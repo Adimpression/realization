@@ -1,0 +1,25 @@
+{
+  "assistant_text": "{\"answer\": \"executed\", \"notes\": [], \"result\": {\"status\": \"executed\"}, \"status\": \"ok\"}",
+  "model": "workstation-direct-composition",
+  "rounds": 0,
+  "task_contract": {
+    "semantic_unit": "Launch the `Notes` app."
+  },
+  "tool_receipts": [
+    {
+      "arguments": {
+        "skill_title": "Device User Capabilities 02 \u2014 Launch Application By Name / Device User Capabilities 02 Launch Application By Name",
+        "target": ""
+      },
+      "name": "ws.skill.invoke",
+      "result": {
+        "answer": "{\"answer\": \"executed\", \"notes\": [], \"result\": {\"status\": \"executed\"}, \"status\": \"ok\"}",
+        "error": "",
+        "error_type": "",
+        "executor_framework": "bash",
+        "skill_title": "Device User Capabilities 02 \u2014 Launch Application By Name / Device User Capabilities 02 Launch Application By Name",
+        "status": "ok"
+      }
+    }
+  ]
+}

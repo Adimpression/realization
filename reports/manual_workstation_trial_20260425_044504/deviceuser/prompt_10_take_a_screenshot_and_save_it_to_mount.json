@@ -1,0 +1,25 @@
+{
+  "assistant_text": "captured",
+  "model": "workstation-direct-composition",
+  "rounds": 0,
+  "task_contract": {
+    "semantic_unit": "Take a screenshot and save it to mount `skill_tmp` at `deviceuser-screen.png`."
+  },
+  "tool_receipts": [
+    {
+      "arguments": {
+        "skill_title": "Device User Capabilities 10 \u2014 Capture Screenshot To File / Device User Capabilities 10 Capture Screenshot To File",
+        "target": ""
+      },
+      "name": "ws.skill.invoke",
+      "result": {
+        "answer": "captured",
+        "error": "",
+        "error_type": "",
+        "executor_framework": "bash",
+        "skill_title": "Device User Capabilities 10 \u2014 Capture Screenshot To File / Device User Capabilities 10 Capture Screenshot To File",
+        "status": "ok"
+      }
+    }
+  ]
+}

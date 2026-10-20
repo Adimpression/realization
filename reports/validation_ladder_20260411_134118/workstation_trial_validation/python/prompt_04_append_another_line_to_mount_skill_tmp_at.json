@@ -1,0 +1,25 @@
+{
+  "assistant_text": "{'status': 'appended', 'mount': 'skill_tmp', 'relative_path': 'python-suite.txt', 'text': 'another line'}",
+  "model": "workstation-direct-composition",
+  "rounds": 0,
+  "task_contract": {
+    "semantic_unit": "Append `another line` to mount `skill_tmp` at `python-suite.txt`."
+  },
+  "tool_receipts": [
+    {
+      "arguments": {
+        "skill_title": "Python Commands 04 \u2014 Append Text File / Python Commands 04 Append Text File",
+        "target": ""
+      },
+      "name": "ws.skill.invoke",
+      "result": {
+        "answer": "{'status': 'appended', 'mount': 'skill_tmp', 'relative_path': 'python-suite.txt', 'text': 'another line'}",
+        "error": "",
+        "error_type": "",
+        "executor_framework": "python3",
+        "skill_title": "Python Commands 04 \u2014 Append Text File / Python Commands 04 Append Text File",
+        "status": "ok"
+      }
+    }
+  ]
+}

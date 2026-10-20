@@ -1,0 +1,25 @@
+{
+  "assistant_text": "{'status': 'extracted', 'source_mount': 'skill_tmp', 'source_relative_path': 'realized-tests.zip', 'destination_mount': 'skill_output', 'destination_relative_path': 'extracted-tests'}",
+  "model": "workstation-direct-composition",
+  "rounds": 0,
+  "task_contract": {
+    "semantic_unit": "Extract `realized-tests.zip` from mount `skill_tmp` into mount `skill_output` at `extracted-tests`."
+  },
+  "tool_receipts": [
+    {
+      "arguments": {
+        "skill_title": "Python Commands 14 \u2014 Extract Zip Archive / Python Commands 14 Extract Zip Archive",
+        "target": ""
+      },
+      "name": "ws.skill.invoke",
+      "result": {
+        "answer": "{'status': 'extracted', 'source_mount': 'skill_tmp', 'source_relative_path': 'realized-tests.zip', 'destination_mount': 'skill_output', 'destination_relative_path': 'extracted-tests'}",
+        "error": "",
+        "error_type": "",
+        "executor_framework": "python3",
+        "skill_title": "Python Commands 14 \u2014 Extract Zip Archive / Python Commands 14 Extract Zip Archive",
+        "status": "ok"
+      }
+    }
+  ]
+}

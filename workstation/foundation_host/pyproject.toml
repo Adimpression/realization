@@ -1,0 +1,22 @@
+[project]
+name = "realized-workstation-foundation-host"
+version = "0.1.0"
+description = "Workstation host-facing foundation package for Realized."
+requires-python = ">=3.14"
+dependencies = [
+    "realized-workstation",
+    "realized-workstation-contracts",
+    "realized-workstation-foundation-models",
+]
+
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["workstation.foundation.host"]
+namespaces = true

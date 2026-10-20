@@ -1,0 +1,902 @@
+{
+  "artifact_persistence": [
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-rate-of-change-in-mo_bbebdd",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.003053,
+        "connect_seconds": 0.001635,
+        "ensure_schema_seconds": 0.013576,
+        "existing_payload_batch_lookup_seconds": 0.00022,
+        "index_seconds": 0.224994,
+        "prepare_seconds": 0.57555,
+        "total_seconds": 0.821776
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "e1e8f7e87554c732f1d7e42232b903d9d5affe387979d4ecb11c6011602a8039",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.049767,
+        "existing_payload_lookup_seconds": 2.2e-05,
+        "total_seconds": 0.049789
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-rate-of-change-in-mo_5f3b28",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.003053,
+        "connect_seconds": 0.001635,
+        "ensure_schema_seconds": 0.013576,
+        "existing_payload_batch_lookup_seconds": 0.00022,
+        "index_seconds": 0.224994,
+        "prepare_seconds": 0.57555,
+        "total_seconds": 0.821776
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "2e2794cdfa405e11066920e8fa87c9c25d06b976482bd9638a3e3188f9414a5d",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.037213,
+        "existing_payload_lookup_seconds": 2.2e-05,
+        "index_seconds": 0.224994,
+        "total_seconds": 0.2949,
+        "write_rows_seconds": 0.032671
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-rate-of-change-in-mo_594641",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.003053,
+        "connect_seconds": 0.001635,
+        "ensure_schema_seconds": 0.013576,
+        "existing_payload_batch_lookup_seconds": 0.00022,
+        "index_seconds": 0.224994,
+        "prepare_seconds": 0.57555,
+        "total_seconds": 0.821776
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "5cff99eb5e47f880abd31f298bd4a9eb073e5f3fb9866fb9e29c26bd340d4279",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.040729,
+        "existing_payload_lookup_seconds": 2.2e-05,
+        "index_seconds": 0.224994,
+        "total_seconds": 0.294259,
+        "write_rows_seconds": 0.028514
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-rate-of-change-in-mo_261267",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.003053,
+        "connect_seconds": 0.001635,
+        "ensure_schema_seconds": 0.013576,
+        "existing_payload_batch_lookup_seconds": 0.00022,
+        "index_seconds": 0.224994,
+        "prepare_seconds": 0.57555,
+        "total_seconds": 0.821776
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "70b2a4977d4e38f7cf5a523da83aad476a05be7d3bfd83adf9975e39fa504a86",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.045479,
+        "existing_payload_lookup_seconds": 2.2e-05,
+        "index_seconds": 0.224994,
+        "total_seconds": 0.30852599999999997,
+        "write_rows_seconds": 0.038031
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-rate-of-change-in-mo_80b1b8",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.003053,
+        "connect_seconds": 0.001635,
+        "ensure_schema_seconds": 0.013576,
+        "existing_payload_batch_lookup_seconds": 0.00022,
+        "index_seconds": 0.224994,
+        "prepare_seconds": 0.57555,
+        "total_seconds": 0.821776
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "7363608ca6eca6e174a351cdfcf4531e778696b8e08afae6300a75656003a081",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.047469,
+        "existing_payload_lookup_seconds": 2.2e-05,
+        "index_seconds": 0.224994,
+        "total_seconds": 0.30853600000000003,
+        "write_rows_seconds": 0.036051
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-rate-of-change-in-mo_cddee2",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.003053,
+        "connect_seconds": 0.001635,
+        "ensure_schema_seconds": 0.013576,
+        "existing_payload_batch_lookup_seconds": 0.00022,
+        "index_seconds": 0.224994,
+        "prepare_seconds": 0.57555,
+        "total_seconds": 0.821776
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "ee65669e6324ae6dc383427bd273f3aa26ce3e03a4ddf3cc3a58188ff2f5da8b",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.044884,
+        "existing_payload_lookup_seconds": 2.2e-05,
+        "total_seconds": 0.044906
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_ability-physics-relations-rate-of-change-in-moti_94c77b",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.003053,
+        "connect_seconds": 0.001635,
+        "ensure_schema_seconds": 0.013576,
+        "existing_payload_batch_lookup_seconds": 0.00022,
+        "index_seconds": 0.224994,
+        "prepare_seconds": 0.57555,
+        "total_seconds": 0.821776
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "07634a8d348ecc216a27d89ae89783e1bb465e3f59c1a90a497d476a374dff1d",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.000858,
+        "existing_payload_lookup_seconds": 2.2e-05,
+        "total_seconds": 0.00088
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-rate-of-change-in-mo_594641",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.003053,
+        "connect_seconds": 0.001635,
+        "ensure_schema_seconds": 0.013576,
+        "existing_payload_batch_lookup_seconds": 0.00022,
+        "index_seconds": 0.224994,
+        "prepare_seconds": 0.57555,
+        "total_seconds": 0.821776
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "cdfe07fae770ccf34406a1864775adc610514b3beab78dc48fa220361d136e7a",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.00043,
+        "existing_payload_lookup_seconds": 2.2e-05,
+        "total_seconds": 0.000452
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-rate-of-change-in-mo_261267",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.003053,
+        "connect_seconds": 0.001635,
+        "ensure_schema_seconds": 0.013576,
+        "existing_payload_batch_lookup_seconds": 0.00022,
+        "index_seconds": 0.224994,
+        "prepare_seconds": 0.57555,
+        "total_seconds": 0.821776
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "5bf471a996be854635e9ba7855eccb6c7577e957cdc2763ba5d87ba4e13ba69f",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.000436,
+        "existing_payload_lookup_seconds": 2.2e-05,
+        "total_seconds": 0.000458
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-rate-of-change-in-mo_80b1b8",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.003053,
+        "connect_seconds": 0.001635,
+        "ensure_schema_seconds": 0.013576,
+        "existing_payload_batch_lookup_seconds": 0.00022,
+        "index_seconds": 0.224994,
+        "prepare_seconds": 0.57555,
+        "total_seconds": 0.821776
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "63f6f8a319d41880656009fcea00ab22deae6aa10c98934fa198232e156e0db2",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.000385,
+        "existing_payload_lookup_seconds": 2.2e-05,
+        "total_seconds": 0.00040699999999999997
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-rate-of-change-in-mo_594641",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000931,
+        "connect_seconds": 0.00271,
+        "ensure_schema_seconds": 0.021271,
+        "existing_payload_batch_lookup_seconds": 0.000302,
+        "index_seconds": 0.129902,
+        "prepare_seconds": 0.385413,
+        "total_seconds": 0.545261
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "5cff99eb5e47f880abd31f298bd4a9eb073e5f3fb9866fb9e29c26bd340d4279",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.038562,
+        "existing_payload_lookup_seconds": 4.314285714285715e-05,
+        "total_seconds": 0.03860514285714286
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-rate-of-change-in-mo_261267",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000931,
+        "connect_seconds": 0.00271,
+        "ensure_schema_seconds": 0.021271,
+        "existing_payload_batch_lookup_seconds": 0.000302,
+        "index_seconds": 0.129902,
+        "prepare_seconds": 0.385413,
+        "total_seconds": 0.545261
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "70b2a4977d4e38f7cf5a523da83aad476a05be7d3bfd83adf9975e39fa504a86",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.044932,
+        "existing_payload_lookup_seconds": 4.314285714285715e-05,
+        "total_seconds": 0.04497514285714286
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-rate-of-change-in-mo_80b1b8",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000931,
+        "connect_seconds": 0.00271,
+        "ensure_schema_seconds": 0.021271,
+        "existing_payload_batch_lookup_seconds": 0.000302,
+        "index_seconds": 0.129902,
+        "prepare_seconds": 0.385413,
+        "total_seconds": 0.545261
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "7363608ca6eca6e174a351cdfcf4531e778696b8e08afae6300a75656003a081",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.045823,
+        "existing_payload_lookup_seconds": 4.314285714285715e-05,
+        "total_seconds": 0.04586614285714286
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-rate-of-change-in-mo_cddee2",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000931,
+        "connect_seconds": 0.00271,
+        "ensure_schema_seconds": 0.021271,
+        "existing_payload_batch_lookup_seconds": 0.000302,
+        "index_seconds": 0.129902,
+        "prepare_seconds": 0.385413,
+        "total_seconds": 0.545261
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "ee65669e6324ae6dc383427bd273f3aa26ce3e03a4ddf3cc3a58188ff2f5da8b",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.038133,
+        "existing_payload_lookup_seconds": 4.314285714285715e-05,
+        "total_seconds": 0.03817614285714286
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-rate-of-change-in-mo_594641",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000931,
+        "connect_seconds": 0.00271,
+        "ensure_schema_seconds": 0.021271,
+        "existing_payload_batch_lookup_seconds": 0.000302,
+        "index_seconds": 0.129902,
+        "prepare_seconds": 0.385413,
+        "total_seconds": 0.545261
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "cdfe07fae770ccf34406a1864775adc610514b3beab78dc48fa220361d136e7a",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 9.1e-05,
+        "existing_payload_lookup_seconds": 4.314285714285715e-05,
+        "index_seconds": 0.129902,
+        "total_seconds": 0.17309214285714286,
+        "write_rows_seconds": 0.043056
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-rate-of-change-in-mo_261267",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000931,
+        "connect_seconds": 0.00271,
+        "ensure_schema_seconds": 0.021271,
+        "existing_payload_batch_lookup_seconds": 0.000302,
+        "index_seconds": 0.129902,
+        "prepare_seconds": 0.385413,
+        "total_seconds": 0.545261
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "5bf471a996be854635e9ba7855eccb6c7577e957cdc2763ba5d87ba4e13ba69f",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.0001,
+        "existing_payload_lookup_seconds": 4.314285714285715e-05,
+        "index_seconds": 0.129902,
+        "total_seconds": 0.17028314285714286,
+        "write_rows_seconds": 0.040238
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-rate-of-change-in-mo_80b1b8",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000931,
+        "connect_seconds": 0.00271,
+        "ensure_schema_seconds": 0.021271,
+        "existing_payload_batch_lookup_seconds": 0.000302,
+        "index_seconds": 0.129902,
+        "prepare_seconds": 0.385413,
+        "total_seconds": 0.545261
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "63f6f8a319d41880656009fcea00ab22deae6aa10c98934fa198232e156e0db2",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 7.5e-05,
+        "existing_payload_lookup_seconds": 4.314285714285715e-05,
+        "index_seconds": 0.129902,
+        "total_seconds": 0.17196014285714284,
+        "write_rows_seconds": 0.04194
+      },
+      "vector_enabled": false
+    }
+  ],
+  "document": {
+    "section_count": 5,
+    "source_path": "/Users/ravindranathakila/service/realized/trials/physics/02_LEARN_PHYSICS_RELATIONS_RATE_OF_CHANGE.md",
+    "title": "Physics Relations \u2014 Rate of Change in Motion"
+  },
+  "encounter_proposal": {
+    "encounters": [
+      {
+        "bullets": [
+          "input: `\\Delta A`",
+          "input: `\\Delta B`",
+          "output: `R`"
+        ],
+        "candidate_kinds": [
+          "equation",
+          "template",
+          "definition",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_1",
+        "equation_bearing": true,
+        "equations": [
+          "$$ R = rac{\\Delta A}{\\Delta B} $$"
+        ],
+        "heading": "1. Reusable substrate",
+        "paragraphs": [
+          "When a quantity is defined as change per unit of another quantity, the reusable family is ratio-of-change.",
+          "The reusable formula is:",
+          "$$ R = rac{\\Delta A}{\\Delta B} $$"
+        ],
+        "path": [
+          "Physics Relations \u2014 Rate of Change in Motion",
+          "1. Reusable substrate"
+        ],
+        "sections": [
+          "1. Reusable substrate"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `d`",
+          "input: `t`",
+          "output: `speed`"
+        ],
+        "candidate_kinds": [
+          "equation",
+          "logic",
+          "template",
+          "definition",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_2",
+        "equation_bearing": true,
+        "equations": [
+          "$$ ext{speed} = rac{d}{t} $$"
+        ],
+        "heading": "2. Speed from distance and time",
+        "paragraphs": [
+          "Average speed is a ratio-of-change law.",
+          "$$ ext{speed} = rac{d}{t} $$",
+          "Where:"
+        ],
+        "path": [
+          "Physics Relations \u2014 Rate of Change in Motion",
+          "2. Speed from distance and time"
+        ],
+        "sections": [
+          "2. Speed from distance and time"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `\\Delta x`",
+          "input: `\\Delta t`",
+          "output: `v`"
+        ],
+        "candidate_kinds": [
+          "equation",
+          "logic",
+          "template",
+          "definition",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_3",
+        "equation_bearing": true,
+        "equations": [
+          "$$ v = rac{\\Delta x}{\\Delta t} $$"
+        ],
+        "heading": "3. Velocity from displacement and time",
+        "paragraphs": [
+          "Average velocity is also a ratio-of-change law.",
+          "$$ v = rac{\\Delta x}{\\Delta t} $$",
+          "Where:"
+        ],
+        "path": [
+          "Physics Relations \u2014 Rate of Change in Motion",
+          "3. Velocity from displacement and time"
+        ],
+        "sections": [
+          "3. Velocity from displacement and time"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `\\Delta v`",
+          "input: `\\Delta t`",
+          "output: `a`"
+        ],
+        "candidate_kinds": [
+          "equation",
+          "logic",
+          "template",
+          "definition",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_4",
+        "equation_bearing": true,
+        "equations": [
+          "$$ a = rac{\\Delta v}{\\Delta t} $$"
+        ],
+        "heading": "4. Acceleration from velocity change and time",
+        "paragraphs": [
+          "Acceleration is another ratio-of-change law.",
+          "$$ a = rac{\\Delta v}{\\Delta t} $$",
+          "Where:"
+        ],
+        "path": [
+          "Physics Relations \u2014 Rate of Change in Motion",
+          "4. Acceleration from velocity change and time"
+        ],
+        "sections": [
+          "4. Acceleration from velocity change and time"
+        ]
+      },
+      {
+        "bullets": [],
+        "candidate_kinds": [
+          "logic",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_5",
+        "equation_bearing": false,
+        "equations": [],
+        "heading": "5. One-sentence summary",
+        "paragraphs": [
+          "Motion laws for speed, velocity, and acceleration all reuse the same deeper ratio-of-change family."
+        ],
+        "path": [
+          "Physics Relations \u2014 Rate of Change in Motion",
+          "5. One-sentence summary"
+        ],
+        "sections": [
+          "5. One-sentence summary"
+        ]
+      }
+    ],
+    "proposal_id": "proposal_markdownabilitylearningproposal_d674f4",
+    "rationale": "Markdown ability learning proposals are bounded executable-harvest plans grounded in the structural ir.",
+    "source": "llm"
+  },
+  "final_answer": "Learned 10 artifacts from 02_LEARN_PHYSICS_RELATIONS_RATE_OF_CHANGE.md.",
+  "functionalization_proposal": {
+    "proposal_id": "proposal_markdownfunctionalizationproposal_714bef",
+    "rationale": "Markdown functionalization proposals are bounded executable extractions from already classified encounters.",
+    "source": "llm"
+  },
+  "ir": {
+    "clusters": [
+      {
+        "bullets": [
+          "input: `\\Delta A`",
+          "input: `\\Delta B`",
+          "output: `R`"
+        ],
+        "code_blocks": [],
+        "equations": [
+          "$$ R = rac{\\Delta A}{\\Delta B} $$"
+        ],
+        "heading": "1. Reusable substrate",
+        "paragraphs": [
+          "When a quantity is defined as change per unit of another quantity, the reusable family is ratio-of-change.",
+          "The reusable formula is:",
+          "$$ R = rac{\\Delta A}{\\Delta B} $$"
+        ],
+        "path": [
+          "Physics Relations \u2014 Rate of Change in Motion",
+          "1. Reusable substrate"
+        ],
+        "sections": [
+          "1. Reusable substrate"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `d`",
+          "input: `t`",
+          "output: `speed`"
+        ],
+        "code_blocks": [],
+        "equations": [
+          "$$ ext{speed} = rac{d}{t} $$"
+        ],
+        "heading": "2. Speed from distance and time",
+        "paragraphs": [
+          "Average speed is a ratio-of-change law.",
+          "$$ ext{speed} = rac{d}{t} $$",
+          "Where:"
+        ],
+        "path": [
+          "Physics Relations \u2014 Rate of Change in Motion",
+          "2. Speed from distance and time"
+        ],
+        "sections": [
+          "2. Speed from distance and time"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `\\Delta x`",
+          "input: `\\Delta t`",
+          "output: `v`"
+        ],
+        "code_blocks": [],
+        "equations": [
+          "$$ v = rac{\\Delta x}{\\Delta t} $$"
+        ],
+        "heading": "3. Velocity from displacement and time",
+        "paragraphs": [
+          "Average velocity is also a ratio-of-change law.",
+          "$$ v = rac{\\Delta x}{\\Delta t} $$",
+          "Where:"
+        ],
+        "path": [
+          "Physics Relations \u2014 Rate of Change in Motion",
+          "3. Velocity from displacement and time"
+        ],
+        "sections": [
+          "3. Velocity from displacement and time"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `\\Delta v`",
+          "input: `\\Delta t`",
+          "output: `a`"
+        ],
+        "code_blocks": [],
+        "equations": [
+          "$$ a = rac{\\Delta v}{\\Delta t} $$"
+        ],
+        "heading": "4. Acceleration from velocity change and time",
+        "paragraphs": [
+          "Acceleration is another ratio-of-change law.",
+          "$$ a = rac{\\Delta v}{\\Delta t} $$",
+          "Where:"
+        ],
+        "path": [
+          "Physics Relations \u2014 Rate of Change in Motion",
+          "4. Acceleration from velocity change and time"
+        ],
+        "sections": [
+          "4. Acceleration from velocity change and time"
+        ]
+      },
+      {
+        "bullets": [],
+        "code_blocks": [],
+        "equations": [],
+        "heading": "5. One-sentence summary",
+        "paragraphs": [
+          "Motion laws for speed, velocity, and acceleration all reuse the same deeper ratio-of-change family."
+        ],
+        "path": [
+          "Physics Relations \u2014 Rate of Change in Motion",
+          "5. One-sentence summary"
+        ],
+        "sections": [
+          "5. One-sentence summary"
+        ]
+      }
+    ],
+    "intro_bullets": [],
+    "intro_paragraphs": [
+      "This document teaches one reusable ratio substrate and then reuses it in later motion laws.",
+      "The point is to preserve the relation where a change in one quantity is divided by a change in another."
+    ],
+    "section_count": 5,
+    "source_path": "/Users/ravindranathakila/service/realized/trials/physics/02_LEARN_PHYSICS_RELATIONS_RATE_OF_CHANGE.md",
+    "title": "Physics Relations \u2014 Rate of Change in Motion"
+  },
+  "learned_artifacts": [
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-rate-of-change-in-mo_bbebdd",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Ratio Of Change?",
+      "related_artifact_ids": [],
+      "representation": "yaml",
+      "source_sections": [],
+      "title": "Physics Relations \u2014 Rate of Change in Motion / Physics Relations Rate of Change in Motion"
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-rate-of-change-in-mo_5f3b28",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Ratio Of Change?",
+      "related_artifact_ids": [],
+      "representation": "yaml",
+      "source_sections": [
+        "1. Reusable substrate"
+      ],
+      "title": "Physics Relations Rate of Change in Motion / Ratio Of Change"
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-rate-of-change-in-mo_594641",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Speed from distance and time?",
+      "related_artifact_ids": [
+        "artifact_knowledge-physics-relations-rate-of-change-in-mo_5f3b28"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "2. Speed from distance and time"
+      ],
+      "title": "Physics Relations \u2014 Rate of Change in Motion / Speed from distance and time"
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-rate-of-change-in-mo_261267",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Velocity from displacement and time?",
+      "related_artifact_ids": [
+        "artifact_knowledge-physics-relations-rate-of-change-in-mo_5f3b28"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "3. Velocity from displacement and time"
+      ],
+      "title": "Physics Relations \u2014 Rate of Change in Motion / Velocity from displacement and time"
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-rate-of-change-in-mo_80b1b8",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Acceleration from velocity change and time?",
+      "related_artifact_ids": [
+        "artifact_knowledge-physics-relations-rate-of-change-in-mo_5f3b28"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "4. Acceleration from velocity change and time"
+      ],
+      "title": "Physics Relations \u2014 Rate of Change in Motion / Acceleration from velocity change and time"
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-rate-of-change-in-mo_cddee2",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is The Same Deeper Ratio Of Change?",
+      "related_artifact_ids": [
+        "artifact_knowledge-physics-relations-rate-of-change-in-mo_5f3b28"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "5. One-sentence summary"
+      ],
+      "title": "Physics Relations Rate of Change in Motion / The Same Deeper Ratio Of Change"
+    },
+    {
+      "artifact_id": "artifact_ability-physics-relations-rate-of-change-in-moti_94c77b",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate R from Delta_A, Delta_B?",
+      "related_artifact_ids": [],
+      "representation": "python_script",
+      "source_sections": [
+        "1. Reusable substrate"
+      ],
+      "title": "Physics Relations \u2014 Rate of Change in Motion / Python Ability"
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-rate-of-change-in-mo_594641",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate ext_times_speed from rac, d, t?",
+      "related_artifact_ids": [],
+      "representation": "python_script",
+      "source_sections": [
+        "2. Speed from distance and time"
+      ],
+      "title": "Physics Relations \u2014 Rate of Change in Motion / Speed From Distance And Time"
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-rate-of-change-in-mo_261267",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate v from Delta_x, Delta_t?",
+      "related_artifact_ids": [],
+      "representation": "python_script",
+      "source_sections": [
+        "3. Velocity from displacement and time"
+      ],
+      "title": "Physics Relations \u2014 Rate of Change in Motion / Velocity From Displacement And Time"
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-rate-of-change-in-mo_80b1b8",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate a from Delta_v, Delta_t?",
+      "related_artifact_ids": [],
+      "representation": "python_script",
+      "source_sections": [
+        "4. Acceleration from velocity change and time"
+      ],
+      "title": "Physics Relations \u2014 Rate of Change in Motion / Acceleration From Velocity Change And Time"
+    }
+  ],
+  "learned_count": 10,
+  "learning_context": {
+    "applied_delta_count": 2,
+    "canonical_title": "Physics Relations \u2014 Rate of Change in Motion",
+    "context_path": "/Users/ravindranathakila/service/realized/trials/physics/corpus/physics-relations-rate-of-change-in-motion/context.json",
+    "corpus_root": "/Users/ravindranathakila/service/realized/trials/physics",
+    "delta_id": "delta_physics-relations-rate-of-change-in-motion_f80786",
+    "delta_path": "/Users/ravindranathakila/service/realized/trials/physics/corpus/physics-relations-rate-of-change-in-motion/deltas/delta_physics-relations-rate-of-change-in-motion_f80786.json",
+    "matched_existing_subject_id": "physics-relations-rate-of-change-in-motion",
+    "source_id": "source_users-ravindranathakila-service-realized-trials-_e3ad48dac3",
+    "source_record_path": "/Users/ravindranathakila/service/realized/trials/physics/corpus/physics-relations-rate-of-change-in-motion/sources/source_users-ravindranathakila-service-realized-trials-_e3ad48dac3.json",
+    "subject_family": "Physics Relations \u2014 Rate of Change in Motion",
+    "subject_id": "physics-relations-rate-of-change-in-motion",
+    "unit_count": 9
+  },
+  "parsing_failures": [],
+  "proposal": {
+    "proposal_id": "proposal_markdownlearningproposal_bc9ee5",
+    "rationale": "Markdown learning proposals are bounded ingestion plans for external-source harvest and remain governed before artifact admission.",
+    "source": "llm"
+  },
+  "run_id": "run_aeff8114_870ce1",
+  "run_outcome": "completed",
+  "supported_executors": [
+    "python3"
+  ]
+}

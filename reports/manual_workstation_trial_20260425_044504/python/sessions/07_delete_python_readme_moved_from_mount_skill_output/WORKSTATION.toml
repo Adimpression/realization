@@ -1,0 +1,118 @@
+[session]
+session_id = "ws_289aacb0a64d"
+created_at = "2026-04-24T20:54:54.780876+00:00"
+root_path = "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/sessions/07_delete_python_readme_moved_from_mount_skill_output"
+openai_profile = "openai_default"
+openai_env_var = "OPENAI_API_KEY"
+
+[attachments.session]
+kind = "session_root"
+source = "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/sessions/07_delete_python_readme_moved_from_mount_skill_output"
+access_mode = "read_write"
+mount_path = "/workstation/session"
+
+[attachments.main]
+kind = "workspace"
+source = "/Users/ravindranathakila/service/realized"
+access_mode = "read_write"
+mount_path = "/workstation/mounts/main"
+metadata_blend_world_id = "bworld_e0c1cf0f80db"
+metadata_blend_world_mount = "main"
+metadata_blend_world_root = "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/world"
+
+[attachments.scratch]
+kind = "scratch"
+source = "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/world/scratch"
+access_mode = "read_write"
+mount_path = "/workstation/scratch"
+metadata_blend_world_id = "bworld_e0c1cf0f80db"
+metadata_blend_world_mount = "scratch"
+metadata_blend_world_root = "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/world"
+
+[attachments.output]
+kind = "output"
+source = "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/world/output"
+access_mode = "write"
+mount_path = "/workstation/output"
+metadata_blend_world_id = "bworld_e0c1cf0f80db"
+metadata_blend_world_mount = "output"
+metadata_blend_world_root = "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/world"
+
+[attachments.openai]
+kind = "secret_ref"
+source = "host:OPENAI_API_KEY"
+access_mode = "indirect"
+mount_path = "/workstation/secrets/openai"
+metadata_profile = "openai_default"
+
+[attachments.skill_input]
+kind = "workspace"
+source = "/Users/ravindranathakila/service/realized"
+access_mode = "read"
+mount_path = "/workstation/mounts/skill_input"
+metadata_alias_of = "main"
+metadata_blend_world_id = "bworld_e0c1cf0f80db"
+metadata_blend_world_mount = "main"
+metadata_blend_world_root = "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/world"
+
+[attachments.skill_tmp]
+kind = "scratch"
+source = "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/world/scratch"
+access_mode = "read_write"
+mount_path = "/workstation/mounts/skill_tmp"
+metadata_alias_of = "scratch"
+metadata_blend_world_id = "bworld_e0c1cf0f80db"
+metadata_blend_world_mount = "scratch"
+metadata_blend_world_root = "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/world"
+
+[attachments.skill_output]
+kind = "output"
+source = "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/world/output"
+access_mode = "write"
+mount_path = "/workstation/mounts/skill_output"
+metadata_alias_of = "output"
+metadata_blend_world_id = "bworld_e0c1cf0f80db"
+metadata_blend_world_mount = "output"
+metadata_blend_world_root = "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/world"
+
+[attachments.skills]
+kind = "skill_store"
+source = "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/python.sqlite3"
+access_mode = "read_write"
+mount_path = "/workstation/skills/store.sqlite3"
+metadata_exports_path = "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/exports"
+metadata_home_path = "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python"
+metadata_imports_path = "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/imports"
+metadata_store_path = "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/python.sqlite3"
+
+[attachments.skills_exports]
+kind = "skill_exports"
+source = "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/exports"
+access_mode = "read_write"
+mount_path = "/workstation/skills/exports"
+metadata_exports_path = "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/exports"
+metadata_home_path = "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python"
+metadata_imports_path = "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/imports"
+metadata_store_path = "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/python.sqlite3"
+
+[attachments.skills_imports]
+kind = "skill_imports"
+source = "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/imports"
+access_mode = "read_write"
+mount_path = "/workstation/skills/imports"
+metadata_exports_path = "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/exports"
+metadata_home_path = "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python"
+metadata_imports_path = "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/imports"
+metadata_store_path = "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/python.sqlite3"
+
+[capabilities]
+capability_0 = "ws.fs.read"
+capability_1 = "ws.process.run"
+capability_2 = "ws.markdown.create"
+capability_3 = "ws.markdown.append"
+capability_4 = "ws.skill.catalog"
+capability_5 = "ws.skill.import"
+capability_6 = "ws.skill.export"
+capability_7 = "ws.skill.invoke"
+capability_8 = "ws.skill.compose"
+

@@ -1,0 +1,34 @@
+@startuml
+title Normal Text To Prolog-Backed Ability Resolution Flow
+
+actor "User" as User
+participant "BSSCController" as Controller
+participant "Prior Learning Lookup" as Lookup
+participant "Executable Artifact" as Ability
+participant "Prolog Identity Layer" as Prolog
+participant "Cross-Boundary Execution" as Execute
+
+User -> Controller: natural text prompt\n"Calculate force for mass=3 and acceleration=4."
+Controller -> Lookup: lookup_prior_non_achievedness(node)
+Lookup --> Controller: answer_artifact candidate
+
+Controller -> Controller: artifact_answer_text(answer_artifact,\nsemantic_unit=prompt)
+alt executable artifact available
+  Controller -> Controller: derive_artifact_invocation_payload(...)
+  alt normal text can synthesize Prolog head
+    Controller -> Prolog: synthesize_prolog_query_title_identity(...)
+    Prolog --> Controller: structural head with bound inputs
+  end
+  Controller -> Execute: execute_function_artifact(...)
+  Execute --> Controller: computed answer
+else Prolog clause only
+  Controller -> Prolog: artifact_prolog_clause_answer(...)
+  Prolog --> Controller: instantiated body text
+else stored or latent knowledge answer
+  Controller -> Controller: explicit answer or latent knowledge answer
+end
+
+Controller --> User: resolved answer
+
+@enduml
+

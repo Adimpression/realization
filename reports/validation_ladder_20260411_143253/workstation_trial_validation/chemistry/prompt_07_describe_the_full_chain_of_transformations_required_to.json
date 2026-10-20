@@ -1,0 +1,25 @@
+{
+  "assistant_text": "Here is a clear chain of transformations to go from mass of a reactant to the concentration of a product in solution, with each intermediate relation named.\n\nAssumptions\n- A balanced reaction: a A + b B + \u2026 -> c C + \u2026\n- You either have one reactant in excess or you account for all reactants to find the limiting reagent.\n- Final volume V of the solution is known (or can be measured) after the reaction.\n- 100% theoretical yield is assumed unless you include yielding (<1).\n\nChain of transformations and intermediate relations\n\n1) Mass-to-Moles for each reactant (Molar Mass Conversion)\n- Relation: Mass to moles via molar mass\n- Formula for reactant i: n_i = m_i / M_i\n- What it provides: The amount of each reactant in moles available to react.\n\n2) Stoichiometric coupling: relate reactant moles to product moles\n- Relation: Stoichiometric relation from the balanced equation\n- For product P with stoichiometric coefficient c and reactant i with coefficient \u03bd_i:\n  n_P,i = (c / \u03bd_i) \u00d7 n_i\n- What it provides: Theoretical amount of product P that can be formed from each reactant i if that reactant were the limiting one (assuming others are present in at least the required amounts and 100% yield).\n\n3) Determine the limiting reagent (Minimum achievable production)\n- Relation: Limiting Reagent / minimum of theoretical product from each reactant\n- Compute for all reactants i: n_P,i as in step 2, then\n  n_P,max = min_i { n_P,i }\n- What it provides: The maximum moles of product P that could be produced under the given amounts, assuming 100% yield and no side reactions.\n\n4) Adjust for actual yield (if yield is not 100%)\n- Relation: Actual yield factor\n- If overall yield is \u03b7 (0 \u2264 \u03b7 \u2264 1):\n  n_P,actual = \u03b7 \u00d7 n_P,max\n- What it provides: The real moles of product you actually obtain.\n\n5) Convert product moles to concentration in solution\n- Relation: Concentration from moles (Molarity)\n- If final solution volume is V (in liters):\n  C_P = n_P,actual / V\n- What it provides: The concentration of product P in the solution, in moles per liter (M).\n\n6) Units and practical checks\n- Ensure masses are in consistent units (e.g., g), molar masses in g/mol, volumes in liters.\n- If the reaction occurs in a solvent with significant volume change, use the final measured volume V.\n- Note: This chain ignores side reactions, equilibrium effects, and changes in volume due to dissolution unless you explicitly account for them with the measured V.\n\nOptional refinements you can add\n- If you only know the limiting reagent directly, you can compute n_P,max using that reagent\u2019s available moles and its stoichiometric ratio to product, rather than taking the min over all reactants.\n- If you want concentrations of multiple species, apply the same chain to each species, using their respective stoichiometric relationships.\n\nExample (brief)\n- Balanced: a A + b B -> c C\n- Given masses: m_A, m_B; M_A, M_B; final volume V\n- Steps:\n  1) n_A = m_A / M_A; n_B = m_B / M_B\n  2) n_P,A = (c / a) \u00d7 n_A; n_P,B = (c / b) \u00d7 n_B\n  3) n_P,max = min(n_P,A, n_P,B)\n  4) If yield \u03b7: n_P,actual = \u03b7 \u00d7 n_P,max\n  5) C_P = n_P,actual / V\n\nIf you\u2019d like, I can tailor this to a specific reaction (give me the balanced equation, masses, molar masses, and final volume) and compute the resulting concentration step by step.",
+  "model": "gpt-5-nano-2025-08-07",
+  "rounds": 2,
+  "task_contract": {
+    "semantic_unit": "Describe the full chain of transformations required to convert mass of a reactant into concentration of a product in solution, naming each intermediate relation used."
+  },
+  "tool_receipts": [
+    {
+      "arguments": {
+        "skill_title": "Chemistry Relations 05 \u2014 Limiting Reagent as Minimum Achievable Production / Product possible from each reactant",
+        "target": ""
+      },
+      "name": "ws.skill.invoke",
+      "result": {
+        "answer": "For each reactant, compute the product moles it could produce. The reusable formula is: $$ nP^{(i)} = ni \\frac{\\nuP}{\\nui} $$ input: ni input: \\nui input: \\nuP output: nP^(i)",
+        "error": "",
+        "error_type": "",
+        "executor_framework": "",
+        "skill_title": "Chemistry Relations 05 \u2014 Limiting Reagent as Minimum Achievable Production / Product possible from each reactant",
+        "status": "ok"
+      }
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "prompt": "Find files ending in `.md` under mount `skill_input` at `trials`.",
+  "returned_skill_count": 2,
+  "skills": [
+    {
+      "authorities_requested": [
+        "execute",
+        "read"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "mount": "required input value",
+        "relative_path": "required input value",
+        "suffix": "required input value"
+      },
+      "kind": "ability",
+      "outputs": {
+        "result": "execution result"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "score": 8,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Python Commands 16 \u2014 Find Files By Suffix / Python Commands 16 Find Files By Suffix"
+    },
+    {
+      "authorities_requested": [
+        "execute",
+        "read"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "glob": "optional fnmatch-style relative path filter",
+        "max_matches": "maximum match lines to return",
+        "mount": "governed workstation attachment mount name",
+        "pattern": "regular expression or literal text to search for",
+        "relative_path": "optional relative directory inside the mount"
+      },
+      "kind": "ability",
+      "outputs": {
+        "match_count": "number of matches returned",
+        "matches": "matched lines with file and line number"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "score": 6,
+      "source_kind": "builtin_workstation",
+      "source_target": "",
+      "title": "Workstation Repo Search"
+    }
+  ],
+  "total_skill_count": 19
+}

@@ -1,0 +1,25 @@
+{
+  "assistant_text": "- Core relation: mass m equals number of moles n times molar mass M of the substrate.\n  - m = n \u00d7 M\n  - Units: M in g/mol, n in mol, m in g\n\n- How to use it (quick steps):\n  1) Determine the molar mass M of the substrate (from a periodic table or a data sheet).\n  2) Decide how many moles n you want to use in a run.\n  3) Compute the mass to weigh: m = n \u00d7 M.\n  4) Weigh that mass to obtain the substrate for your reaction.\n\n- How this relates to a reusable substrate:\n  - The molar mass M is a constant property of the pure substrate, so the mass needed per mole is constant across cycles.\n  - If you recover or recycle substrate after a run, you can convert the recovered mass back to moles to see how much substrate remains:\n    - nr = mr / M, where mr is the recovered mass.\n  - Use this to decide how much fresh substrate to add to reach the target moles for the next cycle:\n    - If you want n_target moles, you may add \u0394n = n_target \u2212 nr moles of substrate, which weighs \u0394m = \u0394n \u00d7 M grams.\n  - Keep in mind real-world issues: purity (effective M may differ), losses, and any byproducts or solvents that affect the usable substrate mass.\n\n- Quick example:\n  - Substrate with M = 180.16 g/mol (glucose).\n  - Target for a cycle: n = 0.5 mol.\n  - Mass to weigh: m = 0.5 \u00d7 180.16 = 90.08 g.\n  - If you recover mr = 88.0 g after the cycle, nr = 88.0 / 180.16 \u2248 0.4887 mol remain.\n  - To reach 0.5 mol again, you\u2019d add \u0394n \u2248 0.5 \u2212 0.4887 = 0.0113 mol, which is \u0394m \u2248 0.0113 \u00d7 180.16 \u2248 2.04 g of substrate.\n\nIn short: m = nM lets you plan how much substrate to weigh, and the same relation lets you track and replenish substrate when it\u2019s reused.",
+  "model": "gpt-5-nano-2025-08-07",
+  "rounds": 2,
+  "task_contract": {
+    "semantic_unit": "Given the relation for molar mass, express how to compute mass from moles and molar mass, and explain how this relates to the reusable substrate."
+  },
+  "tool_receipts": [
+    {
+      "arguments": {
+        "skill_title": "Chemistry Relations 03 \u2014 Mass to Mole Conversion / Mass from moles",
+        "target": ""
+      },
+      "name": "ws.skill.invoke",
+      "result": {
+        "answer": "The corresponding multiplicative form is: $$ m = n M $$ Where: input: n input: M output: m",
+        "error": "",
+        "error_type": "",
+        "executor_framework": "",
+        "skill_title": "Chemistry Relations 03 \u2014 Mass to Mole Conversion / Mass from moles",
+        "status": "ok"
+      }
+    }
+  ]
+}

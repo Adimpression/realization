@@ -1,0 +1,83 @@
+{
+  "version": "2.0.0",
+  "purpose": "Compatibility checks for safe model updates.",
+  "classes": [
+    {
+      "class": "additive",
+      "definition": "Adds new model content without changing existing guarantees.",
+      "requiresMigrationPlan": false
+    },
+    {
+      "class": "corrective",
+      "definition": "Clarifies wording or references without changing guarantees.",
+      "requiresMigrationPlan": false
+    },
+    {
+      "class": "strengthening",
+      "definition": "Makes an existing guarantee stricter.",
+      "requiresMigrationPlan": false
+    },
+    {
+      "class": "weakening",
+      "definition": "Loosens an existing guarantee.",
+      "requiresMigrationPlan": true
+    },
+    {
+      "class": "breaking",
+      "definition": "Removes or changes an existing product promise.",
+      "requiresMigrationPlan": true
+    }
+  ],
+  "checks": [
+    {
+      "checkId": "COMP-001",
+      "severity": "error",
+      "statement": "Removing an active duty is breaking."
+    },
+    {
+      "checkId": "COMP-002",
+      "severity": "error",
+      "statement": "Removing a GWT step used by an active journey or trace is breaking."
+    },
+    {
+      "checkId": "COMP-003",
+      "severity": "error",
+      "statement": "Loosening an SLO target is weakening and requires migration plan."
+    },
+    {
+      "checkId": "COMP-004",
+      "severity": "warning",
+      "statement": "Tightening an SLO target is strengthening and requires operational readiness review."
+    },
+    {
+      "checkId": "COMP-005",
+      "severity": "error",
+      "statement": "Removing an anti-golden trace requires a replacement or explicit proof the forbidden behavior is obsolete."
+    },
+    {
+      "checkId": "COMP-006",
+      "severity": "error",
+      "statement": "Changing an under-1s boundary to separationAllowed=true is breaking unless causality is re-modeled."
+    },
+    {
+      "checkId": "COMP-007",
+      "severity": "error",
+      "statement": "Any change invalidating a golden trace is breaking or requires trace replacement."
+    },
+    {
+      "checkId": "COMP-008",
+      "severity": "error",
+      "statement": "Any change making an anti-golden trace acceptable is breaking unless the product promise explicitly changed."
+    },
+    {
+      "checkId": "COMP-009",
+      "severity": "error",
+      "statement": "Renaming an artifact ID is breaking; create a new artifact and deprecate/supersede the old one instead."
+    },
+    {
+      "checkId": "COMP-010",
+      "severity": "error",
+      "statement": "Marking an under-1s boundary as separationAllowed=true without an approved exceptionApproval is breaking."
+    }
+  ]
+}

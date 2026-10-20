@@ -1,0 +1,190 @@
+{
+  "actions": [
+    {
+      "action_key": "open_context",
+      "next_phase": "",
+      "next_tab": "",
+      "receipt_lines": [
+        "- context: $WORKSTATION_ROOT/corpus/find-the-time/context.json",
+        "- subject.md: $WORKSTATION_ROOT/corpus/find-the-time/subject.md",
+        "- subject.typ: $WORKSTATION_ROOT/corpus/find-the-time/subject.typ",
+        "- items: 1",
+        "- linked sources: 1"
+      ],
+      "receipt_title": "Context Receipt",
+      "status_text": "Subject context opened."
+    },
+    {
+      "action_key": "generate_itemization",
+      "next_phase": "",
+      "next_tab": "",
+      "receipt_lines": [
+        "- session: $ITEMIZATION_ID",
+        "- freshness: current",
+        "- validation: ok",
+        "- item count: 5",
+        "- direct llm decomposition: fallback",
+        "- direct llm candidates: 0",
+        "- item kinds: claim=1, decision_role_candidate=2, entity=1, glossary_term=1",
+        "- sample items:",
+        "- [claim] Find the Time",
+        "- [decision_role_candidate] ask for the time, say,",
+        "- [decision_role_candidate] If you",
+        "- [entity] Find the Time",
+        "- [glossary_term] Find the Time",
+        "- source subject: Find the Time"
+      ],
+      "receipt_title": "Itemization Receipt",
+      "status_text": "Itemization generated."
+    },
+    {
+      "action_key": "refresh_review_composition",
+      "next_phase": "draft",
+      "next_tab": "",
+      "receipt_lines": [
+        "- draft composition: $DRAFT_COMPOSITION_ID",
+        "- itemization session: $ITEMIZATION_ID",
+        "- subject snapshot: $CONTENT_HASH",
+        "- status: draft",
+        "- review items: 5",
+        "- included items: 5",
+        "- source subject: Find the Time",
+        "- semantic kinds: claim=3, definition=2",
+        "- render kinds: citation_callout=2, paragraph=3",
+        "- sample review items:",
+        "- [x] claim -> paragraph: Find the Time",
+        "- [x] claim -> citation_callout: ask for the time, say,",
+        "- [x] claim -> citation_callout: If you",
+        "- [x] definition -> paragraph: Find the Time",
+        "- [x] definition -> paragraph: Find the Time"
+      ],
+      "receipt_title": "Draft Composition",
+      "status_text": "Draft composition refreshed."
+    },
+    {
+      "action_key": "compare_projections",
+      "next_phase": "",
+      "next_tab": "",
+      "receipt_lines": [
+        "- subject.md: $WORKSTATION_ROOT/corpus/find-the-time/subject.md",
+        "- subject.typ: $WORKSTATION_ROOT/corpus/find-the-time/subject.typ",
+        "- subject.md lines/hash: 73 / $CONTENT_HASH",
+        "- subject.typ lines/hash: 63 / $CONTENT_HASH",
+        "- subject.md bytes: 1483",
+        "- subject.typ bytes: 1389",
+        "- subject title found in subject.md: yes",
+        "- subject title found in subject.typ: yes",
+        "- subject.typ typst validation: ok",
+        "- items checked: 1",
+        "- items covered in subject.md: 1 / 1",
+        "- items covered in subject.typ: 1 / 1",
+        "- missing in subject.md: <none>",
+        "- missing in subject.typ: <none>",
+        "- verdict: aligned"
+      ],
+      "receipt_title": "Projection Comparison Receipt",
+      "status_text": "Projection comparison aligned."
+    },
+    {
+      "action_key": "refresh_publication_composition",
+      "next_phase": "draft",
+      "next_tab": "",
+      "receipt_lines": [
+        "- composition: $PUBLICATION_COMPOSITION_ID",
+        "- title: Find the Time Report",
+        "- output style: Governed Report",
+        "- scope: Governed report projection for Find the Time.",
+        "- status: draft",
+        "- context snapshot: $CONTENT_HASH",
+        "- draft composition: $DRAFT_COMPOSITION_ID",
+        "- draft review items: 5 (5 included)",
+        "- unit selection: draft_review",
+        "- selection rationale: Report plan unit scope was seeded from the current draft composition, which itself was derived from the itemization inventory.",
+        "- included units: 1",
+        "- selected imports: 0",
+        "- sections: 6",
+        "- section plan: Full",
+        "- section titles: Summary, Definitions, Analysis, Implementation, Evidence, Appendix",
+        "- import usage: none"
+      ],
+      "receipt_title": "Report Plan",
+      "status_text": "Report plan refreshed."
+    },
+    {
+      "action_key": "approve_review",
+      "next_phase": "",
+      "next_tab": "",
+      "receipt_lines": [
+        "- subject: Find the Time",
+        "- comparison verdict: aligned",
+        "- composition: $PUBLICATION_COMPOSITION_ID",
+        "- composition imports: 0",
+        "- composition units: 1",
+        "- decision: approved for report publication"
+      ],
+      "receipt_title": "Review Approval Receipt",
+      "status_text": "Review approved for report publication."
+    },
+    {
+      "action_key": "lock_publication",
+      "next_phase": "",
+      "next_tab": "",
+      "receipt_lines": [
+        "- subject: Find the Time",
+        "- review ready: yes",
+        "- publication inputs: locked"
+      ],
+      "receipt_title": "Publication Lock Receipt",
+      "status_text": "Publication inputs locked."
+    },
+    {
+      "action_key": "build_report",
+      "next_phase": "",
+      "next_tab": "",
+      "receipt_lines": [
+        "- publication: pub_find-the-time_report_734c5a04b5",
+        "- composition: $PUBLICATION_COMPOSITION_ID",
+        "- build: $PUBLICATION_BUILD_ID",
+        "- validation: ok",
+        "- ready for report: yes",
+        "- publication inputs locked: yes",
+        "- sections: 6",
+        "- claims: 5",
+        "- sources: 1",
+        "- entities: 1",
+        "- xrefs: 15",
+        "- reviews: 1",
+        "- active support: 0",
+        "- imported subjects in scope: 0",
+        "- publication record: $WORKSTATION_ROOT/corpus/find-the-time/publications/pub_find-the-time_report_734c5a04b5/publication.json",
+        "- build record: $WORKSTATION_ROOT/corpus/find-the-time/publications/pub_find-the-time_report_734c5a04b5/builds/$PUBLICATION_BUILD_ID.json",
+        "- release packet: $WORKSTATION_ROOT/corpus/find-the-time/publications/pub_find-the-time_report_734c5a04b5",
+        "- rendered pdf: outputs/$PUBLICATION_BUILD_ID/report.pdf (<missing>)",
+        "- rendered typ: outputs/$PUBLICATION_BUILD_ID/report.typ (<missing>)",
+        "- rendered md: outputs/$PUBLICATION_BUILD_ID/report.md (<missing>)",
+        "- packet contents: blocks, builds, claims, composition_revisions, compositions, entities, outputs, publication.json ..."
+      ],
+      "receipt_title": "Publication Build Receipt",
+      "status_text": "Report build completed [ok]."
+    }
+  ],
+  "artifacts": {
+    "report.md": "d8332ecb52be9d0b79ec5dd38ad242fe20c5b2695288a17ddfb844de6b5bdaac",
+    "report.typ": "f2d29f0814e6ef1ace27f98540942426c47847a695cbab56b60bde46b98245e9"
+  },
+  "fixture": "workstation/tests/fixtures/report_creation/01_FIND_THE_TIME.md",
+  "fixture_sha256": "cf41fad4601fc02e3284600837eebd4d365926ad0bc7b362493789fe955500b9",
+  "publication": {
+    "build_status": "ok",
+    "publication_claim_count": 5,
+    "publication_entity_count": 1,
+    "publication_review_count": 1,
+    "publication_section_count": 6,
+    "publication_source_count": 1,
+    "publication_title": "Find the Time Report",
+    "publication_xref_count": 15,
+    "validation_status": "ok"
+  },
+  "schema_version": 1,
+  "subject_id": "find-the-time"
+}

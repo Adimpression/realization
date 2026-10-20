@@ -1,0 +1,209 @@
+{
+  "schema_version": "dst_normalized_case.v1",
+  "fixture_id": "hospital-medication-system-upgrade",
+  "source_ref": "dst/Hospital medication system upgrade.md",
+  "context": {
+    "system_name": "Hospital medication system upgrade",
+    "decision_problem": "Choose how to replace handwritten medication orders without creating unsafe mixed prescribing or interrupting care.",
+    "evaluation_state_id": "s0",
+    "planning_horizon": "",
+    "notes": [
+      "The useful decision point is the cutover decision after approval, training, and integration readiness are complete."
+    ]
+  },
+  "actors": [
+    {"id": "a1", "name": "hospital administration", "roles": ["decision_maker", "coordinator"], "can_decide": true},
+    {"id": "a2", "name": "clinical safety board", "roles": ["safety_governance"], "can_decide": true},
+    {"id": "a3", "name": "doctors", "roles": ["operator"], "can_decide": false},
+    {"id": "a4", "name": "pharmacy department", "roles": ["operator"], "can_decide": false},
+    {"id": "a5", "name": "IT vendor", "roles": ["provider"], "can_decide": false}
+  ],
+  "objectives": [
+    {"id": "o1", "name": "prevent medication errors", "shared": true, "mandatory": true, "pursued_by": ["a1", "a2", "a3", "a4"]},
+    {"id": "o2", "name": "maintain uninterrupted clinical operations", "shared": true, "mandatory": true, "pursued_by": ["a1", "a2", "a3", "a4"]}
+  ],
+  "capabilities": [
+    {
+      "id": "k1",
+      "name": "paper prescribing",
+      "kind": "legacy",
+      "advances_objectives": ["o2"],
+      "controlled_by": ["a3", "a4"],
+      "benefits_to": ["a3", "a4"],
+      "costs_to": ["a3", "a4"],
+      "risks_to": ["a3", "a4"]
+    },
+    {
+      "id": "k2",
+      "name": "electronic prescribing",
+      "kind": "target",
+      "advances_objectives": ["o1", "o2"],
+      "controlled_by": ["a1", "a4", "a5"],
+      "benefits_to": ["a3", "a4"],
+      "costs_to": ["a1", "a5"],
+      "risks_to": ["a3", "a4"]
+    },
+    {
+      "id": "k3",
+      "name": "barcode medication verification",
+      "kind": "target",
+      "advances_objectives": ["o1"],
+      "controlled_by": ["a2", "a4", "a5"],
+      "benefits_to": ["a3", "a4"],
+      "costs_to": ["a1", "a5"],
+      "risks_to": ["a3", "a4"]
+    }
+  ],
+  "dependencies": [
+    {"id": "d1", "name": "regulator approval for digital prescribing"},
+    {"id": "d2", "name": "staff training completed"},
+    {"id": "d3", "name": "pharmacy system integration working"}
+  ],
+  "constraints": [
+    {"id": "q1", "name": "no dual prescribing allowed for controlled drugs", "kind": "hard"},
+    {"id": "q2", "name": "patient safety rules require fully validated workflows before live use", "kind": "hard"}
+  ],
+  "boundaries": [
+    {"id": "b1", "name": "clinical-to-IT boundary"},
+    {"id": "b2", "name": "hospital-to-regulator boundary"}
+  ],
+  "states": [
+    {
+      "id": "s0",
+      "name": "paper-only operation with cutover readiness complete",
+      "is_current": true,
+      "is_target": false,
+      "available_capabilities": ["k1"],
+      "operational_capabilities": ["k1"],
+      "satisfied_dependencies": ["d1", "d2", "d3"],
+      "active_constraints": ["q1", "q2"],
+      "boundary_friction": [
+        {"boundary_id": "b1", "present": true},
+        {"boundary_id": "b2", "present": true}
+      ]
+    },
+    {
+      "id": "s1",
+      "name": "mixed prescribing workflow",
+      "is_current": false,
+      "is_target": false,
+      "available_capabilities": ["k1", "k2"],
+      "operational_capabilities": ["k1", "k2"],
+      "satisfied_dependencies": ["d1", "d2", "d3"],
+      "active_constraints": ["q1", "q2"],
+      "boundary_friction": [
+        {"boundary_id": "b1", "present": true}
+      ]
+    },
+    {
+      "id": "s2",
+      "name": "fully electronic and validated medication workflow",
+      "is_current": false,
+      "is_target": true,
+      "available_capabilities": ["k2", "k3"],
+      "operational_capabilities": ["k2", "k3"],
+      "satisfied_dependencies": ["d1", "d2", "d3"],
+      "active_constraints": ["q1", "q2"],
+      "boundary_friction": []
+    }
+  ],
+  "capability_requirements": [
+    {"capability_id": "k2", "required_dependencies": ["d1", "d2", "d3"], "limiting_constraints": ["q1", "q2"], "crossed_boundaries": ["b1", "b2"]},
+    {"capability_id": "k3", "required_dependencies": ["d2", "d3"], "limiting_constraints": ["q2"], "crossed_boundaries": ["b1"]}
+  ],
+  "capability_admissibility": [
+    {"capability_id": "k2", "state_id": "s0", "admissible": true, "reasons": []},
+    {"capability_id": "k3", "state_id": "s0", "admissible": true, "reasons": []}
+  ],
+  "transitions": [
+    {
+      "id": "t1",
+      "name": "phased mixed-mode rollout",
+      "source_state_id": "s0",
+      "target_state_id": "s1",
+      "changes_capabilities": ["k2"],
+      "required_dependencies": ["d1", "d2", "d3"],
+      "constraining_constraints": ["q1", "q2"],
+      "crossed_boundaries": ["b1", "b2"]
+    },
+    {
+      "id": "t2",
+      "name": "prepared direct cutover to validated electronic prescribing",
+      "source_state_id": "s0",
+      "target_state_id": "s2",
+      "changes_capabilities": ["k2", "k3"],
+      "required_dependencies": ["d1", "d2", "d3"],
+      "constraining_constraints": ["q1", "q2"],
+      "crossed_boundaries": ["b1", "b2"]
+    }
+  ],
+  "transition_admissibility": [
+    {
+      "transition_id": "t1",
+      "state_id": "s0",
+      "admissible": false,
+      "reasons": [
+        "mixed mode violates controlled-drug safety rules",
+        "patient-safety policy prohibits live use before full validation"
+      ]
+    },
+    {
+      "transition_id": "t2",
+      "state_id": "s0",
+      "admissible": true,
+      "reasons": []
+    }
+  ],
+  "decisions": [
+    {
+      "id": "x1",
+      "name": "Use a phased mixed-mode rollout",
+      "selects_transition_id": "t1",
+      "assignments": [
+        {"actor_id": "a1", "capability_id": "k2"}
+      ],
+      "time_label": ""
+    },
+    {
+      "id": "x2",
+      "name": "Complete readiness work, then cut over directly",
+      "selects_transition_id": "t2",
+      "assignments": [
+        {"actor_id": "a1", "capability_id": "k2"},
+        {"actor_id": "a1", "capability_id": "k3"}
+      ],
+      "time_label": ""
+    }
+  ],
+  "decision_status": [
+    {"decision_id": "x1", "state_id": "s0", "valid": false, "executable": false, "reasons": ["selected_transition_inadmissible:t1"]},
+    {"decision_id": "x2", "state_id": "s0", "valid": true, "executable": true, "reasons": []}
+  ],
+  "coordination_requirements": [
+    {
+      "type": "transition",
+      "target_id": "t2",
+      "required": true,
+      "actors": ["a1", "a2", "a4", "a5"],
+      "basis": "explicit_cross_boundary_requirement"
+    }
+  ],
+  "risk_indicators": [
+    {
+      "target_type": "transition",
+      "target_id": "t1",
+      "state_id": "s0",
+      "risks": ["mixed_mode_violation", "controlled_drug_safety_risk"]
+    }
+  ],
+  "fallbacks": [],
+  "candidate_sets": {
+    "candidate_transition_ids_from_current_state": ["t1", "t2"],
+    "candidate_decision_ids_from_current_state": ["x1", "x2"]
+  },
+  "assumptions": [
+    "The decision point assumes approval, training, and integration readiness are complete before go-live."
+  ],
+  "ambiguities": [],
+  "missing_information": []
+}

@@ -1,0 +1,301 @@
+{
+  "schema_version": "smart_city_travel_incremental_ladder.v1",
+  "subject_id": "smart-city-travel",
+  "subject_title": "Smart City Travel",
+  "rungs": [
+    {
+      "name": "v1",
+      "markdown_files": [
+        "dst/City bus prose v1.md"
+      ],
+      "decision_analysis_expected": false,
+      "required_markdown_substrings": [
+        "cash or plastic transit cards",
+        "app-based payment",
+        "contactless bank-card payment"
+      ],
+      "forbidden_markdown_substrings": [
+        "Decision Option Matrix",
+        "Decision Recommendation"
+      ],
+      "required_workflow_health": {
+        "subject_id": "smart-city-travel",
+        "itemization_freshness": "current",
+        "itemization_validation": "ok",
+        "draft_composition_current": true,
+        "report_build_completed": true
+      },
+      "optional_typst_substrings": []
+    },
+    {
+      "name": "v1+v2",
+      "markdown_files": [
+        "dst/City bus prose v1.md",
+        "dst/City bus prose v2.md"
+      ],
+      "decision_analysis_expected": false,
+      "required_markdown_substrings": [
+        "transit authority",
+        "private bus operators",
+        "payment processor",
+        "city regulator",
+        "passengers"
+      ],
+      "forbidden_markdown_substrings": [
+        "Decision Option Matrix",
+        "Decision Recommendation"
+      ],
+      "required_workflow_health": {
+        "subject_id": "smart-city-travel",
+        "itemization_freshness": "current",
+        "itemization_validation": "ok",
+        "draft_composition_current": true,
+        "report_build_completed": true
+      },
+      "optional_typst_substrings": []
+    },
+    {
+      "name": "v1+v2+v3",
+      "markdown_files": [
+        "dst/City bus prose v1.md",
+        "dst/City bus prose v2.md",
+        "dst/City bus prose v3.md"
+      ],
+      "decision_analysis_expected": false,
+      "required_markdown_substrings": [
+        "reduce boarding time",
+        "reduce fare evasion",
+        "avoid service disruption"
+      ],
+      "forbidden_markdown_substrings": [
+        "Decision Option Matrix",
+        "Decision Recommendation"
+      ],
+      "required_workflow_health": {
+        "subject_id": "smart-city-travel",
+        "itemization_freshness": "current",
+        "itemization_validation": "ok",
+        "draft_composition_current": true,
+        "report_build_completed": true
+      },
+      "optional_typst_substrings": []
+    },
+    {
+      "name": "v1+v2+v3+v4",
+      "markdown_files": [
+        "dst/City bus prose v1.md",
+        "dst/City bus prose v2.md",
+        "dst/City bus prose v3.md",
+        "dst/City bus prose v4.md"
+      ],
+      "decision_analysis_expected": false,
+      "required_markdown_substrings": [
+        "improve the existing smart card system",
+        "full open-loop contactless payment using bank cards and phones",
+        "mobile verification tools",
+        "backward compatibility for old validators"
+      ],
+      "forbidden_markdown_substrings": [
+        "Decision Option Matrix",
+        "Decision Recommendation"
+      ],
+      "required_workflow_health": {
+        "subject_id": "smart-city-travel",
+        "itemization_freshness": "current",
+        "itemization_validation": "ok",
+        "draft_composition_current": true,
+        "report_build_completed": true
+      },
+      "optional_typst_substrings": []
+    },
+    {
+      "name": "v1+v2+v3+v4+v5",
+      "markdown_files": [
+        "dst/City bus prose v1.md",
+        "dst/City bus prose v2.md",
+        "dst/City bus prose v3.md",
+        "dst/City bus prose v4.md",
+        "dst/City bus prose v5.md"
+      ],
+      "decision_analysis_expected": false,
+      "required_markdown_substrings": [
+        "Banks and the payment processor must be ready",
+        "necessary hardware upgrades",
+        "legal approval for account-based fare processing"
+      ],
+      "forbidden_markdown_substrings": [
+        "Decision Option Matrix",
+        "Decision Recommendation"
+      ],
+      "required_workflow_health": {
+        "subject_id": "smart-city-travel",
+        "itemization_freshness": "current",
+        "itemization_validation": "ok",
+        "draft_composition_current": true,
+        "report_build_completed": true
+      },
+      "optional_typst_substrings": []
+    },
+    {
+      "name": "v1+v2+v3+v4+v5+v6",
+      "markdown_files": [
+        "dst/City bus prose v1.md",
+        "dst/City bus prose v2.md",
+        "dst/City bus prose v3.md",
+        "dst/City bus prose v4.md",
+        "dst/City bus prose v5.md",
+        "dst/City bus prose v6.md"
+      ],
+      "decision_analysis_expected": false,
+      "required_markdown_substrings": [
+        "annual budget cap",
+        "continue operating without downtime",
+        "elderly and unbanked riders"
+      ],
+      "forbidden_markdown_substrings": [
+        "Decision Option Matrix",
+        "Decision Recommendation"
+      ],
+      "required_workflow_health": {
+        "subject_id": "smart-city-travel",
+        "itemization_freshness": "current",
+        "itemization_validation": "ok",
+        "draft_composition_current": true,
+        "report_build_completed": true
+      },
+      "optional_typst_substrings": []
+    },
+    {
+      "name": "v1+v2+v3+v4+v5+v6+v7",
+      "markdown_files": [
+        "dst/City bus prose v1.md",
+        "dst/City bus prose v2.md",
+        "dst/City bus prose v3.md",
+        "dst/City bus prose v4.md",
+        "dst/City bus prose v5.md",
+        "dst/City bus prose v6.md",
+        "dst/City bus prose v7.md"
+      ],
+      "decision_analysis_expected": false,
+      "required_markdown_substrings": [
+        "public transit authority and private bus operators",
+        "transit system and the banking/payment system",
+        "inclusion and privacy"
+      ],
+      "forbidden_markdown_substrings": [
+        "Decision Option Matrix",
+        "Decision Recommendation"
+      ],
+      "required_workflow_health": {
+        "subject_id": "smart-city-travel",
+        "itemization_freshness": "current",
+        "itemization_validation": "ok",
+        "draft_composition_current": true,
+        "report_build_completed": true
+      },
+      "optional_typst_substrings": []
+    },
+    {
+      "name": "v1+v2+v3+v4+v5+v6+v7+v8",
+      "markdown_files": [
+        "dst/City bus prose v1.md",
+        "dst/City bus prose v2.md",
+        "dst/City bus prose v3.md",
+        "dst/City bus prose v4.md",
+        "dst/City bus prose v5.md",
+        "dst/City bus prose v6.md",
+        "dst/City bus prose v7.md",
+        "dst/City bus prose v8.md"
+      ],
+      "decision_analysis_expected": false,
+      "required_markdown_substrings": [
+        "legacy fare system",
+        "improved closed-loop card system",
+        "hybrid system",
+        "full account-based open-loop payment system"
+      ],
+      "forbidden_markdown_substrings": [
+        "Decision Option Matrix",
+        "Decision Recommendation"
+      ],
+      "required_workflow_health": {
+        "subject_id": "smart-city-travel",
+        "itemization_freshness": "current",
+        "itemization_validation": "ok",
+        "draft_composition_current": true,
+        "report_build_completed": true
+      },
+      "optional_typst_substrings": []
+    },
+    {
+      "name": "v1+v2+v3+v4+v5+v6+v7+v8+v9",
+      "markdown_files": [
+        "dst/City bus prose v1.md",
+        "dst/City bus prose v2.md",
+        "dst/City bus prose v3.md",
+        "dst/City bus prose v4.md",
+        "dst/City bus prose v5.md",
+        "dst/City bus prose v6.md",
+        "dst/City bus prose v7.md",
+        "dst/City bus prose v8.md",
+        "dst/City bus prose v9.md"
+      ],
+      "decision_analysis_expected": true,
+      "required_markdown_substrings": [
+        "Case Frame",
+        "Decision Option Matrix",
+        "Staged modernization route",
+        "Direct open-loop route",
+        "Keep in reserve until execution conditions are materially stronger."
+      ],
+      "forbidden_markdown_substrings": [],
+      "required_workflow_health": {
+        "subject_id": "smart-city-travel",
+        "itemization_freshness": "current",
+        "itemization_validation": "ok",
+        "draft_composition_current": true,
+        "report_build_completed": true
+      },
+      "optional_typst_substrings": [
+        "Decision Option Matrix"
+      ]
+    },
+    {
+      "name": "v1+v2+v3+v4+v5+v6+v7+v8+v9+v10",
+      "markdown_files": [
+        "dst/City bus prose v1.md",
+        "dst/City bus prose v2.md",
+        "dst/City bus prose v3.md",
+        "dst/City bus prose v4.md",
+        "dst/City bus prose v5.md",
+        "dst/City bus prose v6.md",
+        "dst/City bus prose v7.md",
+        "dst/City bus prose v8.md",
+        "dst/City bus prose v9.md",
+        "dst/City bus prose v10.md"
+      ],
+      "decision_analysis_expected": true,
+      "required_markdown_substrings": [
+        "Decision Recommendation",
+        "Execution Guidance",
+        "legacy fare system → upgrade existing transit card system → improved closed-loop card system",
+        "improved closed-loop card system → add compatibility and inspection tools → hybrid card plus compatibility tools",
+        "hybrid card plus compatibility tools → advance to full account-based open-loop payment → full account-based open-loop payment",
+        "Direct open-loop route | valid_but_not_executable |",
+        "Recommended options: Staged modernization route."
+      ],
+      "forbidden_markdown_substrings": [],
+      "required_workflow_health": {
+        "subject_id": "smart-city-travel",
+        "itemization_freshness": "current",
+        "itemization_validation": "ok",
+        "draft_composition_current": true,
+        "report_build_completed": true
+      },
+      "optional_typst_substrings": [
+        "Decision Recommendation",
+        "Execution Guidance"
+      ]
+    }
+  ]
+}

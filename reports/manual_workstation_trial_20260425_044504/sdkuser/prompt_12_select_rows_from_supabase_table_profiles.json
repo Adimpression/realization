@@ -1,0 +1,25 @@
+{
+  "assistant_text": "{'status': 'ok', 'table': 'profiles', 'rows': [{'id': 1, 'name': 'Ada'}, {'id': 2, 'name': 'Linus'}]}",
+  "model": "workstation-direct-composition",
+  "rounds": 0,
+  "task_contract": {
+    "semantic_unit": "Select rows from Supabase table `profiles`."
+  },
+  "tool_receipts": [
+    {
+      "arguments": {
+        "skill_title": "SDK User Commands 12 \u2014 Supabase Select Rows / Sdk User Commands 12 Supabase Select Rows",
+        "target": ""
+      },
+      "name": "ws.skill.invoke",
+      "result": {
+        "answer": "{'status': 'ok', 'table': 'profiles', 'rows': [{'id': 1, 'name': 'Ada'}, {'id': 2, 'name': 'Linus'}]}",
+        "error": "",
+        "error_type": "",
+        "executor_framework": "python3",
+        "skill_title": "SDK User Commands 12 \u2014 Supabase Select Rows / Sdk User Commands 12 Supabase Select Rows",
+        "status": "ok"
+      }
+    }
+  ]
+}

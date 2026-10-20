@@ -1,0 +1,3632 @@
+schema: bssc_skill.v2
+kind: policy
+title: Local Bundle Admission Policy / 1bdaa11ef1a7
+policy:
+  intent: Admit the governed skills packaged in this bundle on a fresh system.
+  target_kinds:
+  - ability
+  max_risk_tier: tier2_connected
+  allowed_authorities:
+  - execute
+  - write
+  - communicate
+  denied_authorities: []
+  allowed_executors:
+  - bash
+  required_approval_for_risk_tiers: {}
+  allowed_data_classes:
+  - public
+---
+schema: bssc_skill.v2
+kind: ability
+title: "Bash Commands 01 \u2014 Create Directory / Bash Commands 01 Create Directory"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you execute bash commands 01 create directory?
+declaration:
+  intent: How do you execute bash commands 01 create directory?
+  inputs:
+    path: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  - write
+  authority_bounds:
+    execute:
+      scope: local_executor
+      target: bash_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+    write:
+      scope: local_executor
+      target: skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - shell command execution
+  - filesystem or external state modification
+  persistence_behavior: may_modify_external_state
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier2_connected
+  executor_framework: bash
+executor: bash
+entrypoint: main
+inputs:
+  path: required input value
+outputs:
+  result: execution result
+shell: |-
+  #!/usr/bin/env bash
+  set -euo pipefail
+
+  # BSSC exposes the structured input payload as JSON and as env vars for shell-based abilities.
+  mkdir -p "$path"
+
+  printf '%s\n' "{\"answer\": \"executed\", \"notes\": [], \"result\": {\"status\": \"executed\"}, \"status\": \"ok\"}"
+governance:
+  scope: reuse when later prompts ask for bash commands 01 create directory under
+    compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a'*
+  - c'*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:21:46+00:00'
+  provenance:
+  - not_learn-from-markdown-01-learn-bash-commands-creat_ad48a6
+  - /Users/ravindranathakila/service/realized/trials/bash/01_LEARN_BASH_COMMANDS_CREATE_DIRECTORY.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for bash commands 01 create directory
+      under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Bash Commands 01 Create Directory
+    encountered_not: Bash Commands 01 Create Directory
+    goal: How do you execute bash commands 01 create directory?
+    intended_object: "Bash Commands 01 \u2014 Create Directory Bash Commands 01 \u2014\
+      \ Create Directory / Bash Commands 01 Create Directory Bash Commands 01 Create\
+      \ Directory How do you execute bash commands 01 create directory? 2. Executable\
+      \ Bash relation shell command block execute `mkdir -p \"$path\"` named shell\
+      \ parameters: `path` This capability should be learned as a reusable bash ability\
+      \ artifact. The named shell parameter is `$path`."
+    success_criteria:
+    - the response directly resolves the stated ask without erasing material distinctions
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ Bash Commands 01 \u2014 Create Directory Bash Commands 01 \u2014 Create Directory\
+      \ / Bash Commands 01 Create Directory Bash Commands 01 Create Directory How\
+      \ do you execute bash commands 01 create directory, 2, Executable Bash relation\
+      \ shell command block execute `mkdir -p \"$path\"` named shell parameters: `path`\
+      \ This capability should be learned as a reusable bash ability artifact; no\
+      \ justified final closure has been admitted yet"
+    givens:
+    - "Bash Commands 01 \u2014 Create Directory Bash Commands 01 \u2014 Create Directory\
+      \ / Bash Commands 01 Create Directory Bash Commands 01 Create Directory How\
+      \ do you execute bash commands 01 create directory"
+    - '2'
+    - 'Executable Bash relation shell command block execute `mkdir -p "$path"` named
+      shell parameters: `path` This capability should be learned as a reusable bash
+      ability artifact'
+    unknowns: []
+    missing_components:
+    - a justified final realization has not yet been produced
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - completion
+    origin_layers:
+    - model
+    degree: partial
+    remainder_shapes:
+    - missing
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair: []
+    full_repair:
+    - 'satisfy success condition: the response directly resolves the stated ask without
+      erasing material distinctions'
+    boundary_shape:
+    - d*
+    action_posture: direct_resolution
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Bash Commands 01 Create Directory
+    title_depth_prefixes:
+    - Bash Commands 01 Create Directory
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Bash Command 01 Directory
+    composed_not: Bash Command 01 Directory
+    lookup_keys:
+    - bash command 01 directory
+    - bash command
+    - command 01
+    - 01 directory
+    - bash command 01
+    - command 01 directory
+    - execute bash command 01 directory
+    - execute bash
+    - execute bash command
+    - without reduc remainder item cannot clos with govern confidence
+    - without reduc remainder item cannot clo
+    - govern confidence
+    - without reduc
+    - reduc remainder
+    - remainder item
+    - item cannot
+    - cannot clos
+    - clos with
+    - with govern
+    - without reduc remainder
+    - reduc remainder item
+    - remainder item cannot
+    - item cannot clos
+    - cannot clos with
+    notation_yaml: |-
+      "How Do You Execute Bash Commands 01 Create Directory":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Bash Commands 01 Create Directory"
+          - "Components: Bash Command 01 Directory"
+          - "Composition: Bash Command 01 Directory"
+          - "Title identity: Bash Commands 01 Create Directory"
+          - "Title depth segments: Bash Commands 01 Create Directory"
+          - "Title depth prefixes: Bash Commands 01 Create Directory"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: Bash Commands 01 \u2014 Create Directory Bash Commands 01 \u2014 Create Directory / Bash Commands 01 Create Directory Bash Commands 01 Create Directory How do you execute bash commands 01 create directory? 2. Executable Bash relation shell command block execute `mkdir -p \"$path\"` named shell parameters: `path` This capability should be learned as a reusable bash ability artifact. The named shell parameter is `$path`."
+          - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+          - "Actual realization: the prompt surface is present; explicit givens are present: Bash Commands 01 \u2014 Create Directory Bash Commands 01 \u2014 Create Directory / Bash Commands 01 Create Directory Bash Commands 01 Create Directory How do you execute bash commands 01 create directory, 2, Executable Bash relation shell command block execute `mkdir -p \"$path\"` named shell parameters: `path` This capability should be learned as a reusable bash ability artifact; no justified final closure has been admitted yet"
+          - "Givens: Bash Commands 01 \u2014 Create Directory Bash Commands 01 \u2014 Create Directory / Bash Commands 01 Create Directory Bash Commands 01 Create Directory How do you execute bash commands 01 create directory, 2, Executable Bash relation shell command block execute `mkdir -p \"$path\"` named shell parameters: `path` This capability should be learned as a reusable bash ability artifact"
+          - "Missing components: a justified final realization has not yet been produced"
+          - "Misalignment types: completion"
+          - "Origin layers: model"
+          - "Degree: partial"
+          - "Remainder shapes: missing"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+          - "Action posture: direct_resolution"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - bash
+---
+schema: bssc_skill.v2
+kind: ability
+title: "Bash Commands 02 \u2014 List Directory Contents / Bash Commands 02 List Directory\
+  \ Contents"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you execute bash commands 02 list directory contents?
+declaration:
+  intent: How do you execute bash commands 02 list directory contents?
+  inputs:
+    path: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  authority_bounds:
+    execute:
+      scope: local_executor
+      target: bash_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - shell command execution
+  persistence_behavior: none
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier1_bounded_transform
+  executor_framework: bash
+executor: bash
+entrypoint: main
+inputs:
+  path: required input value
+outputs:
+  result: execution result
+shell: |-
+  #!/usr/bin/env bash
+  set -euo pipefail
+
+  # BSSC exposes the structured input payload as JSON and as env vars for shell-based abilities.
+  ls -la "$path"
+
+  printf '%s\n' "{\"answer\": \"executed\", \"notes\": [], \"result\": {\"status\": \"executed\"}, \"status\": \"ok\"}"
+governance:
+  scope: reuse when later prompts ask for bash commands 02 list directory contents
+    under compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a'*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:21:52+00:00'
+  provenance:
+  - not_learn-from-markdown-02-learn-bash-commands-list-_98fcf0
+  - /Users/ravindranathakila/service/realized/trials/bash/02_LEARN_BASH_COMMANDS_LIST_DIRECTORY.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for bash commands 02 list directory
+      contents under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Bash Commands 02 List Directory Contents
+    encountered_not: Bash Commands 02 List Directory Contents
+    goal: How do you execute bash commands 02 list directory contents?
+    intended_object: "Bash Commands 02 \u2014 List Directory Contents Bash Commands\
+      \ 02 \u2014 List Directory Contents / Bash Commands 02 List Directory Contents\
+      \ Bash Commands 02 List Directory Contents How do you execute bash commands\
+      \ 02 list directory contents? 2. Executable Bash relation shell command block\
+      \ execute `ls -la \"$path\"` named shell parameters: `path` This capability\
+      \ should be learned as a reusable bash ability artifact. The named shell parameter\
+      \ is `$path`."
+    success_criteria:
+    - the response directly resolves the stated ask without erasing material distinctions
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ Bash Commands 02 \u2014 List Directory Contents Bash Commands 02 \u2014 List\
+      \ Directory Contents / Bash Commands 02 List Directory Contents Bash Commands\
+      \ 02 List Directory Contents How do you execute bash commands 02 list directory\
+      \ contents, 2, Executable Bash relation shell command block execute `ls -la\
+      \ \"$path\"` named shell parameters: `path` This capability should be learned\
+      \ as a reusable bash ability artifact; no justified final closure has been admitted\
+      \ yet"
+    givens:
+    - "Bash Commands 02 \u2014 List Directory Contents Bash Commands 02 \u2014 List\
+      \ Directory Contents / Bash Commands 02 List Directory Contents Bash Commands\
+      \ 02 List Directory Contents How do you execute bash commands 02 list directory\
+      \ contents"
+    - '2'
+    - 'Executable Bash relation shell command block execute `ls -la "$path"` named
+      shell parameters: `path` This capability should be learned as a reusable bash
+      ability artifact'
+    unknowns: []
+    missing_components:
+    - a justified final realization has not yet been produced
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - completion
+    origin_layers:
+    - model
+    degree: partial
+    remainder_shapes:
+    - missing
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair: []
+    full_repair:
+    - 'satisfy success condition: the response directly resolves the stated ask without
+      erasing material distinctions'
+    boundary_shape:
+    - d*
+    action_posture: direct_resolution
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Bash Commands 02 List Directory Contents
+    title_depth_prefixes:
+    - Bash Commands 02 List Directory Contents
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Bash Command 02 List Directory Content
+    composed_not: Bash Command 02 List Directory Content
+    lookup_keys:
+    - bash command 02 list directory content
+    - bash command
+    - command 02
+    - 02 list
+    - list directory
+    - directory content
+    - bash command 02
+    - command 02 list
+    - 02 list directory
+    - list directory content
+    - execute bash command 02 list directory content
+    - execute bash
+    - execute bash command
+    - without reduc remainder item cannot clos with govern confidence
+    - without reduc remainder item cannot clo
+    - govern confidence
+    - without reduc
+    - reduc remainder
+    - remainder item
+    - item cannot
+    - cannot clos
+    - clos with
+    - with govern
+    - without reduc remainder
+    notation_yaml: |-
+      "How Do You Execute Bash Commands 02 List Directory Contents":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Bash Commands 02 List Directory Contents"
+          - "Components: Bash Command 02 List Directory Content"
+          - "Composition: Bash Command 02 List Directory Content"
+          - "Title identity: Bash Commands 02 List Directory Contents"
+          - "Title depth segments: Bash Commands 02 List Directory Contents"
+          - "Title depth prefixes: Bash Commands 02 List Directory Contents"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: Bash Commands 02 \u2014 List Directory Contents Bash Commands 02 \u2014 List Directory Contents / Bash Commands 02 List Directory Contents Bash Commands 02 List Directory Contents How do you execute bash commands 02 list directory contents? 2. Executable Bash relation shell command block execute `ls -la \"$path\"` named shell parameters: `path` This capability should be learned as a reusable bash ability artifact. The named shell parameter is `$path`."
+          - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+          - "Actual realization: the prompt surface is present; explicit givens are present: Bash Commands 02 \u2014 List Directory Contents Bash Commands 02 \u2014 List Directory Contents / Bash Commands 02 List Directory Contents Bash Commands 02 List Directory Contents How do you execute bash commands 02 list directory contents, 2, Executable Bash relation shell command block execute `ls -la \"$path\"` named shell parameters: `path` This capability should be learned as a reusable bash ability artifact; no justified final closure has been admitted yet"
+          - "Givens: Bash Commands 02 \u2014 List Directory Contents Bash Commands 02 \u2014 List Directory Contents / Bash Commands 02 List Directory Contents Bash Commands 02 List Directory Contents How do you execute bash commands 02 list directory contents, 2, Executable Bash relation shell command block execute `ls -la \"$path\"` named shell parameters: `path` This capability should be learned as a reusable bash ability artifact"
+          - "Missing components: a justified final realization has not yet been produced"
+          - "Misalignment types: completion"
+          - "Origin layers: model"
+          - "Degree: partial"
+          - "Remainder shapes: missing"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+          - "Action posture: direct_resolution"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - bash
+---
+schema: bssc_skill.v2
+kind: ability
+title: "Bash Commands 03 \u2014 Print File Contents / Bash Commands 03 Print File\
+  \ Contents"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you execute bash commands 03 print file contents?
+declaration:
+  intent: How do you execute bash commands 03 print file contents?
+  inputs:
+    path: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  authority_bounds:
+    execute:
+      scope: local_executor
+      target: bash_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - shell command execution
+  persistence_behavior: none
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier1_bounded_transform
+  executor_framework: bash
+executor: bash
+entrypoint: main
+inputs:
+  path: required input value
+outputs:
+  result: execution result
+shell: |-
+  #!/usr/bin/env bash
+  set -euo pipefail
+
+  # BSSC exposes the structured input payload as JSON and as env vars for shell-based abilities.
+  cat "$path"
+
+  printf '%s\n' "{\"answer\": \"executed\", \"notes\": [], \"result\": {\"status\": \"executed\"}, \"status\": \"ok\"}"
+governance:
+  scope: reuse when later prompts ask for bash commands 03 print file contents under
+    compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a'*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:21:59+00:00'
+  provenance:
+  - not_learn-from-markdown-03-learn-bash-commands-print_420930
+  - /Users/ravindranathakila/service/realized/trials/bash/03_LEARN_BASH_COMMANDS_PRINT_FILE.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for bash commands 03 print file contents
+      under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Bash Commands 03 Print File Contents
+    encountered_not: Bash Commands 03 Print File Contents
+    goal: How do you execute bash commands 03 print file contents?
+    intended_object: "Bash Commands 03 \u2014 Print File Contents Bash Commands 03\
+      \ \u2014 Print File Contents / Bash Commands 03 Print File Contents Bash Commands\
+      \ 03 Print File Contents How do you execute bash commands 03 print file contents?\
+      \ 2. Executable Bash relation shell command block execute `cat \"$path\"` named\
+      \ shell parameters: `path` This capability should be learned as a reusable bash\
+      \ ability artifact. The named shell parameter is `$path`."
+    success_criteria:
+    - the response directly resolves the stated ask without erasing material distinctions
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ Bash Commands 03 \u2014 Print File Contents Bash Commands 03 \u2014 Print\
+      \ File Contents / Bash Commands 03 Print File Contents Bash Commands 03 Print\
+      \ File Contents How do you execute bash commands 03 print file contents, 2,\
+      \ Executable Bash relation shell command block execute `cat \"$path\"` named\
+      \ shell parameters: `path` This capability should be learned as a reusable bash\
+      \ ability artifact; no justified final closure has been admitted yet"
+    givens:
+    - "Bash Commands 03 \u2014 Print File Contents Bash Commands 03 \u2014 Print File\
+      \ Contents / Bash Commands 03 Print File Contents Bash Commands 03 Print File\
+      \ Contents How do you execute bash commands 03 print file contents"
+    - '2'
+    - 'Executable Bash relation shell command block execute `cat "$path"` named shell
+      parameters: `path` This capability should be learned as a reusable bash ability
+      artifact'
+    unknowns: []
+    missing_components:
+    - a justified final realization has not yet been produced
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - completion
+    origin_layers:
+    - model
+    degree: partial
+    remainder_shapes:
+    - missing
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair: []
+    full_repair:
+    - 'satisfy success condition: the response directly resolves the stated ask without
+      erasing material distinctions'
+    boundary_shape:
+    - d*
+    action_posture: direct_resolution
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Bash Commands 03 Print File Contents
+    title_depth_prefixes:
+    - Bash Commands 03 Print File Contents
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Bash Command 03 Print File Content
+    composed_not: Bash Command 03 Print File Content
+    lookup_keys:
+    - bash command 03 print file content
+    - bash command
+    - command 03
+    - 03 print
+    - print file
+    - file content
+    - bash command 03
+    - command 03 print
+    - 03 print file
+    - print file content
+    - execute bash command 03 print file content
+    - execute bash
+    - execute bash command
+    - without reduc remainder item cannot clos with govern confidence
+    - without reduc remainder item cannot clo
+    - govern confidence
+    - without reduc
+    - reduc remainder
+    - remainder item
+    - item cannot
+    - cannot clos
+    - clos with
+    - with govern
+    - without reduc remainder
+    notation_yaml: |-
+      "How Do You Execute Bash Commands 03 Print File Contents":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Bash Commands 03 Print File Contents"
+          - "Components: Bash Command 03 Print File Content"
+          - "Composition: Bash Command 03 Print File Content"
+          - "Title identity: Bash Commands 03 Print File Contents"
+          - "Title depth segments: Bash Commands 03 Print File Contents"
+          - "Title depth prefixes: Bash Commands 03 Print File Contents"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: Bash Commands 03 \u2014 Print File Contents Bash Commands 03 \u2014 Print File Contents / Bash Commands 03 Print File Contents Bash Commands 03 Print File Contents How do you execute bash commands 03 print file contents? 2. Executable Bash relation shell command block execute `cat \"$path\"` named shell parameters: `path` This capability should be learned as a reusable bash ability artifact. The named shell parameter is `$path`."
+          - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+          - "Actual realization: the prompt surface is present; explicit givens are present: Bash Commands 03 \u2014 Print File Contents Bash Commands 03 \u2014 Print File Contents / Bash Commands 03 Print File Contents Bash Commands 03 Print File Contents How do you execute bash commands 03 print file contents, 2, Executable Bash relation shell command block execute `cat \"$path\"` named shell parameters: `path` This capability should be learned as a reusable bash ability artifact; no justified final closure has been admitted yet"
+          - "Givens: Bash Commands 03 \u2014 Print File Contents Bash Commands 03 \u2014 Print File Contents / Bash Commands 03 Print File Contents Bash Commands 03 Print File Contents How do you execute bash commands 03 print file contents, 2, Executable Bash relation shell command block execute `cat \"$path\"` named shell parameters: `path` This capability should be learned as a reusable bash ability artifact"
+          - "Missing components: a justified final realization has not yet been produced"
+          - "Misalignment types: completion"
+          - "Origin layers: model"
+          - "Degree: partial"
+          - "Remainder shapes: missing"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+          - "Action posture: direct_resolution"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - bash
+---
+schema: bssc_skill.v2
+kind: ability
+title: "Bash Commands 04 \u2014 Search Text In File / Bash Commands 04 Search Text\
+  \ In File"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you execute bash commands 04 search text in file?
+declaration:
+  intent: How do you execute bash commands 04 search text in file?
+  inputs:
+    pattern: required input value
+    path: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  authority_bounds:
+    execute:
+      scope: local_executor
+      target: bash_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - shell command execution
+  persistence_behavior: none
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier1_bounded_transform
+  executor_framework: bash
+executor: bash
+entrypoint: main
+inputs:
+  pattern: required input value
+  path: required input value
+outputs:
+  result: execution result
+shell: |-
+  #!/usr/bin/env bash
+  set -euo pipefail
+
+  # BSSC exposes the structured input payload as JSON and as env vars for shell-based abilities.
+  grep -n "$pattern" "$path"
+
+  printf '%s\n' "{\"answer\": \"executed\", \"notes\": [], \"result\": {\"status\": \"executed\"}, \"status\": \"ok\"}"
+governance:
+  scope: reuse when later prompts ask for bash commands 04 search text in file under
+    compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a'*
+  - b'*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:22:07+00:00'
+  provenance:
+  - not_learn-from-markdown-04-learn-bash-commands-searc_e17a78
+  - /Users/ravindranathakila/service/realized/trials/bash/04_LEARN_BASH_COMMANDS_SEARCH_TEXT_IN_FILE.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for bash commands 04 search text
+      in file under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Bash Commands 04 Search Text In File
+    encountered_not: Bash Commands 04 Search Text In File
+    goal: How do you execute bash commands 04 search text in file?
+    intended_object: "Bash Commands 04 \u2014 Search Text In File Bash Commands 04\
+      \ \u2014 Search Text In File / Bash Commands 04 Search Text In File Bash Commands\
+      \ 04 Search Text In File How do you execute bash commands 04 search text in\
+      \ file? 2. Executable Bash relation shell command block execute `grep -n \"\
+      $pattern\" \"$path\"` named shell parameters: `pattern`, `path` This capability\
+      \ should be learned as a reusable bash ability artifact. The named shell parameters\
+      \ are `$pattern` and `$path`."
+    success_criteria:
+    - the response directly resolves the stated ask without erasing material distinctions
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ Bash Commands 04 \u2014 Search Text In File Bash Commands 04 \u2014 Search\
+      \ Text In File / Bash Commands 04 Search Text In File Bash Commands 04 Search\
+      \ Text In File How do you execute bash commands 04 search text in file, 2, Executable\
+      \ Bash relation shell command block execute `grep -n \"$pattern\" \"$path\"\
+      ` named shell parameters: `pattern`; no justified final closure has been admitted\
+      \ yet"
+    givens:
+    - "Bash Commands 04 \u2014 Search Text In File Bash Commands 04 \u2014 Search\
+      \ Text In File / Bash Commands 04 Search Text In File Bash Commands 04 Search\
+      \ Text In File How do you execute bash commands 04 search text in file"
+    - '2'
+    - 'Executable Bash relation shell command block execute `grep -n "$pattern" "$path"`
+      named shell parameters: `pattern`'
+    unknowns: []
+    missing_components:
+    - a justified final realization has not yet been produced
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - completion
+    origin_layers:
+    - model
+    degree: partial
+    remainder_shapes:
+    - missing
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair: []
+    full_repair:
+    - 'satisfy success condition: the response directly resolves the stated ask without
+      erasing material distinctions'
+    boundary_shape:
+    - d*
+    action_posture: direct_resolution
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Bash Commands 04 Search Text In File
+    title_depth_prefixes:
+    - Bash Commands 04 Search Text In File
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Bash Command 04 Search Text File
+    - "Bash Commands 04 \u2014 Search Text In File / Bash Commands 04 Search Text\
+      \ In File / Path"
+    composed_not: Bash Command 04 Search Text File
+    lookup_keys:
+    - bash command 04 search text file
+    - bash command
+    - command 04
+    - 04 search
+    - search text
+    - text file
+    - bash command 04
+    - command 04 search
+    - 04 search text
+    - search text file
+    - execute bash command 04 search text file
+    - execute bash
+    - execute bash command
+    - without reduc remainder item cannot clos with govern confidence
+    - without reduc remainder item cannot clo
+    - govern confidence
+    - without reduc
+    - reduc remainder
+    - remainder item
+    - item cannot
+    - cannot clos
+    - clos with
+    - with govern
+    - without reduc remainder
+    notation_yaml: |-
+      "How Do You Execute Bash Commands 04 Search Text In File":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Bash Commands 04 Search Text In File"
+          - "Components: Bash Command 04 Search Text File, Bash Commands 04 \u2014 Search Text In File / Bash Commands 04 Search Text In File / Path"
+          - "Composition: Bash Command 04 Search Text File"
+          - "Title identity: Bash Commands 04 Search Text In File"
+          - "Title depth segments: Bash Commands 04 Search Text In File"
+          - "Title depth prefixes: Bash Commands 04 Search Text In File"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: Bash Commands 04 \u2014 Search Text In File Bash Commands 04 \u2014 Search Text In File / Bash Commands 04 Search Text In File Bash Commands 04 Search Text In File How do you execute bash commands 04 search text in file? 2. Executable Bash relation shell command block execute `grep -n \"$pattern\" \"$path\"` named shell parameters: `pattern`, `path` This capability should be learned as a reusable bash ability artifact. The named shell parameters are `$pattern` and `$path`."
+          - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+          - "Actual realization: the prompt surface is present; explicit givens are present: Bash Commands 04 \u2014 Search Text In File Bash Commands 04 \u2014 Search Text In File / Bash Commands 04 Search Text In File Bash Commands 04 Search Text In File How do you execute bash commands 04 search text in file, 2, Executable Bash relation shell command block execute `grep -n \"$pattern\" \"$path\"` named shell parameters: `pattern`; no justified final closure has been admitted yet"
+          - "Givens: Bash Commands 04 \u2014 Search Text In File Bash Commands 04 \u2014 Search Text In File / Bash Commands 04 Search Text In File Bash Commands 04 Search Text In File How do you execute bash commands 04 search text in file, 2, Executable Bash relation shell command block execute `grep -n \"$pattern\" \"$path\"` named shell parameters: `pattern`"
+          - "Missing components: a justified final realization has not yet been produced"
+          - "Misalignment types: completion"
+          - "Origin layers: model"
+          - "Degree: partial"
+          - "Remainder shapes: missing"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+          - "Action posture: direct_resolution"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - bash
+---
+schema: bssc_skill.v2
+kind: ability
+title: "Bash Commands 05 \u2014 Count Lines In File / Bash Commands 05 Count Lines\
+  \ In File"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you execute bash commands 05 count lines in file?
+declaration:
+  intent: How do you execute bash commands 05 count lines in file?
+  inputs:
+    path: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  authority_bounds:
+    execute:
+      scope: local_executor
+      target: bash_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - shell command execution
+  persistence_behavior: none
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier1_bounded_transform
+  executor_framework: bash
+executor: bash
+entrypoint: main
+inputs:
+  path: required input value
+outputs:
+  result: execution result
+shell: |-
+  #!/usr/bin/env bash
+  set -euo pipefail
+
+  # BSSC exposes the structured input payload as JSON and as env vars for shell-based abilities.
+  wc -l < "$path"
+
+  printf '%s\n' "{\"answer\": \"executed\", \"notes\": [], \"result\": {\"status\": \"executed\"}, \"status\": \"ok\"}"
+governance:
+  scope: reuse when later prompts ask for bash commands 05 count lines in file under
+    compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a'*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:22:14+00:00'
+  provenance:
+  - not_learn-from-markdown-05-learn-bash-commands-count_d3bded
+  - /Users/ravindranathakila/service/realized/trials/bash/05_LEARN_BASH_COMMANDS_COUNT_LINES.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for bash commands 05 count lines
+      in file under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Bash Commands 05 Count Lines In File
+    encountered_not: Bash Commands 05 Count Lines In File
+    goal: How do you execute bash commands 05 count lines in file?
+    intended_object: "Bash Commands 05 \u2014 Count Lines In File Bash Commands 05\
+      \ \u2014 Count Lines In File / Bash Commands 05 Count Lines In File Bash Commands\
+      \ 05 Count Lines In File How do you execute bash commands 05 count lines in\
+      \ file? 2. Executable Bash relation shell command block execute `wc -l < \"\
+      $path\"` named shell parameters: `path` This capability should be learned as\
+      \ a reusable bash ability artifact. The named shell parameter is `$path`."
+    success_criteria:
+    - the response directly resolves the stated ask without erasing material distinctions
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ Bash Commands 05 \u2014 Count Lines In File Bash Commands 05 \u2014 Count\
+      \ Lines In File / Bash Commands 05 Count Lines In File Bash Commands 05 Count\
+      \ Lines In File How do you execute bash commands 05 count lines in file, 2,\
+      \ Executable Bash relation shell command block execute `wc -l < \"$path\"` named\
+      \ shell parameters: `path` This capability should be learned as a reusable bash\
+      \ ability artifact; no justified final closure has been admitted yet"
+    givens:
+    - "Bash Commands 05 \u2014 Count Lines In File Bash Commands 05 \u2014 Count Lines\
+      \ In File / Bash Commands 05 Count Lines In File Bash Commands 05 Count Lines\
+      \ In File How do you execute bash commands 05 count lines in file"
+    - '2'
+    - 'Executable Bash relation shell command block execute `wc -l < "$path"` named
+      shell parameters: `path` This capability should be learned as a reusable bash
+      ability artifact'
+    unknowns: []
+    missing_components:
+    - a justified final realization has not yet been produced
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - completion
+    origin_layers:
+    - model
+    degree: partial
+    remainder_shapes:
+    - missing
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair: []
+    full_repair:
+    - 'satisfy success condition: the response directly resolves the stated ask without
+      erasing material distinctions'
+    boundary_shape:
+    - d*
+    action_posture: direct_resolution
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Bash Commands 05 Count Lines In File
+    title_depth_prefixes:
+    - Bash Commands 05 Count Lines In File
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Bash Command 05 Count Line File
+    composed_not: Bash Command 05 Count Line File
+    lookup_keys:
+    - bash command 05 count line file
+    - bash command
+    - command 05
+    - 05 count
+    - count line
+    - line file
+    - bash command 05
+    - command 05 count
+    - 05 count line
+    - count line file
+    - execute bash command 05 count line file
+    - execute bash
+    - execute bash command
+    - without reduc remainder item cannot clos with govern confidence
+    - without reduc remainder item cannot clo
+    - govern confidence
+    - without reduc
+    - reduc remainder
+    - remainder item
+    - item cannot
+    - cannot clos
+    - clos with
+    - with govern
+    - without reduc remainder
+    notation_yaml: |-
+      "How Do You Execute Bash Commands 05 Count Lines In File":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Bash Commands 05 Count Lines In File"
+          - "Components: Bash Command 05 Count Line File"
+          - "Composition: Bash Command 05 Count Line File"
+          - "Title identity: Bash Commands 05 Count Lines In File"
+          - "Title depth segments: Bash Commands 05 Count Lines In File"
+          - "Title depth prefixes: Bash Commands 05 Count Lines In File"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: Bash Commands 05 \u2014 Count Lines In File Bash Commands 05 \u2014 Count Lines In File / Bash Commands 05 Count Lines In File Bash Commands 05 Count Lines In File How do you execute bash commands 05 count lines in file? 2. Executable Bash relation shell command block execute `wc -l < \"$path\"` named shell parameters: `path` This capability should be learned as a reusable bash ability artifact. The named shell parameter is `$path`."
+          - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+          - "Actual realization: the prompt surface is present; explicit givens are present: Bash Commands 05 \u2014 Count Lines In File Bash Commands 05 \u2014 Count Lines In File / Bash Commands 05 Count Lines In File Bash Commands 05 Count Lines In File How do you execute bash commands 05 count lines in file, 2, Executable Bash relation shell command block execute `wc -l < \"$path\"` named shell parameters: `path` This capability should be learned as a reusable bash ability artifact; no justified final closure has been admitted yet"
+          - "Givens: Bash Commands 05 \u2014 Count Lines In File Bash Commands 05 \u2014 Count Lines In File / Bash Commands 05 Count Lines In File Bash Commands 05 Count Lines In File How do you execute bash commands 05 count lines in file, 2, Executable Bash relation shell command block execute `wc -l < \"$path\"` named shell parameters: `path` This capability should be learned as a reusable bash ability artifact"
+          - "Missing components: a justified final realization has not yet been produced"
+          - "Misalignment types: completion"
+          - "Origin layers: model"
+          - "Degree: partial"
+          - "Remainder shapes: missing"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+          - "Action posture: direct_resolution"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - bash
+---
+schema: bssc_skill.v2
+kind: ability
+title: "Bash Commands 06 \u2014 Find Files By Name / Bash Commands 06 Find Files By\
+  \ Name"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you execute bash commands 06 find files by name?
+declaration:
+  intent: How do you execute bash commands 06 find files by name?
+  inputs:
+    root: required input value
+    name: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  authority_bounds:
+    execute:
+      scope: local_executor
+      target: bash_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - shell command execution
+  persistence_behavior: none
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier1_bounded_transform
+  executor_framework: bash
+executor: bash
+entrypoint: main
+inputs:
+  root: required input value
+  name: required input value
+outputs:
+  result: execution result
+shell: |-
+  #!/usr/bin/env bash
+  set -euo pipefail
+
+  # BSSC exposes the structured input payload as JSON and as env vars for shell-based abilities.
+  find "$root" -type f -name "$name"
+
+  printf '%s\n' "{\"answer\": \"executed\", \"notes\": [], \"result\": {\"status\": \"executed\"}, \"status\": \"ok\"}"
+governance:
+  scope: reuse when later prompts ask for bash commands 06 find files by name under
+    compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:22:22+00:00'
+  provenance:
+  - not_learn-from-markdown-06-learn-bash-commands-find-_4bf4ca
+  - /Users/ravindranathakila/service/realized/trials/bash/06_LEARN_BASH_COMMANDS_FIND_FILES_BY_NAME.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for bash commands 06 find files by
+      name under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Bash Commands 06 Find Files By Name
+    encountered_not: Bash Commands 06 Find Files By Name
+    goal: How do you execute bash commands 06 find files by name?
+    intended_object: "Bash Commands 06 \u2014 Find Files By Name Bash Commands 06\
+      \ \u2014 Find Files By Name / Bash Commands 06 Find Files By Name Bash Commands\
+      \ 06 Find Files By Name How do you execute bash commands 06 find files by name?\
+      \ 2. Executable Bash relation shell command block execute `find \"$root\" -type\
+      \ f -name \"$name\"` named shell parameters: `root`, `name` This capability\
+      \ should be learned as a reusable bash ability artifact. The named shell parameters\
+      \ are `$root` and `$name`."
+    success_criteria:
+    - all required inputs are explicit and the bounded computation or template is
+      applied faithfully
+    - the result is returned in the requested usable form
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ Bash Commands 06 \u2014 Find Files By Name Bash Commands 06 \u2014 Find Files\
+      \ By Name / Bash Commands 06 Find Files By Name Bash Commands 06 Find Files\
+      \ By Name How do you execute bash commands 06 find files by name, 2, Executable\
+      \ Bash relation shell command block execute `find \"$root\" -type f -name \"\
+      $name\"` named shell parameters: `root`; no justified final closure has been\
+      \ admitted yet"
+    givens:
+    - "Bash Commands 06 \u2014 Find Files By Name Bash Commands 06 \u2014 Find Files\
+      \ By Name / Bash Commands 06 Find Files By Name Bash Commands 06 Find Files\
+      \ By Name How do you execute bash commands 06 find files by name"
+    - '2'
+    - 'Executable Bash relation shell command block execute `find "$root" -type f
+      -name "$name"` named shell parameters: `root`'
+    unknowns: []
+    missing_components:
+    - the full set of required inputs or executable relation is not yet explicit
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - functional
+    - completion
+    origin_layers:
+    - prompt
+    degree: partial
+    remainder_shapes:
+    - underdetermined
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair:
+    - supply or recover the missing inputs and then perform the bounded computation
+    full_repair:
+    - supply or recover the missing inputs and then perform the bounded computation
+    - 'satisfy success condition: all required inputs are explicit and the bounded
+      computation or template is applied faithfully'
+    - 'satisfy success condition: the result is returned in the requested usable form'
+    boundary_shape:
+    - d*
+    action_posture: compute_or_template
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Bash Commands 06 Find Files By Name
+    title_depth_prefixes:
+    - Bash Commands 06 Find Files By Name
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Bash Command 06 Find File
+    - "Bash Commands 06 \u2014 Find Files By Name / Bash Commands 06 Find Files By\
+      \ Name / Name"
+    composed_not: Bash Command 06 Find File
+    lookup_keys:
+    - bash command 06 find file
+    - bash command
+    - command 06
+    - 06 find
+    - find file
+    - bash command 06
+    - command 06 find
+    - 06 find file
+    - execute bash command 06 find file
+    - execute bash
+    - execute bash command
+    - supply or recover miss input then perform bound computation
+    - supply or recover miss input
+    - perform bound computation
+    - supply or
+    - or recover
+    - recover miss
+    - miss input
+    - input then
+    - then perform
+    - perform bound
+    - bound computation
+    - supply or recover
+    - or recover miss
+    notation_yaml: |-
+      "How Do You Execute Bash Commands 06 Find Files By Name":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Bash Commands 06 Find Files By Name"
+          - "Components: Bash Command 06 Find File, Bash Commands 06 \u2014 Find Files By Name / Bash Commands 06 Find Files By Name / Name"
+          - "Composition: Bash Command 06 Find File"
+          - "Title identity: Bash Commands 06 Find Files By Name"
+          - "Title depth segments: Bash Commands 06 Find Files By Name"
+          - "Title depth prefixes: Bash Commands 06 Find Files By Name"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: Bash Commands 06 \u2014 Find Files By Name Bash Commands 06 \u2014 Find Files By Name / Bash Commands 06 Find Files By Name Bash Commands 06 Find Files By Name How do you execute bash commands 06 find files by name? 2. Executable Bash relation shell command block execute `find \"$root\" -type f -name \"$name\"` named shell parameters: `root`, `name` This capability should be learned as a reusable bash ability artifact. The named shell parameters are `$root` and `$name`."
+          - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+          - "Actual realization: the prompt surface is present; explicit givens are present: Bash Commands 06 \u2014 Find Files By Name Bash Commands 06 \u2014 Find Files By Name / Bash Commands 06 Find Files By Name Bash Commands 06 Find Files By Name How do you execute bash commands 06 find files by name, 2, Executable Bash relation shell command block execute `find \"$root\" -type f -name \"$name\"` named shell parameters: `root`; no justified final closure has been admitted yet"
+          - "Givens: Bash Commands 06 \u2014 Find Files By Name Bash Commands 06 \u2014 Find Files By Name / Bash Commands 06 Find Files By Name Bash Commands 06 Find Files By Name How do you execute bash commands 06 find files by name, 2, Executable Bash relation shell command block execute `find \"$root\" -type f -name \"$name\"` named shell parameters: `root`"
+          - "Missing components: the full set of required inputs or executable relation is not yet explicit"
+          - "Misalignment types: functional, completion"
+          - "Origin layers: prompt"
+          - "Degree: partial"
+          - "Remainder shapes: underdetermined"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Minimal repair: supply or recover the missing inputs and then perform the bounded computation"
+          - "Full repair: supply or recover the missing inputs and then perform the bounded computation, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+          - "Action posture: compute_or_template"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - bash
+---
+schema: bssc_skill.v2
+kind: ability
+title: "Bash Commands 07 \u2014 Copy File / Bash Commands 07 Copy File"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you execute bash commands 07 copy file?
+declaration:
+  intent: How do you execute bash commands 07 copy file?
+  inputs:
+    destination: required input value
+    source: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  - write
+  authority_bounds:
+    execute:
+      scope: local_executor
+      target: bash_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+    write:
+      scope: local_executor
+      target: skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - shell command execution
+  - filesystem or external state modification
+  persistence_behavior: may_modify_external_state
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier2_connected
+  executor_framework: bash
+executor: bash
+entrypoint: main
+inputs:
+  destination: required input value
+  source: required input value
+outputs:
+  result: execution result
+shell: |-
+  #!/usr/bin/env bash
+  set -euo pipefail
+
+  # BSSC exposes the structured input payload as JSON and as env vars for shell-based abilities.
+  mkdir -p "$(dirname "$destination")"
+  cp "$source" "$destination"
+
+  printf '%s\n' "{\"answer\": \"executed\", \"notes\": [], \"result\": {\"status\": \"executed\"}, \"status\": \"ok\"}"
+governance:
+  scope: reuse when later prompts ask for bash commands 07 copy file under compatible
+    inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:22:31+00:00'
+  provenance:
+  - not_learn-from-markdown-07-learn-bash-commands-copy-_2bc3c2
+  - /Users/ravindranathakila/service/realized/trials/bash/07_LEARN_BASH_COMMANDS_COPY_FILE.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for bash commands 07 copy file under
+      compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Bash Commands 07 Copy File
+    encountered_not: Bash Commands 07 Copy File
+    goal: How do you execute bash commands 07 copy file?
+    intended_object: "Bash Commands 07 \u2014 Copy File Bash Commands 07 \u2014 Copy\
+      \ File / Bash Commands 07 Copy File Bash Commands 07 Copy File How do you execute\
+      \ bash commands 07 copy file? 2. Executable Bash relation shell command block\
+      \ execute `mkdir -p \"$(dirname \"$destination\")\"` execute `cp \"$source\"\
+      \ \"$destination\"` named shell parameters: `destination`, `source` This capability\
+      \ should be learned as a reusable bash ability artifact. The named shell parameters\
+      \ are `$source` and `$destination`."
+    success_criteria:
+    - the response directly resolves the stated ask without erasing material distinctions
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ Bash Commands 07 \u2014 Copy File Bash Commands 07 \u2014 Copy File / Bash\
+      \ Commands 07 Copy File Bash Commands 07 Copy File How do you execute bash commands\
+      \ 07 copy file, 2, Executable Bash relation shell command block execute `mkdir\
+      \ -p \"$(dirname \"$destination\")\"` execute `cp \"$source\" \"$destination\"\
+      ` named shell parameters: `destination`; no justified final closure has been\
+      \ admitted yet"
+    givens:
+    - "Bash Commands 07 \u2014 Copy File Bash Commands 07 \u2014 Copy File / Bash\
+      \ Commands 07 Copy File Bash Commands 07 Copy File How do you execute bash commands\
+      \ 07 copy file"
+    - '2'
+    - 'Executable Bash relation shell command block execute `mkdir -p "$(dirname "$destination")"`
+      execute `cp "$source" "$destination"` named shell parameters: `destination`'
+    unknowns: []
+    missing_components:
+    - a justified final realization has not yet been produced
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - completion
+    origin_layers:
+    - model
+    degree: partial
+    remainder_shapes:
+    - missing
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair: []
+    full_repair:
+    - 'satisfy success condition: the response directly resolves the stated ask without
+      erasing material distinctions'
+    boundary_shape:
+    - d*
+    action_posture: direct_resolution
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Bash Commands 07 Copy File
+    title_depth_prefixes:
+    - Bash Commands 07 Copy File
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Bash Command 07 Copy File
+    - "Bash Commands 07 \u2014 Copy File / Bash Commands 07 Copy File / Source"
+    composed_not: Bash Command 07 Copy File
+    lookup_keys:
+    - bash command 07 copy file
+    - bash command
+    - command 07
+    - 07 copy
+    - copy file
+    - bash command 07
+    - command 07 copy
+    - 07 copy file
+    - execute bash command 07 copy file
+    - execute bash
+    - execute bash command
+    - without reduc remainder item cannot clos with govern confidence
+    - without reduc remainder item cannot clo
+    - govern confidence
+    - without reduc
+    - reduc remainder
+    - remainder item
+    - item cannot
+    - cannot clos
+    - clos with
+    - with govern
+    - without reduc remainder
+    - reduc remainder item
+    - remainder item cannot
+    notation_yaml: |-
+      "How Do You Execute Bash Commands 07 Copy File":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Bash Commands 07 Copy File"
+          - "Components: Bash Command 07 Copy File, Bash Commands 07 \u2014 Copy File / Bash Commands 07 Copy File / Source"
+          - "Composition: Bash Command 07 Copy File"
+          - "Title identity: Bash Commands 07 Copy File"
+          - "Title depth segments: Bash Commands 07 Copy File"
+          - "Title depth prefixes: Bash Commands 07 Copy File"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: Bash Commands 07 \u2014 Copy File Bash Commands 07 \u2014 Copy File / Bash Commands 07 Copy File Bash Commands 07 Copy File How do you execute bash commands 07 copy file? 2. Executable Bash relation shell command block execute `mkdir -p \"$(dirname \"$destination\")\"` execute `cp \"$source\" \"$destination\"` named shell parameters: `destination`, `source` This capability should be learned as a reusable bash ability artifact. The named shell parameters are `$source` and `$destination`."
+          - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+          - "Actual realization: the prompt surface is present; explicit givens are present: Bash Commands 07 \u2014 Copy File Bash Commands 07 \u2014 Copy File / Bash Commands 07 Copy File Bash Commands 07 Copy File How do you execute bash commands 07 copy file, 2, Executable Bash relation shell command block execute `mkdir -p \"$(dirname \"$destination\")\"` execute `cp \"$source\" \"$destination\"` named shell parameters: `destination`; no justified final closure has been admitted yet"
+          - "Givens: Bash Commands 07 \u2014 Copy File Bash Commands 07 \u2014 Copy File / Bash Commands 07 Copy File Bash Commands 07 Copy File How do you execute bash commands 07 copy file, 2, Executable Bash relation shell command block execute `mkdir -p \"$(dirname \"$destination\")\"` execute `cp \"$source\" \"$destination\"` named shell parameters: `destination`"
+          - "Missing components: a justified final realization has not yet been produced"
+          - "Misalignment types: completion"
+          - "Origin layers: model"
+          - "Degree: partial"
+          - "Remainder shapes: missing"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+          - "Action posture: direct_resolution"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - bash
+---
+schema: bssc_skill.v2
+kind: ability
+title: "Bash Commands 08 \u2014 Move File / Bash Commands 08 Move File"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you execute bash commands 08 move file?
+declaration:
+  intent: How do you execute bash commands 08 move file?
+  inputs:
+    destination: required input value
+    source: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  - write
+  authority_bounds:
+    execute:
+      scope: local_executor
+      target: bash_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+    write:
+      scope: local_executor
+      target: skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - shell command execution
+  - filesystem or external state modification
+  persistence_behavior: may_modify_external_state
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier2_connected
+  executor_framework: bash
+executor: bash
+entrypoint: main
+inputs:
+  destination: required input value
+  source: required input value
+outputs:
+  result: execution result
+shell: |-
+  #!/usr/bin/env bash
+  set -euo pipefail
+
+  # BSSC exposes the structured input payload as JSON and as env vars for shell-based abilities.
+  mkdir -p "$(dirname "$destination")"
+  mv "$source" "$destination"
+
+  printf '%s\n' "{\"answer\": \"executed\", \"notes\": [], \"result\": {\"status\": \"executed\"}, \"status\": \"ok\"}"
+governance:
+  scope: reuse when later prompts ask for bash commands 08 move file under compatible
+    inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:22:48+00:00'
+  provenance:
+  - not_learn-from-markdown-08-learn-bash-commands-move-_5003be
+  - /Users/ravindranathakila/service/realized/trials/bash/08_LEARN_BASH_COMMANDS_MOVE_FILE.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for bash commands 08 move file under
+      compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Bash Commands 08 Move File
+    encountered_not: Bash Commands 08 Move File
+    goal: How do you execute bash commands 08 move file?
+    intended_object: "Bash Commands 08 \u2014 Move File Bash Commands 08 \u2014 Move\
+      \ File / Bash Commands 08 Move File Bash Commands 08 Move File How do you execute\
+      \ bash commands 08 move file? 2. Executable Bash relation shell command block\
+      \ execute `mkdir -p \"$(dirname \"$destination\")\"` execute `mv \"$source\"\
+      \ \"$destination\"` named shell parameters: `destination`, `source` This capability\
+      \ should be learned as a reusable bash ability artifact. The named shell parameters\
+      \ are `$source` and `$destination`."
+    success_criteria:
+    - the response directly resolves the stated ask without erasing material distinctions
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ Bash Commands 08 \u2014 Move File Bash Commands 08 \u2014 Move File / Bash\
+      \ Commands 08 Move File Bash Commands 08 Move File How do you execute bash commands\
+      \ 08 move file, 2, Executable Bash relation shell command block execute `mkdir\
+      \ -p \"$(dirname \"$destination\")\"` execute `mv \"$source\" \"$destination\"\
+      ` named shell parameters: `destination`; no justified final closure has been\
+      \ admitted yet"
+    givens:
+    - "Bash Commands 08 \u2014 Move File Bash Commands 08 \u2014 Move File / Bash\
+      \ Commands 08 Move File Bash Commands 08 Move File How do you execute bash commands\
+      \ 08 move file"
+    - '2'
+    - 'Executable Bash relation shell command block execute `mkdir -p "$(dirname "$destination")"`
+      execute `mv "$source" "$destination"` named shell parameters: `destination`'
+    unknowns: []
+    missing_components:
+    - a justified final realization has not yet been produced
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - completion
+    origin_layers:
+    - model
+    degree: partial
+    remainder_shapes:
+    - missing
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair: []
+    full_repair:
+    - 'satisfy success condition: the response directly resolves the stated ask without
+      erasing material distinctions'
+    boundary_shape:
+    - d*
+    action_posture: direct_resolution
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Bash Commands 08 Move File
+    title_depth_prefixes:
+    - Bash Commands 08 Move File
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Bash Command 08 Move File
+    - "Bash Commands 08 \u2014 Move File / Bash Commands 08 Move File / Source"
+    composed_not: Bash Command 08 Move File
+    lookup_keys:
+    - bash command 08 move file
+    - bash command
+    - command 08
+    - 08 move
+    - move file
+    - bash command 08
+    - command 08 move
+    - 08 move file
+    - execute bash command 08 move file
+    - execute bash
+    - execute bash command
+    - without reduc remainder item cannot clos with govern confidence
+    - without reduc remainder item cannot clo
+    - govern confidence
+    - without reduc
+    - reduc remainder
+    - remainder item
+    - item cannot
+    - cannot clos
+    - clos with
+    - with govern
+    - without reduc remainder
+    - reduc remainder item
+    - remainder item cannot
+    notation_yaml: |-
+      "How Do You Execute Bash Commands 08 Move File":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Bash Commands 08 Move File"
+          - "Components: Bash Command 08 Move File, Bash Commands 08 \u2014 Move File / Bash Commands 08 Move File / Source"
+          - "Composition: Bash Command 08 Move File"
+          - "Title identity: Bash Commands 08 Move File"
+          - "Title depth segments: Bash Commands 08 Move File"
+          - "Title depth prefixes: Bash Commands 08 Move File"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: Bash Commands 08 \u2014 Move File Bash Commands 08 \u2014 Move File / Bash Commands 08 Move File Bash Commands 08 Move File How do you execute bash commands 08 move file? 2. Executable Bash relation shell command block execute `mkdir -p \"$(dirname \"$destination\")\"` execute `mv \"$source\" \"$destination\"` named shell parameters: `destination`, `source` This capability should be learned as a reusable bash ability artifact. The named shell parameters are `$source` and `$destination`."
+          - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+          - "Actual realization: the prompt surface is present; explicit givens are present: Bash Commands 08 \u2014 Move File Bash Commands 08 \u2014 Move File / Bash Commands 08 Move File Bash Commands 08 Move File How do you execute bash commands 08 move file, 2, Executable Bash relation shell command block execute `mkdir -p \"$(dirname \"$destination\")\"` execute `mv \"$source\" \"$destination\"` named shell parameters: `destination`; no justified final closure has been admitted yet"
+          - "Givens: Bash Commands 08 \u2014 Move File Bash Commands 08 \u2014 Move File / Bash Commands 08 Move File Bash Commands 08 Move File How do you execute bash commands 08 move file, 2, Executable Bash relation shell command block execute `mkdir -p \"$(dirname \"$destination\")\"` execute `mv \"$source\" \"$destination\"` named shell parameters: `destination`"
+          - "Missing components: a justified final realization has not yet been produced"
+          - "Misalignment types: completion"
+          - "Origin layers: model"
+          - "Degree: partial"
+          - "Remainder shapes: missing"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+          - "Action posture: direct_resolution"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - bash
+---
+schema: bssc_skill.v2
+kind: ability
+title: "Bash Commands 09 \u2014 Remove File / Bash Commands 09 Remove File"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you execute bash commands 09 remove file?
+declaration:
+  intent: How do you execute bash commands 09 remove file?
+  inputs:
+    path: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  - write
+  authority_bounds:
+    execute:
+      scope: local_executor
+      target: bash_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+    write:
+      scope: local_executor
+      target: skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - shell command execution
+  - filesystem or external state modification
+  persistence_behavior: may_modify_external_state
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier2_connected
+  executor_framework: bash
+executor: bash
+entrypoint: main
+inputs:
+  path: required input value
+outputs:
+  result: execution result
+shell: |-
+  #!/usr/bin/env bash
+  set -euo pipefail
+
+  # BSSC exposes the structured input payload as JSON and as env vars for shell-based abilities.
+  rm -f "$path"
+
+  printf '%s\n' "{\"answer\": \"executed\", \"notes\": [], \"result\": {\"status\": \"executed\"}, \"status\": \"ok\"}"
+governance:
+  scope: reuse when later prompts ask for bash commands 09 remove file under compatible
+    inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a'*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:22:55+00:00'
+  provenance:
+  - not_learn-from-markdown-09-learn-bash-commands-remov_0943ea
+  - /Users/ravindranathakila/service/realized/trials/bash/09_LEARN_BASH_COMMANDS_REMOVE_FILE.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for bash commands 09 remove file
+      under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Bash Commands 09 Remove File
+    encountered_not: Bash Commands 09 Remove File
+    goal: How do you execute bash commands 09 remove file?
+    intended_object: "Bash Commands 09 \u2014 Remove File Bash Commands 09 \u2014\
+      \ Remove File / Bash Commands 09 Remove File Bash Commands 09 Remove File How\
+      \ do you execute bash commands 09 remove file? 2. Executable Bash relation shell\
+      \ command block execute `rm -f \"$path\"` named shell parameters: `path` This\
+      \ capability should be learned as a reusable bash ability artifact. The named\
+      \ shell parameter is `$path`."
+    success_criteria:
+    - the response directly resolves the stated ask without erasing material distinctions
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ Bash Commands 09 \u2014 Remove File Bash Commands 09 \u2014 Remove File /\
+      \ Bash Commands 09 Remove File Bash Commands 09 Remove File How do you execute\
+      \ bash commands 09 remove file, 2, Executable Bash relation shell command block\
+      \ execute `rm -f \"$path\"` named shell parameters: `path` This capability should\
+      \ be learned as a reusable bash ability artifact; no justified final closure\
+      \ has been admitted yet"
+    givens:
+    - "Bash Commands 09 \u2014 Remove File Bash Commands 09 \u2014 Remove File / Bash\
+      \ Commands 09 Remove File Bash Commands 09 Remove File How do you execute bash\
+      \ commands 09 remove file"
+    - '2'
+    - 'Executable Bash relation shell command block execute `rm -f "$path"` named
+      shell parameters: `path` This capability should be learned as a reusable bash
+      ability artifact'
+    unknowns: []
+    missing_components:
+    - a justified final realization has not yet been produced
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - completion
+    origin_layers:
+    - model
+    degree: partial
+    remainder_shapes:
+    - missing
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair: []
+    full_repair:
+    - 'satisfy success condition: the response directly resolves the stated ask without
+      erasing material distinctions'
+    boundary_shape:
+    - d*
+    action_posture: direct_resolution
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Bash Commands 09 Remove File
+    title_depth_prefixes:
+    - Bash Commands 09 Remove File
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Bash Command 09 Remove File
+    composed_not: Bash Command 09 Remove File
+    lookup_keys:
+    - bash command 09 remove file
+    - bash command
+    - command 09
+    - 09 remove
+    - remove file
+    - bash command 09
+    - command 09 remove
+    - 09 remove file
+    - execute bash command 09 remove file
+    - execute bash
+    - execute bash command
+    - without reduc remainder item cannot clos with govern confidence
+    - without reduc remainder item cannot clo
+    - govern confidence
+    - without reduc
+    - reduc remainder
+    - remainder item
+    - item cannot
+    - cannot clos
+    - clos with
+    - with govern
+    - without reduc remainder
+    - reduc remainder item
+    - remainder item cannot
+    notation_yaml: |-
+      "How Do You Execute Bash Commands 09 Remove File":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Bash Commands 09 Remove File"
+          - "Components: Bash Command 09 Remove File"
+          - "Composition: Bash Command 09 Remove File"
+          - "Title identity: Bash Commands 09 Remove File"
+          - "Title depth segments: Bash Commands 09 Remove File"
+          - "Title depth prefixes: Bash Commands 09 Remove File"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: Bash Commands 09 \u2014 Remove File Bash Commands 09 \u2014 Remove File / Bash Commands 09 Remove File Bash Commands 09 Remove File How do you execute bash commands 09 remove file? 2. Executable Bash relation shell command block execute `rm -f \"$path\"` named shell parameters: `path` This capability should be learned as a reusable bash ability artifact. The named shell parameter is `$path`."
+          - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+          - "Actual realization: the prompt surface is present; explicit givens are present: Bash Commands 09 \u2014 Remove File Bash Commands 09 \u2014 Remove File / Bash Commands 09 Remove File Bash Commands 09 Remove File How do you execute bash commands 09 remove file, 2, Executable Bash relation shell command block execute `rm -f \"$path\"` named shell parameters: `path` This capability should be learned as a reusable bash ability artifact; no justified final closure has been admitted yet"
+          - "Givens: Bash Commands 09 \u2014 Remove File Bash Commands 09 \u2014 Remove File / Bash Commands 09 Remove File Bash Commands 09 Remove File How do you execute bash commands 09 remove file, 2, Executable Bash relation shell command block execute `rm -f \"$path\"` named shell parameters: `path` This capability should be learned as a reusable bash ability artifact"
+          - "Missing components: a justified final realization has not yet been produced"
+          - "Misalignment types: completion"
+          - "Origin layers: model"
+          - "Degree: partial"
+          - "Remainder shapes: missing"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+          - "Action posture: direct_resolution"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - bash
+---
+schema: bssc_skill.v2
+kind: ability
+title: "Bash Commands 10 \u2014 Create Tar Gz Archive / Bash Commands 10 Create Tar\
+  \ Gz Archive"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you execute bash commands 10 create tar gz archive?
+declaration:
+  intent: How do you execute bash commands 10 create tar gz archive?
+  inputs:
+    archive: required input value
+    source_dir: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  - write
+  authority_bounds:
+    execute:
+      scope: local_executor
+      target: bash_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+    write:
+      scope: local_executor
+      target: skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - shell command execution
+  - filesystem or external state modification
+  persistence_behavior: may_modify_external_state
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier2_connected
+  executor_framework: bash
+executor: bash
+entrypoint: main
+inputs:
+  archive: required input value
+  source_dir: required input value
+outputs:
+  result: execution result
+shell: |-
+  #!/usr/bin/env bash
+  set -euo pipefail
+
+  # BSSC exposes the structured input payload as JSON and as env vars for shell-based abilities.
+  mkdir -p "$(dirname "$archive")"
+  tar -czf "$archive" -C "$source_dir" .
+
+  printf '%s\n' "{\"answer\": \"executed\", \"notes\": [], \"result\": {\"status\": \"executed\"}, \"status\": \"ok\"}"
+governance:
+  scope: reuse when later prompts ask for bash commands 10 create tar gz archive under
+    compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a*
+  - c*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:23:04+00:00'
+  provenance:
+  - not_learn-from-markdown-10-learn-bash-commands-creat_7d0fd0
+  - /Users/ravindranathakila/service/realized/trials/bash/10_LEARN_BASH_COMMANDS_CREATE_TAR_ARCHIVE.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for bash commands 10 create tar gz
+      archive under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Bash Commands 10 Create Tar Gz Archive
+    encountered_not: Bash Commands 10 Create Tar Gz Archive
+    goal: How do you execute bash commands 10 create tar gz archive?
+    intended_object: "Bash Commands 10 \u2014 Create Tar Gz Archive Bash Commands\
+      \ 10 \u2014 Create Tar Gz Archive / Bash Commands 10 Create Tar Gz Archive Bash\
+      \ Commands 10 Create Tar Gz Archive How do you execute bash commands 10 create\
+      \ tar gz archive? 2. Executable Bash relation shell command block execute `mkdir\
+      \ -p \"$(dirname \"$archive\")\"` execute `tar -czf \"$archive\" -C \"$source_dir\"\
+      \ .` named shell parameters: `archive`, `source_dir` This capability should\
+      \ be learned as a reusable bash ability artifact. The named shell parameters\
+      \ are `$archive` and `$source_dir`."
+    success_criteria:
+    - the response directly resolves the stated ask without erasing material distinctions
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ Bash Commands 10 \u2014 Create Tar Gz Archive Bash Commands 10 \u2014 Create\
+      \ Tar Gz Archive / Bash Commands 10 Create Tar Gz Archive Bash Commands 10 Create\
+      \ Tar Gz Archive How do you execute bash commands 10 create tar gz archive,\
+      \ 2, ` named shell parameters: `archive`; no justified final closure has been\
+      \ admitted yet"
+    givens:
+    - "Bash Commands 10 \u2014 Create Tar Gz Archive Bash Commands 10 \u2014 Create\
+      \ Tar Gz Archive / Bash Commands 10 Create Tar Gz Archive Bash Commands 10 Create\
+      \ Tar Gz Archive How do you execute bash commands 10 create tar gz archive"
+    - '2'
+    - '` named shell parameters: `archive`'
+    unknowns: []
+    missing_components:
+    - a justified final realization has not yet been produced
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - completion
+    origin_layers:
+    - model
+    degree: partial
+    remainder_shapes:
+    - missing
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair: []
+    full_repair:
+    - 'satisfy success condition: the response directly resolves the stated ask without
+      erasing material distinctions'
+    boundary_shape:
+    - d*
+    action_posture: direct_resolution
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Bash Commands 10 Create Tar Gz Archive
+    title_depth_prefixes:
+    - Bash Commands 10 Create Tar Gz Archive
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Bash Command 10 Tar Gz Archive
+    - "Bash Commands 10 \u2014 Create Tar Gz Archive / Bash Commands 10 Create Tar\
+      \ Gz Archive / Source Dir"
+    composed_not: Bash Command 10 Tar Gz Archive
+    lookup_keys:
+    - bash command 10 tar gz archive
+    - bash command
+    - command 10
+    - 10 tar
+    - tar gz
+    - gz archive
+    - bash command 10
+    - command 10 tar
+    - 10 tar gz
+    - tar gz archive
+    - execute bash command 10 tar gz archive
+    - execute bash
+    - execute bash command
+    - without reduc remainder item cannot clos with govern confidence
+    - without reduc remainder item cannot clo
+    - govern confidence
+    - without reduc
+    - reduc remainder
+    - remainder item
+    - item cannot
+    - cannot clos
+    - clos with
+    - with govern
+    - without reduc remainder
+    notation_yaml: |-
+      "How Do You Execute Bash Commands 10 Create Tar Gz Archive":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Bash Commands 10 Create Tar Gz Archive"
+          - "Components: Bash Command 10 Tar Gz Archive, Bash Commands 10 \u2014 Create Tar Gz Archive / Bash Commands 10 Create Tar Gz Archive / Source Dir"
+          - "Composition: Bash Command 10 Tar Gz Archive"
+          - "Title identity: Bash Commands 10 Create Tar Gz Archive"
+          - "Title depth segments: Bash Commands 10 Create Tar Gz Archive"
+          - "Title depth prefixes: Bash Commands 10 Create Tar Gz Archive"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: Bash Commands 10 \u2014 Create Tar Gz Archive Bash Commands 10 \u2014 Create Tar Gz Archive / Bash Commands 10 Create Tar Gz Archive Bash Commands 10 Create Tar Gz Archive How do you execute bash commands 10 create tar gz archive? 2. Executable Bash relation shell command block execute `mkdir -p \"$(dirname \"$archive\")\"` execute `tar -czf \"$archive\" -C \"$source_dir\" .` named shell parameters: `archive`, `source_dir` This capability should be learned as a reusable bash ability artifact. The named shell parameters are `$archive` and `$source_dir`."
+          - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+          - "Actual realization: the prompt surface is present; explicit givens are present: Bash Commands 10 \u2014 Create Tar Gz Archive Bash Commands 10 \u2014 Create Tar Gz Archive / Bash Commands 10 Create Tar Gz Archive Bash Commands 10 Create Tar Gz Archive How do you execute bash commands 10 create tar gz archive, 2, ` named shell parameters: `archive`; no justified final closure has been admitted yet"
+          - "Givens: Bash Commands 10 \u2014 Create Tar Gz Archive Bash Commands 10 \u2014 Create Tar Gz Archive / Bash Commands 10 Create Tar Gz Archive Bash Commands 10 Create Tar Gz Archive How do you execute bash commands 10 create tar gz archive, 2, ` named shell parameters: `archive`"
+          - "Missing components: a justified final realization has not yet been produced"
+          - "Misalignment types: completion"
+          - "Origin layers: model"
+          - "Degree: partial"
+          - "Remainder shapes: missing"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+          - "Action posture: direct_resolution"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - bash
+---
+schema: bssc_skill.v2
+kind: ability
+title: "Bash Commands 11 \u2014 Extract Zip Archive / Bash Commands 11 Extract Zip\
+  \ Archive"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you execute bash commands 11 extract zip archive?
+declaration:
+  intent: How do you execute bash commands 11 extract zip archive?
+  inputs:
+    destination: required input value
+    archive: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  - write
+  authority_bounds:
+    execute:
+      scope: local_executor
+      target: bash_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+    write:
+      scope: local_executor
+      target: skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - shell command execution
+  - filesystem or external state modification
+  persistence_behavior: may_modify_external_state
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier2_connected
+  executor_framework: bash
+executor: bash
+entrypoint: main
+inputs:
+  destination: required input value
+  archive: required input value
+outputs:
+  result: execution result
+shell: |-
+  #!/usr/bin/env bash
+  set -euo pipefail
+
+  # BSSC exposes the structured input payload as JSON and as env vars for shell-based abilities.
+  mkdir -p "$destination"
+  unzip -o "$archive" -d "$destination"
+
+  printf '%s\n' "{\"answer\": \"executed\", \"notes\": [], \"result\": {\"status\": \"executed\"}, \"status\": \"ok\"}"
+governance:
+  scope: reuse when later prompts ask for bash commands 11 extract zip archive under
+    compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:23:13+00:00'
+  provenance:
+  - not_learn-from-markdown-11-learn-bash-commands-extra_54ae5d
+  - /Users/ravindranathakila/service/realized/trials/bash/11_LEARN_BASH_COMMANDS_EXTRACT_ZIP_ARCHIVE.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for bash commands 11 extract zip
+      archive under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Bash Commands 11 Extract Zip Archive
+    encountered_not: Bash Commands 11 Extract Zip Archive
+    goal: How do you execute bash commands 11 extract zip archive?
+    intended_object: "Bash Commands 11 \u2014 Extract Zip Archive Bash Commands 11\
+      \ \u2014 Extract Zip Archive / Bash Commands 11 Extract Zip Archive Bash Commands\
+      \ 11 Extract Zip Archive How do you execute bash commands 11 extract zip archive?\
+      \ 2. Executable Bash relation shell command block execute `mkdir -p \"$destination\"\
+      ` execute `unzip -o \"$archive\" -d \"$destination\"` named shell parameters:\
+      \ `destination`, `archive` This capability should be learned as a reusable bash\
+      \ ability artifact. The named shell parameters are `$archive` and `$destination`."
+    success_criteria:
+    - the response directly resolves the stated ask without erasing material distinctions
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ Bash Commands 11 \u2014 Extract Zip Archive Bash Commands 11 \u2014 Extract\
+      \ Zip Archive / Bash Commands 11 Extract Zip Archive Bash Commands 11 Extract\
+      \ Zip Archive How do you execute bash commands 11 extract zip archive, 2, Executable\
+      \ Bash relation shell command block execute `mkdir -p \"$destination\"` execute\
+      \ `unzip -o \"$archive\" -d \"$destination\"` named shell parameters: `destination`;\
+      \ no justified final closure has been admitted yet"
+    givens:
+    - "Bash Commands 11 \u2014 Extract Zip Archive Bash Commands 11 \u2014 Extract\
+      \ Zip Archive / Bash Commands 11 Extract Zip Archive Bash Commands 11 Extract\
+      \ Zip Archive How do you execute bash commands 11 extract zip archive"
+    - '2'
+    - 'Executable Bash relation shell command block execute `mkdir -p "$destination"`
+      execute `unzip -o "$archive" -d "$destination"` named shell parameters: `destination`'
+    unknowns: []
+    missing_components:
+    - a justified final realization has not yet been produced
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - completion
+    origin_layers:
+    - model
+    degree: partial
+    remainder_shapes:
+    - missing
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair: []
+    full_repair:
+    - 'satisfy success condition: the response directly resolves the stated ask without
+      erasing material distinctions'
+    boundary_shape:
+    - d*
+    action_posture: direct_resolution
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Bash Commands 11 Extract Zip Archive
+    title_depth_prefixes:
+    - Bash Commands 11 Extract Zip Archive
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Bash Command 11 Extract Zip Archive
+    - "Bash Commands 11 \u2014 Extract Zip Archive / Bash Commands 11 Extract Zip\
+      \ Archive / Archive"
+    composed_not: Bash Command 11 Extract Zip Archive
+    lookup_keys:
+    - bash command 11 extract zip archive
+    - bash command
+    - command 11
+    - 11 extract
+    - extract zip
+    - zip archive
+    - bash command 11
+    - command 11 extract
+    - 11 extract zip
+    - extract zip archive
+    - execute bash command 11 extract zip archive
+    - execute bash
+    - execute bash command
+    - without reduc remainder item cannot clos with govern confidence
+    - without reduc remainder item cannot clo
+    - govern confidence
+    - without reduc
+    - reduc remainder
+    - remainder item
+    - item cannot
+    - cannot clos
+    - clos with
+    - with govern
+    - without reduc remainder
+    notation_yaml: |-
+      "How Do You Execute Bash Commands 11 Extract Zip Archive":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Bash Commands 11 Extract Zip Archive"
+          - "Components: Bash Command 11 Extract Zip Archive, Bash Commands 11 \u2014 Extract Zip Archive / Bash Commands 11 Extract Zip Archive / Archive"
+          - "Composition: Bash Command 11 Extract Zip Archive"
+          - "Title identity: Bash Commands 11 Extract Zip Archive"
+          - "Title depth segments: Bash Commands 11 Extract Zip Archive"
+          - "Title depth prefixes: Bash Commands 11 Extract Zip Archive"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: Bash Commands 11 \u2014 Extract Zip Archive Bash Commands 11 \u2014 Extract Zip Archive / Bash Commands 11 Extract Zip Archive Bash Commands 11 Extract Zip Archive How do you execute bash commands 11 extract zip archive? 2. Executable Bash relation shell command block execute `mkdir -p \"$destination\"` execute `unzip -o \"$archive\" -d \"$destination\"` named shell parameters: `destination`, `archive` This capability should be learned as a reusable bash ability artifact. The named shell parameters are `$archive` and `$destination`."
+          - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+          - "Actual realization: the prompt surface is present; explicit givens are present: Bash Commands 11 \u2014 Extract Zip Archive Bash Commands 11 \u2014 Extract Zip Archive / Bash Commands 11 Extract Zip Archive Bash Commands 11 Extract Zip Archive How do you execute bash commands 11 extract zip archive, 2, Executable Bash relation shell command block execute `mkdir -p \"$destination\"` execute `unzip -o \"$archive\" -d \"$destination\"` named shell parameters: `destination`; no justified final closure has been admitted yet"
+          - "Givens: Bash Commands 11 \u2014 Extract Zip Archive Bash Commands 11 \u2014 Extract Zip Archive / Bash Commands 11 Extract Zip Archive Bash Commands 11 Extract Zip Archive How do you execute bash commands 11 extract zip archive, 2, Executable Bash relation shell command block execute `mkdir -p \"$destination\"` execute `unzip -o \"$archive\" -d \"$destination\"` named shell parameters: `destination`"
+          - "Missing components: a justified final realization has not yet been produced"
+          - "Misalignment types: completion"
+          - "Origin layers: model"
+          - "Degree: partial"
+          - "Remainder shapes: missing"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+          - "Action posture: direct_resolution"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - bash
+---
+schema: bssc_skill.v2
+kind: ability
+title: "Bash Commands 12 \u2014 Download Url To File / Bash Commands 12 Download Url\
+  \ To File"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you execute bash commands 12 download url to file?
+declaration:
+  intent: How do you execute bash commands 12 download url to file?
+  inputs:
+    destination: required input value
+    url: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  - write
+  - communicate
+  authority_bounds:
+    execute:
+      scope: local_executor
+      target: bash_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+    write:
+      scope: local_executor
+      target: skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+    communicate:
+      scope: local_executor
+      target: skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - shell command execution
+  - network communication
+  - filesystem or external state modification
+  persistence_behavior: may_modify_external_state
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier2_connected
+  executor_framework: bash
+executor: bash
+entrypoint: main
+inputs:
+  destination: required input value
+  url: required input value
+outputs:
+  result: execution result
+shell: |-
+  #!/usr/bin/env bash
+  set -euo pipefail
+
+  # BSSC exposes the structured input payload as JSON and as env vars for shell-based abilities.
+  mkdir -p "$(dirname "$destination")"
+  curl -L "$url" -o "$destination"
+
+  printf '%s\n' "{\"answer\": \"executed\", \"notes\": [], \"result\": {\"status\": \"executed\"}, \"status\": \"ok\"}"
+governance:
+  scope: reuse when later prompts ask for bash commands 12 download url to file under
+    compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a'*
+  - b'*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:23:22+00:00'
+  provenance:
+  - not_learn-from-markdown-12-learn-bash-commands-downl_44bbd7
+  - /Users/ravindranathakila/service/realized/trials/bash/12_LEARN_BASH_COMMANDS_DOWNLOAD_URL.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for bash commands 12 download url
+      to file under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Bash Commands 12 Download Url To File
+    encountered_not: Bash Commands 12 Download Url To File
+    goal: How do you execute bash commands 12 download url to file?
+    intended_object: "Bash Commands 12 \u2014 Download Url To File Bash Commands 12\
+      \ \u2014 Download Url To File / Bash Commands 12 Download Url To File Bash Commands\
+      \ 12 Download Url To File How do you execute bash commands 12 download url to\
+      \ file? 2. Executable Bash relation shell command block execute `mkdir -p \"\
+      $(dirname \"$destination\")\"` execute `curl -L \"$url\" -o \"$destination\"\
+      ` named shell parameters: `destination`, `url` This capability should be learned\
+      \ as a reusable bash ability artifact. The named shell parameters are `$url`\
+      \ and `$destination`."
+    success_criteria:
+    - the response directly resolves the stated ask without erasing material distinctions
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ Bash Commands 12 \u2014 Download Url To File Bash Commands 12 \u2014 Download\
+      \ Url To File / Bash Commands 12 Download Url To File Bash Commands 12 Download\
+      \ Url To File How do you execute bash commands 12 download url to file, 2, Executable\
+      \ Bash relation shell command block execute `mkdir -p \"$(dirname \"$destination\"\
+      )\"` execute `curl -L \"$url\" -o \"$destination\"` named shell parameters:\
+      \ `destination`; no justified final closure has been admitted yet"
+    givens:
+    - "Bash Commands 12 \u2014 Download Url To File Bash Commands 12 \u2014 Download\
+      \ Url To File / Bash Commands 12 Download Url To File Bash Commands 12 Download\
+      \ Url To File How do you execute bash commands 12 download url to file"
+    - '2'
+    - 'Executable Bash relation shell command block execute `mkdir -p "$(dirname "$destination")"`
+      execute `curl -L "$url" -o "$destination"` named shell parameters: `destination`'
+    unknowns: []
+    missing_components:
+    - a justified final realization has not yet been produced
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - completion
+    origin_layers:
+    - model
+    degree: partial
+    remainder_shapes:
+    - missing
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair: []
+    full_repair:
+    - 'satisfy success condition: the response directly resolves the stated ask without
+      erasing material distinctions'
+    boundary_shape:
+    - d*
+    action_posture: direct_resolution
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Bash Commands 12 Download Url To File
+    title_depth_prefixes:
+    - Bash Commands 12 Download Url To File
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Bash Command 12 Download Url File
+    - "Bash Commands 12 \u2014 Download Url To File / Bash Commands 12 Download Url\
+      \ To File / Url"
+    composed_not: Bash Command 12 Download Url File
+    lookup_keys:
+    - bash command 12 download url file
+    - bash command
+    - command 12
+    - 12 download
+    - download url
+    - url file
+    - bash command 12
+    - command 12 download
+    - 12 download url
+    - download url file
+    - execute bash command 12 download url file
+    - execute bash
+    - execute bash command
+    - without reduc remainder item cannot clos with govern confidence
+    - without reduc remainder item cannot clo
+    - govern confidence
+    - without reduc
+    - reduc remainder
+    - remainder item
+    - item cannot
+    - cannot clos
+    - clos with
+    - with govern
+    - without reduc remainder
+    notation_yaml: |-
+      "How Do You Execute Bash Commands 12 Download Url To File":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Bash Commands 12 Download Url To File"
+          - "Components: Bash Command 12 Download Url File, Bash Commands 12 \u2014 Download Url To File / Bash Commands 12 Download Url To File / Url"
+          - "Composition: Bash Command 12 Download Url File"
+          - "Title identity: Bash Commands 12 Download Url To File"
+          - "Title depth segments: Bash Commands 12 Download Url To File"
+          - "Title depth prefixes: Bash Commands 12 Download Url To File"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: Bash Commands 12 \u2014 Download Url To File Bash Commands 12 \u2014 Download Url To File / Bash Commands 12 Download Url To File Bash Commands 12 Download Url To File How do you execute bash commands 12 download url to file? 2. Executable Bash relation shell command block execute `mkdir -p \"$(dirname \"$destination\")\"` execute `curl -L \"$url\" -o \"$destination\"` named shell parameters: `destination`, `url` This capability should be learned as a reusable bash ability artifact. The named shell parameters are `$url` and `$destination`."
+          - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+          - "Actual realization: the prompt surface is present; explicit givens are present: Bash Commands 12 \u2014 Download Url To File Bash Commands 12 \u2014 Download Url To File / Bash Commands 12 Download Url To File Bash Commands 12 Download Url To File How do you execute bash commands 12 download url to file, 2, Executable Bash relation shell command block execute `mkdir -p \"$(dirname \"$destination\")\"` execute `curl -L \"$url\" -o \"$destination\"` named shell parameters: `destination`; no justified final closure has been admitted yet"
+          - "Givens: Bash Commands 12 \u2014 Download Url To File Bash Commands 12 \u2014 Download Url To File / Bash Commands 12 Download Url To File Bash Commands 12 Download Url To File How do you execute bash commands 12 download url to file, 2, Executable Bash relation shell command block execute `mkdir -p \"$(dirname \"$destination\")\"` execute `curl -L \"$url\" -o \"$destination\"` named shell parameters: `destination`"
+          - "Missing components: a justified final realization has not yet been produced"
+          - "Misalignment types: completion"
+          - "Origin layers: model"
+          - "Degree: partial"
+          - "Remainder shapes: missing"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+          - "Action posture: direct_resolution"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - bash
+---
+schema: bssc_skill.v2
+kind: ability
+title: "Bash Commands 13 \u2014 Compute Sha256 Checksum / Bash Commands 13 Compute\
+  \ Sha256 Checksum"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you execute bash commands 13 compute sha256 checksum?
+declaration:
+  intent: How do you execute bash commands 13 compute sha256 checksum?
+  inputs:
+    path: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  authority_bounds:
+    execute:
+      scope: local_executor
+      target: bash_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - shell command execution
+  persistence_behavior: none
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier1_bounded_transform
+  executor_framework: bash
+executor: bash
+entrypoint: main
+inputs:
+  path: required input value
+outputs:
+  result: execution result
+shell: |-
+  #!/usr/bin/env bash
+  set -euo pipefail
+
+  # BSSC exposes the structured input payload as JSON and as env vars for shell-based abilities.
+  shasum -a 256 "$path"
+
+  printf '%s\n' "{\"answer\": \"executed\", \"notes\": [], \"result\": {\"status\": \"executed\"}, \"status\": \"ok\"}"
+governance:
+  scope: reuse when later prompts ask for bash commands 13 compute sha256 checksum
+    under compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a'*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:23:41+00:00'
+  provenance:
+  - not_learn-from-markdown-13-learn-bash-commands-sha25_f98e9d
+  - /Users/ravindranathakila/service/realized/trials/bash/13_LEARN_BASH_COMMANDS_SHA256_CHECKSUM.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for bash commands 13 compute sha256
+      checksum under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Bash Commands 13 Compute Sha256 Checksum
+    encountered_not: Bash Commands 13 Compute Sha256 Checksum
+    goal: How do you execute bash commands 13 compute sha256 checksum?
+    intended_object: "Bash Commands 13 \u2014 Compute Sha256 Checksum Bash Commands\
+      \ 13 \u2014 Compute Sha256 Checksum / Bash Commands 13 Compute Sha256 Checksum\
+      \ Bash Commands 13 Compute Sha256 Checksum How do you execute bash commands\
+      \ 13 compute sha256 checksum? 2. Executable Bash relation shell command block\
+      \ execute `shasum -a 256 \"$path\"` named shell parameters: `path` This capability\
+      \ should be learned as a reusable bash ability artifact. The named shell parameter\
+      \ is `$path`."
+    success_criteria:
+    - all required inputs are explicit and the bounded computation or template is
+      applied faithfully
+    - the result is returned in the requested usable form
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ Bash Commands 13 \u2014 Compute Sha256 Checksum Bash Commands 13 \u2014 Compute\
+      \ Sha256 Checksum / Bash Commands 13 Compute Sha256 Checksum Bash Commands 13\
+      \ Compute Sha256 Checksum How do you execute bash commands 13 compute sha256\
+      \ checksum, 2, Executable Bash relation shell command block execute `shasum\
+      \ -a 256 \"$path\"` named shell parameters: `path` This capability should be\
+      \ learned as a reusable bash ability artifact; no justified final closure has\
+      \ been admitted yet"
+    givens:
+    - "Bash Commands 13 \u2014 Compute Sha256 Checksum Bash Commands 13 \u2014 Compute\
+      \ Sha256 Checksum / Bash Commands 13 Compute Sha256 Checksum Bash Commands 13\
+      \ Compute Sha256 Checksum How do you execute bash commands 13 compute sha256\
+      \ checksum"
+    - '2'
+    - 'Executable Bash relation shell command block execute `shasum -a 256 "$path"`
+      named shell parameters: `path` This capability should be learned as a reusable
+      bash ability artifact'
+    unknowns: []
+    missing_components:
+    - the full set of required inputs or executable relation is not yet explicit
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - functional
+    - completion
+    origin_layers:
+    - prompt
+    degree: partial
+    remainder_shapes:
+    - underdetermined
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair:
+    - supply or recover the missing inputs and then perform the bounded computation
+    full_repair:
+    - supply or recover the missing inputs and then perform the bounded computation
+    - 'satisfy success condition: all required inputs are explicit and the bounded
+      computation or template is applied faithfully'
+    - 'satisfy success condition: the result is returned in the requested usable form'
+    boundary_shape:
+    - d*
+    action_posture: compute_or_template
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Bash Commands 13 Compute Sha256 Checksum
+    title_depth_prefixes:
+    - Bash Commands 13 Compute Sha256 Checksum
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Bash Command 13 Compute Sha256 Checksum
+    composed_not: Bash Command 13 Compute Sha256 Checksum
+    lookup_keys:
+    - bash command 13 compute sha256 checksum
+    - bash command
+    - command 13
+    - 13 compute
+    - compute sha256
+    - sha256 checksum
+    - bash command 13
+    - command 13 compute
+    - 13 compute sha256
+    - compute sha256 checksum
+    - execute bash command 13 compute sha256 checksum
+    - execute bash
+    - execute bash command
+    - supply or recover miss input then perform bound computation
+    - supply or recover miss input
+    - perform bound computation
+    - supply or
+    - or recover
+    - recover miss
+    - miss input
+    - input then
+    - then perform
+    - perform bound
+    - bound computation
+    notation_yaml: |-
+      "How Do You Execute Bash Commands 13 Compute Sha256 Checksum":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Bash Commands 13 Compute Sha256 Checksum"
+          - "Components: Bash Command 13 Compute Sha256 Checksum"
+          - "Composition: Bash Command 13 Compute Sha256 Checksum"
+          - "Title identity: Bash Commands 13 Compute Sha256 Checksum"
+          - "Title depth segments: Bash Commands 13 Compute Sha256 Checksum"
+          - "Title depth prefixes: Bash Commands 13 Compute Sha256 Checksum"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: Bash Commands 13 \u2014 Compute Sha256 Checksum Bash Commands 13 \u2014 Compute Sha256 Checksum / Bash Commands 13 Compute Sha256 Checksum Bash Commands 13 Compute Sha256 Checksum How do you execute bash commands 13 compute sha256 checksum? 2. Executable Bash relation shell command block execute `shasum -a 256 \"$path\"` named shell parameters: `path` This capability should be learned as a reusable bash ability artifact. The named shell parameter is `$path`."
+          - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+          - "Actual realization: the prompt surface is present; explicit givens are present: Bash Commands 13 \u2014 Compute Sha256 Checksum Bash Commands 13 \u2014 Compute Sha256 Checksum / Bash Commands 13 Compute Sha256 Checksum Bash Commands 13 Compute Sha256 Checksum How do you execute bash commands 13 compute sha256 checksum, 2, Executable Bash relation shell command block execute `shasum -a 256 \"$path\"` named shell parameters: `path` This capability should be learned as a reusable bash ability artifact; no justified final closure has been admitted yet"
+          - "Givens: Bash Commands 13 \u2014 Compute Sha256 Checksum Bash Commands 13 \u2014 Compute Sha256 Checksum / Bash Commands 13 Compute Sha256 Checksum Bash Commands 13 Compute Sha256 Checksum How do you execute bash commands 13 compute sha256 checksum, 2, Executable Bash relation shell command block execute `shasum -a 256 \"$path\"` named shell parameters: `path` This capability should be learned as a reusable bash ability artifact"
+          - "Missing components: the full set of required inputs or executable relation is not yet explicit"
+          - "Misalignment types: functional, completion"
+          - "Origin layers: prompt"
+          - "Degree: partial"
+          - "Remainder shapes: underdetermined"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Minimal repair: supply or recover the missing inputs and then perform the bounded computation"
+          - "Full repair: supply or recover the missing inputs and then perform the bounded computation, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+          - "Action posture: compute_or_template"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - bash
+---
+schema: bssc_skill.v2
+kind: ability
+title: "Bash Commands 14 \u2014 Change File Mode / Bash Commands 14 Change File Mode"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you execute bash commands 14 change file mode?
+declaration:
+  intent: How do you execute bash commands 14 change file mode?
+  inputs:
+    mode: required input value
+    path: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  - write
+  authority_bounds:
+    execute:
+      scope: local_executor
+      target: bash_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+    write:
+      scope: local_executor
+      target: skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - shell command execution
+  - filesystem or external state modification
+  persistence_behavior: may_modify_external_state
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier2_connected
+  executor_framework: bash
+executor: bash
+entrypoint: main
+inputs:
+  mode: required input value
+  path: required input value
+outputs:
+  result: execution result
+shell: |-
+  #!/usr/bin/env bash
+  set -euo pipefail
+
+  # BSSC exposes the structured input payload as JSON and as env vars for shell-based abilities.
+  chmod "$mode" "$path"
+
+  printf '%s\n' "{\"answer\": \"executed\", \"notes\": [], \"result\": {\"status\": \"executed\"}, \"status\": \"ok\"}"
+governance:
+  scope: reuse when later prompts ask for bash commands 14 change file mode under
+    compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a'*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:23:52+00:00'
+  provenance:
+  - not_learn-from-markdown-14-learn-bash-commands-chmod_c6300c
+  - /Users/ravindranathakila/service/realized/trials/bash/14_LEARN_BASH_COMMANDS_CHMOD_EXECUTABLE.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for bash commands 14 change file
+      mode under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Bash Commands 14 Change File Mode
+    encountered_not: Bash Commands 14 Change File Mode
+    goal: How do you execute bash commands 14 change file mode?
+    intended_object: "Bash Commands 14 \u2014 Change File Mode Bash Commands 14 \u2014\
+      \ Change File Mode / Bash Commands 14 Change File Mode Bash Commands 14 Change\
+      \ File Mode How do you execute bash commands 14 change file mode? 2. Executable\
+      \ Bash relation shell command block execute `chmod \"$mode\" \"$path\"` named\
+      \ shell parameters: `mode`, `path` This capability should be learned as a reusable\
+      \ bash ability artifact. The named shell parameters are `$mode` and `$path`."
+    success_criteria:
+    - the response directly resolves the stated ask without erasing material distinctions
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ Bash Commands 14 \u2014 Change File Mode Bash Commands 14 \u2014 Change File\
+      \ Mode / Bash Commands 14 Change File Mode Bash Commands 14 Change File Mode\
+      \ How do you execute bash commands 14 change file mode, 2, Executable Bash relation\
+      \ shell command block execute `chmod \"$mode\" \"$path\"` named shell parameters:\
+      \ `mode`; no justified final closure has been admitted yet"
+    givens:
+    - "Bash Commands 14 \u2014 Change File Mode Bash Commands 14 \u2014 Change File\
+      \ Mode / Bash Commands 14 Change File Mode Bash Commands 14 Change File Mode\
+      \ How do you execute bash commands 14 change file mode"
+    - '2'
+    - 'Executable Bash relation shell command block execute `chmod "$mode" "$path"`
+      named shell parameters: `mode`'
+    unknowns: []
+    missing_components:
+    - a justified final realization has not yet been produced
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - completion
+    origin_layers:
+    - model
+    degree: partial
+    remainder_shapes:
+    - missing
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair: []
+    full_repair:
+    - 'satisfy success condition: the response directly resolves the stated ask without
+      erasing material distinctions'
+    boundary_shape:
+    - d*
+    action_posture: direct_resolution
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Bash Commands 14 Change File Mode
+    title_depth_prefixes:
+    - Bash Commands 14 Change File Mode
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Bash Command 14 Change File Mode
+    - "Bash Commands 14 \u2014 Change File Mode / Bash Commands 14 Change File Mode\
+      \ / Path"
+    composed_not: Bash Command 14 Change File Mode
+    lookup_keys:
+    - bash command 14 change file mode
+    - bash command
+    - command 14
+    - 14 change
+    - change file
+    - file mode
+    - bash command 14
+    - command 14 change
+    - 14 change file
+    - change file mode
+    - execute bash command 14 change file mode
+    - execute bash
+    - execute bash command
+    - without reduc remainder item cannot clos with govern confidence
+    - without reduc remainder item cannot clo
+    - govern confidence
+    - without reduc
+    - reduc remainder
+    - remainder item
+    - item cannot
+    - cannot clos
+    - clos with
+    - with govern
+    - without reduc remainder
+    notation_yaml: |-
+      "How Do You Execute Bash Commands 14 Change File Mode":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Bash Commands 14 Change File Mode"
+          - "Components: Bash Command 14 Change File Mode, Bash Commands 14 \u2014 Change File Mode / Bash Commands 14 Change File Mode / Path"
+          - "Composition: Bash Command 14 Change File Mode"
+          - "Title identity: Bash Commands 14 Change File Mode"
+          - "Title depth segments: Bash Commands 14 Change File Mode"
+          - "Title depth prefixes: Bash Commands 14 Change File Mode"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: Bash Commands 14 \u2014 Change File Mode Bash Commands 14 \u2014 Change File Mode / Bash Commands 14 Change File Mode Bash Commands 14 Change File Mode How do you execute bash commands 14 change file mode? 2. Executable Bash relation shell command block execute `chmod \"$mode\" \"$path\"` named shell parameters: `mode`, `path` This capability should be learned as a reusable bash ability artifact. The named shell parameters are `$mode` and `$path`."
+          - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+          - "Actual realization: the prompt surface is present; explicit givens are present: Bash Commands 14 \u2014 Change File Mode Bash Commands 14 \u2014 Change File Mode / Bash Commands 14 Change File Mode Bash Commands 14 Change File Mode How do you execute bash commands 14 change file mode, 2, Executable Bash relation shell command block execute `chmod \"$mode\" \"$path\"` named shell parameters: `mode`; no justified final closure has been admitted yet"
+          - "Givens: Bash Commands 14 \u2014 Change File Mode Bash Commands 14 \u2014 Change File Mode / Bash Commands 14 Change File Mode Bash Commands 14 Change File Mode How do you execute bash commands 14 change file mode, 2, Executable Bash relation shell command block execute `chmod \"$mode\" \"$path\"` named shell parameters: `mode`"
+          - "Missing components: a justified final realization has not yet been produced"
+          - "Misalignment types: completion"
+          - "Origin layers: model"
+          - "Degree: partial"
+          - "Remainder shapes: missing"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+          - "Action posture: direct_resolution"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - bash

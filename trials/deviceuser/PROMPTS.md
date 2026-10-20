@@ -1,0 +1,10 @@
+- Open Google Chrome to `https://example.com`.
+- Launch the `Notes` app.
+- Open `trials/deviceuser/README.md` from mount `skill_input` in TextEdit.
+- Show mount `skill_input` at `trials` in Finder.
+- Open Terminal in mount `skill_input` at `.`.
+- Search the web for `how to zip a folder on mac`.
+- Reveal `trials/deviceuser/README.md` from mount `skill_input` in Finder.
+- Open the Network settings pane.
+- Copy `device setup complete` to the clipboard.
+- Take a screenshot and save it to mount `skill_tmp` at `deviceuser-screen.png`.

@@ -1,0 +1,302 @@
+{
+  "schema_version": "dst_normalized_case.v1",
+  "fixture_id": "city-bus-ticketing-modernization",
+  "source_ref": "dst/City bus ticketing modernization.md",
+  "context": {
+    "system_name": "City bus ticketing modernization",
+    "decision_problem": "Choose how to modernize fare payment without excluding riders or disrupting service.",
+    "evaluation_state_id": "s0",
+    "planning_horizon": "",
+    "notes": [
+      "The source use case presents two good path families rather than one obvious best path."
+    ]
+  },
+  "actors": [
+    {"id": "a1", "name": "transit authority", "roles": ["decision_maker", "coordinator"], "can_decide": true},
+    {"id": "a2", "name": "private bus operators", "roles": ["operator", "provider"], "can_decide": null},
+    {"id": "a3", "name": "payment processor", "roles": ["provider"], "can_decide": null},
+    {"id": "a4", "name": "city regulator", "roles": ["regulator"], "can_decide": null},
+    {"id": "a5", "name": "passengers", "roles": ["beneficiary", "consumer"], "can_decide": false}
+  ],
+  "objectives": [
+    {"id": "o1", "name": "reduce boarding time", "shared": true, "mandatory": false, "pursued_by": ["a1"]},
+    {"id": "o2", "name": "reduce fare evasion", "shared": true, "mandatory": false, "pursued_by": ["a1"]},
+    {"id": "o3", "name": "avoid service disruption", "shared": true, "mandatory": true, "pursued_by": ["a1", "a4"]}
+  ],
+  "capabilities": [
+    {
+      "id": "k1",
+      "name": "improved smart card system",
+      "kind": "transitional",
+      "advances_objectives": ["o1", "o2", "o3"],
+      "controlled_by": ["a1", "a2"],
+      "benefits_to": ["a5"],
+      "costs_to": ["a1", "a2"],
+      "risks_to": ["a5"]
+    },
+    {
+      "id": "k2",
+      "name": "full open-loop contactless payment with bank cards and phones",
+      "kind": "target",
+      "advances_objectives": ["o1", "o2"],
+      "controlled_by": ["a1", "a3"],
+      "benefits_to": ["a5"],
+      "costs_to": ["a1", "a2"],
+      "risks_to": ["a5"]
+    },
+    {
+      "id": "k3",
+      "name": "fare inspector mobile verification tools",
+      "kind": "transitional",
+      "advances_objectives": ["o2", "o3"],
+      "controlled_by": ["a1"],
+      "benefits_to": ["a1", "a5"],
+      "costs_to": ["a1"],
+      "risks_to": ["a5"]
+    },
+    {
+      "id": "k4",
+      "name": "backward compatibility for old validators",
+      "kind": "transitional",
+      "advances_objectives": ["o3"],
+      "controlled_by": ["a1", "a2"],
+      "benefits_to": ["a5"],
+      "costs_to": ["a1", "a2"],
+      "risks_to": ["a5"]
+    }
+  ],
+  "dependencies": [
+    {"id": "d1", "name": "banks and payment processor readiness"},
+    {"id": "d2", "name": "operator hardware upgrade complete"},
+    {"id": "d3", "name": "legal approval for account-based fare processing"}
+  ],
+  "constraints": [
+    {"id": "q1", "name": "annual budget cap", "kind": "soft"},
+    {"id": "q2", "name": "buses must continue operating without downtime", "kind": "hard"},
+    {"id": "q3", "name": "elderly and unbanked riders must not be excluded", "kind": "hard"}
+  ],
+  "boundaries": [
+    {"id": "b1", "name": "public-private operator boundary"},
+    {"id": "b2", "name": "transit-to-banking boundary"},
+    {"id": "b3", "name": "policy boundary around inclusion and privacy"}
+  ],
+  "states": [
+    {
+      "id": "s0",
+      "name": "legacy fare system",
+      "is_current": true,
+      "is_target": false,
+      "available_capabilities": [],
+      "operational_capabilities": [],
+      "satisfied_dependencies": ["d2"],
+      "active_constraints": ["q1", "q2", "q3"],
+      "boundary_friction": [
+        {"boundary_id": "b2", "present": true},
+        {"boundary_id": "b3", "present": true}
+      ]
+    },
+    {
+      "id": "s1",
+      "name": "improved closed-loop card system",
+      "is_current": false,
+      "is_target": false,
+      "available_capabilities": ["k1"],
+      "operational_capabilities": ["k1"],
+      "satisfied_dependencies": ["d2"],
+      "active_constraints": ["q1", "q2", "q3"],
+      "boundary_friction": []
+    },
+    {
+      "id": "s2",
+      "name": "hybrid card plus compatibility tools",
+      "is_current": false,
+      "is_target": true,
+      "available_capabilities": ["k1", "k3", "k4"],
+      "operational_capabilities": ["k1", "k3", "k4"],
+      "satisfied_dependencies": ["d2"],
+      "active_constraints": ["q1", "q2", "q3"],
+      "boundary_friction": [
+        {"boundary_id": "b3", "present": true}
+      ]
+    },
+    {
+      "id": "s3",
+      "name": "full account-based open-loop payment",
+      "is_current": false,
+      "is_target": true,
+      "available_capabilities": ["k2"],
+      "operational_capabilities": ["k2"],
+      "satisfied_dependencies": ["d1", "d2", "d3"],
+      "active_constraints": ["q1", "q2", "q3"],
+      "boundary_friction": [
+        {"boundary_id": "b2", "present": true},
+        {"boundary_id": "b3", "present": true}
+      ]
+    }
+  ],
+  "capability_requirements": [
+    {
+      "capability_id": "k1",
+      "required_dependencies": ["d2"],
+      "limiting_constraints": ["q1", "q2"],
+      "crossed_boundaries": ["b1"]
+    },
+    {
+      "capability_id": "k2",
+      "required_dependencies": ["d1", "d2", "d3"],
+      "limiting_constraints": ["q1", "q2", "q3"],
+      "crossed_boundaries": ["b1", "b2", "b3"]
+    },
+    {
+      "capability_id": "k3",
+      "required_dependencies": ["d2"],
+      "limiting_constraints": ["q2"],
+      "crossed_boundaries": ["b1"]
+    },
+    {
+      "capability_id": "k4",
+      "required_dependencies": ["d2"],
+      "limiting_constraints": ["q2", "q3"],
+      "crossed_boundaries": ["b1", "b3"]
+    }
+  ],
+  "capability_admissibility": [
+    {
+      "capability_id": "k1",
+      "state_id": "s0",
+      "admissible": true,
+      "reasons": []
+    },
+    {
+      "capability_id": "k2",
+      "state_id": "s0",
+      "admissible": false,
+      "reasons": [
+        "required_dependency_unsatisfied:d1",
+        "required_dependency_unsatisfied:d3"
+      ]
+    }
+  ],
+  "transitions": [
+    {
+      "id": "t1",
+      "name": "upgrade existing transit card system",
+      "source_state_id": "s0",
+      "target_state_id": "s1",
+      "changes_capabilities": ["k1"],
+      "required_dependencies": ["d2"],
+      "constraining_constraints": ["q1", "q2"],
+      "crossed_boundaries": ["b1"]
+    },
+    {
+      "id": "t2",
+      "name": "add compatibility and inspection tools",
+      "source_state_id": "s1",
+      "target_state_id": "s2",
+      "changes_capabilities": ["k3", "k4"],
+      "required_dependencies": ["d2"],
+      "constraining_constraints": ["q2", "q3"],
+      "crossed_boundaries": ["b1", "b3"]
+    },
+    {
+      "id": "t3",
+      "name": "direct shift to open-loop bank-card payment",
+      "source_state_id": "s0",
+      "target_state_id": "s3",
+      "changes_capabilities": ["k2"],
+      "required_dependencies": ["d1", "d2", "d3"],
+      "constraining_constraints": ["q1", "q2", "q3"],
+      "crossed_boundaries": ["b1", "b2", "b3"]
+    }
+  ],
+  "transition_admissibility": [
+    {
+      "transition_id": "t1",
+      "state_id": "s0",
+      "admissible": true,
+      "reasons": []
+    },
+    {
+      "transition_id": "t3",
+      "state_id": "s0",
+      "admissible": false,
+      "reasons": [
+        "required_dependency_unsatisfied:d1",
+        "required_dependency_unsatisfied:d3",
+        "coordination_required"
+      ]
+    }
+  ],
+  "decisions": [
+    {
+      "id": "x1",
+      "name": "Start with closed-loop upgrade",
+      "selects_transition_id": "t1",
+      "assignments": [
+        {"actor_id": "a1", "capability_id": "k1"}
+      ],
+      "time_label": ""
+    },
+    {
+      "id": "x2",
+      "name": "Leap to open-loop contactless",
+      "selects_transition_id": "t3",
+      "assignments": [
+        {"actor_id": "a1", "capability_id": "k2"}
+      ],
+      "time_label": ""
+    }
+  ],
+  "decision_status": [
+    {
+      "decision_id": "x1",
+      "state_id": "s0",
+      "valid": true,
+      "executable": true,
+      "reasons": []
+    },
+    {
+      "decision_id": "x2",
+      "state_id": "s0",
+      "valid": false,
+      "executable": false,
+      "reasons": [
+        "selected_transition_inadmissible:t3"
+      ]
+    }
+  ],
+  "coordination_requirements": [
+    {
+      "type": "transition",
+      "target_id": "t3",
+      "required": true,
+      "actors": ["a1", "a3", "a4"],
+      "basis": "explicit_cross_actor_requirement"
+    }
+  ],
+  "risk_indicators": [
+    {
+      "target_type": "transition",
+      "target_id": "t3",
+      "state_id": "s0",
+      "risks": [
+        "unsatisfied_dependency:d1",
+        "unsatisfied_dependency:d3",
+        "boundary_friction:b2",
+        "coordination_failure_risk"
+      ]
+    }
+  ],
+  "fallbacks": [],
+  "candidate_sets": {
+    "candidate_transition_ids_from_current_state": ["t1", "t3"],
+    "candidate_decision_ids_from_current_state": ["x1", "x2"]
+  },
+  "assumptions": [],
+  "ambiguities": [
+    "Path A is path-level while the formal DST representation remains transition-local."
+  ],
+  "missing_information": [
+    "The current readiness status for banking and legal dependencies is not fully specified beyond what blocks the direct leap."
+  ]
+}

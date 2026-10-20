@@ -1,0 +1,25 @@
+{
+  "assistant_text": "{'status': 'read', 'mount': 'skill_input', 'relative_path': 'trials/python/README.md', 'text': '# Python Command Capability Trials\\n\\nThis folder defines a gated Python-learning curriculum for common command-style\\ncapabilities.\\n\\nThe goal is to teach reusable Python abilities that can be learned directly from\\nfenced Python functions when `--supported-executor python3` is enabled.\\n\\nThis curriculum follows these conventions:\\n\\n* each lesson teaches one bounded Python capability\\n* the executable surface is always a fenced `python` block\\n* the function is always named `main`\\n* imports are placed inside `main`\\n* dependency metadata is kept inline in the signature as\\n `__dependencies__: tuple[str, ...] = ()`\\n* file-bearing skills should prefer governed broker surfaces such as\\n `fs.read_mount`, `fs.write_mount`, `fs.list_mount`, `fs.find_mount`,\\n `store.named_query`, `store.skill_state`, and `net.http_get_text` rather\\n than raw paths, raw SQLite, or raw network access\\n* when a lesson uses filesystem data, the preferred inputs are a `mount` name\\n plus a `relative_path`\\n* the code is intentionally simple and command-specific\\n* headings, paraphrases, and summaries are written to support later natural\\n retrieval\\n\\nCanonical teaching shape:\\n\\n* section 1: core capability\\n* section 2: executable Python relation\\n* section 3: inputs and outputs\\n* section 4: natural-language paraphrases\\n* section 5: one-sentence summary\\n\\nThe emphasis is on reusable Python task abilities, not on large frameworks or\\nmulti-file applications.\\n'}",
+  "model": "workstation-direct-composition",
+  "rounds": 0,
+  "task_contract": {
+    "semantic_unit": "Read the text file `trials/python/README.md` from mount `skill_input`."
+  },
+  "tool_receipts": [
+    {
+      "arguments": {
+        "skill_title": "Python Commands 02 \u2014 Read Text File / Python Commands 02 Read Text File",
+        "target": ""
+      },
+      "name": "ws.skill.invoke",
+      "result": {
+        "answer": "{'status': 'read', 'mount': 'skill_input', 'relative_path': 'trials/python/README.md', 'text': '# Python Command Capability Trials\\n\\nThis folder defines a gated Python-learning curriculum for common command-style\\ncapabilities.\\n\\nThe goal is to teach reusable Python abilities that can be learned directly from\\nfenced Python functions when `--supported-executor python3` is enabled.\\n\\nThis curriculum follows these conventions:\\n\\n* each lesson teaches one bounded Python capability\\n* the executable surface is always a fenced `python` block\\n* the function is always named `main`\\n* imports are placed inside `main`\\n* dependency metadata is kept inline in the signature as\\n `__dependencies__: tuple[str, ...] = ()`\\n* file-bearing skills should prefer governed broker surfaces such as\\n `fs.read_mount`, `fs.write_mount`, `fs.list_mount`, `fs.find_mount`,\\n `store.named_query`, `store.skill_state`, and `net.http_get_text` rather\\n than raw paths, raw SQLite, or raw network access\\n* when a lesson uses filesystem data, the preferred inputs are a `mount` name\\n plus a `relative_path`\\n* the code is intentionally simple and command-specific\\n* headings, paraphrases, and summaries are written to support later natural\\n retrieval\\n\\nCanonical teaching shape:\\n\\n* section 1: core capability\\n* section 2: executable Python relation\\n* section 3: inputs and outputs\\n* section 4: natural-language paraphrases\\n* section 5: one-sentence summary\\n\\nThe emphasis is on reusable Python task abilities, not on large frameworks or\\nmulti-file applications.\\n'}",
+        "error": "",
+        "error_type": "",
+        "executor_framework": "python3",
+        "skill_title": "Python Commands 02 \u2014 Read Text File / Python Commands 02 Read Text File",
+        "status": "ok"
+      }
+    }
+  ]
+}

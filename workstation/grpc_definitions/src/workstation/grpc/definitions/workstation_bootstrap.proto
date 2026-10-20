@@ -1,0 +1,141 @@
+syntax = "proto3";
+
+// Bootstrap contracts for discovering which workstation roots a host exposes.
+//
+// What:
+//   This package defines the minimal discovery surface a cross-platform client
+//   uses before opening shell or subject workflow sessions.
+//
+// Why:
+//   Desktop-local paths cannot be manually typed on web/mobile with confidence.
+//   The host must explicitly advertise the workstation roots it is willing to
+//   serve.
+//
+// How:
+//   1. Connect to the workstation host endpoint.
+//   2. Call `ListWorkstationRoots`.
+//   3. Let the user choose one returned root descriptor.
+//   4. Feed the chosen `root_path` into shell and subject workflow RPCs.
+//
+// Valid Example:
+//   request: {}
+//   response:
+//     {
+//       "roots": [
+//         {
+//           "root_id": "transit",
+//           "label": "Transit Workstation",
+//           "root_path": "/srv/workstations/transit",
+//           "workspace_name": "Transit",
+//           "is_default": true
+//         }
+//       ]
+//     }
+package workstation;
+
+// What: One workstation root the host is willing to serve.
+// Why: Clients need a stable descriptor for selection and later routing.
+// How: Use `root_path` as the root argument for later shell and subject
+// workflow requests.
+// Valid Example:
+//   {
+//     "root_id": "transit",
+//     "label": "Transit Workstation",
+//     "root_path": "/srv/workstations/transit",
+//     "workspace_name": "Transit",
+//     "is_default": true
+//   }
+message WorkstationRootDescriptor {
+  // What: Stable host-level id for the served root.
+  // Why: UI selection state should not rely on display labels alone.
+  // How: Use it as the selected option value in the bootstrap UI.
+  // Example: "transit"
+  string root_id = 1;
+
+  // What: Human-readable selection label.
+  // Why: Users need a readable name in the bootstrap screen.
+  // How: Render it in the root selector.
+  // Example: "Transit Workstation"
+  string label = 2;
+
+  // What: Absolute workstation root path on the server.
+  // Why: Later workflow RPCs are still rooted by server path.
+  // How: Pass it into shell and subject workflow requests.
+  // Example: "/srv/workstations/transit"
+  string root_path = 3;
+
+  // What: Human-readable workspace name associated with the root.
+  // Why: Some environments use a shorter friendly workspace name.
+  // How: Render it as supporting context in the root picker.
+  // Example: "Transit"
+  string workspace_name = 4;
+
+  // What: Whether this is the host's default workstation root.
+  // Why: Clients often want an initial selection without additional policy.
+  // How: Preselect the first descriptor where this is true.
+  // Example: true
+  bool is_default = 5;
+}
+
+// What: Request to list the workstation roots served by the host.
+// Why: Cross-platform clients need explicit root discovery before they can
+// open sessions.
+// How: Call it immediately after connecting to the host.
+// Valid Example:
+//   {}
+message ListWorkstationRootsRequest {}
+
+// What: Response containing all served workstation roots.
+// Why: The client needs both root descriptors and trace metadata.
+// How: Render the returned roots in the bootstrap selection UI.
+// Valid Example:
+//   {
+//     "roots": [
+//       {
+//         "root_id": "transit",
+//         "label": "Transit Workstation",
+//         "root_path": "/srv/workstations/transit",
+//         "workspace_name": "Transit",
+//         "is_default": true
+//       }
+//     ],
+//     "trace_id": "bootstrap-roots-response_2f3cbe90",
+//     "parent_id": "bootstrap-roots-request_90fdb95e"
+//   }
+message ListWorkstationRootsResponse {
+  // What: Served workstation root descriptors.
+  // Why: The client needs the available workstation choices.
+  // How: Render one selectable row per descriptor.
+  // Example: [{"root_id":"transit","label":"Transit Workstation","root_path":"/srv/workstations/transit","workspace_name":"Transit","is_default":true}]
+  repeated WorkstationRootDescriptor roots = 1;
+
+  // What: Trace id for the response.
+  // Why: Bootstrap operations participate in host-level traceability.
+  // How: Log it when debugging connection/bootstrap issues.
+  // Example: "bootstrap-roots-response_2f3cbe90"
+  string trace_id = 100;
+
+  // What: Parent trace id linking back to the request.
+  // Why: Diagnostics need causal request/response linkage.
+  // How: Treat it as opaque correlation metadata.
+  // Example: "bootstrap-roots-request_90fdb95e"
+  string parent_id = 101;
+}
+
+// What: Bootstrap service for workstation root discovery.
+// Why: New clients need an explicit discovery surface before they can open
+// root-scoped sessions.
+// How: Call `ListWorkstationRoots` first, then pass the chosen `root_path`
+// into the rest of the workstation API.
+// Valid Example:
+//   request: {}
+//   response: {"roots": [{"root_id": "transit", "root_path": "/srv/workstations/transit"}]}
+service WorkstationBootstrapService {
+  // What: Lists workstation roots served by the current host.
+  // Why: Clients need an authoritative root registry.
+  // How: Call it before opening shell or subject workflow sessions.
+  // Valid Example:
+  //   request: {}
+  //   response: {"roots": [{"root_id": "transit", "label": "Transit Workstation"}]}
+  rpc ListWorkstationRoots(ListWorkstationRootsRequest) returns (ListWorkstationRootsResponse);
+}

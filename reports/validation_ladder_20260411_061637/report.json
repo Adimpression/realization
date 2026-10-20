@@ -1,0 +1,26 @@
+{
+  "started_at": "2026-04-11T06:16:37+00:00",
+  "finished_at": "2026-04-11T06:34:15+00:00",
+  "status": "failed",
+  "stage": "unit_tests",
+  "report_root": "/Users/ravindranathakila/service/realized/reports/validation_ladder_20260411_061637",
+  "stages": [
+    {
+      "name": "unit_tests",
+      "cmd": [
+        "/Users/ravindranathakila/.venv/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/Users/ravindranathakila/service/realized/tests"
+      ],
+      "cwd": "/Users/ravindranathakila/service/realized",
+      "status": "failed",
+      "returncode": 1,
+      "elapsed_seconds": 1057.927855,
+      "stdout_tail": "",
+      "stderr_tail": "eError: property 'encoder' of 'SQLiteVectorArtifactStore' object has no setter\n\n======================================================================\nERROR: test_retrieval_works_without_legacy_lookup_columns (test_artifact_search_hybrid.ArtifactSearchHybridTests.test_retrieval_works_without_legacy_lookup_columns)\nHigh Level Purpose:\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/ravindranathakila/service/realized/tests/test_artifact_search_hybrid.py\", line 308, in test_retrieval_works_without_legacy_lookup_columns\n    connection.execute(\"DELETE FROM bssc_artifact_vec WHERE artifact_id = ?\", (artifact.id,))\n    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsqlite3.OperationalError: no such table: bssc_artifact_vec\n\n======================================================================\nFAIL: test_break_this_down_prompt_decompose_or_refine_rebuilds_split_children_from_requested_outputs (test_artifact_answer_selection.ArtifactAnswerSelectionTests.test_break_this_down_prompt_decompose_or_refine_rebuilds_split_children_from_requested_outputs)\nHigh Level Purpose:\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/ravindranathakila/service/realized/tests/test_artifact_answer_selection.py\", line 2259, in test_break_this_down_prompt_decompose_or_refine_rebuilds_split_children_from_requested_outputs\n    self.assertTrue(any(unit.endswith(\"/ Total Surface Area\") for unit in child_units))\n    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: False is not true\n\n======================================================================\nFAIL: test_construct_prompt_decompose_or_refine_creates_children_under_fallback (test_artifact_answer_selection.ArtifactAnswerSelectionTests.test_construct_prompt_decompose_or_refine_creates_children_under_fallback)\nHigh Level Purpose:\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/ravindranathakila/service/realized/tests/test_artifact_answer_selection.py\", line 2291, in test_construct_prompt_decompose_or_refine_creates_children_under_fallback\n    self.assertGreaterEqual(len(children), 2)\n    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^\nAssertionError: 0 not greater than or equal to 2\n\n======================================================================\nFAIL: test_construct_prompt_root_fallback_control_decision_prefers_decomposition (test_artifact_answer_selection.ArtifactAnswerSelectionTests.test_construct_prompt_root_fallback_control_decision_prefers_decomposition)\nHigh Level Purpose:\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/ravindranathakila/service/realized/tests/test_artifact_answer_selection.py\", line 2095, in test_construct_prompt_root_fallback_control_decision_prefers_decomposition\n    self.assertTrue(decision[\"should_decompose\"])\n    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: False is not true\n\n======================================================================\nFAIL: test_batch_persist_canonicalizes_same_notation_key_within_batch (test_artifact_search_hybrid.ArtifactSearchHybridTests.test_batch_persist_canonicalizes_same_notation_key_within_batch)\nHigh Level Purpose:\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/ravindranathakila/service/realized/tests/test_artifact_search_hybrid.py\", line 411, in test_batch_persist_canonicalizes_same_notation_key_within_batch\n    self.assertEqual(report.get(\"persisted_artifacts\"), 1)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 2 != 1\n\n----------------------------------------------------------------------\nRan 789 tests in 1057.056s\n\nFAILED (failures=4, errors=2)\n"
+    }
+  ]
+}

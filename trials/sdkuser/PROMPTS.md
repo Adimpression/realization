@@ -1,0 +1,12 @@
+- Generate a short text response with the OpenAI SDK using model `gpt-5.4` and prompt `Say hello in one sentence.`.
+- Create an embedding with the OpenAI SDK using model `text-embedding-3-small` and text `semantic search`.
+- Generate a short message with the Anthropic SDK using model `claude-sonnet-4-5` and prompt `Summarize API reliability in one sentence.`.
+- List objects in the S3 bucket `demo-bucket` with the boto3 SDK.
+- Upload `/tmp/report.txt` to the S3 bucket `demo-bucket` as key `reports/report.txt`.
+- Download the GCS blob `reports/daily.json` from bucket `demo-bucket` to `/tmp/daily.json`.
+- Send the Slack message `deploy complete` to channel `C12345678`.
+- List open GitHub issues for repository `octocat/Hello-World`.
+- List pods in the Kubernetes namespace `default`.
+- Read the Redis key `session:42`.
+- Retrieve the Stripe customer `cus_123`.
+- Select rows from Supabase table `profiles`.

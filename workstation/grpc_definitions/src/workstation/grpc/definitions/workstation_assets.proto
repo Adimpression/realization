@@ -1,0 +1,260 @@
+syntax = "proto3";
+
+// Asset ingress/egress contracts for cross-platform workstation clients.
+//
+// What:
+//   This package defines the small explicit asset boundary that lets clients
+//   stage markdown bytes into the server and resolve server-local artifact
+//   paths into client-actionable references.
+//
+// Why:
+//   Same-machine desktop shells such as Textual can often pass raw paths.
+//   Flutter web/mobile cannot. They need upload bytes going in and resolvable
+//   artifact references coming out.
+//
+// How:
+//   1. Use `StageMarkdownUpload` to copy client-chosen markdown bytes into the
+//      workstation root and receive a server-visible staged path.
+//   2. Feed that staged path into `SubjectPhaseProjectionContext`.
+//   3. Use `ResolveArtifacts` when you have server-local paths that need
+//      client-actionable `download_url` / `can_open_locally` metadata.
+//
+// Valid Example:
+//   upload request:
+//     {
+//       "root_path": "/srv/workstations/transit",
+//       "client_session_id": "flutter-shell-a",
+//       "filename": "city-bus.md",
+//       "content": "IyBTbWFydCBDaXR5IFRyYXZlbAo="
+//     }
+//   upload response:
+//     {
+//       "staged_path": "/srv/workstations/transit/uploads/flutter-shell-a/city-bus.md",
+//       "display_name": "city-bus.md",
+//       "sha256": "4b1c3a9cfd0ba57f4d4b11eb0d5ff4da5424cbf7a5328f4f9459e88f82c6eaf5"
+//     }
+package workstation;
+
+// What: One client-actionable artifact reference.
+// Why: Cross-platform clients need something richer than a server-local path.
+// How: Prefer this message over raw `open_paths` whenever the client might not
+// share the server filesystem.
+// Valid Example:
+//   {
+//     "label": "report.pdf",
+//     "server_path": "/srv/workstations/transit/build/report.pdf",
+//     "mime_type": "application/pdf",
+//     "download_url": "http://127.0.0.1:8787/artifacts/abc123/report.pdf",
+//     "can_open_locally": true
+//   }
+message ArtifactRef {
+  // What: Human-readable artifact label.
+  // Why: Users need a display name for the artifact.
+  // How: Render it on buttons, links, or file rows.
+  // Example: "report.pdf"
+  string label = 1;
+
+  // What: Canonical server-local artifact path.
+  // Why: Same-machine tooling and diagnostics still benefit from the real
+  // server path.
+  // How: Treat it as informational unless the client is explicitly local.
+  // Example: "/srv/workstations/transit/build/report.pdf"
+  string server_path = 2;
+
+  // What: Resolved MIME type for the artifact.
+  // Why: Clients need to choose icons, preview behavior, and download headers.
+  // How: Use it to decide how to open or present the artifact.
+  // Example: "application/pdf"
+  string mime_type = 3;
+
+  // What: Client-usable download/open URL.
+  // Why: Web/mobile clients need a transportable reference they can actually
+  // fetch.
+  // How: Open it in a browser tab, external viewer, or download flow.
+  // Example: "http://127.0.0.1:8787/artifacts/abc123/report.pdf"
+  string download_url = 4;
+
+  // What: Whether the current client can safely attempt a direct local open.
+  // Why: Same-machine desktop clients may still prefer `open`/shell-style
+  // local opening over an HTTP download.
+  // How: If true, the client may use `server_path` directly when it knows it
+  // shares the server filesystem.
+  // Example: true
+  bool can_open_locally = 5;
+}
+
+// What: Request to stage one markdown upload into the workstation root.
+// Why: Cross-platform clients cannot rely on server-visible local file paths.
+// How: Supply the chosen filename and raw bytes from the client file picker.
+// Valid Example:
+//   {
+//     "root_path": "/srv/workstations/transit",
+//     "client_session_id": "flutter-shell-a",
+//     "filename": "city-bus.md",
+//     "content": "IyBTbWFydCBDaXR5IFRyYXZlbAo="
+//   }
+message StageMarkdownUploadRequest {
+  // What: Absolute workstation root path on the server.
+  // Why: Upload staging is scoped to one workstation.
+  // How: Reuse the root selected during bootstrap.
+  // Example: "/srv/workstations/transit"
+  string root_path = 1;
+
+  // What: Stable client session id.
+  // Why: The host can segregate staged uploads by session.
+  // How: Reuse the client session id from the shell/session bootstrap.
+  // Example: "flutter-shell-a"
+  string client_session_id = 2;
+
+  // What: Original client-side filename.
+  // Why: The staged artifact should preserve a user-meaningful name.
+  // How: Pass the basename selected from the file picker.
+  // Example: "city-bus.md"
+  string filename = 3;
+
+  // What: Raw markdown file bytes.
+  // Why: The server needs real file content, not just a client-local path.
+  // How: Send the exact bytes selected in the file picker.
+  // Example: "IyBTbWFydCBDaXR5IFRyYXZlbAo="
+  bytes content = 4;
+}
+
+// What: Response returned after staging one markdown upload.
+// Why: The client needs a server-visible path and integrity metadata for later
+// workflow requests.
+// How: Feed `staged_path` into `SubjectPhaseProjectionContext`.
+// Valid Example:
+//   {
+//     "staged_path": "/srv/workstations/transit/uploads/flutter-shell-a/city-bus.md",
+//     "display_name": "city-bus.md",
+//     "sha256": "4b1c3a9cfd0ba57f4d4b11eb0d5ff4da5424cbf7a5328f4f9459e88f82c6eaf5",
+//     "trace_id": "asset-stage-response_81256598",
+//     "parent_id": "asset-stage-request_0eb5dd9b"
+//   }
+message StageMarkdownUploadResponse {
+  // What: Server-visible staged path to the uploaded markdown file.
+  // Why: Later subject workflow RPCs still refer to a concrete server path.
+  // How: Put it into `markdown_selected_path` inside the projection context.
+  // Example: "/srv/workstations/transit/uploads/flutter-shell-a/city-bus.md"
+  string staged_path = 1;
+
+  // What: Human-readable display name for the staged upload.
+  // Why: The client often wants to show the staged filename back to the user.
+  // How: Render it in upload/import status text.
+  // Example: "city-bus.md"
+  string display_name = 2;
+
+  // What: SHA-256 digest of the uploaded content.
+  // Why: Clients and logs may need a stable integrity fingerprint.
+  // How: Treat it as an opaque checksum string.
+  // Example: "4b1c3a9cfd0ba57f4d4b11eb0d5ff4da5424cbf7a5328f4f9459e88f82c6eaf5"
+  string sha256 = 3;
+
+  // What: Trace id for the response.
+  // Why: Upload staging is a traceable operation.
+  // How: Log it when debugging upload issues.
+  // Example: "asset-stage-response_81256598"
+  string trace_id = 100;
+
+  // What: Parent trace id linking back to the request.
+  // Why: Diagnostics need causal request/response linkage.
+  // How: Treat it as opaque correlation metadata.
+  // Example: "asset-stage-request_0eb5dd9b"
+  string parent_id = 101;
+}
+
+// What: Request to resolve one or more server-local paths into artifact refs.
+// Why: The client may have legacy `open_paths` or informational paths that
+// need a usable `download_url`.
+// How: Pass the current root, client session id, and the server-local paths to
+// resolve.
+// Valid Example:
+//   {
+//     "root_path": "/srv/workstations/transit",
+//     "client_session_id": "flutter-shell-a",
+//     "server_paths": ["/srv/workstations/transit/build/report.pdf"]
+//   }
+message ResolveArtifactsRequest {
+  // What: Absolute workstation root path on the server.
+  // Why: Artifact resolution is scoped to one workstation root.
+  // How: Reuse the root selected during bootstrap.
+  // Example: "/srv/workstations/transit"
+  string root_path = 1;
+
+  // What: Stable client session id.
+  // Why: Resolution behavior may depend on session-local host assumptions.
+  // How: Reuse the client session id.
+  // Example: "flutter-shell-a"
+  string client_session_id = 2;
+
+  // What: Server-local paths to resolve.
+  // Why: The host needs the concrete artifact locations to produce refs.
+  // How: Pass raw `open_paths` or other known server-local file paths.
+  // Example: ["/srv/workstations/transit/build/report.pdf"]
+  repeated string server_paths = 3;
+}
+
+// What: Response containing resolved artifact refs.
+// Why: The client needs actionable artifact metadata rather than raw paths.
+// How: Use the returned refs for open/download UI.
+// Valid Example:
+//   {
+//     "artifacts": [
+//       {
+//         "label": "report.pdf",
+//         "server_path": "/srv/workstations/transit/build/report.pdf",
+//         "mime_type": "application/pdf",
+//         "download_url": "http://127.0.0.1:8787/artifacts/abc123/report.pdf",
+//         "can_open_locally": true
+//       }
+//     ],
+//     "trace_id": "asset-resolve-response_17f8cb08",
+//     "parent_id": "asset-resolve-request_51637f2a"
+//   }
+message ResolveArtifactsResponse {
+  // What: Resolved client-actionable artifact refs.
+  // Why: The client needs actionable outputs for open/download behavior.
+  // How: Render or open each returned artifact according to client policy.
+  // Example: [{"label":"report.pdf","server_path":"/srv/workstations/transit/build/report.pdf","mime_type":"application/pdf","download_url":"http://127.0.0.1:8787/artifacts/abc123/report.pdf","can_open_locally":true}]
+  repeated ArtifactRef artifacts = 1;
+
+  // What: Trace id for the response.
+  // Why: Artifact resolution is traceable.
+  // How: Log it when debugging artifact-open issues.
+  // Example: "asset-resolve-response_17f8cb08"
+  string trace_id = 100;
+
+  // What: Parent trace id linking back to the request.
+  // Why: Diagnostics need causal request/response linkage.
+  // How: Treat it as opaque correlation metadata.
+  // Example: "asset-resolve-request_51637f2a"
+  string parent_id = 101;
+}
+
+// What: Asset service for upload staging and artifact resolution.
+// Why: Cross-platform clients need a minimal explicit asset boundary.
+// How: Use `StageMarkdownUpload` for ingress and `ResolveArtifacts` for
+// actionable egress references.
+// Valid Example:
+//   - `StageMarkdownUpload(filename="city-bus.md")`
+//   - use returned `staged_path` in `ApplySubjectAction`
+//   - `ResolveArtifacts(server_paths=["/srv/workstations/transit/build/report.pdf"])`
+service WorkstationAssetService {
+  // What: Stages one markdown upload into the workstation root.
+  // Why: The workflow needs a server-visible path, not a client-local path.
+  // How: Call it after the user picks a markdown file in the client.
+  // Valid Example:
+  //   request: {"root_path": "/srv/workstations/transit", "client_session_id": "flutter-shell-a", "filename": "city-bus.md", "content": "IyBTbWFydCBDaXR5IFRyYXZlbAo="}
+  //   response: {"staged_path": "/srv/workstations/transit/uploads/flutter-shell-a/city-bus.md"}
+  rpc StageMarkdownUpload(StageMarkdownUploadRequest) returns (StageMarkdownUploadResponse);
+
+  // What: Resolves server-local paths into artifact refs.
+  // Why: Web/mobile clients need download/open metadata rather than raw
+  // filesystem paths.
+  // How: Call it when you receive `open_paths` or other informational artifact
+  // paths from the workflow.
+  // Valid Example:
+  //   request: {"root_path": "/srv/workstations/transit", "client_session_id": "flutter-shell-a", "server_paths": ["/srv/workstations/transit/build/report.pdf"]}
+  //   response: {"artifacts": [{"label": "report.pdf", "download_url": "http://127.0.0.1:8787/artifacts/abc123/report.pdf"}]}
+  rpc ResolveArtifacts(ResolveArtifactsRequest) returns (ResolveArtifactsResponse);
+}

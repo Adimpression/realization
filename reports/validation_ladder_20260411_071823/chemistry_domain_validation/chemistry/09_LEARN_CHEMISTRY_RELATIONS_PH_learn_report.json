@@ -1,0 +1,821 @@
+{
+  "artifact_persistence": [
+    {
+      "artifact_id": "artifact-skill-686e9a7ef441",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.001448,
+        "connect_seconds": 0.000476,
+        "ensure_schema_seconds": 0.003788,
+        "existing_payload_batch_lookup_seconds": 4.2e-05,
+        "index_seconds": 0.110839,
+        "prepare_seconds": 0.283279,
+        "total_seconds": 0.400786
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "4af4e5b3ac75cc9d26e85907aeb750001bae7b3e436e8b3a0f99594f8d1236fc",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.021721,
+        "existing_payload_lookup_seconds": 4.666666666666666e-06,
+        "index_seconds": 0.110839,
+        "total_seconds": 0.14716366666666666,
+        "write_rows_seconds": 0.014599
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-09-4d3-ph-as-logar_ecc226",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.001448,
+        "connect_seconds": 0.000476,
+        "ensure_schema_seconds": 0.003788,
+        "existing_payload_batch_lookup_seconds": 4.2e-05,
+        "index_seconds": 0.110839,
+        "prepare_seconds": 0.283279,
+        "total_seconds": 0.400786
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "3bb6eed479dc20522b069913753e583f4a088d1273499cfa4406e4beaed0f053",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.01737,
+        "existing_payload_lookup_seconds": 4.666666666666666e-06,
+        "index_seconds": 0.110839,
+        "total_seconds": 0.14048366666666667,
+        "write_rows_seconds": 0.01227
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-1c552c64a31e",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.001448,
+        "connect_seconds": 0.000476,
+        "ensure_schema_seconds": 0.003788,
+        "existing_payload_batch_lookup_seconds": 4.2e-05,
+        "index_seconds": 0.110839,
+        "prepare_seconds": 0.283279,
+        "total_seconds": 0.400786
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "477185c833f7404f2712f579e375ee219e6d015d649e8f90d045fe591c0d57e3",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.018646,
+        "existing_payload_lookup_seconds": 4.666666666666666e-06,
+        "total_seconds": 0.018650666666666666
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-9e5b732c61ef",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.001448,
+        "connect_seconds": 0.000476,
+        "ensure_schema_seconds": 0.003788,
+        "existing_payload_batch_lookup_seconds": 4.2e-05,
+        "index_seconds": 0.110839,
+        "prepare_seconds": 0.283279,
+        "total_seconds": 0.400786
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "150c4b98c8a243fef0e0bd17d512d6423a64aaeaf898404cfd0aeb74a53e73ad",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.017723,
+        "existing_payload_lookup_seconds": 4.666666666666666e-06,
+        "total_seconds": 0.017727666666666666
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-09-ph-as-logarithm_b44a89",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.001448,
+        "connect_seconds": 0.000476,
+        "ensure_schema_seconds": 0.003788,
+        "existing_payload_batch_lookup_seconds": 4.2e-05,
+        "index_seconds": 0.110839,
+        "prepare_seconds": 0.283279,
+        "total_seconds": 0.400786
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "662953231b3a959e968131c7a332bbc4d3d845ec6d50866024af5ed21cfb0cce",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.028387,
+        "existing_payload_lookup_seconds": 4.666666666666666e-06,
+        "index_seconds": 0.110839,
+        "total_seconds": 0.15779366666666667,
+        "write_rows_seconds": 0.018563
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-09-ph-as-logarithm_5a4049",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.001448,
+        "connect_seconds": 0.000476,
+        "ensure_schema_seconds": 0.003788,
+        "existing_payload_batch_lookup_seconds": 4.2e-05,
+        "index_seconds": 0.110839,
+        "prepare_seconds": 0.283279,
+        "total_seconds": 0.400786
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "70c8495168b87e3ea6001d2556bbee1734c5f152566f28aa168ac57eaee8d1b0",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.016564,
+        "existing_payload_lookup_seconds": 4.666666666666666e-06,
+        "total_seconds": 0.016568666666666666
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-8caa8dd238e6",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.001448,
+        "connect_seconds": 0.000476,
+        "ensure_schema_seconds": 0.003788,
+        "existing_payload_batch_lookup_seconds": 4.2e-05,
+        "index_seconds": 0.110839,
+        "prepare_seconds": 0.283279,
+        "total_seconds": 0.400786
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "bb62b4e33895b764d3d5fd8a483117924d1c6ae185545adcb516dbe122b2cfd8",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.000162,
+        "existing_payload_lookup_seconds": 4.666666666666666e-06,
+        "total_seconds": 0.00016666666666666666
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-1c552c64a31e",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.001448,
+        "connect_seconds": 0.000476,
+        "ensure_schema_seconds": 0.003788,
+        "existing_payload_batch_lookup_seconds": 4.2e-05,
+        "index_seconds": 0.110839,
+        "prepare_seconds": 0.283279,
+        "total_seconds": 0.400786
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "8bd9bf27534b633daf7c2930b55622ba9f3118881fc10ef254e08d6bb29febf0",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.000148,
+        "existing_payload_lookup_seconds": 4.666666666666666e-06,
+        "index_seconds": 0.110839,
+        "total_seconds": 0.12536866666666666,
+        "write_rows_seconds": 0.014377
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-9e5b732c61ef",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.001448,
+        "connect_seconds": 0.000476,
+        "ensure_schema_seconds": 0.003788,
+        "existing_payload_batch_lookup_seconds": 4.2e-05,
+        "index_seconds": 0.110839,
+        "prepare_seconds": 0.283279,
+        "total_seconds": 0.400786
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "e996ff70c2176f48900dd93c44c470f124ae44976950cca5c0d70fc24701cabb",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.000142,
+        "existing_payload_lookup_seconds": 4.666666666666666e-06,
+        "index_seconds": 0.110839,
+        "total_seconds": 0.12504166666666666,
+        "write_rows_seconds": 0.014056
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-1c552c64a31e",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000336,
+        "connect_seconds": 0.000664,
+        "ensure_schema_seconds": 0.003977,
+        "existing_payload_batch_lookup_seconds": 4.2e-05,
+        "index_seconds": 0.044113,
+        "prepare_seconds": 0.14251,
+        "total_seconds": 0.192262
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "477185c833f7404f2712f579e375ee219e6d015d649e8f90d045fe591c0d57e3",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.018621,
+        "existing_payload_lookup_seconds": 7e-06,
+        "index_seconds": 0.044113,
+        "total_seconds": 0.07564799999999999,
+        "write_rows_seconds": 0.012907
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-9e5b732c61ef",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000336,
+        "connect_seconds": 0.000664,
+        "ensure_schema_seconds": 0.003977,
+        "existing_payload_batch_lookup_seconds": 4.2e-05,
+        "index_seconds": 0.044113,
+        "prepare_seconds": 0.14251,
+        "total_seconds": 0.192262
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "150c4b98c8a243fef0e0bd17d512d6423a64aaeaf898404cfd0aeb74a53e73ad",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.017621,
+        "existing_payload_lookup_seconds": 7e-06,
+        "index_seconds": 0.044113,
+        "total_seconds": 0.07367,
+        "write_rows_seconds": 0.011929
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-09-ph-as-logarithm_b44a89",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000336,
+        "connect_seconds": 0.000664,
+        "ensure_schema_seconds": 0.003977,
+        "existing_payload_batch_lookup_seconds": 4.2e-05,
+        "index_seconds": 0.044113,
+        "prepare_seconds": 0.14251,
+        "total_seconds": 0.192262
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "662953231b3a959e968131c7a332bbc4d3d845ec6d50866024af5ed21cfb0cce",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.028305,
+        "existing_payload_lookup_seconds": 7e-06,
+        "total_seconds": 0.028312
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-09-ph-as-logarithm_5a4049",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000336,
+        "connect_seconds": 0.000664,
+        "ensure_schema_seconds": 0.003977,
+        "existing_payload_batch_lookup_seconds": 4.2e-05,
+        "index_seconds": 0.044113,
+        "prepare_seconds": 0.14251,
+        "total_seconds": 0.192262
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "70c8495168b87e3ea6001d2556bbee1734c5f152566f28aa168ac57eaee8d1b0",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.016544,
+        "existing_payload_lookup_seconds": 7e-06,
+        "total_seconds": 0.016551
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-1c552c64a31e",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000336,
+        "connect_seconds": 0.000664,
+        "ensure_schema_seconds": 0.003977,
+        "existing_payload_batch_lookup_seconds": 4.2e-05,
+        "index_seconds": 0.044113,
+        "prepare_seconds": 0.14251,
+        "total_seconds": 0.192262
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "8bd9bf27534b633daf7c2930b55622ba9f3118881fc10ef254e08d6bb29febf0",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 2.6e-05,
+        "existing_payload_lookup_seconds": 7e-06,
+        "total_seconds": 3.2999999999999996e-05
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-9e5b732c61ef",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000336,
+        "connect_seconds": 0.000664,
+        "ensure_schema_seconds": 0.003977,
+        "existing_payload_batch_lookup_seconds": 4.2e-05,
+        "index_seconds": 0.044113,
+        "prepare_seconds": 0.14251,
+        "total_seconds": 0.192262
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "e996ff70c2176f48900dd93c44c470f124ae44976950cca5c0d70fc24701cabb",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 2.3e-05,
+        "existing_payload_lookup_seconds": 7e-06,
+        "total_seconds": 3e-05
+      },
+      "vector_enabled": false
+    }
+  ],
+  "document": {
+    "section_count": 5,
+    "source_path": "/Users/ravindranathakila/service/realized/trials/chemistry/09_LEARN_CHEMISTRY_RELATIONS_PH.md",
+    "title": "Chemistry Relations 09 \u2014 pH as Logarithmic Amount Measure"
+  },
+  "encounter_proposal": {
+    "encounters": [
+      {
+        "bullets": [
+          "input: `q`",
+          "output: `M`"
+        ],
+        "candidate_kinds": [
+          "equation",
+          "template",
+          "definition",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_1",
+        "equation_bearing": true,
+        "equations": [
+          "$$ M = -\\log_{10}(q) $$"
+        ],
+        "heading": "1. Reusable substrate",
+        "paragraphs": [
+          "When a measure is defined as the negative base-10 logarithm of a quantity, the reusable family is logarithmic compression.",
+          "The reusable formula is:",
+          "$$ M = -\\log_{10}(q) $$"
+        ],
+        "path": [
+          "Chemistry Relations 09 \u2014 pH as Logarithmic Amount Measure",
+          "1. Reusable substrate"
+        ],
+        "sections": [
+          "1. Reusable substrate"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `[H^+]`",
+          "output: `pH`"
+        ],
+        "candidate_kinds": [
+          "equation",
+          "template",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_2",
+        "equation_bearing": true,
+        "equations": [
+          "$$ \\mathrm{pH} = -\\log_{10}[H^+] $$"
+        ],
+        "heading": "2. pH from hydrogen ion concentration",
+        "paragraphs": [
+          "Chemistry uses this family in the pH definition.",
+          "The reusable formula is:",
+          "$$ \\mathrm{pH} = -\\log_{10}[H^+] $$"
+        ],
+        "path": [
+          "Chemistry Relations 09 \u2014 pH as Logarithmic Amount Measure",
+          "2. pH from hydrogen ion concentration"
+        ],
+        "sections": [
+          "2. pH from hydrogen ion concentration"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `pH`",
+          "output: `[H^+]`"
+        ],
+        "candidate_kinds": [
+          "equation",
+          "template",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_3",
+        "equation_bearing": true,
+        "equations": [
+          "$$ [H^+] = 10^{-\\mathrm{pH}} $$"
+        ],
+        "heading": "3. Recovering concentration from pH",
+        "paragraphs": [
+          "The inverse relation is:",
+          "$$ [H^+] = 10^{-\\mathrm{pH}} $$",
+          "Where:"
+        ],
+        "path": [
+          "Chemistry Relations 09 \u2014 pH as Logarithmic Amount Measure",
+          "3. Recovering concentration from pH"
+        ],
+        "sections": [
+          "3. Recovering concentration from pH"
+        ]
+      },
+      {
+        "bullets": [
+          "concentration is the direct amount measure",
+          "pH is the logarithmically compressed measure"
+        ],
+        "candidate_kinds": [
+          "logic",
+          "definition",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_4",
+        "equation_bearing": false,
+        "equations": [],
+        "heading": "4. Distinguishing pH from concentration",
+        "paragraphs": [
+          "pH and hydrogen ion concentration are tightly related, but they are not the same representation.",
+          "If a prompt asks for one, do not answer only with the other unless the conversion is made explicit."
+        ],
+        "path": [
+          "Chemistry Relations 09 \u2014 pH as Logarithmic Amount Measure",
+          "4. Distinguishing pH from concentration"
+        ],
+        "sections": [
+          "4. Distinguishing pH from concentration"
+        ]
+      },
+      {
+        "bullets": [],
+        "candidate_kinds": [
+          "logic",
+          "definition",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_5",
+        "equation_bearing": false,
+        "equations": [],
+        "heading": "5. One-sentence summary",
+        "paragraphs": [
+          "Logarithmic compression is the broader reusable substrate; pH is a narrower determinate chemistry law that maps hydrogen ion concentration onto a logarithmic scale."
+        ],
+        "path": [
+          "Chemistry Relations 09 \u2014 pH as Logarithmic Amount Measure",
+          "5. One-sentence summary"
+        ],
+        "sections": [
+          "5. One-sentence summary"
+        ]
+      }
+    ],
+    "proposal_id": "proposal_markdownabilitylearningproposal_4d1dfd",
+    "rationale": "Markdown ability learning proposals are bounded executable-harvest plans grounded in the structural ir.",
+    "source": "llm"
+  },
+  "final_answer": "Learned 9 artifacts from 09_LEARN_CHEMISTRY_RELATIONS_PH.md.",
+  "functionalization_proposal": {
+    "proposal_id": "proposal_markdownfunctionalizationproposal_1d1979",
+    "rationale": "Markdown functionalization proposals are bounded executable extractions from already classified encounters.",
+    "source": "llm"
+  },
+  "ir": {
+    "clusters": [
+      {
+        "bullets": [
+          "input: `q`",
+          "output: `M`"
+        ],
+        "code_blocks": [],
+        "equations": [
+          "$$ M = -\\log_{10}(q) $$"
+        ],
+        "heading": "1. Reusable substrate",
+        "paragraphs": [
+          "When a measure is defined as the negative base-10 logarithm of a quantity, the reusable family is logarithmic compression.",
+          "The reusable formula is:",
+          "$$ M = -\\log_{10}(q) $$"
+        ],
+        "path": [
+          "Chemistry Relations 09 \u2014 pH as Logarithmic Amount Measure",
+          "1. Reusable substrate"
+        ],
+        "sections": [
+          "1. Reusable substrate"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `[H^+]`",
+          "output: `pH`"
+        ],
+        "code_blocks": [],
+        "equations": [
+          "$$ \\mathrm{pH} = -\\log_{10}[H^+] $$"
+        ],
+        "heading": "2. pH from hydrogen ion concentration",
+        "paragraphs": [
+          "Chemistry uses this family in the pH definition.",
+          "The reusable formula is:",
+          "$$ \\mathrm{pH} = -\\log_{10}[H^+] $$"
+        ],
+        "path": [
+          "Chemistry Relations 09 \u2014 pH as Logarithmic Amount Measure",
+          "2. pH from hydrogen ion concentration"
+        ],
+        "sections": [
+          "2. pH from hydrogen ion concentration"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `pH`",
+          "output: `[H^+]`"
+        ],
+        "code_blocks": [],
+        "equations": [
+          "$$ [H^+] = 10^{-\\mathrm{pH}} $$"
+        ],
+        "heading": "3. Recovering concentration from pH",
+        "paragraphs": [
+          "The inverse relation is:",
+          "$$ [H^+] = 10^{-\\mathrm{pH}} $$",
+          "Where:"
+        ],
+        "path": [
+          "Chemistry Relations 09 \u2014 pH as Logarithmic Amount Measure",
+          "3. Recovering concentration from pH"
+        ],
+        "sections": [
+          "3. Recovering concentration from pH"
+        ]
+      },
+      {
+        "bullets": [
+          "concentration is the direct amount measure",
+          "pH is the logarithmically compressed measure"
+        ],
+        "code_blocks": [],
+        "equations": [],
+        "heading": "4. Distinguishing pH from concentration",
+        "paragraphs": [
+          "pH and hydrogen ion concentration are tightly related, but they are not the same representation.",
+          "If a prompt asks for one, do not answer only with the other unless the conversion is made explicit."
+        ],
+        "path": [
+          "Chemistry Relations 09 \u2014 pH as Logarithmic Amount Measure",
+          "4. Distinguishing pH from concentration"
+        ],
+        "sections": [
+          "4. Distinguishing pH from concentration"
+        ]
+      },
+      {
+        "bullets": [],
+        "code_blocks": [],
+        "equations": [],
+        "heading": "5. One-sentence summary",
+        "paragraphs": [
+          "Logarithmic compression is the broader reusable substrate; pH is a narrower determinate chemistry law that maps hydrogen ion concentration onto a logarithmic scale."
+        ],
+        "path": [
+          "Chemistry Relations 09 \u2014 pH as Logarithmic Amount Measure",
+          "5. One-sentence summary"
+        ],
+        "sections": [
+          "5. One-sentence summary"
+        ]
+      }
+    ],
+    "intro_bullets": [],
+    "intro_paragraphs": [
+      "This document teaches one reusable logarithmic-scaling substrate and then reuses it in acid-base chemistry.",
+      "The point is not only to store a formula, but to preserve the reusable semantic relation between a quantity and its logarithmic measure."
+    ],
+    "section_count": 5,
+    "source_path": "/Users/ravindranathakila/service/realized/trials/chemistry/09_LEARN_CHEMISTRY_RELATIONS_PH.md",
+    "title": "Chemistry Relations 09 \u2014 pH as Logarithmic Amount Measure"
+  },
+  "learned_artifacts": [
+    {
+      "artifact_id": "artifact-skill-686e9a7ef441",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Logarithmic Compression?",
+      "related_artifact_ids": [],
+      "representation": "yaml",
+      "source_sections": [],
+      "title": "Chemistry Relations 09 \u2014 pH as Logarithmic Amount Measure / Chemistry Relations 09 pH as Logarithmic Amount Measure"
+    },
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-09-4d3-ph-as-logar_ecc226",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Logarithmic Compression?",
+      "related_artifact_ids": [],
+      "representation": "yaml",
+      "source_sections": [
+        "1. Reusable substrate"
+      ],
+      "title": "Chemistry Relations 09 4d3 pH as Logarithmic Amount Measure / Logarithmic Compression"
+    },
+    {
+      "artifact_id": "artifact-skill-1c552c64a31e",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is pH from hydrogen ion concentration?",
+      "related_artifact_ids": [
+        "artifact_knowledge-chemistry-relations-09-4d3-ph-as-logar_ecc226"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "2. pH from hydrogen ion concentration"
+      ],
+      "title": "Chemistry Relations 09 \u2014 pH as Logarithmic Amount Measure / pH from hydrogen ion concentration"
+    },
+    {
+      "artifact_id": "artifact-skill-9e5b732c61ef",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Recovering concentration from pH?",
+      "related_artifact_ids": [
+        "artifact_knowledge-chemistry-relations-09-4d3-ph-as-logar_ecc226"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "3. Recovering concentration from pH"
+      ],
+      "title": "Chemistry Relations 09 \u2014 pH as Logarithmic Amount Measure / Recovering concentration from pH"
+    },
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-09-ph-as-logarithm_b44a89",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is 4. Distinguishing pH from concentration?",
+      "related_artifact_ids": [
+        "artifact_knowledge-chemistry-relations-09-4d3-ph-as-logar_ecc226"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "4. Distinguishing pH from concentration"
+      ],
+      "title": "Chemistry Relations 09 \u2014 pH as Logarithmic Amount Measure / Chemistry Relations 09 pH as Logarithmic Amount Measure / Distinguishing pH from concentration"
+    },
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-09-ph-as-logarithm_5a4049",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Logarithmic Compression?",
+      "related_artifact_ids": [
+        "artifact_knowledge-chemistry-relations-09-4d3-ph-as-logar_ecc226"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "5. One-sentence summary"
+      ],
+      "title": "Chemistry Relations 09 \u2014 pH as Logarithmic Amount Measure / Logarithmic Compression"
+    },
+    {
+      "artifact_id": "artifact-skill-8caa8dd238e6",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate M from q?",
+      "related_artifact_ids": [],
+      "representation": "python_script",
+      "source_sections": [
+        "1. Reusable substrate"
+      ],
+      "title": "Chemistry Relations 09 \u2014 pH as Logarithmic Amount Measure / Python Ability"
+    },
+    {
+      "artifact_id": "artifact-skill-1c552c64a31e",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate pH from H_plus?",
+      "related_artifact_ids": [],
+      "representation": "python_script",
+      "source_sections": [
+        "2. pH from hydrogen ion concentration"
+      ],
+      "title": "Chemistry Relations 09 \u2014 pH as Logarithmic Amount Measure / Ph From Hydrogen Ion Concentration"
+    },
+    {
+      "artifact_id": "artifact-skill-9e5b732c61ef",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate H_plus from pH?",
+      "related_artifact_ids": [],
+      "representation": "python_script",
+      "source_sections": [
+        "3. Recovering concentration from pH"
+      ],
+      "title": "Chemistry Relations 09 \u2014 pH as Logarithmic Amount Measure / Recovering Concentration From Ph"
+    }
+  ],
+  "learned_count": 9,
+  "learning_context": {
+    "applied_delta_count": 7,
+    "canonical_title": "Chemistry Relations 09 \u2014 pH as Logarithmic Amount Measure",
+    "context_path": "/Users/ravindranathakila/service/realized/trials/chemistry/corpus/chemistry-relations-09-ph-as-logarithmic-amount-measure/context.json",
+    "corpus_root": "/Users/ravindranathakila/service/realized/trials/chemistry",
+    "delta_id": "delta_chemistry-relations-09-ph-as-logarithmic-amount-_4a1f7f",
+    "delta_path": "/Users/ravindranathakila/service/realized/trials/chemistry/corpus/chemistry-relations-09-ph-as-logarithmic-amount-measure/deltas/delta_chemistry-relations-09-ph-as-logarithmic-amount-_4a1f7f.json",
+    "matched_existing_subject_id": "chemistry-relations-09-ph-as-logarithmic-amount-measure",
+    "source_id": "source_users-ravindranathakila-service-realized-trials-_9c7beeda88",
+    "source_record_path": "/Users/ravindranathakila/service/realized/trials/chemistry/corpus/chemistry-relations-09-ph-as-logarithmic-amount-measure/sources/source_users-ravindranathakila-service-realized-trials-_9c7beeda88.json",
+    "subject_family": "Chemistry Relations 09 \u2014 pH as Logarithmic Amount Measure",
+    "subject_id": "chemistry-relations-09-ph-as-logarithmic-amount-measure",
+    "unit_count": 9
+  },
+  "parsing_failures": [],
+  "proposal": {
+    "proposal_id": "proposal_markdownlearningproposal_6592c3",
+    "rationale": "Markdown learning proposals are bounded ingestion plans for external-source harvest and remain governed before artifact admission.",
+    "source": "llm"
+  },
+  "run_id": "run_b5e3e697_9b20ee",
+  "run_outcome": "completed",
+  "supported_executors": [
+    "python3"
+  ]
+}

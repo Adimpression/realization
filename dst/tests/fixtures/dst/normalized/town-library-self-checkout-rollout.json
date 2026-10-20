@@ -1,0 +1,168 @@
+{
+  "schema_version": "dst_normalized_case.v1",
+  "fixture_id": "town-library-self-checkout-rollout",
+  "source_ref": "dst/Town library self-checkout rollout.md",
+  "context": {
+    "system_name": "Town library self-checkout rollout",
+    "decision_problem": "Choose how to introduce self-checkout kiosks without excluding patrons who still need staffed help or disrupting branch operations.",
+    "evaluation_state_id": "s0",
+    "planning_horizon": "",
+    "notes": [
+      "The publication question is which rollout pattern the library should approve, not whether kiosks are desirable in the abstract."
+    ]
+  },
+  "actors": [
+    {"id": "a1", "name": "library administration", "roles": ["decision_maker", "coordinator"], "can_decide": true},
+    {"id": "a2", "name": "branch staff", "roles": ["operator"], "can_decide": false},
+    {"id": "a3", "name": "kiosk vendor", "roles": ["provider"], "can_decide": false},
+    {"id": "a4", "name": "accessibility office", "roles": ["oversight"], "can_decide": true},
+    {"id": "a5", "name": "patrons", "roles": ["beneficiary"], "can_decide": false}
+  ],
+  "objectives": [
+    {"id": "o1", "name": "reduce checkout wait times", "shared": true, "mandatory": false, "pursued_by": ["a1", "a2"]},
+    {"id": "o2", "name": "keep checkout accessible for patrons who need staff help", "shared": true, "mandatory": true, "pursued_by": ["a1", "a2", "a4"]},
+    {"id": "o3", "name": "avoid branch disruption during rollout", "shared": true, "mandatory": true, "pursued_by": ["a1", "a2"]}
+  ],
+  "capabilities": [
+    {"id": "k1", "name": "self-checkout kiosks", "kind": "target", "advances_objectives": ["o1"], "controlled_by": ["a1", "a3"], "benefits_to": ["a5"], "costs_to": ["a1"], "risks_to": ["a5"]},
+    {"id": "k2", "name": "staffed assistance desk during kiosk use", "kind": "support", "advances_objectives": ["o2", "o3"], "controlled_by": ["a2"], "benefits_to": ["a5"], "costs_to": ["a2"], "risks_to": []},
+    {"id": "k3", "name": "accessible kiosk prompts and large-text guidance", "kind": "accessibility", "advances_objectives": ["o2"], "controlled_by": ["a3", "a4"], "benefits_to": ["a5"], "costs_to": ["a1"], "risks_to": []},
+    {"id": "k4", "name": "kiosk-first checkout with minimal staffed support", "kind": "performance", "advances_objectives": ["o1"], "controlled_by": ["a1", "a3"], "benefits_to": ["a5"], "costs_to": ["a2"], "risks_to": ["a5"]}
+  ],
+  "dependencies": [
+    {"id": "d1", "name": "vendor installation readiness"},
+    {"id": "d2", "name": "staff training complete"},
+    {"id": "d3", "name": "accessibility review signed off"}
+  ],
+  "constraints": [
+    {"id": "q1", "name": "branches must stay open during rollout", "kind": "hard"},
+    {"id": "q2", "name": "patrons who need staff help must still be served", "kind": "hard"},
+    {"id": "q3", "name": "budget only allows staged installation", "kind": "hard"}
+  ],
+  "boundaries": [
+    {"id": "b1", "name": "library-to-vendor boundary"},
+    {"id": "b2", "name": "accessibility-to-service-design boundary"}
+  ],
+  "states": [
+    {
+      "id": "s0",
+      "name": "staffed checkout only",
+      "is_current": true,
+      "is_target": false,
+      "available_capabilities": [],
+      "operational_capabilities": [],
+      "satisfied_dependencies": ["d1", "d2", "d3"],
+      "active_constraints": ["q1", "q2", "q3"],
+      "boundary_friction": [
+        {"boundary_id": "b1", "present": true},
+        {"boundary_id": "b2", "present": true}
+      ]
+    },
+    {
+      "id": "s2",
+      "name": "multi-branch kiosks with staffed support",
+      "is_current": false,
+      "is_target": true,
+      "available_capabilities": ["k1", "k2", "k3"],
+      "operational_capabilities": ["k1", "k2", "k3"],
+      "satisfied_dependencies": ["d1", "d2", "d3"],
+      "active_constraints": ["q1", "q2", "q3"],
+      "boundary_friction": [
+        {"boundary_id": "b1", "present": true}
+      ]
+    },
+    {
+      "id": "s3",
+      "name": "kiosk-first checkout with minimal staffed support",
+      "is_current": false,
+      "is_target": false,
+      "available_capabilities": ["k1", "k4"],
+      "operational_capabilities": ["k1", "k4"],
+      "satisfied_dependencies": ["d1", "d2", "d3"],
+      "active_constraints": ["q1", "q2", "q3"],
+      "boundary_friction": [
+        {"boundary_id": "b1", "present": true},
+        {"boundary_id": "b2", "present": true}
+      ]
+    }
+  ],
+  "capability_requirements": [
+    {"capability_id": "k1", "required_dependencies": ["d1", "d2"], "limiting_constraints": ["q1", "q3"], "crossed_boundaries": ["b1"]},
+    {"capability_id": "k2", "required_dependencies": ["d2"], "limiting_constraints": ["q1", "q2"], "crossed_boundaries": []},
+    {"capability_id": "k3", "required_dependencies": ["d3"], "limiting_constraints": ["q2"], "crossed_boundaries": ["b2"]},
+    {"capability_id": "k4", "required_dependencies": ["d1", "d2"], "limiting_constraints": ["q1", "q2", "q3"], "crossed_boundaries": ["b1", "b2"]}
+  ],
+  "capability_admissibility": [
+    {"capability_id": "k1", "state_id": "s0", "admissible": true, "reasons": []},
+    {"capability_id": "k2", "state_id": "s0", "admissible": true, "reasons": []},
+    {"capability_id": "k3", "state_id": "s0", "admissible": true, "reasons": []},
+    {"capability_id": "k4", "state_id": "s0", "admissible": false, "reasons": ["staffed fallback removed too early"]}
+  ],
+  "transitions": [
+    {
+      "id": "t1",
+      "name": "Branch pilot with staffed support",
+      "source_state_id": "s0",
+      "target_state_id": "s2",
+      "changes_capabilities": ["k1", "k2", "k3"],
+      "required_dependencies": ["d1", "d2", "d3"],
+      "constraining_constraints": ["q1", "q2", "q3"],
+      "crossed_boundaries": ["b1", "b2"]
+    },
+    {
+      "id": "t2",
+      "name": "Kiosk-first cutover",
+      "source_state_id": "s0",
+      "target_state_id": "s3",
+      "changes_capabilities": ["k1", "k4"],
+      "required_dependencies": ["d1", "d2", "d3"],
+      "constraining_constraints": ["q1", "q2", "q3"],
+      "crossed_boundaries": ["b1", "b2"]
+    }
+  ],
+  "transition_admissibility": [
+    {"transition_id": "t1", "state_id": "s0", "admissible": true, "reasons": []},
+    {"transition_id": "t2", "state_id": "s0", "admissible": false, "reasons": ["accessibility and staffed-service standard would be weakened too early"]}
+  ],
+  "decisions": [
+    {
+      "id": "x1",
+      "name": "Branch pilot with staffed support",
+      "selects_transition_id": "t1",
+      "assignments": [
+        {"actor_id": "a1", "capability_id": "k1"},
+        {"actor_id": "a1", "capability_id": "k2"},
+        {"actor_id": "a1", "capability_id": "k3"}
+      ],
+      "time_label": ""
+    },
+    {
+      "id": "x2",
+      "name": "Kiosk-first cutover",
+      "selects_transition_id": "t2",
+      "assignments": [
+        {"actor_id": "a1", "capability_id": "k1"},
+        {"actor_id": "a1", "capability_id": "k4"}
+      ],
+      "time_label": ""
+    }
+  ],
+  "decision_status": [
+    {"decision_id": "x1", "state_id": "s0", "valid": true, "executable": true, "reasons": []},
+    {"decision_id": "x2", "state_id": "s0", "valid": false, "executable": false, "reasons": ["selected_transition_inadmissible:t2"]}
+  ],
+  "coordination_requirements": [
+    {"type": "transition", "target_id": "t1", "required": true, "actors": ["a1", "a2", "a3", "a4"], "basis": "explicit_cross_boundary_requirement"}
+  ],
+  "risk_indicators": [
+    {"target_type": "transition", "target_id": "t2", "state_id": "s0", "risks": ["accessibility_regression", "service_continuity_loss"]}
+  ],
+  "fallbacks": [],
+  "candidate_sets": {
+    "candidate_transition_ids_from_current_state": ["t1", "t2"],
+    "candidate_decision_ids_from_current_state": ["x1", "x2"]
+  },
+  "assumptions": [],
+  "ambiguities": [],
+  "missing_information": []
+}

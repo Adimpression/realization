@@ -1,0 +1,25 @@
+{
+  "assistant_text": "{'status': 'ok', 'model': 'text-embedding-3-small', 'dimensions': 4, 'embedding': [0.11, 0.22, 0.33, 0.44]}",
+  "model": "workstation-direct-composition",
+  "rounds": 0,
+  "task_contract": {
+    "semantic_unit": "Create an embedding with the OpenAI SDK using model `text-embedding-3-small` and text `semantic search`."
+  },
+  "tool_receipts": [
+    {
+      "arguments": {
+        "skill_title": "SDK User Commands 02 \u2014 OpenAI Embedding / Sdk User Commands 02 Openai Embedding",
+        "target": ""
+      },
+      "name": "ws.skill.invoke",
+      "result": {
+        "answer": "{'status': 'ok', 'model': 'text-embedding-3-small', 'dimensions': 4, 'embedding': [0.11, 0.22, 0.33, 0.44]}",
+        "error": "",
+        "error_type": "",
+        "executor_framework": "python3",
+        "skill_title": "SDK User Commands 02 \u2014 OpenAI Embedding / Sdk User Commands 02 Openai Embedding",
+        "status": "ok"
+      }
+    }
+  ]
+}

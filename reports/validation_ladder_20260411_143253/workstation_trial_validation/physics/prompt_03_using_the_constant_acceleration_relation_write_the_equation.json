@@ -1,0 +1,9 @@
+{
+  "assistant_text": "- Equation updating velocity (constant acceleration): v = u + a t\n  - u: initial velocity at t = 0\n  - a: constant acceleration\n  - t: elapsed time\n  - v: velocity at time t\n\n- State-plus-change (discrete-time) form:\n  - v_next = v_now + \u0394v, where \u0394v = a \u0394t\n  - If we use t as the elapsed time step, this becomes v_{k+1} = v_k + a \u0394t_k\n  - Here the \u201cstate\u201d is velocity (v), and the \u201cchange\u201d is \u0394v = a \u0394t\n\n- Continuous-time interpretation (for completeness):\n  - dv/dt = a, integrating with constant a gives v(t) = v(0) + a t\n\nIn short, the velocity update is a state-plus-change update: new velocity equals old velocity plus the change \u0394v due to acceleration over the time step.",
+  "model": "gpt-5-nano-2025-08-07",
+  "rounds": 1,
+  "task_contract": {
+    "semantic_unit": "Using the constant-acceleration relation, write the equation that updates velocity from initial velocity, acceleration, and time, and identify the \u201cstate-plus-change\u201d structure."
+  },
+  "tool_receipts": []
+}

@@ -1,0 +1,21 @@
+{
+  "bundleName": "product-model-schema-bundle",
+  "version": "2.0.0",
+  "createdAt": "2026-05-16T00:00:00Z",
+  "files": [
+    "README.md",
+    "product-model.schema.json",
+    "product-model.template.json",
+    "lexicon.md",
+    "semantic-rules.md",
+    "update-protocol.md",
+    "docs/forming-valid-product-model-json.md",
+    "examples/simple-library-reservation.json",
+    "examples/intermediate-cafe-pickup-order.json",
+    "examples/advanced-online-return-refund.json",
+    "examples/README.md",
+    "validation/semantic-validator-rules.json",
+    "validation/compatibility-checks.json",
+    "bundle-manifest.json"
+  ]
+}

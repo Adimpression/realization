@@ -1,0 +1,138 @@
+{
+  "fixture_id": "community-clinic-appointment-reminders",
+  "title": "Community clinic appointment reminders",
+  "title_key": "community-clinic-appointment-reminders",
+  "source_ref": "dst/Community clinic appointment reminders.md",
+  "summary": "A clinic network wants fewer missed appointments.",
+  "sections": [
+    {
+      "key": "situation",
+      "title": "Situation",
+      "narrative": "A clinic network wants fewer missed appointments.\n\nToday front-desk staff call patients one by one. The clinics want a reminder system that reaches people earlier, but they cannot assume every patient uses the mobile app or reads messages in English.",
+      "entries": []
+    },
+    {
+      "key": "actors",
+      "title": "Actors",
+      "narrative": "",
+      "entries": [
+        {"code": "a1", "text": "clinic operations lead"},
+        {"code": "a2", "text": "front-desk staff"},
+        {"code": "a3", "text": "messaging vendor"},
+        {"code": "a4", "text": "privacy officer"},
+        {"code": "a5", "text": "patients"}
+      ]
+    },
+    {
+      "key": "objectives",
+      "title": "Objectives",
+      "narrative": "",
+      "entries": [
+        {"code": "o1", "text": "reduce missed appointments"},
+        {"code": "o2", "text": "keep reminders accessible across language and device differences"},
+        {"code": "o3", "text": "protect consent and privacy rules"}
+      ]
+    },
+    {
+      "key": "capabilities",
+      "title": "Capabilities",
+      "narrative": "",
+      "entries": [
+        {"code": "k1", "text": "automated SMS reminders"},
+        {"code": "k2", "text": "multilingual reminder templates"},
+        {"code": "k3", "text": "call fallback for high-risk visits"},
+        {"code": "k4", "text": "portal-app-only reminders"}
+      ]
+    },
+    {
+      "key": "dependencies",
+      "title": "Dependencies",
+      "narrative": "",
+      "entries": [
+        {"code": "d1", "text": "patient phone numbers are current"},
+        {"code": "d2", "text": "consent records are complete"},
+        {"code": "d3", "text": "multilingual content approved"},
+        {"code": "d4", "text": "follow-up lists reach front-desk staff"}
+      ]
+    },
+    {
+      "key": "constraints",
+      "title": "Constraints",
+      "narrative": "",
+      "entries": [
+        {"code": "q1", "text": "patients without smartphones must still receive reminders"},
+        {"code": "q2", "text": "reminder messages require recorded consent"},
+        {"code": "q3", "text": "the front desk cannot absorb unlimited manual callback work"}
+      ]
+    },
+    {
+      "key": "boundaries",
+      "title": "Boundaries",
+      "narrative": "",
+      "entries": [
+        {"code": "b1", "text": "clinic-to-vendor messaging boundary"},
+        {"code": "b2", "text": "privacy-to-patient-communication boundary"},
+        {"code": "b3", "text": "digital channel-to-manual follow-up boundary"}
+      ]
+    },
+    {
+      "key": "states",
+      "title": "States",
+      "narrative": "",
+      "entries": [
+        {"code": "s0", "text": "manual phone reminders only"},
+        {"code": "s1", "text": "SMS reminders only"},
+        {"code": "s2", "text": "SMS reminders with multilingual templates and call fallback"},
+        {"code": "s3", "text": "portal-app-only reminders"}
+      ]
+    },
+    {
+      "key": "transitions",
+      "title": "Transitions",
+      "narrative": "",
+      "entries": [
+        {"code": "t1", "text": "launch SMS reminders with multilingual templates and call fallback"},
+        {"code": "t2", "text": "launch SMS reminders without follow-up fallback"},
+        {"code": "t3", "text": "move to portal-app-only reminders"}
+      ]
+    }
+  ],
+  "candidate_paths": [
+    {
+      "title": "Path A: inclusive reminder rollout",
+      "parent_title": "Candidate paths",
+      "route_expression": "s0 -> s2",
+      "narrative": "This path automates the first reminder but keeps a manual safety net for patients who need it.",
+      "highlights": [
+        "`s0 -> s2`",
+        "use SMS for scale",
+        "add multilingual templates",
+        "keep call fallback for high-risk or unreachable patients"
+      ]
+    },
+    {
+      "title": "Path B: lean SMS rollout",
+      "parent_title": "Candidate paths",
+      "route_expression": "s0 -> s1",
+      "narrative": "This path is operationally lighter than manual calling, but it is not ready if the clinics cannot guarantee callback coverage for people who miss or cannot read the first message.",
+      "highlights": [
+        "`s0 -> s1`",
+        "use SMS as the main reminder channel",
+        "depend on current phone and consent records",
+        "leave follow-up capacity thin"
+      ]
+    },
+    {
+      "title": "Path C: portal-only reminders",
+      "parent_title": "Candidate paths",
+      "route_expression": "s0 -> s3",
+      "narrative": "This path is simple on paper, but it fails the accessibility and device-coverage standard.",
+      "highlights": [
+        "`s0 -> s3`",
+        "use the app portal as the reminder channel",
+        "reduce manual and SMS overhead",
+        "exclude patients who do not reliably use the portal"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "assistant_text": "{\"answer\": \"executed\", \"notes\": [], \"result\": {\"status\": \"executed\"}, \"status\": \"ok\"}",
+  "model": "workstation-direct-composition",
+  "rounds": 0,
+  "task_contract": {
+    "semantic_unit": "Copy `device setup complete` to the clipboard."
+  },
+  "tool_receipts": [
+    {
+      "arguments": {
+        "skill_title": "Device User Capabilities 09 \u2014 Copy Text To Clipboard / Device User Capabilities 09 Copy Text To Clipboard",
+        "target": ""
+      },
+      "name": "ws.skill.invoke",
+      "result": {
+        "answer": "{\"answer\": \"executed\", \"notes\": [], \"result\": {\"status\": \"executed\"}, \"status\": \"ok\"}",
+        "error": "",
+        "error_type": "",
+        "executor_framework": "bash",
+        "skill_title": "Device User Capabilities 09 \u2014 Copy Text To Clipboard / Device User Capabilities 09 Copy Text To Clipboard",
+        "status": "ok"
+      }
+    }
+  ]
+}

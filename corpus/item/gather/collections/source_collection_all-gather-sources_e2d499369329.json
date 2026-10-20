@@ -1,0 +1,14 @@
+{
+  "collection_id": "source_collection_all-gather-sources_e2d499369329",
+  "created_at_epoch_ms": 1777695862604,
+  "description": "The full staged-source set for this subject before corpus admission.",
+  "metadata": {
+    "collection_kind": "all_gather_sources"
+  },
+  "query_text": "",
+  "schema": "source_collection.v1",
+  "staged_source_ids": [],
+  "subject_id": "item",
+  "title": "All Gather Sources",
+  "updated_at_epoch_ms": 1777695862604
+}

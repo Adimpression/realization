@@ -1,0 +1,104 @@
+{
+  "version": "2.0.0",
+  "purpose": "Machine-checkable semantic validation rules for Product Self-Representation models.",
+  "rules": [
+    {
+      "ruleId": "SEM-001",
+      "severity": "error",
+      "appliesTo": "duties",
+      "statement": "Every duty must map to at least one real-world object and one real-world interaction.",
+      "machineCheckHint": "Check usesRealWorldObjectIds and usesRealWorldInteractionIds resolve to existing artifacts."
+    },
+    {
+      "ruleId": "SEM-002",
+      "severity": "error",
+      "appliesTo": "journeys",
+      "statement": "Every journey must fulfill exactly one primary duty.",
+      "machineCheckHint": "journey.dutyId must resolve to one duty."
+    },
+    {
+      "ruleId": "SEM-003",
+      "severity": "error",
+      "appliesTo": "journeys",
+      "statement": "Every journey step ID must reference a GWT step whose journeyId matches.",
+      "machineCheckHint": "Join journey.stepIds to steps."
+    },
+    {
+      "ruleId": "SEM-004",
+      "severity": "error",
+      "appliesTo": "critical journeys",
+      "statement": "Every journey for a high or critical duty must have at least one UX SLI and SLO.",
+      "machineCheckHint": "Resolve duty.criticality and check journey.sliIds and sloIds."
+    },
+    {
+      "ruleId": "SEM-005",
+      "severity": "error",
+      "appliesTo": "golden traces",
+      "statement": "Every golden trace must validate named steps and must not violate invariants or SLOs.",
+      "machineCheckHint": "Check validatesStepIds non-empty and violates* empty."
+    },
+    {
+      "ruleId": "SEM-006",
+      "severity": "error",
+      "appliesTo": "anti-golden traces",
+      "statement": "Every anti-golden trace must violate a named step, invariant, or SLO.",
+      "machineCheckHint": "Check at least one violates* array is non-empty."
+    },
+    {
+      "ruleId": "SEM-007",
+      "severity": "error",
+      "appliesTo": "network boundaries",
+      "statement": "Under-1s real-world interactions should not be network-separated unless explicitly approved.",
+      "machineCheckHint": "Flag realWorldLatencyClass=under-1s and separationAllowed=true."
+    },
+    {
+      "ruleId": "SEM-008",
+      "severity": "error",
+      "appliesTo": "updates",
+      "statement": "Weakening or breaking changes must include a migration plan and affected artifacts.",
+      "machineCheckHint": "Check compatibility and migrationPlan."
+    },
+    {
+      "ruleId": "SEM-009",
+      "severity": "error",
+      "appliesTo": "all references",
+      "statement": "All referenced IDs must resolve to exactly one defined artifact.",
+      "machineCheckHint": "Build ID index and check all *Ids fields."
+    },
+    {
+      "ruleId": "SEM-010",
+      "severity": "warning",
+      "appliesTo": "language",
+      "statement": "Prefer real-world domain language over implementation-only terms.",
+      "machineCheckHint": "Lint for table, endpoint, service, queue unless domain-approved."
+    },
+    {
+      "ruleId": "SEM-011",
+      "severity": "error",
+      "appliesTo": "journey step sequencing",
+      "statement": "Within a journey, step.sequence values must be unique and must match the order implied by journey.stepIds.",
+      "machineCheckHint": "For each journey, sort steps by sequence and compare to journey.stepIds. Ensure no duplicate sequences."
+    },
+    {
+      "ruleId": "SEM-012",
+      "severity": "error",
+      "appliesTo": "network boundaries",
+      "statement": "If a boundary is under-1s and separationAllowed=true, exceptionApproval must exist and be approved.",
+      "machineCheckHint": "Check boundary.realWorldLatencyClass=under-1s AND separationAllowed=true => exceptionApproval.approvalStatus=approved."
+    },
+    {
+      "ruleId": "SEM-013",
+      "severity": "warning",
+      "appliesTo": "journey flow graphs",
+      "statement": "If a journey has non-empty variants or failureBoundaries, provide journey.flow to make branching decidable.",
+      "machineCheckHint": "If len(variants)+len(failureBoundaries)>0, warn when flow is missing."
+    },
+    {
+      "ruleId": "SEM-014",
+      "severity": "warning",
+      "appliesTo": "structured state transitions",
+      "statement": "Prefer step.stateTransitions for steps that change a real-world object's lifecycle state.",
+      "machineCheckHint": "Heuristic: if thenAssertions mention state change keywords, recommend stateTransitions. If provided, validate states exist in object lifecycleStates."
+    }
+  ]
+}

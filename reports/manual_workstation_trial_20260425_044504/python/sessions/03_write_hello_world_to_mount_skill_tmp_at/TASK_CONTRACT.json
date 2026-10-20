@@ -1,0 +1,24 @@
+{
+  "assumptions": [],
+  "boundary_shape": [
+    "c*",
+    "a*",
+    "d*"
+  ],
+  "completion_conditions": [
+    "requested result is returned to the user"
+  ],
+  "input_values": {},
+  "missing_requirements": [],
+  "output_values": [
+    "result"
+  ],
+  "read_references": [],
+  "semantic_unit": "Write `hello world` to mount `skill_tmp` at `python-suite.txt`.",
+  "side_effects": [
+    "write file"
+  ],
+  "write_targets": [
+    "external write target"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "created_at": "2026-04-24T20:55:32.192821+00:00",
+  "metadata": {
+    "source_kind": "workstation_world",
+    "workspace_name": "main",
+    "workspace_path": "/Users/ravindranathakila/service/realized"
+  },
+  "mounts": [
+    {
+      "access_mode": "read_write",
+      "kind": "workspace",
+      "metadata": {},
+      "mount_path": "/world/mounts/main",
+      "name": "main",
+      "source": "/Users/ravindranathakila/service/realized"
+    },
+    {
+      "access_mode": "read_write",
+      "kind": "scratch",
+      "metadata": {},
+      "mount_path": "/world/scratch",
+      "name": "scratch",
+      "source": "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/symbolsearch/world/scratch"
+    },
+    {
+      "access_mode": "read_write",
+      "kind": "output",
+      "metadata": {},
+      "mount_path": "/world/output",
+      "name": "output",
+      "source": "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/symbolsearch/world/output"
+    }
+  ],
+  "root_path": "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/symbolsearch/world",
+  "world_id": "bworld_66e0d74881d0"
+}

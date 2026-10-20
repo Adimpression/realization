@@ -1,0 +1,9 @@
+{
+  "assistant_text": "- Core relation: mass = moles \u00d7 molar mass\n  - m (grams) = n (moles) \u00d7 M (g/mol)\n  - M is the molar mass of the substrate (a fixed property of the substance)\n\n- What you need to know\n  - n: amount of substance in moles\n  - M: molar mass in g/mol\n  - Then compute m by multiplying n by M\n  - If you know mass and molar mass, you can find moles via n = m / M\n  - If you prefer kilograms, convert units accordingly: m (kg) = n \u00d7 M (kg/mol)\n\n- Example\n  - Substrate with molar mass M = 180.16 g/mol (glucose)\n  - If 0.25 mol are involved in a cycle: m = 0.25 mol \u00d7 180.16 g/mol \u2248 45.04 g\n  - If you have 60 g of substrate and want moles: n = 60 g / 180.16 g/mol \u2248 0.333 mol\n\n- Relation to a reusable substrate\n  - The molar mass M is a fixed property, so the same amount of substance (in moles) always corresponds to the same mass via m = nM.\n  - In a cycle where the substrate is reused, the same mass-per-mole relationship applies to each cycle.\n  - Practical perspective:\n    - If you use n_consumed moles in a cycle, you\u2019ve required m_consumed = n_consumed \u00d7 M grams of substrate.\n    - After the cycle, if a fraction r of the substrate is recovered, you recover m_recovered = r \u00d7 m_consumed grams, which corresponds to n_recovered = m_recovered / M moles.\n    - The overall mass balance for reuse is: initial mass used = recovered mass + any losses, with the per-cycle mass-to-moles relation governed by M.\n\nIf you\u2019d like, I can plug in a specific substrate and numbers you\u2019re working with to show a complete mass-budget for a reuse cycle.",
+  "model": "gpt-5-nano-2025-08-07",
+  "rounds": 1,
+  "task_contract": {
+    "semantic_unit": "Given the relation for molar mass, express how to compute mass from moles and molar mass, and explain how this relates to the reusable substrate."
+  },
+  "tool_receipts": []
+}

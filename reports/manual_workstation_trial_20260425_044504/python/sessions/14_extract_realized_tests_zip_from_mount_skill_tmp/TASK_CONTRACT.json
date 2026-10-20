@@ -1,0 +1,18 @@
+{
+  "assumptions": [],
+  "boundary_shape": [
+    "d*"
+  ],
+  "completion_conditions": [
+    "requested result is returned to the user"
+  ],
+  "input_values": {},
+  "missing_requirements": [],
+  "output_values": [
+    "result"
+  ],
+  "read_references": [],
+  "semantic_unit": "Extract `realized-tests.zip` from mount `skill_tmp` into mount `skill_output` at `extracted-tests`.",
+  "side_effects": [],
+  "write_targets": []
+}

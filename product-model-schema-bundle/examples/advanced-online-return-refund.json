@@ -1,0 +1,1133 @@
+{
+  "schemaVersion": "2.0.0",
+  "modelId": "model.online-return-refund",
+  "modelName": "Online Return and Refund Product Model",
+  "modelPurpose": "Represents a long-running return and refund duty across eligibility, parcel movement, warehouse inspection, refund issuance, and truthful customer status.",
+  "createdAt": "2026-05-16T00:00:00Z",
+  "updatedAt": "2026-05-16T00:00:00Z",
+  "product": {
+    "productId": "product.online-store",
+    "name": "Online Store",
+    "description": "A product that lets customers return eligible delivered items and receive refunds according to policy.",
+    "domain": "Online retail returns"
+  },
+  "lexicon": [
+    {
+      "termId": "term.duty",
+      "term": "Duty",
+      "definition": "A world-anchored obligation or capability the product must support, expressed as the KR title.",
+      "allowedAliases": [
+        "Product Duty",
+        "Obligated Work"
+      ],
+      "forbiddenAliases": [
+        "Persona",
+        "User Type"
+      ],
+      "examples": [
+        "Reserve an available book copy for pickup",
+        "Prepare a paid cafe order for customer pickup",
+        "Return an eligible delivered item and issue the correct refund"
+      ]
+    },
+    {
+      "termId": "term.user-journey",
+      "term": "User Journey",
+      "definition": "The canonical end-to-end path that fulfills one primary duty, expressed as the KR description.",
+      "allowedAliases": [
+        "Journey",
+        "Duty Journey"
+      ],
+      "forbiddenAliases": [
+        "Screen Flow Only",
+        "Persona Story"
+      ],
+      "examples": [
+        "A member searches for a book, reserves a copy, and receives pickup details."
+      ]
+    },
+    {
+      "termId": "term.gwt-step",
+      "term": "Given-When-Then Step",
+      "definition": "An atomic behavioral transition with preconditions, trigger, and observable postconditions.",
+      "allowedAliases": [
+        "GWT",
+        "Behavioral Step"
+      ],
+      "forbiddenAliases": [
+        "Implementation Task",
+        "Engineering Ticket"
+      ],
+      "examples": [
+        "Given a copy is available, when a member reserves it, then one active hold is created."
+      ]
+    },
+    {
+      "termId": "term.ux-sli",
+      "term": "UX SLI",
+      "definition": "A measurable indicator of user-experienced quality, such as latency, correctness, freshness, or recoverability.",
+      "allowedAliases": [
+        "Experience Indicator"
+      ],
+      "forbiddenAliases": [
+        "Infrastructure Metric Only"
+      ],
+      "examples": [
+        "Reservation confirmation time",
+        "Refund status freshness"
+      ]
+    },
+    {
+      "termId": "term.ux-slo",
+      "term": "UX SLO",
+      "definition": "A threshold target for a UX SLI that defines acceptable experience for a critical duty or journey.",
+      "allowedAliases": [
+        "Experience Objective"
+      ],
+      "forbiddenAliases": [
+        "Aspirational Goal"
+      ],
+      "examples": [
+        "99% of valid reservations confirm in under one second."
+      ]
+    },
+    {
+      "termId": "term.golden-trace",
+      "term": "Golden Trace",
+      "definition": "A concrete end-to-end execution example that demonstrates correct behavior for a duty journey.",
+      "allowedAliases": [
+        "Correct Trace",
+        "Canonical Success Trace"
+      ],
+      "forbiddenAliases": [
+        "Happy Path Only"
+      ],
+      "examples": [
+        "Successful reservation of one available library copy."
+      ]
+    },
+    {
+      "termId": "term.anti-golden-trace",
+      "term": "Anti-Golden Trace",
+      "definition": "A concrete execution example that demonstrates forbidden, failed, misleading, or unacceptable behavior.",
+      "allowedAliases": [
+        "Forbidden Trace",
+        "Negative Trace"
+      ],
+      "forbiddenAliases": [
+        "Bug Report Only"
+      ],
+      "examples": [
+        "Two members receive confirmation for the same physical copy."
+      ]
+    },
+    {
+      "termId": "term.real-world-object",
+      "term": "Real-World Object",
+      "definition": "A domain entity that exists or is meaningful in the real world and anchors the product architecture.",
+      "allowedAliases": [
+        "Domain Object",
+        "World Object"
+      ],
+      "forbiddenAliases": [
+        "Database Table"
+      ],
+      "examples": [
+        "Book Copy",
+        "Kitchen Ticket",
+        "Refund"
+      ]
+    },
+    {
+      "termId": "term.network-boundary",
+      "term": "Network Boundary",
+      "definition": "An architectural separation justified by real-world duration, externality, or human/physical delay.",
+      "allowedAliases": [
+        "Causal Boundary"
+      ],
+      "forbiddenAliases": [
+        "Arbitrary Microservice Boundary"
+      ],
+      "examples": [
+        "Kitchen preparation may be asynchronous because cooking takes real-world time."
+      ]
+    },
+    {
+      "termId": "term.invariant",
+      "term": "Invariant",
+      "definition": "A product law that must remain true across all valid states and transitions.",
+      "allowedAliases": [
+        "Product Law",
+        "Non-Negotiable Rule"
+      ],
+      "forbiddenAliases": [
+        "Preference",
+        "Suggestion"
+      ],
+      "examples": [
+        "One accepted return may issue at most one refund."
+      ]
+    }
+  ],
+  "ambiguityPolicy": {
+    "principle": "The model must be internally decidable. If ambiguity remains, the model must name the missing external fact instead of hiding uncertainty in vague wording.",
+    "unresolvedQuestionHandling": "block-change",
+    "requiresClarificationWhen": [
+      "A duty cannot be mapped to at least one real-world object or interaction.",
+      "A network boundary lacks a real-world latency or causality justification.",
+      "A trace can be interpreted as both golden and anti-golden.",
+      "A weakening or breaking update lacks explicit compatibility classification.",
+      "A journey completion criterion cannot be evaluated from observable state."
+    ]
+  },
+  "realWorldModel": {
+    "objects": [
+      {
+        "objectId": "object.customer",
+        "name": "Customer",
+        "definition": "A person who bought a delivered item and may request a return.",
+        "lifecycleStates": [
+          "active",
+          "restricted"
+        ],
+        "ownedByDutyIds": [
+          "duty.return-item-issue-refund"
+        ]
+      },
+      {
+        "objectId": "object.delivered-item",
+        "name": "Delivered Item",
+        "definition": "A specific item from an order that has reached the customer.",
+        "lifecycleStates": [
+          "delivered",
+          "return-requested",
+          "in-transit",
+          "received",
+          "accepted",
+          "rejected",
+          "refunded"
+        ],
+        "ownedByDutyIds": [
+          "duty.return-item-issue-refund"
+        ]
+      },
+      {
+        "objectId": "object.return-request",
+        "name": "Return Request",
+        "definition": "A request to return a delivered item under policy.",
+        "lifecycleStates": [
+          "created",
+          "label-issued",
+          "in-transit",
+          "received",
+          "accepted",
+          "rejected",
+          "closed"
+        ],
+        "ownedByDutyIds": [
+          "duty.return-item-issue-refund"
+        ]
+      },
+      {
+        "objectId": "object.parcel",
+        "name": "Parcel",
+        "definition": "The physical package containing the returned item.",
+        "lifecycleStates": [
+          "not-shipped",
+          "in-transit",
+          "delivered-to-warehouse",
+          "lost"
+        ],
+        "ownedByDutyIds": [
+          "duty.return-item-issue-refund"
+        ]
+      },
+      {
+        "objectId": "object.inspection-result",
+        "name": "Inspection Result",
+        "definition": "A decision about whether the returned item meets acceptance policy.",
+        "lifecycleStates": [
+          "pending",
+          "passed",
+          "failed",
+          "manual-review"
+        ],
+        "ownedByDutyIds": [
+          "duty.return-item-issue-refund"
+        ]
+      },
+      {
+        "objectId": "object.refund",
+        "name": "Refund",
+        "definition": "A money movement back to the customer according to return policy.",
+        "lifecycleStates": [
+          "not-approved",
+          "approved",
+          "issued",
+          "settled",
+          "failed"
+        ],
+        "ownedByDutyIds": [
+          "duty.return-item-issue-refund"
+        ]
+      }
+    ],
+    "interactions": [
+      {
+        "interactionId": "interaction.create-return",
+        "name": "Create return request",
+        "description": "The customer creates a return request for an eligible delivered item.",
+        "participantObjectIds": [
+          "object.customer",
+          "object.delivered-item",
+          "object.return-request"
+        ],
+        "expectedRealWorldDuration": {
+          "class": "under-1s",
+          "explanation": "Eligibility and request creation should be fast digital operations."
+        }
+      },
+      {
+        "interactionId": "interaction.ship-parcel",
+        "name": "Ship return parcel",
+        "description": "The customer gives the parcel to a carrier and it moves to the warehouse.",
+        "participantObjectIds": [
+          "object.return-request",
+          "object.parcel"
+        ],
+        "expectedRealWorldDuration": {
+          "class": "over-or-equal-1s",
+          "explanation": "Parcel movement occurs over hours or days."
+        }
+      },
+      {
+        "interactionId": "interaction.inspect-item",
+        "name": "Inspect returned item",
+        "description": "Warehouse determines whether the returned item is accepted.",
+        "participantObjectIds": [
+          "object.parcel",
+          "object.inspection-result"
+        ],
+        "expectedRealWorldDuration": {
+          "class": "over-or-equal-1s",
+          "explanation": "Inspection takes operational time and may involve humans."
+        }
+      },
+      {
+        "interactionId": "interaction.issue-refund",
+        "name": "Issue refund",
+        "description": "The product initiates refund after accepted return.",
+        "participantObjectIds": [
+          "object.inspection-result",
+          "object.refund"
+        ],
+        "expectedRealWorldDuration": {
+          "class": "over-or-equal-1s",
+          "explanation": "Payment networks can take hours or days."
+        }
+      }
+    ],
+    "invariants": [
+      {
+        "invariantId": "invariant.refund-after-acceptance",
+        "name": "Refund only after accepted return",
+        "statement": "A refund must not be issued before the return is accepted unless instant refund policy is explicitly modeled.",
+        "rationale": "The business should not refund items that were never accepted.",
+        "severity": "critical",
+        "objectIds": [
+          "object.return-request",
+          "object.inspection-result",
+          "object.refund"
+        ],
+        "interactionIds": [
+          "interaction.inspect-item",
+          "interaction.issue-refund"
+        ],
+        "enforcedByStepIds": [
+          "step.approve-refund-after-inspection"
+        ],
+        "guardedByAntiTraceIds": [
+          "antitrace.refund-before-inspection"
+        ]
+      },
+      {
+        "invariantId": "invariant.refund-idempotency",
+        "name": "Refund idempotency",
+        "statement": "One accepted return may issue at most one refund for the same refundable obligation.",
+        "rationale": "Retries must not cause duplicate money movement.",
+        "severity": "critical",
+        "objectIds": [
+          "object.return-request",
+          "object.refund"
+        ],
+        "interactionIds": [
+          "interaction.issue-refund"
+        ],
+        "enforcedByStepIds": [
+          "step.issue-refund-once"
+        ],
+        "guardedByAntiTraceIds": [
+          "antitrace.duplicate-refund"
+        ]
+      }
+    ],
+    "networkBoundaries": [
+      {
+        "boundaryId": "boundary.return-creation",
+        "name": "Return creation boundary",
+        "description": "Eligibility and return creation must be causally tight.",
+        "interactionId": "interaction.create-return",
+        "realWorldProcess": "A customer asks the business to accept a returned delivered item.",
+        "realWorldLatencyClass": "under-1s",
+        "separationAllowed": false,
+        "consistencyExpectation": "strong",
+        "causalityJustification": "Creating a return request creates a business obligation and must be linked to eligibility.",
+        "userVisibleImpact": "The customer immediately sees whether the return can start.",
+        "failureMode": "An ineligible item may receive a return request."
+      },
+      {
+        "boundaryId": "boundary.shipping",
+        "name": "Carrier shipping boundary",
+        "description": "Parcel movement progresses asynchronously through carrier events.",
+        "interactionId": "interaction.ship-parcel",
+        "realWorldProcess": "A physical parcel moves through a carrier network.",
+        "realWorldLatencyClass": "over-or-equal-1s",
+        "separationAllowed": true,
+        "consistencyExpectation": "eventual",
+        "causalityJustification": "Shipping is physically slow and externally observed through scans.",
+        "userVisibleImpact": "The customer sees in-transit updates after carrier imports.",
+        "failureMode": "Delayed scans can make status temporarily stale."
+      },
+      {
+        "boundaryId": "boundary.inspection-refund",
+        "name": "Inspection and refund boundary",
+        "description": "Inspection and refund processing happen asynchronously after warehouse receipt.",
+        "interactionId": "interaction.issue-refund",
+        "realWorldProcess": "Warehouse accepts the item and payment rails process refund.",
+        "realWorldLatencyClass": "over-or-equal-1s",
+        "separationAllowed": true,
+        "consistencyExpectation": "eventual",
+        "causalityJustification": "Inspection and payment settlement involve real-world and external delays.",
+        "userVisibleImpact": "The customer sees accepted, refund issued, and posting states.",
+        "failureMode": "A retry bug can cause duplicate refund if idempotency is broken."
+      }
+    ]
+  },
+  "objectives": [
+    {
+      "objectiveId": "objective.trustworthy-returns",
+      "title": "Make returns trustworthy and correctly refundable",
+      "description": "Customers understand return eligibility, return progress, inspection result, and refund status.",
+      "successMeaning": "Eligible items can be returned, accepted returns are refunded once, and customers see truthful status."
+    }
+  ],
+  "duties": [
+    {
+      "dutyId": "duty.return-item-issue-refund",
+      "title": "Return an eligible delivered item and issue the correct refund",
+      "intent": "Allow a customer to return an eligible delivered item and receive exactly the refund owed.",
+      "scope": "Covers return creation, shipping progress, inspection, refund issuance, and customer-visible status.",
+      "nonGoals": [
+        "Exchange for another item.",
+        "Warranty repair workflows."
+      ],
+      "criticality": "critical",
+      "status": "active",
+      "objectiveIds": [
+        "objective.trustworthy-returns"
+      ],
+      "primaryJourneyIds": [
+        "journey.return-item-issue-refund"
+      ],
+      "usesRealWorldObjectIds": [
+        "object.customer",
+        "object.delivered-item",
+        "object.return-request",
+        "object.parcel",
+        "object.inspection-result",
+        "object.refund"
+      ],
+      "usesRealWorldInteractionIds": [
+        "interaction.create-return",
+        "interaction.ship-parcel",
+        "interaction.inspect-item",
+        "interaction.issue-refund"
+      ],
+      "invariantIds": [
+        "invariant.refund-after-acceptance",
+        "invariant.refund-idempotency"
+      ],
+      "version": "1.0.0",
+      "okrMapping": {
+        "keyResultTitle": "Return an eligible delivered item and issue the correct refund",
+        "keyResultDescription": "A customer creates a return, ships the item, the item is accepted, and the correct refund is issued once."
+      },
+      "dependsOnDutyIds": []
+    }
+  ],
+  "journeys": [
+    {
+      "journeyId": "journey.return-item-issue-refund",
+      "dutyId": "duty.return-item-issue-refund",
+      "title": "Return item and receive refund",
+      "description": "A customer requests a return for an eligible delivered item, ships it back, the warehouse accepts it, and one correct refund is issued.",
+      "purpose": "Preserve trust across a long-running process involving goods, warehouse operations, and money movement.",
+      "trigger": "Customer selects a delivered item to return.",
+      "preconditions": [
+        "The item has been delivered.",
+        "The item is eligible under policy."
+      ],
+      "primaryFlow": [
+        "Customer creates return request.",
+        "Customer ships parcel.",
+        "Carrier updates in-transit status.",
+        "Warehouse receives and inspects item.",
+        "Inspection passes.",
+        "Refund is approved and issued once.",
+        "Customer sees final refund status."
+      ],
+      "completionCriteria": [
+        "Return reaches accepted or rejected state.",
+        "If accepted, exactly one refund is issued.",
+        "Customer-visible status reflects current authoritative state."
+      ],
+      "variants": [
+        "Manual review may occur before acceptance."
+      ],
+      "failureBoundaries": [
+        "Rejected inspection does not issue refund unless policy override exists.",
+        "Refund provider retry must not duplicate refund."
+      ],
+      "nonGoals": [
+        "Exchange and warranty workflows are separate duties."
+      ],
+      "inputObjectIds": [
+        "object.customer",
+        "object.delivered-item"
+      ],
+      "outputObjectIds": [
+        "object.return-request",
+        "object.parcel",
+        "object.inspection-result",
+        "object.refund"
+      ],
+      "invariantIds": [
+        "invariant.refund-after-acceptance",
+        "invariant.refund-idempotency"
+      ],
+      "stepIds": [
+        "step.create-return-request",
+        "step.update-in-transit",
+        "step.inspect-returned-item",
+        "step.approve-refund-after-inspection",
+        "step.issue-refund-once",
+        "step.reject-failed-inspection"
+      ],
+      "sliIds": [
+        "sli.return-request-creation-time",
+        "sli.refund-trigger-latency",
+        "sli.status-correctness"
+      ],
+      "sloIds": [
+        "slo.return-request-under-2s",
+        "slo.refund-trigger-under-1h",
+        "slo.status-correctness"
+      ],
+      "goldenTraceIds": [
+        "trace.successful-return-refund"
+      ],
+      "antiGoldenTraceIds": [
+        "antitrace.refund-before-inspection",
+        "antitrace.duplicate-refund"
+      ],
+      "timing": {
+        "realWorldLatencyClass": "mixed",
+        "syncExpectation": "mixed",
+        "causalJustification": "Return creation needs immediate consistency, while shipping, inspection, and refund settlement take real-world time."
+      },
+      "networkBoundaryIds": [
+        "boundary.return-creation",
+        "boundary.shipping",
+        "boundary.inspection-refund"
+      ],
+      "status": "active",
+      "version": "1.0.0",
+      "invokesDutyIds": [],
+      "flow": {
+        "entryStepId": "step.create-return-request",
+        "exitStepIds": [
+          "step.reject-failed-inspection"
+        ],
+        "edges": [
+          {
+            "fromStepId": "step.create-return-request",
+            "toStepId": "step.update-in-transit",
+            "edgeType": "primary",
+            "condition": "",
+            "notes": ""
+          },
+          {
+            "fromStepId": "step.update-in-transit",
+            "toStepId": "step.inspect-returned-item",
+            "edgeType": "primary",
+            "condition": "",
+            "notes": ""
+          },
+          {
+            "fromStepId": "step.inspect-returned-item",
+            "toStepId": "step.approve-refund-after-inspection",
+            "edgeType": "primary",
+            "condition": "",
+            "notes": ""
+          },
+          {
+            "fromStepId": "step.approve-refund-after-inspection",
+            "toStepId": "step.issue-refund-once",
+            "edgeType": "primary",
+            "condition": "",
+            "notes": ""
+          },
+          {
+            "fromStepId": "step.issue-refund-once",
+            "toStepId": "step.reject-failed-inspection",
+            "edgeType": "primary",
+            "condition": "",
+            "notes": ""
+          }
+        ],
+        "notes": "Linear primary flow derived from step order."
+      }
+    }
+  ],
+  "steps": [
+    {
+      "stepId": "step.create-return-request",
+      "journeyId": "journey.return-item-issue-refund",
+      "sequence": 1,
+      "title": "Create return request",
+      "given": "A delivered item is eligible for return.",
+      "when": "The customer confirms the return reason.",
+      "then": "The system creates a return request and shows shipping instructions.",
+      "thenAssertions": [
+        "The return request references one delivered item."
+      ],
+      "relatedObjectIds": [
+        "object.delivered-item",
+        "object.return-request"
+      ],
+      "relatedInteractionIds": [
+        "interaction.create-return"
+      ],
+      "relatedInvariantIds": [],
+      "expectedUserVisibleOutcome": "The customer sees that the return has started.",
+      "status": "active",
+      "stateTransitions": [
+        {
+          "objectId": "object.delivered-item",
+          "fromState": "delivered",
+          "toState": "return-requested",
+          "notes": "Item is marked return-requested once a return request is created."
+        },
+        {
+          "objectId": "object.return-request",
+          "fromState": "none",
+          "toState": "created",
+          "notes": "A return request record is created."
+        }
+      ]
+    },
+    {
+      "stepId": "step.update-in-transit",
+      "journeyId": "journey.return-item-issue-refund",
+      "sequence": 2,
+      "title": "Update parcel in transit",
+      "given": "A carrier scan exists for the parcel.",
+      "when": "The scan is imported.",
+      "then": "The return status updates to in transit.",
+      "thenAssertions": [
+        "The scan references the correct return request."
+      ],
+      "relatedObjectIds": [
+        "object.parcel",
+        "object.return-request"
+      ],
+      "relatedInteractionIds": [
+        "interaction.ship-parcel"
+      ],
+      "relatedInvariantIds": [],
+      "expectedUserVisibleOutcome": "The customer sees that the parcel is moving back.",
+      "status": "active",
+      "stateTransitions": [
+        {
+          "objectId": "object.parcel",
+          "fromState": "not-shipped",
+          "toState": "in-transit",
+          "notes": "Carrier reports parcel is moving."
+        },
+        {
+          "objectId": "object.return-request",
+          "fromState": "created",
+          "toState": "in-transit",
+          "notes": "Return request progresses with shipment."
+        },
+        {
+          "objectId": "object.delivered-item",
+          "fromState": "return-requested",
+          "toState": "in-transit",
+          "notes": "Item is in transit back to warehouse."
+        }
+      ]
+    },
+    {
+      "stepId": "step.inspect-returned-item",
+      "journeyId": "journey.return-item-issue-refund",
+      "sequence": 3,
+      "title": "Inspect returned item",
+      "given": "The warehouse receives the return parcel.",
+      "when": "Inspection completes.",
+      "then": "The system records passed, failed, or manual review.",
+      "thenAssertions": [
+        "Inspection result exists before refund approval when required."
+      ],
+      "relatedObjectIds": [
+        "object.parcel",
+        "object.inspection-result"
+      ],
+      "relatedInteractionIds": [
+        "interaction.inspect-item"
+      ],
+      "relatedInvariantIds": [
+        "invariant.refund-after-acceptance"
+      ],
+      "expectedUserVisibleOutcome": "The customer sees review or acceptance status.",
+      "status": "active",
+      "stateTransitions": [
+        {
+          "objectId": "object.parcel",
+          "fromState": "in-transit",
+          "toState": "delivered-to-warehouse",
+          "notes": "Parcel is received at warehouse."
+        },
+        {
+          "objectId": "object.return-request",
+          "fromState": "in-transit",
+          "toState": "received",
+          "notes": "Return request is marked received."
+        },
+        {
+          "objectId": "object.inspection-result",
+          "fromState": "none",
+          "toState": "pending",
+          "notes": "Inspection begins; result is pending until decision."
+        }
+      ]
+    },
+    {
+      "stepId": "step.approve-refund-after-inspection",
+      "journeyId": "journey.return-item-issue-refund",
+      "sequence": 4,
+      "title": "Approve refund after accepted inspection",
+      "given": "The returned item passes inspection.",
+      "when": "The inspection result is recorded.",
+      "then": "The system approves the refund for the correct amount.",
+      "thenAssertions": [
+        "Refund approval references the accepted return."
+      ],
+      "relatedObjectIds": [
+        "object.inspection-result",
+        "object.refund"
+      ],
+      "relatedInteractionIds": [
+        "interaction.issue-refund"
+      ],
+      "relatedInvariantIds": [
+        "invariant.refund-after-acceptance"
+      ],
+      "expectedUserVisibleOutcome": "The customer sees refund approved or processing.",
+      "status": "active",
+      "stateTransitions": [
+        {
+          "objectId": "object.inspection-result",
+          "fromState": "pending",
+          "toState": "passed",
+          "notes": "Inspection passes."
+        },
+        {
+          "objectId": "object.refund",
+          "fromState": "not-approved",
+          "toState": "approved",
+          "notes": "Refund becomes approved after successful inspection."
+        }
+      ]
+    },
+    {
+      "stepId": "step.issue-refund-once",
+      "journeyId": "journey.return-item-issue-refund",
+      "sequence": 5,
+      "title": "Issue refund once",
+      "given": "A refund is approved and no refund has already been issued for the same return.",
+      "when": "Refund processing starts.",
+      "then": "The system issues exactly one refund.",
+      "thenAssertions": [
+        "Duplicate retries do not issue duplicate refunds."
+      ],
+      "relatedObjectIds": [
+        "object.refund",
+        "object.return-request"
+      ],
+      "relatedInteractionIds": [
+        "interaction.issue-refund"
+      ],
+      "relatedInvariantIds": [
+        "invariant.refund-idempotency"
+      ],
+      "expectedUserVisibleOutcome": "The customer sees refund issued and expected posting information.",
+      "status": "active",
+      "stateTransitions": [
+        {
+          "objectId": "object.refund",
+          "fromState": "approved",
+          "toState": "issued",
+          "notes": "Refund is issued exactly once (idempotent)."
+        },
+        {
+          "objectId": "object.return-request",
+          "fromState": "accepted",
+          "toState": "closed",
+          "notes": "Return request closes after refund issuance."
+        },
+        {
+          "objectId": "object.delivered-item",
+          "fromState": "accepted",
+          "toState": "refunded",
+          "notes": "Item becomes refunded after refund issuance."
+        }
+      ]
+    },
+    {
+      "stepId": "step.reject-failed-inspection",
+      "journeyId": "journey.return-item-issue-refund",
+      "sequence": 6,
+      "title": "Reject failed inspection",
+      "given": "The returned item fails inspection.",
+      "when": "Inspection completes.",
+      "then": "The system rejects the return and does not issue refund.",
+      "thenAssertions": [
+        "No refund exists without acceptance."
+      ],
+      "relatedObjectIds": [
+        "object.inspection-result",
+        "object.refund"
+      ],
+      "relatedInteractionIds": [
+        "interaction.inspect-item",
+        "interaction.issue-refund"
+      ],
+      "relatedInvariantIds": [
+        "invariant.refund-after-acceptance"
+      ],
+      "expectedUserVisibleOutcome": "The customer sees rejection reason and no refund promise.",
+      "status": "active",
+      "stateTransitions": [
+        {
+          "objectId": "object.inspection-result",
+          "fromState": "pending",
+          "toState": "failed",
+          "notes": "Inspection fails."
+        },
+        {
+          "objectId": "object.refund",
+          "fromState": "not-approved",
+          "toState": "not-approved",
+          "notes": "Refund remains not approved when inspection fails."
+        },
+        {
+          "objectId": "object.return-request",
+          "fromState": "received",
+          "toState": "rejected",
+          "notes": "Return request is rejected when inspection fails."
+        }
+      ]
+    }
+  ],
+  "experience": {
+    "slis": [
+      {
+        "sliId": "sli.return-request-creation-time",
+        "name": "Return request creation time",
+        "description": "Time from confirming return to seeing return instructions.",
+        "measurementType": "latency",
+        "unit": "milliseconds",
+        "eventSource": "return-request-events",
+        "appliesToDutyIds": [
+          "duty.return-item-issue-refund"
+        ],
+        "appliesToJourneyIds": [
+          "journey.return-item-issue-refund"
+        ],
+        "status": "active"
+      },
+      {
+        "sliId": "sli.refund-trigger-latency",
+        "name": "Refund trigger latency",
+        "description": "Time from accepted inspection to refund issuance request.",
+        "measurementType": "latency",
+        "unit": "minutes",
+        "eventSource": "refund-events",
+        "appliesToDutyIds": [
+          "duty.return-item-issue-refund"
+        ],
+        "appliesToJourneyIds": [
+          "journey.return-item-issue-refund"
+        ],
+        "status": "active"
+      },
+      {
+        "sliId": "sli.status-correctness",
+        "name": "Customer status correctness",
+        "description": "Percentage of status views that match authoritative return and refund state.",
+        "measurementType": "correctness",
+        "unit": "percent",
+        "eventSource": "status-audit-events",
+        "appliesToDutyIds": [
+          "duty.return-item-issue-refund"
+        ],
+        "appliesToJourneyIds": [
+          "journey.return-item-issue-refund"
+        ],
+        "status": "active"
+      }
+    ],
+    "slos": [
+      {
+        "sloId": "slo.return-request-under-2s",
+        "sliId": "sli.return-request-creation-time",
+        "name": "Return request under two seconds",
+        "targetOperator": "<=",
+        "targetValue": 2000,
+        "measurementWindow": "rolling 7 days",
+        "consequenceOfViolation": "Customers may retry and create duplicate confusion.",
+        "severity": "high",
+        "status": "active"
+      },
+      {
+        "sloId": "slo.refund-trigger-under-1h",
+        "sliId": "sli.refund-trigger-latency",
+        "name": "Refund triggered within one hour",
+        "targetOperator": "<=",
+        "targetValue": 60,
+        "measurementWindow": "rolling 30 days",
+        "consequenceOfViolation": "Accepted returns are not promptly refunded.",
+        "severity": "high",
+        "status": "active"
+      },
+      {
+        "sloId": "slo.status-correctness",
+        "sliId": "sli.status-correctness",
+        "name": "Customer status correctness",
+        "targetOperator": ">=",
+        "targetValue": 99.9,
+        "measurementWindow": "rolling 30 days",
+        "consequenceOfViolation": "Customers may be misled about money or returned goods.",
+        "severity": "critical",
+        "status": "active"
+      }
+    ]
+  },
+  "traces": {
+    "golden": [
+      {
+        "traceId": "trace.successful-return-refund",
+        "traceType": "golden",
+        "title": "Successful return and refund",
+        "description": "A customer returns an eligible item, warehouse accepts it, and one refund is issued.",
+        "dutyId": "duty.return-item-issue-refund",
+        "journeyId": "journey.return-item-issue-refund",
+        "scenario": "The item is eligible and passes inspection.",
+        "trigger": "Customer selects return item.",
+        "events": [
+          {
+            "sequence": 1,
+            "title": "Create return",
+            "event": "Customer confirms return.",
+            "stateBefore": "Item is delivered and eligible.",
+            "stateAfter": "Return request exists.",
+            "observedOutcome": "Customer sees shipping instructions.",
+            "elapsedTimeMs": 1000,
+            "relatedStepIds": [
+              "step.create-return-request"
+            ]
+          },
+          {
+            "sequence": 2,
+            "title": "Parcel in transit",
+            "event": "Carrier scan imported.",
+            "stateBefore": "Parcel not shipped.",
+            "stateAfter": "Parcel is in transit.",
+            "observedOutcome": "Customer sees in-transit status.",
+            "elapsedTimeMs": 600000,
+            "relatedStepIds": [
+              "step.update-in-transit"
+            ]
+          },
+          {
+            "sequence": 3,
+            "title": "Inspection passes",
+            "event": "Warehouse records pass.",
+            "stateBefore": "Parcel received.",
+            "stateAfter": "Inspection passed.",
+            "observedOutcome": "Return is accepted.",
+            "elapsedTimeMs": 1800000,
+            "relatedStepIds": [
+              "step.inspect-returned-item"
+            ]
+          },
+          {
+            "sequence": 4,
+            "title": "Refund issued",
+            "event": "Refund processing starts.",
+            "stateBefore": "Refund approved.",
+            "stateAfter": "Refund issued once.",
+            "observedOutcome": "Customer sees refund issued.",
+            "elapsedTimeMs": 1200000,
+            "relatedStepIds": [
+              "step.approve-refund-after-inspection",
+              "step.issue-refund-once"
+            ]
+          }
+        ],
+        "finalState": "Return is accepted and one refund is issued.",
+        "validatesStepIds": [
+          "step.create-return-request",
+          "step.update-in-transit",
+          "step.inspect-returned-item",
+          "step.approve-refund-after-inspection",
+          "step.issue-refund-once"
+        ],
+        "classificationReason": "The trace satisfies acceptance-before-refund and refund idempotency.",
+        "status": "active"
+      }
+    ],
+    "antiGolden": [
+      {
+        "traceId": "antitrace.refund-before-inspection",
+        "traceType": "anti-golden",
+        "title": "Refund before required inspection",
+        "description": "A refund is issued before the parcel is received or inspected.",
+        "dutyId": "duty.return-item-issue-refund",
+        "journeyId": "journey.return-item-issue-refund",
+        "scenario": "Policy requires inspection but refund is issued after return creation.",
+        "trigger": "Customer creates return.",
+        "events": [
+          {
+            "sequence": 1,
+            "title": "Return created",
+            "event": "Customer receives instructions.",
+            "stateBefore": "Item delivered.",
+            "stateAfter": "Return request exists.",
+            "observedOutcome": "Customer can ship item.",
+            "relatedStepIds": [
+              "step.create-return-request"
+            ]
+          },
+          {
+            "sequence": 2,
+            "title": "Refund wrongly issued",
+            "event": "System issues refund before inspection.",
+            "stateBefore": "No inspection result exists.",
+            "stateAfter": "Refund issued.",
+            "observedOutcome": "Customer receives refund too early.",
+            "relatedStepIds": [
+              "step.approve-refund-after-inspection",
+              "step.issue-refund-once"
+            ]
+          }
+        ],
+        "finalState": "Refund exists without accepted return.",
+        "violatesStepIds": [
+          "step.approve-refund-after-inspection",
+          "step.issue-refund-once"
+        ],
+        "violatesInvariantIds": [
+          "invariant.refund-after-acceptance"
+        ],
+        "classificationReason": "This violates the acceptance-before-refund invariant.",
+        "status": "active"
+      },
+      {
+        "traceId": "antitrace.duplicate-refund",
+        "traceType": "anti-golden",
+        "title": "Duplicate refund from retry",
+        "description": "A retry job issues the same refund twice.",
+        "dutyId": "duty.return-item-issue-refund",
+        "journeyId": "journey.return-item-issue-refund",
+        "scenario": "Refund provider retry occurs after first refund issued.",
+        "trigger": "Refund retry job runs.",
+        "events": [
+          {
+            "sequence": 1,
+            "title": "First refund",
+            "event": "Refund is issued.",
+            "stateBefore": "Refund approved.",
+            "stateAfter": "Refund issued once.",
+            "observedOutcome": "Customer refund is sent.",
+            "relatedStepIds": [
+              "step.issue-refund-once"
+            ]
+          },
+          {
+            "sequence": 2,
+            "title": "Duplicate refund",
+            "event": "Retry issues refund again.",
+            "stateBefore": "Refund already issued.",
+            "stateAfter": "Second refund issued.",
+            "observedOutcome": "Customer receives duplicate refund.",
+            "relatedStepIds": [
+              "step.issue-refund-once"
+            ]
+          }
+        ],
+        "finalState": "Two refunds exist for one accepted return.",
+        "violatesStepIds": [
+          "step.issue-refund-once"
+        ],
+        "violatesInvariantIds": [
+          "invariant.refund-idempotency"
+        ],
+        "classificationReason": "This violates refund idempotency.",
+        "status": "active"
+      }
+    ]
+  },
+  "updates": [
+    {
+      "changeId": "change.initial-return-refund-model",
+      "changeType": "add-duty",
+      "targetRefs": [
+        "duty.return-item-issue-refund"
+      ],
+      "summary": "Initial model for returning an eligible item and issuing the correct refund.",
+      "reason": "Establishes the first complete version of this product representation.",
+      "compatibility": "additive",
+      "impactAssessment": {
+        "affectedDuties": [
+          "duty.return-item-issue-refund"
+        ],
+        "affectedJourneys": [],
+        "affectedSlis": [],
+        "affectedSlos": [],
+        "affectedTraces": [],
+        "affectedInvariants": [],
+        "riskLevel": "high",
+        "riskExplanation": "Initial additive example model."
+      },
+      "migrationPlan": null,
+      "rolloutPlan": "Adopt as baseline after schema and semantic validation.",
+      "approvalStatus": "approved",
+      "approvedBy": "example-owner",
+      "createdAt": "2026-05-16T00:00:00Z",
+      "effectiveAt": "2026-05-16T00:00:00Z"
+    }
+  ],
+  "openQuestions": []
+}

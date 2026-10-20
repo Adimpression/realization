@@ -1,0 +1,827 @@
+{
+  "artifact_persistence": [
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-06-concentration-a_0eb52a",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000478,
+        "connect_seconds": 0.000469,
+        "ensure_schema_seconds": 0.003768,
+        "existing_payload_batch_lookup_seconds": 4.5e-05,
+        "index_seconds": 0.08042,
+        "prepare_seconds": 0.234365,
+        "total_seconds": 0.320365
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "3580503fb9839020679de5dcba58c947d492d429e028660d12c2e85003a2b405",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.022346,
+        "existing_payload_lookup_seconds": 5e-06,
+        "index_seconds": 0.08042,
+        "total_seconds": 0.11777300000000002,
+        "write_rows_seconds": 0.015002
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-06-concentration-a_b628a9",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000478,
+        "connect_seconds": 0.000469,
+        "ensure_schema_seconds": 0.003768,
+        "existing_payload_batch_lookup_seconds": 4.5e-05,
+        "index_seconds": 0.08042,
+        "prepare_seconds": 0.234365,
+        "total_seconds": 0.320365
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "2c7a5cb438b87a97ff6447834da280d73ddba7e08e9fc1195706fd7ce8f66558",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.01678,
+        "existing_payload_lookup_seconds": 5e-06,
+        "index_seconds": 0.08042,
+        "total_seconds": 0.109101,
+        "write_rows_seconds": 0.011896
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-11710e60605a",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000478,
+        "connect_seconds": 0.000469,
+        "ensure_schema_seconds": 0.003768,
+        "existing_payload_batch_lookup_seconds": 4.5e-05,
+        "index_seconds": 0.08042,
+        "prepare_seconds": 0.234365,
+        "total_seconds": 0.320365
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "808aafa861cf0fa9398057fbfc05a331bb916f04e07e991ae9992fb20cecf759",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.016608,
+        "existing_payload_lookup_seconds": 5e-06,
+        "total_seconds": 0.016613000000000003
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-f8341a5dda36",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000478,
+        "connect_seconds": 0.000469,
+        "ensure_schema_seconds": 0.003768,
+        "existing_payload_batch_lookup_seconds": 4.5e-05,
+        "index_seconds": 0.08042,
+        "prepare_seconds": 0.234365,
+        "total_seconds": 0.320365
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "65de966589871a3b4a735cf6a0122aec01241f1ac50096c9ea00122287404b19",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.021067,
+        "existing_payload_lookup_seconds": 5e-06,
+        "total_seconds": 0.021072
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-b35c93af3a93",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000478,
+        "connect_seconds": 0.000469,
+        "ensure_schema_seconds": 0.003768,
+        "existing_payload_batch_lookup_seconds": 4.5e-05,
+        "index_seconds": 0.08042,
+        "prepare_seconds": 0.234365,
+        "total_seconds": 0.320365
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "6a82dba79ec3d9ed435897a13170c1595efdade79b46bfc46ba2b0f3874c1d8e",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.018063,
+        "existing_payload_lookup_seconds": 5e-06,
+        "total_seconds": 0.018068
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-06-concentration-a_b628a9",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000478,
+        "connect_seconds": 0.000469,
+        "ensure_schema_seconds": 0.003768,
+        "existing_payload_batch_lookup_seconds": 4.5e-05,
+        "index_seconds": 0.08042,
+        "prepare_seconds": 0.234365,
+        "total_seconds": 0.320365
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "227c02f9a004abd7bfae9ad05221da1a92b231d864e1aa99fd6afe4313224f8b",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.016595,
+        "existing_payload_lookup_seconds": 5e-06,
+        "total_seconds": 0.0166
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-76d36e95fb47",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000478,
+        "connect_seconds": 0.000469,
+        "ensure_schema_seconds": 0.003768,
+        "existing_payload_batch_lookup_seconds": 4.5e-05,
+        "index_seconds": 0.08042,
+        "prepare_seconds": 0.234365,
+        "total_seconds": 0.320365
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "c834e5c5caa7d350122f8bee09fea82e78e3c49a5b8046ad5a33c660466bcf49",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.000167,
+        "existing_payload_lookup_seconds": 5e-06,
+        "total_seconds": 0.000172
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-11710e60605a",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000478,
+        "connect_seconds": 0.000469,
+        "ensure_schema_seconds": 0.003768,
+        "existing_payload_batch_lookup_seconds": 4.5e-05,
+        "index_seconds": 0.08042,
+        "prepare_seconds": 0.234365,
+        "total_seconds": 0.320365
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "c760f41c77edb26c0219426aa1bae9def3196a69ecb662b2ecb1ce4682c6185f",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.000155,
+        "existing_payload_lookup_seconds": 5e-06,
+        "index_seconds": 0.08042,
+        "total_seconds": 0.09545400000000001,
+        "write_rows_seconds": 0.014874
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-f8341a5dda36",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000478,
+        "connect_seconds": 0.000469,
+        "ensure_schema_seconds": 0.003768,
+        "existing_payload_batch_lookup_seconds": 4.5e-05,
+        "index_seconds": 0.08042,
+        "prepare_seconds": 0.234365,
+        "total_seconds": 0.320365
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "339077e34feb245a4e77d8e72f7013da81ccc8cb2686639d0ed9baf761674bd2",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.000154,
+        "existing_payload_lookup_seconds": 5e-06,
+        "index_seconds": 0.08042,
+        "total_seconds": 0.097941,
+        "write_rows_seconds": 0.017362
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-11710e60605a",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000392,
+        "connect_seconds": 0.000704,
+        "ensure_schema_seconds": 0.003809,
+        "existing_payload_batch_lookup_seconds": 3.9e-05,
+        "index_seconds": 0.065759,
+        "prepare_seconds": 0.163401,
+        "total_seconds": 0.235177
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "808aafa861cf0fa9398057fbfc05a331bb916f04e07e991ae9992fb20cecf759",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.01643,
+        "existing_payload_lookup_seconds": 6.5e-06,
+        "index_seconds": 0.065759,
+        "total_seconds": 0.0940625,
+        "write_rows_seconds": 0.011867
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-f8341a5dda36",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000392,
+        "connect_seconds": 0.000704,
+        "ensure_schema_seconds": 0.003809,
+        "existing_payload_batch_lookup_seconds": 3.9e-05,
+        "index_seconds": 0.065759,
+        "prepare_seconds": 0.163401,
+        "total_seconds": 0.235177
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "65de966589871a3b4a735cf6a0122aec01241f1ac50096c9ea00122287404b19",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.020912,
+        "existing_payload_lookup_seconds": 6.5e-06,
+        "index_seconds": 0.065759,
+        "total_seconds": 0.10086049999999999,
+        "write_rows_seconds": 0.014183
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-b35c93af3a93",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000392,
+        "connect_seconds": 0.000704,
+        "ensure_schema_seconds": 0.003809,
+        "existing_payload_batch_lookup_seconds": 3.9e-05,
+        "index_seconds": 0.065759,
+        "prepare_seconds": 0.163401,
+        "total_seconds": 0.235177
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "6a82dba79ec3d9ed435897a13170c1595efdade79b46bfc46ba2b0f3874c1d8e",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.017927,
+        "existing_payload_lookup_seconds": 6.5e-06,
+        "total_seconds": 0.017933499999999998
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-06-concentration-a_b628a9",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000392,
+        "connect_seconds": 0.000704,
+        "ensure_schema_seconds": 0.003809,
+        "existing_payload_batch_lookup_seconds": 3.9e-05,
+        "index_seconds": 0.065759,
+        "prepare_seconds": 0.163401,
+        "total_seconds": 0.235177
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "227c02f9a004abd7bfae9ad05221da1a92b231d864e1aa99fd6afe4313224f8b",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.016494,
+        "existing_payload_lookup_seconds": 6.5e-06,
+        "index_seconds": 0.065759,
+        "total_seconds": 0.0935655,
+        "write_rows_seconds": 0.011306
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-11710e60605a",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000392,
+        "connect_seconds": 0.000704,
+        "ensure_schema_seconds": 0.003809,
+        "existing_payload_batch_lookup_seconds": 3.9e-05,
+        "index_seconds": 0.065759,
+        "prepare_seconds": 0.163401,
+        "total_seconds": 0.235177
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "c760f41c77edb26c0219426aa1bae9def3196a69ecb662b2ecb1ce4682c6185f",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 2.8e-05,
+        "existing_payload_lookup_seconds": 6.5e-06,
+        "total_seconds": 3.45e-05
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-f8341a5dda36",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000392,
+        "connect_seconds": 0.000704,
+        "ensure_schema_seconds": 0.003809,
+        "existing_payload_batch_lookup_seconds": 3.9e-05,
+        "index_seconds": 0.065759,
+        "prepare_seconds": 0.163401,
+        "total_seconds": 0.235177
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "339077e34feb245a4e77d8e72f7013da81ccc8cb2686639d0ed9baf761674bd2",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 2.8e-05,
+        "existing_payload_lookup_seconds": 6.5e-06,
+        "total_seconds": 3.45e-05
+      },
+      "vector_enabled": false
+    }
+  ],
+  "document": {
+    "section_count": 5,
+    "source_path": "/Users/ravindranathakila/service/realized/trials/chemistry/06_LEARN_CHEMISTRY_RELATIONS_CONCENTRATION.md",
+    "title": "Chemistry Relations 06 \u2014 Concentration as Amount per Volume"
+  },
+  "encounter_proposal": {
+    "encounters": [
+      {
+        "bullets": [
+          "input: `Q`",
+          "input: `S`",
+          "output: `D`"
+        ],
+        "candidate_kinds": [
+          "equation",
+          "template",
+          "definition",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_1",
+        "equation_bearing": true,
+        "equations": [
+          "$$ D = \\frac{Q}{S} $$"
+        ],
+        "heading": "1. Reusable substrate",
+        "paragraphs": [
+          "When an intensity or density is formed by dividing total amount by containing size, the reusable family is amount-per-container.",
+          "The reusable formula is:",
+          "$$ D = \\frac{Q}{S} $$"
+        ],
+        "path": [
+          "Chemistry Relations 06 \u2014 Concentration as Amount per Volume",
+          "1. Reusable substrate"
+        ],
+        "sections": [
+          "1. Reusable substrate"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `n`",
+          "input: `V`",
+          "output: `C`"
+        ],
+        "candidate_kinds": [
+          "equation",
+          "template",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_2",
+        "equation_bearing": true,
+        "equations": [
+          "$$ C = \\frac{n}{V} $$"
+        ],
+        "heading": "2. Molar concentration",
+        "paragraphs": [
+          "Chemistry uses this family in molarity.",
+          "The reusable formula is:",
+          "$$ C = \\frac{n}{V} $$"
+        ],
+        "path": [
+          "Chemistry Relations 06 \u2014 Concentration as Amount per Volume",
+          "2. Molar concentration"
+        ],
+        "sections": [
+          "2. Molar concentration"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `C`",
+          "input: `V`",
+          "output: `n`"
+        ],
+        "candidate_kinds": [
+          "equation",
+          "template",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_3",
+        "equation_bearing": true,
+        "equations": [
+          "$$ n = C * V $$"
+        ],
+        "heading": "3. Solute amount from concentration and volume",
+        "paragraphs": [
+          "The multiplicative form is:",
+          "$$ n = C * V $$",
+          "Where:"
+        ],
+        "path": [
+          "Chemistry Relations 06 \u2014 Concentration as Amount per Volume",
+          "3. Solute amount from concentration and volume"
+        ],
+        "sections": [
+          "3. Solute amount from concentration and volume"
+        ]
+      },
+      {
+        "bullets": [
+          "mass to moles by molar mass",
+          "moles across substances by stoichiometric ratio",
+          "moles to concentration by volume division"
+        ],
+        "candidate_kinds": [
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_4",
+        "equation_bearing": false,
+        "equations": [],
+        "heading": "4. Connection to earlier lessons",
+        "paragraphs": [
+          "Now chemistry can move across several layers:",
+          "This makes solutions part of the same reusable conversion network."
+        ],
+        "path": [
+          "Chemistry Relations 06 \u2014 Concentration as Amount per Volume",
+          "4. Connection to earlier lessons"
+        ],
+        "sections": [
+          "4. Connection to earlier lessons"
+        ]
+      },
+      {
+        "bullets": [],
+        "candidate_kinds": [
+          "logic",
+          "definition",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_5",
+        "equation_bearing": false,
+        "equations": [],
+        "heading": "5. One-sentence summary",
+        "paragraphs": [
+          "Amount-per-container is the broader reusable substrate; molar concentration is a narrower determinate chemistry law that expresses amount of solute per unit volume of solution."
+        ],
+        "path": [
+          "Chemistry Relations 06 \u2014 Concentration as Amount per Volume",
+          "5. One-sentence summary"
+        ],
+        "sections": [
+          "5. One-sentence summary"
+        ]
+      }
+    ],
+    "proposal_id": "proposal_markdownabilitylearningproposal_64aafd",
+    "rationale": "Markdown ability learning proposals are bounded executable-harvest plans grounded in the structural ir.",
+    "source": "llm"
+  },
+  "final_answer": "Learned 9 artifacts from 06_LEARN_CHEMISTRY_RELATIONS_CONCENTRATION.md.",
+  "functionalization_proposal": {
+    "proposal_id": "proposal_markdownfunctionalizationproposal_90df4f",
+    "rationale": "Markdown functionalization proposals are bounded executable extractions from already classified encounters.",
+    "source": "llm"
+  },
+  "ir": {
+    "clusters": [
+      {
+        "bullets": [
+          "input: `Q`",
+          "input: `S`",
+          "output: `D`"
+        ],
+        "code_blocks": [],
+        "equations": [
+          "$$ D = \\frac{Q}{S} $$"
+        ],
+        "heading": "1. Reusable substrate",
+        "paragraphs": [
+          "When an intensity or density is formed by dividing total amount by containing size, the reusable family is amount-per-container.",
+          "The reusable formula is:",
+          "$$ D = \\frac{Q}{S} $$"
+        ],
+        "path": [
+          "Chemistry Relations 06 \u2014 Concentration as Amount per Volume",
+          "1. Reusable substrate"
+        ],
+        "sections": [
+          "1. Reusable substrate"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `n`",
+          "input: `V`",
+          "output: `C`"
+        ],
+        "code_blocks": [],
+        "equations": [
+          "$$ C = \\frac{n}{V} $$"
+        ],
+        "heading": "2. Molar concentration",
+        "paragraphs": [
+          "Chemistry uses this family in molarity.",
+          "The reusable formula is:",
+          "$$ C = \\frac{n}{V} $$"
+        ],
+        "path": [
+          "Chemistry Relations 06 \u2014 Concentration as Amount per Volume",
+          "2. Molar concentration"
+        ],
+        "sections": [
+          "2. Molar concentration"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `C`",
+          "input: `V`",
+          "output: `n`"
+        ],
+        "code_blocks": [],
+        "equations": [
+          "$$ n = C * V $$"
+        ],
+        "heading": "3. Solute amount from concentration and volume",
+        "paragraphs": [
+          "The multiplicative form is:",
+          "$$ n = C * V $$",
+          "Where:"
+        ],
+        "path": [
+          "Chemistry Relations 06 \u2014 Concentration as Amount per Volume",
+          "3. Solute amount from concentration and volume"
+        ],
+        "sections": [
+          "3. Solute amount from concentration and volume"
+        ]
+      },
+      {
+        "bullets": [
+          "mass to moles by molar mass",
+          "moles across substances by stoichiometric ratio",
+          "moles to concentration by volume division"
+        ],
+        "code_blocks": [],
+        "equations": [],
+        "heading": "4. Connection to earlier lessons",
+        "paragraphs": [
+          "Now chemistry can move across several layers:",
+          "This makes solutions part of the same reusable conversion network."
+        ],
+        "path": [
+          "Chemistry Relations 06 \u2014 Concentration as Amount per Volume",
+          "4. Connection to earlier lessons"
+        ],
+        "sections": [
+          "4. Connection to earlier lessons"
+        ]
+      },
+      {
+        "bullets": [],
+        "code_blocks": [],
+        "equations": [],
+        "heading": "5. One-sentence summary",
+        "paragraphs": [
+          "Amount-per-container is the broader reusable substrate; molar concentration is a narrower determinate chemistry law that expresses amount of solute per unit volume of solution."
+        ],
+        "path": [
+          "Chemistry Relations 06 \u2014 Concentration as Amount per Volume",
+          "5. One-sentence summary"
+        ],
+        "sections": [
+          "5. One-sentence summary"
+        ]
+      }
+    ],
+    "intro_bullets": [],
+    "intro_paragraphs": [
+      "This document teaches one reusable density-like substrate and then reuses it in solution chemistry.",
+      "The point is not only to store a formula, but to preserve the reusable semantic relation between distributed amount and containing extent."
+    ],
+    "section_count": 5,
+    "source_path": "/Users/ravindranathakila/service/realized/trials/chemistry/06_LEARN_CHEMISTRY_RELATIONS_CONCENTRATION.md",
+    "title": "Chemistry Relations 06 \u2014 Concentration as Amount per Volume"
+  },
+  "learned_artifacts": [
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-06-concentration-a_0eb52a",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Amount Per Container?",
+      "related_artifact_ids": [],
+      "representation": "yaml",
+      "source_sections": [],
+      "title": "Chemistry Relations 06 \u2014 Concentration as Amount per Volume / Chemistry Relations 06 Concentration as Amount per Volume"
+    },
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-06-concentration-a_b628a9",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Amount Per Container?",
+      "related_artifact_ids": [
+        "artifact_knowledge-chemistry-relations-06-concentration-a_0eb52a"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "1. Reusable substrate"
+      ],
+      "title": "Chemistry Relations 06 \u2014 Concentration as Amount per Volume / Amount Per Container"
+    },
+    {
+      "artifact_id": "artifact-skill-11710e60605a",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Molar concentration?",
+      "related_artifact_ids": [
+        "artifact_knowledge-chemistry-relations-06-concentration-a_b628a9"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "2. Molar concentration"
+      ],
+      "title": "Chemistry Relations 06 \u2014 Concentration as Amount per Volume / Molar concentration"
+    },
+    {
+      "artifact_id": "artifact-skill-f8341a5dda36",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Solute amount from concentration and volume?",
+      "related_artifact_ids": [
+        "artifact_knowledge-chemistry-relations-06-concentration-a_b628a9"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "3. Solute amount from concentration and volume"
+      ],
+      "title": "Chemistry Relations 06 \u2014 Concentration as Amount per Volume / Solute amount from concentration and volume"
+    },
+    {
+      "artifact_id": "artifact-skill-b35c93af3a93",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Connection to earlier lessons?",
+      "related_artifact_ids": [
+        "artifact_knowledge-chemistry-relations-06-concentration-a_b628a9"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "4. Connection to earlier lessons"
+      ],
+      "title": "Chemistry Relations 06 \u2014 Concentration as Amount per Volume / Connection to earlier lessons"
+    },
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-06-concentration-a_b628a9",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Amount Per Container?",
+      "related_artifact_ids": [],
+      "representation": "yaml",
+      "source_sections": [
+        "5. One-sentence summary"
+      ],
+      "title": "Chemistry Relations 06 \u2014 Concentration as Amount per Volume / Amount Per Container"
+    },
+    {
+      "artifact_id": "artifact-skill-76d36e95fb47",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate D from Q, S?",
+      "related_artifact_ids": [],
+      "representation": "python_script",
+      "source_sections": [
+        "1. Reusable substrate"
+      ],
+      "title": "Chemistry Relations 06 \u2014 Concentration as Amount per Volume / Python Ability"
+    },
+    {
+      "artifact_id": "artifact-skill-11710e60605a",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate C from n, V?",
+      "related_artifact_ids": [],
+      "representation": "python_script",
+      "source_sections": [
+        "2. Molar concentration"
+      ],
+      "title": "Chemistry Relations 06 \u2014 Concentration as Amount per Volume / Molar Concentration"
+    },
+    {
+      "artifact_id": "artifact-skill-f8341a5dda36",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate n from C, V?",
+      "related_artifact_ids": [],
+      "representation": "python_script",
+      "source_sections": [
+        "3. Solute amount from concentration and volume"
+      ],
+      "title": "Chemistry Relations 06 \u2014 Concentration as Amount per Volume / Solute Amount From Concentration And Volume"
+    }
+  ],
+  "learned_count": 9,
+  "learning_context": {
+    "applied_delta_count": 7,
+    "canonical_title": "Chemistry Relations 06 \u2014 Concentration as Amount per Volume",
+    "context_path": "/Users/ravindranathakila/service/realized/trials/chemistry/corpus/chemistry-relations-06-concentration-as-amount-per-volume/context.json",
+    "corpus_root": "/Users/ravindranathakila/service/realized/trials/chemistry",
+    "delta_id": "delta_chemistry-relations-06-concentration-as-amount-p_eb34a8",
+    "delta_path": "/Users/ravindranathakila/service/realized/trials/chemistry/corpus/chemistry-relations-06-concentration-as-amount-per-volume/deltas/delta_chemistry-relations-06-concentration-as-amount-p_eb34a8.json",
+    "matched_existing_subject_id": "chemistry-relations-06-concentration-as-amount-per-volume",
+    "source_id": "source_users-ravindranathakila-service-realized-trials-_6818f2b66c",
+    "source_record_path": "/Users/ravindranathakila/service/realized/trials/chemistry/corpus/chemistry-relations-06-concentration-as-amount-per-volume/sources/source_users-ravindranathakila-service-realized-trials-_6818f2b66c.json",
+    "subject_family": "Chemistry Relations 06 \u2014 Concentration as Amount per Volume",
+    "subject_id": "chemistry-relations-06-concentration-as-amount-per-volume",
+    "unit_count": 7
+  },
+  "parsing_failures": [],
+  "proposal": {
+    "proposal_id": "proposal_markdownlearningproposal_6f8072",
+    "rationale": "Markdown learning proposals are bounded ingestion plans for external-source harvest and remain governed before artifact admission.",
+    "source": "llm"
+  },
+  "run_id": "run_ac68b727_9a7525",
+  "run_outcome": "completed",
+  "supported_executors": [
+    "python3"
+  ]
+}

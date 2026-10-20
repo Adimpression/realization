@@ -1,0 +1,25 @@
+{
+  "assistant_text": "{'status': 'downloaded', 'bucket': 'demo-bucket', 'blob_name': 'reports/daily.json', 'destination': '/tmp/daily.json'}",
+  "model": "workstation-direct-composition",
+  "rounds": 0,
+  "task_contract": {
+    "semantic_unit": "Download the GCS blob `reports/daily.json` from bucket `demo-bucket` to `/tmp/daily.json`."
+  },
+  "tool_receipts": [
+    {
+      "arguments": {
+        "skill_title": "SDK User Commands 06 \u2014 Google Cloud Storage Download Blob / Sdk User Commands 06 Google Cloud Storage Download Blob",
+        "target": ""
+      },
+      "name": "ws.skill.invoke",
+      "result": {
+        "answer": "{'status': 'downloaded', 'bucket': 'demo-bucket', 'blob_name': 'reports/daily.json', 'destination': '/tmp/daily.json'}",
+        "error": "",
+        "error_type": "",
+        "executor_framework": "python3",
+        "skill_title": "SDK User Commands 06 \u2014 Google Cloud Storage Download Blob / Sdk User Commands 06 Google Cloud Storage Download Blob",
+        "status": "ok"
+      }
+    }
+  ]
+}

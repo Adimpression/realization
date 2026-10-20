@@ -1,0 +1,18 @@
+{
+  "assumptions": [],
+  "boundary_shape": [
+    "d*"
+  ],
+  "completion_conditions": [
+    "requested result is returned to the user"
+  ],
+  "input_values": {},
+  "missing_requirements": [],
+  "output_values": [
+    "list"
+  ],
+  "read_references": [],
+  "semantic_unit": "List the entries in mount `skill_input` at `trials`.",
+  "side_effects": [],
+  "write_targets": []
+}

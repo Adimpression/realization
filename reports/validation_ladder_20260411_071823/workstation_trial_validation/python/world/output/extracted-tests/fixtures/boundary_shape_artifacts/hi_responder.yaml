@@ -1,0 +1,61 @@
+Hi Responder:
+  Description:
+    - Output-only greeting function.
+  In: []
+  Out:
+    - greeting: hi
+  Metadata:
+    artifact_type: ability
+    representation: python_script
+    function_bit: 1
+    boundary_shape:
+      - d*
+    scope: reuse when a direct hi response is needed with no further inputs
+    reusability: broad_reuse
+    admissibility: admitted
+    learning_relation: new_family
+    justification: A bounded output-only greeting artifact.
+    question: Say hi.
+    input_contract: {}
+    output_contract:
+      greeting: string greeting
+    python_script: |
+      # /// script
+      # requires-python = ">=3.11"
+      # dependencies = ["msgspec", "orjson"]
+      # ///
+      from __future__ import annotations
+
+      import argparse
+      import sys
+
+      import msgspec
+      import orjson
+
+
+      class OutputPayload(msgspec.Struct, kw_only=True):
+          status: str
+          answer: str
+          result: dict[str, str]
+          notes: list[str] = []
+
+
+      def run() -> OutputPayload:
+          return OutputPayload(
+              status="ok",
+              answer="hi",
+              result={"greeting": "hi"},
+              notes=["output-only greeting"],
+          )
+
+
+      def main() -> None:
+          parser = argparse.ArgumentParser(description="hi responder")
+          parser.add_argument("--input-json", help="optional JSON payload")
+          parser.parse_args()
+          sys.stdout.buffer.write(orjson.dumps(msgspec.to_builtins(run())))
+          sys.stdout.buffer.write(b"\n")
+
+
+      if __name__ == "__main__":
+          main()

@@ -1,0 +1,9 @@
+{
+  "assistant_text": "Here is a concise, step-by-step derivation showing how the three forms follow from the driving-response idea and a multiplicative power definition.\n\nKey idea\n- Instantaneous power delivered to an element is the product of the driving quantity (voltage across the element, V) and the response (current through the element, I):\n  P = V I\n- For a resistor, the driving-response relation is Ohm\u2019s law: V = I R (or equivalently I = V / R).\n\nDerivation paths\n\n1) From P = V I to P = I^2 R\n- Start with P = V I (definition of power for a circuit element).\n- Use Ohm\u2019s law in the form V = I R to substitute for V:\n  P = (I R) I = I^2 R.\n- Result: P = I^2 R.\n\n2) From P = V I to P = V^2 / R\n- Start with P = V I.\n- Use Ohm\u2019s law in the form I = V / R to substitute for I:\n  P = V (V / R) = V^2 / R.\n- Result: P = V^2 / R.\n\nRemarks\n- Both P = I^2 R and P = V^2 / R are equivalent representations of the same dissipated power for a linear resistor (where V and I are related by V = IR).\n- The core reasoning is: power is the product of the driving (voltage) and the response (current), and the Ohmic relation V = IR lets you substitute to obtain the two alternative forms.\n- For completeness, the general DC form is P = VI, and for a resistor specifically, substituting either I = V/R or V = IR yields the two alternative expressions above. In AC or non-Ohmic cases, p(t) = v(t) i(t) still holds instantaneously, with averaging depending on phase and impedance.",
+  "model": "gpt-5-nano-2025-08-07",
+  "rounds": 1,
+  "task_contract": {
+    "semantic_unit": "Explain how electric power expressions ( P = VI ), ( P = I^2 R ), and ( P = \\frac{V^2}{R} ) are derived through composition of the driving-response relation and multiplicative combination. Provide the full reasoning chain."
+  },
+  "tool_receipts": []
+}

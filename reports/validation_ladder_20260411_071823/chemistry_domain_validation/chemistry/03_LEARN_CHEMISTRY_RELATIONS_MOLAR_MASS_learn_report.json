@@ -1,0 +1,897 @@
+{
+  "artifact_persistence": [
+    {
+      "artifact_id": "artifact-skill-f2e1f6230c5a",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000466,
+        "connect_seconds": 0.00047,
+        "ensure_schema_seconds": 0.003543,
+        "existing_payload_batch_lookup_seconds": 4.3e-05,
+        "index_seconds": 0.072818,
+        "prepare_seconds": 0.197622,
+        "total_seconds": 0.275759
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "c1928352373e88e05af8c82b0a2f031426c3ef0a53e08b869d0b78e1235cff5a",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.018924,
+        "existing_payload_lookup_seconds": 4.3e-06,
+        "total_seconds": 0.0189283
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-c0839f70ebe0",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000466,
+        "connect_seconds": 0.00047,
+        "ensure_schema_seconds": 0.003543,
+        "existing_payload_batch_lookup_seconds": 4.3e-05,
+        "index_seconds": 0.072818,
+        "prepare_seconds": 0.197622,
+        "total_seconds": 0.275759
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "f3ac273cdf142f977ea5edcecc4fde0f48cc763f1d01b4f6e8e7cc740d3e36e6",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.015513,
+        "existing_payload_lookup_seconds": 4.3e-06,
+        "index_seconds": 0.072818,
+        "total_seconds": 0.09996329999999999,
+        "write_rows_seconds": 0.011628
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-f45812c43021",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000466,
+        "connect_seconds": 0.00047,
+        "ensure_schema_seconds": 0.003543,
+        "existing_payload_batch_lookup_seconds": 4.3e-05,
+        "index_seconds": 0.072818,
+        "prepare_seconds": 0.197622,
+        "total_seconds": 0.275759
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "9e3fbab0a87fad25208b05a1cb47b421bf8a1aa10bfd99af92a58028eae22e28",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.013906,
+        "existing_payload_lookup_seconds": 4.3e-06,
+        "index_seconds": 0.072818,
+        "total_seconds": 0.0967213,
+        "write_rows_seconds": 0.009993
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-434b5cdc8b20",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000466,
+        "connect_seconds": 0.00047,
+        "ensure_schema_seconds": 0.003543,
+        "existing_payload_batch_lookup_seconds": 4.3e-05,
+        "index_seconds": 0.072818,
+        "prepare_seconds": 0.197622,
+        "total_seconds": 0.275759
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "d47d42a2a9756690e732b7dcebf3f28f7182140b4489490442e8c060c673c2d5",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.013896,
+        "existing_payload_lookup_seconds": 4.3e-06,
+        "index_seconds": 0.072818,
+        "total_seconds": 0.09670429999999999,
+        "write_rows_seconds": 0.009986
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-566835e2fcc7",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000466,
+        "connect_seconds": 0.00047,
+        "ensure_schema_seconds": 0.003543,
+        "existing_payload_batch_lookup_seconds": 4.3e-05,
+        "index_seconds": 0.072818,
+        "prepare_seconds": 0.197622,
+        "total_seconds": 0.275759
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "d1dab42d65bd9639e857e9d74787d132bdf39b5226c17a2d6209bf6ff1e06bba",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.016255,
+        "existing_payload_lookup_seconds": 4.3e-06,
+        "index_seconds": 0.072818,
+        "total_seconds": 0.1006223,
+        "write_rows_seconds": 0.011545
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-c0839f70ebe0",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000466,
+        "connect_seconds": 0.00047,
+        "ensure_schema_seconds": 0.003543,
+        "existing_payload_batch_lookup_seconds": 4.3e-05,
+        "index_seconds": 0.072818,
+        "prepare_seconds": 0.197622,
+        "total_seconds": 0.275759
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "e35b4da3d7cd1575cdf156ecc6da967b43cbe80fa194325ff1cbbf52f3ef5a7c",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.015308,
+        "existing_payload_lookup_seconds": 4.3e-06,
+        "total_seconds": 0.015312300000000001
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-9eba888e7f25",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000466,
+        "connect_seconds": 0.00047,
+        "ensure_schema_seconds": 0.003543,
+        "existing_payload_batch_lookup_seconds": 4.3e-05,
+        "index_seconds": 0.072818,
+        "prepare_seconds": 0.197622,
+        "total_seconds": 0.275759
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "5360158f614605491fe7f799098b935e2b4eaf68b2ba99be783ee77cf5715e6f",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.000166,
+        "existing_payload_lookup_seconds": 4.3e-06,
+        "total_seconds": 0.0001703
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-f45812c43021",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000466,
+        "connect_seconds": 0.00047,
+        "ensure_schema_seconds": 0.003543,
+        "existing_payload_batch_lookup_seconds": 4.3e-05,
+        "index_seconds": 0.072818,
+        "prepare_seconds": 0.197622,
+        "total_seconds": 0.275759
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "e625e45b5fbcdc054b824f3a4236eb7b36deb5e876bc83c17b3394206c5306f4",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.000153,
+        "existing_payload_lookup_seconds": 4.3e-06,
+        "total_seconds": 0.0001573
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-434b5cdc8b20",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000466,
+        "connect_seconds": 0.00047,
+        "ensure_schema_seconds": 0.003543,
+        "existing_payload_batch_lookup_seconds": 4.3e-05,
+        "index_seconds": 0.072818,
+        "prepare_seconds": 0.197622,
+        "total_seconds": 0.275759
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "f0df0e83aa1b7cee315c59d8ee65b93838e7c2f201261d9fbaa4b5153d129e27",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.000156,
+        "existing_payload_lookup_seconds": 4.3e-06,
+        "total_seconds": 0.0001603
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-566835e2fcc7",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000466,
+        "connect_seconds": 0.00047,
+        "ensure_schema_seconds": 0.003543,
+        "existing_payload_batch_lookup_seconds": 4.3e-05,
+        "index_seconds": 0.072818,
+        "prepare_seconds": 0.197622,
+        "total_seconds": 0.275759
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "de1d1d502a32b9d6a97e32500fbbd597a7f7732c7f7ff0e39233cb27f69505b8",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.000173,
+        "existing_payload_lookup_seconds": 4.3e-06,
+        "total_seconds": 0.0001773
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-f45812c43021",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000403,
+        "connect_seconds": 0.00066,
+        "ensure_schema_seconds": 0.003655,
+        "existing_payload_batch_lookup_seconds": 4.3e-05,
+        "index_seconds": 0.066455,
+        "prepare_seconds": 0.165752,
+        "total_seconds": 0.237852
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "9e3fbab0a87fad25208b05a1cb47b421bf8a1aa10bfd99af92a58028eae22e28",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.01383,
+        "existing_payload_lookup_seconds": 6.142857142857143e-06,
+        "total_seconds": 0.013836142857142858
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-434b5cdc8b20",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000403,
+        "connect_seconds": 0.00066,
+        "ensure_schema_seconds": 0.003655,
+        "existing_payload_batch_lookup_seconds": 4.3e-05,
+        "index_seconds": 0.066455,
+        "prepare_seconds": 0.165752,
+        "total_seconds": 0.237852
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "d47d42a2a9756690e732b7dcebf3f28f7182140b4489490442e8c060c673c2d5",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.013839,
+        "existing_payload_lookup_seconds": 6.142857142857143e-06,
+        "total_seconds": 0.013845142857142858
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-566835e2fcc7",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000403,
+        "connect_seconds": 0.00066,
+        "ensure_schema_seconds": 0.003655,
+        "existing_payload_batch_lookup_seconds": 4.3e-05,
+        "index_seconds": 0.066455,
+        "prepare_seconds": 0.165752,
+        "total_seconds": 0.237852
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "d1dab42d65bd9639e857e9d74787d132bdf39b5226c17a2d6209bf6ff1e06bba",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.016175,
+        "existing_payload_lookup_seconds": 6.142857142857143e-06,
+        "total_seconds": 0.016181142857142856
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-c0839f70ebe0",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000403,
+        "connect_seconds": 0.00066,
+        "ensure_schema_seconds": 0.003655,
+        "existing_payload_batch_lookup_seconds": 4.3e-05,
+        "index_seconds": 0.066455,
+        "prepare_seconds": 0.165752,
+        "total_seconds": 0.237852
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "e35b4da3d7cd1575cdf156ecc6da967b43cbe80fa194325ff1cbbf52f3ef5a7c",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.015141,
+        "existing_payload_lookup_seconds": 6.142857142857143e-06,
+        "index_seconds": 0.066455,
+        "total_seconds": 0.09267014285714285,
+        "write_rows_seconds": 0.011068
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-f45812c43021",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000403,
+        "connect_seconds": 0.00066,
+        "ensure_schema_seconds": 0.003655,
+        "existing_payload_batch_lookup_seconds": 4.3e-05,
+        "index_seconds": 0.066455,
+        "prepare_seconds": 0.165752,
+        "total_seconds": 0.237852
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "e625e45b5fbcdc054b824f3a4236eb7b36deb5e876bc83c17b3394206c5306f4",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 2.5e-05,
+        "existing_payload_lookup_seconds": 6.142857142857143e-06,
+        "index_seconds": 0.066455,
+        "total_seconds": 0.08010614285714286,
+        "write_rows_seconds": 0.01362
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-434b5cdc8b20",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000403,
+        "connect_seconds": 0.00066,
+        "ensure_schema_seconds": 0.003655,
+        "existing_payload_batch_lookup_seconds": 4.3e-05,
+        "index_seconds": 0.066455,
+        "prepare_seconds": 0.165752,
+        "total_seconds": 0.237852
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "f0df0e83aa1b7cee315c59d8ee65b93838e7c2f201261d9fbaa4b5153d129e27",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 2.6e-05,
+        "existing_payload_lookup_seconds": 6.142857142857143e-06,
+        "index_seconds": 0.066455,
+        "total_seconds": 0.07967814285714286,
+        "write_rows_seconds": 0.013191
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-566835e2fcc7",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000403,
+        "connect_seconds": 0.00066,
+        "ensure_schema_seconds": 0.003655,
+        "existing_payload_batch_lookup_seconds": 4.3e-05,
+        "index_seconds": 0.066455,
+        "prepare_seconds": 0.165752,
+        "total_seconds": 0.237852
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "de1d1d502a32b9d6a97e32500fbbd597a7f7732c7f7ff0e39233cb27f69505b8",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 4.2e-05,
+        "existing_payload_lookup_seconds": 6.142857142857143e-06,
+        "index_seconds": 0.066455,
+        "total_seconds": 0.08624814285714286,
+        "write_rows_seconds": 0.019745
+      },
+      "vector_enabled": false
+    }
+  ],
+  "document": {
+    "section_count": 5,
+    "source_path": "/Users/ravindranathakila/service/realized/trials/chemistry/03_LEARN_CHEMISTRY_RELATIONS_MOLAR_MASS.md",
+    "title": "Chemistry Relations 03 \u2014 Mass to Mole Conversion"
+  },
+  "encounter_proposal": {
+    "encounters": [
+      {
+        "bullets": [
+          "input: `T`",
+          "input: `q_u`",
+          "output: `U`"
+        ],
+        "candidate_kinds": [
+          "equation",
+          "template",
+          "definition",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_1",
+        "equation_bearing": true,
+        "equations": [
+          "$$ U = \\frac{T}{q_u} $$"
+        ],
+        "heading": "1. Reusable substrate",
+        "paragraphs": [
+          "When the number of units is obtained by dividing a total by the amount per unit, the reusable family is total-per-unit division.",
+          "The reusable formula is:",
+          "$$ U = \\frac{T}{q_u} $$"
+        ],
+        "path": [
+          "Chemistry Relations 03 \u2014 Mass to Mole Conversion",
+          "1. Reusable substrate"
+        ],
+        "sections": [
+          "1. Reusable substrate"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `m`",
+          "input: `M`",
+          "output: `n`"
+        ],
+        "candidate_kinds": [
+          "equation",
+          "template",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_2",
+        "equation_bearing": true,
+        "equations": [
+          "$$ n = \\frac{m}{M} $$"
+        ],
+        "heading": "2. Moles from mass",
+        "paragraphs": [
+          "Chemistry uses this family in molar-mass conversion.",
+          "The reusable formula is:",
+          "$$ n = \\frac{m}{M} $$"
+        ],
+        "path": [
+          "Chemistry Relations 03 \u2014 Mass to Mole Conversion",
+          "2. Moles from mass"
+        ],
+        "sections": [
+          "2. Moles from mass"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `n`",
+          "input: `M`",
+          "output: `m`"
+        ],
+        "candidate_kinds": [
+          "equation",
+          "template",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_3",
+        "equation_bearing": true,
+        "equations": [
+          "$$ m = n * M $$"
+        ],
+        "heading": "3. Mass from moles",
+        "paragraphs": [
+          "The corresponding multiplicative form is:",
+          "$$ m = n * M $$",
+          "Where:"
+        ],
+        "path": [
+          "Chemistry Relations 03 \u2014 Mass to Mole Conversion",
+          "3. Mass from moles"
+        ],
+        "sections": [
+          "3. Mass from moles"
+        ]
+      },
+      {
+        "bullets": [
+          "`N = n * N_A` connects particles and moles",
+          "`m = n * M` connects mass and moles"
+        ],
+        "candidate_kinds": [
+          "equation",
+          "template",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_4",
+        "equation_bearing": true,
+        "equations": [
+          "`N = n * N_A` connects particles and moles",
+          "`m = n * M` connects mass and moles"
+        ],
+        "heading": "4. Connection to earlier lessons",
+        "paragraphs": [
+          "Now chemistry has two reusable counting bridges:",
+          "So moles become a central intermediate representation between count and mass."
+        ],
+        "path": [
+          "Chemistry Relations 03 \u2014 Mass to Mole Conversion",
+          "4. Connection to earlier lessons"
+        ],
+        "sections": [
+          "4. Connection to earlier lessons"
+        ]
+      },
+      {
+        "bullets": [],
+        "candidate_kinds": [
+          "logic",
+          "definition",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_5",
+        "equation_bearing": false,
+        "equations": [],
+        "heading": "5. One-sentence summary",
+        "paragraphs": [
+          "Total-per-unit division is the broader reusable substrate; molar-mass conversion is a narrower determinate chemistry law that uses grams per mole as the unit size."
+        ],
+        "path": [
+          "Chemistry Relations 03 \u2014 Mass to Mole Conversion",
+          "5. One-sentence summary"
+        ],
+        "sections": [
+          "5. One-sentence summary"
+        ]
+      }
+    ],
+    "proposal_id": "proposal_markdownabilitylearningproposal_6dd927",
+    "rationale": "Markdown ability learning proposals are bounded executable-harvest plans grounded in the structural ir.",
+    "source": "llm"
+  },
+  "final_answer": "Learned 10 artifacts from 03_LEARN_CHEMISTRY_RELATIONS_MOLAR_MASS.md.",
+  "functionalization_proposal": {
+    "proposal_id": "proposal_markdownfunctionalizationproposal_271796",
+    "rationale": "Markdown functionalization proposals are bounded executable extractions from already classified encounters.",
+    "source": "llm"
+  },
+  "ir": {
+    "clusters": [
+      {
+        "bullets": [
+          "input: `T`",
+          "input: `q_u`",
+          "output: `U`"
+        ],
+        "code_blocks": [],
+        "equations": [
+          "$$ U = \\frac{T}{q_u} $$"
+        ],
+        "heading": "1. Reusable substrate",
+        "paragraphs": [
+          "When the number of units is obtained by dividing a total by the amount per unit, the reusable family is total-per-unit division.",
+          "The reusable formula is:",
+          "$$ U = \\frac{T}{q_u} $$"
+        ],
+        "path": [
+          "Chemistry Relations 03 \u2014 Mass to Mole Conversion",
+          "1. Reusable substrate"
+        ],
+        "sections": [
+          "1. Reusable substrate"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `m`",
+          "input: `M`",
+          "output: `n`"
+        ],
+        "code_blocks": [],
+        "equations": [
+          "$$ n = \\frac{m}{M} $$"
+        ],
+        "heading": "2. Moles from mass",
+        "paragraphs": [
+          "Chemistry uses this family in molar-mass conversion.",
+          "The reusable formula is:",
+          "$$ n = \\frac{m}{M} $$"
+        ],
+        "path": [
+          "Chemistry Relations 03 \u2014 Mass to Mole Conversion",
+          "2. Moles from mass"
+        ],
+        "sections": [
+          "2. Moles from mass"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `n`",
+          "input: `M`",
+          "output: `m`"
+        ],
+        "code_blocks": [],
+        "equations": [
+          "$$ m = n * M $$"
+        ],
+        "heading": "3. Mass from moles",
+        "paragraphs": [
+          "The corresponding multiplicative form is:",
+          "$$ m = n * M $$",
+          "Where:"
+        ],
+        "path": [
+          "Chemistry Relations 03 \u2014 Mass to Mole Conversion",
+          "3. Mass from moles"
+        ],
+        "sections": [
+          "3. Mass from moles"
+        ]
+      },
+      {
+        "bullets": [
+          "`N = n * N_A` connects particles and moles",
+          "`m = n * M` connects mass and moles"
+        ],
+        "code_blocks": [],
+        "equations": [
+          "`N = n * N_A` connects particles and moles",
+          "`m = n * M` connects mass and moles"
+        ],
+        "heading": "4. Connection to earlier lessons",
+        "paragraphs": [
+          "Now chemistry has two reusable counting bridges:",
+          "So moles become a central intermediate representation between count and mass."
+        ],
+        "path": [
+          "Chemistry Relations 03 \u2014 Mass to Mole Conversion",
+          "4. Connection to earlier lessons"
+        ],
+        "sections": [
+          "4. Connection to earlier lessons"
+        ]
+      },
+      {
+        "bullets": [],
+        "code_blocks": [],
+        "equations": [],
+        "heading": "5. One-sentence summary",
+        "paragraphs": [
+          "Total-per-unit division is the broader reusable substrate; molar-mass conversion is a narrower determinate chemistry law that uses grams per mole as the unit size."
+        ],
+        "path": [
+          "Chemistry Relations 03 \u2014 Mass to Mole Conversion",
+          "5. One-sentence summary"
+        ],
+        "sections": [
+          "5. One-sentence summary"
+        ]
+      }
+    ],
+    "intro_bullets": [],
+    "intro_paragraphs": [
+      "This document teaches one reusable ratio substrate and then reuses it in a central chemistry conversion.",
+      "The point is not only to store a conversion formula, but to preserve the reusable semantic relation between total quantity and per-unit quantity."
+    ],
+    "section_count": 5,
+    "source_path": "/Users/ravindranathakila/service/realized/trials/chemistry/03_LEARN_CHEMISTRY_RELATIONS_MOLAR_MASS.md",
+    "title": "Chemistry Relations 03 \u2014 Mass to Mole Conversion"
+  },
+  "learned_artifacts": [
+    {
+      "artifact_id": "artifact-skill-f2e1f6230c5a",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Total Per Unit Division?",
+      "related_artifact_ids": [],
+      "representation": "yaml",
+      "source_sections": [],
+      "title": "Chemistry Relations 03 \u2014 Mass to Mole Conversion / Chemistry Relations 03 Mass to Mole Conversion"
+    },
+    {
+      "artifact_id": "artifact-skill-c0839f70ebe0",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Total Per Unit Division?",
+      "related_artifact_ids": [
+        "artifact-skill-3432dd178884"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "1. Reusable substrate"
+      ],
+      "title": "Chemistry Relations 03 Mass to Mole Conversion / Total Per Unit Division"
+    },
+    {
+      "artifact_id": "artifact-skill-f45812c43021",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Moles from mass?",
+      "related_artifact_ids": [
+        "artifact-skill-c0839f70ebe0"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "2. Moles from mass"
+      ],
+      "title": "Chemistry Relations 03 \u2014 Mass to Mole Conversion / Moles from mass"
+    },
+    {
+      "artifact_id": "artifact-skill-434b5cdc8b20",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Mass from moles?",
+      "related_artifact_ids": [
+        "artifact-skill-c0839f70ebe0"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "3. Mass from moles"
+      ],
+      "title": "Chemistry Relations 03 \u2014 Mass to Mole Conversion / Mass from moles"
+    },
+    {
+      "artifact_id": "artifact-skill-566835e2fcc7",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Connection to earlier lessons?",
+      "related_artifact_ids": [
+        "artifact-skill-c0839f70ebe0"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "4. Connection to earlier lessons"
+      ],
+      "title": "Chemistry Relations 03 \u2014 Mass to Mole Conversion / Connection to earlier lessons"
+    },
+    {
+      "artifact_id": "artifact-skill-c0839f70ebe0",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Total Per Unit Division?",
+      "related_artifact_ids": [],
+      "representation": "yaml",
+      "source_sections": [
+        "5. One-sentence summary"
+      ],
+      "title": "Chemistry Relations 03 Mass to Mole Conversion / Total Per Unit Division"
+    },
+    {
+      "artifact_id": "artifact-skill-9eba888e7f25",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate U from T, q_u?",
+      "related_artifact_ids": [],
+      "representation": "python_script",
+      "source_sections": [
+        "1. Reusable substrate"
+      ],
+      "title": "Chemistry Relations 03 \u2014 Mass to Mole Conversion / Python Ability"
+    },
+    {
+      "artifact_id": "artifact-skill-f45812c43021",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate n from m, M?",
+      "related_artifact_ids": [],
+      "representation": "python_script",
+      "source_sections": [
+        "2. Moles from mass"
+      ],
+      "title": "Chemistry Relations 03 \u2014 Mass to Mole Conversion / Moles From Mass"
+    },
+    {
+      "artifact_id": "artifact-skill-434b5cdc8b20",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate m from n, M?",
+      "related_artifact_ids": [],
+      "representation": "python_script",
+      "source_sections": [
+        "3. Mass from moles"
+      ],
+      "title": "Chemistry Relations 03 \u2014 Mass to Mole Conversion / Mass From Moles"
+    },
+    {
+      "artifact_id": "artifact-skill-566835e2fcc7",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate N from n, N_A, connects, particles, and, moles?",
+      "related_artifact_ids": [],
+      "representation": "python_script",
+      "source_sections": [
+        "4. Connection to earlier lessons"
+      ],
+      "title": "Chemistry Relations 03 \u2014 Mass to Mole Conversion / Connection To Earlier Lessons"
+    }
+  ],
+  "learned_count": 10,
+  "learning_context": {
+    "applied_delta_count": 8,
+    "canonical_title": "Chemistry Relations 03 \u2014 Mass to Mole Conversion",
+    "context_path": "/Users/ravindranathakila/service/realized/trials/chemistry/corpus/chemistry-relations-03-mass-to-mole-conversion/context.json",
+    "corpus_root": "/Users/ravindranathakila/service/realized/trials/chemistry",
+    "delta_id": "delta_chemistry-relations-03-mass-to-mole-conversion_6e3849",
+    "delta_path": "/Users/ravindranathakila/service/realized/trials/chemistry/corpus/chemistry-relations-03-mass-to-mole-conversion/deltas/delta_chemistry-relations-03-mass-to-mole-conversion_6e3849.json",
+    "matched_existing_subject_id": "chemistry-relations-03-mass-to-mole-conversion",
+    "source_id": "source_users-ravindranathakila-service-realized-trials-_33757ccc6d",
+    "source_record_path": "/Users/ravindranathakila/service/realized/trials/chemistry/corpus/chemistry-relations-03-mass-to-mole-conversion/sources/source_users-ravindranathakila-service-realized-trials-_33757ccc6d.json",
+    "subject_family": "Chemistry Relations 03 \u2014 Mass to Mole Conversion",
+    "subject_id": "chemistry-relations-03-mass-to-mole-conversion",
+    "unit_count": 9
+  },
+  "parsing_failures": [],
+  "proposal": {
+    "proposal_id": "proposal_markdownlearningproposal_a79b80",
+    "rationale": "Markdown learning proposals are bounded ingestion plans for external-source harvest and remain governed before artifact admission.",
+    "source": "llm"
+  },
+  "run_id": "run_4b8503a3_df4a6a",
+  "run_outcome": "completed",
+  "supported_executors": [
+    "python3"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "assistant_text": "- Work and energy change: When forces act through a displacement on a system (the transfer substrate), they transfer energy to or from that substrate. The amount of energy transferred by work is the work done by the external forces.\n\n- Work-energy theorem (in terms of the transfer substrate): For the transfer substrate S, the net work done on S by external forces equals the change in S\u2019s kinetic energy:\n  W_net_on_S = \u0394K_S = K_S(final) \u2212 K_S(initial).\n  In words: the energy you transfer to S by doing work changes its motion (its kinetic energy) by that amount.\n\n- General, more complete energy balance: If you also account for potential energy stored within or associated with S (due to conservative forces) and possible non-conservative effects (like friction converting some energy to heat), a convenient form is:\n  \u0394(K_S + U_S) = W_ext_nonconservative.\n  Equivalently, the total mechanical energy of S can only change by work done by non-conservative forces; energy exchanged via conservative forces shifts between kinetic and potential within S.\n\n- Practical takeaway:\n  - The work you do on an object (the transfer substrate) shows up as an increase in its kinetic energy if the forces are in the direction of motion.\n  - If motion is frictionless and only kinetic energy matters, W_on_S = \u0394K_S.\n  - If internal potential energies or dissipative processes are present, use the broader energy-balance form above.\n\n- Quick formula:\n  - \u03b4W = F \u00b7 dr, so W = \u222b F \u00b7 dr.\n  - W_net_on_S = \u0394K_S = K_S(final) \u2212 K_S(initial).",
+  "model": "gpt-5-nano-2025-08-07",
+  "rounds": 1,
+  "task_contract": {
+    "semantic_unit": "Explain how work relates to energy change, and state the work-energy theorem in terms of the transfer substrate."
+  },
+  "tool_receipts": []
+}

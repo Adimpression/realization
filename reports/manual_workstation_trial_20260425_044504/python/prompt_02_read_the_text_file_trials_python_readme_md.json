@@ -1,0 +1,25 @@
+{
+  "assistant_text": "Invocation of Python Commands 02 \u2014 Read Text File / Python Commands 02 Read Text File failed: ModuleNotFoundError: No module named 'yaml'",
+  "model": "workstation-direct-composition",
+  "rounds": 0,
+  "task_contract": {
+    "semantic_unit": "Read the text file `trials/python/README.md` from mount `skill_input`."
+  },
+  "tool_receipts": [
+    {
+      "arguments": {
+        "skill_title": "Python Commands 02 \u2014 Read Text File / Python Commands 02 Read Text File",
+        "target": ""
+      },
+      "name": "ws.skill.invoke",
+      "result": {
+        "answer": "Invocation of Python Commands 02 \u2014 Read Text File / Python Commands 02 Read Text File failed: ModuleNotFoundError: No module named 'yaml'",
+        "error": "",
+        "error_type": "",
+        "executor_framework": "python3",
+        "skill_title": "Python Commands 02 \u2014 Read Text File / Python Commands 02 Read Text File",
+        "status": "error"
+      }
+    }
+  ]
+}

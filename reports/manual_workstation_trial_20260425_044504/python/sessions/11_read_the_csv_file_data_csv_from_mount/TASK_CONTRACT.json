@@ -1,0 +1,22 @@
+{
+  "assumptions": [],
+  "boundary_shape": [
+    "b'*",
+    "a'*",
+    "d*"
+  ],
+  "completion_conditions": [
+    "requested result is returned to the user"
+  ],
+  "input_values": {},
+  "missing_requirements": [],
+  "output_values": [
+    "result"
+  ],
+  "read_references": [
+    "file or path reference"
+  ],
+  "semantic_unit": "Read the CSV file `data.csv` from mount `skill_tmp`.",
+  "side_effects": [],
+  "write_targets": []
+}

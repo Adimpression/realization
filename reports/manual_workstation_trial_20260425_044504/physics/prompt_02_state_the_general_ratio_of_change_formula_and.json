@@ -1,0 +1,25 @@
+{
+  "assistant_text": "- General ratio-of-change formula: R = \u0394A / \u0394B, the change in A per unit change in B.\n  - If B is time, this becomes a rate with respect to time.\n\n- Example from motion:\n  - Average velocity v_avg = \u0394x / \u0394t, where x is position and t is time.\n  - Example numbers: if a car goes from x = 0 m at t = 0 s to x = 50 m at t = 5 s, then v_avg = (50 \u2212 0) / (5 \u2212 0) = 10 m/s.",
+  "model": "gpt-5-nano-2025-08-07",
+  "rounds": 2,
+  "task_contract": {
+    "semantic_unit": "State the general ratio-of-change formula and give one example from motion that uses it."
+  },
+  "tool_receipts": [
+    {
+      "arguments": {
+        "skill_title": "Physics Relations \u2014 Rate of Change in Motion / Ratio Of Change",
+        "target": ""
+      },
+      "name": "ws.skill.invoke",
+      "result": {
+        "answer": "When a quantity is defined as change per unit of another quantity, the reusable family is ratio-of-change. The reusable formula is: $$ R = \\frac{\\Delta A}{\\Delta B} $$ input: \\Delta A input: \\Delta B output: R",
+        "error": "",
+        "error_type": "",
+        "executor_framework": "",
+        "skill_title": "Physics Relations \u2014 Rate of Change in Motion / Ratio Of Change",
+        "status": "ok"
+      }
+    }
+  ]
+}

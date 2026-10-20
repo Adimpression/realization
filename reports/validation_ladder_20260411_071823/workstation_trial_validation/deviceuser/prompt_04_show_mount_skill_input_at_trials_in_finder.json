@@ -1,0 +1,25 @@
+{
+  "assistant_text": "{\"answer\": \"executed\", \"notes\": [], \"result\": {\"status\": \"executed\"}, \"status\": \"ok\"}",
+  "model": "workstation-direct-composition",
+  "rounds": 0,
+  "task_contract": {
+    "semantic_unit": "Show mount `skill_input` at `trials` in Finder."
+  },
+  "tool_receipts": [
+    {
+      "arguments": {
+        "skill_title": "Device User Capabilities 04 \u2014 Open Folder In Finder / Device User Capabilities 04 Open Folder In Finder",
+        "target": ""
+      },
+      "name": "ws.skill.invoke",
+      "result": {
+        "answer": "{\"answer\": \"executed\", \"notes\": [], \"result\": {\"status\": \"executed\"}, \"status\": \"ok\"}",
+        "error": "",
+        "error_type": "",
+        "executor_framework": "bash",
+        "skill_title": "Device User Capabilities 04 \u2014 Open Folder In Finder / Device User Capabilities 04 Open Folder In Finder",
+        "status": "ok"
+      }
+    }
+  ]
+}

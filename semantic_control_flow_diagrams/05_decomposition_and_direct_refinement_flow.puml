@@ -1,0 +1,58 @@
+@startuml
+title Decomposition And Direct Refinement Flow
+
+participant "BSSCController" as Controller
+participant "Governed Semantic Reduction Runtime" as Runtime
+participant "Governed Closure And Commitment" as Closure
+participant "Active Node" as Node
+participant "Reflection" as Reflect
+participant "Contemplation" as Contemplate
+participant "Decomposition Proposal" as Decompose
+participant "Child Nodes" as Children
+
+Controller -> Runtime: reduce_not(node)
+Runtime -> Controller: propagate([node])
+
+alt node already closed or committable
+  Runtime -> Closure: commit_closure(node)
+else active reduction
+  opt reflection enabled
+    Runtime -> Reflect: reflect(node)
+  end
+  opt contemplation enabled
+    Runtime -> Contemplate: contemplate(node)
+  end
+
+  Runtime -> Decompose: decompose_or_refine(node)
+  Decompose --> Runtime: proposed children or preserve_parent
+
+  alt preserve parent or no valid children
+    alt can refine directly
+      Runtime -> Controller: refine_directly(node)
+      Runtime -> Controller: propagate([node])
+      alt node becomes committable
+        Runtime -> Closure: commit_closure(node)
+      else still unresolved
+        Runtime -> Closure: commit_incompletion(node)
+      end
+    else no direct refinement path
+      Runtime -> Closure: commit_incompletion(node)
+    end
+  else subordinate split accepted
+    Runtime -> Controller: filter_by_faithfulness(children, node)
+    Runtime -> Controller: order_children(children)
+    loop each child
+      Runtime -> Children: reduce_not(child)
+      Runtime -> Controller: propagate([child, node])
+    end
+    alt parent now committable
+      Runtime -> Closure: commit_closure(node)
+    else pause justified
+      Runtime -> Closure: commit_pause(node)
+    else still unresolved
+      Runtime -> Closure: commit_incompletion(node)
+    end
+  end
+end
+
+@enduml

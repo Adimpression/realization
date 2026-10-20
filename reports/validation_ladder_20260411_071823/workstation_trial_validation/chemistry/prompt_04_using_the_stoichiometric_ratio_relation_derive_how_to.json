@@ -1,0 +1,9 @@
+{
+  "assistant_text": "Here is the standard derivation for a single-step reaction of the form a A \u2192 b B, using the extent of reaction \u03be.\n\n- Define the extent of reaction \u03be. As the reaction proceeds by \u03be:\n  - The amount of A consumed: \u0394n_A = a \u03be\n  - The amount of B produced: \u0394n_B = b \u03be\n\n- If the initial amounts are n_A0 and n_B0, then after progress \u03be:\n  - n_A = n_A0 \u2212 a \u03be\n  - n_B = n_B0 + b \u03be\n\n- Solve for \u03be from the A balance: \u03be = (n_A0 \u2212 n_A)/a\n\n- Substitute into the B balance:\n  n_B = n_B0 + b (n_A0 \u2212 n_A)/a\n\nSpecial cases:\n- If you started with only A (n_B0 = 0) and know the initial amount n_A0:\n  n_B = (b/a) (n_A0 \u2212 n_A)\n  This shows n_B is proportional to the amount of A that has reacted, with ratio b/a.\n\n- If you know the amount of A that has reacted, \u0394n_A = n_A0 \u2212 n_A:\n  n_B = (b/a) \u0394n_A (assuming initial B is zero)\n\nGeneralization to multiple reactants:\n- For a balanced equation \u2211 \u03b1_i A_i \u2192 \u2211 \u03b2_j B_j with extent \u03be:\n  n_{A_i} = n_{A_i,0} \u2212 \u03b1_i \u03be\n  n_{B_j} = n_{B_j,0} + \u03b2_j \u03be\n  If you know a particular A_i with initial n_{A_i,0} and coefficient \u03b1_i, you can compute \u03be = (n_{A_i,0} \u2212 n_{A_i})/\u03b1_i, then obtain n_{B_j} = n_{B_j,0} + \u03b2_j \u03be.",
+  "model": "gpt-5-nano-2025-08-07",
+  "rounds": 1,
+  "task_contract": {
+    "semantic_unit": "Using the stoichiometric ratio relation, derive how to compute the amount of substance ( n_B ) from a known ( n_A ) and coefficients."
+  },
+  "tool_receipts": []
+}

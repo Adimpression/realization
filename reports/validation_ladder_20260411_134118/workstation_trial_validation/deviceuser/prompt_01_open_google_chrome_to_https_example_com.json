@@ -1,0 +1,25 @@
+{
+  "assistant_text": "{'status': 'opened', 'browser': 'Google Chrome', 'url': 'https://example.com'}",
+  "model": "workstation-direct-composition",
+  "rounds": 0,
+  "task_contract": {
+    "semantic_unit": "Open Google Chrome to `https://example.com`."
+  },
+  "tool_receipts": [
+    {
+      "arguments": {
+        "skill_title": "Device User Capabilities 01 \u2014 Launch Browser At Specific URL / Device User Capabilities 01 Launch Browser At Specific Url",
+        "target": ""
+      },
+      "name": "ws.skill.invoke",
+      "result": {
+        "answer": "{'status': 'opened', 'browser': 'Google Chrome', 'url': 'https://example.com'}",
+        "error": "",
+        "error_type": "",
+        "executor_framework": "python3",
+        "skill_title": "Device User Capabilities 01 \u2014 Launch Browser At Specific URL / Device User Capabilities 01 Launch Browser At Specific Url",
+        "status": "ok"
+      }
+    }
+  ]
+}

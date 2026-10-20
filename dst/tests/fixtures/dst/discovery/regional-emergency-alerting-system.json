@@ -1,0 +1,61 @@
+{
+  "schema_version": "dst_discovery.v1",
+  "fixture_id": "regional-emergency-alerting-system",
+  "source_ref": "dst/Regional emergency alerting system.md",
+  "system_name": "Regional emergency alerting system",
+  "decision_problem": "Choose among competing alerting configurations with trade-offs across speed, resilience, and inclusion.",
+  "root_non_achievedness": "What are the materially distinct admissible transformation paths for the regional emergency alerting system, what unresolved distinctions separate those paths, and what missing facts block commitment?",
+  "candidate_paths": [
+    {
+      "path_id": "p1-speed-first",
+      "title": "Example A: speed-first configuration",
+      "path_kind": "configuration",
+      "route_expression": "",
+      "summary": "Optimizes fast warning delivery, accepting weaker resilience and inclusion guarantees.",
+      "supporting_points": [
+        "fastest alert propagation",
+        "higher exclusion risk"
+      ],
+      "blockers": [
+        "coverage_evidence_for_vulnerable_groups"
+      ],
+      "required_information": []
+    },
+    {
+      "path_id": "p2-balanced",
+      "title": "Example D: balanced configuration",
+      "path_kind": "configuration",
+      "route_expression": "",
+      "summary": "Balances speed, resilience, and inclusion without maximizing any single dimension.",
+      "supporting_points": [
+        "better cross-boundary balance",
+        "lower single-point fragility"
+      ],
+      "blockers": [
+        "coordination_design_detail"
+      ],
+      "required_information": []
+    }
+  ],
+  "dominant_distinctions": [
+    {
+      "distinction_id": "u1",
+      "title": "Optimization target",
+      "description": "The core distinction is whether the system is optimized for speed alone or for a balance across speed, resilience, and inclusion.",
+      "separates_path_ids": [
+        "p1-speed-first",
+        "p2-balanced"
+      ]
+    }
+  ],
+  "shared_blockers": [
+    "cross-jurisdiction coordination design"
+  ],
+  "assumptions": [],
+  "ambiguities": [
+    "The examples describe competing configurations rather than a state-transition graph."
+  ],
+  "missing_information": [
+    "The acceptable minimum for inclusion guarantees is not stated."
+  ]
+}

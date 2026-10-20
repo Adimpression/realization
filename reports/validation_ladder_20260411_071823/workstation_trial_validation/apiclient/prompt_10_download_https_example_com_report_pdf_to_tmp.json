@@ -1,0 +1,25 @@
+{
+  "assistant_text": "{'status': 'downloaded', 'url': 'https://example.com/report.pdf', 'destination': '/tmp/report.pdf'}",
+  "model": "workstation-direct-composition",
+  "rounds": 0,
+  "task_contract": {
+    "semantic_unit": "Download `https://example.com/report.pdf` to `/tmp/report.pdf`."
+  },
+  "tool_receipts": [
+    {
+      "arguments": {
+        "skill_title": "API Client Commands 10 \u2014 Download File From Url / Api Client Commands 10 Download File From Url",
+        "target": ""
+      },
+      "name": "ws.skill.invoke",
+      "result": {
+        "answer": "{'status': 'downloaded', 'url': 'https://example.com/report.pdf', 'destination': '/tmp/report.pdf'}",
+        "error": "",
+        "error_type": "",
+        "executor_framework": "python3",
+        "skill_title": "API Client Commands 10 \u2014 Download File From Url / Api Client Commands 10 Download File From Url",
+        "status": "ok"
+      }
+    }
+  ]
+}

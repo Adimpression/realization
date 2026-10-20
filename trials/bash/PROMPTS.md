@@ -1,0 +1,14 @@
+- Create the directory `/tmp/bash-suite-demo`.
+- List the contents of `/Users/ravindranathakila/service/realized`.
+- Print the contents of `/etc/hosts`.
+- Search for `TODO` in `README.md`.
+- Count the lines in `/etc/hosts`.
+- Find files named `README.md` under `/Users/ravindranathakila/service/realized`.
+- Copy `/etc/hosts` to `/tmp/hosts.copy`.
+- Move `/tmp/hosts.copy` to `/tmp/hosts.moved`.
+- Remove `/tmp/hosts.moved`.
+- Create the archive `/tmp/realized-tests.tar.gz` from `tests`.
+- Extract `/tmp/example.zip` into `/tmp/example-unpacked`.
+- Download `https://example.com` to `/tmp/example.html`.
+- Compute the sha256 checksum of `/etc/hosts`.
+- Make `/tmp/demo.sh` executable with mode `755`.

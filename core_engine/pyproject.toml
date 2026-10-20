@@ -1,0 +1,40 @@
+[project]
+name = "realized-core-engine"
+version = "0.1.0"
+description = "Canonical governed realization engine with plain SQLite persistence."
+readme = "README.md"
+requires-python = ">=3.14"
+authors = [{ name = "Ravindranath Akila" }]
+maintainers = [{ name = "Adimpression", email = "talktome@adimpression.mobi" }]
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+keywords = ["governance", "reasoning", "sqlite", "artifacts", "replay"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "openai==2.29.0",
+    "pydantic==2.12.5",
+    "pyyaml==6.0.3",
+    "realized-core-runtime==0.1.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/Adimpression/realization"
+Repository = "https://github.com/Adimpression/realization"
+Issues = "https://github.com/Adimpression/realization/issues"
+
+[project.optional-dependencies]
+wasm = ["wasmtime==43.0.0"]
+
+[build-system]
+requires = ["setuptools>=77.0.3", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.uv.sources]
+realized-core-runtime = { workspace = true }

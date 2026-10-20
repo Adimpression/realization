@@ -1,0 +1,823 @@
+{
+  "artifact_persistence": [
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-02-mole-as-countin_cba6b4",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000925,
+        "connect_seconds": 0.000539,
+        "ensure_schema_seconds": 0.003644,
+        "existing_payload_batch_lookup_seconds": 4.3e-05,
+        "index_seconds": 0.07612,
+        "prepare_seconds": 0.201071,
+        "total_seconds": 0.283139
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "398aac1dcadeec761093a886ae2bf5826af6159a5483fef86ecd5c21d9dcf822",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.019538,
+        "existing_payload_lookup_seconds": 4.777777777777778e-06,
+        "index_seconds": 0.07612,
+        "total_seconds": 0.10915777777777777,
+        "write_rows_seconds": 0.013495
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-e3fbbd97e48e",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000925,
+        "connect_seconds": 0.000539,
+        "ensure_schema_seconds": 0.003644,
+        "existing_payload_batch_lookup_seconds": 4.3e-05,
+        "index_seconds": 0.07612,
+        "prepare_seconds": 0.201071,
+        "total_seconds": 0.283139
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "50507b2a629f709af2f65f6f156cf9c70997fc93e7ffaa5dc1407c1d627a9a0a",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.013644,
+        "existing_payload_lookup_seconds": 4.777777777777778e-06,
+        "index_seconds": 0.07612,
+        "total_seconds": 0.09997577777777777,
+        "write_rows_seconds": 0.010207
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-5a2411c5a757",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000925,
+        "connect_seconds": 0.000539,
+        "ensure_schema_seconds": 0.003644,
+        "existing_payload_batch_lookup_seconds": 4.3e-05,
+        "index_seconds": 0.07612,
+        "prepare_seconds": 0.201071,
+        "total_seconds": 0.283139
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "956706bcad9ed4e8a3eac985bfe068f5e0c738b30d53b47509f538debfd49114",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.014739,
+        "existing_payload_lookup_seconds": 4.777777777777778e-06,
+        "index_seconds": 0.07612,
+        "total_seconds": 0.10135677777777777,
+        "write_rows_seconds": 0.010493
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-89fef8ed4d56",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000925,
+        "connect_seconds": 0.000539,
+        "ensure_schema_seconds": 0.003644,
+        "existing_payload_batch_lookup_seconds": 4.3e-05,
+        "index_seconds": 0.07612,
+        "prepare_seconds": 0.201071,
+        "total_seconds": 0.283139
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "c4fbd282683c0448f2181c1f920a487e17b5dccc0da1fb0e700c43ec1278fb78",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.014767,
+        "existing_payload_lookup_seconds": 4.777777777777778e-06,
+        "index_seconds": 0.07612,
+        "total_seconds": 0.10131977777777777,
+        "write_rows_seconds": 0.010428
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-931cac823c96",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000925,
+        "connect_seconds": 0.000539,
+        "ensure_schema_seconds": 0.003644,
+        "existing_payload_batch_lookup_seconds": 4.3e-05,
+        "index_seconds": 0.07612,
+        "prepare_seconds": 0.201071,
+        "total_seconds": 0.283139
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "66bf0047d5584f0e94853a3b25aa1a08ce600c2440d7153a983b640047b07874",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.016927,
+        "existing_payload_lookup_seconds": 4.777777777777778e-06,
+        "total_seconds": 0.016931777777777778
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-e3fbbd97e48e",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000925,
+        "connect_seconds": 0.000539,
+        "ensure_schema_seconds": 0.003644,
+        "existing_payload_batch_lookup_seconds": 4.3e-05,
+        "index_seconds": 0.07612,
+        "prepare_seconds": 0.201071,
+        "total_seconds": 0.283139
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "5d3b9608c40d502b9eb239763c43fdbee0fca158f971071ac4d16271f37854cf",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.013396,
+        "existing_payload_lookup_seconds": 4.777777777777778e-06,
+        "total_seconds": 0.013400777777777777
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-218e014ba6ce",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000925,
+        "connect_seconds": 0.000539,
+        "ensure_schema_seconds": 0.003644,
+        "existing_payload_batch_lookup_seconds": 4.3e-05,
+        "index_seconds": 0.07612,
+        "prepare_seconds": 0.201071,
+        "total_seconds": 0.283139
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "bc03ffe9f7a485d3c58cb2c7155f727a4d9779e85ab45ff8daa8d24c6c5f431f",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.000168,
+        "existing_payload_lookup_seconds": 4.777777777777778e-06,
+        "total_seconds": 0.00017277777777777777
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-5a2411c5a757",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000925,
+        "connect_seconds": 0.000539,
+        "ensure_schema_seconds": 0.003644,
+        "existing_payload_batch_lookup_seconds": 4.3e-05,
+        "index_seconds": 0.07612,
+        "prepare_seconds": 0.201071,
+        "total_seconds": 0.283139
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "2f9a1b44ef7be9e4c43e1b6ee7d68a35f2e6a5a2f5c2cd2199e42ed99705dc94",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.000152,
+        "existing_payload_lookup_seconds": 4.777777777777778e-06,
+        "total_seconds": 0.0001567777777777778
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-89fef8ed4d56",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000925,
+        "connect_seconds": 0.000539,
+        "ensure_schema_seconds": 0.003644,
+        "existing_payload_batch_lookup_seconds": 4.3e-05,
+        "index_seconds": 0.07612,
+        "prepare_seconds": 0.201071,
+        "total_seconds": 0.283139
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "d2153de477d6ada050545c7bc7cf955b92c8b48c7b95426448fbc37afc3a1796",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.00015,
+        "existing_payload_lookup_seconds": 4.777777777777778e-06,
+        "total_seconds": 0.00015477777777777777
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-5a2411c5a757",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000389,
+        "connect_seconds": 0.00073,
+        "ensure_schema_seconds": 0.003682,
+        "existing_payload_batch_lookup_seconds": 4.4e-05,
+        "index_seconds": 0.043318,
+        "prepare_seconds": 0.128832,
+        "total_seconds": 0.177704
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "956706bcad9ed4e8a3eac985bfe068f5e0c738b30d53b47509f538debfd49114",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.014821,
+        "existing_payload_lookup_seconds": 7.333333333333333e-06,
+        "total_seconds": 0.014828333333333334
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-89fef8ed4d56",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000389,
+        "connect_seconds": 0.00073,
+        "ensure_schema_seconds": 0.003682,
+        "existing_payload_batch_lookup_seconds": 4.4e-05,
+        "index_seconds": 0.043318,
+        "prepare_seconds": 0.128832,
+        "total_seconds": 0.177704
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "c4fbd282683c0448f2181c1f920a487e17b5dccc0da1fb0e700c43ec1278fb78",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.014665,
+        "existing_payload_lookup_seconds": 7.333333333333333e-06,
+        "total_seconds": 0.014672333333333332
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-931cac823c96",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000389,
+        "connect_seconds": 0.00073,
+        "ensure_schema_seconds": 0.003682,
+        "existing_payload_batch_lookup_seconds": 4.4e-05,
+        "index_seconds": 0.043318,
+        "prepare_seconds": 0.128832,
+        "total_seconds": 0.177704
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "66bf0047d5584f0e94853a3b25aa1a08ce600c2440d7153a983b640047b07874",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.016755,
+        "existing_payload_lookup_seconds": 7.333333333333333e-06,
+        "total_seconds": 0.016762333333333334
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-e3fbbd97e48e",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000389,
+        "connect_seconds": 0.00073,
+        "ensure_schema_seconds": 0.003682,
+        "existing_payload_batch_lookup_seconds": 4.4e-05,
+        "index_seconds": 0.043318,
+        "prepare_seconds": 0.128832,
+        "total_seconds": 0.177704
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "5d3b9608c40d502b9eb239763c43fdbee0fca158f971071ac4d16271f37854cf",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.013293,
+        "existing_payload_lookup_seconds": 7.333333333333333e-06,
+        "index_seconds": 0.043318,
+        "total_seconds": 0.06676033333333334,
+        "write_rows_seconds": 0.010142
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-5a2411c5a757",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000389,
+        "connect_seconds": 0.00073,
+        "ensure_schema_seconds": 0.003682,
+        "existing_payload_batch_lookup_seconds": 4.4e-05,
+        "index_seconds": 0.043318,
+        "prepare_seconds": 0.128832,
+        "total_seconds": 0.177704
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "2f9a1b44ef7be9e4c43e1b6ee7d68a35f2e6a5a2f5c2cd2199e42ed99705dc94",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 2.8e-05,
+        "existing_payload_lookup_seconds": 7.333333333333333e-06,
+        "index_seconds": 0.043318,
+        "total_seconds": 0.05649733333333334,
+        "write_rows_seconds": 0.013144
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-89fef8ed4d56",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000389,
+        "connect_seconds": 0.00073,
+        "ensure_schema_seconds": 0.003682,
+        "existing_payload_batch_lookup_seconds": 4.4e-05,
+        "index_seconds": 0.043318,
+        "prepare_seconds": 0.128832,
+        "total_seconds": 0.177704
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "d2153de477d6ada050545c7bc7cf955b92c8b48c7b95426448fbc37afc3a1796",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 2.5e-05,
+        "existing_payload_lookup_seconds": 7.333333333333333e-06,
+        "index_seconds": 0.043318,
+        "total_seconds": 0.05668033333333333,
+        "write_rows_seconds": 0.01333
+      },
+      "vector_enabled": false
+    }
+  ],
+  "document": {
+    "section_count": 5,
+    "source_path": "/Users/ravindranathakila/service/realized/trials/chemistry/02_LEARN_CHEMISTRY_RELATIONS_MOLE.md",
+    "title": "Chemistry Relations 02 \u2014 Mole as Counting Conversion"
+  },
+  "encounter_proposal": {
+    "encounters": [
+      {
+        "bullets": [
+          "input: `G`",
+          "input: `c_g`",
+          "output: `C`"
+        ],
+        "candidate_kinds": [
+          "equation",
+          "template",
+          "definition",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_1",
+        "equation_bearing": true,
+        "equations": [
+          "$$ C = G * c_g $$"
+        ],
+        "heading": "1. Reusable substrate",
+        "paragraphs": [
+          "When a total count is obtained by multiplying the number of groups by the count per group, the reusable family is grouped counting.",
+          "The reusable formula is:",
+          "$$ C = G * c_g $$"
+        ],
+        "path": [
+          "Chemistry Relations 02 \u2014 Mole as Counting Conversion",
+          "1. Reusable substrate"
+        ],
+        "sections": [
+          "1. Reusable substrate"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `n`",
+          "input: `N_A`",
+          "output: `N`"
+        ],
+        "candidate_kinds": [
+          "equation",
+          "logic",
+          "template",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_2",
+        "equation_bearing": true,
+        "equations": [
+          "$$ N = n * N_A $$"
+        ],
+        "heading": "2. Particles from moles",
+        "paragraphs": [
+          "Chemistry uses the mole as a grouped-counting law.",
+          "The reusable formula is:",
+          "$$ N = n * N_A $$"
+        ],
+        "path": [
+          "Chemistry Relations 02 \u2014 Mole as Counting Conversion",
+          "2. Particles from moles"
+        ],
+        "sections": [
+          "2. Particles from moles"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `N`",
+          "input: `N_A`",
+          "output: `n`"
+        ],
+        "candidate_kinds": [
+          "equation",
+          "template",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_3",
+        "equation_bearing": true,
+        "equations": [
+          "$$ n = \\frac{N}{N_A} $$"
+        ],
+        "heading": "3. Moles from particles",
+        "paragraphs": [
+          "The inverse use of the same relation is:",
+          "$$ n = \\frac{N}{N_A} $$",
+          "Where:"
+        ],
+        "path": [
+          "Chemistry Relations 02 \u2014 Mole as Counting Conversion",
+          "3. Moles from particles"
+        ],
+        "sections": [
+          "3. Moles from particles"
+        ]
+      },
+      {
+        "bullets": [],
+        "candidate_kinds": [
+          "logic",
+          "definition",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_4",
+        "equation_bearing": false,
+        "equations": [],
+        "heading": "4. Connection to the previous lesson",
+        "paragraphs": [
+          "The mole relation helps express atom conservation more usefully.",
+          "If atoms are conserved across a reaction, then corresponding mole amounts are also constrained by fixed counting relations.",
+          "So counting conversion can sit beneath balancing and stoichiometry."
+        ],
+        "path": [
+          "Chemistry Relations 02 \u2014 Mole as Counting Conversion",
+          "4. Connection to the previous lesson"
+        ],
+        "sections": [
+          "4. Connection to the previous lesson"
+        ]
+      },
+      {
+        "bullets": [],
+        "candidate_kinds": [
+          "logic",
+          "definition",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_5",
+        "equation_bearing": false,
+        "equations": [],
+        "heading": "5. One-sentence summary",
+        "paragraphs": [
+          "Grouped counting is the broader reusable substrate; the mole law is a narrower determinate chemistry law that uses groups of size Avogadro's number to connect particle count and amount of substance."
+        ],
+        "path": [
+          "Chemistry Relations 02 \u2014 Mole as Counting Conversion",
+          "5. One-sentence summary"
+        ],
+        "sections": [
+          "5. One-sentence summary"
+        ]
+      }
+    ],
+    "proposal_id": "proposal_markdownabilitylearningproposal_c9293f",
+    "rationale": "Markdown ability learning proposals are bounded executable-harvest plans grounded in the structural ir.",
+    "source": "llm"
+  },
+  "final_answer": "Learned 9 artifacts from 02_LEARN_CHEMISTRY_RELATIONS_MOLE.md.",
+  "functionalization_proposal": {
+    "proposal_id": "proposal_markdownfunctionalizationproposal_fd0787",
+    "rationale": "Markdown functionalization proposals are bounded executable extractions from already classified encounters.",
+    "source": "llm"
+  },
+  "ir": {
+    "clusters": [
+      {
+        "bullets": [
+          "input: `G`",
+          "input: `c_g`",
+          "output: `C`"
+        ],
+        "code_blocks": [],
+        "equations": [
+          "$$ C = G * c_g $$"
+        ],
+        "heading": "1. Reusable substrate",
+        "paragraphs": [
+          "When a total count is obtained by multiplying the number of groups by the count per group, the reusable family is grouped counting.",
+          "The reusable formula is:",
+          "$$ C = G * c_g $$"
+        ],
+        "path": [
+          "Chemistry Relations 02 \u2014 Mole as Counting Conversion",
+          "1. Reusable substrate"
+        ],
+        "sections": [
+          "1. Reusable substrate"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `n`",
+          "input: `N_A`",
+          "output: `N`"
+        ],
+        "code_blocks": [],
+        "equations": [
+          "$$ N = n * N_A $$"
+        ],
+        "heading": "2. Particles from moles",
+        "paragraphs": [
+          "Chemistry uses the mole as a grouped-counting law.",
+          "The reusable formula is:",
+          "$$ N = n * N_A $$"
+        ],
+        "path": [
+          "Chemistry Relations 02 \u2014 Mole as Counting Conversion",
+          "2. Particles from moles"
+        ],
+        "sections": [
+          "2. Particles from moles"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `N`",
+          "input: `N_A`",
+          "output: `n`"
+        ],
+        "code_blocks": [],
+        "equations": [
+          "$$ n = \\frac{N}{N_A} $$"
+        ],
+        "heading": "3. Moles from particles",
+        "paragraphs": [
+          "The inverse use of the same relation is:",
+          "$$ n = \\frac{N}{N_A} $$",
+          "Where:"
+        ],
+        "path": [
+          "Chemistry Relations 02 \u2014 Mole as Counting Conversion",
+          "3. Moles from particles"
+        ],
+        "sections": [
+          "3. Moles from particles"
+        ]
+      },
+      {
+        "bullets": [],
+        "code_blocks": [],
+        "equations": [],
+        "heading": "4. Connection to the previous lesson",
+        "paragraphs": [
+          "The mole relation helps express atom conservation more usefully.",
+          "If atoms are conserved across a reaction, then corresponding mole amounts are also constrained by fixed counting relations.",
+          "So counting conversion can sit beneath balancing and stoichiometry."
+        ],
+        "path": [
+          "Chemistry Relations 02 \u2014 Mole as Counting Conversion",
+          "4. Connection to the previous lesson"
+        ],
+        "sections": [
+          "4. Connection to the previous lesson"
+        ]
+      },
+      {
+        "bullets": [],
+        "code_blocks": [],
+        "equations": [],
+        "heading": "5. One-sentence summary",
+        "paragraphs": [
+          "Grouped counting is the broader reusable substrate; the mole law is a narrower determinate chemistry law that uses groups of size Avogadro's number to connect particle count and amount of substance."
+        ],
+        "path": [
+          "Chemistry Relations 02 \u2014 Mole as Counting Conversion",
+          "5. One-sentence summary"
+        ],
+        "sections": [
+          "5. One-sentence summary"
+        ]
+      }
+    ],
+    "intro_bullets": [],
+    "intro_paragraphs": [
+      "This document teaches one reusable counting-conversion substrate and then reuses it in later chemistry lessons.",
+      "The point is not only to store a formula, but to preserve the reusable semantic relation between counted entities and amount of substance."
+    ],
+    "section_count": 5,
+    "source_path": "/Users/ravindranathakila/service/realized/trials/chemistry/02_LEARN_CHEMISTRY_RELATIONS_MOLE.md",
+    "title": "Chemistry Relations 02 \u2014 Mole as Counting Conversion"
+  },
+  "learned_artifacts": [
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-02-mole-as-countin_cba6b4",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Grouped Counting?",
+      "related_artifact_ids": [],
+      "representation": "yaml",
+      "source_sections": [],
+      "title": "Chemistry Relations 02 \u2014 Mole as Counting Conversion / Chemistry Relations 02 4 Mole as Counting Conversion"
+    },
+    {
+      "artifact_id": "artifact-skill-e3fbbd97e48e",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Grouped Counting?",
+      "related_artifact_ids": [
+        "artifact_knowledge-chemistry-relations-02-mole-as-countin_cba6b4"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "1. Reusable substrate"
+      ],
+      "title": "Chemistry Relations 02 Mole as Counting Conversion / Grouped Counting"
+    },
+    {
+      "artifact_id": "artifact-skill-5a2411c5a757",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Particles from moles?",
+      "related_artifact_ids": [
+        "artifact-skill-e3fbbd97e48e"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "2. Particles from moles"
+      ],
+      "title": "Chemistry Relations 02 \u2014 Mole as Counting Conversion / Particles from moles"
+    },
+    {
+      "artifact_id": "artifact-skill-89fef8ed4d56",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Moles from particles?",
+      "related_artifact_ids": [
+        "artifact-skill-e3fbbd97e48e"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "3. Moles from particles"
+      ],
+      "title": "Chemistry Relations 02 \u2014 Mole as Counting Conversion / Moles from particles"
+    },
+    {
+      "artifact_id": "artifact-skill-931cac823c96",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Connection to the previous lesson?",
+      "related_artifact_ids": [
+        "artifact-skill-e3fbbd97e48e"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "4. Connection to the previous lesson"
+      ],
+      "title": "Chemistry Relations 02 \u2014 Mole as Counting Conversion / Connection to the previous lesson"
+    },
+    {
+      "artifact_id": "artifact-skill-e3fbbd97e48e",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Grouped Counting?",
+      "related_artifact_ids": [],
+      "representation": "yaml",
+      "source_sections": [
+        "5. One-sentence summary"
+      ],
+      "title": "Chemistry Relations 02 Mole as Counting Conversion / Grouped Counting"
+    },
+    {
+      "artifact_id": "artifact-skill-218e014ba6ce",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate C from G, c_g?",
+      "related_artifact_ids": [],
+      "representation": "python_script",
+      "source_sections": [
+        "1. Reusable substrate"
+      ],
+      "title": "Chemistry Relations 02 \u2014 Mole as Counting Conversion / Python Ability"
+    },
+    {
+      "artifact_id": "artifact-skill-5a2411c5a757",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate N from n, N_A?",
+      "related_artifact_ids": [],
+      "representation": "python_script",
+      "source_sections": [
+        "2. Particles from moles"
+      ],
+      "title": "Chemistry Relations 02 \u2014 Mole as Counting Conversion / Particles From Moles"
+    },
+    {
+      "artifact_id": "artifact-skill-89fef8ed4d56",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate n from N, N_A?",
+      "related_artifact_ids": [],
+      "representation": "python_script",
+      "source_sections": [
+        "3. Moles from particles"
+      ],
+      "title": "Chemistry Relations 02 \u2014 Mole as Counting Conversion / Moles From Particles"
+    }
+  ],
+  "learned_count": 9,
+  "learning_context": {
+    "applied_delta_count": 8,
+    "canonical_title": "Chemistry Relations 02 \u2014 Mole as Counting Conversion",
+    "context_path": "/Users/ravindranathakila/service/realized/trials/chemistry/corpus/chemistry-relations-02-mole-as-counting-conversion/context.json",
+    "corpus_root": "/Users/ravindranathakila/service/realized/trials/chemistry",
+    "delta_id": "delta_chemistry-relations-02-mole-as-counting-conversi_d6706e",
+    "delta_path": "/Users/ravindranathakila/service/realized/trials/chemistry/corpus/chemistry-relations-02-mole-as-counting-conversion/deltas/delta_chemistry-relations-02-mole-as-counting-conversi_d6706e.json",
+    "matched_existing_subject_id": "chemistry-relations-02-mole-as-counting-conversion",
+    "source_id": "source_users-ravindranathakila-service-realized-trials-_295c24bd24",
+    "source_record_path": "/Users/ravindranathakila/service/realized/trials/chemistry/corpus/chemistry-relations-02-mole-as-counting-conversion/sources/source_users-ravindranathakila-service-realized-trials-_295c24bd24.json",
+    "subject_family": "Chemistry Relations 02 \u2014 Mole as Counting Conversion",
+    "subject_id": "chemistry-relations-02-mole-as-counting-conversion",
+    "unit_count": 10
+  },
+  "parsing_failures": [],
+  "proposal": {
+    "proposal_id": "proposal_markdownlearningproposal_e35742",
+    "rationale": "Markdown learning proposals are bounded ingestion plans for external-source harvest and remain governed before artifact admission.",
+    "source": "llm"
+  },
+  "run_id": "run_8941e0c8_e35e91",
+  "run_outcome": "completed",
+  "supported_executors": [
+    "python3"
+  ]
+}

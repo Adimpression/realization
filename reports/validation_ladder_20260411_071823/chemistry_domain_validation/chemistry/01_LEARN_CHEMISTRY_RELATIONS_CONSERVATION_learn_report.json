@@ -1,0 +1,825 @@
+{
+  "artifact_persistence": [
+    {
+      "artifact_id": "artifact-skill-4ac59a883ef2",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000553,
+        "connect_seconds": 0.000464,
+        "ensure_schema_seconds": 0.003532,
+        "existing_payload_batch_lookup_seconds": 3.9e-05,
+        "index_seconds": 0.084042,
+        "prepare_seconds": 0.215146,
+        "total_seconds": 0.30476
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "88b65e3394333200eb486448b996cd2a04b15269ab4a4f08c76efb6fe68a036d",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.018288,
+        "existing_payload_lookup_seconds": 4.333333333333333e-06,
+        "index_seconds": 0.084042,
+        "total_seconds": 0.11494633333333334,
+        "write_rows_seconds": 0.012612
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-d06778fa8a69",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000553,
+        "connect_seconds": 0.000464,
+        "ensure_schema_seconds": 0.003532,
+        "existing_payload_batch_lookup_seconds": 3.9e-05,
+        "index_seconds": 0.084042,
+        "prepare_seconds": 0.215146,
+        "total_seconds": 0.30476
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "81ba428997e410c6c3736bcf8beb6c6caadcc49c67a7fd7263cacdc1e7d640e5",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.013115,
+        "existing_payload_lookup_seconds": 4.333333333333333e-06,
+        "total_seconds": 0.013119333333333334
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-97dbebf412cf",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000553,
+        "connect_seconds": 0.000464,
+        "ensure_schema_seconds": 0.003532,
+        "existing_payload_batch_lookup_seconds": 3.9e-05,
+        "index_seconds": 0.084042,
+        "prepare_seconds": 0.215146,
+        "total_seconds": 0.30476
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "240b52f2950b8bb71841e3821eeb7666c2eb1e66f21fc2f4fc01cfe6ef90165e",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.016308,
+        "existing_payload_lookup_seconds": 4.333333333333333e-06,
+        "total_seconds": 0.01631233333333333
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-4f4a6d771717",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000553,
+        "connect_seconds": 0.000464,
+        "ensure_schema_seconds": 0.003532,
+        "existing_payload_batch_lookup_seconds": 3.9e-05,
+        "index_seconds": 0.084042,
+        "prepare_seconds": 0.215146,
+        "total_seconds": 0.30476
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "fa81930fb31ee74d9cfd753f61754b90270b10e6caf2ff27a0f2305c8b0909cb",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.015609,
+        "existing_payload_lookup_seconds": 4.333333333333333e-06,
+        "total_seconds": 0.015613333333333333
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-01-conservation-of_147a3b",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000553,
+        "connect_seconds": 0.000464,
+        "ensure_schema_seconds": 0.003532,
+        "existing_payload_batch_lookup_seconds": 3.9e-05,
+        "index_seconds": 0.084042,
+        "prepare_seconds": 0.215146,
+        "total_seconds": 0.30476
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "e9c89738dcf6a648161175f577e9ae8b03302e36483ed20b4f9fe5c53e04363b",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.01053,
+        "existing_payload_lookup_seconds": 4.333333333333333e-06,
+        "index_seconds": 0.084042,
+        "total_seconds": 0.10382133333333333,
+        "write_rows_seconds": 0.009245
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-d06778fa8a69",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000553,
+        "connect_seconds": 0.000464,
+        "ensure_schema_seconds": 0.003532,
+        "existing_payload_batch_lookup_seconds": 3.9e-05,
+        "index_seconds": 0.084042,
+        "prepare_seconds": 0.215146,
+        "total_seconds": 0.30476
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "ad5719c4e6d2d6cd1460b2af6970a856a750a2ca5d6e7f8e9a45282a9a12c056",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.012999,
+        "existing_payload_lookup_seconds": 4.333333333333333e-06,
+        "index_seconds": 0.084042,
+        "total_seconds": 0.10642633333333334,
+        "write_rows_seconds": 0.009381
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-0bfe036e5f28",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000553,
+        "connect_seconds": 0.000464,
+        "ensure_schema_seconds": 0.003532,
+        "existing_payload_batch_lookup_seconds": 3.9e-05,
+        "index_seconds": 0.084042,
+        "prepare_seconds": 0.215146,
+        "total_seconds": 0.30476
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "e8063761c132d8a71273e848f925778fe7567786cfc71fb1f79e22b281e3bffd",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.000168,
+        "existing_payload_lookup_seconds": 4.333333333333333e-06,
+        "total_seconds": 0.0001723333333333333
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-97dbebf412cf",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000553,
+        "connect_seconds": 0.000464,
+        "ensure_schema_seconds": 0.003532,
+        "existing_payload_batch_lookup_seconds": 3.9e-05,
+        "index_seconds": 0.084042,
+        "prepare_seconds": 0.215146,
+        "total_seconds": 0.30476
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "cd8110b4a7de4b603050b5e2b36ff56ac9c7115884c5b5b15364e1a4d0850e2e",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.000154,
+        "existing_payload_lookup_seconds": 4.333333333333333e-06,
+        "index_seconds": 0.084042,
+        "total_seconds": 0.10002533333333334,
+        "write_rows_seconds": 0.015825
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-4f4a6d771717",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000553,
+        "connect_seconds": 0.000464,
+        "ensure_schema_seconds": 0.003532,
+        "existing_payload_batch_lookup_seconds": 3.9e-05,
+        "index_seconds": 0.084042,
+        "prepare_seconds": 0.215146,
+        "total_seconds": 0.30476
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "708a1d29d4ad411d4b8ce7aff50ccc6b3eb3ed1d1f1172a14e4b21335152330c",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.000151,
+        "existing_payload_lookup_seconds": 4.333333333333333e-06,
+        "index_seconds": 0.084042,
+        "total_seconds": 0.09977233333333334,
+        "write_rows_seconds": 0.015575
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-97dbebf412cf",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000315,
+        "connect_seconds": 0.000799,
+        "ensure_schema_seconds": 0.003637,
+        "existing_payload_batch_lookup_seconds": 3.8e-05,
+        "index_seconds": 0.039068,
+        "prepare_seconds": 0.110176,
+        "total_seconds": 0.154623
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "240b52f2950b8bb71841e3821eeb7666c2eb1e66f21fc2f4fc01cfe6ef90165e",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.016375,
+        "existing_payload_lookup_seconds": 6.333333333333333e-06,
+        "index_seconds": 0.039068,
+        "total_seconds": 0.06720433333333334,
+        "write_rows_seconds": 0.011755
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-4f4a6d771717",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000315,
+        "connect_seconds": 0.000799,
+        "ensure_schema_seconds": 0.003637,
+        "existing_payload_batch_lookup_seconds": 3.8e-05,
+        "index_seconds": 0.039068,
+        "prepare_seconds": 0.110176,
+        "total_seconds": 0.154623
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "fa81930fb31ee74d9cfd753f61754b90270b10e6caf2ff27a0f2305c8b0909cb",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.015539,
+        "existing_payload_lookup_seconds": 6.333333333333333e-06,
+        "index_seconds": 0.039068,
+        "total_seconds": 0.06552333333333334,
+        "write_rows_seconds": 0.01091
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-01-conservation-of_147a3b",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000315,
+        "connect_seconds": 0.000799,
+        "ensure_schema_seconds": 0.003637,
+        "existing_payload_batch_lookup_seconds": 3.8e-05,
+        "index_seconds": 0.039068,
+        "prepare_seconds": 0.110176,
+        "total_seconds": 0.154623
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "e9c89738dcf6a648161175f577e9ae8b03302e36483ed20b4f9fe5c53e04363b",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.01046,
+        "existing_payload_lookup_seconds": 6.333333333333333e-06,
+        "total_seconds": 0.010466333333333334
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-d06778fa8a69",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000315,
+        "connect_seconds": 0.000799,
+        "ensure_schema_seconds": 0.003637,
+        "existing_payload_batch_lookup_seconds": 3.8e-05,
+        "index_seconds": 0.039068,
+        "prepare_seconds": 0.110176,
+        "total_seconds": 0.154623
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "ad5719c4e6d2d6cd1460b2af6970a856a750a2ca5d6e7f8e9a45282a9a12c056",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.012851,
+        "existing_payload_lookup_seconds": 6.333333333333333e-06,
+        "total_seconds": 0.012857333333333333
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-97dbebf412cf",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000315,
+        "connect_seconds": 0.000799,
+        "ensure_schema_seconds": 0.003637,
+        "existing_payload_batch_lookup_seconds": 3.8e-05,
+        "index_seconds": 0.039068,
+        "prepare_seconds": 0.110176,
+        "total_seconds": 0.154623
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "cd8110b4a7de4b603050b5e2b36ff56ac9c7115884c5b5b15364e1a4d0850e2e",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 2.9e-05,
+        "existing_payload_lookup_seconds": 6.333333333333333e-06,
+        "total_seconds": 3.5333333333333336e-05
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-4f4a6d771717",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000315,
+        "connect_seconds": 0.000799,
+        "ensure_schema_seconds": 0.003637,
+        "existing_payload_batch_lookup_seconds": 3.8e-05,
+        "index_seconds": 0.039068,
+        "prepare_seconds": 0.110176,
+        "total_seconds": 0.154623
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "708a1d29d4ad411d4b8ce7aff50ccc6b3eb3ed1d1f1172a14e4b21335152330c",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 2.7e-05,
+        "existing_payload_lookup_seconds": 6.333333333333333e-06,
+        "total_seconds": 3.3333333333333335e-05
+      },
+      "vector_enabled": false
+    }
+  ],
+  "document": {
+    "section_count": 5,
+    "source_path": "/Users/ravindranathakila/service/realized/trials/chemistry/01_LEARN_CHEMISTRY_RELATIONS_CONSERVATION.md",
+    "title": "Chemistry Relations 01 \u2014 Conservation of Amount"
+  },
+  "encounter_proposal": {
+    "encounters": [
+      {
+        "bullets": [
+          "input: `T_before`",
+          "output: `T_after`"
+        ],
+        "candidate_kinds": [
+          "equation",
+          "logic",
+          "template",
+          "definition",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_1",
+        "equation_bearing": true,
+        "equations": [
+          "$$ T_{before} = T_{after} $$"
+        ],
+        "heading": "1. Reusable substrate",
+        "paragraphs": [
+          "When the total amount before a process equals the total amount after a process, the reusable family is conservation.",
+          "The reusable formula is:",
+          "$$ T_{before} = T_{after} $$"
+        ],
+        "path": [
+          "Chemistry Relations 01 \u2014 Conservation of Amount",
+          "1. Reusable substrate"
+        ],
+        "sections": [
+          "1. Reusable substrate"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `m_reactants`",
+          "output: `m_products`"
+        ],
+        "candidate_kinds": [
+          "equation",
+          "logic",
+          "template",
+          "definition",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_2",
+        "equation_bearing": true,
+        "equations": [
+          "$$ m_{reactants} = m_{products} $$"
+        ],
+        "heading": "2. Mass conservation in a reaction",
+        "paragraphs": [
+          "Mass conservation is a conservation law in chemistry.",
+          "The reusable formula is:",
+          "$$ m_{reactants} = m_{products} $$"
+        ],
+        "path": [
+          "Chemistry Relations 01 \u2014 Conservation of Amount",
+          "2. Mass conservation in a reaction"
+        ],
+        "sections": [
+          "2. Mass conservation in a reaction"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `N_before(E)`",
+          "output: `N_after(E)`"
+        ],
+        "candidate_kinds": [
+          "equation",
+          "template",
+          "definition",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_3",
+        "equation_bearing": true,
+        "equations": [
+          "$$ N_{before}(E) = N_{after}(E) $$"
+        ],
+        "heading": "3. Atom conservation in balancing",
+        "paragraphs": [
+          "For each element, the number of atoms is conserved when an equation is balanced.",
+          "The reusable formula is:",
+          "$$ N_{before}(E) = N_{after}(E) $$"
+        ],
+        "path": [
+          "Chemistry Relations 01 \u2014 Conservation of Amount",
+          "3. Atom conservation in balancing"
+        ],
+        "sections": [
+          "3. Atom conservation in balancing"
+        ]
+      },
+      {
+        "bullets": [
+          "mass conservation preserves total mass",
+          "atom conservation preserves count of each element in a balanced equation"
+        ],
+        "candidate_kinds": [
+          "logic",
+          "definition",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_4",
+        "equation_bearing": false,
+        "equations": [],
+        "heading": "4. Distinguishing the laws",
+        "paragraphs": [
+          "Mass conservation and atom conservation belong to the same conservation family, but they are not the same law.",
+          "If a prompt asks for one of them, do not collapse it into the other."
+        ],
+        "path": [
+          "Chemistry Relations 01 \u2014 Conservation of Amount",
+          "4. Distinguishing the laws"
+        ],
+        "sections": [
+          "4. Distinguishing the laws"
+        ]
+      },
+      {
+        "bullets": [],
+        "candidate_kinds": [
+          "logic",
+          "definition",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_5",
+        "equation_bearing": false,
+        "equations": [],
+        "heading": "5. One-sentence summary",
+        "paragraphs": [
+          "Conservation is the broader reusable substrate; mass conservation and atom conservation are narrower determinate chemistry laws that reuse that substrate with different preserved quantities."
+        ],
+        "path": [
+          "Chemistry Relations 01 \u2014 Conservation of Amount",
+          "5. One-sentence summary"
+        ],
+        "sections": [
+          "5. One-sentence summary"
+        ]
+      }
+    ],
+    "proposal_id": "proposal_markdownabilitylearningproposal_d35f7a",
+    "rationale": "Markdown ability learning proposals are bounded executable-harvest plans grounded in the structural ir.",
+    "source": "llm"
+  },
+  "final_answer": "Learned 9 artifacts from 01_LEARN_CHEMISTRY_RELATIONS_CONSERVATION.md.",
+  "functionalization_proposal": {
+    "proposal_id": "proposal_markdownfunctionalizationproposal_cff5cb",
+    "rationale": "Markdown functionalization proposals are bounded executable extractions from already classified encounters.",
+    "source": "llm"
+  },
+  "ir": {
+    "clusters": [
+      {
+        "bullets": [
+          "input: `T_before`",
+          "output: `T_after`"
+        ],
+        "code_blocks": [],
+        "equations": [
+          "$$ T_{before} = T_{after} $$"
+        ],
+        "heading": "1. Reusable substrate",
+        "paragraphs": [
+          "When the total amount before a process equals the total amount after a process, the reusable family is conservation.",
+          "The reusable formula is:",
+          "$$ T_{before} = T_{after} $$"
+        ],
+        "path": [
+          "Chemistry Relations 01 \u2014 Conservation of Amount",
+          "1. Reusable substrate"
+        ],
+        "sections": [
+          "1. Reusable substrate"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `m_reactants`",
+          "output: `m_products`"
+        ],
+        "code_blocks": [],
+        "equations": [
+          "$$ m_{reactants} = m_{products} $$"
+        ],
+        "heading": "2. Mass conservation in a reaction",
+        "paragraphs": [
+          "Mass conservation is a conservation law in chemistry.",
+          "The reusable formula is:",
+          "$$ m_{reactants} = m_{products} $$"
+        ],
+        "path": [
+          "Chemistry Relations 01 \u2014 Conservation of Amount",
+          "2. Mass conservation in a reaction"
+        ],
+        "sections": [
+          "2. Mass conservation in a reaction"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `N_before(E)`",
+          "output: `N_after(E)`"
+        ],
+        "code_blocks": [],
+        "equations": [
+          "$$ N_{before}(E) = N_{after}(E) $$"
+        ],
+        "heading": "3. Atom conservation in balancing",
+        "paragraphs": [
+          "For each element, the number of atoms is conserved when an equation is balanced.",
+          "The reusable formula is:",
+          "$$ N_{before}(E) = N_{after}(E) $$"
+        ],
+        "path": [
+          "Chemistry Relations 01 \u2014 Conservation of Amount",
+          "3. Atom conservation in balancing"
+        ],
+        "sections": [
+          "3. Atom conservation in balancing"
+        ]
+      },
+      {
+        "bullets": [
+          "mass conservation preserves total mass",
+          "atom conservation preserves count of each element in a balanced equation"
+        ],
+        "code_blocks": [],
+        "equations": [],
+        "heading": "4. Distinguishing the laws",
+        "paragraphs": [
+          "Mass conservation and atom conservation belong to the same conservation family, but they are not the same law.",
+          "If a prompt asks for one of them, do not collapse it into the other."
+        ],
+        "path": [
+          "Chemistry Relations 01 \u2014 Conservation of Amount",
+          "4. Distinguishing the laws"
+        ],
+        "sections": [
+          "4. Distinguishing the laws"
+        ]
+      },
+      {
+        "bullets": [],
+        "code_blocks": [],
+        "equations": [],
+        "heading": "5. One-sentence summary",
+        "paragraphs": [
+          "Conservation is the broader reusable substrate; mass conservation and atom conservation are narrower determinate chemistry laws that reuse that substrate with different preserved quantities."
+        ],
+        "path": [
+          "Chemistry Relations 01 \u2014 Conservation of Amount",
+          "5. One-sentence summary"
+        ],
+        "sections": [
+          "5. One-sentence summary"
+        ]
+      }
+    ],
+    "intro_bullets": [],
+    "intro_paragraphs": [
+      "This document teaches one reusable quantity-preservation substrate and then reuses it in later chemistry lessons.",
+      "The point is not only to store separate formulas, but to preserve the reusable semantic relation between conserved amount and later chemistry laws."
+    ],
+    "section_count": 5,
+    "source_path": "/Users/ravindranathakila/service/realized/trials/chemistry/01_LEARN_CHEMISTRY_RELATIONS_CONSERVATION.md",
+    "title": "Chemistry Relations 01 \u2014 Conservation of Amount"
+  },
+  "learned_artifacts": [
+    {
+      "artifact_id": "artifact-skill-4ac59a883ef2",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Conservation?",
+      "related_artifact_ids": [],
+      "representation": "yaml",
+      "source_sections": [],
+      "title": "Chemistry Relations 01 \u2014 Conservation of Amount / Chemistry Relations 01 Conservation of Amount"
+    },
+    {
+      "artifact_id": "artifact-skill-d06778fa8a69",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Conservation?",
+      "related_artifact_ids": [
+        "artifact-skill-97dbebf412cf"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "1. Reusable substrate"
+      ],
+      "title": "Chemistry Relations 01 Conservation of Amount / Conservation"
+    },
+    {
+      "artifact_id": "artifact-skill-97dbebf412cf",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Mass conservation in a reaction?",
+      "related_artifact_ids": [
+        "artifact-skill-4ac59a883ef2"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "2. Mass conservation in a reaction"
+      ],
+      "title": "Chemistry Relations 01 \u2014 Conservation of Amount / Mass conservation in a reaction"
+    },
+    {
+      "artifact_id": "artifact-skill-4f4a6d771717",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Atom conservation in balancing?",
+      "related_artifact_ids": [
+        "artifact-skill-97dbebf412cf"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "3. Atom conservation in balancing"
+      ],
+      "title": "Chemistry Relations 01 \u2014 Conservation of Amount / Atom conservation in balancing"
+    },
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-01-conservation-of_147a3b",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Chemistry Relations 01 Conservation Of Amount?",
+      "related_artifact_ids": [
+        "artifact-skill-97dbebf412cf"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "4. Distinguishing the laws"
+      ],
+      "title": "Chemistry Relations 01 Conservation of Amount"
+    },
+    {
+      "artifact_id": "artifact-skill-d06778fa8a69",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Conservation?",
+      "related_artifact_ids": [],
+      "representation": "yaml",
+      "source_sections": [
+        "5. One-sentence summary"
+      ],
+      "title": "Chemistry Relations 01 Conservation of Amount / Conservation"
+    },
+    {
+      "artifact_id": "artifact-skill-0bfe036e5f28",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate T_times_before from T_, after?",
+      "related_artifact_ids": [],
+      "representation": "python_script",
+      "source_sections": [
+        "1. Reusable substrate"
+      ],
+      "title": "Chemistry Relations 01 \u2014 Conservation of Amount / Python Ability"
+    },
+    {
+      "artifact_id": "artifact-skill-97dbebf412cf",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate m_times_reactants from m_, products?",
+      "related_artifact_ids": [],
+      "representation": "python_script",
+      "source_sections": [
+        "2. Mass conservation in a reaction"
+      ],
+      "title": "Chemistry Relations 01 \u2014 Conservation of Amount / Mass Conservation In A Reaction"
+    },
+    {
+      "artifact_id": "artifact-skill-4f4a6d771717",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate N_times_before_times_E from N_, after?",
+      "related_artifact_ids": [],
+      "representation": "python_script",
+      "source_sections": [
+        "3. Atom conservation in balancing"
+      ],
+      "title": "Chemistry Relations 01 \u2014 Conservation of Amount / Atom Conservation In Balancing"
+    }
+  ],
+  "learned_count": 9,
+  "learning_context": {
+    "applied_delta_count": 14,
+    "canonical_title": "Chemistry Relations 01 \u2014 Conservation of Amount",
+    "context_path": "/Users/ravindranathakila/service/realized/trials/chemistry/corpus/chemistry-relations-01-conservation-of-amount/context.json",
+    "corpus_root": "/Users/ravindranathakila/service/realized/trials/chemistry",
+    "delta_id": "delta_chemistry-relations-01-conservation-of-amount_19eeb8",
+    "delta_path": "/Users/ravindranathakila/service/realized/trials/chemistry/corpus/chemistry-relations-01-conservation-of-amount/deltas/delta_chemistry-relations-01-conservation-of-amount_19eeb8.json",
+    "matched_existing_subject_id": "chemistry-relations-01-conservation-of-amount",
+    "source_id": "source_users-ravindranathakila-service-realized-trials-_d3ff419c42",
+    "source_record_path": "/Users/ravindranathakila/service/realized/trials/chemistry/corpus/chemistry-relations-01-conservation-of-amount/sources/source_users-ravindranathakila-service-realized-trials-_d3ff419c42.json",
+    "subject_family": "Chemistry Relations 01 \u2014 Conservation of Amount",
+    "subject_id": "chemistry-relations-01-conservation-of-amount",
+    "unit_count": 14
+  },
+  "parsing_failures": [],
+  "proposal": {
+    "proposal_id": "proposal_markdownlearningproposal_d9fcbc",
+    "rationale": "Markdown learning proposals are bounded ingestion plans for external-source harvest and remain governed before artifact admission.",
+    "source": "llm"
+  },
+  "run_id": "run_68adf492_07fcaf",
+  "run_outcome": "completed",
+  "supported_executors": [
+    "python3"
+  ]
+}

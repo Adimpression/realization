@@ -1,0 +1,244 @@
+{
+  "prompt": "Open Google Chrome to `https://example.com`.",
+  "returned_skill_count": 12,
+  "skills": [
+    {
+      "authorities_requested": [
+        "execute"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "browser": "required input value",
+        "url": "required input value"
+      },
+      "kind": "ability",
+      "outputs": {
+        "result": "execution result"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "score": 6,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Device User Capabilities 01 \u2014 Launch Browser At Specific URL / Device User Capabilities 01 Launch Browser At Specific Url"
+    },
+    {
+      "authorities_requested": [
+        "execute",
+        "communicate"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "Chrome": "number",
+        "Google": "number",
+        "tuplestr": "number"
+      },
+      "kind": "ability",
+      "outputs": {
+        "The_times_signature_times_is_times_main_times_url_str_times_browser_str": "number"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier2_connected",
+      "score": 6,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Device User Capabilities 01 \u2014 Launch Browser At Specific URL / Python Function"
+    },
+    {
+      "authorities_requested": [
+        "execute",
+        "communicate"
+      ],
+      "executor_framework": "bash",
+      "inputs": {
+        "payload": "execution input"
+      },
+      "kind": "ability",
+      "outputs": {
+        "result": "execution result"
+      },
+      "representation": "shell_script",
+      "risk_tier": "tier2_connected",
+      "score": 6,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Device User Capabilities 06 \u2014 Search The Web In Browser / Device User Capabilities 06 Search The Web In Browser"
+    },
+    {
+      "authorities_requested": [
+        "execute",
+        "communicate"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "Safari": "number",
+        "tuplestr": "number"
+      },
+      "kind": "ability",
+      "outputs": {
+        "The_times_reusable_times_function_times_signature_times_is_times_main_times_query_str_times_browser_str": "number"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier2_connected",
+      "score": 6,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Device User Capabilities 06 \u2014 Search The Web In Browser / Python Function"
+    },
+    {
+      "authorities_requested": [
+        "execute"
+      ],
+      "executor_framework": "bash",
+      "inputs": {
+        "payload": "execution input"
+      },
+      "kind": "ability",
+      "outputs": {
+        "result": "execution result"
+      },
+      "representation": "shell_script",
+      "risk_tier": "tier1_bounded_transform",
+      "score": 3,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Device User Capabilities 03 \u2014 Open File In Chosen App / Device User Capabilities 03 Open File In Chosen App"
+    },
+    {
+      "authorities_requested": [
+        "execute"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "dictstr_str": "number"
+      },
+      "kind": "ability",
+      "outputs": {
+        "The_times_reusable_times_function_times_signature_times_is_times_main_times_mount_str_relative_path_str_times_app_str_dependencies_tuplestr": "number"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "score": 3,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Device User Capabilities 03 \u2014 Open File In Chosen App / Python Function"
+    },
+    {
+      "authorities_requested": [
+        "execute",
+        "communicate"
+      ],
+      "executor_framework": "bash",
+      "inputs": {
+        "payload": "execution input"
+      },
+      "kind": "ability",
+      "outputs": {
+        "result": "execution result"
+      },
+      "representation": "shell_script",
+      "risk_tier": "tier2_connected",
+      "score": 3,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Device User Capabilities 04 \u2014 Open Folder In Finder / Device User Capabilities 04 Open Folder In Finder"
+    },
+    {
+      "authorities_requested": [
+        "execute"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "tuplestr": "number"
+      },
+      "kind": "ability",
+      "outputs": {
+        "The_times_reusable_times_function_times_signature_times_is_times_main_times_mount_str_relative_path_str": "number"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "score": 3,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Device User Capabilities 04 \u2014 Open Folder In Finder / Python Function"
+    },
+    {
+      "authorities_requested": [
+        "execute"
+      ],
+      "executor_framework": "bash",
+      "inputs": {
+        "payload": "execution input"
+      },
+      "kind": "ability",
+      "outputs": {
+        "result": "execution result"
+      },
+      "representation": "shell_script",
+      "risk_tier": "tier1_bounded_transform",
+      "score": 3,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Device User Capabilities 05 \u2014 Open Terminal At Directory / Device User Capabilities 05 Open Terminal At Directory"
+    },
+    {
+      "authorities_requested": [
+        "execute"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "str": "number",
+        "terminal_app": "number"
+      },
+      "kind": "ability",
+      "outputs": {
+        "The_times_reusable_times_function_times_signature_times_is_times_main_times_mount_str_relative_path_str": "number"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "score": 3,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Device User Capabilities 05 \u2014 Open Terminal At Directory / Python Function"
+    },
+    {
+      "authorities_requested": [
+        "execute"
+      ],
+      "executor_framework": "bash",
+      "inputs": {
+        "payload": "execution input"
+      },
+      "kind": "ability",
+      "outputs": {
+        "result": "execution result"
+      },
+      "representation": "shell_script",
+      "risk_tier": "tier1_bounded_transform",
+      "score": 3,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Device User Capabilities 08 \u2014 Open System Settings Pane / Device User Capabilities 08 Open System Settings Pane"
+    },
+    {
+      "authorities_requested": [
+        "execute"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "dictstr_str": "number"
+      },
+      "kind": "ability",
+      "outputs": {
+        "The_times_reusable_times_function_times_signature_times_is_times_main_times_settings_url_str_times_dependencies_tuplestr": "number"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "score": 3,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Device User Capabilities 08 \u2014 Open System Settings Pane / Python Function"
+    }
+  ],
+  "total_skill_count": 23
+}

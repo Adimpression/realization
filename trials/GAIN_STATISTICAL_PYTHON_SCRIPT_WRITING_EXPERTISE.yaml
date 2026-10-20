@@ -1,0 +1,1644 @@
+Structured learning record for Import Relate Python Script:
+  Description:
+  - the run produced a structured non-achievedness view that can be reused for prior-encounter
+    lookup, decomposition-aware reuse, and composition-aware reuse
+  - 'Knowledge artifact for: How do imports relate to a Python script?'
+  In:
+  - How do imports relate to a Python script?
+  Out: []
+  Metadata:
+    artifact_id: artifact_knowledge-structured-learning-record-for-import-_cb94cd
+    artifact_type: knowledge
+    representation: yaml
+    function_bit: 0
+    boundary_shape:
+    - d*
+    scope: reuse when the same non-achievedness, a paraphrase of it, or a compatible
+      decomposition reappears
+    reusability: broad_reuse
+    admissibility: admitted
+    learning_relation: instance_of_existing
+    created_at: '2026-03-25T11:28:14+00:00'
+    provenance:
+    - not_how-do-imports-relate-to-a-python-script_24fb46
+    related_artifact_ids:
+    - artifact_knowledge-structured-learning-record-for-python-_84003f
+    constraints:
+    - reuse the record only when the active non-achievedness is semantically aligned
+      under ordinary reading
+    - treat structure alone as support only after governance checks for scope, conflict,
+      and stability
+    justification: the run produced a structured non-achievedness view that can be
+      reused for prior-encounter lookup, decomposition-aware reuse, and composition-aware
+      reuse
+    question: How do imports relate to a Python script?
+    structured_learning:
+      encountered_not: Import Relate Python Script
+      goal: How do imports relate to a Python script?
+      intended_object: How do imports relate to a Python script?
+      success_criteria:
+      - the response directly resolves the stated ask without erasing material distinctions
+      actual_realization: the prompt surface is present; no justified final closure
+        has been admitted yet
+      givens: []
+      unknowns: []
+      missing_components:
+      - a justified final realization has not yet been produced
+      distorted_components: []
+      differentiators: []
+      contrastive_cases: []
+      risk_of_wrong_closure: []
+      disallowed_assumptions: []
+      misalignment_types:
+      - completion
+      origin_layers:
+      - model
+      degree: partial
+      remainder_shapes:
+      - missing
+      why_it_matters:
+      - without reducing the remainder, the item cannot be closed with governed confidence
+      minimal_repair: []
+      full_repair:
+      - 'satisfy success condition: the response directly resolves the stated ask
+        without erasing material distinctions'
+      boundary_shape:
+      - d*
+      action_posture: direct_resolution
+      component_nots: []
+      composed_not: Import Relate Python Script Structur Learn Record Import Relate
+        Python Script
+      lookup_keys:
+      - import relate python script
+      - import relate
+      - relate python
+      - python script
+      - import relate python
+      - relate python script
+      - without reduc remainder item cannot clos with govern confidence
+      - without reduc remainder item cannot clo
+      - govern confidence
+      - without reduc
+      - reduc remainder
+      - remainder item
+      - item cannot
+      - cannot clos
+      - clos with
+      - with govern
+      - without reduc remainder
+      - reduc remainder item
+      - remainder item cannot
+      - item cannot clos
+      - cannot clos with
+      - clos with govern
+      - with govern confidence
+      - justifi final realization has not yet been produc
+      notation_yaml: |-
+        "How Do Imports Relate To A Python Script":
+          Description:
+            - "Structured learning declaration for the active non-achievedness."
+            - "Encountered non-achievedness: Import Relate Python Script"
+            - "Components: none"
+            - "Composition: Import Relate Python Script Structur Learn Record Import Relate Python Script"
+            - "Intended object: How do imports relate to a Python script?"
+            - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+            - "Actual realization: the prompt surface is present; no justified final closure has been admitted yet"
+            - "Missing components: a justified final realization has not yet been produced"
+            - "Misalignment types: completion"
+            - "Origin layers: model"
+            - "Degree: partial"
+            - "Remainder shapes: missing"
+            - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+            - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+            - "Action posture: direct_resolution"
+          In:
+            - "Prompt Surface String"
+            - "Encountered Non Achievedness String"
+            - "Lookup Keys Strings"
+            - "[ Component Non Achievedness ]"
+            - "Composed Non Achievedness"
+          Out:
+            - "Prior Encounter"
+            - "[ Reusable Artifact ]"
+            - "[ Reused Non Achievedness ]"
+            - "[ Composed Reuse ]"
+    content:
+      node_id: not_how-do-imports-relate-to-a-python-script_24fb46
+      answer_source: none
+      structured_learning:
+        encountered_not: Import Relate Python Script
+        lookup_keys:
+        - import relate python script
+        - import relate
+        - relate python
+        - python script
+        - import relate python
+        - relate python script
+        - without reduc remainder item cannot clos with govern confidence
+        - without reduc remainder item cannot clo
+        - govern confidence
+        - without reduc
+        - reduc remainder
+        - remainder item
+        - item cannot
+        - cannot clos
+        - clos with
+        - with govern
+        - without reduc remainder
+        - reduc remainder item
+        - remainder item cannot
+        - item cannot clos
+        - cannot clos with
+        - clos with govern
+        - with govern confidence
+        - justifi final realization has not yet been produc
+        component_nots: []
+        composed_not: Import Relate Python Script Structur Learn Record Import Relate
+          Python Script
+        goal: How do imports relate to a Python script?
+        intended_object: How do imports relate to a Python script?
+        success_criteria:
+        - the response directly resolves the stated ask without erasing material distinctions
+        actual_realization: the prompt surface is present; no justified final closure
+          has been admitted yet
+        missing_components:
+        - a justified final realization has not yet been produced
+        misalignment_types:
+        - completion
+        origin_layers:
+        - model
+        degree: partial
+        remainder_shapes:
+        - missing
+        why_it_matters:
+        - without reducing the remainder, the item cannot be closed with governed
+          confidence
+        full_repair:
+        - 'satisfy success condition: the response directly resolves the stated ask
+          without erasing material distinctions'
+        boundary_shape:
+        - d*
+        action_posture: direct_resolution
+        notation_yaml: |-
+          "How Do Imports Relate To A Python Script":
+            Description:
+              - "Structured learning declaration for the active non-achievedness."
+              - "Encountered non-achievedness: Import Relate Python Script"
+              - "Components: none"
+              - "Composition: Import Relate Python Script Structur Learn Record Import Relate Python Script"
+              - "Intended object: How do imports relate to a Python script?"
+              - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+              - "Actual realization: the prompt surface is present; no justified final closure has been admitted yet"
+              - "Missing components: a justified final realization has not yet been produced"
+              - "Misalignment types: completion"
+              - "Origin layers: model"
+              - "Degree: partial"
+              - "Remainder shapes: missing"
+              - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+              - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+              - "Action posture: direct_resolution"
+            In:
+              - "Prompt Surface String"
+              - "Encountered Non Achievedness String"
+              - "Lookup Keys Strings"
+              - "[ Component Non Achievedness ]"
+              - "Composed Non Achievedness"
+            Out:
+              - "Prior Encounter"
+              - "[ Reusable Artifact ]"
+              - "[ Reused Non Achievedness ]"
+              - "[ Composed Reuse ]"
+---
+Direct closure pattern for direct_fact:
+  Description:
+  - the run closed through direct resolution without requiring subordinate achievement
+    decomposition
+  - Reusable closure pattern artifact.
+  In:
+  - Direct Closure Pattern
+  - Direct Fact
+  Out: []
+  Metadata:
+    artifact_id: artifact_closure-pattern-direct-closure-pattern-for-direc_29e7b6
+    artifact_type: closure_pattern
+    representation: json
+    function_bit: 0
+    boundary_shape:
+    - d*
+    scope: bounded direct_fact prompts that are self-contained and conventionally
+      interpreted
+    reusability: broad_reuse
+    admissibility: admitted
+    learning_relation: new_family
+    created_at: '2026-03-25T11:32:07+00:00'
+    provenance:
+    - proposal_discoveryauditproposal_3486a9
+    - not_what-is-statistics_244065
+    constraints:
+    - use only when the question is self-contained and the ordinary interpretation
+      is stable
+    template_schema:
+      preconditions:
+      - the active item matches the artifact scope
+      - the current state is admissible for governed reuse
+      governed_function: keep the item whole and close directly when a stable ordinary
+        reading yields a ready direct answer
+      completion_conditions:
+      - direct resolution is ready
+      - support-bearing answer evidence is attached
+      failure_conditions:
+      - ordinary interpretation is unstable
+      - external evidence is required
+      scope_of_reuse: bounded direct_fact prompts that are self-contained and conventionally
+        interpreted
+      bssc_awareness:
+        admissible_place_in_realization: governed realization state
+        may_not_by_itself_justify:
+        - closure
+        permitted_governed_effect: support closure_pattern reuse without self-justifying
+          closure
+        required_governed_state: active represented non-achievedness with durable
+          state
+      holdon_awareness:
+        diagnostic_use_allowed: true
+        relevant_holdon_blocks_instantiation: true
+        relevant_holdon_conditions:
+        - missing evidence
+        - pause boundary
+        - governance block
+        resumption_condition: resume ordinary use only when the blocking condition
+          is cleared
+    justification: the run closed through direct resolution without requiring subordinate
+      achievement decomposition
+    structured_learning:
+      encountered_not: Direct Closure Pattern Direct Fact
+      goal: Direct closure pattern for direct_fact
+      intended_object: Direct closure pattern for direct_fact
+      success_criteria:
+      - the response directly resolves the stated ask without erasing material distinctions
+      actual_realization: the prompt surface is present; no justified final closure
+        has been admitted yet
+      givens: []
+      unknowns: []
+      missing_components:
+      - a justified final realization has not yet been produced
+      distorted_components: []
+      differentiators: []
+      contrastive_cases: []
+      risk_of_wrong_closure: []
+      disallowed_assumptions: []
+      misalignment_types:
+      - completion
+      origin_layers:
+      - model
+      degree: partial
+      remainder_shapes:
+      - missing
+      why_it_matters:
+      - without reducing the remainder, the item cannot be closed with governed confidence
+      minimal_repair: []
+      full_repair:
+      - 'satisfy success condition: the response directly resolves the stated ask
+        without erasing material distinctions'
+      boundary_shape:
+      - d*
+      action_posture: direct_resolution
+      component_nots:
+      - Direct Closure Pattern
+      - Direct Fact
+      composed_not: Direct Closure Pattern Direct Fact
+      lookup_keys:
+      - direct closure pattern direct fact
+      - direct closure pattern
+      - direct fact
+      - direct closure
+      - closure pattern
+      - pattern direct
+      - closure pattern direct
+      - pattern direct fact
+      - without reduc remainder item cannot clos with govern confidence
+      - without reduc remainder item cannot clo
+      - govern confidence
+      - without reduc
+      - reduc remainder
+      - remainder item
+      - item cannot
+      - cannot clos
+      - clos with
+      - with govern
+      - without reduc remainder
+      - reduc remainder item
+      - remainder item cannot
+      - item cannot clos
+      - cannot clos with
+      - clos with govern
+      notation_yaml: |-
+        "Direct Closure Pattern For Direct Fact":
+          Description:
+            - "Structured learning declaration for the active non-achievedness."
+            - "Encountered non-achievedness: Direct Closure Pattern Direct Fact"
+            - "Components: Direct Closure Pattern, Direct Fact"
+            - "Composition: Direct Closure Pattern Direct Fact"
+            - "Intended object: Direct closure pattern for direct_fact"
+            - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+            - "Actual realization: the prompt surface is present; no justified final closure has been admitted yet"
+            - "Missing components: a justified final realization has not yet been produced"
+            - "Misalignment types: completion"
+            - "Origin layers: model"
+            - "Degree: partial"
+            - "Remainder shapes: missing"
+            - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+            - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+            - "Action posture: direct_resolution"
+          In:
+            - "Prompt Surface String"
+            - "Encountered Non Achievedness String"
+            - "Lookup Keys Strings"
+            - "[ Component Non Achievedness ]"
+            - "Composed Non Achievedness"
+          Out:
+            - "Prior Encounter"
+            - "[ Reusable Artifact ]"
+            - "[ Reused Non Achievedness ]"
+            - "[ Composed Reuse ]"
+    content:
+      answer_kind: direct_fact
+      closure_rule: if direct resolution is ready, keep the item whole and close it
+        after support-bearing evidence is attached
+      node_id: not_what-is-statistics_244065
+      structured_learning:
+        encountered_not: Direct Closure Pattern Direct Fact
+        lookup_keys:
+        - direct closure pattern direct fact
+        - direct closure pattern
+        - direct fact
+        - direct closure
+        - closure pattern
+        - pattern direct
+        - closure pattern direct
+        - pattern direct fact
+        - without reduc remainder item cannot clos with govern confidence
+        - without reduc remainder item cannot clo
+        - govern confidence
+        - without reduc
+        - reduc remainder
+        - remainder item
+        - item cannot
+        - cannot clos
+        - clos with
+        - with govern
+        - without reduc remainder
+        - reduc remainder item
+        - remainder item cannot
+        - item cannot clos
+        - cannot clos with
+        - clos with govern
+        component_nots:
+        - Direct Closure Pattern
+        - Direct Fact
+        composed_not: Direct Closure Pattern Direct Fact
+        goal: Direct closure pattern for direct_fact
+        intended_object: Direct closure pattern for direct_fact
+        success_criteria:
+        - the response directly resolves the stated ask without erasing material distinctions
+        actual_realization: the prompt surface is present; no justified final closure
+          has been admitted yet
+        missing_components:
+        - a justified final realization has not yet been produced
+        misalignment_types:
+        - completion
+        origin_layers:
+        - model
+        degree: partial
+        remainder_shapes:
+        - missing
+        why_it_matters:
+        - without reducing the remainder, the item cannot be closed with governed
+          confidence
+        full_repair:
+        - 'satisfy success condition: the response directly resolves the stated ask
+          without erasing material distinctions'
+        boundary_shape:
+        - d*
+        action_posture: direct_resolution
+        notation_yaml: |-
+          "Direct Closure Pattern For Direct Fact":
+            Description:
+              - "Structured learning declaration for the active non-achievedness."
+              - "Encountered non-achievedness: Direct Closure Pattern Direct Fact"
+              - "Components: Direct Closure Pattern, Direct Fact"
+              - "Composition: Direct Closure Pattern Direct Fact"
+              - "Intended object: Direct closure pattern for direct_fact"
+              - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+              - "Actual realization: the prompt surface is present; no justified final closure has been admitted yet"
+              - "Missing components: a justified final realization has not yet been produced"
+              - "Misalignment types: completion"
+              - "Origin layers: model"
+              - "Degree: partial"
+              - "Remainder shapes: missing"
+              - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+              - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+              - "Action posture: direct_resolution"
+            In:
+              - "Prompt Surface String"
+              - "Encountered Non Achievedness String"
+              - "Lookup Keys Strings"
+              - "[ Component Non Achievedness ]"
+              - "Composed Non Achievedness"
+            Out:
+              - "Prior Encounter"
+              - "[ Reusable Artifact ]"
+              - "[ Reused Non Achievedness ]"
+              - "[ Composed Reuse ]"
+---
+Knowledge note from What is statistics?:
+  Description:
+  - the run produced a bounded answer that may be reusable beyond the exact originating
+    phrasing
+  - 'Knowledge artifact for: What is statistics?'
+  In:
+  - Statistics Knowledge Note Statistics Statistics Science Collect Organiz Analyz
+    Interpret
+  - Present Data Uncover Pattern Draw Inference
+  - Inform Decision Mak
+  Out:
+  - Statistics is the science of collecting, organizing, analyzing, interpreting,
+    and presenting data to uncover patterns, draw inferences, and inform decision
+    making.
+  Metadata:
+    artifact_id: artifact_knowledge-knowledge-note-from-what-is-statistics_ee4f2e
+    artifact_type: knowledge
+    representation: json
+    function_bit: 0
+    boundary_shape:
+    - d*
+    scope: reuse when the same stable fact is asked again under the same ordinary
+      reading
+    reusability: local_reuse
+    admissibility: candidate
+    learning_relation: instance_of_existing
+    created_at: '2026-03-25T11:32:07+00:00'
+    provenance:
+    - proposal_discoveryauditproposal_3486a9
+    - not_what-is-statistics_244065
+    related_artifact_ids:
+    - artifact_knowledge-structured-learning-record-for-python-_84003f
+    - artifact_knowledge-structured-learning-record-for-import-_cb94cd
+    constraints:
+    - reuse only when the fact remains stable and no fresher evidence is required
+    justification: the run produced a bounded answer that may be reusable beyond the
+      exact originating phrasing
+    question: What is statistics?
+    answer: Statistics is the science of collecting, organizing, analyzing, interpreting,
+      and presenting data to uncover patterns, draw inferences, and inform decision
+      making.
+    structured_learning:
+      encountered_not: Statistics Knowledge Note Statistics Statistics Science Collect
+        Organiz Analyz Interpret Present Data Uncover Pattern Draw Inference Inform
+        Decision Mak
+      goal: What is statistics? Knowledge note from What is statistics? Statistics
+        is the science of collecting, organizing, analyzing, interpreting, and presenting
+        data to uncover patterns, draw inferences, and inform decision making.
+      intended_object: What is statistics? Knowledge note from What is statistics?
+        Statistics is the science of collecting, organizing, analyzing, interpreting,
+        and presenting data to uncover patterns, draw inferences, and inform decision
+        making.
+      success_criteria:
+      - the response directly resolves the stated ask without erasing material distinctions
+      actual_realization: the prompt surface is present; no justified final closure
+        has been admitted yet
+      givens: []
+      unknowns: []
+      missing_components:
+      - a justified final realization has not yet been produced
+      distorted_components: []
+      differentiators: []
+      contrastive_cases: []
+      risk_of_wrong_closure: []
+      disallowed_assumptions: []
+      misalignment_types:
+      - completion
+      origin_layers:
+      - model
+      degree: partial
+      remainder_shapes:
+      - missing
+      why_it_matters:
+      - without reducing the remainder, the item cannot be closed with governed confidence
+      minimal_repair: []
+      full_repair:
+      - 'satisfy success condition: the response directly resolves the stated ask
+        without erasing material distinctions'
+      boundary_shape:
+      - d*
+      action_posture: direct_resolution
+      component_nots:
+      - Statistics Knowledge Note Statistics Statistics Science Collect Organiz Analyz
+        Interpret
+      - Present Data Uncover Pattern Draw Inference
+      - Inform Decision Mak
+      composed_not: Statistics Knowledge Note Statistics Statistics Science Collect
+        Organiz Analyz Interpret Present Data Uncover Pattern Draw Inference Inform
+        Decision Mak
+      lookup_keys:
+      - statistics knowledge note statistics statistics science collect organiz analyz
+        interpret present data uncover pattern draw inference inform decision mak
+      - statistics knowledge note statistics statistics science collect organiz analyz
+        interpret
+      - present data uncover pattern draw inference
+      - inform decision mak
+      - statistics knowledge
+      - knowledge note
+      - note statistics
+      - statistics statistics
+      - statistics science
+      - science collect
+      - collect organiz
+      - organiz analyz
+      - analyz interpret
+      - interpret present
+      - present data
+      - data uncover
+      - uncover pattern
+      - pattern draw
+      - draw inference
+      - inference inform
+      - inform decision
+      - decision mak
+      - statistics knowledge note
+      - knowledge note statistics
+      notation_yaml: |-
+        "What Is Statistics Knowledge Note From What Is Statistics Statistics Is The Science Of Collecting Organizing Analyzing Interpreting And Presenting Data To Uncover Patterns Draw Inferences And Inform Decision Making":
+          Description:
+            - "Structured learning declaration for the active non-achievedness."
+            - "Encountered non-achievedness: Statistics Knowledge Note Statistics Statistics Science Collect Organiz Analyz Interpret Present Data Uncover Pattern Draw Inference Inform Decision Mak"
+            - "Components: Statistics Knowledge Note Statistics Statistics Science Collect Organiz Analyz Interpret, Present Data Uncover Pattern Draw Inference, Inform Decision Mak"
+            - "Composition: Statistics Knowledge Note Statistics Statistics Science Collect Organiz Analyz Interpret Present Data Uncover Pattern Draw Inference Inform Decision Mak"
+            - "Intended object: What is statistics? Knowledge note from What is statistics? Statistics is the science of collecting, organizing, analyzing, interpreting, and presenting data to uncover patterns, draw inferences, and inform decision making."
+            - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+            - "Actual realization: the prompt surface is present; no justified final closure has been admitted yet"
+            - "Missing components: a justified final realization has not yet been produced"
+            - "Misalignment types: completion"
+            - "Origin layers: model"
+            - "Degree: partial"
+            - "Remainder shapes: missing"
+            - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+            - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+            - "Action posture: direct_resolution"
+          In:
+            - "Prompt Surface String"
+            - "Encountered Non Achievedness String"
+            - "Lookup Keys Strings"
+            - "[ Component Non Achievedness ]"
+            - "Composed Non Achievedness"
+          Out:
+            - "Prior Encounter"
+            - "[ Reusable Artifact ]"
+            - "[ Reused Non Achievedness ]"
+            - "[ Composed Reuse ]"
+    content:
+      node_id: not_what-is-statistics_244065
+      structured_learning:
+        encountered_not: Statistics Knowledge Note Statistics Statistics Science Collect
+          Organiz Analyz Interpret Present Data Uncover Pattern Draw Inference Inform
+          Decision Mak
+        lookup_keys:
+        - statistics knowledge note statistics statistics science collect organiz
+          analyz interpret present data uncover pattern draw inference inform decision
+          mak
+        - statistics knowledge note statistics statistics science collect organiz
+          analyz interpret
+        - present data uncover pattern draw inference
+        - inform decision mak
+        - statistics knowledge
+        - knowledge note
+        - note statistics
+        - statistics statistics
+        - statistics science
+        - science collect
+        - collect organiz
+        - organiz analyz
+        - analyz interpret
+        - interpret present
+        - present data
+        - data uncover
+        - uncover pattern
+        - pattern draw
+        - draw inference
+        - inference inform
+        - inform decision
+        - decision mak
+        - statistics knowledge note
+        - knowledge note statistics
+        component_nots:
+        - Statistics Knowledge Note Statistics Statistics Science Collect Organiz
+          Analyz Interpret
+        - Present Data Uncover Pattern Draw Inference
+        - Inform Decision Mak
+        composed_not: Statistics Knowledge Note Statistics Statistics Science Collect
+          Organiz Analyz Interpret Present Data Uncover Pattern Draw Inference Inform
+          Decision Mak
+        goal: What is statistics? Knowledge note from What is statistics? Statistics
+          is the science of collecting, organizing, analyzing, interpreting, and presenting
+          data to uncover patterns, draw inferences, and inform decision making.
+        intended_object: What is statistics? Knowledge note from What is statistics?
+          Statistics is the science of collecting, organizing, analyzing, interpreting,
+          and presenting data to uncover patterns, draw inferences, and inform decision
+          making.
+        success_criteria:
+        - the response directly resolves the stated ask without erasing material distinctions
+        actual_realization: the prompt surface is present; no justified final closure
+          has been admitted yet
+        missing_components:
+        - a justified final realization has not yet been produced
+        misalignment_types:
+        - completion
+        origin_layers:
+        - model
+        degree: partial
+        remainder_shapes:
+        - missing
+        why_it_matters:
+        - without reducing the remainder, the item cannot be closed with governed
+          confidence
+        full_repair:
+        - 'satisfy success condition: the response directly resolves the stated ask
+          without erasing material distinctions'
+        boundary_shape:
+        - d*
+        action_posture: direct_resolution
+        notation_yaml: |-
+          "What Is Statistics":
+            Description:
+              - "Structured learning declaration for the active non-achievedness."
+              - "Encountered non-achievedness: Statistics Knowledge Note Statistics Statistics Science Collect Organiz Analyz Interpret Present Data Uncover Pattern Draw Inference Inform Decision Mak"
+              - "Components: Statistics Knowledge Note Statistics Statistics Science Collect Organiz Analyz Interpret, Present Data Uncover Pattern Draw Inference, Inform Decision Mak"
+              - "Composition: Statistics Knowledge Note Statistics Statistics Science Collect Organiz Analyz Interpret Present Data Uncover Pattern Draw Inference Inform Decision Mak"
+              - "Intended object: What is statistics? Knowledge note from What is statistics? Statistics is the science of collecting, organizing, analyzing, interpreting, and presenting data to uncover patterns, draw inferences, and inform decision making."
+              - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+              - "Actual realization: the prompt surface is present; no justified final closure has been admitted yet"
+              - "Missing components: a justified final realization has not yet been produced"
+              - "Misalignment types: completion"
+              - "Origin layers: model"
+              - "Degree: partial"
+              - "Remainder shapes: missing"
+              - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+              - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+              - "Action posture: direct_resolution"
+            In:
+              - "Prompt Surface String"
+              - "Encountered Non Achievedness String"
+              - "Lookup Keys Strings"
+              - "[ Component Non Achievedness ]"
+              - "Composed Non Achievedness"
+            Out:
+              - "Prior Encounter"
+              - "[ Reusable Artifact ]"
+              - "[ Reused Non Achievedness ]"
+              - "[ Composed Reuse ]"
+---
+Structured learning record for Statistics:
+  Description:
+  - the run produced a structured non-achievedness view that can be reused for prior-encounter
+    lookup, decomposition-aware reuse, and composition-aware reuse
+  - 'Knowledge artifact for: What is statistics?'
+  In:
+  - What is statistics?
+  Out:
+  - Statistics is the science of collecting, organizing, analyzing, interpreting,
+    and presenting data to uncover patterns, draw inferences, and inform decision
+    making.
+  Metadata:
+    artifact_id: artifact_knowledge-structured-learning-record-for-statist_29c3b1
+    artifact_type: knowledge
+    representation: yaml
+    function_bit: 0
+    boundary_shape:
+    - d*
+    scope: reuse when the same non-achievedness, a paraphrase of it, or a compatible
+      decomposition reappears
+    reusability: broad_reuse
+    admissibility: admitted
+    learning_relation: instance_of_existing
+    created_at: '2026-03-25T11:32:12+00:00'
+    provenance:
+    - not_what-is-statistics_244065
+    - artifact_closure-pattern-direct-closure-pattern-for-direc_29e7b6
+    - artifact_knowledge-knowledge-note-from-what-is-statistics_ee4f2e
+    related_artifact_ids:
+    - artifact_closure-pattern-direct-closure-pattern-for-direc_29e7b6
+    - artifact_knowledge-knowledge-note-from-what-is-statistics_ee4f2e
+    constraints:
+    - reuse the record only when the active non-achievedness is semantically aligned
+      under ordinary reading
+    - treat structure alone as support only after governance checks for scope, conflict,
+      and stability
+    justification: the run produced a structured non-achievedness view that can be
+      reused for prior-encounter lookup, decomposition-aware reuse, and composition-aware
+      reuse
+    question: What is statistics?
+    answer: Statistics is the science of collecting, organizing, analyzing, interpreting,
+      and presenting data to uncover patterns, draw inferences, and inform decision
+      making.
+    structured_learning:
+      encountered_not: Statistics
+      goal: What is statistics?
+      intended_object: What is statistics?
+      success_criteria:
+      - the response directly resolves the stated ask without erasing material distinctions
+      actual_realization: the prompt surface is present; no justified final closure
+        has been admitted yet
+      givens: []
+      unknowns: []
+      missing_components:
+      - a justified final realization has not yet been produced
+      distorted_components: []
+      differentiators: []
+      contrastive_cases: []
+      risk_of_wrong_closure: []
+      disallowed_assumptions: []
+      misalignment_types:
+      - completion
+      origin_layers:
+      - model
+      degree: partial
+      remainder_shapes:
+      - missing
+      why_it_matters:
+      - without reducing the remainder, the item cannot be closed with governed confidence
+      minimal_repair: []
+      full_repair:
+      - 'satisfy success condition: the response directly resolves the stated ask
+        without erasing material distinctions'
+      boundary_shape:
+      - d*
+      action_posture: direct_resolution
+      component_nots: []
+      composed_not: Statistics Structur Learn Record Statistics Statistics Science
+        Collect Organiz Analyz Interpret Present Data Uncover Pattern Draw Inference
+        Inform Decision Mak
+      lookup_keys:
+      - statistics
+      - without reduc remainder item cannot clos with govern confidence
+      - without reduc remainder item cannot clo
+      - govern confidence
+      - without reduc
+      - reduc remainder
+      - remainder item
+      - item cannot
+      - cannot clos
+      - clos with
+      - with govern
+      - without reduc remainder
+      - reduc remainder item
+      - remainder item cannot
+      - item cannot clos
+      - cannot clos with
+      - clos with govern
+      - with govern confidence
+      - justifi final realization has not yet been produc
+      - justifi final
+      - final realization
+      - realization has
+      - has not
+      - not yet
+      notation_yaml: |-
+        "What Is Statistics":
+          Description:
+            - "Structured learning declaration for the active non-achievedness."
+            - "Encountered non-achievedness: Statistics"
+            - "Components: none"
+            - "Composition: Statistics Structur Learn Record Statistics Statistics Science Collect Organiz Analyz Interpret Present Data Uncover Pattern Draw Inference Inform Decision Mak"
+            - "Intended object: What is statistics?"
+            - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+            - "Actual realization: the prompt surface is present; no justified final closure has been admitted yet"
+            - "Missing components: a justified final realization has not yet been produced"
+            - "Misalignment types: completion"
+            - "Origin layers: model"
+            - "Degree: partial"
+            - "Remainder shapes: missing"
+            - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+            - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+            - "Action posture: direct_resolution"
+          In:
+            - "Prompt Surface String"
+            - "Encountered Non Achievedness String"
+            - "Lookup Keys Strings"
+            - "[ Component Non Achievedness ]"
+            - "Composed Non Achievedness"
+          Out:
+            - "Prior Encounter"
+            - "[ Reusable Artifact ]"
+            - "[ Reused Non Achievedness ]"
+            - "[ Composed Reuse ]"
+    content:
+      node_id: not_what-is-statistics_244065
+      answer_source: direct_resolution
+      answer_source_artifact_id: artifact_knowledge-knowledge-note-from-what-is-statistics_ee4f2e
+      answer_source_artifact_title: Knowledge note from What is statistics?
+      answer_reuse_preference: same_composed_family
+      structured_learning:
+        encountered_not: Statistics
+        lookup_keys:
+        - statistics
+        - without reduc remainder item cannot clos with govern confidence
+        - without reduc remainder item cannot clo
+        - govern confidence
+        - without reduc
+        - reduc remainder
+        - remainder item
+        - item cannot
+        - cannot clos
+        - clos with
+        - with govern
+        - without reduc remainder
+        - reduc remainder item
+        - remainder item cannot
+        - item cannot clos
+        - cannot clos with
+        - clos with govern
+        - with govern confidence
+        - justifi final realization has not yet been produc
+        - justifi final
+        - final realization
+        - realization has
+        - has not
+        - not yet
+        component_nots: []
+        composed_not: Statistics Structur Learn Record Statistics Statistics Science
+          Collect Organiz Analyz Interpret Present Data Uncover Pattern Draw Inference
+          Inform Decision Mak
+        goal: What is statistics?
+        intended_object: What is statistics?
+        success_criteria:
+        - the response directly resolves the stated ask without erasing material distinctions
+        actual_realization: the prompt surface is present; no justified final closure
+          has been admitted yet
+        missing_components:
+        - a justified final realization has not yet been produced
+        misalignment_types:
+        - completion
+        origin_layers:
+        - model
+        degree: partial
+        remainder_shapes:
+        - missing
+        why_it_matters:
+        - without reducing the remainder, the item cannot be closed with governed
+          confidence
+        full_repair:
+        - 'satisfy success condition: the response directly resolves the stated ask
+          without erasing material distinctions'
+        boundary_shape:
+        - d*
+        action_posture: direct_resolution
+        notation_yaml: |-
+          "What Is Statistics":
+            Description:
+              - "Structured learning declaration for the active non-achievedness."
+              - "Encountered non-achievedness: Statistics"
+              - "Components: none"
+              - "Composition: Statistics Structur Learn Record Statistics Statistics Science Collect Organiz Analyz Interpret Present Data Uncover Pattern Draw Inference Inform Decision Mak"
+              - "Intended object: What is statistics?"
+              - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+              - "Actual realization: the prompt surface is present; no justified final closure has been admitted yet"
+              - "Missing components: a justified final realization has not yet been produced"
+              - "Misalignment types: completion"
+              - "Origin layers: model"
+              - "Degree: partial"
+              - "Remainder shapes: missing"
+              - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+              - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+              - "Action posture: direct_resolution"
+            In:
+              - "Prompt Surface String"
+              - "Encountered Non Achievedness String"
+              - "Lookup Keys Strings"
+              - "[ Component Non Achievedness ]"
+              - "Composed Non Achievedness"
+            Out:
+              - "Prior Encounter"
+              - "[ Reusable Artifact ]"
+              - "[ Reused Non Achievedness ]"
+              - "[ Composed Reuse ]"
+---
+Structured learning record for Python Script:
+  Description:
+  - the run produced a structured non-achievedness view that can be reused for prior-encounter
+    lookup, decomposition-aware reuse, and composition-aware reuse
+  - 'Knowledge artifact for: What is Python scripting?'
+  In:
+  - What is Python scripting?
+  Out:
+  - Statistics is the science of collecting, organizing, analyzing, interpreting,
+    and presenting data to uncover patterns, draw inferences, and inform decision
+    making.
+  Metadata:
+    artifact_id: artifact_knowledge-structured-learning-record-for-python-_84003f
+    artifact_type: knowledge
+    representation: yaml
+    function_bit: 0
+    boundary_shape:
+    - d*
+    scope: reuse when the same non-achievedness, a paraphrase of it, or a compatible
+      decomposition reappears
+    reusability: broad_reuse
+    admissibility: admitted
+    learning_relation: instance_of_existing
+    created_at: '2026-03-25T11:34:06+00:00'
+    provenance:
+    - not_what-is-python-scripting_64f069
+    - artifact_closure-pattern-direct-closure-pattern-for-learn_8c1712
+    related_artifact_ids:
+    - artifact_closure-pattern-direct-closure-pattern-for-learn_8c1712
+    constraints:
+    - reuse the record only when the active non-achievedness is semantically aligned
+      under ordinary reading
+    - treat structure alone as support only after governance checks for scope, conflict,
+      and stability
+    justification: the run produced a structured non-achievedness view that can be
+      reused for prior-encounter lookup, decomposition-aware reuse, and composition-aware
+      reuse
+    question: What is Python scripting?
+    answer: Statistics is the science of collecting, organizing, analyzing, interpreting,
+      and presenting data to uncover patterns, draw inferences, and inform decision
+      making.
+    structured_learning:
+      encountered_not: Python Script
+      goal: What is Python scripting?
+      intended_object: What is Python scripting?
+      success_criteria:
+      - the response directly resolves the stated ask without erasing material distinctions
+      actual_realization: the prompt surface is present; no justified final closure
+        has been admitted yet
+      givens: []
+      unknowns: []
+      missing_components:
+      - a justified final realization has not yet been produced
+      distorted_components: []
+      differentiators: []
+      contrastive_cases: []
+      risk_of_wrong_closure: []
+      disallowed_assumptions: []
+      misalignment_types:
+      - completion
+      origin_layers:
+      - model
+      degree: partial
+      remainder_shapes:
+      - missing
+      why_it_matters:
+      - without reducing the remainder, the item cannot be closed with governed confidence
+      minimal_repair: []
+      full_repair:
+      - 'satisfy success condition: the response directly resolves the stated ask
+        without erasing material distinctions'
+      boundary_shape:
+      - d*
+      action_posture: direct_resolution
+      component_nots: []
+      composed_not: Python Script Structur Learn Record Python Script Statistics Science
+        Collect Organiz Analyz Interpret Present Data Uncover Pattern Draw Inference
+        Inform Decision Mak
+      lookup_keys:
+      - python script
+      - without reduc remainder item cannot clos with govern confidence
+      - without reduc remainder item cannot clo
+      - govern confidence
+      - without reduc
+      - reduc remainder
+      - remainder item
+      - item cannot
+      - cannot clos
+      - clos with
+      - with govern
+      - without reduc remainder
+      - reduc remainder item
+      - remainder item cannot
+      - item cannot clos
+      - cannot clos with
+      - clos with govern
+      - with govern confidence
+      - justifi final realization has not yet been produc
+      - justifi final
+      - final realization
+      - realization has
+      - has not
+      - not yet
+      notation_yaml: |-
+        "What Is Python Scripting":
+          Description:
+            - "Structured learning declaration for the active non-achievedness."
+            - "Encountered non-achievedness: Python Script"
+            - "Components: none"
+            - "Composition: Python Script Structur Learn Record Python Script Statistics Science Collect Organiz Analyz Interpret Present Data Uncover Pattern Draw Inference Inform Decision Mak"
+            - "Intended object: What is Python scripting?"
+            - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+            - "Actual realization: the prompt surface is present; no justified final closure has been admitted yet"
+            - "Missing components: a justified final realization has not yet been produced"
+            - "Misalignment types: completion"
+            - "Origin layers: model"
+            - "Degree: partial"
+            - "Remainder shapes: missing"
+            - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+            - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+            - "Action posture: direct_resolution"
+          In:
+            - "Prompt Surface String"
+            - "Encountered Non Achievedness String"
+            - "Lookup Keys Strings"
+            - "[ Component Non Achievedness ]"
+            - "Composed Non Achievedness"
+          Out:
+            - "Prior Encounter"
+            - "[ Reusable Artifact ]"
+            - "[ Reused Non Achievedness ]"
+            - "[ Composed Reuse ]"
+    content:
+      node_id: not_what-is-python-scripting_64f069
+      answer_source: direct_resolution
+      structured_learning:
+        encountered_not: Python Script
+        lookup_keys:
+        - python script
+        - without reduc remainder item cannot clos with govern confidence
+        - without reduc remainder item cannot clo
+        - govern confidence
+        - without reduc
+        - reduc remainder
+        - remainder item
+        - item cannot
+        - cannot clos
+        - clos with
+        - with govern
+        - without reduc remainder
+        - reduc remainder item
+        - remainder item cannot
+        - item cannot clos
+        - cannot clos with
+        - clos with govern
+        - with govern confidence
+        - justifi final realization has not yet been produc
+        - justifi final
+        - final realization
+        - realization has
+        - has not
+        - not yet
+        component_nots: []
+        composed_not: Python Script Structur Learn Record Python Script Statistics
+          Science Collect Organiz Analyz Interpret Present Data Uncover Pattern Draw
+          Inference Inform Decision Mak
+        goal: What is Python scripting?
+        intended_object: What is Python scripting?
+        success_criteria:
+        - the response directly resolves the stated ask without erasing material distinctions
+        actual_realization: the prompt surface is present; no justified final closure
+          has been admitted yet
+        missing_components:
+        - a justified final realization has not yet been produced
+        misalignment_types:
+        - completion
+        origin_layers:
+        - model
+        degree: partial
+        remainder_shapes:
+        - missing
+        why_it_matters:
+        - without reducing the remainder, the item cannot be closed with governed
+          confidence
+        full_repair:
+        - 'satisfy success condition: the response directly resolves the stated ask
+          without erasing material distinctions'
+        boundary_shape:
+        - d*
+        action_posture: direct_resolution
+        notation_yaml: |-
+          "What Is Python Scripting":
+            Description:
+              - "Structured learning declaration for the active non-achievedness."
+              - "Encountered non-achievedness: Python Script"
+              - "Components: none"
+              - "Composition: Python Script Structur Learn Record Python Script Statistics Science Collect Organiz Analyz Interpret Present Data Uncover Pattern Draw Inference Inform Decision Mak"
+              - "Intended object: What is Python scripting?"
+              - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+              - "Actual realization: the prompt surface is present; no justified final closure has been admitted yet"
+              - "Missing components: a justified final realization has not yet been produced"
+              - "Misalignment types: completion"
+              - "Origin layers: model"
+              - "Degree: partial"
+              - "Remainder shapes: missing"
+              - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+              - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+              - "Action posture: direct_resolution"
+            In:
+              - "Prompt Surface String"
+              - "Encountered Non Achievedness String"
+              - "Lookup Keys Strings"
+              - "[ Component Non Achievedness ]"
+              - "Composed Non Achievedness"
+            Out:
+              - "Prior Encounter"
+              - "[ Reusable Artifact ]"
+              - "[ Reused Non Achievedness ]"
+              - "[ Composed Reuse ]"
+---
+Direct closure pattern for learned_reuse:
+  Description:
+  - the run closed through direct resolution without requiring subordinate achievement
+    decomposition
+  - Reusable closure pattern artifact.
+  In:
+  - Direct Closure Pattern
+  - Learn Reuse
+  Out: []
+  Metadata:
+    artifact_id: artifact_closure-pattern-direct-closure-pattern-for-learn_8c1712
+    artifact_type: closure_pattern
+    representation: json
+    function_bit: 0
+    boundary_shape:
+    - d*
+    scope: bounded learned_reuse prompts that are self-contained and conventionally
+      interpreted
+    reusability: broad_reuse
+    admissibility: admitted
+    learning_relation: instance_of_existing
+    created_at: '2026-03-25T11:34:06+00:00'
+    provenance:
+    - proposal_discoveryauditproposal_f141bb
+    - not_what-is-python-scripting_64f069
+    related_artifact_ids:
+    - artifact_closure-pattern-direct-closure-pattern-for-direc_29e7b6
+    constraints:
+    - use only when the question is self-contained and the ordinary interpretation
+      is stable
+    template_schema:
+      preconditions:
+      - the active item matches the artifact scope
+      - the current state is admissible for governed reuse
+      governed_function: keep the item whole and close directly when a stable ordinary
+        reading yields a ready direct answer
+      completion_conditions:
+      - direct resolution is ready
+      - support-bearing answer evidence is attached
+      failure_conditions:
+      - ordinary interpretation is unstable
+      - external evidence is required
+      scope_of_reuse: bounded learned_reuse prompts that are self-contained and conventionally
+        interpreted
+      bssc_awareness:
+        admissible_place_in_realization: governed realization state
+        required_governed_state: active represented non-achievedness with durable
+          state
+        permitted_governed_effect: support closure_pattern reuse without self-justifying
+          closure
+        may_not_by_itself_justify:
+        - closure
+      holdon_awareness:
+        relevant_holdon_blocks_instantiation: true
+        diagnostic_use_allowed: true
+        relevant_holdon_conditions:
+        - missing evidence
+        - pause boundary
+        - governance block
+        resumption_condition: resume ordinary use only when the blocking condition
+          is cleared
+    justification: the run closed through direct resolution without requiring subordinate
+      achievement decomposition
+    structured_learning:
+      encountered_not: Direct Closure Pattern Learn Reuse
+      goal: Direct closure pattern for learned_reuse
+      intended_object: Direct closure pattern for learned_reuse
+      success_criteria:
+      - the response directly resolves the stated ask without erasing material distinctions
+      actual_realization: the prompt surface is present; no justified final closure
+        has been admitted yet
+      givens: []
+      unknowns: []
+      missing_components:
+      - a justified final realization has not yet been produced
+      distorted_components: []
+      differentiators: []
+      contrastive_cases: []
+      risk_of_wrong_closure: []
+      disallowed_assumptions: []
+      misalignment_types:
+      - completion
+      origin_layers:
+      - model
+      degree: partial
+      remainder_shapes:
+      - missing
+      why_it_matters:
+      - without reducing the remainder, the item cannot be closed with governed confidence
+      minimal_repair: []
+      full_repair:
+      - 'satisfy success condition: the response directly resolves the stated ask
+        without erasing material distinctions'
+      boundary_shape:
+      - d*
+      action_posture: direct_resolution
+      component_nots:
+      - Direct Closure Pattern
+      - Learn Reuse
+      composed_not: Direct Closure Pattern Learn Reuse
+      lookup_keys:
+      - direct closure pattern learn reuse
+      - direct closure pattern
+      - learn reuse
+      - direct closure
+      - closure pattern
+      - pattern learn
+      - closure pattern learn
+      - pattern learn reuse
+      - without reduc remainder item cannot clos with govern confidence
+      - without reduc remainder item cannot clo
+      - govern confidence
+      - without reduc
+      - reduc remainder
+      - remainder item
+      - item cannot
+      - cannot clos
+      - clos with
+      - with govern
+      - without reduc remainder
+      - reduc remainder item
+      - remainder item cannot
+      - item cannot clos
+      - cannot clos with
+      - clos with govern
+      notation_yaml: |-
+        "Direct Closure Pattern For Learned Reuse":
+          Description:
+            - "Structured learning declaration for the active non-achievedness."
+            - "Encountered non-achievedness: Direct Closure Pattern Learn Reuse"
+            - "Components: Direct Closure Pattern, Learn Reuse"
+            - "Composition: Direct Closure Pattern Learn Reuse"
+            - "Intended object: Direct closure pattern for learned_reuse"
+            - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+            - "Actual realization: the prompt surface is present; no justified final closure has been admitted yet"
+            - "Missing components: a justified final realization has not yet been produced"
+            - "Misalignment types: completion"
+            - "Origin layers: model"
+            - "Degree: partial"
+            - "Remainder shapes: missing"
+            - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+            - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+            - "Action posture: direct_resolution"
+          In:
+            - "Prompt Surface String"
+            - "Encountered Non Achievedness String"
+            - "Lookup Keys Strings"
+            - "[ Component Non Achievedness ]"
+            - "Composed Non Achievedness"
+          Out:
+            - "Prior Encounter"
+            - "[ Reusable Artifact ]"
+            - "[ Reused Non Achievedness ]"
+            - "[ Composed Reuse ]"
+    content:
+      node_id: not_what-is-python-scripting_64f069
+      answer_kind: learned_reuse
+      closure_rule: if direct resolution is ready, keep the item whole and close it
+        after support-bearing evidence is attached
+      structured_learning:
+        encountered_not: Direct Closure Pattern Learn Reuse
+        lookup_keys:
+        - direct closure pattern learn reuse
+        - direct closure pattern
+        - learn reuse
+        - direct closure
+        - closure pattern
+        - pattern learn
+        - closure pattern learn
+        - pattern learn reuse
+        - without reduc remainder item cannot clos with govern confidence
+        - without reduc remainder item cannot clo
+        - govern confidence
+        - without reduc
+        - reduc remainder
+        - remainder item
+        - item cannot
+        - cannot clos
+        - clos with
+        - with govern
+        - without reduc remainder
+        - reduc remainder item
+        - remainder item cannot
+        - item cannot clos
+        - cannot clos with
+        - clos with govern
+        component_nots:
+        - Direct Closure Pattern
+        - Learn Reuse
+        composed_not: Direct Closure Pattern Learn Reuse
+        goal: Direct closure pattern for learned_reuse
+        intended_object: Direct closure pattern for learned_reuse
+        success_criteria:
+        - the response directly resolves the stated ask without erasing material distinctions
+        actual_realization: the prompt surface is present; no justified final closure
+          has been admitted yet
+        missing_components:
+        - a justified final realization has not yet been produced
+        misalignment_types:
+        - completion
+        origin_layers:
+        - model
+        degree: partial
+        remainder_shapes:
+        - missing
+        why_it_matters:
+        - without reducing the remainder, the item cannot be closed with governed
+          confidence
+        full_repair:
+        - 'satisfy success condition: the response directly resolves the stated ask
+          without erasing material distinctions'
+        boundary_shape:
+        - d*
+        action_posture: direct_resolution
+        notation_yaml: |-
+          "Direct Closure Pattern For Learned Reuse":
+            Description:
+              - "Structured learning declaration for the active non-achievedness."
+              - "Encountered non-achievedness: Direct Closure Pattern Learn Reuse"
+              - "Components: Direct Closure Pattern, Learn Reuse"
+              - "Composition: Direct Closure Pattern Learn Reuse"
+              - "Intended object: Direct closure pattern for learned_reuse"
+              - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+              - "Actual realization: the prompt surface is present; no justified final closure has been admitted yet"
+              - "Missing components: a justified final realization has not yet been produced"
+              - "Misalignment types: completion"
+              - "Origin layers: model"
+              - "Degree: partial"
+              - "Remainder shapes: missing"
+              - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+              - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+              - "Action posture: direct_resolution"
+            In:
+              - "Prompt Surface String"
+              - "Encountered Non Achievedness String"
+              - "Lookup Keys Strings"
+              - "[ Component Non Achievedness ]"
+              - "Composed Non Achievedness"
+            Out:
+              - "Prior Encounter"
+              - "[ Reusable Artifact ]"
+              - "[ Reused Non Achievedness ]"
+              - "[ Composed Reuse ]"
+---
+Structured learning record for Python Script Compute Z Score X 12 Mean 10 Std 2:
+  Description:
+  - the run produced a structured non-achievedness view that can be reused for prior-encounter
+    lookup, decomposition-aware reuse, and composition-aware reuse
+  - 'Knowledge artifact for: Write a Python script that computes the z-score for x=12,
+    mean=10, std=2.'
+  In:
+  - Python Script Compute Z Score
+  - X 12 Mean 10 Std 2
+  Out: []
+  Metadata:
+    artifact_id: artifact_knowledge-structured-learning-record-for-python-_96cc87
+    artifact_type: knowledge
+    representation: yaml
+    function_bit: 0
+    boundary_shape:
+    - d*
+    scope: reuse when the same non-achievedness, a paraphrase of it, or a compatible
+      decomposition reappears
+    reusability: broad_reuse
+    admissibility: admitted
+    learning_relation: instance_of_existing
+    created_at: '2026-03-25T11:40:35+00:00'
+    provenance:
+    - not_write-a-python-script-that-computes-the-z-score-_3ceafa
+    related_artifact_ids:
+    - artifact_knowledge-structured-learning-record-for-python-_84003f
+    - artifact_knowledge-structured-learning-record-for-import-_cb94cd
+    - artifact_knowledge-structured-learning-record-for-statist_29c3b1
+    - artifact_knowledge-knowledge-note-from-what-is-statistics_ee4f2e
+    constraints:
+    - reuse the record only when the active non-achievedness is semantically aligned
+      under ordinary reading
+    - treat structure alone as support only after governance checks for scope, conflict,
+      and stability
+    justification: the run produced a structured non-achievedness view that can be
+      reused for prior-encounter lookup, decomposition-aware reuse, and composition-aware
+      reuse
+    question: Write a Python script that computes the z-score for x=12, mean=10, std=2.
+    structured_learning:
+      encountered_not: Python Script Compute Z Score X 12 Mean 10 Std 2
+      goal: Write a Python script that computes the z-score for x=12, mean=10, std=2.
+      intended_object: Write a Python script that computes the z-score for x=12, mean=10,
+        std=2.
+      success_criteria:
+      - all required inputs are explicit and the bounded computation or template is
+        applied faithfully
+      - the result is returned in the requested usable form
+      actual_realization: 'the prompt surface is present; explicit givens are present:
+        Write a Python script that computes the z-score for x=12, mean=10, std=2;
+        no justified final closure has been admitted yet'
+      givens:
+      - Write a Python script that computes the z-score for x=12
+      - mean=10
+      - std=2
+      unknowns: []
+      missing_components:
+      - a justified final realization has not yet been produced
+      distorted_components: []
+      differentiators:
+      - 'named inputs supplied: x, mean, std'
+      contrastive_cases: []
+      risk_of_wrong_closure: []
+      disallowed_assumptions: []
+      misalignment_types:
+      - functional
+      - completion
+      origin_layers:
+      - model
+      degree: partial
+      remainder_shapes:
+      - missing
+      why_it_matters:
+      - without reducing the remainder, the item cannot be closed with governed confidence
+      minimal_repair:
+      - perform the bounded computation or invoke the matching executable template
+      full_repair:
+      - perform the bounded computation or invoke the matching executable template
+      - 'satisfy success condition: all required inputs are explicit and the bounded
+        computation or template is applied faithfully'
+      - 'satisfy success condition: the result is returned in the requested usable
+        form'
+      boundary_shape:
+      - a*
+      - c*
+      - d*
+      action_posture: compute_or_template
+      component_nots:
+      - Python Script Compute Z Score
+      - X 12 Mean 10 Std 2
+      composed_not: Python Script Compute Z Score X 12 Mean 10 Std 2
+      lookup_keys:
+      - python script compute z score x 12 mean 10 std 2
+      - python script compute z score
+      - x 12 mean 10 std 2
+      - python script
+      - script compute
+      - compute z
+      - z score
+      - score x
+      - x 12
+      - 12 mean
+      - mean 10
+      - 10 std
+      - std 2
+      - python script compute
+      - script compute z
+      - compute z score
+      - z score x
+      - score x 12
+      - x 12 mean
+      - 12 mean 10
+      - mean 10 std
+      - 10 std 2
+      - perform bound computation or invoke match executable template
+      - perform bound
+      notation_yaml: |-
+        "Write A Python Script That Computes The Z Score For X 12 Mean 10 Std 2":
+          Description:
+            - "Structured learning declaration for the active non-achievedness."
+            - "Encountered non-achievedness: Python Script Compute Z Score X 12 Mean 10 Std 2"
+            - "Components: Python Script Compute Z Score, X 12 Mean 10 Std 2"
+            - "Composition: Python Script Compute Z Score X 12 Mean 10 Std 2"
+            - "Intended object: Write a Python script that computes the z-score for x=12, mean=10, std=2."
+            - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+            - "Actual realization: the prompt surface is present; explicit givens are present: Write a Python script that computes the z-score for x=12, mean=10, std=2; no justified final closure has been admitted yet"
+            - "Givens: Write a Python script that computes the z-score for x=12, mean=10, std=2"
+            - "Missing components: a justified final realization has not yet been produced"
+            - "Differentiators: named inputs supplied: x, mean, std"
+            - "Misalignment types: functional, completion"
+            - "Origin layers: model"
+            - "Degree: partial"
+            - "Remainder shapes: missing"
+            - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+            - "Minimal repair: perform the bounded computation or invoke the matching executable template"
+            - "Full repair: perform the bounded computation or invoke the matching executable template, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+            - "Action posture: compute_or_template"
+          In:
+            - "Prompt Surface String"
+            - "Encountered Non Achievedness String"
+            - "Lookup Keys Strings"
+            - "[ Component Non Achievedness ]"
+            - "Composed Non Achievedness"
+          Out:
+            - "Prior Encounter"
+            - "[ Reusable Artifact ]"
+            - "[ Reused Non Achievedness ]"
+            - "[ Composed Reuse ]"
+    content:
+      node_id: not_write-a-python-script-that-computes-the-z-score-_3ceafa
+      answer_source: none
+      structured_learning:
+        encountered_not: Python Script Compute Z Score X 12 Mean 10 Std 2
+        lookup_keys:
+        - python script compute z score x 12 mean 10 std 2
+        - python script compute z score
+        - x 12 mean 10 std 2
+        - python script
+        - script compute
+        - compute z
+        - z score
+        - score x
+        - x 12
+        - 12 mean
+        - mean 10
+        - 10 std
+        - std 2
+        - python script compute
+        - script compute z
+        - compute z score
+        - z score x
+        - score x 12
+        - x 12 mean
+        - 12 mean 10
+        - mean 10 std
+        - 10 std 2
+        - perform bound computation or invoke match executable template
+        - perform bound
+        component_nots:
+        - Python Script Compute Z Score
+        - X 12 Mean 10 Std 2
+        composed_not: Python Script Compute Z Score X 12 Mean 10 Std 2
+        goal: Write a Python script that computes the z-score for x=12, mean=10, std=2.
+        intended_object: Write a Python script that computes the z-score for x=12,
+          mean=10, std=2.
+        success_criteria:
+        - all required inputs are explicit and the bounded computation or template
+          is applied faithfully
+        - the result is returned in the requested usable form
+        actual_realization: 'the prompt surface is present; explicit givens are present:
+          Write a Python script that computes the z-score for x=12, mean=10, std=2;
+          no justified final closure has been admitted yet'
+        givens:
+        - Write a Python script that computes the z-score for x=12
+        - mean=10
+        - std=2
+        missing_components:
+        - a justified final realization has not yet been produced
+        differentiators:
+        - 'named inputs supplied: x, mean, std'
+        misalignment_types:
+        - functional
+        - completion
+        origin_layers:
+        - model
+        degree: partial
+        remainder_shapes:
+        - missing
+        why_it_matters:
+        - without reducing the remainder, the item cannot be closed with governed
+          confidence
+        minimal_repair:
+        - perform the bounded computation or invoke the matching executable template
+        full_repair:
+        - perform the bounded computation or invoke the matching executable template
+        - 'satisfy success condition: all required inputs are explicit and the bounded
+          computation or template is applied faithfully'
+        - 'satisfy success condition: the result is returned in the requested usable
+          form'
+        boundary_shape:
+        - a*
+        - c*
+        - d*
+        action_posture: compute_or_template
+        notation_yaml: |-
+          "Write A Python Script That Computes The Z Score For X 12 Mean 10 Std 2":
+            Description:
+              - "Structured learning declaration for the active non-achievedness."
+              - "Encountered non-achievedness: Python Script Compute Z Score X 12 Mean 10 Std 2"
+              - "Components: Python Script Compute Z Score, X 12 Mean 10 Std 2"
+              - "Composition: Python Script Compute Z Score X 12 Mean 10 Std 2"
+              - "Intended object: Write a Python script that computes the z-score for x=12, mean=10, std=2."
+              - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+              - "Actual realization: the prompt surface is present; explicit givens are present: Write a Python script that computes the z-score for x=12, mean=10, std=2; no justified final closure has been admitted yet"
+              - "Givens: Write a Python script that computes the z-score for x=12, mean=10, std=2"
+              - "Missing components: a justified final realization has not yet been produced"
+              - "Differentiators: named inputs supplied: x, mean, std"
+              - "Misalignment types: functional, completion"
+              - "Origin layers: model"
+              - "Degree: partial"
+              - "Remainder shapes: missing"
+              - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+              - "Minimal repair: perform the bounded computation or invoke the matching executable template"
+              - "Full repair: perform the bounded computation or invoke the matching executable template, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+              - "Action posture: compute_or_template"
+            In:
+              - "Prompt Surface String"
+              - "Encountered Non Achievedness String"
+              - "Lookup Keys Strings"
+              - "[ Component Non Achievedness ]"
+              - "Composed Non Achievedness"
+            Out:
+              - "Prior Encounter"
+              - "[ Reusable Artifact ]"
+              - "[ Reused Non Achievedness ]"
+              - "[ Composed Reuse ]"

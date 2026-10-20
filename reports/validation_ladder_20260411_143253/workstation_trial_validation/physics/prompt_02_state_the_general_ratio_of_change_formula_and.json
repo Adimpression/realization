@@ -1,0 +1,9 @@
+{
+  "assistant_text": "- General ratio-of-change formula:\n  - Finite change: \u0394y/\u0394x, the ratio of how y changes for a change in x.\n  - Instantaneous rate (calculus): dy/dx = lim (\u0394y/\u0394x) as \u0394x \u2192 0.\n\n- Example from motion:\n  - Position as a function of time: s(t). The velocity is the rate of change of position: v = ds/dt.\n  - Example calculation (finite change): If a car moves from s1 = 0 m at t1 = 0 s to s2 = 20 m at t2 = 4 s, the average velocity over that interval is \u0394s/\u0394t = (20 \u2212 0) m / (4 \u2212 0) s = 5 m/s.\n  - Optional smooth example (instantaneous rate): If s(t) = 4t^2 meters, then v(t) = ds/dt = 8t m/s; at t = 3 s, v = 24 m/s.",
+  "model": "gpt-5-nano-2025-08-07",
+  "rounds": 1,
+  "task_contract": {
+    "semantic_unit": "State the general ratio-of-change formula and give one example from motion that uses it."
+  },
+  "tool_receipts": []
+}

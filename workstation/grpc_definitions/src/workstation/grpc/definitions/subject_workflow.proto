@@ -1,0 +1,2252 @@
+syntax = "proto3";
+
+import "workstation/grpc/definitions/workstation_assets.proto";
+
+// Subject workflow contracts for the Gather -> Itemize -> Draft -> Review ->
+// Publication pipeline.
+//
+// What:
+//   This package defines the projection, control, snapshot, watch, action, and
+//   client-progress contracts for one workstation subject workflow.
+//
+// Why:
+//   The subject workflow surface is the semantic source of truth for phase
+//   state, allowed actions, current step guidance, and subject-specific panes.
+//   Textual, Python clients, and Flutter should all render the same workflow
+//   semantics from these messages instead of recomputing workflow rules in the
+//   UI.
+//
+// How:
+//   1. Call `ListSubjects` to discover available subjects under one root.
+//   2. Call `GetSubjectWorkflowSnapshot` for the initial phase projection.
+//   3. Call `WatchSubjectWorkflow` to receive later changes.
+//   4. Apply user actions through `ApplySubjectAction`.
+//   5. Persist client-only local view state through
+//      `GetClientSubjectProgress` and `PutClientSubjectProgress`.
+//
+// Watch Stream Semantics:
+//   The server emits full snapshot replacement events rather than partial UI
+//   deltas. Clients should treat each event as a fresh authoritative snapshot
+//   for the watched `(root_path, subject_id, phase, projection_context,
+//   client_session_id)` tuple.
+//
+// Tracing Fields:
+//   `trace_id` identifies the emitted message itself.
+//   `parent_id` links it to the triggering request or upstream workflow event.
+//
+// Valid Example:
+//   - package: `realized.workstation.subjectworkflow.v1`
+//   - root_path: `/srv/workstations/transit`
+//   - subject_id: `smart_city_travel`
+//   - phase: `research`
+//   - watch flow:
+//       1. `GetSubjectWorkflowSnapshot`
+//       2. `WatchSubjectWorkflow`
+//       3. `ApplySubjectAction(action_key="approve_import")`
+//       4. watch event with `event_kind="subject_workflow_changed"`
+package realized.workstation.subjectworkflow.v1;
+
+// What: Summary row describing one subject scenario in the workstation corpus.
+// Why: Subject lists need a compact but information-rich projection for
+// selection, sorting, and quick status inspection before opening a phase view.
+// How: Render these values in subject pickers, status strips, and summary
+// dashboards; use the more detailed phase snapshot when the user opens one
+// subject.
+// Valid Example:
+//   {
+//     "key": "smart_city_travel",
+//     "subject_id": "smart_city_travel",
+//     "title": "Smart City Travel",
+//     "family_title": "City bus prose v2",
+//     "context_id": "ctx_smart_city_travel",
+//     "summary": "A city transit authority wants to modernize fare payment.",
+//     "governance_status": "ready",
+//     "context_snapshot_hash": "9c0bbf2d",
+//     "unit_count": 12,
+//     "admitted_unit_count": 12,
+//     "source_count": 1,
+//     "delta_count": 1,
+//     "applied_delta_count": 1,
+//     "import_count": 1,
+//     "pending_import_count": 0,
+//     "reasoning_import_count": 0,
+//     "imported_subject_count": 0,
+//     "context_path": "corpus/smart-city-travel/context.json",
+//     "subject_markdown_path": "/srv/workstations/transit/dst/City bus prose v2.md",
+//     "subject_typst_path": "",
+//     "publication_id": "",
+//     "publication_title": "",
+//     "build_id": "",
+//     "build_status": "",
+//     "validation_status": "",
+//     "build_path": "",
+//     "publication_section_count": 0,
+//     "publication_claim_count": 0,
+//     "publication_source_count": 0,
+//     "publication_entity_count": 0,
+//     "publication_xref_count": 0,
+//     "publication_review_count": 0,
+//     "report_markdown_path": "",
+//     "report_typst_path": "",
+//     "report_pdf_path": "",
+//     "composition_id": "",
+//     "composition_status": "",
+//     "composition_title": "",
+//     "composition_scope_summary": "",
+//     "composition_learning_context_snapshot_hash": "",
+//     "composition_included_unit_count": 0,
+//     "composition_selected_import_count": 0,
+//     "composition_section_count": 0,
+//     "source_collection_count": 1,
+//     "staged_source_count": 0,
+//     "source_collection_preview_lines": ["All Gather Sources"],
+//     "source_preview_lines": ["City bus prose v2.md"],
+//     "staged_source_preview_lines": [],
+//     "unit_preview_lines": ["Smart City Travel"],
+//     "delta_preview_lines": ["definition: Smart City Travel"],
+//     "pending_import_preview_lines": [],
+//     "import_preview_lines": ["City bus prose v2.md"],
+//     "is_placeholder": false
+//   }
+message SubjectScenarioSummary {
+  // What: Stable scenario key used by selectors and summaries.
+  // Why: Clients need a durable identity token that is safe to store in local
+  // UI state.
+  // How: Use it as the option value when choosing a subject from a list.
+  // Example: "smart_city_travel"
+  string key = 1;
+
+  // What: Canonical subject id for workflow operations.
+  // Why: Action, snapshot, and progress RPCs target subjects by id.
+  // How: Pass it into later subject workflow requests.
+  // Example: "smart_city_travel"
+  string subject_id = 2;
+
+  // What: Current subject title.
+  // Why: Lists and tabs should show the human-readable subject name.
+  // How: Render it anywhere the user needs to identify the subject.
+  // Example: "Smart City Travel"
+  string title = 3;
+
+  // What: Family or source-derived subject label.
+  // Why: Users often need to know which original material produced the subject.
+  // How: Show it as supporting context beside the main title.
+  // Example: "City bus prose v2"
+  string family_title = 4;
+
+  // What: Context document id that backs the subject.
+  // Why: Context lifecycle tools need a durable identity for the stored
+  // learning context.
+  // How: Treat it as an opaque system id unless you are debugging.
+  // Example: "ctx_smart_city_travel"
+  string context_id = 5;
+
+  // What: Short subject summary.
+  // Why: Subject lists need a compressed preview before the user opens a full
+  // phase projection.
+  // How: Render it as a subtitle or summary card body.
+  // Example: "A city transit authority wants to modernize fare payment."
+  string summary = 6;
+
+  // What: Governance/readiness status for the subject.
+  // Why: The list view should surface whether the subject is ready, stale,
+  // blocked, or otherwise gated.
+  // How: Render it as status text or a badge.
+  // Example: "ready"
+  string governance_status = 7;
+
+  // What: Hash of the current learning-context snapshot.
+  // Why: Clients and services use it to detect whether downstream artifacts are
+  // stale relative to current intake.
+  // How: Treat it as an opaque fingerprint for comparison.
+  // Example: "9c0bbf2d"
+  string context_snapshot_hash = 8;
+
+  // What: Total unit count currently represented in the subject context.
+  // Why: The list view often needs a high-level measure of subject size.
+  // How: Display it as informational summary data.
+  // Example: 12
+  int32 unit_count = 9;
+
+  // What: Count of admitted units in the context.
+  // Why: Workflows distinguish between discovered and admitted material.
+  // How: Show it when governance or intake readiness matters.
+  // Example: 12
+  int32 admitted_unit_count = 10;
+
+  // What: Count of source records associated with the subject.
+  // Why: Users need a quick sense of source breadth.
+  // How: Render it in summaries or phase status views.
+  // Example: 1
+  int32 source_count = 11;
+
+  // What: Count of recorded deltas for the subject.
+  // Why: Intake and refinement often materialize incremental changes.
+  // How: Show it as part of current subject health/shape.
+  // Example: 1
+  int32 delta_count = 12;
+
+  // What: Count of deltas that have been applied.
+  // Why: Users need to know whether proposed changes have been absorbed.
+  // How: Compare it with `delta_count` in progress summaries.
+  // Example: 1
+  int32 applied_delta_count = 13;
+
+  // What: Count of imported records attached to the subject.
+  // Why: Import activity is a first-class workflow concern in Gather.
+  // How: Display it in intake summaries.
+  // Example: 1
+  int32 import_count = 14;
+
+  // What: Count of imports waiting for approval or resolution.
+  // Why: Pending imports usually gate the next recommended action.
+  // How: Highlight non-zero values in Gather.
+  // Example: 0
+  int32 pending_import_count = 15;
+
+  // What: Count of reasoning-scope imports.
+  // Why: Some imports support reasoning context rather than primary definition.
+  // How: Treat it as advanced diagnostic metadata.
+  // Example: 0
+  int32 reasoning_import_count = 16;
+
+  // What: Count of imported subjects linked into this subject.
+  // Why: Cross-subject reuse is part of the workstation domain model.
+  // How: Surface it in advanced status or subject relation views.
+  // Example: 0
+  int32 imported_subject_count = 17;
+
+  // What: Server-local path to the stored subject context document.
+  // Why: Operators and same-machine desktop clients may need the canonical
+  // storage location for diagnostics.
+  // How: Treat it as informational; web/mobile should not assume it is
+  // directly usable.
+  // Example: "corpus/smart-city-travel/context.json"
+  string context_path = 18;
+
+  // What: Server-local path to the learned subject markdown source.
+  // Why: Same-machine tooling and diagnostics often need the originating file.
+  // How: Treat it as informational; actionable opening should use
+  // `open_artifacts` or `ResolveArtifacts`.
+  // Example: "/srv/workstations/transit/dst/City bus prose v2.md"
+  string subject_markdown_path = 19;
+
+  // What: Server-local path to the subject Typst projection, when present.
+  // Why: Draft/publication tooling may materialize Typst alongside markdown.
+  // How: Treat it as informational unless resolved through the asset surface.
+  // Example: ""
+  string subject_typst_path = 20;
+
+  // What: Current publication id for this subject.
+  // Why: Publication is a durable governed object with its own identity.
+  // How: Treat it as opaque metadata for diagnostics or deep links.
+  // Example: ""
+  string publication_id = 21;
+
+  // What: Human-readable publication title.
+  // Why: Publication outputs often have their own presentation title.
+  // How: Render when publication exists.
+  // Example: ""
+  string publication_title = 22;
+
+  // What: Current build id for the subject publication.
+  // Why: Publication builds are versioned and traceable.
+  // How: Treat it as opaque metadata for diagnostics.
+  // Example: ""
+  string build_id = 23;
+
+  // What: Current publication build status.
+  // Why: Clients need to know whether a build is absent, running, failed, or
+  // complete.
+  // How: Render it in Publication status areas.
+  // Example: ""
+  string build_status = 24;
+
+  // What: Validation status for the built publication.
+  // Why: Publication review depends on build validation outcomes.
+  // How: Surface it near build status.
+  // Example: ""
+  string validation_status = 25;
+
+  // What: Server-local path to the build output directory.
+  // Why: Same-machine debugging and release tooling may need it.
+  // How: Treat it as informational unless exposed through an artifact URL.
+  // Example: ""
+  string build_path = 26;
+
+  // What: Count of publication sections.
+  // Why: Publication complexity is part of summary state.
+  // How: Render in publication-oriented summaries when non-zero.
+  // Example: 0
+  int32 publication_section_count = 27;
+
+  // What: Count of publication claims.
+  // Why: Reviewers often need a top-level sense of claim volume.
+  // How: Show in publication diagnostics or status.
+  // Example: 0
+  int32 publication_claim_count = 28;
+
+  // What: Count of publication sources.
+  // Why: Publication/source completeness is review-relevant.
+  // How: Render when publication artifacts exist.
+  // Example: 0
+  int32 publication_source_count = 29;
+
+  // What: Count of publication entities.
+  // Why: Entity coverage is useful for publication diagnostics.
+  // How: Treat it as publication metadata.
+  // Example: 0
+  int32 publication_entity_count = 30;
+
+  // What: Count of publication cross-references.
+  // Why: Cross-reference density can indicate publication completeness.
+  // How: Show it in advanced publication views.
+  // Example: 0
+  int32 publication_xref_count = 31;
+
+  // What: Count of recorded publication reviews.
+  // Why: Review completion is a workflow concept and useful summary statistic.
+  // How: Render in Review/Publication status summaries.
+  // Example: 0
+  int32 publication_review_count = 32;
+
+  // What: Server-local path to the current report markdown output.
+  // Why: Same-machine clients can inspect the raw output directly.
+  // How: Treat it as informational; cross-platform clients should use artifact
+  // refs instead of opening the path.
+  // Example: ""
+  string report_markdown_path = 33;
+
+  // What: Server-local path to the current report Typst output.
+  // Why: Publication tooling may render or diff the Typst source.
+  // How: Treat it as informational.
+  // Example: ""
+  string report_typst_path = 34;
+
+  // What: Server-local path to the current report PDF output.
+  // Why: Same-machine preview and release workflows often open the PDF.
+  // How: Use `open_artifacts` or `ResolveArtifacts` for client-actionable
+  // access.
+  // Example: ""
+  string report_pdf_path = 35;
+
+  // What: Current composition id.
+  // Why: Composition is a governed intermediate object in later phases.
+  // How: Treat it as opaque metadata.
+  // Example: ""
+  string composition_id = 36;
+
+  // What: Current composition status.
+  // Why: Draft/Review views need to know whether composition exists or is
+  // stale.
+  // How: Render it in workflow status panes.
+  // Example: ""
+  string composition_status = 37;
+
+  // What: Composition title.
+  // Why: The report or composition may diverge from the subject title.
+  // How: Show it when composition exists.
+  // Example: ""
+  string composition_title = 38;
+
+  // What: Short summary of current composition scope.
+  // Why: Users need to know what subset of the subject the composition covers.
+  // How: Render it in Draft/Review summaries.
+  // Example: ""
+  string composition_scope_summary = 39;
+
+  // What: Context fingerprint captured when composition was generated.
+  // Why: Drift detection depends on comparing composition inputs with the
+  // current subject context.
+  // How: Treat it as an opaque comparison fingerprint.
+  // Example: ""
+  string composition_learning_context_snapshot_hash = 40;
+
+  // What: Count of units included in the composition.
+  // Why: Draft/publication summaries often need scope size.
+  // How: Show it when composition exists.
+  // Example: 0
+  int32 composition_included_unit_count = 41;
+
+  // What: Count of imports selected into the composition.
+  // Why: Compositions can selectively include imported supporting material.
+  // How: Render as advanced composition metadata.
+  // Example: 0
+  int32 composition_selected_import_count = 42;
+
+  // What: Count of composition sections.
+  // Why: Draft/publication views need a quick measure of structure size.
+  // How: Show it when composition exists.
+  // Example: 0
+  int32 composition_section_count = 43;
+
+  // What: Count of source collections attached to the subject.
+  // Why: The workflow tracks both individual sources and grouped collections.
+  // How: Surface it in Gather status summaries.
+  // Example: 1
+  int32 source_collection_count = 44;
+
+  // What: Count of staged sources not yet admitted into the corpus.
+  // Why: Gather workflows often stage material before admission.
+  // How: Highlight non-zero values in Gather.
+  // Example: 0
+  int32 staged_source_count = 45;
+
+  // What: Preview lines for source collections.
+  // Why: Subject lists sometimes need richer preview text than counts alone.
+  // How: Render each string as an already-assembled preview line.
+  // Example: ["All Gather Sources"]
+  repeated string source_collection_preview_lines = 46;
+
+  // What: Preview lines for the current source inventory.
+  // Why: The summary can expose source names without opening the subject.
+  // How: Render each string as one line of preview text.
+  // Example: ["City bus prose v2.md"]
+  repeated string source_preview_lines = 47;
+
+  // What: Preview lines for staged sources.
+  // Why: Users may need to see staged-but-not-admitted material in lists.
+  // How: Render each string as one preview line.
+  // Example: []
+  repeated string staged_source_preview_lines = 48;
+
+  // What: Preview lines for units in the subject.
+  // Why: A small unit preview makes subject selection more informative.
+  // How: Render them as ready-to-display lines.
+  // Example: ["Smart City Travel"]
+  repeated string unit_preview_lines = 49;
+
+  // What: Preview lines for subject deltas.
+  // Why: Deltas are a key part of Gather and Review diagnostics.
+  // How: Render each entry as already-composed human text.
+  // Example: ["definition: Smart City Travel"]
+  repeated string delta_preview_lines = 50;
+
+  // What: Preview lines for pending imports.
+  // Why: Gather needs to surface unresolved imports quickly.
+  // How: Render the provided human-readable lines.
+  // Example: []
+  repeated string pending_import_preview_lines = 51;
+
+  // What: Preview lines for completed imports.
+  // Why: Imports are often more understandable as names than counts.
+  // How: Render each string as one preview line.
+  // Example: ["City bus prose v2.md"]
+  repeated string import_preview_lines = 52;
+
+  // What: Whether this summary is a placeholder rather than a fully realized
+  // subject.
+  // Why: Some views reserve space or signal empty states using placeholder
+  // summaries.
+  // How: Treat `true` as non-actionable unless the UI explicitly supports
+  // placeholders.
+  // Example: false
+  bool is_placeholder = 53;
+}
+
+// What: One labeled value row used across status and structured panes.
+// Why: Many workstation projections are semantically key/value data rather than
+// free-form text.
+// How: Render `label` and `value` as one structured row.
+// Valid Example:
+//   {"label": "Mode", "value": "Live subject workflow"}
+message KeyValueRow {
+  // What: Human-readable field label.
+  // Why: Structured rows need a stable display label.
+  // How: Render it as the left-hand column or key text.
+  // Example: "Mode"
+  string label = 1;
+
+  // What: Human-readable field value.
+  // Why: Structured rows need the projected value text.
+  // How: Render it as the right-hand column or value text.
+  // Example: "Live subject workflow"
+  string value = 2;
+}
+
+// What: One gate/action control shown in the current-step section.
+// Why: Current-step guidance needs explicit actionable affordances, not just
+// prose.
+// How: Render it using `display_kind`, show `label`, and submit `key` when the
+// user activates it.
+// Valid Example:
+//   {
+//     "display_kind": "BUTTON",
+//     "action_kind": "subject_action",
+//     "key": "approve_import",
+//     "label": "Approve Import",
+//     "enabled": true
+//   }
+message SubjectGateAction {
+  // What: Visual treatment hint for a gate action.
+  // Why: Some actions should render as buttons while others are better shown
+  // as links.
+  // How: Style the same semantic action differently based on the enum value.
+  enum DisplayKind {
+    // What: Default/unknown display kind.
+    // Why: Proto3 enums require a zero value and clients need a safe fallback.
+    // How: Treat it as `BUTTON` unless your client has a better default.
+    // Example: "DISPLAY_KIND_UNSPECIFIED"
+    DISPLAY_KIND_UNSPECIFIED = 0;
+
+    // What: Action should render as a button-like affordance.
+    // Why: Primary or in-flow actions are usually button interactions.
+    // How: Use the platform's standard button widget.
+    // Example: "BUTTON"
+    BUTTON = 1;
+
+    // What: Action should render as a link-like affordance.
+    // Why: Secondary or navigation-style actions often read better as links.
+    // How: Use a text-button or hyperlink treatment.
+    // Example: "LINK"
+    LINK = 2;
+  }
+
+  // What: Rendering hint for the action.
+  // Why: UIs need a consistent semantic style cue.
+  // How: Render it according to the enum value.
+  // Example: "BUTTON"
+  DisplayKind display_kind = 1;
+
+  // What: Category of action semantics.
+  // Why: Some clients distinguish subject actions from other kinds of action.
+  // How: Treat it as opaque workflow metadata.
+  // Example: "subject_action"
+  string action_kind = 2;
+
+  // What: Canonical action key.
+  // Why: The workflow service applies actions by key.
+  // How: Submit it back through `ApplySubjectAction`.
+  // Example: "approve_import"
+  string key = 3;
+
+  // What: Human-readable control label.
+  // Why: Users need a display label for the affordance.
+  // How: Render it directly on the control.
+  // Example: "Approve Import"
+  string label = 4;
+
+  // What: Whether the action is currently allowed.
+  // Why: The service, not the UI, owns action availability.
+  // How: Disable or hide the control according to client policy.
+  // Example: true
+  bool enabled = 5;
+}
+
+// What: One non-primary action listed in a phase control bundle.
+// Why: More-actions areas need stable action metadata.
+// How: Render the label and submit the key through `ApplySubjectAction`.
+// Valid Example:
+//   {"key": "refresh_subjects", "label": "Refresh Subjects", "enabled": true}
+message SubjectActionSpec {
+  // What: Canonical action key.
+  // Why: The action service applies actions by key.
+  // How: Submit it as `action_key`.
+  // Example: "refresh_subjects"
+  string key = 1;
+
+  // What: Human-readable action label.
+  // Why: Users need to understand what clicking the control will do.
+  // How: Render it on the control surface.
+  // Example: "Refresh Subjects"
+  string label = 2;
+
+  // What: Whether the action is currently enabled.
+  // Why: The service should be the authority for action availability.
+  // How: Disable or hide it according to client policy.
+  // Example: true
+  bool enabled = 3;
+}
+
+// What: One selectable option within a select control.
+// Why: Select fields need stable `(label, value)` pairs from the service.
+// How: Render `label` and submit/store `value`.
+// Valid Example:
+//   {"label": "All Gather Sources", "value": "all_gather_sources"}
+message SubjectOption {
+  // What: Human-readable option label.
+  // Why: Users need display text for the option.
+  // How: Show it in the select dropdown or menu.
+  // Example: "All Gather Sources"
+  string label = 1;
+
+  // What: Canonical option value.
+  // Why: The workflow logic operates on stable symbolic values.
+  // How: Send or persist this value instead of the label.
+  // Example: "all_gather_sources"
+  string value = 2;
+}
+
+// What: One selectable option inside a multi-item selection list.
+// Why: Selection lists need to show both available options and current
+// selection state.
+// How: Render the label and reflect `selected` in the row state.
+// Valid Example:
+//   {"label": "Smart City Travel", "value": "smart_city_travel", "selected": true}
+message SubjectSelectionOption {
+  // What: Human-readable option label.
+  // Why: Selection rows need readable text.
+  // How: Render it directly.
+  // Example: "Smart City Travel"
+  string label = 1;
+
+  // What: Canonical option value.
+  // Why: Selection toggles target stable ids rather than display text.
+  // How: Use it to derive the action target.
+  // Example: "smart_city_travel"
+  string value = 2;
+
+  // What: Whether this option is currently selected.
+  // Why: Clients need authoritative current state for selection lists.
+  // How: Reflect it in row styling or checkbox state.
+  // Example: true
+  bool selected = 3;
+}
+
+// What: Select control specification for one workflow phase.
+// Why: The service owns available select inputs and their options.
+// How: Render one select widget bound to `key`.
+// Valid Example:
+//   {
+//     "key": "source_set",
+//     "label": "Source Set",
+//     "value": "all_gather_sources",
+//     "options": [{"label": "All Gather Sources", "value": "all_gather_sources"}],
+//     "enabled": true
+//   }
+message SubjectSelectSpecView {
+  // What: Canonical control key.
+  // Why: Clients need a stable identity for the select.
+  // How: Use it when storing local widget state.
+  // Example: "source_set"
+  string key = 1;
+
+  // What: Human-readable control label.
+  // Why: Users need to know what the select changes.
+  // How: Render it as the field label.
+  // Example: "Source Set"
+  string label = 2;
+
+  // What: Currently selected option value.
+  // Why: The service is the source of truth for the active selection.
+  // How: Set the select widget's current value to it.
+  // Example: "all_gather_sources"
+  string value = 3;
+
+  // What: Allowed options for the select.
+  // Why: Workflow semantics determine valid choices.
+  // How: Populate the dropdown from this sequence.
+  // Example: [{"label": "All Gather Sources", "value": "all_gather_sources"}]
+  repeated SubjectOption options = 4;
+
+  // What: Whether the select is currently interactive.
+  // Why: Phase state sometimes makes a control read-only.
+  // How: Disable the widget when false.
+  // Example: true
+  bool enabled = 5;
+}
+
+// What: Switch/toggle control specification for one workflow phase.
+// Why: Some phase controls are boolean rather than multi-valued.
+// How: Render a switch or checkbox bound to `key`.
+// Valid Example:
+//   {"key": "include_sources", "label": "Include Sources", "value": true, "enabled": true}
+message SubjectSwitchSpecView {
+  // What: Canonical control key.
+  // Why: Clients need a stable toggle identity.
+  // How: Use it in local widget state and event routing.
+  // Example: "include_sources"
+  string key = 1;
+
+  // What: Human-readable control label.
+  // Why: Users need to know what the toggle changes.
+  // How: Render it beside the switch.
+  // Example: "Include Sources"
+  string label = 2;
+
+  // What: Current boolean value.
+  // Why: The service owns current toggle state.
+  // How: Set the widget state from it.
+  // Example: true
+  bool value = 3;
+
+  // What: Whether the toggle is interactive.
+  // Why: Some workflow states make toggles read-only.
+  // How: Disable the widget when false.
+  // Example: true
+  bool enabled = 4;
+}
+
+// What: Multi-row selection control specification.
+// Why: Some workflow selections are better represented as explicit lists than
+// as dropdowns.
+// How: Render the options and submit actions derived from
+// `action_key_prefix + option.value`.
+// Valid Example:
+//   {
+//     "key": "subject_imports",
+//     "label": "Imports",
+//     "action_key_prefix": "select_import:",
+//     "options": [{"label": "City bus prose v2.md", "value": "import_1", "selected": true}],
+//     "enabled": true
+//   }
+message SubjectSelectionListSpecView {
+  // What: Canonical selection-list key.
+  // Why: Clients need a stable identity for the list.
+  // How: Use it when storing local UI state.
+  // Example: "subject_imports"
+  string key = 1;
+
+  // What: Human-readable selection-list label.
+  // Why: Users need to know what the list controls.
+  // How: Render it as the section label.
+  // Example: "Imports"
+  string label = 2;
+
+  // What: Prefix used to derive per-option action keys.
+  // Why: Interaction with selection lists often maps to action-key prefixes.
+  // How: Concatenate it with the chosen option value if your client models row
+  // actions locally.
+  // Example: "select_import:"
+  string action_key_prefix = 3;
+
+  // What: Available options and their current selection state.
+  // Why: The service defines the valid selection surface.
+  // How: Render one row per option.
+  // Example: [{"label":"City bus prose v2.md","value":"import_1","selected":true}]
+  repeated SubjectSelectionOption options = 4;
+
+  // What: Whether the selection list is interactive.
+  // Why: Some workflow states allow inspection but not mutation.
+  // How: Disable row interaction when false.
+  // Example: true
+  bool enabled = 5;
+}
+
+// What: One row in a structured table pane/control.
+// Why: Several workstation projections are tabular rather than narrative.
+// How: Render each string in `cells` under the corresponding table column.
+// Valid Example:
+//   {"cells": ["report.pdf", "ready"]}
+message SubjectTableRow {
+  // What: Ordered row cell values.
+  // Why: Tabular views need stable cell ordering.
+  // How: Render them against the table's declared columns.
+  // Example: ["report.pdf", "ready"]
+  repeated string cells = 1;
+}
+
+// What: Structured table specification within a control bundle.
+// Why: Some phases expose tabular controls or diagnostics rather than plain
+// text.
+// How: Render a table with the declared columns and rows.
+// Valid Example:
+//   {
+//     "key": "publication_build_artifacts",
+//     "label": "Build Artifacts",
+//     "columns": ["Artifact", "Status"],
+//     "rows": [{"cells": ["report.pdf", "ready"]}],
+//     "enabled": true
+//   }
+message SubjectTableSpecView {
+  // What: Canonical table key.
+  // Why: Clients need a stable identity for refresh and lookup.
+  // How: Use it as the widget id or lookup key.
+  // Example: "publication_build_artifacts"
+  string key = 1;
+
+  // What: Human-readable table label.
+  // Why: Users need to know what the table represents.
+  // How: Render it as the table title.
+  // Example: "Build Artifacts"
+  string label = 2;
+
+  // What: Ordered column titles.
+  // Why: Structured tables need explicit headers.
+  // How: Render them as header cells.
+  // Example: ["Artifact", "Status"]
+  repeated string columns = 3;
+
+  // What: Ordered table rows.
+  // Why: The service projects tabular content directly.
+  // How: Render them beneath `columns`.
+  // Example: [{"cells": ["report.pdf", "ready"]}]
+  repeated SubjectTableRow rows = 4;
+
+  // What: Whether the table or related actions are currently enabled.
+  // Why: Some tables participate in editable control surfaces.
+  // How: Treat false as read-only or disabled according to client policy.
+  // Example: true
+  bool enabled = 5;
+}
+
+// What: Full set of interactive controls projected for one phase.
+// Why: Clients should not infer the control surface by phase name alone.
+// How: Render the actions, selects, switches, lists, and tables directly from
+// this message.
+// Valid Example:
+//   {
+//     "phase": "research",
+//     "more_actions": [{"key": "refresh_subjects", "label": "Refresh Subjects", "enabled": true}],
+//     "selects": [],
+//     "switches": [],
+//     "selection_lists": [],
+//     "tables": []
+//   }
+message SubjectControlBundleView {
+  // What: Phase that this control bundle belongs to.
+  // Why: Clients often cache multiple bundles and need a stable discriminator.
+  // How: Associate it with the active tab/phase.
+  // Example: "research"
+  string phase = 1;
+
+  // What: Secondary action controls for the phase.
+  // Why: More-actions areas need explicit service-owned action metadata.
+  // How: Render them in the phase action surface.
+  // Example: [{"key":"refresh_subjects","label":"Refresh Subjects","enabled":true}]
+  repeated SubjectActionSpec more_actions = 2;
+
+  // What: Select controls for the phase.
+  // Why: Workflow semantics determine select controls and options.
+  // How: Render one select per entry.
+  // Example: []
+  repeated SubjectSelectSpecView selects = 3;
+
+  // What: Switch controls for the phase.
+  // Why: Boolean workflow controls must come from the service.
+  // How: Render one toggle per entry.
+  // Example: []
+  repeated SubjectSwitchSpecView switches = 4;
+
+  // What: Selection-list controls for the phase.
+  // Why: Some workflow state is best represented as explicit lists.
+  // How: Render one section per entry.
+  // Example: []
+  repeated SubjectSelectionListSpecView selection_lists = 5;
+
+  // What: Structured tables for the phase.
+  // Why: Tables surface dense structured information more clearly than prose.
+  // How: Render one table per entry.
+  // Example: []
+  repeated SubjectTableSpecView tables = 6;
+}
+
+// What: Current-step guidance for the active phase.
+// Why: The service owns the recommended next action and the reasoning behind
+// it.
+// How: Render the title/status/why text and the gate actions exactly as
+// returned.
+// Valid Example:
+//   {
+//     "title": "Current Step",
+//     "status": "Markdown intake is running.",
+//     "why": "Wait for the import to finish so the subject state can update.",
+//     "detail_lines": ["- source markdown: City bus prose v2.md"],
+//     "actions": []
+//   }
+message SubjectCurrentStepView {
+  // What: Section title for the current-step panel.
+  // Why: Some clients render current-step content as a titled card.
+  // How: Show it as the panel heading.
+  // Example: "Current Step"
+  string title = 1;
+
+  // What: Primary current-step status text.
+  // Why: Users need the current workflow state in one sentence.
+  // How: Render it as the main status line.
+  // Example: "Markdown intake is running."
+  string status = 2;
+
+  // What: Reason the current step matters now.
+  // Why: Guidance is more actionable when the user understands why.
+  // How: Render it beneath the status text.
+  // Example: "Wait for the import to finish so the subject state can update."
+  string why = 3;
+
+  // What: Additional detail lines for the current step.
+  // Why: Some steps need supporting detail without changing the main status.
+  // How: Render each string as one already-composed line.
+  // Example: ["- source markdown: City bus prose v2.md"]
+  repeated string detail_lines = 4;
+
+  // What: Gate actions directly associated with the current step.
+  // Why: The recommended next action should travel with the current-step text.
+  // How: Render these as the primary controls in the section.
+  // Example: []
+  repeated SubjectGateAction actions = 5;
+}
+
+// What: Simple titled text block used in subject projections.
+// Why: Several panes and workspace sections are semantically narrative text.
+// How: Render `title` and each string in `lines` as provided.
+// Valid Example:
+//   {"title": "Workspace", "lines": ["Root: /srv/workstations/transit"]}
+message TextSection {
+  // What: Section title.
+  // Why: Narrative blocks still need a heading.
+  // How: Render it as the section title.
+  // Example: "Workspace"
+  string title = 1;
+
+  // What: Ordered already-composed text lines.
+  // Why: The service controls the exact textual projection.
+  // How: Render each string as one line or paragraph according to client
+  // styling.
+  // Example: ["Root: /srv/workstations/transit"]
+  repeated string lines = 2;
+}
+
+// What: Structured status block for the active phase.
+// Why: The workflow exposes key/value operational status alongside narrative
+// guidance.
+// How: Render the title and rows in a structured card or table.
+// Valid Example:
+//   {"title": "Subject Status", "rows": [{"label": "Phase", "value": "Gather"}]}
+message SubjectStatusView {
+  // What: Title for the status block.
+  // Why: Users need to know what the structured rows describe.
+  // How: Render it as the panel title.
+  // Example: "Subject Status"
+  string title = 1;
+
+  // What: Ordered structured rows.
+  // Why: Phase status is naturally represented as labeled values.
+  // How: Render each row as a key/value pair.
+  // Example: [{"label": "Phase", "value": "Gather"}]
+  repeated KeyValueRow rows = 2;
+}
+
+// What: Full phase projection for one subject and one phase.
+// Why: This is the central semantic snapshot for the active workflow phase.
+// How: Render it as the phase body and treat it as authoritative for current
+// status and next-step guidance.
+// Valid Example:
+//   {
+//     "phase": "research",
+//     "phase_title": "Gather",
+//     "preferred_phase": "research",
+//     "scenario": {"key": "smart_city_travel"},
+//     "current_step": {"title": "Current Step"},
+//     "status_view": {"title": "Subject Status"},
+//     "journey_lines": ["1. Gather"],
+//     "workspace_view": {"title": "Workspace", "lines": ["Root: /srv/workstations/transit"]},
+//     "latest_receipt_title": "Latest Receipt",
+//     "latest_receipt_lines": ["No recent receipts."]
+//   }
+message SubjectPhaseView {
+  // What: Canonical phase key.
+  // Why: Clients often map tabs and layouts by phase key.
+  // How: Use it to identify the active workflow phase.
+  // Example: "research"
+  string phase = 1;
+
+  // What: Human-readable phase title.
+  // Why: Users should see display titles rather than internal keys.
+  // How: Render it in headers or tab labels when needed.
+  // Example: "Gather"
+  string phase_title = 2;
+
+  // What: Service-recommended phase after considering current workflow state.
+  // Why: The service owns workflow guidance and can suggest cross-phase moves.
+  // How: Treat it as advisory routing guidance, not a mandatory UI command.
+  // Example: "research"
+  string preferred_phase = 3;
+
+  // What: High-level summary of the subject.
+  // Why: Every phase needs access to the current subject summary.
+  // How: Render or cache it as phase-level metadata.
+  // Example: {"key": "smart_city_travel"}
+  SubjectScenarioSummary scenario = 4;
+
+  // What: Current-step guidance block.
+  // Why: The user needs explicit next-step workflow guidance.
+  // How: Render it prominently in the phase.
+  // Example: {"title": "Current Step"}
+  SubjectCurrentStepView current_step = 5;
+
+  // What: Structured phase status block.
+  // Why: Narrative guidance alone is insufficient for workflow inspection.
+  // How: Render it as a structured card or table.
+  // Example: {"title": "Subject Status"}
+  SubjectStatusView status_view = 6;
+
+  // What: High-level journey/progress lines.
+  // Why: Users benefit from a concise sense of where the phase sits in the
+  // overall flow.
+  // How: Render each string as one line of progress text.
+  // Example: ["1. Gather"]
+  repeated string journey_lines = 7;
+
+  // What: Workspace-specific narrative text.
+  // Why: Some phase context is best shown as a titled narrative block.
+  // How: Render it in a workspace/info pane.
+  // Example: {"title":"Workspace","lines":["Root: /srv/workstations/transit"]}
+  TextSection workspace_view = 8;
+
+  // What: Title for the latest receipt/log block.
+  // Why: Receipts are distinct from general workspace text.
+  // How: Render it as the heading for recent receipts.
+  // Example: "Latest Receipt"
+  string latest_receipt_title = 9;
+
+  // What: Latest receipt lines for the phase.
+  // Why: Users need the most recent workflow receipt without leaving the phase.
+  // How: Render each string as one line.
+  // Example: ["No recent receipts."]
+  repeated string latest_receipt_lines = 10;
+}
+
+// What: Pending import metadata supplied when applying an import-related
+// action.
+// Why: Gather import approval often needs more detail than just an action key.
+// How: Supply it only for import actions that require a selected staging item.
+// Valid Example:
+//   {
+//     "source_subject_id": "smart_city_travel",
+//     "source_subject_title": "Smart City Travel",
+//     "source_subject_version_id": "subject-version-1",
+//     "import_kind": "definition_support",
+//     "selection_profile": "units_only"
+//   }
+message SubjectImportStaging {
+  // What: Source subject id for the staged import.
+  // Why: The workflow must know which subject the import originated from.
+  // How: Fill it from the selected staged import entry.
+  // Example: "smart_city_travel"
+  string source_subject_id = 1;
+
+  // What: Human-readable source subject title.
+  // Why: Receipts and diagnostics often include the source subject title.
+  // How: Pass the title of the selected staged import.
+  // Example: "Smart City Travel"
+  string source_subject_title = 2;
+
+  // What: Source subject version id.
+  // Why: Imports can be version-sensitive.
+  // How: Pass the selected source version id when known.
+  // Example: "subject-version-1"
+  string source_subject_version_id = 3;
+
+  // What: Import semantic kind.
+  // Why: The workflow distinguishes different kinds of imported support.
+  // How: Use the service-defined symbolic value.
+  // Example: "definition_support"
+  string import_kind = 4;
+
+  // What: Selection profile that shapes the imported material.
+  // Why: Import approval can select units-only versus broader import shapes.
+  // How: Use the symbolic profile the service expects.
+  // Example: "units_only"
+  string selection_profile = 5;
+}
+
+// What: UI projection context that influences but does not redefine the
+// workflow snapshot.
+// Why: Some subject projections depend on client-local state such as a chosen
+// markdown file or whether the assistant input can be captured in the current
+// phase.
+// How: Pass the current client-local context on snapshot, watch, action, and
+// interaction requests.
+// Valid Example:
+//   {
+//     "can_capture_assistant": true,
+//     "markdown_selected_path": "/srv/workstations/transit/uploads/flutter-shell-a/city-bus.md",
+//     "markdown_status_text": "Stage markdown and approve import.",
+//     "markdown_busy": false
+//   }
+message SubjectPhaseProjectionContext {
+  // What: Whether the active client can currently capture assistant text into
+  // the phase workflow.
+  // Why: Some phase controls depend on whether assistant output can be applied.
+  // How: Set it from the UI's local capability state.
+  // Example: true
+  bool can_capture_assistant = 1;
+
+  // What: Server-visible path for the currently selected markdown source.
+  // Why: Gather import flows need a concrete staged or same-machine path.
+  // How: For cross-platform clients, use the staged path returned by
+  // `StageMarkdownUpload`.
+  // Example: "/srv/workstations/transit/uploads/flutter-shell-a/city-bus.md"
+  string markdown_selected_path = 2;
+
+  // What: Client-visible markdown status text.
+  // Why: The projection can incorporate current markdown-import guidance.
+  // How: Pass the current markdown-related status line from the UI.
+  // Example: "Stage markdown and approve import."
+  string markdown_status_text = 3;
+
+  // What: Whether a markdown-related operation is currently busy.
+  // Why: Phase guidance sometimes changes while import work is running.
+  // How: Set true while upload/import work is in progress.
+  // Example: false
+  bool markdown_busy = 4;
+}
+
+// What: Outcome of applying one workflow action.
+// Why: Action application needs a stable contract for status text, routing
+// guidance, reload hints, and actionable artifacts.
+// How: Render the status/receipt, optionally follow `next_phase` or `next_tab`,
+// refresh subject lists when requested, and use `open_artifacts` for any
+// client-actionable outputs.
+// Valid Example:
+//   {
+//     "status_text": "Report build completed.",
+//     "timeline_text": "Built publication output.",
+//     "next_phase": "publication",
+//     "next_tab": "publication",
+//     "reload_subjects": true,
+//     "open_paths": ["/srv/workstations/transit/build/report.pdf"],
+//     "preferred_subject_key": "smart_city_travel",
+//     "open_artifacts": [
+//       {
+//         "label": "report.pdf",
+//         "server_path": "/srv/workstations/transit/build/report.pdf",
+//         "mime_type": "application/pdf",
+//         "download_url": "http://127.0.0.1:8787/artifacts/abc123/report.pdf",
+//         "can_open_locally": true
+//       }
+//     ]
+//   }
+message SubjectActionResult {
+  // What: Primary human-readable status text for the completed action.
+  // Why: Users need immediate confirmation of what happened.
+  // How: Render it as a receipt/status message.
+  // Example: "Report build completed."
+  string status_text = 1;
+
+  // What: Timeline/receipt text for the action.
+  // Why: The workflow records a narrative receipt for history and context.
+  // How: Append or display it in the latest-receipt surface.
+  // Example: "Built publication output."
+  string timeline_text = 2;
+
+  // What: Service-directed next workflow phase, when the action semantically
+  // changes where the user should be.
+  // Why: Post-action routing should come from workflow semantics, not UI guesswork.
+  // How: Treat it as the highest-priority advisory routing field.
+  // Example: "publication"
+  string next_phase = 3;
+
+  // What: UI tab key aligned with the next workflow surface.
+  // Why: Some clients route by tab key rather than raw phase name.
+  // How: Use it as an advisory tab selection hint.
+  // Example: "publication"
+  string next_tab = 4;
+
+  // What: Whether subject lists should be reloaded after the action.
+  // Why: Some actions materially change list-visible subject summaries.
+  // How: Refresh the list if true.
+  // Example: true
+  bool reload_subjects = 5;
+
+  // What: Legacy same-filesystem paths opened by existing desktop clients.
+  // Why: Textual and other same-machine desktop workflows still rely on direct
+  // local opens.
+  // How: Keep supporting them for backward compatibility, but prefer
+  // `open_artifacts` for new cross-platform clients.
+  // Example: ["/srv/workstations/transit/build/report.pdf"]
+  repeated string open_paths = 6;
+
+  // What: Preferred subject key after the action.
+  // Why: Some actions switch the effective subject context.
+  // How: Use it when refreshing the selected subject after an action.
+  // Example: "smart_city_travel"
+  string preferred_subject_key = 7;
+
+  // What: Client-actionable artifact references opened or produced by the
+  // action.
+  // Why: Web/mobile clients cannot rely on server-local filesystem paths.
+  // How: Prefer these refs over `open_paths` when present.
+  // Example: [{"label":"report.pdf","server_path":"/srv/workstations/transit/build/report.pdf","mime_type":"application/pdf","download_url":"http://127.0.0.1:8787/artifacts/abc123/report.pdf","can_open_locally":true}]
+  repeated .workstation.ArtifactRef open_artifacts = 8;
+}
+
+// What: Request to list subjects for one workstation root.
+// Why: Clients need to discover available subjects before selecting one.
+// How: Supply the root path chosen during bootstrap.
+// Valid Example:
+//   {"root_path": "/srv/workstations/transit"}
+message ListSubjectsRequest {
+  // What: Absolute workstation root path on the server.
+  // Why: Subject lists are scoped to one workstation instance.
+  // How: Use the `root_path` returned by `ListWorkstationRoots`.
+  // Example: "/srv/workstations/transit"
+  string root_path = 1;
+}
+
+// What: Response containing all current subject summaries.
+// Why: Subject lists need both data and trace metadata.
+// How: Render `subjects` and optionally log the trace fields for diagnostics.
+// Valid Example:
+//   {
+//     "subjects": [{"key": "smart_city_travel", "subject_id": "smart_city_travel"}],
+//     "trace_id": "subject-list-response_04b7d44f",
+//     "parent_id": "subject-list-request_169cb3c8"
+//   }
+message ListSubjectsResponse {
+  // What: Ordered subject summaries.
+  // Why: Clients use them to render the subject picker.
+  // How: Replace or refresh the local subject list from this sequence.
+  // Example: [{"key":"smart_city_travel","subject_id":"smart_city_travel"}]
+  repeated SubjectScenarioSummary subjects = 1;
+
+  // What: Trace id for this response.
+  // Why: List operations participate in host-level traceability.
+  // How: Log or correlate it when debugging.
+  // Example: "subject-list-response_04b7d44f"
+  string trace_id = 100;
+
+  // What: Parent trace id linking back to the triggering request.
+  // Why: Diagnostics need causal request/response linkage.
+  // How: Treat it as opaque correlation metadata.
+  // Example: "subject-list-request_169cb3c8"
+  string parent_id = 101;
+}
+
+// What: Request for one phase projection.
+// Why: Clients sometimes need just the phase body without controls or panes.
+// How: Supply root, subject, phase, client session, and current projection
+// context.
+// Valid Example:
+//   {
+//     "root_path": "/srv/workstations/transit",
+//     "subject_id": "smart_city_travel",
+//     "phase": "research",
+//     "projection_context": {"can_capture_assistant": true},
+//     "client_session_id": "flutter-shell-a"
+//   }
+message GetSubjectPhaseViewRequest {
+  // What: Absolute workstation root path on the server.
+  // Why: Phase projections are scoped to one workstation.
+  // How: Reuse the bootstrapped root.
+  // Example: "/srv/workstations/transit"
+  string root_path = 1;
+
+  // What: Target subject id.
+  // Why: The server needs to know which subject to project.
+  // How: Use the selected subject id from `ListSubjects`.
+  // Example: "smart_city_travel"
+  string subject_id = 2;
+
+  // What: Requested workflow phase key.
+  // Why: The server can project different semantic views per phase.
+  // How: Pass one of `research`, `itemize`, `draft`, `review`, or
+  // `publication`.
+  // Example: "research"
+  string phase = 3;
+
+  // What: Current UI projection context.
+  // Why: The phase projection may depend on client-local markdown/assistant
+  // state.
+  // How: Fill it from current client-local workflow context.
+  // Example: {"can_capture_assistant": true}
+  SubjectPhaseProjectionContext projection_context = 4;
+
+  // What: Stable client session id.
+  // Why: Subject projections can depend on client-specific progress/view state.
+  // How: Reuse the id from `OpenClientSession`.
+  // Example: "flutter-shell-a"
+  string client_session_id = 5;
+}
+
+// What: Response containing one phase projection.
+// Why: The client needs the phase body plus trace metadata.
+// How: Render `view` as the current phase panel.
+// Valid Example:
+//   {
+//     "view": {"phase": "research", "phase_title": "Gather"},
+//     "trace_id": "subject-phase-response_0a2d7091",
+//     "parent_id": "subject-phase-request_9d19641d"
+//   }
+message GetSubjectPhaseViewResponse {
+  // What: Projected phase body.
+  // Why: This is the main data the client requested.
+  // How: Render it as the current phase surface.
+  // Example: {"phase":"research","phase_title":"Gather"}
+  SubjectPhaseView view = 1;
+
+  // What: Trace id for the response.
+  // Why: Phase reads participate in traceable host operations.
+  // How: Log it when debugging.
+  // Example: "subject-phase-response_0a2d7091"
+  string trace_id = 100;
+
+  // What: Parent trace id linking back to the request.
+  // Why: Diagnostics need causal linkage.
+  // How: Treat it as opaque metadata.
+  // Example: "subject-phase-request_9d19641d"
+  string parent_id = 101;
+}
+
+// What: Request for the control bundle of one phase.
+// Why: Some clients fetch controls independently from the phase body.
+// How: Use the same targeting fields as `GetSubjectPhaseView`.
+// Valid Example:
+//   {
+//     "root_path": "/srv/workstations/transit",
+//     "subject_id": "smart_city_travel",
+//     "phase": "research",
+//     "projection_context": {"can_capture_assistant": true},
+//     "client_session_id": "flutter-shell-a"
+//   }
+message GetSubjectControlBundleRequest {
+  // What: Absolute workstation root path on the server.
+  // Why: Control bundles are scoped to one workstation.
+  // How: Reuse the bootstrapped root.
+  // Example: "/srv/workstations/transit"
+  string root_path = 1;
+
+  // What: Target subject id.
+  // Why: Controls are subject-specific.
+  // How: Use the selected subject id.
+  // Example: "smart_city_travel"
+  string subject_id = 2;
+
+  // What: Requested phase key.
+  // Why: Control bundles vary by phase.
+  // How: Pass the phase currently being rendered.
+  // Example: "research"
+  string phase = 3;
+
+  // What: Current client projection context.
+  // Why: Control availability can depend on local markdown/assistant state.
+  // How: Fill it from the UI's current local context.
+  // Example: {"can_capture_assistant": true}
+  SubjectPhaseProjectionContext projection_context = 4;
+
+  // What: Stable client session id.
+  // Why: Client-specific progress can influence control projections.
+  // How: Reuse the client session id.
+  // Example: "flutter-shell-a"
+  string client_session_id = 5;
+}
+
+// What: Response containing the control bundle for one phase.
+// Why: The client needs service-owned action/control projections plus trace
+// metadata.
+// How: Render `bundle` as the actionable control surface for the phase.
+// Valid Example:
+//   {
+//     "bundle": {"phase": "research", "more_actions": []},
+//     "trace_id": "subject-control-response_6735be2e",
+//     "parent_id": "subject-control-request_4c517f44"
+//   }
+message GetSubjectControlBundleResponse {
+  // What: Control bundle for the requested phase.
+  // Why: This is the main payload for the request.
+  // How: Render its contained controls directly.
+  // Example: {"phase":"research","more_actions":[]}
+  SubjectControlBundleView bundle = 1;
+
+  // What: Trace id for the response.
+  // Why: Control reads are traceable operations.
+  // How: Log it when debugging.
+  // Example: "subject-control-response_6735be2e"
+  string trace_id = 100;
+
+  // What: Parent trace id linking back to the request.
+  // Why: Diagnostics need request/response correlation.
+  // How: Treat it as opaque metadata.
+  // Example: "subject-control-request_4c517f44"
+  string parent_id = 101;
+}
+
+// What: One renderer-neutral pane projection.
+// Why: Clients often lay out the same phase data across several panes/cards.
+// How: Render text lines, rows, or a structured table according to the fields.
+// Valid Example:
+//   {
+//     "key": "learning",
+//     "title": "Learning",
+//     "lines": ["A city transit authority wants to modernize fare payment."],
+//     "rows": [],
+//     "is_structured_table": false
+//   }
+message SubjectPaneView {
+  // What: Canonical pane key.
+  // Why: Clients need a stable pane identity for layout and refresh.
+  // How: Use it as a renderer lookup key.
+  // Example: "learning"
+  string key = 1;
+
+  // What: Human-readable pane title.
+  // Why: Panes need display titles in multi-pane layouts.
+  // How: Render it as the pane heading.
+  // Example: "Learning"
+  string title = 2;
+
+  // What: Narrative text lines for the pane.
+  // Why: Many panes are text-first projections.
+  // How: Render each string as one line or paragraph.
+  // Example: ["A city transit authority wants to modernize fare payment."]
+  repeated string lines = 3;
+
+  // What: Structured key/value rows for the pane.
+  // Why: Some panes are better represented as structured metadata.
+  // How: Render these rows when present.
+  // Example: []
+  repeated KeyValueRow rows = 4;
+
+  // What: Whether the pane should be rendered as a structured table.
+  // Why: Some pane content is fundamentally tabular.
+  // How: Use it as a rendering hint.
+  // Example: false
+  bool is_structured_table = 5;
+
+  // What: Typed items rendered by interactive inventory and tree panes.
+  // Why: Selection, checkbox, hierarchy, and identity must not be inferred
+  // from human-readable punctuation in `lines`.
+  // How: Use these entries as the behavioral source of truth and retain
+  // `lines` only as a presentation/fallback projection.
+  repeated SubjectPaneItemView items = 6;
+}
+
+// What: One typed item in a subject pane.
+// Why: UI behavior must remain stable when human-readable prose changes.
+// How: Render the display fields and use the explicit selection, check-state,
+// hierarchy, and identity fields for interaction dispatch.
+message SubjectPaneItemView {
+  // Stable item identity used for selection and interaction dispatch.
+  string entry_id = 1;
+  // Renderer-neutral category such as item, section, source, or revision.
+  string entry_kind = 2;
+  // Human-readable text shown for this pane item.
+  string label = 3;
+  // Stable ordering position within the pane projection.
+  int32 ordinal = 4;
+  // Parent item identity for hierarchical pane projections.
+  string parent_entry_id = 5;
+  // Zero-based hierarchy depth used by tree and indented-list renderers.
+  int32 depth = 6;
+  // Whether the item may become the pane's active selection.
+  bool selectable = 7;
+  // Whether the item is currently the pane's active selection.
+  bool selected = 8;
+  // Whether the item's inclusion or check state can be changed.
+  bool toggleable = 9;
+  // Explicit checkbox state, such as none, checked, unchecked, or mixed.
+  string check_state = 10;
+  // Whether the item is currently held for a later merge operation.
+  bool held = 11;
+  // Domain status associated with the item.
+  string status = 12;
+  // Semantic role used when composing or rendering the item.
+  string semantic_kind = 13;
+  // Requested presentation kind for the item.
+  string render_kind = 14;
+  // Evidence presentation policy associated with the item.
+  string evidence_mode = 15;
+  // Transformation policy applied when the item enters a report.
+  string transform_mode = 16;
+  // Canonical learning-unit identity from which the item was derived.
+  string source_unit_id = 17;
+  // Canonical source item identity from which the item was derived.
+  string source_item_id = 18;
+  // Source path, URI, or other renderer-safe reference.
+  string source_ref = 19;
+  // Domain category of the referenced source.
+  string source_kind = 20;
+  // Media type of the referenced source content.
+  string media_type = 21;
+  // Identity of the latest known revision for revision-aware entries.
+  string latest_revision_id = 22;
+  // Domain category of the latest known revision.
+  string latest_revision_kind = 23;
+  // Number of revisions associated with this entry.
+  int32 revision_count = 24;
+  // Number of files contained by an entry representing a bundle.
+  int32 bundle_file_count = 25;
+  // Sort policy or classification applied to this entry.
+  string sort_kind = 26;
+  // Concise item summary for list and detail projections.
+  string summary = 27;
+  // Longer explanatory text for the item.
+  string description = 28;
+  // Query text associated with search- or question-shaped entries.
+  string query_text = 29;
+  // Free-form notes associated with the item.
+  string notes = 30;
+  // Normalized confidence value supplied by the domain projection.
+  double confidence = 31;
+  // Identities of directly related pane entries.
+  repeated string related_ids = 32;
+  // Heading for the item's detail pane.
+  string detail_title = 33;
+  // Narrative lines for the item's detail pane.
+  repeated string detail_lines = 34;
+  // Structured attributes for the item's detail pane.
+  repeated KeyValueRow attributes = 35;
+}
+
+// What: Full set of panes for one phase.
+// Why: Clients need a stable pane grouping for multi-pane layouts.
+// How: Render the panes in the layout that matches the active phase.
+// Valid Example:
+//   {
+//     "phase": "research",
+//     "panes": [{"key": "learning", "title": "Learning"}]
+//   }
+message SubjectPaneBundleView {
+  // What: Phase that owns this pane bundle.
+  // Why: Clients may cache pane bundles across phases.
+  // How: Associate it with the active phase key.
+  // Example: "research"
+  string phase = 1;
+
+  // What: Pane projections for the phase.
+  // Why: The service owns the semantic pane contents.
+  // How: Render one pane/card per entry.
+  // Example: [{"key":"learning","title":"Learning"}]
+  repeated SubjectPaneView panes = 2;
+}
+
+// What: Request for the pane bundle of one phase.
+// Why: Some clients fetch panes independently from the rest of the snapshot.
+// How: Supply root, subject, phase, and client session id.
+// Valid Example:
+//   {
+//     "root_path": "/srv/workstations/transit",
+//     "subject_id": "smart_city_travel",
+//     "phase": "research",
+//     "client_session_id": "flutter-shell-a"
+//   }
+message GetSubjectPaneBundleRequest {
+  // What: Absolute workstation root path on the server.
+  // Why: Pane bundles are scoped to one workstation.
+  // How: Reuse the bootstrapped root.
+  // Example: "/srv/workstations/transit"
+  string root_path = 1;
+
+  // What: Target subject id.
+  // Why: Pane projections are subject-specific.
+  // How: Use the selected subject id.
+  // Example: "smart_city_travel"
+  string subject_id = 2;
+
+  // What: Requested phase key.
+  // Why: Pane sets differ by phase.
+  // How: Pass the active phase.
+  // Example: "research"
+  string phase = 3;
+
+  // What: Stable client session id.
+  // Why: Some panes may depend on client-specific view state.
+  // How: Reuse the client session id.
+  // Example: "flutter-shell-a"
+  string client_session_id = 4;
+}
+
+// What: Response containing the pane bundle for one phase.
+// Why: Clients need semantic pane contents and trace metadata.
+// How: Render `bundle` in the phase's multi-pane layout.
+// Valid Example:
+//   {
+//     "bundle": {"phase": "research", "panes": []},
+//     "trace_id": "subject-pane-response_11cab5b0",
+//     "parent_id": "subject-pane-request_84e6d2fe"
+//   }
+message GetSubjectPaneBundleResponse {
+  // What: Pane bundle payload.
+  // Why: This is the data the client asked for.
+  // How: Render its panes directly.
+  // Example: {"phase":"research","panes":[]}
+  SubjectPaneBundleView bundle = 1;
+
+  // What: Trace id for the response.
+  // Why: Pane reads are traceable operations.
+  // How: Log it for diagnostics when needed.
+  // Example: "subject-pane-response_11cab5b0"
+  string trace_id = 100;
+
+  // What: Parent trace id linking back to the request.
+  // Why: Diagnostics need request/response linkage.
+  // How: Treat it as opaque metadata.
+  // Example: "subject-pane-request_84e6d2fe"
+  string parent_id = 101;
+}
+
+// What: Composite snapshot containing phase, control, and pane projections.
+// Why: Most clients want one authoritative workflow snapshot rather than
+// separate per-surface calls.
+// How: Treat it as the full semantic projection for one subject/phase.
+// Valid Example:
+//   {
+//     "phase_view": {"phase": "research"},
+//     "control_bundle": {"phase": "research"},
+//     "pane_bundle": {"phase": "research"}
+//   }
+message SubjectWorkflowSnapshotView {
+  // What: Main phase projection.
+  // Why: The snapshot needs the phase body.
+  // How: Render it as the primary phase content.
+  // Example: {"phase":"research"}
+  SubjectPhaseView phase_view = 1;
+
+  // What: Control bundle for the phase.
+  // Why: The snapshot should include the actionable control surface.
+  // How: Render its controls alongside the phase body.
+  // Example: {"phase":"research"}
+  SubjectControlBundleView control_bundle = 2;
+
+  // What: Pane bundle for the phase.
+  // Why: Multi-pane clients need explicit pane content.
+  // How: Render it in the phase layout.
+  // Example: {"phase":"research"}
+  SubjectPaneBundleView pane_bundle = 3;
+}
+
+// What: Request for the full composite workflow snapshot.
+// Why: Clients usually need one authoritative initial snapshot before
+// switching to the watch stream.
+// How: Call this before `WatchSubjectWorkflow`.
+// Valid Example:
+//   {
+//     "root_path": "/srv/workstations/transit",
+//     "subject_id": "smart_city_travel",
+//     "phase": "research",
+//     "projection_context": {"can_capture_assistant": true},
+//     "client_session_id": "flutter-shell-a"
+//   }
+message GetSubjectWorkflowSnapshotRequest {
+  // What: Absolute workstation root path on the server.
+  // Why: Snapshots are scoped to one workstation.
+  // How: Reuse the bootstrapped root.
+  // Example: "/srv/workstations/transit"
+  string root_path = 1;
+
+  // What: Target subject id.
+  // Why: The server needs to know which subject to snapshot.
+  // How: Use the selected subject id.
+  // Example: "smart_city_travel"
+  string subject_id = 2;
+
+  // What: Requested phase key.
+  // Why: Snapshots are phase-specific.
+  // How: Pass the phase the UI intends to render.
+  // Example: "research"
+  string phase = 3;
+
+  // What: Current client projection context.
+  // Why: Snapshot materialization can depend on local markdown/assistant state.
+  // How: Fill it from the current UI context.
+  // Example: {"can_capture_assistant": true}
+  SubjectPhaseProjectionContext projection_context = 4;
+
+  // What: Stable client session id.
+  // Why: Snapshots can reflect session-scoped progress/view state.
+  // How: Reuse the client session id.
+  // Example: "flutter-shell-a"
+  string client_session_id = 5;
+}
+
+// What: Response containing the full workflow snapshot.
+// Why: Clients need both the snapshot and trace metadata.
+// How: Replace the locally rendered subject phase from `snapshot`.
+// Valid Example:
+//   {
+//     "snapshot": {"phase_view": {"phase": "research"}},
+//     "trace_id": "subject-snapshot-response_599ea09b",
+//     "parent_id": "subject-snapshot-request_398d3f41"
+//   }
+message GetSubjectWorkflowSnapshotResponse {
+  // What: Full subject workflow snapshot.
+  // Why: This is the main data the client requested.
+  // How: Render it as the authoritative current subject state.
+  // Example: {"phase_view":{"phase":"research"}}
+  SubjectWorkflowSnapshotView snapshot = 1;
+
+  // What: Trace id for the response.
+  // Why: Snapshot reads are traceable operations.
+  // How: Log it when debugging.
+  // Example: "subject-snapshot-response_599ea09b"
+  string trace_id = 100;
+
+  // What: Parent trace id linking back to the request.
+  // Why: Diagnostics need causal request/response linkage.
+  // How: Treat it as opaque correlation metadata.
+  // Example: "subject-snapshot-request_398d3f41"
+  string parent_id = 101;
+}
+
+// What: Request to watch the full workflow snapshot for changes.
+// Why: Clients need an event-driven way to stay synchronized with subject
+// workflow changes.
+// How: Open the stream after fetching an initial snapshot. Re-render from each
+// incoming `snapshot`.
+// Valid Example:
+//   {
+//     "root_path": "/srv/workstations/transit",
+//     "subject_id": "smart_city_travel",
+//     "phase": "research",
+//     "projection_context": {"can_capture_assistant": true},
+//     "client_session_id": "flutter-shell-a"
+//   }
+message WatchSubjectWorkflowRequest {
+  // What: Absolute workstation root path on the server.
+  // Why: Watch channels are scoped to one workstation.
+  // How: Reuse the bootstrapped root.
+  // Example: "/srv/workstations/transit"
+  string root_path = 1;
+
+  // What: Target subject id.
+  // Why: The stream watches one subject at a time.
+  // How: Use the selected subject id.
+  // Example: "smart_city_travel"
+  string subject_id = 2;
+
+  // What: Watched phase key.
+  // Why: Different phases can project different snapshots for the same
+  // subject.
+  // How: Pass the phase the client is currently rendering.
+  // Example: "research"
+  string phase = 3;
+
+  // What: Current client projection context.
+  // Why: Watch projections are keyed by local markdown/assistant state too.
+  // How: Pass the same context used for the initial snapshot.
+  // Example: {"can_capture_assistant": true}
+  SubjectPhaseProjectionContext projection_context = 4;
+
+  // What: Stable client session id.
+  // Why: Watch state and progress are client-session scoped.
+  // How: Reuse the client session id.
+  // Example: "flutter-shell-a"
+  string client_session_id = 5;
+}
+
+// What: One full-snapshot update emitted by `WatchSubjectWorkflow`.
+// Why: Clients need both the replacement snapshot and stream bookkeeping
+// fields.
+// How: Re-render from `snapshot`, and use `sequence`, `snapshot_version`, and
+// `progress_fingerprint` for reconciliation/debugging.
+// Valid Example:
+//   {
+//     "event_kind": "subject_workflow_changed",
+//     "snapshot": {"phase_view": {"phase": "research"}},
+//     "channel_key": "subject:smart_city_travel:research",
+//     "sequence": 14,
+//     "snapshot_version": "subject-research-14",
+//     "progress_fingerprint": "f0c53e2295f2",
+//     "trace_id": "subject-watch-event_3d31fb24",
+//     "parent_id": "subject-action-response_0ed55f93"
+//   }
+message SubjectWorkflowSnapshotUpdate {
+  // What: Semantic kind of watch event.
+  // Why: Clients may want to distinguish workflow changes from progress-only
+  // refreshes.
+  // How: Treat it as an opaque event category string.
+  // Example: "subject_workflow_changed"
+  string event_kind = 1;
+
+  // What: Replacement workflow snapshot.
+  // Why: The stream carries full authoritative snapshots.
+  // How: Replace local rendered state with it.
+  // Example: {"phase_view":{"phase":"research"}}
+  SubjectWorkflowSnapshotView snapshot = 2;
+
+  // What: Stable identifier for the watched channel.
+  // Why: Debugging and multiplexing tools need to know which channel emitted
+  // the event.
+  // How: Treat it as opaque channel metadata.
+  // Example: "subject:smart_city_travel:research"
+  string channel_key = 3;
+
+  // What: Monotonic sequence number within the watched channel.
+  // Why: Clients can detect dropped or out-of-order updates.
+  // How: Expect it to increase by one for consecutive events on the same
+  // channel.
+  // Example: 14
+  int64 sequence = 4;
+
+  // What: Snapshot version token for the emitted state.
+  // Why: Polling and streaming clients need a stable change token.
+  // How: Treat it as opaque version metadata.
+  // Example: "subject-research-14"
+  string snapshot_version = 5;
+
+  // What: Fingerprint of the client-progress state tied to the snapshot.
+  // Why: Clients can cheaply detect whether view/progress state changed.
+  // How: Treat it as an opaque comparison fingerprint.
+  // Example: "f0c53e2295f2"
+  string progress_fingerprint = 6;
+
+  // What: Trace id for this emitted event.
+  // Why: Stream events participate in cross-layer traceability.
+  // How: Log it when debugging.
+  // Example: "subject-watch-event_3d31fb24"
+  string trace_id = 100;
+
+  // What: Parent trace id that caused this event.
+  // Why: Diagnostics need to link the watch event to the triggering action or
+  // refresh.
+  // How: Treat it as opaque correlation metadata.
+  // Example: "subject-action-response_0ed55f93"
+  string parent_id = 101;
+}
+
+// What: Request to apply one semantic workflow action.
+// Why: Actions mutate subject workflow state and may change the recommended
+// phase, available controls, or produced artifacts.
+// How: Provide the action key and any auxiliary import/projection context
+// needed by the action.
+// Valid Example:
+//   {
+//     "root_path": "/srv/workstations/transit",
+//     "subject_id": "smart_city_travel",
+//     "phase": "research",
+//     "action_key": "approve_import",
+//     "assistant_message_text": "",
+//     "subject_title_override": "",
+//     "import_staging": {
+//       "source_subject_id": "smart_city_travel",
+//       "source_subject_title": "Smart City Travel",
+//       "source_subject_version_id": "subject-version-1",
+//       "import_kind": "definition_support",
+//       "selection_profile": "units_only"
+//     },
+//     "projection_context": {
+//       "can_capture_assistant": true,
+//       "markdown_selected_path": "/srv/workstations/transit/uploads/flutter-shell-a/city-bus.md",
+//       "markdown_status_text": "Approve staged markdown import.",
+//       "markdown_busy": false
+//     },
+//     "client_session_id": "flutter-shell-a"
+//   }
+message ApplySubjectActionRequest {
+  // What: Absolute workstation root path on the server.
+  // Why: Actions mutate state within one workstation root.
+  // How: Reuse the bootstrapped root.
+  // Example: "/srv/workstations/transit"
+  string root_path = 1;
+
+  // What: Target subject id.
+  // Why: The action applies to one subject.
+  // How: Use the currently selected subject id.
+  // Example: "smart_city_travel"
+  string subject_id = 2;
+
+  // What: Phase from which the action was triggered.
+  // Why: Some action semantics depend on the current phase context.
+  // How: Pass the currently rendered phase key.
+  // Example: "research"
+  string phase = 3;
+
+  // What: Canonical workflow action key.
+  // Why: The service applies actions by symbolic key.
+  // How: Use the key returned by the control/gate projection.
+  // Example: "approve_import"
+  string action_key = 4;
+
+  // What: Assistant text to capture for actions that consume assistant output.
+  // Why: Some phase actions incorporate generated assistant text into the
+  // workflow.
+  // How: Supply it only when the chosen action expects it.
+  // Example: ""
+  string assistant_message_text = 5;
+
+  // What: Optional subject-title override provided by the client.
+  // Why: Some creation/import flows let the user propose a subject title.
+  // How: Leave empty unless the action requires it.
+  // Example: ""
+  string subject_title_override = 6;
+
+  // What: Optional staged-import metadata for import actions.
+  // Why: Import approval often needs more context than just an action key.
+  // How: Supply it for import actions, otherwise leave it unset/default.
+  // Example: {"source_subject_id":"smart_city_travel"}
+  SubjectImportStaging import_staging = 7;
+
+  // What: Current client projection context.
+  // Why: Actions can depend on staged markdown paths and assistant-capture
+  // availability.
+  // How: Pass the same context the client used for the current snapshot.
+  // Example: {"can_capture_assistant":true}
+  SubjectPhaseProjectionContext projection_context = 8;
+
+  // What: Stable client session id.
+  // Why: Actions can mutate or consult client-scoped progress/view state.
+  // How: Reuse the client session id.
+  // Example: "flutter-shell-a"
+  string client_session_id = 9;
+}
+
+// What: Response returned after one workflow action is applied.
+// Why: Clients need both the action outcome and the fresh phase projection.
+// How: Render the receipt from `result`, then update the phase from `view`.
+// Valid Example:
+//   {
+//     "result": {"status_text": "Import approved."},
+//     "view": {"phase": "research", "preferred_phase": "itemize"},
+//     "trace_id": "subject-action-response_0ed55f93",
+//     "parent_id": "subject-action-request_5668713e"
+//   }
+message ApplySubjectActionResponse {
+  // What: Action outcome/receipt.
+  // Why: The caller needs explicit semantic feedback about the action.
+  // How: Use it for receipts, routing hints, reload hints, and artifacts.
+  // Example: {"status_text":"Import approved."}
+  SubjectActionResult result = 1;
+
+  // What: Fresh phase projection after applying the action.
+  // Why: The UI should render updated workflow state immediately.
+  // How: Replace the rendered phase from this message.
+  // Example: {"phase":"research","preferred_phase":"itemize"}
+  SubjectPhaseView view = 2;
+
+  // What: Trace id for the response.
+  // Why: Action application is a traceable mutating operation.
+  // How: Log it when debugging.
+  // Example: "subject-action-response_0ed55f93"
+  string trace_id = 100;
+
+  // What: Parent trace id linking back to the request.
+  // Why: Diagnostics need causal linkage.
+  // How: Treat it as opaque correlation metadata.
+  // Example: "subject-action-request_5668713e"
+  string parent_id = 101;
+}
+
+// What: Request for client-scoped subject progress JSON.
+// Why: The workflow keeps some view/progress state isolated per client
+// session.
+// How: Supply the current root, subject, and client session id.
+// Valid Example:
+//   {
+//     "root_path": "/srv/workstations/transit",
+//     "subject_id": "smart_city_travel",
+//     "client_session_id": "flutter-shell-a"
+//   }
+message GetClientSubjectProgressRequest {
+  // What: Absolute workstation root path on the server.
+  // Why: Progress is scoped to one workstation.
+  // How: Reuse the bootstrapped root.
+  // Example: "/srv/workstations/transit"
+  string root_path = 1;
+
+  // What: Target subject id.
+  // Why: Progress is tracked per subject.
+  // How: Use the selected subject id.
+  // Example: "smart_city_travel"
+  string subject_id = 2;
+
+  // What: Stable client session id.
+  // Why: Progress is isolated per client session.
+  // How: Reuse the client session id.
+  // Example: "flutter-shell-a"
+  string client_session_id = 3;
+}
+
+// What: Response containing client-scoped subject progress JSON.
+// Why: The client may need to restore ephemeral view state after reconnecting.
+// How: Treat `progress_json` as opaque JSON owned by the service.
+// Valid Example:
+//   {
+//     "progress_json": "{\"selectedImportId\":\"import_1\"}",
+//     "trace_id": "subject-progress-response_6dfcf8f0",
+//     "parent_id": "subject-progress-request_a4e93f2d"
+//   }
+message GetClientSubjectProgressResponse {
+  // What: Opaque client-scoped subject progress JSON.
+  // Why: The service owns the exact progress schema.
+  // How: Store and send it back unchanged unless you understand the schema.
+  // Example: "{\"selectedImportId\":\"import_1\"}"
+  string progress_json = 1;
+
+  // What: Trace id for the response.
+  // Why: Progress reads are traceable operations.
+  // How: Log it when debugging.
+  // Example: "subject-progress-response_6dfcf8f0"
+  string trace_id = 100;
+
+  // What: Parent trace id linking back to the request.
+  // Why: Diagnostics need request/response correlation.
+  // How: Treat it as opaque metadata.
+  // Example: "subject-progress-request_a4e93f2d"
+  string parent_id = 101;
+}
+
+// What: Request to persist client-scoped subject progress JSON.
+// Why: The client needs to write isolated ephemeral view/progress state.
+// How: Supply the same targeting fields and the opaque JSON payload.
+// Valid Example:
+//   {
+//     "root_path": "/srv/workstations/transit",
+//     "subject_id": "smart_city_travel",
+//     "client_session_id": "flutter-shell-a",
+//     "progress_json": "{\"selectedImportId\":\"import_1\"}"
+//   }
+message PutClientSubjectProgressRequest {
+  // What: Absolute workstation root path on the server.
+  // Why: Progress writes are scoped to one workstation.
+  // How: Reuse the bootstrapped root.
+  // Example: "/srv/workstations/transit"
+  string root_path = 1;
+
+  // What: Target subject id.
+  // Why: Progress is stored per subject.
+  // How: Use the selected subject id.
+  // Example: "smart_city_travel"
+  string subject_id = 2;
+
+  // What: Stable client session id.
+  // Why: Progress is isolated per client session.
+  // How: Reuse the client session id.
+  // Example: "flutter-shell-a"
+  string client_session_id = 3;
+
+  // What: Opaque client-scoped progress JSON payload.
+  // Why: The service persists client-local workflow/view state in one blob.
+  // How: Write back the progress JSON previously read or locally updated.
+  // Example: "{\"selectedImportId\":\"import_1\"}"
+  string progress_json = 4;
+}
+
+// What: Response returned after writing client-scoped subject progress JSON.
+// Why: Clients need the normalized stored JSON plus trace metadata.
+// How: Replace local cached progress with the returned payload.
+// Valid Example:
+//   {
+//     "progress_json": "{\"selectedImportId\":\"import_1\"}",
+//     "trace_id": "subject-progress-put-response_1be2d86f",
+//     "parent_id": "subject-progress-put-request_d275f620"
+//   }
+message PutClientSubjectProgressResponse {
+  // What: Normalized stored progress JSON.
+  // Why: The server may normalize the payload before persisting it.
+  // How: Replace local cached progress with the returned text.
+  // Example: "{\"selectedImportId\":\"import_1\"}"
+  string progress_json = 1;
+
+  // What: Trace id for the response.
+  // Why: Progress writes are traceable operations.
+  // How: Log it when debugging.
+  // Example: "subject-progress-put-response_1be2d86f"
+  string trace_id = 100;
+
+  // What: Parent trace id linking back to the write request.
+  // Why: Diagnostics need causal linkage.
+  // How: Treat it as opaque metadata.
+  // Example: "subject-progress-put-request_d275f620"
+  string parent_id = 101;
+}
+
+// What: Request to apply one lightweight client interaction to the current
+// subject workflow.
+// Why: Some client interactions mutate progress/view state without being full
+// semantic subject actions.
+// How: Supply the interaction key, delta/target information, and current
+// projection context.
+// Valid Example:
+//   {
+//     "root_path": "/srv/workstations/transit",
+//     "subject_id": "smart_city_travel",
+//     "phase": "review",
+//     "client_session_id": "flutter-shell-a",
+//     "interaction_key": "report_scope_select",
+//     "delta": 1,
+//     "target_id": "section_02",
+//     "preview_only": false,
+//     "projection_context": {"can_capture_assistant": true}
+//   }
+message ApplySubjectInteractionRequest {
+  // What: Absolute workstation root path on the server.
+  // Why: Interaction updates are scoped to one workstation.
+  // How: Reuse the bootstrapped root.
+  // Example: "/srv/workstations/transit"
+  string root_path = 1;
+
+  // What: Target subject id.
+  // Why: Interactions apply to one subject.
+  // How: Use the selected subject id.
+  // Example: "smart_city_travel"
+  string subject_id = 2;
+
+  // What: Phase from which the interaction originated.
+  // Why: Interaction meaning can depend on phase-local controls.
+  // How: Pass the active phase key.
+  // Example: "review"
+  string phase = 3;
+
+  // What: Stable client session id.
+  // Why: Interaction state is client-session scoped.
+  // How: Reuse the client session id.
+  // Example: "flutter-shell-a"
+  string client_session_id = 4;
+
+  // What: Canonical interaction key.
+  // Why: The service applies lightweight interactions by symbolic key.
+  // How: Use the interaction key defined by the UI contract.
+  // Example: "report_scope_select"
+  string interaction_key = 5;
+
+  // What: Integer delta associated with the interaction.
+  // Why: Some interactions increment/decrement or otherwise carry a signed
+  // step.
+  // How: Supply 0 when the interaction does not use a delta.
+  // Example: 1
+  int32 delta = 6;
+
+  // What: Target id associated with the interaction.
+  // Why: Interactions often operate on one selected row/item/section.
+  // How: Supply the stable target id when required.
+  // Example: "section_02"
+  string target_id = 7;
+
+  // What: Whether to compute a preview without committing the interaction.
+  // Why: Some clients want to inspect a hypothetical result first.
+  // How: Set true for preview-only interactions.
+  // Example: false
+  bool preview_only = 8;
+
+  // What: Current client projection context.
+  // Why: Interaction projections can still depend on markdown/assistant state.
+  // How: Pass the same context used by the current snapshot.
+  // Example: {"can_capture_assistant": true}
+  SubjectPhaseProjectionContext projection_context = 9;
+}
+
+// What: Response returned after applying a lightweight client interaction.
+// Why: The client needs the refreshed snapshot and normalized progress state.
+// How: Replace the rendered snapshot and local cached progress with the
+// returned values.
+// Valid Example:
+//   {
+//     "snapshot": {"phase_view": {"phase": "review"}},
+//     "progress_json": "{\"selectedSectionId\":\"section_02\"}",
+//     "progress_fingerprint": "38b62d00aefe",
+//     "trace_id": "subject-interaction-response_4ec1eb3a",
+//     "parent_id": "subject-interaction-request_5e47cfda"
+//   }
+message ApplySubjectInteractionResponse {
+  // What: Refreshed workflow snapshot after the interaction.
+  // Why: The client should re-render from authoritative service state.
+  // How: Replace local rendered state with this snapshot.
+  // Example: {"phase_view":{"phase":"review"}}
+  SubjectWorkflowSnapshotView snapshot = 1;
+
+  // What: Normalized client progress JSON after the interaction.
+  // Why: The service may mutate stored client progress while handling the
+  // interaction.
+  // How: Replace the local cached progress with it.
+  // Example: "{\"selectedSectionId\":\"section_02\"}"
+  string progress_json = 2;
+
+  // What: Fingerprint of the returned progress state.
+  // Why: Clients can cheaply detect stale progress caches.
+  // How: Treat it as opaque version metadata.
+  // Example: "38b62d00aefe"
+  string progress_fingerprint = 3;
+
+  // What: Trace id for the response.
+  // Why: Interaction application is a traceable operation.
+  // How: Log it when debugging.
+  // Example: "subject-interaction-response_4ec1eb3a"
+  string trace_id = 100;
+
+  // What: Parent trace id linking back to the request.
+  // Why: Diagnostics need causal linkage.
+  // How: Treat it as opaque metadata.
+  // Example: "subject-interaction-request_5e47cfda"
+  string parent_id = 101;
+}
+
+// What: gRPC service exposing the subject workflow semantic surface.
+// Why: All workstation UIs should consume the same authoritative workflow
+// semantics through one contract.
+// How: Use unary RPCs for initial reads and mutations, then watch the stream
+// for later updates.
+// Valid Example:
+//   - `ListSubjects` -> choose `smart_city_travel`
+//   - `GetSubjectWorkflowSnapshot(phase="research")`
+//   - `WatchSubjectWorkflow`
+//   - `ApplySubjectAction(action_key="approve_import")`
+service SubjectWorkflowService {
+  // What: Lists all current subjects for one workstation root.
+  // Why: Clients need a subject picker before opening any workflow phase.
+  // How: Call it after bootstrap and before selecting a subject.
+  // Valid Example:
+  //   request: {"root_path": "/srv/workstations/transit"}
+  //   response: {"subjects": [{"subject_id": "smart_city_travel"}]}
+  rpc ListSubjects(ListSubjectsRequest) returns (ListSubjectsResponse);
+
+  // What: Returns just the phase projection for one subject and phase.
+  // Why: Some clients fetch the phase body independently from controls/panes.
+  // How: Use it when you do not need the composite snapshot.
+  // Valid Example:
+  //   request: {"root_path": "/srv/workstations/transit", "subject_id": "smart_city_travel", "phase": "research"}
+  //   response: {"view": {"phase": "research", "phase_title": "Gather"}}
+  rpc GetSubjectPhaseView(GetSubjectPhaseViewRequest) returns (GetSubjectPhaseViewResponse);
+
+  // What: Returns the control bundle for one subject and phase.
+  // Why: Some clients fetch controls independently from the main phase body.
+  // How: Use it when you need just the interactive control surface.
+  // Valid Example:
+  //   request: {"root_path": "/srv/workstations/transit", "subject_id": "smart_city_travel", "phase": "research"}
+  //   response: {"bundle": {"phase": "research"}}
+  rpc GetSubjectControlBundle(GetSubjectControlBundleRequest) returns (GetSubjectControlBundleResponse);
+
+  // What: Returns the pane bundle for one subject and phase.
+  // Why: Multi-pane clients can fetch pane projections separately when needed.
+  // How: Use it when you need only pane content.
+  // Valid Example:
+  //   request: {"root_path": "/srv/workstations/transit", "subject_id": "smart_city_travel", "phase": "research"}
+  //   response: {"bundle": {"phase": "research", "panes": []}}
+  rpc GetSubjectPaneBundle(GetSubjectPaneBundleRequest) returns (GetSubjectPaneBundleResponse);
+
+  // What: Returns the full subject workflow snapshot.
+  // Why: Most clients want one authoritative initial projection before
+  // opening a watch stream.
+  // How: Call this first when opening a subject.
+  // Valid Example:
+  //   request: {"root_path": "/srv/workstations/transit", "subject_id": "smart_city_travel", "phase": "research"}
+  //   response: {"snapshot": {"phase_view": {"phase": "research"}}}
+  rpc GetSubjectWorkflowSnapshot(GetSubjectWorkflowSnapshotRequest) returns (GetSubjectWorkflowSnapshotResponse);
+
+  // What: Streams full-snapshot updates for one watched subject/phase.
+  // Why: Clients need event-driven synchronization as workflow state changes.
+  // How: Open the stream after `GetSubjectWorkflowSnapshot` and replace local
+  // state from each emitted `snapshot`.
+  // Valid Example:
+  //   request: {"root_path": "/srv/workstations/transit", "subject_id": "smart_city_travel", "phase": "research"}
+  //   response sequence:
+  //     1. {"event_kind": "initial_state", "sequence": 1, "snapshot_version": "subject-research-1"}
+  //     2. {"event_kind": "subject_workflow_changed", "sequence": 2, "snapshot_version": "subject-research-2"}
+  rpc WatchSubjectWorkflow(WatchSubjectWorkflowRequest) returns (stream SubjectWorkflowSnapshotUpdate);
+
+  // What: Applies one semantic workflow action.
+  // Why: Actions are the governed mutation surface for subject workflow state.
+  // How: Submit the action key supplied by the current projection and then
+  // re-render from the returned phase view.
+  // Valid Example:
+  //   request: {"root_path": "/srv/workstations/transit", "subject_id": "smart_city_travel", "phase": "research", "action_key": "approve_import"}
+  //   response: {"result": {"status_text": "Import approved."}, "view": {"preferred_phase": "itemize"}}
+  rpc ApplySubjectAction(ApplySubjectActionRequest) returns (ApplySubjectActionResponse);
+
+  // What: Reads client-scoped subject progress JSON.
+  // Why: The workflow isolates ephemeral view/progress state per client
+  // session.
+  // How: Call it when reconnecting or restoring a client session.
+  // Valid Example:
+  //   request: {"root_path": "/srv/workstations/transit", "subject_id": "smart_city_travel", "client_session_id": "flutter-shell-a"}
+  //   response: {"progress_json": "{\"selectedImportId\":\"import_1\"}"}
+  rpc GetClientSubjectProgress(GetClientSubjectProgressRequest) returns (GetClientSubjectProgressResponse);
+
+  // What: Persists client-scoped subject progress JSON.
+  // Why: Clients need to store isolated ephemeral view/progress state.
+  // How: Write back the opaque JSON blob whenever client-local progress
+  // changes.
+  // Valid Example:
+  //   request: {"root_path": "/srv/workstations/transit", "subject_id": "smart_city_travel", "client_session_id": "flutter-shell-a", "progress_json": "{\"selectedImportId\":\"import_1\"}"}
+  //   response: {"progress_json": "{\"selectedImportId\":\"import_1\"}"}
+  rpc PutClientSubjectProgress(PutClientSubjectProgressRequest) returns (PutClientSubjectProgressResponse);
+
+  // What: Applies one lightweight client interaction.
+  // Why: Some client-local workflow interactions are distinct from full
+  // semantic subject actions.
+  // How: Use it for interaction keys that mutate client progress and return a
+  // refreshed snapshot.
+  // Valid Example:
+  //   request: {"root_path": "/srv/workstations/transit", "subject_id": "smart_city_travel", "phase": "review", "client_session_id": "flutter-shell-a", "interaction_key": "report_scope_select", "target_id": "section_02"}
+  //   response: {"snapshot": {"phase_view": {"phase": "review"}}, "progress_json": "{\"selectedSectionId\":\"section_02\"}"}
+  rpc ApplySubjectInteraction(ApplySubjectInteractionRequest) returns (ApplySubjectInteractionResponse);
+}

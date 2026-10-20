@@ -1,0 +1,240 @@
+{
+  "prompt": "What distinguishes a scalar quantity from a vector quantity, and how is this represented in the reusable relation?",
+  "returned_skill_count": 12,
+  "skills": [
+    {
+      "authorities_requested": [
+        "execute"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "ext": "number",
+        "magnitude": "number",
+        "only": "number"
+      },
+      "kind": "ability",
+      "outputs": {
+        "d": "number"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "score": 9,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Scalars and Vectors / Distance And Displacement"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "score": 9,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Scalars and Vectors / Physics Relations Scalars And Vectors"
+    },
+    {
+      "authorities_requested": [
+        "execute"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "magnitude": "number"
+      },
+      "kind": "ability",
+      "outputs": {
+        "Q": "number"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "score": 9,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Scalars and Vectors / Python Ability"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "score": 9,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Scalars and Vectors / Q From Magnitude"
+    },
+    {
+      "authorities_requested": [
+        "execute"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "ext": "number",
+        "magnitude": "number",
+        "only": "number"
+      },
+      "kind": "ability",
+      "outputs": {
+        "ext_times_speed": "number"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "score": 9,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Scalars and Vectors / Speed And Velocity"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "score": 6,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Gravitation / Reusable substrate under the law"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "score": 3,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Circular Motion / Centripetal acceleration"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "score": 3,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Circular Motion / Centripetal force"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "score": 3,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Circular Motion / Earlier Acceleration"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "score": 3,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Circular Motion / Physics Relations Circular Motion"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "score": 3,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Electric Circuits / Electric power"
+    },
+    {
+      "authorities_requested": [
+        "execute"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "R": "number",
+        "V": "number"
+      },
+      "kind": "ability",
+      "outputs": {
+        "I": "number"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "score": 3,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Electric Circuits / Ohm S Law"
+    }
+  ],
+  "total_skill_count": 62
+}

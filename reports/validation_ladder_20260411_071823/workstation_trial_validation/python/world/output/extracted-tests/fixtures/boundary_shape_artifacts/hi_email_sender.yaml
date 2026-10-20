@@ -1,0 +1,75 @@
+Hi Email Sender:
+  Description:
+    - Input-plus-write greeting function.
+  In:
+    - recipient: destination email address
+    - message: greeting message
+  Out:
+    - delivery_status: simulated delivery status
+  Metadata:
+    artifact_type: ability
+    representation: python_script
+    function_bit: 1
+    boundary_shape:
+      - a*
+      - c*
+    scope: reuse when a greeting email must be sent under supplied recipient and message values
+    reusability: broad_reuse
+    admissibility: admitted
+    learning_relation: extends_parameters
+    justification: A bounded write-side artifact for simulated greeting email sending.
+    question: Send a greeting email.
+    input_contract:
+      recipient: destination email address
+      message: greeting message
+    output_contract:
+      delivery_status: simulated delivery status
+    python_script: |
+      # /// script
+      # requires-python = ">=3.11"
+      # dependencies = ["msgspec", "orjson"]
+      # ///
+      from __future__ import annotations
+
+      import argparse
+      import sys
+
+      import msgspec
+      import orjson
+
+
+      class InputPayload(msgspec.Struct, kw_only=True):
+          recipient: str
+          message: str
+
+
+      class OutputPayload(msgspec.Struct, kw_only=True):
+          status: str
+          answer: str
+          result: dict[str, str]
+          notes: list[str] = []
+
+
+      def run(payload: InputPayload) -> OutputPayload:
+          delivery = f"simulated send to {payload.recipient}: {payload.message}"
+          return OutputPayload(
+              status="ok",
+              answer=delivery,
+              result={"delivery_status": delivery},
+              notes=["simulated write-side email send"],
+          )
+
+
+      def main() -> None:
+          parser = argparse.ArgumentParser(description="hi email sender")
+          parser.add_argument("--input-json", help="optional JSON payload")
+          args = parser.parse_args()
+          raw = args.input_json.encode("utf-8") if args.input_json else sys.stdin.buffer.read()
+          payload = orjson.loads(raw) if raw else {}
+          typed = msgspec.convert(payload, type=InputPayload)
+          sys.stdout.buffer.write(orjson.dumps(msgspec.to_builtins(run(typed))))
+          sys.stdout.buffer.write(b"\n")
+
+
+      if __name__ == "__main__":
+          main()

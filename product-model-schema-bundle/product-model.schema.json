@@ -1,0 +1,1721 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/product-self-representation.schema.v2.0.1.json",
+  "title": "Product Self-Representation Model (Duties/Journeys/GWT/UX/SLOs/Traces)",
+  "description": "# Product Self-Representation Specification  \n*A complete, implementation-independent model of a product expressed through duties, journeys, behavioral contracts, experience guarantees, traces, and reality-aligned architecture constraints.*\n\n---\n\n## 1. Purpose\n\nThis document specifies a durable way to represent what a product **is**, **does**, and **guarantees**—independent of any particular codebase—so that a team can:\n\n- Understand the product without relying on tribal knowledge.\n- Reconstruct the product’s current behavior and experience envelope from artifacts alone.\n- Re-implement the product from scratch while preserving meaning, user outcomes, and operational guarantees.\n\nThis representation is designed for products that evolve over years and must remain legible, testable, and observable as they change.\n\n---\n\n## 2. The Representation at a Glance\n\nThe product is represented as a coherent set of artifacts that together define:\n\n1. **What must be done** (Duties)\n2. **How it is done end-to-end** (User Journeys)\n3. **What must happen step-by-step** (High-fidelity Given–When–Then)\n4. **What must be true in the user experience** (UX SLIs/SLOs)\n5. **What “correct” looks like in practice** (Golden traces)\n6. **What “incorrect / forbidden / unacceptable” looks like** (Anti-golden traces)\n7. **Why the architecture is shaped the way it is** (Real-world object/process model + causality rule)\n\nThese components form a self-describing system: semantics, behavior, experience, and causality are all explicit.\n\n---\n\n## 3. Core Concepts and Definitions\n\n### 3.1 Duty\nA **Duty** is the primary organizing unit of the product. It replaces traditional persona-centric framing.\n\n- A Duty is a **world-anchored obligation/capability** the product must support.\n- It is expressed as a **KR Title**.\n- A Duty is stable over time because it is grounded in real-world work, not in fluctuating user archetypes.\n\n**Key property:** a Duty is satisfiable by any legitimate actor (human, automation, API client) capable of performing it, without changing its semantic essence.\n\n**Naming convention:** *Verb + Domain Object + Qualifier*  \nExamples (illustrative):  \n- “Verify identity for account creation”  \n- “Settle payment for an order”  \n- “Provision access to a workspace”\n\n---\n\n### 3.2 User Journey\nA **User Journey** is the canonical end-to-end flow that fulfills a Duty.\n\n- It is expressed as the **KR Description**.\n- It defines how the Duty is completed under expected conditions, including acceptable variants and failure boundaries.\n\nThe Journey is narrative in form, but structured enough to be converted into executable checks and observability targets.\n\n---\n\n### 3.3 Step Specification (High-Fidelity Given–When–Then)\nThe **KR breakdown** is a sequence of **Given–When–Then** step specifications.\n\nEach GWT step is a behavioral constraint:\n\n- **Given**: required preconditions and state assumptions  \n- **When**: the triggering action/event  \n- **Then**: the observable outcome and resulting state guarantees\n\nThese steps are intended to be **atomic**, testable, and composable.\n\n---\n\n### 3.4 UX SLIs and SLOs for Critical Journeys\nFor each critical journey (and therefore for the duties they fulfill), the product defines:\n\n- **SLIs**: measurable indicators of user experience quality\n- **SLOs**: target thresholds that must be met\n\nThis layer defines the **experience envelope**:\n- what must be fast,\n- what must be reliable,\n- what must degrade gracefully,\n- what must never fail.\n\n---\n\n### 3.5 Golden Traces\nA **Golden Trace** is an exemplar end-to-end execution that demonstrates correct behavior across layers.\n\nGolden traces are not just logs; they are **witnesses** of correctness:\n- They anchor abstract specifications to concrete reality.\n- They remove interpretation ambiguity from GWT and journey narratives.\n- They provide stable regression reference points as implementations change.\n\n---\n\n### 3.6 Anti-Golden Traces\nAn **Anti-Golden Trace** is an exemplar of behavior that is explicitly unacceptable:\n- a forbidden transition,\n- an invalid state,\n- an erroneous journey completion,\n- an experience violation (e.g., unacceptable latency, confusing UX failure mode).\n\nAnti-golden traces define the **negative space** of the product: what must not happen.\n\n---\n\n### 3.7 Real-World Object and Process Architecture Model\nThe architecture is modeled around **real-world objects and interactions**:\n- domain entities correspond to real-world entities,\n- interactions correspond to real-world processes,\n- boundaries correspond to real-world seams.\n\nThis ensures semantics remain stable and interpretable even as implementation details evolve.\n\n---\n\n### 3.8 Causal Realism Constraint for Network Separation\nA governing architectural rule applies:\n\n> **Network separation is only allowed if the corresponding real-world process takes more than ~1 second.**\n\nMeaning:\n- If the real world is causally tight and fast, the system remains tightly coupled (synchronous interaction permitted/expected).\n- If the real world is inherently slow (human delay, external processing, physical constraints), the system may be decoupled (asynchronous separation justified).\n\nThis constraint makes time and causality first-class, preventing arbitrary distribution that obscures domain meaning.\n\n---\n\n## 4. Artifact Structure: The Duty Specification Unit\n\nEach Duty is represented as a self-contained unit that includes all necessary layers.\n\n### 4.1 Duty (KR Title)\n- **Duty Name**: Verb + Domain Object + Qualifier\n- **Intent**: concise statement of what must be accomplished\n- **Scope**: what this duty covers and excludes (non-goals)\n\n### 4.2 User Journey (KR Description)\nA structured description containing:\n\n1. **Purpose**: why this duty exists in the domain  \n2. **Trigger**: what starts the journey  \n3. **Preconditions**: what must already be true  \n4. **Primary flow**: canonical end-to-end path  \n5. **Completion criteria**: what “done” means, including state changes  \n6. **Variants**: allowed alternate paths (optional but recommended)  \n7. **Failure boundaries**: expected failures and correct user-visible handling  \n8. **Non-goals**: explicitly excluded responsibilities  \n9. **Inputs/Outputs** (semantic contract):\n   - Inputs: required domain objects/data\n   - Outputs: produced/updated domain objects/data\n   - Invariants: must-always-hold properties\n10. **Causality / timing class**:\n    - `< 1s real-world` → tight coupling expected\n    - `>= 1s real-world` → async separation permitted/expected\n    - justification grounded in the real-world process\n\n### 4.3 Step Breakdown (KR GWT)\nA numbered list of atomic GWT steps.\n\nGuidelines:\n- One step = one observable transition guarantee.\n- Steps should refer to domain objects and states (not internal services).\n- Postconditions should be checkable by outputs or observable effects.\n\n### 4.4 UX SLIs/SLOs\nA small set of measurable guarantees tied to the journey:\n\n- **Success SLI**: completion success rate\n- **Latency SLIs**: time-to-meaningful-feedback; time-to-completion (as needed)\n- **Error SLIs**: user-visible error rate; recoverability rate; retry rate\n- **SLOs**: thresholds defining acceptable experience\n\nThis makes the duty measurable and operationally enforceable.\n\n### 4.5 Traces\n- **Golden traces**: canonical successful executions of the duty journey\n- **Anti-golden traces**: canonical unacceptable executions\n- Each trace should identify:\n  - triggering context,\n  - sequence of key events,\n  - salient state transitions,\n  - UX-relevant timings and outcomes.\n\n---\n\n## 5. How the Pieces Fit Together\n\n### 5.1 Product as a Set of Duties\nThe product is the union of duties:\n\n- Duties define the product’s capability surface.\n- A duty is the smallest unit of “what the product must be able to do” that remains meaningful and testable.\n\n### 5.2 Journeys as Compositions of Duties\nSome duties can be fulfilled by composing other duties:\n\n- A “parent duty” journey can invoke “child duties” as sub-journeys.\n- Composition remains explicit because inputs/outputs and invariants are defined per duty.\n\nThis yields a graph of duties rather than a flat list, enabling modular reasoning.\n\n### 5.3 GWT as the Executable Behavioral Contract\nGWT steps provide the behavioral truth:\n\n- They constrain permissible state transitions.\n- They define acceptance criteria.\n- They allow systematic conversion into tests and simulations.\n\n### 5.4 SLOs as the Experience Envelope\nSLOs bound not only correctness but **felt correctness**:\n\n- A journey that technically works but violates UX SLOs is treated as incorrect for critical duties.\n- SLOs formalize what must remain “good” even under stress.\n\n### 5.5 Traces as Reality Anchors\nTraces ensure the system model remains connected to actual behavior:\n\n- Golden traces reduce ambiguity and prevent “spec drift into fantasy”.\n- Anti-golden traces define forbidden behaviors and known failure modes.\n\n---\n\n## 6. What This Representation Can and Cannot Capture\n\n### 6.1 What It Captures Extremely Well\nThis representation reconstructs, with very high fidelity:\n\n- **Domain meaning**: what the product is about, in real-world terms  \n- **User-visible behavior**: what happens and what must happen  \n- **Critical journeys**: end-to-end flows that matter  \n- **Experience guarantees**: performance and reliability as felt by users  \n- **Causal structure**: why interactions are synchronous vs asynchronous  \n- **Correctness boundaries**: defined by both golden and anti-golden traces\n\nIn effect, it represents the product as a **promise**: a behavioral and experiential contract grounded in real-world semantics and time.\n\n### 6.2 What It Does Not Fully Capture\nEven with excellent artifacts, some aspects remain underdetermined:\n\n- **Implementation specifics**: exact schemas, code structure, technology choices  \n- **Operational pain/cost topology**: what is expensive, brittle, or hard to change  \n- **Historical trauma and org memory**: why teams fear certain changes  \n- **Emergent user folklore**: workarounds that never violated SLOs and never became explicit\n\nThese are properties of lived operation and are not fully recoverable from static specifications alone.\n\n---\n\n## 7. Quality Standards and Non-Negotiables\n\nFor this representation to remain valid over years, the following standards apply:\n\n1. **Domain-first language**\n   - Duties, journeys, and steps must speak in terms of real-world objects and interactions.\n\n2. **Atomic GWT**\n   - Each step must be independently testable and unambiguous.\n\n3. **Journey coverage**\n   - Critical user journeys must have explicit SLIs/SLOs.\n   - Non-critical journeys may have looser targets, but the distinction must be explicit.\n\n4. **Trace completeness**\n   - Every critical duty must have at least:\n     - one golden trace,\n     - one anti-golden trace (where meaningful).\n\n5. **Causal realism enforcement**\n   - Network separation requires real-world time justification (`>= ~1s`).\n   - Otherwise, boundaries must remain causally tight.\n\n6. **Versioned evolution**\n   - Changes to duties/journeys/steps/SLOs/traces are treated as first-class evolution events.\n   - The representation must reflect what the product currently guarantees.\n\n---\n\n## 8. Practical Outcome\n\nWhen maintained correctly, this system of artifacts yields a product that is **legible, testable, and reconstructible**:\n\n- New teams can understand what the product is by reading duties and journeys.\n- Engineers can re-implement the product by implementing the duties’ behavioral contracts and meeting journey SLOs.\n- Observability can be driven directly from journey SLIs and validated against traces.\n- Architecture remains explainable because it is constrained by real-world objects and real-world time.\n\nThe product ceases to be primarily “in the code”.  \nIt becomes primarily “in the model”—and the code becomes one instantiation of that model.\n",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "modelId",
+    "modelName",
+    "modelPurpose",
+    "createdAt",
+    "updatedAt",
+    "product",
+    "lexicon",
+    "ambiguityPolicy",
+    "realWorldModel",
+    "objectives",
+    "duties",
+    "journeys",
+    "steps",
+    "experience",
+    "traces",
+    "updates"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Version of this schema bundle that the document claims to conform to (semantic version)."
+    },
+    "modelId": {
+      "$ref": "#/$defs/modelId",
+      "description": "Stable ID of this product model document. Use to track the same model across updates."
+    },
+    "modelName": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Human-friendly name for the model (e.g., 'Library Reservation Model')."
+    },
+    "modelPurpose": {
+      "type": "string",
+      "minLength": 40,
+      "description": "Why this model exists and what decisions it should enable (at least one paragraph)."
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the first version of this model was created."
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When this model document was last updated."
+    },
+    "product": {
+      "$ref": "#/$defs/product",
+      "description": "Minimal product metadata: name, domain, and description."
+    },
+    "lexicon": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/lexiconTerm"
+      },
+      "description": "1. **Domain-first language**\n   - Duties, journeys, and steps must speak in terms of real-world objects and interactions."
+    },
+    "ambiguityPolicy": {
+      "$ref": "#/$defs/ambiguityPolicy",
+      "description": "## 7. Quality Standards and Non-Negotiables\n\n1. **Domain-first language**\n   - Duties, journeys, and steps must speak in terms of real-world objects and interactions.\n\n2. **Atomic GWT**\n   - Each step must be independently testable and unambiguous."
+    },
+    "realWorldModel": {
+      "$ref": "#/$defs/realWorldModel",
+      "description": "### 3.7 Real-World Object and Process Architecture Model\nThe architecture is modeled around **real-world objects and interactions**:\n- domain entities correspond to real-world entities,\n- interactions correspond to real-world processes,\n- boundaries correspond to real-world seams.\n\nThis ensures semantics remain stable and interpretable even as implementation details evolve.\n\n---\n\n### 3.8 Causal Realism Constraint for Network Separation\nA governing architectural rule applies:\n\n> **Network separation is only allowed if the corresponding real-world process takes more than ~1 second.**\n\nMeaning:\n- If the real world is causally tight and fast, the system remains tightly coupled (synchronous interaction permitted/expected).\n- If the real world is inherently slow (human delay, external processing, physical constraints), the system may be decoupled (asynchronous separation justified).\n\nThis constraint makes time and causality first-class, preventing arbitrary distribution that obscures domain meaning.\n\n---\n\n"
+    },
+    "objectives": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/objective"
+      },
+      "description": "OKR Objectives: why the product is trying to achieve something (the O in OKR)."
+    },
+    "duties": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/duty"
+      },
+      "description": "### 3.1 Duty\nA **Duty** is the primary organizing unit of the product. It replaces traditional persona-centric framing.\n\n- A Duty is a **world-anchored obligation/capability** the product must support.\n- It is expressed as a **KR Title**.\n- A Duty is stable over time because it is grounded in real-world work, not in fluctuating user archetypes.\n\n**Key property:** a Duty is satisfiable by any legitimate actor (human, automation, API client) capable of performing it, without changing its semantic essence.\n\n**Naming convention:** *Verb + Domain Object + Qualifier*  \nExamples (illustrative):  \n- “Verify identity for account creation”  \n- “Settle payment for an order”  \n- “Provision access to a workspace”\n\n---\n\n### 4.1 Duty (KR Title)\n- **Duty Name**: Verb + Domain Object + Qualifier\n- **Intent**: concise statement of what must be accomplished\n- **Scope**: what this duty covers and excludes (non-goals)\n\n### 5.1 Product as a Set of Duties\nThe product is the union of duties:\n\n- Duties define the product’s capability surface.\n- A duty is the smallest unit of “what the product must be able to do” that remains meaningful and testable.\n\n"
+    },
+    "journeys": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/journey"
+      },
+      "description": "### 3.2 User Journey\nA **User Journey** is the canonical end-to-end flow that fulfills a Duty.\n\n- It is expressed as the **KR Description**.\n- It defines how the Duty is completed under expected conditions, including acceptable variants and failure boundaries.\n\nThe Journey is narrative in form, but structured enough to be converted into executable checks and observability targets.\n\n---\n\n### 4.2 User Journey (KR Description)\nA structured description containing:\n\n1. **Purpose**: why this duty exists in the domain  \n2. **Trigger**: what starts the journey  \n3. **Preconditions**: what must already be true  \n4. **Primary flow**: canonical end-to-end path  \n5. **Completion criteria**: what “done” means, including state changes  \n6. **Variants**: allowed alternate paths (optional but recommended)  \n7. **Failure boundaries**: expected failures and correct user-visible handling  \n8. **Non-goals**: explicitly excluded responsibilities  \n9. **Inputs/Outputs** (semantic contract):\n   - Inputs: required domain objects/data\n   - Outputs: produced/updated domain objects/data\n   - Invariants: must-always-hold properties\n10. **Causality / timing class**:\n    - `< 1s real-world` → tight coupling expected\n    - `>= 1s real-world` → async separation permitted/expected\n    - justification grounded in the real-world process\n\n### 5.2 Journeys as Compositions of Duties\nSome duties can be fulfilled by composing other duties:\n\n- A “parent duty” journey can invoke “child duties” as sub-journeys.\n- Composition remains explicit because inputs/outputs and invariants are defined per duty.\n\nThis yields a graph of duties rather than a flat list, enabling modular reasoning.\n\n"
+    },
+    "steps": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/gwtStep"
+      },
+      "description": "### 3.3 Step Specification (High-Fidelity Given–When–Then)\nThe **KR breakdown** is a sequence of **Given–When–Then** step specifications.\n\nEach GWT step is a behavioral constraint:\n\n- **Given**: required preconditions and state assumptions  \n- **When**: the triggering action/event  \n- **Then**: the observable outcome and resulting state guarantees\n\nThese steps are intended to be **atomic**, testable, and composable.\n\n---\n\n### 4.3 Step Breakdown (KR GWT)\nA numbered list of atomic GWT steps.\n\nGuidelines:\n- One step = one observable transition guarantee.\n- Steps should refer to domain objects and states (not internal services).\n- Postconditions should be checkable by outputs or observable effects.\n\n### 5.3 GWT as the Executable Behavioral Contract\nGWT steps provide the behavioral truth:\n\n- They constrain permissible state transitions.\n- They define acceptance criteria.\n- They allow systematic conversion into tests and simulations.\n\n"
+    },
+    "experience": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "slis",
+        "slos"
+      ],
+      "properties": {
+        "slis": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/sli"
+          }
+        },
+        "slos": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/slo"
+          }
+        }
+      },
+      "description": "### 3.4 UX SLIs and SLOs for Critical Journeys\nFor each critical journey (and therefore for the duties they fulfill), the product defines:\n\n- **SLIs**: measurable indicators of user experience quality\n- **SLOs**: target thresholds that must be met\n\nThis layer defines the **experience envelope**:\n- what must be fast,\n- what must be reliable,\n- what must degrade gracefully,\n- what must never fail.\n\n---\n\n### 4.4 UX SLIs/SLOs\nA small set of measurable guarantees tied to the journey:\n\n- **Success SLI**: completion success rate\n- **Latency SLIs**: time-to-meaningful-feedback; time-to-completion (as needed)\n- **Error SLIs**: user-visible error rate; recoverability rate; retry rate\n- **SLOs**: thresholds defining acceptable experience\n\nThis makes the duty measurable and operationally enforceable.\n\n### 5.4 SLOs as the Experience Envelope\nSLOs bound not only correctness but **felt correctness**:\n\n- A journey that technically works but violates UX SLOs is treated as incorrect for critical duties.\n- SLOs formalize what must remain “good” even under stress.\n\n"
+    },
+    "traces": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "golden",
+        "antiGolden"
+      ],
+      "properties": {
+        "golden": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/trace"
+          }
+        },
+        "antiGolden": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/trace"
+          }
+        }
+      },
+      "description": "### 3.5 Golden Traces\nA **Golden Trace** is an exemplar end-to-end execution that demonstrates correct behavior across layers.\n\nGolden traces are not just logs; they are **witnesses** of correctness:\n- They anchor abstract specifications to concrete reality.\n- They remove interpretation ambiguity from GWT and journey narratives.\n- They provide stable regression reference points as implementations change.\n\n---\n\n### 3.6 Anti-Golden Traces\nAn **Anti-Golden Trace** is an exemplar of behavior that is explicitly unacceptable:\n- a forbidden transition,\n- an invalid state,\n- an erroneous journey completion,\n- an experience violation (e.g., unacceptable latency, confusing UX failure mode).\n\nAnti-golden traces define the **negative space** of the product: what must not happen.\n\n---\n\n### 4.5 Traces\n- **Golden traces**: canonical successful executions of the duty journey\n- **Anti-golden traces**: canonical unacceptable executions\n- Each trace should identify:\n  - triggering context,\n  - sequence of key events,\n  - salient state transitions,\n  - UX-relevant timings and outcomes.\n\n---\n\n### 5.5 Traces as Reality Anchors\nTraces ensure the system model remains connected to actual behavior:\n\n- Golden traces reduce ambiguity and prevent “spec drift into fantasy”.\n- Anti-golden traces define forbidden behaviors and known failure modes.\n\n---\n\n"
+    },
+    "updates": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/changeRecord"
+      },
+      "description": "6. **Versioned evolution**\n   - Changes to duties/journeys/steps/SLOs/traces are treated as first-class evolution events.\n   - The representation must reflect what the product currently guarantees."
+    },
+    "openQuestions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/openQuestion"
+      },
+      "description": "Explicitly unresolved questions that require external clarification; never hide ambiguity in vague wording."
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*\\.[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Legacy/general typed identifier (lowercase prefix + '.' + slug). Prefer using the type-specific ID definitions for each field."
+    },
+    "nonEmpty": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sentence": {
+      "type": "string",
+      "minLength": 12
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "active",
+        "deprecated",
+        "retired",
+        "superseded"
+      ]
+    },
+    "criticality": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "critical"
+      ]
+    },
+    "latencyClass": {
+      "type": "string",
+      "enum": [
+        "under-1s",
+        "over-or-equal-1s",
+        "mixed"
+      ]
+    },
+    "product": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "productId",
+        "name",
+        "description",
+        "domain"
+      ],
+      "properties": {
+        "productId": {
+          "$ref": "#/$defs/productId"
+        },
+        "name": {
+          "$ref": "#/$defs/nonEmpty"
+        },
+        "description": {
+          "$ref": "#/$defs/sentence"
+        },
+        "domain": {
+          "$ref": "#/$defs/nonEmpty"
+        }
+      }
+    },
+    "lexiconTerm": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "termId",
+        "term",
+        "definition",
+        "allowedAliases",
+        "forbiddenAliases",
+        "examples"
+      ],
+      "properties": {
+        "termId": {
+          "$ref": "#/$defs/termId"
+        },
+        "term": {
+          "$ref": "#/$defs/nonEmpty"
+        },
+        "definition": {
+          "type": "string",
+          "minLength": 25
+        },
+        "allowedAliases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "forbiddenAliases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "examples": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ambiguityPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "principle",
+        "unresolvedQuestionHandling",
+        "requiresClarificationWhen"
+      ],
+      "properties": {
+        "principle": {
+          "type": "string",
+          "minLength": 40
+        },
+        "unresolvedQuestionHandling": {
+          "type": "string",
+          "enum": [
+            "block-change",
+            "record-open-question",
+            "allow-with-explicit-risk"
+          ]
+        },
+        "requiresClarificationWhen": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 15
+          }
+        }
+      }
+    },
+    "realWorldModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "objects",
+        "interactions",
+        "invariants",
+        "networkBoundaries"
+      ],
+      "properties": {
+        "objects": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/realWorldObject"
+          }
+        },
+        "interactions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/realWorldInteraction"
+          }
+        },
+        "invariants": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/invariant"
+          }
+        },
+        "networkBoundaries": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/networkBoundary"
+          }
+        }
+      },
+      "description": "### 3.7 Real-World Object and Process Architecture Model\nThe architecture is modeled around **real-world objects and interactions**:\n- domain entities correspond to real-world entities,\n- interactions correspond to real-world processes,\n- boundaries correspond to real-world seams.\n\nThis ensures semantics remain stable and interpretable even as implementation details evolve.\n\n---\n\n### 3.8 Causal Realism Constraint for Network Separation\nA governing architectural rule applies:\n\n> **Network separation is only allowed if the corresponding real-world process takes more than ~1 second.**\n\nMeaning:\n- If the real world is causally tight and fast, the system remains tightly coupled (synchronous interaction permitted/expected).\n- If the real world is inherently slow (human delay, external processing, physical constraints), the system may be decoupled (asynchronous separation justified).\n\nThis constraint makes time and causality first-class, preventing arbitrary distribution that obscures domain meaning.\n\n---\n\n"
+    },
+    "realWorldObject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "objectId",
+        "name",
+        "definition",
+        "lifecycleStates"
+      ],
+      "properties": {
+        "objectId": {
+          "$ref": "#/$defs/objectId"
+        },
+        "name": {
+          "$ref": "#/$defs/nonEmpty"
+        },
+        "definition": {
+          "type": "string",
+          "minLength": 20
+        },
+        "lifecycleStates": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "ownedByDutyIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/dutyId"
+          }
+        }
+      }
+    },
+    "realWorldInteraction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "interactionId",
+        "name",
+        "description",
+        "participantObjectIds",
+        "expectedRealWorldDuration"
+      ],
+      "properties": {
+        "interactionId": {
+          "$ref": "#/$defs/interactionId"
+        },
+        "name": {
+          "$ref": "#/$defs/nonEmpty"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 20
+        },
+        "participantObjectIds": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/objectId"
+          }
+        },
+        "expectedRealWorldDuration": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "class",
+            "explanation"
+          ],
+          "properties": {
+            "class": {
+              "$ref": "#/$defs/latencyClass"
+            },
+            "explanation": {
+              "type": "string",
+              "minLength": 20
+            }
+          }
+        }
+      }
+    },
+    "invariant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "invariantId",
+        "name",
+        "statement",
+        "rationale",
+        "severity",
+        "objectIds",
+        "interactionIds"
+      ],
+      "properties": {
+        "invariantId": {
+          "$ref": "#/$defs/invariantId"
+        },
+        "name": {
+          "$ref": "#/$defs/nonEmpty"
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 20
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 20
+        },
+        "severity": {
+          "$ref": "#/$defs/criticality"
+        },
+        "objectIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/objectId"
+          }
+        },
+        "interactionIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/interactionId"
+          }
+        },
+        "enforcedByStepIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/stepId"
+          }
+        },
+        "guardedByAntiTraceIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/antiTraceId"
+          }
+        }
+      },
+      "description": "9. **Inputs/Outputs** (semantic contract):\n   - Inputs: required domain objects/data\n   - Outputs: produced/updated domain objects/data\n   - Invariants: must-always-hold properties"
+    },
+    "networkBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "boundaryId",
+        "name",
+        "description",
+        "interactionId",
+        "realWorldProcess",
+        "realWorldLatencyClass",
+        "separationAllowed",
+        "consistencyExpectation",
+        "causalityJustification",
+        "userVisibleImpact"
+      ],
+      "properties": {
+        "boundaryId": {
+          "$ref": "#/$defs/boundaryId"
+        },
+        "name": {
+          "$ref": "#/$defs/nonEmpty"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 20
+        },
+        "interactionId": {
+          "$ref": "#/$defs/interactionId"
+        },
+        "realWorldProcess": {
+          "type": "string",
+          "minLength": 20
+        },
+        "realWorldLatencyClass": {
+          "$ref": "#/$defs/latencyClass",
+          "description": "10. **Causality / timing class**:\n    - `< 1s real-world` → tight coupling expected\n    - `>= 1s real-world` → async separation permitted/expected\n    - justification grounded in the real-world process"
+        },
+        "separationAllowed": {
+          "type": "boolean",
+          "description": "> **Network separation is only allowed if the corresponding real-world process takes more than ~1 second.**"
+        },
+        "consistencyExpectation": {
+          "type": "string",
+          "enum": [
+            "strong",
+            "read-your-writes",
+            "eventual",
+            "best-effort",
+            "not-applicable"
+          ]
+        },
+        "causalityJustification": {
+          "type": "string",
+          "minLength": 30
+        },
+        "userVisibleImpact": {
+          "type": "string",
+          "minLength": 20
+        },
+        "failureMode": {
+          "type": "string"
+        },
+        "exceptionApproval": {
+          "$ref": "#/$defs/exceptionApproval",
+          "description": "Approval record required when permitting an architectural exception."
+        }
+      },
+      "description": "### 3.8 Causal Realism Constraint for Network Separation\nA governing architectural rule applies:\n\n> **Network separation is only allowed if the corresponding real-world process takes more than ~1 second.**\n\nMeaning:\n- If the real world is causally tight and fast, the system remains tightly coupled (synchronous interaction permitted/expected).\n- If the real world is inherently slow (human delay, external processing, physical constraints), the system may be decoupled (asynchronous separation justified).\n\nThis constraint makes time and causality first-class, preventing arbitrary distribution that obscures domain meaning.\n\n---\n\n"
+    },
+    "objective": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "objectiveId",
+        "title",
+        "description",
+        "successMeaning"
+      ],
+      "properties": {
+        "objectiveId": {
+          "$ref": "#/$defs/objectiveId"
+        },
+        "title": {
+          "$ref": "#/$defs/nonEmpty"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 20
+        },
+        "successMeaning": {
+          "type": "string",
+          "minLength": 20
+        }
+      },
+      "description": "An OKR Objective describing a desired direction/outcome. Duties (KRs) link back to objectives."
+    },
+    "duty": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dutyId",
+        "title",
+        "intent",
+        "scope",
+        "nonGoals",
+        "criticality",
+        "status",
+        "objectiveIds",
+        "primaryJourneyIds",
+        "usesRealWorldObjectIds",
+        "usesRealWorldInteractionIds",
+        "invariantIds",
+        "version"
+      ],
+      "properties": {
+        "dutyId": {
+          "$ref": "#/$defs/dutyId"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 12,
+          "description": "- **Duty Name**: Verb + Domain Object + Qualifier"
+        },
+        "intent": {
+          "type": "string",
+          "minLength": 20,
+          "description": "- **Intent**: concise statement of what must be accomplished"
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 20,
+          "description": "- **Scope**: what this duty covers and excludes (non-goals)"
+        },
+        "nonGoals": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "8. **Non-goals**: explicitly excluded responsibilities"
+        },
+        "criticality": {
+          "$ref": "#/$defs/criticality"
+        },
+        "status": {
+          "$ref": "#/$defs/status"
+        },
+        "objectiveIds": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/objectiveId"
+          }
+        },
+        "primaryJourneyIds": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/journeyId"
+          }
+        },
+        "usesRealWorldObjectIds": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/objectId"
+          }
+        },
+        "usesRealWorldInteractionIds": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/interactionId"
+          }
+        },
+        "invariantIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/invariantId"
+          }
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "okrMapping": {
+          "type": "object"
+        },
+        "dependsOnDutyIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/dutyId"
+          },
+          "description": "### 5.2 Journeys as Compositions of Duties\nSome duties can be fulfilled by composing other duties:\n\n- A “parent duty” journey can invoke “child duties” as sub-journeys.\n- Composition remains explicit because inputs/outputs and invariants are defined per duty.\n\nThis yields a graph of duties rather than a flat list, enabling modular reasoning.\n\n"
+        }
+      },
+      "description": "### 3.1 Duty\nA **Duty** is the primary organizing unit of the product. It replaces traditional persona-centric framing.\n\n- A Duty is a **world-anchored obligation/capability** the product must support.\n- It is expressed as a **KR Title**.\n- A Duty is stable over time because it is grounded in real-world work, not in fluctuating user archetypes.\n\n**Key property:** a Duty is satisfiable by any legitimate actor (human, automation, API client) capable of performing it, without changing its semantic essence.\n\n**Naming convention:** *Verb + Domain Object + Qualifier*  \nExamples (illustrative):  \n- “Verify identity for account creation”  \n- “Settle payment for an order”  \n- “Provision access to a workspace”\n\n---\n\n### 4.1 Duty (KR Title)\n- **Duty Name**: Verb + Domain Object + Qualifier\n- **Intent**: concise statement of what must be accomplished\n- **Scope**: what this duty covers and excludes (non-goals)\n\n### 5.1 Product as a Set of Duties\nThe product is the union of duties:\n\n- Duties define the product’s capability surface.\n- A duty is the smallest unit of “what the product must be able to do” that remains meaningful and testable.\n\n"
+    },
+    "journey": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "journeyId",
+        "dutyId",
+        "title",
+        "description",
+        "purpose",
+        "trigger",
+        "preconditions",
+        "primaryFlow",
+        "completionCriteria",
+        "variants",
+        "failureBoundaries",
+        "nonGoals",
+        "inputObjectIds",
+        "outputObjectIds",
+        "invariantIds",
+        "stepIds",
+        "sliIds",
+        "sloIds",
+        "goldenTraceIds",
+        "antiGoldenTraceIds",
+        "timing",
+        "networkBoundaryIds",
+        "status",
+        "version"
+      ],
+      "properties": {
+        "journeyId": {
+          "$ref": "#/$defs/journeyId"
+        },
+        "dutyId": {
+          "$ref": "#/$defs/dutyId"
+        },
+        "title": {
+          "$ref": "#/$defs/nonEmpty"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 30
+        },
+        "purpose": {
+          "type": "string",
+          "minLength": 15,
+          "description": "1. **Purpose**: why this duty exists in the domain  "
+        },
+        "trigger": {
+          "type": "string",
+          "minLength": 5,
+          "description": "2. **Trigger**: what starts the journey  "
+        },
+        "preconditions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          },
+          "description": "3. **Preconditions**: what must already be true  "
+        },
+        "primaryFlow": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          },
+          "description": "4. **Primary flow**: canonical end-to-end path  "
+        },
+        "completionCriteria": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          },
+          "description": "5. **Completion criteria**: what “done” means, including state changes  "
+        },
+        "variants": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "6. **Variants**: allowed alternate paths (optional but recommended)  "
+        },
+        "failureBoundaries": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "7. **Failure boundaries**: expected failures and correct user-visible handling  "
+        },
+        "nonGoals": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "8. **Non-goals**: explicitly excluded responsibilities  "
+        },
+        "inputObjectIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/objectId"
+          },
+          "description": "9. **Inputs/Outputs** (semantic contract):\n   - Inputs: required domain objects/data"
+        },
+        "outputObjectIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/objectId"
+          },
+          "description": "9. **Inputs/Outputs** (semantic contract):\n   - Outputs: produced/updated domain objects/data"
+        },
+        "invariantIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/invariantId"
+          },
+          "description": "9. **Inputs/Outputs** (semantic contract):\n   - Invariants: must-always-hold properties"
+        },
+        "stepIds": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/stepId"
+          }
+        },
+        "sliIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sliId"
+          }
+        },
+        "sloIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sloId"
+          }
+        },
+        "goldenTraceIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/traceId"
+          }
+        },
+        "antiGoldenTraceIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/antiTraceId"
+          }
+        },
+        "timing": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "realWorldLatencyClass",
+            "syncExpectation",
+            "causalJustification"
+          ],
+          "properties": {
+            "realWorldLatencyClass": {
+              "$ref": "#/$defs/latencyClass"
+            },
+            "syncExpectation": {
+              "type": "string",
+              "enum": [
+                "synchronous",
+                "asynchronous",
+                "mixed"
+              ]
+            },
+            "causalJustification": {
+              "type": "string",
+              "minLength": 30
+            }
+          },
+          "description": "10. **Causality / timing class**:\n    - `< 1s real-world` → tight coupling expected\n    - `>= 1s real-world` → async separation permitted/expected\n    - justification grounded in the real-world process"
+        },
+        "networkBoundaryIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/boundaryId"
+          }
+        },
+        "status": {
+          "$ref": "#/$defs/status"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "invokesDutyIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/dutyId"
+          },
+          "description": "### 5.2 Journeys as Compositions of Duties\nSome duties can be fulfilled by composing other duties:\n\n- A “parent duty” journey can invoke “child duties” as sub-journeys.\n- Composition remains explicit because inputs/outputs and invariants are defined per duty.\n\nThis yields a graph of duties rather than a flat list, enabling modular reasoning.\n\n"
+        },
+        "flow": {
+          "$ref": "#/$defs/journeyFlow"
+        }
+      },
+      "description": "### 3.2 User Journey\nA **User Journey** is the canonical end-to-end flow that fulfills a Duty.\n\n- It is expressed as the **KR Description**.\n- It defines how the Duty is completed under expected conditions, including acceptable variants and failure boundaries.\n\nThe Journey is narrative in form, but structured enough to be converted into executable checks and observability targets.\n\n---\n\n### 4.2 User Journey (KR Description)\nA structured description containing:\n\n1. **Purpose**: why this duty exists in the domain  \n2. **Trigger**: what starts the journey  \n3. **Preconditions**: what must already be true  \n4. **Primary flow**: canonical end-to-end path  \n5. **Completion criteria**: what “done” means, including state changes  \n6. **Variants**: allowed alternate paths (optional but recommended)  \n7. **Failure boundaries**: expected failures and correct user-visible handling  \n8. **Non-goals**: explicitly excluded responsibilities  \n9. **Inputs/Outputs** (semantic contract):\n   - Inputs: required domain objects/data\n   - Outputs: produced/updated domain objects/data\n   - Invariants: must-always-hold properties\n10. **Causality / timing class**:\n    - `< 1s real-world` → tight coupling expected\n    - `>= 1s real-world` → async separation permitted/expected\n    - justification grounded in the real-world process\n\n### 5.2 Journeys as Compositions of Duties\nSome duties can be fulfilled by composing other duties:\n\n- A “parent duty” journey can invoke “child duties” as sub-journeys.\n- Composition remains explicit because inputs/outputs and invariants are defined per duty.\n\nThis yields a graph of duties rather than a flat list, enabling modular reasoning.\n\n"
+    },
+    "gwtStep": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "stepId",
+        "journeyId",
+        "sequence",
+        "title",
+        "given",
+        "when",
+        "then",
+        "thenAssertions",
+        "relatedObjectIds",
+        "relatedInteractionIds",
+        "relatedInvariantIds",
+        "expectedUserVisibleOutcome",
+        "status"
+      ],
+      "properties": {
+        "stepId": {
+          "$ref": "#/$defs/stepId"
+        },
+        "journeyId": {
+          "$ref": "#/$defs/journeyId"
+        },
+        "sequence": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "title": {
+          "$ref": "#/$defs/nonEmpty"
+        },
+        "given": {
+          "type": "string",
+          "minLength": 10,
+          "description": "- **Given**: required preconditions and state assumptions  "
+        },
+        "when": {
+          "type": "string",
+          "minLength": 10,
+          "description": "- **When**: the triggering action/event  "
+        },
+        "then": {
+          "type": "string",
+          "minLength": 10,
+          "description": "- **Then**: the observable outcome and resulting state guarantees"
+        },
+        "thenAssertions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          },
+          "description": "- Postconditions should be checkable by outputs or observable effects."
+        },
+        "relatedObjectIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/objectId"
+          },
+          "description": "- Steps should refer to domain objects and states (not internal services)."
+        },
+        "relatedInteractionIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/interactionId"
+          },
+          "description": "- Steps should refer to domain objects and states (not internal services)."
+        },
+        "relatedInvariantIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/invariantId"
+          }
+        },
+        "expectedUserVisibleOutcome": {
+          "type": "string",
+          "minLength": 10,
+          "description": "- Postconditions should be checkable by outputs or observable effects."
+        },
+        "status": {
+          "$ref": "#/$defs/status"
+        },
+        "stateTransitions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/stateTransition"
+          },
+          "description": "Optional structured state transitions implied by this step (complements the free-text Given/When/Then)."
+        }
+      },
+      "description": "### 3.3 Step Specification (High-Fidelity Given–When–Then)\nThe **KR breakdown** is a sequence of **Given–When–Then** step specifications.\n\nEach GWT step is a behavioral constraint:\n\n- **Given**: required preconditions and state assumptions  \n- **When**: the triggering action/event  \n- **Then**: the observable outcome and resulting state guarantees\n\nThese steps are intended to be **atomic**, testable, and composable.\n\n---\n\n### 4.3 Step Breakdown (KR GWT)\nA numbered list of atomic GWT steps.\n\nGuidelines:\n- One step = one observable transition guarantee.\n- Steps should refer to domain objects and states (not internal services).\n- Postconditions should be checkable by outputs or observable effects.\n\n### 5.3 GWT as the Executable Behavioral Contract\nGWT steps provide the behavioral truth:\n\n- They constrain permissible state transitions.\n- They define acceptance criteria.\n- They allow systematic conversion into tests and simulations.\n\n"
+    },
+    "sli": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sliId",
+        "name",
+        "description",
+        "measurementType",
+        "unit",
+        "eventSource",
+        "appliesToDutyIds",
+        "appliesToJourneyIds",
+        "status"
+      ],
+      "properties": {
+        "sliId": {
+          "$ref": "#/$defs/sliId"
+        },
+        "name": {
+          "$ref": "#/$defs/nonEmpty"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 20
+        },
+        "measurementType": {
+          "type": "string",
+          "enum": [
+            "success-rate",
+            "latency",
+            "freshness",
+            "error-rate",
+            "correctness",
+            "recoverability",
+            "retry-rate",
+            "custom"
+          ],
+          "description": "- **Success SLI**: completion success rate\n- **Latency SLIs**: time-to-meaningful-feedback; time-to-completion (as needed)\n- **Error SLIs**: user-visible error rate; recoverability rate; retry rate"
+        },
+        "unit": {
+          "type": "string",
+          "enum": [
+            "percent",
+            "milliseconds",
+            "seconds",
+            "minutes",
+            "count",
+            "boolean",
+            "custom"
+          ],
+          "description": "A small set of measurable guarantees tied to the journey:"
+        },
+        "eventSource": {
+          "type": "string",
+          "minLength": 3
+        },
+        "appliesToDutyIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/dutyId"
+          }
+        },
+        "appliesToJourneyIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/journeyId"
+          }
+        },
+        "status": {
+          "$ref": "#/$defs/status"
+        }
+      },
+      "description": "### 3.4 UX SLIs and SLOs for Critical Journeys\nFor each critical journey (and therefore for the duties they fulfill), the product defines:\n\n- **SLIs**: measurable indicators of user experience quality\n- **SLOs**: target thresholds that must be met\n\nThis layer defines the **experience envelope**:\n- what must be fast,\n- what must be reliable,\n- what must degrade gracefully,\n- what must never fail.\n\n---\n\n### 4.4 UX SLIs/SLOs\nA small set of measurable guarantees tied to the journey:\n\n- **Success SLI**: completion success rate\n- **Latency SLIs**: time-to-meaningful-feedback; time-to-completion (as needed)\n- **Error SLIs**: user-visible error rate; recoverability rate; retry rate\n- **SLOs**: thresholds defining acceptable experience\n\nThis makes the duty measurable and operationally enforceable.\n\n"
+    },
+    "slo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sloId",
+        "sliId",
+        "name",
+        "targetOperator",
+        "targetValue",
+        "measurementWindow",
+        "consequenceOfViolation",
+        "severity",
+        "status"
+      ],
+      "properties": {
+        "sloId": {
+          "$ref": "#/$defs/sloId"
+        },
+        "sliId": {
+          "$ref": "#/$defs/sliId"
+        },
+        "name": {
+          "$ref": "#/$defs/nonEmpty"
+        },
+        "targetOperator": {
+          "type": "string",
+          "enum": [
+            "<",
+            "<=",
+            "=",
+            ">=",
+            ">",
+            "between"
+          ]
+        },
+        "targetValue": {
+          "type": "number",
+          "description": "- **SLOs**: thresholds defining acceptable experience"
+        },
+        "targetMaxValue": {
+          "type": "number"
+        },
+        "measurementWindow": {
+          "type": "string",
+          "minLength": 3,
+          "description": "- **SLOs**: thresholds defining acceptable experience"
+        },
+        "consequenceOfViolation": {
+          "type": "string",
+          "minLength": 20
+        },
+        "severity": {
+          "$ref": "#/$defs/criticality"
+        },
+        "status": {
+          "$ref": "#/$defs/status"
+        }
+      },
+      "description": "### 3.4 UX SLIs and SLOs for Critical Journeys\nFor each critical journey (and therefore for the duties they fulfill), the product defines:\n\n- **SLIs**: measurable indicators of user experience quality\n- **SLOs**: target thresholds that must be met\n\nThis layer defines the **experience envelope**:\n- what must be fast,\n- what must be reliable,\n- what must degrade gracefully,\n- what must never fail.\n\n---\n\n### 4.4 UX SLIs/SLOs\nA small set of measurable guarantees tied to the journey:\n\n- **Success SLI**: completion success rate\n- **Latency SLIs**: time-to-meaningful-feedback; time-to-completion (as needed)\n- **Error SLIs**: user-visible error rate; recoverability rate; retry rate\n- **SLOs**: thresholds defining acceptable experience\n\nThis makes the duty measurable and operationally enforceable.\n\n### 5.4 SLOs as the Experience Envelope\nSLOs bound not only correctness but **felt correctness**:\n\n- A journey that technically works but violates UX SLOs is treated as incorrect for critical duties.\n- SLOs formalize what must remain “good” even under stress.\n\n"
+    },
+    "trace": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "traceId",
+        "traceType",
+        "title",
+        "description",
+        "dutyId",
+        "journeyId",
+        "scenario",
+        "trigger",
+        "events",
+        "finalState",
+        "classificationReason",
+        "status"
+      ],
+      "properties": {
+        "traceId": {
+          "$ref": "#/$defs/traceAnyId"
+        },
+        "traceType": {
+          "type": "string",
+          "enum": [
+            "golden",
+            "anti-golden"
+          ],
+          "description": "- **Golden traces**: canonical successful executions of the duty journey\n- **Anti-golden traces**: canonical unacceptable executions"
+        },
+        "title": {
+          "$ref": "#/$defs/nonEmpty"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 20
+        },
+        "dutyId": {
+          "$ref": "#/$defs/dutyId"
+        },
+        "journeyId": {
+          "$ref": "#/$defs/journeyId"
+        },
+        "scenario": {
+          "type": "string",
+          "minLength": 5
+        },
+        "trigger": {
+          "type": "string",
+          "minLength": 5
+        },
+        "events": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/traceEvent"
+          },
+          "description": "- Each trace should identify:\n  - triggering context,\n  - sequence of key events,\n  - salient state transitions,\n  - UX-relevant timings and outcomes."
+        },
+        "finalState": {
+          "type": "string",
+          "minLength": 10
+        },
+        "validatesStepIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/stepId"
+          }
+        },
+        "violatesStepIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/stepId"
+          }
+        },
+        "violatesInvariantIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/invariantId"
+          }
+        },
+        "violatesSloIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sloId"
+          }
+        },
+        "classificationReason": {
+          "type": "string",
+          "minLength": 20,
+          "description": "### 3.5 Golden Traces\nA **Golden Trace** is an exemplar end-to-end execution that demonstrates correct behavior across layers.\n\nGolden traces are not just logs; they are **witnesses** of correctness:\n- They anchor abstract specifications to concrete reality.\n- They remove interpretation ambiguity from GWT and journey narratives.\n- They provide stable regression reference points as implementations change.\n\n---\n\n### 3.6 Anti-Golden Traces\nAn **Anti-Golden Trace** is an exemplar of behavior that is explicitly unacceptable:\n- a forbidden transition,\n- an invalid state,\n- an erroneous journey completion,\n- an experience violation (e.g., unacceptable latency, confusing UX failure mode).\n\nAnti-golden traces define the **negative space** of the product: what must not happen.\n\n---\n\n"
+        },
+        "status": {
+          "$ref": "#/$defs/status"
+        }
+      },
+      "description": "### 3.5 Golden Traces\nA **Golden Trace** is an exemplar end-to-end execution that demonstrates correct behavior across layers.\n\nGolden traces are not just logs; they are **witnesses** of correctness:\n- They anchor abstract specifications to concrete reality.\n- They remove interpretation ambiguity from GWT and journey narratives.\n- They provide stable regression reference points as implementations change.\n\n---\n\n### 3.6 Anti-Golden Traces\nAn **Anti-Golden Trace** is an exemplar of behavior that is explicitly unacceptable:\n- a forbidden transition,\n- an invalid state,\n- an erroneous journey completion,\n- an experience violation (e.g., unacceptable latency, confusing UX failure mode).\n\nAnti-golden traces define the **negative space** of the product: what must not happen.\n\n---\n\n### 4.5 Traces\n- **Golden traces**: canonical successful executions of the duty journey\n- **Anti-golden traces**: canonical unacceptable executions\n- Each trace should identify:\n  - triggering context,\n  - sequence of key events,\n  - salient state transitions,\n  - UX-relevant timings and outcomes.\n\n---\n\n### 5.5 Traces as Reality Anchors\nTraces ensure the system model remains connected to actual behavior:\n\n- Golden traces reduce ambiguity and prevent “spec drift into fantasy”.\n- Anti-golden traces define forbidden behaviors and known failure modes.\n\n---\n\n"
+    },
+    "traceEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sequence",
+        "title",
+        "event",
+        "observedOutcome"
+      ],
+      "properties": {
+        "sequence": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "title": {
+          "$ref": "#/$defs/nonEmpty"
+        },
+        "event": {
+          "type": "string",
+          "minLength": 3
+        },
+        "stateBefore": {
+          "type": "string"
+        },
+        "stateAfter": {
+          "type": "string"
+        },
+        "observedOutcome": {
+          "type": "string",
+          "minLength": 3
+        },
+        "elapsedTimeMs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "relatedStepIds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/stepId"
+          }
+        }
+      }
+    },
+    "changeRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "changeId",
+        "changeType",
+        "targetRefs",
+        "summary",
+        "reason",
+        "compatibility",
+        "impactAssessment",
+        "migrationPlan",
+        "approvalStatus",
+        "createdAt"
+      ],
+      "properties": {
+        "changeId": {
+          "$ref": "#/$defs/changeId"
+        },
+        "changeType": {
+          "type": "string"
+        },
+        "targetRefs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/anyId"
+          }
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 10
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 10
+        },
+        "compatibility": {
+          "type": "string",
+          "enum": [
+            "additive",
+            "corrective",
+            "strengthening",
+            "weakening",
+            "breaking"
+          ]
+        },
+        "impactAssessment": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "affectedDuties",
+            "affectedJourneys",
+            "affectedSlos",
+            "affectedTraces",
+            "affectedInvariants",
+            "riskLevel"
+          ],
+          "properties": {
+            "affectedDuties": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/dutyId"
+              }
+            },
+            "affectedJourneys": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/journeyId"
+              }
+            },
+            "affectedSlis": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/sliId"
+              }
+            },
+            "affectedSlos": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/sloId"
+              }
+            },
+            "affectedTraces": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/traceAnyId"
+              }
+            },
+            "affectedInvariants": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/invariantId"
+              }
+            },
+            "riskLevel": {
+              "$ref": "#/$defs/criticality"
+            },
+            "riskExplanation": {
+              "type": "string"
+            }
+          }
+        },
+        "migrationPlan": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "rolloutPlan": {
+          "type": "string"
+        },
+        "approvalStatus": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "proposed",
+            "approved",
+            "rejected",
+            "superseded"
+          ]
+        },
+        "approvedBy": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "effectiveAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "description": "A recorded model change with compatibility classification, impact assessment, and migration plan when weakening/breaking."
+    },
+    "openQuestion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "questionId",
+        "question",
+        "blocksChange",
+        "neededFrom"
+      ],
+      "properties": {
+        "questionId": {
+          "$ref": "#/$defs/questionId"
+        },
+        "question": {
+          "type": "string",
+          "minLength": 10
+        },
+        "blocksChange": {
+          "type": "boolean"
+        },
+        "neededFrom": {
+          "type": "string",
+          "minLength": 2
+        },
+        "targetRefs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/anyId"
+          }
+        }
+      }
+    },
+    "modelId": {
+      "type": "string",
+      "pattern": "^model\\.[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Stable identifier for model artifacts. Must start with 'model.' followed by a lowercase kebab-case slug.",
+      "examples": [
+        "model.example-slug"
+      ]
+    },
+    "productId": {
+      "type": "string",
+      "pattern": "^product\\.[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Stable identifier for product artifacts. Must start with 'product.' followed by a lowercase kebab-case slug.",
+      "examples": [
+        "product.example-slug"
+      ]
+    },
+    "termId": {
+      "type": "string",
+      "pattern": "^term\\.[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Stable identifier for term artifacts. Must start with 'term.' followed by a lowercase kebab-case slug.",
+      "examples": [
+        "term.example-slug"
+      ]
+    },
+    "objectiveId": {
+      "type": "string",
+      "pattern": "^objective\\.[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Stable identifier for objective artifacts. Must start with 'objective.' followed by a lowercase kebab-case slug.",
+      "examples": [
+        "objective.example-slug"
+      ]
+    },
+    "dutyId": {
+      "type": "string",
+      "pattern": "^duty\\.[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Stable identifier for duty artifacts. Must start with 'duty.' followed by a lowercase kebab-case slug.",
+      "examples": [
+        "duty.example-slug"
+      ]
+    },
+    "journeyId": {
+      "type": "string",
+      "pattern": "^journey\\.[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Stable identifier for journey artifacts. Must start with 'journey.' followed by a lowercase kebab-case slug.",
+      "examples": [
+        "journey.example-slug"
+      ]
+    },
+    "stepId": {
+      "type": "string",
+      "pattern": "^step\\.[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Stable identifier for step artifacts. Must start with 'step.' followed by a lowercase kebab-case slug.",
+      "examples": [
+        "step.example-slug"
+      ]
+    },
+    "sliId": {
+      "type": "string",
+      "pattern": "^sli\\.[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Stable identifier for sli artifacts. Must start with 'sli.' followed by a lowercase kebab-case slug.",
+      "examples": [
+        "sli.example-slug"
+      ]
+    },
+    "sloId": {
+      "type": "string",
+      "pattern": "^slo\\.[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Stable identifier for slo artifacts. Must start with 'slo.' followed by a lowercase kebab-case slug.",
+      "examples": [
+        "slo.example-slug"
+      ]
+    },
+    "traceId": {
+      "type": "string",
+      "pattern": "^trace\\.[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Stable identifier for trace artifacts. Must start with 'trace.' followed by a lowercase kebab-case slug.",
+      "examples": [
+        "trace.example-slug"
+      ]
+    },
+    "antiTraceId": {
+      "type": "string",
+      "pattern": "^antitrace\\.[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Stable identifier for antiTrace artifacts. Must start with 'antitrace.' followed by a lowercase kebab-case slug.",
+      "examples": [
+        "antitrace.example-slug"
+      ]
+    },
+    "objectId": {
+      "type": "string",
+      "pattern": "^object\\.[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Stable identifier for object artifacts. Must start with 'object.' followed by a lowercase kebab-case slug.",
+      "examples": [
+        "object.example-slug"
+      ]
+    },
+    "interactionId": {
+      "type": "string",
+      "pattern": "^interaction\\.[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Stable identifier for interaction artifacts. Must start with 'interaction.' followed by a lowercase kebab-case slug.",
+      "examples": [
+        "interaction.example-slug"
+      ]
+    },
+    "invariantId": {
+      "type": "string",
+      "pattern": "^invariant\\.[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Stable identifier for invariant artifacts. Must start with 'invariant.' followed by a lowercase kebab-case slug.",
+      "examples": [
+        "invariant.example-slug"
+      ]
+    },
+    "boundaryId": {
+      "type": "string",
+      "pattern": "^boundary\\.[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Stable identifier for boundary artifacts. Must start with 'boundary.' followed by a lowercase kebab-case slug.",
+      "examples": [
+        "boundary.example-slug"
+      ]
+    },
+    "changeId": {
+      "type": "string",
+      "pattern": "^change\\.[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Stable identifier for change artifacts. Must start with 'change.' followed by a lowercase kebab-case slug.",
+      "examples": [
+        "change.example-slug"
+      ]
+    },
+    "questionId": {
+      "type": "string",
+      "pattern": "^question\\.[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Stable identifier for question artifacts. Must start with 'question.' followed by a lowercase kebab-case slug.",
+      "examples": [
+        "question.example-slug"
+      ]
+    },
+    "anyId": {
+      "type": "string",
+      "pattern": "^(?:model|product|term|objective|duty|journey|step|sli|slo|trace|antitrace|object|interaction|invariant|boundary|change|question)\\.[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Stable identifier for any artifact type in this schema bundle.",
+      "examples": [
+        "duty.reserve-book-copy",
+        "journey.checkout",
+        "slo.confirm-under-1s"
+      ]
+    },
+    "traceAnyId": {
+      "type": "string",
+      "pattern": "^(?:trace|antitrace)\\.[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Stable identifier for trace artifacts. Must start with 'trace.' (golden) or 'antitrace.' (anti-golden).",
+      "examples": [
+        "trace.successful-flow",
+        "antitrace.forbidden-double-booking"
+      ]
+    },
+    "stateTransition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "objectId",
+        "toState"
+      ],
+      "properties": {
+        "objectId": {
+          "$ref": "#/$defs/objectId"
+        },
+        "fromState": {
+          "type": "string",
+          "minLength": 0,
+          "description": "Optional previous lifecycle state; omit or use 'none' for creation."
+        },
+        "toState": {
+          "type": "string",
+          "minLength": 1
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "description": "A machine-checkable lifecycle state change for a real-world object. Use for updates (from->to). For creations, omit fromState or use a sentinel like 'none'."
+    },
+    "flowEdge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fromStepId",
+        "toStepId",
+        "edgeType"
+      ],
+      "properties": {
+        "fromStepId": {
+          "$ref": "#/$defs/stepId"
+        },
+        "toStepId": {
+          "$ref": "#/$defs/stepId"
+        },
+        "edgeType": {
+          "type": "string",
+          "enum": [
+            "primary",
+            "variant",
+            "failure",
+            "retry",
+            "loop"
+          ]
+        },
+        "condition": {
+          "type": "string",
+          "minLength": 0
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "description": "A directed edge between steps expressing ordering, branching, and failure paths."
+    },
+    "journeyFlow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entryStepId",
+        "exitStepIds",
+        "edges"
+      ],
+      "properties": {
+        "entryStepId": {
+          "$ref": "#/$defs/stepId"
+        },
+        "exitStepIds": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/stepId"
+          }
+        },
+        "edges": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/flowEdge"
+          }
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "description": "Optional explicit flow graph for a journey when linear ordering is insufficient (variants, loops, concurrency)."
+    },
+    "exceptionApproval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "approvalStatus",
+        "approvedBy",
+        "approvedAt",
+        "reason"
+      ],
+      "properties": {
+        "approvalStatus": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "proposed",
+            "approved",
+            "rejected",
+            "superseded"
+          ]
+        },
+        "approvedBy": {
+          "$ref": "#/$defs/nonEmpty"
+        },
+        "approvedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 30
+        },
+        "mitigations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "linkedChangeId": {
+          "$ref": "#/$defs/changeId"
+        }
+      },
+      "description": "Approval record for an architectural exception (e.g., allowing network separation for an under-1s real-world interaction)."
+    }
+  },
+  "$comment": "Schema v2.0.1 (descriptions enriched with full Product Self-Representation Specification prose). Validation semantics unchanged from v2.0.0."
+}

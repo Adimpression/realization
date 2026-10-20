@@ -1,0 +1,4103 @@
+schema: bssc_skill.v2
+kind: policy
+title: Local Bundle Admission Policy / 63d3e249e90d
+policy:
+  intent: Admit the governed skills packaged in this bundle on a fresh system.
+  target_kinds:
+  - ability
+  max_risk_tier: tier1_bounded_transform
+  allowed_authorities:
+  - execute
+  denied_authorities: []
+  allowed_executors:
+  - bash
+  required_approval_for_risk_tiers: {}
+  allowed_data_classes:
+  - public
+---
+schema: bssc_skill.v2
+kind: ability
+title: "Symbol Search Commands 01 \u2014 Find Symbol Occurrences / Symbol Search Commands\
+  \ 01 Find Symbol Occurrences"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you execute symbol search commands 01 find symbol occurrences?
+declaration:
+  intent: How do you execute symbol search commands 01 find symbol occurrences?
+  inputs:
+    symbol: required input value
+    root: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  authority_bounds:
+    execute:
+      scope: local_executor
+      target: bash_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - shell command execution
+  persistence_behavior: none
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier1_bounded_transform
+  executor_framework: bash
+executor: bash
+entrypoint: main
+inputs:
+  symbol: required input value
+  root: required input value
+outputs:
+  result: execution result
+shell: |-
+  #!/usr/bin/env bash
+  set -euo pipefail
+
+  # BSSC exposes the structured input payload as JSON and as env vars for shell-based abilities.
+  rg -n "$symbol" "$root"
+
+  printf '%s\n' "{\"answer\": \"executed\", \"notes\": [], \"result\": {\"status\": \"executed\"}, \"status\": \"ok\"}"
+governance:
+  scope: reuse when later prompts ask for symbol search commands 01 find symbol occurrences
+    under compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a*
+  - b*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:28:31+00:00'
+  provenance:
+  - not_learn-from-markdown-01-learn-symbolsearch-comman_929a23
+  - /Users/ravindranathakila/service/realized/trials/symbolsearch/01_LEARN_SYMBOLSEARCH_COMMANDS_FIND_SYMBOL_OCCURRENCES.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for symbol search commands 01 find
+      symbol occurrences under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Symbol Search Commands 01 Find Symbol Occurrences
+    encountered_not: Symbol Search Commands 01 Find Symbol Occurrences
+    goal: How do you execute symbol search commands 01 find symbol occurrences?
+    intended_object: "Symbol Search Commands 01 \u2014 Find Symbol Occurrences Symbol\
+      \ Search Commands 01 \u2014 Find Symbol Occurrences / Symbol Search Commands\
+      \ 01 Find Symbol Occurrences Symbol Search Commands 01 Find Symbol Occurrences\
+      \ How do you execute symbol search commands 01 find symbol occurrences? 2. Executable\
+      \ Bash relation shell command block execute `rg -n \"$symbol\" \"$root\"` named\
+      \ shell parameters: `symbol`, `root` This capability should be learned as a\
+      \ reusable bash ability artifact. The named shell parameters are `$symbol` and\
+      \ `$root`."
+    success_criteria:
+    - all required inputs are explicit and the bounded computation or template is
+      applied faithfully
+    - the result is returned in the requested usable form
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ Symbol Search Commands 01 \u2014 Find Symbol Occurrences Symbol Search Commands\
+      \ 01 \u2014 Find Symbol Occurrences / Symbol Search Commands 01 Find Symbol\
+      \ Occurrences Symbol Search Commands 01 Find Symbol Occurrences How do you execute\
+      \ symbol search commands 01 find symbol occurrences, 2, Executable Bash relation\
+      \ shell command block execute `rg -n \"$symbol\" \"$root\"` named shell parameters:\
+      \ `symbol`; no justified final closure has been admitted yet"
+    givens:
+    - "Symbol Search Commands 01 \u2014 Find Symbol Occurrences Symbol Search Commands\
+      \ 01 \u2014 Find Symbol Occurrences / Symbol Search Commands 01 Find Symbol\
+      \ Occurrences Symbol Search Commands 01 Find Symbol Occurrences How do you execute\
+      \ symbol search commands 01 find symbol occurrences"
+    - '2'
+    - 'Executable Bash relation shell command block execute `rg -n "$symbol" "$root"`
+      named shell parameters: `symbol`'
+    unknowns: []
+    missing_components:
+    - the full set of required inputs or executable relation is not yet explicit
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - functional
+    - completion
+    origin_layers:
+    - prompt
+    degree: partial
+    remainder_shapes:
+    - underdetermined
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair:
+    - supply or recover the missing inputs and then perform the bounded computation
+    full_repair:
+    - supply or recover the missing inputs and then perform the bounded computation
+    - 'satisfy success condition: all required inputs are explicit and the bounded
+      computation or template is applied faithfully'
+    - 'satisfy success condition: the result is returned in the requested usable form'
+    boundary_shape:
+    - d*
+    action_posture: compute_or_template
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Symbol Search Commands 01 Find Symbol Occurrences
+    title_depth_prefixes:
+    - Symbol Search Commands 01 Find Symbol Occurrences
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Symbol Search Command 01 Find Symbol Occurrence
+    - "Symbol Search Commands 01 \u2014 Find Symbol Occurrences / Symbol Search Commands\
+      \ 01 Find Symbol Occurrences / Root"
+    composed_not: Symbol Search Command 01 Find Symbol Occurrence
+    lookup_keys:
+    - symbol search command 01 find symbol occurrence
+    - symbol search
+    - search command
+    - command 01
+    - 01 find
+    - find symbol
+    - symbol occurrence
+    - symbol search command
+    - search command 01
+    - command 01 find
+    - 01 find symbol
+    - find symbol occurrence
+    - execute symbol search command 01 find symbol occurrence
+    - execute symbol
+    - execute symbol search
+    - supply or recover miss input then perform bound computation
+    - supply or recover miss input
+    - perform bound computation
+    - supply or
+    - or recover
+    - recover miss
+    - miss input
+    - input then
+    - then perform
+    notation_yaml: |-
+      "How Do You Execute Symbol Search Commands 01 Find Symbol Occurrences":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Symbol Search Commands 01 Find Symbol Occurrences"
+          - "Components: Symbol Search Command 01 Find Symbol Occurrence, Symbol Search Commands 01 \u2014 Find Symbol Occurrences / Symbol Search Commands 01 Find Symbol Occurrences / Root"
+          - "Composition: Symbol Search Command 01 Find Symbol Occurrence"
+          - "Title identity: Symbol Search Commands 01 Find Symbol Occurrences"
+          - "Title depth segments: Symbol Search Commands 01 Find Symbol Occurrences"
+          - "Title depth prefixes: Symbol Search Commands 01 Find Symbol Occurrences"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: Symbol Search Commands 01 \u2014 Find Symbol Occurrences Symbol Search Commands 01 \u2014 Find Symbol Occurrences / Symbol Search Commands 01 Find Symbol Occurrences Symbol Search Commands 01 Find Symbol Occurrences How do you execute symbol search commands 01 find symbol occurrences? 2. Executable Bash relation shell command block execute `rg -n \"$symbol\" \"$root\"` named shell parameters: `symbol`, `root` This capability should be learned as a reusable bash ability artifact. The named shell parameters are `$symbol` and `$root`."
+          - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+          - "Actual realization: the prompt surface is present; explicit givens are present: Symbol Search Commands 01 \u2014 Find Symbol Occurrences Symbol Search Commands 01 \u2014 Find Symbol Occurrences / Symbol Search Commands 01 Find Symbol Occurrences Symbol Search Commands 01 Find Symbol Occurrences How do you execute symbol search commands 01 find symbol occurrences, 2, Executable Bash relation shell command block execute `rg -n \"$symbol\" \"$root\"` named shell parameters: `symbol`; no justified final closure has been admitted yet"
+          - "Givens: Symbol Search Commands 01 \u2014 Find Symbol Occurrences Symbol Search Commands 01 \u2014 Find Symbol Occurrences / Symbol Search Commands 01 Find Symbol Occurrences Symbol Search Commands 01 Find Symbol Occurrences How do you execute symbol search commands 01 find symbol occurrences, 2, Executable Bash relation shell command block execute `rg -n \"$symbol\" \"$root\"` named shell parameters: `symbol`"
+          - "Missing components: the full set of required inputs or executable relation is not yet explicit"
+          - "Misalignment types: functional, completion"
+          - "Origin layers: prompt"
+          - "Degree: partial"
+          - "Remainder shapes: underdetermined"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Minimal repair: supply or recover the missing inputs and then perform the bounded computation"
+          - "Full repair: supply or recover the missing inputs and then perform the bounded computation, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+          - "Action posture: compute_or_template"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - bash
+aliases:
+- Symbol Search Commands 01 Find Symbol Occurrences
+family:
+  label: Symbol Search Commands
+  key: symbol search commands
+  ordinal: '01'
+  variant: Find Symbol Occurrences
+hosting_metadata:
+  representation: shell_script
+  executor_framework: bash
+  entrypoint: main
+  body_field: shell_script
+  body_sha256: 5028a6c17fbdad13e3369f7a79817c8355d8b91aaa812583b0fe58fc2213688a
+  virtual_mounts: []
+normalization:
+  normalization_version: bssc.skill.normalization.v1
+  path_notation_version: bssc.skill.path.v1
+  regions:
+    a:
+      boundary_term: a*
+      carrier_kind: value
+      reconstructible: true
+      leaves:
+      - region: a*
+        path: /a/root
+        carrier_kind: value
+        data_type: String
+        semantic_label: root
+        value: required input value
+        leaf_class: scalar
+      - region: a*
+        path: /a/symbol
+        carrier_kind: value
+        data_type: String
+        semantic_label: symbol
+        value: required input value
+        leaf_class: scalar
+    a':
+      boundary_term: a'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+    b:
+      boundary_term: b*
+      carrier_kind: value
+      reconstructible: true
+      leaves: []
+    b':
+      boundary_term: b'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+    c:
+      boundary_term: c*
+      carrier_kind: value
+      reconstructible: true
+      leaves: []
+    c':
+      boundary_term: c'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+    d:
+      boundary_term: d*
+      carrier_kind: value
+      reconstructible: true
+      leaves:
+      - region: d*
+        path: /d/result
+        carrier_kind: value
+        data_type: String
+        semantic_label: result
+        value: execution result
+        leaf_class: scalar
+    d':
+      boundary_term: d'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+---
+schema: bssc_skill.v2
+kind: ability
+title: "Symbol Search Commands 02 \u2014 Find Python Function Definition / Symbol\
+  \ Search Commands 02 Find Python Function Definition"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you execute symbol search commands 02 find python function definition?
+declaration:
+  intent: How do you execute symbol search commands 02 find python function definition?
+  inputs:
+    symbol: required input value
+    root: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  authority_bounds:
+    execute:
+      scope: local_executor
+      target: bash_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - shell command execution
+  persistence_behavior: none
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier1_bounded_transform
+  executor_framework: bash
+executor: bash
+entrypoint: main
+inputs:
+  symbol: required input value
+  root: required input value
+outputs:
+  result: execution result
+shell: |-
+  #!/usr/bin/env bash
+  set -euo pipefail
+
+  # BSSC exposes the structured input payload as JSON and as env vars for shell-based abilities.
+  rg -n "^def ${symbol}\\(" "$root"
+
+  printf '%s\n' "{\"answer\": \"executed\", \"notes\": [], \"result\": {\"status\": \"executed\"}, \"status\": \"ok\"}"
+governance:
+  scope: reuse when later prompts ask for symbol search commands 02 find python function
+    definition under compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a*
+  - b*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:28:39+00:00'
+  provenance:
+  - not_learn-from-markdown-02-learn-symbolsearch-comman_bfb545
+  - /Users/ravindranathakila/service/realized/trials/symbolsearch/02_LEARN_SYMBOLSEARCH_COMMANDS_FIND_PYTHON_FUNCTION_DEFINITION.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for symbol search commands 02 find
+      python function definition under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Symbol Search Commands 02 Find Python Function Definition
+    encountered_not: Symbol Search Commands 02 Find Python Function Definition
+    goal: How do you execute symbol search commands 02 find python function definition?
+    intended_object: "Symbol Search Commands 02 \u2014 Find Python Function Definition\
+      \ Symbol Search Commands 02 \u2014 Find Python Function Definition / Symbol\
+      \ Search Commands 02 Find Python Function Definition Symbol Search Commands\
+      \ 02 Find Python Function Definition How do you execute symbol search commands\
+      \ 02 find python function definition? 2. Executable Bash relation shell command\
+      \ block execute `rg -n \"^def ${symbol}\\\\(\" \"$root\"` named shell parameters:\
+      \ `symbol`, `root` This capability should be learned as a reusable bash ability\
+      \ artifact. The named shell parameters are `$symbol` and `$root`."
+    success_criteria:
+    - all required inputs are explicit and the bounded computation or template is
+      applied faithfully
+    - the result is returned in the requested usable form
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ Symbol Search Commands 02 \u2014 Find Python Function Definition Symbol Search\
+      \ Commands 02 \u2014 Find Python Function Definition / Symbol Search Commands\
+      \ 02 Find Python Function Definition Symbol Search Commands 02 Find Python Function\
+      \ Definition How do you execute symbol search commands 02 find python function\
+      \ definition, 2, Executable Bash relation shell command block execute `rg -n\
+      \ \"^def ${symbol}\\\\(\" \"$root\"` named shell parameters: `symbol`; no justified\
+      \ final closure has been admitted yet"
+    givens:
+    - "Symbol Search Commands 02 \u2014 Find Python Function Definition Symbol Search\
+      \ Commands 02 \u2014 Find Python Function Definition / Symbol Search Commands\
+      \ 02 Find Python Function Definition Symbol Search Commands 02 Find Python Function\
+      \ Definition How do you execute symbol search commands 02 find python function\
+      \ definition"
+    - '2'
+    - 'Executable Bash relation shell command block execute `rg -n "^def ${symbol}\\("
+      "$root"` named shell parameters: `symbol`'
+    unknowns: []
+    missing_components:
+    - the full set of required inputs or executable relation is not yet explicit
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - functional
+    - completion
+    origin_layers:
+    - prompt
+    degree: partial
+    remainder_shapes:
+    - underdetermined
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair:
+    - supply or recover the missing inputs and then perform the bounded computation
+    full_repair:
+    - supply or recover the missing inputs and then perform the bounded computation
+    - 'satisfy success condition: all required inputs are explicit and the bounded
+      computation or template is applied faithfully'
+    - 'satisfy success condition: the result is returned in the requested usable form'
+    boundary_shape:
+    - d*
+    action_posture: compute_or_template
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Symbol Search Commands 02 Find Python Function Definition
+    title_depth_prefixes:
+    - Symbol Search Commands 02 Find Python Function Definition
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Symbol Search Command 02 Find Python Function Definition
+    - "Symbol Search Commands 02 \u2014 Find Python Function Definition / Symbol Search\
+      \ Commands 02 Find Python Function Definition / Root"
+    composed_not: Symbol Search Command 02 Find Python Function Definition
+    lookup_keys:
+    - symbol search command 02 find python function definition
+    - symbol search
+    - search command
+    - command 02
+    - 02 find
+    - find python
+    - python function
+    - function definition
+    - symbol search command
+    - search command 02
+    - command 02 find
+    - 02 find python
+    - find python function
+    - python function definition
+    - execute symbol search command 02 find python function definition
+    - execute symbol
+    - execute symbol search
+    - supply or recover miss input then perform bound computation
+    - supply or recover miss input
+    - perform bound computation
+    - supply or
+    - or recover
+    - recover miss
+    - miss input
+    notation_yaml: |-
+      "How Do You Execute Symbol Search Commands 02 Find Python Function Definition":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Symbol Search Commands 02 Find Python Function Definition"
+          - "Components: Symbol Search Command 02 Find Python Function Definition, Symbol Search Commands 02 \u2014 Find Python Function Definition / Symbol Search Commands 02 Find Python Function Definition / Root"
+          - "Composition: Symbol Search Command 02 Find Python Function Definition"
+          - "Title identity: Symbol Search Commands 02 Find Python Function Definition"
+          - "Title depth segments: Symbol Search Commands 02 Find Python Function Definition"
+          - "Title depth prefixes: Symbol Search Commands 02 Find Python Function Definition"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: Symbol Search Commands 02 \u2014 Find Python Function Definition Symbol Search Commands 02 \u2014 Find Python Function Definition / Symbol Search Commands 02 Find Python Function Definition Symbol Search Commands 02 Find Python Function Definition How do you execute symbol search commands 02 find python function definition? 2. Executable Bash relation shell command block execute `rg -n \"^def ${symbol}\\\\(\" \"$root\"` named shell parameters: `symbol`, `root` This capability should be learned as a reusable bash ability artifact. The named shell parameters are `$symbol` and `$root`."
+          - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+          - "Actual realization: the prompt surface is present; explicit givens are present: Symbol Search Commands 02 \u2014 Find Python Function Definition Symbol Search Commands 02 \u2014 Find Python Function Definition / Symbol Search Commands 02 Find Python Function Definition Symbol Search Commands 02 Find Python Function Definition How do you execute symbol search commands 02 find python function definition, 2, Executable Bash relation shell command block execute `rg -n \"^def ${symbol}\\\\(\" \"$root\"` named shell parameters: `symbol`; no justified final closure has been admitted yet"
+          - "Givens: Symbol Search Commands 02 \u2014 Find Python Function Definition Symbol Search Commands 02 \u2014 Find Python Function Definition / Symbol Search Commands 02 Find Python Function Definition Symbol Search Commands 02 Find Python Function Definition How do you execute symbol search commands 02 find python function definition, 2, Executable Bash relation shell command block execute `rg -n \"^def ${symbol}\\\\(\" \"$root\"` named shell parameters: `symbol`"
+          - "Missing components: the full set of required inputs or executable relation is not yet explicit"
+          - "Misalignment types: functional, completion"
+          - "Origin layers: prompt"
+          - "Degree: partial"
+          - "Remainder shapes: underdetermined"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Minimal repair: supply or recover the missing inputs and then perform the bounded computation"
+          - "Full repair: supply or recover the missing inputs and then perform the bounded computation, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+          - "Action posture: compute_or_template"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - bash
+aliases:
+- Symbol Search Commands 02 Find Python Function Definition
+family:
+  label: Symbol Search Commands
+  key: symbol search commands
+  ordinal: '02'
+  variant: Find Python Function Definition
+hosting_metadata:
+  representation: shell_script
+  executor_framework: bash
+  entrypoint: main
+  body_field: shell_script
+  body_sha256: f6095310fad73bb212cce0ea6603677a2e588269bb5fcd984192ddcd69729789
+  virtual_mounts: []
+normalization:
+  normalization_version: bssc.skill.normalization.v1
+  path_notation_version: bssc.skill.path.v1
+  regions:
+    a:
+      boundary_term: a*
+      carrier_kind: value
+      reconstructible: true
+      leaves:
+      - region: a*
+        path: /a/root
+        carrier_kind: value
+        data_type: String
+        semantic_label: root
+        value: required input value
+        leaf_class: scalar
+      - region: a*
+        path: /a/symbol
+        carrier_kind: value
+        data_type: String
+        semantic_label: symbol
+        value: required input value
+        leaf_class: scalar
+    a':
+      boundary_term: a'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+    b:
+      boundary_term: b*
+      carrier_kind: value
+      reconstructible: true
+      leaves: []
+    b':
+      boundary_term: b'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+    c:
+      boundary_term: c*
+      carrier_kind: value
+      reconstructible: true
+      leaves: []
+    c':
+      boundary_term: c'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+    d:
+      boundary_term: d*
+      carrier_kind: value
+      reconstructible: true
+      leaves:
+      - region: d*
+        path: /d/result
+        carrier_kind: value
+        data_type: String
+        semantic_label: result
+        value: execution result
+        leaf_class: scalar
+    d':
+      boundary_term: d'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+---
+schema: bssc_skill.v2
+kind: ability
+title: "Symbol Search Commands 03 \u2014 Find Python Class Definition / Symbol Search\
+  \ Commands 03 Find Python Class Definition"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you execute symbol search commands 03 find python class definition?
+declaration:
+  intent: How do you execute symbol search commands 03 find python class definition?
+  inputs:
+    symbol: required input value
+    root: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  authority_bounds:
+    execute:
+      scope: local_executor
+      target: bash_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - shell command execution
+  persistence_behavior: none
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier1_bounded_transform
+  executor_framework: bash
+executor: bash
+entrypoint: main
+inputs:
+  symbol: required input value
+  root: required input value
+outputs:
+  result: execution result
+shell: |-
+  #!/usr/bin/env bash
+  set -euo pipefail
+
+  # BSSC exposes the structured input payload as JSON and as env vars for shell-based abilities.
+  rg -n "^class ${symbol}\\b" "$root"
+
+  printf '%s\n' "{\"answer\": \"executed\", \"notes\": [], \"result\": {\"status\": \"executed\"}, \"status\": \"ok\"}"
+governance:
+  scope: reuse when later prompts ask for symbol search commands 03 find python class
+    definition under compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a*
+  - b*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:28:47+00:00'
+  provenance:
+  - not_learn-from-markdown-03-learn-symbolsearch-comman_2a2bef
+  - /Users/ravindranathakila/service/realized/trials/symbolsearch/03_LEARN_SYMBOLSEARCH_COMMANDS_FIND_PYTHON_CLASS_DEFINITION.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for symbol search commands 03 find
+      python class definition under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Symbol Search Commands 03 Find Python Class Definition
+    encountered_not: Symbol Search Commands 03 Find Python Class Definition
+    goal: How do you execute symbol search commands 03 find python class definition?
+    intended_object: "Symbol Search Commands 03 \u2014 Find Python Class Definition\
+      \ Symbol Search Commands 03 \u2014 Find Python Class Definition / Symbol Search\
+      \ Commands 03 Find Python Class Definition Symbol Search Commands 03 Find Python\
+      \ Class Definition How do you execute symbol search commands 03 find python\
+      \ class definition? 2. Executable Bash relation shell command block execute\
+      \ `rg -n \"^class ${symbol}\\\\b\" \"$root\"` named shell parameters: `symbol`,\
+      \ `root` This capability should be learned as a reusable bash ability artifact.\
+      \ The named shell parameters are `$symbol` and `$root`."
+    success_criteria:
+    - all required inputs are explicit and the bounded computation or template is
+      applied faithfully
+    - the result is returned in the requested usable form
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ Symbol Search Commands 03 \u2014 Find Python Class Definition Symbol Search\
+      \ Commands 03 \u2014 Find Python Class Definition / Symbol Search Commands 03\
+      \ Find Python Class Definition Symbol Search Commands 03 Find Python Class Definition\
+      \ How do you execute symbol search commands 03 find python class definition,\
+      \ 2, Executable Bash relation shell command block execute `rg -n \"^class ${symbol}\\\
+      \\b\" \"$root\"` named shell parameters: `symbol`; no justified final closure\
+      \ has been admitted yet"
+    givens:
+    - "Symbol Search Commands 03 \u2014 Find Python Class Definition Symbol Search\
+      \ Commands 03 \u2014 Find Python Class Definition / Symbol Search Commands 03\
+      \ Find Python Class Definition Symbol Search Commands 03 Find Python Class Definition\
+      \ How do you execute symbol search commands 03 find python class definition"
+    - '2'
+    - 'Executable Bash relation shell command block execute `rg -n "^class ${symbol}\\b"
+      "$root"` named shell parameters: `symbol`'
+    unknowns: []
+    missing_components:
+    - the full set of required inputs or executable relation is not yet explicit
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - functional
+    - completion
+    origin_layers:
+    - prompt
+    degree: partial
+    remainder_shapes:
+    - underdetermined
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair:
+    - supply or recover the missing inputs and then perform the bounded computation
+    full_repair:
+    - supply or recover the missing inputs and then perform the bounded computation
+    - 'satisfy success condition: all required inputs are explicit and the bounded
+      computation or template is applied faithfully'
+    - 'satisfy success condition: the result is returned in the requested usable form'
+    boundary_shape:
+    - d*
+    action_posture: compute_or_template
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Symbol Search Commands 03 Find Python Class Definition
+    title_depth_prefixes:
+    - Symbol Search Commands 03 Find Python Class Definition
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Symbol Search Command 03 Find Python Class Definition
+    - "Symbol Search Commands 03 \u2014 Find Python Class Definition / Symbol Search\
+      \ Commands 03 Find Python Class Definition / Root"
+    composed_not: Symbol Search Command 03 Find Python Class Definition
+    lookup_keys:
+    - symbol search command 03 find python class definition
+    - symbol search
+    - search command
+    - command 03
+    - 03 find
+    - find python
+    - python class
+    - class definition
+    - symbol search command
+    - search command 03
+    - command 03 find
+    - 03 find python
+    - find python class
+    - python class definition
+    - execute symbol search command 03 find python class definition
+    - execute symbol
+    - execute symbol search
+    - supply or recover miss input then perform bound computation
+    - supply or recover miss input
+    - perform bound computation
+    - supply or
+    - or recover
+    - recover miss
+    - miss input
+    notation_yaml: |-
+      "How Do You Execute Symbol Search Commands 03 Find Python Class Definition":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Symbol Search Commands 03 Find Python Class Definition"
+          - "Components: Symbol Search Command 03 Find Python Class Definition, Symbol Search Commands 03 \u2014 Find Python Class Definition / Symbol Search Commands 03 Find Python Class Definition / Root"
+          - "Composition: Symbol Search Command 03 Find Python Class Definition"
+          - "Title identity: Symbol Search Commands 03 Find Python Class Definition"
+          - "Title depth segments: Symbol Search Commands 03 Find Python Class Definition"
+          - "Title depth prefixes: Symbol Search Commands 03 Find Python Class Definition"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: Symbol Search Commands 03 \u2014 Find Python Class Definition Symbol Search Commands 03 \u2014 Find Python Class Definition / Symbol Search Commands 03 Find Python Class Definition Symbol Search Commands 03 Find Python Class Definition How do you execute symbol search commands 03 find python class definition? 2. Executable Bash relation shell command block execute `rg -n \"^class ${symbol}\\\\b\" \"$root\"` named shell parameters: `symbol`, `root` This capability should be learned as a reusable bash ability artifact. The named shell parameters are `$symbol` and `$root`."
+          - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+          - "Actual realization: the prompt surface is present; explicit givens are present: Symbol Search Commands 03 \u2014 Find Python Class Definition Symbol Search Commands 03 \u2014 Find Python Class Definition / Symbol Search Commands 03 Find Python Class Definition Symbol Search Commands 03 Find Python Class Definition How do you execute symbol search commands 03 find python class definition, 2, Executable Bash relation shell command block execute `rg -n \"^class ${symbol}\\\\b\" \"$root\"` named shell parameters: `symbol`; no justified final closure has been admitted yet"
+          - "Givens: Symbol Search Commands 03 \u2014 Find Python Class Definition Symbol Search Commands 03 \u2014 Find Python Class Definition / Symbol Search Commands 03 Find Python Class Definition Symbol Search Commands 03 Find Python Class Definition How do you execute symbol search commands 03 find python class definition, 2, Executable Bash relation shell command block execute `rg -n \"^class ${symbol}\\\\b\" \"$root\"` named shell parameters: `symbol`"
+          - "Missing components: the full set of required inputs or executable relation is not yet explicit"
+          - "Misalignment types: functional, completion"
+          - "Origin layers: prompt"
+          - "Degree: partial"
+          - "Remainder shapes: underdetermined"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Minimal repair: supply or recover the missing inputs and then perform the bounded computation"
+          - "Full repair: supply or recover the missing inputs and then perform the bounded computation, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+          - "Action posture: compute_or_template"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - bash
+aliases:
+- Symbol Search Commands 03 Find Python Class Definition
+family:
+  label: Symbol Search Commands
+  key: symbol search commands
+  ordinal: '03'
+  variant: Find Python Class Definition
+hosting_metadata:
+  representation: shell_script
+  executor_framework: bash
+  entrypoint: main
+  body_field: shell_script
+  body_sha256: 699b82772a25f8895af8be11d54e9e28e858174f8ff6d88bc739343e301d0a2b
+  virtual_mounts: []
+normalization:
+  normalization_version: bssc.skill.normalization.v1
+  path_notation_version: bssc.skill.path.v1
+  regions:
+    a:
+      boundary_term: a*
+      carrier_kind: value
+      reconstructible: true
+      leaves:
+      - region: a*
+        path: /a/root
+        carrier_kind: value
+        data_type: String
+        semantic_label: root
+        value: required input value
+        leaf_class: scalar
+      - region: a*
+        path: /a/symbol
+        carrier_kind: value
+        data_type: String
+        semantic_label: symbol
+        value: required input value
+        leaf_class: scalar
+    a':
+      boundary_term: a'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+    b:
+      boundary_term: b*
+      carrier_kind: value
+      reconstructible: true
+      leaves: []
+    b':
+      boundary_term: b'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+    c:
+      boundary_term: c*
+      carrier_kind: value
+      reconstructible: true
+      leaves: []
+    c':
+      boundary_term: c'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+    d:
+      boundary_term: d*
+      carrier_kind: value
+      reconstructible: true
+      leaves:
+      - region: d*
+        path: /d/result
+        carrier_kind: value
+        data_type: String
+        semantic_label: result
+        value: execution result
+        leaf_class: scalar
+    d':
+      boundary_term: d'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+---
+schema: bssc_skill.v2
+kind: ability
+title: "Symbol Search Commands 04 \u2014 Find Import Statements / Symbol Search Commands\
+  \ 04 Find Import Statements"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you execute symbol search commands 04 find import statements?
+declaration:
+  intent: How do you execute symbol search commands 04 find import statements?
+  inputs:
+    module: required input value
+    root: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  authority_bounds:
+    execute:
+      scope: local_executor
+      target: bash_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - shell command execution
+  persistence_behavior: none
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier1_bounded_transform
+  executor_framework: bash
+executor: bash
+entrypoint: main
+inputs:
+  module: required input value
+  root: required input value
+outputs:
+  result: execution result
+shell: |-
+  #!/usr/bin/env bash
+  set -euo pipefail
+
+  # BSSC exposes the structured input payload as JSON and as env vars for shell-based abilities.
+  rg -n "^(from|import) .*${module}" "$root"
+
+  printf '%s\n' "{\"answer\": \"executed\", \"notes\": [], \"result\": {\"status\": \"executed\"}, \"status\": \"ok\"}"
+governance:
+  scope: reuse when later prompts ask for symbol search commands 04 find import statements
+    under compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a*
+  - b*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:28:56+00:00'
+  provenance:
+  - not_learn-from-markdown-04-learn-symbolsearch-comman_d22e85
+  - /Users/ravindranathakila/service/realized/trials/symbolsearch/04_LEARN_SYMBOLSEARCH_COMMANDS_FIND_IMPORTS.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for symbol search commands 04 find
+      import statements under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Symbol Search Commands 04 Find Import Statements
+    encountered_not: Symbol Search Commands 04 Find Import Statements
+    goal: How do you execute symbol search commands 04 find import statements?
+    intended_object: "Symbol Search Commands 04 \u2014 Find Import Statements Symbol\
+      \ Search Commands 04 \u2014 Find Import Statements / Symbol Search Commands\
+      \ 04 Find Import Statements Symbol Search Commands 04 Find Import Statements\
+      \ How do you execute symbol search commands 04 find import statements? 2. Executable\
+      \ Bash relation shell command block execute `rg -n \"^(from|import) .*${module}\"\
+      \ \"$root\"` named shell parameters: `module`, `root` This capability should\
+      \ be learned as a reusable bash ability artifact. The named shell parameters\
+      \ are `$module` and `$root`."
+    success_criteria:
+    - all required inputs are explicit and the bounded computation or template is
+      applied faithfully
+    - the result is returned in the requested usable form
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ Symbol Search Commands 04 \u2014 Find Import Statements Symbol Search Commands\
+      \ 04 \u2014 Find Import Statements / Symbol Search Commands 04 Find Import Statements\
+      \ Symbol Search Commands 04 Find Import Statements How do you execute symbol\
+      \ search commands 04 find import statements, 2, *${module}\" \"$root\"` named\
+      \ shell parameters: `module`; no justified final closure has been admitted yet"
+    givens:
+    - "Symbol Search Commands 04 \u2014 Find Import Statements Symbol Search Commands\
+      \ 04 \u2014 Find Import Statements / Symbol Search Commands 04 Find Import Statements\
+      \ Symbol Search Commands 04 Find Import Statements How do you execute symbol\
+      \ search commands 04 find import statements"
+    - '2'
+    - '*${module}" "$root"` named shell parameters: `module`'
+    unknowns: []
+    missing_components:
+    - the full set of required inputs or executable relation is not yet explicit
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - functional
+    - completion
+    origin_layers:
+    - prompt
+    degree: partial
+    remainder_shapes:
+    - underdetermined
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair:
+    - supply or recover the missing inputs and then perform the bounded computation
+    full_repair:
+    - supply or recover the missing inputs and then perform the bounded computation
+    - 'satisfy success condition: all required inputs are explicit and the bounded
+      computation or template is applied faithfully'
+    - 'satisfy success condition: the result is returned in the requested usable form'
+    boundary_shape:
+    - d*
+    action_posture: compute_or_template
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Symbol Search Commands 04 Find Import Statements
+    title_depth_prefixes:
+    - Symbol Search Commands 04 Find Import Statements
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Symbol Search Command 04 Find Import Statement
+    - "Symbol Search Commands 04 \u2014 Find Import Statements / Symbol Search Commands\
+      \ 04 Find Import Statements / Root"
+    composed_not: Symbol Search Command 04 Find Import Statement
+    lookup_keys:
+    - symbol search command 04 find import statement
+    - symbol search
+    - search command
+    - command 04
+    - 04 find
+    - find import
+    - import statement
+    - symbol search command
+    - search command 04
+    - command 04 find
+    - 04 find import
+    - find import statement
+    - execute symbol search command 04 find import statement
+    - execute symbol
+    - execute symbol search
+    - supply or recover miss input then perform bound computation
+    - supply or recover miss input
+    - perform bound computation
+    - supply or
+    - or recover
+    - recover miss
+    - miss input
+    - input then
+    - then perform
+    notation_yaml: |-
+      "How Do You Execute Symbol Search Commands 04 Find Import Statements":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Symbol Search Commands 04 Find Import Statements"
+          - "Components: Symbol Search Command 04 Find Import Statement, Symbol Search Commands 04 \u2014 Find Import Statements / Symbol Search Commands 04 Find Import Statements / Root"
+          - "Composition: Symbol Search Command 04 Find Import Statement"
+          - "Title identity: Symbol Search Commands 04 Find Import Statements"
+          - "Title depth segments: Symbol Search Commands 04 Find Import Statements"
+          - "Title depth prefixes: Symbol Search Commands 04 Find Import Statements"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: Symbol Search Commands 04 \u2014 Find Import Statements Symbol Search Commands 04 \u2014 Find Import Statements / Symbol Search Commands 04 Find Import Statements Symbol Search Commands 04 Find Import Statements How do you execute symbol search commands 04 find import statements? 2. Executable Bash relation shell command block execute `rg -n \"^(from|import) .*${module}\" \"$root\"` named shell parameters: `module`, `root` This capability should be learned as a reusable bash ability artifact. The named shell parameters are `$module` and `$root`."
+          - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+          - "Actual realization: the prompt surface is present; explicit givens are present: Symbol Search Commands 04 \u2014 Find Import Statements Symbol Search Commands 04 \u2014 Find Import Statements / Symbol Search Commands 04 Find Import Statements Symbol Search Commands 04 Find Import Statements How do you execute symbol search commands 04 find import statements, 2, *${module}\" \"$root\"` named shell parameters: `module`; no justified final closure has been admitted yet"
+          - "Givens: Symbol Search Commands 04 \u2014 Find Import Statements Symbol Search Commands 04 \u2014 Find Import Statements / Symbol Search Commands 04 Find Import Statements Symbol Search Commands 04 Find Import Statements How do you execute symbol search commands 04 find import statements, 2, *${module}\" \"$root\"` named shell parameters: `module`"
+          - "Missing components: the full set of required inputs or executable relation is not yet explicit"
+          - "Misalignment types: functional, completion"
+          - "Origin layers: prompt"
+          - "Degree: partial"
+          - "Remainder shapes: underdetermined"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Minimal repair: supply or recover the missing inputs and then perform the bounded computation"
+          - "Full repair: supply or recover the missing inputs and then perform the bounded computation, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+          - "Action posture: compute_or_template"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - bash
+aliases:
+- Symbol Search Commands 04 Find Import Statements
+family:
+  label: Symbol Search Commands
+  key: symbol search commands
+  ordinal: '04'
+  variant: Find Import Statements
+hosting_metadata:
+  representation: shell_script
+  executor_framework: bash
+  entrypoint: main
+  body_field: shell_script
+  body_sha256: 5d5fdbbc2f2b1b3821353328d39c371a4a806a7b2f52897dbd8d16f105a91761
+  virtual_mounts: []
+normalization:
+  normalization_version: bssc.skill.normalization.v1
+  path_notation_version: bssc.skill.path.v1
+  regions:
+    a:
+      boundary_term: a*
+      carrier_kind: value
+      reconstructible: true
+      leaves:
+      - region: a*
+        path: /a/module
+        carrier_kind: value
+        data_type: String
+        semantic_label: module
+        value: required input value
+        leaf_class: scalar
+      - region: a*
+        path: /a/root
+        carrier_kind: value
+        data_type: String
+        semantic_label: root
+        value: required input value
+        leaf_class: scalar
+    a':
+      boundary_term: a'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+    b:
+      boundary_term: b*
+      carrier_kind: value
+      reconstructible: true
+      leaves: []
+    b':
+      boundary_term: b'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+    c:
+      boundary_term: c*
+      carrier_kind: value
+      reconstructible: true
+      leaves: []
+    c':
+      boundary_term: c'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+    d:
+      boundary_term: d*
+      carrier_kind: value
+      reconstructible: true
+      leaves:
+      - region: d*
+        path: /d/result
+        carrier_kind: value
+        data_type: String
+        semantic_label: result
+        value: execution result
+        leaf_class: scalar
+    d':
+      boundary_term: d'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+---
+schema: bssc_skill.v2
+kind: ability
+title: "Symbol Search Commands 05 \u2014 Find Tagged Comment Lines / Symbol Search\
+  \ Commands 05 Find Tagged Comment Lines"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you execute symbol search commands 05 find tagged comment lines?
+declaration:
+  intent: How do you execute symbol search commands 05 find tagged comment lines?
+  inputs:
+    tag: required input value
+    root: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  authority_bounds:
+    execute:
+      scope: local_executor
+      target: bash_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - shell command execution
+  persistence_behavior: none
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier1_bounded_transform
+  executor_framework: bash
+executor: bash
+entrypoint: main
+inputs:
+  tag: required input value
+  root: required input value
+outputs:
+  result: execution result
+shell: |-
+  #!/usr/bin/env bash
+  set -euo pipefail
+
+  # BSSC exposes the structured input payload as JSON and as env vars for shell-based abilities.
+  rg -n "$tag" "$root"
+
+  printf '%s\n' "{\"answer\": \"executed\", \"notes\": [], \"result\": {\"status\": \"executed\"}, \"status\": \"ok\"}"
+governance:
+  scope: reuse when later prompts ask for symbol search commands 05 find tagged comment
+    lines under compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a*
+  - b*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:29:05+00:00'
+  provenance:
+  - not_learn-from-markdown-05-learn-symbolsearch-comman_0998cb
+  - /Users/ravindranathakila/service/realized/trials/symbolsearch/05_LEARN_SYMBOLSEARCH_COMMANDS_FIND_TAG_LINES.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for symbol search commands 05 find
+      tagged comment lines under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Symbol Search Commands 05 Find Tagged Comment Lines
+    encountered_not: Symbol Search Commands 05 Find Tagged Comment Lines
+    goal: How do you execute symbol search commands 05 find tagged comment lines?
+    intended_object: "Symbol Search Commands 05 \u2014 Find Tagged Comment Lines Symbol\
+      \ Search Commands 05 \u2014 Find Tagged Comment Lines / Symbol Search Commands\
+      \ 05 Find Tagged Comment Lines Symbol Search Commands 05 Find Tagged Comment\
+      \ Lines How do you execute symbol search commands 05 find tagged comment lines?\
+      \ 2. Executable Bash relation shell command block execute `rg -n \"$tag\" \"\
+      $root\"` named shell parameters: `tag`, `root` This capability should be learned\
+      \ as a reusable bash ability artifact. The named shell parameters are `$tag`\
+      \ and `$root`."
+    success_criteria:
+    - all required inputs are explicit and the bounded computation or template is
+      applied faithfully
+    - the result is returned in the requested usable form
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ Symbol Search Commands 05 \u2014 Find Tagged Comment Lines Symbol Search Commands\
+      \ 05 \u2014 Find Tagged Comment Lines / Symbol Search Commands 05 Find Tagged\
+      \ Comment Lines Symbol Search Commands 05 Find Tagged Comment Lines How do you\
+      \ execute symbol search commands 05 find tagged comment lines, 2, Executable\
+      \ Bash relation shell command block execute `rg -n \"$tag\" \"$root\"` named\
+      \ shell parameters: `tag`; no justified final closure has been admitted yet"
+    givens:
+    - "Symbol Search Commands 05 \u2014 Find Tagged Comment Lines Symbol Search Commands\
+      \ 05 \u2014 Find Tagged Comment Lines / Symbol Search Commands 05 Find Tagged\
+      \ Comment Lines Symbol Search Commands 05 Find Tagged Comment Lines How do you\
+      \ execute symbol search commands 05 find tagged comment lines"
+    - '2'
+    - 'Executable Bash relation shell command block execute `rg -n "$tag" "$root"`
+      named shell parameters: `tag`'
+    unknowns: []
+    missing_components:
+    - the full set of required inputs or executable relation is not yet explicit
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - functional
+    - completion
+    origin_layers:
+    - prompt
+    degree: partial
+    remainder_shapes:
+    - underdetermined
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair:
+    - supply or recover the missing inputs and then perform the bounded computation
+    full_repair:
+    - supply or recover the missing inputs and then perform the bounded computation
+    - 'satisfy success condition: all required inputs are explicit and the bounded
+      computation or template is applied faithfully'
+    - 'satisfy success condition: the result is returned in the requested usable form'
+    boundary_shape:
+    - d*
+    action_posture: compute_or_template
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Symbol Search Commands 05 Find Tagged Comment Lines
+    title_depth_prefixes:
+    - Symbol Search Commands 05 Find Tagged Comment Lines
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Symbol Search Command 05 Find Tagg Comment Line
+    - "Symbol Search Commands 05 \u2014 Find Tagged Comment Lines / Symbol Search\
+      \ Commands 05 Find Tagged Comment Lines / Root"
+    composed_not: Symbol Search Command 05 Find Tagg Comment Line
+    lookup_keys:
+    - symbol search command 05 find tagg comment line
+    - symbol search
+    - search command
+    - command 05
+    - 05 find
+    - find tagg
+    - tagg comment
+    - comment line
+    - symbol search command
+    - search command 05
+    - command 05 find
+    - 05 find tagg
+    - find tagg comment
+    - tagg comment line
+    - execute symbol search command 05 find tagg comment line
+    - execute symbol
+    - execute symbol search
+    - supply or recover miss input then perform bound computation
+    - supply or recover miss input
+    - perform bound computation
+    - supply or
+    - or recover
+    - recover miss
+    - miss input
+    notation_yaml: |-
+      "How Do You Execute Symbol Search Commands 05 Find Tagged Comment Lines":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Symbol Search Commands 05 Find Tagged Comment Lines"
+          - "Components: Symbol Search Command 05 Find Tagg Comment Line, Symbol Search Commands 05 \u2014 Find Tagged Comment Lines / Symbol Search Commands 05 Find Tagged Comment Lines / Root"
+          - "Composition: Symbol Search Command 05 Find Tagg Comment Line"
+          - "Title identity: Symbol Search Commands 05 Find Tagged Comment Lines"
+          - "Title depth segments: Symbol Search Commands 05 Find Tagged Comment Lines"
+          - "Title depth prefixes: Symbol Search Commands 05 Find Tagged Comment Lines"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: Symbol Search Commands 05 \u2014 Find Tagged Comment Lines Symbol Search Commands 05 \u2014 Find Tagged Comment Lines / Symbol Search Commands 05 Find Tagged Comment Lines Symbol Search Commands 05 Find Tagged Comment Lines How do you execute symbol search commands 05 find tagged comment lines? 2. Executable Bash relation shell command block execute `rg -n \"$tag\" \"$root\"` named shell parameters: `tag`, `root` This capability should be learned as a reusable bash ability artifact. The named shell parameters are `$tag` and `$root`."
+          - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+          - "Actual realization: the prompt surface is present; explicit givens are present: Symbol Search Commands 05 \u2014 Find Tagged Comment Lines Symbol Search Commands 05 \u2014 Find Tagged Comment Lines / Symbol Search Commands 05 Find Tagged Comment Lines Symbol Search Commands 05 Find Tagged Comment Lines How do you execute symbol search commands 05 find tagged comment lines, 2, Executable Bash relation shell command block execute `rg -n \"$tag\" \"$root\"` named shell parameters: `tag`; no justified final closure has been admitted yet"
+          - "Givens: Symbol Search Commands 05 \u2014 Find Tagged Comment Lines Symbol Search Commands 05 \u2014 Find Tagged Comment Lines / Symbol Search Commands 05 Find Tagged Comment Lines Symbol Search Commands 05 Find Tagged Comment Lines How do you execute symbol search commands 05 find tagged comment lines, 2, Executable Bash relation shell command block execute `rg -n \"$tag\" \"$root\"` named shell parameters: `tag`"
+          - "Missing components: the full set of required inputs or executable relation is not yet explicit"
+          - "Misalignment types: functional, completion"
+          - "Origin layers: prompt"
+          - "Degree: partial"
+          - "Remainder shapes: underdetermined"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Minimal repair: supply or recover the missing inputs and then perform the bounded computation"
+          - "Full repair: supply or recover the missing inputs and then perform the bounded computation, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+          - "Action posture: compute_or_template"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - bash
+aliases:
+- Symbol Search Commands 05 Find Tagged Comment Lines
+family:
+  label: Symbol Search Commands
+  key: symbol search commands
+  ordinal: '05'
+  variant: Find Tagged Comment Lines
+hosting_metadata:
+  representation: shell_script
+  executor_framework: bash
+  entrypoint: main
+  body_field: shell_script
+  body_sha256: d724f5ad1eeee97ecaeeb3aafaf67c3ac0a6e0bd9ce767ca5f32777bee405b8b
+  virtual_mounts: []
+normalization:
+  normalization_version: bssc.skill.normalization.v1
+  path_notation_version: bssc.skill.path.v1
+  regions:
+    a:
+      boundary_term: a*
+      carrier_kind: value
+      reconstructible: true
+      leaves:
+      - region: a*
+        path: /a/root
+        carrier_kind: value
+        data_type: String
+        semantic_label: root
+        value: required input value
+        leaf_class: scalar
+      - region: a*
+        path: /a/tag
+        carrier_kind: value
+        data_type: String
+        semantic_label: tag
+        value: required input value
+        leaf_class: scalar
+    a':
+      boundary_term: a'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+    b:
+      boundary_term: b*
+      carrier_kind: value
+      reconstructible: true
+      leaves: []
+    b':
+      boundary_term: b'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+    c:
+      boundary_term: c*
+      carrier_kind: value
+      reconstructible: true
+      leaves: []
+    c':
+      boundary_term: c'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+    d:
+      boundary_term: d*
+      carrier_kind: value
+      reconstructible: true
+      leaves:
+      - region: d*
+        path: /d/result
+        carrier_kind: value
+        data_type: String
+        semantic_label: result
+        value: execution result
+        leaf_class: scalar
+    d':
+      boundary_term: d'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+---
+schema: bssc_skill.v2
+kind: ability
+title: "Symbol Search Commands 06 \u2014 Find Markdown Headings / Symbol Search Commands\
+  \ 06 Find Markdown Headings"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you execute symbol search commands 06 find markdown headings?
+declaration:
+  intent: How do you execute symbol search commands 06 find markdown headings?
+  inputs:
+    root: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  authority_bounds:
+    execute:
+      scope: local_executor
+      target: bash_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - shell command execution
+  persistence_behavior: none
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier1_bounded_transform
+  executor_framework: bash
+executor: bash
+entrypoint: main
+inputs:
+  root: required input value
+outputs:
+  result: execution result
+shell: |-
+  #!/usr/bin/env bash
+  set -euo pipefail
+
+  # BSSC exposes the structured input payload as JSON and as env vars for shell-based abilities.
+  rg -n "^#+" "$root"
+
+  printf '%s\n' "{\"answer\": \"executed\", \"notes\": [], \"result\": {\"status\": \"executed\"}, \"status\": \"ok\"}"
+governance:
+  scope: reuse when later prompts ask for symbol search commands 06 find markdown
+    headings under compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a*
+  - b*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:29:13+00:00'
+  provenance:
+  - not_learn-from-markdown-06-learn-symbolsearch-comman_a1558f
+  - /Users/ravindranathakila/service/realized/trials/symbolsearch/06_LEARN_SYMBOLSEARCH_COMMANDS_FIND_MARKDOWN_HEADINGS.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for symbol search commands 06 find
+      markdown headings under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Symbol Search Commands 06 Find Markdown Headings
+    encountered_not: Symbol Search Commands 06 Find Markdown Headings
+    goal: How do you execute symbol search commands 06 find markdown headings?
+    intended_object: "Symbol Search Commands 06 \u2014 Find Markdown Headings Symbol\
+      \ Search Commands 06 \u2014 Find Markdown Headings / Symbol Search Commands\
+      \ 06 Find Markdown Headings Symbol Search Commands 06 Find Markdown Headings\
+      \ How do you execute symbol search commands 06 find markdown headings? 2. Executable\
+      \ Bash relation shell command block execute `rg -n \"^#+\" \"$root\"` named\
+      \ shell parameters: `root` This capability should be learned as a reusable bash\
+      \ ability artifact. The named shell parameter is `$root`."
+    success_criteria:
+    - all required inputs are explicit and the bounded computation or template is
+      applied faithfully
+    - the result is returned in the requested usable form
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ Symbol Search Commands 06 \u2014 Find Markdown Headings Symbol Search Commands\
+      \ 06 \u2014 Find Markdown Headings / Symbol Search Commands 06 Find Markdown\
+      \ Headings Symbol Search Commands 06 Find Markdown Headings How do you execute\
+      \ symbol search commands 06 find markdown headings, 2, Executable Bash relation\
+      \ shell command block execute `rg -n \"^#+\" \"$root\"` named shell parameters:\
+      \ `root` This capability should be learned as a reusable bash ability artifact;\
+      \ no justified final closure has been admitted yet"
+    givens:
+    - "Symbol Search Commands 06 \u2014 Find Markdown Headings Symbol Search Commands\
+      \ 06 \u2014 Find Markdown Headings / Symbol Search Commands 06 Find Markdown\
+      \ Headings Symbol Search Commands 06 Find Markdown Headings How do you execute\
+      \ symbol search commands 06 find markdown headings"
+    - '2'
+    - 'Executable Bash relation shell command block execute `rg -n "^#+" "$root"`
+      named shell parameters: `root` This capability should be learned as a reusable
+      bash ability artifact'
+    unknowns: []
+    missing_components:
+    - the full set of required inputs or executable relation is not yet explicit
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - functional
+    - completion
+    origin_layers:
+    - prompt
+    degree: partial
+    remainder_shapes:
+    - underdetermined
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair:
+    - supply or recover the missing inputs and then perform the bounded computation
+    full_repair:
+    - supply or recover the missing inputs and then perform the bounded computation
+    - 'satisfy success condition: all required inputs are explicit and the bounded
+      computation or template is applied faithfully'
+    - 'satisfy success condition: the result is returned in the requested usable form'
+    boundary_shape:
+    - d*
+    action_posture: compute_or_template
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Symbol Search Commands 06 Find Markdown Headings
+    title_depth_prefixes:
+    - Symbol Search Commands 06 Find Markdown Headings
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Symbol Search Command 06 Find Markdown Head
+    composed_not: Symbol Search Command 06 Find Markdown Head
+    lookup_keys:
+    - symbol search command 06 find markdown heading
+    - symbol search
+    - search command
+    - command 06
+    - 06 find
+    - find markdown
+    - markdown heading
+    - symbol search command
+    - search command 06
+    - command 06 find
+    - 06 find markdown
+    - find markdown heading
+    - execute symbol search command 06 find markdown heading
+    - execute symbol
+    - execute symbol search
+    - supply or recover miss input then perform bound computation
+    - supply or recover miss input
+    - perform bound computation
+    - supply or
+    - or recover
+    - recover miss
+    - miss input
+    - input then
+    - then perform
+    notation_yaml: |-
+      "How Do You Execute Symbol Search Commands 06 Find Markdown Headings":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Symbol Search Commands 06 Find Markdown Headings"
+          - "Components: Symbol Search Command 06 Find Markdown Head"
+          - "Composition: Symbol Search Command 06 Find Markdown Head"
+          - "Title identity: Symbol Search Commands 06 Find Markdown Headings"
+          - "Title depth segments: Symbol Search Commands 06 Find Markdown Headings"
+          - "Title depth prefixes: Symbol Search Commands 06 Find Markdown Headings"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: Symbol Search Commands 06 \u2014 Find Markdown Headings Symbol Search Commands 06 \u2014 Find Markdown Headings / Symbol Search Commands 06 Find Markdown Headings Symbol Search Commands 06 Find Markdown Headings How do you execute symbol search commands 06 find markdown headings? 2. Executable Bash relation shell command block execute `rg -n \"^#+\" \"$root\"` named shell parameters: `root` This capability should be learned as a reusable bash ability artifact. The named shell parameter is `$root`."
+          - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+          - "Actual realization: the prompt surface is present; explicit givens are present: Symbol Search Commands 06 \u2014 Find Markdown Headings Symbol Search Commands 06 \u2014 Find Markdown Headings / Symbol Search Commands 06 Find Markdown Headings Symbol Search Commands 06 Find Markdown Headings How do you execute symbol search commands 06 find markdown headings, 2, Executable Bash relation shell command block execute `rg -n \"^#+\" \"$root\"` named shell parameters: `root` This capability should be learned as a reusable bash ability artifact; no justified final closure has been admitted yet"
+          - "Givens: Symbol Search Commands 06 \u2014 Find Markdown Headings Symbol Search Commands 06 \u2014 Find Markdown Headings / Symbol Search Commands 06 Find Markdown Headings Symbol Search Commands 06 Find Markdown Headings How do you execute symbol search commands 06 find markdown headings, 2, Executable Bash relation shell command block execute `rg -n \"^#+\" \"$root\"` named shell parameters: `root` This capability should be learned as a reusable bash ability artifact"
+          - "Missing components: the full set of required inputs or executable relation is not yet explicit"
+          - "Misalignment types: functional, completion"
+          - "Origin layers: prompt"
+          - "Degree: partial"
+          - "Remainder shapes: underdetermined"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Minimal repair: supply or recover the missing inputs and then perform the bounded computation"
+          - "Full repair: supply or recover the missing inputs and then perform the bounded computation, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+          - "Action posture: compute_or_template"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - bash
+aliases:
+- Symbol Search Commands 06 Find Markdown Headings
+family:
+  label: Symbol Search Commands
+  key: symbol search commands
+  ordinal: '06'
+  variant: Find Markdown Headings
+hosting_metadata:
+  representation: shell_script
+  executor_framework: bash
+  entrypoint: main
+  body_field: shell_script
+  body_sha256: 6df6fb51fcaeba94ceeec9192a737b32c2df8658dfd0e986b405c250331eccef
+  virtual_mounts: []
+normalization:
+  normalization_version: bssc.skill.normalization.v1
+  path_notation_version: bssc.skill.path.v1
+  regions:
+    a:
+      boundary_term: a*
+      carrier_kind: value
+      reconstructible: true
+      leaves:
+      - region: a*
+        path: /a/root
+        carrier_kind: value
+        data_type: String
+        semantic_label: root
+        value: required input value
+        leaf_class: scalar
+    a':
+      boundary_term: a'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+    b:
+      boundary_term: b*
+      carrier_kind: value
+      reconstructible: true
+      leaves: []
+    b':
+      boundary_term: b'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+    c:
+      boundary_term: c*
+      carrier_kind: value
+      reconstructible: true
+      leaves: []
+    c':
+      boundary_term: c'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+    d:
+      boundary_term: d*
+      carrier_kind: value
+      reconstructible: true
+      leaves:
+      - region: d*
+        path: /d/result
+        carrier_kind: value
+        data_type: String
+        semantic_label: result
+        value: execution result
+        leaf_class: scalar
+    d':
+      boundary_term: d'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+---
+schema: bssc_skill.v2
+kind: ability
+title: "Symbol Search Commands 07 \u2014 Find Symbol In File Glob / Symbol Search\
+  \ Commands 07 Find Symbol In File Glob"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you execute symbol search commands 07 find symbol in file glob?
+declaration:
+  intent: How do you execute symbol search commands 07 find symbol in file glob?
+  inputs:
+    glob: required input value
+    symbol: required input value
+    root: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  authority_bounds:
+    execute:
+      scope: local_executor
+      target: bash_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - shell command execution
+  persistence_behavior: none
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier1_bounded_transform
+  executor_framework: bash
+executor: bash
+entrypoint: main
+inputs:
+  glob: required input value
+  symbol: required input value
+  root: required input value
+outputs:
+  result: execution result
+shell: |-
+  #!/usr/bin/env bash
+  set -euo pipefail
+
+  # BSSC exposes the structured input payload as JSON and as env vars for shell-based abilities.
+  rg -n -g "$glob" "$symbol" "$root"
+
+  printf '%s\n' "{\"answer\": \"executed\", \"notes\": [], \"result\": {\"status\": \"executed\"}, \"status\": \"ok\"}"
+governance:
+  scope: reuse when later prompts ask for symbol search commands 07 find symbol in
+    file glob under compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a*
+  - b'*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:29:23+00:00'
+  provenance:
+  - not_learn-from-markdown-07-learn-symbolsearch-comman_55c3ba
+  - /Users/ravindranathakila/service/realized/trials/symbolsearch/07_LEARN_SYMBOLSEARCH_COMMANDS_FIND_SYMBOL_IN_GLOB.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for symbol search commands 07 find
+      symbol in file glob under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Symbol Search Commands 07 Find Symbol In File Glob
+    encountered_not: Symbol Search Commands 07 Find Symbol In File Glob
+    goal: How do you execute symbol search commands 07 find symbol in file glob?
+    intended_object: "Symbol Search Commands 07 \u2014 Find Symbol In File Glob Symbol\
+      \ Search Commands 07 \u2014 Find Symbol In File Glob / Symbol Search Commands\
+      \ 07 Find Symbol In File Glob Symbol Search Commands 07 Find Symbol In File\
+      \ Glob How do you execute symbol search commands 07 find symbol in file glob?\
+      \ 2. Executable Bash relation shell command block execute `rg -n -g \"$glob\"\
+      \ \"$symbol\" \"$root\"` named shell parameters: `glob`, `symbol`, `root` This\
+      \ capability should be learned as a reusable bash ability artifact. The named\
+      \ shell parameters are `$glob`, `$symbol`, and `$root`."
+    success_criteria:
+    - all required inputs are explicit and the bounded computation or template is
+      applied faithfully
+    - the result is returned in the requested usable form
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ Symbol Search Commands 07 \u2014 Find Symbol In File Glob Symbol Search Commands\
+      \ 07 \u2014 Find Symbol In File Glob / Symbol Search Commands 07 Find Symbol\
+      \ In File Glob Symbol Search Commands 07 Find Symbol In File Glob How do you\
+      \ execute symbol search commands 07 find symbol in file glob, 2, Executable\
+      \ Bash relation shell command block execute `rg -n -g \"$glob\" \"$symbol\"\
+      \ \"$root\"` named shell parameters: `glob`; no justified final closure has\
+      \ been admitted yet"
+    givens:
+    - "Symbol Search Commands 07 \u2014 Find Symbol In File Glob Symbol Search Commands\
+      \ 07 \u2014 Find Symbol In File Glob / Symbol Search Commands 07 Find Symbol\
+      \ In File Glob Symbol Search Commands 07 Find Symbol In File Glob How do you\
+      \ execute symbol search commands 07 find symbol in file glob"
+    - '2'
+    - 'Executable Bash relation shell command block execute `rg -n -g "$glob" "$symbol"
+      "$root"` named shell parameters: `glob`'
+    unknowns: []
+    missing_components:
+    - the full set of required inputs or executable relation is not yet explicit
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - functional
+    - completion
+    origin_layers:
+    - prompt
+    degree: partial
+    remainder_shapes:
+    - underdetermined
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair:
+    - supply or recover the missing inputs and then perform the bounded computation
+    full_repair:
+    - supply or recover the missing inputs and then perform the bounded computation
+    - 'satisfy success condition: all required inputs are explicit and the bounded
+      computation or template is applied faithfully'
+    - 'satisfy success condition: the result is returned in the requested usable form'
+    boundary_shape:
+    - d*
+    action_posture: compute_or_template
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Symbol Search Commands 07 Find Symbol In File Glob
+    title_depth_prefixes:
+    - Symbol Search Commands 07 Find Symbol In File Glob
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Symbol Search Command 07 Find Symbol File Glob
+    - "Symbol Search Commands 07 \u2014 Find Symbol In File Glob / Symbol Search Commands\
+      \ 07 Find Symbol In File Glob / Symbol"
+    - "Symbol Search Commands 07 \u2014 Find Symbol In File Glob / Symbol Search Commands\
+      \ 07 Find Symbol In File Glob / Root"
+    composed_not: Symbol Search Command 07 Find Symbol File Glob
+    lookup_keys:
+    - symbol search command 07 find symbol file glob
+    - symbol search
+    - search command
+    - command 07
+    - 07 find
+    - find symbol
+    - symbol file
+    - file glob
+    - symbol search command
+    - search command 07
+    - command 07 find
+    - 07 find symbol
+    - find symbol file
+    - symbol file glob
+    - execute symbol search command 07 find symbol file glob
+    - execute symbol
+    - execute symbol search
+    - supply or recover miss input then perform bound computation
+    - supply or recover miss input
+    - perform bound computation
+    - supply or
+    - or recover
+    - recover miss
+    - miss input
+    notation_yaml: |-
+      "How Do You Execute Symbol Search Commands 07 Find Symbol In File Glob":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Symbol Search Commands 07 Find Symbol In File Glob"
+          - "Components: Symbol Search Command 07 Find Symbol File Glob, Symbol Search Commands 07 \u2014 Find Symbol In File Glob / Symbol Search Commands 07 Find Symbol In File Glob / Symbol, Symbol Search Commands 07 \u2014 Find Symbol In File Glob / Symbol Search Commands 07 Find Symbol In File Glob / Root"
+          - "Composition: Symbol Search Command 07 Find Symbol File Glob"
+          - "Title identity: Symbol Search Commands 07 Find Symbol In File Glob"
+          - "Title depth segments: Symbol Search Commands 07 Find Symbol In File Glob"
+          - "Title depth prefixes: Symbol Search Commands 07 Find Symbol In File Glob"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: Symbol Search Commands 07 \u2014 Find Symbol In File Glob Symbol Search Commands 07 \u2014 Find Symbol In File Glob / Symbol Search Commands 07 Find Symbol In File Glob Symbol Search Commands 07 Find Symbol In File Glob How do you execute symbol search commands 07 find symbol in file glob? 2. Executable Bash relation shell command block execute `rg -n -g \"$glob\" \"$symbol\" \"$root\"` named shell parameters: `glob`, `symbol`, `root` This capability should be learned as a reusable bash ability artifact. The named shell parameters are `$glob`, `$symbol`, and `$root`."
+          - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+          - "Actual realization: the prompt surface is present; explicit givens are present: Symbol Search Commands 07 \u2014 Find Symbol In File Glob Symbol Search Commands 07 \u2014 Find Symbol In File Glob / Symbol Search Commands 07 Find Symbol In File Glob Symbol Search Commands 07 Find Symbol In File Glob How do you execute symbol search commands 07 find symbol in file glob, 2, Executable Bash relation shell command block execute `rg -n -g \"$glob\" \"$symbol\" \"$root\"` named shell parameters: `glob`; no justified final closure has been admitted yet"
+          - "Givens: Symbol Search Commands 07 \u2014 Find Symbol In File Glob Symbol Search Commands 07 \u2014 Find Symbol In File Glob / Symbol Search Commands 07 Find Symbol In File Glob Symbol Search Commands 07 Find Symbol In File Glob How do you execute symbol search commands 07 find symbol in file glob, 2, Executable Bash relation shell command block execute `rg -n -g \"$glob\" \"$symbol\" \"$root\"` named shell parameters: `glob`"
+          - "Missing components: the full set of required inputs or executable relation is not yet explicit"
+          - "Misalignment types: functional, completion"
+          - "Origin layers: prompt"
+          - "Degree: partial"
+          - "Remainder shapes: underdetermined"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Minimal repair: supply or recover the missing inputs and then perform the bounded computation"
+          - "Full repair: supply or recover the missing inputs and then perform the bounded computation, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+          - "Action posture: compute_or_template"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - bash
+aliases:
+- Symbol Search Commands 07 Find Symbol In File Glob
+family:
+  label: Symbol Search Commands
+  key: symbol search commands
+  ordinal: '07'
+  variant: Find Symbol In File Glob
+hosting_metadata:
+  representation: shell_script
+  executor_framework: bash
+  entrypoint: main
+  body_field: shell_script
+  body_sha256: 04e4059ec87d312a18b0b3d3c3a176c070ec8b596c017f115a8638174ffd3d2d
+  virtual_mounts: []
+normalization:
+  normalization_version: bssc.skill.normalization.v1
+  path_notation_version: bssc.skill.path.v1
+  regions:
+    a:
+      boundary_term: a*
+      carrier_kind: value
+      reconstructible: true
+      leaves:
+      - region: a*
+        path: /a/glob
+        carrier_kind: value
+        data_type: String
+        semantic_label: glob
+        value: required input value
+        leaf_class: scalar
+      - region: a*
+        path: /a/root
+        carrier_kind: value
+        data_type: String
+        semantic_label: root
+        value: required input value
+        leaf_class: scalar
+      - region: a*
+        path: /a/symbol
+        carrier_kind: value
+        data_type: String
+        semantic_label: symbol
+        value: required input value
+        leaf_class: scalar
+    a':
+      boundary_term: a'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+    b:
+      boundary_term: b*
+      carrier_kind: value
+      reconstructible: true
+      leaves: []
+    b':
+      boundary_term: b'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+    c:
+      boundary_term: c*
+      carrier_kind: value
+      reconstructible: true
+      leaves: []
+    c':
+      boundary_term: c'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+    d:
+      boundary_term: d*
+      carrier_kind: value
+      reconstructible: true
+      leaves:
+      - region: d*
+        path: /d/result
+        carrier_kind: value
+        data_type: String
+        semantic_label: result
+        value: execution result
+        leaf_class: scalar
+    d':
+      boundary_term: d'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+---
+schema: bssc_skill.v2
+kind: ability
+title: "Symbol Search Commands 08 \u2014 Find Environment Variable Names / Symbol\
+  \ Search Commands 08 Find Environment Variable Names"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you execute symbol search commands 08 find environment variable names?
+declaration:
+  intent: How do you execute symbol search commands 08 find environment variable names?
+  inputs:
+    pattern: required input value
+    root: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  authority_bounds:
+    execute:
+      scope: local_executor
+      target: bash_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - shell command execution
+  persistence_behavior: none
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier1_bounded_transform
+  executor_framework: bash
+executor: bash
+entrypoint: main
+inputs:
+  pattern: required input value
+  root: required input value
+outputs:
+  result: execution result
+shell: |-
+  #!/usr/bin/env bash
+  set -euo pipefail
+
+  # BSSC exposes the structured input payload as JSON and as env vars for shell-based abilities.
+  rg -n "$pattern" "$root"
+
+  printf '%s\n' "{\"answer\": \"executed\", \"notes\": [], \"result\": {\"status\": \"executed\"}, \"status\": \"ok\"}"
+governance:
+  scope: reuse when later prompts ask for symbol search commands 08 find environment
+    variable names under compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a*
+  - b*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:29:33+00:00'
+  provenance:
+  - not_learn-from-markdown-08-learn-symbolsearch-comman_54f96d
+  - /Users/ravindranathakila/service/realized/trials/symbolsearch/08_LEARN_SYMBOLSEARCH_COMMANDS_FIND_ENVIRONMENT_VARIABLES.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for symbol search commands 08 find
+      environment variable names under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Symbol Search Commands 08 Find Environment Variable Names
+    encountered_not: Symbol Search Commands 08 Find Environment Variable Names
+    goal: How do you execute symbol search commands 08 find environment variable names?
+    intended_object: "Symbol Search Commands 08 \u2014 Find Environment Variable Names\
+      \ Symbol Search Commands 08 \u2014 Find Environment Variable Names / Symbol\
+      \ Search Commands 08 Find Environment Variable Names Symbol Search Commands\
+      \ 08 Find Environment Variable Names How do you execute symbol search commands\
+      \ 08 find environment variable names? 2. Executable Bash relation shell command\
+      \ block execute `rg -n \"$pattern\" \"$root\"` named shell parameters: `pattern`,\
+      \ `root` This capability should be learned as a reusable bash ability artifact.\
+      \ The named shell parameters are `$pattern` and `$root`."
+    success_criteria:
+    - all required inputs are explicit and the bounded computation or template is
+      applied faithfully
+    - the result is returned in the requested usable form
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ Symbol Search Commands 08 \u2014 Find Environment Variable Names Symbol Search\
+      \ Commands 08 \u2014 Find Environment Variable Names / Symbol Search Commands\
+      \ 08 Find Environment Variable Names Symbol Search Commands 08 Find Environment\
+      \ Variable Names How do you execute symbol search commands 08 find environment\
+      \ variable names, 2, Executable Bash relation shell command block execute `rg\
+      \ -n \"$pattern\" \"$root\"` named shell parameters: `pattern`; no justified\
+      \ final closure has been admitted yet"
+    givens:
+    - "Symbol Search Commands 08 \u2014 Find Environment Variable Names Symbol Search\
+      \ Commands 08 \u2014 Find Environment Variable Names / Symbol Search Commands\
+      \ 08 Find Environment Variable Names Symbol Search Commands 08 Find Environment\
+      \ Variable Names How do you execute symbol search commands 08 find environment\
+      \ variable names"
+    - '2'
+    - 'Executable Bash relation shell command block execute `rg -n "$pattern" "$root"`
+      named shell parameters: `pattern`'
+    unknowns: []
+    missing_components:
+    - the full set of required inputs or executable relation is not yet explicit
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - functional
+    - completion
+    origin_layers:
+    - prompt
+    degree: partial
+    remainder_shapes:
+    - underdetermined
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair:
+    - supply or recover the missing inputs and then perform the bounded computation
+    full_repair:
+    - supply or recover the missing inputs and then perform the bounded computation
+    - 'satisfy success condition: all required inputs are explicit and the bounded
+      computation or template is applied faithfully'
+    - 'satisfy success condition: the result is returned in the requested usable form'
+    boundary_shape:
+    - d*
+    action_posture: compute_or_template
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Symbol Search Commands 08 Find Environment Variable Names
+    title_depth_prefixes:
+    - Symbol Search Commands 08 Find Environment Variable Names
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Symbol Search Command 08 Find Environment Variable
+    - "Symbol Search Commands 08 \u2014 Find Environment Variable Names / Symbol Search\
+      \ Commands 08 Find Environment Variable Names / Root"
+    composed_not: Symbol Search Command 08 Find Environment Variable
+    lookup_keys:
+    - symbol search command 08 find environment variable
+    - symbol search
+    - search command
+    - command 08
+    - 08 find
+    - find environment
+    - environment variable
+    - symbol search command
+    - search command 08
+    - command 08 find
+    - 08 find environment
+    - find environment variable
+    - execute symbol search command 08 find environment variable
+    - execute symbol
+    - execute symbol search
+    - supply or recover miss input then perform bound computation
+    - supply or recover miss input
+    - perform bound computation
+    - supply or
+    - or recover
+    - recover miss
+    - miss input
+    - input then
+    - then perform
+    notation_yaml: |-
+      "How Do You Execute Symbol Search Commands 08 Find Environment Variable Names":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Symbol Search Commands 08 Find Environment Variable Names"
+          - "Components: Symbol Search Command 08 Find Environment Variable, Symbol Search Commands 08 \u2014 Find Environment Variable Names / Symbol Search Commands 08 Find Environment Variable Names / Root"
+          - "Composition: Symbol Search Command 08 Find Environment Variable"
+          - "Title identity: Symbol Search Commands 08 Find Environment Variable Names"
+          - "Title depth segments: Symbol Search Commands 08 Find Environment Variable Names"
+          - "Title depth prefixes: Symbol Search Commands 08 Find Environment Variable Names"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: Symbol Search Commands 08 \u2014 Find Environment Variable Names Symbol Search Commands 08 \u2014 Find Environment Variable Names / Symbol Search Commands 08 Find Environment Variable Names Symbol Search Commands 08 Find Environment Variable Names How do you execute symbol search commands 08 find environment variable names? 2. Executable Bash relation shell command block execute `rg -n \"$pattern\" \"$root\"` named shell parameters: `pattern`, `root` This capability should be learned as a reusable bash ability artifact. The named shell parameters are `$pattern` and `$root`."
+          - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+          - "Actual realization: the prompt surface is present; explicit givens are present: Symbol Search Commands 08 \u2014 Find Environment Variable Names Symbol Search Commands 08 \u2014 Find Environment Variable Names / Symbol Search Commands 08 Find Environment Variable Names Symbol Search Commands 08 Find Environment Variable Names How do you execute symbol search commands 08 find environment variable names, 2, Executable Bash relation shell command block execute `rg -n \"$pattern\" \"$root\"` named shell parameters: `pattern`; no justified final closure has been admitted yet"
+          - "Givens: Symbol Search Commands 08 \u2014 Find Environment Variable Names Symbol Search Commands 08 \u2014 Find Environment Variable Names / Symbol Search Commands 08 Find Environment Variable Names Symbol Search Commands 08 Find Environment Variable Names How do you execute symbol search commands 08 find environment variable names, 2, Executable Bash relation shell command block execute `rg -n \"$pattern\" \"$root\"` named shell parameters: `pattern`"
+          - "Missing components: the full set of required inputs or executable relation is not yet explicit"
+          - "Misalignment types: functional, completion"
+          - "Origin layers: prompt"
+          - "Degree: partial"
+          - "Remainder shapes: underdetermined"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Minimal repair: supply or recover the missing inputs and then perform the bounded computation"
+          - "Full repair: supply or recover the missing inputs and then perform the bounded computation, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+          - "Action posture: compute_or_template"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - bash
+aliases:
+- Symbol Search Commands 08 Find Environment Variable Names
+family:
+  label: Symbol Search Commands
+  key: symbol search commands
+  ordinal: 08
+  variant: Find Environment Variable Names
+hosting_metadata:
+  representation: shell_script
+  executor_framework: bash
+  entrypoint: main
+  body_field: shell_script
+  body_sha256: 832b68db029e6dfb45ebbce84b30028fd54e28c88051e61504bdb939aaeb3ec9
+  virtual_mounts: []
+normalization:
+  normalization_version: bssc.skill.normalization.v1
+  path_notation_version: bssc.skill.path.v1
+  regions:
+    a:
+      boundary_term: a*
+      carrier_kind: value
+      reconstructible: true
+      leaves:
+      - region: a*
+        path: /a/pattern
+        carrier_kind: value
+        data_type: String
+        semantic_label: pattern
+        value: required input value
+        leaf_class: scalar
+      - region: a*
+        path: /a/root
+        carrier_kind: value
+        data_type: String
+        semantic_label: root
+        value: required input value
+        leaf_class: scalar
+    a':
+      boundary_term: a'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+    b:
+      boundary_term: b*
+      carrier_kind: value
+      reconstructible: true
+      leaves: []
+    b':
+      boundary_term: b'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+    c:
+      boundary_term: c*
+      carrier_kind: value
+      reconstructible: true
+      leaves: []
+    c':
+      boundary_term: c'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+    d:
+      boundary_term: d*
+      carrier_kind: value
+      reconstructible: true
+      leaves:
+      - region: d*
+        path: /d/result
+        carrier_kind: value
+        data_type: String
+        semantic_label: result
+        value: execution result
+        leaf_class: scalar
+    d':
+      boundary_term: d'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+---
+schema: bssc_skill.v2
+kind: ability
+title: "Symbol Search Commands 09 \u2014 Find Exact Word References / Symbol Search\
+  \ Commands 09 Find Exact Word References"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you execute symbol search commands 09 find exact word references?
+declaration:
+  intent: How do you execute symbol search commands 09 find exact word references?
+  inputs:
+    symbol: required input value
+    root: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  authority_bounds:
+    execute:
+      scope: local_executor
+      target: bash_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - shell command execution
+  persistence_behavior: none
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier1_bounded_transform
+  executor_framework: bash
+executor: bash
+entrypoint: main
+inputs:
+  symbol: required input value
+  root: required input value
+outputs:
+  result: execution result
+shell: |-
+  #!/usr/bin/env bash
+  set -euo pipefail
+
+  # BSSC exposes the structured input payload as JSON and as env vars for shell-based abilities.
+  rg -n -w "$symbol" "$root"
+
+  printf '%s\n' "{\"answer\": \"executed\", \"notes\": [], \"result\": {\"status\": \"executed\"}, \"status\": \"ok\"}"
+governance:
+  scope: reuse when later prompts ask for symbol search commands 09 find exact word
+    references under compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a*
+  - b'*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:29:43+00:00'
+  provenance:
+  - not_learn-from-markdown-09-learn-symbolsearch-comman_b374a8
+  - /Users/ravindranathakila/service/realized/trials/symbolsearch/09_LEARN_SYMBOLSEARCH_COMMANDS_FIND_EXACT_WORD_REFERENCES.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for symbol search commands 09 find
+      exact word references under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Symbol Search Commands 09 Find Exact Word References
+    encountered_not: Symbol Search Commands 09 Find Exact Word References
+    goal: How do you execute symbol search commands 09 find exact word references?
+    intended_object: "Symbol Search Commands 09 \u2014 Find Exact Word References\
+      \ Symbol Search Commands 09 \u2014 Find Exact Word References / Symbol Search\
+      \ Commands 09 Find Exact Word References Symbol Search Commands 09 Find Exact\
+      \ Word References How do you execute symbol search commands 09 find exact word\
+      \ references? 2. Executable Bash relation shell command block execute `rg -n\
+      \ -w \"$symbol\" \"$root\"` named shell parameters: `symbol`, `root` This capability\
+      \ should be learned as a reusable bash ability artifact. The named shell parameters\
+      \ are `$symbol` and `$root`."
+    success_criteria:
+    - all required inputs are explicit and the bounded computation or template is
+      applied faithfully
+    - the result is returned in the requested usable form
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ Symbol Search Commands 09 \u2014 Find Exact Word References Symbol Search\
+      \ Commands 09 \u2014 Find Exact Word References / Symbol Search Commands 09\
+      \ Find Exact Word References Symbol Search Commands 09 Find Exact Word References\
+      \ How do you execute symbol search commands 09 find exact word references, 2,\
+      \ Executable Bash relation shell command block execute `rg -n -w \"$symbol\"\
+      \ \"$root\"` named shell parameters: `symbol`; no justified final closure has\
+      \ been admitted yet"
+    givens:
+    - "Symbol Search Commands 09 \u2014 Find Exact Word References Symbol Search Commands\
+      \ 09 \u2014 Find Exact Word References / Symbol Search Commands 09 Find Exact\
+      \ Word References Symbol Search Commands 09 Find Exact Word References How do\
+      \ you execute symbol search commands 09 find exact word references"
+    - '2'
+    - 'Executable Bash relation shell command block execute `rg -n -w "$symbol" "$root"`
+      named shell parameters: `symbol`'
+    unknowns: []
+    missing_components:
+    - the full set of required inputs or executable relation is not yet explicit
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - functional
+    - completion
+    origin_layers:
+    - prompt
+    degree: partial
+    remainder_shapes:
+    - underdetermined
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair:
+    - supply or recover the missing inputs and then perform the bounded computation
+    full_repair:
+    - supply or recover the missing inputs and then perform the bounded computation
+    - 'satisfy success condition: all required inputs are explicit and the bounded
+      computation or template is applied faithfully'
+    - 'satisfy success condition: the result is returned in the requested usable form'
+    boundary_shape:
+    - d*
+    action_posture: compute_or_template
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Symbol Search Commands 09 Find Exact Word References
+    title_depth_prefixes:
+    - Symbol Search Commands 09 Find Exact Word References
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Symbol Search Command 09 Find Exact Word Reference
+    - "Symbol Search Commands 09 \u2014 Find Exact Word References / Symbol Search\
+      \ Commands 09 Find Exact Word References / Root"
+    composed_not: Symbol Search Command 09 Find Exact Word Reference
+    lookup_keys:
+    - symbol search command 09 find exact word reference
+    - symbol search
+    - search command
+    - command 09
+    - 09 find
+    - find exact
+    - exact word
+    - word reference
+    - symbol search command
+    - search command 09
+    - command 09 find
+    - 09 find exact
+    - find exact word
+    - exact word reference
+    - execute symbol search command 09 find exact word reference
+    - execute symbol
+    - execute symbol search
+    - supply or recover miss input then perform bound computation
+    - supply or recover miss input
+    - perform bound computation
+    - supply or
+    - or recover
+    - recover miss
+    - miss input
+    notation_yaml: |-
+      "How Do You Execute Symbol Search Commands 09 Find Exact Word References":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Symbol Search Commands 09 Find Exact Word References"
+          - "Components: Symbol Search Command 09 Find Exact Word Reference, Symbol Search Commands 09 \u2014 Find Exact Word References / Symbol Search Commands 09 Find Exact Word References / Root"
+          - "Composition: Symbol Search Command 09 Find Exact Word Reference"
+          - "Title identity: Symbol Search Commands 09 Find Exact Word References"
+          - "Title depth segments: Symbol Search Commands 09 Find Exact Word References"
+          - "Title depth prefixes: Symbol Search Commands 09 Find Exact Word References"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: Symbol Search Commands 09 \u2014 Find Exact Word References Symbol Search Commands 09 \u2014 Find Exact Word References / Symbol Search Commands 09 Find Exact Word References Symbol Search Commands 09 Find Exact Word References How do you execute symbol search commands 09 find exact word references? 2. Executable Bash relation shell command block execute `rg -n -w \"$symbol\" \"$root\"` named shell parameters: `symbol`, `root` This capability should be learned as a reusable bash ability artifact. The named shell parameters are `$symbol` and `$root`."
+          - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+          - "Actual realization: the prompt surface is present; explicit givens are present: Symbol Search Commands 09 \u2014 Find Exact Word References Symbol Search Commands 09 \u2014 Find Exact Word References / Symbol Search Commands 09 Find Exact Word References Symbol Search Commands 09 Find Exact Word References How do you execute symbol search commands 09 find exact word references, 2, Executable Bash relation shell command block execute `rg -n -w \"$symbol\" \"$root\"` named shell parameters: `symbol`; no justified final closure has been admitted yet"
+          - "Givens: Symbol Search Commands 09 \u2014 Find Exact Word References Symbol Search Commands 09 \u2014 Find Exact Word References / Symbol Search Commands 09 Find Exact Word References Symbol Search Commands 09 Find Exact Word References How do you execute symbol search commands 09 find exact word references, 2, Executable Bash relation shell command block execute `rg -n -w \"$symbol\" \"$root\"` named shell parameters: `symbol`"
+          - "Missing components: the full set of required inputs or executable relation is not yet explicit"
+          - "Misalignment types: functional, completion"
+          - "Origin layers: prompt"
+          - "Degree: partial"
+          - "Remainder shapes: underdetermined"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Minimal repair: supply or recover the missing inputs and then perform the bounded computation"
+          - "Full repair: supply or recover the missing inputs and then perform the bounded computation, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+          - "Action posture: compute_or_template"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - bash
+aliases:
+- Symbol Search Commands 09 Find Exact Word References
+family:
+  label: Symbol Search Commands
+  key: symbol search commands
+  ordinal: 09
+  variant: Find Exact Word References
+hosting_metadata:
+  representation: shell_script
+  executor_framework: bash
+  entrypoint: main
+  body_field: shell_script
+  body_sha256: 0fa8f87d626b5c121388e906855c56a0400a2a6e862836ea607ee35d7d863da9
+  virtual_mounts: []
+normalization:
+  normalization_version: bssc.skill.normalization.v1
+  path_notation_version: bssc.skill.path.v1
+  regions:
+    a:
+      boundary_term: a*
+      carrier_kind: value
+      reconstructible: true
+      leaves:
+      - region: a*
+        path: /a/root
+        carrier_kind: value
+        data_type: String
+        semantic_label: root
+        value: required input value
+        leaf_class: scalar
+      - region: a*
+        path: /a/symbol
+        carrier_kind: value
+        data_type: String
+        semantic_label: symbol
+        value: required input value
+        leaf_class: scalar
+    a':
+      boundary_term: a'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+    b:
+      boundary_term: b*
+      carrier_kind: value
+      reconstructible: true
+      leaves: []
+    b':
+      boundary_term: b'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+    c:
+      boundary_term: c*
+      carrier_kind: value
+      reconstructible: true
+      leaves: []
+    c':
+      boundary_term: c'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+    d:
+      boundary_term: d*
+      carrier_kind: value
+      reconstructible: true
+      leaves:
+      - region: d*
+        path: /d/result
+        carrier_kind: value
+        data_type: String
+        semantic_label: result
+        value: execution result
+        leaf_class: scalar
+    d':
+      boundary_term: d'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+---
+schema: bssc_skill.v2
+kind: ability
+title: "Symbol Search Commands 10 \u2014 Find Method Call Pattern / Symbol Search\
+  \ Commands 10 Find Method Call Pattern"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you execute symbol search commands 10 find method call pattern?
+declaration:
+  intent: How do you execute symbol search commands 10 find method call pattern?
+  inputs:
+    pattern: required input value
+    root: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  authority_bounds:
+    execute:
+      scope: local_executor
+      target: bash_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - shell command execution
+  persistence_behavior: none
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier1_bounded_transform
+  executor_framework: bash
+executor: bash
+entrypoint: main
+inputs:
+  pattern: required input value
+  root: required input value
+outputs:
+  result: execution result
+shell: |-
+  #!/usr/bin/env bash
+  set -euo pipefail
+
+  # BSSC exposes the structured input payload as JSON and as env vars for shell-based abilities.
+  rg -n "$pattern" "$root"
+
+  printf '%s\n' "{\"answer\": \"executed\", \"notes\": [], \"result\": {\"status\": \"executed\"}, \"status\": \"ok\"}"
+governance:
+  scope: reuse when later prompts ask for symbol search commands 10 find method call
+    pattern under compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a*
+  - b*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:29:53+00:00'
+  provenance:
+  - not_learn-from-markdown-10-learn-symbolsearch-comman_1d6931
+  - /Users/ravindranathakila/service/realized/trials/symbolsearch/10_LEARN_SYMBOLSEARCH_COMMANDS_FIND_METHOD_CALLS.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for symbol search commands 10 find
+      method call pattern under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Symbol Search Commands 10 Find Method Call Pattern
+    encountered_not: Symbol Search Commands 10 Find Method Call Pattern
+    goal: How do you execute symbol search commands 10 find method call pattern?
+    intended_object: "Symbol Search Commands 10 \u2014 Find Method Call Pattern Symbol\
+      \ Search Commands 10 \u2014 Find Method Call Pattern / Symbol Search Commands\
+      \ 10 Find Method Call Pattern Symbol Search Commands 10 Find Method Call Pattern\
+      \ How do you execute symbol search commands 10 find method call pattern? 2.\
+      \ Executable Bash relation shell command block execute `rg -n \"$pattern\" \"\
+      $root\"` named shell parameters: `pattern`, `root` This capability should be\
+      \ learned as a reusable bash ability artifact. The named shell parameters are\
+      \ `$pattern` and `$root`."
+    success_criteria:
+    - all required inputs are explicit and the bounded computation or template is
+      applied faithfully
+    - the result is returned in the requested usable form
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ Symbol Search Commands 10 \u2014 Find Method Call Pattern Symbol Search Commands\
+      \ 10 \u2014 Find Method Call Pattern / Symbol Search Commands 10 Find Method\
+      \ Call Pattern Symbol Search Commands 10 Find Method Call Pattern How do you\
+      \ execute symbol search commands 10 find method call pattern, 2, Executable\
+      \ Bash relation shell command block execute `rg -n \"$pattern\" \"$root\"` named\
+      \ shell parameters: `pattern`; no justified final closure has been admitted\
+      \ yet"
+    givens:
+    - "Symbol Search Commands 10 \u2014 Find Method Call Pattern Symbol Search Commands\
+      \ 10 \u2014 Find Method Call Pattern / Symbol Search Commands 10 Find Method\
+      \ Call Pattern Symbol Search Commands 10 Find Method Call Pattern How do you\
+      \ execute symbol search commands 10 find method call pattern"
+    - '2'
+    - 'Executable Bash relation shell command block execute `rg -n "$pattern" "$root"`
+      named shell parameters: `pattern`'
+    unknowns: []
+    missing_components:
+    - the full set of required inputs or executable relation is not yet explicit
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - functional
+    - completion
+    origin_layers:
+    - prompt
+    degree: partial
+    remainder_shapes:
+    - underdetermined
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair:
+    - supply or recover the missing inputs and then perform the bounded computation
+    full_repair:
+    - supply or recover the missing inputs and then perform the bounded computation
+    - 'satisfy success condition: all required inputs are explicit and the bounded
+      computation or template is applied faithfully'
+    - 'satisfy success condition: the result is returned in the requested usable form'
+    boundary_shape:
+    - d*
+    action_posture: compute_or_template
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Symbol Search Commands 10 Find Method Call Pattern
+    title_depth_prefixes:
+    - Symbol Search Commands 10 Find Method Call Pattern
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Symbol Search Command 10 Find Method Call Pattern
+    - "Symbol Search Commands 10 \u2014 Find Method Call Pattern / Symbol Search Commands\
+      \ 10 Find Method Call Pattern / Root"
+    composed_not: Symbol Search Command 10 Find Method Call Pattern
+    lookup_keys:
+    - symbol search command 10 find method call pattern
+    - symbol search
+    - search command
+    - command 10
+    - 10 find
+    - find method
+    - method call
+    - call pattern
+    - symbol search command
+    - search command 10
+    - command 10 find
+    - 10 find method
+    - find method call
+    - method call pattern
+    - execute symbol search command 10 find method call pattern
+    - execute symbol
+    - execute symbol search
+    - supply or recover miss input then perform bound computation
+    - supply or recover miss input
+    - perform bound computation
+    - supply or
+    - or recover
+    - recover miss
+    - miss input
+    notation_yaml: |-
+      "How Do You Execute Symbol Search Commands 10 Find Method Call Pattern":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Symbol Search Commands 10 Find Method Call Pattern"
+          - "Components: Symbol Search Command 10 Find Method Call Pattern, Symbol Search Commands 10 \u2014 Find Method Call Pattern / Symbol Search Commands 10 Find Method Call Pattern / Root"
+          - "Composition: Symbol Search Command 10 Find Method Call Pattern"
+          - "Title identity: Symbol Search Commands 10 Find Method Call Pattern"
+          - "Title depth segments: Symbol Search Commands 10 Find Method Call Pattern"
+          - "Title depth prefixes: Symbol Search Commands 10 Find Method Call Pattern"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: Symbol Search Commands 10 \u2014 Find Method Call Pattern Symbol Search Commands 10 \u2014 Find Method Call Pattern / Symbol Search Commands 10 Find Method Call Pattern Symbol Search Commands 10 Find Method Call Pattern How do you execute symbol search commands 10 find method call pattern? 2. Executable Bash relation shell command block execute `rg -n \"$pattern\" \"$root\"` named shell parameters: `pattern`, `root` This capability should be learned as a reusable bash ability artifact. The named shell parameters are `$pattern` and `$root`."
+          - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+          - "Actual realization: the prompt surface is present; explicit givens are present: Symbol Search Commands 10 \u2014 Find Method Call Pattern Symbol Search Commands 10 \u2014 Find Method Call Pattern / Symbol Search Commands 10 Find Method Call Pattern Symbol Search Commands 10 Find Method Call Pattern How do you execute symbol search commands 10 find method call pattern, 2, Executable Bash relation shell command block execute `rg -n \"$pattern\" \"$root\"` named shell parameters: `pattern`; no justified final closure has been admitted yet"
+          - "Givens: Symbol Search Commands 10 \u2014 Find Method Call Pattern Symbol Search Commands 10 \u2014 Find Method Call Pattern / Symbol Search Commands 10 Find Method Call Pattern Symbol Search Commands 10 Find Method Call Pattern How do you execute symbol search commands 10 find method call pattern, 2, Executable Bash relation shell command block execute `rg -n \"$pattern\" \"$root\"` named shell parameters: `pattern`"
+          - "Missing components: the full set of required inputs or executable relation is not yet explicit"
+          - "Misalignment types: functional, completion"
+          - "Origin layers: prompt"
+          - "Degree: partial"
+          - "Remainder shapes: underdetermined"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Minimal repair: supply or recover the missing inputs and then perform the bounded computation"
+          - "Full repair: supply or recover the missing inputs and then perform the bounded computation, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+          - "Action posture: compute_or_template"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - bash
+aliases:
+- Symbol Search Commands 10 Find Method Call Pattern
+family:
+  label: Symbol Search Commands
+  key: symbol search commands
+  ordinal: '10'
+  variant: Find Method Call Pattern
+hosting_metadata:
+  representation: shell_script
+  executor_framework: bash
+  entrypoint: main
+  body_field: shell_script
+  body_sha256: 832b68db029e6dfb45ebbce84b30028fd54e28c88051e61504bdb939aaeb3ec9
+  virtual_mounts: []
+normalization:
+  normalization_version: bssc.skill.normalization.v1
+  path_notation_version: bssc.skill.path.v1
+  regions:
+    a:
+      boundary_term: a*
+      carrier_kind: value
+      reconstructible: true
+      leaves:
+      - region: a*
+        path: /a/pattern
+        carrier_kind: value
+        data_type: String
+        semantic_label: pattern
+        value: required input value
+        leaf_class: scalar
+      - region: a*
+        path: /a/root
+        carrier_kind: value
+        data_type: String
+        semantic_label: root
+        value: required input value
+        leaf_class: scalar
+    a':
+      boundary_term: a'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+    b:
+      boundary_term: b*
+      carrier_kind: value
+      reconstructible: true
+      leaves: []
+    b':
+      boundary_term: b'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+    c:
+      boundary_term: c*
+      carrier_kind: value
+      reconstructible: true
+      leaves: []
+    c':
+      boundary_term: c'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+    d:
+      boundary_term: d*
+      carrier_kind: value
+      reconstructible: true
+      leaves:
+      - region: d*
+        path: /d/result
+        carrier_kind: value
+        data_type: String
+        semantic_label: result
+        value: execution result
+        leaf_class: scalar
+    d':
+      boundary_term: d'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+---
+schema: bssc_skill.v2
+kind: ability
+title: "Symbol Search Commands 11 \u2014 Find Yaml Keys / Symbol Search Commands 11\
+  \ Find Yaml Keys"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you execute symbol search commands 11 find yaml keys?
+declaration:
+  intent: How do you execute symbol search commands 11 find yaml keys?
+  inputs:
+    key: required input value
+    root: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  authority_bounds:
+    execute:
+      scope: local_executor
+      target: bash_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - shell command execution
+  persistence_behavior: none
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier1_bounded_transform
+  executor_framework: bash
+executor: bash
+entrypoint: main
+inputs:
+  key: required input value
+  root: required input value
+outputs:
+  result: execution result
+shell: |-
+  #!/usr/bin/env bash
+  set -euo pipefail
+
+  # BSSC exposes the structured input payload as JSON and as env vars for shell-based abilities.
+  rg -n "^\\s*${key}:" "$root"
+
+  printf '%s\n' "{\"answer\": \"executed\", \"notes\": [], \"result\": {\"status\": \"executed\"}, \"status\": \"ok\"}"
+governance:
+  scope: reuse when later prompts ask for symbol search commands 11 find yaml keys
+    under compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a*
+  - b*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:30:04+00:00'
+  provenance:
+  - not_learn-from-markdown-11-learn-symbolsearch-comman_fe5f91
+  - /Users/ravindranathakila/service/realized/trials/symbolsearch/11_LEARN_SYMBOLSEARCH_COMMANDS_FIND_YAML_KEYS.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for symbol search commands 11 find
+      yaml keys under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Symbol Search Commands 11 Find Yaml Keys
+    encountered_not: Symbol Search Commands 11 Find Yaml Keys
+    goal: How do you execute symbol search commands 11 find yaml keys?
+    intended_object: "Symbol Search Commands 11 \u2014 Find Yaml Keys Symbol Search\
+      \ Commands 11 \u2014 Find Yaml Keys / Symbol Search Commands 11 Find Yaml Keys\
+      \ Symbol Search Commands 11 Find Yaml Keys How do you execute symbol search\
+      \ commands 11 find yaml keys? 2. Executable Bash relation shell command block\
+      \ execute `rg -n \"^\\\\s*${key}:\" \"$root\"` named shell parameters: `key`,\
+      \ `root` This capability should be learned as a reusable bash ability artifact.\
+      \ The named shell parameters are `$key` and `$root`."
+    success_criteria:
+    - all required inputs are explicit and the bounded computation or template is
+      applied faithfully
+    - the result is returned in the requested usable form
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ Symbol Search Commands 11 \u2014 Find Yaml Keys Symbol Search Commands 11\
+      \ \u2014 Find Yaml Keys / Symbol Search Commands 11 Find Yaml Keys Symbol Search\
+      \ Commands 11 Find Yaml Keys How do you execute symbol search commands 11 find\
+      \ yaml keys, 2, Executable Bash relation shell command block execute `rg -n\
+      \ \"^\\\\s*${key}:\" \"$root\"` named shell parameters: `key`; no justified\
+      \ final closure has been admitted yet"
+    givens:
+    - "Symbol Search Commands 11 \u2014 Find Yaml Keys Symbol Search Commands 11 \u2014\
+      \ Find Yaml Keys / Symbol Search Commands 11 Find Yaml Keys Symbol Search Commands\
+      \ 11 Find Yaml Keys How do you execute symbol search commands 11 find yaml keys"
+    - '2'
+    - 'Executable Bash relation shell command block execute `rg -n "^\\s*${key}:"
+      "$root"` named shell parameters: `key`'
+    unknowns: []
+    missing_components:
+    - the full set of required inputs or executable relation is not yet explicit
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - functional
+    - completion
+    origin_layers:
+    - prompt
+    degree: partial
+    remainder_shapes:
+    - underdetermined
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair:
+    - supply or recover the missing inputs and then perform the bounded computation
+    full_repair:
+    - supply or recover the missing inputs and then perform the bounded computation
+    - 'satisfy success condition: all required inputs are explicit and the bounded
+      computation or template is applied faithfully'
+    - 'satisfy success condition: the result is returned in the requested usable form'
+    boundary_shape:
+    - d*
+    action_posture: compute_or_template
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Symbol Search Commands 11 Find Yaml Keys
+    title_depth_prefixes:
+    - Symbol Search Commands 11 Find Yaml Keys
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Symbol Search Command 11 Find Yaml Key
+    - "Symbol Search Commands 11 \u2014 Find Yaml Keys / Symbol Search Commands 11\
+      \ Find Yaml Keys / Root"
+    composed_not: Symbol Search Command 11 Find Yaml Key
+    lookup_keys:
+    - symbol search command 11 find yaml key
+    - symbol search
+    - search command
+    - command 11
+    - 11 find
+    - find yaml
+    - yaml key
+    - symbol search command
+    - search command 11
+    - command 11 find
+    - 11 find yaml
+    - find yaml key
+    - execute symbol search command 11 find yaml key
+    - execute symbol
+    - execute symbol search
+    - supply or recover miss input then perform bound computation
+    - supply or recover miss input
+    - perform bound computation
+    - supply or
+    - or recover
+    - recover miss
+    - miss input
+    - input then
+    - then perform
+    notation_yaml: |-
+      "How Do You Execute Symbol Search Commands 11 Find Yaml Keys":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Symbol Search Commands 11 Find Yaml Keys"
+          - "Components: Symbol Search Command 11 Find Yaml Key, Symbol Search Commands 11 \u2014 Find Yaml Keys / Symbol Search Commands 11 Find Yaml Keys / Root"
+          - "Composition: Symbol Search Command 11 Find Yaml Key"
+          - "Title identity: Symbol Search Commands 11 Find Yaml Keys"
+          - "Title depth segments: Symbol Search Commands 11 Find Yaml Keys"
+          - "Title depth prefixes: Symbol Search Commands 11 Find Yaml Keys"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: Symbol Search Commands 11 \u2014 Find Yaml Keys Symbol Search Commands 11 \u2014 Find Yaml Keys / Symbol Search Commands 11 Find Yaml Keys Symbol Search Commands 11 Find Yaml Keys How do you execute symbol search commands 11 find yaml keys? 2. Executable Bash relation shell command block execute `rg -n \"^\\\\s*${key}:\" \"$root\"` named shell parameters: `key`, `root` This capability should be learned as a reusable bash ability artifact. The named shell parameters are `$key` and `$root`."
+          - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+          - "Actual realization: the prompt surface is present; explicit givens are present: Symbol Search Commands 11 \u2014 Find Yaml Keys Symbol Search Commands 11 \u2014 Find Yaml Keys / Symbol Search Commands 11 Find Yaml Keys Symbol Search Commands 11 Find Yaml Keys How do you execute symbol search commands 11 find yaml keys, 2, Executable Bash relation shell command block execute `rg -n \"^\\\\s*${key}:\" \"$root\"` named shell parameters: `key`; no justified final closure has been admitted yet"
+          - "Givens: Symbol Search Commands 11 \u2014 Find Yaml Keys Symbol Search Commands 11 \u2014 Find Yaml Keys / Symbol Search Commands 11 Find Yaml Keys Symbol Search Commands 11 Find Yaml Keys How do you execute symbol search commands 11 find yaml keys, 2, Executable Bash relation shell command block execute `rg -n \"^\\\\s*${key}:\" \"$root\"` named shell parameters: `key`"
+          - "Missing components: the full set of required inputs or executable relation is not yet explicit"
+          - "Misalignment types: functional, completion"
+          - "Origin layers: prompt"
+          - "Degree: partial"
+          - "Remainder shapes: underdetermined"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Minimal repair: supply or recover the missing inputs and then perform the bounded computation"
+          - "Full repair: supply or recover the missing inputs and then perform the bounded computation, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+          - "Action posture: compute_or_template"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - bash
+aliases:
+- Symbol Search Commands 11 Find Yaml Keys
+family:
+  label: Symbol Search Commands
+  key: symbol search commands
+  ordinal: '11'
+  variant: Find Yaml Keys
+hosting_metadata:
+  representation: shell_script
+  executor_framework: bash
+  entrypoint: main
+  body_field: shell_script
+  body_sha256: bf1bcd3a8b9bd37bcb3dcb787bca723cd63109e0ab417f328790be5869b0165b
+  virtual_mounts: []
+normalization:
+  normalization_version: bssc.skill.normalization.v1
+  path_notation_version: bssc.skill.path.v1
+  regions:
+    a:
+      boundary_term: a*
+      carrier_kind: value
+      reconstructible: true
+      leaves:
+      - region: a*
+        path: /a/key
+        carrier_kind: value
+        data_type: String
+        semantic_label: key
+        value: required input value
+        leaf_class: scalar
+      - region: a*
+        path: /a/root
+        carrier_kind: value
+        data_type: String
+        semantic_label: root
+        value: required input value
+        leaf_class: scalar
+    a':
+      boundary_term: a'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+    b:
+      boundary_term: b*
+      carrier_kind: value
+      reconstructible: true
+      leaves: []
+    b':
+      boundary_term: b'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+    c:
+      boundary_term: c*
+      carrier_kind: value
+      reconstructible: true
+      leaves: []
+    c':
+      boundary_term: c'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+    d:
+      boundary_term: d*
+      carrier_kind: value
+      reconstructible: true
+      leaves:
+      - region: d*
+        path: /d/result
+        carrier_kind: value
+        data_type: String
+        semantic_label: result
+        value: execution result
+        leaf_class: scalar
+    d':
+      boundary_term: d'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+---
+schema: bssc_skill.v2
+kind: ability
+title: "Symbol Search Commands 12 \u2014 Find Python Decorators / Symbol Search Commands\
+  \ 12 Find Python Decorators"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you execute symbol search commands 12 find python decorators?
+declaration:
+  intent: How do you execute symbol search commands 12 find python decorators?
+  inputs:
+    root: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  authority_bounds:
+    execute:
+      scope: local_executor
+      target: bash_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - shell command execution
+  persistence_behavior: none
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier1_bounded_transform
+  executor_framework: bash
+executor: bash
+entrypoint: main
+inputs:
+  root: required input value
+outputs:
+  result: execution result
+shell: |-
+  #!/usr/bin/env bash
+  set -euo pipefail
+
+  # BSSC exposes the structured input payload as JSON and as env vars for shell-based abilities.
+  rg -n "^@" "$root"
+
+  printf '%s\n' "{\"answer\": \"executed\", \"notes\": [], \"result\": {\"status\": \"executed\"}, \"status\": \"ok\"}"
+governance:
+  scope: reuse when later prompts ask for symbol search commands 12 find python decorators
+    under compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a*
+  - b*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:30:13+00:00'
+  provenance:
+  - not_learn-from-markdown-12-learn-symbolsearch-comman_172d58
+  - /Users/ravindranathakila/service/realized/trials/symbolsearch/12_LEARN_SYMBOLSEARCH_COMMANDS_FIND_PYTHON_DECORATORS.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for symbol search commands 12 find
+      python decorators under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Symbol Search Commands 12 Find Python Decorators
+    encountered_not: Symbol Search Commands 12 Find Python Decorators
+    goal: How do you execute symbol search commands 12 find python decorators?
+    intended_object: "Symbol Search Commands 12 \u2014 Find Python Decorators Symbol\
+      \ Search Commands 12 \u2014 Find Python Decorators / Symbol Search Commands\
+      \ 12 Find Python Decorators Symbol Search Commands 12 Find Python Decorators\
+      \ How do you execute symbol search commands 12 find python decorators? 2. Executable\
+      \ Bash relation shell command block execute `rg -n \"^@\" \"$root\"` named shell\
+      \ parameters: `root` This capability should be learned as a reusable bash ability\
+      \ artifact. The named shell parameter is `$root`."
+    success_criteria:
+    - all required inputs are explicit and the bounded computation or template is
+      applied faithfully
+    - the result is returned in the requested usable form
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ Symbol Search Commands 12 \u2014 Find Python Decorators Symbol Search Commands\
+      \ 12 \u2014 Find Python Decorators / Symbol Search Commands 12 Find Python Decorators\
+      \ Symbol Search Commands 12 Find Python Decorators How do you execute symbol\
+      \ search commands 12 find python decorators, 2, Executable Bash relation shell\
+      \ command block execute `rg -n \"^@\" \"$root\"` named shell parameters: `root`\
+      \ This capability should be learned as a reusable bash ability artifact; no\
+      \ justified final closure has been admitted yet"
+    givens:
+    - "Symbol Search Commands 12 \u2014 Find Python Decorators Symbol Search Commands\
+      \ 12 \u2014 Find Python Decorators / Symbol Search Commands 12 Find Python Decorators\
+      \ Symbol Search Commands 12 Find Python Decorators How do you execute symbol\
+      \ search commands 12 find python decorators"
+    - '2'
+    - 'Executable Bash relation shell command block execute `rg -n "^@" "$root"` named
+      shell parameters: `root` This capability should be learned as a reusable bash
+      ability artifact'
+    unknowns: []
+    missing_components:
+    - the full set of required inputs or executable relation is not yet explicit
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - functional
+    - completion
+    origin_layers:
+    - prompt
+    degree: partial
+    remainder_shapes:
+    - underdetermined
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair:
+    - supply or recover the missing inputs and then perform the bounded computation
+    full_repair:
+    - supply or recover the missing inputs and then perform the bounded computation
+    - 'satisfy success condition: all required inputs are explicit and the bounded
+      computation or template is applied faithfully'
+    - 'satisfy success condition: the result is returned in the requested usable form'
+    boundary_shape:
+    - d*
+    action_posture: compute_or_template
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Symbol Search Commands 12 Find Python Decorators
+    title_depth_prefixes:
+    - Symbol Search Commands 12 Find Python Decorators
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Symbol Search Command 12 Find Python Decorator
+    composed_not: Symbol Search Command 12 Find Python Decorator
+    lookup_keys:
+    - symbol search command 12 find python decorator
+    - symbol search
+    - search command
+    - command 12
+    - 12 find
+    - find python
+    - python decorator
+    - symbol search command
+    - search command 12
+    - command 12 find
+    - 12 find python
+    - find python decorator
+    - execute symbol search command 12 find python decorator
+    - execute symbol
+    - execute symbol search
+    - supply or recover miss input then perform bound computation
+    - supply or recover miss input
+    - perform bound computation
+    - supply or
+    - or recover
+    - recover miss
+    - miss input
+    - input then
+    - then perform
+    notation_yaml: |-
+      "How Do You Execute Symbol Search Commands 12 Find Python Decorators":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Symbol Search Commands 12 Find Python Decorators"
+          - "Components: Symbol Search Command 12 Find Python Decorator"
+          - "Composition: Symbol Search Command 12 Find Python Decorator"
+          - "Title identity: Symbol Search Commands 12 Find Python Decorators"
+          - "Title depth segments: Symbol Search Commands 12 Find Python Decorators"
+          - "Title depth prefixes: Symbol Search Commands 12 Find Python Decorators"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: Symbol Search Commands 12 \u2014 Find Python Decorators Symbol Search Commands 12 \u2014 Find Python Decorators / Symbol Search Commands 12 Find Python Decorators Symbol Search Commands 12 Find Python Decorators How do you execute symbol search commands 12 find python decorators? 2. Executable Bash relation shell command block execute `rg -n \"^@\" \"$root\"` named shell parameters: `root` This capability should be learned as a reusable bash ability artifact. The named shell parameter is `$root`."
+          - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+          - "Actual realization: the prompt surface is present; explicit givens are present: Symbol Search Commands 12 \u2014 Find Python Decorators Symbol Search Commands 12 \u2014 Find Python Decorators / Symbol Search Commands 12 Find Python Decorators Symbol Search Commands 12 Find Python Decorators How do you execute symbol search commands 12 find python decorators, 2, Executable Bash relation shell command block execute `rg -n \"^@\" \"$root\"` named shell parameters: `root` This capability should be learned as a reusable bash ability artifact; no justified final closure has been admitted yet"
+          - "Givens: Symbol Search Commands 12 \u2014 Find Python Decorators Symbol Search Commands 12 \u2014 Find Python Decorators / Symbol Search Commands 12 Find Python Decorators Symbol Search Commands 12 Find Python Decorators How do you execute symbol search commands 12 find python decorators, 2, Executable Bash relation shell command block execute `rg -n \"^@\" \"$root\"` named shell parameters: `root` This capability should be learned as a reusable bash ability artifact"
+          - "Missing components: the full set of required inputs or executable relation is not yet explicit"
+          - "Misalignment types: functional, completion"
+          - "Origin layers: prompt"
+          - "Degree: partial"
+          - "Remainder shapes: underdetermined"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Minimal repair: supply or recover the missing inputs and then perform the bounded computation"
+          - "Full repair: supply or recover the missing inputs and then perform the bounded computation, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+          - "Action posture: compute_or_template"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - bash
+aliases:
+- Symbol Search Commands 12 Find Python Decorators
+family:
+  label: Symbol Search Commands
+  key: symbol search commands
+  ordinal: '12'
+  variant: Find Python Decorators
+hosting_metadata:
+  representation: shell_script
+  executor_framework: bash
+  entrypoint: main
+  body_field: shell_script
+  body_sha256: 36fb6e257debecc07a08df341009fe80196400a9bca2294bc8b3707e0048b757
+  virtual_mounts: []
+normalization:
+  normalization_version: bssc.skill.normalization.v1
+  path_notation_version: bssc.skill.path.v1
+  regions:
+    a:
+      boundary_term: a*
+      carrier_kind: value
+      reconstructible: true
+      leaves:
+      - region: a*
+        path: /a/root
+        carrier_kind: value
+        data_type: String
+        semantic_label: root
+        value: required input value
+        leaf_class: scalar
+    a':
+      boundary_term: a'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+    b:
+      boundary_term: b*
+      carrier_kind: value
+      reconstructible: true
+      leaves: []
+    b':
+      boundary_term: b'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+    c:
+      boundary_term: c*
+      carrier_kind: value
+      reconstructible: true
+      leaves: []
+    c':
+      boundary_term: c'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []
+    d:
+      boundary_term: d*
+      carrier_kind: value
+      reconstructible: true
+      leaves:
+      - region: d*
+        path: /d/result
+        carrier_kind: value
+        data_type: String
+        semantic_label: result
+        value: execution result
+        leaf_class: scalar
+    d':
+      boundary_term: d'*
+      carrier_kind: reference
+      reconstructible: true
+      leaves: []

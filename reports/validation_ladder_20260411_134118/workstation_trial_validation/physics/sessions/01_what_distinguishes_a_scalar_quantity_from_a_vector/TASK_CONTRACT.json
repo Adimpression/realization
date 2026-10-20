@@ -1,0 +1,18 @@
+{
+  "assumptions": [],
+  "boundary_shape": [
+    "d*"
+  ],
+  "completion_conditions": [
+    "requested result is returned to the user"
+  ],
+  "input_values": {},
+  "missing_requirements": [],
+  "output_values": [
+    "result"
+  ],
+  "read_references": [],
+  "semantic_unit": "What distinguishes a scalar quantity from a vector quantity, and how is this represented in the reusable relation?",
+  "side_effects": [],
+  "write_targets": []
+}

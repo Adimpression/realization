@@ -1,0 +1,184 @@
+schema_version = 1
+
+[policy]
+performance_runs = 3
+max_median_regression_percent = 10.0
+max_p95_regression_percent = 10.0
+
+[[gates]]
+id = "architecture_ratchet"
+category = "architecture"
+cwd = "."
+command = ["python", "scripts/check_architecture_boundaries.py"]
+timeout_seconds = 120
+required = true
+run_by_default = true
+artifacts = []
+
+[[gates]]
+id = "root_unit_tests"
+category = "unit"
+cwd = "."
+command = ["python", "-m", "unittest", "discover", "-s", "tests"]
+timeout_seconds = 3600
+required = true
+run_by_default = true
+artifacts = []
+env = { OPENAI_API_KEY = "" }
+
+[[gates]]
+id = "workstation_tests"
+category = "workstation"
+cwd = "."
+command = ["python", "-m", "unittest", "discover", "-s", "workstation/tests", "-t", ".", "-p", "test_*.py"]
+# The Textual app tests intentionally mount full event-loop states and make the
+# complete workstation suite substantially longer than the root unit suite.
+timeout_seconds = 14400
+required = true
+run_by_default = true
+artifacts = []
+env = { OPENAI_API_KEY = "" }
+
+[[gates]]
+id = "trial_skill_routing_bdd"
+category = "bdd"
+cwd = "."
+command = ["python", "-m", "unittest", "workstation.tests.bdd.test_trial_skill_routing_bdd"]
+timeout_seconds = 600
+required = true
+run_by_default = true
+artifacts = []
+env = { OPENAI_API_KEY = "" }
+
+[[gates]]
+id = "publication_bdd"
+category = "bdd"
+cwd = "."
+command = ["python", "-m", "unittest", "workstation.tests.bdd.test_report_creation_bdd"]
+timeout_seconds = 1800
+required = true
+run_by_default = true
+artifacts = []
+env = { OPENAI_API_KEY = "" }
+
+[[gates]]
+id = "publication_reference"
+category = "artifact"
+cwd = "."
+command = ["python", "scripts/capture_publication_reference.py"]
+timeout_seconds = 600
+required = true
+run_by_default = true
+artifacts = [
+  "reports/architecture_qualification/publication_reference/reference.json",
+  "reports/architecture_qualification/publication_reference/report.md",
+  "reports/architecture_qualification/publication_reference/report.typ",
+]
+env = { OPENAI_API_KEY = "" }
+
+[[gates]]
+id = "incremental_publication_bdd"
+category = "bdd"
+cwd = "."
+command = ["python", "-m", "unittest", "workstation.tests.bdd.test_smart_city_travel_incremental_report_ladder_bdd"]
+timeout_seconds = 1800
+required = true
+run_by_default = true
+artifacts = []
+env = { OPENAI_API_KEY = "" }
+
+[[gates]]
+id = "flutter_analyze"
+category = "flutter_static"
+cwd = "workstation/ui_flutter"
+command = ["flutter", "analyze"]
+timeout_seconds = 600
+required = true
+run_by_default = true
+artifacts = []
+
+[[gates]]
+id = "incremental_publication_bdd_live"
+category = "bdd_provider"
+cwd = "."
+command = ["python", "-m", "unittest", "workstation.tests.bdd.test_smart_city_travel_incremental_report_ladder_live"]
+timeout_seconds = 7200
+required = true
+run_by_default = false
+reason_not_default = "Requires a configured provider credential and explicit authorization to transmit the trial prompts and artifacts to the external provider."
+artifacts = []
+
+[[gates]]
+id = "flutter_widget_tests"
+category = "flutter_test"
+cwd = "workstation/ui_flutter"
+command = ["flutter", "test"]
+timeout_seconds = 1800
+required = true
+run_by_default = true
+artifacts = []
+
+[[gates]]
+id = "flutter_direct_v10_publication"
+category = "flutter_browser_integration"
+cwd = "workstation/ui_flutter"
+command = ["./scripts/run_subject_tab_screenshot_test.sh"]
+timeout_seconds = 1800
+required = true
+run_by_default = false
+reason_not_default = "Starts Chrome, ChromeDriver, Envoy, and a local gRPC host."
+artifacts = []
+env = { WORKSTATION_INTEGRATION_TARGET = "integration_test/direct_v10_publication_flow_test.dart", WORKSTATION_SCREENSHOT_ROOT = "/tmp/workstation-direct-v10-qualification" }
+
+[[gates]]
+id = "flutter_gate_scroll_integration"
+category = "flutter_browser_integration"
+cwd = "workstation/ui_flutter"
+command = ["./scripts/run_subject_tab_screenshot_test.sh"]
+timeout_seconds = 1800
+required = true
+run_by_default = false
+reason_not_default = "Starts Chrome, ChromeDriver, Envoy, and a local gRPC host."
+artifacts = []
+env = { WORKSTATION_INTEGRATION_TARGET = "integration_test/gate_scroll_behavior_test.dart", WORKSTATION_SCREENSHOT_ROOT = "/tmp/workstation-gate-scroll-qualification" }
+
+[[gates]]
+id = "flutter_subject_tab_screenshots"
+category = "screenshot"
+cwd = "workstation/ui_flutter"
+command = ["./scripts/run_subject_tab_screenshot_test.sh"]
+timeout_seconds = 1800
+required = true
+run_by_default = false
+reason_not_default = "Starts Chrome, ChromeDriver, Envoy, and a local gRPC host."
+artifacts = ["workstation/ui_flutter/build/integration_test_screenshots/*.png"]
+env = { WORKSTATION_SCREENSHOT_ROOT = "/tmp/workstation-screenshot-qualification" }
+
+[[gates]]
+id = "workstation_trial_validation"
+category = "trial"
+cwd = "."
+command = ["python", "main.py", "workstation-trial-validate", "--workspace", ".", "--report-root", "reports/architecture_qualification/workstation_trials", "--report-out", "reports/architecture_qualification/workstation_trials.json"]
+timeout_seconds = 7200
+required = true
+run_by_default = false
+reason_not_default = "Requires explicit authorization to transmit trial prompts and artifacts to the configured external provider."
+artifacts = ["reports/architecture_qualification/workstation_trials.json"]
+result_json = "reports/architecture_qualification/workstation_trials.json"
+# Historical provider runs are commonly partial because an unavailable trial
+# bundle is skipped or a stochastic tool route is rejected. Preserve that state
+# visibly instead of reducing the gate to its process exit code.
+accepted_result_statuses = ["ok", "partial"]
+
+[[gates]]
+id = "validation_ladder"
+category = "trial"
+cwd = "."
+command = ["python", "main.py", "validation-ladder", "--workspace", ".", "--report-root", "reports/architecture_qualification/validation_ladder", "--report-out", "reports/architecture_qualification/validation_ladder.json"]
+timeout_seconds = 10800
+required = true
+run_by_default = false
+reason_not_default = "Runs the provider-backed trial ladder and requires explicit authorization for external prompt and artifact transmission."
+artifacts = ["reports/architecture_qualification/validation_ladder.json"]
+result_json = "reports/architecture_qualification/validation_ladder.json"
+accepted_result_statuses = ["ok"]

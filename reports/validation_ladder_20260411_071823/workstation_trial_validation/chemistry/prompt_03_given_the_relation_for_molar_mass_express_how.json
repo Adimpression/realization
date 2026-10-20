@@ -1,0 +1,9 @@
+{
+  "assistant_text": "- Mass from moles (and molar mass): \n  m = n \u00d7 M\n  where\n  - m is mass (grams, g)\n  - n is amount in moles (mol)\n  - M is molar mass (g/mol)\n\n- If you know mass and want moles: \n  n = m / M\n\n- Quick example:\n  - Substrate with molar mass M = 58.44 g/mol (sodium chloride, NaCl)\n  - Desired amount n = 2.5 mol\n  - Mass needed: m = 2.5 \u00d7 58.44 \u2248 146.1 g\n\nRelation to a reusable substrate:\n- The same mass\u2013mole relation applies to the substrate you plan to reuse. After a reaction cycle, you may recover some intact substrate for reuse. To know how much is left for the next cycle, convert the recovered mass back to moles using n_recovered = m_recovered / M.\n- Example: Suppose M = 58.44 g/mol and you recover m_recovered = 40 g of substrate after a cycle. Then n_recovered \u2248 40 / 58.44 \u2248 0.685 mol.\n- If you started with n0 moles, and you used n_use moles in the cycle, the available moles for the next cycle are:\n  n_next = n0 \u2212 n_use + n_recovered\n  (assuming recovered substrate remains usable as-is).\n- This lets you plan how many cycles you can run before needing to replenish mass. The higher the recovery fraction (n_recovered relative to n_use), the more cycles you can perform with the same initial substrate, all while staying consistent with the molar masses.",
+  "model": "gpt-5-nano-2025-08-07",
+  "rounds": 1,
+  "task_contract": {
+    "semantic_unit": "Given the relation for molar mass, express how to compute mass from moles and molar mass, and explain how this relates to the reusable substrate."
+  },
+  "tool_receipts": []
+}

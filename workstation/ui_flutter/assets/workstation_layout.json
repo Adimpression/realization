@@ -1,0 +1,896 @@
+{
+  "desktop_shell_states": [
+    {
+      "key": "gather.main",
+      "sections": [
+        {
+          "key": "subject_header",
+          "placement": "header",
+          "title": "Current Subject"
+        },
+        {
+          "key": "subject_nav",
+          "placement": "header_controls",
+          "title": ""
+        },
+        {
+          "key": "current_step",
+          "placement": "gate_left",
+          "title": "Current Step"
+        },
+        {
+          "key": "subject_status",
+          "placement": "gate_right",
+          "title": "Subject Status"
+        },
+        {
+          "key": "more_actions",
+          "placement": "actions",
+          "title": "More Actions"
+        },
+        {
+          "key": "source_set",
+          "placement": "controls",
+          "title": "Source Set"
+        },
+        {
+          "key": "revision_baseline",
+          "placement": "controls",
+          "title": "Revision Baseline"
+        },
+        {
+          "key": "in_source_set",
+          "placement": "controls",
+          "title": "In Source Set"
+        },
+        {
+          "key": "source_sets",
+          "placement": "workbench_left",
+          "title": "Source Sets"
+        },
+        {
+          "key": "learned_snapshot",
+          "placement": "workbench_right",
+          "title": "Learned Snapshot"
+        }
+      ],
+      "tab_key": "research",
+      "title": "Gather"
+    },
+    {
+      "key": "gather.journal",
+      "sections": [
+        {
+          "key": "subject_header",
+          "placement": "header",
+          "title": "Current Subject"
+        },
+        {
+          "key": "subject_nav",
+          "placement": "header_controls",
+          "title": ""
+        },
+        {
+          "key": "journal",
+          "placement": "full_pane",
+          "title": "Gather Journal"
+        }
+      ],
+      "tab_key": "research",
+      "title": "Gather Journal"
+    },
+    {
+      "key": "gather.source_detail",
+      "sections": [
+        {
+          "key": "subject_header",
+          "placement": "header",
+          "title": "Current Subject"
+        },
+        {
+          "key": "subject_nav",
+          "placement": "header_controls",
+          "title": ""
+        },
+        {
+          "key": "source_detail",
+          "placement": "full_pane",
+          "title": "Source Detail"
+        }
+      ],
+      "tab_key": "research",
+      "title": "Source Detail"
+    },
+    {
+      "key": "itemize.main",
+      "sections": [
+        {
+          "key": "subject_header",
+          "placement": "header",
+          "title": "Current Subject"
+        },
+        {
+          "key": "subject_nav",
+          "placement": "header_controls",
+          "title": ""
+        },
+        {
+          "key": "current_step",
+          "placement": "gate_left",
+          "title": "Current Step"
+        },
+        {
+          "key": "itemize_status",
+          "placement": "gate_right",
+          "title": "Itemize Status"
+        },
+        {
+          "key": "more_actions",
+          "placement": "actions",
+          "title": "More Actions"
+        },
+        {
+          "key": "decision_role",
+          "placement": "controls",
+          "title": "Decision Role"
+        },
+        {
+          "key": "hold_for_merge",
+          "placement": "controls",
+          "title": "Hold For Merge"
+        },
+        {
+          "key": "item_inventory",
+          "placement": "workbench_left",
+          "title": "Item Inventory"
+        },
+        {
+          "key": "item_detail",
+          "placement": "workbench_right",
+          "title": ""
+        }
+      ],
+      "tab_key": "itemize",
+      "title": "Itemize"
+    },
+    {
+      "key": "draft.compose",
+      "sections": [
+        {
+          "key": "subject_header",
+          "placement": "header",
+          "title": "Current Subject"
+        },
+        {
+          "key": "subject_nav",
+          "placement": "header_controls",
+          "title": ""
+        },
+        {
+          "key": "current_step",
+          "placement": "gate_left",
+          "title": "Current Step"
+        },
+        {
+          "key": "draft_status",
+          "placement": "gate_right",
+          "title": "Draft Status"
+        },
+        {
+          "key": "more_actions",
+          "placement": "actions",
+          "title": "More Actions"
+        },
+        {
+          "key": "selected_change",
+          "placement": "controls",
+          "title": "Selected Change"
+        },
+        {
+          "key": "view",
+          "placement": "controls",
+          "title": "View"
+        },
+        {
+          "key": "lens",
+          "placement": "controls",
+          "title": "Lens"
+        },
+        {
+          "key": "draft_inventory",
+          "placement": "workbench_left",
+          "title": "Draft Item Inventory"
+        },
+        {
+          "key": "draft_detail",
+          "placement": "workbench_right",
+          "title": ""
+        }
+      ],
+      "tab_key": "draft",
+      "title": "Draft"
+    },
+    {
+      "key": "draft.frame",
+      "sections": [
+        {
+          "key": "subject_header",
+          "placement": "header",
+          "title": "Current Subject"
+        },
+        {
+          "key": "subject_nav",
+          "placement": "header_controls",
+          "title": ""
+        },
+        {
+          "key": "current_step",
+          "placement": "gate_left",
+          "title": "Current Step"
+        },
+        {
+          "key": "draft_status",
+          "placement": "gate_right",
+          "title": "Draft Status"
+        },
+        {
+          "key": "more_actions",
+          "placement": "actions",
+          "title": "More Actions"
+        },
+        {
+          "key": "selected_change",
+          "placement": "controls",
+          "title": "Selected Change"
+        },
+        {
+          "key": "view",
+          "placement": "controls",
+          "title": "View"
+        },
+        {
+          "key": "lens",
+          "placement": "controls",
+          "title": "Lens"
+        },
+        {
+          "key": "case_objects",
+          "placement": "workbench_left",
+          "title": "Case Objects"
+        },
+        {
+          "key": "case_frame",
+          "placement": "workbench_center",
+          "title": "Case Frame"
+        },
+        {
+          "key": "draft_detail",
+          "placement": "workbench_right",
+          "title": ""
+        },
+        {
+          "key": "issues_validation",
+          "placement": "workbench_bottom",
+          "title": "Issues & Validation"
+        }
+      ],
+      "tab_key": "draft",
+      "title": "Draft Frame"
+    },
+    {
+      "key": "draft.model",
+      "sections": [
+        {
+          "key": "subject_header",
+          "placement": "header",
+          "title": "Current Subject"
+        },
+        {
+          "key": "subject_nav",
+          "placement": "header_controls",
+          "title": ""
+        },
+        {
+          "key": "current_step",
+          "placement": "gate_left",
+          "title": "Current Step"
+        },
+        {
+          "key": "draft_status",
+          "placement": "gate_right",
+          "title": "Draft Status"
+        },
+        {
+          "key": "more_actions",
+          "placement": "actions",
+          "title": "More Actions"
+        },
+        {
+          "key": "selected_change",
+          "placement": "controls",
+          "title": "Selected Change"
+        },
+        {
+          "key": "view",
+          "placement": "controls",
+          "title": "View"
+        },
+        {
+          "key": "lens",
+          "placement": "controls",
+          "title": "Lens"
+        },
+        {
+          "key": "case_objects",
+          "placement": "workbench_left",
+          "title": "Case Objects"
+        },
+        {
+          "key": "transformation_model",
+          "placement": "workbench_center",
+          "title": "Transformation Model"
+        },
+        {
+          "key": "draft_detail",
+          "placement": "workbench_right",
+          "title": ""
+        },
+        {
+          "key": "issues_validation",
+          "placement": "workbench_bottom",
+          "title": "Issues & Validation"
+        }
+      ],
+      "tab_key": "draft",
+      "title": "Draft Model"
+    },
+    {
+      "key": "draft.explore",
+      "sections": [
+        {
+          "key": "subject_header",
+          "placement": "header",
+          "title": "Current Subject"
+        },
+        {
+          "key": "subject_nav",
+          "placement": "header_controls",
+          "title": ""
+        },
+        {
+          "key": "current_step",
+          "placement": "gate_left",
+          "title": "Current Step"
+        },
+        {
+          "key": "draft_status",
+          "placement": "gate_right",
+          "title": "Draft Status"
+        },
+        {
+          "key": "more_actions",
+          "placement": "actions",
+          "title": "More Actions"
+        },
+        {
+          "key": "selected_change",
+          "placement": "controls",
+          "title": "Selected Change"
+        },
+        {
+          "key": "view",
+          "placement": "controls",
+          "title": "View"
+        },
+        {
+          "key": "lens",
+          "placement": "controls",
+          "title": "Lens"
+        },
+        {
+          "key": "case_objects",
+          "placement": "workbench_left",
+          "title": "Case Objects"
+        },
+        {
+          "key": "explore_alternatives",
+          "placement": "workbench_center",
+          "title": "Explore Alternatives"
+        },
+        {
+          "key": "draft_detail",
+          "placement": "workbench_right",
+          "title": ""
+        },
+        {
+          "key": "issues_validation",
+          "placement": "workbench_bottom",
+          "title": "Issues & Validation"
+        }
+      ],
+      "tab_key": "draft",
+      "title": "Draft Explore"
+    },
+    {
+      "key": "review.main",
+      "sections": [
+        {
+          "key": "subject_header",
+          "placement": "header",
+          "title": "Current Subject"
+        },
+        {
+          "key": "subject_nav",
+          "placement": "header_controls",
+          "title": ""
+        },
+        {
+          "key": "current_step",
+          "placement": "gate_left",
+          "title": "Current Step"
+        },
+        {
+          "key": "review_status",
+          "placement": "gate_right",
+          "title": "Review Status"
+        },
+        {
+          "key": "more_actions",
+          "placement": "actions",
+          "title": "More Actions"
+        },
+        {
+          "key": "report_plan",
+          "placement": "controls",
+          "title": "Report Plan"
+        },
+        {
+          "key": "selected_item",
+          "placement": "controls",
+          "title": "Selected Item"
+        },
+        {
+          "key": "selected_section",
+          "placement": "controls",
+          "title": "Selected Section"
+        },
+        {
+          "key": "report_scope",
+          "placement": "workbench_left",
+          "title": "Report Scope"
+        },
+        {
+          "key": "selection_details",
+          "placement": "workbench_right",
+          "title": "Selection Details"
+        }
+      ],
+      "tab_key": "review",
+      "title": "Review"
+    },
+    {
+      "key": "review.journal",
+      "sections": [
+        {
+          "key": "subject_header",
+          "placement": "header",
+          "title": "Current Subject"
+        },
+        {
+          "key": "subject_nav",
+          "placement": "header_controls",
+          "title": ""
+        },
+        {
+          "key": "journal",
+          "placement": "full_pane",
+          "title": "Review Journal"
+        },
+        {
+          "key": "review_status",
+          "placement": "footer",
+          "title": "Review Status"
+        }
+      ],
+      "tab_key": "review",
+      "title": "Review Journal"
+    },
+    {
+      "key": "publication.main",
+      "sections": [
+        {
+          "key": "subject_header",
+          "placement": "header",
+          "title": "Current Subject"
+        },
+        {
+          "key": "subject_nav",
+          "placement": "header_controls",
+          "title": ""
+        },
+        {
+          "key": "current_step",
+          "placement": "gate_left",
+          "title": "Current Step"
+        },
+        {
+          "key": "publication_status",
+          "placement": "gate_right",
+          "title": "Publication Status"
+        },
+        {
+          "key": "more_actions",
+          "placement": "actions",
+          "title": "More Actions"
+        },
+        {
+          "key": "report_plan",
+          "placement": "controls",
+          "title": "Report Plan"
+        },
+        {
+          "key": "selected_support",
+          "placement": "controls",
+          "title": "Selected Support"
+        },
+        {
+          "key": "selected_item",
+          "placement": "controls",
+          "title": "Selected Item"
+        },
+        {
+          "key": "selected_section",
+          "placement": "controls",
+          "title": "Selected Section"
+        },
+        {
+          "key": "report_scope",
+          "placement": "workbench_left",
+          "title": "Report Scope"
+        },
+        {
+          "key": "selection_details",
+          "placement": "workbench_right",
+          "title": "Selection Details"
+        }
+      ],
+      "tab_key": "publication",
+      "title": "Publication"
+    }
+  ],
+  "tabs": [
+    {
+      "key": "chat",
+      "panes": [
+        {
+          "height_mode": "content",
+          "key": "status",
+          "min_height_units": 2,
+          "scroll_x": false,
+          "scroll_y": false,
+          "surface_role": "inactive",
+          "text_role": "default",
+          "title": "Status",
+          "width": "fill",
+          "wrap": true
+        },
+        {
+          "height_mode": "fixed",
+          "height_units": 3,
+          "key": "activity",
+          "scroll_x": false,
+          "scroll_y": false,
+          "surface_role": "inactive",
+          "text_role": "accent",
+          "title": "Activity",
+          "width": "fill",
+          "wrap": true
+        },
+        {
+          "height_mode": "fill",
+          "key": "transcript",
+          "scroll_x": false,
+          "scroll_y": true,
+          "surface_role": "active",
+          "text_role": "default",
+          "title": "Transcript",
+          "width": "fill",
+          "wrap": true
+        },
+        {
+          "height_mode": "content",
+          "key": "composer",
+          "min_height_units": 3,
+          "scroll_x": false,
+          "scroll_y": false,
+          "surface_role": "active",
+          "text_role": "prompt",
+          "title": "",
+          "width": "fill",
+          "wrap": false
+        },
+        {
+          "height_mode": "fixed",
+          "height_units": 8,
+          "key": "suggestions",
+          "scroll_x": false,
+          "scroll_y": true,
+          "surface_role": "inactive",
+          "text_role": "default",
+          "title": "Suggestions",
+          "width": "fill",
+          "wrap": true
+        },
+        {
+          "height_mode": "fixed",
+          "height_units": 1,
+          "key": "hint",
+          "scroll_x": false,
+          "scroll_y": false,
+          "surface_role": "inactive",
+          "text_role": "muted",
+          "title": "",
+          "width": "fill",
+          "wrap": true
+        }
+      ],
+      "title": "Chat"
+    },
+    {
+      "key": "research",
+      "panes": [
+        {
+          "height_mode": "content",
+          "key": "actions",
+          "min_height_units": 4,
+          "scroll_x": false,
+          "scroll_y": false,
+          "surface_role": "active",
+          "text_role": "default",
+          "title": "Actions",
+          "width": "fill",
+          "wrap": false
+        },
+        {
+          "height_mode": "content",
+          "key": "progress",
+          "min_height_units": 2,
+          "scroll_x": false,
+          "scroll_y": false,
+          "surface_role": "inactive",
+          "text_role": "default",
+          "title": "Progress",
+          "width": "fill",
+          "wrap": true
+        },
+        {
+          "height_mode": "fill",
+          "key": "learning",
+          "scroll_x": false,
+          "scroll_y": true,
+          "surface_role": "active",
+          "text_role": "default",
+          "title": "Learning",
+          "width": "fill",
+          "wrap": true
+        }
+      ],
+      "title": "Gather"
+    },
+    {
+      "key": "itemize",
+      "panes": [
+        {
+          "height_mode": "content",
+          "key": "actions",
+          "min_height_units": 4,
+          "scroll_x": false,
+          "scroll_y": false,
+          "surface_role": "active",
+          "text_role": "default",
+          "title": "Actions",
+          "width": "fill",
+          "wrap": false
+        },
+        {
+          "height_mode": "content",
+          "key": "progress",
+          "min_height_units": 2,
+          "scroll_x": false,
+          "scroll_y": false,
+          "surface_role": "inactive",
+          "text_role": "default",
+          "title": "Progress",
+          "width": "fill",
+          "wrap": true
+        },
+        {
+          "height_mode": "fill",
+          "key": "learning",
+          "scroll_x": false,
+          "scroll_y": true,
+          "surface_role": "active",
+          "text_role": "default",
+          "title": "Learning",
+          "width": "fill",
+          "wrap": true
+        }
+      ],
+      "title": "Itemize"
+    },
+    {
+      "key": "draft",
+      "panes": [
+        {
+          "height_mode": "content",
+          "key": "actions",
+          "min_height_units": 4,
+          "scroll_x": false,
+          "scroll_y": false,
+          "surface_role": "active",
+          "text_role": "default",
+          "title": "Actions",
+          "width": "fill",
+          "wrap": false
+        },
+        {
+          "height_mode": "content",
+          "key": "progress",
+          "min_height_units": 2,
+          "scroll_x": false,
+          "scroll_y": false,
+          "surface_role": "inactive",
+          "text_role": "default",
+          "title": "Progress",
+          "width": "fill",
+          "wrap": true
+        },
+        {
+          "height_mode": "fill",
+          "key": "learning",
+          "scroll_x": false,
+          "scroll_y": true,
+          "surface_role": "active",
+          "text_role": "default",
+          "title": "Learning",
+          "width": "fill",
+          "wrap": true
+        }
+      ],
+      "title": "Draft"
+    },
+    {
+      "key": "review",
+      "panes": [
+        {
+          "height_mode": "content",
+          "key": "actions",
+          "min_height_units": 4,
+          "scroll_x": false,
+          "scroll_y": false,
+          "surface_role": "active",
+          "text_role": "default",
+          "title": "Actions",
+          "width": "fill",
+          "wrap": false
+        },
+        {
+          "height_mode": "content",
+          "key": "progress",
+          "min_height_units": 2,
+          "scroll_x": false,
+          "scroll_y": false,
+          "surface_role": "inactive",
+          "text_role": "default",
+          "title": "Progress",
+          "width": "fill",
+          "wrap": true
+        },
+        {
+          "height_mode": "fill",
+          "key": "learning",
+          "scroll_x": false,
+          "scroll_y": true,
+          "surface_role": "active",
+          "text_role": "default",
+          "title": "Learning",
+          "width": "fill",
+          "wrap": true
+        }
+      ],
+      "title": "Review"
+    },
+    {
+      "key": "publication",
+      "panes": [
+        {
+          "height_mode": "content",
+          "key": "actions",
+          "min_height_units": 4,
+          "scroll_x": false,
+          "scroll_y": false,
+          "surface_role": "active",
+          "text_role": "default",
+          "title": "Actions",
+          "width": "fill",
+          "wrap": false
+        },
+        {
+          "height_mode": "content",
+          "key": "progress",
+          "min_height_units": 2,
+          "scroll_x": false,
+          "scroll_y": false,
+          "surface_role": "inactive",
+          "text_role": "default",
+          "title": "Progress",
+          "width": "fill",
+          "wrap": true
+        },
+        {
+          "height_mode": "fill",
+          "key": "learning",
+          "scroll_x": false,
+          "scroll_y": true,
+          "surface_role": "active",
+          "text_role": "default",
+          "title": "Learning",
+          "width": "fill",
+          "wrap": true
+        }
+      ],
+      "title": "Publication"
+    },
+    {
+      "key": "permissions",
+      "panes": [
+        {
+          "height_mode": "fill",
+          "key": "permissions",
+          "scroll_x": false,
+          "scroll_y": true,
+          "surface_role": "active",
+          "text_role": "default",
+          "title": "Permissions",
+          "width": "fill",
+          "wrap": true
+        }
+      ],
+      "title": "Permissions"
+    },
+    {
+      "key": "activity",
+      "panes": [
+        {
+          "height_mode": "fill",
+          "key": "activity_feed",
+          "scroll_x": false,
+          "scroll_y": true,
+          "surface_role": "active",
+          "text_role": "default",
+          "title": "Activity",
+          "width": "fill",
+          "wrap": true
+        }
+      ],
+      "title": "Activity"
+    },
+    {
+      "key": "skills",
+      "panes": [
+        {
+          "height_mode": "fill",
+          "key": "skills",
+          "scroll_x": false,
+          "scroll_y": true,
+          "surface_role": "active",
+          "text_role": "default",
+          "title": "Skills",
+          "width": "fill",
+          "wrap": true
+        }
+      ],
+      "title": "Skills"
+    }
+  ]
+}

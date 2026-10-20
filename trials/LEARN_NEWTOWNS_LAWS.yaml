@@ -1,0 +1,3351 @@
+Newton's Laws of Motion:
+  Description:
+  - The markdown document states the overall topic directly in its introduction.
+  - 'Knowledge artifact for: What is Second Law: Law of Acceleration?'
+  In:
+  - 'What is Second Law: Law of Acceleration?'
+  Out:
+  - The acceleration of an object is directly proportional to the net force acting
+    on it and inversely proportional to its mass. F = m a A larger force produces
+    a greater acceleration, while a larger mass results in a smaller acceleration
+    for the same force.
+  Metadata:
+    artifact_id: artifact_knowledge-newton-s-laws-of-motion_16affb
+    artifact_type: knowledge
+    representation: yaml
+    function_bit: 0
+    boundary_shape:
+    - d*
+    scope: reuse when the user asks about Newton's Laws of Motion from Newton's Laws
+      of Motion under ordinary stable reading
+    reusability: broad_reuse
+    admissibility: admitted
+    learning_relation: new_family
+    created_at: '2026-03-25T11:05:50+00:00'
+    provenance:
+    - not_learn-from-markdown-learn-newtowns-laws-md_52c9aa
+    - /Users/ravindranathakila/service/realized/LEARN_NEWTOWNS_LAWS.md
+    justification: The markdown document states the overall topic directly in its
+      introduction.
+    question: 'What is Second Law: Law of Acceleration?'
+    answer: The acceleration of an object is directly proportional to the net force
+      acting on it and inversely proportional to its mass. F = m a A larger force
+      produces a greater acceleration, while a larger mass results in a smaller acceleration
+      for the same force.
+    structured_learning:
+      encountered_not: Newton S Laws Of Motion
+      goal: 'What is Second Law: Law of Acceleration?'
+      intended_object: 'Newton''s Laws of Motion What is Second Law: Law of Acceleration?
+        Second Law: Law of Acceleration Newton''s Laws of Motion Second Law: Law of
+        Acceleration Newton''s Laws of Motion Second Law The acceleration of an object
+        is directly proportional to the net force acting on it and inversely proportional
+        to its mass. F = m * a A larger force produces a greater acceleration, while
+        a larger mass results in a smaller acceleration for the same force. The acceleration
+        of an object is directly proportional to the net force acting on it and inversely
+        proportional to its mass. F = m a A larger force produces a greater acceleration,
+        while a larger mass results in a smaller acceleration for the same force.'
+      success_criteria:
+      - all required inputs are explicit and the bounded computation or template is
+        applied faithfully
+      - the result is returned in the requested usable form
+      actual_realization: 'the prompt surface is present; explicit givens are present:
+        Newton''s Laws of Motion What is Second Law: Law of Acceleration, Second Law:
+        Law of Acceleration Newton''s Laws of Motion Second Law: Law of Acceleration
+        Newton''s Laws of Motion Second Law The acceleration of an object is directly
+        proportional to the net force acting on it and inversely proportional to its
+        mass, F = m * a A larger force produces a greater acceleration; no justified
+        final closure has been admitted yet'
+      givens:
+      - 'Newton''s Laws of Motion What is Second Law: Law of Acceleration'
+      - 'Second Law: Law of Acceleration Newton''s Laws of Motion Second Law: Law
+        of Acceleration Newton''s Laws of Motion Second Law The acceleration of an
+        object is directly proportional to the net force acting on it and inversely
+        proportional to its mass'
+      - F = m * a A larger force produces a greater acceleration
+      - F = m a A larger force produces a greater acceleration
+      unknowns: []
+      missing_components:
+      - a justified final realization has not yet been produced
+      distorted_components: []
+      differentiators:
+      - 'named inputs supplied: law, f'
+      contrastive_cases: []
+      risk_of_wrong_closure: []
+      disallowed_assumptions: []
+      misalignment_types:
+      - functional
+      - completion
+      origin_layers:
+      - model
+      degree: partial
+      remainder_shapes:
+      - missing
+      why_it_matters:
+      - without reducing the remainder, the item cannot be closed with governed confidence
+      minimal_repair:
+      - perform the bounded computation or invoke the matching executable template
+      full_repair:
+      - perform the bounded computation or invoke the matching executable template
+      - 'satisfy success condition: all required inputs are explicit and the bounded
+        computation or template is applied faithfully'
+      - 'satisfy success condition: the result is returned in the requested usable
+        form'
+      boundary_shape:
+      - d*
+      action_posture: direct_resolution
+      component_nots: []
+      composed_not: Newton S Law Motion Second Law Law Acceleration Second Law Law
+        Acceleration Newton S Law Motion Second Law Law Acceleration Newton S Law
+        Motion Second Law Acceleration Object Directly Proportional Net Force Act
+        Inversely Proportional Its Mass F M Larger Force Produce Greater Acceleration
+        While Larger Mass Result Smaller Acceleration Same Force Acceleration Object
+        Directly Proportional Net Force Act Inversely Proportional Its Mass F M Larger
+        Force Produce Greater Acceleration While Larger Mass Result Smaller Acceleration
+        Same Force
+      lookup_keys:
+      - second law law acceleration
+      - second law
+      - law law
+      - law acceleration
+      - second law law
+      - law law acceleration
+      - perform bound computation or invoke match executable template
+      - perform bound
+      - bound computation
+      - computation or
+      - or invoke
+      - invoke match
+      - match executable
+      - executable template
+      - perform bound computation
+      - bound computation or
+      - computation or invoke
+      - or invoke match
+      - invoke match executable
+      - match executable template
+      - without reduc remainder item cannot clos with govern confidence
+      - without reduc remainder item cannot clo
+      - govern confidence
+      - without reduc
+      notation_yaml: |-
+        "What Is Second Law Law Of Acceleration":
+          Description:
+            - "Structured learning declaration for the active non-achievedness."
+            - "Encountered non-achievedness: Newton S Laws Of Motion"
+            - "Components: none"
+            - "Composition: Newton S Law Motion Second Law Law Acceleration Second Law Law Acceleration Newton S Law Motion Second Law Law Acceleration Newton S Law Motion Second Law Acceleration Object Directly Proportional Net Force Act Inversely Proportional Its Mass F M Larger Force Produce Greater Acceleration While Larger Mass Result Smaller Acceleration Same Force Acceleration Object Directly Proportional Net Force Act Inversely Proportional Its Mass F M Larger Force Produce Greater Acceleration While Larger Mass Result Smaller Acceleration Same Force"
+            - "Intended object: Newton's Laws of Motion What is Second Law: Law of Acceleration? Second Law: Law of Acceleration Newton's Laws of Motion Second Law: Law of Acceleration Newton's Laws of Motion Second Law The acceleration of an object is directly proportional to the net force acting on it and inversely proportional to its mass. F = m * a A larger force produces a greater acceleration, while a larger mass results in a smaller acceleration for the same force. The acceleration of an object is directly proportional to the net force acting on it and inversely proportional to its mass. F = m a A larger force produces a greater acceleration, while a larger mass results in a smaller acceleration for the same force."
+            - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+            - "Actual realization: the prompt surface is present; explicit givens are present: Newton's Laws of Motion What is Second Law: Law of Acceleration, Second Law: Law of Acceleration Newton's Laws of Motion Second Law: Law of Acceleration Newton's Laws of Motion Second Law The acceleration of an object is directly proportional to the net force acting on it and inversely proportional to its mass, F = m * a A larger force produces a greater acceleration; no justified final closure has been admitted yet"
+            - "Givens: Newton's Laws of Motion What is Second Law: Law of Acceleration, Second Law: Law of Acceleration Newton's Laws of Motion Second Law: Law of Acceleration Newton's Laws of Motion Second Law The acceleration of an object is directly proportional to the net force acting on it and inversely proportional to its mass, F = m * a A larger force produces a greater acceleration, F = m a A larger force produces a greater acceleration"
+            - "Missing components: a justified final realization has not yet been produced"
+            - "Differentiators: named inputs supplied: law, f"
+            - "Misalignment types: functional, completion"
+            - "Origin layers: model"
+            - "Degree: partial"
+            - "Remainder shapes: missing"
+            - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+            - "Minimal repair: perform the bounded computation or invoke the matching executable template"
+            - "Full repair: perform the bounded computation or invoke the matching executable template, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+            - "Action posture: direct_resolution"
+          In:
+            - "Prompt Surface String"
+            - "Encountered Non Achievedness String"
+            - "Lookup Keys Strings"
+            - "[ Component Non Achievedness ]"
+            - "Composed Non Achievedness"
+          Out:
+            - "Prior Encounter"
+            - "[ Reusable Artifact ]"
+            - "[ Reused Non Achievedness ]"
+            - "[ Composed Reuse ]"
+    content:
+      source_path: /Users/ravindranathakila/service/realized/LEARN_NEWTOWNS_LAWS.md
+      source_document: LEARN_NEWTOWNS_LAWS.md
+      source_kind: markdown
+      source_title: Newton's Laws of Motion
+      equation_bearing: false
+      parameterized: false
+      node_id: not_learn-from-markdown-learn-newtowns-laws-md_52c9aa
+      aliases:
+      - 'Second Law: Law of Acceleration'
+      - Newton's Laws of Motion
+      - 'Newton''s Laws of Motion Second Law: Law of Acceleration'
+      - Newton's Laws of Motion Second Law
+      structured_learning:
+        encountered_not: Newton S Laws Of Motion
+        lookup_keys:
+        - second law law acceleration
+        - second law
+        - law law
+        - law acceleration
+        - second law law
+        - law law acceleration
+        - perform bound computation or invoke match executable template
+        - perform bound
+        - bound computation
+        - computation or
+        - or invoke
+        - invoke match
+        - match executable
+        - executable template
+        - perform bound computation
+        - bound computation or
+        - computation or invoke
+        - or invoke match
+        - invoke match executable
+        - match executable template
+        - without reduc remainder item cannot clos with govern confidence
+        - without reduc remainder item cannot clo
+        - govern confidence
+        - without reduc
+        component_nots: []
+        composed_not: Newton S Law Motion Second Law Law Acceleration Second Law Law
+          Acceleration Newton S Law Motion Second Law Law Acceleration Newton S Law
+          Motion Second Law Acceleration Object Directly Proportional Net Force Act
+          Inversely Proportional Its Mass F M Larger Force Produce Greater Acceleration
+          While Larger Mass Result Smaller Acceleration Same Force Acceleration Object
+          Directly Proportional Net Force Act Inversely Proportional Its Mass F M
+          Larger Force Produce Greater Acceleration While Larger Mass Result Smaller
+          Acceleration Same Force
+        goal: 'What is Second Law: Law of Acceleration?'
+        intended_object: 'Newton''s Laws of Motion What is Second Law: Law of Acceleration?
+          Second Law: Law of Acceleration Newton''s Laws of Motion Second Law: Law
+          of Acceleration Newton''s Laws of Motion Second Law The acceleration of
+          an object is directly proportional to the net force acting on it and inversely
+          proportional to its mass. F = m * a A larger force produces a greater acceleration,
+          while a larger mass results in a smaller acceleration for the same force.
+          The acceleration of an object is directly proportional to the net force
+          acting on it and inversely proportional to its mass. F = m a A larger force
+          produces a greater acceleration, while a larger mass results in a smaller
+          acceleration for the same force.'
+        success_criteria:
+        - all required inputs are explicit and the bounded computation or template
+          is applied faithfully
+        - the result is returned in the requested usable form
+        actual_realization: 'the prompt surface is present; explicit givens are present:
+          Newton''s Laws of Motion What is Second Law: Law of Acceleration, Second
+          Law: Law of Acceleration Newton''s Laws of Motion Second Law: Law of Acceleration
+          Newton''s Laws of Motion Second Law The acceleration of an object is directly
+          proportional to the net force acting on it and inversely proportional to
+          its mass, F = m * a A larger force produces a greater acceleration; no justified
+          final closure has been admitted yet'
+        givens:
+        - 'Newton''s Laws of Motion What is Second Law: Law of Acceleration'
+        - 'Second Law: Law of Acceleration Newton''s Laws of Motion Second Law: Law
+          of Acceleration Newton''s Laws of Motion Second Law The acceleration of
+          an object is directly proportional to the net force acting on it and inversely
+          proportional to its mass'
+        - F = m * a A larger force produces a greater acceleration
+        - F = m a A larger force produces a greater acceleration
+        missing_components:
+        - a justified final realization has not yet been produced
+        differentiators:
+        - 'named inputs supplied: law, f'
+        misalignment_types:
+        - functional
+        - completion
+        origin_layers:
+        - model
+        degree: partial
+        remainder_shapes:
+        - missing
+        why_it_matters:
+        - without reducing the remainder, the item cannot be closed with governed
+          confidence
+        minimal_repair:
+        - perform the bounded computation or invoke the matching executable template
+        full_repair:
+        - perform the bounded computation or invoke the matching executable template
+        - 'satisfy success condition: all required inputs are explicit and the bounded
+          computation or template is applied faithfully'
+        - 'satisfy success condition: the result is returned in the requested usable
+          form'
+        boundary_shape:
+        - d*
+        action_posture: direct_resolution
+        notation_yaml: |-
+          "What Is Second Law Law Of Acceleration":
+            Description:
+              - "Structured learning declaration for the active non-achievedness."
+              - "Encountered non-achievedness: Newton S Laws Of Motion"
+              - "Components: none"
+              - "Composition: Newton S Law Motion Second Law Law Acceleration Second Law Law Acceleration Newton S Law Motion Second Law Law Acceleration Newton S Law Motion Second Law Acceleration Object Directly Proportional Net Force Act Inversely Proportional Its Mass F M Larger Force Produce Greater Acceleration While Larger Mass Result Smaller Acceleration Same Force Acceleration Object Directly Proportional Net Force Act Inversely Proportional Its Mass F M Larger Force Produce Greater Acceleration While Larger Mass Result Smaller Acceleration Same Force"
+              - "Intended object: Newton's Laws of Motion What is Second Law: Law of Acceleration? Second Law: Law of Acceleration Newton's Laws of Motion Second Law: Law of Acceleration Newton's Laws of Motion Second Law The acceleration of an object is directly proportional to the net force acting on it and inversely proportional to its mass. F = m * a A larger force produces a greater acceleration, while a larger mass results in a smaller acceleration for the same force. The acceleration of an object is directly proportional to the net force acting on it and inversely proportional to its mass. F = m a A larger force produces a greater acceleration, while a larger mass results in a smaller acceleration for the same force."
+              - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+              - "Actual realization: the prompt surface is present; explicit givens are present: Newton's Laws of Motion What is Second Law: Law of Acceleration, Second Law: Law of Acceleration Newton's Laws of Motion Second Law: Law of Acceleration Newton's Laws of Motion Second Law The acceleration of an object is directly proportional to the net force acting on it and inversely proportional to its mass, F = m * a A larger force produces a greater acceleration; no justified final closure has been admitted yet"
+              - "Givens: Newton's Laws of Motion What is Second Law: Law of Acceleration, Second Law: Law of Acceleration Newton's Laws of Motion Second Law: Law of Acceleration Newton's Laws of Motion Second Law The acceleration of an object is directly proportional to the net force acting on it and inversely proportional to its mass, F = m * a A larger force produces a greater acceleration, F = m a A larger force produces a greater acceleration"
+              - "Missing components: a justified final realization has not yet been produced"
+              - "Differentiators: named inputs supplied: law, f"
+              - "Misalignment types: functional, completion"
+              - "Origin layers: model"
+              - "Degree: partial"
+              - "Remainder shapes: missing"
+              - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+              - "Minimal repair: perform the bounded computation or invoke the matching executable template"
+              - "Full repair: perform the bounded computation or invoke the matching executable template, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+              - "Action posture: direct_resolution"
+            In:
+              - "Prompt Surface String"
+              - "Encountered Non Achievedness String"
+              - "Lookup Keys Strings"
+              - "[ Component Non Achievedness ]"
+              - "Composed Non Achievedness"
+            Out:
+              - "Prior Encounter"
+              - "[ Reusable Artifact ]"
+              - "[ Reused Non Achievedness ]"
+              - "[ Composed Reuse ]"
+---
+'First Law: Law of Inertia':
+  Description:
+  - The markdown document contains a bounded section that directly states this knowledge
+    unit.
+  - 'Knowledge artifact for: What is First Law: Law of Inertia?'
+  In:
+  - Newton S Laws Of Motion
+  Out:
+  - "An object remains at rest or in uniform motion in a straight line unless acted\
+    \ upon by an external force. F = 0 \u21D2 v = constant If no net force acts on\
+    \ an object, its velocity does not change. This means it will either stay at rest\
+    \ or continue moving at a constant velocity."
+  Metadata:
+    artifact_id: artifact_knowledge-first-law-law-of-inertia_92a104
+    artifact_type: knowledge
+    representation: yaml
+    function_bit: 0
+    boundary_shape:
+    - d*
+    scope: 'reuse when the user asks about First Law: Law of Inertia from Newton''s
+      Laws of Motion under ordinary stable reading'
+    reusability: broad_reuse
+    admissibility: admitted
+    learning_relation: instance_of_existing
+    created_at: '2026-03-25T11:05:51+00:00'
+    provenance:
+    - not_learn-from-markdown-learn-newtowns-laws-md_52c9aa
+    - /Users/ravindranathakila/service/realized/LEARN_NEWTOWNS_LAWS.md
+    related_artifact_ids:
+    - artifact_knowledge-newton-s-laws-of-motion_16affb
+    justification: The markdown document contains a bounded section that directly
+      states this knowledge unit.
+    question: 'What is First Law: Law of Inertia?'
+    answer: "An object remains at rest or in uniform motion in a straight line unless\
+      \ acted upon by an external force. F = 0 \u21D2 v = constant If no net force\
+      \ acts on an object, its velocity does not change. This means it will either\
+      \ stay at rest or continue moving at a constant velocity."
+    structured_learning:
+      encountered_not: First Law Law Of Inertia
+      goal: 'What is First Law: Law of Inertia?'
+      intended_object: "Newton's Laws of Motion What is First Law: Law of Inertia?\
+        \ First Law: Law of Inertia Equation Explanation Newton's Laws of Motion First\
+        \ Law: Law of Inertia Newton's Laws of Motion First Law An object remains\
+        \ at rest or in uniform motion in a straight line unless acted upon by an\
+        \ external force. F = 0 \u21D2 v = constant If no net force acts on an object,\
+        \ its velocity does not change. This means it will either stay at rest or\
+        \ continue moving at a constant velocity. An object remains at rest or in\
+        \ uniform motion in a straight line unless acted upon by an external force.\
+        \ F = 0 \u21D2 v = constant If no net force acts on an object, its velocity\
+        \ does not change. This means it will either stay at rest or continue moving\
+        \ at a constant velocity."
+      success_criteria:
+      - the decisive unresolved alternative is explicitly resolved before closure
+      - the next step or answer is conditioned only on confirmed facts
+      - all required inputs are explicit and the bounded computation or template is
+        applied faithfully
+      - the result is returned in the requested usable form
+      actual_realization: "the prompt surface is present; explicit givens are present:\
+        \ Newton's Laws of Motion What is First Law: Law of Inertia, First Law: Law\
+        \ of Inertia Equation Explanation Newton's Laws of Motion First Law: Law of\
+        \ Inertia Newton's Laws of Motion First Law An object remains at rest or in\
+        \ uniform motion in a straight line unless acted upon by an external force,\
+        \ F = 0 \u21D2 v = constant If no net force acts on an object; unresolved\
+        \ points remain: one or more decisive facts remain unconfirmed; no justified\
+        \ final closure has been admitted yet"
+      givens:
+      - 'Newton''s Laws of Motion What is First Law: Law of Inertia'
+      - 'First Law: Law of Inertia Equation Explanation Newton''s Laws of Motion First
+        Law: Law of Inertia Newton''s Laws of Motion First Law An object remains at
+        rest or in uniform motion in a straight line unless acted upon by an external
+        force'
+      - "F = 0 \u21D2 v = constant If no net force acts on an object"
+      unknowns:
+      - one or more decisive facts remain unconfirmed
+      missing_components:
+      - one or more decisive facts remain unconfirmed
+      distorted_components:
+      - confirmed and unconfirmed cases must not be collapsed together
+      differentiators:
+      - different explicit alternatives may lead to different next actions
+      - First Law An object remains at rest or in uniform motion in a straight line
+      - This means it will either stay at rest or continue moving at a constant velocity
+      - explicit absence is stated and should not be collapsed into presence
+      - 'named inputs supplied: law, f, v'
+      contrastive_cases:
+      - confirmed case versus unresolved case
+      - relevant item present versus explicitly absent
+      - condition holds versus condition does not hold
+      risk_of_wrong_closure:
+      - acting on the wrong alternative could produce the wrong result
+      disallowed_assumptions:
+      - do not treat an unresolved alternative as confirmed
+      - do not infer the presence of an item when the prompt states absence
+      misalignment_types:
+      - specification
+      - epistemic
+      - fidelity
+      - functional
+      - completion
+      origin_layers:
+      - prompt
+      - knowledge
+      - model
+      degree: dominant
+      remainder_shapes:
+      - underdetermined
+      - blocked
+      - missing
+      why_it_matters:
+      - different unresolved alternatives could require materially different actions
+        or answers
+      minimal_repair:
+      - confirm the decisive unresolved fact before acting or closing
+      - perform the bounded computation or invoke the matching executable template
+      full_repair:
+      - confirm the decisive unresolved fact before acting or closing
+      - perform the bounded computation or invoke the matching executable template
+      - 'satisfy success condition: the decisive unresolved alternative is explicitly
+        resolved before closure'
+      - 'satisfy success condition: the next step or answer is conditioned only on
+        confirmed facts'
+      - 'satisfy success condition: all required inputs are explicit and the bounded
+        computation or template is applied faithfully'
+      - 'satisfy success condition: the result is returned in the requested usable
+        form'
+      boundary_shape:
+      - d*
+      action_posture: direct_resolution
+      component_nots:
+      - Newton S Laws Of Motion
+      composed_not: Newton S Laws Of Motion
+      lookup_keys:
+      - first law law inertia
+      - first law
+      - law law
+      - law inertia
+      - first law law
+      - law law inertia
+      - confirm decisive unresolv fact before act or clos
+      - confirm decisive
+      - decisive unresolv
+      - unresolv fact
+      - fact before
+      - before act
+      - act or
+      - or clos
+      - confirm decisive unresolv
+      - decisive unresolv fact
+      - unresolv fact before
+      - fact before act
+      - before act or
+      - act or clos
+      - perform bound computation or invoke match executable template
+      - perform bound
+      - bound computation
+      - computation or
+      notation_yaml: |-
+        "What Is First Law Law Of Inertia":
+          Description:
+            - "Structured learning declaration for the active non-achievedness."
+            - "Encountered non-achievedness: First Law Law Of Inertia"
+            - "Components: Newton S Laws Of Motion"
+            - "Composition: Newton S Laws Of Motion"
+            - "Intended object: Newton's Laws of Motion What is First Law: Law of Inertia? First Law: Law of Inertia Equation Explanation Newton's Laws of Motion First Law: Law of Inertia Newton's Laws of Motion First Law An object remains at rest or in uniform motion in a straight line unless acted upon by an external force. F = 0 \u21d2 v = constant If no net force acts on an object, its velocity does not change. This means it will either stay at rest or continue moving at a constant velocity. An object remains at rest or in uniform motion in a straight line unless acted upon by an external force. F = 0 \u21d2 v = constant If no net force acts on an object, its velocity does not change. This means it will either stay at rest or continue moving at a constant velocity."
+            - "Success criteria: the decisive unresolved alternative is explicitly resolved before closure, the next step or answer is conditioned only on confirmed facts, all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+            - "Actual realization: the prompt surface is present; explicit givens are present: Newton's Laws of Motion What is First Law: Law of Inertia, First Law: Law of Inertia Equation Explanation Newton's Laws of Motion First Law: Law of Inertia Newton's Laws of Motion First Law An object remains at rest or in uniform motion in a straight line unless acted upon by an external force, F = 0 \u21d2 v = constant If no net force acts on an object; unresolved points remain: one or more decisive facts remain unconfirmed; no justified final closure has been admitted yet"
+            - "Givens: Newton's Laws of Motion What is First Law: Law of Inertia, First Law: Law of Inertia Equation Explanation Newton's Laws of Motion First Law: Law of Inertia Newton's Laws of Motion First Law An object remains at rest or in uniform motion in a straight line unless acted upon by an external force, F = 0 \u21d2 v = constant If no net force acts on an object"
+            - "Unknowns: one or more decisive facts remain unconfirmed"
+            - "Missing components: one or more decisive facts remain unconfirmed"
+            - "Distorted components: confirmed and unconfirmed cases must not be collapsed together"
+            - "Differentiators: different explicit alternatives may lead to different next actions, First Law An object remains at rest or in uniform motion in a straight line, This means it will either stay at rest or continue moving at a constant velocity, explicit absence is stated and should not be collapsed into presence, named inputs supplied: law, f, v"
+            - "Contrastive cases: confirmed case versus unresolved case, relevant item present versus explicitly absent, condition holds versus condition does not hold"
+            - "Risk of wrong closure: acting on the wrong alternative could produce the wrong result"
+            - "Disallowed assumptions: do not treat an unresolved alternative as confirmed, do not infer the presence of an item when the prompt states absence"
+            - "Misalignment types: specification, epistemic, fidelity, functional, completion"
+            - "Origin layers: prompt, knowledge, model"
+            - "Degree: dominant"
+            - "Remainder shapes: underdetermined, blocked, missing"
+            - "Why it matters: different unresolved alternatives could require materially different actions or answers"
+            - "Minimal repair: confirm the decisive unresolved fact before acting or closing, perform the bounded computation or invoke the matching executable template"
+            - "Full repair: confirm the decisive unresolved fact before acting or closing, perform the bounded computation or invoke the matching executable template, satisfy success condition: the decisive unresolved alternative is explicitly resolved before closure, satisfy success condition: the next step or answer is conditioned only on confirmed facts, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+            - "Action posture: direct_resolution"
+          In:
+            - "Prompt Surface String"
+            - "Encountered Non Achievedness String"
+            - "Lookup Keys Strings"
+            - "[ Component Non Achievedness ]"
+            - "Composed Non Achievedness"
+          Out:
+            - "Prior Encounter"
+            - "[ Reusable Artifact ]"
+            - "[ Reused Non Achievedness ]"
+            - "[ Composed Reuse ]"
+    content:
+      source_path: /Users/ravindranathakila/service/realized/LEARN_NEWTOWNS_LAWS.md
+      source_document: LEARN_NEWTOWNS_LAWS.md
+      source_kind: markdown
+      source_title: Newton's Laws of Motion
+      source_sections:
+      - 'First Law: Law of Inertia'
+      - Equation
+      - Explanation
+      equation_bearing: false
+      parameterized: false
+      node_id: not_learn-from-markdown-learn-newtowns-laws-md_52c9aa
+      aliases:
+      - Equation
+      - Explanation
+      - 'First Law: Law of Inertia'
+      - Newton's Laws of Motion
+      - 'Newton''s Laws of Motion First Law: Law of Inertia'
+      - Newton's Laws of Motion First Law
+      structured_learning:
+        encountered_not: First Law Law Of Inertia
+        lookup_keys:
+        - first law law inertia
+        - first law
+        - law law
+        - law inertia
+        - first law law
+        - law law inertia
+        - confirm decisive unresolv fact before act or clos
+        - confirm decisive
+        - decisive unresolv
+        - unresolv fact
+        - fact before
+        - before act
+        - act or
+        - or clos
+        - confirm decisive unresolv
+        - decisive unresolv fact
+        - unresolv fact before
+        - fact before act
+        - before act or
+        - act or clos
+        - perform bound computation or invoke match executable template
+        - perform bound
+        - bound computation
+        - computation or
+        component_nots:
+        - Newton S Laws Of Motion
+        composed_not: Newton S Laws Of Motion
+        goal: 'What is First Law: Law of Inertia?'
+        intended_object: "Newton's Laws of Motion What is First Law: Law of Inertia?\
+          \ First Law: Law of Inertia Equation Explanation Newton's Laws of Motion\
+          \ First Law: Law of Inertia Newton's Laws of Motion First Law An object\
+          \ remains at rest or in uniform motion in a straight line unless acted upon\
+          \ by an external force. F = 0 \u21D2 v = constant If no net force acts on\
+          \ an object, its velocity does not change. This means it will either stay\
+          \ at rest or continue moving at a constant velocity. An object remains at\
+          \ rest or in uniform motion in a straight line unless acted upon by an external\
+          \ force. F = 0 \u21D2 v = constant If no net force acts on an object, its\
+          \ velocity does not change. This means it will either stay at rest or continue\
+          \ moving at a constant velocity."
+        success_criteria:
+        - the decisive unresolved alternative is explicitly resolved before closure
+        - the next step or answer is conditioned only on confirmed facts
+        - all required inputs are explicit and the bounded computation or template
+          is applied faithfully
+        - the result is returned in the requested usable form
+        actual_realization: "the prompt surface is present; explicit givens are present:\
+          \ Newton's Laws of Motion What is First Law: Law of Inertia, First Law:\
+          \ Law of Inertia Equation Explanation Newton's Laws of Motion First Law:\
+          \ Law of Inertia Newton's Laws of Motion First Law An object remains at\
+          \ rest or in uniform motion in a straight line unless acted upon by an external\
+          \ force, F = 0 \u21D2 v = constant If no net force acts on an object; unresolved\
+          \ points remain: one or more decisive facts remain unconfirmed; no justified\
+          \ final closure has been admitted yet"
+        givens:
+        - 'Newton''s Laws of Motion What is First Law: Law of Inertia'
+        - 'First Law: Law of Inertia Equation Explanation Newton''s Laws of Motion
+          First Law: Law of Inertia Newton''s Laws of Motion First Law An object remains
+          at rest or in uniform motion in a straight line unless acted upon by an
+          external force'
+        - "F = 0 \u21D2 v = constant If no net force acts on an object"
+        unknowns:
+        - one or more decisive facts remain unconfirmed
+        missing_components:
+        - one or more decisive facts remain unconfirmed
+        distorted_components:
+        - confirmed and unconfirmed cases must not be collapsed together
+        differentiators:
+        - different explicit alternatives may lead to different next actions
+        - First Law An object remains at rest or in uniform motion in a straight line
+        - This means it will either stay at rest or continue moving at a constant
+          velocity
+        - explicit absence is stated and should not be collapsed into presence
+        - 'named inputs supplied: law, f, v'
+        contrastive_cases:
+        - confirmed case versus unresolved case
+        - relevant item present versus explicitly absent
+        - condition holds versus condition does not hold
+        risk_of_wrong_closure:
+        - acting on the wrong alternative could produce the wrong result
+        disallowed_assumptions:
+        - do not treat an unresolved alternative as confirmed
+        - do not infer the presence of an item when the prompt states absence
+        misalignment_types:
+        - specification
+        - epistemic
+        - fidelity
+        - functional
+        - completion
+        origin_layers:
+        - prompt
+        - knowledge
+        - model
+        degree: dominant
+        remainder_shapes:
+        - underdetermined
+        - blocked
+        - missing
+        why_it_matters:
+        - different unresolved alternatives could require materially different actions
+          or answers
+        minimal_repair:
+        - confirm the decisive unresolved fact before acting or closing
+        - perform the bounded computation or invoke the matching executable template
+        full_repair:
+        - confirm the decisive unresolved fact before acting or closing
+        - perform the bounded computation or invoke the matching executable template
+        - 'satisfy success condition: the decisive unresolved alternative is explicitly
+          resolved before closure'
+        - 'satisfy success condition: the next step or answer is conditioned only
+          on confirmed facts'
+        - 'satisfy success condition: all required inputs are explicit and the bounded
+          computation or template is applied faithfully'
+        - 'satisfy success condition: the result is returned in the requested usable
+          form'
+        boundary_shape:
+        - d*
+        action_posture: direct_resolution
+        notation_yaml: |-
+          "What Is First Law Law Of Inertia":
+            Description:
+              - "Structured learning declaration for the active non-achievedness."
+              - "Encountered non-achievedness: First Law Law Of Inertia"
+              - "Components: Newton S Laws Of Motion"
+              - "Composition: Newton S Laws Of Motion"
+              - "Intended object: Newton's Laws of Motion What is First Law: Law of Inertia? First Law: Law of Inertia Equation Explanation Newton's Laws of Motion First Law: Law of Inertia Newton's Laws of Motion First Law An object remains at rest or in uniform motion in a straight line unless acted upon by an external force. F = 0 \u21d2 v = constant If no net force acts on an object, its velocity does not change. This means it will either stay at rest or continue moving at a constant velocity. An object remains at rest or in uniform motion in a straight line unless acted upon by an external force. F = 0 \u21d2 v = constant If no net force acts on an object, its velocity does not change. This means it will either stay at rest or continue moving at a constant velocity."
+              - "Success criteria: the decisive unresolved alternative is explicitly resolved before closure, the next step or answer is conditioned only on confirmed facts, all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+              - "Actual realization: the prompt surface is present; explicit givens are present: Newton's Laws of Motion What is First Law: Law of Inertia, First Law: Law of Inertia Equation Explanation Newton's Laws of Motion First Law: Law of Inertia Newton's Laws of Motion First Law An object remains at rest or in uniform motion in a straight line unless acted upon by an external force, F = 0 \u21d2 v = constant If no net force acts on an object; unresolved points remain: one or more decisive facts remain unconfirmed; no justified final closure has been admitted yet"
+              - "Givens: Newton's Laws of Motion What is First Law: Law of Inertia, First Law: Law of Inertia Equation Explanation Newton's Laws of Motion First Law: Law of Inertia Newton's Laws of Motion First Law An object remains at rest or in uniform motion in a straight line unless acted upon by an external force, F = 0 \u21d2 v = constant If no net force acts on an object"
+              - "Unknowns: one or more decisive facts remain unconfirmed"
+              - "Missing components: one or more decisive facts remain unconfirmed"
+              - "Distorted components: confirmed and unconfirmed cases must not be collapsed together"
+              - "Differentiators: different explicit alternatives may lead to different next actions, First Law An object remains at rest or in uniform motion in a straight line, This means it will either stay at rest or continue moving at a constant velocity, explicit absence is stated and should not be collapsed into presence, named inputs supplied: law, f, v"
+              - "Contrastive cases: confirmed case versus unresolved case, relevant item present versus explicitly absent, condition holds versus condition does not hold"
+              - "Risk of wrong closure: acting on the wrong alternative could produce the wrong result"
+              - "Disallowed assumptions: do not treat an unresolved alternative as confirmed, do not infer the presence of an item when the prompt states absence"
+              - "Misalignment types: specification, epistemic, fidelity, functional, completion"
+              - "Origin layers: prompt, knowledge, model"
+              - "Degree: dominant"
+              - "Remainder shapes: underdetermined, blocked, missing"
+              - "Why it matters: different unresolved alternatives could require materially different actions or answers"
+              - "Minimal repair: confirm the decisive unresolved fact before acting or closing, perform the bounded computation or invoke the matching executable template"
+              - "Full repair: confirm the decisive unresolved fact before acting or closing, perform the bounded computation or invoke the matching executable template, satisfy success condition: the decisive unresolved alternative is explicitly resolved before closure, satisfy success condition: the next step or answer is conditioned only on confirmed facts, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+              - "Action posture: direct_resolution"
+            In:
+              - "Prompt Surface String"
+              - "Encountered Non Achievedness String"
+              - "Lookup Keys Strings"
+              - "[ Component Non Achievedness ]"
+              - "Composed Non Achievedness"
+            Out:
+              - "Prior Encounter"
+              - "[ Reusable Artifact ]"
+              - "[ Reused Non Achievedness ]"
+              - "[ Composed Reuse ]"
+---
+'Second Law: Law of Acceleration':
+  Description:
+  - The markdown document contains a bounded section that directly states this knowledge
+    unit.
+  - 'Knowledge artifact for: What is Second Law: Law of Acceleration?'
+  In:
+  - Newton S Laws Of Motion
+  Out:
+  - The acceleration of an object is directly proportional to the net force acting
+    on it and inversely proportional to its mass. F = m a A larger force produces
+    a greater acceleration, while a larger mass results in a smaller acceleration
+    for the same force.
+  Metadata:
+    artifact_id: artifact_knowledge-second-law-law-of-acceleration_f1cf8e
+    artifact_type: knowledge
+    representation: yaml
+    function_bit: 0
+    boundary_shape:
+    - d*
+    scope: 'reuse when the user asks about Second Law: Law of Acceleration from Newton''s
+      Laws of Motion under ordinary stable reading'
+    reusability: broad_reuse
+    admissibility: admitted
+    learning_relation: instance_of_existing
+    created_at: '2026-03-25T11:05:51+00:00'
+    provenance:
+    - not_learn-from-markdown-learn-newtowns-laws-md_52c9aa
+    - /Users/ravindranathakila/service/realized/LEARN_NEWTOWNS_LAWS.md
+    related_artifact_ids:
+    - artifact_knowledge-newton-s-laws-of-motion_16affb
+    - artifact_knowledge-first-law-law-of-inertia_92a104
+    justification: The markdown document contains a bounded section that directly
+      states this knowledge unit.
+    question: 'What is Second Law: Law of Acceleration?'
+    answer: The acceleration of an object is directly proportional to the net force
+      acting on it and inversely proportional to its mass. F = m a A larger force
+      produces a greater acceleration, while a larger mass results in a smaller acceleration
+      for the same force.
+    structured_learning:
+      encountered_not: Second Law Law Of Acceleration
+      goal: 'What is Second Law: Law of Acceleration?'
+      intended_object: 'Newton''s Laws of Motion What is Second Law: Law of Acceleration?
+        Second Law: Law of Acceleration Equation Explanation Example Newton''s Laws
+        of Motion Second Law: Law of Acceleration Newton''s Laws of Motion Second
+        Law The acceleration of an object is directly proportional to the net force
+        acting on it and inversely proportional to its mass. F = m * a A larger force
+        produces a greater acceleration, while a larger mass results in a smaller
+        acceleration for the same force. The acceleration of an object is directly
+        proportional to the net force acting on it and inversely proportional to its
+        mass. F = m a A larger force produces a greater acceleration, while a larger
+        mass results in a smaller acceleration for the same force.'
+      success_criteria:
+      - all required inputs are explicit and the bounded computation or template is
+        applied faithfully
+      - the result is returned in the requested usable form
+      actual_realization: 'the prompt surface is present; explicit givens are present:
+        Newton''s Laws of Motion What is Second Law: Law of Acceleration, Second Law:
+        Law of Acceleration Equation Explanation Example Newton''s Laws of Motion
+        Second Law: Law of Acceleration Newton''s Laws of Motion Second Law The acceleration
+        of an object is directly proportional to the net force acting on it and inversely
+        proportional to its mass, F = m * a A larger force produces a greater acceleration;
+        no justified final closure has been admitted yet'
+      givens:
+      - 'Newton''s Laws of Motion What is Second Law: Law of Acceleration'
+      - 'Second Law: Law of Acceleration Equation Explanation Example Newton''s Laws
+        of Motion Second Law: Law of Acceleration Newton''s Laws of Motion Second
+        Law The acceleration of an object is directly proportional to the net force
+        acting on it and inversely proportional to its mass'
+      - F = m * a A larger force produces a greater acceleration
+      - F = m a A larger force produces a greater acceleration
+      unknowns: []
+      missing_components:
+      - a justified final realization has not yet been produced
+      distorted_components: []
+      differentiators:
+      - 'named inputs supplied: law, f'
+      contrastive_cases: []
+      risk_of_wrong_closure: []
+      disallowed_assumptions: []
+      misalignment_types:
+      - functional
+      - completion
+      origin_layers:
+      - model
+      degree: partial
+      remainder_shapes:
+      - missing
+      why_it_matters:
+      - without reducing the remainder, the item cannot be closed with governed confidence
+      minimal_repair:
+      - perform the bounded computation or invoke the matching executable template
+      full_repair:
+      - perform the bounded computation or invoke the matching executable template
+      - 'satisfy success condition: all required inputs are explicit and the bounded
+        computation or template is applied faithfully'
+      - 'satisfy success condition: the result is returned in the requested usable
+        form'
+      boundary_shape:
+      - d*
+      action_posture: direct_resolution
+      component_nots:
+      - Newton S Laws Of Motion
+      composed_not: Newton S Laws Of Motion
+      lookup_keys:
+      - second law law acceleration
+      - second law
+      - law law
+      - law acceleration
+      - second law law
+      - law law acceleration
+      - perform bound computation or invoke match executable template
+      - perform bound
+      - bound computation
+      - computation or
+      - or invoke
+      - invoke match
+      - match executable
+      - executable template
+      - perform bound computation
+      - bound computation or
+      - computation or invoke
+      - or invoke match
+      - invoke match executable
+      - match executable template
+      - without reduc remainder item cannot clos with govern confidence
+      - without reduc remainder item cannot clo
+      - govern confidence
+      - without reduc
+      notation_yaml: |-
+        "What Is Second Law Law Of Acceleration":
+          Description:
+            - "Structured learning declaration for the active non-achievedness."
+            - "Encountered non-achievedness: Second Law Law Of Acceleration"
+            - "Components: Newton S Laws Of Motion"
+            - "Composition: Newton S Laws Of Motion"
+            - "Intended object: Newton's Laws of Motion What is Second Law: Law of Acceleration? Second Law: Law of Acceleration Equation Explanation Example Newton's Laws of Motion Second Law: Law of Acceleration Newton's Laws of Motion Second Law The acceleration of an object is directly proportional to the net force acting on it and inversely proportional to its mass. F = m * a A larger force produces a greater acceleration, while a larger mass results in a smaller acceleration for the same force. The acceleration of an object is directly proportional to the net force acting on it and inversely proportional to its mass. F = m a A larger force produces a greater acceleration, while a larger mass results in a smaller acceleration for the same force."
+            - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+            - "Actual realization: the prompt surface is present; explicit givens are present: Newton's Laws of Motion What is Second Law: Law of Acceleration, Second Law: Law of Acceleration Equation Explanation Example Newton's Laws of Motion Second Law: Law of Acceleration Newton's Laws of Motion Second Law The acceleration of an object is directly proportional to the net force acting on it and inversely proportional to its mass, F = m * a A larger force produces a greater acceleration; no justified final closure has been admitted yet"
+            - "Givens: Newton's Laws of Motion What is Second Law: Law of Acceleration, Second Law: Law of Acceleration Equation Explanation Example Newton's Laws of Motion Second Law: Law of Acceleration Newton's Laws of Motion Second Law The acceleration of an object is directly proportional to the net force acting on it and inversely proportional to its mass, F = m * a A larger force produces a greater acceleration, F = m a A larger force produces a greater acceleration"
+            - "Missing components: a justified final realization has not yet been produced"
+            - "Differentiators: named inputs supplied: law, f"
+            - "Misalignment types: functional, completion"
+            - "Origin layers: model"
+            - "Degree: partial"
+            - "Remainder shapes: missing"
+            - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+            - "Minimal repair: perform the bounded computation or invoke the matching executable template"
+            - "Full repair: perform the bounded computation or invoke the matching executable template, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+            - "Action posture: direct_resolution"
+          In:
+            - "Prompt Surface String"
+            - "Encountered Non Achievedness String"
+            - "Lookup Keys Strings"
+            - "[ Component Non Achievedness ]"
+            - "Composed Non Achievedness"
+          Out:
+            - "Prior Encounter"
+            - "[ Reusable Artifact ]"
+            - "[ Reused Non Achievedness ]"
+            - "[ Composed Reuse ]"
+    content:
+      source_path: /Users/ravindranathakila/service/realized/LEARN_NEWTOWNS_LAWS.md
+      source_document: LEARN_NEWTOWNS_LAWS.md
+      source_kind: markdown
+      source_title: Newton's Laws of Motion
+      source_sections:
+      - 'Second Law: Law of Acceleration'
+      - Equation
+      - Explanation
+      - Example
+      equation_bearing: false
+      parameterized: false
+      node_id: not_learn-from-markdown-learn-newtowns-laws-md_52c9aa
+      aliases:
+      - Equation
+      - Explanation
+      - Example
+      - 'Second Law: Law of Acceleration'
+      - Newton's Laws of Motion
+      - 'Newton''s Laws of Motion Second Law: Law of Acceleration'
+      - Newton's Laws of Motion Second Law
+      structured_learning:
+        encountered_not: Second Law Law Of Acceleration
+        lookup_keys:
+        - second law law acceleration
+        - second law
+        - law law
+        - law acceleration
+        - second law law
+        - law law acceleration
+        - perform bound computation or invoke match executable template
+        - perform bound
+        - bound computation
+        - computation or
+        - or invoke
+        - invoke match
+        - match executable
+        - executable template
+        - perform bound computation
+        - bound computation or
+        - computation or invoke
+        - or invoke match
+        - invoke match executable
+        - match executable template
+        - without reduc remainder item cannot clos with govern confidence
+        - without reduc remainder item cannot clo
+        - govern confidence
+        - without reduc
+        component_nots:
+        - Newton S Laws Of Motion
+        composed_not: Newton S Laws Of Motion
+        goal: 'What is Second Law: Law of Acceleration?'
+        intended_object: 'Newton''s Laws of Motion What is Second Law: Law of Acceleration?
+          Second Law: Law of Acceleration Equation Explanation Example Newton''s Laws
+          of Motion Second Law: Law of Acceleration Newton''s Laws of Motion Second
+          Law The acceleration of an object is directly proportional to the net force
+          acting on it and inversely proportional to its mass. F = m * a A larger
+          force produces a greater acceleration, while a larger mass results in a
+          smaller acceleration for the same force. The acceleration of an object is
+          directly proportional to the net force acting on it and inversely proportional
+          to its mass. F = m a A larger force produces a greater acceleration, while
+          a larger mass results in a smaller acceleration for the same force.'
+        success_criteria:
+        - all required inputs are explicit and the bounded computation or template
+          is applied faithfully
+        - the result is returned in the requested usable form
+        actual_realization: 'the prompt surface is present; explicit givens are present:
+          Newton''s Laws of Motion What is Second Law: Law of Acceleration, Second
+          Law: Law of Acceleration Equation Explanation Example Newton''s Laws of
+          Motion Second Law: Law of Acceleration Newton''s Laws of Motion Second Law
+          The acceleration of an object is directly proportional to the net force
+          acting on it and inversely proportional to its mass, F = m * a A larger
+          force produces a greater acceleration; no justified final closure has been
+          admitted yet'
+        givens:
+        - 'Newton''s Laws of Motion What is Second Law: Law of Acceleration'
+        - 'Second Law: Law of Acceleration Equation Explanation Example Newton''s
+          Laws of Motion Second Law: Law of Acceleration Newton''s Laws of Motion
+          Second Law The acceleration of an object is directly proportional to the
+          net force acting on it and inversely proportional to its mass'
+        - F = m * a A larger force produces a greater acceleration
+        - F = m a A larger force produces a greater acceleration
+        missing_components:
+        - a justified final realization has not yet been produced
+        differentiators:
+        - 'named inputs supplied: law, f'
+        misalignment_types:
+        - functional
+        - completion
+        origin_layers:
+        - model
+        degree: partial
+        remainder_shapes:
+        - missing
+        why_it_matters:
+        - without reducing the remainder, the item cannot be closed with governed
+          confidence
+        minimal_repair:
+        - perform the bounded computation or invoke the matching executable template
+        full_repair:
+        - perform the bounded computation or invoke the matching executable template
+        - 'satisfy success condition: all required inputs are explicit and the bounded
+          computation or template is applied faithfully'
+        - 'satisfy success condition: the result is returned in the requested usable
+          form'
+        boundary_shape:
+        - d*
+        action_posture: direct_resolution
+        notation_yaml: |-
+          "What Is Second Law Law Of Acceleration":
+            Description:
+              - "Structured learning declaration for the active non-achievedness."
+              - "Encountered non-achievedness: Second Law Law Of Acceleration"
+              - "Components: Newton S Laws Of Motion"
+              - "Composition: Newton S Laws Of Motion"
+              - "Intended object: Newton's Laws of Motion What is Second Law: Law of Acceleration? Second Law: Law of Acceleration Equation Explanation Example Newton's Laws of Motion Second Law: Law of Acceleration Newton's Laws of Motion Second Law The acceleration of an object is directly proportional to the net force acting on it and inversely proportional to its mass. F = m * a A larger force produces a greater acceleration, while a larger mass results in a smaller acceleration for the same force. The acceleration of an object is directly proportional to the net force acting on it and inversely proportional to its mass. F = m a A larger force produces a greater acceleration, while a larger mass results in a smaller acceleration for the same force."
+              - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+              - "Actual realization: the prompt surface is present; explicit givens are present: Newton's Laws of Motion What is Second Law: Law of Acceleration, Second Law: Law of Acceleration Equation Explanation Example Newton's Laws of Motion Second Law: Law of Acceleration Newton's Laws of Motion Second Law The acceleration of an object is directly proportional to the net force acting on it and inversely proportional to its mass, F = m * a A larger force produces a greater acceleration; no justified final closure has been admitted yet"
+              - "Givens: Newton's Laws of Motion What is Second Law: Law of Acceleration, Second Law: Law of Acceleration Equation Explanation Example Newton's Laws of Motion Second Law: Law of Acceleration Newton's Laws of Motion Second Law The acceleration of an object is directly proportional to the net force acting on it and inversely proportional to its mass, F = m * a A larger force produces a greater acceleration, F = m a A larger force produces a greater acceleration"
+              - "Missing components: a justified final realization has not yet been produced"
+              - "Differentiators: named inputs supplied: law, f"
+              - "Misalignment types: functional, completion"
+              - "Origin layers: model"
+              - "Degree: partial"
+              - "Remainder shapes: missing"
+              - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+              - "Minimal repair: perform the bounded computation or invoke the matching executable template"
+              - "Full repair: perform the bounded computation or invoke the matching executable template, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+              - "Action posture: direct_resolution"
+            In:
+              - "Prompt Surface String"
+              - "Encountered Non Achievedness String"
+              - "Lookup Keys Strings"
+              - "[ Component Non Achievedness ]"
+              - "Composed Non Achievedness"
+            Out:
+              - "Prior Encounter"
+              - "[ Reusable Artifact ]"
+              - "[ Reused Non Achievedness ]"
+              - "[ Composed Reuse ]"
+---
+'Third Law: Action and Reaction':
+  Description:
+  - The markdown document contains a bounded section that directly states this knowledge
+    unit.
+  - 'Knowledge artifact for: What is Third Law: Action and Reaction?'
+  In:
+  - Newton S Laws Of Motion
+  - Third Law Action
+  - Reaction
+  Out:
+  - "For every action, there is an equal and opposite reaction. F\u2081\u2082 = -F\u2082\
+    \u2081 If object A exerts a force on object B, then object B simultaneously exerts\
+    \ an equal and opposite force on object A."
+  Metadata:
+    artifact_id: artifact_knowledge-third-law-action-and-reaction_d8883d
+    artifact_type: knowledge
+    representation: yaml
+    function_bit: 0
+    boundary_shape:
+    - d*
+    scope: 'reuse when the user asks about Third Law: Action and Reaction from Newton''s
+      Laws of Motion under ordinary stable reading'
+    reusability: broad_reuse
+    admissibility: admitted
+    learning_relation: instance_of_existing
+    created_at: '2026-03-25T11:05:52+00:00'
+    provenance:
+    - not_learn-from-markdown-learn-newtowns-laws-md_52c9aa
+    - /Users/ravindranathakila/service/realized/LEARN_NEWTOWNS_LAWS.md
+    related_artifact_ids:
+    - artifact_knowledge-newton-s-laws-of-motion_16affb
+    - artifact_knowledge-first-law-law-of-inertia_92a104
+    - artifact_knowledge-second-law-law-of-acceleration_f1cf8e
+    justification: The markdown document contains a bounded section that directly
+      states this knowledge unit.
+    question: 'What is Third Law: Action and Reaction?'
+    answer: "For every action, there is an equal and opposite reaction. F\u2081\u2082\
+      \ = -F\u2082\u2081 If object A exerts a force on object B, then object B simultaneously\
+      \ exerts an equal and opposite force on object A."
+    structured_learning:
+      encountered_not: Third Law Action And Reaction
+      goal: 'What is Third Law: Action and Reaction?'
+      intended_object: "Newton's Laws of Motion What is Third Law: Action and Reaction?\
+        \ Third Law: Action and Reaction Equation Explanation Example Newton's Laws\
+        \ of Motion Third Law: Action and Reaction Newton's Laws of Motion Third Law\
+        \ For every action, there is an equal and opposite reaction. F\u2081\u2082\
+        \ = -F\u2082\u2081 If object A exerts a force on object B, then object B simultaneously\
+        \ exerts an equal and opposite force on object A. For every action, there\
+        \ is an equal and opposite reaction. F\u2081\u2082 = -F\u2082\u2081 If object\
+        \ A exerts a force on object B, then object B simultaneously exerts an equal\
+        \ and opposite force on object A."
+      success_criteria:
+      - all required inputs are explicit and the bounded computation or template is
+        applied faithfully
+      - the result is returned in the requested usable form
+      actual_realization: 'the prompt surface is present; explicit givens are present:
+        Newton''s Laws of Motion What is Third Law: Action and Reaction, Third Law:
+        Action and Reaction Equation Explanation Example Newton''s Laws of Motion
+        Third Law: Action and Reaction Newton''s Laws of Motion Third Law For every
+        action, there is an equal and opposite reaction; no justified final closure
+        has been admitted yet'
+      givens:
+      - 'Newton''s Laws of Motion What is Third Law: Action and Reaction'
+      - 'Third Law: Action and Reaction Equation Explanation Example Newton''s Laws
+        of Motion Third Law: Action and Reaction Newton''s Laws of Motion Third Law
+        For every action'
+      - there is an equal and opposite reaction
+      unknowns: []
+      missing_components:
+      - a justified final realization has not yet been produced
+      distorted_components: []
+      differentiators:
+      - 'named inputs supplied: law'
+      contrastive_cases:
+      - condition holds versus condition does not hold
+      risk_of_wrong_closure: []
+      disallowed_assumptions: []
+      misalignment_types:
+      - functional
+      - completion
+      origin_layers:
+      - model
+      degree: partial
+      remainder_shapes:
+      - missing
+      why_it_matters:
+      - without reducing the remainder, the item cannot be closed with governed confidence
+      minimal_repair:
+      - perform the bounded computation or invoke the matching executable template
+      full_repair:
+      - perform the bounded computation or invoke the matching executable template
+      - 'satisfy success condition: all required inputs are explicit and the bounded
+        computation or template is applied faithfully'
+      - 'satisfy success condition: the result is returned in the requested usable
+        form'
+      boundary_shape:
+      - d*
+      action_posture: direct_resolution
+      component_nots:
+      - Newton S Laws Of Motion
+      - Third Law Action
+      - Reaction
+      composed_not: Newton S Laws Of Motion
+      lookup_keys:
+      - third law action reaction
+      - third law action
+      - reaction
+      - third law
+      - law action
+      - action reaction
+      - law action reaction
+      - perform bound computation or invoke match executable template
+      - perform bound
+      - bound computation
+      - computation or
+      - or invoke
+      - invoke match
+      - match executable
+      - executable template
+      - perform bound computation
+      - bound computation or
+      - computation or invoke
+      - or invoke match
+      - invoke match executable
+      - match executable template
+      - without reduc remainder item cannot clos with govern confidence
+      - without reduc remainder item cannot clo
+      - govern confidence
+      notation_yaml: |-
+        "What Is Third Law Action And Reaction":
+          Description:
+            - "Structured learning declaration for the active non-achievedness."
+            - "Encountered non-achievedness: Third Law Action And Reaction"
+            - "Components: Newton S Laws Of Motion, Third Law Action, Reaction"
+            - "Composition: Newton S Laws Of Motion"
+            - "Intended object: Newton's Laws of Motion What is Third Law: Action and Reaction? Third Law: Action and Reaction Equation Explanation Example Newton's Laws of Motion Third Law: Action and Reaction Newton's Laws of Motion Third Law For every action, there is an equal and opposite reaction. F\u2081\u2082 = -F\u2082\u2081 If object A exerts a force on object B, then object B simultaneously exerts an equal and opposite force on object A. For every action, there is an equal and opposite reaction. F\u2081\u2082 = -F\u2082\u2081 If object A exerts a force on object B, then object B simultaneously exerts an equal and opposite force on object A."
+            - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+            - "Actual realization: the prompt surface is present; explicit givens are present: Newton's Laws of Motion What is Third Law: Action and Reaction, Third Law: Action and Reaction Equation Explanation Example Newton's Laws of Motion Third Law: Action and Reaction Newton's Laws of Motion Third Law For every action, there is an equal and opposite reaction; no justified final closure has been admitted yet"
+            - "Givens: Newton's Laws of Motion What is Third Law: Action and Reaction, Third Law: Action and Reaction Equation Explanation Example Newton's Laws of Motion Third Law: Action and Reaction Newton's Laws of Motion Third Law For every action, there is an equal and opposite reaction"
+            - "Missing components: a justified final realization has not yet been produced"
+            - "Differentiators: named inputs supplied: law"
+            - "Contrastive cases: condition holds versus condition does not hold"
+            - "Misalignment types: functional, completion"
+            - "Origin layers: model"
+            - "Degree: partial"
+            - "Remainder shapes: missing"
+            - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+            - "Minimal repair: perform the bounded computation or invoke the matching executable template"
+            - "Full repair: perform the bounded computation or invoke the matching executable template, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+            - "Action posture: direct_resolution"
+          In:
+            - "Prompt Surface String"
+            - "Encountered Non Achievedness String"
+            - "Lookup Keys Strings"
+            - "[ Component Non Achievedness ]"
+            - "Composed Non Achievedness"
+          Out:
+            - "Prior Encounter"
+            - "[ Reusable Artifact ]"
+            - "[ Reused Non Achievedness ]"
+            - "[ Composed Reuse ]"
+    content:
+      source_path: /Users/ravindranathakila/service/realized/LEARN_NEWTOWNS_LAWS.md
+      source_document: LEARN_NEWTOWNS_LAWS.md
+      source_kind: markdown
+      source_title: Newton's Laws of Motion
+      source_sections:
+      - 'Third Law: Action and Reaction'
+      - Equation
+      - Explanation
+      - Example
+      equation_bearing: false
+      parameterized: false
+      node_id: not_learn-from-markdown-learn-newtowns-laws-md_52c9aa
+      aliases:
+      - Equation
+      - Explanation
+      - Example
+      - 'Third Law: Action and Reaction'
+      - Newton's Laws of Motion
+      - 'Newton''s Laws of Motion Third Law: Action and Reaction'
+      - Newton's Laws of Motion Third Law
+      structured_learning:
+        encountered_not: Third Law Action And Reaction
+        lookup_keys:
+        - third law action reaction
+        - third law action
+        - reaction
+        - third law
+        - law action
+        - action reaction
+        - law action reaction
+        - perform bound computation or invoke match executable template
+        - perform bound
+        - bound computation
+        - computation or
+        - or invoke
+        - invoke match
+        - match executable
+        - executable template
+        - perform bound computation
+        - bound computation or
+        - computation or invoke
+        - or invoke match
+        - invoke match executable
+        - match executable template
+        - without reduc remainder item cannot clos with govern confidence
+        - without reduc remainder item cannot clo
+        - govern confidence
+        component_nots:
+        - Newton S Laws Of Motion
+        - Third Law Action
+        - Reaction
+        composed_not: Newton S Laws Of Motion
+        goal: 'What is Third Law: Action and Reaction?'
+        intended_object: "Newton's Laws of Motion What is Third Law: Action and Reaction?\
+          \ Third Law: Action and Reaction Equation Explanation Example Newton's Laws\
+          \ of Motion Third Law: Action and Reaction Newton's Laws of Motion Third\
+          \ Law For every action, there is an equal and opposite reaction. F\u2081\
+          \u2082 = -F\u2082\u2081 If object A exerts a force on object B, then object\
+          \ B simultaneously exerts an equal and opposite force on object A. For every\
+          \ action, there is an equal and opposite reaction. F\u2081\u2082 = -F\u2082\
+          \u2081 If object A exerts a force on object B, then object B simultaneously\
+          \ exerts an equal and opposite force on object A."
+        success_criteria:
+        - all required inputs are explicit and the bounded computation or template
+          is applied faithfully
+        - the result is returned in the requested usable form
+        actual_realization: 'the prompt surface is present; explicit givens are present:
+          Newton''s Laws of Motion What is Third Law: Action and Reaction, Third Law:
+          Action and Reaction Equation Explanation Example Newton''s Laws of Motion
+          Third Law: Action and Reaction Newton''s Laws of Motion Third Law For every
+          action, there is an equal and opposite reaction; no justified final closure
+          has been admitted yet'
+        givens:
+        - 'Newton''s Laws of Motion What is Third Law: Action and Reaction'
+        - 'Third Law: Action and Reaction Equation Explanation Example Newton''s Laws
+          of Motion Third Law: Action and Reaction Newton''s Laws of Motion Third
+          Law For every action'
+        - there is an equal and opposite reaction
+        missing_components:
+        - a justified final realization has not yet been produced
+        differentiators:
+        - 'named inputs supplied: law'
+        contrastive_cases:
+        - condition holds versus condition does not hold
+        misalignment_types:
+        - functional
+        - completion
+        origin_layers:
+        - model
+        degree: partial
+        remainder_shapes:
+        - missing
+        why_it_matters:
+        - without reducing the remainder, the item cannot be closed with governed
+          confidence
+        minimal_repair:
+        - perform the bounded computation or invoke the matching executable template
+        full_repair:
+        - perform the bounded computation or invoke the matching executable template
+        - 'satisfy success condition: all required inputs are explicit and the bounded
+          computation or template is applied faithfully'
+        - 'satisfy success condition: the result is returned in the requested usable
+          form'
+        boundary_shape:
+        - d*
+        action_posture: direct_resolution
+        notation_yaml: |-
+          "What Is Third Law Action And Reaction":
+            Description:
+              - "Structured learning declaration for the active non-achievedness."
+              - "Encountered non-achievedness: Third Law Action And Reaction"
+              - "Components: Newton S Laws Of Motion, Third Law Action, Reaction"
+              - "Composition: Newton S Laws Of Motion"
+              - "Intended object: Newton's Laws of Motion What is Third Law: Action and Reaction? Third Law: Action and Reaction Equation Explanation Example Newton's Laws of Motion Third Law: Action and Reaction Newton's Laws of Motion Third Law For every action, there is an equal and opposite reaction. F\u2081\u2082 = -F\u2082\u2081 If object A exerts a force on object B, then object B simultaneously exerts an equal and opposite force on object A. For every action, there is an equal and opposite reaction. F\u2081\u2082 = -F\u2082\u2081 If object A exerts a force on object B, then object B simultaneously exerts an equal and opposite force on object A."
+              - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+              - "Actual realization: the prompt surface is present; explicit givens are present: Newton's Laws of Motion What is Third Law: Action and Reaction, Third Law: Action and Reaction Equation Explanation Example Newton's Laws of Motion Third Law: Action and Reaction Newton's Laws of Motion Third Law For every action, there is an equal and opposite reaction; no justified final closure has been admitted yet"
+              - "Givens: Newton's Laws of Motion What is Third Law: Action and Reaction, Third Law: Action and Reaction Equation Explanation Example Newton's Laws of Motion Third Law: Action and Reaction Newton's Laws of Motion Third Law For every action, there is an equal and opposite reaction"
+              - "Missing components: a justified final realization has not yet been produced"
+              - "Differentiators: named inputs supplied: law"
+              - "Contrastive cases: condition holds versus condition does not hold"
+              - "Misalignment types: functional, completion"
+              - "Origin layers: model"
+              - "Degree: partial"
+              - "Remainder shapes: missing"
+              - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+              - "Minimal repair: perform the bounded computation or invoke the matching executable template"
+              - "Full repair: perform the bounded computation or invoke the matching executable template, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+              - "Action posture: direct_resolution"
+            In:
+              - "Prompt Surface String"
+              - "Encountered Non Achievedness String"
+              - "Lookup Keys Strings"
+              - "[ Component Non Achievedness ]"
+              - "Composed Non Achievedness"
+            Out:
+              - "Prior Encounter"
+              - "[ Reusable Artifact ]"
+              - "[ Reused Non Achievedness ]"
+              - "[ Composed Reuse ]"
+---
+Summary:
+  Description:
+  - The markdown document contains a bounded section that directly states this knowledge
+    unit.
+  - 'Knowledge artifact for: What is Summary?'
+  In:
+  - Newton S Laws Of Motion
+  Out:
+  - 'First Law: Objects resist changes in motion. Second Law: Force determines acceleration.
+    Third Law: Forces occur in pairs.'
+  Metadata:
+    artifact_id: artifact_knowledge-summary_49f287
+    artifact_type: knowledge
+    representation: yaml
+    function_bit: 0
+    boundary_shape:
+    - d*
+    scope: reuse when the user asks about Summary from Newton's Laws of Motion under
+      ordinary stable reading
+    reusability: broad_reuse
+    admissibility: admitted
+    learning_relation: instance_of_existing
+    created_at: '2026-03-25T11:05:52+00:00'
+    provenance:
+    - not_learn-from-markdown-learn-newtowns-laws-md_52c9aa
+    - /Users/ravindranathakila/service/realized/LEARN_NEWTOWNS_LAWS.md
+    related_artifact_ids:
+    - artifact_knowledge-newton-s-laws-of-motion_16affb
+    - artifact_knowledge-first-law-law-of-inertia_92a104
+    - artifact_knowledge-second-law-law-of-acceleration_f1cf8e
+    - artifact_knowledge-third-law-action-and-reaction_d8883d
+    justification: The markdown document contains a bounded section that directly
+      states this knowledge unit.
+    question: What is Summary?
+    answer: 'First Law: Objects resist changes in motion. Second Law: Force determines
+      acceleration. Third Law: Forces occur in pairs.'
+    structured_learning:
+      encountered_not: Summary
+      goal: What is Summary?
+      intended_object: 'Newton''s Laws of Motion What is Summary? Summary First Law:
+        Objects resist changes in motion. Second Law: Force determines acceleration.
+        Third Law: Forces occur in pairs. Newton''s Laws of Motion Summary First Law:
+        Objects resist changes in motion. Second Law: Force determines acceleration.
+        Third Law: Forces occur in pairs.'
+      success_criteria:
+      - all required inputs are explicit and the bounded computation or template is
+        applied faithfully
+      - the result is returned in the requested usable form
+      actual_realization: 'the prompt surface is present; explicit givens are present:
+        Summary First Law: Objects resist changes in motion, Second Law: Force determines
+        acceleration, Third Law: Forces occur in pairs; no justified final closure
+        has been admitted yet'
+      givens:
+      - 'Summary First Law: Objects resist changes in motion'
+      - 'Second Law: Force determines acceleration'
+      - 'Third Law: Forces occur in pairs'
+      - 'Newton''s Laws of Motion Summary First Law: Objects resist changes in motion'
+      unknowns: []
+      missing_components:
+      - a justified final realization has not yet been produced
+      distorted_components: []
+      differentiators:
+      - 'named inputs supplied: law'
+      contrastive_cases: []
+      risk_of_wrong_closure: []
+      disallowed_assumptions: []
+      misalignment_types:
+      - functional
+      - completion
+      origin_layers:
+      - model
+      degree: partial
+      remainder_shapes:
+      - missing
+      why_it_matters:
+      - without reducing the remainder, the item cannot be closed with governed confidence
+      minimal_repair:
+      - perform the bounded computation or invoke the matching executable template
+      full_repair:
+      - perform the bounded computation or invoke the matching executable template
+      - 'satisfy success condition: all required inputs are explicit and the bounded
+        computation or template is applied faithfully'
+      - 'satisfy success condition: the result is returned in the requested usable
+        form'
+      boundary_shape:
+      - d*
+      action_posture: direct_resolution
+      component_nots:
+      - Newton S Laws Of Motion
+      composed_not: Newton S Laws Of Motion
+      lookup_keys:
+      - summary
+      - perform bound computation or invoke match executable template
+      - perform bound
+      - bound computation
+      - computation or
+      - or invoke
+      - invoke match
+      - match executable
+      - executable template
+      - perform bound computation
+      - bound computation or
+      - computation or invoke
+      - or invoke match
+      - invoke match executable
+      - match executable template
+      - without reduc remainder item cannot clos with govern confidence
+      - without reduc remainder item cannot clo
+      - govern confidence
+      - without reduc
+      - reduc remainder
+      - remainder item
+      - item cannot
+      - cannot clos
+      - clos with
+      notation_yaml: |-
+        "What Is Summary":
+          Description:
+            - "Structured learning declaration for the active non-achievedness."
+            - "Encountered non-achievedness: Summary"
+            - "Components: Newton S Laws Of Motion"
+            - "Composition: Newton S Laws Of Motion"
+            - "Intended object: Newton's Laws of Motion What is Summary? Summary First Law: Objects resist changes in motion. Second Law: Force determines acceleration. Third Law: Forces occur in pairs. Newton's Laws of Motion Summary First Law: Objects resist changes in motion. Second Law: Force determines acceleration. Third Law: Forces occur in pairs."
+            - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+            - "Actual realization: the prompt surface is present; explicit givens are present: Summary First Law: Objects resist changes in motion, Second Law: Force determines acceleration, Third Law: Forces occur in pairs; no justified final closure has been admitted yet"
+            - "Givens: Summary First Law: Objects resist changes in motion, Second Law: Force determines acceleration, Third Law: Forces occur in pairs, Newton's Laws of Motion Summary First Law: Objects resist changes in motion"
+            - "Missing components: a justified final realization has not yet been produced"
+            - "Differentiators: named inputs supplied: law"
+            - "Misalignment types: functional, completion"
+            - "Origin layers: model"
+            - "Degree: partial"
+            - "Remainder shapes: missing"
+            - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+            - "Minimal repair: perform the bounded computation or invoke the matching executable template"
+            - "Full repair: perform the bounded computation or invoke the matching executable template, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+            - "Action posture: direct_resolution"
+          In:
+            - "Prompt Surface String"
+            - "Encountered Non Achievedness String"
+            - "Lookup Keys Strings"
+            - "[ Component Non Achievedness ]"
+            - "Composed Non Achievedness"
+          Out:
+            - "Prior Encounter"
+            - "[ Reusable Artifact ]"
+            - "[ Reused Non Achievedness ]"
+            - "[ Composed Reuse ]"
+    content:
+      source_path: /Users/ravindranathakila/service/realized/LEARN_NEWTOWNS_LAWS.md
+      source_document: LEARN_NEWTOWNS_LAWS.md
+      source_kind: markdown
+      source_title: Newton's Laws of Motion
+      source_sections:
+      - Summary
+      equation_bearing: false
+      parameterized: false
+      node_id: not_learn-from-markdown-learn-newtowns-laws-md_52c9aa
+      aliases:
+      - 'First Law: Objects resist changes in motion.'
+      - 'Second Law: Force determines acceleration.'
+      - 'Third Law: Forces occur in pairs.'
+      - Summary
+      - Newton's Laws of Motion
+      - Newton's Laws of Motion Summary
+      structured_learning:
+        encountered_not: Summary
+        lookup_keys:
+        - summary
+        - perform bound computation or invoke match executable template
+        - perform bound
+        - bound computation
+        - computation or
+        - or invoke
+        - invoke match
+        - match executable
+        - executable template
+        - perform bound computation
+        - bound computation or
+        - computation or invoke
+        - or invoke match
+        - invoke match executable
+        - match executable template
+        - without reduc remainder item cannot clos with govern confidence
+        - without reduc remainder item cannot clo
+        - govern confidence
+        - without reduc
+        - reduc remainder
+        - remainder item
+        - item cannot
+        - cannot clos
+        - clos with
+        component_nots:
+        - Newton S Laws Of Motion
+        composed_not: Newton S Laws Of Motion
+        goal: What is Summary?
+        intended_object: 'Newton''s Laws of Motion What is Summary? Summary First
+          Law: Objects resist changes in motion. Second Law: Force determines acceleration.
+          Third Law: Forces occur in pairs. Newton''s Laws of Motion Summary First
+          Law: Objects resist changes in motion. Second Law: Force determines acceleration.
+          Third Law: Forces occur in pairs.'
+        success_criteria:
+        - all required inputs are explicit and the bounded computation or template
+          is applied faithfully
+        - the result is returned in the requested usable form
+        actual_realization: 'the prompt surface is present; explicit givens are present:
+          Summary First Law: Objects resist changes in motion, Second Law: Force determines
+          acceleration, Third Law: Forces occur in pairs; no justified final closure
+          has been admitted yet'
+        givens:
+        - 'Summary First Law: Objects resist changes in motion'
+        - 'Second Law: Force determines acceleration'
+        - 'Third Law: Forces occur in pairs'
+        - 'Newton''s Laws of Motion Summary First Law: Objects resist changes in motion'
+        missing_components:
+        - a justified final realization has not yet been produced
+        differentiators:
+        - 'named inputs supplied: law'
+        misalignment_types:
+        - functional
+        - completion
+        origin_layers:
+        - model
+        degree: partial
+        remainder_shapes:
+        - missing
+        why_it_matters:
+        - without reducing the remainder, the item cannot be closed with governed
+          confidence
+        minimal_repair:
+        - perform the bounded computation or invoke the matching executable template
+        full_repair:
+        - perform the bounded computation or invoke the matching executable template
+        - 'satisfy success condition: all required inputs are explicit and the bounded
+          computation or template is applied faithfully'
+        - 'satisfy success condition: the result is returned in the requested usable
+          form'
+        boundary_shape:
+        - d*
+        action_posture: direct_resolution
+        notation_yaml: |-
+          "What Is Summary":
+            Description:
+              - "Structured learning declaration for the active non-achievedness."
+              - "Encountered non-achievedness: Summary"
+              - "Components: Newton S Laws Of Motion"
+              - "Composition: Newton S Laws Of Motion"
+              - "Intended object: Newton's Laws of Motion What is Summary? Summary First Law: Objects resist changes in motion. Second Law: Force determines acceleration. Third Law: Forces occur in pairs. Newton's Laws of Motion Summary First Law: Objects resist changes in motion. Second Law: Force determines acceleration. Third Law: Forces occur in pairs."
+              - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+              - "Actual realization: the prompt surface is present; explicit givens are present: Summary First Law: Objects resist changes in motion, Second Law: Force determines acceleration, Third Law: Forces occur in pairs; no justified final closure has been admitted yet"
+              - "Givens: Summary First Law: Objects resist changes in motion, Second Law: Force determines acceleration, Third Law: Forces occur in pairs, Newton's Laws of Motion Summary First Law: Objects resist changes in motion"
+              - "Missing components: a justified final realization has not yet been produced"
+              - "Differentiators: named inputs supplied: law"
+              - "Misalignment types: functional, completion"
+              - "Origin layers: model"
+              - "Degree: partial"
+              - "Remainder shapes: missing"
+              - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+              - "Minimal repair: perform the bounded computation or invoke the matching executable template"
+              - "Full repair: perform the bounded computation or invoke the matching executable template, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+              - "Action posture: direct_resolution"
+            In:
+              - "Prompt Surface String"
+              - "Encountered Non Achievedness String"
+              - "Lookup Keys Strings"
+              - "[ Component Non Achievedness ]"
+              - "Composed Non Achievedness"
+            Out:
+              - "Prior Encounter"
+              - "[ Reusable Artifact ]"
+              - "[ Reused Non Achievedness ]"
+              - "[ Composed Reuse ]"
+---
+First Law Law Of Inertia:
+  Description:
+  - The parameter mapping can be reused whenever the same named inputs are supplied.
+  - Executable ability artifact.
+  In:
+  - 'v: number'
+  Out:
+  - 'F: number'
+  Metadata:
+    artifact_id: artifact_ability-first-law-law-of-inertia_684240
+    artifact_type: ability
+    representation: python_script
+    function_bit: 1
+    boundary_shape:
+    - a*
+    - d*
+    scope: reuse when later prompts ask to compute v from F, v
+    reusability: broad_reuse
+    admissibility: candidate
+    learning_relation: extends_parameters
+    created_at: '2026-03-25T11:05:53+00:00'
+    provenance:
+    - not_learn-from-markdown-learn-newtowns-laws-md_52c9aa
+    - /Users/ravindranathakila/service/realized/LEARN_NEWTOWNS_LAWS.md
+    constraints:
+    - derive only from the supplied encounter
+    template_schema:
+      preconditions:
+      - the active item matches the artifact scope
+      - the current state is admissible for governed reuse
+      governed_function: reuse ability in a governed way
+      completion_conditions:
+      - the artifact is instantiated in scope and its use conditions are met
+      failure_conditions:
+      - scope or HoldOn conditions are violated
+      scope_of_reuse: reuse when later prompts ask to compute v from F, v
+      bssc_awareness:
+        admissible_place_in_realization: governed realization state
+        required_governed_state: active represented non-achievedness with durable
+          state
+        permitted_governed_effect: support ability reuse without self-justifying closure
+        may_not_by_itself_justify:
+        - closure
+      holdon_awareness:
+        relevant_holdon_blocks_instantiation: true
+        diagnostic_use_allowed: true
+        relevant_holdon_conditions:
+        - missing evidence
+        - pause boundary
+        - governance block
+        resumption_condition: resume ordinary use only when the blocking condition
+          is cleared
+    justification: The parameter mapping can be reused whenever the same named inputs
+      are supplied.
+    question: How do you calculate F from v?
+    structured_learning:
+      encountered_not: First Law Law Of Inertia
+      goal: How do you calculate F from v?
+      intended_object: "Newton's Laws of Motion How do you calculate F from v? First\
+        \ Law Law Of Inertia F=0 -> v=constant F == 0 => v is constant F=0 \u21D2\
+        \ v is constant First Law: Law of Inertia An object remains at rest or in\
+        \ uniform motion in a straight line unless acted upon by an external force.\
+        \ F = 0 \u21D2 v = constant Equation Explanation If no net force acts on an\
+        \ object, its velocity does not change. This means it will either stay at\
+        \ rest or continue moving at a constant velocity."
+      success_criteria:
+      - the decisive unresolved alternative is explicitly resolved before closure
+      - the next step or answer is conditioned only on confirmed facts
+      - all required inputs are explicit and the bounded computation or template is
+        applied faithfully
+      - the result is returned in the requested usable form
+      actual_realization: "the prompt surface is present; explicit givens are present:\
+        \ First Law Law Of Inertia F=0 -> v=constant F == 0 => v is constant F=0 \u21D2\
+        \ v is constant First Law: Law of Inertia An object remains at rest or in\
+        \ uniform motion in a straight line unless acted upon by an external force,\
+        \ F = 0 \u21D2 v = constant Equation Explanation If no net force acts on an\
+        \ object; unresolved points remain: one or more decisive facts remain unconfirmed;\
+        \ no justified final closure has been admitted yet"
+      givens:
+      - "First Law Law Of Inertia F=0 -> v=constant F == 0 => v is constant F=0 \u21D2\
+        \ v is constant First Law: Law of Inertia An object remains at rest or in\
+        \ uniform motion in a straight line unless acted upon by an external force"
+      - "F = 0 \u21D2 v = constant Equation Explanation If no net force acts on an\
+        \ object"
+      unknowns:
+      - one or more decisive facts remain unconfirmed
+      missing_components:
+      - one or more decisive facts remain unconfirmed
+      distorted_components:
+      - confirmed and unconfirmed cases must not be collapsed together
+      differentiators:
+      - different explicit alternatives may lead to different next actions
+      - of Inertia An object remains at rest or in uniform motion in a straight line
+      - This means it will either stay at rest or continue moving at a constant velocity
+      - explicit absence is stated and should not be collapsed into presence
+      - 'named inputs supplied: f, v, law'
+      contrastive_cases:
+      - confirmed case versus unresolved case
+      - relevant item present versus explicitly absent
+      - condition holds versus condition does not hold
+      risk_of_wrong_closure:
+      - acting on the wrong alternative could produce the wrong result
+      disallowed_assumptions:
+      - do not treat an unresolved alternative as confirmed
+      - do not infer the presence of an item when the prompt states absence
+      misalignment_types:
+      - specification
+      - epistemic
+      - fidelity
+      - functional
+      - completion
+      origin_layers:
+      - prompt
+      - knowledge
+      - model
+      degree: dominant
+      remainder_shapes:
+      - underdetermined
+      - blocked
+      - missing
+      why_it_matters:
+      - different unresolved alternatives could require materially different actions
+        or answers
+      minimal_repair:
+      - confirm the decisive unresolved fact before acting or closing
+      - perform the bounded computation or invoke the matching executable template
+      full_repair:
+      - confirm the decisive unresolved fact before acting or closing
+      - perform the bounded computation or invoke the matching executable template
+      - 'satisfy success condition: the decisive unresolved alternative is explicitly
+        resolved before closure'
+      - 'satisfy success condition: the next step or answer is conditioned only on
+        confirmed facts'
+      - 'satisfy success condition: all required inputs are explicit and the bounded
+        computation or template is applied faithfully'
+      - 'satisfy success condition: the result is returned in the requested usable
+        form'
+      boundary_shape:
+      - d*
+      action_posture: clarify_before_acting
+      component_nots:
+      - V
+      - F
+      composed_not: First Law Law Of Inertia
+      lookup_keys:
+      - calculate f v
+      - calculate f
+      - f v
+      - confirm decisive unresolv fact before act or clos
+      - confirm decisive
+      - decisive unresolv
+      - unresolv fact
+      - fact before
+      - before act
+      - act or
+      - or clos
+      - confirm decisive unresolv
+      - decisive unresolv fact
+      - unresolv fact before
+      - fact before act
+      - before act or
+      - act or clos
+      - perform bound computation or invoke match executable template
+      - perform bound
+      - bound computation
+      - computation or
+      - or invoke
+      - invoke match
+      - match executable
+      notation_yaml: |-
+        "How Do You Calculate F From V":
+          Description:
+            - "Structured learning declaration for the active non-achievedness."
+            - "Encountered non-achievedness: First Law Law Of Inertia"
+            - "Components: V, F"
+            - "Composition: First Law Law Of Inertia"
+            - "Intended object: Newton's Laws of Motion How do you calculate F from v? First Law Law Of Inertia F=0 -> v=constant F == 0 => v is constant F=0 \u21d2 v is constant First Law: Law of Inertia An object remains at rest or in uniform motion in a straight line unless acted upon by an external force. F = 0 \u21d2 v = constant Equation Explanation If no net force acts on an object, its velocity does not change. This means it will either stay at rest or continue moving at a constant velocity."
+            - "Success criteria: the decisive unresolved alternative is explicitly resolved before closure, the next step or answer is conditioned only on confirmed facts, all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+            - "Actual realization: the prompt surface is present; explicit givens are present: First Law Law Of Inertia F=0 -> v=constant F == 0 => v is constant F=0 \u21d2 v is constant First Law: Law of Inertia An object remains at rest or in uniform motion in a straight line unless acted upon by an external force, F = 0 \u21d2 v = constant Equation Explanation If no net force acts on an object; unresolved points remain: one or more decisive facts remain unconfirmed; no justified final closure has been admitted yet"
+            - "Givens: First Law Law Of Inertia F=0 -> v=constant F == 0 => v is constant F=0 \u21d2 v is constant First Law: Law of Inertia An object remains at rest or in uniform motion in a straight line unless acted upon by an external force, F = 0 \u21d2 v = constant Equation Explanation If no net force acts on an object"
+            - "Unknowns: one or more decisive facts remain unconfirmed"
+            - "Missing components: one or more decisive facts remain unconfirmed"
+            - "Distorted components: confirmed and unconfirmed cases must not be collapsed together"
+            - "Differentiators: different explicit alternatives may lead to different next actions, of Inertia An object remains at rest or in uniform motion in a straight line, This means it will either stay at rest or continue moving at a constant velocity, explicit absence is stated and should not be collapsed into presence, named inputs supplied: f, v, law"
+            - "Contrastive cases: confirmed case versus unresolved case, relevant item present versus explicitly absent, condition holds versus condition does not hold"
+            - "Risk of wrong closure: acting on the wrong alternative could produce the wrong result"
+            - "Disallowed assumptions: do not treat an unresolved alternative as confirmed, do not infer the presence of an item when the prompt states absence"
+            - "Misalignment types: specification, epistemic, fidelity, functional, completion"
+            - "Origin layers: prompt, knowledge, model"
+            - "Degree: dominant"
+            - "Remainder shapes: underdetermined, blocked, missing"
+            - "Why it matters: different unresolved alternatives could require materially different actions or answers"
+            - "Minimal repair: confirm the decisive unresolved fact before acting or closing, perform the bounded computation or invoke the matching executable template"
+            - "Full repair: confirm the decisive unresolved fact before acting or closing, perform the bounded computation or invoke the matching executable template, satisfy success condition: the decisive unresolved alternative is explicitly resolved before closure, satisfy success condition: the next step or answer is conditioned only on confirmed facts, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+            - "Action posture: clarify_before_acting"
+          In:
+            - "Prompt Surface String"
+            - "Encountered Non Achievedness String"
+            - "Lookup Keys Strings"
+            - "[ Component Non Achievedness ]"
+            - "Composed Non Achievedness"
+          Out:
+            - "Prior Encounter"
+            - "[ Reusable Artifact ]"
+            - "[ Reused Non Achievedness ]"
+            - "[ Composed Reuse ]"
+    entrypoint: main
+    dependencies:
+    - msgspec
+    - orjson
+    input_contract:
+      v: number
+    output_contract:
+      F: number
+    python_script: "# /// script\n# requires-python = \">=3.11\"\n# dependencies =\
+      \ [\"msgspec\", \"orjson\"]\n# ///\n\nfrom __future__ import annotations\n\n\
+      import argparse\nimport ast\nimport math\nimport sys\n\nimport msgspec\nimport\
+      \ orjson\n\n\nEXPRESSION = '0 \u21D2 v'\nOUTPUT_FIELD = 'F'\nALLOWED_NAMES =\
+      \ ['v']\nALLOWED_NODE_TYPES = (\n    ast.Expression,\n    ast.BinOp,\n    ast.UnaryOp,\n\
+      \    ast.Add,\n    ast.Sub,\n    ast.Mult,\n    ast.Div,\n    ast.Pow,\n   \
+      \ ast.Mod,\n    ast.FloorDiv,\n    ast.USub,\n    ast.UAdd,\n    ast.Load,\n\
+      \    ast.Name,\n    ast.Constant,\n)\n\n\nclass InputPayload(msgspec.Struct,\
+      \ kw_only=True):\n    payload: dict[str, object] = {}\n\n\nclass OutputPayload(msgspec.Struct,\
+      \ kw_only=True):\n    status: str\n    answer: str = \"\"\n    result: dict[str,\
+      \ object]\n    notes: list[str] = []\n\n\ndef _validate_expression() -> ast.AST:\n\
+      \    tree = ast.parse(EXPRESSION, mode=\"eval\")\n    for node in ast.walk(tree):\n\
+      \        if not isinstance(node, ALLOWED_NODE_TYPES):\n            raise ValueError(f\"\
+      disallowed expression node: {type(node).__name__}\")\n        if isinstance(node,\
+      \ ast.Name) and node.id not in ALLOWED_NAMES:\n            raise ValueError(f\"\
+      disallowed symbol: {node.id}\")\n    return tree\n\n\nCOMPILED = compile(_validate_expression(),\
+      \ \"<expression>\", \"eval\")\n\n\ndef _coerce_number(value: object) -> float:\n\
+      \    if value is None:\n        raise ValueError(\"missing numeric input\")\n\
+      \    if isinstance(value, bool):\n        raise ValueError(\"boolean inputs\
+      \ are not numeric\")\n    if isinstance(value, (int, float)):\n        return\
+      \ float(value)\n    text = str(value).strip()\n    if not text:\n        raise\
+      \ ValueError(\"empty numeric input\")\n    return float(text)\n\n\ndef run(payload:\
+      \ InputPayload) -> OutputPayload:\n    values = {\n    \"v\": _coerce_number(payload.payload.get(\"\
+      v\")),\n    }\n    result = eval(COMPILED, {\"__builtins__\": {}, \"math\":\
+      \ math}, values)\n    normalized = int(result) if isinstance(result, float)\
+      \ and result.is_integer() else result\n    return OutputPayload(\n        status=\"\
+      ok\",\n        answer=str(normalized),\n        result={OUTPUT_FIELD: normalized},\n\
+      \        notes=[],\n    )\n\n\ndef main() -> None:\n    parser = argparse.ArgumentParser(description='First\
+      \ Law Law Of Inertia')\n    parser.add_argument(\"--input-json\", help=\"Optional\
+      \ JSON payload. Prefer stdin when omitted.\")\n    args = parser.parse_args()\n\
+      \    raw = args.input_json.encode(\"utf-8\") if args.input_json else sys.stdin.buffer.read()\n\
+      \    payload = orjson.loads(raw) if raw else {}\n    typed_input = msgspec.convert({\"\
+      payload\": payload}, type=InputPayload)\n    result = run(typed_input)\n   \
+      \ sys.stdout.buffer.write(orjson.dumps(msgspec.to_builtins(result), option=orjson.OPT_INDENT_2))\n\
+      \    sys.stdout.buffer.write(b\"\\n\")\n\n\nif __name__ == \"__main__\":\n \
+      \   main()"
+    script_language: python
+    content:
+      source_path: /Users/ravindranathakila/service/realized/LEARN_NEWTOWNS_LAWS.md
+      source_document: LEARN_NEWTOWNS_LAWS.md
+      output_field: F
+      compute_expression: "0 \u21D2 v"
+      parameter_aliases:
+        v:
+        - v
+        - velocity
+        F:
+        - F
+        - "0 \u21D2 v = constant"
+        - m * a
+        - force
+        - for
+        - first
+        - forces
+      source_kind: markdown
+      source_title: Newton's Laws of Motion
+      source_sections:
+      - 'First Law: Law of Inertia'
+      - Equation
+      - Explanation
+      encounter_id: cluster_1
+      equation_bearing: true
+      parameterized: true
+      node_id: not_learn-from-markdown-learn-newtowns-laws-md_52c9aa
+      aliases:
+      - F=0 -> v=constant
+      - F == 0 => v is constant
+      - "F=0 \u21D2 v is constant"
+      - 'First Law: Law of Inertia'
+      - An object remains at rest or in uniform motion in a straight line unless acted
+        upon by an external force.
+      - "F = 0 \u21D2 v = constant"
+      structured_learning:
+        encountered_not: First Law Law Of Inertia
+        lookup_keys:
+        - calculate f v
+        - calculate f
+        - f v
+        - confirm decisive unresolv fact before act or clos
+        - confirm decisive
+        - decisive unresolv
+        - unresolv fact
+        - fact before
+        - before act
+        - act or
+        - or clos
+        - confirm decisive unresolv
+        - decisive unresolv fact
+        - unresolv fact before
+        - fact before act
+        - before act or
+        - act or clos
+        - perform bound computation or invoke match executable template
+        - perform bound
+        - bound computation
+        - computation or
+        - or invoke
+        - invoke match
+        - match executable
+        component_nots:
+        - V
+        - F
+        composed_not: First Law Law Of Inertia
+        goal: How do you calculate F from v?
+        intended_object: "Newton's Laws of Motion How do you calculate F from v? First\
+          \ Law Law Of Inertia F=0 -> v=constant F == 0 => v is constant F=0 \u21D2\
+          \ v is constant First Law: Law of Inertia An object remains at rest or in\
+          \ uniform motion in a straight line unless acted upon by an external force.\
+          \ F = 0 \u21D2 v = constant Equation Explanation If no net force acts on\
+          \ an object, its velocity does not change. This means it will either stay\
+          \ at rest or continue moving at a constant velocity."
+        success_criteria:
+        - the decisive unresolved alternative is explicitly resolved before closure
+        - the next step or answer is conditioned only on confirmed facts
+        - all required inputs are explicit and the bounded computation or template
+          is applied faithfully
+        - the result is returned in the requested usable form
+        actual_realization: "the prompt surface is present; explicit givens are present:\
+          \ First Law Law Of Inertia F=0 -> v=constant F == 0 => v is constant F=0\
+          \ \u21D2 v is constant First Law: Law of Inertia An object remains at rest\
+          \ or in uniform motion in a straight line unless acted upon by an external\
+          \ force, F = 0 \u21D2 v = constant Equation Explanation If no net force\
+          \ acts on an object; unresolved points remain: one or more decisive facts\
+          \ remain unconfirmed; no justified final closure has been admitted yet"
+        givens:
+        - "First Law Law Of Inertia F=0 -> v=constant F == 0 => v is constant F=0\
+          \ \u21D2 v is constant First Law: Law of Inertia An object remains at rest\
+          \ or in uniform motion in a straight line unless acted upon by an external\
+          \ force"
+        - "F = 0 \u21D2 v = constant Equation Explanation If no net force acts on\
+          \ an object"
+        unknowns:
+        - one or more decisive facts remain unconfirmed
+        missing_components:
+        - one or more decisive facts remain unconfirmed
+        distorted_components:
+        - confirmed and unconfirmed cases must not be collapsed together
+        differentiators:
+        - different explicit alternatives may lead to different next actions
+        - of Inertia An object remains at rest or in uniform motion in a straight
+          line
+        - This means it will either stay at rest or continue moving at a constant
+          velocity
+        - explicit absence is stated and should not be collapsed into presence
+        - 'named inputs supplied: f, v, law'
+        contrastive_cases:
+        - confirmed case versus unresolved case
+        - relevant item present versus explicitly absent
+        - condition holds versus condition does not hold
+        risk_of_wrong_closure:
+        - acting on the wrong alternative could produce the wrong result
+        disallowed_assumptions:
+        - do not treat an unresolved alternative as confirmed
+        - do not infer the presence of an item when the prompt states absence
+        misalignment_types:
+        - specification
+        - epistemic
+        - fidelity
+        - functional
+        - completion
+        origin_layers:
+        - prompt
+        - knowledge
+        - model
+        degree: dominant
+        remainder_shapes:
+        - underdetermined
+        - blocked
+        - missing
+        why_it_matters:
+        - different unresolved alternatives could require materially different actions
+          or answers
+        minimal_repair:
+        - confirm the decisive unresolved fact before acting or closing
+        - perform the bounded computation or invoke the matching executable template
+        full_repair:
+        - confirm the decisive unresolved fact before acting or closing
+        - perform the bounded computation or invoke the matching executable template
+        - 'satisfy success condition: the decisive unresolved alternative is explicitly
+          resolved before closure'
+        - 'satisfy success condition: the next step or answer is conditioned only
+          on confirmed facts'
+        - 'satisfy success condition: all required inputs are explicit and the bounded
+          computation or template is applied faithfully'
+        - 'satisfy success condition: the result is returned in the requested usable
+          form'
+        boundary_shape:
+        - d*
+        action_posture: clarify_before_acting
+        notation_yaml: |-
+          "How Do You Calculate F From V":
+            Description:
+              - "Structured learning declaration for the active non-achievedness."
+              - "Encountered non-achievedness: First Law Law Of Inertia"
+              - "Components: V, F"
+              - "Composition: First Law Law Of Inertia"
+              - "Intended object: Newton's Laws of Motion How do you calculate F from v? First Law Law Of Inertia F=0 -> v=constant F == 0 => v is constant F=0 \u21d2 v is constant First Law: Law of Inertia An object remains at rest or in uniform motion in a straight line unless acted upon by an external force. F = 0 \u21d2 v = constant Equation Explanation If no net force acts on an object, its velocity does not change. This means it will either stay at rest or continue moving at a constant velocity."
+              - "Success criteria: the decisive unresolved alternative is explicitly resolved before closure, the next step or answer is conditioned only on confirmed facts, all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+              - "Actual realization: the prompt surface is present; explicit givens are present: First Law Law Of Inertia F=0 -> v=constant F == 0 => v is constant F=0 \u21d2 v is constant First Law: Law of Inertia An object remains at rest or in uniform motion in a straight line unless acted upon by an external force, F = 0 \u21d2 v = constant Equation Explanation If no net force acts on an object; unresolved points remain: one or more decisive facts remain unconfirmed; no justified final closure has been admitted yet"
+              - "Givens: First Law Law Of Inertia F=0 -> v=constant F == 0 => v is constant F=0 \u21d2 v is constant First Law: Law of Inertia An object remains at rest or in uniform motion in a straight line unless acted upon by an external force, F = 0 \u21d2 v = constant Equation Explanation If no net force acts on an object"
+              - "Unknowns: one or more decisive facts remain unconfirmed"
+              - "Missing components: one or more decisive facts remain unconfirmed"
+              - "Distorted components: confirmed and unconfirmed cases must not be collapsed together"
+              - "Differentiators: different explicit alternatives may lead to different next actions, of Inertia An object remains at rest or in uniform motion in a straight line, This means it will either stay at rest or continue moving at a constant velocity, explicit absence is stated and should not be collapsed into presence, named inputs supplied: f, v, law"
+              - "Contrastive cases: confirmed case versus unresolved case, relevant item present versus explicitly absent, condition holds versus condition does not hold"
+              - "Risk of wrong closure: acting on the wrong alternative could produce the wrong result"
+              - "Disallowed assumptions: do not treat an unresolved alternative as confirmed, do not infer the presence of an item when the prompt states absence"
+              - "Misalignment types: specification, epistemic, fidelity, functional, completion"
+              - "Origin layers: prompt, knowledge, model"
+              - "Degree: dominant"
+              - "Remainder shapes: underdetermined, blocked, missing"
+              - "Why it matters: different unresolved alternatives could require materially different actions or answers"
+              - "Minimal repair: confirm the decisive unresolved fact before acting or closing, perform the bounded computation or invoke the matching executable template"
+              - "Full repair: confirm the decisive unresolved fact before acting or closing, perform the bounded computation or invoke the matching executable template, satisfy success condition: the decisive unresolved alternative is explicitly resolved before closure, satisfy success condition: the next step or answer is conditioned only on confirmed facts, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+              - "Action posture: clarify_before_acting"
+            In:
+              - "Prompt Surface String"
+              - "Encountered Non Achievedness String"
+              - "Lookup Keys Strings"
+              - "[ Component Non Achievedness ]"
+              - "Composed Non Achievedness"
+            Out:
+              - "Prior Encounter"
+              - "[ Reusable Artifact ]"
+              - "[ Reused Non Achievedness ]"
+              - "[ Composed Reuse ]"
+---
+Second Law Law Of Acceleration:
+  Description:
+  - The parameter mapping can be reused whenever the same named inputs are supplied.
+  - Executable ability artifact.
+  In:
+  - 'm: number'
+  - 'a: number'
+  Out:
+  - 'F: number'
+  Metadata:
+    artifact_id: artifact_ability-second-law-law-of-acceleration_6f5458
+    artifact_type: ability
+    representation: python_script
+    function_bit: 1
+    boundary_shape:
+    - a*
+    - d*
+    scope: reuse when later prompts ask to compute a from F, m
+    reusability: broad_reuse
+    admissibility: candidate
+    learning_relation: extends_parameters
+    created_at: '2026-03-25T11:05:53+00:00'
+    provenance:
+    - not_learn-from-markdown-learn-newtowns-laws-md_52c9aa
+    - /Users/ravindranathakila/service/realized/LEARN_NEWTOWNS_LAWS.md
+    related_artifact_ids:
+    - artifact_ability-first-law-law-of-inertia_684240
+    constraints:
+    - derive only from the supplied encounter
+    template_schema:
+      preconditions:
+      - the active item matches the artifact scope
+      - the current state is admissible for governed reuse
+      governed_function: reuse ability in a governed way
+      completion_conditions:
+      - the artifact is instantiated in scope and its use conditions are met
+      failure_conditions:
+      - scope or HoldOn conditions are violated
+      scope_of_reuse: reuse when later prompts ask to compute a from F, m
+      bssc_awareness:
+        admissible_place_in_realization: governed realization state
+        required_governed_state: active represented non-achievedness with durable
+          state
+        permitted_governed_effect: support ability reuse without self-justifying closure
+        may_not_by_itself_justify:
+        - closure
+      holdon_awareness:
+        relevant_holdon_blocks_instantiation: true
+        diagnostic_use_allowed: true
+        relevant_holdon_conditions:
+        - missing evidence
+        - pause boundary
+        - governance block
+        resumption_condition: resume ordinary use only when the blocking condition
+          is cleared
+    justification: The parameter mapping can be reused whenever the same named inputs
+      are supplied.
+    question: How do you calculate F from m, a?
+    structured_learning:
+      encountered_not: Second Law Law Of Acceleration
+      goal: How do you calculate F from m, a?
+      intended_object: "Newton's Laws of Motion How do you calculate F from m, a?\
+        \ Second Law Law Of Acceleration a = F / m F = m * a Second Law: Law of Acceleration\
+        \ The acceleration of an object is directly proportional to the net force\
+        \ acting on it and inversely proportional to its mass. A larger force produces\
+        \ a greater acceleration, while a larger mass results in a smaller acceleration\
+        \ for the same force. a = F / m = 10 / 2 = 5 m/s\xB2 Equation Explanation\
+        \ Example"
+      success_criteria:
+      - all required inputs are explicit and the bounded computation or template is
+        applied faithfully
+      - the result is returned in the requested usable form
+      actual_realization: "the prompt surface is present; explicit givens are present:\
+        \ Second Law Law Of Acceleration a = F / m F = m * a Second Law: Law of Acceleration\
+        \ The acceleration of an object is directly proportional to the net force\
+        \ acting on it and inversely proportional to its mass, a = F / m = 10 / 2\
+        \ = 5 m/s\xB2 Equation Explanation Example; no justified final closure has\
+        \ been admitted yet"
+      givens:
+      - 'Second Law Law Of Acceleration a = F / m F = m * a Second Law: Law of Acceleration
+        The acceleration of an object is directly proportional to the net force acting
+        on it and inversely proportional to its mass'
+      - "a = F / m = 10 / 2 = 5 m/s\xB2 Equation Explanation Example"
+      unknowns: []
+      missing_components:
+      - a justified final realization has not yet been produced
+      distorted_components: []
+      differentiators:
+      - 'named inputs supplied: a, f, law, m'
+      contrastive_cases: []
+      risk_of_wrong_closure: []
+      disallowed_assumptions: []
+      misalignment_types:
+      - functional
+      - completion
+      origin_layers:
+      - model
+      degree: partial
+      remainder_shapes:
+      - missing
+      why_it_matters:
+      - without reducing the remainder, the item cannot be closed with governed confidence
+      minimal_repair:
+      - perform the bounded computation or invoke the matching executable template
+      full_repair:
+      - perform the bounded computation or invoke the matching executable template
+      - 'satisfy success condition: all required inputs are explicit and the bounded
+        computation or template is applied faithfully'
+      - 'satisfy success condition: the result is returned in the requested usable
+        form'
+      boundary_shape:
+      - d*
+      action_posture: compute_or_template
+      component_nots:
+      - M
+      - A
+      - F
+      composed_not: Second Law Law Of Acceleration
+      lookup_keys:
+      - calculate f m
+      - calculate f
+      - f m
+      - perform bound computation or invoke match executable template
+      - perform bound
+      - bound computation
+      - computation or
+      - or invoke
+      - invoke match
+      - match executable
+      - executable template
+      - perform bound computation
+      - bound computation or
+      - computation or invoke
+      - or invoke match
+      - invoke match executable
+      - match executable template
+      - without reduc remainder item cannot clos with govern confidence
+      - without reduc remainder item cannot clo
+      - govern confidence
+      - without reduc
+      - reduc remainder
+      - remainder item
+      - item cannot
+      notation_yaml: |-
+        "How Do You Calculate F From M A":
+          Description:
+            - "Structured learning declaration for the active non-achievedness."
+            - "Encountered non-achievedness: Second Law Law Of Acceleration"
+            - "Components: M, A, F"
+            - "Composition: Second Law Law Of Acceleration"
+            - "Intended object: Newton's Laws of Motion How do you calculate F from m, a? Second Law Law Of Acceleration a = F / m F = m * a Second Law: Law of Acceleration The acceleration of an object is directly proportional to the net force acting on it and inversely proportional to its mass. A larger force produces a greater acceleration, while a larger mass results in a smaller acceleration for the same force. a = F / m = 10 / 2 = 5 m/s\u00b2 Equation Explanation Example"
+            - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+            - "Actual realization: the prompt surface is present; explicit givens are present: Second Law Law Of Acceleration a = F / m F = m * a Second Law: Law of Acceleration The acceleration of an object is directly proportional to the net force acting on it and inversely proportional to its mass, a = F / m = 10 / 2 = 5 m/s\u00b2 Equation Explanation Example; no justified final closure has been admitted yet"
+            - "Givens: Second Law Law Of Acceleration a = F / m F = m * a Second Law: Law of Acceleration The acceleration of an object is directly proportional to the net force acting on it and inversely proportional to its mass, a = F / m = 10 / 2 = 5 m/s\u00b2 Equation Explanation Example"
+            - "Missing components: a justified final realization has not yet been produced"
+            - "Differentiators: named inputs supplied: a, f, law, m"
+            - "Misalignment types: functional, completion"
+            - "Origin layers: model"
+            - "Degree: partial"
+            - "Remainder shapes: missing"
+            - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+            - "Minimal repair: perform the bounded computation or invoke the matching executable template"
+            - "Full repair: perform the bounded computation or invoke the matching executable template, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+            - "Action posture: compute_or_template"
+          In:
+            - "Prompt Surface String"
+            - "Encountered Non Achievedness String"
+            - "Lookup Keys Strings"
+            - "[ Component Non Achievedness ]"
+            - "Composed Non Achievedness"
+          Out:
+            - "Prior Encounter"
+            - "[ Reusable Artifact ]"
+            - "[ Reused Non Achievedness ]"
+            - "[ Composed Reuse ]"
+    entrypoint: main
+    dependencies:
+    - msgspec
+    - orjson
+    input_contract:
+      m: number
+      a: number
+    output_contract:
+      F: number
+    python_script: |-
+      # /// script
+      # requires-python = ">=3.11"
+      # dependencies = ["msgspec", "orjson"]
+      # ///
+
+      from __future__ import annotations
+
+      import argparse
+      import ast
+      import math
+      import sys
+
+      import msgspec
+      import orjson
+
+
+      EXPRESSION = 'm * a'
+      OUTPUT_FIELD = 'F'
+      ALLOWED_NAMES = ['m', 'a']
+      ALLOWED_NODE_TYPES = (
+          ast.Expression,
+          ast.BinOp,
+          ast.UnaryOp,
+          ast.Add,
+          ast.Sub,
+          ast.Mult,
+          ast.Div,
+          ast.Pow,
+          ast.Mod,
+          ast.FloorDiv,
+          ast.USub,
+          ast.UAdd,
+          ast.Load,
+          ast.Name,
+          ast.Constant,
+      )
+
+
+      class InputPayload(msgspec.Struct, kw_only=True):
+          payload: dict[str, object] = {}
+
+
+      class OutputPayload(msgspec.Struct, kw_only=True):
+          status: str
+          answer: str = ""
+          result: dict[str, object]
+          notes: list[str] = []
+
+
+      def _validate_expression() -> ast.AST:
+          tree = ast.parse(EXPRESSION, mode="eval")
+          for node in ast.walk(tree):
+              if not isinstance(node, ALLOWED_NODE_TYPES):
+                  raise ValueError(f"disallowed expression node: {type(node).__name__}")
+              if isinstance(node, ast.Name) and node.id not in ALLOWED_NAMES:
+                  raise ValueError(f"disallowed symbol: {node.id}")
+          return tree
+
+
+      COMPILED = compile(_validate_expression(), "<expression>", "eval")
+
+
+      def _coerce_number(value: object) -> float:
+          if value is None:
+              raise ValueError("missing numeric input")
+          if isinstance(value, bool):
+              raise ValueError("boolean inputs are not numeric")
+          if isinstance(value, (int, float)):
+              return float(value)
+          text = str(value).strip()
+          if not text:
+              raise ValueError("empty numeric input")
+          return float(text)
+
+
+      def run(payload: InputPayload) -> OutputPayload:
+          values = {
+          "m": _coerce_number(payload.payload.get("m")),
+          "a": _coerce_number(payload.payload.get("a")),
+          }
+          result = eval(COMPILED, {"__builtins__": {}, "math": math}, values)
+          normalized = int(result) if isinstance(result, float) and result.is_integer() else result
+          return OutputPayload(
+              status="ok",
+              answer=str(normalized),
+              result={OUTPUT_FIELD: normalized},
+              notes=[],
+          )
+
+
+      def main() -> None:
+          parser = argparse.ArgumentParser(description='Second Law Law Of Acceleration')
+          parser.add_argument("--input-json", help="Optional JSON payload. Prefer stdin when omitted.")
+          args = parser.parse_args()
+          raw = args.input_json.encode("utf-8") if args.input_json else sys.stdin.buffer.read()
+          payload = orjson.loads(raw) if raw else {}
+          typed_input = msgspec.convert({"payload": payload}, type=InputPayload)
+          result = run(typed_input)
+          sys.stdout.buffer.write(orjson.dumps(msgspec.to_builtins(result), option=orjson.OPT_INDENT_2))
+          sys.stdout.buffer.write(b"\n")
+
+
+      if __name__ == "__main__":
+          main()
+    script_language: python
+    content:
+      source_path: /Users/ravindranathakila/service/realized/LEARN_NEWTOWNS_LAWS.md
+      source_document: LEARN_NEWTOWNS_LAWS.md
+      output_field: F
+      compute_expression: m * a
+      parameter_aliases:
+        m:
+        - m
+        - motion
+        - means
+        - moving
+        - mass
+        a:
+        - a
+        - "F / m = 10 / 2 = 5 m/s\xB2"
+        - acted
+        - acts
+        - acceleration
+        - acting
+        - and
+        - action
+        F:
+        - F
+        - "0 \u21D2 v = constant"
+        - m * a
+        - force
+        - for
+        - first
+        - forces
+      source_kind: markdown
+      source_title: Newton's Laws of Motion
+      source_sections:
+      - 'Second Law: Law of Acceleration'
+      - Equation
+      - Explanation
+      - Example
+      encounter_id: cluster_2
+      equation_bearing: true
+      parameterized: true
+      node_id: not_learn-from-markdown-learn-newtowns-laws-md_52c9aa
+      aliases:
+      - a = F / m
+      - F = m * a
+      - 'Second Law: Law of Acceleration'
+      - The acceleration of an object is directly proportional to the net force acting
+        on it and inversely proportional to its mass.
+      - A larger force produces a greater acceleration, while a larger mass results
+        in a smaller acceleration for the same force.
+      - "a = F / m = 10 / 2 = 5 m/s\xB2"
+      structured_learning:
+        encountered_not: Second Law Law Of Acceleration
+        lookup_keys:
+        - calculate f m
+        - calculate f
+        - f m
+        - perform bound computation or invoke match executable template
+        - perform bound
+        - bound computation
+        - computation or
+        - or invoke
+        - invoke match
+        - match executable
+        - executable template
+        - perform bound computation
+        - bound computation or
+        - computation or invoke
+        - or invoke match
+        - invoke match executable
+        - match executable template
+        - without reduc remainder item cannot clos with govern confidence
+        - without reduc remainder item cannot clo
+        - govern confidence
+        - without reduc
+        - reduc remainder
+        - remainder item
+        - item cannot
+        component_nots:
+        - M
+        - A
+        - F
+        composed_not: Second Law Law Of Acceleration
+        goal: How do you calculate F from m, a?
+        intended_object: "Newton's Laws of Motion How do you calculate F from m, a?\
+          \ Second Law Law Of Acceleration a = F / m F = m * a Second Law: Law of\
+          \ Acceleration The acceleration of an object is directly proportional to\
+          \ the net force acting on it and inversely proportional to its mass. A larger\
+          \ force produces a greater acceleration, while a larger mass results in\
+          \ a smaller acceleration for the same force. a = F / m = 10 / 2 = 5 m/s\xB2\
+          \ Equation Explanation Example"
+        success_criteria:
+        - all required inputs are explicit and the bounded computation or template
+          is applied faithfully
+        - the result is returned in the requested usable form
+        actual_realization: "the prompt surface is present; explicit givens are present:\
+          \ Second Law Law Of Acceleration a = F / m F = m * a Second Law: Law of\
+          \ Acceleration The acceleration of an object is directly proportional to\
+          \ the net force acting on it and inversely proportional to its mass, a =\
+          \ F / m = 10 / 2 = 5 m/s\xB2 Equation Explanation Example; no justified\
+          \ final closure has been admitted yet"
+        givens:
+        - 'Second Law Law Of Acceleration a = F / m F = m * a Second Law: Law of Acceleration
+          The acceleration of an object is directly proportional to the net force
+          acting on it and inversely proportional to its mass'
+        - "a = F / m = 10 / 2 = 5 m/s\xB2 Equation Explanation Example"
+        missing_components:
+        - a justified final realization has not yet been produced
+        differentiators:
+        - 'named inputs supplied: a, f, law, m'
+        misalignment_types:
+        - functional
+        - completion
+        origin_layers:
+        - model
+        degree: partial
+        remainder_shapes:
+        - missing
+        why_it_matters:
+        - without reducing the remainder, the item cannot be closed with governed
+          confidence
+        minimal_repair:
+        - perform the bounded computation or invoke the matching executable template
+        full_repair:
+        - perform the bounded computation or invoke the matching executable template
+        - 'satisfy success condition: all required inputs are explicit and the bounded
+          computation or template is applied faithfully'
+        - 'satisfy success condition: the result is returned in the requested usable
+          form'
+        boundary_shape:
+        - d*
+        action_posture: compute_or_template
+        notation_yaml: |-
+          "How Do You Calculate F From M A":
+            Description:
+              - "Structured learning declaration for the active non-achievedness."
+              - "Encountered non-achievedness: Second Law Law Of Acceleration"
+              - "Components: M, A, F"
+              - "Composition: Second Law Law Of Acceleration"
+              - "Intended object: Newton's Laws of Motion How do you calculate F from m, a? Second Law Law Of Acceleration a = F / m F = m * a Second Law: Law of Acceleration The acceleration of an object is directly proportional to the net force acting on it and inversely proportional to its mass. A larger force produces a greater acceleration, while a larger mass results in a smaller acceleration for the same force. a = F / m = 10 / 2 = 5 m/s\u00b2 Equation Explanation Example"
+              - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+              - "Actual realization: the prompt surface is present; explicit givens are present: Second Law Law Of Acceleration a = F / m F = m * a Second Law: Law of Acceleration The acceleration of an object is directly proportional to the net force acting on it and inversely proportional to its mass, a = F / m = 10 / 2 = 5 m/s\u00b2 Equation Explanation Example; no justified final closure has been admitted yet"
+              - "Givens: Second Law Law Of Acceleration a = F / m F = m * a Second Law: Law of Acceleration The acceleration of an object is directly proportional to the net force acting on it and inversely proportional to its mass, a = F / m = 10 / 2 = 5 m/s\u00b2 Equation Explanation Example"
+              - "Missing components: a justified final realization has not yet been produced"
+              - "Differentiators: named inputs supplied: a, f, law, m"
+              - "Misalignment types: functional, completion"
+              - "Origin layers: model"
+              - "Degree: partial"
+              - "Remainder shapes: missing"
+              - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+              - "Minimal repair: perform the bounded computation or invoke the matching executable template"
+              - "Full repair: perform the bounded computation or invoke the matching executable template, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+              - "Action posture: compute_or_template"
+            In:
+              - "Prompt Surface String"
+              - "Encountered Non Achievedness String"
+              - "Lookup Keys Strings"
+              - "[ Component Non Achievedness ]"
+              - "Composed Non Achievedness"
+            Out:
+              - "Prior Encounter"
+              - "[ Reusable Artifact ]"
+              - "[ Reused Non Achievedness ]"
+              - "[ Composed Reuse ]"
+---
+Third Law Action And Reaction:
+  Description:
+  - Applies to any two-body interaction where the force on one object is the negative
+    of the force on the other.
+  - Executable ability artifact.
+  In:
+  - 'F21: number'
+  Out:
+  - 'F12: number'
+  Metadata:
+    artifact_id: artifact_ability-third-law-action-and-reaction_332952
+    artifact_type: ability
+    representation: python_script
+    function_bit: 1
+    boundary_shape:
+    - a*
+    - d*
+    scope: reuse when later prompts ask to compute F12 from F21
+    reusability: broad_reuse
+    admissibility: candidate
+    learning_relation: extends_parameters
+    created_at: '2026-03-25T11:05:53+00:00'
+    provenance:
+    - not_learn-from-markdown-learn-newtowns-laws-md_52c9aa
+    - /Users/ravindranathakila/service/realized/LEARN_NEWTOWNS_LAWS.md
+    related_artifact_ids:
+    - artifact_ability-first-law-law-of-inertia_684240
+    - artifact_ability-second-law-law-of-acceleration_6f5458
+    constraints:
+    - derive only from the supplied encounter
+    template_schema:
+      preconditions:
+      - the active item matches the artifact scope
+      - the current state is admissible for governed reuse
+      governed_function: reuse ability in a governed way
+      completion_conditions:
+      - the artifact is instantiated in scope and its use conditions are met
+      failure_conditions:
+      - scope or HoldOn conditions are violated
+      scope_of_reuse: reuse when later prompts ask to compute F12 from F21
+      bssc_awareness:
+        admissible_place_in_realization: governed realization state
+        required_governed_state: active represented non-achievedness with durable
+          state
+        permitted_governed_effect: support ability reuse without self-justifying closure
+        may_not_by_itself_justify:
+        - closure
+      holdon_awareness:
+        relevant_holdon_blocks_instantiation: true
+        diagnostic_use_allowed: true
+        relevant_holdon_conditions:
+        - missing evidence
+        - pause boundary
+        - governance block
+        resumption_condition: resume ordinary use only when the blocking condition
+          is cleared
+    justification: Applies to any two-body interaction where the force on one object
+      is the negative of the force on the other.
+    question: What is F12 in terms of F21 according to Newton's Third Law?
+    structured_learning:
+      encountered_not: Third Law Action And Reaction
+      goal: What is F12 in terms of F21 according to Newton's Third Law?
+      intended_object: "Newton's Laws of Motion What is F12 in terms of F21 according\
+        \ to Newton's Third Law? Third Law Action And Reaction F12 = -F21 Third Law:\
+        \ Action and Reaction For every action, there is an equal and opposite reaction.\
+        \ F\u2081\u2082 = -F\u2082\u2081 If object A exerts a force on object B, then\
+        \ object B simultaneously exerts an equal and opposite force on object A.\
+        \ Equation Explanation Example"
+      success_criteria:
+      - all required inputs are explicit and the bounded computation or template is
+        applied faithfully
+      - the result is returned in the requested usable form
+      actual_realization: 'the prompt surface is present; explicit givens are present:
+        Third Law Action And Reaction F12 = -F21 Third Law: Action and Reaction For
+        every action, there is an equal and opposite reaction; no justified final
+        closure has been admitted yet'
+      givens:
+      - 'Third Law Action And Reaction F12 = -F21 Third Law: Action and Reaction For
+        every action'
+      - there is an equal and opposite reaction
+      unknowns: []
+      missing_components:
+      - a justified final realization has not yet been produced
+      distorted_components: []
+      differentiators:
+      - 'named inputs supplied: f12, law'
+      contrastive_cases:
+      - condition holds versus condition does not hold
+      risk_of_wrong_closure: []
+      disallowed_assumptions: []
+      misalignment_types:
+      - functional
+      - completion
+      origin_layers:
+      - model
+      degree: partial
+      remainder_shapes:
+      - missing
+      why_it_matters:
+      - without reducing the remainder, the item cannot be closed with governed confidence
+      minimal_repair:
+      - perform the bounded computation or invoke the matching executable template
+      full_repair:
+      - perform the bounded computation or invoke the matching executable template
+      - 'satisfy success condition: all required inputs are explicit and the bounded
+        computation or template is applied faithfully'
+      - 'satisfy success condition: the result is returned in the requested usable
+        form'
+      boundary_shape:
+      - d*
+      action_posture: compute_or_template
+      component_nots:
+      - F21
+      - F12
+      composed_not: Third Law Action And Reaction
+      lookup_keys:
+      - f12 term f21 accord newton s third law
+      - f12 term
+      - term f21
+      - f21 accord
+      - accord newton
+      - newton s
+      - s third
+      - third law
+      - f12 term f21
+      - term f21 accord
+      - f21 accord newton
+      - accord newton s
+      - newton s third
+      - s third law
+      - perform bound computation or invoke match executable template
+      - perform bound
+      - bound computation
+      - computation or
+      - or invoke
+      - invoke match
+      - match executable
+      - executable template
+      - perform bound computation
+      - bound computation or
+      notation_yaml: |-
+        "What Is F12 In Terms Of F21 According To Newton S Third Law":
+          Description:
+            - "Structured learning declaration for the active non-achievedness."
+            - "Encountered non-achievedness: Third Law Action And Reaction"
+            - "Components: F21, F12"
+            - "Composition: Third Law Action And Reaction"
+            - "Intended object: Newton's Laws of Motion What is F12 in terms of F21 according to Newton's Third Law? Third Law Action And Reaction F12 = -F21 Third Law: Action and Reaction For every action, there is an equal and opposite reaction. F\u2081\u2082 = -F\u2082\u2081 If object A exerts a force on object B, then object B simultaneously exerts an equal and opposite force on object A. Equation Explanation Example"
+            - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+            - "Actual realization: the prompt surface is present; explicit givens are present: Third Law Action And Reaction F12 = -F21 Third Law: Action and Reaction For every action, there is an equal and opposite reaction; no justified final closure has been admitted yet"
+            - "Givens: Third Law Action And Reaction F12 = -F21 Third Law: Action and Reaction For every action, there is an equal and opposite reaction"
+            - "Missing components: a justified final realization has not yet been produced"
+            - "Differentiators: named inputs supplied: f12, law"
+            - "Contrastive cases: condition holds versus condition does not hold"
+            - "Misalignment types: functional, completion"
+            - "Origin layers: model"
+            - "Degree: partial"
+            - "Remainder shapes: missing"
+            - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+            - "Minimal repair: perform the bounded computation or invoke the matching executable template"
+            - "Full repair: perform the bounded computation or invoke the matching executable template, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+            - "Action posture: compute_or_template"
+          In:
+            - "Prompt Surface String"
+            - "Encountered Non Achievedness String"
+            - "Lookup Keys Strings"
+            - "[ Component Non Achievedness ]"
+            - "Composed Non Achievedness"
+          Out:
+            - "Prior Encounter"
+            - "[ Reusable Artifact ]"
+            - "[ Reused Non Achievedness ]"
+            - "[ Composed Reuse ]"
+    entrypoint: main
+    dependencies:
+    - msgspec
+    - orjson
+    input_contract:
+      F21: number
+    output_contract:
+      F12: number
+    python_script: |-
+      # /// script
+      # requires-python = ">=3.11"
+      # dependencies = ["msgspec", "orjson"]
+      # ///
+
+      from __future__ import annotations
+
+      import argparse
+      import ast
+      import math
+      import sys
+
+      import msgspec
+      import orjson
+
+
+      EXPRESSION = '-F21'
+      OUTPUT_FIELD = 'F12'
+      ALLOWED_NAMES = ['F21']
+      ALLOWED_NODE_TYPES = (
+          ast.Expression,
+          ast.BinOp,
+          ast.UnaryOp,
+          ast.Add,
+          ast.Sub,
+          ast.Mult,
+          ast.Div,
+          ast.Pow,
+          ast.Mod,
+          ast.FloorDiv,
+          ast.USub,
+          ast.UAdd,
+          ast.Load,
+          ast.Name,
+          ast.Constant,
+      )
+
+
+      class InputPayload(msgspec.Struct, kw_only=True):
+          payload: dict[str, object] = {}
+
+
+      class OutputPayload(msgspec.Struct, kw_only=True):
+          status: str
+          answer: str = ""
+          result: dict[str, object]
+          notes: list[str] = []
+
+
+      def _validate_expression() -> ast.AST:
+          tree = ast.parse(EXPRESSION, mode="eval")
+          for node in ast.walk(tree):
+              if not isinstance(node, ALLOWED_NODE_TYPES):
+                  raise ValueError(f"disallowed expression node: {type(node).__name__}")
+              if isinstance(node, ast.Name) and node.id not in ALLOWED_NAMES:
+                  raise ValueError(f"disallowed symbol: {node.id}")
+          return tree
+
+
+      COMPILED = compile(_validate_expression(), "<expression>", "eval")
+
+
+      def _coerce_number(value: object) -> float:
+          if value is None:
+              raise ValueError("missing numeric input")
+          if isinstance(value, bool):
+              raise ValueError("boolean inputs are not numeric")
+          if isinstance(value, (int, float)):
+              return float(value)
+          text = str(value).strip()
+          if not text:
+              raise ValueError("empty numeric input")
+          return float(text)
+
+
+      def run(payload: InputPayload) -> OutputPayload:
+          values = {
+          "F21": _coerce_number(payload.payload.get("F21")),
+          }
+          result = eval(COMPILED, {"__builtins__": {}, "math": math}, values)
+          normalized = int(result) if isinstance(result, float) and result.is_integer() else result
+          return OutputPayload(
+              status="ok",
+              answer=str(normalized),
+              result={OUTPUT_FIELD: normalized},
+              notes=[],
+          )
+
+
+      def main() -> None:
+          parser = argparse.ArgumentParser(description='Third Law Action And Reaction')
+          parser.add_argument("--input-json", help="Optional JSON payload. Prefer stdin when omitted.")
+          args = parser.parse_args()
+          raw = args.input_json.encode("utf-8") if args.input_json else sys.stdin.buffer.read()
+          payload = orjson.loads(raw) if raw else {}
+          typed_input = msgspec.convert({"payload": payload}, type=InputPayload)
+          result = run(typed_input)
+          sys.stdout.buffer.write(orjson.dumps(msgspec.to_builtins(result), option=orjson.OPT_INDENT_2))
+          sys.stdout.buffer.write(b"\n")
+
+
+      if __name__ == "__main__":
+          main()
+    script_language: python
+    content:
+      source_path: /Users/ravindranathakila/service/realized/LEARN_NEWTOWNS_LAWS.md
+      source_document: LEARN_NEWTOWNS_LAWS.md
+      output_field: F12
+      compute_expression: -F21
+      source_kind: markdown
+      source_title: Newton's Laws of Motion
+      source_sections:
+      - 'Third Law: Action and Reaction'
+      - Equation
+      - Explanation
+      - Example
+      encounter_id: cluster_3
+      equation_bearing: true
+      parameterized: true
+      node_id: not_learn-from-markdown-learn-newtowns-laws-md_52c9aa
+      aliases:
+      - F12 = -F21
+      - 'Third Law: Action and Reaction'
+      - For every action, there is an equal and opposite reaction.
+      - "F\u2081\u2082 = -F\u2082\u2081"
+      - If object A exerts a force on object B, then object B simultaneously exerts
+        an equal and opposite force on object A.
+      structured_learning:
+        encountered_not: Third Law Action And Reaction
+        lookup_keys:
+        - f12 term f21 accord newton s third law
+        - f12 term
+        - term f21
+        - f21 accord
+        - accord newton
+        - newton s
+        - s third
+        - third law
+        - f12 term f21
+        - term f21 accord
+        - f21 accord newton
+        - accord newton s
+        - newton s third
+        - s third law
+        - perform bound computation or invoke match executable template
+        - perform bound
+        - bound computation
+        - computation or
+        - or invoke
+        - invoke match
+        - match executable
+        - executable template
+        - perform bound computation
+        - bound computation or
+        component_nots:
+        - F21
+        - F12
+        composed_not: Third Law Action And Reaction
+        goal: What is F12 in terms of F21 according to Newton's Third Law?
+        intended_object: "Newton's Laws of Motion What is F12 in terms of F21 according\
+          \ to Newton's Third Law? Third Law Action And Reaction F12 = -F21 Third\
+          \ Law: Action and Reaction For every action, there is an equal and opposite\
+          \ reaction. F\u2081\u2082 = -F\u2082\u2081 If object A exerts a force on\
+          \ object B, then object B simultaneously exerts an equal and opposite force\
+          \ on object A. Equation Explanation Example"
+        success_criteria:
+        - all required inputs are explicit and the bounded computation or template
+          is applied faithfully
+        - the result is returned in the requested usable form
+        actual_realization: 'the prompt surface is present; explicit givens are present:
+          Third Law Action And Reaction F12 = -F21 Third Law: Action and Reaction
+          For every action, there is an equal and opposite reaction; no justified
+          final closure has been admitted yet'
+        givens:
+        - 'Third Law Action And Reaction F12 = -F21 Third Law: Action and Reaction
+          For every action'
+        - there is an equal and opposite reaction
+        missing_components:
+        - a justified final realization has not yet been produced
+        differentiators:
+        - 'named inputs supplied: f12, law'
+        contrastive_cases:
+        - condition holds versus condition does not hold
+        misalignment_types:
+        - functional
+        - completion
+        origin_layers:
+        - model
+        degree: partial
+        remainder_shapes:
+        - missing
+        why_it_matters:
+        - without reducing the remainder, the item cannot be closed with governed
+          confidence
+        minimal_repair:
+        - perform the bounded computation or invoke the matching executable template
+        full_repair:
+        - perform the bounded computation or invoke the matching executable template
+        - 'satisfy success condition: all required inputs are explicit and the bounded
+          computation or template is applied faithfully'
+        - 'satisfy success condition: the result is returned in the requested usable
+          form'
+        boundary_shape:
+        - d*
+        action_posture: compute_or_template
+        notation_yaml: |-
+          "What Is F12 In Terms Of F21 According To Newton S Third Law":
+            Description:
+              - "Structured learning declaration for the active non-achievedness."
+              - "Encountered non-achievedness: Third Law Action And Reaction"
+              - "Components: F21, F12"
+              - "Composition: Third Law Action And Reaction"
+              - "Intended object: Newton's Laws of Motion What is F12 in terms of F21 according to Newton's Third Law? Third Law Action And Reaction F12 = -F21 Third Law: Action and Reaction For every action, there is an equal and opposite reaction. F\u2081\u2082 = -F\u2082\u2081 If object A exerts a force on object B, then object B simultaneously exerts an equal and opposite force on object A. Equation Explanation Example"
+              - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+              - "Actual realization: the prompt surface is present; explicit givens are present: Third Law Action And Reaction F12 = -F21 Third Law: Action and Reaction For every action, there is an equal and opposite reaction; no justified final closure has been admitted yet"
+              - "Givens: Third Law Action And Reaction F12 = -F21 Third Law: Action and Reaction For every action, there is an equal and opposite reaction"
+              - "Missing components: a justified final realization has not yet been produced"
+              - "Differentiators: named inputs supplied: f12, law"
+              - "Contrastive cases: condition holds versus condition does not hold"
+              - "Misalignment types: functional, completion"
+              - "Origin layers: model"
+              - "Degree: partial"
+              - "Remainder shapes: missing"
+              - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+              - "Minimal repair: perform the bounded computation or invoke the matching executable template"
+              - "Full repair: perform the bounded computation or invoke the matching executable template, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+              - "Action posture: compute_or_template"
+            In:
+              - "Prompt Surface String"
+              - "Encountered Non Achievedness String"
+              - "Lookup Keys Strings"
+              - "[ Component Non Achievedness ]"
+              - "Composed Non Achievedness"
+            Out:
+              - "Prior Encounter"
+              - "[ Reusable Artifact ]"
+              - "[ Reused Non Achievedness ]"
+              - "[ Composed Reuse ]"
+---
+Direct closure pattern for learned_reuse:
+  Description:
+  - the run closed through direct resolution without requiring subordinate achievement
+    decomposition
+  - Reusable closure pattern artifact.
+  In:
+  - Direct Closure Pattern
+  - Learn Reuse
+  Out: []
+  Metadata:
+    artifact_id: artifact_closure-pattern-direct-closure-pattern-for-learn_a835f8
+    artifact_type: closure_pattern
+    representation: json
+    function_bit: 0
+    boundary_shape:
+    - d*
+    scope: bounded learned_reuse prompts that are self-contained and conventionally
+      interpreted
+    reusability: broad_reuse
+    admissibility: admitted
+    learning_relation: new_family
+    created_at: '2026-03-25T11:05:56+00:00'
+    provenance:
+    - proposal_discoveryauditproposal_a0c403
+    - not_calculate-force-for-mass-3-and-acceleration-4_072eb4
+    constraints:
+    - use only when the question is self-contained and the ordinary interpretation
+      is stable
+    template_schema:
+      preconditions:
+      - the active item matches the artifact scope
+      - the current state is admissible for governed reuse
+      governed_function: keep the item whole and close directly when a stable ordinary
+        reading yields a ready direct answer
+      completion_conditions:
+      - direct resolution is ready
+      - support-bearing answer evidence is attached
+      failure_conditions:
+      - ordinary interpretation is unstable
+      - external evidence is required
+      scope_of_reuse: bounded learned_reuse prompts that are self-contained and conventionally
+        interpreted
+      bssc_awareness:
+        admissible_place_in_realization: governed realization state
+        required_governed_state: active represented non-achievedness with durable
+          state
+        permitted_governed_effect: support closure_pattern reuse without self-justifying
+          closure
+        may_not_by_itself_justify:
+        - closure
+      holdon_awareness:
+        relevant_holdon_blocks_instantiation: true
+        diagnostic_use_allowed: true
+        relevant_holdon_conditions:
+        - missing evidence
+        - pause boundary
+        - governance block
+        resumption_condition: resume ordinary use only when the blocking condition
+          is cleared
+    justification: the run closed through direct resolution without requiring subordinate
+      achievement decomposition
+    structured_learning:
+      encountered_not: Direct Closure Pattern Learn Reuse
+      goal: Direct closure pattern for learned_reuse
+      intended_object: Direct closure pattern for learned_reuse
+      success_criteria:
+      - the response directly resolves the stated ask without erasing material distinctions
+      actual_realization: the prompt surface is present; no justified final closure
+        has been admitted yet
+      givens: []
+      unknowns: []
+      missing_components:
+      - a justified final realization has not yet been produced
+      distorted_components: []
+      differentiators: []
+      contrastive_cases: []
+      risk_of_wrong_closure: []
+      disallowed_assumptions: []
+      misalignment_types:
+      - completion
+      origin_layers:
+      - model
+      degree: partial
+      remainder_shapes:
+      - missing
+      why_it_matters:
+      - without reducing the remainder, the item cannot be closed with governed confidence
+      minimal_repair: []
+      full_repair:
+      - 'satisfy success condition: the response directly resolves the stated ask
+        without erasing material distinctions'
+      boundary_shape:
+      - d*
+      action_posture: direct_resolution
+      component_nots:
+      - Direct Closure Pattern
+      - Learn Reuse
+      composed_not: Direct Closure Pattern Learn Reuse
+      lookup_keys:
+      - direct closure pattern learn reuse
+      - direct closure pattern
+      - learn reuse
+      - direct closure
+      - closure pattern
+      - pattern learn
+      - closure pattern learn
+      - pattern learn reuse
+      - without reduc remainder item cannot clos with govern confidence
+      - without reduc remainder item cannot clo
+      - govern confidence
+      - without reduc
+      - reduc remainder
+      - remainder item
+      - item cannot
+      - cannot clos
+      - clos with
+      - with govern
+      - without reduc remainder
+      - reduc remainder item
+      - remainder item cannot
+      - item cannot clos
+      - cannot clos with
+      - clos with govern
+      notation_yaml: |-
+        "Direct Closure Pattern For Learned Reuse":
+          Description:
+            - "Structured learning declaration for the active non-achievedness."
+            - "Encountered non-achievedness: Direct Closure Pattern Learn Reuse"
+            - "Components: Direct Closure Pattern, Learn Reuse"
+            - "Composition: Direct Closure Pattern Learn Reuse"
+            - "Intended object: Direct closure pattern for learned_reuse"
+            - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+            - "Actual realization: the prompt surface is present; no justified final closure has been admitted yet"
+            - "Missing components: a justified final realization has not yet been produced"
+            - "Misalignment types: completion"
+            - "Origin layers: model"
+            - "Degree: partial"
+            - "Remainder shapes: missing"
+            - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+            - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+            - "Action posture: direct_resolution"
+          In:
+            - "Prompt Surface String"
+            - "Encountered Non Achievedness String"
+            - "Lookup Keys Strings"
+            - "[ Component Non Achievedness ]"
+            - "Composed Non Achievedness"
+          Out:
+            - "Prior Encounter"
+            - "[ Reusable Artifact ]"
+            - "[ Reused Non Achievedness ]"
+            - "[ Composed Reuse ]"
+    content:
+      node_id: not_calculate-force-for-mass-3-and-acceleration-4_072eb4
+      answer_kind: learned_reuse
+      closure_rule: if direct resolution is ready, keep the item whole and close it
+        after support-bearing evidence is attached
+      structured_learning:
+        encountered_not: Direct Closure Pattern Learn Reuse
+        lookup_keys:
+        - direct closure pattern learn reuse
+        - direct closure pattern
+        - learn reuse
+        - direct closure
+        - closure pattern
+        - pattern learn
+        - closure pattern learn
+        - pattern learn reuse
+        - without reduc remainder item cannot clos with govern confidence
+        - without reduc remainder item cannot clo
+        - govern confidence
+        - without reduc
+        - reduc remainder
+        - remainder item
+        - item cannot
+        - cannot clos
+        - clos with
+        - with govern
+        - without reduc remainder
+        - reduc remainder item
+        - remainder item cannot
+        - item cannot clos
+        - cannot clos with
+        - clos with govern
+        component_nots:
+        - Direct Closure Pattern
+        - Learn Reuse
+        composed_not: Direct Closure Pattern Learn Reuse
+        goal: Direct closure pattern for learned_reuse
+        intended_object: Direct closure pattern for learned_reuse
+        success_criteria:
+        - the response directly resolves the stated ask without erasing material distinctions
+        actual_realization: the prompt surface is present; no justified final closure
+          has been admitted yet
+        missing_components:
+        - a justified final realization has not yet been produced
+        misalignment_types:
+        - completion
+        origin_layers:
+        - model
+        degree: partial
+        remainder_shapes:
+        - missing
+        why_it_matters:
+        - without reducing the remainder, the item cannot be closed with governed
+          confidence
+        full_repair:
+        - 'satisfy success condition: the response directly resolves the stated ask
+          without erasing material distinctions'
+        boundary_shape:
+        - d*
+        action_posture: direct_resolution
+        notation_yaml: |-
+          "Direct Closure Pattern For Learned Reuse":
+            Description:
+              - "Structured learning declaration for the active non-achievedness."
+              - "Encountered non-achievedness: Direct Closure Pattern Learn Reuse"
+              - "Components: Direct Closure Pattern, Learn Reuse"
+              - "Composition: Direct Closure Pattern Learn Reuse"
+              - "Intended object: Direct closure pattern for learned_reuse"
+              - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+              - "Actual realization: the prompt surface is present; no justified final closure has been admitted yet"
+              - "Missing components: a justified final realization has not yet been produced"
+              - "Misalignment types: completion"
+              - "Origin layers: model"
+              - "Degree: partial"
+              - "Remainder shapes: missing"
+              - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+              - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+              - "Action posture: direct_resolution"
+            In:
+              - "Prompt Surface String"
+              - "Encountered Non Achievedness String"
+              - "Lookup Keys Strings"
+              - "[ Component Non Achievedness ]"
+              - "Composed Non Achievedness"
+            Out:
+              - "Prior Encounter"
+              - "[ Reusable Artifact ]"
+              - "[ Reused Non Achievedness ]"
+              - "[ Composed Reuse ]"
+---
+Structured learning record for Calculate Force Mass 3 Acceleration 4:
+  Description:
+  - the run produced a structured non-achievedness view that can be reused for prior-encounter
+    lookup, decomposition-aware reuse, and composition-aware reuse
+  - 'Knowledge artifact for: Calculate force for mass=3 and acceleration=4.'
+  In:
+  - Calculate Force
+  - Mass 3
+  - Acceleration 4
+  Out:
+  - '12'
+  Metadata:
+    artifact_id: artifact_knowledge-structured-learning-record-for-calcula_f4334a
+    artifact_type: knowledge
+    representation: yaml
+    function_bit: 0
+    boundary_shape:
+    - d*
+    scope: reuse when the same non-achievedness, a paraphrase of it, or a compatible
+      decomposition reappears
+    reusability: broad_reuse
+    admissibility: admitted
+    learning_relation: instance_of_existing
+    created_at: '2026-03-25T11:05:56+00:00'
+    provenance:
+    - not_calculate-force-for-mass-3-and-acceleration-4_072eb4
+    - artifact_closure-pattern-direct-closure-pattern-for-learn_a835f8
+    related_artifact_ids:
+    - artifact_closure-pattern-direct-closure-pattern-for-learn_a835f8
+    constraints:
+    - reuse the record only when the active non-achievedness is semantically aligned
+      under ordinary reading
+    - treat structure alone as support only after governance checks for scope, conflict,
+      and stability
+    justification: the run produced a structured non-achievedness view that can be
+      reused for prior-encounter lookup, decomposition-aware reuse, and composition-aware
+      reuse
+    question: Calculate force for mass=3 and acceleration=4.
+    answer: '12'
+    structured_learning:
+      encountered_not: Calculate Force Mass 3 Acceleration 4
+      goal: Calculate force for mass=3 and acceleration=4.
+      intended_object: Calculate force for mass=3 and acceleration=4.
+      success_criteria:
+      - all required inputs are explicit and the bounded computation or template is
+        applied faithfully
+      - the result is returned in the requested usable form
+      actual_realization: 'the prompt surface is present; explicit givens are present:
+        Calculate force for mass=3 and acceleration=4; no justified final closure
+        has been admitted yet'
+      givens:
+      - Calculate force for mass=3 and acceleration=4
+      unknowns: []
+      missing_components:
+      - a justified final realization has not yet been produced
+      distorted_components: []
+      differentiators:
+      - 'named inputs supplied: mass, acceleration'
+      contrastive_cases: []
+      risk_of_wrong_closure: []
+      disallowed_assumptions: []
+      misalignment_types:
+      - functional
+      - completion
+      origin_layers:
+      - model
+      degree: partial
+      remainder_shapes:
+      - missing
+      why_it_matters:
+      - without reducing the remainder, the item cannot be closed with governed confidence
+      minimal_repair:
+      - perform the bounded computation or invoke the matching executable template
+      full_repair:
+      - perform the bounded computation or invoke the matching executable template
+      - 'satisfy success condition: all required inputs are explicit and the bounded
+        computation or template is applied faithfully'
+      - 'satisfy success condition: the result is returned in the requested usable
+        form'
+      boundary_shape:
+      - a*
+      - d*
+      action_posture: compute_or_template
+      component_nots:
+      - Calculate Force
+      - Mass 3
+      - Acceleration 4
+      composed_not: Calculate Force Mass 3 Acceleration 4
+      lookup_keys:
+      - calculate force mass 3 acceleration 4
+      - calculate force
+      - mass 3
+      - acceleration 4
+      - force mass
+      - 3 acceleration
+      - calculate force mass
+      - force mass 3
+      - mass 3 acceleration
+      - 3 acceleration 4
+      - perform bound computation or invoke match executable template
+      - perform bound
+      - bound computation
+      - computation or
+      - or invoke
+      - invoke match
+      - match executable
+      - executable template
+      - perform bound computation
+      - bound computation or
+      - computation or invoke
+      - or invoke match
+      - invoke match executable
+      - match executable template
+      notation_yaml: |-
+        "Calculate Force For Mass 3 And Acceleration 4":
+          Description:
+            - "Structured learning declaration for the active non-achievedness."
+            - "Encountered non-achievedness: Calculate Force Mass 3 Acceleration 4"
+            - "Components: Calculate Force, Mass 3, Acceleration 4"
+            - "Composition: Calculate Force Mass 3 Acceleration 4"
+            - "Intended object: Calculate force for mass=3 and acceleration=4."
+            - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+            - "Actual realization: the prompt surface is present; explicit givens are present: Calculate force for mass=3 and acceleration=4; no justified final closure has been admitted yet"
+            - "Givens: Calculate force for mass=3 and acceleration=4"
+            - "Missing components: a justified final realization has not yet been produced"
+            - "Differentiators: named inputs supplied: mass, acceleration"
+            - "Misalignment types: functional, completion"
+            - "Origin layers: model"
+            - "Degree: partial"
+            - "Remainder shapes: missing"
+            - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+            - "Minimal repair: perform the bounded computation or invoke the matching executable template"
+            - "Full repair: perform the bounded computation or invoke the matching executable template, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+            - "Action posture: compute_or_template"
+          In:
+            - "Prompt Surface String"
+            - "Encountered Non Achievedness String"
+            - "Lookup Keys Strings"
+            - "[ Component Non Achievedness ]"
+            - "Composed Non Achievedness"
+          Out:
+            - "Prior Encounter"
+            - "[ Reusable Artifact ]"
+            - "[ Reused Non Achievedness ]"
+            - "[ Composed Reuse ]"
+    content:
+      node_id: not_calculate-force-for-mass-3-and-acceleration-4_072eb4
+      answer_source: direct_resolution
+      structured_learning:
+        encountered_not: Calculate Force Mass 3 Acceleration 4
+        lookup_keys:
+        - calculate force mass 3 acceleration 4
+        - calculate force
+        - mass 3
+        - acceleration 4
+        - force mass
+        - 3 acceleration
+        - calculate force mass
+        - force mass 3
+        - mass 3 acceleration
+        - 3 acceleration 4
+        - perform bound computation or invoke match executable template
+        - perform bound
+        - bound computation
+        - computation or
+        - or invoke
+        - invoke match
+        - match executable
+        - executable template
+        - perform bound computation
+        - bound computation or
+        - computation or invoke
+        - or invoke match
+        - invoke match executable
+        - match executable template
+        component_nots:
+        - Calculate Force
+        - Mass 3
+        - Acceleration 4
+        composed_not: Calculate Force Mass 3 Acceleration 4
+        goal: Calculate force for mass=3 and acceleration=4.
+        intended_object: Calculate force for mass=3 and acceleration=4.
+        success_criteria:
+        - all required inputs are explicit and the bounded computation or template
+          is applied faithfully
+        - the result is returned in the requested usable form
+        actual_realization: 'the prompt surface is present; explicit givens are present:
+          Calculate force for mass=3 and acceleration=4; no justified final closure
+          has been admitted yet'
+        givens:
+        - Calculate force for mass=3 and acceleration=4
+        missing_components:
+        - a justified final realization has not yet been produced
+        differentiators:
+        - 'named inputs supplied: mass, acceleration'
+        misalignment_types:
+        - functional
+        - completion
+        origin_layers:
+        - model
+        degree: partial
+        remainder_shapes:
+        - missing
+        why_it_matters:
+        - without reducing the remainder, the item cannot be closed with governed
+          confidence
+        minimal_repair:
+        - perform the bounded computation or invoke the matching executable template
+        full_repair:
+        - perform the bounded computation or invoke the matching executable template
+        - 'satisfy success condition: all required inputs are explicit and the bounded
+          computation or template is applied faithfully'
+        - 'satisfy success condition: the result is returned in the requested usable
+          form'
+        boundary_shape:
+        - a*
+        - d*
+        action_posture: compute_or_template
+        notation_yaml: |-
+          "Calculate Force For Mass 3 And Acceleration 4":
+            Description:
+              - "Structured learning declaration for the active non-achievedness."
+              - "Encountered non-achievedness: Calculate Force Mass 3 Acceleration 4"
+              - "Components: Calculate Force, Mass 3, Acceleration 4"
+              - "Composition: Calculate Force Mass 3 Acceleration 4"
+              - "Intended object: Calculate force for mass=3 and acceleration=4."
+              - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+              - "Actual realization: the prompt surface is present; explicit givens are present: Calculate force for mass=3 and acceleration=4; no justified final closure has been admitted yet"
+              - "Givens: Calculate force for mass=3 and acceleration=4"
+              - "Missing components: a justified final realization has not yet been produced"
+              - "Differentiators: named inputs supplied: mass, acceleration"
+              - "Misalignment types: functional, completion"
+              - "Origin layers: model"
+              - "Degree: partial"
+              - "Remainder shapes: missing"
+              - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+              - "Minimal repair: perform the bounded computation or invoke the matching executable template"
+              - "Full repair: perform the bounded computation or invoke the matching executable template, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+              - "Action posture: compute_or_template"
+            In:
+              - "Prompt Surface String"
+              - "Encountered Non Achievedness String"
+              - "Lookup Keys Strings"
+              - "[ Component Non Achievedness ]"
+              - "Composed Non Achievedness"
+            Out:
+              - "Prior Encounter"
+              - "[ Reusable Artifact ]"
+              - "[ Reused Non Achievedness ]"
+              - "[ Composed Reuse ]"

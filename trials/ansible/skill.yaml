@@ -1,0 +1,4088 @@
+schema: bssc_skill.v2
+kind: policy
+title: Local Bundle Admission Policy / f51a6a728425
+policy:
+  intent: Admit the governed skills packaged in this bundle on a fresh system.
+  target_kinds:
+  - ability
+  max_risk_tier: tier3_sensitive
+  allowed_authorities:
+  - execute
+  - write
+  - communicate
+  denied_authorities: []
+  allowed_executors:
+  - ansible
+  - python3
+  required_approval_for_risk_tiers: {}
+  allowed_data_classes:
+  - public
+---
+schema: bssc_skill.v2
+kind: ability
+title: "Ansible Commands 01 \u2014 Ensure Package Installed / Ansible Commands 01\
+  \ Ensure Package Installed"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you execute ansible commands 01 ensure package installed?
+declaration:
+  intent: How do you execute ansible commands 01 ensure package installed?
+  inputs:
+    package_name: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  - write
+  authority_bounds:
+    execute:
+      scope: local_configuration_target
+      target: ansible_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+    write:
+      scope: local_configuration_target
+      target: skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - configuration changes on declared targets
+  - filesystem or external state modification
+  persistence_behavior: may_modify_external_state
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier3_sensitive
+  executor_framework: ansible
+executor: ansible
+entrypoint: playbook
+inputs:
+  package_name: required input value
+outputs:
+  result: execution result
+ansible: |-
+  - hosts: localhost
+    gather_facts: false
+    tasks:
+      - name: Ensure package is installed
+        package:
+          name: "{{ package_name }}"
+          state: present
+governance:
+  scope: reuse when later prompts ask for ansible commands 01 ensure package installed
+    under compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:26:17+00:00'
+  provenance:
+  - not_learn-from-markdown-01-learn-ansible-commands-in_bb5686
+  - /Users/ravindranathakila/service/realized/trials/ansible/01_LEARN_ANSIBLE_COMMANDS_INSTALL_PACKAGE.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for ansible commands 01 ensure package
+      installed under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Ansible Commands 01 Ensure Package Installed
+    encountered_not: Ansible Commands 01 Ensure Package Installed
+    goal: How do you execute ansible commands 01 ensure package installed?
+    intended_object: "Ansible Commands 01 \u2014 Ensure Package Installed Ansible\
+      \ Commands 01 \u2014 Ensure Package Installed / Ansible Commands 01 Ensure Package\
+      \ Installed Ansible Commands 01 Ensure Package Installed How do you execute\
+      \ ansible commands 01 ensure package installed? 2. Executable Ansible relation\
+      \ ansible playbook block named playbook parameters: `package_name` This capability\
+      \ should be learned as a reusable Ansible ability artifact. The named playbook\
+      \ parameter is `package_name`."
+    success_criteria:
+    - the response directly resolves the stated ask without erasing material distinctions
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ Ansible Commands 01 \u2014 Ensure Package Installed Ansible Commands 01 \u2014\
+      \ Ensure Package Installed / Ansible Commands 01 Ensure Package Installed Ansible\
+      \ Commands 01 Ensure Package Installed How do you execute ansible commands 01\
+      \ ensure package installed, 2, Executable Ansible relation ansible playbook\
+      \ block named playbook parameters: `package_name` This capability should be\
+      \ learned as a reusable Ansible ability artifact; no justified final closure\
+      \ has been admitted yet"
+    givens:
+    - "Ansible Commands 01 \u2014 Ensure Package Installed Ansible Commands 01 \u2014\
+      \ Ensure Package Installed / Ansible Commands 01 Ensure Package Installed Ansible\
+      \ Commands 01 Ensure Package Installed How do you execute ansible commands 01\
+      \ ensure package installed"
+    - '2'
+    - 'Executable Ansible relation ansible playbook block named playbook parameters:
+      `package_name` This capability should be learned as a reusable Ansible ability
+      artifact'
+    unknowns: []
+    missing_components:
+    - a justified final realization has not yet been produced
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - completion
+    origin_layers:
+    - model
+    degree: partial
+    remainder_shapes:
+    - missing
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair: []
+    full_repair:
+    - 'satisfy success condition: the response directly resolves the stated ask without
+      erasing material distinctions'
+    boundary_shape:
+    - d*
+    action_posture: direct_resolution
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Ansible Commands 01 Ensure Package Installed
+    title_depth_prefixes:
+    - Ansible Commands 01 Ensure Package Installed
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Ansible Command 01 Ensure Package Install
+    composed_not: Ansible Command 01 Ensure Package Install
+    lookup_keys:
+    - ansible command 01 ensure package install
+    - ansible command
+    - command 01
+    - 01 ensure
+    - ensure package
+    - package install
+    - ansible command 01
+    - command 01 ensure
+    - 01 ensure package
+    - ensure package install
+    - execute ansible command 01 ensure package install
+    - execute ansible
+    - execute ansible command
+    - without reduc remainder item cannot clos with govern confidence
+    - without reduc remainder item cannot clo
+    - govern confidence
+    - without reduc
+    - reduc remainder
+    - remainder item
+    - item cannot
+    - cannot clos
+    - clos with
+    - with govern
+    - without reduc remainder
+    notation_yaml: |-
+      "How Do You Execute Ansible Commands 01 Ensure Package Installed":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Ansible Commands 01 Ensure Package Installed"
+          - "Components: Ansible Command 01 Ensure Package Install"
+          - "Composition: Ansible Command 01 Ensure Package Install"
+          - "Title identity: Ansible Commands 01 Ensure Package Installed"
+          - "Title depth segments: Ansible Commands 01 Ensure Package Installed"
+          - "Title depth prefixes: Ansible Commands 01 Ensure Package Installed"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: Ansible Commands 01 \u2014 Ensure Package Installed Ansible Commands 01 \u2014 Ensure Package Installed / Ansible Commands 01 Ensure Package Installed Ansible Commands 01 Ensure Package Installed How do you execute ansible commands 01 ensure package installed? 2. Executable Ansible relation ansible playbook block named playbook parameters: `package_name` This capability should be learned as a reusable Ansible ability artifact. The named playbook parameter is `package_name`."
+          - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+          - "Actual realization: the prompt surface is present; explicit givens are present: Ansible Commands 01 \u2014 Ensure Package Installed Ansible Commands 01 \u2014 Ensure Package Installed / Ansible Commands 01 Ensure Package Installed Ansible Commands 01 Ensure Package Installed How do you execute ansible commands 01 ensure package installed, 2, Executable Ansible relation ansible playbook block named playbook parameters: `package_name` This capability should be learned as a reusable Ansible ability artifact; no justified final closure has been admitted yet"
+          - "Givens: Ansible Commands 01 \u2014 Ensure Package Installed Ansible Commands 01 \u2014 Ensure Package Installed / Ansible Commands 01 Ensure Package Installed Ansible Commands 01 Ensure Package Installed How do you execute ansible commands 01 ensure package installed, 2, Executable Ansible relation ansible playbook block named playbook parameters: `package_name` This capability should be learned as a reusable Ansible ability artifact"
+          - "Missing components: a justified final realization has not yet been produced"
+          - "Misalignment types: completion"
+          - "Origin layers: model"
+          - "Degree: partial"
+          - "Remainder shapes: missing"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+          - "Action posture: direct_resolution"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - ansible
+---
+schema: bssc_skill.v2
+kind: ability
+title: "Ansible Commands 02 \u2014 Ensure Directory Exists / Ansible Commands 02 Ensure\
+  \ Directory Exists"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you execute ansible commands 02 ensure directory exists?
+declaration:
+  intent: How do you execute ansible commands 02 ensure directory exists?
+  inputs:
+    path: required input value
+    mode: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  - write
+  authority_bounds:
+    execute:
+      scope: local_configuration_target
+      target: ansible_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+    write:
+      scope: local_configuration_target
+      target: skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - configuration changes on declared targets
+  - filesystem or external state modification
+  persistence_behavior: may_modify_external_state
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier3_sensitive
+  executor_framework: ansible
+executor: ansible
+entrypoint: playbook
+inputs:
+  path: required input value
+  mode: required input value
+outputs:
+  result: execution result
+ansible: |-
+  - hosts: localhost
+    gather_facts: false
+    tasks:
+      - name: Ensure directory exists
+        file:
+          path: "{{ path }}"
+          state: directory
+          mode: "{{ mode }}"
+governance:
+  scope: reuse when later prompts ask for ansible commands 02 ensure directory exists
+    under compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a'*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:26:24+00:00'
+  provenance:
+  - not_learn-from-markdown-02-learn-ansible-commands-cr_44b682
+  - /Users/ravindranathakila/service/realized/trials/ansible/02_LEARN_ANSIBLE_COMMANDS_CREATE_DIRECTORY.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for ansible commands 02 ensure directory
+      exists under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Ansible Commands 02 Ensure Directory Exists
+    encountered_not: Ansible Commands 02 Ensure Directory Exists
+    goal: How do you execute ansible commands 02 ensure directory exists?
+    intended_object: "Ansible Commands 02 \u2014 Ensure Directory Exists Ansible Commands\
+      \ 02 \u2014 Ensure Directory Exists / Ansible Commands 02 Ensure Directory Exists\
+      \ Ansible Commands 02 Ensure Directory Exists How do you execute ansible commands\
+      \ 02 ensure directory exists? 2. Executable Ansible relation ansible playbook\
+      \ block named playbook parameters: `path`, `mode` This capability should be\
+      \ learned as a reusable Ansible ability artifact. The named playbook parameters\
+      \ are `path` and `mode`."
+    success_criteria:
+    - the response directly resolves the stated ask without erasing material distinctions
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ Ansible Commands 02 \u2014 Ensure Directory Exists Ansible Commands 02 \u2014\
+      \ Ensure Directory Exists / Ansible Commands 02 Ensure Directory Exists Ansible\
+      \ Commands 02 Ensure Directory Exists How do you execute ansible commands 02\
+      \ ensure directory exists, 2, Executable Ansible relation ansible playbook block\
+      \ named playbook parameters: `path`; no justified final closure has been admitted\
+      \ yet"
+    givens:
+    - "Ansible Commands 02 \u2014 Ensure Directory Exists Ansible Commands 02 \u2014\
+      \ Ensure Directory Exists / Ansible Commands 02 Ensure Directory Exists Ansible\
+      \ Commands 02 Ensure Directory Exists How do you execute ansible commands 02\
+      \ ensure directory exists"
+    - '2'
+    - 'Executable Ansible relation ansible playbook block named playbook parameters:
+      `path`'
+    unknowns: []
+    missing_components:
+    - a justified final realization has not yet been produced
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - completion
+    origin_layers:
+    - model
+    degree: partial
+    remainder_shapes:
+    - missing
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair: []
+    full_repair:
+    - 'satisfy success condition: the response directly resolves the stated ask without
+      erasing material distinctions'
+    boundary_shape:
+    - d*
+    action_posture: direct_resolution
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Ansible Commands 02 Ensure Directory Exists
+    title_depth_prefixes:
+    - Ansible Commands 02 Ensure Directory Exists
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Ansible Command 02 Ensure Directory Exist
+    - "Ansible Commands 02 \u2014 Ensure Directory Exists / Ansible Commands 02 Ensure\
+      \ Directory Exists / Mode"
+    composed_not: Ansible Command 02 Ensure Directory Exist
+    lookup_keys:
+    - ansible command 02 ensure directory exist
+    - ansible command
+    - command 02
+    - 02 ensure
+    - ensure directory
+    - directory exist
+    - ansible command 02
+    - command 02 ensure
+    - 02 ensure directory
+    - ensure directory exist
+    - execute ansible command 02 ensure directory exist
+    - execute ansible
+    - execute ansible command
+    - without reduc remainder item cannot clos with govern confidence
+    - without reduc remainder item cannot clo
+    - govern confidence
+    - without reduc
+    - reduc remainder
+    - remainder item
+    - item cannot
+    - cannot clos
+    - clos with
+    - with govern
+    - without reduc remainder
+    notation_yaml: |-
+      "How Do You Execute Ansible Commands 02 Ensure Directory Exists":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Ansible Commands 02 Ensure Directory Exists"
+          - "Components: Ansible Command 02 Ensure Directory Exist, Ansible Commands 02 \u2014 Ensure Directory Exists / Ansible Commands 02 Ensure Directory Exists / Mode"
+          - "Composition: Ansible Command 02 Ensure Directory Exist"
+          - "Title identity: Ansible Commands 02 Ensure Directory Exists"
+          - "Title depth segments: Ansible Commands 02 Ensure Directory Exists"
+          - "Title depth prefixes: Ansible Commands 02 Ensure Directory Exists"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: Ansible Commands 02 \u2014 Ensure Directory Exists Ansible Commands 02 \u2014 Ensure Directory Exists / Ansible Commands 02 Ensure Directory Exists Ansible Commands 02 Ensure Directory Exists How do you execute ansible commands 02 ensure directory exists? 2. Executable Ansible relation ansible playbook block named playbook parameters: `path`, `mode` This capability should be learned as a reusable Ansible ability artifact. The named playbook parameters are `path` and `mode`."
+          - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+          - "Actual realization: the prompt surface is present; explicit givens are present: Ansible Commands 02 \u2014 Ensure Directory Exists Ansible Commands 02 \u2014 Ensure Directory Exists / Ansible Commands 02 Ensure Directory Exists Ansible Commands 02 Ensure Directory Exists How do you execute ansible commands 02 ensure directory exists, 2, Executable Ansible relation ansible playbook block named playbook parameters: `path`; no justified final closure has been admitted yet"
+          - "Givens: Ansible Commands 02 \u2014 Ensure Directory Exists Ansible Commands 02 \u2014 Ensure Directory Exists / Ansible Commands 02 Ensure Directory Exists Ansible Commands 02 Ensure Directory Exists How do you execute ansible commands 02 ensure directory exists, 2, Executable Ansible relation ansible playbook block named playbook parameters: `path`"
+          - "Missing components: a justified final realization has not yet been produced"
+          - "Misalignment types: completion"
+          - "Origin layers: model"
+          - "Degree: partial"
+          - "Remainder shapes: missing"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+          - "Action posture: direct_resolution"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - ansible
+---
+schema: bssc_skill.v2
+kind: ability
+title: "Ansible Commands 03 \u2014 Copy File To Destination / Ansible Commands 03\
+  \ Copy File To Destination"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you execute ansible commands 03 copy file to destination?
+declaration:
+  intent: How do you execute ansible commands 03 copy file to destination?
+  inputs:
+    source: required input value
+    destination: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  - write
+  authority_bounds:
+    execute:
+      scope: local_configuration_target
+      target: ansible_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+    write:
+      scope: local_configuration_target
+      target: skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - configuration changes on declared targets
+  - filesystem or external state modification
+  persistence_behavior: may_modify_external_state
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier3_sensitive
+  executor_framework: ansible
+executor: ansible
+entrypoint: playbook
+inputs:
+  source: required input value
+  destination: required input value
+outputs:
+  result: execution result
+ansible: |-
+  - hosts: localhost
+    gather_facts: false
+    tasks:
+      - name: Copy file to destination
+        copy:
+          src: "{{ source }}"
+          dest: "{{ destination }}"
+          remote_src: true
+governance:
+  scope: reuse when later prompts ask for ansible commands 03 copy file to destination
+    under compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:26:32+00:00'
+  provenance:
+  - not_learn-from-markdown-03-learn-ansible-commands-co_a3a05e
+  - /Users/ravindranathakila/service/realized/trials/ansible/03_LEARN_ANSIBLE_COMMANDS_COPY_FILE.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for ansible commands 03 copy file
+      to destination under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Ansible Commands 03 Copy File To Destination
+    encountered_not: Ansible Commands 03 Copy File To Destination
+    goal: How do you execute ansible commands 03 copy file to destination?
+    intended_object: "Ansible Commands 03 \u2014 Copy File To Destination Ansible\
+      \ Commands 03 \u2014 Copy File To Destination / Ansible Commands 03 Copy File\
+      \ To Destination Ansible Commands 03 Copy File To Destination How do you execute\
+      \ ansible commands 03 copy file to destination? 2. Executable Ansible relation\
+      \ ansible playbook block named playbook parameters: `source`, `destination`\
+      \ This capability should be learned as a reusable Ansible ability artifact.\
+      \ The named playbook parameters are `source` and `destination`."
+    success_criteria:
+    - the response directly resolves the stated ask without erasing material distinctions
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ Ansible Commands 03 \u2014 Copy File To Destination Ansible Commands 03 \u2014\
+      \ Copy File To Destination / Ansible Commands 03 Copy File To Destination Ansible\
+      \ Commands 03 Copy File To Destination How do you execute ansible commands 03\
+      \ copy file to destination, 2, Executable Ansible relation ansible playbook\
+      \ block named playbook parameters: `source`; no justified final closure has\
+      \ been admitted yet"
+    givens:
+    - "Ansible Commands 03 \u2014 Copy File To Destination Ansible Commands 03 \u2014\
+      \ Copy File To Destination / Ansible Commands 03 Copy File To Destination Ansible\
+      \ Commands 03 Copy File To Destination How do you execute ansible commands 03\
+      \ copy file to destination"
+    - '2'
+    - 'Executable Ansible relation ansible playbook block named playbook parameters:
+      `source`'
+    unknowns: []
+    missing_components:
+    - a justified final realization has not yet been produced
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - completion
+    origin_layers:
+    - model
+    degree: partial
+    remainder_shapes:
+    - missing
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair: []
+    full_repair:
+    - 'satisfy success condition: the response directly resolves the stated ask without
+      erasing material distinctions'
+    boundary_shape:
+    - d*
+    action_posture: direct_resolution
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Ansible Commands 03 Copy File To Destination
+    title_depth_prefixes:
+    - Ansible Commands 03 Copy File To Destination
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Ansible Command 03 Copy File Destination
+    - "Ansible Commands 03 \u2014 Copy File To Destination / Ansible Commands 03 Copy\
+      \ File To Destination / Destination"
+    composed_not: Ansible Command 03 Copy File Destination
+    lookup_keys:
+    - ansible command 03 copy file destination
+    - ansible command
+    - command 03
+    - 03 copy
+    - copy file
+    - file destination
+    - ansible command 03
+    - command 03 copy
+    - 03 copy file
+    - copy file destination
+    - execute ansible command 03 copy file destination
+    - execute ansible
+    - execute ansible command
+    - without reduc remainder item cannot clos with govern confidence
+    - without reduc remainder item cannot clo
+    - govern confidence
+    - without reduc
+    - reduc remainder
+    - remainder item
+    - item cannot
+    - cannot clos
+    - clos with
+    - with govern
+    - without reduc remainder
+    notation_yaml: |-
+      "How Do You Execute Ansible Commands 03 Copy File To Destination":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Ansible Commands 03 Copy File To Destination"
+          - "Components: Ansible Command 03 Copy File Destination, Ansible Commands 03 \u2014 Copy File To Destination / Ansible Commands 03 Copy File To Destination / Destination"
+          - "Composition: Ansible Command 03 Copy File Destination"
+          - "Title identity: Ansible Commands 03 Copy File To Destination"
+          - "Title depth segments: Ansible Commands 03 Copy File To Destination"
+          - "Title depth prefixes: Ansible Commands 03 Copy File To Destination"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: Ansible Commands 03 \u2014 Copy File To Destination Ansible Commands 03 \u2014 Copy File To Destination / Ansible Commands 03 Copy File To Destination Ansible Commands 03 Copy File To Destination How do you execute ansible commands 03 copy file to destination? 2. Executable Ansible relation ansible playbook block named playbook parameters: `source`, `destination` This capability should be learned as a reusable Ansible ability artifact. The named playbook parameters are `source` and `destination`."
+          - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+          - "Actual realization: the prompt surface is present; explicit givens are present: Ansible Commands 03 \u2014 Copy File To Destination Ansible Commands 03 \u2014 Copy File To Destination / Ansible Commands 03 Copy File To Destination Ansible Commands 03 Copy File To Destination How do you execute ansible commands 03 copy file to destination, 2, Executable Ansible relation ansible playbook block named playbook parameters: `source`; no justified final closure has been admitted yet"
+          - "Givens: Ansible Commands 03 \u2014 Copy File To Destination Ansible Commands 03 \u2014 Copy File To Destination / Ansible Commands 03 Copy File To Destination Ansible Commands 03 Copy File To Destination How do you execute ansible commands 03 copy file to destination, 2, Executable Ansible relation ansible playbook block named playbook parameters: `source`"
+          - "Missing components: a justified final realization has not yet been produced"
+          - "Misalignment types: completion"
+          - "Origin layers: model"
+          - "Degree: partial"
+          - "Remainder shapes: missing"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+          - "Action posture: direct_resolution"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - ansible
+---
+schema: bssc_skill.v2
+kind: ability
+title: "Ansible Commands 04 \u2014 Write File Content / Ansible Commands 04 Write\
+  \ File Content"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you execute ansible commands 04 write file content?
+declaration:
+  intent: How do you execute ansible commands 04 write file content?
+  inputs:
+    path: required input value
+    content: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  - write
+  authority_bounds:
+    execute:
+      scope: local_configuration_target
+      target: ansible_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+    write:
+      scope: local_configuration_target
+      target: skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - configuration changes on declared targets
+  - filesystem or external state modification
+  persistence_behavior: may_modify_external_state
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier3_sensitive
+  executor_framework: ansible
+executor: ansible
+entrypoint: playbook
+inputs:
+  path: required input value
+  content: required input value
+outputs:
+  result: execution result
+ansible: |-
+  - hosts: localhost
+    gather_facts: false
+    tasks:
+      - name: Write file content
+        copy:
+          dest: "{{ path }}"
+          content: "{{ content }}"
+governance:
+  scope: reuse when later prompts ask for ansible commands 04 write file content under
+    compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a'*
+  - c'*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:26:39+00:00'
+  provenance:
+  - not_learn-from-markdown-04-learn-ansible-commands-wr_12367d
+  - /Users/ravindranathakila/service/realized/trials/ansible/04_LEARN_ANSIBLE_COMMANDS_WRITE_FILE_CONTENT.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for ansible commands 04 write file
+      content under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Ansible Commands 04 Write File Content
+    encountered_not: Ansible Commands 04 Write File Content
+    goal: How do you execute ansible commands 04 write file content?
+    intended_object: "Ansible Commands 04 \u2014 Write File Content Ansible Commands\
+      \ 04 \u2014 Write File Content / Ansible Commands 04 Write File Content Ansible\
+      \ Commands 04 Write File Content How do you execute ansible commands 04 write\
+      \ file content? 2. Executable Ansible relation ansible playbook block named\
+      \ playbook parameters: `path`, `content` This capability should be learned as\
+      \ a reusable Ansible ability artifact. The named playbook parameters are `path`\
+      \ and `content`."
+    success_criteria:
+    - the response directly resolves the stated ask without erasing material distinctions
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ Ansible Commands 04 \u2014 Write File Content Ansible Commands 04 \u2014 Write\
+      \ File Content / Ansible Commands 04 Write File Content Ansible Commands 04\
+      \ Write File Content How do you execute ansible commands 04 write file content,\
+      \ 2, Executable Ansible relation ansible playbook block named playbook parameters:\
+      \ `path`; no justified final closure has been admitted yet"
+    givens:
+    - "Ansible Commands 04 \u2014 Write File Content Ansible Commands 04 \u2014 Write\
+      \ File Content / Ansible Commands 04 Write File Content Ansible Commands 04\
+      \ Write File Content How do you execute ansible commands 04 write file content"
+    - '2'
+    - 'Executable Ansible relation ansible playbook block named playbook parameters:
+      `path`'
+    unknowns: []
+    missing_components:
+    - a justified final realization has not yet been produced
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - completion
+    origin_layers:
+    - model
+    degree: partial
+    remainder_shapes:
+    - missing
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair: []
+    full_repair:
+    - 'satisfy success condition: the response directly resolves the stated ask without
+      erasing material distinctions'
+    boundary_shape:
+    - d*
+    action_posture: direct_resolution
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Ansible Commands 04 Write File Content
+    title_depth_prefixes:
+    - Ansible Commands 04 Write File Content
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Ansible Command 04 File Content
+    - "Ansible Commands 04 \u2014 Write File Content / Ansible Commands 04 Write File\
+      \ Content / Content"
+    composed_not: Ansible Command 04 File Content
+    lookup_keys:
+    - ansible command 04 file content
+    - ansible command
+    - command 04
+    - 04 file
+    - file content
+    - ansible command 04
+    - command 04 file
+    - 04 file content
+    - execute ansible command 04 file content
+    - execute ansible
+    - execute ansible command
+    - without reduc remainder item cannot clos with govern confidence
+    - without reduc remainder item cannot clo
+    - govern confidence
+    - without reduc
+    - reduc remainder
+    - remainder item
+    - item cannot
+    - cannot clos
+    - clos with
+    - with govern
+    - without reduc remainder
+    - reduc remainder item
+    - remainder item cannot
+    notation_yaml: |-
+      "How Do You Execute Ansible Commands 04 Write File Content":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Ansible Commands 04 Write File Content"
+          - "Components: Ansible Command 04 File Content, Ansible Commands 04 \u2014 Write File Content / Ansible Commands 04 Write File Content / Content"
+          - "Composition: Ansible Command 04 File Content"
+          - "Title identity: Ansible Commands 04 Write File Content"
+          - "Title depth segments: Ansible Commands 04 Write File Content"
+          - "Title depth prefixes: Ansible Commands 04 Write File Content"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: Ansible Commands 04 \u2014 Write File Content Ansible Commands 04 \u2014 Write File Content / Ansible Commands 04 Write File Content Ansible Commands 04 Write File Content How do you execute ansible commands 04 write file content? 2. Executable Ansible relation ansible playbook block named playbook parameters: `path`, `content` This capability should be learned as a reusable Ansible ability artifact. The named playbook parameters are `path` and `content`."
+          - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+          - "Actual realization: the prompt surface is present; explicit givens are present: Ansible Commands 04 \u2014 Write File Content Ansible Commands 04 \u2014 Write File Content / Ansible Commands 04 Write File Content Ansible Commands 04 Write File Content How do you execute ansible commands 04 write file content, 2, Executable Ansible relation ansible playbook block named playbook parameters: `path`; no justified final closure has been admitted yet"
+          - "Givens: Ansible Commands 04 \u2014 Write File Content Ansible Commands 04 \u2014 Write File Content / Ansible Commands 04 Write File Content Ansible Commands 04 Write File Content How do you execute ansible commands 04 write file content, 2, Executable Ansible relation ansible playbook block named playbook parameters: `path`"
+          - "Missing components: a justified final realization has not yet been produced"
+          - "Misalignment types: completion"
+          - "Origin layers: model"
+          - "Degree: partial"
+          - "Remainder shapes: missing"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+          - "Action posture: direct_resolution"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - ansible
+---
+schema: bssc_skill.v2
+kind: ability
+title: "Ansible Commands 04 \u2014 Write File Content / Python Ability"
+description:
+- The encounter states a direct parameter mapping that should remain callable even
+  when other learned artifacts from the same document are knowledge-shaped.
+- Executable ability artifact.
+question: How do you calculate write_times_the_times_text_times_ready from true, to,
+  tmp, ansible, env?
+declaration:
+  intent: How do you calculate write_times_the_times_text_times_ready from true, to,
+    tmp, ansible, env?
+  inputs:
+    'true': number
+    to: number
+    tmp: number
+    ansible: number
+    env: number
+  outputs:
+    write_times_the_times_text_times_ready: number
+  authorities_requested:
+  - execute
+  authority_bounds:
+    execute:
+      scope: local_executor
+      target: python3_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - local executor invocation
+  persistence_behavior: none
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier1_bounded_transform
+  executor_framework: python3
+executor: python3
+entrypoint: main
+inputs:
+  'true': number
+  to: number
+  tmp: number
+  ansible: number
+  env: number
+outputs:
+  write_times_the_times_text_times_ready: number
+python: "# /// script\n# requires-python = \">=3.11\"\n# dependencies = [\"msgspec\"\
+  , \"orjson\"]\n# ///\n\nfrom __future__ import annotations\n\nimport argparse\n\
+  import ast\nimport math\nimport sys\n\nimport msgspec\nimport orjson\n\n\nEXPRESSION\
+  \ = 'true * to / tmp / ansible . env'\nOUTPUT_FIELD = 'write_times_the_times_text_times_ready'\n\
+  ALLOWED_NAMES = ['true', 'to', 'tmp', 'ansible', 'env']\nALLOWED_NODE_TYPES = (\n\
+  \    ast.Expression,\n    ast.BinOp,\n    ast.UnaryOp,\n    ast.Add,\n    ast.Sub,\n\
+  \    ast.Mult,\n    ast.Div,\n    ast.Pow,\n    ast.Mod,\n    ast.FloorDiv,\n  \
+  \  ast.USub,\n    ast.UAdd,\n    ast.Load,\n    ast.Name,\n    ast.Constant,\n)\n\
+  \n\nclass InputPayload(msgspec.Struct, kw_only=True):\n    payload: dict[str, object]\
+  \ = {}\n\n\nclass OutputPayload(msgspec.Struct, kw_only=True):\n    status: str\n\
+  \    answer: str = \"\"\n    result: dict[str, object]\n    notes: list[str] = []\n\
+  \n\ndef _validate_expression() -> ast.AST:\n    tree = ast.parse(EXPRESSION, mode=\"\
+  eval\")\n    for node in ast.walk(tree):\n        if not isinstance(node, ALLOWED_NODE_TYPES):\n\
+  \            raise ValueError(f\"disallowed expression node: {type(node).__name__}\"\
+  )\n        if isinstance(node, ast.Name) and node.id not in ALLOWED_NAMES:\n   \
+  \         raise ValueError(f\"disallowed symbol: {node.id}\")\n    return tree\n\
+  \n\nCOMPILED = compile(_validate_expression(), \"<expression>\", \"eval\")\n\n\n\
+  def _coerce_number(value: object) -> float:\n    if value is None:\n        raise\
+  \ ValueError(\"missing numeric input\")\n    if isinstance(value, bool):\n     \
+  \   raise ValueError(\"boolean inputs are not numeric\")\n    if isinstance(value,\
+  \ (int, float)):\n        return float(value)\n    text = str(value).strip()\n \
+  \   if not text:\n        raise ValueError(\"empty numeric input\")\n    return\
+  \ float(text)\n\n\ndef run(payload: InputPayload) -> OutputPayload:\n    values\
+  \ = {\n    \"true\": _coerce_number(payload.payload.get(\"true\")),\n    \"to\"\
+  : _coerce_number(payload.payload.get(\"to\")),\n    \"tmp\": _coerce_number(payload.payload.get(\"\
+  tmp\")),\n    \"ansible\": _coerce_number(payload.payload.get(\"ansible\")),\n \
+  \   \"env\": _coerce_number(payload.payload.get(\"env\")),\n    }\n    result =\
+  \ eval(COMPILED, {\"__builtins__\": {}, \"math\": math}, values)\n    normalized\
+  \ = int(result) if isinstance(result, float) and result.is_integer() else result\n\
+  \    return OutputPayload(\n        status=\"ok\",\n        answer=str(normalized),\n\
+  \        result={OUTPUT_FIELD: normalized},\n        notes=[],\n    )\n\n\ndef main()\
+  \ -> None:\n    parser = argparse.ArgumentParser(description='Ansible Commands 04\
+  \ \u2014 Write File Content / Python Ability')\n    parser.add_argument(\"--input-json\"\
+  , help=\"Optional JSON payload. Prefer stdin when omitted.\")\n    args = parser.parse_args()\n\
+  \    raw = args.input_json.encode(\"utf-8\") if args.input_json else sys.stdin.buffer.read()\n\
+  \    payload = orjson.loads(raw) if raw else {}\n    typed_input = msgspec.convert({\"\
+  payload\": payload}, type=InputPayload)\n    result = run(typed_input)\n    sys.stdout.buffer.write(orjson.dumps(msgspec.to_builtins(result),\
+  \ option=orjson.OPT_INDENT_2))\n    sys.stdout.buffer.write(b\"\\n\")\n\n\nif __name__\
+  \ == \"__main__\":\n    main()"
+governance:
+  scope: reuse when later prompts ask to compute write_times_the_times_text_times_ready
+    from true, to, tmp, ansible, env
+  justification: The encounter states a direct parameter mapping that should remain
+    callable even when other learned artifacts from the same document are knowledge-shaped.
+  function_bit: 1
+  boundary_shape:
+  - a*
+  - b'*
+  - c'*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:26:42+00:00'
+  provenance:
+  - not_learn-from-markdown-04-learn-ansible-commands-wr_12367d
+  - /Users/ravindranathakila/service/realized/trials/ansible/04_LEARN_ANSIBLE_COMMANDS_WRITE_FILE_CONTENT.md
+  constraints:
+  - derive only from the supplied encounter
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask to compute write_times_the_times_text_times_ready
+      from true, to, tmp, ansible, env
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Natural Language Paraphrases
+    encountered_not: 4 Natural Language Paraphrases
+    goal: How do you calculate write_times_the_times_text_times_ready from true, to,
+      tmp, ansible, env?
+    intended_object: "Ansible Commands 04 \u2014 Write File Content Ansible Commands\
+      \ 04 \u2014 Write File Content / Python Ability Natural Language Paraphrases\
+      \ Python Ability How do you calculate write_times_the_times_text_times_ready\
+      \ from true, to, tmp, ansible, env? 4 Natural Language Paraphrases 4. Natural-language\
+      \ paraphrases write the text ready=true to /tmp/ansible.env create /tmp/app.conf\
+      \ with specific content write exact file content with Ansible write the text\
+      \ `ready=true` to `/tmp/ansible.env` create `/tmp/app.conf` with specific content"
+    success_criteria:
+    - all required inputs are explicit and the bounded computation or template is
+      applied faithfully
+    - the result is returned in the requested usable form
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ Ansible Commands 04 \u2014 Write File Content Ansible Commands 04 \u2014 Write\
+      \ File Content / Python Ability Natural Language Paraphrases Python Ability\
+      \ How do you calculate write_times_the_times_text_times_ready from true, 4 Natural\
+      \ Language Paraphrases 4, Natural-language paraphrases write the text ready=true\
+      \ to /tmp/ansible; no justified final closure has been admitted yet"
+    givens:
+    - "Ansible Commands 04 \u2014 Write File Content Ansible Commands 04 \u2014 Write\
+      \ File Content / Python Ability Natural Language Paraphrases Python Ability\
+      \ How do you calculate write_times_the_times_text_times_ready from true"
+    - 4 Natural Language Paraphrases 4
+    - Natural-language paraphrases write the text ready=true to /tmp/ansible
+    - conf with specific content write exact file content with Ansible write the text
+      `ready=true` to `/tmp/ansible
+    unknowns: []
+    missing_components:
+    - a justified final realization has not yet been produced
+    distorted_components: []
+    differentiators:
+    - 'named inputs supplied: ready'
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - functional
+    - completion
+    origin_layers:
+    - model
+    degree: partial
+    remainder_shapes:
+    - missing
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair:
+    - perform the bounded computation or invoke the matching executable template
+    full_repair:
+    - perform the bounded computation or invoke the matching executable template
+    - 'satisfy success condition: all required inputs are explicit and the bounded
+      computation or template is applied faithfully'
+    - 'satisfy success condition: the result is returned in the requested usable form'
+    boundary_shape:
+    - d*
+    action_posture: compute_or_template
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Natural Language Paraphrases
+    title_depth_prefixes:
+    - Natural Language Paraphrases
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Ansible Command 04 File Content
+    - "Ansible Commands 04 \u2014 Write File Content / Python Ability / To"
+    - "Ansible Commands 04 \u2014 Write File Content / Python Ability / Tmp"
+    - "Ansible Commands 04 \u2014 Write File Content / Python Ability / Ansible"
+    - "Ansible Commands 04 \u2014 Write File Content / Python Ability / Env"
+    - "Ansible Commands 04 \u2014 Write File Content / Python Ability / Time Time\
+      \ Text Time Ready"
+    composed_not: 4 Natural Language Paraphrase
+    lookup_keys:
+    - natural language paraphrase
+    - natural language
+    - language paraphrase
+    - calculate time time text time ready true tmp ansible env
+    - calculate time
+    - time time
+    - time text
+    - text time
+    - time ready
+    - ready true
+    - true tmp
+    - tmp ansible
+    - ansible env
+    - calculate time time
+    - time time text
+    - time text time
+    - text time ready
+    - time ready true
+    - ready true tmp
+    - true tmp ansible
+    - tmp ansible env
+    - perform bound computation or invoke match executable template
+    - perform bound
+    - bound computation
+    notation_yaml: |-
+      "How Do You Calculate Write Times The Times Text Times Ready From True To Tmp Ansible Env":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: 4 Natural Language Paraphrases"
+          - "Components: Ansible Command 04 File Content, Ansible Commands 04 \u2014 Write File Content / Python Ability / To, Ansible Commands 04 \u2014 Write File Content / Python Ability / Tmp, Ansible Commands 04 \u2014 Write File Content / Python Ability / Ansible, Ansible Commands 04 \u2014 Write File Content / Python Ability / Env, Ansible Commands 04 \u2014 Write File Content / Python Ability / Time Time Text Time Ready"
+          - "Composition: 4 Natural Language Paraphrase"
+          - "Title identity: Natural Language Paraphrases"
+          - "Title depth segments: Natural Language Paraphrases"
+          - "Title depth prefixes: Natural Language Paraphrases"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: Ansible Commands 04 \u2014 Write File Content Ansible Commands 04 \u2014 Write File Content / Python Ability Natural Language Paraphrases Python Ability How do you calculate write_times_the_times_text_times_ready from true, to, tmp, ansible, env? 4 Natural Language Paraphrases 4. Natural-language paraphrases write the text ready=true to /tmp/ansible.env create /tmp/app.conf with specific content write exact file content with Ansible write the text `ready=true` to `/tmp/ansible.env` create `/tmp/app.conf` with specific content"
+          - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+          - "Actual realization: the prompt surface is present; explicit givens are present: Ansible Commands 04 \u2014 Write File Content Ansible Commands 04 \u2014 Write File Content / Python Ability Natural Language Paraphrases Python Ability How do you calculate write_times_the_times_text_times_ready from true, 4 Natural Language Paraphrases 4, Natural-language paraphrases write the text ready=true to /tmp/ansible; no justified final closure has been admitted yet"
+          - "Givens: Ansible Commands 04 \u2014 Write File Content Ansible Commands 04 \u2014 Write File Content / Python Ability Natural Language Paraphrases Python Ability How do you calculate write_times_the_times_text_times_ready from true, 4 Natural Language Paraphrases 4, Natural-language paraphrases write the text ready=true to /tmp/ansible, conf with specific content write exact file content with Ansible write the text `ready=true` to `/tmp/ansible"
+          - "Missing components: a justified final realization has not yet been produced"
+          - "Differentiators: named inputs supplied: ready"
+          - "Misalignment types: functional, completion"
+          - "Origin layers: model"
+          - "Degree: partial"
+          - "Remainder shapes: missing"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Minimal repair: perform the bounded computation or invoke the matching executable template"
+          - "Full repair: perform the bounded computation or invoke the matching executable template, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+          - "Action posture: compute_or_template"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - ansible
+---
+schema: bssc_skill.v2
+kind: ability
+title: "Ansible Commands 05 \u2014 Ensure Line Present In File / Ansible Commands\
+  \ 05 Ensure Line Present In File"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you execute ansible commands 05 ensure line present in file?
+declaration:
+  intent: How do you execute ansible commands 05 ensure line present in file?
+  inputs:
+    path: required input value
+    line: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  - write
+  authority_bounds:
+    execute:
+      scope: local_configuration_target
+      target: ansible_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+    write:
+      scope: local_configuration_target
+      target: skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - configuration changes on declared targets
+  - filesystem or external state modification
+  persistence_behavior: may_modify_external_state
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier3_sensitive
+  executor_framework: ansible
+executor: ansible
+entrypoint: playbook
+inputs:
+  path: required input value
+  line: required input value
+outputs:
+  result: execution result
+ansible: |-
+  - hosts: localhost
+    gather_facts: false
+    tasks:
+      - name: Ensure line is present
+        lineinfile:
+          path: "{{ path }}"
+          line: "{{ line }}"
+          create: true
+governance:
+  scope: reuse when later prompts ask for ansible commands 05 ensure line present
+    in file under compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a'*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:27:07+00:00'
+  provenance:
+  - not_learn-from-markdown-05-learn-ansible-commands-en_ec21f7
+  - /Users/ravindranathakila/service/realized/trials/ansible/05_LEARN_ANSIBLE_COMMANDS_ENSURE_LINE_PRESENT.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for ansible commands 05 ensure line
+      present in file under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Ansible Commands 05 Ensure Line Present In File
+    encountered_not: Ansible Commands 05 Ensure Line Present In File
+    goal: How do you execute ansible commands 05 ensure line present in file?
+    intended_object: "Ansible Commands 05 \u2014 Ensure Line Present In File Ansible\
+      \ Commands 05 \u2014 Ensure Line Present In File / Ansible Commands 05 Ensure\
+      \ Line Present In File Ansible Commands 05 Ensure Line Present In File How do\
+      \ you execute ansible commands 05 ensure line present in file? 2. Executable\
+      \ Ansible relation ansible playbook block named playbook parameters: `path`,\
+      \ `line` This capability should be learned as a reusable Ansible ability artifact.\
+      \ The named playbook parameters are `path` and `line`."
+    success_criteria:
+    - the response directly resolves the stated ask without erasing material distinctions
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ Ansible Commands 05 \u2014 Ensure Line Present In File Ansible Commands 05\
+      \ \u2014 Ensure Line Present In File / Ansible Commands 05 Ensure Line Present\
+      \ In File Ansible Commands 05 Ensure Line Present In File How do you execute\
+      \ ansible commands 05 ensure line present in file, 2, Executable Ansible relation\
+      \ ansible playbook block named playbook parameters: `path`; no justified final\
+      \ closure has been admitted yet"
+    givens:
+    - "Ansible Commands 05 \u2014 Ensure Line Present In File Ansible Commands 05\
+      \ \u2014 Ensure Line Present In File / Ansible Commands 05 Ensure Line Present\
+      \ In File Ansible Commands 05 Ensure Line Present In File How do you execute\
+      \ ansible commands 05 ensure line present in file"
+    - '2'
+    - 'Executable Ansible relation ansible playbook block named playbook parameters:
+      `path`'
+    unknowns: []
+    missing_components:
+    - a justified final realization has not yet been produced
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - completion
+    origin_layers:
+    - model
+    degree: partial
+    remainder_shapes:
+    - missing
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair: []
+    full_repair:
+    - 'satisfy success condition: the response directly resolves the stated ask without
+      erasing material distinctions'
+    boundary_shape:
+    - d*
+    action_posture: direct_resolution
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Ansible Commands 05 Ensure Line Present In File
+    title_depth_prefixes:
+    - Ansible Commands 05 Ensure Line Present In File
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Ansible Command 05 Ensure Line Present File
+    - "Ansible Commands 05 \u2014 Ensure Line Present In File / Ansible Commands 05\
+      \ Ensure Line Present In File / Line"
+    composed_not: Ansible Command 05 Ensure Line Present File
+    lookup_keys:
+    - ansible command 05 ensure line present file
+    - ansible command
+    - command 05
+    - 05 ensure
+    - ensure line
+    - line present
+    - present file
+    - ansible command 05
+    - command 05 ensure
+    - 05 ensure line
+    - ensure line present
+    - line present file
+    - execute ansible command 05 ensure line present file
+    - execute ansible
+    - execute ansible command
+    - without reduc remainder item cannot clos with govern confidence
+    - without reduc remainder item cannot clo
+    - govern confidence
+    - without reduc
+    - reduc remainder
+    - remainder item
+    - item cannot
+    - cannot clos
+    - clos with
+    notation_yaml: |-
+      "How Do You Execute Ansible Commands 05 Ensure Line Present In File":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Ansible Commands 05 Ensure Line Present In File"
+          - "Components: Ansible Command 05 Ensure Line Present File, Ansible Commands 05 \u2014 Ensure Line Present In File / Ansible Commands 05 Ensure Line Present In File / Line"
+          - "Composition: Ansible Command 05 Ensure Line Present File"
+          - "Title identity: Ansible Commands 05 Ensure Line Present In File"
+          - "Title depth segments: Ansible Commands 05 Ensure Line Present In File"
+          - "Title depth prefixes: Ansible Commands 05 Ensure Line Present In File"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: Ansible Commands 05 \u2014 Ensure Line Present In File Ansible Commands 05 \u2014 Ensure Line Present In File / Ansible Commands 05 Ensure Line Present In File Ansible Commands 05 Ensure Line Present In File How do you execute ansible commands 05 ensure line present in file? 2. Executable Ansible relation ansible playbook block named playbook parameters: `path`, `line` This capability should be learned as a reusable Ansible ability artifact. The named playbook parameters are `path` and `line`."
+          - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+          - "Actual realization: the prompt surface is present; explicit givens are present: Ansible Commands 05 \u2014 Ensure Line Present In File Ansible Commands 05 \u2014 Ensure Line Present In File / Ansible Commands 05 Ensure Line Present In File Ansible Commands 05 Ensure Line Present In File How do you execute ansible commands 05 ensure line present in file, 2, Executable Ansible relation ansible playbook block named playbook parameters: `path`; no justified final closure has been admitted yet"
+          - "Givens: Ansible Commands 05 \u2014 Ensure Line Present In File Ansible Commands 05 \u2014 Ensure Line Present In File / Ansible Commands 05 Ensure Line Present In File Ansible Commands 05 Ensure Line Present In File How do you execute ansible commands 05 ensure line present in file, 2, Executable Ansible relation ansible playbook block named playbook parameters: `path`"
+          - "Missing components: a justified final realization has not yet been produced"
+          - "Misalignment types: completion"
+          - "Origin layers: model"
+          - "Degree: partial"
+          - "Remainder shapes: missing"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+          - "Action posture: direct_resolution"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - ansible
+---
+schema: bssc_skill.v2
+kind: ability
+title: "Ansible Commands 05 \u2014 Ensure Line Present In File / Python Ability"
+description:
+- The encounter states a direct parameter mapping that should remain callable even
+  when other learned artifacts from the same document are knowledge-shaped.
+- Executable ability artifact.
+question: How do you calculate ensure_times_the_times_line_times_export_times_DEMO
+  from is, present, in, tmp, ansible, env?
+declaration:
+  intent: How do you calculate ensure_times_the_times_line_times_export_times_DEMO
+    from is, present, in, tmp, ansible, env?
+  inputs:
+    is: number
+    present: number
+    in: number
+    tmp: number
+    ansible: number
+    env: number
+  outputs:
+    ensure_times_the_times_line_times_export_times_DEMO: number
+  authorities_requested:
+  - execute
+  authority_bounds:
+    execute:
+      scope: local_executor
+      target: python3_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - local executor invocation
+  persistence_behavior: none
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier1_bounded_transform
+  executor_framework: python3
+executor: python3
+entrypoint: main
+inputs:
+  is: number
+  present: number
+  in: number
+  tmp: number
+  ansible: number
+  env: number
+outputs:
+  ensure_times_the_times_line_times_export_times_DEMO: number
+python: "# /// script\n# requires-python = \">=3.11\"\n# dependencies = [\"msgspec\"\
+  , \"orjson\"]\n# ///\n\nfrom __future__ import annotations\n\nimport argparse\n\
+  import ast\nimport math\nimport sys\n\nimport msgspec\nimport orjson\n\n\nEXPRESSION\
+  \ = '1 * is * present * in / tmp / ansible . env'\nOUTPUT_FIELD = 'ensure_times_the_times_line_times_export_times_DEMO'\n\
+  ALLOWED_NAMES = ['is', 'present', 'in', 'tmp', 'ansible', 'env']\nALLOWED_NODE_TYPES\
+  \ = (\n    ast.Expression,\n    ast.BinOp,\n    ast.UnaryOp,\n    ast.Add,\n   \
+  \ ast.Sub,\n    ast.Mult,\n    ast.Div,\n    ast.Pow,\n    ast.Mod,\n    ast.FloorDiv,\n\
+  \    ast.USub,\n    ast.UAdd,\n    ast.Load,\n    ast.Name,\n    ast.Constant,\n\
+  )\n\n\nclass InputPayload(msgspec.Struct, kw_only=True):\n    payload: dict[str,\
+  \ object] = {}\n\n\nclass OutputPayload(msgspec.Struct, kw_only=True):\n    status:\
+  \ str\n    answer: str = \"\"\n    result: dict[str, object]\n    notes: list[str]\
+  \ = []\n\n\ndef _validate_expression() -> ast.AST:\n    tree = ast.parse(EXPRESSION,\
+  \ mode=\"eval\")\n    for node in ast.walk(tree):\n        if not isinstance(node,\
+  \ ALLOWED_NODE_TYPES):\n            raise ValueError(f\"disallowed expression node:\
+  \ {type(node).__name__}\")\n        if isinstance(node, ast.Name) and node.id not\
+  \ in ALLOWED_NAMES:\n            raise ValueError(f\"disallowed symbol: {node.id}\"\
+  )\n    return tree\n\n\nCOMPILED = compile(_validate_expression(), \"<expression>\"\
+  , \"eval\")\n\n\ndef _coerce_number(value: object) -> float:\n    if value is None:\n\
+  \        raise ValueError(\"missing numeric input\")\n    if isinstance(value, bool):\n\
+  \        raise ValueError(\"boolean inputs are not numeric\")\n    if isinstance(value,\
+  \ (int, float)):\n        return float(value)\n    text = str(value).strip()\n \
+  \   if not text:\n        raise ValueError(\"empty numeric input\")\n    return\
+  \ float(text)\n\n\ndef run(payload: InputPayload) -> OutputPayload:\n    values\
+  \ = {\n    \"is\": _coerce_number(payload.payload.get(\"is\")),\n    \"present\"\
+  : _coerce_number(payload.payload.get(\"present\")),\n    \"in\": _coerce_number(payload.payload.get(\"\
+  in\")),\n    \"tmp\": _coerce_number(payload.payload.get(\"tmp\")),\n    \"ansible\"\
+  : _coerce_number(payload.payload.get(\"ansible\")),\n    \"env\": _coerce_number(payload.payload.get(\"\
+  env\")),\n    }\n    result = eval(COMPILED, {\"__builtins__\": {}, \"math\": math},\
+  \ values)\n    normalized = int(result) if isinstance(result, float) and result.is_integer()\
+  \ else result\n    return OutputPayload(\n        status=\"ok\",\n        answer=str(normalized),\n\
+  \        result={OUTPUT_FIELD: normalized},\n        notes=[],\n    )\n\n\ndef main()\
+  \ -> None:\n    parser = argparse.ArgumentParser(description='Ansible Commands 05\
+  \ \u2014 Ensure Line Present In File / Python Ability')\n    parser.add_argument(\"\
+  --input-json\", help=\"Optional JSON payload. Prefer stdin when omitted.\")\n  \
+  \  args = parser.parse_args()\n    raw = args.input_json.encode(\"utf-8\") if args.input_json\
+  \ else sys.stdin.buffer.read()\n    payload = orjson.loads(raw) if raw else {}\n\
+  \    typed_input = msgspec.convert({\"payload\": payload}, type=InputPayload)\n\
+  \    result = run(typed_input)\n    sys.stdout.buffer.write(orjson.dumps(msgspec.to_builtins(result),\
+  \ option=orjson.OPT_INDENT_2))\n    sys.stdout.buffer.write(b\"\\n\")\n\n\nif __name__\
+  \ == \"__main__\":\n    main()"
+governance:
+  scope: reuse when later prompts ask to compute ensure_times_the_times_line_times_export_times_DEMO
+    from is, present, in, tmp, ansible, env
+  justification: The encounter states a direct parameter mapping that should remain
+    callable even when other learned artifacts from the same document are knowledge-shaped.
+  function_bit: 1
+  boundary_shape:
+  - a*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:27:14+00:00'
+  provenance:
+  - not_learn-from-markdown-05-learn-ansible-commands-en_ec21f7
+  - /Users/ravindranathakila/service/realized/trials/ansible/05_LEARN_ANSIBLE_COMMANDS_ENSURE_LINE_PRESENT.md
+  constraints:
+  - derive only from the supplied encounter
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask to compute ensure_times_the_times_line_times_export_times_DEMO
+      from is, present, in, tmp, ansible, env
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Natural Language Paraphrases
+    encountered_not: 4 Natural Language Paraphrases
+    goal: How do you calculate ensure_times_the_times_line_times_export_times_DEMO
+      from is, present, in, tmp, ansible, env?
+    intended_object: "Ansible Commands 05 \u2014 Ensure Line Present In File Ansible\
+      \ Commands 05 \u2014 Ensure Line Present In File / Python Ability Natural Language\
+      \ Paraphrases Python Ability How do you calculate ensure_times_the_times_line_times_export_times_DEMO\
+      \ from is, present, in, tmp, ansible, env? 4 Natural Language Paraphrases 4.\
+      \ Natural-language paraphrases ensure the line export DEMO=1 is present in /tmp/ansible.env\
+      \ add one configuration line to a file if missing manage a single line in a\
+      \ file with Ansible ensure the line `export DEMO=1` is present in `/tmp/ansible.env`"
+    success_criteria:
+    - all required inputs are explicit and the bounded computation or template is
+      applied faithfully
+    - the result is returned in the requested usable form
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ Ansible Commands 05 \u2014 Ensure Line Present In File Ansible Commands 05\
+      \ \u2014 Ensure Line Present In File / Python Ability Natural Language Paraphrases\
+      \ Python Ability How do you calculate ensure_times_the_times_line_times_export_times_DEMO\
+      \ from is, 4 Natural Language Paraphrases 4, Natural-language paraphrases ensure\
+      \ the line export DEMO=1 is present in /tmp/ansible; no justified final closure\
+      \ has been admitted yet"
+    givens:
+    - "Ansible Commands 05 \u2014 Ensure Line Present In File Ansible Commands 05\
+      \ \u2014 Ensure Line Present In File / Python Ability Natural Language Paraphrases\
+      \ Python Ability How do you calculate ensure_times_the_times_line_times_export_times_DEMO\
+      \ from is"
+    - 4 Natural Language Paraphrases 4
+    - Natural-language paraphrases ensure the line export DEMO=1 is present in /tmp/ansible
+    - env add one configuration line to a file if missing manage a single line in
+      a file with Ansible ensure the line `export DEMO=1` is present in `/tmp/ansible
+    unknowns: []
+    missing_components:
+    - a justified final realization has not yet been produced
+    distorted_components: []
+    differentiators:
+    - 'named inputs supplied: demo'
+    contrastive_cases:
+    - condition holds versus condition does not hold
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - functional
+    - completion
+    origin_layers:
+    - model
+    degree: partial
+    remainder_shapes:
+    - missing
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair:
+    - perform the bounded computation or invoke the matching executable template
+    full_repair:
+    - perform the bounded computation or invoke the matching executable template
+    - 'satisfy success condition: all required inputs are explicit and the bounded
+      computation or template is applied faithfully'
+    - 'satisfy success condition: the result is returned in the requested usable form'
+    boundary_shape:
+    - d*
+    action_posture: compute_or_template
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Natural Language Paraphrases
+    title_depth_prefixes:
+    - Natural Language Paraphrases
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Ansible Command 05 Ensure Line Present File
+    - "Ansible Commands 05 \u2014 Ensure Line Present In File / Python Ability / Present"
+    - "Ansible Commands 05 \u2014 Ensure Line Present In File / Python Ability / In"
+    - "Ansible Commands 05 \u2014 Ensure Line Present In File / Python Ability / Tmp"
+    - "Ansible Commands 05 \u2014 Ensure Line Present In File / Python Ability / Ansible"
+    - "Ansible Commands 05 \u2014 Ensure Line Present In File / Python Ability / Env"
+    composed_not: 4 Natural Language Paraphrase
+    lookup_keys:
+    - natural language paraphrase
+    - natural language
+    - language paraphrase
+    - calculate ensure time time line time export time demo present tmp ansible env
+    - calculate ensure
+    - ensure time
+    - time time
+    - time line
+    - line time
+    - time export
+    - export time
+    - time demo
+    - demo present
+    - present tmp
+    - tmp ansible
+    - ansible env
+    - calculate ensure time
+    - ensure time time
+    - time time line
+    - time line time
+    - line time export
+    - time export time
+    - export time demo
+    - time demo present
+    notation_yaml: |-
+      "How Do You Calculate Ensure Times The Times Line Times Export Times Demo From Is Present In Tmp Ansible Env":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: 4 Natural Language Paraphrases"
+          - "Components: Ansible Command 05 Ensure Line Present File, Ansible Commands 05 \u2014 Ensure Line Present In File / Python Ability / Present, Ansible Commands 05 \u2014 Ensure Line Present In File / Python Ability / In, Ansible Commands 05 \u2014 Ensure Line Present In File / Python Ability / Tmp, Ansible Commands 05 \u2014 Ensure Line Present In File / Python Ability / Ansible, Ansible Commands 05 \u2014 Ensure Line Present In File / Python Ability / Env"
+          - "Composition: 4 Natural Language Paraphrase"
+          - "Title identity: Natural Language Paraphrases"
+          - "Title depth segments: Natural Language Paraphrases"
+          - "Title depth prefixes: Natural Language Paraphrases"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: Ansible Commands 05 \u2014 Ensure Line Present In File Ansible Commands 05 \u2014 Ensure Line Present In File / Python Ability Natural Language Paraphrases Python Ability How do you calculate ensure_times_the_times_line_times_export_times_DEMO from is, present, in, tmp, ansible, env? 4 Natural Language Paraphrases 4. Natural-language paraphrases ensure the line export DEMO=1 is present in /tmp/ansible.env add one configuration line to a file if missing manage a single line in a file with Ansible ensure the line `export DEMO=1` is present in `/tmp/ansible.env`"
+          - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+          - "Actual realization: the prompt surface is present; explicit givens are present: Ansible Commands 05 \u2014 Ensure Line Present In File Ansible Commands 05 \u2014 Ensure Line Present In File / Python Ability Natural Language Paraphrases Python Ability How do you calculate ensure_times_the_times_line_times_export_times_DEMO from is, 4 Natural Language Paraphrases 4, Natural-language paraphrases ensure the line export DEMO=1 is present in /tmp/ansible; no justified final closure has been admitted yet"
+          - "Givens: Ansible Commands 05 \u2014 Ensure Line Present In File Ansible Commands 05 \u2014 Ensure Line Present In File / Python Ability Natural Language Paraphrases Python Ability How do you calculate ensure_times_the_times_line_times_export_times_DEMO from is, 4 Natural Language Paraphrases 4, Natural-language paraphrases ensure the line export DEMO=1 is present in /tmp/ansible, env add one configuration line to a file if missing manage a single line in a file with Ansible ensure the line `export DEMO=1` is present in `/tmp/ansible"
+          - "Missing components: a justified final realization has not yet been produced"
+          - "Differentiators: named inputs supplied: demo"
+          - "Contrastive cases: condition holds versus condition does not hold"
+          - "Misalignment types: functional, completion"
+          - "Origin layers: model"
+          - "Degree: partial"
+          - "Remainder shapes: missing"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Minimal repair: perform the bounded computation or invoke the matching executable template"
+          - "Full repair: perform the bounded computation or invoke the matching executable template, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+          - "Action posture: compute_or_template"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - ansible
+---
+schema: bssc_skill.v2
+kind: ability
+title: "Ansible Commands 06 \u2014 Download Url To File / Ansible Commands 06 Download\
+  \ Url To File"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you execute ansible commands 06 download url to file?
+declaration:
+  intent: How do you execute ansible commands 06 download url to file?
+  inputs:
+    url: required input value
+    destination: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  - write
+  - communicate
+  authority_bounds:
+    execute:
+      scope: local_configuration_target
+      target: ansible_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+    write:
+      scope: local_configuration_target
+      target: skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+    communicate:
+      scope: local_configuration_target
+      target: skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - configuration changes on declared targets
+  - network communication
+  - filesystem or external state modification
+  persistence_behavior: may_modify_external_state
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier3_sensitive
+  executor_framework: ansible
+executor: ansible
+entrypoint: playbook
+inputs:
+  url: required input value
+  destination: required input value
+outputs:
+  result: execution result
+ansible: |-
+  - hosts: localhost
+    gather_facts: false
+    tasks:
+      - name: Download URL to file
+        get_url:
+          url: "{{ url }}"
+          dest: "{{ destination }}"
+governance:
+  scope: reuse when later prompts ask for ansible commands 06 download url to file
+    under compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a'*
+  - b'*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:27:23+00:00'
+  provenance:
+  - not_learn-from-markdown-06-learn-ansible-commands-do_65ac7f
+  - /Users/ravindranathakila/service/realized/trials/ansible/06_LEARN_ANSIBLE_COMMANDS_DOWNLOAD_URL.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for ansible commands 06 download
+      url to file under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Ansible Commands 06 Download Url To File
+    encountered_not: Ansible Commands 06 Download Url To File
+    goal: How do you execute ansible commands 06 download url to file?
+    intended_object: "Ansible Commands 06 \u2014 Download Url To File Ansible Commands\
+      \ 06 \u2014 Download Url To File / Ansible Commands 06 Download Url To File\
+      \ Ansible Commands 06 Download Url To File How do you execute ansible commands\
+      \ 06 download url to file? 2. Executable Ansible relation ansible playbook block\
+      \ named playbook parameters: `url`, `destination` This capability should be\
+      \ learned as a reusable Ansible ability artifact. The named playbook parameters\
+      \ are `url` and `destination`."
+    success_criteria:
+    - the response directly resolves the stated ask without erasing material distinctions
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ Ansible Commands 06 \u2014 Download Url To File Ansible Commands 06 \u2014\
+      \ Download Url To File / Ansible Commands 06 Download Url To File Ansible Commands\
+      \ 06 Download Url To File How do you execute ansible commands 06 download url\
+      \ to file, 2, Executable Ansible relation ansible playbook block named playbook\
+      \ parameters: `url`; no justified final closure has been admitted yet"
+    givens:
+    - "Ansible Commands 06 \u2014 Download Url To File Ansible Commands 06 \u2014\
+      \ Download Url To File / Ansible Commands 06 Download Url To File Ansible Commands\
+      \ 06 Download Url To File How do you execute ansible commands 06 download url\
+      \ to file"
+    - '2'
+    - 'Executable Ansible relation ansible playbook block named playbook parameters:
+      `url`'
+    unknowns: []
+    missing_components:
+    - a justified final realization has not yet been produced
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - completion
+    origin_layers:
+    - model
+    degree: partial
+    remainder_shapes:
+    - missing
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair: []
+    full_repair:
+    - 'satisfy success condition: the response directly resolves the stated ask without
+      erasing material distinctions'
+    boundary_shape:
+    - d*
+    action_posture: direct_resolution
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Ansible Commands 06 Download Url To File
+    title_depth_prefixes:
+    - Ansible Commands 06 Download Url To File
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Ansible Command 06 Download Url File
+    - "Ansible Commands 06 \u2014 Download Url To File / Ansible Commands 06 Download\
+      \ Url To File / Destination"
+    composed_not: Ansible Command 06 Download Url File
+    lookup_keys:
+    - ansible command 06 download url file
+    - ansible command
+    - command 06
+    - 06 download
+    - download url
+    - url file
+    - ansible command 06
+    - command 06 download
+    - 06 download url
+    - download url file
+    - execute ansible command 06 download url file
+    - execute ansible
+    - execute ansible command
+    - without reduc remainder item cannot clos with govern confidence
+    - without reduc remainder item cannot clo
+    - govern confidence
+    - without reduc
+    - reduc remainder
+    - remainder item
+    - item cannot
+    - cannot clos
+    - clos with
+    - with govern
+    - without reduc remainder
+    notation_yaml: |-
+      "How Do You Execute Ansible Commands 06 Download Url To File":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Ansible Commands 06 Download Url To File"
+          - "Components: Ansible Command 06 Download Url File, Ansible Commands 06 \u2014 Download Url To File / Ansible Commands 06 Download Url To File / Destination"
+          - "Composition: Ansible Command 06 Download Url File"
+          - "Title identity: Ansible Commands 06 Download Url To File"
+          - "Title depth segments: Ansible Commands 06 Download Url To File"
+          - "Title depth prefixes: Ansible Commands 06 Download Url To File"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: Ansible Commands 06 \u2014 Download Url To File Ansible Commands 06 \u2014 Download Url To File / Ansible Commands 06 Download Url To File Ansible Commands 06 Download Url To File How do you execute ansible commands 06 download url to file? 2. Executable Ansible relation ansible playbook block named playbook parameters: `url`, `destination` This capability should be learned as a reusable Ansible ability artifact. The named playbook parameters are `url` and `destination`."
+          - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+          - "Actual realization: the prompt surface is present; explicit givens are present: Ansible Commands 06 \u2014 Download Url To File Ansible Commands 06 \u2014 Download Url To File / Ansible Commands 06 Download Url To File Ansible Commands 06 Download Url To File How do you execute ansible commands 06 download url to file, 2, Executable Ansible relation ansible playbook block named playbook parameters: `url`; no justified final closure has been admitted yet"
+          - "Givens: Ansible Commands 06 \u2014 Download Url To File Ansible Commands 06 \u2014 Download Url To File / Ansible Commands 06 Download Url To File Ansible Commands 06 Download Url To File How do you execute ansible commands 06 download url to file, 2, Executable Ansible relation ansible playbook block named playbook parameters: `url`"
+          - "Missing components: a justified final realization has not yet been produced"
+          - "Misalignment types: completion"
+          - "Origin layers: model"
+          - "Degree: partial"
+          - "Remainder shapes: missing"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+          - "Action posture: direct_resolution"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - ansible
+---
+schema: bssc_skill.v2
+kind: ability
+title: "Ansible Commands 07 \u2014 Extract Archive / Ansible Commands 07 Extract Archive"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you execute ansible commands 07 extract archive?
+declaration:
+  intent: How do you execute ansible commands 07 extract archive?
+  inputs:
+    archive: required input value
+    destination: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  - write
+  authority_bounds:
+    execute:
+      scope: local_configuration_target
+      target: ansible_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+    write:
+      scope: local_configuration_target
+      target: skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - configuration changes on declared targets
+  - filesystem or external state modification
+  persistence_behavior: may_modify_external_state
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier3_sensitive
+  executor_framework: ansible
+executor: ansible
+entrypoint: playbook
+inputs:
+  archive: required input value
+  destination: required input value
+outputs:
+  result: execution result
+ansible: |-
+  - hosts: localhost
+    gather_facts: false
+    tasks:
+      - name: Extract archive
+        unarchive:
+          src: "{{ archive }}"
+          dest: "{{ destination }}"
+          remote_src: true
+governance:
+  scope: reuse when later prompts ask for ansible commands 07 extract archive under
+    compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:27:32+00:00'
+  provenance:
+  - not_learn-from-markdown-07-learn-ansible-commands-ex_de5384
+  - /Users/ravindranathakila/service/realized/trials/ansible/07_LEARN_ANSIBLE_COMMANDS_EXTRACT_ZIP_ARCHIVE.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for ansible commands 07 extract archive
+      under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Ansible Commands 07 Extract Archive
+    encountered_not: Ansible Commands 07 Extract Archive
+    goal: How do you execute ansible commands 07 extract archive?
+    intended_object: "Ansible Commands 07 \u2014 Extract Archive Ansible Commands\
+      \ 07 \u2014 Extract Archive / Ansible Commands 07 Extract Archive Ansible Commands\
+      \ 07 Extract Archive How do you execute ansible commands 07 extract archive?\
+      \ 2. Executable Ansible relation ansible playbook block named playbook parameters:\
+      \ `archive`, `destination` This capability should be learned as a reusable Ansible\
+      \ ability artifact. The named playbook parameters are `archive` and `destination`."
+    success_criteria:
+    - the response directly resolves the stated ask without erasing material distinctions
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ Ansible Commands 07 \u2014 Extract Archive Ansible Commands 07 \u2014 Extract\
+      \ Archive / Ansible Commands 07 Extract Archive Ansible Commands 07 Extract\
+      \ Archive How do you execute ansible commands 07 extract archive, 2, Executable\
+      \ Ansible relation ansible playbook block named playbook parameters: `archive`;\
+      \ no justified final closure has been admitted yet"
+    givens:
+    - "Ansible Commands 07 \u2014 Extract Archive Ansible Commands 07 \u2014 Extract\
+      \ Archive / Ansible Commands 07 Extract Archive Ansible Commands 07 Extract\
+      \ Archive How do you execute ansible commands 07 extract archive"
+    - '2'
+    - 'Executable Ansible relation ansible playbook block named playbook parameters:
+      `archive`'
+    unknowns: []
+    missing_components:
+    - a justified final realization has not yet been produced
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - completion
+    origin_layers:
+    - model
+    degree: partial
+    remainder_shapes:
+    - missing
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair: []
+    full_repair:
+    - 'satisfy success condition: the response directly resolves the stated ask without
+      erasing material distinctions'
+    boundary_shape:
+    - d*
+    action_posture: direct_resolution
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Ansible Commands 07 Extract Archive
+    title_depth_prefixes:
+    - Ansible Commands 07 Extract Archive
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Ansible Command 07 Extract Archive
+    - "Ansible Commands 07 \u2014 Extract Archive / Ansible Commands 07 Extract Archive\
+      \ / Destination"
+    composed_not: Ansible Command 07 Extract Archive
+    lookup_keys:
+    - ansible command 07 extract archive
+    - ansible command
+    - command 07
+    - 07 extract
+    - extract archive
+    - ansible command 07
+    - command 07 extract
+    - 07 extract archive
+    - execute ansible command 07 extract archive
+    - execute ansible
+    - execute ansible command
+    - without reduc remainder item cannot clos with govern confidence
+    - without reduc remainder item cannot clo
+    - govern confidence
+    - without reduc
+    - reduc remainder
+    - remainder item
+    - item cannot
+    - cannot clos
+    - clos with
+    - with govern
+    - without reduc remainder
+    - reduc remainder item
+    - remainder item cannot
+    notation_yaml: |-
+      "How Do You Execute Ansible Commands 07 Extract Archive":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Ansible Commands 07 Extract Archive"
+          - "Components: Ansible Command 07 Extract Archive, Ansible Commands 07 \u2014 Extract Archive / Ansible Commands 07 Extract Archive / Destination"
+          - "Composition: Ansible Command 07 Extract Archive"
+          - "Title identity: Ansible Commands 07 Extract Archive"
+          - "Title depth segments: Ansible Commands 07 Extract Archive"
+          - "Title depth prefixes: Ansible Commands 07 Extract Archive"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: Ansible Commands 07 \u2014 Extract Archive Ansible Commands 07 \u2014 Extract Archive / Ansible Commands 07 Extract Archive Ansible Commands 07 Extract Archive How do you execute ansible commands 07 extract archive? 2. Executable Ansible relation ansible playbook block named playbook parameters: `archive`, `destination` This capability should be learned as a reusable Ansible ability artifact. The named playbook parameters are `archive` and `destination`."
+          - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+          - "Actual realization: the prompt surface is present; explicit givens are present: Ansible Commands 07 \u2014 Extract Archive Ansible Commands 07 \u2014 Extract Archive / Ansible Commands 07 Extract Archive Ansible Commands 07 Extract Archive How do you execute ansible commands 07 extract archive, 2, Executable Ansible relation ansible playbook block named playbook parameters: `archive`; no justified final closure has been admitted yet"
+          - "Givens: Ansible Commands 07 \u2014 Extract Archive Ansible Commands 07 \u2014 Extract Archive / Ansible Commands 07 Extract Archive Ansible Commands 07 Extract Archive How do you execute ansible commands 07 extract archive, 2, Executable Ansible relation ansible playbook block named playbook parameters: `archive`"
+          - "Missing components: a justified final realization has not yet been produced"
+          - "Misalignment types: completion"
+          - "Origin layers: model"
+          - "Degree: partial"
+          - "Remainder shapes: missing"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+          - "Action posture: direct_resolution"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - ansible
+---
+schema: bssc_skill.v2
+kind: ability
+title: "Ansible Commands 08 \u2014 Ensure Service Started And Enabled / Ansible Commands\
+  \ 08 Ensure Service Started And Enabled"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you execute ansible commands 08 ensure service started and enabled?
+declaration:
+  intent: How do you execute ansible commands 08 ensure service started and enabled?
+  inputs:
+    service_name: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  - write
+  authority_bounds:
+    execute:
+      scope: local_configuration_target
+      target: ansible_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+    write:
+      scope: local_configuration_target
+      target: skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - configuration changes on declared targets
+  - filesystem or external state modification
+  persistence_behavior: may_modify_external_state
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier3_sensitive
+  executor_framework: ansible
+executor: ansible
+entrypoint: playbook
+inputs:
+  service_name: required input value
+outputs:
+  result: execution result
+ansible: |-
+  - hosts: localhost
+    gather_facts: false
+    tasks:
+      - name: Ensure service is started and enabled
+        service:
+          name: "{{ service_name }}"
+          state: started
+          enabled: true
+governance:
+  scope: reuse when later prompts ask for ansible commands 08 ensure service started
+    and enabled under compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:27:41+00:00'
+  provenance:
+  - not_learn-from-markdown-08-learn-ansible-commands-en_fb36d2
+  - /Users/ravindranathakila/service/realized/trials/ansible/08_LEARN_ANSIBLE_COMMANDS_ENSURE_SERVICE_STATE.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for ansible commands 08 ensure service
+      started and enabled under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Ansible Commands 08 Ensure Service Started And Enabled
+    encountered_not: Ansible Commands 08 Ensure Service Started And Enabled
+    goal: How do you execute ansible commands 08 ensure service started and enabled?
+    intended_object: "Ansible Commands 08 \u2014 Ensure Service Started And Enabled\
+      \ Ansible Commands 08 \u2014 Ensure Service Started And Enabled / Ansible Commands\
+      \ 08 Ensure Service Started And Enabled Ansible Commands 08 Ensure Service Started\
+      \ And Enabled How do you execute ansible commands 08 ensure service started\
+      \ and enabled? 2. Executable Ansible relation ansible playbook block named playbook\
+      \ parameters: `service_name` This capability should be learned as a reusable\
+      \ Ansible ability artifact. The named playbook parameter is `service_name`."
+    success_criteria:
+    - the response directly resolves the stated ask without erasing material distinctions
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ Ansible Commands 08 \u2014 Ensure Service Started And Enabled Ansible Commands\
+      \ 08 \u2014 Ensure Service Started And Enabled / Ansible Commands 08 Ensure\
+      \ Service Started And Enabled Ansible Commands 08 Ensure Service Started And\
+      \ Enabled How do you execute ansible commands 08 ensure service started and\
+      \ enabled, 2, Executable Ansible relation ansible playbook block named playbook\
+      \ parameters: `service_name` This capability should be learned as a reusable\
+      \ Ansible ability artifact; no justified final closure has been admitted yet"
+    givens:
+    - "Ansible Commands 08 \u2014 Ensure Service Started And Enabled Ansible Commands\
+      \ 08 \u2014 Ensure Service Started And Enabled / Ansible Commands 08 Ensure\
+      \ Service Started And Enabled Ansible Commands 08 Ensure Service Started And\
+      \ Enabled How do you execute ansible commands 08 ensure service started and\
+      \ enabled"
+    - '2'
+    - 'Executable Ansible relation ansible playbook block named playbook parameters:
+      `service_name` This capability should be learned as a reusable Ansible ability
+      artifact'
+    unknowns: []
+    missing_components:
+    - a justified final realization has not yet been produced
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - completion
+    origin_layers:
+    - model
+    degree: partial
+    remainder_shapes:
+    - missing
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair: []
+    full_repair:
+    - 'satisfy success condition: the response directly resolves the stated ask without
+      erasing material distinctions'
+    boundary_shape:
+    - d*
+    action_posture: direct_resolution
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Ansible Commands 08 Ensure Service Started And Enabled
+    title_depth_prefixes:
+    - Ansible Commands 08 Ensure Service Started And Enabled
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Ansible Command 08 Ensure Service Start Enabl
+    - Ansible Command 08 Ensure Service Start
+    - Enabl
+    - Enabl Ansible Command 08 Ensure Service Start
+    composed_not: Ansible Command 08 Ensure Service Start Enabl
+    lookup_keys:
+    - ansible command 08 ensure service start enabl
+    - ansible command 08 ensure service start
+    - enabl
+    - ansible command
+    - command 08
+    - 08 ensure
+    - ensure service
+    - service start
+    - start enabl
+    - ansible command 08
+    - command 08 ensure
+    - 08 ensure service
+    - ensure service start
+    - service start enabl
+    - execute ansible command 08 ensure service start enabl
+    - execute ansible command 08 ensure service start
+    - execute ansible
+    - execute ansible command
+    - without reduc remainder item cannot clos with govern confidence
+    - without reduc remainder item cannot clo
+    - govern confidence
+    - without reduc
+    - reduc remainder
+    - remainder item
+    notation_yaml: |-
+      "How Do You Execute Ansible Commands 08 Ensure Service Started And Enabled":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Ansible Commands 08 Ensure Service Started And Enabled"
+          - "Components: Ansible Command 08 Ensure Service Start Enabl, Ansible Command 08 Ensure Service Start, Enabl, Enabl Ansible Command 08 Ensure Service Start"
+          - "Composition: Ansible Command 08 Ensure Service Start Enabl"
+          - "Title identity: Ansible Commands 08 Ensure Service Started And Enabled"
+          - "Title depth segments: Ansible Commands 08 Ensure Service Started And Enabled"
+          - "Title depth prefixes: Ansible Commands 08 Ensure Service Started And Enabled"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: Ansible Commands 08 \u2014 Ensure Service Started And Enabled Ansible Commands 08 \u2014 Ensure Service Started And Enabled / Ansible Commands 08 Ensure Service Started And Enabled Ansible Commands 08 Ensure Service Started And Enabled How do you execute ansible commands 08 ensure service started and enabled? 2. Executable Ansible relation ansible playbook block named playbook parameters: `service_name` This capability should be learned as a reusable Ansible ability artifact. The named playbook parameter is `service_name`."
+          - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+          - "Actual realization: the prompt surface is present; explicit givens are present: Ansible Commands 08 \u2014 Ensure Service Started And Enabled Ansible Commands 08 \u2014 Ensure Service Started And Enabled / Ansible Commands 08 Ensure Service Started And Enabled Ansible Commands 08 Ensure Service Started And Enabled How do you execute ansible commands 08 ensure service started and enabled, 2, Executable Ansible relation ansible playbook block named playbook parameters: `service_name` This capability should be learned as a reusable Ansible ability artifact; no justified final closure has been admitted yet"
+          - "Givens: Ansible Commands 08 \u2014 Ensure Service Started And Enabled Ansible Commands 08 \u2014 Ensure Service Started And Enabled / Ansible Commands 08 Ensure Service Started And Enabled Ansible Commands 08 Ensure Service Started And Enabled How do you execute ansible commands 08 ensure service started and enabled, 2, Executable Ansible relation ansible playbook block named playbook parameters: `service_name` This capability should be learned as a reusable Ansible ability artifact"
+          - "Missing components: a justified final realization has not yet been produced"
+          - "Misalignment types: completion"
+          - "Origin layers: model"
+          - "Degree: partial"
+          - "Remainder shapes: missing"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+          - "Action posture: direct_resolution"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - ansible
+---
+schema: bssc_skill.v2
+kind: ability
+title: "Ansible Commands 09 \u2014 Clone Git Repository / Ansible Commands 09 Clone\
+  \ Git Repository"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you execute ansible commands 09 clone git repository?
+declaration:
+  intent: How do you execute ansible commands 09 clone git repository?
+  inputs:
+    repo_url: required input value
+    destination: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  - write
+  authority_bounds:
+    execute:
+      scope: local_configuration_target
+      target: ansible_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+    write:
+      scope: local_configuration_target
+      target: skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - configuration changes on declared targets
+  - filesystem or external state modification
+  persistence_behavior: may_modify_external_state
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier3_sensitive
+  executor_framework: ansible
+executor: ansible
+entrypoint: playbook
+inputs:
+  repo_url: required input value
+  destination: required input value
+outputs:
+  result: execution result
+ansible: |-
+  - hosts: localhost
+    gather_facts: false
+    tasks:
+      - name: Clone Git repository
+        git:
+          repo: "{{ repo_url }}"
+          dest: "{{ destination }}"
+governance:
+  scope: reuse when later prompts ask for ansible commands 09 clone git repository
+    under compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a'*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:27:50+00:00'
+  provenance:
+  - not_learn-from-markdown-09-learn-ansible-commands-cl_640066
+  - /Users/ravindranathakila/service/realized/trials/ansible/09_LEARN_ANSIBLE_COMMANDS_CLONE_GIT_REPO.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for ansible commands 09 clone git
+      repository under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Ansible Commands 09 Clone Git Repository
+    encountered_not: Ansible Commands 09 Clone Git Repository
+    goal: How do you execute ansible commands 09 clone git repository?
+    intended_object: "Ansible Commands 09 \u2014 Clone Git Repository Ansible Commands\
+      \ 09 \u2014 Clone Git Repository / Ansible Commands 09 Clone Git Repository\
+      \ Ansible Commands 09 Clone Git Repository How do you execute ansible commands\
+      \ 09 clone git repository? 2. Executable Ansible relation ansible playbook block\
+      \ named playbook parameters: `repo_url`, `destination` This capability should\
+      \ be learned as a reusable Ansible ability artifact. The named playbook parameters\
+      \ are `repo_url` and `destination`."
+    success_criteria:
+    - the response directly resolves the stated ask without erasing material distinctions
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ Ansible Commands 09 \u2014 Clone Git Repository Ansible Commands 09 \u2014\
+      \ Clone Git Repository / Ansible Commands 09 Clone Git Repository Ansible Commands\
+      \ 09 Clone Git Repository How do you execute ansible commands 09 clone git repository,\
+      \ 2, Executable Ansible relation ansible playbook block named playbook parameters:\
+      \ `repo_url`; no justified final closure has been admitted yet"
+    givens:
+    - "Ansible Commands 09 \u2014 Clone Git Repository Ansible Commands 09 \u2014\
+      \ Clone Git Repository / Ansible Commands 09 Clone Git Repository Ansible Commands\
+      \ 09 Clone Git Repository How do you execute ansible commands 09 clone git repository"
+    - '2'
+    - 'Executable Ansible relation ansible playbook block named playbook parameters:
+      `repo_url`'
+    unknowns: []
+    missing_components:
+    - a justified final realization has not yet been produced
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - completion
+    origin_layers:
+    - model
+    degree: partial
+    remainder_shapes:
+    - missing
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair: []
+    full_repair:
+    - 'satisfy success condition: the response directly resolves the stated ask without
+      erasing material distinctions'
+    boundary_shape:
+    - d*
+    action_posture: direct_resolution
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Ansible Commands 09 Clone Git Repository
+    title_depth_prefixes:
+    - Ansible Commands 09 Clone Git Repository
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Ansible Command 09 Clone Git Repository
+    - "Ansible Commands 09 \u2014 Clone Git Repository / Ansible Commands 09 Clone\
+      \ Git Repository / Destination"
+    composed_not: Ansible Command 09 Clone Git Repository
+    lookup_keys:
+    - ansible command 09 clone git repository
+    - ansible command
+    - command 09
+    - 09 clone
+    - clone git
+    - git repository
+    - ansible command 09
+    - command 09 clone
+    - 09 clone git
+    - clone git repository
+    - execute ansible command 09 clone git repository
+    - execute ansible
+    - execute ansible command
+    - without reduc remainder item cannot clos with govern confidence
+    - without reduc remainder item cannot clo
+    - govern confidence
+    - without reduc
+    - reduc remainder
+    - remainder item
+    - item cannot
+    - cannot clos
+    - clos with
+    - with govern
+    - without reduc remainder
+    notation_yaml: |-
+      "How Do You Execute Ansible Commands 09 Clone Git Repository":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Ansible Commands 09 Clone Git Repository"
+          - "Components: Ansible Command 09 Clone Git Repository, Ansible Commands 09 \u2014 Clone Git Repository / Ansible Commands 09 Clone Git Repository / Destination"
+          - "Composition: Ansible Command 09 Clone Git Repository"
+          - "Title identity: Ansible Commands 09 Clone Git Repository"
+          - "Title depth segments: Ansible Commands 09 Clone Git Repository"
+          - "Title depth prefixes: Ansible Commands 09 Clone Git Repository"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: Ansible Commands 09 \u2014 Clone Git Repository Ansible Commands 09 \u2014 Clone Git Repository / Ansible Commands 09 Clone Git Repository Ansible Commands 09 Clone Git Repository How do you execute ansible commands 09 clone git repository? 2. Executable Ansible relation ansible playbook block named playbook parameters: `repo_url`, `destination` This capability should be learned as a reusable Ansible ability artifact. The named playbook parameters are `repo_url` and `destination`."
+          - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+          - "Actual realization: the prompt surface is present; explicit givens are present: Ansible Commands 09 \u2014 Clone Git Repository Ansible Commands 09 \u2014 Clone Git Repository / Ansible Commands 09 Clone Git Repository Ansible Commands 09 Clone Git Repository How do you execute ansible commands 09 clone git repository, 2, Executable Ansible relation ansible playbook block named playbook parameters: `repo_url`; no justified final closure has been admitted yet"
+          - "Givens: Ansible Commands 09 \u2014 Clone Git Repository Ansible Commands 09 \u2014 Clone Git Repository / Ansible Commands 09 Clone Git Repository Ansible Commands 09 Clone Git Repository How do you execute ansible commands 09 clone git repository, 2, Executable Ansible relation ansible playbook block named playbook parameters: `repo_url`"
+          - "Missing components: a justified final realization has not yet been produced"
+          - "Misalignment types: completion"
+          - "Origin layers: model"
+          - "Degree: partial"
+          - "Remainder shapes: missing"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+          - "Action posture: direct_resolution"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - ansible
+---
+schema: bssc_skill.v2
+kind: ability
+title: "Ansible Commands 10 \u2014 Ensure File Mode / Ansible Commands 10 Ensure File\
+  \ Mode"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you execute ansible commands 10 ensure file mode?
+declaration:
+  intent: How do you execute ansible commands 10 ensure file mode?
+  inputs:
+    path: required input value
+    mode: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  - write
+  authority_bounds:
+    execute:
+      scope: local_configuration_target
+      target: ansible_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+    write:
+      scope: local_configuration_target
+      target: skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - configuration changes on declared targets
+  - filesystem or external state modification
+  persistence_behavior: may_modify_external_state
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier3_sensitive
+  executor_framework: ansible
+executor: ansible
+entrypoint: playbook
+inputs:
+  path: required input value
+  mode: required input value
+outputs:
+  result: execution result
+ansible: |-
+  - hosts: localhost
+    gather_facts: false
+    tasks:
+      - name: Ensure file mode
+        file:
+          path: "{{ path }}"
+          mode: "{{ mode }}"
+          state: file
+governance:
+  scope: reuse when later prompts ask for ansible commands 10 ensure file mode under
+    compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a'*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:28:00+00:00'
+  provenance:
+  - not_learn-from-markdown-10-learn-ansible-commands-se_10ad1a
+  - /Users/ravindranathakila/service/realized/trials/ansible/10_LEARN_ANSIBLE_COMMANDS_SET_FILE_MODE.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for ansible commands 10 ensure file
+      mode under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Ansible Commands 10 Ensure File Mode
+    encountered_not: Ansible Commands 10 Ensure File Mode
+    goal: How do you execute ansible commands 10 ensure file mode?
+    intended_object: "Ansible Commands 10 \u2014 Ensure File Mode Ansible Commands\
+      \ 10 \u2014 Ensure File Mode / Ansible Commands 10 Ensure File Mode Ansible\
+      \ Commands 10 Ensure File Mode How do you execute ansible commands 10 ensure\
+      \ file mode? 2. Executable Ansible relation ansible playbook block named playbook\
+      \ parameters: `path`, `mode` This capability should be learned as a reusable\
+      \ Ansible ability artifact. The named playbook parameters are `path` and `mode`."
+    success_criteria:
+    - the response directly resolves the stated ask without erasing material distinctions
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ Ansible Commands 10 \u2014 Ensure File Mode Ansible Commands 10 \u2014 Ensure\
+      \ File Mode / Ansible Commands 10 Ensure File Mode Ansible Commands 10 Ensure\
+      \ File Mode How do you execute ansible commands 10 ensure file mode, 2, Executable\
+      \ Ansible relation ansible playbook block named playbook parameters: `path`;\
+      \ no justified final closure has been admitted yet"
+    givens:
+    - "Ansible Commands 10 \u2014 Ensure File Mode Ansible Commands 10 \u2014 Ensure\
+      \ File Mode / Ansible Commands 10 Ensure File Mode Ansible Commands 10 Ensure\
+      \ File Mode How do you execute ansible commands 10 ensure file mode"
+    - '2'
+    - 'Executable Ansible relation ansible playbook block named playbook parameters:
+      `path`'
+    unknowns: []
+    missing_components:
+    - a justified final realization has not yet been produced
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - completion
+    origin_layers:
+    - model
+    degree: partial
+    remainder_shapes:
+    - missing
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair: []
+    full_repair:
+    - 'satisfy success condition: the response directly resolves the stated ask without
+      erasing material distinctions'
+    boundary_shape:
+    - d*
+    action_posture: direct_resolution
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Ansible Commands 10 Ensure File Mode
+    title_depth_prefixes:
+    - Ansible Commands 10 Ensure File Mode
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Ansible Command 10 Ensure File Mode
+    - "Ansible Commands 10 \u2014 Ensure File Mode / Ansible Commands 10 Ensure File\
+      \ Mode / Mode"
+    composed_not: Ansible Command 10 Ensure File Mode
+    lookup_keys:
+    - ansible command 10 ensure file mode
+    - ansible command
+    - command 10
+    - 10 ensure
+    - ensure file
+    - file mode
+    - ansible command 10
+    - command 10 ensure
+    - 10 ensure file
+    - ensure file mode
+    - execute ansible command 10 ensure file mode
+    - execute ansible
+    - execute ansible command
+    - without reduc remainder item cannot clos with govern confidence
+    - without reduc remainder item cannot clo
+    - govern confidence
+    - without reduc
+    - reduc remainder
+    - remainder item
+    - item cannot
+    - cannot clos
+    - clos with
+    - with govern
+    - without reduc remainder
+    notation_yaml: |-
+      "How Do You Execute Ansible Commands 10 Ensure File Mode":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Ansible Commands 10 Ensure File Mode"
+          - "Components: Ansible Command 10 Ensure File Mode, Ansible Commands 10 \u2014 Ensure File Mode / Ansible Commands 10 Ensure File Mode / Mode"
+          - "Composition: Ansible Command 10 Ensure File Mode"
+          - "Title identity: Ansible Commands 10 Ensure File Mode"
+          - "Title depth segments: Ansible Commands 10 Ensure File Mode"
+          - "Title depth prefixes: Ansible Commands 10 Ensure File Mode"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: Ansible Commands 10 \u2014 Ensure File Mode Ansible Commands 10 \u2014 Ensure File Mode / Ansible Commands 10 Ensure File Mode Ansible Commands 10 Ensure File Mode How do you execute ansible commands 10 ensure file mode? 2. Executable Ansible relation ansible playbook block named playbook parameters: `path`, `mode` This capability should be learned as a reusable Ansible ability artifact. The named playbook parameters are `path` and `mode`."
+          - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+          - "Actual realization: the prompt surface is present; explicit givens are present: Ansible Commands 10 \u2014 Ensure File Mode Ansible Commands 10 \u2014 Ensure File Mode / Ansible Commands 10 Ensure File Mode Ansible Commands 10 Ensure File Mode How do you execute ansible commands 10 ensure file mode, 2, Executable Ansible relation ansible playbook block named playbook parameters: `path`; no justified final closure has been admitted yet"
+          - "Givens: Ansible Commands 10 \u2014 Ensure File Mode Ansible Commands 10 \u2014 Ensure File Mode / Ansible Commands 10 Ensure File Mode Ansible Commands 10 Ensure File Mode How do you execute ansible commands 10 ensure file mode, 2, Executable Ansible relation ansible playbook block named playbook parameters: `path`"
+          - "Missing components: a justified final realization has not yet been produced"
+          - "Misalignment types: completion"
+          - "Origin layers: model"
+          - "Degree: partial"
+          - "Remainder shapes: missing"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+          - "Action posture: direct_resolution"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - ansible
+---
+schema: bssc_skill.v2
+kind: ability
+title: "Ansible Commands 11 \u2014 Ensure User Exists / Ansible Commands 11 Ensure\
+  \ User Exists"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you execute ansible commands 11 ensure user exists?
+declaration:
+  intent: How do you execute ansible commands 11 ensure user exists?
+  inputs:
+    username: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  - write
+  authority_bounds:
+    execute:
+      scope: local_configuration_target
+      target: ansible_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+    write:
+      scope: local_configuration_target
+      target: skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - configuration changes on declared targets
+  - filesystem or external state modification
+  persistence_behavior: may_modify_external_state
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier3_sensitive
+  executor_framework: ansible
+executor: ansible
+entrypoint: playbook
+inputs:
+  username: required input value
+outputs:
+  result: execution result
+ansible: |-
+  - hosts: localhost
+    gather_facts: false
+    tasks:
+      - name: Ensure user exists
+        user:
+          name: "{{ username }}"
+          state: present
+governance:
+  scope: reuse when later prompts ask for ansible commands 11 ensure user exists under
+    compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:28:09+00:00'
+  provenance:
+  - not_learn-from-markdown-11-learn-ansible-commands-en_199eb0
+  - /Users/ravindranathakila/service/realized/trials/ansible/11_LEARN_ANSIBLE_COMMANDS_ENSURE_USER_EXISTS.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for ansible commands 11 ensure user
+      exists under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Ansible Commands 11 Ensure User Exists
+    encountered_not: Ansible Commands 11 Ensure User Exists
+    goal: How do you execute ansible commands 11 ensure user exists?
+    intended_object: "Ansible Commands 11 \u2014 Ensure User Exists Ansible Commands\
+      \ 11 \u2014 Ensure User Exists / Ansible Commands 11 Ensure User Exists Ansible\
+      \ Commands 11 Ensure User Exists How do you execute ansible commands 11 ensure\
+      \ user exists? 2. Executable Ansible relation ansible playbook block named playbook\
+      \ parameters: `username` This capability should be learned as a reusable Ansible\
+      \ ability artifact. The named playbook parameter is `username`."
+    success_criteria:
+    - the response directly resolves the stated ask without erasing material distinctions
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ Ansible Commands 11 \u2014 Ensure User Exists Ansible Commands 11 \u2014 Ensure\
+      \ User Exists / Ansible Commands 11 Ensure User Exists Ansible Commands 11 Ensure\
+      \ User Exists How do you execute ansible commands 11 ensure user exists, 2,\
+      \ Executable Ansible relation ansible playbook block named playbook parameters:\
+      \ `username` This capability should be learned as a reusable Ansible ability\
+      \ artifact; no justified final closure has been admitted yet"
+    givens:
+    - "Ansible Commands 11 \u2014 Ensure User Exists Ansible Commands 11 \u2014 Ensure\
+      \ User Exists / Ansible Commands 11 Ensure User Exists Ansible Commands 11 Ensure\
+      \ User Exists How do you execute ansible commands 11 ensure user exists"
+    - '2'
+    - 'Executable Ansible relation ansible playbook block named playbook parameters:
+      `username` This capability should be learned as a reusable Ansible ability artifact'
+    unknowns: []
+    missing_components:
+    - a justified final realization has not yet been produced
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - completion
+    origin_layers:
+    - model
+    degree: partial
+    remainder_shapes:
+    - missing
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair: []
+    full_repair:
+    - 'satisfy success condition: the response directly resolves the stated ask without
+      erasing material distinctions'
+    boundary_shape:
+    - d*
+    action_posture: direct_resolution
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Ansible Commands 11 Ensure User Exists
+    title_depth_prefixes:
+    - Ansible Commands 11 Ensure User Exists
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Ansible Command 11 Ensure User Exist
+    composed_not: Ansible Command 11 Ensure User Exist
+    lookup_keys:
+    - ansible command 11 ensure user exist
+    - ansible command
+    - command 11
+    - 11 ensure
+    - ensure user
+    - user exist
+    - ansible command 11
+    - command 11 ensure
+    - 11 ensure user
+    - ensure user exist
+    - execute ansible command 11 ensure user exist
+    - execute ansible
+    - execute ansible command
+    - without reduc remainder item cannot clos with govern confidence
+    - without reduc remainder item cannot clo
+    - govern confidence
+    - without reduc
+    - reduc remainder
+    - remainder item
+    - item cannot
+    - cannot clos
+    - clos with
+    - with govern
+    - without reduc remainder
+    notation_yaml: |-
+      "How Do You Execute Ansible Commands 11 Ensure User Exists":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Ansible Commands 11 Ensure User Exists"
+          - "Components: Ansible Command 11 Ensure User Exist"
+          - "Composition: Ansible Command 11 Ensure User Exist"
+          - "Title identity: Ansible Commands 11 Ensure User Exists"
+          - "Title depth segments: Ansible Commands 11 Ensure User Exists"
+          - "Title depth prefixes: Ansible Commands 11 Ensure User Exists"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: Ansible Commands 11 \u2014 Ensure User Exists Ansible Commands 11 \u2014 Ensure User Exists / Ansible Commands 11 Ensure User Exists Ansible Commands 11 Ensure User Exists How do you execute ansible commands 11 ensure user exists? 2. Executable Ansible relation ansible playbook block named playbook parameters: `username` This capability should be learned as a reusable Ansible ability artifact. The named playbook parameter is `username`."
+          - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+          - "Actual realization: the prompt surface is present; explicit givens are present: Ansible Commands 11 \u2014 Ensure User Exists Ansible Commands 11 \u2014 Ensure User Exists / Ansible Commands 11 Ensure User Exists Ansible Commands 11 Ensure User Exists How do you execute ansible commands 11 ensure user exists, 2, Executable Ansible relation ansible playbook block named playbook parameters: `username` This capability should be learned as a reusable Ansible ability artifact; no justified final closure has been admitted yet"
+          - "Givens: Ansible Commands 11 \u2014 Ensure User Exists Ansible Commands 11 \u2014 Ensure User Exists / Ansible Commands 11 Ensure User Exists Ansible Commands 11 Ensure User Exists How do you execute ansible commands 11 ensure user exists, 2, Executable Ansible relation ansible playbook block named playbook parameters: `username` This capability should be learned as a reusable Ansible ability artifact"
+          - "Missing components: a justified final realization has not yet been produced"
+          - "Misalignment types: completion"
+          - "Origin layers: model"
+          - "Degree: partial"
+          - "Remainder shapes: missing"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+          - "Action posture: direct_resolution"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - ansible
+---
+schema: bssc_skill.v2
+kind: ability
+title: "Ansible Commands 12 \u2014 Render Template To File / Ansible Commands 12 Render\
+  \ Template To File"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you execute ansible commands 12 render template to file?
+declaration:
+  intent: How do you execute ansible commands 12 render template to file?
+  inputs:
+    path: required input value
+    port: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  - write
+  authority_bounds:
+    execute:
+      scope: local_configuration_target
+      target: ansible_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+    write:
+      scope: local_configuration_target
+      target: skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - configuration changes on declared targets
+  - filesystem or external state modification
+  persistence_behavior: may_modify_external_state
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier3_sensitive
+  executor_framework: ansible
+executor: ansible
+entrypoint: playbook
+inputs:
+  path: required input value
+  port: required input value
+outputs:
+  result: execution result
+ansible: |-
+  - hosts: localhost
+    gather_facts: false
+    tasks:
+      - name: Render template content
+        copy:
+          dest: "{{ path }}"
+          content: "port={{ port }}\n"
+governance:
+  scope: reuse when later prompts ask for ansible commands 12 render template to file
+    under compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a'*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:28:19+00:00'
+  provenance:
+  - not_learn-from-markdown-12-learn-ansible-commands-re_5ab635
+  - /Users/ravindranathakila/service/realized/trials/ansible/12_LEARN_ANSIBLE_COMMANDS_RENDER_TEMPLATE_FILE.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for ansible commands 12 render template
+      to file under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Ansible Commands 12 Render Template To File
+    encountered_not: Ansible Commands 12 Render Template To File
+    goal: How do you execute ansible commands 12 render template to file?
+    intended_object: "Ansible Commands 12 \u2014 Render Template To File Ansible Commands\
+      \ 12 \u2014 Render Template To File / Ansible Commands 12 Render Template To\
+      \ File Ansible Commands 12 Render Template To File How do you execute ansible\
+      \ commands 12 render template to file? 2. Executable Ansible relation ansible\
+      \ playbook block named playbook parameters: `path`, `port` This capability should\
+      \ be learned as a reusable Ansible ability artifact. The named playbook parameters\
+      \ are `path` and `port`."
+    success_criteria:
+    - the response directly resolves the stated ask without erasing material distinctions
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ Ansible Commands 12 \u2014 Render Template To File Ansible Commands 12 \u2014\
+      \ Render Template To File / Ansible Commands 12 Render Template To File Ansible\
+      \ Commands 12 Render Template To File How do you execute ansible commands 12\
+      \ render template to file, 2, Executable Ansible relation ansible playbook block\
+      \ named playbook parameters: `path`; no justified final closure has been admitted\
+      \ yet"
+    givens:
+    - "Ansible Commands 12 \u2014 Render Template To File Ansible Commands 12 \u2014\
+      \ Render Template To File / Ansible Commands 12 Render Template To File Ansible\
+      \ Commands 12 Render Template To File How do you execute ansible commands 12\
+      \ render template to file"
+    - '2'
+    - 'Executable Ansible relation ansible playbook block named playbook parameters:
+      `path`'
+    unknowns: []
+    missing_components:
+    - a justified final realization has not yet been produced
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - completion
+    origin_layers:
+    - model
+    degree: partial
+    remainder_shapes:
+    - missing
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair: []
+    full_repair:
+    - 'satisfy success condition: the response directly resolves the stated ask without
+      erasing material distinctions'
+    boundary_shape:
+    - d*
+    action_posture: direct_resolution
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Ansible Commands 12 Render Template To File
+    title_depth_prefixes:
+    - Ansible Commands 12 Render Template To File
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Ansible Command 12 Render Template File
+    - "Ansible Commands 12 \u2014 Render Template To File / Ansible Commands 12 Render\
+      \ Template To File / Port"
+    composed_not: Ansible Command 12 Render Template File
+    lookup_keys:
+    - ansible command 12 render template file
+    - ansible command
+    - command 12
+    - 12 render
+    - render template
+    - template file
+    - ansible command 12
+    - command 12 render
+    - 12 render template
+    - render template file
+    - execute ansible command 12 render template file
+    - execute ansible
+    - execute ansible command
+    - without reduc remainder item cannot clos with govern confidence
+    - without reduc remainder item cannot clo
+    - govern confidence
+    - without reduc
+    - reduc remainder
+    - remainder item
+    - item cannot
+    - cannot clos
+    - clos with
+    - with govern
+    - without reduc remainder
+    notation_yaml: |-
+      "How Do You Execute Ansible Commands 12 Render Template To File":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Ansible Commands 12 Render Template To File"
+          - "Components: Ansible Command 12 Render Template File, Ansible Commands 12 \u2014 Render Template To File / Ansible Commands 12 Render Template To File / Port"
+          - "Composition: Ansible Command 12 Render Template File"
+          - "Title identity: Ansible Commands 12 Render Template To File"
+          - "Title depth segments: Ansible Commands 12 Render Template To File"
+          - "Title depth prefixes: Ansible Commands 12 Render Template To File"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: Ansible Commands 12 \u2014 Render Template To File Ansible Commands 12 \u2014 Render Template To File / Ansible Commands 12 Render Template To File Ansible Commands 12 Render Template To File How do you execute ansible commands 12 render template to file? 2. Executable Ansible relation ansible playbook block named playbook parameters: `path`, `port` This capability should be learned as a reusable Ansible ability artifact. The named playbook parameters are `path` and `port`."
+          - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+          - "Actual realization: the prompt surface is present; explicit givens are present: Ansible Commands 12 \u2014 Render Template To File Ansible Commands 12 \u2014 Render Template To File / Ansible Commands 12 Render Template To File Ansible Commands 12 Render Template To File How do you execute ansible commands 12 render template to file, 2, Executable Ansible relation ansible playbook block named playbook parameters: `path`; no justified final closure has been admitted yet"
+          - "Givens: Ansible Commands 12 \u2014 Render Template To File Ansible Commands 12 \u2014 Render Template To File / Ansible Commands 12 Render Template To File Ansible Commands 12 Render Template To File How do you execute ansible commands 12 render template to file, 2, Executable Ansible relation ansible playbook block named playbook parameters: `path`"
+          - "Missing components: a justified final realization has not yet been produced"
+          - "Misalignment types: completion"
+          - "Origin layers: model"
+          - "Degree: partial"
+          - "Remainder shapes: missing"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+          - "Action posture: direct_resolution"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - ansible
+---
+schema: bssc_skill.v2
+kind: ability
+title: "Ansible Commands 12 \u2014 Render Template To File / Python Ability"
+description:
+- The encounter states a direct parameter mapping that should remain callable even
+  when other learned artifacts from the same document are knowledge-shaped.
+- Executable ability artifact.
+question: How do you calculate render_per_tmp_per_app_conf_times_from_times_the_times_template_times_text_times_port
+  from port, with?
+declaration:
+  intent: How do you calculate render_per_tmp_per_app_conf_times_from_times_the_times_template_times_text_times_port
+    from port, with?
+  inputs:
+    port: number
+    with: number
+  outputs:
+    render_per_tmp_per_app_conf_times_from_times_the_times_template_times_text_times_port: number
+  authorities_requested:
+  - execute
+  authority_bounds:
+    execute:
+      scope: local_executor
+      target: python3_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - local executor invocation
+  persistence_behavior: none
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier1_bounded_transform
+  executor_framework: python3
+executor: python3
+entrypoint: main
+inputs:
+  port: number
+  with: number
+outputs:
+  render_per_tmp_per_app_conf_times_from_times_the_times_template_times_text_times_port: number
+python: "# /// script\n# requires-python = \">=3.11\"\n# dependencies = [\"msgspec\"\
+  , \"orjson\"]\n# ///\n\nfrom __future__ import annotations\n\nimport argparse\n\
+  import ast\nimport math\nimport sys\n\nimport msgspec\nimport orjson\n\n\nEXPRESSION\
+  \ = '( ( port ) ) * with * port'\nOUTPUT_FIELD = 'render_per_tmp_per_app_conf_times_from_times_the_times_template_times_text_times_port'\n\
+  ALLOWED_NAMES = ['port', 'with']\nALLOWED_NODE_TYPES = (\n    ast.Expression,\n\
+  \    ast.BinOp,\n    ast.UnaryOp,\n    ast.Add,\n    ast.Sub,\n    ast.Mult,\n \
+  \   ast.Div,\n    ast.Pow,\n    ast.Mod,\n    ast.FloorDiv,\n    ast.USub,\n   \
+  \ ast.UAdd,\n    ast.Load,\n    ast.Name,\n    ast.Constant,\n)\n\n\nclass InputPayload(msgspec.Struct,\
+  \ kw_only=True):\n    payload: dict[str, object] = {}\n\n\nclass OutputPayload(msgspec.Struct,\
+  \ kw_only=True):\n    status: str\n    answer: str = \"\"\n    result: dict[str,\
+  \ object]\n    notes: list[str] = []\n\n\ndef _validate_expression() -> ast.AST:\n\
+  \    tree = ast.parse(EXPRESSION, mode=\"eval\")\n    for node in ast.walk(tree):\n\
+  \        if not isinstance(node, ALLOWED_NODE_TYPES):\n            raise ValueError(f\"\
+  disallowed expression node: {type(node).__name__}\")\n        if isinstance(node,\
+  \ ast.Name) and node.id not in ALLOWED_NAMES:\n            raise ValueError(f\"\
+  disallowed symbol: {node.id}\")\n    return tree\n\n\nCOMPILED = compile(_validate_expression(),\
+  \ \"<expression>\", \"eval\")\n\n\ndef _coerce_number(value: object) -> float:\n\
+  \    if value is None:\n        raise ValueError(\"missing numeric input\")\n  \
+  \  if isinstance(value, bool):\n        raise ValueError(\"boolean inputs are not\
+  \ numeric\")\n    if isinstance(value, (int, float)):\n        return float(value)\n\
+  \    text = str(value).strip()\n    if not text:\n        raise ValueError(\"empty\
+  \ numeric input\")\n    return float(text)\n\n\ndef run(payload: InputPayload) ->\
+  \ OutputPayload:\n    values = {\n    \"port\": _coerce_number(payload.payload.get(\"\
+  port\")),\n    \"with\": _coerce_number(payload.payload.get(\"with\")),\n    }\n\
+  \    result = eval(COMPILED, {\"__builtins__\": {}, \"math\": math}, values)\n \
+  \   normalized = int(result) if isinstance(result, float) and result.is_integer()\
+  \ else result\n    return OutputPayload(\n        status=\"ok\",\n        answer=str(normalized),\n\
+  \        result={OUTPUT_FIELD: normalized},\n        notes=[],\n    )\n\n\ndef main()\
+  \ -> None:\n    parser = argparse.ArgumentParser(description='Ansible Commands 12\
+  \ \u2014 Render Template To File / Python Ability')\n    parser.add_argument(\"\
+  --input-json\", help=\"Optional JSON payload. Prefer stdin when omitted.\")\n  \
+  \  args = parser.parse_args()\n    raw = args.input_json.encode(\"utf-8\") if args.input_json\
+  \ else sys.stdin.buffer.read()\n    payload = orjson.loads(raw) if raw else {}\n\
+  \    typed_input = msgspec.convert({\"payload\": payload}, type=InputPayload)\n\
+  \    result = run(typed_input)\n    sys.stdout.buffer.write(orjson.dumps(msgspec.to_builtins(result),\
+  \ option=orjson.OPT_INDENT_2))\n    sys.stdout.buffer.write(b\"\\n\")\n\n\nif __name__\
+  \ == \"__main__\":\n    main()"
+governance:
+  scope: reuse when later prompts ask to compute render_per_tmp_per_app_conf_times_from_times_the_times_template_times_text_times_port
+    from port, with
+  justification: The encounter states a direct parameter mapping that should remain
+    callable even when other learned artifacts from the same document are knowledge-shaped.
+  function_bit: 1
+  boundary_shape:
+  - a*
+  - c'*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:28:23+00:00'
+  provenance:
+  - not_learn-from-markdown-12-learn-ansible-commands-re_5ab635
+  - /Users/ravindranathakila/service/realized/trials/ansible/12_LEARN_ANSIBLE_COMMANDS_RENDER_TEMPLATE_FILE.md
+  constraints:
+  - derive only from the supplied encounter
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask to compute render_per_tmp_per_app_conf_times_from_times_the_times_template_times_text_times_port
+      from port, with
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Natural Language Paraphrases
+    encountered_not: 4 Natural Language Paraphrases
+    goal: How do you calculate render_per_tmp_per_app_conf_times_from_times_the_times_template_times_text_times_port
+      from port, with?
+    intended_object: "Ansible Commands 12 \u2014 Render Template To File Ansible Commands\
+      \ 12 \u2014 Render Template To File / Python Ability Natural Language Paraphrases\
+      \ Python Ability How do you calculate render_per_tmp_per_app_conf_times_from_times_the_times_template_times_text_times_port\
+      \ from port, with? 4 Natural Language Paraphrases 4. Natural-language paraphrases\
+      \ render /tmp/app.conf from the template text port= port with port=8080 write\
+      \ templated port configuration into a file render a tiny config file with Ansible\
+      \ render `/tmp/app.conf` from the template text `port={{ port }}` with `port=8080`"
+    success_criteria:
+    - all required inputs are explicit and the bounded computation or template is
+      applied faithfully
+    - the result is returned in the requested usable form
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ Ansible Commands 12 \u2014 Render Template To File Ansible Commands 12 \u2014\
+      \ Render Template To File / Python Ability Natural Language Paraphrases Python\
+      \ Ability How do you calculate render_per_tmp_per_app_conf_times_from_times_the_times_template_times_text_times_port\
+      \ from port, with, 4 Natural Language Paraphrases 4; no justified final closure\
+      \ has been admitted yet"
+    givens:
+    - "Ansible Commands 12 \u2014 Render Template To File Ansible Commands 12 \u2014\
+      \ Render Template To File / Python Ability Natural Language Paraphrases Python\
+      \ Ability How do you calculate render_per_tmp_per_app_conf_times_from_times_the_times_template_times_text_times_port\
+      \ from port"
+    - with
+    - 4 Natural Language Paraphrases 4
+    - conf from the template text port= port with port=8080 write templated port configuration
+      into a file render a tiny config file with Ansible render `/tmp/app
+    unknowns: []
+    missing_components:
+    - a justified final realization has not yet been produced
+    distorted_components: []
+    differentiators:
+    - 'named inputs supplied: port'
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - functional
+    - completion
+    origin_layers:
+    - model
+    degree: partial
+    remainder_shapes:
+    - missing
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair:
+    - perform the bounded computation or invoke the matching executable template
+    full_repair:
+    - perform the bounded computation or invoke the matching executable template
+    - 'satisfy success condition: all required inputs are explicit and the bounded
+      computation or template is applied faithfully'
+    - 'satisfy success condition: the result is returned in the requested usable form'
+    boundary_shape:
+    - d*
+    action_posture: compute_or_template
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Natural Language Paraphrases
+    title_depth_prefixes:
+    - Natural Language Paraphrases
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Ansible Command 12 Render Template File
+    - "Ansible Commands 12 \u2014 Render Template To File / Python Ability / With"
+    - "Ansible Commands 12 \u2014 Render Template To File / Python Ability / Render\
+      \ Per Tmp Per App Conf Time Time Time Template Time Text Time Port"
+    composed_not: 4 Natural Language Paraphrase
+    lookup_keys:
+    - natural language paraphrase
+    - natural language
+    - language paraphrase
+    - calculate render per tmp per app conf time time time template time text time
+      port port with
+    - calculate render per tmp per app conf time time time template time text time
+      port port
+    - calculate render
+    - render per
+    - per tmp
+    - tmp per
+    - per app
+    - app conf
+    - conf time
+    - time time
+    - time template
+    - template time
+    - time text
+    - text time
+    - time port
+    - port port
+    - port with
+    - calculate render per
+    - render per tmp
+    - per tmp per
+    - tmp per app
+    notation_yaml: |-
+      "How Do You Calculate Render Per Tmp Per App Conf Times From Times The Times Template Times Text Times Port From Port With":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: 4 Natural Language Paraphrases"
+          - "Components: Ansible Command 12 Render Template File, Ansible Commands 12 \u2014 Render Template To File / Python Ability / With, Ansible Commands 12 \u2014 Render Template To File / Python Ability / Render Per Tmp Per App Conf Time Time Time Template Time Text Time Port"
+          - "Composition: 4 Natural Language Paraphrase"
+          - "Title identity: Natural Language Paraphrases"
+          - "Title depth segments: Natural Language Paraphrases"
+          - "Title depth prefixes: Natural Language Paraphrases"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: Ansible Commands 12 \u2014 Render Template To File Ansible Commands 12 \u2014 Render Template To File / Python Ability Natural Language Paraphrases Python Ability How do you calculate render_per_tmp_per_app_conf_times_from_times_the_times_template_times_text_times_port from port, with? 4 Natural Language Paraphrases 4. Natural-language paraphrases render /tmp/app.conf from the template text port= port with port=8080 write templated port configuration into a file render a tiny config file with Ansible render `/tmp/app.conf` from the template text `port={{ port }}` with `port=8080`"
+          - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+          - "Actual realization: the prompt surface is present; explicit givens are present: Ansible Commands 12 \u2014 Render Template To File Ansible Commands 12 \u2014 Render Template To File / Python Ability Natural Language Paraphrases Python Ability How do you calculate render_per_tmp_per_app_conf_times_from_times_the_times_template_times_text_times_port from port, with, 4 Natural Language Paraphrases 4; no justified final closure has been admitted yet"
+          - "Givens: Ansible Commands 12 \u2014 Render Template To File Ansible Commands 12 \u2014 Render Template To File / Python Ability Natural Language Paraphrases Python Ability How do you calculate render_per_tmp_per_app_conf_times_from_times_the_times_template_times_text_times_port from port, with, 4 Natural Language Paraphrases 4, conf from the template text port= port with port=8080 write templated port configuration into a file render a tiny config file with Ansible render `/tmp/app"
+          - "Missing components: a justified final realization has not yet been produced"
+          - "Differentiators: named inputs supplied: port"
+          - "Misalignment types: functional, completion"
+          - "Origin layers: model"
+          - "Degree: partial"
+          - "Remainder shapes: missing"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Minimal repair: perform the bounded computation or invoke the matching executable template"
+          - "Full repair: perform the bounded computation or invoke the matching executable template, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+          - "Action posture: compute_or_template"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - ansible

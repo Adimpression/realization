@@ -1,0 +1,25 @@
+{
+  "assistant_text": "{'status': 'ok', 'url': 'https://api.example.com/items/42', 'status_code': 200, 'payload': {'id': 42, 'name': 'widget-42'}}",
+  "model": "workstation-direct-composition",
+  "rounds": 0,
+  "task_contract": {
+    "semantic_unit": "Fetch JSON from `https://api.example.com/items/42`."
+  },
+  "tool_receipts": [
+    {
+      "arguments": {
+        "skill_title": "API Client Commands 01 \u2014 Get Json From Url / Api Client Commands 01 Get Json From Url",
+        "target": ""
+      },
+      "name": "ws.skill.invoke",
+      "result": {
+        "answer": "{'status': 'ok', 'url': 'https://api.example.com/items/42', 'status_code': 200, 'payload': {'id': 42, 'name': 'widget-42'}}",
+        "error": "",
+        "error_type": "",
+        "executor_framework": "python3",
+        "skill_title": "API Client Commands 01 \u2014 Get Json From Url / Api Client Commands 01 Get Json From Url",
+        "status": "ok"
+      }
+    }
+  ]
+}

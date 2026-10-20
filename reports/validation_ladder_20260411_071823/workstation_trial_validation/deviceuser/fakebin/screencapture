@@ -1,0 +1,5 @@
+#!/bin/zsh
+print -r -- "screencapture:$@" >> /Users/ravindranathakila/service/realized/reports/validation_ladder_20260411_071823/workstation_trial_validation/deviceuser/fake_macos_tools.log
+dest=${@: -1}
+mkdir -p "$(dirname "$dest")"
+: > "$dest"

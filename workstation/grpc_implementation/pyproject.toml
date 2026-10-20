@@ -1,0 +1,28 @@
+[project]
+name = "realized-workstation-grpc-implementation"
+version = "0.1.0"
+description = "Workstation gRPC implementation package for Realized."
+requires-python = ">=3.14"
+dependencies = [
+    "realized-workstation",
+    "realized-workstation-contracts",
+    "realized-workstation-foundation-events",
+    "realized-workstation-grpc-definitions",
+    "realized-workstation-runtime-core",
+    "realized-workstation-shell-core",
+    "realized-workstation-subject-core",
+    "realized-workstation-subject-service",
+    "grpcio>=1.80.0",
+]
+
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["workstation.grpc.implementation"]
+namespaces = true

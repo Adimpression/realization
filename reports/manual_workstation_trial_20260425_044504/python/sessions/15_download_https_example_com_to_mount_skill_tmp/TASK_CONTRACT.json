@@ -1,0 +1,28 @@
+{
+  "assumptions": [],
+  "boundary_shape": [
+    "b*",
+    "a*",
+    "d*"
+  ],
+  "completion_conditions": [
+    "downloaded file is available in the workstation",
+    "requested result is returned to the user"
+  ],
+  "input_values": {},
+  "missing_requirements": [],
+  "output_values": [
+    "result"
+  ],
+  "read_references": [
+    "https://example.com`",
+    "download source"
+  ],
+  "semantic_unit": "Download `https://example.com` to mount `skill_tmp` at `example-python.html`.",
+  "side_effects": [
+    "download file"
+  ],
+  "write_targets": [
+    "download destination"
+  ]
+}

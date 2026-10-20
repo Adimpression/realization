@@ -1,0 +1,18 @@
+{
+  "assumptions": [],
+  "boundary_shape": [
+    "d*"
+  ],
+  "completion_conditions": [
+    "explanation is returned to the user"
+  ],
+  "input_values": {},
+  "missing_requirements": [],
+  "output_values": [
+    "explanation"
+  ],
+  "read_references": [],
+  "semantic_unit": "Explain how work relates to energy change, and state the work-energy theorem in terms of the transfer substrate.",
+  "side_effects": [],
+  "write_targets": []
+}

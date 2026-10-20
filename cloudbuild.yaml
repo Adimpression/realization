@@ -1,0 +1,71 @@
+# Deterministic CI for Realized. Provider-backed and browser gates remain explicit
+# qualification jobs because they require credentials or local desktop services.
+timeout: 1800s
+
+steps:
+  - name: 'python:3.14-slim'
+    id: 'architecture-ratchet'
+    entrypoint: 'python'
+    args: ['scripts/check_architecture_boundaries.py']
+
+  - name: 'python:3.14-slim'
+    id: 'architecture-ratchet-tests'
+    entrypoint: 'bash'
+    env:
+      - 'UV_CACHE_DIR=/workspace/.uv-cache'
+    args:
+      - '-c'
+      - >-
+        python -m pip install --disable-pip-version-check --no-cache-dir uv==0.10.10 &&
+        uv sync --frozen &&
+        uv build core_runtime --out-dir /workspace/core-runtime-dist &&
+        uv build --wheel core_engine --out-dir /workspace/core-engine-dist &&
+        uv build --wheel core_app --out-dir /workspace/core-app-dist &&
+        uv run --frozen python -m unittest
+        tests.test_architecture_boundaries
+        core_runtime.tests.test_reduction
+        core_engine.tests.test_api
+        core_engine.tests.test_distribution
+        core_app.tests.test_distribution
+        tests.test_core_runtime_package_adapter
+        tests.test_core_app_cli_equivalence
+        tests.test_side_boundary_extraction
+        tests.test_skill_invocation_contract
+        tests.test_artifact_boundary_shape
+        tests.test_boundary_shape_typing
+        tests.test_function_boundary
+        workstation.tests.test_workstation_package_import_hygiene
+        tests.test_runtime_layer_hygiene
+        tests.test_controller_layer_hygiene
+        tests.test_llm_layer_hygiene
+        tests.test_exchange_layer_hygiene
+        tests.test_skill_boundary_normalization
+        workstation.tests.test_six_layer_workstation_boundary_hygiene &&
+        uv run --frozen python scripts/verify_core_distribution.py
+        --app-wheel /workspace/core-app-dist/realized_core-0.1.0-py3-none-any.whl
+        --engine-wheel /workspace/core-engine-dist/realized_core_engine-0.1.0-py3-none-any.whl
+        --runtime-wheel /workspace/core-runtime-dist/realized_core_runtime-0.1.0-py3-none-any.whl
+
+  - name: 'python:3.14-slim'
+    id: 'deterministic-trial-bdd'
+    entrypoint: 'bash'
+    env:
+      - 'OPENAI_API_KEY='
+      - 'UV_CACHE_DIR=/workspace/.uv-cache'
+    args:
+      - '-c'
+      - >-
+        python -m pip install --disable-pip-version-check --no-cache-dir uv==0.10.10 &&
+        uv sync --frozen &&
+        uv run --frozen python -m unittest
+        workstation.tests.bdd.test_report_creation_bdd
+        workstation.tests.bdd.test_smart_city_travel_incremental_report_ladder_bdd
+        workstation.tests.bdd.test_trial_skill_routing_bdd
+        tests.test_architecture_compatibility_facades
+        workstation.tests.test_workstation_activity_view
+        workstation.tests.test_workstation.WorkstationTests.test_load_current_workstation_session_does_not_rewrite_discovery_files
+        workstation.tests.test_workstation.WorkstationTests.test_load_legacy_workstation_session_persists_attachment_upgrade
+        workstation.tests.test_workstation_chat_ui.WorkstationChatUiTests.test_workstation_chat_context_reads_workspace_and_skill_inventory
+
+options:
+  logging: CLOUD_LOGGING_ONLY

@@ -1,0 +1,138 @@
+...................................s............................................................................................................................................................................................................................................................................................................................................................................................FFF.FFF.................................................................................................................................................................I1011 12:25:25.777066 13960880 fork_posix.cc:71] Other threads are currently calling into gRPC, skipping fork() handlers
+...
+======================================================================
+FAIL: test_textual_publication_import_widgets_update_selected_import_scope_and_usage (workstation.tests.test_workstation_chat_ui.WorkstationChatUiTests.test_textual_publication_import_widgets_update_selected_import_scope_and_usage)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ravindranathakila/.codex/worktrees/boundary-followup/service/realized/workstation/tests/test_workstation_chat_ui.py", line 8227, in test_textual_publication_import_widgets_update_selected_import_scope_and_usage
+    asyncio.run(_exercise())
+    ~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.3_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/runners.py", line 204, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.3_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.3_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/base_events.py", line 719, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/Users/ravindranathakila/.codex/worktrees/boundary-followup/service/realized/workstation/tests/test_workstation_chat_ui.py", line 8188, in _exercise
+    self.assertEqual(str(getattr(target_select, "value", "")), second_import.import_id)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'subject_import_unit-support-1e98b8ced3_b5a6f8084e' != 'subject_import_unit-support-b94b023346_8eb508651c'
+- subject_import_unit-support-1e98b8ced3_b5a6f8084e
++ subject_import_unit-support-b94b023346_8eb508651c
+
+
+======================================================================
+FAIL: test_textual_publication_include_section_switch_enables_after_section_target_selected (workstation.tests.test_workstation_chat_ui.WorkstationChatUiTests.test_textual_publication_include_section_switch_enables_after_section_target_selected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ravindranathakila/.codex/worktrees/boundary-followup/service/realized/workstation/tests/test_workstation_chat_ui.py", line 8324, in test_textual_publication_include_section_switch_enables_after_section_target_selected
+    asyncio.run(_exercise())
+    ~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.3_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/runners.py", line 204, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.3_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.3_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/base_events.py", line 719, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/Users/ravindranathakila/.codex/worktrees/boundary-followup/service/realized/workstation/tests/test_workstation_chat_ui.py", line 8322, in _exercise
+    self.assertFalse(bool(getattr(include_section_switch, "disabled", True)))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_textual_publication_preview_diff_opens_result_pane_and_hides_legacy_baseline_action (workstation.tests.test_workstation_chat_ui.WorkstationChatUiTests.test_textual_publication_preview_diff_opens_result_pane_and_hides_legacy_baseline_action)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ravindranathakila/.codex/worktrees/boundary-followup/service/realized/workstation/tests/test_workstation_chat_ui.py", line 7939, in test_textual_publication_preview_diff_opens_result_pane_and_hides_legacy_baseline_action
+    asyncio.run(_exercise())
+    ~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.3_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/runners.py", line 204, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.3_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.3_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/base_events.py", line 719, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/Users/ravindranathakila/.codex/worktrees/boundary-followup/service/realized/workstation/tests/test_workstation_chat_ui.py", line 7923, in _exercise
+    self.assertEqual(app._maximized_pane_id, "publication_result")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None != 'publication_result'
+
+======================================================================
+FAIL: test_textual_publication_scope_tree_supports_keyboard_selection_and_preview (workstation.tests.test_workstation_chat_ui.WorkstationChatUiTests.test_textual_publication_scope_tree_supports_keyboard_selection_and_preview)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ravindranathakila/.codex/worktrees/boundary-followup/service/realized/workstation/tests/test_workstation_chat_ui.py", line 7512, in test_textual_publication_scope_tree_supports_keyboard_selection_and_preview
+    asyncio.run(_exercise())
+    ~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.3_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/runners.py", line 204, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.3_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.3_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/base_events.py", line 719, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/Users/ravindranathakila/.codex/worktrees/boundary-followup/service/realized/workstation/tests/test_workstation_chat_ui.py", line 7502, in _exercise
+    self.assertIn("  [-] Velocity", toggled_tree_text)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '  [-] Velocity' not found in 'Items (2)\n  [x] Velocity\n> [x] Acceleration\nSupport (0)\nNo approved support is available.\nReport sections (6)\n  [x] Summary (summary)\n  [x] Definitions (definition)\n  [x] Analysis (analysis)\n  [x] Implementation (implementation)\n  [x] Evidence (evidence)\n  [x] Appendix (appendix)'
+
+======================================================================
+FAIL: test_textual_publication_section_target_selection_scrolls_tree_to_visible_section (workstation.tests.test_workstation_chat_ui.WorkstationChatUiTests.test_textual_publication_section_target_selection_scrolls_tree_to_visible_section)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ravindranathakila/.codex/worktrees/boundary-followup/service/realized/workstation/tests/test_workstation_chat_ui.py", line 7618, in test_textual_publication_section_target_selection_scrolls_tree_to_visible_section
+    asyncio.run(_exercise())
+    ~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.3_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/runners.py", line 204, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.3_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.3_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/base_events.py", line 719, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/Users/ravindranathakila/.codex/worktrees/boundary-followup/service/realized/workstation/tests/test_workstation_chat_ui.py", line 7613, in _exercise
+    self.assertIn("> [x] Analysis", tree_text)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '> [x] Analysis' not found in 'Items (15)\n> [x] Actors\n  [x] Boundaries\n  [x] Capabilities\n  [x] Constraints\n  [x] Dependencies\n  [x] Objectives\n  [x] States\n  [x] Transitions\n  [x] Vendors\n  [x] Balances\n  [x] Top Ups\n  [x] Cashiers\n  [x] Parents\n  [x] Students\n  [x] Receipts\nSupport (0)\nNo approved support is available.\nReport sections (6)\n  [x] Summary (summary)\n  [x] Definitions (definition)\n  [x] Analysis (analysis)\n  [x] Implementation (implementation)\n  [x] Evidence (evidence)\n  [x] Appendix (appendix)'
+
+======================================================================
+FAIL: test_textual_publication_select_action_keeps_active_publication_tab (workstation.tests.test_workstation_chat_ui.WorkstationChatUiTests.test_textual_publication_select_action_keeps_active_publication_tab)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/ravindranathakila/.codex/worktrees/boundary-followup/service/realized/workstation/tests/test_workstation_chat_ui.py", line 8019, in test_textual_publication_select_action_keeps_active_publication_tab
+    asyncio.run(_exercise())
+    ~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.3_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/runners.py", line 204, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.3_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.3_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/base_events.py", line 719, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/Users/ravindranathakila/.codex/worktrees/boundary-followup/service/realized/workstation/tests/test_workstation_chat_ui.py", line 8017, in _exercise
+    self.assertEqual(app._active_tab_id(), "publication_tab")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'review_tab' != 'publication_tab'
+- review_tab
++ publication_tab
+
+
+----------------------------------------------------------------------
+Ran 587 tests in 4243.737s
+
+FAILED (failures=6, skipped=1)

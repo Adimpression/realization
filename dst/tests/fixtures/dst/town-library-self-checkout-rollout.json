@@ -1,0 +1,124 @@
+{
+  "fixture_id": "town-library-self-checkout-rollout",
+  "title": "Town library self-checkout rollout",
+  "title_key": "town-library-self-checkout-rollout",
+  "source_ref": "dst/Town library self-checkout rollout.md",
+  "summary": "A town library network wants shorter checkout lines and less repetitive desk work.",
+  "sections": [
+    {
+      "key": "situation",
+      "title": "Situation",
+      "narrative": "A town library network wants shorter checkout lines and less repetitive desk work.\n\nToday branch staff check out every book and media item by hand. The library is considering self-checkout kiosks, but it cannot leave patrons without help and it cannot shut branches during installation.",
+      "entries": []
+    },
+    {
+      "key": "actors",
+      "title": "Actors",
+      "narrative": "",
+      "entries": [
+        {"code": "a1", "text": "library administration"},
+        {"code": "a2", "text": "branch staff"},
+        {"code": "a3", "text": "kiosk vendor"},
+        {"code": "a4", "text": "accessibility office"},
+        {"code": "a5", "text": "patrons"}
+      ]
+    },
+    {
+      "key": "objectives",
+      "title": "Objectives",
+      "narrative": "",
+      "entries": [
+        {"code": "o1", "text": "reduce checkout wait times"},
+        {"code": "o2", "text": "keep checkout accessible for patrons who need staff help"},
+        {"code": "o3", "text": "avoid branch disruption during rollout"}
+      ]
+    },
+    {
+      "key": "capabilities",
+      "title": "Capabilities",
+      "narrative": "",
+      "entries": [
+        {"code": "k1", "text": "self-checkout kiosks"},
+        {"code": "k2", "text": "staffed assistance desk during kiosk use"},
+        {"code": "k3", "text": "accessible kiosk prompts and large-text guidance"},
+        {"code": "k4", "text": "kiosk-first checkout with minimal staffed support"}
+      ]
+    },
+    {
+      "key": "dependencies",
+      "title": "Dependencies",
+      "narrative": "",
+      "entries": [
+        {"code": "d1", "text": "vendor installation readiness"},
+        {"code": "d2", "text": "staff training complete"},
+        {"code": "d3", "text": "accessibility review signed off"}
+      ]
+    },
+    {
+      "key": "constraints",
+      "title": "Constraints",
+      "narrative": "",
+      "entries": [
+        {"code": "q1", "text": "branches must stay open during rollout"},
+        {"code": "q2", "text": "patrons who need staff help must still be served"},
+        {"code": "q3", "text": "budget only allows staged installation"}
+      ]
+    },
+    {
+      "key": "boundaries",
+      "title": "Boundaries",
+      "narrative": "",
+      "entries": [
+        {"code": "b1", "text": "library-to-vendor boundary"},
+        {"code": "b2", "text": "accessibility-to-service-design boundary"}
+      ]
+    },
+    {
+      "key": "states",
+      "title": "States",
+      "narrative": "",
+      "entries": [
+        {"code": "s0", "text": "staffed checkout only"},
+        {"code": "s1", "text": "main-branch pilot with staff support"},
+        {"code": "s2", "text": "multi-branch kiosks with staffed support"},
+        {"code": "s3", "text": "kiosk-first checkout with minimal staffed support"}
+      ]
+    },
+    {
+      "key": "transitions",
+      "title": "Transitions",
+      "narrative": "",
+      "entries": [
+        {"code": "t1", "text": "branch pilot with staffed support"},
+        {"code": "t2", "text": "expand kiosks while keeping staffed assistance"},
+        {"code": "t3", "text": "fast kiosk-first rollout"}
+      ]
+    }
+  ],
+  "candidate_paths": [
+    {
+      "title": "Path A: branch pilot with staffed support",
+      "parent_title": "Candidate paths",
+      "route_expression": "s0 -> s1 -> s2",
+      "narrative": "This path keeps the service legible to patrons and gives staff time to learn the new workflow before the library expands kiosks across branches.",
+      "highlights": [
+        "`s0 -> s1 -> s2`",
+        "keep staffed assistance in place",
+        "stage installation branch by branch",
+        "preserve accessibility and service continuity"
+      ]
+    },
+    {
+      "title": "Path B: kiosk-first cutover",
+      "parent_title": "Candidate paths",
+      "route_expression": "s0 -> s3",
+      "narrative": "This path reduces desk traffic faster, but it is brittle because it depends on full readiness and weakens the staffed fallback too early.",
+      "highlights": [
+        "`s0 -> s3`",
+        "push kiosks out quickly",
+        "reduce staffed checkout coverage early",
+        "risk excluding patrons who still need direct help"
+      ]
+    }
+  ]
+}

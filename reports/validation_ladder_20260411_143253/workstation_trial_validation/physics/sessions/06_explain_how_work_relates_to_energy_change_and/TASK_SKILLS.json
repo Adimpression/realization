@@ -1,0 +1,250 @@
+{
+  "prompt": "Explain how work relates to energy change, and state the work-energy theorem in terms of the transfer substrate.",
+  "returned_skill_count": 12,
+  "skills": [
+    {
+      "authorities_requested": [
+        "execute"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "Delta": "number",
+        "KE": "number"
+      },
+      "kind": "ability",
+      "outputs": {
+        "W_times_net": "number"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "score": 18,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Work and Energy Transfer / Work Energy Theorem"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "score": 18,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Work and Energy Transfer / Work-energy theorem"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "score": 15,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Work and Energy Transfer / E Times Final From E And Initial And Delta"
+    },
+    {
+      "authorities_requested": [
+        "execute"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "m": "number",
+        "v": "number"
+      },
+      "kind": "ability",
+      "outputs": {
+        "KE": "number"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "score": 15,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Work and Energy Transfer / Kinetic Energy"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "score": 15,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Work and Energy Transfer / Physics Relations Work And Energy Transfer"
+    },
+    {
+      "authorities_requested": [
+        "execute"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "Delta": "number",
+        "E_": "number",
+        "initial": "number"
+      },
+      "kind": "ability",
+      "outputs": {
+        "E_times_final": "number"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "score": 15,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Work and Energy Transfer / Python Ability"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "score": 15,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Work and Energy Transfer / Work from force and displacement"
+    },
+    {
+      "authorities_requested": [
+        "execute"
+      ],
+      "executor_framework": "wasm_wasi",
+      "inputs": {
+        "payload": "stdin payload or JSON input"
+      },
+      "kind": "ability",
+      "outputs": {
+        "greeting": "greeting text"
+      },
+      "representation": "wasm_module",
+      "risk_tier": "tier1_bounded_transform",
+      "score": 6,
+      "source_kind": "builtin_workstation",
+      "source_target": "",
+      "title": "Workstation Greeting From Wasm"
+    },
+    {
+      "authorities_requested": [
+        "execute",
+        "read"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "glob": "optional fnmatch-style relative path filter",
+        "max_matches": "maximum match lines to return",
+        "mount": "governed workstation attachment mount name",
+        "pattern": "regular expression or literal text to search for",
+        "relative_path": "optional relative directory inside the mount"
+      },
+      "kind": "ability",
+      "outputs": {
+        "match_count": "number of matches returned",
+        "matches": "matched lines with file and line number"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "score": 6,
+      "source_kind": "builtin_workstation",
+      "source_target": "",
+      "title": "Workstation Repo Search"
+    },
+    {
+      "authorities_requested": [
+        "execute",
+        "read"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "max_depth": "maximum traversal depth",
+        "max_entries": "maximum lines to return",
+        "mount": "governed workstation attachment mount name",
+        "relative_path": "optional relative directory inside the mount"
+      },
+      "kind": "ability",
+      "outputs": {
+        "entry_count": "number of entries returned",
+        "tree": "bounded directory-tree lines"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "score": 6,
+      "source_kind": "builtin_workstation",
+      "source_target": "",
+      "title": "Workstation Repo Tree"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "score": 3,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Gravitation / Reusable substrate under the law"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "score": 3,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Linear Motion Under Constant Acceleration / S Times Later From S And Initial And Change"
+    }
+  ],
+  "total_skill_count": 62
+}

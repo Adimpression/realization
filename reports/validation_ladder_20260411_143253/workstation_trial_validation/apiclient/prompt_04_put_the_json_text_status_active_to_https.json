@@ -1,0 +1,25 @@
+{
+  "assistant_text": "{'status': 'ok', 'url': 'https://api.example.com/users/42', 'status_code': 200, 'payload': {'status': 'updated', 'method': 'PUT', 'payload': {'status': 'active'}}}",
+  "model": "workstation-direct-composition",
+  "rounds": 0,
+  "task_contract": {
+    "semantic_unit": "Put the JSON text `{\"status\":\"active\"}` to `https://api.example.com/users/42`."
+  },
+  "tool_receipts": [
+    {
+      "arguments": {
+        "skill_title": "API Client Commands 04 \u2014 Put Json Body / Api Client Commands 04 Put Json Body",
+        "target": ""
+      },
+      "name": "ws.skill.invoke",
+      "result": {
+        "answer": "{'status': 'ok', 'url': 'https://api.example.com/users/42', 'status_code': 200, 'payload': {'status': 'updated', 'method': 'PUT', 'payload': {'status': 'active'}}}",
+        "error": "",
+        "error_type": "",
+        "executor_framework": "python3",
+        "skill_title": "API Client Commands 04 \u2014 Put Json Body / Api Client Commands 04 Put Json Body",
+        "status": "ok"
+      }
+    }
+  ]
+}

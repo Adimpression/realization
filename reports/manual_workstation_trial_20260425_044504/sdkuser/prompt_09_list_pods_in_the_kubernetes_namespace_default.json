@@ -1,0 +1,25 @@
+{
+  "assistant_text": "{'status': 'ok', 'namespace': 'default', 'pods': ['api-0', 'worker-0']}",
+  "model": "workstation-direct-composition",
+  "rounds": 0,
+  "task_contract": {
+    "semantic_unit": "List pods in the Kubernetes namespace `default`."
+  },
+  "tool_receipts": [
+    {
+      "arguments": {
+        "skill_title": "SDK User Commands 09 \u2014 Kubernetes List Pods / Sdk User Commands 09 Kubernetes List Pods",
+        "target": ""
+      },
+      "name": "ws.skill.invoke",
+      "result": {
+        "answer": "{'status': 'ok', 'namespace': 'default', 'pods': ['api-0', 'worker-0']}",
+        "error": "",
+        "error_type": "",
+        "executor_framework": "python3",
+        "skill_title": "SDK User Commands 09 \u2014 Kubernetes List Pods / Sdk User Commands 09 Kubernetes List Pods",
+        "status": "ok"
+      }
+    }
+  ]
+}

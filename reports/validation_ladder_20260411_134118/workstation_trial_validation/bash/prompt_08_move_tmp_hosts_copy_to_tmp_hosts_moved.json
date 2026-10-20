@@ -1,0 +1,25 @@
+{
+  "assistant_text": "{\"answer\": \"executed\", \"notes\": [], \"result\": {\"status\": \"executed\"}, \"status\": \"ok\"}",
+  "model": "workstation-direct-composition",
+  "rounds": 0,
+  "task_contract": {
+    "semantic_unit": "Move `/tmp/hosts.copy` to `/tmp/hosts.moved`."
+  },
+  "tool_receipts": [
+    {
+      "arguments": {
+        "skill_title": "Bash Commands 08 \u2014 Move File / Bash Commands 08 Move File",
+        "target": ""
+      },
+      "name": "ws.skill.invoke",
+      "result": {
+        "answer": "{\"answer\": \"executed\", \"notes\": [], \"result\": {\"status\": \"executed\"}, \"status\": \"ok\"}",
+        "error": "",
+        "error_type": "",
+        "executor_framework": "bash",
+        "skill_title": "Bash Commands 08 \u2014 Move File / Bash Commands 08 Move File",
+        "status": "ok"
+      }
+    }
+  ]
+}

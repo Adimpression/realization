@@ -1,0 +1,22 @@
+{
+  "assumptions": [],
+  "boundary_shape": [
+    "b*",
+    "a*",
+    "d*"
+  ],
+  "completion_conditions": [
+    "requested result is returned to the user"
+  ],
+  "input_values": {},
+  "missing_requirements": [],
+  "output_values": [
+    "result"
+  ],
+  "read_references": [
+    "https://example.com`."
+  ],
+  "semantic_unit": "Open Google Chrome to `https://example.com`.",
+  "side_effects": [],
+  "write_targets": []
+}

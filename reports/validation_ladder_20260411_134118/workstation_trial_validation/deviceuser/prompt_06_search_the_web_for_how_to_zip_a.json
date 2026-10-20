@@ -1,0 +1,25 @@
+{
+  "assistant_text": "{\"answer\": \"executed\", \"notes\": [], \"result\": {\"status\": \"executed\"}, \"status\": \"ok\"}",
+  "model": "workstation-direct-composition",
+  "rounds": 0,
+  "task_contract": {
+    "semantic_unit": "Search the web for `how to zip a folder on mac`."
+  },
+  "tool_receipts": [
+    {
+      "arguments": {
+        "skill_title": "Device User Capabilities 06 \u2014 Search The Web In Browser / Device User Capabilities 06 Search The Web In Browser",
+        "target": ""
+      },
+      "name": "ws.skill.invoke",
+      "result": {
+        "answer": "{\"answer\": \"executed\", \"notes\": [], \"result\": {\"status\": \"executed\"}, \"status\": \"ok\"}",
+        "error": "",
+        "error_type": "",
+        "executor_framework": "bash",
+        "skill_title": "Device User Capabilities 06 \u2014 Search The Web In Browser / Device User Capabilities 06 Search The Web In Browser",
+        "status": "ok"
+      }
+    }
+  ]
+}

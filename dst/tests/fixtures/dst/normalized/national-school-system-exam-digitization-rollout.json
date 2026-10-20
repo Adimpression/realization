@@ -1,0 +1,363 @@
+{
+  "schema_version": "dst_normalized_case.v1",
+  "fixture_id": "national-school-system-exam-digitization-rollout",
+  "source_ref": "dst/National School System Exam Digitization Rollout.md",
+  "context": {
+    "system_name": "National school exam digitization rollout",
+    "decision_problem": "Choose a rollout path for national digital exams that preserves legitimacy, continuity, and equity at national scale.",
+    "evaluation_state_id": "s0",
+    "planning_horizon": "",
+    "notes": [
+      "The cleaned intermediate model expresses candidate rollout paths as decision-ready option transitions from a common decision point.",
+      "The publication question is not whether to digitize, but which admissible operating model to approve."
+    ]
+  },
+  "actors": [
+    {"id": "a1", "name": "national education ministry", "roles": ["decision_maker", "coordinator"], "can_decide": true},
+    {"id": "a2", "name": "exam authority", "roles": ["delivery_owner"], "can_decide": true},
+    {"id": "a3", "name": "regional education boards", "roles": ["regional_operator"], "can_decide": false},
+    {"id": "a4", "name": "school administrators", "roles": ["school_operator"], "can_decide": false},
+    {"id": "a5", "name": "teachers / invigilators", "roles": ["invigilation"], "can_decide": false},
+    {"id": "a6", "name": "students", "roles": ["beneficiary"], "can_decide": false},
+    {"id": "a7", "name": "disability accommodation office", "roles": ["accessibility"], "can_decide": false},
+    {"id": "a8", "name": "device and platform vendor", "roles": ["provider"], "can_decide": false},
+    {"id": "a9", "name": "telecom / network providers", "roles": ["provider"], "can_decide": false},
+    {"id": "a10", "name": "courts / legal oversight body", "roles": ["oversight"], "can_decide": false},
+    {"id": "a11", "name": "cybersecurity authority", "roles": ["assurance"], "can_decide": false}
+  ],
+  "objectives": [
+    {"id": "o1", "name": "exam integrity", "shared": true, "mandatory": true, "pursued_by": ["a1", "a2", "a11"]},
+    {"id": "o2", "name": "equal fairness across schools and regions", "shared": true, "mandatory": true, "pursued_by": ["a1", "a2", "a3", "a10"]},
+    {"id": "o3", "name": "operational continuity on exam day", "shared": true, "mandatory": true, "pursued_by": ["a1", "a2", "a3", "a4"]},
+    {"id": "o4", "name": "grading efficiency", "shared": true, "mandatory": false, "pursued_by": ["a1", "a2"]},
+    {"id": "o5", "name": "accessibility for students with disabilities", "shared": true, "mandatory": true, "pursued_by": ["a1", "a2", "a7"]},
+    {"id": "o6", "name": "public trust and legitimacy", "shared": true, "mandatory": true, "pursued_by": ["a1", "a2", "a10"]},
+    {"id": "o7", "name": "lower long-term administrative cost", "shared": true, "mandatory": false, "pursued_by": ["a1", "a2"]},
+    {"id": "o8", "name": "resilience against cheating and cyberattack", "shared": true, "mandatory": true, "pursued_by": ["a1", "a2", "a11"]}
+  ],
+  "capabilities": [
+    {"id": "k2", "name": "digital exam authoring platform", "kind": "core", "advances_objectives": ["o1", "o4"], "controlled_by": ["a1", "a2", "a8"], "benefits_to": ["a2"], "costs_to": ["a1"], "risks_to": ["a6"]},
+    {"id": "k5", "name": "local offline exam caching", "kind": "resilience", "advances_objectives": ["o3", "o8"], "controlled_by": ["a1", "a2", "a8"], "benefits_to": ["a3", "a4", "a6"], "costs_to": ["a1"], "risks_to": ["a6"]},
+    {"id": "k8", "name": "digital accommodations interface", "kind": "accessibility", "advances_objectives": ["o2", "o5", "o6"], "controlled_by": ["a1", "a2", "a7"], "benefits_to": ["a6"], "costs_to": ["a1"], "risks_to": ["a6"]},
+    {"id": "k11", "name": "emergency paper fallback kit", "kind": "resilience", "advances_objectives": ["o3", "o6"], "controlled_by": ["a1", "a2", "a3", "a4"], "benefits_to": ["a6"], "costs_to": ["a1", "a3"], "risks_to": ["a6"]},
+    {"id": "k13", "name": "school device readiness management", "kind": "readiness", "advances_objectives": ["o2", "o3", "o6"], "controlled_by": ["a1", "a3", "a4"], "benefits_to": ["a6"], "costs_to": ["a1", "a3"], "risks_to": ["a6"]},
+    {"id": "k14", "name": "region-wide scheduling coordination", "kind": "coordination", "advances_objectives": ["o2", "o3", "o6"], "controlled_by": ["a1", "a2", "a3"], "benefits_to": ["a4", "a6"], "costs_to": ["a1", "a3"], "risks_to": ["a6"]},
+    {"id": "k6", "name": "real-time submission to central servers", "kind": "performance", "advances_objectives": ["o1", "o4"], "controlled_by": ["a1", "a2", "a8", "a9"], "benefits_to": ["a2"], "costs_to": ["a1"], "risks_to": ["a6"]},
+    {"id": "k12", "name": "plagiarism and anomaly detection", "kind": "assurance", "advances_objectives": ["o1", "o8"], "controlled_by": ["a1", "a2", "a11"], "benefits_to": ["a2"], "costs_to": ["a1"], "risks_to": ["a6"]}
+  ],
+  "dependencies": [
+    {"id": "d1", "name": "every school has sufficient functioning devices"},
+    {"id": "d3", "name": "internet connectivity or offline sync readiness"},
+    {"id": "d4", "name": "student identity records are accurate"},
+    {"id": "d5", "name": "invigilators are trained"},
+    {"id": "d6", "name": "legal approval of digital exam results"},
+    {"id": "d7", "name": "accessibility workflows tested"},
+    {"id": "d8", "name": "cybersecurity certification complete"},
+    {"id": "d9", "name": "data protection approval granted"},
+    {"id": "d10", "name": "item bank successfully migrated"},
+    {"id": "d11", "name": "telecom surge capacity confirmed"},
+    {"id": "d12", "name": "paper fallback logistics preserved"},
+    {"id": "d13", "name": "dispute-resolution process updated for digital evidence"},
+    {"id": "d14", "name": "interoperability between ministry, vendor, and regional systems works"}
+  ],
+  "constraints": [
+    {"id": "q1", "name": "national law requires equal treatment across all exam candidates", "kind": "hard"},
+    {"id": "q2", "name": "no student may be disadvantaged by disability, region, or school wealth", "kind": "hard"},
+    {"id": "q3", "name": "high-stakes exams must be legally challengeable and auditable", "kind": "hard"},
+    {"id": "q4", "name": "exam content must remain confidential before the sitting", "kind": "hard"},
+    {"id": "q5", "name": "the exam must proceed even under partial technical failure", "kind": "hard"},
+    {"id": "q6", "name": "budget caps prohibit replacing all school hardware at once", "kind": "hard"},
+    {"id": "q7", "name": "unions limit invigilator workflow changes without training", "kind": "hard"},
+    {"id": "q8", "name": "privacy law restricts biometric proctoring", "kind": "hard"},
+    {"id": "q9", "name": "some regions prohibit external cloud hosting of student data", "kind": "hard"},
+    {"id": "q10", "name": "schools cannot suspend all legacy processes immediately", "kind": "hard"},
+    {"id": "q11", "name": "national results calendar cannot slip beyond a fixed deadline", "kind": "hard"}
+  ],
+  "boundaries": [
+    {"id": "b1", "name": "national ministry to regional boards"},
+    {"id": "b2", "name": "school operations to national exam platform"},
+    {"id": "b3", "name": "vendor system to government records"},
+    {"id": "b4", "name": "urban schools to rural schools"},
+    {"id": "b5", "name": "accessibility office to standard exam workflow"},
+    {"id": "b6", "name": "privacy law to proctoring technology"},
+    {"id": "b7", "name": "legal oversight to operational design"},
+    {"id": "b8", "name": "online infrastructure to offline continuity mechanisms"}
+  ],
+  "states": [
+    {
+      "id": "s0",
+      "name": "paper-based baseline with readiness package complete",
+      "is_current": true,
+      "is_target": false,
+      "available_capabilities": [],
+      "operational_capabilities": [],
+      "satisfied_dependencies": ["d1", "d3", "d4", "d5", "d6", "d7", "d8", "d9", "d10", "d11", "d12", "d13", "d14"],
+      "active_constraints": ["q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8", "q9", "q10", "q11"],
+      "boundary_friction": [
+        {"boundary_id": "b1", "present": true},
+        {"boundary_id": "b2", "present": true},
+        {"boundary_id": "b4", "present": true},
+        {"boundary_id": "b7", "present": true},
+        {"boundary_id": "b8", "present": true}
+      ]
+    },
+    {
+      "id": "s1",
+      "name": "conservative layered rollout",
+      "is_current": false,
+      "is_target": false,
+      "available_capabilities": ["k2", "k13", "k14"],
+      "operational_capabilities": ["k2", "k13", "k14"],
+      "satisfied_dependencies": ["d1", "d3", "d5", "d6", "d10", "d11", "d12", "d14"],
+      "active_constraints": ["q1", "q2", "q3", "q5", "q6", "q10", "q11"],
+      "boundary_friction": [
+        {"boundary_id": "b1", "present": true},
+        {"boundary_id": "b4", "present": true}
+      ]
+    },
+    {
+      "id": "s2",
+      "name": "resilience-first audited digital rollout",
+      "is_current": false,
+      "is_target": true,
+      "available_capabilities": ["k2", "k5", "k8", "k11", "k13", "k14"],
+      "operational_capabilities": ["k2", "k5", "k8", "k11", "k13", "k14"],
+      "satisfied_dependencies": ["d1", "d3", "d5", "d6", "d7", "d8", "d9", "d10", "d11", "d12", "d13", "d14"],
+      "active_constraints": ["q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8", "q9", "q10", "q11"],
+      "boundary_friction": [
+        {"boundary_id": "b1", "present": true},
+        {"boundary_id": "b5", "present": true}
+      ]
+    },
+    {
+      "id": "s3",
+      "name": "direct national full-digital leap",
+      "is_current": false,
+      "is_target": false,
+      "available_capabilities": ["k2", "k6", "k12"],
+      "operational_capabilities": ["k2", "k6", "k12"],
+      "satisfied_dependencies": ["d1", "d3", "d4", "d5", "d6", "d8", "d9", "d10", "d11", "d14"],
+      "active_constraints": ["q1", "q2", "q3", "q4", "q5", "q6", "q8", "q9", "q11"],
+      "boundary_friction": [
+        {"boundary_id": "b2", "present": true},
+        {"boundary_id": "b6", "present": true},
+        {"boundary_id": "b7", "present": true}
+      ]
+    },
+    {
+      "id": "s4",
+      "name": "readiness-based regional rollout",
+      "is_current": false,
+      "is_target": true,
+      "available_capabilities": ["k2", "k5", "k8", "k11", "k13", "k14"],
+      "operational_capabilities": ["k2", "k5", "k8", "k11", "k13", "k14"],
+      "satisfied_dependencies": ["d1", "d3", "d5", "d6", "d7", "d8", "d9", "d10", "d11", "d12", "d13", "d14"],
+      "active_constraints": ["q1", "q2", "q3", "q4", "q5", "q6", "q7", "q9", "q11"],
+      "boundary_friction": [
+        {"boundary_id": "b1", "present": true},
+        {"boundary_id": "b4", "present": true},
+        {"boundary_id": "b7", "present": true}
+      ]
+    },
+    {
+      "id": "s5",
+      "name": "persistent mixed-mode stall",
+      "is_current": false,
+      "is_target": false,
+      "available_capabilities": ["k2", "k13"],
+      "operational_capabilities": ["k2", "k13"],
+      "satisfied_dependencies": ["d1", "d5", "d10", "d14"],
+      "active_constraints": ["q1", "q2", "q3", "q10", "q11"],
+      "boundary_friction": [
+        {"boundary_id": "b1", "present": true},
+        {"boundary_id": "b4", "present": true},
+        {"boundary_id": "b7", "present": true}
+      ]
+    }
+  ],
+  "capability_requirements": [
+    {"capability_id": "k2", "required_dependencies": ["d5", "d10", "d14"], "limiting_constraints": ["q1", "q3", "q11"], "crossed_boundaries": ["b1", "b2", "b3"]},
+    {"capability_id": "k5", "required_dependencies": ["d3", "d11", "d12", "d14"], "limiting_constraints": ["q2", "q5", "q11"], "crossed_boundaries": ["b2", "b8"]},
+    {"capability_id": "k8", "required_dependencies": ["d7", "d14"], "limiting_constraints": ["q1", "q2", "q5"], "crossed_boundaries": ["b5"]},
+    {"capability_id": "k11", "required_dependencies": ["d12"], "limiting_constraints": ["q3", "q5"], "crossed_boundaries": ["b7", "b8"]},
+    {"capability_id": "k13", "required_dependencies": ["d1", "d14"], "limiting_constraints": ["q2", "q6"], "crossed_boundaries": ["b1", "b4"]},
+    {"capability_id": "k14", "required_dependencies": ["d5", "d14"], "limiting_constraints": ["q1", "q3", "q11"], "crossed_boundaries": ["b1", "b7"]},
+    {"capability_id": "k6", "required_dependencies": ["d3", "d11", "d14"], "limiting_constraints": ["q4", "q5", "q9"], "crossed_boundaries": ["b2", "b3", "b8"]},
+    {"capability_id": "k12", "required_dependencies": ["d8", "d9"], "limiting_constraints": ["q3", "q8", "q9"], "crossed_boundaries": ["b6", "b7"]}
+  ],
+  "capability_admissibility": [
+    {"capability_id": "k2", "state_id": "s0", "admissible": true, "reasons": []},
+    {"capability_id": "k5", "state_id": "s0", "admissible": true, "reasons": []},
+    {"capability_id": "k8", "state_id": "s0", "admissible": true, "reasons": []},
+    {"capability_id": "k11", "state_id": "s0", "admissible": true, "reasons": []},
+    {"capability_id": "k13", "state_id": "s0", "admissible": true, "reasons": []},
+    {"capability_id": "k14", "state_id": "s0", "admissible": true, "reasons": []},
+    {"capability_id": "k6", "state_id": "s0", "admissible": true, "reasons": []},
+    {"capability_id": "k12", "state_id": "s0", "admissible": true, "reasons": []}
+  ],
+  "transitions": [
+    {
+      "id": "t1",
+      "name": "Conservative layered rollout",
+      "source_state_id": "s0",
+      "target_state_id": "s1",
+      "changes_capabilities": ["k2", "k13", "k14"],
+      "required_dependencies": ["d1", "d5", "d10", "d14"],
+      "constraining_constraints": ["q1", "q2", "q3", "q10", "q11"],
+      "crossed_boundaries": ["b1", "b2", "b4", "b7"]
+    },
+    {
+      "id": "t2",
+      "name": "Resilience-first audited rollout",
+      "source_state_id": "s0",
+      "target_state_id": "s2",
+      "changes_capabilities": ["k2", "k5", "k8", "k11", "k13", "k14"],
+      "required_dependencies": ["d1", "d3", "d5", "d6", "d7", "d8", "d9", "d10", "d11", "d12", "d13", "d14"],
+      "constraining_constraints": ["q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8", "q9", "q10", "q11"],
+      "crossed_boundaries": ["b1", "b2", "b4", "b5", "b7", "b8"]
+    },
+    {
+      "id": "t3",
+      "name": "Direct national full-digital leap",
+      "source_state_id": "s0",
+      "target_state_id": "s3",
+      "changes_capabilities": ["k2", "k6", "k12"],
+      "required_dependencies": ["d1", "d3", "d4", "d5", "d6", "d8", "d9", "d10", "d11", "d14"],
+      "constraining_constraints": ["q1", "q2", "q3", "q4", "q5", "q6", "q8", "q9", "q11"],
+      "crossed_boundaries": ["b2", "b3", "b6", "b7", "b8"]
+    },
+    {
+      "id": "t4",
+      "name": "Readiness-based regional rollout",
+      "source_state_id": "s0",
+      "target_state_id": "s4",
+      "changes_capabilities": ["k2", "k5", "k8", "k11", "k13", "k14"],
+      "required_dependencies": ["d1", "d3", "d5", "d6", "d7", "d8", "d9", "d10", "d11", "d12", "d13", "d14"],
+      "constraining_constraints": ["q1", "q2", "q3", "q4", "q5", "q6", "q7", "q9", "q11"],
+      "crossed_boundaries": ["b1", "b2", "b4", "b5", "b7", "b8"]
+    },
+    {
+      "id": "t5",
+      "name": "Pilot then stall in mixed mode",
+      "source_state_id": "s0",
+      "target_state_id": "s5",
+      "changes_capabilities": ["k2", "k13"],
+      "required_dependencies": ["d1", "d5", "d10", "d14"],
+      "constraining_constraints": ["q1", "q2", "q3", "q10", "q11"],
+      "crossed_boundaries": ["b1", "b2", "b4", "b7"]
+    }
+  ],
+  "transition_admissibility": [
+    {"transition_id": "t1", "state_id": "s0", "admissible": true, "reasons": []},
+    {"transition_id": "t2", "state_id": "s0", "admissible": true, "reasons": []},
+    {
+      "transition_id": "t3",
+      "state_id": "s0",
+      "admissible": false,
+      "reasons": [
+        "direct leap exceeds continuity and fairness tolerance",
+        "privacy and legal challenge controls are not mature enough for a national big-bang cutover"
+      ]
+    },
+    {"transition_id": "t4", "state_id": "s0", "admissible": true, "reasons": []},
+    {
+      "transition_id": "t5",
+      "state_id": "s0",
+      "admissible": false,
+      "reasons": [
+        "permanent mixed mode fails to converge to a defensible national operating model"
+      ]
+    }
+  ],
+  "decisions": [
+    {
+      "id": "x1",
+      "name": "Conservative layered rollout",
+      "selects_transition_id": "t1",
+      "assignments": [
+        {"actor_id": "a3", "capability_id": "k2"},
+        {"actor_id": "a3", "capability_id": "k13"},
+        {"actor_id": "a3", "capability_id": "k14"}
+      ],
+      "time_label": ""
+    },
+    {
+      "id": "x2",
+      "name": "Resilience-first audited rollout",
+      "selects_transition_id": "t2",
+      "assignments": [
+        {"actor_id": "a1", "capability_id": "k2"},
+        {"actor_id": "a1", "capability_id": "k5"},
+        {"actor_id": "a1", "capability_id": "k8"},
+        {"actor_id": "a1", "capability_id": "k11"},
+        {"actor_id": "a1", "capability_id": "k13"},
+        {"actor_id": "a1", "capability_id": "k14"}
+      ],
+      "time_label": ""
+    },
+    {
+      "id": "x3",
+      "name": "Direct national leap",
+      "selects_transition_id": "t3",
+      "assignments": [
+        {"actor_id": "a1", "capability_id": "k2"},
+        {"actor_id": "a1", "capability_id": "k6"},
+        {"actor_id": "a1", "capability_id": "k12"}
+      ],
+      "time_label": ""
+    },
+    {
+      "id": "x4",
+      "name": "Readiness-based regional rollout",
+      "selects_transition_id": "t4",
+      "assignments": [
+        {"actor_id": "a3", "capability_id": "k2"},
+        {"actor_id": "a3", "capability_id": "k5"},
+        {"actor_id": "a3", "capability_id": "k8"},
+        {"actor_id": "a3", "capability_id": "k11"},
+        {"actor_id": "a3", "capability_id": "k13"},
+        {"actor_id": "a3", "capability_id": "k14"}
+      ],
+      "time_label": ""
+    },
+    {
+      "id": "x5",
+      "name": "Pilot then stall in mixed mode",
+      "selects_transition_id": "t5",
+      "assignments": [
+        {"actor_id": "a1", "capability_id": "k2"},
+        {"actor_id": "a1", "capability_id": "k13"}
+      ],
+      "time_label": ""
+    }
+  ],
+  "decision_status": [
+    {"decision_id": "x1", "state_id": "s0", "valid": true, "executable": false, "reasons": ["regional operators cannot authorize the national decision"]},
+    {"decision_id": "x2", "state_id": "s0", "valid": true, "executable": true, "reasons": []},
+    {"decision_id": "x3", "state_id": "s0", "valid": false, "executable": false, "reasons": ["selected_transition_inadmissible:t3"]},
+    {"decision_id": "x4", "state_id": "s0", "valid": true, "executable": false, "reasons": ["regionalized rollout needs a national decision owner before execution"]},
+    {"decision_id": "x5", "state_id": "s0", "valid": false, "executable": false, "reasons": ["selected_transition_inadmissible:t5"]}
+  ],
+  "coordination_requirements": [
+    {"type": "transition", "target_id": "t2", "required": true, "actors": ["a1", "a2", "a3", "a7", "a10", "a11"], "basis": "explicit_cross_actor_requirement"},
+    {"type": "transition", "target_id": "t4", "required": true, "actors": ["a1", "a2", "a3", "a4", "a7"], "basis": "explicit_cross_actor_requirement"}
+  ],
+  "risk_indicators": [
+    {"target_type": "transition", "target_id": "t3", "state_id": "s0", "risks": ["fairness_failure_risk", "continuity_failure_risk", "legal_challenge_risk"]},
+    {"target_type": "transition", "target_id": "t5", "state_id": "s0", "risks": ["mixed_mode_drift", "legitimacy_erosion"]}
+  ],
+  "fallbacks": [],
+  "candidate_sets": {
+    "candidate_transition_ids_from_current_state": ["t1", "t2", "t3", "t4", "t5"],
+    "candidate_decision_ids_from_current_state": ["x1", "x2", "x3", "x4", "x5"]
+  },
+  "assumptions": [
+    "The normalized case evaluates explicit rollout options from a common national decision point after core readiness work is visible."
+  ],
+  "ambiguities": [
+    "The source prose mixes path-level and state-level language; the normalized case serializes those paths as option transitions for decision analysis."
+  ],
+  "missing_information": [
+    "The source does not quantify the exact cost delta between resilience-first and regionalized rollout options."
+  ]
+}

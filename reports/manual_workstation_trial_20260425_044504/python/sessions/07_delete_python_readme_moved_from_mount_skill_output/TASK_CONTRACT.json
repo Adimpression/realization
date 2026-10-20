@@ -1,0 +1,25 @@
+{
+  "assumptions": [],
+  "boundary_shape": [
+    "b*",
+    "a*",
+    "c*",
+    "d*"
+  ],
+  "completion_conditions": [
+    "requested result is returned to the user"
+  ],
+  "input_values": {},
+  "missing_requirements": [],
+  "output_values": [
+    "result"
+  ],
+  "read_references": [
+    "external reference"
+  ],
+  "semantic_unit": "Delete `python-readme.moved` from mount `skill_output`.",
+  "side_effects": [],
+  "write_targets": [
+    "external write target"
+  ]
+}

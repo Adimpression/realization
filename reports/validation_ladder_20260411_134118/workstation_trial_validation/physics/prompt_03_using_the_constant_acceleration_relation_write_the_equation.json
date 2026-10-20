@@ -1,0 +1,9 @@
+{
+  "assistant_text": "- Equation (continuous form): v(t) = v0 + a t\n- Equation (discrete/step form): v_{k+1} = v_k + a \u0394t_k\n  - Here \u0394t_k is the time step and a is the (constant) acceleration over that step.\n\nState-plus-change structure:\n- State: velocity v\n- Change: \u0394v = a \u0394t\n- Update rule: v_next = v_current + \u0394v\n  - This shows the next state (velocity) equals the current state plus a change term determined by acceleration times the time interval.",
+  "model": "gpt-5-nano-2025-08-07",
+  "rounds": 1,
+  "task_contract": {
+    "semantic_unit": "Using the constant-acceleration relation, write the equation that updates velocity from initial velocity, acceleration, and time, and identify the \u201cstate-plus-change\u201d structure."
+  },
+  "tool_receipts": []
+}

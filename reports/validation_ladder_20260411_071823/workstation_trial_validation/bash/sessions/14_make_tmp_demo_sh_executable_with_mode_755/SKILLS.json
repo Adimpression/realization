@@ -1,0 +1,350 @@
+{
+  "query": "",
+  "returned_skill_count": 17,
+  "skill_exports_attachment": "skills_exports",
+  "skill_home": {
+    "exports_path": "/Users/ravindranathakila/service/realized/reports/validation_ladder_20260411_071823/workstation_trial_validation/bash/exports",
+    "home_path": "/Users/ravindranathakila/service/realized/reports/validation_ladder_20260411_071823/workstation_trial_validation/bash",
+    "imports_path": "/Users/ravindranathakila/service/realized/reports/validation_ladder_20260411_071823/workstation_trial_validation/bash/imports",
+    "store_path": "/Users/ravindranathakila/service/realized/reports/validation_ladder_20260411_071823/workstation_trial_validation/bash/bash.sqlite3"
+  },
+  "skill_imports_attachment": "skills_imports",
+  "skill_store_attachment": "skills",
+  "skills": [
+    {
+      "authorities_requested": [
+        "execute",
+        "write"
+      ],
+      "executor_framework": "bash",
+      "inputs": {
+        "path": "required input value"
+      },
+      "kind": "ability",
+      "outputs": {
+        "result": "execution result"
+      },
+      "representation": "shell_script",
+      "risk_tier": "tier2_connected",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Bash Commands 01 \u2014 Create Directory / Bash Commands 01 Create Directory"
+    },
+    {
+      "authorities_requested": [
+        "execute"
+      ],
+      "executor_framework": "bash",
+      "inputs": {
+        "path": "required input value"
+      },
+      "kind": "ability",
+      "outputs": {
+        "result": "execution result"
+      },
+      "representation": "shell_script",
+      "risk_tier": "tier1_bounded_transform",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Bash Commands 02 \u2014 List Directory Contents / Bash Commands 02 List Directory Contents"
+    },
+    {
+      "authorities_requested": [
+        "execute"
+      ],
+      "executor_framework": "bash",
+      "inputs": {
+        "path": "required input value"
+      },
+      "kind": "ability",
+      "outputs": {
+        "result": "execution result"
+      },
+      "representation": "shell_script",
+      "risk_tier": "tier1_bounded_transform",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Bash Commands 03 \u2014 Print File Contents / Bash Commands 03 Print File Contents"
+    },
+    {
+      "authorities_requested": [
+        "execute"
+      ],
+      "executor_framework": "bash",
+      "inputs": {
+        "path": "required input value",
+        "pattern": "required input value"
+      },
+      "kind": "ability",
+      "outputs": {
+        "result": "execution result"
+      },
+      "representation": "shell_script",
+      "risk_tier": "tier1_bounded_transform",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Bash Commands 04 \u2014 Search Text In File / Bash Commands 04 Search Text In File"
+    },
+    {
+      "authorities_requested": [
+        "execute"
+      ],
+      "executor_framework": "bash",
+      "inputs": {
+        "path": "required input value"
+      },
+      "kind": "ability",
+      "outputs": {
+        "result": "execution result"
+      },
+      "representation": "shell_script",
+      "risk_tier": "tier1_bounded_transform",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Bash Commands 05 \u2014 Count Lines In File / Bash Commands 05 Count Lines In File"
+    },
+    {
+      "authorities_requested": [
+        "execute"
+      ],
+      "executor_framework": "bash",
+      "inputs": {
+        "name": "required input value",
+        "root": "required input value"
+      },
+      "kind": "ability",
+      "outputs": {
+        "result": "execution result"
+      },
+      "representation": "shell_script",
+      "risk_tier": "tier1_bounded_transform",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Bash Commands 06 \u2014 Find Files By Name / Bash Commands 06 Find Files By Name"
+    },
+    {
+      "authorities_requested": [
+        "execute",
+        "write"
+      ],
+      "executor_framework": "bash",
+      "inputs": {
+        "destination": "required input value",
+        "source": "required input value"
+      },
+      "kind": "ability",
+      "outputs": {
+        "result": "execution result"
+      },
+      "representation": "shell_script",
+      "risk_tier": "tier2_connected",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Bash Commands 07 \u2014 Copy File / Bash Commands 07 Copy File"
+    },
+    {
+      "authorities_requested": [
+        "execute",
+        "write"
+      ],
+      "executor_framework": "bash",
+      "inputs": {
+        "destination": "required input value",
+        "source": "required input value"
+      },
+      "kind": "ability",
+      "outputs": {
+        "result": "execution result"
+      },
+      "representation": "shell_script",
+      "risk_tier": "tier2_connected",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Bash Commands 08 \u2014 Move File / Bash Commands 08 Move File"
+    },
+    {
+      "authorities_requested": [
+        "execute",
+        "write"
+      ],
+      "executor_framework": "bash",
+      "inputs": {
+        "path": "required input value"
+      },
+      "kind": "ability",
+      "outputs": {
+        "result": "execution result"
+      },
+      "representation": "shell_script",
+      "risk_tier": "tier2_connected",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Bash Commands 09 \u2014 Remove File / Bash Commands 09 Remove File"
+    },
+    {
+      "authorities_requested": [
+        "execute",
+        "write"
+      ],
+      "executor_framework": "bash",
+      "inputs": {
+        "archive": "required input value",
+        "source_dir": "required input value"
+      },
+      "kind": "ability",
+      "outputs": {
+        "result": "execution result"
+      },
+      "representation": "shell_script",
+      "risk_tier": "tier2_connected",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Bash Commands 10 \u2014 Create Tar Gz Archive / Bash Commands 10 Create Tar Gz Archive"
+    },
+    {
+      "authorities_requested": [
+        "execute",
+        "write"
+      ],
+      "executor_framework": "bash",
+      "inputs": {
+        "archive": "required input value",
+        "destination": "required input value"
+      },
+      "kind": "ability",
+      "outputs": {
+        "result": "execution result"
+      },
+      "representation": "shell_script",
+      "risk_tier": "tier2_connected",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Bash Commands 11 \u2014 Extract Zip Archive / Bash Commands 11 Extract Zip Archive"
+    },
+    {
+      "authorities_requested": [
+        "execute",
+        "write",
+        "communicate"
+      ],
+      "executor_framework": "bash",
+      "inputs": {
+        "destination": "required input value",
+        "url": "required input value"
+      },
+      "kind": "ability",
+      "outputs": {
+        "result": "execution result"
+      },
+      "representation": "shell_script",
+      "risk_tier": "tier2_connected",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Bash Commands 12 \u2014 Download Url To File / Bash Commands 12 Download Url To File"
+    },
+    {
+      "authorities_requested": [
+        "execute"
+      ],
+      "executor_framework": "bash",
+      "inputs": {
+        "path": "required input value"
+      },
+      "kind": "ability",
+      "outputs": {
+        "result": "execution result"
+      },
+      "representation": "shell_script",
+      "risk_tier": "tier1_bounded_transform",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Bash Commands 13 \u2014 Compute Sha256 Checksum / Bash Commands 13 Compute Sha256 Checksum"
+    },
+    {
+      "authorities_requested": [
+        "execute",
+        "write"
+      ],
+      "executor_framework": "bash",
+      "inputs": {
+        "mode": "required input value",
+        "path": "required input value"
+      },
+      "kind": "ability",
+      "outputs": {
+        "result": "execution result"
+      },
+      "representation": "shell_script",
+      "risk_tier": "tier2_connected",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Bash Commands 14 \u2014 Change File Mode / Bash Commands 14 Change File Mode"
+    },
+    {
+      "authorities_requested": [
+        "execute"
+      ],
+      "executor_framework": "wasm_wasi",
+      "inputs": {
+        "payload": "stdin payload or JSON input"
+      },
+      "kind": "ability",
+      "outputs": {
+        "greeting": "greeting text"
+      },
+      "representation": "wasm_module",
+      "risk_tier": "tier1_bounded_transform",
+      "source_kind": "builtin_workstation",
+      "source_target": "",
+      "title": "Workstation Greeting From Wasm"
+    },
+    {
+      "authorities_requested": [
+        "execute",
+        "read"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "glob": "optional fnmatch-style relative path filter",
+        "max_matches": "maximum match lines to return",
+        "mount": "governed workstation attachment mount name",
+        "pattern": "regular expression or literal text to search for",
+        "relative_path": "optional relative directory inside the mount"
+      },
+      "kind": "ability",
+      "outputs": {
+        "match_count": "number of matches returned",
+        "matches": "matched lines with file and line number"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "source_kind": "builtin_workstation",
+      "source_target": "",
+      "title": "Workstation Repo Search"
+    },
+    {
+      "authorities_requested": [
+        "execute",
+        "read"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "max_depth": "maximum traversal depth",
+        "max_entries": "maximum lines to return",
+        "mount": "governed workstation attachment mount name",
+        "relative_path": "optional relative directory inside the mount"
+      },
+      "kind": "ability",
+      "outputs": {
+        "entry_count": "number of entries returned",
+        "tree": "bounded directory-tree lines"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "source_kind": "builtin_workstation",
+      "source_target": "",
+      "title": "Workstation Repo Tree"
+    }
+  ],
+  "total_skill_count": 17
+}

@@ -1,0 +1,9 @@
+{
+  "assistant_text": "- How work relates to energy change (in terms of the transfer substrate)\n  - Work is the transfer of energy between systems caused by a force acting through a displacement on the transfer substrate (the object or system you\u2019re considering).\n  - When you do work on the transfer substrate (or it does work on another object), energy is added to (or removed from) the substrate. This energy change shows up most plainly as a change in the substrate\u2019s kinetic energy (for translational motion) and, for extended bodies, also in rotational or internal energy if the motion deforms or heats the substrate.\n\n- Work-energy theorem (in terms of the transfer substrate)\n  - For the translational motion of a single substrate ( particle or rigid body\u2019s center of mass): the net work done on the substrate equals the change in its kinetic energy.\n  - Mathematically: W_net, on substrate = \u0394K_substrate = K_final \u2212 K_initial = (1/2) m v_final^2 \u2212 (1/2) m v_initial^2\n  - If you also account for rotation (extended bodies): W_net = \u0394K_trans + \u0394K_rot, i.e., the net work changes the substrate\u2019s total kinetic energy (translational plus rotational).\n  - In general energy terms, the work transferred to the substrate increases its energy content by the amount of work done, with the kinetic-energy change being the primary quantity in the standard work-energy statement.\n\nIf you\u2019d like, I can give a quick numerical example to illustrate how to apply W = \u0394K for a moving block.",
+  "model": "gpt-5-nano-2025-08-07",
+  "rounds": 1,
+  "task_contract": {
+    "semantic_unit": "Explain how work relates to energy change, and state the work-energy theorem in terms of the transfer substrate."
+  },
+  "tool_receipts": []
+}

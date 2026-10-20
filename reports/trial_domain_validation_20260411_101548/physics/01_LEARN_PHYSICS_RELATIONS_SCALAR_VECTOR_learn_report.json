@@ -1,0 +1,657 @@
+{
+  "artifact_persistence": [
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-scalars-and-vectors-_feccc1",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.001474,
+        "connect_seconds": 0.001454,
+        "ensure_schema_seconds": 0.012901,
+        "existing_payload_batch_lookup_seconds": 0.000163,
+        "index_seconds": 0.179458,
+        "prepare_seconds": 0.512264,
+        "total_seconds": 0.711669
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "257c35f740230977b908f34ababf1c988fee5619401b1798abde3875d6952215",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.042912,
+        "existing_payload_lookup_seconds": 1.8111111111111112e-05,
+        "index_seconds": 0.179458,
+        "total_seconds": 0.26292411111111114,
+        "write_rows_seconds": 0.040536
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-scalars-and-vectors-_5cea58",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.001474,
+        "connect_seconds": 0.001454,
+        "ensure_schema_seconds": 0.012901,
+        "existing_payload_batch_lookup_seconds": 0.000163,
+        "index_seconds": 0.179458,
+        "prepare_seconds": 0.512264,
+        "total_seconds": 0.711669
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "d5fc3593e166071ce46d378ae684d0d194992cedfeaf7cc6a9a37598af652a7f",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.037801,
+        "existing_payload_lookup_seconds": 1.8111111111111112e-05,
+        "index_seconds": 0.179458,
+        "total_seconds": 0.24643411111111113,
+        "write_rows_seconds": 0.029157
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-scalars-and-vectors-_765ddf",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.001474,
+        "connect_seconds": 0.001454,
+        "ensure_schema_seconds": 0.012901,
+        "existing_payload_batch_lookup_seconds": 0.000163,
+        "index_seconds": 0.179458,
+        "prepare_seconds": 0.512264,
+        "total_seconds": 0.711669
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "1b74b2f417c5d0b426d8c64da99e98bdafc7a0505a77227ab3b0842eaa63b976",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.042258,
+        "existing_payload_lookup_seconds": 1.8111111111111112e-05,
+        "total_seconds": 0.04227611111111111
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-scalars-and-vectors-_73803a",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.001474,
+        "connect_seconds": 0.001454,
+        "ensure_schema_seconds": 0.012901,
+        "existing_payload_batch_lookup_seconds": 0.000163,
+        "index_seconds": 0.179458,
+        "prepare_seconds": 0.512264,
+        "total_seconds": 0.711669
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "94139e0e6c826e275030e7b4e5d1c36145b693bfc5d59234a97a8d8e56329cf5",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.035235,
+        "existing_payload_lookup_seconds": 1.8111111111111112e-05,
+        "total_seconds": 0.03525311111111112
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-scalars-and-vectors-_feccc1",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.001474,
+        "connect_seconds": 0.001454,
+        "ensure_schema_seconds": 0.012901,
+        "existing_payload_batch_lookup_seconds": 0.000163,
+        "index_seconds": 0.179458,
+        "prepare_seconds": 0.512264,
+        "total_seconds": 0.711669
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "95e2d2f2f88ac8f91a653702ad2190cfb1d8b8e22bbf5c1a28ba156e5d7abb06",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.040192,
+        "existing_payload_lookup_seconds": 1.8111111111111112e-05,
+        "total_seconds": 0.04021011111111111
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-scalars-and-vectors_a0c23e",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.001474,
+        "connect_seconds": 0.001454,
+        "ensure_schema_seconds": 0.012901,
+        "existing_payload_batch_lookup_seconds": 0.000163,
+        "index_seconds": 0.179458,
+        "prepare_seconds": 0.512264,
+        "total_seconds": 0.711669
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "979f750dc66d3fc5b11a598626e589fb898e0346b3ef46acbb83d3d5b7ac7af5",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.02029,
+        "existing_payload_lookup_seconds": 1.8111111111111112e-05,
+        "total_seconds": 0.02030811111111111
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_ability-physics-relations-scalars-and-vectors-py_800971",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.001474,
+        "connect_seconds": 0.001454,
+        "ensure_schema_seconds": 0.012901,
+        "existing_payload_batch_lookup_seconds": 0.000163,
+        "index_seconds": 0.179458,
+        "prepare_seconds": 0.512264,
+        "total_seconds": 0.711669
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "a10df0410aef787ee975961600ebe7cbeb4db636dc16ccf40dd159a8e28af670",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.000477,
+        "existing_payload_lookup_seconds": 1.8111111111111112e-05,
+        "total_seconds": 0.0004951111111111111
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-scalars-and-vectors-_765ddf",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.001474,
+        "connect_seconds": 0.001454,
+        "ensure_schema_seconds": 0.012901,
+        "existing_payload_batch_lookup_seconds": 0.000163,
+        "index_seconds": 0.179458,
+        "prepare_seconds": 0.512264,
+        "total_seconds": 0.711669
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "587edd15925ae864c655cb47bc67fcaf8565b91cd56a4071caec8e9ebd3112cb",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.000403,
+        "existing_payload_lookup_seconds": 1.8111111111111112e-05,
+        "index_seconds": 0.179458,
+        "total_seconds": 0.22166511111111112,
+        "write_rows_seconds": 0.041786
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-scalars-and-vectors-_73803a",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.001474,
+        "connect_seconds": 0.001454,
+        "ensure_schema_seconds": 0.012901,
+        "existing_payload_batch_lookup_seconds": 0.000163,
+        "index_seconds": 0.179458,
+        "prepare_seconds": 0.512264,
+        "total_seconds": 0.711669
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "5612bed8a97b59cb49dd8cab407aa24649e1686f3ba75d061a98cb936537caad",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.000369,
+        "existing_payload_lookup_seconds": 1.8111111111111112e-05,
+        "index_seconds": 0.179458,
+        "total_seconds": 0.2185481111111111,
+        "write_rows_seconds": 0.038703
+      },
+      "vector_enabled": false
+    }
+  ],
+  "document": {
+    "section_count": 5,
+    "source_path": "/Users/ravindranathakila/service/realized/trials/physics/01_LEARN_PHYSICS_RELATIONS_SCALAR_VECTOR.md",
+    "title": "Physics Relations \u2014 Scalars and Vectors"
+  },
+  "encounter_proposal": {
+    "encounters": [
+      {
+        "bullets": [
+          "input: `magnitude`",
+          "optional input: `direction`",
+          "output: `Q`"
+        ],
+        "candidate_kinds": [
+          "equation",
+          "template",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_1",
+        "equation_bearing": true,
+        "equations": [
+          "$$ Q = ( ext{magnitude}, ext{direction?}) $$"
+        ],
+        "heading": "1. Reusable substrate",
+        "paragraphs": [
+          "A physical quantity can either be treated as magnitude-only or as magnitude-with-direction.",
+          "The reusable relation is:",
+          "$$ Q = ( ext{magnitude}, ext{direction?}) $$"
+        ],
+        "path": [
+          "Physics Relations \u2014 Scalars and Vectors",
+          "1. Reusable substrate"
+        ],
+        "sections": [
+          "1. Reusable substrate"
+        ]
+      },
+      {
+        "bullets": [
+          "`d` is scalar",
+          "`\\Delta x` is vector"
+        ],
+        "candidate_kinds": [
+          "equation",
+          "template",
+          "definition",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_2",
+        "equation_bearing": true,
+        "equations": [
+          "$$ d = ext{magnitude only} $$",
+          "$$ \\Delta x = ( ext{magnitude}, ext{direction}) $$"
+        ],
+        "heading": "2. Distance and displacement",
+        "paragraphs": [
+          "Distance is a scalar description of change in position, while displacement is a vector description of change in position.",
+          "The reusable representations are:",
+          "$$ d = ext{magnitude only} $$"
+        ],
+        "path": [
+          "Physics Relations \u2014 Scalars and Vectors",
+          "2. Distance and displacement"
+        ],
+        "sections": [
+          "2. Distance and displacement"
+        ]
+      },
+      {
+        "bullets": [],
+        "candidate_kinds": [
+          "equation",
+          "template",
+          "definition",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_3",
+        "equation_bearing": true,
+        "equations": [
+          "$$ ext{speed} = ext{magnitude only} $$",
+          "$$ v = ( ext{magnitude}, ext{direction}) $$"
+        ],
+        "heading": "3. Speed and velocity",
+        "paragraphs": [
+          "Speed is scalar, while velocity is vector.",
+          "The reusable representations are:",
+          "$$ ext{speed} = ext{magnitude only} $$"
+        ],
+        "path": [
+          "Physics Relations \u2014 Scalars and Vectors",
+          "3. Speed and velocity"
+        ],
+        "sections": [
+          "3. Speed and velocity"
+        ]
+      },
+      {
+        "bullets": [
+          "scalar relations do not preserve direction",
+          "vector relations preserve direction"
+        ],
+        "candidate_kinds": [
+          "logic",
+          "definition",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_4",
+        "equation_bearing": false,
+        "equations": [],
+        "heading": "4. Distinguishing the laws",
+        "paragraphs": [
+          "Distance is not displacement, and speed is not velocity.",
+          "If a prompt asks for direction-sensitive motion, prefer the vector form."
+        ],
+        "path": [
+          "Physics Relations \u2014 Scalars and Vectors",
+          "4. Distinguishing the laws"
+        ],
+        "sections": [
+          "4. Distinguishing the laws"
+        ]
+      },
+      {
+        "bullets": [],
+        "candidate_kinds": [
+          "logic",
+          "definition",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_5",
+        "equation_bearing": false,
+        "equations": [],
+        "heading": "5. One-sentence summary",
+        "paragraphs": [
+          "Scalar-versus-vector is a reusable representational substrate that later motion laws reuse when direction matters."
+        ],
+        "path": [
+          "Physics Relations \u2014 Scalars and Vectors",
+          "5. One-sentence summary"
+        ],
+        "sections": [
+          "5. One-sentence summary"
+        ]
+      }
+    ],
+    "proposal_id": "proposal_markdownabilitylearningproposal_5ec8d8",
+    "rationale": "Markdown ability learning proposals are bounded executable-harvest plans grounded in the structural ir.",
+    "source": "llm"
+  },
+  "final_answer": "Learned 9 artifacts from 01_LEARN_PHYSICS_RELATIONS_SCALAR_VECTOR.md.",
+  "functionalization_proposal": {
+    "proposal_id": "proposal_markdownfunctionalizationproposal_88e70f",
+    "rationale": "Markdown functionalization proposals are bounded executable extractions from already classified encounters.",
+    "source": "llm"
+  },
+  "ir": {
+    "clusters": [
+      {
+        "bullets": [
+          "input: `magnitude`",
+          "optional input: `direction`",
+          "output: `Q`"
+        ],
+        "code_blocks": [],
+        "equations": [
+          "$$ Q = ( ext{magnitude}, ext{direction?}) $$"
+        ],
+        "heading": "1. Reusable substrate",
+        "paragraphs": [
+          "A physical quantity can either be treated as magnitude-only or as magnitude-with-direction.",
+          "The reusable relation is:",
+          "$$ Q = ( ext{magnitude}, ext{direction?}) $$"
+        ],
+        "path": [
+          "Physics Relations \u2014 Scalars and Vectors",
+          "1. Reusable substrate"
+        ],
+        "sections": [
+          "1. Reusable substrate"
+        ]
+      },
+      {
+        "bullets": [
+          "`d` is scalar",
+          "`\\Delta x` is vector"
+        ],
+        "code_blocks": [],
+        "equations": [
+          "$$ d = ext{magnitude only} $$",
+          "$$ \\Delta x = ( ext{magnitude}, ext{direction}) $$"
+        ],
+        "heading": "2. Distance and displacement",
+        "paragraphs": [
+          "Distance is a scalar description of change in position, while displacement is a vector description of change in position.",
+          "The reusable representations are:",
+          "$$ d = ext{magnitude only} $$"
+        ],
+        "path": [
+          "Physics Relations \u2014 Scalars and Vectors",
+          "2. Distance and displacement"
+        ],
+        "sections": [
+          "2. Distance and displacement"
+        ]
+      },
+      {
+        "bullets": [],
+        "code_blocks": [],
+        "equations": [
+          "$$ ext{speed} = ext{magnitude only} $$",
+          "$$ v = ( ext{magnitude}, ext{direction}) $$"
+        ],
+        "heading": "3. Speed and velocity",
+        "paragraphs": [
+          "Speed is scalar, while velocity is vector.",
+          "The reusable representations are:",
+          "$$ ext{speed} = ext{magnitude only} $$"
+        ],
+        "path": [
+          "Physics Relations \u2014 Scalars and Vectors",
+          "3. Speed and velocity"
+        ],
+        "sections": [
+          "3. Speed and velocity"
+        ]
+      },
+      {
+        "bullets": [
+          "scalar relations do not preserve direction",
+          "vector relations preserve direction"
+        ],
+        "code_blocks": [],
+        "equations": [],
+        "heading": "4. Distinguishing the laws",
+        "paragraphs": [
+          "Distance is not displacement, and speed is not velocity.",
+          "If a prompt asks for direction-sensitive motion, prefer the vector form."
+        ],
+        "path": [
+          "Physics Relations \u2014 Scalars and Vectors",
+          "4. Distinguishing the laws"
+        ],
+        "sections": [
+          "4. Distinguishing the laws"
+        ]
+      },
+      {
+        "bullets": [],
+        "code_blocks": [],
+        "equations": [],
+        "heading": "5. One-sentence summary",
+        "paragraphs": [
+          "Scalar-versus-vector is a reusable representational substrate that later motion laws reuse when direction matters."
+        ],
+        "path": [
+          "Physics Relations \u2014 Scalars and Vectors",
+          "5. One-sentence summary"
+        ],
+        "sections": [
+          "5. One-sentence summary"
+        ]
+      }
+    ],
+    "intro_bullets": [],
+    "intro_paragraphs": [
+      "This document teaches one reusable representational substrate and then reuses it in later physics relations.",
+      "The point is not only to store separate formulas, but to preserve the reusable semantic relation between a quantity with only magnitude and a quantity with both magnitude and direction."
+    ],
+    "section_count": 5,
+    "source_path": "/Users/ravindranathakila/service/realized/trials/physics/01_LEARN_PHYSICS_RELATIONS_SCALAR_VECTOR.md",
+    "title": "Physics Relations \u2014 Scalars and Vectors"
+  },
+  "learned_artifacts": [
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-scalars-and-vectors-_feccc1",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Q From Magnitude?",
+      "related_artifact_ids": [],
+      "representation": "yaml",
+      "source_sections": [],
+      "title": "Physics Relations \u2014 Scalars and Vectors / Physics Relations Scalars and Vectors"
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-scalars-and-vectors-_5cea58",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Q From Magnitude?",
+      "related_artifact_ids": [],
+      "representation": "yaml",
+      "source_sections": [
+        "1. Reusable substrate"
+      ],
+      "title": "Physics Relations \u2014 Scalars and Vectors / Q From Magnitude"
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-scalars-and-vectors-_765ddf",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Distance and displacement?",
+      "related_artifact_ids": [],
+      "representation": "yaml",
+      "source_sections": [
+        "2. Distance and displacement"
+      ],
+      "title": "Physics Relations \u2014 Scalars and Vectors / Distance and displacement"
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-scalars-and-vectors-_73803a",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Speed and velocity?",
+      "related_artifact_ids": [],
+      "representation": "yaml",
+      "source_sections": [
+        "3. Speed and velocity"
+      ],
+      "title": "Physics Relations \u2014 Scalars and Vectors / Speed and velocity"
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-scalars-and-vectors-_feccc1",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Physics Relations Scalars And Vectors?",
+      "related_artifact_ids": [],
+      "representation": "yaml",
+      "source_sections": [
+        "4. Distinguishing the laws"
+      ],
+      "title": "Physics Relations \u2014 Scalars and Vectors / Physics Relations Scalars And Vectors"
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-scalars-and-vectors_a0c23e",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Physics Relations Scalars And Vectors?",
+      "related_artifact_ids": [],
+      "representation": "yaml",
+      "source_sections": [
+        "5. One-sentence summary"
+      ],
+      "title": "Physics Relations Scalars and Vectors"
+    },
+    {
+      "artifact_id": "artifact_ability-physics-relations-scalars-and-vectors-py_800971",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate Q from magnitude?",
+      "related_artifact_ids": [],
+      "representation": "python_script",
+      "source_sections": [
+        "1. Reusable substrate"
+      ],
+      "title": "Physics Relations \u2014 Scalars and Vectors / Python Ability"
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-scalars-and-vectors-_765ddf",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate d from ext, magnitude, only?",
+      "related_artifact_ids": [],
+      "representation": "python_script",
+      "source_sections": [
+        "2. Distance and displacement"
+      ],
+      "title": "Physics Relations \u2014 Scalars and Vectors / Distance And Displacement"
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-scalars-and-vectors-_73803a",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate ext_times_speed from ext, magnitude, only?",
+      "related_artifact_ids": [],
+      "representation": "python_script",
+      "source_sections": [
+        "3. Speed and velocity"
+      ],
+      "title": "Physics Relations \u2014 Scalars and Vectors / Speed And Velocity"
+    }
+  ],
+  "learned_count": 9,
+  "learning_context": {
+    "applied_delta_count": 4,
+    "canonical_title": "Physics Relations \u2014 Scalars and Vectors",
+    "context_path": "/Users/ravindranathakila/service/realized/trials/physics/corpus/physics-relations-scalars-and-vectors/context.json",
+    "corpus_root": "/Users/ravindranathakila/service/realized/trials/physics",
+    "delta_id": "delta_physics-relations-scalars-and-vectors_4e16ff",
+    "delta_path": "/Users/ravindranathakila/service/realized/trials/physics/corpus/physics-relations-scalars-and-vectors/deltas/delta_physics-relations-scalars-and-vectors_4e16ff.json",
+    "matched_existing_subject_id": "physics-relations-scalars-and-vectors",
+    "source_id": "source_users-ravindranathakila-service-realized-trials-_dbd0c66bed",
+    "source_record_path": "/Users/ravindranathakila/service/realized/trials/physics/corpus/physics-relations-scalars-and-vectors/sources/source_users-ravindranathakila-service-realized-trials-_dbd0c66bed.json",
+    "subject_family": "Physics Relations \u2014 Scalars and Vectors",
+    "subject_id": "physics-relations-scalars-and-vectors",
+    "unit_count": 6
+  },
+  "parsing_failures": [],
+  "proposal": {
+    "proposal_id": "proposal_markdownlearningproposal_d2195d",
+    "rationale": "Markdown learning proposals are bounded ingestion plans for external-source harvest and remain governed before artifact admission.",
+    "source": "llm"
+  },
+  "run_id": "run_3a589770_4255f4",
+  "run_outcome": "completed",
+  "supported_executors": [
+    "python3"
+  ]
+}

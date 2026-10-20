@@ -1,0 +1,26 @@
+{
+  "started_at": "2026-04-11T11:17:05+00:00",
+  "finished_at": "2026-04-11T11:35:41+00:00",
+  "status": "failed",
+  "stage": "unit_tests",
+  "report_root": "/Users/ravindranathakila/service/realized/reports/validation_ladder_20260411_111705",
+  "stages": [
+    {
+      "name": "unit_tests",
+      "cmd": [
+        "/Users/ravindranathakila/.venv/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/Users/ravindranathakila/service/realized/tests"
+      ],
+      "cwd": "/Users/ravindranathakila/service/realized",
+      "status": "failed",
+      "returncode": 1,
+      "elapsed_seconds": 1115.863442,
+      "stdout_tail": "",
+      "stderr_tail": ": all() is deprecated since version 0.80.0 and will be removed in version 0.83.0. Use Border.all() instead.\n  return ft.border.all(_FLET_BORDER_WIDTH, ACTIVE_AREA_FRAME if active else INACTIVE_AREA_FRAME)\n/Users/ravindranathakila/service/realized/workstation/flet_host.py:436: DeprecationWarning: symmetric() is deprecated since version 0.80.0 and will be removed in version 0.83.0. Use Padding.symmetric() instead\n  padding=ft.padding.symmetric(horizontal=10, vertical=5),\n/Users/ravindranathakila/service/realized/workstation/flet_host.py:1905: DeprecationWarning: symmetric() is deprecated since version 0.80.0 and will be removed in version 0.83.0. Use Padding.symmetric() instead\n  content_padding=ft.padding.symmetric(horizontal=0, vertical=2),\n./Users/ravindranathakila/service/realized/workstation/flet_host.py:1616: DeprecationWarning: symmetric() is deprecated since version 0.80.0 and will be removed in version 0.83.0. Use Padding.symmetric() instead\n  padding=ft.padding.symmetric(horizontal=8, vertical=4),\n...E../Users/ravindranathakila/service/realized/workstation/flet_host.py:1726: DeprecationWarning: symmetric() is deprecated since version 0.80.0 and will be removed in version 0.83.0. Use Padding.symmetric() instead\n  padding=ft.padding.symmetric(horizontal=8, vertical=6),\n./Users/ravindranathakila/service/realized/workstation/flet_host.py:1942: DeprecationWarning: only() is deprecated since version 0.80.0 and will be removed in version 0.83.0. Use Padding.only() instead\n  padding=ft.padding.only(left=0, right=0, top=0, bottom=4),\n............/Users/ravindranathakila/service/realized/workstation/flet_host.py:1386: DeprecationWarning: only() is deprecated since version 0.80.0 and will be removed in version 0.83.0. Use Padding.only() instead\n  padding=ft.padding.only(bottom=6),\n/Users/ravindranathakila/service/realized/workstation/flet_host.py:1420: DeprecationWarning: only() is deprecated since version 0.80.0 and will be removed in version 0.83.0. Use Padding.only() instead\n  padding=ft.padding.only(bottom=6),\n.......E........\n======================================================================\nERROR: test_chat_panel_fragment_suggestions_insert_skill_title (test_workstation_flet_host.WorkstationFletHostTests.test_chat_panel_fragment_suggestions_insert_skill_title)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/ravindranathakila/service/realized/tests/test_workstation_flet_host.py\", line 457, in test_chat_panel_fragment_suggestions_insert_skill_title\n    suggestion_context = type(context)(\n        root=context.root,\n    ...<5 lines>...\n        allowed_capabilities=context.allowed_capabilities,\n    )\nTypeError: WorkstationChatContext.__init__() missing 1 required positional argument: 'subject_titles'\n\n======================================================================\nERROR: test_capture_assistant_markdown_for_research_persists_learning_context (test_workstation_learning_capture.WorkstationLearningCaptureTests.test_capture_assistant_markdown_for_research_persists_learning_context)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/ravindranathakila/service/realized/tests/test_workstation_learning_capture.py\", line 168, in test_capture_assistant_markdown_for_research_persists_learning_context\n    def test_capture_assistant_markdown_for_research_persists_learning_context(self) -> None:\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<16 lines>...\n            ),\n    \n  File \"/Users/ravindranathakila/service/realized/workstation/learning_capture.py\", line 387, in capture_workstation_assistant_markdown_for_research\n    media_type=\"text/markdown\",\n                      ^^^^^^^^\nNameError: name 'document' is not defined\n\n----------------------------------------------------------------------\nRan 797 tests in 1115.101s\n\nFAILED (errors=2)\n"
+    }
+  ]
+}
