@@ -1,0 +1,40 @@
+@startuml
+title Prior Learning Lookup And Reuse Selection Flow
+
+participant "BSSCController" as Controller
+participant "SemanticNode" as Node
+participant "Governed Prior Learning Reuse" as Reuse
+participant "Semantic Prompt Posture" as Posture
+participant "Reusable Artifact Pool" as Pool
+participant "Persisted Artifact Store" as Store
+participant "Direct Knowledge Reuse" as DirectReuse
+participant "Artifact Answer Resolution" as Resolve
+
+Controller -> Reuse: lookup_prior_non_achievedness(node)
+Reuse -> Controller: ensure_not_elaboration(node)
+Reuse -> Posture: classify prompt posture and direct-knowledge preference
+Posture --> Reuse: posture + direct-knowledge bias
+Reuse -> Pool: reusable_artifact_candidates()
+loop each reusable artifact
+  Reuse -> Controller: classify_structured_learning_match(current, prior)
+  Reuse -> Controller: answer_reuse_preference(current, prior, artifact)
+end
+
+alt prompt prefers direct knowledge answer
+  Reuse -> DirectReuse: focused_direct_knowledge_candidates(...)
+  DirectReuse -> Pool: reusable_artifact_candidates()
+  DirectReuse -> Store: load_all_artifacts() if needed
+  DirectReuse --> Reuse: focus-aligned knowledge candidates
+else compute or general reuse
+  Reuse -> Controller: rank executable and answer-bearing candidates
+end
+
+opt compute-oriented posture
+  Reuse -> Resolve: best_invokable_artifact_candidate(...)
+  Reuse -> Resolve: fallback_executable_answer_candidate(...)
+end
+
+Reuse --> Controller: selected answer_artifact,\nmatch_kind,\nanswer_preference,\nfocus_candidates
+Controller --> Node: selected answer_artifact,\nmatch_kind,\nanswer_preference,\nfocus_candidates
+
+@enduml

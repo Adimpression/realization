@@ -1,0 +1,9 @@
+{
+  "assistant_text": "General ratio-of-change formula:\n- \u0394y/\u0394x = (y2 \u2212 y1) / (x2 \u2212 x1) for two points (x1, y1) and (x2, y2). In calculus, this becomes dy/dx as \u0394x \u2192 0 (the derivative).\n\nExample from motion:\n- Velocity is the rate of change of position with respect to time. For positions x1, x2 at times t1, t2, the average velocity is v_avg = \u0394x/\u0394t = (x2 \u2212 x1) / (t2 \u2212 t1).\n- Example: a car moves from x1 = 0 m at t1 = 0 s to x2 = 40 m at t2 = 8 s, so v_avg = (40 \u2212 0) / (8 \u2212 0) = 5 m/s.",
+  "model": "gpt-5-nano-2025-08-07",
+  "rounds": 1,
+  "task_contract": {
+    "semantic_unit": "State the general ratio-of-change formula and give one example from motion that uses it."
+  },
+  "tool_receipts": []
+}

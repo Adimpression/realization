@@ -1,0 +1,14 @@
+{"input": "Say hello in one sentence.", "model": "gpt-5.4", "sdk": "openai.responses"}
+{"input": "semantic search", "model": "text-embedding-3-small", "sdk": "openai.embeddings"}
+{"max_tokens": 200, "model": "claude-sonnet-4-5", "sdk": "anthropic.messages"}
+{"bucket": "demo-bucket", "prefix": "", "sdk": "boto3.s3.list_objects_v2"}
+{"bucket": "demo-bucket", "key": "reports/report.txt", "local_path": "/tmp/report.txt", "sdk": "boto3.s3.upload_file"}
+{"bucket": "demo-bucket", "sdk": "google.cloud.storage.bucket"}
+{"blob_name": "reports/daily.json", "destination": "/tmp/daily.json", "sdk": "google.cloud.storage.download_to_filename"}
+{"channel": "C12345678", "sdk": "slack_sdk.chat_postMessage", "text": "deploy complete"}
+{"repo": "octocat/Hello-World", "sdk": "github.get_issues", "state": "open"}
+{"sdk": "kubernetes.load_kube_config"}
+{"namespace": "default", "sdk": "kubernetes.list_namespaced_pod"}
+{"key": "session:42", "sdk": "redis.get", "url": "redis://fake-redis.local:6379/0"}
+{"customer_id": "cus_123", "sdk": "stripe.Customer.retrieve"}
+{"sdk": "supabase.select", "table": "profiles"}

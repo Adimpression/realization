@@ -1,0 +1,18 @@
+{
+  "assumptions": [],
+  "boundary_shape": [
+    "d*"
+  ],
+  "completion_conditions": [
+    "requested result is returned to the user"
+  ],
+  "input_values": {},
+  "missing_requirements": [],
+  "output_values": [
+    "result"
+  ],
+  "read_references": [],
+  "semantic_unit": "Append `another line` to mount `skill_tmp` at `python-suite.txt`.",
+  "side_effects": [],
+  "write_targets": []
+}

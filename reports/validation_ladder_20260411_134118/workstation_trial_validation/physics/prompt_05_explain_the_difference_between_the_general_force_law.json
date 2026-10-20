@@ -1,0 +1,25 @@
+{
+  "assistant_text": "- F = m a (Newton\u2019s second law) is the general rule. It says the net force acting on a mass m produces acceleration a, with a = F_net / m. It applies to any combination of forces and in any inertial frame.\n\n- W = m g is a specific gravitational force. It is the force that gravity exerts on a mass m in a gravitational field with acceleration g (the local gravitational acceleration). Its magnitude is mg and its direction is toward the source of gravity (e.g., downward toward Earth\u2019s center near the surface).\n\nHow they relate:\n- Weight is one particular force that can contribute to F_net. If gravity is the only force on the object, then F_net = W = m g and the acceleration is a = g (downward).\n- In general, F_net is the sum of all forces: F_net = W + N + F_friction + T + \u2026, and the acceleration is a = F_net / m. So weight is not necessarily equal to the net force unless gravity is the only force present.\n\nImportant nuances:\n- g is not always exactly 9.81 m/s^2; it varies with location (altitude, latitude) and can be different on other planets.\n- Weight can differ from the \u201ctrue\u201d gravitational force in fluids due to buoyancy: apparent weight = m g \u2212 \u03c1_fluid V g.\n- Weight is a force; it\u2019s a component of the net force in many problems, but F = m a always uses the net force, not just weight.\n\n Quick example:\n- A 2 kg object falling in vacuum near Earth: F_net = mg \u2248 2 \u00d7 9.81 \u2248 19.6 N downward, so a = F_net / m \u2248 9.81 m/s^2 downward.\n- If the object rests on a surface with a normal force N pulling up, then F_net = mg \u2212 N, and a = (mg \u2212 N)/m, which is not simply g unless N = 0.",
+  "model": "gpt-5-nano-2025-08-07",
+  "rounds": 2,
+  "task_contract": {
+    "semantic_unit": "Explain the difference between the general force law ( F = ma ) and the specific case of weight ( W = mg )."
+  },
+  "tool_receipts": [
+    {
+      "arguments": {
+        "skill_title": "Physics Relations \u2014 Force and Mass-Acceleration Relation / General Mass Acceleration",
+        "target": ""
+      },
+      "name": "ws.skill.invoke",
+      "result": {
+        "answer": "Do not collapse the general law into the special case. F = ma is the general mass-acceleration law W = mg is a special case under gravity",
+        "error": "",
+        "error_type": "",
+        "executor_framework": "",
+        "skill_title": "Physics Relations \u2014 Force and Mass-Acceleration Relation / General Mass Acceleration",
+        "status": "ok"
+      }
+    }
+  ]
+}

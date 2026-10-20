@@ -1,0 +1,115 @@
+{
+  "prompt": "Write the CSV text `name,score\\nAda,10\\nBob,9\\n` to mount `skill_tmp` at `data.csv`.",
+  "returned_skill_count": 5,
+  "skills": [
+    {
+      "authorities_requested": [
+        "execute",
+        "read"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "mount": "required input value",
+        "relative_path": "required input value"
+      },
+      "kind": "ability",
+      "outputs": {
+        "result": "execution result"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "score": 6,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Python Commands 10 \u2014 Read Csv File / Python Commands 10 Read Csv File"
+    },
+    {
+      "authorities_requested": [
+        "execute",
+        "write"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "csv_text": "required input value",
+        "mount": "required input value",
+        "relative_path": "required input value"
+      },
+      "kind": "ability",
+      "outputs": {
+        "result": "execution result"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier2_connected",
+      "score": 6,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Python Commands 11 \u2014 Write Csv File / Python Commands 11 Write Csv File"
+    },
+    {
+      "authorities_requested": [
+        "execute",
+        "read"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "mount": "required input value",
+        "relative_path": "required input value"
+      },
+      "kind": "ability",
+      "outputs": {
+        "result": "execution result"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "score": 3,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Python Commands 02 \u2014 Read Text File / Python Commands 02 Read Text File"
+    },
+    {
+      "authorities_requested": [
+        "execute",
+        "write"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "mount": "required input value",
+        "relative_path": "required input value",
+        "text": "required input value"
+      },
+      "kind": "ability",
+      "outputs": {
+        "result": "execution result"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier2_connected",
+      "score": 3,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Python Commands 03 \u2014 Write Text File / Python Commands 03 Write Text File"
+    },
+    {
+      "authorities_requested": [
+        "execute",
+        "write"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "mount": "required input value",
+        "relative_path": "required input value",
+        "text": "required input value"
+      },
+      "kind": "ability",
+      "outputs": {
+        "result": "execution result"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier2_connected",
+      "score": 3,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Python Commands 04 \u2014 Append Text File / Python Commands 04 Append Text File"
+    }
+  ],
+  "total_skill_count": 19
+}

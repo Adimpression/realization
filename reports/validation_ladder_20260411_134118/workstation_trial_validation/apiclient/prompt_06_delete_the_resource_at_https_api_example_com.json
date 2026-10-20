@@ -1,0 +1,25 @@
+{
+  "assistant_text": "{'status': 'ok', 'url': 'https://api.example.com/users/42', 'status_code': 200, 'body': '{\"status\": \"deleted\", \"url\": \"https://api.example.com/users/42\"}'}",
+  "model": "workstation-direct-composition",
+  "rounds": 0,
+  "task_contract": {
+    "semantic_unit": "Delete the resource at `https://api.example.com/users/42`."
+  },
+  "tool_receipts": [
+    {
+      "arguments": {
+        "skill_title": "API Client Commands 06 \u2014 Delete Resource / Api Client Commands 06 Delete Resource",
+        "target": ""
+      },
+      "name": "ws.skill.invoke",
+      "result": {
+        "answer": "{'status': 'ok', 'url': 'https://api.example.com/users/42', 'status_code': 200, 'body': '{\"status\": \"deleted\", \"url\": \"https://api.example.com/users/42\"}'}",
+        "error": "",
+        "error_type": "",
+        "executor_framework": "python3",
+        "skill_title": "API Client Commands 06 \u2014 Delete Resource / Api Client Commands 06 Delete Resource",
+        "status": "ok"
+      }
+    }
+  ]
+}

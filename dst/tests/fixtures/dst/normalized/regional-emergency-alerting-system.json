@@ -1,0 +1,293 @@
+{
+  "schema_version": "dst_normalized_case.v1",
+  "fixture_id": "regional-emergency-alerting-system",
+  "source_ref": "dst/Regional emergency alerting system.md",
+  "context": {
+    "system_name": "Regional emergency alerting system",
+    "decision_problem": "Choose an alerting operating model that balances speed, resilience, accessibility, and coordination burden.",
+    "evaluation_state_id": "s0",
+    "planning_horizon": "",
+    "notes": [
+      "The source describes candidate configurations rather than a single state-transition graph.",
+      "The normalized case turns those configurations into comparable operating-model options."
+    ]
+  },
+  "actors": [
+    {"id": "a1", "name": "national emergency agency", "roles": ["decision_maker", "coordinator"], "can_decide": true},
+    {"id": "a2", "name": "local governments", "roles": ["operator"], "can_decide": false},
+    {"id": "a3", "name": "telecom operators", "roles": ["provider"], "can_decide": false},
+    {"id": "a4", "name": "weather service", "roles": ["signal_source"], "can_decide": false},
+    {"id": "a5", "name": "police and fire services", "roles": ["responder"], "can_decide": false},
+    {"id": "a6", "name": "hospitals", "roles": ["responder"], "can_decide": false},
+    {"id": "a7", "name": "media broadcasters", "roles": ["distribution_partner"], "can_decide": false}
+  ],
+  "objectives": [
+    {"id": "o1", "name": "fast alert delivery", "shared": true, "mandatory": true, "pursued_by": ["a1", "a2", "a5"]},
+    {"id": "o2", "name": "reliable delivery under failure", "shared": true, "mandatory": true, "pursued_by": ["a1", "a2", "a5", "a6"]},
+    {"id": "o3", "name": "accessibility for all populations", "shared": true, "mandatory": true, "pursued_by": ["a1", "a2", "a6"]},
+    {"id": "o4", "name": "interoperability across agencies", "shared": true, "mandatory": true, "pursued_by": ["a1", "a2", "a5"]},
+    {"id": "o5", "name": "public trust and clarity", "shared": true, "mandatory": true, "pursued_by": ["a1", "a2", "a7"]}
+  ],
+  "capabilities": [
+    {"id": "k1", "name": "cell broadcast alerts", "kind": "speed", "advances_objectives": ["o1"], "controlled_by": ["a1", "a3"], "benefits_to": ["a5", "a6"], "costs_to": ["a1"], "risks_to": ["a2"]},
+    {"id": "k2", "name": "SMS alerts", "kind": "resilience", "advances_objectives": ["o1", "o2"], "controlled_by": ["a1", "a3"], "benefits_to": ["a2", "a5", "a6"], "costs_to": ["a1"], "risks_to": ["a2"]},
+    {"id": "k3", "name": "app push notifications", "kind": "inclusion", "advances_objectives": ["o1", "o3"], "controlled_by": ["a1"], "benefits_to": ["a2", "a6"], "costs_to": ["a1"], "risks_to": ["a2"]},
+    {"id": "k4", "name": "multilingual message templating", "kind": "inclusion", "advances_objectives": ["o3", "o5"], "controlled_by": ["a1", "a2"], "benefits_to": ["a2", "a6", "a7"], "costs_to": ["a1"], "risks_to": ["a2"]},
+    {"id": "k5", "name": "siren fallback", "kind": "resilience", "advances_objectives": ["o2"], "controlled_by": ["a2", "a5"], "benefits_to": ["a2", "a6"], "costs_to": ["a2"], "risks_to": ["a2"]},
+    {"id": "k6", "name": "alert coordination dashboard", "kind": "coordination", "advances_objectives": ["o2", "o4", "o5"], "controlled_by": ["a1", "a2"], "benefits_to": ["a5", "a6"], "costs_to": ["a1", "a2"], "risks_to": ["a2"]},
+    {"id": "k7", "name": "location-specific geofencing", "kind": "speed", "advances_objectives": ["o1", "o5"], "controlled_by": ["a1", "a3"], "benefits_to": ["a5"], "costs_to": ["a1"], "risks_to": ["a2"]},
+    {"id": "k8", "name": "accessibility features for disabled users", "kind": "inclusion", "advances_objectives": ["o3", "o5"], "controlled_by": ["a1", "a2"], "benefits_to": ["a6"], "costs_to": ["a1", "a2"], "risks_to": ["a2"]}
+  ],
+  "dependencies": [
+    {"id": "d1", "name": "telecom integration"},
+    {"id": "d2", "name": "shared message standards"},
+    {"id": "d3", "name": "legal authority for who may send alerts"},
+    {"id": "d4", "name": "funding for local rollout"},
+    {"id": "d5", "name": "training and operating procedures"}
+  ],
+  "constraints": [
+    {"id": "q1", "name": "privacy law", "kind": "hard"},
+    {"id": "q2", "name": "uneven municipal budgets", "kind": "hard"},
+    {"id": "q3", "name": "legacy systems must remain active during rollout", "kind": "hard"},
+    {"id": "q4", "name": "no single point of failure", "kind": "hard"},
+    {"id": "q5", "name": "alerts must remain understandable to the public", "kind": "hard"}
+  ],
+  "boundaries": [
+    {"id": "b1", "name": "national-local governance boundary"},
+    {"id": "b2", "name": "agency-to-telecom boundary"},
+    {"id": "b3", "name": "technical standards boundary"},
+    {"id": "b4", "name": "language and accessibility boundary"}
+  ],
+  "states": [
+    {
+      "id": "s0",
+      "name": "fragmented local alerting baseline",
+      "is_current": true,
+      "is_target": false,
+      "available_capabilities": [],
+      "operational_capabilities": [],
+      "satisfied_dependencies": ["d1", "d2", "d3", "d4", "d5"],
+      "active_constraints": ["q1", "q2", "q3", "q4", "q5"],
+      "boundary_friction": [
+        {"boundary_id": "b1", "present": true},
+        {"boundary_id": "b2", "present": true},
+        {"boundary_id": "b3", "present": true},
+        {"boundary_id": "b4", "present": true}
+      ]
+    },
+    {
+      "id": "s1",
+      "name": "speed-first alerting configuration",
+      "is_current": false,
+      "is_target": false,
+      "available_capabilities": ["k1", "k6", "k7"],
+      "operational_capabilities": ["k1", "k6", "k7"],
+      "satisfied_dependencies": ["d1", "d2", "d3", "d5"],
+      "active_constraints": ["q1", "q3", "q4", "q5"],
+      "boundary_friction": [
+        {"boundary_id": "b2", "present": true},
+        {"boundary_id": "b4", "present": true}
+      ]
+    },
+    {
+      "id": "s2",
+      "name": "resilience-first multi-channel configuration",
+      "is_current": false,
+      "is_target": true,
+      "available_capabilities": ["k2", "k4", "k5", "k6"],
+      "operational_capabilities": ["k2", "k4", "k5", "k6"],
+      "satisfied_dependencies": ["d1", "d2", "d3", "d4", "d5"],
+      "active_constraints": ["q1", "q2", "q3", "q4", "q5"],
+      "boundary_friction": [
+        {"boundary_id": "b1", "present": true},
+        {"boundary_id": "b4", "present": true}
+      ]
+    },
+    {
+      "id": "s3",
+      "name": "inclusion-first accessible configuration",
+      "is_current": false,
+      "is_target": true,
+      "available_capabilities": ["k2", "k3", "k4", "k6", "k8"],
+      "operational_capabilities": ["k2", "k3", "k4", "k6", "k8"],
+      "satisfied_dependencies": ["d1", "d2", "d3", "d4", "d5"],
+      "active_constraints": ["q1", "q2", "q3", "q5"],
+      "boundary_friction": [
+        {"boundary_id": "b1", "present": true},
+        {"boundary_id": "b4", "present": true}
+      ]
+    },
+    {
+      "id": "s4",
+      "name": "balanced regional alerting configuration",
+      "is_current": false,
+      "is_target": true,
+      "available_capabilities": ["k1", "k2", "k4", "k5", "k6", "k8"],
+      "operational_capabilities": ["k1", "k2", "k4", "k5", "k6", "k8"],
+      "satisfied_dependencies": ["d1", "d2", "d3", "d4", "d5"],
+      "active_constraints": ["q1", "q2", "q3", "q4", "q5"],
+      "boundary_friction": [
+        {"boundary_id": "b1", "present": true},
+        {"boundary_id": "b2", "present": true},
+        {"boundary_id": "b4", "present": true}
+      ]
+    }
+  ],
+  "capability_requirements": [
+    {"capability_id": "k1", "required_dependencies": ["d1", "d2", "d3"], "limiting_constraints": ["q1", "q4", "q5"], "crossed_boundaries": ["b1", "b2", "b3"]},
+    {"capability_id": "k2", "required_dependencies": ["d1", "d2", "d3", "d5"], "limiting_constraints": ["q1", "q5"], "crossed_boundaries": ["b1", "b2", "b3"]},
+    {"capability_id": "k3", "required_dependencies": ["d1", "d2", "d4"], "limiting_constraints": ["q1", "q2"], "crossed_boundaries": ["b1", "b2"]},
+    {"capability_id": "k4", "required_dependencies": ["d2", "d5"], "limiting_constraints": ["q5"], "crossed_boundaries": ["b4"]},
+    {"capability_id": "k5", "required_dependencies": ["d4", "d5"], "limiting_constraints": ["q2", "q4"], "crossed_boundaries": ["b1"]},
+    {"capability_id": "k6", "required_dependencies": ["d2", "d3", "d5"], "limiting_constraints": ["q3", "q4", "q5"], "crossed_boundaries": ["b1", "b3"]},
+    {"capability_id": "k7", "required_dependencies": ["d1", "d2", "d3"], "limiting_constraints": ["q1", "q4"], "crossed_boundaries": ["b2", "b3"]},
+    {"capability_id": "k8", "required_dependencies": ["d2", "d5"], "limiting_constraints": ["q5"], "crossed_boundaries": ["b4"]}
+  ],
+  "capability_admissibility": [
+    {"capability_id": "k1", "state_id": "s0", "admissible": true, "reasons": []},
+    {"capability_id": "k2", "state_id": "s0", "admissible": true, "reasons": []},
+    {"capability_id": "k4", "state_id": "s0", "admissible": true, "reasons": []},
+    {"capability_id": "k5", "state_id": "s0", "admissible": true, "reasons": []},
+    {"capability_id": "k6", "state_id": "s0", "admissible": true, "reasons": []},
+    {"capability_id": "k8", "state_id": "s0", "admissible": true, "reasons": []}
+  ],
+  "transitions": [
+    {
+      "id": "t1",
+      "name": "Speed-first broadcast configuration",
+      "source_state_id": "s0",
+      "target_state_id": "s1",
+      "changes_capabilities": ["k1", "k6", "k7"],
+      "required_dependencies": ["d1", "d2", "d3", "d5"],
+      "constraining_constraints": ["q1", "q4", "q5"],
+      "crossed_boundaries": ["b1", "b2", "b3"]
+    },
+    {
+      "id": "t2",
+      "name": "Resilience-first multi-channel configuration",
+      "source_state_id": "s0",
+      "target_state_id": "s2",
+      "changes_capabilities": ["k2", "k4", "k5", "k6"],
+      "required_dependencies": ["d1", "d2", "d3", "d4", "d5"],
+      "constraining_constraints": ["q1", "q2", "q3", "q4", "q5"],
+      "crossed_boundaries": ["b1", "b2", "b3", "b4"]
+    },
+    {
+      "id": "t3",
+      "name": "Inclusion-first accessible configuration",
+      "source_state_id": "s0",
+      "target_state_id": "s3",
+      "changes_capabilities": ["k2", "k3", "k4", "k6", "k8"],
+      "required_dependencies": ["d1", "d2", "d3", "d4", "d5"],
+      "constraining_constraints": ["q1", "q2", "q3", "q5"],
+      "crossed_boundaries": ["b1", "b2", "b3", "b4"]
+    },
+    {
+      "id": "t4",
+      "name": "Balanced regional alerting configuration",
+      "source_state_id": "s0",
+      "target_state_id": "s4",
+      "changes_capabilities": ["k1", "k2", "k4", "k5", "k6", "k8"],
+      "required_dependencies": ["d1", "d2", "d3", "d4", "d5"],
+      "constraining_constraints": ["q1", "q2", "q3", "q4", "q5"],
+      "crossed_boundaries": ["b1", "b2", "b3", "b4"]
+    }
+  ],
+  "transition_admissibility": [
+    {
+      "transition_id": "t1",
+      "state_id": "s0",
+      "admissible": false,
+      "reasons": [
+        "speed-first configuration leaves a single-point-failure gap",
+        "public clarity and accessibility remain too weak"
+      ]
+    },
+    {"transition_id": "t2", "state_id": "s0", "admissible": true, "reasons": []},
+    {"transition_id": "t3", "state_id": "s0", "admissible": true, "reasons": []},
+    {"transition_id": "t4", "state_id": "s0", "admissible": true, "reasons": []}
+  ],
+  "decisions": [
+    {
+      "id": "x1",
+      "name": "Speed-first configuration",
+      "selects_transition_id": "t1",
+      "assignments": [
+        {"actor_id": "a1", "capability_id": "k1"},
+        {"actor_id": "a1", "capability_id": "k6"},
+        {"actor_id": "a1", "capability_id": "k7"}
+      ],
+      "time_label": ""
+    },
+    {
+      "id": "x2",
+      "name": "Resilience-first configuration",
+      "selects_transition_id": "t2",
+      "assignments": [
+        {"actor_id": "a2", "capability_id": "k2"},
+        {"actor_id": "a2", "capability_id": "k4"},
+        {"actor_id": "a2", "capability_id": "k5"},
+        {"actor_id": "a2", "capability_id": "k6"}
+      ],
+      "time_label": ""
+    },
+    {
+      "id": "x3",
+      "name": "Inclusion-first configuration",
+      "selects_transition_id": "t3",
+      "assignments": [
+        {"actor_id": "a2", "capability_id": "k2"},
+        {"actor_id": "a2", "capability_id": "k3"},
+        {"actor_id": "a2", "capability_id": "k4"},
+        {"actor_id": "a2", "capability_id": "k6"},
+        {"actor_id": "a2", "capability_id": "k8"}
+      ],
+      "time_label": ""
+    },
+    {
+      "id": "x4",
+      "name": "Balanced configuration",
+      "selects_transition_id": "t4",
+      "assignments": [
+        {"actor_id": "a1", "capability_id": "k1"},
+        {"actor_id": "a1", "capability_id": "k2"},
+        {"actor_id": "a1", "capability_id": "k4"},
+        {"actor_id": "a1", "capability_id": "k5"},
+        {"actor_id": "a1", "capability_id": "k6"},
+        {"actor_id": "a1", "capability_id": "k8"}
+      ],
+      "time_label": ""
+    }
+  ],
+  "decision_status": [
+    {"decision_id": "x1", "state_id": "s0", "valid": false, "executable": false, "reasons": ["selected_transition_inadmissible:t1"]},
+    {"decision_id": "x2", "state_id": "s0", "valid": true, "executable": false, "reasons": ["local operators cannot authorize the regional operating model alone"]},
+    {"decision_id": "x3", "state_id": "s0", "valid": true, "executable": false, "reasons": ["local operators cannot authorize the regional operating model alone"]},
+    {"decision_id": "x4", "state_id": "s0", "valid": true, "executable": true, "reasons": []}
+  ],
+  "coordination_requirements": [
+    {"type": "transition", "target_id": "t2", "required": true, "actors": ["a1", "a2", "a3", "a5", "a7"], "basis": "explicit_cross_actor_requirement"},
+    {"type": "transition", "target_id": "t3", "required": true, "actors": ["a1", "a2", "a3", "a6", "a7"], "basis": "explicit_cross_actor_requirement"},
+    {"type": "transition", "target_id": "t4", "required": true, "actors": ["a1", "a2", "a3", "a5", "a6", "a7"], "basis": "explicit_cross_actor_requirement"}
+  ],
+  "risk_indicators": [
+    {"target_type": "transition", "target_id": "t1", "state_id": "s0", "risks": ["single_point_of_failure", "public_clarity_risk"]},
+    {"target_type": "transition", "target_id": "t2", "state_id": "s0", "risks": ["cost_pressure", "governance_load"]},
+    {"target_type": "transition", "target_id": "t3", "state_id": "s0", "risks": ["coordination_load", "slower_activation"]},
+    {"target_type": "transition", "target_id": "t4", "state_id": "s0", "risks": ["coordination_load", "implementation_cost"]}
+  ],
+  "fallbacks": [],
+  "candidate_sets": {
+    "candidate_transition_ids_from_current_state": ["t1", "t2", "t3", "t4"],
+    "candidate_decision_ids_from_current_state": ["x1", "x2", "x3", "x4"]
+  },
+  "assumptions": [
+    "The normalized case evaluates whole operating-model configurations as decision options from a common regional baseline."
+  ],
+  "ambiguities": [
+    "The source case is configuration-oriented, so the normalized case serializes each configuration as an option transition."
+  ],
+  "missing_information": [
+    "The source does not quantify the exact budget delta between resilience-first and balanced configurations."
+  ]
+}

@@ -1,0 +1,21 @@
+[project]
+name = "realized-workstation-ui-shared"
+version = "0.1.0"
+description = "Shared workstation UI support package for Realized."
+requires-python = ">=3.14"
+dependencies = [
+    "realized-workstation",
+    "realized-workstation-foundation-projections",
+]
+
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["workstation.ui.shared"]
+namespaces = true

@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dst"
+version = "0.1.0"
+description = "Decision Support Tool layer"
+requires-python = ">=3.14"
+dependencies = [
+    "coordinated-transformation",
+]
+
+[tool.uv.sources]
+coordinated-transformation = { path = "../coordinated_transformation", editable = true }
+
+[tool.setuptools]
+packages = ["dst"]
+
+[tool.setuptools.package-dir]
+"" = ".."
+
+[tool.setuptools.package-data]
+dst = [
+    "*.md",
+    "tests/fixtures/dst/*.json",
+    "tests/fixtures/dst/discovery/*.json",
+    "tests/fixtures/dst/normalized/*.json",
+]

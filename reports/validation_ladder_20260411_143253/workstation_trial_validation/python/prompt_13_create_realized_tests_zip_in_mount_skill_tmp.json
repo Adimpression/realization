@@ -1,0 +1,25 @@
+{
+  "assistant_text": "{'status': 'archived', 'source_mount': 'skill_input', 'source_relative_path': 'tests', 'destination_mount': 'skill_tmp', 'destination_relative_path': 'realized-tests.zip'}",
+  "model": "workstation-direct-composition",
+  "rounds": 0,
+  "task_contract": {
+    "semantic_unit": "Create `realized-tests.zip` in mount `skill_tmp` from mount `skill_input` at `tests`."
+  },
+  "tool_receipts": [
+    {
+      "arguments": {
+        "skill_title": "Python Commands 13 \u2014 Create Zip Archive / Python Commands 13 Create Zip Archive",
+        "target": ""
+      },
+      "name": "ws.skill.invoke",
+      "result": {
+        "answer": "{'status': 'archived', 'source_mount': 'skill_input', 'source_relative_path': 'tests', 'destination_mount': 'skill_tmp', 'destination_relative_path': 'realized-tests.zip'}",
+        "error": "",
+        "error_type": "",
+        "executor_framework": "python3",
+        "skill_title": "Python Commands 13 \u2014 Create Zip Archive / Python Commands 13 Create Zip Archive",
+        "status": "ok"
+      }
+    }
+  ]
+}

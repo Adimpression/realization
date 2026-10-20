@@ -1,0 +1,22 @@
+{
+  "assumptions": [],
+  "boundary_shape": [
+    "b*",
+    "a*",
+    "d*"
+  ],
+  "completion_conditions": [
+    "requested result is returned to the user"
+  ],
+  "input_values": {},
+  "missing_requirements": [],
+  "output_values": [
+    "result"
+  ],
+  "read_references": [
+    "external reference"
+  ],
+  "semantic_unit": "Copy `trials/python/README.md` from mount `skill_input` to mount `skill_tmp` at `python-readme.copy`.",
+  "side_effects": [],
+  "write_targets": []
+}

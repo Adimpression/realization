@@ -1,0 +1,25 @@
+{
+  "assistant_text": "{'status': 'ok', 'model': 'gpt-5.4', 'text': 'Hello.', 'response_id': 'resp_fake_openai_1'}",
+  "model": "workstation-direct-composition",
+  "rounds": 0,
+  "task_contract": {
+    "semantic_unit": "Generate a short text response with the OpenAI SDK using model `gpt-5.4` and prompt `Say hello in one sentence.`."
+  },
+  "tool_receipts": [
+    {
+      "arguments": {
+        "skill_title": "SDK User Commands 01 \u2014 OpenAI Text Response / Sdk User Commands 01 Openai Text Response",
+        "target": ""
+      },
+      "name": "ws.skill.invoke",
+      "result": {
+        "answer": "{'status': 'ok', 'model': 'gpt-5.4', 'text': 'Hello.', 'response_id': 'resp_fake_openai_1'}",
+        "error": "",
+        "error_type": "",
+        "executor_framework": "python3",
+        "skill_title": "SDK User Commands 01 \u2014 OpenAI Text Response / Sdk User Commands 01 Openai Text Response",
+        "status": "ok"
+      }
+    }
+  ]
+}

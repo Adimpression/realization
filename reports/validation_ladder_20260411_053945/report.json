@@ -1,0 +1,26 @@
+{
+  "started_at": "2026-04-11T05:39:45+00:00",
+  "finished_at": "2026-04-11T06:00:50+00:00",
+  "status": "failed",
+  "stage": "unit_tests",
+  "report_root": "/Users/ravindranathakila/service/realized/reports/validation_ladder_20260411_053945",
+  "stages": [
+    {
+      "name": "unit_tests",
+      "cmd": [
+        "/Users/ravindranathakila/.venv/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/Users/ravindranathakila/service/realized/tests"
+      ],
+      "cwd": "/Users/ravindranathakila/service/realized",
+      "status": "failed",
+      "returncode": 1,
+      "elapsed_seconds": 1265.583454,
+      "stdout_tail": "",
+      "stderr_tail": "(test_markdown_learning.MarkdownLearningNewtonTests.test_first_law_reuse_without_llm)\nHigh Level Purpose:\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/ravindranathakila/service/realized/tests/test_markdown_learning.py\", line 284, in test_first_law_reuse_without_llm\n    self.assertEqual(result[\"run_outcome\"], \"completed\")\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'incomplete' != 'completed'\n- incomplete\n? --\n+ completed\n?         +\n\n\n======================================================================\nFAIL: test_force_calculation_reuse_without_llm (test_markdown_learning.MarkdownLearningNewtonTests.test_force_calculation_reuse_without_llm)\nHigh Level Purpose:\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/ravindranathakila/service/realized/tests/test_markdown_learning.py\", line 356, in test_force_calculation_reuse_without_llm\n    self.assertEqual(result[\"run_outcome\"], \"completed\")\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'incomplete' != 'completed'\n- incomplete\n? --\n+ completed\n?         +\n\n\n======================================================================\nFAIL: test_force_calculation_uses_cross_boundary_function (test_markdown_learning.MarkdownLearningNewtonTests.test_force_calculation_uses_cross_boundary_function)\nHigh Level Purpose:\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/ravindranathakila/service/realized/tests/test_markdown_learning.py\", line 380, in test_force_calculation_uses_cross_boundary_function\n    self.assertEqual(result[\"run_outcome\"], \"completed\")\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'paused' != 'completed'\n- paused\n+ completed\n\n\n======================================================================\nFAIL: test_markdown_learning_persists_artifacts (test_markdown_learning.MarkdownLearningNewtonTests.test_markdown_learning_persists_artifacts)\nHigh Level Purpose:\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/ravindranathakila/service/realized/tests/test_markdown_learning.py\", line 263, in test_markdown_learning_persists_artifacts\n    self.assertGreaterEqual(int(function_artifact_count), 1)\n    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 0 not greater than or equal to 1\n\n======================================================================\nFAIL: test_second_law_reuse_without_llm (test_markdown_learning.MarkdownLearningNewtonTests.test_second_law_reuse_without_llm)\nHigh Level Purpose:\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/ravindranathakila/service/realized/tests/test_markdown_learning.py\", line 308, in test_second_law_reuse_without_llm\n    self.assertEqual(result[\"run_outcome\"], \"completed\")\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'incomplete' != 'completed'\n- incomplete\n? --\n+ completed\n?         +\n\n\n======================================================================\nFAIL: test_third_law_reuse_without_llm (test_markdown_learning.MarkdownLearningNewtonTests.test_third_law_reuse_without_llm)\nHigh Level Purpose:\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/ravindranathakila/service/realized/tests/test_markdown_learning.py\", line 332, in test_third_law_reuse_without_llm\n    self.assertEqual(result[\"run_outcome\"], \"completed\")\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'incomplete' != 'completed'\n- incomplete\n? --\n+ completed\n?         +\n\n\n----------------------------------------------------------------------\nRan 788 tests in 1264.636s\n\nFAILED (failures=10, errors=2)\n"
+    }
+  ]
+}

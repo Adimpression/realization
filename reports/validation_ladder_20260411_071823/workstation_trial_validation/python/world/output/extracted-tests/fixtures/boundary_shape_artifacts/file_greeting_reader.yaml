@@ -1,0 +1,74 @@
+File Greeting Reader:
+  Description:
+    - Input-reference plus read greeting function.
+  In:
+    - path: file path containing greeting text
+  Out:
+    - greeting: greeting loaded from file
+  Metadata:
+    artifact_type: ability
+    representation: python_script
+    function_bit: 1
+    boundary_shape:
+      - a'*
+      - b'*
+      - d*
+    scope: reuse when greeting text must be read from a file path
+    reusability: broad_reuse
+    admissibility: admitted
+    learning_relation: extends_parameters
+    justification: A bounded read-side artifact for loading a greeting from a path.
+    question: Read a greeting from a file path.
+    input_contract:
+      path: file path
+    output_contract:
+      greeting: greeting text
+    python_script: |
+      # /// script
+      # requires-python = ">=3.11"
+      # dependencies = ["msgspec", "orjson"]
+      # ///
+      from __future__ import annotations
+
+      import argparse
+      from pathlib import Path
+      import sys
+
+      import msgspec
+      import orjson
+
+
+      class InputPayload(msgspec.Struct, kw_only=True):
+          path: str
+
+
+      class OutputPayload(msgspec.Struct, kw_only=True):
+          status: str
+          answer: str
+          result: dict[str, str]
+          notes: list[str] = []
+
+
+      def run(payload: InputPayload) -> OutputPayload:
+          greeting = Path(payload.path).read_text().strip()
+          return OutputPayload(
+              status="ok",
+              answer=greeting,
+              result={"greeting": greeting},
+              notes=["read greeting from file"],
+          )
+
+
+      def main() -> None:
+          parser = argparse.ArgumentParser(description="file greeting reader")
+          parser.add_argument("--input-json", help="optional JSON payload")
+          args = parser.parse_args()
+          raw = args.input_json.encode("utf-8") if args.input_json else sys.stdin.buffer.read()
+          payload = orjson.loads(raw) if raw else {}
+          typed = msgspec.convert(payload, type=InputPayload)
+          sys.stdout.buffer.write(orjson.dumps(msgspec.to_builtins(run(typed))))
+          sys.stdout.buffer.write(b"\n")
+
+
+      if __name__ == "__main__":
+          main()

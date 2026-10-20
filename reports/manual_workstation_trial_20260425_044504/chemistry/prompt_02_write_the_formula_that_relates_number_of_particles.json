@@ -1,0 +1,9 @@
+{
+  "assistant_text": "Formula:\n- N = n \u00d7 N_A\n\nVariables:\n- N = number of particles (atoms, molecules, or ions)\n- n = amount of substance in moles\n- N_A = Avogadro's number \u2248 6.022 \u00d7 10^23 particles per mole\n\nInverse relation (often useful):\n- n = N / N_A\n\nExamples:\n- 2.00 moles \u2192 N \u2248 2.00 \u00d7 6.022\u00d710^23 \u2248 1.204 \u00d7 10^24 particles\n- 1.50 \u00d7 10^24 particles \u2192 n \u2248 (1.50 \u00d7 10^24) / (6.022 \u00d7 10^23) \u2248 2.49 moles",
+  "model": "gpt-5-nano-2025-08-07",
+  "rounds": 1,
+  "task_contract": {
+    "semantic_unit": "Write the formula that relates number of particles to moles, and identify the role of each variable."
+  },
+  "tool_receipts": []
+}

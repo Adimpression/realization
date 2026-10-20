@@ -1,0 +1,3438 @@
+schema: bssc_skill.v2
+kind: policy
+title: Local Bundle Admission Policy / 89ed67623844
+policy:
+  intent: Admit the governed skills packaged in this bundle on a fresh system.
+  target_kinds:
+  - ability
+  max_risk_tier: tier2_connected
+  allowed_authorities:
+  - execute
+  - communicate
+  denied_authorities: []
+  allowed_executors:
+  - python3
+  required_approval_for_risk_tiers: {}
+  allowed_data_classes:
+  - public
+---
+schema: bssc_skill.v2
+kind: ability
+title: "SDK User Commands 01 \u2014 OpenAI Text Response / Sdk User Commands 01 Openai\
+  \ Text Response"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you use sdk user commands 01 openai text response from model, prompt?
+declaration:
+  intent: How do you use sdk user commands 01 openai text response from model, prompt?
+  inputs:
+    model: required input value
+    prompt: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  - communicate
+  authority_bounds:
+    execute:
+      scope: local_executor
+      target: python3_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+    communicate:
+      scope: local_executor
+      target: skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - local executor invocation
+  - network communication
+  persistence_behavior: none
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier2_connected
+  executor_framework: python3
+executor: python3
+entrypoint: main
+inputs:
+  model: required input value
+  prompt: required input value
+outputs:
+  result: execution result
+python: "# /// script\n# requires-python = \">=3.11\"\n# dependencies = [\"msgspec\"\
+  , \"orjson\"]\n# ///\n\nfrom __future__ import annotations\n\nimport argparse\n\
+  import sys\n\nimport msgspec\nimport orjson\n\n\nclass InputPayload(msgspec.Struct,\
+  \ kw_only=True):\n    payload: dict[str, object] = {}\n\n\nclass OutputPayload(msgspec.Struct,\
+  \ kw_only=True):\n    status: str\n    answer: str = \"\"\n    result: dict[str,\
+  \ object]\n    notes: list[str] = []\n\n\ndef _normalize_result(value: object) ->\
+  \ object:\n    if isinstance(value, float) and value.is_integer():\n        return\
+  \ int(value)\n    return value\n\ndef main(\n    model: str,\n    prompt: str,\n\
+  \    *,\n    __dependencies__: tuple[str, ...] = (\"openai\",),\n) -> dict[str,\
+  \ object]:\n    from openai import OpenAI\n\n    client = OpenAI()\n    response\
+  \ = client.responses.create(model=model, input=prompt)\n    return {\n        \"\
+  status\": \"ok\",\n        \"model\": model,\n        \"text\": response.output_text,\n\
+  \        \"response_id\": response.id,\n    }\n\ndef run(payload: InputPayload)\
+  \ -> OutputPayload:\n    \"\"\"SDK User Commands 01 \u2014 OpenAI Text Response\
+  \ / Sdk User Commands 01 Openai Text Response: reuse when later prompts ask for\
+  \ sdk user commands 01 openai text response under compatible inputs\"\"\"\n    result_value\
+  \ = main(model=payload.payload.get('model'), prompt=payload.payload.get('prompt'))\n\
+  \    normalized = _normalize_result(result_value)\n    return OutputPayload(\n \
+  \       status=\"ok\",\n        answer=str(normalized),\n        result={\"result\"\
+  : normalized},\n        notes=[],\n    )\n\n\ndef __bssc_cli_main__() -> None:\n\
+  \    parser = argparse.ArgumentParser(description='SDK User Commands 01 \u2014 OpenAI\
+  \ Text Response / Sdk User Commands 01 Openai Text Response')\n    parser.add_argument(\"\
+  --input-json\", help=\"Optional JSON payload. Prefer stdin when omitted.\")\n  \
+  \  args = parser.parse_args()\n    raw = args.input_json.encode(\"utf-8\") if args.input_json\
+  \ else sys.stdin.buffer.read()\n    payload = orjson.loads(raw) if raw else {}\n\
+  \    typed_input = msgspec.convert({\"payload\": payload}, type=InputPayload)\n\
+  \    result = run(typed_input)\n    sys.stdout.buffer.write(orjson.dumps(msgspec.to_builtins(result),\
+  \ option=orjson.OPT_INDENT_2))\n    sys.stdout.buffer.write(b\"\\n\")\n\n\nif __name__\
+  \ == \"__main__\":\n    __bssc_cli_main__()"
+governance:
+  scope: reuse when later prompts ask for sdk user commands 01 openai text response
+    under compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a*
+  - b*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:32:24+00:00'
+  provenance:
+  - not_learn-from-markdown-01-learn-sdkuser-commands-op_6bc989
+  - /Users/ravindranathakila/service/realized/trials/sdkuser/01_LEARN_SDKUSER_COMMANDS_OPENAI_TEXT_RESPONSE.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for sdk user commands 01 openai text
+      response under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Sdk User Commands 01 Openai Text Response
+    encountered_not: Sdk User Commands 01 Openai Text Response
+    goal: How do you use sdk user commands 01 openai text response from model, prompt?
+    intended_object: "SDK User Commands 01 \u2014 OpenAI Text Response SDK User Commands\
+      \ 01 \u2014 OpenAI Text Response / Sdk User Commands 01 Openai Text Response\
+      \ Sdk User Commands 01 Openai Text Response How do you use sdk user commands\
+      \ 01 openai text response from model, prompt? 2. Executable Python relation\
+      \ function name is `main` named inputs: `model`, `prompt` imports inside `main`:\
+      \ `openai` return `return {` This capability should be learned as a reusable\
+      \ Python ability artifact."
+    success_criteria:
+    - the response directly resolves the stated ask without erasing material distinctions
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ SDK User Commands 01 \u2014 OpenAI Text Response SDK User Commands 01 \u2014\
+      \ OpenAI Text Response / Sdk User Commands 01 Openai Text Response Sdk User\
+      \ Commands 01 Openai Text Response How do you use sdk user commands 01 openai\
+      \ text response from model, 2, Executable Python relation function name is `main`\
+      \ named inputs: `model`; no justified final closure has been admitted yet"
+    givens:
+    - "SDK User Commands 01 \u2014 OpenAI Text Response SDK User Commands 01 \u2014\
+      \ OpenAI Text Response / Sdk User Commands 01 Openai Text Response Sdk User\
+      \ Commands 01 Openai Text Response How do you use sdk user commands 01 openai\
+      \ text response from model"
+    - '2'
+    - 'Executable Python relation function name is `main` named inputs: `model`'
+    unknowns: []
+    missing_components:
+    - a justified final realization has not yet been produced
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - completion
+    origin_layers:
+    - model
+    degree: partial
+    remainder_shapes:
+    - missing
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair: []
+    full_repair:
+    - 'satisfy success condition: the response directly resolves the stated ask without
+      erasing material distinctions'
+    boundary_shape:
+    - d*
+    action_posture: direct_resolution
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Sdk User Commands 01 Openai Text Response
+    title_depth_prefixes:
+    - Sdk User Commands 01 Openai Text Response
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Sdk User Command 01 Openai Text Response
+    - "SDK User Commands 01 \u2014 OpenAI Text Response / Sdk User Commands 01 Openai\
+      \ Text Response / Prompt"
+    composed_not: Sdk User Command 01 Openai Text Response
+    lookup_keys:
+    - sdk user command 01 openai text response
+    - sdk user
+    - user command
+    - command 01
+    - 01 openai
+    - openai text
+    - text response
+    - sdk user command
+    - user command 01
+    - command 01 openai
+    - 01 openai text
+    - openai text response
+    - sdk user command 01 openai text response model prompt
+    - response model
+    - model prompt
+    - text response model
+    - response model prompt
+    - without reduc remainder item cannot clos with govern confidence
+    - without reduc remainder item cannot clo
+    - govern confidence
+    - without reduc
+    - reduc remainder
+    - remainder item
+    - item cannot
+    notation_yaml: |-
+      "How Do You Use Sdk User Commands 01 Openai Text Response From Model Prompt":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Sdk User Commands 01 Openai Text Response"
+          - "Components: Sdk User Command 01 Openai Text Response, SDK User Commands 01 \u2014 OpenAI Text Response / Sdk User Commands 01 Openai Text Response / Prompt"
+          - "Composition: Sdk User Command 01 Openai Text Response"
+          - "Title identity: Sdk User Commands 01 Openai Text Response"
+          - "Title depth segments: Sdk User Commands 01 Openai Text Response"
+          - "Title depth prefixes: Sdk User Commands 01 Openai Text Response"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: SDK User Commands 01 \u2014 OpenAI Text Response SDK User Commands 01 \u2014 OpenAI Text Response / Sdk User Commands 01 Openai Text Response Sdk User Commands 01 Openai Text Response How do you use sdk user commands 01 openai text response from model, prompt? 2. Executable Python relation function name is `main` named inputs: `model`, `prompt` imports inside `main`: `openai` return `return {` This capability should be learned as a reusable Python ability artifact."
+          - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+          - "Actual realization: the prompt surface is present; explicit givens are present: SDK User Commands 01 \u2014 OpenAI Text Response SDK User Commands 01 \u2014 OpenAI Text Response / Sdk User Commands 01 Openai Text Response Sdk User Commands 01 Openai Text Response How do you use sdk user commands 01 openai text response from model, 2, Executable Python relation function name is `main` named inputs: `model`; no justified final closure has been admitted yet"
+          - "Givens: SDK User Commands 01 \u2014 OpenAI Text Response SDK User Commands 01 \u2014 OpenAI Text Response / Sdk User Commands 01 Openai Text Response Sdk User Commands 01 Openai Text Response How do you use sdk user commands 01 openai text response from model, 2, Executable Python relation function name is `main` named inputs: `model`"
+          - "Missing components: a justified final realization has not yet been produced"
+          - "Misalignment types: completion"
+          - "Origin layers: model"
+          - "Degree: partial"
+          - "Remainder shapes: missing"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+          - "Action posture: direct_resolution"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - python3
+---
+schema: bssc_skill.v2
+kind: ability
+title: "SDK User Commands 02 \u2014 OpenAI Embedding / Sdk User Commands 02 Openai\
+  \ Embedding"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you use sdk user commands 02 openai embedding from model, text?
+declaration:
+  intent: How do you use sdk user commands 02 openai embedding from model, text?
+  inputs:
+    model: required input value
+    text: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  - communicate
+  authority_bounds:
+    execute:
+      scope: local_executor
+      target: python3_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+    communicate:
+      scope: local_executor
+      target: skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - local executor invocation
+  - network communication
+  persistence_behavior: none
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier2_connected
+  executor_framework: python3
+executor: python3
+entrypoint: main
+inputs:
+  model: required input value
+  text: required input value
+outputs:
+  result: execution result
+python: "# /// script\n# requires-python = \">=3.11\"\n# dependencies = [\"msgspec\"\
+  , \"orjson\"]\n# ///\n\nfrom __future__ import annotations\n\nimport argparse\n\
+  import sys\n\nimport msgspec\nimport orjson\n\n\nclass InputPayload(msgspec.Struct,\
+  \ kw_only=True):\n    payload: dict[str, object] = {}\n\n\nclass OutputPayload(msgspec.Struct,\
+  \ kw_only=True):\n    status: str\n    answer: str = \"\"\n    result: dict[str,\
+  \ object]\n    notes: list[str] = []\n\n\ndef _normalize_result(value: object) ->\
+  \ object:\n    if isinstance(value, float) and value.is_integer():\n        return\
+  \ int(value)\n    return value\n\ndef main(\n    model: str,\n    text: str,\n \
+  \   *,\n    __dependencies__: tuple[str, ...] = (\"openai\",),\n) -> dict[str, object]:\n\
+  \    from openai import OpenAI\n\n    client = OpenAI()\n    response = client.embeddings.create(model=model,\
+  \ input=text)\n    vector = response.data[0].embedding\n    return {\"status\":\
+  \ \"ok\", \"model\": model, \"dimensions\": len(vector), \"embedding\": vector}\n\
+  \ndef run(payload: InputPayload) -> OutputPayload:\n    \"\"\"SDK User Commands\
+  \ 02 \u2014 OpenAI Embedding / Sdk User Commands 02 Openai Embedding: reuse when\
+  \ later prompts ask for sdk user commands 02 openai embedding under compatible inputs\"\
+  \"\"\n    result_value = main(model=payload.payload.get('model'), text=payload.payload.get('text'))\n\
+  \    normalized = _normalize_result(result_value)\n    return OutputPayload(\n \
+  \       status=\"ok\",\n        answer=str(normalized),\n        result={\"result\"\
+  : normalized},\n        notes=[],\n    )\n\n\ndef __bssc_cli_main__() -> None:\n\
+  \    parser = argparse.ArgumentParser(description='SDK User Commands 02 \u2014 OpenAI\
+  \ Embedding / Sdk User Commands 02 Openai Embedding')\n    parser.add_argument(\"\
+  --input-json\", help=\"Optional JSON payload. Prefer stdin when omitted.\")\n  \
+  \  args = parser.parse_args()\n    raw = args.input_json.encode(\"utf-8\") if args.input_json\
+  \ else sys.stdin.buffer.read()\n    payload = orjson.loads(raw) if raw else {}\n\
+  \    typed_input = msgspec.convert({\"payload\": payload}, type=InputPayload)\n\
+  \    result = run(typed_input)\n    sys.stdout.buffer.write(orjson.dumps(msgspec.to_builtins(result),\
+  \ option=orjson.OPT_INDENT_2))\n    sys.stdout.buffer.write(b\"\\n\")\n\n\nif __name__\
+  \ == \"__main__\":\n    __bssc_cli_main__()"
+governance:
+  scope: reuse when later prompts ask for sdk user commands 02 openai embedding under
+    compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a*
+  - b*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:32:40+00:00'
+  provenance:
+  - not_learn-from-markdown-02-learn-sdkuser-commands-op_9965e9
+  - /Users/ravindranathakila/service/realized/trials/sdkuser/02_LEARN_SDKUSER_COMMANDS_OPENAI_EMBEDDING.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for sdk user commands 02 openai embedding
+      under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Sdk User Commands 02 Openai Embedding
+    encountered_not: Sdk User Commands 02 Openai Embedding
+    goal: How do you use sdk user commands 02 openai embedding from model, text?
+    intended_object: "SDK User Commands 02 \u2014 OpenAI Embedding SDK User Commands\
+      \ 02 \u2014 OpenAI Embedding / Sdk User Commands 02 Openai Embedding Sdk User\
+      \ Commands 02 Openai Embedding How do you use sdk user commands 02 openai embedding\
+      \ from model, text? 2. Executable Python relation function name is `main` named\
+      \ inputs: `model`, `text` imports inside `main`: `openai` return `return {\"\
+      status\": \"ok\", \"model\": model, \"dimensions\": len(vector), \"embedding\"\
+      : vector}` This capability should be learned as a reusable Python ability artifact."
+    success_criteria:
+    - the response directly resolves the stated ask without erasing material distinctions
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ SDK User Commands 02 \u2014 OpenAI Embedding SDK User Commands 02 \u2014 OpenAI\
+      \ Embedding / Sdk User Commands 02 Openai Embedding Sdk User Commands 02 Openai\
+      \ Embedding How do you use sdk user commands 02 openai embedding from model,\
+      \ 2, Executable Python relation function name is `main` named inputs: `model`;\
+      \ no justified final closure has been admitted yet"
+    givens:
+    - "SDK User Commands 02 \u2014 OpenAI Embedding SDK User Commands 02 \u2014 OpenAI\
+      \ Embedding / Sdk User Commands 02 Openai Embedding Sdk User Commands 02 Openai\
+      \ Embedding How do you use sdk user commands 02 openai embedding from model"
+    - '2'
+    - 'Executable Python relation function name is `main` named inputs: `model`'
+    unknowns: []
+    missing_components:
+    - a justified final realization has not yet been produced
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - completion
+    origin_layers:
+    - model
+    degree: partial
+    remainder_shapes:
+    - missing
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair: []
+    full_repair:
+    - 'satisfy success condition: the response directly resolves the stated ask without
+      erasing material distinctions'
+    boundary_shape:
+    - d*
+    action_posture: direct_resolution
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Sdk User Commands 02 Openai Embedding
+    title_depth_prefixes:
+    - Sdk User Commands 02 Openai Embedding
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Sdk User Command 02 Openai Embedd
+    - "SDK User Commands 02 \u2014 OpenAI Embedding / Sdk User Commands 02 Openai\
+      \ Embedding / Text"
+    composed_not: Sdk User Command 02 Openai Embedd
+    lookup_keys:
+    - sdk user command 02 openai embedd
+    - sdk user
+    - user command
+    - command 02
+    - 02 openai
+    - openai embedd
+    - sdk user command
+    - user command 02
+    - command 02 openai
+    - 02 openai embedd
+    - sdk user command 02 openai embedd model text
+    - embedd model
+    - model text
+    - openai embedd model
+    - embedd model text
+    - without reduc remainder item cannot clos with govern confidence
+    - without reduc remainder item cannot clo
+    - govern confidence
+    - without reduc
+    - reduc remainder
+    - remainder item
+    - item cannot
+    - cannot clos
+    - clos with
+    notation_yaml: |-
+      "How Do You Use Sdk User Commands 02 Openai Embedding From Model Text":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Sdk User Commands 02 Openai Embedding"
+          - "Components: Sdk User Command 02 Openai Embedd, SDK User Commands 02 \u2014 OpenAI Embedding / Sdk User Commands 02 Openai Embedding / Text"
+          - "Composition: Sdk User Command 02 Openai Embedd"
+          - "Title identity: Sdk User Commands 02 Openai Embedding"
+          - "Title depth segments: Sdk User Commands 02 Openai Embedding"
+          - "Title depth prefixes: Sdk User Commands 02 Openai Embedding"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: SDK User Commands 02 \u2014 OpenAI Embedding SDK User Commands 02 \u2014 OpenAI Embedding / Sdk User Commands 02 Openai Embedding Sdk User Commands 02 Openai Embedding How do you use sdk user commands 02 openai embedding from model, text? 2. Executable Python relation function name is `main` named inputs: `model`, `text` imports inside `main`: `openai` return `return {\"status\": \"ok\", \"model\": model, \"dimensions\": len(vector), \"embedding\": vector}` This capability should be learned as a reusable Python ability artifact."
+          - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+          - "Actual realization: the prompt surface is present; explicit givens are present: SDK User Commands 02 \u2014 OpenAI Embedding SDK User Commands 02 \u2014 OpenAI Embedding / Sdk User Commands 02 Openai Embedding Sdk User Commands 02 Openai Embedding How do you use sdk user commands 02 openai embedding from model, 2, Executable Python relation function name is `main` named inputs: `model`; no justified final closure has been admitted yet"
+          - "Givens: SDK User Commands 02 \u2014 OpenAI Embedding SDK User Commands 02 \u2014 OpenAI Embedding / Sdk User Commands 02 Openai Embedding Sdk User Commands 02 Openai Embedding How do you use sdk user commands 02 openai embedding from model, 2, Executable Python relation function name is `main` named inputs: `model`"
+          - "Missing components: a justified final realization has not yet been produced"
+          - "Misalignment types: completion"
+          - "Origin layers: model"
+          - "Degree: partial"
+          - "Remainder shapes: missing"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+          - "Action posture: direct_resolution"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - python3
+---
+schema: bssc_skill.v2
+kind: ability
+title: "SDK User Commands 03 \u2014 Anthropic Message / Sdk User Commands 03 Anthropic\
+  \ Message"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you use sdk user commands 03 anthropic message from model, prompt,
+  max_tokens?
+declaration:
+  intent: How do you use sdk user commands 03 anthropic message from model, prompt,
+    max_tokens?
+  inputs:
+    model: required input value
+    prompt: required input value
+    max_tokens: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  - communicate
+  authority_bounds:
+    execute:
+      scope: local_executor
+      target: python3_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+    communicate:
+      scope: local_executor
+      target: skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - local executor invocation
+  - network communication
+  persistence_behavior: none
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier2_connected
+  executor_framework: python3
+executor: python3
+entrypoint: main
+inputs:
+  model: required input value
+  prompt: required input value
+  max_tokens: required input value
+outputs:
+  result: execution result
+python: "# /// script\n# requires-python = \">=3.11\"\n# dependencies = [\"msgspec\"\
+  , \"orjson\"]\n# ///\n\nfrom __future__ import annotations\n\nimport argparse\n\
+  import sys\n\nimport msgspec\nimport orjson\n\n\nclass InputPayload(msgspec.Struct,\
+  \ kw_only=True):\n    payload: dict[str, object] = {}\n\n\nclass OutputPayload(msgspec.Struct,\
+  \ kw_only=True):\n    status: str\n    answer: str = \"\"\n    result: dict[str,\
+  \ object]\n    notes: list[str] = []\n\n\ndef _normalize_result(value: object) ->\
+  \ object:\n    if isinstance(value, float) and value.is_integer():\n        return\
+  \ int(value)\n    return value\n\ndef main(\n    model: str,\n    prompt: str,\n\
+  \    *,\n    max_tokens: int = 200,\n    __dependencies__: tuple[str, ...] = (\"\
+  anthropic\",),\n) -> dict[str, object]:\n    from anthropic import Anthropic\n\n\
+  \    client = Anthropic()\n    response = client.messages.create(\n        model=model,\n\
+  \        max_tokens=max_tokens,\n        messages=[{\"role\": \"user\", \"content\"\
+  : prompt}],\n    )\n    text = \"\".join(block.text for block in response.content\
+  \ if getattr(block, \"type\", \"\") == \"text\")\n    return {\"status\": \"ok\"\
+  , \"model\": model, \"text\": text}\n\ndef run(payload: InputPayload) -> OutputPayload:\n\
+  \    \"\"\"SDK User Commands 03 \u2014 Anthropic Message / Sdk User Commands 03\
+  \ Anthropic Message: reuse when later prompts ask for sdk user commands 03 anthropic\
+  \ message under compatible inputs\"\"\"\n    result_value = main(model=payload.payload.get('model'),\
+  \ prompt=payload.payload.get('prompt'))\n    normalized = _normalize_result(result_value)\n\
+  \    return OutputPayload(\n        status=\"ok\",\n        answer=str(normalized),\n\
+  \        result={\"result\": normalized},\n        notes=[],\n    )\n\n\ndef __bssc_cli_main__()\
+  \ -> None:\n    parser = argparse.ArgumentParser(description='SDK User Commands\
+  \ 03 \u2014 Anthropic Message / Sdk User Commands 03 Anthropic Message')\n    parser.add_argument(\"\
+  --input-json\", help=\"Optional JSON payload. Prefer stdin when omitted.\")\n  \
+  \  args = parser.parse_args()\n    raw = args.input_json.encode(\"utf-8\") if args.input_json\
+  \ else sys.stdin.buffer.read()\n    payload = orjson.loads(raw) if raw else {}\n\
+  \    typed_input = msgspec.convert({\"payload\": payload}, type=InputPayload)\n\
+  \    result = run(typed_input)\n    sys.stdout.buffer.write(orjson.dumps(msgspec.to_builtins(result),\
+  \ option=orjson.OPT_INDENT_2))\n    sys.stdout.buffer.write(b\"\\n\")\n\n\nif __name__\
+  \ == \"__main__\":\n    __bssc_cli_main__()"
+governance:
+  scope: reuse when later prompts ask for sdk user commands 03 anthropic message under
+    compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:32:48+00:00'
+  provenance:
+  - not_learn-from-markdown-03-learn-sdkuser-commands-an_7e1be9
+  - /Users/ravindranathakila/service/realized/trials/sdkuser/03_LEARN_SDKUSER_COMMANDS_ANTHROPIC_MESSAGE.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for sdk user commands 03 anthropic
+      message under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Sdk User Commands 03 Anthropic Message
+    encountered_not: Sdk User Commands 03 Anthropic Message
+    goal: How do you use sdk user commands 03 anthropic message from model, prompt,
+      max_tokens?
+    intended_object: "SDK User Commands 03 \u2014 Anthropic Message SDK User Commands\
+      \ 03 \u2014 Anthropic Message / Sdk User Commands 03 Anthropic Message Sdk User\
+      \ Commands 03 Anthropic Message How do you use sdk user commands 03 anthropic\
+      \ message from model, prompt, max_tokens? 2. Executable Python relation function\
+      \ name is `main` named inputs: `model`, `prompt`, `max_tokens` imports inside\
+      \ `main`: `anthropic` return `return {\"status\": \"ok\", \"model\": model,\
+      \ \"text\": text}` This capability should be learned as a reusable Python ability\
+      \ artifact."
+    success_criteria:
+    - the response directly resolves the stated ask without erasing material distinctions
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ SDK User Commands 03 \u2014 Anthropic Message SDK User Commands 03 \u2014\
+      \ Anthropic Message / Sdk User Commands 03 Anthropic Message Sdk User Commands\
+      \ 03 Anthropic Message How do you use sdk user commands 03 anthropic message\
+      \ from model, 2, Executable Python relation function name is `main` named inputs:\
+      \ `model`; no justified final closure has been admitted yet"
+    givens:
+    - "SDK User Commands 03 \u2014 Anthropic Message SDK User Commands 03 \u2014 Anthropic\
+      \ Message / Sdk User Commands 03 Anthropic Message Sdk User Commands 03 Anthropic\
+      \ Message How do you use sdk user commands 03 anthropic message from model"
+    - '2'
+    - 'Executable Python relation function name is `main` named inputs: `model`'
+    unknowns: []
+    missing_components:
+    - a justified final realization has not yet been produced
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - completion
+    origin_layers:
+    - model
+    degree: partial
+    remainder_shapes:
+    - missing
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair: []
+    full_repair:
+    - 'satisfy success condition: the response directly resolves the stated ask without
+      erasing material distinctions'
+    boundary_shape:
+    - d*
+    action_posture: direct_resolution
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Sdk User Commands 03 Anthropic Message
+    title_depth_prefixes:
+    - Sdk User Commands 03 Anthropic Message
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Sdk User Command 03 Anthropic Message
+    - "SDK User Commands 03 \u2014 Anthropic Message / Sdk User Commands 03 Anthropic\
+      \ Message / Prompt"
+    - "SDK User Commands 03 \u2014 Anthropic Message / Sdk User Commands 03 Anthropic\
+      \ Message / Max Token"
+    composed_not: Sdk User Command 03 Anthropic Message
+    lookup_keys:
+    - sdk user command 03 anthropic message
+    - sdk user
+    - user command
+    - command 03
+    - 03 anthropic
+    - anthropic message
+    - sdk user command
+    - user command 03
+    - command 03 anthropic
+    - 03 anthropic message
+    - sdk user command 03 anthropic message model prompt max token
+    - message model
+    - model prompt
+    - prompt max
+    - max token
+    - anthropic message model
+    - message model prompt
+    - model prompt max
+    - prompt max token
+    - without reduc remainder item cannot clos with govern confidence
+    - without reduc remainder item cannot clo
+    - govern confidence
+    - without reduc
+    - reduc remainder
+    notation_yaml: |-
+      "How Do You Use Sdk User Commands 03 Anthropic Message From Model Prompt Max Tokens":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Sdk User Commands 03 Anthropic Message"
+          - "Components: Sdk User Command 03 Anthropic Message, SDK User Commands 03 \u2014 Anthropic Message / Sdk User Commands 03 Anthropic Message / Prompt, SDK User Commands 03 \u2014 Anthropic Message / Sdk User Commands 03 Anthropic Message / Max Token"
+          - "Composition: Sdk User Command 03 Anthropic Message"
+          - "Title identity: Sdk User Commands 03 Anthropic Message"
+          - "Title depth segments: Sdk User Commands 03 Anthropic Message"
+          - "Title depth prefixes: Sdk User Commands 03 Anthropic Message"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: SDK User Commands 03 \u2014 Anthropic Message SDK User Commands 03 \u2014 Anthropic Message / Sdk User Commands 03 Anthropic Message Sdk User Commands 03 Anthropic Message How do you use sdk user commands 03 anthropic message from model, prompt, max_tokens? 2. Executable Python relation function name is `main` named inputs: `model`, `prompt`, `max_tokens` imports inside `main`: `anthropic` return `return {\"status\": \"ok\", \"model\": model, \"text\": text}` This capability should be learned as a reusable Python ability artifact."
+          - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+          - "Actual realization: the prompt surface is present; explicit givens are present: SDK User Commands 03 \u2014 Anthropic Message SDK User Commands 03 \u2014 Anthropic Message / Sdk User Commands 03 Anthropic Message Sdk User Commands 03 Anthropic Message How do you use sdk user commands 03 anthropic message from model, 2, Executable Python relation function name is `main` named inputs: `model`; no justified final closure has been admitted yet"
+          - "Givens: SDK User Commands 03 \u2014 Anthropic Message SDK User Commands 03 \u2014 Anthropic Message / Sdk User Commands 03 Anthropic Message Sdk User Commands 03 Anthropic Message How do you use sdk user commands 03 anthropic message from model, 2, Executable Python relation function name is `main` named inputs: `model`"
+          - "Missing components: a justified final realization has not yet been produced"
+          - "Misalignment types: completion"
+          - "Origin layers: model"
+          - "Degree: partial"
+          - "Remainder shapes: missing"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+          - "Action posture: direct_resolution"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - python3
+---
+schema: bssc_skill.v2
+kind: ability
+title: "SDK User Commands 04 \u2014 Boto3 List S3 Objects / Sdk User Commands 04 Boto3\
+  \ List S3 Objects"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you use sdk user commands 04 boto3 list s3 objects from bucket, prefix?
+declaration:
+  intent: How do you use sdk user commands 04 boto3 list s3 objects from bucket, prefix?
+  inputs:
+    bucket: required input value
+    prefix: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  - communicate
+  authority_bounds:
+    execute:
+      scope: local_executor
+      target: python3_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+    communicate:
+      scope: local_executor
+      target: skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - local executor invocation
+  - network communication
+  persistence_behavior: none
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier2_connected
+  executor_framework: python3
+executor: python3
+entrypoint: main
+inputs:
+  bucket: required input value
+  prefix: required input value
+outputs:
+  result: execution result
+python: "# /// script\n# requires-python = \">=3.11\"\n# dependencies = [\"msgspec\"\
+  , \"orjson\"]\n# ///\n\nfrom __future__ import annotations\n\nimport argparse\n\
+  import sys\n\nimport msgspec\nimport orjson\n\n\nclass InputPayload(msgspec.Struct,\
+  \ kw_only=True):\n    payload: dict[str, object] = {}\n\n\nclass OutputPayload(msgspec.Struct,\
+  \ kw_only=True):\n    status: str\n    answer: str = \"\"\n    result: dict[str,\
+  \ object]\n    notes: list[str] = []\n\n\ndef _normalize_result(value: object) ->\
+  \ object:\n    if isinstance(value, float) and value.is_integer():\n        return\
+  \ int(value)\n    return value\n\ndef main(\n    bucket: str,\n    *,\n    prefix:\
+  \ str = \"\",\n    __dependencies__: tuple[str, ...] = (\"boto3\",),\n) -> dict[str,\
+  \ object]:\n    import boto3\n\n    client = boto3.client(\"s3\")\n    response\
+  \ = client.list_objects_v2(Bucket=bucket, Prefix=prefix)\n    keys = [item[\"Key\"\
+  ] for item in response.get(\"Contents\", [])]\n    return {\"status\": \"ok\", \"\
+  bucket\": bucket, \"prefix\": prefix, \"keys\": keys}\n\ndef run(payload: InputPayload)\
+  \ -> OutputPayload:\n    \"\"\"SDK User Commands 04 \u2014 Boto3 List S3 Objects\
+  \ / Sdk User Commands 04 Boto3 List S3 Objects: reuse when later prompts ask for\
+  \ sdk user commands 04 boto3 list s3 objects under compatible inputs\"\"\"\n   \
+  \ result_value = main(bucket=payload.payload.get('bucket'))\n    normalized = _normalize_result(result_value)\n\
+  \    return OutputPayload(\n        status=\"ok\",\n        answer=str(normalized),\n\
+  \        result={\"result\": normalized},\n        notes=[],\n    )\n\n\ndef __bssc_cli_main__()\
+  \ -> None:\n    parser = argparse.ArgumentParser(description='SDK User Commands\
+  \ 04 \u2014 Boto3 List S3 Objects / Sdk User Commands 04 Boto3 List S3 Objects')\n\
+  \    parser.add_argument(\"--input-json\", help=\"Optional JSON payload. Prefer\
+  \ stdin when omitted.\")\n    args = parser.parse_args()\n    raw = args.input_json.encode(\"\
+  utf-8\") if args.input_json else sys.stdin.buffer.read()\n    payload = orjson.loads(raw)\
+  \ if raw else {}\n    typed_input = msgspec.convert({\"payload\": payload}, type=InputPayload)\n\
+  \    result = run(typed_input)\n    sys.stdout.buffer.write(orjson.dumps(msgspec.to_builtins(result),\
+  \ option=orjson.OPT_INDENT_2))\n    sys.stdout.buffer.write(b\"\\n\")\n\n\nif __name__\
+  \ == \"__main__\":\n    __bssc_cli_main__()"
+governance:
+  scope: reuse when later prompts ask for sdk user commands 04 boto3 list s3 objects
+    under compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a'*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:32:58+00:00'
+  provenance:
+  - not_learn-from-markdown-04-learn-sdkuser-commands-bo_a49974
+  - /Users/ravindranathakila/service/realized/trials/sdkuser/04_LEARN_SDKUSER_COMMANDS_BOTO3_LIST_S3_OBJECTS.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for sdk user commands 04 boto3 list
+      s3 objects under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Sdk User Commands 04 Boto3 List S3 Objects
+    encountered_not: Sdk User Commands 04 Boto3 List S3 Objects
+    goal: How do you use sdk user commands 04 boto3 list s3 objects from bucket, prefix?
+    intended_object: "SDK User Commands 04 \u2014 Boto3 List S3 Objects SDK User Commands\
+      \ 04 \u2014 Boto3 List S3 Objects / Sdk User Commands 04 Boto3 List S3 Objects\
+      \ Sdk User Commands 04 Boto3 List S3 Objects How do you use sdk user commands\
+      \ 04 boto3 list s3 objects from bucket, prefix? 2. Executable Python relation\
+      \ function name is `main` named inputs: `bucket`, `prefix` imports inside `main`:\
+      \ `boto3` return `return {\"status\": \"ok\", \"bucket\": bucket, \"prefix\"\
+      : prefix, \"keys\": keys}` This capability should be learned as a reusable Python\
+      \ ability artifact."
+    success_criteria:
+    - the response directly resolves the stated ask without erasing material distinctions
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ SDK User Commands 04 \u2014 Boto3 List S3 Objects SDK User Commands 04 \u2014\
+      \ Boto3 List S3 Objects / Sdk User Commands 04 Boto3 List S3 Objects Sdk User\
+      \ Commands 04 Boto3 List S3 Objects How do you use sdk user commands 04 boto3\
+      \ list s3 objects from bucket, 2, Executable Python relation function name is\
+      \ `main` named inputs: `bucket`; no justified final closure has been admitted\
+      \ yet"
+    givens:
+    - "SDK User Commands 04 \u2014 Boto3 List S3 Objects SDK User Commands 04 \u2014\
+      \ Boto3 List S3 Objects / Sdk User Commands 04 Boto3 List S3 Objects Sdk User\
+      \ Commands 04 Boto3 List S3 Objects How do you use sdk user commands 04 boto3\
+      \ list s3 objects from bucket"
+    - '2'
+    - 'Executable Python relation function name is `main` named inputs: `bucket`'
+    unknowns: []
+    missing_components:
+    - a justified final realization has not yet been produced
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - completion
+    origin_layers:
+    - model
+    degree: partial
+    remainder_shapes:
+    - missing
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair: []
+    full_repair:
+    - 'satisfy success condition: the response directly resolves the stated ask without
+      erasing material distinctions'
+    boundary_shape:
+    - d*
+    action_posture: direct_resolution
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Sdk User Commands 04 Boto3 List S3 Objects
+    title_depth_prefixes:
+    - Sdk User Commands 04 Boto3 List S3 Objects
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Sdk User Command 04 Boto3 List S3 Object
+    - "SDK User Commands 04 \u2014 Boto3 List S3 Objects / Sdk User Commands 04 Boto3\
+      \ List S3 Objects / Prefix"
+    composed_not: Sdk User Command 04 Boto3 List S3 Object
+    lookup_keys:
+    - sdk user command 04 boto3 list s3 object
+    - sdk user
+    - user command
+    - command 04
+    - 04 boto3
+    - boto3 list
+    - list s3
+    - s3 object
+    - sdk user command
+    - user command 04
+    - command 04 boto3
+    - 04 boto3 list
+    - boto3 list s3
+    - list s3 object
+    - sdk user command 04 boto3 list s3 object bucket prefix
+    - object bucket
+    - bucket prefix
+    - s3 object bucket
+    - object bucket prefix
+    - without reduc remainder item cannot clos with govern confidence
+    - without reduc remainder item cannot clo
+    - govern confidence
+    - without reduc
+    - reduc remainder
+    notation_yaml: |-
+      "How Do You Use Sdk User Commands 04 Boto3 List S3 Objects From Bucket Prefix":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Sdk User Commands 04 Boto3 List S3 Objects"
+          - "Components: Sdk User Command 04 Boto3 List S3 Object, SDK User Commands 04 \u2014 Boto3 List S3 Objects / Sdk User Commands 04 Boto3 List S3 Objects / Prefix"
+          - "Composition: Sdk User Command 04 Boto3 List S3 Object"
+          - "Title identity: Sdk User Commands 04 Boto3 List S3 Objects"
+          - "Title depth segments: Sdk User Commands 04 Boto3 List S3 Objects"
+          - "Title depth prefixes: Sdk User Commands 04 Boto3 List S3 Objects"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: SDK User Commands 04 \u2014 Boto3 List S3 Objects SDK User Commands 04 \u2014 Boto3 List S3 Objects / Sdk User Commands 04 Boto3 List S3 Objects Sdk User Commands 04 Boto3 List S3 Objects How do you use sdk user commands 04 boto3 list s3 objects from bucket, prefix? 2. Executable Python relation function name is `main` named inputs: `bucket`, `prefix` imports inside `main`: `boto3` return `return {\"status\": \"ok\", \"bucket\": bucket, \"prefix\": prefix, \"keys\": keys}` This capability should be learned as a reusable Python ability artifact."
+          - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+          - "Actual realization: the prompt surface is present; explicit givens are present: SDK User Commands 04 \u2014 Boto3 List S3 Objects SDK User Commands 04 \u2014 Boto3 List S3 Objects / Sdk User Commands 04 Boto3 List S3 Objects Sdk User Commands 04 Boto3 List S3 Objects How do you use sdk user commands 04 boto3 list s3 objects from bucket, 2, Executable Python relation function name is `main` named inputs: `bucket`; no justified final closure has been admitted yet"
+          - "Givens: SDK User Commands 04 \u2014 Boto3 List S3 Objects SDK User Commands 04 \u2014 Boto3 List S3 Objects / Sdk User Commands 04 Boto3 List S3 Objects Sdk User Commands 04 Boto3 List S3 Objects How do you use sdk user commands 04 boto3 list s3 objects from bucket, 2, Executable Python relation function name is `main` named inputs: `bucket`"
+          - "Missing components: a justified final realization has not yet been produced"
+          - "Misalignment types: completion"
+          - "Origin layers: model"
+          - "Degree: partial"
+          - "Remainder shapes: missing"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+          - "Action posture: direct_resolution"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - python3
+---
+schema: bssc_skill.v2
+kind: ability
+title: "SDK User Commands 05 \u2014 Boto3 Upload File To S3 / Sdk User Commands 05\
+  \ Boto3 Upload File To S3"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you use sdk user commands 05 boto3 upload file to s3 from local_path,
+  bucket, key?
+declaration:
+  intent: How do you use sdk user commands 05 boto3 upload file to s3 from local_path,
+    bucket, key?
+  inputs:
+    local_path: required input value
+    bucket: required input value
+    key: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  - communicate
+  authority_bounds:
+    execute:
+      scope: local_executor
+      target: python3_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+    communicate:
+      scope: local_executor
+      target: skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - local executor invocation
+  - network communication
+  persistence_behavior: none
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier2_connected
+  executor_framework: python3
+executor: python3
+entrypoint: main
+inputs:
+  local_path: required input value
+  bucket: required input value
+  key: required input value
+outputs:
+  result: execution result
+python: "# /// script\n# requires-python = \">=3.11\"\n# dependencies = [\"msgspec\"\
+  , \"orjson\"]\n# ///\n\nfrom __future__ import annotations\n\nimport argparse\n\
+  import sys\n\nimport msgspec\nimport orjson\n\n\nclass InputPayload(msgspec.Struct,\
+  \ kw_only=True):\n    payload: dict[str, object] = {}\n\n\nclass OutputPayload(msgspec.Struct,\
+  \ kw_only=True):\n    status: str\n    answer: str = \"\"\n    result: dict[str,\
+  \ object]\n    notes: list[str] = []\n\n\ndef _normalize_result(value: object) ->\
+  \ object:\n    if isinstance(value, float) and value.is_integer():\n        return\
+  \ int(value)\n    return value\n\ndef main(\n    local_path: str,\n    bucket: str,\n\
+  \    key: str,\n    *,\n    __dependencies__: tuple[str, ...] = (\"boto3\",),\n\
+  ) -> dict[str, str]:\n    import boto3\n\n    client = boto3.client(\"s3\")\n  \
+  \  client.upload_file(local_path, bucket, key)\n    return {\"status\": \"uploaded\"\
+  , \"local_path\": local_path, \"bucket\": bucket, \"key\": key}\n\ndef run(payload:\
+  \ InputPayload) -> OutputPayload:\n    \"\"\"SDK User Commands 05 \u2014 Boto3 Upload\
+  \ File To S3 / Sdk User Commands 05 Boto3 Upload File To S3: reuse when later prompts\
+  \ ask for sdk user commands 05 boto3 upload file to s3 under compatible inputs\"\
+  \"\"\n    result_value = main(local_path=payload.payload.get('local_path'), bucket=payload.payload.get('bucket'),\
+  \ key=payload.payload.get('key'))\n    normalized = _normalize_result(result_value)\n\
+  \    return OutputPayload(\n        status=\"ok\",\n        answer=str(normalized),\n\
+  \        result={\"result\": normalized},\n        notes=[],\n    )\n\n\ndef __bssc_cli_main__()\
+  \ -> None:\n    parser = argparse.ArgumentParser(description='SDK User Commands\
+  \ 05 \u2014 Boto3 Upload File To S3 / Sdk User Commands 05 Boto3 Upload File To\
+  \ S3')\n    parser.add_argument(\"--input-json\", help=\"Optional JSON payload.\
+  \ Prefer stdin when omitted.\")\n    args = parser.parse_args()\n    raw = args.input_json.encode(\"\
+  utf-8\") if args.input_json else sys.stdin.buffer.read()\n    payload = orjson.loads(raw)\
+  \ if raw else {}\n    typed_input = msgspec.convert({\"payload\": payload}, type=InputPayload)\n\
+  \    result = run(typed_input)\n    sys.stdout.buffer.write(orjson.dumps(msgspec.to_builtins(result),\
+  \ option=orjson.OPT_INDENT_2))\n    sys.stdout.buffer.write(b\"\\n\")\n\n\nif __name__\
+  \ == \"__main__\":\n    __bssc_cli_main__()"
+governance:
+  scope: reuse when later prompts ask for sdk user commands 05 boto3 upload file to
+    s3 under compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a'*
+  - b'*
+  - c'*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:33:08+00:00'
+  provenance:
+  - not_learn-from-markdown-05-learn-sdkuser-commands-bo_6ac350
+  - /Users/ravindranathakila/service/realized/trials/sdkuser/05_LEARN_SDKUSER_COMMANDS_BOTO3_UPLOAD_FILE.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for sdk user commands 05 boto3 upload
+      file to s3 under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Sdk User Commands 05 Boto3 Upload File To S3
+    encountered_not: Sdk User Commands 05 Boto3 Upload File To S3
+    goal: How do you use sdk user commands 05 boto3 upload file to s3 from local_path,
+      bucket, key?
+    intended_object: "SDK User Commands 05 \u2014 Boto3 Upload File To S3 SDK User\
+      \ Commands 05 \u2014 Boto3 Upload File To S3 / Sdk User Commands 05 Boto3 Upload\
+      \ File To S3 Sdk User Commands 05 Boto3 Upload File To S3 How do you use sdk\
+      \ user commands 05 boto3 upload file to s3 from local_path, bucket, key? 2.\
+      \ Executable Python relation function name is `main` named inputs: `local_path`,\
+      \ `bucket`, `key` imports inside `main`: `boto3` return `return {\"status\"\
+      : \"uploaded\", \"local_path\": local_path, \"bucket\": bucket, \"key\": key}`\
+      \ Uploading a file to S3 by local path, bucket, and key is a reusable Python\
+      \ SDK storage-write capability."
+    success_criteria:
+    - the response directly resolves the stated ask without erasing material distinctions
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ SDK User Commands 05 \u2014 Boto3 Upload File To S3 SDK User Commands 05 \u2014\
+      \ Boto3 Upload File To S3 / Sdk User Commands 05 Boto3 Upload File To S3 Sdk\
+      \ User Commands 05 Boto3 Upload File To S3 How do you use sdk user commands\
+      \ 05 boto3 upload file to s3 from local_path, 2, Executable Python relation\
+      \ function name is `main` named inputs: `local_path`; no justified final closure\
+      \ has been admitted yet"
+    givens:
+    - "SDK User Commands 05 \u2014 Boto3 Upload File To S3 SDK User Commands 05 \u2014\
+      \ Boto3 Upload File To S3 / Sdk User Commands 05 Boto3 Upload File To S3 Sdk\
+      \ User Commands 05 Boto3 Upload File To S3 How do you use sdk user commands\
+      \ 05 boto3 upload file to s3 from local_path"
+    - '2'
+    - 'Executable Python relation function name is `main` named inputs: `local_path`'
+    unknowns: []
+    missing_components:
+    - a justified final realization has not yet been produced
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - completion
+    origin_layers:
+    - model
+    degree: partial
+    remainder_shapes:
+    - missing
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair: []
+    full_repair:
+    - 'satisfy success condition: the response directly resolves the stated ask without
+      erasing material distinctions'
+    boundary_shape:
+    - d*
+    action_posture: direct_resolution
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Sdk User Commands 05 Boto3 Upload File To S3
+    title_depth_prefixes:
+    - Sdk User Commands 05 Boto3 Upload File To S3
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Sdk User Command 05 Boto3 Upload File S3
+    - "SDK User Commands 05 \u2014 Boto3 Upload File To S3 / Sdk User Commands 05\
+      \ Boto3 Upload File To S3 / Bucket"
+    - "SDK User Commands 05 \u2014 Boto3 Upload File To S3 / Sdk User Commands 05\
+      \ Boto3 Upload File To S3 / Key"
+    composed_not: Sdk User Command 05 Boto3 Upload File S3
+    lookup_keys:
+    - sdk user command 05 boto3 upload file s3
+    - sdk user
+    - user command
+    - command 05
+    - 05 boto3
+    - boto3 upload
+    - upload file
+    - file s3
+    - sdk user command
+    - user command 05
+    - command 05 boto3
+    - 05 boto3 upload
+    - boto3 upload file
+    - upload file s3
+    - sdk user command 05 boto3 upload file s3 local path bucket key
+    - s3 local
+    - local path
+    - path bucket
+    - bucket key
+    - file s3 local
+    - s3 local path
+    - local path bucket
+    - path bucket key
+    - without reduc remainder item cannot clos with govern confidence
+    notation_yaml: |-
+      "How Do You Use Sdk User Commands 05 Boto3 Upload File To S3 From Local Path Bucket Key":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Sdk User Commands 05 Boto3 Upload File To S3"
+          - "Components: Sdk User Command 05 Boto3 Upload File S3, SDK User Commands 05 \u2014 Boto3 Upload File To S3 / Sdk User Commands 05 Boto3 Upload File To S3 / Bucket, SDK User Commands 05 \u2014 Boto3 Upload File To S3 / Sdk User Commands 05 Boto3 Upload File To S3 / Key"
+          - "Composition: Sdk User Command 05 Boto3 Upload File S3"
+          - "Title identity: Sdk User Commands 05 Boto3 Upload File To S3"
+          - "Title depth segments: Sdk User Commands 05 Boto3 Upload File To S3"
+          - "Title depth prefixes: Sdk User Commands 05 Boto3 Upload File To S3"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: SDK User Commands 05 \u2014 Boto3 Upload File To S3 SDK User Commands 05 \u2014 Boto3 Upload File To S3 / Sdk User Commands 05 Boto3 Upload File To S3 Sdk User Commands 05 Boto3 Upload File To S3 How do you use sdk user commands 05 boto3 upload file to s3 from local_path, bucket, key? 2. Executable Python relation function name is `main` named inputs: `local_path`, `bucket`, `key` imports inside `main`: `boto3` return `return {\"status\": \"uploaded\", \"local_path\": local_path, \"bucket\": bucket, \"key\": key}` Uploading a file to S3 by local path, bucket, and key is a reusable Python SDK storage-write capability."
+          - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+          - "Actual realization: the prompt surface is present; explicit givens are present: SDK User Commands 05 \u2014 Boto3 Upload File To S3 SDK User Commands 05 \u2014 Boto3 Upload File To S3 / Sdk User Commands 05 Boto3 Upload File To S3 Sdk User Commands 05 Boto3 Upload File To S3 How do you use sdk user commands 05 boto3 upload file to s3 from local_path, 2, Executable Python relation function name is `main` named inputs: `local_path`; no justified final closure has been admitted yet"
+          - "Givens: SDK User Commands 05 \u2014 Boto3 Upload File To S3 SDK User Commands 05 \u2014 Boto3 Upload File To S3 / Sdk User Commands 05 Boto3 Upload File To S3 Sdk User Commands 05 Boto3 Upload File To S3 How do you use sdk user commands 05 boto3 upload file to s3 from local_path, 2, Executable Python relation function name is `main` named inputs: `local_path`"
+          - "Missing components: a justified final realization has not yet been produced"
+          - "Misalignment types: completion"
+          - "Origin layers: model"
+          - "Degree: partial"
+          - "Remainder shapes: missing"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+          - "Action posture: direct_resolution"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - python3
+---
+schema: bssc_skill.v2
+kind: ability
+title: "SDK User Commands 06 \u2014 Google Cloud Storage Download Blob / Sdk User\
+  \ Commands 06 Google Cloud Storage Download Blob"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you use sdk user commands 06 google cloud storage download blob from
+  bucket, blob_name, destination?
+declaration:
+  intent: How do you use sdk user commands 06 google cloud storage download blob from
+    bucket, blob_name, destination?
+  inputs:
+    bucket: required input value
+    blob_name: required input value
+    destination: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  - communicate
+  authority_bounds:
+    execute:
+      scope: local_executor
+      target: python3_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+    communicate:
+      scope: local_executor
+      target: skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - local executor invocation
+  - network communication
+  persistence_behavior: none
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier2_connected
+  executor_framework: python3
+executor: python3
+entrypoint: main
+inputs:
+  bucket: required input value
+  blob_name: required input value
+  destination: required input value
+outputs:
+  result: execution result
+python: "# /// script\n# requires-python = \">=3.11\"\n# dependencies = [\"msgspec\"\
+  , \"orjson\"]\n# ///\n\nfrom __future__ import annotations\n\nimport argparse\n\
+  import sys\n\nimport msgspec\nimport orjson\n\n\nclass InputPayload(msgspec.Struct,\
+  \ kw_only=True):\n    payload: dict[str, object] = {}\n\n\nclass OutputPayload(msgspec.Struct,\
+  \ kw_only=True):\n    status: str\n    answer: str = \"\"\n    result: dict[str,\
+  \ object]\n    notes: list[str] = []\n\n\ndef _normalize_result(value: object) ->\
+  \ object:\n    if isinstance(value, float) and value.is_integer():\n        return\
+  \ int(value)\n    return value\n\ndef main(\n    bucket: str,\n    blob_name: str,\n\
+  \    destination: str,\n    *,\n    __dependencies__: tuple[str, ...] = (\"google-cloud-storage\"\
+  ,),\n) -> dict[str, str]:\n    from google.cloud import storage\n\n    client =\
+  \ storage.Client()\n    bucket_ref = client.bucket(bucket)\n    blob = bucket_ref.blob(blob_name)\n\
+  \    blob.download_to_filename(destination)\n    return {\"status\": \"downloaded\"\
+  , \"bucket\": bucket, \"blob_name\": blob_name, \"destination\": destination}\n\n\
+  def run(payload: InputPayload) -> OutputPayload:\n    \"\"\"SDK User Commands 06\
+  \ \u2014 Google Cloud Storage Download Blob / Sdk User Commands 06 Google Cloud\
+  \ Storage Download Blob: reuse when later prompts ask for sdk user commands 06 google\
+  \ cloud storage download blob under compatible inputs\"\"\"\n    result_value =\
+  \ main(bucket=payload.payload.get('bucket'), blob_name=payload.payload.get('blob_name'),\
+  \ destination=payload.payload.get('destination'))\n    normalized = _normalize_result(result_value)\n\
+  \    return OutputPayload(\n        status=\"ok\",\n        answer=str(normalized),\n\
+  \        result={\"result\": normalized},\n        notes=[],\n    )\n\n\ndef __bssc_cli_main__()\
+  \ -> None:\n    parser = argparse.ArgumentParser(description='SDK User Commands\
+  \ 06 \u2014 Google Cloud Storage Download Blob / Sdk User Commands 06 Google Cloud\
+  \ Storage Download Blob')\n    parser.add_argument(\"--input-json\", help=\"Optional\
+  \ JSON payload. Prefer stdin when omitted.\")\n    args = parser.parse_args()\n\
+  \    raw = args.input_json.encode(\"utf-8\") if args.input_json else sys.stdin.buffer.read()\n\
+  \    payload = orjson.loads(raw) if raw else {}\n    typed_input = msgspec.convert({\"\
+  payload\": payload}, type=InputPayload)\n    result = run(typed_input)\n    sys.stdout.buffer.write(orjson.dumps(msgspec.to_builtins(result),\
+  \ option=orjson.OPT_INDENT_2))\n    sys.stdout.buffer.write(b\"\\n\")\n\n\nif __name__\
+  \ == \"__main__\":\n    __bssc_cli_main__()"
+governance:
+  scope: reuse when later prompts ask for sdk user commands 06 google cloud storage
+    download blob under compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a*
+  - b*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:33:18+00:00'
+  provenance:
+  - not_learn-from-markdown-06-learn-sdkuser-commands-gc_316af5
+  - /Users/ravindranathakila/service/realized/trials/sdkuser/06_LEARN_SDKUSER_COMMANDS_GCS_DOWNLOAD_BLOB.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for sdk user commands 06 google cloud
+      storage download blob under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Sdk User Commands 06 Google Cloud Storage Download Blob
+    encountered_not: Sdk User Commands 06 Google Cloud Storage Download Blob
+    goal: How do you use sdk user commands 06 google cloud storage download blob from
+      bucket, blob_name, destination?
+    intended_object: "SDK User Commands 06 \u2014 Google Cloud Storage Download Blob\
+      \ SDK User Commands 06 \u2014 Google Cloud Storage Download Blob / Sdk User\
+      \ Commands 06 Google Cloud Storage Download Blob Sdk User Commands 06 Google\
+      \ Cloud Storage Download Blob How do you use sdk user commands 06 google cloud\
+      \ storage download blob from bucket, blob_name, destination? 2. Executable Python\
+      \ relation function name is `main` named inputs: `bucket`, `blob_name`, `destination`\
+      \ imports inside `main`: `google.cloud` return `return {\"status\": \"downloaded\"\
+      , \"bucket\": bucket, \"blob_name\": blob_name, \"destination\": destination}`\
+      \ This capability should be learned as a reusable Python ability artifact."
+    success_criteria:
+    - the response directly resolves the stated ask without erasing material distinctions
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ SDK User Commands 06 \u2014 Google Cloud Storage Download Blob SDK User Commands\
+      \ 06 \u2014 Google Cloud Storage Download Blob / Sdk User Commands 06 Google\
+      \ Cloud Storage Download Blob Sdk User Commands 06 Google Cloud Storage Download\
+      \ Blob How do you use sdk user commands 06 google cloud storage download blob\
+      \ from bucket, 2, Executable Python relation function name is `main` named inputs:\
+      \ `bucket`; no justified final closure has been admitted yet"
+    givens:
+    - "SDK User Commands 06 \u2014 Google Cloud Storage Download Blob SDK User Commands\
+      \ 06 \u2014 Google Cloud Storage Download Blob / Sdk User Commands 06 Google\
+      \ Cloud Storage Download Blob Sdk User Commands 06 Google Cloud Storage Download\
+      \ Blob How do you use sdk user commands 06 google cloud storage download blob\
+      \ from bucket"
+    - '2'
+    - 'Executable Python relation function name is `main` named inputs: `bucket`'
+    unknowns: []
+    missing_components:
+    - a justified final realization has not yet been produced
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - completion
+    origin_layers:
+    - model
+    degree: partial
+    remainder_shapes:
+    - missing
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair: []
+    full_repair:
+    - 'satisfy success condition: the response directly resolves the stated ask without
+      erasing material distinctions'
+    boundary_shape:
+    - d*
+    action_posture: direct_resolution
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Sdk User Commands 06 Google Cloud Storage Download Blob
+    title_depth_prefixes:
+    - Sdk User Commands 06 Google Cloud Storage Download Blob
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Sdk User Command 06 Google Cloud Storage Download Blob
+    - "SDK User Commands 06 \u2014 Google Cloud Storage Download Blob / Sdk User Commands\
+      \ 06 Google Cloud Storage Download Blob / Blob"
+    - "SDK User Commands 06 \u2014 Google Cloud Storage Download Blob / Sdk User Commands\
+      \ 06 Google Cloud Storage Download Blob / Destination"
+    composed_not: Sdk User Command 06 Google Cloud Storage Download Blob
+    lookup_keys:
+    - sdk user command 06 google cloud storage download blob
+    - sdk user
+    - user command
+    - command 06
+    - 06 google
+    - google cloud
+    - cloud storage
+    - storage download
+    - download blob
+    - sdk user command
+    - user command 06
+    - command 06 google
+    - 06 google cloud
+    - google cloud storage
+    - cloud storage download
+    - storage download blob
+    - sdk user command 06 google cloud storage download blob bucket blob destination
+    - blob bucket
+    - bucket blob
+    - blob destination
+    - download blob bucket
+    - blob bucket blob
+    - bucket blob destination
+    - without reduc remainder item cannot clos with govern confidence
+    notation_yaml: |-
+      "How Do You Use Sdk User Commands 06 Google Cloud Storage Download Blob From Bucket Blob Name Destination":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Sdk User Commands 06 Google Cloud Storage Download Blob"
+          - "Components: Sdk User Command 06 Google Cloud Storage Download Blob, SDK User Commands 06 \u2014 Google Cloud Storage Download Blob / Sdk User Commands 06 Google Cloud Storage Download Blob / Blob, SDK User Commands 06 \u2014 Google Cloud Storage Download Blob / Sdk User Commands 06 Google Cloud Storage Download Blob / Destination"
+          - "Composition: Sdk User Command 06 Google Cloud Storage Download Blob"
+          - "Title identity: Sdk User Commands 06 Google Cloud Storage Download Blob"
+          - "Title depth segments: Sdk User Commands 06 Google Cloud Storage Download Blob"
+          - "Title depth prefixes: Sdk User Commands 06 Google Cloud Storage Download Blob"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: SDK User Commands 06 \u2014 Google Cloud Storage Download Blob SDK User Commands 06 \u2014 Google Cloud Storage Download Blob / Sdk User Commands 06 Google Cloud Storage Download Blob Sdk User Commands 06 Google Cloud Storage Download Blob How do you use sdk user commands 06 google cloud storage download blob from bucket, blob_name, destination? 2. Executable Python relation function name is `main` named inputs: `bucket`, `blob_name`, `destination` imports inside `main`: `google.cloud` return `return {\"status\": \"downloaded\", \"bucket\": bucket, \"blob_name\": blob_name, \"destination\": destination}` This capability should be learned as a reusable Python ability artifact."
+          - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+          - "Actual realization: the prompt surface is present; explicit givens are present: SDK User Commands 06 \u2014 Google Cloud Storage Download Blob SDK User Commands 06 \u2014 Google Cloud Storage Download Blob / Sdk User Commands 06 Google Cloud Storage Download Blob Sdk User Commands 06 Google Cloud Storage Download Blob How do you use sdk user commands 06 google cloud storage download blob from bucket, 2, Executable Python relation function name is `main` named inputs: `bucket`; no justified final closure has been admitted yet"
+          - "Givens: SDK User Commands 06 \u2014 Google Cloud Storage Download Blob SDK User Commands 06 \u2014 Google Cloud Storage Download Blob / Sdk User Commands 06 Google Cloud Storage Download Blob Sdk User Commands 06 Google Cloud Storage Download Blob How do you use sdk user commands 06 google cloud storage download blob from bucket, 2, Executable Python relation function name is `main` named inputs: `bucket`"
+          - "Missing components: a justified final realization has not yet been produced"
+          - "Misalignment types: completion"
+          - "Origin layers: model"
+          - "Degree: partial"
+          - "Remainder shapes: missing"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+          - "Action posture: direct_resolution"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - python3
+---
+schema: bssc_skill.v2
+kind: ability
+title: "SDK User Commands 07 \u2014 Slack Send Message / Sdk User Commands 07 Slack\
+  \ Send Message"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you use sdk user commands 07 slack send message from token, channel,
+  text?
+declaration:
+  intent: How do you use sdk user commands 07 slack send message from token, channel,
+    text?
+  inputs:
+    token: required input value
+    channel: required input value
+    text: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  - communicate
+  authority_bounds:
+    execute:
+      scope: local_executor
+      target: python3_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+    communicate:
+      scope: local_executor
+      target: skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - local executor invocation
+  - network communication
+  persistence_behavior: none
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier2_connected
+  executor_framework: python3
+executor: python3
+entrypoint: main
+inputs:
+  token: required input value
+  channel: required input value
+  text: required input value
+outputs:
+  result: execution result
+python: "# /// script\n# requires-python = \">=3.11\"\n# dependencies = [\"msgspec\"\
+  , \"orjson\"]\n# ///\n\nfrom __future__ import annotations\n\nimport argparse\n\
+  import sys\n\nimport msgspec\nimport orjson\n\n\nclass InputPayload(msgspec.Struct,\
+  \ kw_only=True):\n    payload: dict[str, object] = {}\n\n\nclass OutputPayload(msgspec.Struct,\
+  \ kw_only=True):\n    status: str\n    answer: str = \"\"\n    result: dict[str,\
+  \ object]\n    notes: list[str] = []\n\n\ndef _normalize_result(value: object) ->\
+  \ object:\n    if isinstance(value, float) and value.is_integer():\n        return\
+  \ int(value)\n    return value\n\ndef main(\n    token: str,\n    channel: str,\n\
+  \    text: str,\n    *,\n    __dependencies__: tuple[str, ...] = (\"slack_sdk\"\
+  ,),\n) -> dict[str, object]:\n    from slack_sdk import WebClient\n\n    client\
+  \ = WebClient(token=token)\n    response = client.chat_postMessage(channel=channel,\
+  \ text=text)\n    return {\"status\": \"sent\", \"channel\": channel, \"timestamp\"\
+  : response[\"ts\"]}\n\ndef run(payload: InputPayload) -> OutputPayload:\n    \"\"\
+  \"SDK User Commands 07 \u2014 Slack Send Message / Sdk User Commands 07 Slack Send\
+  \ Message: reuse when later prompts ask for sdk user commands 07 slack send message\
+  \ under compatible inputs\"\"\"\n    result_value = main(token=payload.payload.get('token'),\
+  \ channel=payload.payload.get('channel'), text=payload.payload.get('text'))\n  \
+  \  normalized = _normalize_result(result_value)\n    return OutputPayload(\n   \
+  \     status=\"ok\",\n        answer=str(normalized),\n        result={\"result\"\
+  : normalized},\n        notes=[],\n    )\n\n\ndef __bssc_cli_main__() -> None:\n\
+  \    parser = argparse.ArgumentParser(description='SDK User Commands 07 \u2014 Slack\
+  \ Send Message / Sdk User Commands 07 Slack Send Message')\n    parser.add_argument(\"\
+  --input-json\", help=\"Optional JSON payload. Prefer stdin when omitted.\")\n  \
+  \  args = parser.parse_args()\n    raw = args.input_json.encode(\"utf-8\") if args.input_json\
+  \ else sys.stdin.buffer.read()\n    payload = orjson.loads(raw) if raw else {}\n\
+  \    typed_input = msgspec.convert({\"payload\": payload}, type=InputPayload)\n\
+  \    result = run(typed_input)\n    sys.stdout.buffer.write(orjson.dumps(msgspec.to_builtins(result),\
+  \ option=orjson.OPT_INDENT_2))\n    sys.stdout.buffer.write(b\"\\n\")\n\n\nif __name__\
+  \ == \"__main__\":\n    __bssc_cli_main__()"
+governance:
+  scope: reuse when later prompts ask for sdk user commands 07 slack send message
+    under compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a*
+  - c*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:33:28+00:00'
+  provenance:
+  - not_learn-from-markdown-07-learn-sdkuser-commands-sl_d35453
+  - /Users/ravindranathakila/service/realized/trials/sdkuser/07_LEARN_SDKUSER_COMMANDS_SLACK_SEND_MESSAGE.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for sdk user commands 07 slack send
+      message under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Sdk User Commands 07 Slack Send Message
+    encountered_not: Sdk User Commands 07 Slack Send Message
+    goal: How do you use sdk user commands 07 slack send message from token, channel,
+      text?
+    intended_object: "SDK User Commands 07 \u2014 Slack Send Message SDK User Commands\
+      \ 07 \u2014 Slack Send Message / Sdk User Commands 07 Slack Send Message Sdk\
+      \ User Commands 07 Slack Send Message How do you use sdk user commands 07 slack\
+      \ send message from token, channel, text? 2. Executable Python relation function\
+      \ name is `main` named inputs: `token`, `channel`, `text` imports inside `main`:\
+      \ `slack_sdk` return `return {\"status\": \"sent\", \"channel\": channel, \"\
+      timestamp\": response[\"ts\"]}` This capability should be learned as a reusable\
+      \ Python ability artifact."
+    success_criteria:
+    - the response directly resolves the stated ask without erasing material distinctions
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ SDK User Commands 07 \u2014 Slack Send Message SDK User Commands 07 \u2014\
+      \ Slack Send Message / Sdk User Commands 07 Slack Send Message Sdk User Commands\
+      \ 07 Slack Send Message How do you use sdk user commands 07 slack send message\
+      \ from token, 2, Executable Python relation function name is `main` named inputs:\
+      \ `token`; no justified final closure has been admitted yet"
+    givens:
+    - "SDK User Commands 07 \u2014 Slack Send Message SDK User Commands 07 \u2014\
+      \ Slack Send Message / Sdk User Commands 07 Slack Send Message Sdk User Commands\
+      \ 07 Slack Send Message How do you use sdk user commands 07 slack send message\
+      \ from token"
+    - '2'
+    - 'Executable Python relation function name is `main` named inputs: `token`'
+    unknowns: []
+    missing_components:
+    - a justified final realization has not yet been produced
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - completion
+    origin_layers:
+    - model
+    degree: partial
+    remainder_shapes:
+    - missing
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair: []
+    full_repair:
+    - 'satisfy success condition: the response directly resolves the stated ask without
+      erasing material distinctions'
+    boundary_shape:
+    - d*
+    action_posture: direct_resolution
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Sdk User Commands 07 Slack Send Message
+    title_depth_prefixes:
+    - Sdk User Commands 07 Slack Send Message
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Sdk User Command 07 Slack Send Message
+    - "SDK User Commands 07 \u2014 Slack Send Message / Sdk User Commands 07 Slack\
+      \ Send Message / Channel"
+    - "SDK User Commands 07 \u2014 Slack Send Message / Sdk User Commands 07 Slack\
+      \ Send Message / Text"
+    composed_not: Sdk User Command 07 Slack Send Message
+    lookup_keys:
+    - sdk user command 07 slack send message
+    - sdk user
+    - user command
+    - command 07
+    - 07 slack
+    - slack send
+    - send message
+    - sdk user command
+    - user command 07
+    - command 07 slack
+    - 07 slack send
+    - slack send message
+    - sdk user command 07 slack send message token channel text
+    - message token
+    - token channel
+    - channel text
+    - send message token
+    - message token channel
+    - token channel text
+    - without reduc remainder item cannot clos with govern confidence
+    - without reduc remainder item cannot clo
+    - govern confidence
+    - without reduc
+    - reduc remainder
+    notation_yaml: |-
+      "How Do You Use Sdk User Commands 07 Slack Send Message From Token Channel Text":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Sdk User Commands 07 Slack Send Message"
+          - "Components: Sdk User Command 07 Slack Send Message, SDK User Commands 07 \u2014 Slack Send Message / Sdk User Commands 07 Slack Send Message / Channel, SDK User Commands 07 \u2014 Slack Send Message / Sdk User Commands 07 Slack Send Message / Text"
+          - "Composition: Sdk User Command 07 Slack Send Message"
+          - "Title identity: Sdk User Commands 07 Slack Send Message"
+          - "Title depth segments: Sdk User Commands 07 Slack Send Message"
+          - "Title depth prefixes: Sdk User Commands 07 Slack Send Message"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: SDK User Commands 07 \u2014 Slack Send Message SDK User Commands 07 \u2014 Slack Send Message / Sdk User Commands 07 Slack Send Message Sdk User Commands 07 Slack Send Message How do you use sdk user commands 07 slack send message from token, channel, text? 2. Executable Python relation function name is `main` named inputs: `token`, `channel`, `text` imports inside `main`: `slack_sdk` return `return {\"status\": \"sent\", \"channel\": channel, \"timestamp\": response[\"ts\"]}` This capability should be learned as a reusable Python ability artifact."
+          - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+          - "Actual realization: the prompt surface is present; explicit givens are present: SDK User Commands 07 \u2014 Slack Send Message SDK User Commands 07 \u2014 Slack Send Message / Sdk User Commands 07 Slack Send Message Sdk User Commands 07 Slack Send Message How do you use sdk user commands 07 slack send message from token, 2, Executable Python relation function name is `main` named inputs: `token`; no justified final closure has been admitted yet"
+          - "Givens: SDK User Commands 07 \u2014 Slack Send Message SDK User Commands 07 \u2014 Slack Send Message / Sdk User Commands 07 Slack Send Message Sdk User Commands 07 Slack Send Message How do you use sdk user commands 07 slack send message from token, 2, Executable Python relation function name is `main` named inputs: `token`"
+          - "Missing components: a justified final realization has not yet been produced"
+          - "Misalignment types: completion"
+          - "Origin layers: model"
+          - "Degree: partial"
+          - "Remainder shapes: missing"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+          - "Action posture: direct_resolution"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - python3
+---
+schema: bssc_skill.v2
+kind: ability
+title: "SDK User Commands 08 \u2014 GitHub List Open Issues / Sdk User Commands 08\
+  \ Github List Open Issues"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you use sdk user commands 08 github list open issues from token,
+  repo_name?
+declaration:
+  intent: How do you use sdk user commands 08 github list open issues from token,
+    repo_name?
+  inputs:
+    token: required input value
+    repo_name: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  - communicate
+  authority_bounds:
+    execute:
+      scope: local_executor
+      target: python3_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+    communicate:
+      scope: local_executor
+      target: skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - local executor invocation
+  - network communication
+  persistence_behavior: none
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier2_connected
+  executor_framework: python3
+executor: python3
+entrypoint: main
+inputs:
+  token: required input value
+  repo_name: required input value
+outputs:
+  result: execution result
+python: "# /// script\n# requires-python = \">=3.11\"\n# dependencies = [\"msgspec\"\
+  , \"orjson\"]\n# ///\n\nfrom __future__ import annotations\n\nimport argparse\n\
+  import sys\n\nimport msgspec\nimport orjson\n\n\nclass InputPayload(msgspec.Struct,\
+  \ kw_only=True):\n    payload: dict[str, object] = {}\n\n\nclass OutputPayload(msgspec.Struct,\
+  \ kw_only=True):\n    status: str\n    answer: str = \"\"\n    result: dict[str,\
+  \ object]\n    notes: list[str] = []\n\n\ndef _normalize_result(value: object) ->\
+  \ object:\n    if isinstance(value, float) and value.is_integer():\n        return\
+  \ int(value)\n    return value\n\ndef main(\n    token: str,\n    repo_name: str,\n\
+  \    *,\n    __dependencies__: tuple[str, ...] = (\"PyGithub\",),\n) -> dict[str,\
+  \ object]:\n    from github import Github\n\n    client = Github(token)\n    repo\
+  \ = client.get_repo(repo_name)\n    issues = [{\"number\": issue.number, \"title\"\
+  : issue.title} for issue in repo.get_issues(state=\"open\")]\n    return {\"status\"\
+  : \"ok\", \"repo_name\": repo_name, \"issues\": issues}\n\ndef run(payload: InputPayload)\
+  \ -> OutputPayload:\n    \"\"\"SDK User Commands 08 \u2014 GitHub List Open Issues\
+  \ / Sdk User Commands 08 Github List Open Issues: reuse when later prompts ask for\
+  \ sdk user commands 08 github list open issues under compatible inputs\"\"\"\n \
+  \   result_value = main(token=payload.payload.get('token'), repo_name=payload.payload.get('repo_name'))\n\
+  \    normalized = _normalize_result(result_value)\n    return OutputPayload(\n \
+  \       status=\"ok\",\n        answer=str(normalized),\n        result={\"result\"\
+  : normalized},\n        notes=[],\n    )\n\n\ndef __bssc_cli_main__() -> None:\n\
+  \    parser = argparse.ArgumentParser(description='SDK User Commands 08 \u2014 GitHub\
+  \ List Open Issues / Sdk User Commands 08 Github List Open Issues')\n    parser.add_argument(\"\
+  --input-json\", help=\"Optional JSON payload. Prefer stdin when omitted.\")\n  \
+  \  args = parser.parse_args()\n    raw = args.input_json.encode(\"utf-8\") if args.input_json\
+  \ else sys.stdin.buffer.read()\n    payload = orjson.loads(raw) if raw else {}\n\
+  \    typed_input = msgspec.convert({\"payload\": payload}, type=InputPayload)\n\
+  \    result = run(typed_input)\n    sys.stdout.buffer.write(orjson.dumps(msgspec.to_builtins(result),\
+  \ option=orjson.OPT_INDENT_2))\n    sys.stdout.buffer.write(b\"\\n\")\n\n\nif __name__\
+  \ == \"__main__\":\n    __bssc_cli_main__()"
+governance:
+  scope: reuse when later prompts ask for sdk user commands 08 github list open issues
+    under compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a*
+  - b*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:33:38+00:00'
+  provenance:
+  - not_learn-from-markdown-08-learn-sdkuser-commands-gi_ff1d23
+  - /Users/ravindranathakila/service/realized/trials/sdkuser/08_LEARN_SDKUSER_COMMANDS_GITHUB_LIST_ISSUES.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for sdk user commands 08 github list
+      open issues under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Sdk User Commands 08 Github List Open Issues
+    encountered_not: Sdk User Commands 08 Github List Open Issues
+    goal: How do you use sdk user commands 08 github list open issues from token,
+      repo_name?
+    intended_object: "SDK User Commands 08 \u2014 GitHub List Open Issues SDK User\
+      \ Commands 08 \u2014 GitHub List Open Issues / Sdk User Commands 08 Github List\
+      \ Open Issues Sdk User Commands 08 Github List Open Issues How do you use sdk\
+      \ user commands 08 github list open issues from token, repo_name? 2. Executable\
+      \ Python relation function name is `main` named inputs: `token`, `repo_name`\
+      \ imports inside `main`: `github` return `return {\"status\": \"ok\", \"repo_name\"\
+      : repo_name, \"issues\": issues}` This capability should be learned as a reusable\
+      \ Python ability artifact."
+    success_criteria:
+    - the response directly resolves the stated ask without erasing material distinctions
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ SDK User Commands 08 \u2014 GitHub List Open Issues SDK User Commands 08 \u2014\
+      \ GitHub List Open Issues / Sdk User Commands 08 Github List Open Issues Sdk\
+      \ User Commands 08 Github List Open Issues How do you use sdk user commands\
+      \ 08 github list open issues from token, 2, Executable Python relation function\
+      \ name is `main` named inputs: `token`; no justified final closure has been\
+      \ admitted yet"
+    givens:
+    - "SDK User Commands 08 \u2014 GitHub List Open Issues SDK User Commands 08 \u2014\
+      \ GitHub List Open Issues / Sdk User Commands 08 Github List Open Issues Sdk\
+      \ User Commands 08 Github List Open Issues How do you use sdk user commands\
+      \ 08 github list open issues from token"
+    - '2'
+    - 'Executable Python relation function name is `main` named inputs: `token`'
+    unknowns: []
+    missing_components:
+    - a justified final realization has not yet been produced
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - completion
+    origin_layers:
+    - model
+    degree: partial
+    remainder_shapes:
+    - missing
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair: []
+    full_repair:
+    - 'satisfy success condition: the response directly resolves the stated ask without
+      erasing material distinctions'
+    boundary_shape:
+    - d*
+    action_posture: direct_resolution
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Sdk User Commands 08 Github List Open Issues
+    title_depth_prefixes:
+    - Sdk User Commands 08 Github List Open Issues
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Sdk User Command 08 Github List Open Issue
+    - "SDK User Commands 08 \u2014 GitHub List Open Issues / Sdk User Commands 08\
+      \ Github List Open Issues / Repo"
+    composed_not: Sdk User Command 08 Github List Open Issue
+    lookup_keys:
+    - sdk user command 08 github list open issue
+    - sdk user
+    - user command
+    - command 08
+    - 08 github
+    - github list
+    - list open
+    - open issue
+    - sdk user command
+    - user command 08
+    - command 08 github
+    - 08 github list
+    - github list open
+    - list open issue
+    - sdk user command 08 github list open issue token repo
+    - issue token
+    - token repo
+    - open issue token
+    - issue token repo
+    - without reduc remainder item cannot clos with govern confidence
+    - without reduc remainder item cannot clo
+    - govern confidence
+    - without reduc
+    - reduc remainder
+    notation_yaml: |-
+      "How Do You Use Sdk User Commands 08 Github List Open Issues From Token Repo Name":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Sdk User Commands 08 Github List Open Issues"
+          - "Components: Sdk User Command 08 Github List Open Issue, SDK User Commands 08 \u2014 GitHub List Open Issues / Sdk User Commands 08 Github List Open Issues / Repo"
+          - "Composition: Sdk User Command 08 Github List Open Issue"
+          - "Title identity: Sdk User Commands 08 Github List Open Issues"
+          - "Title depth segments: Sdk User Commands 08 Github List Open Issues"
+          - "Title depth prefixes: Sdk User Commands 08 Github List Open Issues"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: SDK User Commands 08 \u2014 GitHub List Open Issues SDK User Commands 08 \u2014 GitHub List Open Issues / Sdk User Commands 08 Github List Open Issues Sdk User Commands 08 Github List Open Issues How do you use sdk user commands 08 github list open issues from token, repo_name? 2. Executable Python relation function name is `main` named inputs: `token`, `repo_name` imports inside `main`: `github` return `return {\"status\": \"ok\", \"repo_name\": repo_name, \"issues\": issues}` This capability should be learned as a reusable Python ability artifact."
+          - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+          - "Actual realization: the prompt surface is present; explicit givens are present: SDK User Commands 08 \u2014 GitHub List Open Issues SDK User Commands 08 \u2014 GitHub List Open Issues / Sdk User Commands 08 Github List Open Issues Sdk User Commands 08 Github List Open Issues How do you use sdk user commands 08 github list open issues from token, 2, Executable Python relation function name is `main` named inputs: `token`; no justified final closure has been admitted yet"
+          - "Givens: SDK User Commands 08 \u2014 GitHub List Open Issues SDK User Commands 08 \u2014 GitHub List Open Issues / Sdk User Commands 08 Github List Open Issues Sdk User Commands 08 Github List Open Issues How do you use sdk user commands 08 github list open issues from token, 2, Executable Python relation function name is `main` named inputs: `token`"
+          - "Missing components: a justified final realization has not yet been produced"
+          - "Misalignment types: completion"
+          - "Origin layers: model"
+          - "Degree: partial"
+          - "Remainder shapes: missing"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+          - "Action posture: direct_resolution"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - python3
+---
+schema: bssc_skill.v2
+kind: ability
+title: "SDK User Commands 09 \u2014 Kubernetes List Pods / Sdk User Commands 09 Kubernetes\
+  \ List Pods"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you use sdk user commands 09 kubernetes list pods from namespace?
+declaration:
+  intent: How do you use sdk user commands 09 kubernetes list pods from namespace?
+  inputs:
+    namespace: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  authority_bounds:
+    execute:
+      scope: local_executor
+      target: python3_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - local executor invocation
+  persistence_behavior: none
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier1_bounded_transform
+  executor_framework: python3
+executor: python3
+entrypoint: main
+inputs:
+  namespace: required input value
+outputs:
+  result: execution result
+python: "# /// script\n# requires-python = \">=3.11\"\n# dependencies = [\"msgspec\"\
+  , \"orjson\"]\n# ///\n\nfrom __future__ import annotations\n\nimport argparse\n\
+  import sys\n\nimport msgspec\nimport orjson\n\n\nclass InputPayload(msgspec.Struct,\
+  \ kw_only=True):\n    payload: dict[str, object] = {}\n\n\nclass OutputPayload(msgspec.Struct,\
+  \ kw_only=True):\n    status: str\n    answer: str = \"\"\n    result: dict[str,\
+  \ object]\n    notes: list[str] = []\n\n\ndef _normalize_result(value: object) ->\
+  \ object:\n    if isinstance(value, float) and value.is_integer():\n        return\
+  \ int(value)\n    return value\n\ndef main(\n    namespace: str,\n    *,\n    __dependencies__:\
+  \ tuple[str, ...] = (\"kubernetes\",),\n) -> dict[str, object]:\n    from kubernetes\
+  \ import client, config\n\n    config.load_kube_config()\n    api = client.CoreV1Api()\n\
+  \    pods = api.list_namespaced_pod(namespace=namespace)\n    names = [item.metadata.name\
+  \ for item in pods.items]\n    return {\"status\": \"ok\", \"namespace\": namespace,\
+  \ \"pods\": names}\n\ndef run(payload: InputPayload) -> OutputPayload:\n    \"\"\
+  \"SDK User Commands 09 \u2014 Kubernetes List Pods / Sdk User Commands 09 Kubernetes\
+  \ List Pods: reuse when later prompts ask for sdk user commands 09 kubernetes list\
+  \ pods under compatible inputs\"\"\"\n    result_value = main(namespace=payload.payload.get('namespace'))\n\
+  \    normalized = _normalize_result(result_value)\n    return OutputPayload(\n \
+  \       status=\"ok\",\n        answer=str(normalized),\n        result={\"result\"\
+  : normalized},\n        notes=[],\n    )\n\n\ndef __bssc_cli_main__() -> None:\n\
+  \    parser = argparse.ArgumentParser(description='SDK User Commands 09 \u2014 Kubernetes\
+  \ List Pods / Sdk User Commands 09 Kubernetes List Pods')\n    parser.add_argument(\"\
+  --input-json\", help=\"Optional JSON payload. Prefer stdin when omitted.\")\n  \
+  \  args = parser.parse_args()\n    raw = args.input_json.encode(\"utf-8\") if args.input_json\
+  \ else sys.stdin.buffer.read()\n    payload = orjson.loads(raw) if raw else {}\n\
+  \    typed_input = msgspec.convert({\"payload\": payload}, type=InputPayload)\n\
+  \    result = run(typed_input)\n    sys.stdout.buffer.write(orjson.dumps(msgspec.to_builtins(result),\
+  \ option=orjson.OPT_INDENT_2))\n    sys.stdout.buffer.write(b\"\\n\")\n\n\nif __name__\
+  \ == \"__main__\":\n    __bssc_cli_main__()"
+governance:
+  scope: reuse when later prompts ask for sdk user commands 09 kubernetes list pods
+    under compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:33:47+00:00'
+  provenance:
+  - not_learn-from-markdown-09-learn-sdkuser-commands-ku_3014f6
+  - /Users/ravindranathakila/service/realized/trials/sdkuser/09_LEARN_SDKUSER_COMMANDS_KUBERNETES_LIST_PODS.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for sdk user commands 09 kubernetes
+      list pods under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Sdk User Commands 09 Kubernetes List Pods
+    encountered_not: Sdk User Commands 09 Kubernetes List Pods
+    goal: How do you use sdk user commands 09 kubernetes list pods from namespace?
+    intended_object: "SDK User Commands 09 \u2014 Kubernetes List Pods SDK User Commands\
+      \ 09 \u2014 Kubernetes List Pods / Sdk User Commands 09 Kubernetes List Pods\
+      \ Sdk User Commands 09 Kubernetes List Pods How do you use sdk user commands\
+      \ 09 kubernetes list pods from namespace? 2. Executable Python relation function\
+      \ name is `main` named inputs: `namespace` imports inside `main`: `kubernetes`\
+      \ return `return {\"status\": \"ok\", \"namespace\": namespace, \"pods\": names}`\
+      \ This capability should be learned as a reusable Python ability artifact."
+    success_criteria:
+    - the response directly resolves the stated ask without erasing material distinctions
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ SDK User Commands 09 \u2014 Kubernetes List Pods SDK User Commands 09 \u2014\
+      \ Kubernetes List Pods / Sdk User Commands 09 Kubernetes List Pods Sdk User\
+      \ Commands 09 Kubernetes List Pods How do you use sdk user commands 09 kubernetes\
+      \ list pods from namespace, 2, Executable Python relation function name is `main`\
+      \ named inputs: `namespace` imports inside `main`: `kubernetes` return `return\
+      \ {\"status\": \"ok\"; no justified final closure has been admitted yet"
+    givens:
+    - "SDK User Commands 09 \u2014 Kubernetes List Pods SDK User Commands 09 \u2014\
+      \ Kubernetes List Pods / Sdk User Commands 09 Kubernetes List Pods Sdk User\
+      \ Commands 09 Kubernetes List Pods How do you use sdk user commands 09 kubernetes\
+      \ list pods from namespace"
+    - '2'
+    - 'Executable Python relation function name is `main` named inputs: `namespace`
+      imports inside `main`: `kubernetes` return `return {"status": "ok"'
+    unknowns: []
+    missing_components:
+    - a justified final realization has not yet been produced
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - completion
+    origin_layers:
+    - model
+    degree: partial
+    remainder_shapes:
+    - missing
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair: []
+    full_repair:
+    - 'satisfy success condition: the response directly resolves the stated ask without
+      erasing material distinctions'
+    boundary_shape:
+    - d*
+    action_posture: direct_resolution
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Sdk User Commands 09 Kubernetes List Pods
+    title_depth_prefixes:
+    - Sdk User Commands 09 Kubernetes List Pods
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Sdk User Command 09 Kubernete List Pod
+    composed_not: Sdk User Command 09 Kubernete List Pod
+    lookup_keys:
+    - sdk user command 09 kubernete list pod
+    - sdk user
+    - user command
+    - command 09
+    - 09 kubernete
+    - kubernete list
+    - list pod
+    - sdk user command
+    - user command 09
+    - command 09 kubernete
+    - 09 kubernete list
+    - kubernete list pod
+    - sdk user command 09 kubernete list pod namespace
+    - pod namespace
+    - list pod namespace
+    - without reduc remainder item cannot clos with govern confidence
+    - without reduc remainder item cannot clo
+    - govern confidence
+    - without reduc
+    - reduc remainder
+    - remainder item
+    - item cannot
+    - cannot clos
+    - clos with
+    notation_yaml: |-
+      "How Do You Use Sdk User Commands 09 Kubernetes List Pods From Namespace":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Sdk User Commands 09 Kubernetes List Pods"
+          - "Components: Sdk User Command 09 Kubernete List Pod"
+          - "Composition: Sdk User Command 09 Kubernete List Pod"
+          - "Title identity: Sdk User Commands 09 Kubernetes List Pods"
+          - "Title depth segments: Sdk User Commands 09 Kubernetes List Pods"
+          - "Title depth prefixes: Sdk User Commands 09 Kubernetes List Pods"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: SDK User Commands 09 \u2014 Kubernetes List Pods SDK User Commands 09 \u2014 Kubernetes List Pods / Sdk User Commands 09 Kubernetes List Pods Sdk User Commands 09 Kubernetes List Pods How do you use sdk user commands 09 kubernetes list pods from namespace? 2. Executable Python relation function name is `main` named inputs: `namespace` imports inside `main`: `kubernetes` return `return {\"status\": \"ok\", \"namespace\": namespace, \"pods\": names}` This capability should be learned as a reusable Python ability artifact."
+          - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+          - "Actual realization: the prompt surface is present; explicit givens are present: SDK User Commands 09 \u2014 Kubernetes List Pods SDK User Commands 09 \u2014 Kubernetes List Pods / Sdk User Commands 09 Kubernetes List Pods Sdk User Commands 09 Kubernetes List Pods How do you use sdk user commands 09 kubernetes list pods from namespace, 2, Executable Python relation function name is `main` named inputs: `namespace` imports inside `main`: `kubernetes` return `return {\"status\": \"ok\"; no justified final closure has been admitted yet"
+          - "Givens: SDK User Commands 09 \u2014 Kubernetes List Pods SDK User Commands 09 \u2014 Kubernetes List Pods / Sdk User Commands 09 Kubernetes List Pods Sdk User Commands 09 Kubernetes List Pods How do you use sdk user commands 09 kubernetes list pods from namespace, 2, Executable Python relation function name is `main` named inputs: `namespace` imports inside `main`: `kubernetes` return `return {\"status\": \"ok\""
+          - "Missing components: a justified final realization has not yet been produced"
+          - "Misalignment types: completion"
+          - "Origin layers: model"
+          - "Degree: partial"
+          - "Remainder shapes: missing"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+          - "Action posture: direct_resolution"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - python3
+---
+schema: bssc_skill.v2
+kind: ability
+title: "SDK User Commands 10 \u2014 Redis Get Key / Sdk User Commands 10 Redis Get\
+  \ Key"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you use sdk user commands 10 redis get key from redis_url, key?
+declaration:
+  intent: How do you use sdk user commands 10 redis get key from redis_url, key?
+  inputs:
+    redis_url: required input value
+    key: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  authority_bounds:
+    execute:
+      scope: local_executor
+      target: python3_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - local executor invocation
+  persistence_behavior: none
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier1_bounded_transform
+  executor_framework: python3
+executor: python3
+entrypoint: main
+inputs:
+  redis_url: required input value
+  key: required input value
+outputs:
+  result: execution result
+python: "# /// script\n# requires-python = \">=3.11\"\n# dependencies = [\"msgspec\"\
+  , \"orjson\"]\n# ///\n\nfrom __future__ import annotations\n\nimport argparse\n\
+  import sys\n\nimport msgspec\nimport orjson\n\n\nclass InputPayload(msgspec.Struct,\
+  \ kw_only=True):\n    payload: dict[str, object] = {}\n\n\nclass OutputPayload(msgspec.Struct,\
+  \ kw_only=True):\n    status: str\n    answer: str = \"\"\n    result: dict[str,\
+  \ object]\n    notes: list[str] = []\n\n\ndef _normalize_result(value: object) ->\
+  \ object:\n    if isinstance(value, float) and value.is_integer():\n        return\
+  \ int(value)\n    return value\n\ndef main(\n    redis_url: str,\n    key: str,\n\
+  \    *,\n    __dependencies__: tuple[str, ...] = (\"redis\",),\n) -> dict[str, object]:\n\
+  \    import redis\n\n    client = redis.from_url(redis_url)\n    value = client.get(key)\n\
+  \    decoded = value.decode(\"utf-8\") if isinstance(value, bytes) else value\n\
+  \    return {\"status\": \"ok\", \"key\": key, \"value\": decoded}\n\ndef run(payload:\
+  \ InputPayload) -> OutputPayload:\n    \"\"\"SDK User Commands 10 \u2014 Redis Get\
+  \ Key / Sdk User Commands 10 Redis Get Key: reuse when later prompts ask for sdk\
+  \ user commands 10 redis get key under compatible inputs\"\"\"\n    result_value\
+  \ = main(redis_url=payload.payload.get('redis_url'), key=payload.payload.get('key'))\n\
+  \    normalized = _normalize_result(result_value)\n    return OutputPayload(\n \
+  \       status=\"ok\",\n        answer=str(normalized),\n        result={\"result\"\
+  : normalized},\n        notes=[],\n    )\n\n\ndef __bssc_cli_main__() -> None:\n\
+  \    parser = argparse.ArgumentParser(description='SDK User Commands 10 \u2014 Redis\
+  \ Get Key / Sdk User Commands 10 Redis Get Key')\n    parser.add_argument(\"--input-json\"\
+  , help=\"Optional JSON payload. Prefer stdin when omitted.\")\n    args = parser.parse_args()\n\
+  \    raw = args.input_json.encode(\"utf-8\") if args.input_json else sys.stdin.buffer.read()\n\
+  \    payload = orjson.loads(raw) if raw else {}\n    typed_input = msgspec.convert({\"\
+  payload\": payload}, type=InputPayload)\n    result = run(typed_input)\n    sys.stdout.buffer.write(orjson.dumps(msgspec.to_builtins(result),\
+  \ option=orjson.OPT_INDENT_2))\n    sys.stdout.buffer.write(b\"\\n\")\n\n\nif __name__\
+  \ == \"__main__\":\n    __bssc_cli_main__()"
+governance:
+  scope: reuse when later prompts ask for sdk user commands 10 redis get key under
+    compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a'*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:33:56+00:00'
+  provenance:
+  - not_learn-from-markdown-10-learn-sdkuser-commands-re_989fdb
+  - /Users/ravindranathakila/service/realized/trials/sdkuser/10_LEARN_SDKUSER_COMMANDS_REDIS_GET_KEY.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for sdk user commands 10 redis get
+      key under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Sdk User Commands 10 Redis Get Key
+    encountered_not: Sdk User Commands 10 Redis Get Key
+    goal: How do you use sdk user commands 10 redis get key from redis_url, key?
+    intended_object: "SDK User Commands 10 \u2014 Redis Get Key SDK User Commands\
+      \ 10 \u2014 Redis Get Key / Sdk User Commands 10 Redis Get Key Sdk User Commands\
+      \ 10 Redis Get Key How do you use sdk user commands 10 redis get key from redis_url,\
+      \ key? 2. Executable Python relation function name is `main` named inputs: `redis_url`,\
+      \ `key` imports inside `main`: `redis` return `return {\"status\": \"ok\", \"\
+      key\": key, \"value\": decoded}` This capability should be learned as a reusable\
+      \ Python ability artifact."
+    success_criteria:
+    - the response directly resolves the stated ask without erasing material distinctions
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ SDK User Commands 10 \u2014 Redis Get Key SDK User Commands 10 \u2014 Redis\
+      \ Get Key / Sdk User Commands 10 Redis Get Key Sdk User Commands 10 Redis Get\
+      \ Key How do you use sdk user commands 10 redis get key from redis_url, 2, Executable\
+      \ Python relation function name is `main` named inputs: `redis_url`; no justified\
+      \ final closure has been admitted yet"
+    givens:
+    - "SDK User Commands 10 \u2014 Redis Get Key SDK User Commands 10 \u2014 Redis\
+      \ Get Key / Sdk User Commands 10 Redis Get Key Sdk User Commands 10 Redis Get\
+      \ Key How do you use sdk user commands 10 redis get key from redis_url"
+    - '2'
+    - 'Executable Python relation function name is `main` named inputs: `redis_url`'
+    unknowns: []
+    missing_components:
+    - a justified final realization has not yet been produced
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - completion
+    origin_layers:
+    - model
+    degree: partial
+    remainder_shapes:
+    - missing
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair: []
+    full_repair:
+    - 'satisfy success condition: the response directly resolves the stated ask without
+      erasing material distinctions'
+    boundary_shape:
+    - d*
+    action_posture: direct_resolution
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Sdk User Commands 10 Redis Get Key
+    title_depth_prefixes:
+    - Sdk User Commands 10 Redis Get Key
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Sdk User Command 10 Redi Get Key
+    - "SDK User Commands 10 \u2014 Redis Get Key / Sdk User Commands 10 Redis Get\
+      \ Key / Key"
+    composed_not: Sdk User Command 10 Redi Get Key
+    lookup_keys:
+    - sdk user command 10 redi get key
+    - sdk user
+    - user command
+    - command 10
+    - 10 redi
+    - redi get
+    - get key
+    - sdk user command
+    - user command 10
+    - command 10 redi
+    - 10 redi get
+    - redi get key
+    - sdk user command 10 redi get key redi url key
+    - key redi
+    - redi url
+    - url key
+    - get key redi
+    - key redi url
+    - redi url key
+    - without reduc remainder item cannot clos with govern confidence
+    - without reduc remainder item cannot clo
+    - govern confidence
+    - without reduc
+    - reduc remainder
+    notation_yaml: |-
+      "How Do You Use Sdk User Commands 10 Redis Get Key From Redis Url Key":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Sdk User Commands 10 Redis Get Key"
+          - "Components: Sdk User Command 10 Redi Get Key, SDK User Commands 10 \u2014 Redis Get Key / Sdk User Commands 10 Redis Get Key / Key"
+          - "Composition: Sdk User Command 10 Redi Get Key"
+          - "Title identity: Sdk User Commands 10 Redis Get Key"
+          - "Title depth segments: Sdk User Commands 10 Redis Get Key"
+          - "Title depth prefixes: Sdk User Commands 10 Redis Get Key"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: SDK User Commands 10 \u2014 Redis Get Key SDK User Commands 10 \u2014 Redis Get Key / Sdk User Commands 10 Redis Get Key Sdk User Commands 10 Redis Get Key How do you use sdk user commands 10 redis get key from redis_url, key? 2. Executable Python relation function name is `main` named inputs: `redis_url`, `key` imports inside `main`: `redis` return `return {\"status\": \"ok\", \"key\": key, \"value\": decoded}` This capability should be learned as a reusable Python ability artifact."
+          - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+          - "Actual realization: the prompt surface is present; explicit givens are present: SDK User Commands 10 \u2014 Redis Get Key SDK User Commands 10 \u2014 Redis Get Key / Sdk User Commands 10 Redis Get Key Sdk User Commands 10 Redis Get Key How do you use sdk user commands 10 redis get key from redis_url, 2, Executable Python relation function name is `main` named inputs: `redis_url`; no justified final closure has been admitted yet"
+          - "Givens: SDK User Commands 10 \u2014 Redis Get Key SDK User Commands 10 \u2014 Redis Get Key / Sdk User Commands 10 Redis Get Key Sdk User Commands 10 Redis Get Key How do you use sdk user commands 10 redis get key from redis_url, 2, Executable Python relation function name is `main` named inputs: `redis_url`"
+          - "Missing components: a justified final realization has not yet been produced"
+          - "Misalignment types: completion"
+          - "Origin layers: model"
+          - "Degree: partial"
+          - "Remainder shapes: missing"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+          - "Action posture: direct_resolution"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - python3
+---
+schema: bssc_skill.v2
+kind: ability
+title: "SDK User Commands 11 \u2014 Stripe Retrieve Customer / Sdk User Commands 11\
+  \ Stripe Retrieve Customer"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you use sdk user commands 11 stripe retrieve customer from api_key,
+  customer_id?
+declaration:
+  intent: How do you use sdk user commands 11 stripe retrieve customer from api_key,
+    customer_id?
+  inputs:
+    api_key: required input value
+    customer_id: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  - communicate
+  authority_bounds:
+    execute:
+      scope: local_executor
+      target: python3_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+    communicate:
+      scope: local_executor
+      target: skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - local executor invocation
+  - network communication
+  persistence_behavior: none
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier2_connected
+  executor_framework: python3
+executor: python3
+entrypoint: main
+inputs:
+  api_key: required input value
+  customer_id: required input value
+outputs:
+  result: execution result
+python: "# /// script\n# requires-python = \">=3.11\"\n# dependencies = [\"msgspec\"\
+  , \"orjson\"]\n# ///\n\nfrom __future__ import annotations\n\nimport argparse\n\
+  import sys\n\nimport msgspec\nimport orjson\n\n\nclass InputPayload(msgspec.Struct,\
+  \ kw_only=True):\n    payload: dict[str, object] = {}\n\n\nclass OutputPayload(msgspec.Struct,\
+  \ kw_only=True):\n    status: str\n    answer: str = \"\"\n    result: dict[str,\
+  \ object]\n    notes: list[str] = []\n\n\ndef _normalize_result(value: object) ->\
+  \ object:\n    if isinstance(value, float) and value.is_integer():\n        return\
+  \ int(value)\n    return value\n\ndef main(\n    api_key: str,\n    customer_id:\
+  \ str,\n    *,\n    __dependencies__: tuple[str, ...] = (\"stripe\",),\n) -> dict[str,\
+  \ object]:\n    import stripe\n\n    stripe.api_key = api_key\n    customer = stripe.Customer.retrieve(customer_id)\n\
+  \    return {\"status\": \"ok\", \"customer_id\": customer[\"id\"], \"email\": customer.get(\"\
+  email\")}\n\ndef run(payload: InputPayload) -> OutputPayload:\n    \"\"\"SDK User\
+  \ Commands 11 \u2014 Stripe Retrieve Customer / Sdk User Commands 11 Stripe Retrieve\
+  \ Customer: reuse when later prompts ask for sdk user commands 11 stripe retrieve\
+  \ customer under compatible inputs\"\"\"\n    result_value = main(api_key=payload.payload.get('api_key'),\
+  \ customer_id=payload.payload.get('customer_id'))\n    normalized = _normalize_result(result_value)\n\
+  \    return OutputPayload(\n        status=\"ok\",\n        answer=str(normalized),\n\
+  \        result={\"result\": normalized},\n        notes=[],\n    )\n\n\ndef __bssc_cli_main__()\
+  \ -> None:\n    parser = argparse.ArgumentParser(description='SDK User Commands\
+  \ 11 \u2014 Stripe Retrieve Customer / Sdk User Commands 11 Stripe Retrieve Customer')\n\
+  \    parser.add_argument(\"--input-json\", help=\"Optional JSON payload. Prefer\
+  \ stdin when omitted.\")\n    args = parser.parse_args()\n    raw = args.input_json.encode(\"\
+  utf-8\") if args.input_json else sys.stdin.buffer.read()\n    payload = orjson.loads(raw)\
+  \ if raw else {}\n    typed_input = msgspec.convert({\"payload\": payload}, type=InputPayload)\n\
+  \    result = run(typed_input)\n    sys.stdout.buffer.write(orjson.dumps(msgspec.to_builtins(result),\
+  \ option=orjson.OPT_INDENT_2))\n    sys.stdout.buffer.write(b\"\\n\")\n\n\nif __name__\
+  \ == \"__main__\":\n    __bssc_cli_main__()"
+governance:
+  scope: reuse when later prompts ask for sdk user commands 11 stripe retrieve customer
+    under compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a*
+  - b*
+  - c*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:34:06+00:00'
+  provenance:
+  - not_learn-from-markdown-11-learn-sdkuser-commands-st_0b987e
+  - /Users/ravindranathakila/service/realized/trials/sdkuser/11_LEARN_SDKUSER_COMMANDS_STRIPE_RETRIEVE_CUSTOMER.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for sdk user commands 11 stripe retrieve
+      customer under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Sdk User Commands 11 Stripe Retrieve Customer
+    encountered_not: Sdk User Commands 11 Stripe Retrieve Customer
+    goal: How do you use sdk user commands 11 stripe retrieve customer from api_key,
+      customer_id?
+    intended_object: "SDK User Commands 11 \u2014 Stripe Retrieve Customer SDK User\
+      \ Commands 11 \u2014 Stripe Retrieve Customer / Sdk User Commands 11 Stripe\
+      \ Retrieve Customer Sdk User Commands 11 Stripe Retrieve Customer How do you\
+      \ use sdk user commands 11 stripe retrieve customer from api_key, customer_id?\
+      \ 2. Executable Python relation function name is `main` named inputs: `api_key`,\
+      \ `customer_id` imports inside `main`: `stripe` return `return {\"status\":\
+      \ \"ok\", \"customer_id\": customer[\"id\"], \"email\": customer.get(\"email\"\
+      )}` Retrieving one Stripe customer by API key and customer ID is a reusable\
+      \ Python SDK billing-read capability."
+    success_criteria:
+    - the response directly resolves the stated ask without erasing material distinctions
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ SDK User Commands 11 \u2014 Stripe Retrieve Customer SDK User Commands 11\
+      \ \u2014 Stripe Retrieve Customer / Sdk User Commands 11 Stripe Retrieve Customer\
+      \ Sdk User Commands 11 Stripe Retrieve Customer How do you use sdk user commands\
+      \ 11 stripe retrieve customer from api_key, 2, Executable Python relation function\
+      \ name is `main` named inputs: `api_key`; no justified final closure has been\
+      \ admitted yet"
+    givens:
+    - "SDK User Commands 11 \u2014 Stripe Retrieve Customer SDK User Commands 11 \u2014\
+      \ Stripe Retrieve Customer / Sdk User Commands 11 Stripe Retrieve Customer Sdk\
+      \ User Commands 11 Stripe Retrieve Customer How do you use sdk user commands\
+      \ 11 stripe retrieve customer from api_key"
+    - '2'
+    - 'Executable Python relation function name is `main` named inputs: `api_key`'
+    unknowns: []
+    missing_components:
+    - a justified final realization has not yet been produced
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - completion
+    origin_layers:
+    - model
+    degree: partial
+    remainder_shapes:
+    - missing
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair: []
+    full_repair:
+    - 'satisfy success condition: the response directly resolves the stated ask without
+      erasing material distinctions'
+    boundary_shape:
+    - d*
+    action_posture: direct_resolution
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Sdk User Commands 11 Stripe Retrieve Customer
+    title_depth_prefixes:
+    - Sdk User Commands 11 Stripe Retrieve Customer
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Sdk User Command 11 Stripe Retrieve Customer
+    - "SDK User Commands 11 \u2014 Stripe Retrieve Customer / Sdk User Commands 11\
+      \ Stripe Retrieve Customer / Customer Id"
+    composed_not: Sdk User Command 11 Stripe Retrieve Customer
+    lookup_keys:
+    - sdk user command 11 stripe retrieve customer
+    - sdk user
+    - user command
+    - command 11
+    - 11 stripe
+    - stripe retrieve
+    - retrieve customer
+    - sdk user command
+    - user command 11
+    - command 11 stripe
+    - 11 stripe retrieve
+    - stripe retrieve customer
+    - sdk user command 11 stripe retrieve customer api key customer id
+    - customer api
+    - api key
+    - key customer
+    - customer id
+    - retrieve customer api
+    - customer api key
+    - api key customer
+    - key customer id
+    - without reduc remainder item cannot clos with govern confidence
+    - without reduc remainder item cannot clo
+    - govern confidence
+    notation_yaml: |-
+      "How Do You Use Sdk User Commands 11 Stripe Retrieve Customer From Api Key Customer Id":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Sdk User Commands 11 Stripe Retrieve Customer"
+          - "Components: Sdk User Command 11 Stripe Retrieve Customer, SDK User Commands 11 \u2014 Stripe Retrieve Customer / Sdk User Commands 11 Stripe Retrieve Customer / Customer Id"
+          - "Composition: Sdk User Command 11 Stripe Retrieve Customer"
+          - "Title identity: Sdk User Commands 11 Stripe Retrieve Customer"
+          - "Title depth segments: Sdk User Commands 11 Stripe Retrieve Customer"
+          - "Title depth prefixes: Sdk User Commands 11 Stripe Retrieve Customer"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: SDK User Commands 11 \u2014 Stripe Retrieve Customer SDK User Commands 11 \u2014 Stripe Retrieve Customer / Sdk User Commands 11 Stripe Retrieve Customer Sdk User Commands 11 Stripe Retrieve Customer How do you use sdk user commands 11 stripe retrieve customer from api_key, customer_id? 2. Executable Python relation function name is `main` named inputs: `api_key`, `customer_id` imports inside `main`: `stripe` return `return {\"status\": \"ok\", \"customer_id\": customer[\"id\"], \"email\": customer.get(\"email\")}` Retrieving one Stripe customer by API key and customer ID is a reusable Python SDK billing-read capability."
+          - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+          - "Actual realization: the prompt surface is present; explicit givens are present: SDK User Commands 11 \u2014 Stripe Retrieve Customer SDK User Commands 11 \u2014 Stripe Retrieve Customer / Sdk User Commands 11 Stripe Retrieve Customer Sdk User Commands 11 Stripe Retrieve Customer How do you use sdk user commands 11 stripe retrieve customer from api_key, 2, Executable Python relation function name is `main` named inputs: `api_key`; no justified final closure has been admitted yet"
+          - "Givens: SDK User Commands 11 \u2014 Stripe Retrieve Customer SDK User Commands 11 \u2014 Stripe Retrieve Customer / Sdk User Commands 11 Stripe Retrieve Customer Sdk User Commands 11 Stripe Retrieve Customer How do you use sdk user commands 11 stripe retrieve customer from api_key, 2, Executable Python relation function name is `main` named inputs: `api_key`"
+          - "Missing components: a justified final realization has not yet been produced"
+          - "Misalignment types: completion"
+          - "Origin layers: model"
+          - "Degree: partial"
+          - "Remainder shapes: missing"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+          - "Action posture: direct_resolution"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - python3
+---
+schema: bssc_skill.v2
+kind: ability
+title: "SDK User Commands 12 \u2014 Supabase Select Rows / Sdk User Commands 12 Supabase\
+  \ Select Rows"
+description:
+- The source markdown already presents this executable relation directly in a supported
+  executor framework.
+- Executable ability artifact.
+question: How do you use sdk user commands 12 supabase select rows from supabase_url,
+  supabase_key, table?
+declaration:
+  intent: How do you use sdk user commands 12 supabase select rows from supabase_url,
+    supabase_key, table?
+  inputs:
+    supabase_url: required input value
+    supabase_key: required input value
+    table: required input value
+  outputs:
+    result: execution result
+  authorities_requested:
+  - execute
+  - communicate
+  authority_bounds:
+    execute:
+      scope: local_executor
+      target: python3_skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+    communicate:
+      scope: local_executor
+      target: skill_runtime
+      context: explicit_user_prompt
+      duration: single_invocation
+      triggering_conditions:
+      - user invokes skill
+      approval_class: automatic
+  data_classes_touched:
+  - public
+  side_effects:
+  - local executor invocation
+  - network communication
+  persistence_behavior: none
+  invocation_rights:
+  - direct_user_invocation
+  composition_rights: []
+  escalation_rights: []
+  approval_requirements:
+  - automatic
+  risk_tier: tier2_connected
+  executor_framework: python3
+executor: python3
+entrypoint: main
+inputs:
+  supabase_url: required input value
+  supabase_key: required input value
+  table: required input value
+outputs:
+  result: execution result
+python: "# /// script\n# requires-python = \">=3.11\"\n# dependencies = [\"msgspec\"\
+  , \"orjson\"]\n# ///\n\nfrom __future__ import annotations\n\nimport argparse\n\
+  import sys\n\nimport msgspec\nimport orjson\n\n\nclass InputPayload(msgspec.Struct,\
+  \ kw_only=True):\n    payload: dict[str, object] = {}\n\n\nclass OutputPayload(msgspec.Struct,\
+  \ kw_only=True):\n    status: str\n    answer: str = \"\"\n    result: dict[str,\
+  \ object]\n    notes: list[str] = []\n\n\ndef _normalize_result(value: object) ->\
+  \ object:\n    if isinstance(value, float) and value.is_integer():\n        return\
+  \ int(value)\n    return value\n\ndef main(\n    supabase_url: str,\n    supabase_key:\
+  \ str,\n    table: str,\n    *,\n    __dependencies__: tuple[str, ...] = (\"supabase\"\
+  ,),\n) -> dict[str, object]:\n    from supabase import create_client\n\n    client\
+  \ = create_client(supabase_url, supabase_key)\n    response = client.table(table).select(\"\
+  *\").execute()\n    return {\"status\": \"ok\", \"table\": table, \"rows\": response.data}\n\
+  \ndef run(payload: InputPayload) -> OutputPayload:\n    \"\"\"SDK User Commands\
+  \ 12 \u2014 Supabase Select Rows / Sdk User Commands 12 Supabase Select Rows: reuse\
+  \ when later prompts ask for sdk user commands 12 supabase select rows under compatible\
+  \ inputs\"\"\"\n    result_value = main(supabase_url=payload.payload.get('supabase_url'),\
+  \ supabase_key=payload.payload.get('supabase_key'), table=payload.payload.get('table'))\n\
+  \    normalized = _normalize_result(result_value)\n    return OutputPayload(\n \
+  \       status=\"ok\",\n        answer=str(normalized),\n        result={\"result\"\
+  : normalized},\n        notes=[],\n    )\n\n\ndef __bssc_cli_main__() -> None:\n\
+  \    parser = argparse.ArgumentParser(description='SDK User Commands 12 \u2014 Supabase\
+  \ Select Rows / Sdk User Commands 12 Supabase Select Rows')\n    parser.add_argument(\"\
+  --input-json\", help=\"Optional JSON payload. Prefer stdin when omitted.\")\n  \
+  \  args = parser.parse_args()\n    raw = args.input_json.encode(\"utf-8\") if args.input_json\
+  \ else sys.stdin.buffer.read()\n    payload = orjson.loads(raw) if raw else {}\n\
+  \    typed_input = msgspec.convert({\"payload\": payload}, type=InputPayload)\n\
+  \    result = run(typed_input)\n    sys.stdout.buffer.write(orjson.dumps(msgspec.to_builtins(result),\
+  \ option=orjson.OPT_INDENT_2))\n    sys.stdout.buffer.write(b\"\\n\")\n\n\nif __name__\
+  \ == \"__main__\":\n    __bssc_cli_main__()"
+governance:
+  scope: reuse when later prompts ask for sdk user commands 12 supabase select rows
+    under compatible inputs
+  justification: The source markdown already presents this executable relation directly
+    in a supported executor framework.
+  function_bit: 1
+  boundary_shape:
+  - a'*
+  - d*
+  reusability: broad_reuse
+  admissibility: candidate
+  learning_relation: extends_parameters
+  created_at: '2026-03-31T10:34:36+00:00'
+  provenance:
+  - not_learn-from-markdown-12-learn-sdkuser-commands-su_ca0d44
+  - /Users/ravindranathakila/service/realized/trials/sdkuser/12_LEARN_SDKUSER_COMMANDS_SUPABASE_SELECT_ROWS.md
+  constraints:
+  - derived directly from a supported fenced executable snippet
+  template_schema:
+    preconditions:
+    - the active item matches the artifact scope
+    - the current state is admissible for governed reuse
+    governed_function: reuse ability in a governed way
+    completion_conditions:
+    - the artifact is instantiated in scope and its use conditions are met
+    failure_conditions:
+    - scope or HoldOn conditions are violated
+    scope_of_reuse: reuse when later prompts ask for sdk user commands 12 supabase
+      select rows under compatible inputs
+    bssc_awareness:
+      admissible_place_in_realization: governed realization state
+      required_governed_state: active represented non-achievedness with durable state
+      permitted_governed_effect: support ability reuse without self-justifying closure
+      may_not_by_itself_justify:
+      - closure
+    holdon_awareness:
+      relevant_holdon_blocks_instantiation: true
+      diagnostic_use_allowed: true
+      relevant_holdon_conditions:
+      - missing evidence
+      - pause boundary
+      - governance block
+      resumption_condition: resume ordinary use only when the blocking condition is
+        cleared
+  structured_learning:
+    title_identity: Sdk User Commands 12 Supabase Select Rows
+    encountered_not: Sdk User Commands 12 Supabase Select Rows
+    goal: How do you use sdk user commands 12 supabase select rows from supabase_url,
+      supabase_key, table?
+    intended_object: "SDK User Commands 12 \u2014 Supabase Select Rows SDK User Commands\
+      \ 12 \u2014 Supabase Select Rows / Sdk User Commands 12 Supabase Select Rows\
+      \ Sdk User Commands 12 Supabase Select Rows How do you use sdk user commands\
+      \ 12 supabase select rows from supabase_url, supabase_key, table? 2. Executable\
+      \ Python relation function name is `main` named inputs: `supabase_url`, `supabase_key`,\
+      \ `table` imports inside `main`: `supabase` return `return {\"status\": \"ok\"\
+      , \"table\": table, \"rows\": response.data}` This capability should be learned\
+      \ as a reusable Python ability artifact."
+    success_criteria:
+    - the response directly resolves the stated ask without erasing material distinctions
+    actual_realization: "the prompt surface is present; explicit givens are present:\
+      \ SDK User Commands 12 \u2014 Supabase Select Rows SDK User Commands 12 \u2014\
+      \ Supabase Select Rows / Sdk User Commands 12 Supabase Select Rows Sdk User\
+      \ Commands 12 Supabase Select Rows How do you use sdk user commands 12 supabase\
+      \ select rows from supabase_url, 2, Executable Python relation function name\
+      \ is `main` named inputs: `supabase_url`; no justified final closure has been\
+      \ admitted yet"
+    givens:
+    - "SDK User Commands 12 \u2014 Supabase Select Rows SDK User Commands 12 \u2014\
+      \ Supabase Select Rows / Sdk User Commands 12 Supabase Select Rows Sdk User\
+      \ Commands 12 Supabase Select Rows How do you use sdk user commands 12 supabase\
+      \ select rows from supabase_url"
+    - '2'
+    - 'Executable Python relation function name is `main` named inputs: `supabase_url`'
+    unknowns: []
+    missing_components:
+    - a justified final realization has not yet been produced
+    distorted_components: []
+    differentiators: []
+    contrastive_cases: []
+    risk_of_wrong_closure: []
+    disallowed_assumptions: []
+    misalignment_types:
+    - completion
+    origin_layers:
+    - model
+    degree: partial
+    remainder_shapes:
+    - missing
+    why_it_matters:
+    - without reducing the remainder, the item cannot be closed with governed confidence
+    minimal_repair: []
+    full_repair:
+    - 'satisfy success condition: the response directly resolves the stated ask without
+      erasing material distinctions'
+    boundary_shape:
+    - d*
+    action_posture: direct_resolution
+    prompt_directive_kind: none
+    prompt_directive_focus: ''
+    prompt_directive_compared_terms: []
+    prompt_directive_expectations: []
+    prompt_directive_requires_formula: false
+    prompt_directive_requires_contrast: false
+    prompt_directive_requires_chain: false
+    prompt_directive_requires_substrate: false
+    title_depth_segments:
+    - Sdk User Commands 12 Supabase Select Rows
+    title_depth_prefixes:
+    - Sdk User Commands 12 Supabase Select Rows
+    title_depth_exposed_depth: 1
+    title_depth_minimal_sufficient_depth: 1
+    title_depth_assessment: surface_unsegmented
+    title_depth_hidden_depth_note: title-depth is inferred from context rather than
+      explicitly specified
+    title_depth_body_split_needed: false
+    title_depth_body_split_reason: ''
+    title_depth_reuse_bias: ground_reuse
+    title_similar_identities: []
+    title_representation_mode: slash
+    title_prolog_head: ''
+    title_prolog_body: ''
+    title_prolog_predicate: ''
+    title_prolog_arity: 0
+    title_prolog_head_canonical: ''
+    component_nots:
+    - Sdk User Command 12 Supabase Select Row
+    - "SDK User Commands 12 \u2014 Supabase Select Rows / Sdk User Commands 12 Supabase\
+      \ Select Rows / Supabase Key"
+    - "SDK User Commands 12 \u2014 Supabase Select Rows / Sdk User Commands 12 Supabase\
+      \ Select Rows / Table"
+    composed_not: Sdk User Command 12 Supabase Select Row
+    lookup_keys:
+    - sdk user command 12 supabase select row
+    - sdk user
+    - user command
+    - command 12
+    - 12 supabase
+    - supabase select
+    - select row
+    - sdk user command
+    - user command 12
+    - command 12 supabase
+    - 12 supabase select
+    - supabase select row
+    - sdk user command 12 supabase select row supabase url supabase key table
+    - row supabase
+    - supabase url
+    - url supabase
+    - supabase key
+    - key table
+    - select row supabase
+    - row supabase url
+    - supabase url supabase
+    - url supabase key
+    - supabase key table
+    - without reduc remainder item cannot clos with govern confidence
+    notation_yaml: |-
+      "How Do You Use Sdk User Commands 12 Supabase Select Rows From Supabase Url Supabase Key Table":
+        Description:
+          - "Structured learning declaration for the active non-achievedness."
+          - "Encountered non-achievedness: Sdk User Commands 12 Supabase Select Rows"
+          - "Components: Sdk User Command 12 Supabase Select Row, SDK User Commands 12 \u2014 Supabase Select Rows / Sdk User Commands 12 Supabase Select Rows / Supabase Key, SDK User Commands 12 \u2014 Supabase Select Rows / Sdk User Commands 12 Supabase Select Rows / Table"
+          - "Composition: Sdk User Command 12 Supabase Select Row"
+          - "Title identity: Sdk User Commands 12 Supabase Select Rows"
+          - "Title depth segments: Sdk User Commands 12 Supabase Select Rows"
+          - "Title depth prefixes: Sdk User Commands 12 Supabase Select Rows"
+          - "Title depth exposed/minimal sufficient: 1/1"
+          - "Title depth assessment: surface_unsegmented"
+          - "Title depth hidden-order note: title-depth is inferred from context rather than explicitly specified"
+          - "Title depth body split needed: false"
+          - "Title depth reuse bias: ground_reuse"
+          - "Intended object: SDK User Commands 12 \u2014 Supabase Select Rows SDK User Commands 12 \u2014 Supabase Select Rows / Sdk User Commands 12 Supabase Select Rows Sdk User Commands 12 Supabase Select Rows How do you use sdk user commands 12 supabase select rows from supabase_url, supabase_key, table? 2. Executable Python relation function name is `main` named inputs: `supabase_url`, `supabase_key`, `table` imports inside `main`: `supabase` return `return {\"status\": \"ok\", \"table\": table, \"rows\": response.data}` This capability should be learned as a reusable Python ability artifact."
+          - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+          - "Actual realization: the prompt surface is present; explicit givens are present: SDK User Commands 12 \u2014 Supabase Select Rows SDK User Commands 12 \u2014 Supabase Select Rows / Sdk User Commands 12 Supabase Select Rows Sdk User Commands 12 Supabase Select Rows How do you use sdk user commands 12 supabase select rows from supabase_url, 2, Executable Python relation function name is `main` named inputs: `supabase_url`; no justified final closure has been admitted yet"
+          - "Givens: SDK User Commands 12 \u2014 Supabase Select Rows SDK User Commands 12 \u2014 Supabase Select Rows / Sdk User Commands 12 Supabase Select Rows Sdk User Commands 12 Supabase Select Rows How do you use sdk user commands 12 supabase select rows from supabase_url, 2, Executable Python relation function name is `main` named inputs: `supabase_url`"
+          - "Missing components: a justified final realization has not yet been produced"
+          - "Misalignment types: completion"
+          - "Origin layers: model"
+          - "Degree: partial"
+          - "Remainder shapes: missing"
+          - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+          - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+          - "Action posture: direct_resolution"
+        In:
+          - "Prompt Surface String"
+          - "Encountered Non Achievedness String"
+          - "Lookup Keys Strings"
+          - "[ Component Non Achievedness ]"
+          - "Composed Non Achievedness"
+        Out:
+          - "Prior Encounter"
+          - "[ Reusable Artifact ]"
+          - "[ Reused Non Achievedness ]"
+          - "[ Composed Reuse ]"
+  controller_features:
+    discovery_enabled: false
+    reflection_enabled: false
+    contemplation_enabled: false
+    supported_executors:
+    - python3

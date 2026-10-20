@@ -1,0 +1,33 @@
+@startuml
+title Not Elaboration And Title-Depth Inference Flow
+
+participant "BSSCController" as Controller
+participant "SemanticNode" as Node
+participant "Fallback Not Semantics" as Fallback
+participant "Prompt Directives" as Directives
+participant "Title Semantics" as Titles
+participant "Root Local Namespace" as Namespace
+participant "LLM Proposal" as LLM
+participant "Normalizer" as Normalize
+
+Controller -> Node: ensure_not_elaboration(node)
+alt cached contextual not_elaboration exists
+  Controller -> Normalize: normalize_not_elaboration_payload(...)
+  Normalize --> Controller: normalized structured non-achievedness
+else infer from active context
+  Controller -> Fallback: fallback_not_elaboration_for_text(node.semantic_unit)
+  Controller -> Directives: semantic_prompt_directive_profile(node.semantic_unit)
+  Controller -> Titles: derive_semantic_title_depth_view(node.semantic_unit)
+  Controller -> Namespace: root_local_title_namespace_payload(node)
+  Controller -> LLM: request_proposal(NOT_ELABORATION,\nparent context,\nsibling context,\ntitle-depth law,\nroot-local namespace)
+  LLM --> Controller: proposed non-achievedness payload
+  Controller -> Normalize: normalize_not_elaboration_payload(...)
+  Controller -> Titles: resolve_root_local_title_identity(...)
+  Controller -> Titles: canonicalize_semantic_io_titles(component_nots)
+  Controller -> Normalize: normalize_not_elaboration_payload(...)
+end
+
+Controller -> Node: store metadata.not_elaboration
+Controller -> Node: store metadata.structured_learning
+
+@enduml

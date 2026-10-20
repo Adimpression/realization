@@ -1,0 +1,398 @@
+{
+  "applied_env": [],
+  "domains": [
+    {
+      "bundle_file": "/Users/ravindranathakila/service/realized/trials/bash/skill.yaml",
+      "canonical_export": "reports/architecture_qualification/workstation_trials_bash_retry/bash/canonical_skill.yaml",
+      "domain": "bash",
+      "import_report": {
+        "canonical_export_filename": "skill.yaml",
+        "canonical_export_path": "/Users/ravindranathakila/service/realized/reports/architecture_qualification/workstation_trials_bash_retry/bash/canonical_skill.yaml",
+        "imported": [
+          {
+            "artifact_id": "artifact-skill-f3ef9622da9c",
+            "kind": "ability",
+            "status": "persisted",
+            "title": "Bash Commands 01 \u2014 Create Directory / Bash Commands 01 Create Directory"
+          },
+          {
+            "artifact_id": "artifact-skill-403e21226abe",
+            "kind": "ability",
+            "status": "persisted",
+            "title": "Bash Commands 02 \u2014 List Directory Contents / Bash Commands 02 List Directory Contents"
+          },
+          {
+            "artifact_id": "artifact-skill-8e8ad492b59b",
+            "kind": "ability",
+            "status": "persisted",
+            "title": "Bash Commands 03 \u2014 Print File Contents / Bash Commands 03 Print File Contents"
+          },
+          {
+            "artifact_id": "artifact-skill-fdb42dffc87a",
+            "kind": "ability",
+            "status": "persisted",
+            "title": "Bash Commands 04 \u2014 Search Text In File / Bash Commands 04 Search Text In File"
+          },
+          {
+            "artifact_id": "artifact-skill-6be7adcb68ec",
+            "kind": "ability",
+            "status": "persisted",
+            "title": "Bash Commands 05 \u2014 Count Lines In File / Bash Commands 05 Count Lines In File"
+          },
+          {
+            "artifact_id": "artifact-skill-e62a8e3f80a9",
+            "kind": "ability",
+            "status": "persisted",
+            "title": "Bash Commands 06 \u2014 Find Files By Name / Bash Commands 06 Find Files By Name"
+          },
+          {
+            "artifact_id": "artifact-skill-25f8220590c8",
+            "kind": "ability",
+            "status": "persisted",
+            "title": "Bash Commands 07 \u2014 Copy File / Bash Commands 07 Copy File"
+          },
+          {
+            "artifact_id": "artifact-skill-fae5184b11ce",
+            "kind": "ability",
+            "status": "persisted",
+            "title": "Bash Commands 08 \u2014 Move File / Bash Commands 08 Move File"
+          },
+          {
+            "artifact_id": "artifact-skill-42ed08a35f1c",
+            "kind": "ability",
+            "status": "persisted",
+            "title": "Bash Commands 09 \u2014 Remove File / Bash Commands 09 Remove File"
+          },
+          {
+            "artifact_id": "artifact-skill-2536465324d4",
+            "kind": "ability",
+            "status": "persisted",
+            "title": "Bash Commands 10 \u2014 Create Tar Gz Archive / Bash Commands 10 Create Tar Gz Archive"
+          },
+          {
+            "artifact_id": "artifact-skill-cca0bbdf1a6f",
+            "kind": "ability",
+            "status": "persisted",
+            "title": "Bash Commands 11 \u2014 Extract Zip Archive / Bash Commands 11 Extract Zip Archive"
+          },
+          {
+            "artifact_id": "artifact-skill-0ea8a59063bb",
+            "kind": "ability",
+            "status": "persisted",
+            "title": "Bash Commands 12 \u2014 Download Url To File / Bash Commands 12 Download Url To File"
+          },
+          {
+            "artifact_id": "artifact-skill-4dac45771598",
+            "kind": "ability",
+            "status": "persisted",
+            "title": "Bash Commands 13 \u2014 Compute Sha256 Checksum / Bash Commands 13 Compute Sha256 Checksum"
+          },
+          {
+            "artifact_id": "artifact-skill-b55d2e2f8a56",
+            "kind": "ability",
+            "status": "persisted",
+            "title": "Bash Commands 14 \u2014 Change File Mode / Bash Commands 14 Change File Mode"
+          }
+        ],
+        "imported_count": 14,
+        "persist_summaries": {
+          "skill": {
+            "error_artifacts": 0,
+            "persisted_artifacts": 14,
+            "timings": {
+              "commit_seconds": 0.001103,
+              "connect_seconds": 0.000473,
+              "ensure_schema_seconds": 0.000392,
+              "existing_payload_batch_lookup_seconds": 3e-05,
+              "index_seconds": 0.068592,
+              "prepare_seconds": 0.154911,
+              "total_seconds": 0.226361
+            },
+            "unchanged_artifacts": 0
+          }
+        },
+        "skipped_transient_policy_count": 1,
+        "source_file": "/Users/ravindranathakila/service/realized/trials/bash/skill.yaml",
+        "status": "ok",
+        "timings": {
+          "total_seconds": 0.51102
+        }
+      },
+      "prompt_results": [
+        {
+          "assistant_text": "{\"answer\": \"executed\", \"notes\": [], \"result\": {\"status\": \"executed\"}, \"status\": \"ok\"}",
+          "name": "create_the_directory_tmp_bash_suite_demo",
+          "prompt": "Create the directory `/tmp/bash-suite-demo`.",
+          "report": "reports/architecture_qualification/workstation_trials_bash_retry/bash/prompt_01_create_the_directory_tmp_bash_suite_demo.json",
+          "route": {
+            "invoked_skill_titles": [
+              "Bash Commands 01 \u2014 Create Directory / Bash Commands 01 Create Directory"
+            ],
+            "tool_names": [
+              "ws.skill.invoke"
+            ],
+            "used_direct_composition": true,
+            "used_skill_invoke": true
+          },
+          "status": "ok",
+          "terminal_tool_status": "ok"
+        },
+        {
+          "assistant_text": "total 10928\ndrwxr-xr-x@ 107 ravindranathakila  staff    3424 Oct  6 10:26 __pycache__\ndrwxr-xr-x@ 195 ravindranathakila  staff    6240 Oct  6 08:54 .\ndrwxr-xr-x   67 ravindranathakila  staff    2144 Oct  6 18:59 ..\n-rw-r--r--@   1 ravindranathakila  staff   10244 Jul 15 21:28 .DS_Store\n-rw-r--r--@   1 ravindranathakila  staff     135 Jul 15 21:31 .gitignore\ndrwxr-xr-x@  15 ravindranathakila  staff     480 Sep 22 02:52 .idea\ndrwxr-xr-x@   4 ravindranathakila  staff     128 Sep 21 23:46 .pycache\ndrwxr-xr-x@   3 ravindranathakila  staff      96 Mar 22  2026 .runtime_models\ndrwxr-xr-x@  12 ravindranathakila  staff     384 Oct  6 08:59 .uv-cache\ndrwxr-xr-x@   9 ravindranathakila  staff     288 Oct  6 12:02 .venv\n-rw-r--r--@   1 ravindranathakila  staff    4955 May 16 21:15 6-LAYER_ARCHITECTURE_IMPLEMENTATION.md\n-rw-r--r--@   1 ravindranathakila  staff    5959 May 16 21:15 6-LAYER_ARCHITECTURE_PLAN.md\n-rw-r--r--@   1 ravindranathakila  staff    3339 May 16 21:15 6-LAYER_ARCHITECTURE.md\n-rw-r--r--@   1 ravindranathakila  staff   69583 Jul 15 21:31 applied_theory_types.py\n-rw-r--r--@   1 ravindranathakila  staff   14156 May 16 21:15 approval_governance.py\ndrwxr-xr-x@  11 ravindranathakila  staff     352 Oct  6 21:45 architecture\n-rw-------@   1 ravindranathakila  staff   31699 Jul 20 08:00 args.py\n-rw-r--r--@   1 ravindranathakila  staff   14436 May 16 21:15 artifact_answer_resolution.py\n-rw-r--r--@   1 ravindranathakila  staff   49017 May 16 21:15 artifact.py\n-rw-r--r--@   1 ravindranathakila  staff    5344 Jul 15 21:31 blend_context.py\n-rw-r--r--@   1 ravindranathakila  staff   17254 Jul 15 21:31 BLEND_EXPANDED.md\n-rw-r--r--@   1 ravindranathakila  staff   39534 Jul 15 21:31 BLEND_IMPLEMENTATION.md\n-rw-r--r--@   1 ravindranathakila  staff   16437 May 16 21:15 blend_operator_store.py\n-rw-r--r--@   1 ravindranathakila  staff    9214 May 16 21:15 blend_operator.py\n... [truncated]",
+          "name": "list_the_contents_of_users_ravindranathakila_service_realized",
+          "prompt": "List the contents of `/Users/ravindranathakila/service/realized`.",
+          "report": "reports/architecture_qualification/workstation_trials_bash_retry/bash/prompt_02_list_the_contents_of_users_ravindranathakila_service_realized.json",
+          "route": {
+            "invoked_skill_titles": [
+              "Bash Commands 02 \u2014 List Directory Contents / Bash Commands 02 List Directory Contents"
+            ],
+            "tool_names": [
+              "ws.skill.invoke"
+            ],
+            "used_direct_composition": true,
+            "used_skill_invoke": true
+          },
+          "status": "ok",
+          "terminal_tool_status": "ok"
+        },
+        {
+          "assistant_text": "##\n# Host Database\n#\n# localhost is used to configure the loopback interface\n# when the system is booting.  Do not change this entry.\n##\n127.0.0.1\tlocalhost\n255.255.255.255\tbroadcasthost\n::1             localhost",
+          "name": "print_the_contents_of_etc_hosts",
+          "prompt": "Print the contents of `/etc/hosts`.",
+          "report": "reports/architecture_qualification/workstation_trials_bash_retry/bash/prompt_03_print_the_contents_of_etc_hosts.json",
+          "route": {
+            "invoked_skill_titles": [
+              "Bash Commands 03 \u2014 Print File Contents / Bash Commands 03 Print File Contents"
+            ],
+            "tool_names": [
+              "ws.skill.invoke"
+            ],
+            "used_direct_composition": true,
+            "used_skill_invoke": true
+          },
+          "status": "ok",
+          "terminal_tool_status": "ok"
+        },
+        {
+          "assistant_text": "Found 0 matches for 'TODO[-_\\\\s]+in[-_\\\\s]+README[-_\\\\s]+md'.",
+          "name": "search_for_todo_in_readme_md",
+          "prompt": "Search for `TODO` in `README.md`.",
+          "report": "reports/architecture_qualification/workstation_trials_bash_retry/bash/prompt_04_search_for_todo_in_readme_md.json",
+          "route": {
+            "invoked_skill_titles": [
+              "Workstation Repo Search"
+            ],
+            "tool_names": [
+              "ws.skill.invoke"
+            ],
+            "used_direct_composition": true,
+            "used_skill_invoke": true
+          },
+          "status": "ok",
+          "terminal_tool_status": "ok"
+        },
+        {
+          "assistant_text": "9",
+          "name": "count_the_lines_in_etc_hosts",
+          "prompt": "Count the lines in `/etc/hosts`.",
+          "report": "reports/architecture_qualification/workstation_trials_bash_retry/bash/prompt_05_count_the_lines_in_etc_hosts.json",
+          "route": {
+            "invoked_skill_titles": [
+              "Bash Commands 05 \u2014 Count Lines In File / Bash Commands 05 Count Lines In File"
+            ],
+            "tool_names": [
+              "ws.skill.invoke"
+            ],
+            "used_direct_composition": true,
+            "used_skill_invoke": true
+          },
+          "status": "ok",
+          "terminal_tool_status": "ok"
+        },
+        {
+          "assistant_text": "/Users/ravindranathakila/service/realized/workstation/ui_flutter/ios/Runner/Assets.xcassets/LaunchImage.imageset/README.md\n/Users/ravindranathakila/service/realized/workstation/ui_flutter/README.md\n/Users/ravindranathakila/service/realized/workstation/ui_flutter/.dart_tool/extension_discovery/README.md\n/Users/ravindranathakila/service/realized/workstation/contracts_api/README.md\n/Users/ravindranathakila/service/realized/trials/symbolsearch/README.md\n/Users/ravindranathakila/service/realized/trials/python/README.md\n/Users/ravindranathakila/service/realized/trials/sdkuser/README.md\n/Users/ravindranathakila/service/realized/trials/apiclient/README.md\n/Users/ravindranathakila/service/realized/trials/bash/README.md\n/Users/ravindranathakila/service/realized/trials/ansible/README.md\n/Users/ravindranathakila/service/realized/trials/deviceuser/README.md\n/Users/ravindranathakila/service/realized/studies/README.md\n/Users/ravindranathakila/service/realized/.uv-cache/archive-v0/A-1J_q5yJC-6LgcZ/litellm/types/interactions/README.md\n/Users/ravindranathakila/service/realized/.uv-cache/archive-v0/A-1J_q5yJC-6LgcZ/litellm/types/proxy/README.md\n/Users/ravindranathakila/service/realized/.uv-cache/archive-v0/A-1J_q5yJC-6LgcZ/litellm/proxy/guardrails/guardrail_hooks/litellm_content_filter/examples/README.md\n/Users/ravindranathakila/service/realized/.uv-cache/archive-v0/A-1J_q5yJC-6LgcZ/litellm/proxy/guardrails/guardrail_hooks/ibm_guardrails/README.md\n/Users/ravindranathakila/service/realized/.uv-cache/archive-v0/A-1J_q5yJC-6LgcZ/litellm/proxy/discovery_endpoints/README.md\n/Users/ravindranathakila/service/realized/.uv-cache/archive-v0/A-1J_q5yJC-6LgcZ/litellm/proxy/workflows/README.md\n/Users/ravindranathakila/service/realized/.uv-cache/archive-v0/A-1J_q5yJC-6LgcZ/litellm/proxy/README.md\n/Users/ravindranathakila/service/realized/.uv-cache/archive-v0/A-1J_q5yJC-6LgcZ/litellm/proxy/types_utils/README.md\n/Users/ravindranathakila/service/realized/.uv-cache/archive-v0/A-1J_q5yJC-6LgcZ/litellm/proxy/client/cli/README.md\n/Users/ravindranathakila/service/realized/.uv-cache/archive-v0/A-1J_q5yJC-6LgcZ/litellm/proxy/client/README.md\n/Users/ravindranathakila/service/realized/.uv-cache/archive-v0/A-1J_q5yJC-6LgcZ/litellm/passthrough/README.md\n/Users/ravindranathakila/service/realized/.uv-cache/archive-v0/A-1J_q5yJC-6LgcZ/litellm/realtime_api/README.md\n/Users/ravindranathakila/service/realized/.uv-cache/archive-v0/A-1J_q5yJC-6LgcZ/litellm/integrations/dotprompt/README.md\n... [truncated]",
+          "name": "find_files_named_readme_md_under_users_ravindranathakila",
+          "prompt": "Find files named `README.md` under `/Users/ravindranathakila/service/realized`.",
+          "report": "reports/architecture_qualification/workstation_trials_bash_retry/bash/prompt_06_find_files_named_readme_md_under_users_ravindranathakila.json",
+          "route": {
+            "invoked_skill_titles": [
+              "Bash Commands 06 \u2014 Find Files By Name / Bash Commands 06 Find Files By Name"
+            ],
+            "tool_names": [
+              "ws.skill.invoke"
+            ],
+            "used_direct_composition": true,
+            "used_skill_invoke": true
+          },
+          "status": "ok",
+          "terminal_tool_status": "ok"
+        },
+        {
+          "assistant_text": "{\"answer\": \"executed\", \"notes\": [], \"result\": {\"status\": \"executed\"}, \"status\": \"ok\"}",
+          "name": "copy_etc_hosts_to_tmp_hosts_copy",
+          "prompt": "Copy `/etc/hosts` to `/tmp/hosts.copy`.",
+          "report": "reports/architecture_qualification/workstation_trials_bash_retry/bash/prompt_07_copy_etc_hosts_to_tmp_hosts_copy.json",
+          "route": {
+            "invoked_skill_titles": [
+              "Bash Commands 07 \u2014 Copy File / Bash Commands 07 Copy File"
+            ],
+            "tool_names": [
+              "ws.skill.invoke"
+            ],
+            "used_direct_composition": true,
+            "used_skill_invoke": true
+          },
+          "status": "ok",
+          "terminal_tool_status": "ok"
+        },
+        {
+          "assistant_text": "{\"answer\": \"executed\", \"notes\": [], \"result\": {\"status\": \"executed\"}, \"status\": \"ok\"}",
+          "name": "move_tmp_hosts_copy_to_tmp_hosts_moved",
+          "prompt": "Move `/tmp/hosts.copy` to `/tmp/hosts.moved`.",
+          "report": "reports/architecture_qualification/workstation_trials_bash_retry/bash/prompt_08_move_tmp_hosts_copy_to_tmp_hosts_moved.json",
+          "route": {
+            "invoked_skill_titles": [
+              "Bash Commands 08 \u2014 Move File / Bash Commands 08 Move File"
+            ],
+            "tool_names": [
+              "ws.skill.invoke"
+            ],
+            "used_direct_composition": true,
+            "used_skill_invoke": true
+          },
+          "status": "ok",
+          "terminal_tool_status": "ok"
+        },
+        {
+          "assistant_text": "Done. /tmp/hosts.moved is no longer present (the subsequent check shows: No such file or directory).\n\nNote: A prior attempt to read /tmp/hosts.moved from the session failed due to attachment-root path restrictions, but the removal operation itself completed (exit code 0) and the file is not found now.\n\nWould you like me to verify any other paths or perform a cleanup of related temporary files?",
+          "name": "remove_tmp_hosts_moved",
+          "prompt": "Remove `/tmp/hosts.moved`.",
+          "report": "reports/architecture_qualification/workstation_trials_bash_retry/bash/prompt_09_remove_tmp_hosts_moved.json",
+          "route": {
+            "invoked_skill_titles": [
+              "Bash Commands 09 \u2014 Remove File / Bash Commands 09 Remove File"
+            ],
+            "tool_names": [
+              "ws.skill.invoke",
+              "ws.fs.read",
+              "ws.process.run"
+            ],
+            "used_direct_composition": false,
+            "used_skill_invoke": true
+          },
+          "status": "ok",
+          "terminal_tool_status": "ok"
+        },
+        {
+          "assistant_text": "Invocation of Bash Commands 10 \u2014 Create Tar Gz Archive / Bash Commands 10 Create Tar Gz Archive failed: tar: could not chdir to '/tmp/realized-tests.tar.gz'",
+          "name": "create_the_archive_tmp_realized_tests_tar_gz",
+          "prompt": "Create the archive `/tmp/realized-tests.tar.gz` from `tests`.",
+          "report": "reports/architecture_qualification/workstation_trials_bash_retry/bash/prompt_10_create_the_archive_tmp_realized_tests_tar_gz.json",
+          "route": {
+            "invoked_skill_titles": [
+              "Bash Commands 10 \u2014 Create Tar Gz Archive / Bash Commands 10 Create Tar Gz Archive"
+            ],
+            "tool_names": [
+              "ws.skill.invoke"
+            ],
+            "used_direct_composition": true,
+            "used_skill_invoke": true
+          },
+          "status": "error_terminal_tool_error",
+          "terminal_tool_status": "error"
+        },
+        {
+          "assistant_text": "Archive:  /tmp/example.zip\n extracting: /tmp/example-unpacked/example/README.txt",
+          "name": "extract_tmp_example_zip_into_tmp_example_unpacked",
+          "prompt": "Extract `/tmp/example.zip` into `/tmp/example-unpacked`.",
+          "report": "reports/architecture_qualification/workstation_trials_bash_retry/bash/prompt_11_extract_tmp_example_zip_into_tmp_example_unpacked.json",
+          "route": {
+            "invoked_skill_titles": [
+              "Bash Commands 11 \u2014 Extract Zip Archive / Bash Commands 11 Extract Zip Archive"
+            ],
+            "tool_names": [
+              "ws.skill.invoke"
+            ],
+            "used_direct_composition": true,
+            "used_skill_invoke": true
+          },
+          "status": "ok",
+          "terminal_tool_status": "ok"
+        },
+        {
+          "assistant_text": "{\"answer\": \"executed\", \"notes\": [], \"result\": {\"status\": \"executed\"}, \"status\": \"ok\"}",
+          "name": "download_https_example_com_to_tmp_example_html",
+          "prompt": "Download `https://example.com` to `/tmp/example.html`.",
+          "report": "reports/architecture_qualification/workstation_trials_bash_retry/bash/prompt_12_download_https_example_com_to_tmp_example_html.json",
+          "route": {
+            "invoked_skill_titles": [
+              "Bash Commands 12 \u2014 Download Url To File / Bash Commands 12 Download Url To File"
+            ],
+            "tool_names": [
+              "ws.skill.invoke"
+            ],
+            "used_direct_composition": true,
+            "used_skill_invoke": true
+          },
+          "status": "ok",
+          "terminal_tool_status": "ok"
+        },
+        {
+          "assistant_text": "c7dd0e2ed261ce76d76f852596c5b54026b9a894fa481381ffd399b556c0e2da  /etc/hosts",
+          "name": "compute_the_sha256_checksum_of_etc_hosts",
+          "prompt": "Compute the sha256 checksum of `/etc/hosts`.",
+          "report": "reports/architecture_qualification/workstation_trials_bash_retry/bash/prompt_13_compute_the_sha256_checksum_of_etc_hosts.json",
+          "route": {
+            "invoked_skill_titles": [
+              "Bash Commands 13 \u2014 Compute Sha256 Checksum / Bash Commands 13 Compute Sha256 Checksum"
+            ],
+            "tool_names": [
+              "ws.skill.invoke"
+            ],
+            "used_direct_composition": true,
+            "used_skill_invoke": true
+          },
+          "status": "ok",
+          "terminal_tool_status": "ok"
+        },
+        {
+          "assistant_text": "{\"answer\": \"executed\", \"notes\": [], \"result\": {\"status\": \"executed\"}, \"status\": \"ok\"}",
+          "name": "make_tmp_demo_sh_executable_with_mode_755",
+          "prompt": "Make `/tmp/demo.sh` executable with mode `755`.",
+          "report": "reports/architecture_qualification/workstation_trials_bash_retry/bash/prompt_14_make_tmp_demo_sh_executable_with_mode_755.json",
+          "route": {
+            "invoked_skill_titles": [
+              "Bash Commands 14 \u2014 Change File Mode / Bash Commands 14 Change File Mode"
+            ],
+            "tool_names": [
+              "ws.skill.invoke"
+            ],
+            "used_direct_composition": true,
+            "used_skill_invoke": true
+          },
+          "status": "ok",
+          "terminal_tool_status": "ok"
+        }
+      ],
+      "prompt_summary": {
+        "ok": 13,
+        "total": 14,
+        "used_direct_composition": 13,
+        "used_skill_invoke": 14
+      },
+      "prompts_file": "/Users/ravindranathakila/service/realized/trials/bash/PROMPTS.md",
+      "skill_catalog_count": 17,
+      "sqlite": "reports/architecture_qualification/workstation_trials_bash_retry/bash/bash.sqlite3",
+      "status": "partial",
+      "world_root": "/Users/ravindranathakila/service/realized/reports/architecture_qualification/workstation_trials_bash_retry/bash/world"
+    }
+  ],
+  "finished_at": "2026-10-06T14:33:08.027043+00:00",
+  "max_tool_rounds": 8,
+  "model": "",
+  "report_root": "reports/architecture_qualification/workstation_trials_bash_retry",
+  "started_at": "2026-10-06T14:30:44.207203+00:00",
+  "status": "partial",
+  "trials_root": "/Users/ravindranathakila/service/realized/trials",
+  "workspace": "/Users/ravindranathakila/service/realized"
+}

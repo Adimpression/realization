@@ -1,0 +1,12 @@
+- Fetch JSON from `https://api.example.com/items/42`.
+- Fetch JSON from `https://api.example.com/search` with query `q=widgets` and `limit=10`.
+- Post the JSON text `{"name":"Ada","role":"admin"}` to `https://api.example.com/users`.
+- Put the JSON text `{"status":"active"}` to `https://api.example.com/users/42`.
+- Patch `https://api.example.com/users/42` with the JSON text `{"nickname":"ace"}`.
+- Delete the resource at `https://api.example.com/users/42`.
+- Fetch JSON from `https://api.example.com/profile` using the bearer token `secret-token`.
+- Fetch JSON from `https://api.example.com/items` with the header `X-Trace-Id: abc-123`.
+- Fetch page `2` with page size `50` from `https://api.example.com/items`.
+- Download `https://example.com/report.pdf` to `/tmp/report.pdf`.
+- Post the form fields `grant_type=client_credentials&scope=read` to `https://api.example.com/token`.
+- Poll `https://api.example.com/jobs/42` until the JSON field `status` becomes `completed`.

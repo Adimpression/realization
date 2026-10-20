@@ -1,0 +1,126 @@
+{
+  "fixture_id": "smart-city-travel-incremental",
+  "title": "Smart City Travel",
+  "title_key": "smart-city-travel",
+  "source_ref": "dst/City bus prose v10.md",
+  "summary": "A city transit authority is deciding how to modernize fare payment without disrupting service, excluding riders, or overcommitting to a fragile direct migration path.",
+  "sections": [
+    {
+      "key": "situation",
+      "title": "Situation",
+      "narrative": "The current bus network relies on cash and plastic transit cards. The modernization aim is to introduce app-based and bank-card contactless payment while preserving reliable, accessible public service.",
+      "entries": []
+    },
+    {
+      "key": "actors",
+      "title": "Actors",
+      "narrative": "",
+      "entries": [
+        { "code": "", "text": "City transit authority" },
+        { "code": "", "text": "Private bus operators" },
+        { "code": "", "text": "Payment processor" },
+        { "code": "", "text": "City regulator" },
+        { "code": "", "text": "Passengers" }
+      ]
+    },
+    {
+      "key": "objectives",
+      "title": "Objectives",
+      "narrative": "",
+      "entries": [
+        { "code": "o1", "text": "reduce boarding time" },
+        { "code": "o2", "text": "reduce fare evasion" },
+        { "code": "o3", "text": "avoid service disruption" }
+      ]
+    },
+    {
+      "key": "capabilities",
+      "title": "Capabilities",
+      "narrative": "",
+      "entries": [
+        { "code": "k1", "text": "improved smart card system" },
+        { "code": "k2", "text": "full open-loop contactless payment with bank cards and phones" },
+        { "code": "k3", "text": "fare inspector mobile verification tools" },
+        { "code": "k4", "text": "backward compatibility for old validators" }
+      ]
+    },
+    {
+      "key": "dependencies",
+      "title": "Dependencies",
+      "narrative": "",
+      "entries": [
+        { "code": "d1", "text": "banks and payment processor readiness" },
+        { "code": "d2", "text": "operator hardware upgrade complete" },
+        { "code": "d3", "text": "legal approval for account-based fare processing" }
+      ]
+    },
+    {
+      "key": "constraints",
+      "title": "Constraints",
+      "narrative": "",
+      "entries": [
+        { "code": "q1", "text": "annual budget cap" },
+        { "code": "q2", "text": "buses must continue operating without downtime" },
+        { "code": "q3", "text": "elderly and unbanked riders must not be excluded" }
+      ]
+    },
+    {
+      "key": "boundaries",
+      "title": "Boundaries",
+      "narrative": "",
+      "entries": [
+        { "code": "b1", "text": "public transit authority and private bus operators" },
+        { "code": "b2", "text": "transit system and the banking/payment system" },
+        { "code": "b3", "text": "policy questions of inclusion and privacy" }
+      ]
+    },
+    {
+      "key": "states",
+      "title": "States",
+      "narrative": "",
+      "entries": [
+        { "code": "s0", "text": "legacy fare system" },
+        { "code": "s1", "text": "improved closed-loop card system" },
+        { "code": "s2", "text": "hybrid card plus compatibility tools" },
+        { "code": "s3", "text": "full account-based open-loop payment" }
+      ]
+    },
+    {
+      "key": "transitions",
+      "title": "Transitions",
+      "narrative": "",
+      "entries": [
+        { "code": "t1", "text": "upgrade existing transit card system" },
+        { "code": "t2", "text": "add compatibility and inspection tools" },
+        { "code": "t3", "text": "advance to full account-based open-loop payment" },
+        { "code": "t4", "text": "direct shift to open-loop bank-card payment" }
+      ]
+    }
+  ],
+  "candidate_paths": [
+    {
+      "title": "Path A: staged modernization route",
+      "parent_title": "Candidate paths",
+      "route_expression": "s0 -> s1 -> s2 -> s3",
+      "narrative": "This path upgrades the existing system in stages, preserving continuity and inclusion while creating a later route into full open-loop payment.",
+      "highlights": [
+        "`s0 -> s1 -> s2 -> s3`",
+        "legacy fare system to improved closed-loop card system",
+        "hybrid card plus compatibility tools before full open-loop payment",
+        "reduce boarding time and fare evasion without breaking service"
+      ]
+    },
+    {
+      "title": "Path B: direct open-loop route",
+      "parent_title": "Candidate paths",
+      "route_expression": "s0 -> s3",
+      "narrative": "This path promises faster payoff, but it carries greater dependency and disruption risk because external readiness and public inclusion obligations are tighter.",
+      "highlights": [
+        "`s0 -> s3`",
+        "move directly to bank-card and phone payment",
+        "greater dependency and disruption risk",
+        "depends on banking, hardware, legal approval, and adoption"
+      ]
+    }
+  ]
+}

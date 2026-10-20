@@ -1,0 +1,10 @@
+- State the general conservation formula and explain what the inputs and outputs represent.
+- Write the formula that relates number of particles to moles, and identify the role of each variable.
+- Given the relation for molar mass, express how to compute mass from moles and molar mass, and explain how this relates to the reusable substrate.
+- Using the stoichiometric ratio relation, derive how to compute the amount of substance ( n_B ) from a known ( n_A ) and coefficients.
+- Explain why mass conservation and atom conservation belong to the same family but must not be treated as the same law.
+- Distinguish between stoichiometric ratio and limiting reagent in terms of their functional role in determining reaction outcomes.
+- Describe the full chain of transformations required to convert mass of a reactant into concentration of a product in solution, naming each intermediate relation used.
+- Starting from solute conservation and concentration definitions, derive the dilution law ( C_1 V_1 = C_2 V_2 ) and explain each substitution step.
+- Identify the reusable substrate underlying the ideal gas law, and explain how each variable maps onto that abstract structure.
+- Explain how the equilibrium constant expression composes multiple earlier semantic substrates (concentration, stoichiometric coefficients, and weighted product ratios), and reconstruct the full reasoning path from these components to the final form of ( K ).

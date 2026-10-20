@@ -1,0 +1,399 @@
+{
+  "assistant_text": "Invocation of Python Commands 01 \u2014 List Directory Entries / Python Commands 01 List Directory Entries failed: ModuleNotFoundError: No module named 'yaml'",
+  "direct_result_status": "error",
+  "model": "workstation-direct-composition",
+  "rounds": 0,
+  "tool_receipts": [
+    {
+      "arguments": {
+        "invocation_payload": {
+          "mount": "skill_input",
+          "relative_path": "trials"
+        },
+        "semantic_unit": "List the entries in mount `skill_input` at `trials`.",
+        "skill_title": "Python Commands 01 \u2014 List Directory Entries / Python Commands 01 List Directory Entries"
+      },
+      "name": "ws.skill.invoke",
+      "result": {
+        "answer": "Invocation of Python Commands 01 \u2014 List Directory Entries / Python Commands 01 List Directory Entries failed: ModuleNotFoundError: No module named 'yaml'",
+        "approved_delegation": [],
+        "approved_delegation_scope": "",
+        "capability": "ws.skill.invoke",
+        "declaration_excerpt": {
+          "authorities_requested": [
+            "execute",
+            "read"
+          ],
+          "risk_tier": "tier1_bounded_transform"
+        },
+        "delegated_virtual_mounts": {
+          "skill_input": {
+            "attachment_kind": "workspace",
+            "data_class": "public",
+            "mount_path": "/workstation/mounts/skill_input",
+            "permissions": [
+              "list",
+              "read"
+            ],
+            "root": "/Users/ravindranathakila/service/realized"
+          }
+        },
+        "escalated_delegation": [],
+        "executor_framework": "python3",
+        "granted_delegation": [
+          {
+            "capability": "ws.fs.read",
+            "data_class": "public",
+            "mount": "skill_input",
+            "permissions": [
+              "list",
+              "read"
+            ],
+            "rationale": "Need to expose the requested workstation mount to the invoked skill.",
+            "target": "skill_input"
+          }
+        ],
+        "invocation_request": {
+          "bindings": [
+            {
+              "contract_description": "required input value",
+              "name": "mount",
+              "status": "provided",
+              "value": "skill_input"
+            },
+            {
+              "contract_description": "required input value",
+              "name": "relative_path",
+              "status": "provided",
+              "value": "trials"
+            }
+          ],
+          "declared_inputs": {
+            "mount": "required input value",
+            "relative_path": "required input value"
+          },
+          "declared_outputs": {
+            "result": "execution result"
+          },
+          "executor_framework": "python3",
+          "invocation_mode": "llm_routed",
+          "missing_required_inputs": [],
+          "payload": {
+            "mount": "skill_input",
+            "relative_path": "trials"
+          },
+          "required_inputs": [
+            "mount",
+            "relative_path"
+          ],
+          "semantic_unit": "List the entries in mount `skill_input` at `trials`.",
+          "skill_kind": "ability",
+          "skill_title": "Python Commands 01 \u2014 List Directory Entries / Python Commands 01 List Directory Entries"
+        },
+        "invocation_result": {
+          "answer": "Invocation of Python Commands 01 \u2014 List Directory Entries / Python Commands 01 List Directory Entries failed: ModuleNotFoundError: No module named 'yaml'",
+          "error": "",
+          "nested_run_outcome": "ongoing",
+          "output_payload": null,
+          "skill_title": "Python Commands 01 \u2014 List Directory Entries / Python Commands 01 List Directory Entries",
+          "status": "error"
+        },
+        "missing_delegation": [],
+        "nested_capability_grants": [
+          {
+            "admission_status": "admitted",
+            "approval_class": "automatic",
+            "artifact_id": "artifact-skill-7738051ce6c9",
+            "artifact_title": "Python Commands 01 \u2014 List Directory Entries / Python Commands 01 List Directory Entries",
+            "authority": "execute",
+            "context": "explicit_user_prompt",
+            "data_classes_touched": [
+              "public"
+            ],
+            "duration": "single_invocation",
+            "effect_kind": "execute.python3",
+            "executor_framework": "python3",
+            "id": "grant-d3f5b4c682fe",
+            "issued_at": "2026-04-24T20:54:43+00:00",
+            "policy_titles": [
+              "Workstation Skill Home Policy"
+            ],
+            "risk_tier": "tier1_bounded_transform",
+            "scope": "local_executor",
+            "semantic_unit": "List the entries in mount `skill_input` at `trials`.",
+            "side_effects": [
+              "brokered host effect via fs.list_mount"
+            ],
+            "skill_kind": "ability",
+            "target": "python3_skill_runtime",
+            "triggering_conditions": [
+              "user invokes skill"
+            ]
+          },
+          {
+            "admission_status": "admitted",
+            "approval_class": "automatic",
+            "artifact_id": "artifact-skill-7738051ce6c9",
+            "artifact_title": "Python Commands 01 \u2014 List Directory Entries / Python Commands 01 List Directory Entries",
+            "authority": "read",
+            "context": "explicit_user_prompt",
+            "data_classes_touched": [
+              "public"
+            ],
+            "duration": "single_invocation",
+            "effect_kind": "execute.python3",
+            "executor_framework": "python3",
+            "id": "grant-592d7f740653",
+            "issued_at": "2026-04-24T20:54:43+00:00",
+            "policy_titles": [
+              "Workstation Skill Home Policy"
+            ],
+            "risk_tier": "tier1_bounded_transform",
+            "scope": "local_executor",
+            "semantic_unit": "List the entries in mount `skill_input` at `trials`.",
+            "side_effects": [
+              "brokered host effect via fs.list_mount"
+            ],
+            "skill_kind": "ability",
+            "target": "skill_runtime",
+            "triggering_conditions": [
+              "user invokes skill"
+            ]
+          }
+        ],
+        "nested_effect_traces": [
+          {
+            "admission": {
+              "admitted": true,
+              "approval_titles": [],
+              "evaluated_at": "2026-04-24T20:54:43+00:00",
+              "policy_titles": [
+                "Workstation Skill Home Policy"
+              ],
+              "rationale": "Declaration satisfied installed policy constraints and required no additional approval.",
+              "required_approval_class": "automatic",
+              "status": "admitted"
+            },
+            "artifact_id": "artifact-skill-7738051ce6c9",
+            "artifact_title": "Python Commands 01 \u2014 List Directory Entries / Python Commands 01 List Directory Entries",
+            "created_at": "2026-04-24T20:54:44+00:00",
+            "decision": {
+              "allowed": true,
+              "evaluated_at": "2026-04-24T20:54:43+00:00",
+              "grant_ids": [
+                "grant-d3f5b4c682fe"
+              ],
+              "rationale": "Effect request is covered by issued runtime grants.",
+              "required_authority": "execute"
+            },
+            "declaration": {
+              "approval_requirements": [
+                "automatic"
+              ],
+              "authorities_requested": [
+                "execute",
+                "read"
+              ],
+              "authority_bounds": {
+                "execute": {
+                  "approval_class": "automatic",
+                  "context": "explicit_user_prompt",
+                  "duration": "single_invocation",
+                  "scope": "local_executor",
+                  "target": "python3_skill_runtime",
+                  "triggering_conditions": [
+                    "user invokes skill"
+                  ]
+                },
+                "read": {
+                  "approval_class": "automatic",
+                  "context": "explicit_user_prompt",
+                  "duration": "single_invocation",
+                  "scope": "local_executor",
+                  "target": "skill_runtime",
+                  "triggering_conditions": [
+                    "user invokes skill"
+                  ]
+                }
+              },
+              "composition_rights": [],
+              "data_classes_touched": [
+                "public"
+              ],
+              "escalation_rights": [],
+              "executor_framework": "python3",
+              "inputs": {
+                "mount": "required input value",
+                "relative_path": "required input value"
+              },
+              "intent": "How do you use python commands 01 list directory entries from mount, relative_path?",
+              "invocation_rights": [
+                "direct_user_invocation"
+              ],
+              "outputs": {
+                "result": "execution result"
+              },
+              "persistence_behavior": "none",
+              "risk_tier": "tier1_bounded_transform",
+              "side_effects": [
+                "brokered host effect via fs.list_mount"
+              ]
+            },
+            "grant_ids": [
+              "grant-d3f5b4c682fe",
+              "grant-592d7f740653"
+            ],
+            "grants": [
+              {
+                "admission_status": "admitted",
+                "approval_class": "automatic",
+                "artifact_id": "artifact-skill-7738051ce6c9",
+                "artifact_title": "Python Commands 01 \u2014 List Directory Entries / Python Commands 01 List Directory Entries",
+                "authority": "execute",
+                "context": "explicit_user_prompt",
+                "data_classes_touched": [
+                  "public"
+                ],
+                "duration": "single_invocation",
+                "effect_kind": "execute.python3",
+                "executor_framework": "python3",
+                "id": "grant-d3f5b4c682fe",
+                "issued_at": "2026-04-24T20:54:43+00:00",
+                "policy_titles": [
+                  "Workstation Skill Home Policy"
+                ],
+                "risk_tier": "tier1_bounded_transform",
+                "scope": "local_executor",
+                "semantic_unit": "List the entries in mount `skill_input` at `trials`.",
+                "side_effects": [
+                  "brokered host effect via fs.list_mount"
+                ],
+                "skill_kind": "ability",
+                "target": "python3_skill_runtime",
+                "triggering_conditions": [
+                  "user invokes skill"
+                ]
+              },
+              {
+                "admission_status": "admitted",
+                "approval_class": "automatic",
+                "artifact_id": "artifact-skill-7738051ce6c9",
+                "artifact_title": "Python Commands 01 \u2014 List Directory Entries / Python Commands 01 List Directory Entries",
+                "authority": "read",
+                "context": "explicit_user_prompt",
+                "data_classes_touched": [
+                  "public"
+                ],
+                "duration": "single_invocation",
+                "effect_kind": "execute.python3",
+                "executor_framework": "python3",
+                "id": "grant-592d7f740653",
+                "issued_at": "2026-04-24T20:54:43+00:00",
+                "policy_titles": [
+                  "Workstation Skill Home Policy"
+                ],
+                "risk_tier": "tier1_bounded_transform",
+                "scope": "local_executor",
+                "semantic_unit": "List the entries in mount `skill_input` at `trials`.",
+                "side_effects": [
+                  "brokered host effect via fs.list_mount"
+                ],
+                "skill_kind": "ability",
+                "target": "skill_runtime",
+                "triggering_conditions": [
+                  "user invokes skill"
+                ]
+              }
+            ],
+            "host_abi_version": "bssc.host.v1",
+            "id": "effect-6a55bdf44bc5",
+            "lifecycle": {
+              "activation_status": "active",
+              "admission_status": "admitted",
+              "installation_status": "installed",
+              "quarantine_status": "clear",
+              "review_status": "pending_review",
+              "status_reason": "Skill is installed, active, and trusted for invocation.",
+              "trust_status": "trusted",
+              "updated_at": "2026-04-24T20:54:43+00:00"
+            },
+            "receipts": {
+              "approval": {
+                "digest": "40a3b6b7c64295c8268182d6ccf3fa41b68d562f6c2df16c59303b94172fa6c1",
+                "kind": "approval",
+                "schema": "bssc_effect_receipt.v1"
+              },
+              "declaration": {
+                "digest": "079a6002c2aedf4510b358090f68a37b797a1fba89bcb70d556feeb2624eaf0d",
+                "kind": "declaration",
+                "schema": "bssc_effect_receipt.v1"
+              },
+              "grants": {
+                "digest": "7f035f8104bfda1e88994244ecfb0ad5dcd8e74e7fe7eef7903afd6b49a2ccf3",
+                "kind": "grants",
+                "schema": "bssc_effect_receipt.v1"
+              },
+              "lifecycle": {
+                "digest": "a10728d36adaa72ebf909f7ec306952517515aea1dfc7fe1caa7d58d5e204228",
+                "kind": "lifecycle",
+                "schema": "bssc_effect_receipt.v1"
+              },
+              "policy": {
+                "digest": "d58e4fd27e9c9418c34c41054024700f1f2b2be2ea80e6e5d2bfa0f0e91d750d",
+                "kind": "policy",
+                "schema": "bssc_effect_receipt.v1"
+              },
+              "request": {
+                "digest": "5564e09bc71e4d5100dba976e822d83096a992a4234960e7a45a167e8009904c",
+                "kind": "request",
+                "schema": "bssc_effect_receipt.v1"
+              }
+            },
+            "request": {
+              "artifact_id": "artifact-skill-7738051ce6c9",
+              "artifact_title": "Python Commands 01 \u2014 List Directory Entries / Python Commands 01 List Directory Entries",
+              "created_at": "2026-04-24T20:54:43+00:00",
+              "effect_kind": "execute.python3",
+              "executor_framework": "python3",
+              "invocation_payload": {
+                "mount": "skill_input",
+                "relative_path": "trials"
+              },
+              "semantic_unit": "List the entries in mount `skill_input` at `trials`."
+            },
+            "result": {
+              "answer": "",
+              "exit_code": 1,
+              "notes": [],
+              "ok": false,
+              "stderr": "Installed 2 packages in 1ms\nTraceback (most recent call last):\n  File \"/Users/ravindranathakila/service/realized/ram/tmp/bssc_cross_boundary_p5_zxe7e/boundary_artifact.py\", line 74, in <module>\n    __bssc_cli_main__()\n    ~~~~~~~~~~~~~~~~~^^\n  File \"/Users/ravindranathakila/service/realized/ram/tmp/bssc_cross_boundary_p5_zxe7e/boundary_artifact.py\", line 68, in __bssc_cli_main__\n    result = run(typed_input)\n  File \"/Users/ravindranathakila/service/realized/ram/tmp/bssc_cross_boundary_p5_zxe7e/boundary_artifact.py\", line 51, in run\n    result_value = main(mount=payload.payload.get('mount'), relative_path=payload.payload.get('relative_path'))\n  File \"/Users/ravindranathakila/service/realized/ram/tmp/bssc_cross_boundary_p5_zxe7e/boundary_artifact.py\", line 37, in main\n    from python_skill_host import broker_request\n  File \"/Users/ravindranathakila/service/realized/python_skill_host.py\", line 11, in <module>\n    from host_brokers import invoke_host_broker\n  File \"/Users/ravindranathakila/service/realized/host_brokers.py\", line 33, in <module>\n    from runtime_controller_api import bootstrap_runtime_controller\n  File \"/Users/ravindranathakila/service/realized/runtime_controller_api.py\", line 9, in <module>\n    from learning_context_skill_projection import (\n    ...<3 lines>...\n    )\n  File \"/Users/ravindranathakila/service/realized/learning_context_skill_projection.py\", line 10, in <module>\n    from skill_compiler import compile_skill_document\n  File \"/Users/ravindranathakila/service/realized/skill_compiler.py\", line 10, in <module>\n    from skill_schema_io import artifact_from_skill_document\n  File \"/Users/ravindranathakila/service/realized/skill_schema_io.py\", line 10, in <module>\n    import yaml\nModuleNotFoundError: No module named 'yaml'"
+            }
+          }
+        ],
+        "nested_run_outcome": "ongoing",
+        "notes": [],
+        "parsed_output": null,
+        "rationale": "",
+        "requested_delegation": [
+          {
+            "capability": "ws.fs.read",
+            "rationale": "Need to expose the requested workstation mount to the invoked skill.",
+            "target": "skill_input"
+          }
+        ],
+        "result": null,
+        "result_payload": null,
+        "skill_kind": "ability",
+        "skill_source": {
+          "source_kind": "attached_skill_store",
+          "source_target": "skills"
+        },
+        "skill_title": "Python Commands 01 \u2014 List Directory Entries / Python Commands 01 List Directory Entries",
+        "status": "error",
+        "stderr": "Installed 2 packages in 1ms\nTraceback (most recent call last):\n  File \"/Users/ravindranathakila/service/realized/ram/tmp/bssc_cross_boundary_p5_zxe7e/boundary_artifact.py\", line 74, in <module>\n    __bssc_cli_main__()\n    ~~~~~~~~~~~~~~~~~^^\n  File \"/Users/ravindranathakila/service/realized/ram/tmp/bssc_cross_boundary_p5_zxe7e/boundary_artifact.py\", line 68, in __bssc_cli_main__\n    result = run(typed_input)\n  File \"/Users/ravindranathakila/service/realized/ram/tmp/bssc_cross_boundary_p5_zxe7e/boundary_artifact.py\", line 51, in run\n    result_value = main(mount=payload.payload.get('mount'), relative_path=payload.payload.get('relative_path'))\n  File \"/Users/ravindranathakila/service/realized/ram/tmp/bssc_cross_boundary_p5_zxe7e/boundary_artifact.py\", line 37, in main\n    from python_skill_host import broker_request\n  File \"/Users/ravindranathakila/service/realized/python_skill_host.py\", line 11, in <module>\n    from host_brokers import invoke_host_broker\n  File \"/Users/ravindranathakila/service/realized/host_brokers.py\", line 33, in <module>\n    from runtime_controller_api import bootstrap_runtime_controller\n  File \"/Users/ravindranathakila/service/realized/runtime_controller_api.py\", line 9, in <module>\n    from learning_context_skill_projection import (\n    ...<3 lines>...\n    )\n  File \"/Users/ravindranathakila/service/realized/learning_context_skill_projection.py\", line 10, in <module>\n    from skill_compiler import compile_skill_document\n  File \"/Users/ravindranathakila/service/realized/skill_compiler.py\", line 10, in <module>\n    from skill_schema_io import artifact_from_skill_document\n  File \"/Users/ravindranathakila/service/realized/skill_schema_io.py\", line 10, in <module>\n    import yaml\nModuleNotFoundError: No module named 'yaml'",
+        "target": "skills",
+        "unsupported_delegation": []
+      }
+    }
+  ]
+}

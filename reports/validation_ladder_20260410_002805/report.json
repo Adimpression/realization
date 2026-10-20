@@ -1,0 +1,26 @@
+{
+  "started_at": "2026-04-10T00:28:05+00:00",
+  "finished_at": "2026-04-10T01:13:33+00:00",
+  "status": "failed",
+  "stage": "unit_tests",
+  "report_root": "/Users/ravindranathakila/service/realized/reports/validation_ladder_20260410_002805",
+  "stages": [
+    {
+      "name": "unit_tests",
+      "cmd": [
+        "/Users/ravindranathakila/.venv/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/Users/ravindranathakila/service/realized/tests"
+      ],
+      "cwd": "/Users/ravindranathakila/service/realized",
+      "status": "failed",
+      "returncode": 1,
+      "elapsed_seconds": 2728.424928,
+      "stdout_tail": "",
+      "stderr_tail": "................................................................................................................................................................................../Users/ravindranathakila/service/realized/workstation/flet_host.py:378: DeprecationWarning: all() is deprecated since version 0.80.0 and will be removed in version 0.83.0. Use Border.all() instead.\n  return ft.border.all(_FLET_BORDER_WIDTH, ACTIVE_AREA_FRAME if active else INACTIVE_AREA_FRAME)\n/Users/ravindranathakila/service/realized/workstation/flet_host.py:436: DeprecationWarning: symmetric() is deprecated since version 0.80.0 and will be removed in version 0.83.0. Use Padding.symmetric() instead\n  padding=ft.padding.symmetric(horizontal=10, vertical=5),\n/Users/ravindranathakila/service/realized/workstation/flet_host.py:1905: DeprecationWarning: symmetric() is deprecated since version 0.80.0 and will be removed in version 0.83.0. Use Padding.symmetric() instead\n  content_padding=ft.padding.symmetric(horizontal=0, vertical=2),\n./Users/ravindranathakila/service/realized/workstation/flet_host.py:1616: DeprecationWarning: symmetric() is deprecated since version 0.80.0 and will be removed in version 0.83.0. Use Padding.symmetric() instead\n  padding=ft.padding.symmetric(horizontal=8, vertical=4),\n.../Users/ravindranathakila/service/realized/workstation/flet_host.py:1726: DeprecationWarning: symmetric() is deprecated since version 0.80.0 and will be removed in version 0.83.0. Use Padding.symmetric() instead\n  padding=ft.padding.symmetric(horizontal=8, vertical=6),\n..../Users/ravindranathakila/service/realized/workstation/flet_host.py:1942: DeprecationWarning: only() is deprecated since version 0.80.0 and will be removed in version 0.83.0. Use Padding.only() instead\n  padding=ft.padding.only(left=0, right=0, top=0, bottom=4),\n............/Users/ravindranathakila/service/realized/workstation/flet_host.py:1386: DeprecationWarning: only() is deprecated since version 0.80.0 and will be removed in version 0.83.0. Use Padding.only() instead\n  padding=ft.padding.only(bottom=6),\n/Users/ravindranathakila/service/realized/workstation/flet_host.py:1420: DeprecationWarning: only() is deprecated since version 0.80.0 and will be removed in version 0.83.0. Use Padding.only() instead\n  padding=ft.padding.only(bottom=6),\n..............\n======================================================================\nFAIL: test_break_this_down_prompt_decompose_or_refine_creates_children_under_fallback (test_artifact_answer_selection.ArtifactAnswerSelectionTests.test_break_this_down_prompt_decompose_or_refine_creates_children_under_fallback)\nHigh Level Purpose:\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/ravindranathakila/service/realized/tests/test_artifact_answer_selection.py\", line 2181, in test_break_this_down_prompt_decompose_or_refine_creates_children_under_fallback\n    self.assertGreaterEqual(len(children), 2)\n    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^\nAssertionError: 1 not greater than or equal to 2\n\n======================================================================\nFAIL: test_break_this_down_prompt_decompose_or_refine_rebuilds_split_children_from_requested_outputs (test_artifact_answer_selection.ArtifactAnswerSelectionTests.test_break_this_down_prompt_decompose_or_refine_rebuilds_split_children_from_requested_outputs)\nHigh Level Purpose:\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/ravindranathakila/service/realized/tests/test_artifact_answer_selection.py\", line 2216, in test_break_this_down_prompt_decompose_or_refine_rebuilds_split_children_from_requested_outputs\n    self.assertGreaterEqual(len(children), 2)\n    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^\nAssertionError: 1 not greater than or equal to 2\n\n----------------------------------------------------------------------\nRan 725 tests in 2727.538s\n\nFAILED (failures=2)\n"
+    }
+  ]
+}

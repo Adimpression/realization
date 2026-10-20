@@ -1,0 +1,25 @@
+{
+  "assistant_text": "{'status': 'copied', 'source_mount': 'skill_input', 'source_relative_path': 'trials/python/README.md', 'destination_mount': 'skill_tmp', 'destination_relative_path': 'python-readme.copy'}",
+  "model": "workstation-direct-composition",
+  "rounds": 0,
+  "task_contract": {
+    "semantic_unit": "Copy `trials/python/README.md` from mount `skill_input` to mount `skill_tmp` at `python-readme.copy`."
+  },
+  "tool_receipts": [
+    {
+      "arguments": {
+        "skill_title": "Python Commands 05 \u2014 Copy File / Python Commands 05 Copy File",
+        "target": ""
+      },
+      "name": "ws.skill.invoke",
+      "result": {
+        "answer": "{'status': 'copied', 'source_mount': 'skill_input', 'source_relative_path': 'trials/python/README.md', 'destination_mount': 'skill_tmp', 'destination_relative_path': 'python-readme.copy'}",
+        "error": "",
+        "error_type": "",
+        "executor_framework": "python3",
+        "skill_title": "Python Commands 05 \u2014 Copy File / Python Commands 05 Copy File",
+        "status": "ok"
+      }
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+@startuml
+title Run Finalization And Discovery Harvest Flow
+
+participant "BSSCController" as Controller
+participant "Root Node" as Root
+participant "Run Outcome / Harvest / Reporting\n(extracted seam)" as Finalize
+participant "Discovery Harvest" as Harvest
+participant "Artifact Store" as Store
+participant "Trace Reporting" as Trace
+participant "SystemState" as State
+
+Controller -> Finalize: finalize_run()
+Finalize -> Controller: propagate([root])
+
+alt root becomes committable
+  Finalize -> Controller: commit_closure(root)
+end
+
+Finalize -> Controller: refresh_frontier()
+Finalize -> State: classify run_outcome
+
+alt discovery enabled
+  Finalize -> Harvest: perform_discovery_harvest(root)
+  Harvest --> Finalize: discovery audit and harvested artifacts
+else discovery disabled
+  Finalize -> State: record discovery skipped
+end
+
+Finalize -> Store: persist_artifacts()
+Finalize -> Trace: emit_trace_report()
+Finalize -> State: record final run outcome
+
+@enduml

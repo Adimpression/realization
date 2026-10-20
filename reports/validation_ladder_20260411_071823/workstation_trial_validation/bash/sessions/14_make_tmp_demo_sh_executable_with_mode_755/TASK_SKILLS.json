@@ -1,0 +1,28 @@
+{
+  "prompt": "Make `/tmp/demo.sh` executable with mode `755`.",
+  "returned_skill_count": 1,
+  "skills": [
+    {
+      "authorities_requested": [
+        "execute",
+        "write"
+      ],
+      "executor_framework": "bash",
+      "inputs": {
+        "mode": "required input value",
+        "path": "required input value"
+      },
+      "kind": "ability",
+      "outputs": {
+        "result": "execution result"
+      },
+      "representation": "shell_script",
+      "risk_tier": "tier2_connected",
+      "score": 3,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Bash Commands 14 \u2014 Change File Mode / Bash Commands 14 Change File Mode"
+    }
+  ],
+  "total_skill_count": 17
+}

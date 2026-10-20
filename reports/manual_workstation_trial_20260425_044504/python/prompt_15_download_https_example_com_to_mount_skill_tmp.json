@@ -1,0 +1,25 @@
+{
+  "assistant_text": "Invocation of Python Commands 15 \u2014 Download Url To File / Python Commands 15 Download Url To File failed: ModuleNotFoundError: No module named 'yaml'",
+  "model": "workstation-direct-composition",
+  "rounds": 0,
+  "task_contract": {
+    "semantic_unit": "Download `https://example.com` to mount `skill_tmp` at `example-python.html`."
+  },
+  "tool_receipts": [
+    {
+      "arguments": {
+        "skill_title": "Python Commands 15 \u2014 Download Url To File / Python Commands 15 Download Url To File",
+        "target": ""
+      },
+      "name": "ws.skill.invoke",
+      "result": {
+        "answer": "Invocation of Python Commands 15 \u2014 Download Url To File / Python Commands 15 Download Url To File failed: ModuleNotFoundError: No module named 'yaml'",
+        "error": "",
+        "error_type": "",
+        "executor_framework": "python3",
+        "skill_title": "Python Commands 15 \u2014 Download Url To File / Python Commands 15 Download Url To File",
+        "status": "error"
+      }
+    }
+  ]
+}

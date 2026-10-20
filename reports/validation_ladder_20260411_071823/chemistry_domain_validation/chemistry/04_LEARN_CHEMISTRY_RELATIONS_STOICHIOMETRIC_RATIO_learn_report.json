@@ -1,0 +1,852 @@
+{
+  "artifact_persistence": [
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-04-stoichiometric-_30270c",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000517,
+        "connect_seconds": 0.000504,
+        "ensure_schema_seconds": 0.003547,
+        "existing_payload_batch_lookup_seconds": 3.9e-05,
+        "index_seconds": 0.078103,
+        "prepare_seconds": 0.232227,
+        "total_seconds": 0.315715
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "f60b046b20584124afe3c3114a8f57e53664f96f197e0bb8340311d0fe4d4dd3",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.025877,
+        "existing_payload_lookup_seconds": 4.333333333333333e-06,
+        "index_seconds": 0.078103,
+        "total_seconds": 0.12076433333333333,
+        "write_rows_seconds": 0.01678
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-f67f10ca6a82",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000517,
+        "connect_seconds": 0.000504,
+        "ensure_schema_seconds": 0.003547,
+        "existing_payload_batch_lookup_seconds": 3.9e-05,
+        "index_seconds": 0.078103,
+        "prepare_seconds": 0.232227,
+        "total_seconds": 0.315715
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "f31a0818057460a28bd1e875cec877f0b31dee95d0480a30bdff2acea9c5bd8a",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.017437,
+        "existing_payload_lookup_seconds": 4.333333333333333e-06,
+        "total_seconds": 0.017441333333333333
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-d07a12be303d",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000517,
+        "connect_seconds": 0.000504,
+        "ensure_schema_seconds": 0.003547,
+        "existing_payload_batch_lookup_seconds": 3.9e-05,
+        "index_seconds": 0.078103,
+        "prepare_seconds": 0.232227,
+        "total_seconds": 0.315715
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "f331f8318f3afec79b3063b9804fa883d08cbb6339cc828a758afe1cf186e62f",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.019154,
+        "existing_payload_lookup_seconds": 4.333333333333333e-06,
+        "total_seconds": 0.019158333333333333
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-254afca310c1",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000517,
+        "connect_seconds": 0.000504,
+        "ensure_schema_seconds": 0.003547,
+        "existing_payload_batch_lookup_seconds": 3.9e-05,
+        "index_seconds": 0.078103,
+        "prepare_seconds": 0.232227,
+        "total_seconds": 0.315715
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "9734680c7b8a0b61c3563dc2826430a69ee06c07eadc3742bb2e58ba6c912acd",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.020477,
+        "existing_payload_lookup_seconds": 4.333333333333333e-06,
+        "total_seconds": 0.02048133333333333
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-a87ef4111023",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000517,
+        "connect_seconds": 0.000504,
+        "ensure_schema_seconds": 0.003547,
+        "existing_payload_batch_lookup_seconds": 3.9e-05,
+        "index_seconds": 0.078103,
+        "prepare_seconds": 0.232227,
+        "total_seconds": 0.315715
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "8acd964263101c716831f1779381fe6bad0c05a56c397ae95cafee4aabcfbfe3",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.019216,
+        "existing_payload_lookup_seconds": 4.333333333333333e-06,
+        "total_seconds": 0.019220333333333332
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-04-proportional-ma_4d8d62",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000517,
+        "connect_seconds": 0.000504,
+        "ensure_schema_seconds": 0.003547,
+        "existing_payload_batch_lookup_seconds": 3.9e-05,
+        "index_seconds": 0.078103,
+        "prepare_seconds": 0.232227,
+        "total_seconds": 0.315715
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "0b9c7fdb8b6680c9d583cbd938c182ddba2a6c33ae36bf857a72ef05ca22b54b",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.010188,
+        "existing_payload_lookup_seconds": 4.333333333333333e-06,
+        "index_seconds": 0.078103,
+        "total_seconds": 0.09623733333333334,
+        "write_rows_seconds": 0.007942
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-a87b300c036e",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000517,
+        "connect_seconds": 0.000504,
+        "ensure_schema_seconds": 0.003547,
+        "existing_payload_batch_lookup_seconds": 3.9e-05,
+        "index_seconds": 0.078103,
+        "prepare_seconds": 0.232227,
+        "total_seconds": 0.315715
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "9051b16bc75fc168eecbb0999e3991ac00ce92517d18750d94f5c268190360bb",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.000179,
+        "existing_payload_lookup_seconds": 4.333333333333333e-06,
+        "total_seconds": 0.0001833333333333333
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-d07a12be303d",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000517,
+        "connect_seconds": 0.000504,
+        "ensure_schema_seconds": 0.003547,
+        "existing_payload_batch_lookup_seconds": 3.9e-05,
+        "index_seconds": 0.078103,
+        "prepare_seconds": 0.232227,
+        "total_seconds": 0.315715
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "c97777d0b6660bbbc6d68c2d8f0deae1f5bf7f5abe9dafde3d533e9d0482a28e",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.000153,
+        "existing_payload_lookup_seconds": 4.333333333333333e-06,
+        "index_seconds": 0.078103,
+        "total_seconds": 0.09430333333333334,
+        "write_rows_seconds": 0.016043
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-254afca310c1",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000517,
+        "connect_seconds": 0.000504,
+        "ensure_schema_seconds": 0.003547,
+        "existing_payload_batch_lookup_seconds": 3.9e-05,
+        "index_seconds": 0.078103,
+        "prepare_seconds": 0.232227,
+        "total_seconds": 0.315715
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "bf991071951775109b85d20b9c4e68ffafea31757c4dc2e3692862e30d80d584",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.000167,
+        "existing_payload_lookup_seconds": 4.333333333333333e-06,
+        "index_seconds": 0.078103,
+        "total_seconds": 0.09619233333333334,
+        "write_rows_seconds": 0.017918
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-04-stoichiometric-_30270c",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000419,
+        "connect_seconds": 0.00061,
+        "ensure_schema_seconds": 0.003665,
+        "existing_payload_batch_lookup_seconds": 4.2e-05,
+        "index_seconds": 0.048209,
+        "prepare_seconds": 0.161544,
+        "total_seconds": 0.215484
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "f60b046b20584124afe3c3114a8f57e53664f96f197e0bb8340311d0fe4d4dd3",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.025706,
+        "existing_payload_lookup_seconds": 5.999999999999999e-06,
+        "total_seconds": 0.025712
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-d07a12be303d",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000419,
+        "connect_seconds": 0.00061,
+        "ensure_schema_seconds": 0.003665,
+        "existing_payload_batch_lookup_seconds": 4.2e-05,
+        "index_seconds": 0.048209,
+        "prepare_seconds": 0.161544,
+        "total_seconds": 0.215484
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "f331f8318f3afec79b3063b9804fa883d08cbb6339cc828a758afe1cf186e62f",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.018911,
+        "existing_payload_lookup_seconds": 5.999999999999999e-06,
+        "index_seconds": 0.048209,
+        "total_seconds": 0.080316,
+        "write_rows_seconds": 0.01319
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-254afca310c1",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000419,
+        "connect_seconds": 0.00061,
+        "ensure_schema_seconds": 0.003665,
+        "existing_payload_batch_lookup_seconds": 4.2e-05,
+        "index_seconds": 0.048209,
+        "prepare_seconds": 0.161544,
+        "total_seconds": 0.215484
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "9734680c7b8a0b61c3563dc2826430a69ee06c07eadc3742bb2e58ba6c912acd",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.020255,
+        "existing_payload_lookup_seconds": 5.999999999999999e-06,
+        "index_seconds": 0.048209,
+        "total_seconds": 0.083053,
+        "write_rows_seconds": 0.014583
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-a87ef4111023",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000419,
+        "connect_seconds": 0.00061,
+        "ensure_schema_seconds": 0.003665,
+        "existing_payload_batch_lookup_seconds": 4.2e-05,
+        "index_seconds": 0.048209,
+        "prepare_seconds": 0.161544,
+        "total_seconds": 0.215484
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "8acd964263101c716831f1779381fe6bad0c05a56c397ae95cafee4aabcfbfe3",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.018911,
+        "existing_payload_lookup_seconds": 5.999999999999999e-06,
+        "total_seconds": 0.018917
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-04-proportional-ma_4d8d62",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000419,
+        "connect_seconds": 0.00061,
+        "ensure_schema_seconds": 0.003665,
+        "existing_payload_batch_lookup_seconds": 4.2e-05,
+        "index_seconds": 0.048209,
+        "prepare_seconds": 0.161544,
+        "total_seconds": 0.215484
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "0b9c7fdb8b6680c9d583cbd938c182ddba2a6c33ae36bf857a72ef05ca22b54b",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.010075,
+        "existing_payload_lookup_seconds": 5.999999999999999e-06,
+        "total_seconds": 0.010081000000000001
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-d07a12be303d",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000419,
+        "connect_seconds": 0.00061,
+        "ensure_schema_seconds": 0.003665,
+        "existing_payload_batch_lookup_seconds": 4.2e-05,
+        "index_seconds": 0.048209,
+        "prepare_seconds": 0.161544,
+        "total_seconds": 0.215484
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "c97777d0b6660bbbc6d68c2d8f0deae1f5bf7f5abe9dafde3d533e9d0482a28e",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 3e-05,
+        "existing_payload_lookup_seconds": 5.999999999999999e-06,
+        "total_seconds": 3.6e-05
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-254afca310c1",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000419,
+        "connect_seconds": 0.00061,
+        "ensure_schema_seconds": 0.003665,
+        "existing_payload_batch_lookup_seconds": 4.2e-05,
+        "index_seconds": 0.048209,
+        "prepare_seconds": 0.161544,
+        "total_seconds": 0.215484
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "bf991071951775109b85d20b9c4e68ffafea31757c4dc2e3692862e30d80d584",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 3.2e-05,
+        "existing_payload_lookup_seconds": 5.999999999999999e-06,
+        "total_seconds": 3.7999999999999995e-05
+      },
+      "vector_enabled": false
+    }
+  ],
+  "document": {
+    "section_count": 5,
+    "source_path": "/Users/ravindranathakila/service/realized/trials/chemistry/04_LEARN_CHEMISTRY_RELATIONS_STOICHIOMETRIC_RATIO.md",
+    "title": "Chemistry Relations 04 \u2014 Stoichiometric Ratio from Balanced Equations"
+  },
+  "encounter_proposal": {
+    "encounters": [
+      {
+        "bullets": [
+          "input: `x`",
+          "input: `y`",
+          "output: `k`"
+        ],
+        "candidate_kinds": [
+          "equation",
+          "template",
+          "definition",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_1",
+        "equation_bearing": true,
+        "equations": [
+          "$$ \\frac{x}{y} = k $$"
+        ],
+        "heading": "1. Reusable substrate",
+        "paragraphs": [
+          "When two quantities must vary in a fixed proportion, the reusable family is proportional mapping.",
+          "The reusable formula is:",
+          "$$ \\frac{x}{y} = k $$"
+        ],
+        "path": [
+          "Chemistry Relations 04 \u2014 Stoichiometric Ratio from Balanced Equations",
+          "1. Reusable substrate"
+        ],
+        "sections": [
+          "1. Reusable substrate"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `n_A`",
+          "input: `n_B`",
+          "input: `\\nu_A`",
+          "input: `\\nu_B`"
+        ],
+        "candidate_kinds": [
+          "equation",
+          "template",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_2",
+        "equation_bearing": true,
+        "equations": [
+          "$$ \\frac{n_A}{n_B} = \\frac{\\nu_A}{\\nu_B} $$"
+        ],
+        "heading": "2. Mole ratio from coefficients",
+        "paragraphs": [
+          "In a balanced chemical equation, mole amounts follow the coefficient ratio.",
+          "The reusable formula is:",
+          "$$ \\frac{n_A}{n_B} = \\frac{\\nu_A}{\\nu_B} $$"
+        ],
+        "path": [
+          "Chemistry Relations 04 \u2014 Stoichiometric Ratio from Balanced Equations",
+          "2. Mole ratio from coefficients"
+        ],
+        "sections": [
+          "2. Mole ratio from coefficients"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `n_A`",
+          "input: `\\nu_A`",
+          "input: `\\nu_B`",
+          "output: `n_B`"
+        ],
+        "candidate_kinds": [
+          "equation",
+          "logic",
+          "template",
+          "definition",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_3",
+        "equation_bearing": true,
+        "equations": [
+          "$$ n_B = n_A * \\frac{\\nu_B}{\\nu_A} $$"
+        ],
+        "heading": "3. Solving for an unknown amount",
+        "paragraphs": [
+          "If one amount is known, another can be obtained by ratio transfer.",
+          "The reusable formula is:",
+          "$$ n_B = n_A * \\frac{\\nu_B}{\\nu_A} $$"
+        ],
+        "path": [
+          "Chemistry Relations 04 \u2014 Stoichiometric Ratio from Balanced Equations",
+          "3. Solving for an unknown amount"
+        ],
+        "sections": [
+          "3. Solving for an unknown amount"
+        ]
+      },
+      {
+        "bullets": [],
+        "candidate_kinds": [
+          "definition",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_4",
+        "equation_bearing": false,
+        "equations": [],
+        "heading": "4. Connection to earlier lessons",
+        "paragraphs": [
+          "Balanced coefficients matter because atom conservation fixed them.",
+          "Once the equation is balanced, molar ratios let one known mole amount determine another.",
+          "So conservation gives the structure, and proportion gives the calculation."
+        ],
+        "path": [
+          "Chemistry Relations 04 \u2014 Stoichiometric Ratio from Balanced Equations",
+          "4. Connection to earlier lessons"
+        ],
+        "sections": [
+          "4. Connection to earlier lessons"
+        ]
+      },
+      {
+        "bullets": [],
+        "candidate_kinds": [
+          "logic",
+          "definition",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_5",
+        "equation_bearing": false,
+        "equations": [],
+        "heading": "5. One-sentence summary",
+        "paragraphs": [
+          "Proportional mapping is the broader reusable substrate; stoichiometric ratio is a narrower determinate chemistry law that maps one substance amount to another by balanced coefficients."
+        ],
+        "path": [
+          "Chemistry Relations 04 \u2014 Stoichiometric Ratio from Balanced Equations",
+          "5. One-sentence summary"
+        ],
+        "sections": [
+          "5. One-sentence summary"
+        ]
+      }
+    ],
+    "proposal_id": "proposal_markdownabilitylearningproposal_6ba0ed",
+    "rationale": "Markdown ability learning proposals are bounded executable-harvest plans grounded in the structural ir.",
+    "source": "llm"
+  },
+  "final_answer": "Learned 9 artifacts from 04_LEARN_CHEMISTRY_RELATIONS_STOICHIOMETRIC_RATIO.md.",
+  "functionalization_proposal": {
+    "proposal_id": "proposal_markdownfunctionalizationproposal_73337c",
+    "rationale": "Markdown functionalization proposals are bounded executable extractions from already classified encounters.",
+    "source": "llm"
+  },
+  "ir": {
+    "clusters": [
+      {
+        "bullets": [
+          "input: `x`",
+          "input: `y`",
+          "output: `k`"
+        ],
+        "code_blocks": [],
+        "equations": [
+          "$$ \\frac{x}{y} = k $$"
+        ],
+        "heading": "1. Reusable substrate",
+        "paragraphs": [
+          "When two quantities must vary in a fixed proportion, the reusable family is proportional mapping.",
+          "The reusable formula is:",
+          "$$ \\frac{x}{y} = k $$"
+        ],
+        "path": [
+          "Chemistry Relations 04 \u2014 Stoichiometric Ratio from Balanced Equations",
+          "1. Reusable substrate"
+        ],
+        "sections": [
+          "1. Reusable substrate"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `n_A`",
+          "input: `n_B`",
+          "input: `\\nu_A`",
+          "input: `\\nu_B`"
+        ],
+        "code_blocks": [],
+        "equations": [
+          "$$ \\frac{n_A}{n_B} = \\frac{\\nu_A}{\\nu_B} $$"
+        ],
+        "heading": "2. Mole ratio from coefficients",
+        "paragraphs": [
+          "In a balanced chemical equation, mole amounts follow the coefficient ratio.",
+          "The reusable formula is:",
+          "$$ \\frac{n_A}{n_B} = \\frac{\\nu_A}{\\nu_B} $$"
+        ],
+        "path": [
+          "Chemistry Relations 04 \u2014 Stoichiometric Ratio from Balanced Equations",
+          "2. Mole ratio from coefficients"
+        ],
+        "sections": [
+          "2. Mole ratio from coefficients"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `n_A`",
+          "input: `\\nu_A`",
+          "input: `\\nu_B`",
+          "output: `n_B`"
+        ],
+        "code_blocks": [],
+        "equations": [
+          "$$ n_B = n_A * \\frac{\\nu_B}{\\nu_A} $$"
+        ],
+        "heading": "3. Solving for an unknown amount",
+        "paragraphs": [
+          "If one amount is known, another can be obtained by ratio transfer.",
+          "The reusable formula is:",
+          "$$ n_B = n_A * \\frac{\\nu_B}{\\nu_A} $$"
+        ],
+        "path": [
+          "Chemistry Relations 04 \u2014 Stoichiometric Ratio from Balanced Equations",
+          "3. Solving for an unknown amount"
+        ],
+        "sections": [
+          "3. Solving for an unknown amount"
+        ]
+      },
+      {
+        "bullets": [],
+        "code_blocks": [],
+        "equations": [],
+        "heading": "4. Connection to earlier lessons",
+        "paragraphs": [
+          "Balanced coefficients matter because atom conservation fixed them.",
+          "Once the equation is balanced, molar ratios let one known mole amount determine another.",
+          "So conservation gives the structure, and proportion gives the calculation."
+        ],
+        "path": [
+          "Chemistry Relations 04 \u2014 Stoichiometric Ratio from Balanced Equations",
+          "4. Connection to earlier lessons"
+        ],
+        "sections": [
+          "4. Connection to earlier lessons"
+        ]
+      },
+      {
+        "bullets": [],
+        "code_blocks": [],
+        "equations": [],
+        "heading": "5. One-sentence summary",
+        "paragraphs": [
+          "Proportional mapping is the broader reusable substrate; stoichiometric ratio is a narrower determinate chemistry law that maps one substance amount to another by balanced coefficients."
+        ],
+        "path": [
+          "Chemistry Relations 04 \u2014 Stoichiometric Ratio from Balanced Equations",
+          "5. One-sentence summary"
+        ],
+        "sections": [
+          "5. One-sentence summary"
+        ]
+      }
+    ],
+    "intro_bullets": [],
+    "intro_paragraphs": [
+      "This document teaches one reusable proportional-mapping substrate and then reuses it in reaction calculations.",
+      "The point is not only to store coefficients, but to preserve the reusable semantic relation between paired amounts fixed by structure."
+    ],
+    "section_count": 5,
+    "source_path": "/Users/ravindranathakila/service/realized/trials/chemistry/04_LEARN_CHEMISTRY_RELATIONS_STOICHIOMETRIC_RATIO.md",
+    "title": "Chemistry Relations 04 \u2014 Stoichiometric Ratio from Balanced Equations"
+  },
+  "learned_artifacts": [
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-04-stoichiometric-_30270c",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Mole ratio from coefficients?",
+      "related_artifact_ids": [
+        "artifact-skill-f67f10ca6a82"
+      ],
+      "representation": "yaml",
+      "source_sections": [],
+      "title": "Chemistry Relations 04 \u2014 Stoichiometric Ratio from Balanced Equations / Chemistry Relations 04 \\u2014 Stoichiometric Ratio from Balanced Equations"
+    },
+    {
+      "artifact_id": "artifact-skill-f67f10ca6a82",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Proportional Mapping?",
+      "related_artifact_ids": [],
+      "representation": "yaml",
+      "source_sections": [
+        "1. Reusable substrate"
+      ],
+      "title": "Chemistry Relations 04 Stoichiometric Ratio from Balanced Equations / Proportional Mapping"
+    },
+    {
+      "artifact_id": "artifact-skill-d07a12be303d",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Mole ratio from coefficients?",
+      "related_artifact_ids": [
+        "artifact-skill-f67f10ca6a82"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "2. Mole ratio from coefficients"
+      ],
+      "title": "Chemistry Relations 04 \u2014 Stoichiometric Ratio from Balanced Equations / Mole ratio from coefficients"
+    },
+    {
+      "artifact_id": "artifact-skill-254afca310c1",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Solving for an unknown amount?",
+      "related_artifact_ids": [
+        "artifact-skill-f67f10ca6a82"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "3. Solving for an unknown amount"
+      ],
+      "title": "Chemistry Relations 04 \u2014 Stoichiometric Ratio from Balanced Equations / Solving for an unknown amount"
+    },
+    {
+      "artifact_id": "artifact-skill-a87ef4111023",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Connection to earlier lessons?",
+      "related_artifact_ids": [
+        "artifact-skill-f67f10ca6a82"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "4. Connection to earlier lessons"
+      ],
+      "title": "Chemistry Relations 04 \u2014 Stoichiometric Ratio from Balanced Equations / Connection to earlier lessons"
+    },
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-04-proportional-ma_4d8d62",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Proportional Mapping?",
+      "related_artifact_ids": [
+        "artifact-skill-f67f10ca6a82"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "5. One-sentence summary"
+      ],
+      "title": "Chemistry Relations 04 / Proportional Mapping"
+    },
+    {
+      "artifact_id": "artifact-skill-a87b300c036e",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate x_per_y from k?",
+      "related_artifact_ids": [],
+      "representation": "python_script",
+      "source_sections": [
+        "1. Reusable substrate"
+      ],
+      "title": "Chemistry Relations 04 \u2014 Stoichiometric Ratio from Balanced Equations / Python Ability"
+    },
+    {
+      "artifact_id": "artifact-skill-d07a12be303d",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate n_A_per_n_B from nu_A, nu_B?",
+      "related_artifact_ids": [],
+      "representation": "python_script",
+      "source_sections": [
+        "2. Mole ratio from coefficients"
+      ],
+      "title": "Chemistry Relations 04 \u2014 Stoichiometric Ratio from Balanced Equations / Mole Ratio From Coefficients"
+    },
+    {
+      "artifact_id": "artifact-skill-254afca310c1",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate n_B from n_A, nu_B, nu_A?",
+      "related_artifact_ids": [],
+      "representation": "python_script",
+      "source_sections": [
+        "3. Solving for an unknown amount"
+      ],
+      "title": "Chemistry Relations 04 \u2014 Stoichiometric Ratio from Balanced Equations / Solving For An Unknown Amount"
+    }
+  ],
+  "learned_count": 9,
+  "learning_context": {
+    "applied_delta_count": 8,
+    "canonical_title": "Chemistry Relations 04 \u2014 Stoichiometric Ratio from Balanced Equations",
+    "context_path": "/Users/ravindranathakila/service/realized/trials/chemistry/corpus/chemistry-relations-04-stoichiometric-ratio-from-balanced-equati/context.json",
+    "corpus_root": "/Users/ravindranathakila/service/realized/trials/chemistry",
+    "delta_id": "delta_chemistry-relations-04-stoichiometric-ratio-from_12c19c",
+    "delta_path": "/Users/ravindranathakila/service/realized/trials/chemistry/corpus/chemistry-relations-04-stoichiometric-ratio-from-balanced-equati/deltas/delta_chemistry-relations-04-stoichiometric-ratio-from_12c19c.json",
+    "matched_existing_subject_id": "chemistry-relations-04-stoichiometric-ratio-from-balanced-equati",
+    "source_id": "source_users-ravindranathakila-service-realized-trials-_95be7c6029",
+    "source_record_path": "/Users/ravindranathakila/service/realized/trials/chemistry/corpus/chemistry-relations-04-stoichiometric-ratio-from-balanced-equati/sources/source_users-ravindranathakila-service-realized-trials-_95be7c6029.json",
+    "subject_family": "Chemistry Relations 04 \u2014 Stoichiometric Ratio from Balanced Equations",
+    "subject_id": "chemistry-relations-04-stoichiometric-ratio-from-balanced-equati",
+    "unit_count": 10
+  },
+  "parsing_failures": [],
+  "proposal": {
+    "proposal_id": "proposal_markdownlearningproposal_949958",
+    "rationale": "Markdown learning proposals are bounded ingestion plans for external-source harvest and remain governed before artifact admission.",
+    "source": "llm"
+  },
+  "run_id": "run_20a192f9_3064a2",
+  "run_outcome": "completed",
+  "supported_executors": [
+    "python3"
+  ]
+}

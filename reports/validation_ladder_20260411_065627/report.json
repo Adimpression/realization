@@ -1,0 +1,26 @@
+{
+  "started_at": "2026-04-11T06:56:27+00:00",
+  "finished_at": "2026-04-11T07:17:26+00:00",
+  "status": "failed",
+  "stage": "unit_tests",
+  "report_root": "/Users/ravindranathakila/service/realized/reports/validation_ladder_20260411_065627",
+  "stages": [
+    {
+      "name": "unit_tests",
+      "cmd": [
+        "/Users/ravindranathakila/.venv/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/Users/ravindranathakila/service/realized/tests"
+      ],
+      "cwd": "/Users/ravindranathakila/service/realized",
+      "status": "failed",
+      "returncode": 1,
+      "elapsed_seconds": 1259.735884,
+      "stdout_tail": "",
+      "stderr_tail": "........................................................................................................................................................................................................................................................................................./Users/ravindranathakila/service/realized/workstation/flet_host.py:378: DeprecationWarning: all() is deprecated since version 0.80.0 and will be removed in version 0.83.0. Use Border.all() instead.\n  return ft.border.all(_FLET_BORDER_WIDTH, ACTIVE_AREA_FRAME if active else INACTIVE_AREA_FRAME)\n/Users/ravindranathakila/service/realized/workstation/flet_host.py:436: DeprecationWarning: symmetric() is deprecated since version 0.80.0 and will be removed in version 0.83.0. Use Padding.symmetric() instead\n  padding=ft.padding.symmetric(horizontal=10, vertical=5),\n/Users/ravindranathakila/service/realized/workstation/flet_host.py:1905: DeprecationWarning: symmetric() is deprecated since version 0.80.0 and will be removed in version 0.83.0. Use Padding.symmetric() instead\n  content_padding=ft.padding.symmetric(horizontal=0, vertical=2),\n./Users/ravindranathakila/service/realized/workstation/flet_host.py:1616: DeprecationWarning: symmetric() is deprecated since version 0.80.0 and will be removed in version 0.83.0. Use Padding.symmetric() instead\n  padding=ft.padding.symmetric(horizontal=8, vertical=4),\n.../Users/ravindranathakila/service/realized/workstation/flet_host.py:1726: DeprecationWarning: symmetric() is deprecated since version 0.80.0 and will be removed in version 0.83.0. Use Padding.symmetric() instead\n  padding=ft.padding.symmetric(horizontal=8, vertical=6),\n..../Users/ravindranathakila/service/realized/workstation/flet_host.py:1942: DeprecationWarning: only() is deprecated since version 0.80.0 and will be removed in version 0.83.0. Use Padding.only() instead\n  padding=ft.padding.only(left=0, right=0, top=0, bottom=4),\n............/Users/ravindranathakila/service/realized/workstation/flet_host.py:1386: DeprecationWarning: only() is deprecated since version 0.80.0 and will be removed in version 0.83.0. Use Padding.only() instead\n  padding=ft.padding.only(bottom=6),\n/Users/ravindranathakila/service/realized/workstation/flet_host.py:1420: DeprecationWarning: only() is deprecated since version 0.80.0 and will be removed in version 0.83.0. Use Padding.only() instead\n  padding=ft.padding.only(bottom=6),\n..............\n======================================================================\nERROR: test_retrieval_works_without_legacy_lookup_columns (test_artifact_search_hybrid.ArtifactSearchHybridTests.test_retrieval_works_without_legacy_lookup_columns)\nHigh Level Purpose:\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/ravindranathakila/service/realized/tests/test_artifact_search_hybrid.py\", line 308, in test_retrieval_works_without_legacy_lookup_columns\n    connection.execute(\"DELETE FROM bssc_artifact_vec WHERE artifact_id = ?\", (artifact.id,))\n    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsqlite3.OperationalError: no such table: bssc_artifact_vec\n\n======================================================================\nFAIL: test_batch_persist_encodes_main_and_search_surfaces_in_one_pass (test_artifact_search_hybrid.ArtifactSearchHybridTests.test_batch_persist_encodes_main_and_search_surfaces_in_one_pass)\nHigh Level Purpose:\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/ravindranathakila/service/realized/tests/test_artifact_search_hybrid.py\", line 481, in test_batch_persist_encodes_main_and_search_surfaces_in_one_pass\n    self.assertEqual(len(fake_encoder.calls), 1)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 0 != 1\n\n----------------------------------------------------------------------\nRan 789 tests in 1258.864s\n\nFAILED (failures=1, errors=1)\n"
+    }
+  ]
+}

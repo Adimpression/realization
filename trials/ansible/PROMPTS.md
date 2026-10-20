@@ -1,0 +1,12 @@
+- Ensure the package `git` is installed.
+- Create the directory `/tmp/ansible-demo` with mode `0755`.
+- Copy the file `/etc/hosts` to `/tmp/ansible-hosts.copy`.
+- Write the text `ready=true` to `/tmp/ansible.env`.
+- Ensure the line `export DEMO=1` is present in `/tmp/ansible.env`.
+- Download `https://example.com` to `/tmp/example-ansible.html`.
+- Extract `/tmp/example.zip` into `/tmp/example-ansible-unpacked`.
+- Ensure the service `cron` is started and enabled.
+- Clone `https://github.com/octocat/Hello-World.git` into `/tmp/hello-world`.
+- Ensure the file `/tmp/ansible.env` has mode `0644`.
+- Ensure the user `demo-ansible` exists.
+- Render `/tmp/app.conf` from the template text `port={{ port }}` with `port=8080`.

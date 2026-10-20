@@ -1,0 +1,453 @@
+{
+  "tools": [
+    {
+      "function": {
+        "description": "Read one file from an attached workspace or path attachment.",
+        "name": "ws.fs.read",
+        "parameters": {
+          "additionalProperties": false,
+          "properties": {
+            "max_chars": {
+              "type": "integer"
+            },
+            "path": {
+              "type": "string"
+            },
+            "target": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "target",
+            "path"
+          ],
+          "type": "object"
+        }
+      },
+      "type": "function"
+    },
+    {
+      "function": {
+        "description": "Run one bounded command in the attached workspace without a shell.",
+        "name": "ws.process.run",
+        "parameters": {
+          "additionalProperties": false,
+          "properties": {
+            "argv": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "cwd": {
+              "type": "string"
+            },
+            "max_output_chars": {
+              "type": "integer"
+            },
+            "target": {
+              "type": "string"
+            },
+            "timeout_seconds": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "target",
+            "argv"
+          ],
+          "type": "object"
+        }
+      },
+      "type": "function"
+    },
+    {
+      "function": {
+        "description": "Save Learnings as New Markdown by creating one new .md or .markdown file in a writable workstation attachment.",
+        "name": "ws.markdown.create",
+        "parameters": {
+          "additionalProperties": false,
+          "properties": {
+            "markdown_text": {
+              "type": "string"
+            },
+            "path": {
+              "type": "string"
+            },
+            "target": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "markdown_text"
+          ],
+          "type": "object"
+        }
+      },
+      "type": "function"
+    },
+    {
+      "function": {
+        "description": "Add Learnings to Markdown by appending markdown text to one existing .md or .markdown file in a writable workstation attachment.",
+        "name": "ws.markdown.append",
+        "parameters": {
+          "additionalProperties": false,
+          "properties": {
+            "markdown_text": {
+              "type": "string"
+            },
+            "path": {
+              "type": "string"
+            },
+            "target": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "markdown_text"
+          ],
+          "type": "object"
+        }
+      },
+      "type": "function"
+    },
+    {
+      "function": {
+        "description": "Return the current persistent workstation skill catalog and skill-home locations, optionally filtered by a short query.",
+        "name": "ws.skill.catalog",
+        "parameters": {
+          "additionalProperties": false,
+          "properties": {
+            "limit": {
+              "type": "integer"
+            },
+            "query": {
+              "type": "string"
+            },
+            "target": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "function"
+    },
+    {
+      "function": {
+        "description": "Import one portable skill.yaml file into the persistent workstation skill home.",
+        "name": "ws.skill.import",
+        "parameters": {
+          "additionalProperties": false,
+          "properties": {
+            "canonical_export_path": {
+              "type": "string"
+            },
+            "path": {
+              "type": "string"
+            },
+            "source_target": {
+              "type": "string"
+            },
+            "target": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "type": "object"
+        }
+      },
+      "type": "function"
+    },
+    {
+      "function": {
+        "description": "Export one governed workstation skill from the persistent workstation skill home.",
+        "name": "ws.skill.export",
+        "parameters": {
+          "additionalProperties": false,
+          "properties": {
+            "destination_path": {
+              "type": "string"
+            },
+            "destination_target": {
+              "type": "string"
+            },
+            "skill_title": {
+              "type": "string"
+            },
+            "target": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "skill_title"
+          ],
+          "type": "object"
+        }
+      },
+      "type": "function"
+    },
+    {
+      "function": {
+        "description": "Invoke one installed governed skill from a workstation skill-store attachment.",
+        "name": "ws.skill.invoke",
+        "parameters": {
+          "additionalProperties": false,
+          "properties": {
+            "invocation_payload": {
+              "type": "object"
+            },
+            "rationale": {
+              "type": "string"
+            },
+            "requested_delegation": {
+              "items": {
+                "additionalProperties": false,
+                "properties": {
+                  "capability": {
+                    "type": "string"
+                  },
+                  "rationale": {
+                    "type": "string"
+                  },
+                  "target": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "capability"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "semantic_unit": {
+              "type": "string"
+            },
+            "skill_title": {
+              "type": "string"
+            },
+            "target": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "skill_title"
+          ],
+          "type": "object"
+        }
+      },
+      "type": "function"
+    },
+    {
+      "function": {
+        "description": "Execute an explicit multi-step governed skill composition plan with leaf bindings and mapper-backed payload wiring.",
+        "name": "ws.skill.compose",
+        "parameters": {
+          "additionalProperties": false,
+          "properties": {
+            "approved_delegation": {
+              "items": {
+                "additionalProperties": false,
+                "properties": {
+                  "capability": {
+                    "type": "string"
+                  },
+                  "target": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "capability"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "approved_delegation_scope": {
+              "type": "string"
+            },
+            "final_output_step": {
+              "type": "string"
+            },
+            "rationale": {
+              "type": "string"
+            },
+            "root_inputs": {
+              "type": "object"
+            },
+            "root_references": {
+              "type": "object"
+            },
+            "steps": {
+              "items": {
+                "additionalProperties": false,
+                "properties": {
+                  "bindings": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "constant_value": {},
+                        "mapper": {
+                          "additionalProperties": false,
+                          "properties": {
+                            "kind": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "kind"
+                          ],
+                          "type": "object"
+                        },
+                        "mapper_kind": {
+                          "type": "string"
+                        },
+                        "source_path": {
+                          "type": "string"
+                        },
+                        "source_region": {
+                          "type": "string"
+                        },
+                        "source_root_name": {
+                          "type": "string"
+                        },
+                        "source_root_region": {
+                          "type": "string"
+                        },
+                        "source_step_id": {
+                          "type": "string"
+                        },
+                        "target_path": {
+                          "type": "string"
+                        },
+                        "target_region": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "target_region",
+                        "target_path"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "branch_label": {
+                    "type": "string"
+                  },
+                  "iterate_until": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "expected_value": {},
+                        "operator": {
+                          "type": "string"
+                        },
+                        "source_path": {
+                          "type": "string"
+                        },
+                        "source_region": {
+                          "type": "string"
+                        },
+                        "source_step_id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "source_step_id",
+                        "source_region",
+                        "source_path"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "rationale": {
+                    "type": "string"
+                  },
+                  "requested_delegation": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "capability": {
+                          "type": "string"
+                        },
+                        "rationale": {
+                          "type": "string"
+                        },
+                        "target": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "capability"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "run_if": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "expected_value": {},
+                        "operator": {
+                          "type": "string"
+                        },
+                        "source_path": {
+                          "type": "string"
+                        },
+                        "source_region": {
+                          "type": "string"
+                        },
+                        "source_step_id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "source_step_id",
+                        "source_region",
+                        "source_path"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "semantic_unit": {
+                    "type": "string"
+                  },
+                  "skill_title": {
+                    "type": "string"
+                  },
+                  "step_id": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "step_id",
+                  "skill_title"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "target": {
+              "type": "string"
+            },
+            "workflow_plan": {
+              "type": "object"
+            }
+          },
+          "required": [],
+          "type": "object"
+        }
+      },
+      "type": "function"
+    }
+  ]
+}

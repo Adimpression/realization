@@ -1,0 +1,3788 @@
+Momentum:
+  Description:
+  - The markdown document states the overall topic directly in its introduction.
+  - 'Knowledge artifact for: What is 1. Core meaning?'
+  In:
+  - What is 1. Core meaning?
+  Out:
+  - 'We will use: For this scalar calculation: Useful natural-language aliases: m
+    = mass v = velocity p = momentum velocity and speed can be used as the same input
+    value for v momentum and linear momentum can be used as the same output idea for
+    p momentum'
+  Metadata:
+    artifact_id: artifact_knowledge-momentum_664572
+    artifact_type: knowledge
+    representation: yaml
+    function_bit: 0
+    boundary_shape:
+    - d*
+    scope: reuse when the user asks about Momentum from Momentum under ordinary stable
+      reading
+    reusability: broad_reuse
+    admissibility: admitted
+    learning_relation: new_family
+    created_at: '2026-03-25T11:09:51+00:00'
+    provenance:
+    - not_learn-from-markdown-learn-momentum-md_7d377c
+    - /Users/ravindranathakila/service/realized/LEARN_MOMENTUM.md
+    justification: The markdown document states the overall topic directly in its
+      introduction.
+    question: What is 1. Core meaning?
+    answer: 'We will use: For this scalar calculation: Useful natural-language aliases:
+      m = mass v = velocity p = momentum velocity and speed can be used as the same
+      input value for v momentum and linear momentum can be used as the same output
+      idea for p momentum'
+    structured_learning:
+      encountered_not: Momentum
+      goal: What is 1. Core meaning?
+      intended_object: 'Momentum What is 1. Core meaning? `m` = mass `v` = velocity
+        `p` = momentum `velocity` and `speed` can be used as the same input value
+        for `v` `momentum` and `linear momentum` can be used as the same output idea
+        for `p` momentum 1. Core meaning Momentum 1. Core meaning We will use: For
+        this scalar calculation: Useful natural-language aliases: We will use: For
+        this scalar calculation: Useful natural-language aliases: m = mass v = velocity
+        p = momentum velocity and speed can be used as the same input value for v
+        momentum and linear momentum can be used as the same output idea for p momentum'
+      success_criteria:
+      - all required inputs are explicit and the bounded computation or template is
+        applied faithfully
+      - the result is returned in the requested usable form
+      actual_realization: 'the prompt surface is present; explicit givens are present:
+        Momentum What is 1, `m` = mass `v` = velocity `p` = momentum `velocity` and
+        `speed` can be used as the same input value for `v` `momentum` and `linear
+        momentum` can be used as the same output idea for `p` momentum 1, Core meaning
+        Momentum 1; no justified final closure has been admitted yet'
+      givens:
+      - Momentum What is 1
+      - '`m` = mass `v` = velocity `p` = momentum `velocity` and `speed` can be used
+        as the same input value for `v` `momentum` and `linear momentum` can be used
+        as the same output idea for `p` momentum 1'
+      - Core meaning Momentum 1
+      - 'Core meaning We will use: For this scalar calculation: Useful natural-language
+        aliases: We will use: For this scalar calculation: Useful natural-language
+        aliases: m = mass v = velocity p = momentum velocity and speed can be used
+        as the same input value for v momentum and linear momentum can be used as
+        the same output idea for p momentum'
+      unknowns: []
+      missing_components:
+      - a justified final realization has not yet been produced
+      distorted_components: []
+      differentiators:
+      - 'named inputs supplied: use, calculation, aliases, m, v, p, what'
+      contrastive_cases: []
+      risk_of_wrong_closure: []
+      disallowed_assumptions: []
+      misalignment_types:
+      - functional
+      - completion
+      origin_layers:
+      - model
+      degree: partial
+      remainder_shapes:
+      - missing
+      why_it_matters:
+      - without reducing the remainder, the item cannot be closed with governed confidence
+      minimal_repair:
+      - perform the bounded computation or invoke the matching executable template
+      full_repair:
+      - perform the bounded computation or invoke the matching executable template
+      - 'satisfy success condition: all required inputs are explicit and the bounded
+        computation or template is applied faithfully'
+      - 'satisfy success condition: the result is returned in the requested usable
+        form'
+      boundary_shape:
+      - d*
+      action_posture: direct_resolution
+      component_nots: []
+      composed_not: Momentum 1 Core Mean M Mass V Velocity P Momentum Velocity Spe
+        Can Used Same Input Value V Momentum Linear Momentum Can Used Same Output
+        Idea P Momentum 1 Core Mean Momentum 1 Core Mean We Will Thi Scalar Calculation
+        Useful Natural Language Aliase We Will Thi Scalar Calculation Useful Natural
+        Language Aliase M Mass V Velocity P Momentum Velocity Spe Can Used Same Input
+        Value V Momentum Linear Momentum Can Used Same Output Idea P Momentum
+      lookup_keys:
+      - 1 core mean
+      - 1 core
+      - core mean
+      - perform bound computation or invoke match executable template
+      - perform bound
+      - bound computation
+      - computation or
+      - or invoke
+      - invoke match
+      - match executable
+      - executable template
+      - perform bound computation
+      - bound computation or
+      - computation or invoke
+      - or invoke match
+      - invoke match executable
+      - match executable template
+      - without reduc remainder item cannot clos with govern confidence
+      - without reduc remainder item cannot clo
+      - govern confidence
+      - without reduc
+      - reduc remainder
+      - remainder item
+      - item cannot
+      notation_yaml: |-
+        "What Is 1 Core Meaning":
+          Description:
+            - "Structured learning declaration for the active non-achievedness."
+            - "Encountered non-achievedness: Momentum"
+            - "Components: none"
+            - "Composition: Momentum 1 Core Mean M Mass V Velocity P Momentum Velocity Spe Can Used Same Input Value V Momentum Linear Momentum Can Used Same Output Idea P Momentum 1 Core Mean Momentum 1 Core Mean We Will Thi Scalar Calculation Useful Natural Language Aliase We Will Thi Scalar Calculation Useful Natural Language Aliase M Mass V Velocity P Momentum Velocity Spe Can Used Same Input Value V Momentum Linear Momentum Can Used Same Output Idea P Momentum"
+            - "Intended object: Momentum What is 1. Core meaning? `m` = mass `v` = velocity `p` = momentum `velocity` and `speed` can be used as the same input value for `v` `momentum` and `linear momentum` can be used as the same output idea for `p` momentum 1. Core meaning Momentum 1. Core meaning We will use: For this scalar calculation: Useful natural-language aliases: We will use: For this scalar calculation: Useful natural-language aliases: m = mass v = velocity p = momentum velocity and speed can be used as the same input value for v momentum and linear momentum can be used as the same output idea for p momentum"
+            - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+            - "Actual realization: the prompt surface is present; explicit givens are present: Momentum What is 1, `m` = mass `v` = velocity `p` = momentum `velocity` and `speed` can be used as the same input value for `v` `momentum` and `linear momentum` can be used as the same output idea for `p` momentum 1, Core meaning Momentum 1; no justified final closure has been admitted yet"
+            - "Givens: Momentum What is 1, `m` = mass `v` = velocity `p` = momentum `velocity` and `speed` can be used as the same input value for `v` `momentum` and `linear momentum` can be used as the same output idea for `p` momentum 1, Core meaning Momentum 1, Core meaning We will use: For this scalar calculation: Useful natural-language aliases: We will use: For this scalar calculation: Useful natural-language aliases: m = mass v = velocity p = momentum velocity and speed can be used as the same input value for v momentum and linear momentum can be used as the same output idea for p momentum"
+            - "Missing components: a justified final realization has not yet been produced"
+            - "Differentiators: named inputs supplied: use, calculation, aliases, m, v, p, what"
+            - "Misalignment types: functional, completion"
+            - "Origin layers: model"
+            - "Degree: partial"
+            - "Remainder shapes: missing"
+            - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+            - "Minimal repair: perform the bounded computation or invoke the matching executable template"
+            - "Full repair: perform the bounded computation or invoke the matching executable template, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+            - "Action posture: direct_resolution"
+          In:
+            - "Prompt Surface String"
+            - "Encountered Non Achievedness String"
+            - "Lookup Keys Strings"
+            - "[ Component Non Achievedness ]"
+            - "Composed Non Achievedness"
+          Out:
+            - "Prior Encounter"
+            - "[ Reusable Artifact ]"
+            - "[ Reused Non Achievedness ]"
+            - "[ Composed Reuse ]"
+    content:
+      source_path: /Users/ravindranathakila/service/realized/LEARN_MOMENTUM.md
+      source_document: LEARN_MOMENTUM.md
+      source_kind: markdown
+      source_title: Momentum
+      equation_bearing: false
+      parameterized: false
+      node_id: not_learn-from-markdown-learn-momentum-md_7d377c
+      aliases:
+      - '`m` = mass'
+      - '`v` = velocity'
+      - '`p` = momentum'
+      - '`velocity` and `speed` can be used as the same input value for `v`'
+      - '`momentum` and `linear momentum` can be used as the same output idea for
+        `p`'
+      - momentum
+      - 1. Core meaning
+      - Momentum
+      - Momentum 1. Core meaning
+      structured_learning:
+        encountered_not: Momentum
+        lookup_keys:
+        - 1 core mean
+        - 1 core
+        - core mean
+        - perform bound computation or invoke match executable template
+        - perform bound
+        - bound computation
+        - computation or
+        - or invoke
+        - invoke match
+        - match executable
+        - executable template
+        - perform bound computation
+        - bound computation or
+        - computation or invoke
+        - or invoke match
+        - invoke match executable
+        - match executable template
+        - without reduc remainder item cannot clos with govern confidence
+        - without reduc remainder item cannot clo
+        - govern confidence
+        - without reduc
+        - reduc remainder
+        - remainder item
+        - item cannot
+        component_nots: []
+        composed_not: Momentum 1 Core Mean M Mass V Velocity P Momentum Velocity Spe
+          Can Used Same Input Value V Momentum Linear Momentum Can Used Same Output
+          Idea P Momentum 1 Core Mean Momentum 1 Core Mean We Will Thi Scalar Calculation
+          Useful Natural Language Aliase We Will Thi Scalar Calculation Useful Natural
+          Language Aliase M Mass V Velocity P Momentum Velocity Spe Can Used Same
+          Input Value V Momentum Linear Momentum Can Used Same Output Idea P Momentum
+        goal: What is 1. Core meaning?
+        intended_object: 'Momentum What is 1. Core meaning? `m` = mass `v` = velocity
+          `p` = momentum `velocity` and `speed` can be used as the same input value
+          for `v` `momentum` and `linear momentum` can be used as the same output
+          idea for `p` momentum 1. Core meaning Momentum 1. Core meaning We will use:
+          For this scalar calculation: Useful natural-language aliases: We will use:
+          For this scalar calculation: Useful natural-language aliases: m = mass v
+          = velocity p = momentum velocity and speed can be used as the same input
+          value for v momentum and linear momentum can be used as the same output
+          idea for p momentum'
+        success_criteria:
+        - all required inputs are explicit and the bounded computation or template
+          is applied faithfully
+        - the result is returned in the requested usable form
+        actual_realization: 'the prompt surface is present; explicit givens are present:
+          Momentum What is 1, `m` = mass `v` = velocity `p` = momentum `velocity`
+          and `speed` can be used as the same input value for `v` `momentum` and `linear
+          momentum` can be used as the same output idea for `p` momentum 1, Core meaning
+          Momentum 1; no justified final closure has been admitted yet'
+        givens:
+        - Momentum What is 1
+        - '`m` = mass `v` = velocity `p` = momentum `velocity` and `speed` can be
+          used as the same input value for `v` `momentum` and `linear momentum` can
+          be used as the same output idea for `p` momentum 1'
+        - Core meaning Momentum 1
+        - 'Core meaning We will use: For this scalar calculation: Useful natural-language
+          aliases: We will use: For this scalar calculation: Useful natural-language
+          aliases: m = mass v = velocity p = momentum velocity and speed can be used
+          as the same input value for v momentum and linear momentum can be used as
+          the same output idea for p momentum'
+        missing_components:
+        - a justified final realization has not yet been produced
+        differentiators:
+        - 'named inputs supplied: use, calculation, aliases, m, v, p, what'
+        misalignment_types:
+        - functional
+        - completion
+        origin_layers:
+        - model
+        degree: partial
+        remainder_shapes:
+        - missing
+        why_it_matters:
+        - without reducing the remainder, the item cannot be closed with governed
+          confidence
+        minimal_repair:
+        - perform the bounded computation or invoke the matching executable template
+        full_repair:
+        - perform the bounded computation or invoke the matching executable template
+        - 'satisfy success condition: all required inputs are explicit and the bounded
+          computation or template is applied faithfully'
+        - 'satisfy success condition: the result is returned in the requested usable
+          form'
+        boundary_shape:
+        - d*
+        action_posture: direct_resolution
+        notation_yaml: |-
+          "What Is 1 Core Meaning":
+            Description:
+              - "Structured learning declaration for the active non-achievedness."
+              - "Encountered non-achievedness: Momentum"
+              - "Components: none"
+              - "Composition: Momentum 1 Core Mean M Mass V Velocity P Momentum Velocity Spe Can Used Same Input Value V Momentum Linear Momentum Can Used Same Output Idea P Momentum 1 Core Mean Momentum 1 Core Mean We Will Thi Scalar Calculation Useful Natural Language Aliase We Will Thi Scalar Calculation Useful Natural Language Aliase M Mass V Velocity P Momentum Velocity Spe Can Used Same Input Value V Momentum Linear Momentum Can Used Same Output Idea P Momentum"
+              - "Intended object: Momentum What is 1. Core meaning? `m` = mass `v` = velocity `p` = momentum `velocity` and `speed` can be used as the same input value for `v` `momentum` and `linear momentum` can be used as the same output idea for `p` momentum 1. Core meaning Momentum 1. Core meaning We will use: For this scalar calculation: Useful natural-language aliases: We will use: For this scalar calculation: Useful natural-language aliases: m = mass v = velocity p = momentum velocity and speed can be used as the same input value for v momentum and linear momentum can be used as the same output idea for p momentum"
+              - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+              - "Actual realization: the prompt surface is present; explicit givens are present: Momentum What is 1, `m` = mass `v` = velocity `p` = momentum `velocity` and `speed` can be used as the same input value for `v` `momentum` and `linear momentum` can be used as the same output idea for `p` momentum 1, Core meaning Momentum 1; no justified final closure has been admitted yet"
+              - "Givens: Momentum What is 1, `m` = mass `v` = velocity `p` = momentum `velocity` and `speed` can be used as the same input value for `v` `momentum` and `linear momentum` can be used as the same output idea for `p` momentum 1, Core meaning Momentum 1, Core meaning We will use: For this scalar calculation: Useful natural-language aliases: We will use: For this scalar calculation: Useful natural-language aliases: m = mass v = velocity p = momentum velocity and speed can be used as the same input value for v momentum and linear momentum can be used as the same output idea for p momentum"
+              - "Missing components: a justified final realization has not yet been produced"
+              - "Differentiators: named inputs supplied: use, calculation, aliases, m, v, p, what"
+              - "Misalignment types: functional, completion"
+              - "Origin layers: model"
+              - "Degree: partial"
+              - "Remainder shapes: missing"
+              - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+              - "Minimal repair: perform the bounded computation or invoke the matching executable template"
+              - "Full repair: perform the bounded computation or invoke the matching executable template, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+              - "Action posture: direct_resolution"
+            In:
+              - "Prompt Surface String"
+              - "Encountered Non Achievedness String"
+              - "Lookup Keys Strings"
+              - "[ Component Non Achievedness ]"
+              - "Composed Non Achievedness"
+            Out:
+              - "Prior Encounter"
+              - "[ Reusable Artifact ]"
+              - "[ Reused Non Achievedness ]"
+              - "[ Composed Reuse ]"
+---
+1. Core meaning:
+  Description:
+  - The markdown document contains a bounded section that directly states this knowledge
+    unit.
+  - 'Knowledge artifact for: What is 1. Core meaning?'
+  In:
+  - Momentum
+  Out:
+  - 'We will use: For this scalar calculation: Useful natural-language aliases: m
+    = mass v = velocity p = momentum velocity and speed can be used as the same input
+    value for v momentum and linear momentum can be used as the same output idea for
+    p momentum'
+  Metadata:
+    artifact_id: artifact_knowledge-1-core-meaning_2a5fb9
+    artifact_type: knowledge
+    representation: yaml
+    function_bit: 0
+    boundary_shape:
+    - d*
+    scope: reuse when the user asks about 1. Core meaning from Momentum under ordinary
+      stable reading
+    reusability: broad_reuse
+    admissibility: admitted
+    learning_relation: instance_of_existing
+    created_at: '2026-03-25T11:09:54+00:00'
+    provenance:
+    - not_learn-from-markdown-learn-momentum-md_7d377c
+    - /Users/ravindranathakila/service/realized/LEARN_MOMENTUM.md
+    related_artifact_ids:
+    - artifact_knowledge-momentum_664572
+    justification: The markdown document contains a bounded section that directly
+      states this knowledge unit.
+    question: What is 1. Core meaning?
+    answer: 'We will use: For this scalar calculation: Useful natural-language aliases:
+      m = mass v = velocity p = momentum velocity and speed can be used as the same
+      input value for v momentum and linear momentum can be used as the same output
+      idea for p momentum'
+    structured_learning:
+      encountered_not: 1 Core Meaning
+      goal: What is 1. Core meaning?
+      intended_object: 'Momentum What is 1. Core meaning? 1. Core meaning `m` = mass
+        `v` = velocity `p` = momentum `velocity` and `speed` can be used as the same
+        input value for `v` `momentum` and `linear momentum` can be used as the same
+        output idea for `p` momentum Momentum 1. Core meaning We will use: For this
+        scalar calculation: Useful natural-language aliases: We will use: For this
+        scalar calculation: Useful natural-language aliases: m = mass v = velocity
+        p = momentum velocity and speed can be used as the same input value for v
+        momentum and linear momentum can be used as the same output idea for p momentum'
+      success_criteria:
+      - all required inputs are explicit and the bounded computation or template is
+        applied faithfully
+      - the result is returned in the requested usable form
+      actual_realization: 'the prompt surface is present; explicit givens are present:
+        Momentum What is 1, 1, Core meaning `m` = mass `v` = velocity `p` = momentum
+        `velocity` and `speed` can be used as the same input value for `v` `momentum`
+        and `linear momentum` can be used as the same output idea for `p` momentum
+        Momentum 1; no justified final closure has been admitted yet'
+      givens:
+      - Momentum What is 1
+      - '1'
+      - Core meaning `m` = mass `v` = velocity `p` = momentum `velocity` and `speed`
+        can be used as the same input value for `v` `momentum` and `linear momentum`
+        can be used as the same output idea for `p` momentum Momentum 1
+      - 'Core meaning We will use: For this scalar calculation: Useful natural-language
+        aliases: We will use: For this scalar calculation: Useful natural-language
+        aliases: m = mass v = velocity p = momentum velocity and speed can be used
+        as the same input value for v momentum and linear momentum can be used as
+        the same output idea for p momentum'
+      unknowns: []
+      missing_components:
+      - a justified final realization has not yet been produced
+      distorted_components: []
+      differentiators:
+      - 'named inputs supplied: use, calculation, aliases, m, v, p, what'
+      contrastive_cases: []
+      risk_of_wrong_closure: []
+      disallowed_assumptions: []
+      misalignment_types:
+      - functional
+      - completion
+      origin_layers:
+      - model
+      degree: partial
+      remainder_shapes:
+      - missing
+      why_it_matters:
+      - without reducing the remainder, the item cannot be closed with governed confidence
+      minimal_repair:
+      - perform the bounded computation or invoke the matching executable template
+      full_repair:
+      - perform the bounded computation or invoke the matching executable template
+      - 'satisfy success condition: all required inputs are explicit and the bounded
+        computation or template is applied faithfully'
+      - 'satisfy success condition: the result is returned in the requested usable
+        form'
+      boundary_shape:
+      - d*
+      action_posture: direct_resolution
+      component_nots:
+      - Momentum
+      composed_not: Momentum
+      lookup_keys:
+      - 1 core mean
+      - 1 core
+      - core mean
+      - perform bound computation or invoke match executable template
+      - perform bound
+      - bound computation
+      - computation or
+      - or invoke
+      - invoke match
+      - match executable
+      - executable template
+      - perform bound computation
+      - bound computation or
+      - computation or invoke
+      - or invoke match
+      - invoke match executable
+      - match executable template
+      - without reduc remainder item cannot clos with govern confidence
+      - without reduc remainder item cannot clo
+      - govern confidence
+      - without reduc
+      - reduc remainder
+      - remainder item
+      - item cannot
+      notation_yaml: |-
+        "What Is 1 Core Meaning":
+          Description:
+            - "Structured learning declaration for the active non-achievedness."
+            - "Encountered non-achievedness: 1 Core Meaning"
+            - "Components: Momentum"
+            - "Composition: Momentum"
+            - "Intended object: Momentum What is 1. Core meaning? 1. Core meaning `m` = mass `v` = velocity `p` = momentum `velocity` and `speed` can be used as the same input value for `v` `momentum` and `linear momentum` can be used as the same output idea for `p` momentum Momentum 1. Core meaning We will use: For this scalar calculation: Useful natural-language aliases: We will use: For this scalar calculation: Useful natural-language aliases: m = mass v = velocity p = momentum velocity and speed can be used as the same input value for v momentum and linear momentum can be used as the same output idea for p momentum"
+            - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+            - "Actual realization: the prompt surface is present; explicit givens are present: Momentum What is 1, 1, Core meaning `m` = mass `v` = velocity `p` = momentum `velocity` and `speed` can be used as the same input value for `v` `momentum` and `linear momentum` can be used as the same output idea for `p` momentum Momentum 1; no justified final closure has been admitted yet"
+            - "Givens: Momentum What is 1, 1, Core meaning `m` = mass `v` = velocity `p` = momentum `velocity` and `speed` can be used as the same input value for `v` `momentum` and `linear momentum` can be used as the same output idea for `p` momentum Momentum 1, Core meaning We will use: For this scalar calculation: Useful natural-language aliases: We will use: For this scalar calculation: Useful natural-language aliases: m = mass v = velocity p = momentum velocity and speed can be used as the same input value for v momentum and linear momentum can be used as the same output idea for p momentum"
+            - "Missing components: a justified final realization has not yet been produced"
+            - "Differentiators: named inputs supplied: use, calculation, aliases, m, v, p, what"
+            - "Misalignment types: functional, completion"
+            - "Origin layers: model"
+            - "Degree: partial"
+            - "Remainder shapes: missing"
+            - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+            - "Minimal repair: perform the bounded computation or invoke the matching executable template"
+            - "Full repair: perform the bounded computation or invoke the matching executable template, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+            - "Action posture: direct_resolution"
+          In:
+            - "Prompt Surface String"
+            - "Encountered Non Achievedness String"
+            - "Lookup Keys Strings"
+            - "[ Component Non Achievedness ]"
+            - "Composed Non Achievedness"
+          Out:
+            - "Prior Encounter"
+            - "[ Reusable Artifact ]"
+            - "[ Reused Non Achievedness ]"
+            - "[ Composed Reuse ]"
+    content:
+      source_path: /Users/ravindranathakila/service/realized/LEARN_MOMENTUM.md
+      source_document: LEARN_MOMENTUM.md
+      source_kind: markdown
+      source_title: Momentum
+      source_sections:
+      - 1. Core meaning
+      equation_bearing: false
+      parameterized: false
+      node_id: not_learn-from-markdown-learn-momentum-md_7d377c
+      aliases:
+      - '`m` = mass'
+      - '`v` = velocity'
+      - '`p` = momentum'
+      - '`velocity` and `speed` can be used as the same input value for `v`'
+      - '`momentum` and `linear momentum` can be used as the same output idea for
+        `p`'
+      - momentum
+      - 1. Core meaning
+      - Momentum
+      - Momentum 1. Core meaning
+      structured_learning:
+        encountered_not: 1 Core Meaning
+        lookup_keys:
+        - 1 core mean
+        - 1 core
+        - core mean
+        - perform bound computation or invoke match executable template
+        - perform bound
+        - bound computation
+        - computation or
+        - or invoke
+        - invoke match
+        - match executable
+        - executable template
+        - perform bound computation
+        - bound computation or
+        - computation or invoke
+        - or invoke match
+        - invoke match executable
+        - match executable template
+        - without reduc remainder item cannot clos with govern confidence
+        - without reduc remainder item cannot clo
+        - govern confidence
+        - without reduc
+        - reduc remainder
+        - remainder item
+        - item cannot
+        component_nots:
+        - Momentum
+        composed_not: Momentum
+        goal: What is 1. Core meaning?
+        intended_object: 'Momentum What is 1. Core meaning? 1. Core meaning `m` =
+          mass `v` = velocity `p` = momentum `velocity` and `speed` can be used as
+          the same input value for `v` `momentum` and `linear momentum` can be used
+          as the same output idea for `p` momentum Momentum 1. Core meaning We will
+          use: For this scalar calculation: Useful natural-language aliases: We will
+          use: For this scalar calculation: Useful natural-language aliases: m = mass
+          v = velocity p = momentum velocity and speed can be used as the same input
+          value for v momentum and linear momentum can be used as the same output
+          idea for p momentum'
+        success_criteria:
+        - all required inputs are explicit and the bounded computation or template
+          is applied faithfully
+        - the result is returned in the requested usable form
+        actual_realization: 'the prompt surface is present; explicit givens are present:
+          Momentum What is 1, 1, Core meaning `m` = mass `v` = velocity `p` = momentum
+          `velocity` and `speed` can be used as the same input value for `v` `momentum`
+          and `linear momentum` can be used as the same output idea for `p` momentum
+          Momentum 1; no justified final closure has been admitted yet'
+        givens:
+        - Momentum What is 1
+        - '1'
+        - Core meaning `m` = mass `v` = velocity `p` = momentum `velocity` and `speed`
+          can be used as the same input value for `v` `momentum` and `linear momentum`
+          can be used as the same output idea for `p` momentum Momentum 1
+        - 'Core meaning We will use: For this scalar calculation: Useful natural-language
+          aliases: We will use: For this scalar calculation: Useful natural-language
+          aliases: m = mass v = velocity p = momentum velocity and speed can be used
+          as the same input value for v momentum and linear momentum can be used as
+          the same output idea for p momentum'
+        missing_components:
+        - a justified final realization has not yet been produced
+        differentiators:
+        - 'named inputs supplied: use, calculation, aliases, m, v, p, what'
+        misalignment_types:
+        - functional
+        - completion
+        origin_layers:
+        - model
+        degree: partial
+        remainder_shapes:
+        - missing
+        why_it_matters:
+        - without reducing the remainder, the item cannot be closed with governed
+          confidence
+        minimal_repair:
+        - perform the bounded computation or invoke the matching executable template
+        full_repair:
+        - perform the bounded computation or invoke the matching executable template
+        - 'satisfy success condition: all required inputs are explicit and the bounded
+          computation or template is applied faithfully'
+        - 'satisfy success condition: the result is returned in the requested usable
+          form'
+        boundary_shape:
+        - d*
+        action_posture: direct_resolution
+        notation_yaml: |-
+          "What Is 1 Core Meaning":
+            Description:
+              - "Structured learning declaration for the active non-achievedness."
+              - "Encountered non-achievedness: 1 Core Meaning"
+              - "Components: Momentum"
+              - "Composition: Momentum"
+              - "Intended object: Momentum What is 1. Core meaning? 1. Core meaning `m` = mass `v` = velocity `p` = momentum `velocity` and `speed` can be used as the same input value for `v` `momentum` and `linear momentum` can be used as the same output idea for `p` momentum Momentum 1. Core meaning We will use: For this scalar calculation: Useful natural-language aliases: We will use: For this scalar calculation: Useful natural-language aliases: m = mass v = velocity p = momentum velocity and speed can be used as the same input value for v momentum and linear momentum can be used as the same output idea for p momentum"
+              - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+              - "Actual realization: the prompt surface is present; explicit givens are present: Momentum What is 1, 1, Core meaning `m` = mass `v` = velocity `p` = momentum `velocity` and `speed` can be used as the same input value for `v` `momentum` and `linear momentum` can be used as the same output idea for `p` momentum Momentum 1; no justified final closure has been admitted yet"
+              - "Givens: Momentum What is 1, 1, Core meaning `m` = mass `v` = velocity `p` = momentum `velocity` and `speed` can be used as the same input value for `v` `momentum` and `linear momentum` can be used as the same output idea for `p` momentum Momentum 1, Core meaning We will use: For this scalar calculation: Useful natural-language aliases: We will use: For this scalar calculation: Useful natural-language aliases: m = mass v = velocity p = momentum velocity and speed can be used as the same input value for v momentum and linear momentum can be used as the same output idea for p momentum"
+              - "Missing components: a justified final realization has not yet been produced"
+              - "Differentiators: named inputs supplied: use, calculation, aliases, m, v, p, what"
+              - "Misalignment types: functional, completion"
+              - "Origin layers: model"
+              - "Degree: partial"
+              - "Remainder shapes: missing"
+              - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+              - "Minimal repair: perform the bounded computation or invoke the matching executable template"
+              - "Full repair: perform the bounded computation or invoke the matching executable template, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+              - "Action posture: direct_resolution"
+            In:
+              - "Prompt Surface String"
+              - "Encountered Non Achievedness String"
+              - "Lookup Keys Strings"
+              - "[ Component Non Achievedness ]"
+              - "Composed Non Achievedness"
+            Out:
+              - "Prior Encounter"
+              - "[ Reusable Artifact ]"
+              - "[ Reused Non Achievedness ]"
+              - "[ Composed Reuse ]"
+---
+2. Core equation:
+  Description:
+  - The markdown document contains a bounded section that directly states this knowledge
+    unit.
+  - 'Knowledge artifact for: What is 2. Core equation?'
+  In:
+  - Momentum
+  Out:
+  - 'The reusable rule is: $$ p = m v $$ This means: multiply mass by velocity the
+    result is momentum'
+  Metadata:
+    artifact_id: artifact_knowledge-2-core-equation_578f96
+    artifact_type: knowledge
+    representation: yaml
+    function_bit: 0
+    boundary_shape:
+    - d*
+    scope: reuse when the user asks about 2. Core equation from Momentum under ordinary
+      stable reading
+    reusability: broad_reuse
+    admissibility: admitted
+    learning_relation: instance_of_existing
+    created_at: '2026-03-25T11:09:54+00:00'
+    provenance:
+    - not_learn-from-markdown-learn-momentum-md_7d377c
+    - /Users/ravindranathakila/service/realized/LEARN_MOMENTUM.md
+    related_artifact_ids:
+    - artifact_knowledge-momentum_664572
+    - artifact_knowledge-1-core-meaning_2a5fb9
+    justification: The markdown document contains a bounded section that directly
+      states this knowledge unit.
+    question: What is 2. Core equation?
+    answer: 'The reusable rule is: $$ p = m v $$ This means: multiply mass by velocity
+      the result is momentum'
+    structured_learning:
+      encountered_not: 2 Core Equation
+      goal: What is 2. Core equation?
+      intended_object: 'Momentum What is 2. Core equation? 2. Core equation multiply
+        mass by velocity the result is momentum Momentum 2. Core equation The reusable
+        rule is: $$ p = m * v $$ This means: The reusable rule is: $$ p = m v $$ This
+        means: multiply mass by velocity the result is momentum'
+      success_criteria:
+      - all required inputs are explicit and the bounded computation or template is
+        applied faithfully
+      - the result is returned in the requested usable form
+      actual_realization: 'the prompt surface is present; explicit givens are present:
+        Momentum What is 2, 2, Core equation multiply mass by velocity the result
+        is momentum Momentum 2; no justified final closure has been admitted yet'
+      givens:
+      - Momentum What is 2
+      - '2'
+      - Core equation multiply mass by velocity the result is momentum Momentum 2
+      - 'Core equation The reusable rule is: $$ p = m * v $$ This means: The reusable
+        rule is: $$ p = m v $$ This means: multiply mass by velocity the result is
+        momentum'
+      unknowns: []
+      missing_components:
+      - a justified final realization has not yet been produced
+      distorted_components: []
+      differentiators:
+      - 'named inputs supplied: is, p, means, what'
+      contrastive_cases: []
+      risk_of_wrong_closure: []
+      disallowed_assumptions: []
+      misalignment_types:
+      - functional
+      - completion
+      origin_layers:
+      - model
+      degree: partial
+      remainder_shapes:
+      - missing
+      why_it_matters:
+      - without reducing the remainder, the item cannot be closed with governed confidence
+      minimal_repair:
+      - perform the bounded computation or invoke the matching executable template
+      full_repair:
+      - perform the bounded computation or invoke the matching executable template
+      - 'satisfy success condition: all required inputs are explicit and the bounded
+        computation or template is applied faithfully'
+      - 'satisfy success condition: the result is returned in the requested usable
+        form'
+      boundary_shape:
+      - d*
+      action_posture: direct_resolution
+      component_nots:
+      - Momentum
+      composed_not: Momentum
+      lookup_keys:
+      - 2 core equation
+      - 2 core
+      - core equation
+      - perform bound computation or invoke match executable template
+      - perform bound
+      - bound computation
+      - computation or
+      - or invoke
+      - invoke match
+      - match executable
+      - executable template
+      - perform bound computation
+      - bound computation or
+      - computation or invoke
+      - or invoke match
+      - invoke match executable
+      - match executable template
+      - without reduc remainder item cannot clos with govern confidence
+      - without reduc remainder item cannot clo
+      - govern confidence
+      - without reduc
+      - reduc remainder
+      - remainder item
+      - item cannot
+      notation_yaml: |-
+        "What Is 2 Core Equation":
+          Description:
+            - "Structured learning declaration for the active non-achievedness."
+            - "Encountered non-achievedness: 2 Core Equation"
+            - "Components: Momentum"
+            - "Composition: Momentum"
+            - "Intended object: Momentum What is 2. Core equation? 2. Core equation multiply mass by velocity the result is momentum Momentum 2. Core equation The reusable rule is: $$ p = m * v $$ This means: The reusable rule is: $$ p = m v $$ This means: multiply mass by velocity the result is momentum"
+            - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+            - "Actual realization: the prompt surface is present; explicit givens are present: Momentum What is 2, 2, Core equation multiply mass by velocity the result is momentum Momentum 2; no justified final closure has been admitted yet"
+            - "Givens: Momentum What is 2, 2, Core equation multiply mass by velocity the result is momentum Momentum 2, Core equation The reusable rule is: $$ p = m * v $$ This means: The reusable rule is: $$ p = m v $$ This means: multiply mass by velocity the result is momentum"
+            - "Missing components: a justified final realization has not yet been produced"
+            - "Differentiators: named inputs supplied: is, p, means, what"
+            - "Misalignment types: functional, completion"
+            - "Origin layers: model"
+            - "Degree: partial"
+            - "Remainder shapes: missing"
+            - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+            - "Minimal repair: perform the bounded computation or invoke the matching executable template"
+            - "Full repair: perform the bounded computation or invoke the matching executable template, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+            - "Action posture: direct_resolution"
+          In:
+            - "Prompt Surface String"
+            - "Encountered Non Achievedness String"
+            - "Lookup Keys Strings"
+            - "[ Component Non Achievedness ]"
+            - "Composed Non Achievedness"
+          Out:
+            - "Prior Encounter"
+            - "[ Reusable Artifact ]"
+            - "[ Reused Non Achievedness ]"
+            - "[ Composed Reuse ]"
+    content:
+      source_path: /Users/ravindranathakila/service/realized/LEARN_MOMENTUM.md
+      source_document: LEARN_MOMENTUM.md
+      source_kind: markdown
+      source_title: Momentum
+      source_sections:
+      - 2. Core equation
+      equation_bearing: false
+      parameterized: false
+      node_id: not_learn-from-markdown-learn-momentum-md_7d377c
+      aliases:
+      - multiply mass by velocity
+      - the result is momentum
+      - 2. Core equation
+      - Momentum
+      - Momentum 2. Core equation
+      structured_learning:
+        encountered_not: 2 Core Equation
+        lookup_keys:
+        - 2 core equation
+        - 2 core
+        - core equation
+        - perform bound computation or invoke match executable template
+        - perform bound
+        - bound computation
+        - computation or
+        - or invoke
+        - invoke match
+        - match executable
+        - executable template
+        - perform bound computation
+        - bound computation or
+        - computation or invoke
+        - or invoke match
+        - invoke match executable
+        - match executable template
+        - without reduc remainder item cannot clos with govern confidence
+        - without reduc remainder item cannot clo
+        - govern confidence
+        - without reduc
+        - reduc remainder
+        - remainder item
+        - item cannot
+        component_nots:
+        - Momentum
+        composed_not: Momentum
+        goal: What is 2. Core equation?
+        intended_object: 'Momentum What is 2. Core equation? 2. Core equation multiply
+          mass by velocity the result is momentum Momentum 2. Core equation The reusable
+          rule is: $$ p = m * v $$ This means: The reusable rule is: $$ p = m v $$
+          This means: multiply mass by velocity the result is momentum'
+        success_criteria:
+        - all required inputs are explicit and the bounded computation or template
+          is applied faithfully
+        - the result is returned in the requested usable form
+        actual_realization: 'the prompt surface is present; explicit givens are present:
+          Momentum What is 2, 2, Core equation multiply mass by velocity the result
+          is momentum Momentum 2; no justified final closure has been admitted yet'
+        givens:
+        - Momentum What is 2
+        - '2'
+        - Core equation multiply mass by velocity the result is momentum Momentum
+          2
+        - 'Core equation The reusable rule is: $$ p = m * v $$ This means: The reusable
+          rule is: $$ p = m v $$ This means: multiply mass by velocity the result
+          is momentum'
+        missing_components:
+        - a justified final realization has not yet been produced
+        differentiators:
+        - 'named inputs supplied: is, p, means, what'
+        misalignment_types:
+        - functional
+        - completion
+        origin_layers:
+        - model
+        degree: partial
+        remainder_shapes:
+        - missing
+        why_it_matters:
+        - without reducing the remainder, the item cannot be closed with governed
+          confidence
+        minimal_repair:
+        - perform the bounded computation or invoke the matching executable template
+        full_repair:
+        - perform the bounded computation or invoke the matching executable template
+        - 'satisfy success condition: all required inputs are explicit and the bounded
+          computation or template is applied faithfully'
+        - 'satisfy success condition: the result is returned in the requested usable
+          form'
+        boundary_shape:
+        - d*
+        action_posture: direct_resolution
+        notation_yaml: |-
+          "What Is 2 Core Equation":
+            Description:
+              - "Structured learning declaration for the active non-achievedness."
+              - "Encountered non-achievedness: 2 Core Equation"
+              - "Components: Momentum"
+              - "Composition: Momentum"
+              - "Intended object: Momentum What is 2. Core equation? 2. Core equation multiply mass by velocity the result is momentum Momentum 2. Core equation The reusable rule is: $$ p = m * v $$ This means: The reusable rule is: $$ p = m v $$ This means: multiply mass by velocity the result is momentum"
+              - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+              - "Actual realization: the prompt surface is present; explicit givens are present: Momentum What is 2, 2, Core equation multiply mass by velocity the result is momentum Momentum 2; no justified final closure has been admitted yet"
+              - "Givens: Momentum What is 2, 2, Core equation multiply mass by velocity the result is momentum Momentum 2, Core equation The reusable rule is: $$ p = m * v $$ This means: The reusable rule is: $$ p = m v $$ This means: multiply mass by velocity the result is momentum"
+              - "Missing components: a justified final realization has not yet been produced"
+              - "Differentiators: named inputs supplied: is, p, means, what"
+              - "Misalignment types: functional, completion"
+              - "Origin layers: model"
+              - "Degree: partial"
+              - "Remainder shapes: missing"
+              - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+              - "Minimal repair: perform the bounded computation or invoke the matching executable template"
+              - "Full repair: perform the bounded computation or invoke the matching executable template, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+              - "Action posture: direct_resolution"
+            In:
+              - "Prompt Surface String"
+              - "Encountered Non Achievedness String"
+              - "Lookup Keys Strings"
+              - "[ Component Non Achievedness ]"
+              - "Composed Non Achievedness"
+            Out:
+              - "Prior Encounter"
+              - "[ Reusable Artifact ]"
+              - "[ Reused Non Achievedness ]"
+              - "[ Composed Reuse ]"
+---
+3. Reusable calculation form:
+  Description:
+  - The markdown document contains a bounded section that directly states this knowledge
+    unit.
+  - 'Knowledge artifact for: What is 3. Reusable calculation form?'
+  In:
+  - Momentum
+  Out:
+  - 'Inputs: Output: If mass is in kilograms and velocity is in metres per second,
+    momentum is in kilogram metres per second. m: mass v: velocity p: momentum'
+  Metadata:
+    artifact_id: artifact_knowledge-3-reusable-calculation-form_8b65ae
+    artifact_type: knowledge
+    representation: yaml
+    function_bit: 0
+    boundary_shape:
+    - d*
+    scope: reuse when the user asks about 3. Reusable calculation form from Momentum
+      under ordinary stable reading
+    reusability: broad_reuse
+    admissibility: admitted
+    learning_relation: instance_of_existing
+    created_at: '2026-03-25T11:09:55+00:00'
+    provenance:
+    - not_learn-from-markdown-learn-momentum-md_7d377c
+    - /Users/ravindranathakila/service/realized/LEARN_MOMENTUM.md
+    related_artifact_ids:
+    - artifact_knowledge-momentum_664572
+    - artifact_knowledge-1-core-meaning_2a5fb9
+    - artifact_knowledge-2-core-equation_578f96
+    justification: The markdown document contains a bounded section that directly
+      states this knowledge unit.
+    question: What is 3. Reusable calculation form?
+    answer: 'Inputs: Output: If mass is in kilograms and velocity is in metres per
+      second, momentum is in kilogram metres per second. m: mass v: velocity p: momentum'
+    structured_learning:
+      encountered_not: 3 Reusable Calculation Form
+      goal: What is 3. Reusable calculation form?
+      intended_object: 'Momentum What is 3. Reusable calculation form? 3. Reusable
+        calculation form `m`: mass `v`: velocity `p`: momentum Momentum 3. Reusable
+        calculation form Inputs: Output: If mass is in kilograms and velocity is in
+        metres per second, momentum is in kilogram metres per second. Inputs: Output:
+        If mass is in kilograms and velocity is in metres per second, momentum is
+        in kilogram metres per second. m: mass v: velocity p: momentum'
+      success_criteria:
+      - all required inputs are explicit and the bounded computation or template is
+        applied faithfully
+      - the result is returned in the requested usable form
+      actual_realization: 'the prompt surface is present; explicit givens are present:
+        Momentum What is 3, 3, Reusable calculation form `m`: mass `v`: velocity `p`:
+        momentum Momentum 3; no justified final closure has been admitted yet'
+      givens:
+      - Momentum What is 3
+      - '3'
+      - 'Reusable calculation form `m`: mass `v`: velocity `p`: momentum Momentum
+        3'
+      - 'Reusable calculation form Inputs: Output: If mass is in kilograms and velocity
+        is in metres per second'
+      unknowns: []
+      missing_components:
+      - a justified final realization has not yet been produced
+      distorted_components: []
+      differentiators:
+      - 'named inputs supplied: inputs, output, m, v, p, what'
+      contrastive_cases:
+      - condition holds versus condition does not hold
+      risk_of_wrong_closure: []
+      disallowed_assumptions: []
+      misalignment_types:
+      - functional
+      - completion
+      origin_layers:
+      - model
+      degree: partial
+      remainder_shapes:
+      - missing
+      why_it_matters:
+      - without reducing the remainder, the item cannot be closed with governed confidence
+      minimal_repair:
+      - perform the bounded computation or invoke the matching executable template
+      full_repair:
+      - perform the bounded computation or invoke the matching executable template
+      - 'satisfy success condition: all required inputs are explicit and the bounded
+        computation or template is applied faithfully'
+      - 'satisfy success condition: the result is returned in the requested usable
+        form'
+      boundary_shape:
+      - d*
+      action_posture: direct_resolution
+      component_nots:
+      - Momentum
+      composed_not: Momentum
+      lookup_keys:
+      - 3 reusable calculation form
+      - 3 reusable
+      - reusable calculation
+      - calculation form
+      - 3 reusable calculation
+      - reusable calculation form
+      - perform bound computation or invoke match executable template
+      - perform bound
+      - bound computation
+      - computation or
+      - or invoke
+      - invoke match
+      - match executable
+      - executable template
+      - perform bound computation
+      - bound computation or
+      - computation or invoke
+      - or invoke match
+      - invoke match executable
+      - match executable template
+      - without reduc remainder item cannot clos with govern confidence
+      - without reduc remainder item cannot clo
+      - govern confidence
+      - without reduc
+      notation_yaml: |-
+        "What Is 3 Reusable Calculation Form":
+          Description:
+            - "Structured learning declaration for the active non-achievedness."
+            - "Encountered non-achievedness: 3 Reusable Calculation Form"
+            - "Components: Momentum"
+            - "Composition: Momentum"
+            - "Intended object: Momentum What is 3. Reusable calculation form? 3. Reusable calculation form `m`: mass `v`: velocity `p`: momentum Momentum 3. Reusable calculation form Inputs: Output: If mass is in kilograms and velocity is in metres per second, momentum is in kilogram metres per second. Inputs: Output: If mass is in kilograms and velocity is in metres per second, momentum is in kilogram metres per second. m: mass v: velocity p: momentum"
+            - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+            - "Actual realization: the prompt surface is present; explicit givens are present: Momentum What is 3, 3, Reusable calculation form `m`: mass `v`: velocity `p`: momentum Momentum 3; no justified final closure has been admitted yet"
+            - "Givens: Momentum What is 3, 3, Reusable calculation form `m`: mass `v`: velocity `p`: momentum Momentum 3, Reusable calculation form Inputs: Output: If mass is in kilograms and velocity is in metres per second"
+            - "Missing components: a justified final realization has not yet been produced"
+            - "Differentiators: named inputs supplied: inputs, output, m, v, p, what"
+            - "Contrastive cases: condition holds versus condition does not hold"
+            - "Misalignment types: functional, completion"
+            - "Origin layers: model"
+            - "Degree: partial"
+            - "Remainder shapes: missing"
+            - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+            - "Minimal repair: perform the bounded computation or invoke the matching executable template"
+            - "Full repair: perform the bounded computation or invoke the matching executable template, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+            - "Action posture: direct_resolution"
+          In:
+            - "Prompt Surface String"
+            - "Encountered Non Achievedness String"
+            - "Lookup Keys Strings"
+            - "[ Component Non Achievedness ]"
+            - "Composed Non Achievedness"
+          Out:
+            - "Prior Encounter"
+            - "[ Reusable Artifact ]"
+            - "[ Reused Non Achievedness ]"
+            - "[ Composed Reuse ]"
+    content:
+      source_path: /Users/ravindranathakila/service/realized/LEARN_MOMENTUM.md
+      source_document: LEARN_MOMENTUM.md
+      source_kind: markdown
+      source_title: Momentum
+      source_sections:
+      - 3. Reusable calculation form
+      equation_bearing: false
+      parameterized: false
+      node_id: not_learn-from-markdown-learn-momentum-md_7d377c
+      aliases:
+      - '`m`: mass'
+      - '`v`: velocity'
+      - '`p`: momentum'
+      - 3. Reusable calculation form
+      - Momentum
+      - Momentum 3. Reusable calculation form
+      structured_learning:
+        encountered_not: 3 Reusable Calculation Form
+        lookup_keys:
+        - 3 reusable calculation form
+        - 3 reusable
+        - reusable calculation
+        - calculation form
+        - 3 reusable calculation
+        - reusable calculation form
+        - perform bound computation or invoke match executable template
+        - perform bound
+        - bound computation
+        - computation or
+        - or invoke
+        - invoke match
+        - match executable
+        - executable template
+        - perform bound computation
+        - bound computation or
+        - computation or invoke
+        - or invoke match
+        - invoke match executable
+        - match executable template
+        - without reduc remainder item cannot clos with govern confidence
+        - without reduc remainder item cannot clo
+        - govern confidence
+        - without reduc
+        component_nots:
+        - Momentum
+        composed_not: Momentum
+        goal: What is 3. Reusable calculation form?
+        intended_object: 'Momentum What is 3. Reusable calculation form? 3. Reusable
+          calculation form `m`: mass `v`: velocity `p`: momentum Momentum 3. Reusable
+          calculation form Inputs: Output: If mass is in kilograms and velocity is
+          in metres per second, momentum is in kilogram metres per second. Inputs:
+          Output: If mass is in kilograms and velocity is in metres per second, momentum
+          is in kilogram metres per second. m: mass v: velocity p: momentum'
+        success_criteria:
+        - all required inputs are explicit and the bounded computation or template
+          is applied faithfully
+        - the result is returned in the requested usable form
+        actual_realization: 'the prompt surface is present; explicit givens are present:
+          Momentum What is 3, 3, Reusable calculation form `m`: mass `v`: velocity
+          `p`: momentum Momentum 3; no justified final closure has been admitted yet'
+        givens:
+        - Momentum What is 3
+        - '3'
+        - 'Reusable calculation form `m`: mass `v`: velocity `p`: momentum Momentum
+          3'
+        - 'Reusable calculation form Inputs: Output: If mass is in kilograms and velocity
+          is in metres per second'
+        missing_components:
+        - a justified final realization has not yet been produced
+        differentiators:
+        - 'named inputs supplied: inputs, output, m, v, p, what'
+        contrastive_cases:
+        - condition holds versus condition does not hold
+        misalignment_types:
+        - functional
+        - completion
+        origin_layers:
+        - model
+        degree: partial
+        remainder_shapes:
+        - missing
+        why_it_matters:
+        - without reducing the remainder, the item cannot be closed with governed
+          confidence
+        minimal_repair:
+        - perform the bounded computation or invoke the matching executable template
+        full_repair:
+        - perform the bounded computation or invoke the matching executable template
+        - 'satisfy success condition: all required inputs are explicit and the bounded
+          computation or template is applied faithfully'
+        - 'satisfy success condition: the result is returned in the requested usable
+          form'
+        boundary_shape:
+        - d*
+        action_posture: direct_resolution
+        notation_yaml: |-
+          "What Is 3 Reusable Calculation Form":
+            Description:
+              - "Structured learning declaration for the active non-achievedness."
+              - "Encountered non-achievedness: 3 Reusable Calculation Form"
+              - "Components: Momentum"
+              - "Composition: Momentum"
+              - "Intended object: Momentum What is 3. Reusable calculation form? 3. Reusable calculation form `m`: mass `v`: velocity `p`: momentum Momentum 3. Reusable calculation form Inputs: Output: If mass is in kilograms and velocity is in metres per second, momentum is in kilogram metres per second. Inputs: Output: If mass is in kilograms and velocity is in metres per second, momentum is in kilogram metres per second. m: mass v: velocity p: momentum"
+              - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+              - "Actual realization: the prompt surface is present; explicit givens are present: Momentum What is 3, 3, Reusable calculation form `m`: mass `v`: velocity `p`: momentum Momentum 3; no justified final closure has been admitted yet"
+              - "Givens: Momentum What is 3, 3, Reusable calculation form `m`: mass `v`: velocity `p`: momentum Momentum 3, Reusable calculation form Inputs: Output: If mass is in kilograms and velocity is in metres per second"
+              - "Missing components: a justified final realization has not yet been produced"
+              - "Differentiators: named inputs supplied: inputs, output, m, v, p, what"
+              - "Contrastive cases: condition holds versus condition does not hold"
+              - "Misalignment types: functional, completion"
+              - "Origin layers: model"
+              - "Degree: partial"
+              - "Remainder shapes: missing"
+              - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+              - "Minimal repair: perform the bounded computation or invoke the matching executable template"
+              - "Full repair: perform the bounded computation or invoke the matching executable template, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+              - "Action posture: direct_resolution"
+            In:
+              - "Prompt Surface String"
+              - "Encountered Non Achievedness String"
+              - "Lookup Keys Strings"
+              - "[ Component Non Achievedness ]"
+              - "Composed Non Achievedness"
+            Out:
+              - "Prior Encounter"
+              - "[ Reusable Artifact ]"
+              - "[ Reused Non Achievedness ]"
+              - "[ Composed Reuse ]"
+---
+4. Worked examples:
+  Description:
+  - The markdown document contains a bounded section that directly states this knowledge
+    unit.
+  - 'Knowledge artifact for: What is 4. Worked examples?'
+  In:
+  - Momentum
+  Out:
+  - 'If: Then: $$ p = 3 4 = 12 $$ m = 3 v = 4 m = 5 v = 2'
+  Metadata:
+    artifact_id: artifact_knowledge-4-worked-examples_98f64a
+    artifact_type: knowledge
+    representation: yaml
+    function_bit: 0
+    boundary_shape:
+    - d*
+    scope: reuse when the user asks about 4. Worked examples from Momentum under ordinary
+      stable reading
+    reusability: broad_reuse
+    admissibility: admitted
+    learning_relation: instance_of_existing
+    created_at: '2026-03-25T11:09:55+00:00'
+    provenance:
+    - not_learn-from-markdown-learn-momentum-md_7d377c
+    - /Users/ravindranathakila/service/realized/LEARN_MOMENTUM.md
+    related_artifact_ids:
+    - artifact_knowledge-momentum_664572
+    - artifact_knowledge-1-core-meaning_2a5fb9
+    - artifact_knowledge-2-core-equation_578f96
+    - artifact_knowledge-3-reusable-calculation-form_8b65ae
+    justification: The markdown document contains a bounded section that directly
+      states this knowledge unit.
+    question: What is 4. Worked examples?
+    answer: 'If: Then: $$ p = 3 4 = 12 $$ m = 3 v = 4 m = 5 v = 2'
+    structured_learning:
+      encountered_not: 4 Worked Examples
+      goal: What is 4. Worked examples?
+      intended_object: 'Momentum What is 4. Worked examples? 4. Worked examples `m
+        = 3` `v = 4` `m = 5` `v = 2` Momentum 4. Worked examples If: Then: $$ p =
+        3 * 4 = 12 $$ If: Then: $$ p = 3 4 = 12 $$ m = 3 v = 4 m = 5 v = 2'
+      success_criteria:
+      - all required inputs are explicit and the bounded computation or template is
+        applied faithfully
+      - the result is returned in the requested usable form
+      actual_realization: 'the prompt surface is present; explicit givens are present:
+        Momentum What is 4, 4, Worked examples `m = 3` `v = 4` `m = 5` `v = 2` Momentum
+        4; no justified final closure has been admitted yet'
+      givens:
+      - Momentum What is 4
+      - '4'
+      - Worked examples `m = 3` `v = 4` `m = 5` `v = 2` Momentum 4
+      - 'Worked examples If: Then: $$ p = 3 * 4 = 12 $$ If: Then: $$ p = 3 4 = 12
+        $$ m = 3 v = 4 m = 5 v = 2'
+      unknowns: []
+      missing_components:
+      - a justified final realization has not yet been produced
+      distorted_components: []
+      differentiators:
+      - 'named inputs supplied: m, v, if, then, p, what'
+      contrastive_cases:
+      - condition holds versus condition does not hold
+      risk_of_wrong_closure: []
+      disallowed_assumptions: []
+      misalignment_types:
+      - functional
+      - completion
+      origin_layers:
+      - model
+      degree: partial
+      remainder_shapes:
+      - missing
+      why_it_matters:
+      - without reducing the remainder, the item cannot be closed with governed confidence
+      minimal_repair:
+      - perform the bounded computation or invoke the matching executable template
+      full_repair:
+      - perform the bounded computation or invoke the matching executable template
+      - 'satisfy success condition: all required inputs are explicit and the bounded
+        computation or template is applied faithfully'
+      - 'satisfy success condition: the result is returned in the requested usable
+        form'
+      boundary_shape:
+      - d*
+      action_posture: direct_resolution
+      component_nots:
+      - Momentum
+      composed_not: Momentum
+      lookup_keys:
+      - 4 work example
+      - 4 work
+      - work example
+      - perform bound computation or invoke match executable template
+      - perform bound
+      - bound computation
+      - computation or
+      - or invoke
+      - invoke match
+      - match executable
+      - executable template
+      - perform bound computation
+      - bound computation or
+      - computation or invoke
+      - or invoke match
+      - invoke match executable
+      - match executable template
+      - without reduc remainder item cannot clos with govern confidence
+      - without reduc remainder item cannot clo
+      - govern confidence
+      - without reduc
+      - reduc remainder
+      - remainder item
+      - item cannot
+      notation_yaml: |-
+        "What Is 4 Worked Examples":
+          Description:
+            - "Structured learning declaration for the active non-achievedness."
+            - "Encountered non-achievedness: 4 Worked Examples"
+            - "Components: Momentum"
+            - "Composition: Momentum"
+            - "Intended object: Momentum What is 4. Worked examples? 4. Worked examples `m = 3` `v = 4` `m = 5` `v = 2` Momentum 4. Worked examples If: Then: $$ p = 3 * 4 = 12 $$ If: Then: $$ p = 3 4 = 12 $$ m = 3 v = 4 m = 5 v = 2"
+            - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+            - "Actual realization: the prompt surface is present; explicit givens are present: Momentum What is 4, 4, Worked examples `m = 3` `v = 4` `m = 5` `v = 2` Momentum 4; no justified final closure has been admitted yet"
+            - "Givens: Momentum What is 4, 4, Worked examples `m = 3` `v = 4` `m = 5` `v = 2` Momentum 4, Worked examples If: Then: $$ p = 3 * 4 = 12 $$ If: Then: $$ p = 3 4 = 12 $$ m = 3 v = 4 m = 5 v = 2"
+            - "Missing components: a justified final realization has not yet been produced"
+            - "Differentiators: named inputs supplied: m, v, if, then, p, what"
+            - "Contrastive cases: condition holds versus condition does not hold"
+            - "Misalignment types: functional, completion"
+            - "Origin layers: model"
+            - "Degree: partial"
+            - "Remainder shapes: missing"
+            - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+            - "Minimal repair: perform the bounded computation or invoke the matching executable template"
+            - "Full repair: perform the bounded computation or invoke the matching executable template, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+            - "Action posture: direct_resolution"
+          In:
+            - "Prompt Surface String"
+            - "Encountered Non Achievedness String"
+            - "Lookup Keys Strings"
+            - "[ Component Non Achievedness ]"
+            - "Composed Non Achievedness"
+          Out:
+            - "Prior Encounter"
+            - "[ Reusable Artifact ]"
+            - "[ Reused Non Achievedness ]"
+            - "[ Composed Reuse ]"
+    content:
+      source_path: /Users/ravindranathakila/service/realized/LEARN_MOMENTUM.md
+      source_document: LEARN_MOMENTUM.md
+      source_kind: markdown
+      source_title: Momentum
+      source_sections:
+      - 4. Worked examples
+      equation_bearing: false
+      parameterized: false
+      node_id: not_learn-from-markdown-learn-momentum-md_7d377c
+      aliases:
+      - '`m = 3`'
+      - '`v = 4`'
+      - '`m = 5`'
+      - '`v = 2`'
+      - 4. Worked examples
+      - Momentum
+      - Momentum 4. Worked examples
+      structured_learning:
+        encountered_not: 4 Worked Examples
+        lookup_keys:
+        - 4 work example
+        - 4 work
+        - work example
+        - perform bound computation or invoke match executable template
+        - perform bound
+        - bound computation
+        - computation or
+        - or invoke
+        - invoke match
+        - match executable
+        - executable template
+        - perform bound computation
+        - bound computation or
+        - computation or invoke
+        - or invoke match
+        - invoke match executable
+        - match executable template
+        - without reduc remainder item cannot clos with govern confidence
+        - without reduc remainder item cannot clo
+        - govern confidence
+        - without reduc
+        - reduc remainder
+        - remainder item
+        - item cannot
+        component_nots:
+        - Momentum
+        composed_not: Momentum
+        goal: What is 4. Worked examples?
+        intended_object: 'Momentum What is 4. Worked examples? 4. Worked examples
+          `m = 3` `v = 4` `m = 5` `v = 2` Momentum 4. Worked examples If: Then: $$
+          p = 3 * 4 = 12 $$ If: Then: $$ p = 3 4 = 12 $$ m = 3 v = 4 m = 5 v = 2'
+        success_criteria:
+        - all required inputs are explicit and the bounded computation or template
+          is applied faithfully
+        - the result is returned in the requested usable form
+        actual_realization: 'the prompt surface is present; explicit givens are present:
+          Momentum What is 4, 4, Worked examples `m = 3` `v = 4` `m = 5` `v = 2` Momentum
+          4; no justified final closure has been admitted yet'
+        givens:
+        - Momentum What is 4
+        - '4'
+        - Worked examples `m = 3` `v = 4` `m = 5` `v = 2` Momentum 4
+        - 'Worked examples If: Then: $$ p = 3 * 4 = 12 $$ If: Then: $$ p = 3 4 = 12
+          $$ m = 3 v = 4 m = 5 v = 2'
+        missing_components:
+        - a justified final realization has not yet been produced
+        differentiators:
+        - 'named inputs supplied: m, v, if, then, p, what'
+        contrastive_cases:
+        - condition holds versus condition does not hold
+        misalignment_types:
+        - functional
+        - completion
+        origin_layers:
+        - model
+        degree: partial
+        remainder_shapes:
+        - missing
+        why_it_matters:
+        - without reducing the remainder, the item cannot be closed with governed
+          confidence
+        minimal_repair:
+        - perform the bounded computation or invoke the matching executable template
+        full_repair:
+        - perform the bounded computation or invoke the matching executable template
+        - 'satisfy success condition: all required inputs are explicit and the bounded
+          computation or template is applied faithfully'
+        - 'satisfy success condition: the result is returned in the requested usable
+          form'
+        boundary_shape:
+        - d*
+        action_posture: direct_resolution
+        notation_yaml: |-
+          "What Is 4 Worked Examples":
+            Description:
+              - "Structured learning declaration for the active non-achievedness."
+              - "Encountered non-achievedness: 4 Worked Examples"
+              - "Components: Momentum"
+              - "Composition: Momentum"
+              - "Intended object: Momentum What is 4. Worked examples? 4. Worked examples `m = 3` `v = 4` `m = 5` `v = 2` Momentum 4. Worked examples If: Then: $$ p = 3 * 4 = 12 $$ If: Then: $$ p = 3 4 = 12 $$ m = 3 v = 4 m = 5 v = 2"
+              - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+              - "Actual realization: the prompt surface is present; explicit givens are present: Momentum What is 4, 4, Worked examples `m = 3` `v = 4` `m = 5` `v = 2` Momentum 4; no justified final closure has been admitted yet"
+              - "Givens: Momentum What is 4, 4, Worked examples `m = 3` `v = 4` `m = 5` `v = 2` Momentum 4, Worked examples If: Then: $$ p = 3 * 4 = 12 $$ If: Then: $$ p = 3 4 = 12 $$ m = 3 v = 4 m = 5 v = 2"
+              - "Missing components: a justified final realization has not yet been produced"
+              - "Differentiators: named inputs supplied: m, v, if, then, p, what"
+              - "Contrastive cases: condition holds versus condition does not hold"
+              - "Misalignment types: functional, completion"
+              - "Origin layers: model"
+              - "Degree: partial"
+              - "Remainder shapes: missing"
+              - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+              - "Minimal repair: perform the bounded computation or invoke the matching executable template"
+              - "Full repair: perform the bounded computation or invoke the matching executable template, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+              - "Action posture: direct_resolution"
+            In:
+              - "Prompt Surface String"
+              - "Encountered Non Achievedness String"
+              - "Lookup Keys Strings"
+              - "[ Component Non Achievedness ]"
+              - "Composed Non Achievedness"
+            Out:
+              - "Prior Encounter"
+              - "[ Reusable Artifact ]"
+              - "[ Reused Non Achievedness ]"
+              - "[ Composed Reuse ]"
+---
+5. Natural-language paraphrases of the same task:
+  Description:
+  - The markdown document contains a bounded section that directly states this knowledge
+    unit.
+  - 'Knowledge artifact for: What is 5. Natural-language paraphrases of the same task?'
+  In:
+  - Momentum
+  Out:
+  - 'These all ask for the same reusable calculation: --- calculate momentum from
+    mass and velocity find momentum if mass and velocity are known what is the momentum
+    when mass is 7 and velocity is 6 compute linear momentum for a body with mass
+    8 and speed 9'
+  Metadata:
+    artifact_id: artifact_knowledge-5-natural-language-paraphrases-of-the-_5ea756
+    artifact_type: knowledge
+    representation: yaml
+    function_bit: 0
+    boundary_shape:
+    - d*
+    scope: reuse when the user asks about 5. Natural-language paraphrases of the same
+      task from Momentum under ordinary stable reading
+    reusability: broad_reuse
+    admissibility: admitted
+    learning_relation: instance_of_existing
+    created_at: '2026-03-25T11:09:56+00:00'
+    provenance:
+    - not_learn-from-markdown-learn-momentum-md_7d377c
+    - /Users/ravindranathakila/service/realized/LEARN_MOMENTUM.md
+    related_artifact_ids:
+    - artifact_knowledge-momentum_664572
+    - artifact_knowledge-1-core-meaning_2a5fb9
+    - artifact_knowledge-2-core-equation_578f96
+    - artifact_knowledge-3-reusable-calculation-form_8b65ae
+    justification: The markdown document contains a bounded section that directly
+      states this knowledge unit.
+    question: What is 5. Natural-language paraphrases of the same task?
+    answer: 'These all ask for the same reusable calculation: --- calculate momentum
+      from mass and velocity find momentum if mass and velocity are known what is
+      the momentum when mass is 7 and velocity is 6 compute linear momentum for a
+      body with mass 8 and speed 9'
+    structured_learning:
+      encountered_not: 5 Natural Language Paraphrases Of The Same Task
+      goal: What is 5. Natural-language paraphrases of the same task?
+      intended_object: 'Momentum What is 5. Natural-language paraphrases of the same
+        task? 5. Natural-language paraphrases of the same task calculate momentum
+        from mass and velocity find momentum if mass and velocity are known what is
+        the momentum when mass is 7 and velocity is 6 compute linear momentum for
+        a body with mass 8 and speed 9 Momentum 5. Natural-language paraphrases of
+        the same task These all ask for the same reusable calculation: --- These all
+        ask for the same reusable calculation: --- calculate momentum from mass and
+        velocity find momentum if mass and velocity are known what is the momentum
+        when mass is 7 and velocity is 6 compute linear momentum for a body with mass
+        8 and speed 9'
+      success_criteria:
+      - all required inputs are explicit and the bounded computation or template is
+        applied faithfully
+      - the result is returned in the requested usable form
+      actual_realization: 'the prompt surface is present; explicit givens are present:
+        Momentum What is 5, 5, Natural-language paraphrases of the same task calculate
+        momentum from mass and velocity find momentum if mass and velocity are known
+        what is the momentum when mass is 7 and velocity is 6 compute linear momentum
+        for a body with mass 8 and speed 9 Momentum 5; no justified final closure
+        has been admitted yet'
+      givens:
+      - Momentum What is 5
+      - '5'
+      - Natural-language paraphrases of the same task calculate momentum from mass
+        and velocity find momentum if mass and velocity are known what is the momentum
+        when mass is 7 and velocity is 6 compute linear momentum for a body with mass
+        8 and speed 9 Momentum 5
+      - 'Natural-language paraphrases of the same task These all ask for the same
+        reusable calculation: --- These all ask for the same reusable calculation:
+        --- calculate momentum from mass and velocity find momentum if mass and velocity
+        are known what is the momentum when mass is 7 and velocity is 6 compute linear
+        momentum for a body with mass 8 and speed 9'
+      unknowns: []
+      missing_components:
+      - a justified final realization has not yet been produced
+      distorted_components: []
+      differentiators:
+      - 'named inputs supplied: calculation, what, mass, velocity'
+      contrastive_cases:
+      - condition holds versus condition does not hold
+      risk_of_wrong_closure: []
+      disallowed_assumptions: []
+      misalignment_types:
+      - functional
+      - completion
+      origin_layers:
+      - model
+      degree: partial
+      remainder_shapes:
+      - missing
+      why_it_matters:
+      - without reducing the remainder, the item cannot be closed with governed confidence
+      minimal_repair:
+      - perform the bounded computation or invoke the matching executable template
+      full_repair:
+      - perform the bounded computation or invoke the matching executable template
+      - 'satisfy success condition: all required inputs are explicit and the bounded
+        computation or template is applied faithfully'
+      - 'satisfy success condition: the result is returned in the requested usable
+        form'
+      boundary_shape:
+      - d*
+      action_posture: direct_resolution
+      component_nots:
+      - Momentum
+      composed_not: Momentum
+      lookup_keys:
+      - 5 natural language paraphrase same task
+      - 5 natural
+      - natural language
+      - language paraphrase
+      - paraphrase same
+      - same task
+      - 5 natural language
+      - natural language paraphrase
+      - language paraphrase same
+      - paraphrase same task
+      - perform bound computation or invoke match executable template
+      - perform bound
+      - bound computation
+      - computation or
+      - or invoke
+      - invoke match
+      - match executable
+      - executable template
+      - perform bound computation
+      - bound computation or
+      - computation or invoke
+      - or invoke match
+      - invoke match executable
+      - match executable template
+      notation_yaml: |-
+        "What Is 5 Natural Language Paraphrases Of The Same Task":
+          Description:
+            - "Structured learning declaration for the active non-achievedness."
+            - "Encountered non-achievedness: 5 Natural Language Paraphrases Of The Same Task"
+            - "Components: Momentum"
+            - "Composition: Momentum"
+            - "Intended object: Momentum What is 5. Natural-language paraphrases of the same task? 5. Natural-language paraphrases of the same task calculate momentum from mass and velocity find momentum if mass and velocity are known what is the momentum when mass is 7 and velocity is 6 compute linear momentum for a body with mass 8 and speed 9 Momentum 5. Natural-language paraphrases of the same task These all ask for the same reusable calculation: --- These all ask for the same reusable calculation: --- calculate momentum from mass and velocity find momentum if mass and velocity are known what is the momentum when mass is 7 and velocity is 6 compute linear momentum for a body with mass 8 and speed 9"
+            - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+            - "Actual realization: the prompt surface is present; explicit givens are present: Momentum What is 5, 5, Natural-language paraphrases of the same task calculate momentum from mass and velocity find momentum if mass and velocity are known what is the momentum when mass is 7 and velocity is 6 compute linear momentum for a body with mass 8 and speed 9 Momentum 5; no justified final closure has been admitted yet"
+            - "Givens: Momentum What is 5, 5, Natural-language paraphrases of the same task calculate momentum from mass and velocity find momentum if mass and velocity are known what is the momentum when mass is 7 and velocity is 6 compute linear momentum for a body with mass 8 and speed 9 Momentum 5, Natural-language paraphrases of the same task These all ask for the same reusable calculation: --- These all ask for the same reusable calculation: --- calculate momentum from mass and velocity find momentum if mass and velocity are known what is the momentum when mass is 7 and velocity is 6 compute linear momentum for a body with mass 8 and speed 9"
+            - "Missing components: a justified final realization has not yet been produced"
+            - "Differentiators: named inputs supplied: calculation, what, mass, velocity"
+            - "Contrastive cases: condition holds versus condition does not hold"
+            - "Misalignment types: functional, completion"
+            - "Origin layers: model"
+            - "Degree: partial"
+            - "Remainder shapes: missing"
+            - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+            - "Minimal repair: perform the bounded computation or invoke the matching executable template"
+            - "Full repair: perform the bounded computation or invoke the matching executable template, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+            - "Action posture: direct_resolution"
+          In:
+            - "Prompt Surface String"
+            - "Encountered Non Achievedness String"
+            - "Lookup Keys Strings"
+            - "[ Component Non Achievedness ]"
+            - "Composed Non Achievedness"
+          Out:
+            - "Prior Encounter"
+            - "[ Reusable Artifact ]"
+            - "[ Reused Non Achievedness ]"
+            - "[ Composed Reuse ]"
+    content:
+      source_path: /Users/ravindranathakila/service/realized/LEARN_MOMENTUM.md
+      source_document: LEARN_MOMENTUM.md
+      source_kind: markdown
+      source_title: Momentum
+      source_sections:
+      - 5. Natural-language paraphrases of the same task
+      equation_bearing: false
+      parameterized: false
+      node_id: not_learn-from-markdown-learn-momentum-md_7d377c
+      aliases:
+      - calculate momentum from mass and velocity
+      - find momentum if mass and velocity are known
+      - what is the momentum when mass is 7 and velocity is 6
+      - compute linear momentum for a body with mass 8 and speed 9
+      - 5. Natural-language paraphrases of the same task
+      - Momentum
+      - Momentum 5. Natural-language paraphrases of the same task
+      structured_learning:
+        encountered_not: 5 Natural Language Paraphrases Of The Same Task
+        lookup_keys:
+        - 5 natural language paraphrase same task
+        - 5 natural
+        - natural language
+        - language paraphrase
+        - paraphrase same
+        - same task
+        - 5 natural language
+        - natural language paraphrase
+        - language paraphrase same
+        - paraphrase same task
+        - perform bound computation or invoke match executable template
+        - perform bound
+        - bound computation
+        - computation or
+        - or invoke
+        - invoke match
+        - match executable
+        - executable template
+        - perform bound computation
+        - bound computation or
+        - computation or invoke
+        - or invoke match
+        - invoke match executable
+        - match executable template
+        component_nots:
+        - Momentum
+        composed_not: Momentum
+        goal: What is 5. Natural-language paraphrases of the same task?
+        intended_object: 'Momentum What is 5. Natural-language paraphrases of the
+          same task? 5. Natural-language paraphrases of the same task calculate momentum
+          from mass and velocity find momentum if mass and velocity are known what
+          is the momentum when mass is 7 and velocity is 6 compute linear momentum
+          for a body with mass 8 and speed 9 Momentum 5. Natural-language paraphrases
+          of the same task These all ask for the same reusable calculation: --- These
+          all ask for the same reusable calculation: --- calculate momentum from mass
+          and velocity find momentum if mass and velocity are known what is the momentum
+          when mass is 7 and velocity is 6 compute linear momentum for a body with
+          mass 8 and speed 9'
+        success_criteria:
+        - all required inputs are explicit and the bounded computation or template
+          is applied faithfully
+        - the result is returned in the requested usable form
+        actual_realization: 'the prompt surface is present; explicit givens are present:
+          Momentum What is 5, 5, Natural-language paraphrases of the same task calculate
+          momentum from mass and velocity find momentum if mass and velocity are known
+          what is the momentum when mass is 7 and velocity is 6 compute linear momentum
+          for a body with mass 8 and speed 9 Momentum 5; no justified final closure
+          has been admitted yet'
+        givens:
+        - Momentum What is 5
+        - '5'
+        - Natural-language paraphrases of the same task calculate momentum from mass
+          and velocity find momentum if mass and velocity are known what is the momentum
+          when mass is 7 and velocity is 6 compute linear momentum for a body with
+          mass 8 and speed 9 Momentum 5
+        - 'Natural-language paraphrases of the same task These all ask for the same
+          reusable calculation: --- These all ask for the same reusable calculation:
+          --- calculate momentum from mass and velocity find momentum if mass and
+          velocity are known what is the momentum when mass is 7 and velocity is 6
+          compute linear momentum for a body with mass 8 and speed 9'
+        missing_components:
+        - a justified final realization has not yet been produced
+        differentiators:
+        - 'named inputs supplied: calculation, what, mass, velocity'
+        contrastive_cases:
+        - condition holds versus condition does not hold
+        misalignment_types:
+        - functional
+        - completion
+        origin_layers:
+        - model
+        degree: partial
+        remainder_shapes:
+        - missing
+        why_it_matters:
+        - without reducing the remainder, the item cannot be closed with governed
+          confidence
+        minimal_repair:
+        - perform the bounded computation or invoke the matching executable template
+        full_repair:
+        - perform the bounded computation or invoke the matching executable template
+        - 'satisfy success condition: all required inputs are explicit and the bounded
+          computation or template is applied faithfully'
+        - 'satisfy success condition: the result is returned in the requested usable
+          form'
+        boundary_shape:
+        - d*
+        action_posture: direct_resolution
+        notation_yaml: |-
+          "What Is 5 Natural Language Paraphrases Of The Same Task":
+            Description:
+              - "Structured learning declaration for the active non-achievedness."
+              - "Encountered non-achievedness: 5 Natural Language Paraphrases Of The Same Task"
+              - "Components: Momentum"
+              - "Composition: Momentum"
+              - "Intended object: Momentum What is 5. Natural-language paraphrases of the same task? 5. Natural-language paraphrases of the same task calculate momentum from mass and velocity find momentum if mass and velocity are known what is the momentum when mass is 7 and velocity is 6 compute linear momentum for a body with mass 8 and speed 9 Momentum 5. Natural-language paraphrases of the same task These all ask for the same reusable calculation: --- These all ask for the same reusable calculation: --- calculate momentum from mass and velocity find momentum if mass and velocity are known what is the momentum when mass is 7 and velocity is 6 compute linear momentum for a body with mass 8 and speed 9"
+              - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+              - "Actual realization: the prompt surface is present; explicit givens are present: Momentum What is 5, 5, Natural-language paraphrases of the same task calculate momentum from mass and velocity find momentum if mass and velocity are known what is the momentum when mass is 7 and velocity is 6 compute linear momentum for a body with mass 8 and speed 9 Momentum 5; no justified final closure has been admitted yet"
+              - "Givens: Momentum What is 5, 5, Natural-language paraphrases of the same task calculate momentum from mass and velocity find momentum if mass and velocity are known what is the momentum when mass is 7 and velocity is 6 compute linear momentum for a body with mass 8 and speed 9 Momentum 5, Natural-language paraphrases of the same task These all ask for the same reusable calculation: --- These all ask for the same reusable calculation: --- calculate momentum from mass and velocity find momentum if mass and velocity are known what is the momentum when mass is 7 and velocity is 6 compute linear momentum for a body with mass 8 and speed 9"
+              - "Missing components: a justified final realization has not yet been produced"
+              - "Differentiators: named inputs supplied: calculation, what, mass, velocity"
+              - "Contrastive cases: condition holds versus condition does not hold"
+              - "Misalignment types: functional, completion"
+              - "Origin layers: model"
+              - "Degree: partial"
+              - "Remainder shapes: missing"
+              - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+              - "Minimal repair: perform the bounded computation or invoke the matching executable template"
+              - "Full repair: perform the bounded computation or invoke the matching executable template, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+              - "Action posture: direct_resolution"
+            In:
+              - "Prompt Surface String"
+              - "Encountered Non Achievedness String"
+              - "Lookup Keys Strings"
+              - "[ Component Non Achievedness ]"
+              - "Composed Non Achievedness"
+            Out:
+              - "Prior Encounter"
+              - "[ Reusable Artifact ]"
+              - "[ Reused Non Achievedness ]"
+              - "[ Composed Reuse ]"
+---
+6. One-sentence summary:
+  Description:
+  - The markdown document contains a bounded section that directly states this knowledge
+    unit.
+  - 'Knowledge artifact for: What is 6. One-sentence summary?'
+  In:
+  - Momentum
+  Out:
+  - Momentum is the product of mass and velocity.
+  Metadata:
+    artifact_id: artifact_knowledge-6-one-sentence-summary_edc94e
+    artifact_type: knowledge
+    representation: yaml
+    function_bit: 0
+    boundary_shape:
+    - d*
+    scope: reuse when the user asks about 6. One-sentence summary from Momentum under
+      ordinary stable reading
+    reusability: broad_reuse
+    admissibility: admitted
+    learning_relation: instance_of_existing
+    created_at: '2026-03-25T11:09:56+00:00'
+    provenance:
+    - not_learn-from-markdown-learn-momentum-md_7d377c
+    - /Users/ravindranathakila/service/realized/LEARN_MOMENTUM.md
+    related_artifact_ids:
+    - artifact_knowledge-momentum_664572
+    - artifact_knowledge-1-core-meaning_2a5fb9
+    - artifact_knowledge-2-core-equation_578f96
+    - artifact_knowledge-3-reusable-calculation-form_8b65ae
+    justification: The markdown document contains a bounded section that directly
+      states this knowledge unit.
+    question: What is 6. One-sentence summary?
+    answer: Momentum is the product of mass and velocity.
+    structured_learning:
+      encountered_not: 6 One Sentence Summary
+      goal: What is 6. One-sentence summary?
+      intended_object: Momentum What is 6. One-sentence summary? 6. One-sentence summary
+        Momentum 6. One-sentence summary Momentum is the product of mass and velocity.
+      success_criteria:
+      - all required inputs are explicit and the bounded computation or template is
+        applied faithfully
+      - the result is returned in the requested usable form
+      actual_realization: 'the prompt surface is present; explicit givens are present:
+        Momentum What is 6, 6, One-sentence summary Momentum 6; no justified final
+        closure has been admitted yet'
+      givens:
+      - Momentum What is 6
+      - '6'
+      - One-sentence summary Momentum 6
+      unknowns: []
+      missing_components:
+      - a justified final realization has not yet been produced
+      distorted_components: []
+      differentiators:
+      - 'named inputs supplied: what'
+      contrastive_cases: []
+      risk_of_wrong_closure: []
+      disallowed_assumptions: []
+      misalignment_types:
+      - functional
+      - completion
+      origin_layers:
+      - model
+      degree: partial
+      remainder_shapes:
+      - missing
+      why_it_matters:
+      - without reducing the remainder, the item cannot be closed with governed confidence
+      minimal_repair:
+      - perform the bounded computation or invoke the matching executable template
+      full_repair:
+      - perform the bounded computation or invoke the matching executable template
+      - 'satisfy success condition: all required inputs are explicit and the bounded
+        computation or template is applied faithfully'
+      - 'satisfy success condition: the result is returned in the requested usable
+        form'
+      boundary_shape:
+      - d*
+      action_posture: direct_resolution
+      component_nots:
+      - Momentum
+      composed_not: Momentum
+      lookup_keys:
+      - 6 one sentence summary
+      - 6 one
+      - one sentence
+      - sentence summary
+      - 6 one sentence
+      - one sentence summary
+      - perform bound computation or invoke match executable template
+      - perform bound
+      - bound computation
+      - computation or
+      - or invoke
+      - invoke match
+      - match executable
+      - executable template
+      - perform bound computation
+      - bound computation or
+      - computation or invoke
+      - or invoke match
+      - invoke match executable
+      - match executable template
+      - without reduc remainder item cannot clos with govern confidence
+      - without reduc remainder item cannot clo
+      - govern confidence
+      - without reduc
+      notation_yaml: |-
+        "What Is 6 One Sentence Summary":
+          Description:
+            - "Structured learning declaration for the active non-achievedness."
+            - "Encountered non-achievedness: 6 One Sentence Summary"
+            - "Components: Momentum"
+            - "Composition: Momentum"
+            - "Intended object: Momentum What is 6. One-sentence summary? 6. One-sentence summary Momentum 6. One-sentence summary Momentum is the product of mass and velocity."
+            - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+            - "Actual realization: the prompt surface is present; explicit givens are present: Momentum What is 6, 6, One-sentence summary Momentum 6; no justified final closure has been admitted yet"
+            - "Givens: Momentum What is 6, 6, One-sentence summary Momentum 6"
+            - "Missing components: a justified final realization has not yet been produced"
+            - "Differentiators: named inputs supplied: what"
+            - "Misalignment types: functional, completion"
+            - "Origin layers: model"
+            - "Degree: partial"
+            - "Remainder shapes: missing"
+            - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+            - "Minimal repair: perform the bounded computation or invoke the matching executable template"
+            - "Full repair: perform the bounded computation or invoke the matching executable template, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+            - "Action posture: direct_resolution"
+          In:
+            - "Prompt Surface String"
+            - "Encountered Non Achievedness String"
+            - "Lookup Keys Strings"
+            - "[ Component Non Achievedness ]"
+            - "Composed Non Achievedness"
+          Out:
+            - "Prior Encounter"
+            - "[ Reusable Artifact ]"
+            - "[ Reused Non Achievedness ]"
+            - "[ Composed Reuse ]"
+    content:
+      source_path: /Users/ravindranathakila/service/realized/LEARN_MOMENTUM.md
+      source_document: LEARN_MOMENTUM.md
+      source_kind: markdown
+      source_title: Momentum
+      source_sections:
+      - 6. One-sentence summary
+      equation_bearing: false
+      parameterized: false
+      node_id: not_learn-from-markdown-learn-momentum-md_7d377c
+      aliases:
+      - 6. One-sentence summary
+      - Momentum
+      - Momentum 6. One-sentence summary
+      structured_learning:
+        encountered_not: 6 One Sentence Summary
+        lookup_keys:
+        - 6 one sentence summary
+        - 6 one
+        - one sentence
+        - sentence summary
+        - 6 one sentence
+        - one sentence summary
+        - perform bound computation or invoke match executable template
+        - perform bound
+        - bound computation
+        - computation or
+        - or invoke
+        - invoke match
+        - match executable
+        - executable template
+        - perform bound computation
+        - bound computation or
+        - computation or invoke
+        - or invoke match
+        - invoke match executable
+        - match executable template
+        - without reduc remainder item cannot clos with govern confidence
+        - without reduc remainder item cannot clo
+        - govern confidence
+        - without reduc
+        component_nots:
+        - Momentum
+        composed_not: Momentum
+        goal: What is 6. One-sentence summary?
+        intended_object: Momentum What is 6. One-sentence summary? 6. One-sentence
+          summary Momentum 6. One-sentence summary Momentum is the product of mass
+          and velocity.
+        success_criteria:
+        - all required inputs are explicit and the bounded computation or template
+          is applied faithfully
+        - the result is returned in the requested usable form
+        actual_realization: 'the prompt surface is present; explicit givens are present:
+          Momentum What is 6, 6, One-sentence summary Momentum 6; no justified final
+          closure has been admitted yet'
+        givens:
+        - Momentum What is 6
+        - '6'
+        - One-sentence summary Momentum 6
+        missing_components:
+        - a justified final realization has not yet been produced
+        differentiators:
+        - 'named inputs supplied: what'
+        misalignment_types:
+        - functional
+        - completion
+        origin_layers:
+        - model
+        degree: partial
+        remainder_shapes:
+        - missing
+        why_it_matters:
+        - without reducing the remainder, the item cannot be closed with governed
+          confidence
+        minimal_repair:
+        - perform the bounded computation or invoke the matching executable template
+        full_repair:
+        - perform the bounded computation or invoke the matching executable template
+        - 'satisfy success condition: all required inputs are explicit and the bounded
+          computation or template is applied faithfully'
+        - 'satisfy success condition: the result is returned in the requested usable
+          form'
+        boundary_shape:
+        - d*
+        action_posture: direct_resolution
+        notation_yaml: |-
+          "What Is 6 One Sentence Summary":
+            Description:
+              - "Structured learning declaration for the active non-achievedness."
+              - "Encountered non-achievedness: 6 One Sentence Summary"
+              - "Components: Momentum"
+              - "Composition: Momentum"
+              - "Intended object: Momentum What is 6. One-sentence summary? 6. One-sentence summary Momentum 6. One-sentence summary Momentum is the product of mass and velocity."
+              - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+              - "Actual realization: the prompt surface is present; explicit givens are present: Momentum What is 6, 6, One-sentence summary Momentum 6; no justified final closure has been admitted yet"
+              - "Givens: Momentum What is 6, 6, One-sentence summary Momentum 6"
+              - "Missing components: a justified final realization has not yet been produced"
+              - "Differentiators: named inputs supplied: what"
+              - "Misalignment types: functional, completion"
+              - "Origin layers: model"
+              - "Degree: partial"
+              - "Remainder shapes: missing"
+              - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+              - "Minimal repair: perform the bounded computation or invoke the matching executable template"
+              - "Full repair: perform the bounded computation or invoke the matching executable template, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+              - "Action posture: direct_resolution"
+            In:
+              - "Prompt Surface String"
+              - "Encountered Non Achievedness String"
+              - "Lookup Keys Strings"
+              - "[ Component Non Achievedness ]"
+              - "Composed Non Achievedness"
+            Out:
+              - "Prior Encounter"
+              - "[ Reusable Artifact ]"
+              - "[ Reused Non Achievedness ]"
+              - "[ Composed Reuse ]"
+---
+1 Core Meaning:
+  Description:
+  - The parameter mapping can be reused whenever the same named inputs are supplied.
+  - Executable ability artifact.
+  In:
+  - 'mass: number'
+  Out:
+  - 'm: number'
+  Metadata:
+    artifact_id: artifact_ability-1-core-meaning_e548f7
+    artifact_type: ability
+    representation: python_script
+    function_bit: 1
+    boundary_shape:
+    - a*
+    - d*
+    scope: reuse when later prompts ask to compute p from m, v
+    reusability: broad_reuse
+    admissibility: candidate
+    learning_relation: extends_parameters
+    created_at: '2026-03-25T11:09:57+00:00'
+    provenance:
+    - not_learn-from-markdown-learn-momentum-md_7d377c
+    - /Users/ravindranathakila/service/realized/LEARN_MOMENTUM.md
+    constraints:
+    - derive only from the supplied encounter
+    template_schema:
+      preconditions:
+      - the active item matches the artifact scope
+      - the current state is admissible for governed reuse
+      governed_function: reuse ability in a governed way
+      completion_conditions:
+      - the artifact is instantiated in scope and its use conditions are met
+      failure_conditions:
+      - scope or HoldOn conditions are violated
+      scope_of_reuse: reuse when later prompts ask to compute p from m, v
+      bssc_awareness:
+        admissible_place_in_realization: governed realization state
+        required_governed_state: active represented non-achievedness with durable
+          state
+        permitted_governed_effect: support ability reuse without self-justifying closure
+        may_not_by_itself_justify:
+        - closure
+      holdon_awareness:
+        relevant_holdon_blocks_instantiation: true
+        diagnostic_use_allowed: true
+        relevant_holdon_conditions:
+        - missing evidence
+        - pause boundary
+        - governance block
+        resumption_condition: resume ordinary use only when the blocking condition
+          is cleared
+    justification: The parameter mapping can be reused whenever the same named inputs
+      are supplied.
+    question: How do you calculate m from mass?
+    structured_learning:
+      encountered_not: 1 Core Meaning
+      goal: How do you calculate m from mass?
+      intended_object: 'Momentum How do you calculate m from mass? 1 Core Meaning
+        p = m * v 1. Core meaning m = mass v = velocity p = momentum velocity and
+        speed can be used as the same input value for v momentum and linear momentum
+        can be used as the same output idea for p momentum We will use: `m` = mass
+        `v` = velocity `p` = momentum `velocity` and `speed` can be used as the same
+        input value for `v` `momentum` and `linear momentum` can be used as the same
+        output idea for `p` For this scalar calculation: Useful natural-language aliases:'
+      success_criteria:
+      - all required inputs are explicit and the bounded computation or template is
+        applied faithfully
+      - the result is returned in the requested usable form
+      actual_realization: 'the prompt surface is present; explicit givens are present:
+        1 Core Meaning p = m * v 1, Core meaning m = mass v = velocity p = momentum
+        velocity and speed can be used as the same input value for v momentum and
+        linear momentum can be used as the same output idea for p momentum We will
+        use: `m` = mass `v` = velocity `p` = momentum `velocity` and `speed` can be
+        used as the same input value for `v` `momentum` and `linear momentum` can
+        be used as the same output idea for `p` For this scalar calculation: Useful
+        natural-language aliases:; no justified final closure has been admitted yet'
+      givens:
+      - 1 Core Meaning p = m * v 1
+      - 'Core meaning m = mass v = velocity p = momentum velocity and speed can be
+        used as the same input value for v momentum and linear momentum can be used
+        as the same output idea for p momentum We will use: `m` = mass `v` = velocity
+        `p` = momentum `velocity` and `speed` can be used as the same input value
+        for `v` `momentum` and `linear momentum` can be used as the same output idea
+        for `p` For this scalar calculation: Useful natural-language aliases:'
+      unknowns: []
+      missing_components:
+      - a justified final realization has not yet been produced
+      distorted_components: []
+      differentiators:
+      - 'named inputs supplied: p, m, v, use, calculation, aliases'
+      contrastive_cases: []
+      risk_of_wrong_closure: []
+      disallowed_assumptions: []
+      misalignment_types:
+      - functional
+      - completion
+      origin_layers:
+      - model
+      degree: partial
+      remainder_shapes:
+      - missing
+      why_it_matters:
+      - without reducing the remainder, the item cannot be closed with governed confidence
+      minimal_repair:
+      - perform the bounded computation or invoke the matching executable template
+      full_repair:
+      - perform the bounded computation or invoke the matching executable template
+      - 'satisfy success condition: all required inputs are explicit and the bounded
+        computation or template is applied faithfully'
+      - 'satisfy success condition: the result is returned in the requested usable
+        form'
+      boundary_shape:
+      - d*
+      action_posture: compute_or_template
+      component_nots:
+      - Mass
+      - M
+      composed_not: 1 Core Meaning
+      lookup_keys:
+      - calculate m mass
+      - calculate m
+      - m mass
+      - perform bound computation or invoke match executable template
+      - perform bound
+      - bound computation
+      - computation or
+      - or invoke
+      - invoke match
+      - match executable
+      - executable template
+      - perform bound computation
+      - bound computation or
+      - computation or invoke
+      - or invoke match
+      - invoke match executable
+      - match executable template
+      - without reduc remainder item cannot clos with govern confidence
+      - without reduc remainder item cannot clo
+      - govern confidence
+      - without reduc
+      - reduc remainder
+      - remainder item
+      - item cannot
+      notation_yaml: |-
+        "How Do You Calculate M From Mass":
+          Description:
+            - "Structured learning declaration for the active non-achievedness."
+            - "Encountered non-achievedness: 1 Core Meaning"
+            - "Components: Mass, M"
+            - "Composition: 1 Core Meaning"
+            - "Intended object: Momentum How do you calculate m from mass? 1 Core Meaning p = m * v 1. Core meaning m = mass v = velocity p = momentum velocity and speed can be used as the same input value for v momentum and linear momentum can be used as the same output idea for p momentum We will use: `m` = mass `v` = velocity `p` = momentum `velocity` and `speed` can be used as the same input value for `v` `momentum` and `linear momentum` can be used as the same output idea for `p` For this scalar calculation: Useful natural-language aliases:"
+            - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+            - "Actual realization: the prompt surface is present; explicit givens are present: 1 Core Meaning p = m * v 1, Core meaning m = mass v = velocity p = momentum velocity and speed can be used as the same input value for v momentum and linear momentum can be used as the same output idea for p momentum We will use: `m` = mass `v` = velocity `p` = momentum `velocity` and `speed` can be used as the same input value for `v` `momentum` and `linear momentum` can be used as the same output idea for `p` For this scalar calculation: Useful natural-language aliases:; no justified final closure has been admitted yet"
+            - "Givens: 1 Core Meaning p = m * v 1, Core meaning m = mass v = velocity p = momentum velocity and speed can be used as the same input value for v momentum and linear momentum can be used as the same output idea for p momentum We will use: `m` = mass `v` = velocity `p` = momentum `velocity` and `speed` can be used as the same input value for `v` `momentum` and `linear momentum` can be used as the same output idea for `p` For this scalar calculation: Useful natural-language aliases:"
+            - "Missing components: a justified final realization has not yet been produced"
+            - "Differentiators: named inputs supplied: p, m, v, use, calculation, aliases"
+            - "Misalignment types: functional, completion"
+            - "Origin layers: model"
+            - "Degree: partial"
+            - "Remainder shapes: missing"
+            - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+            - "Minimal repair: perform the bounded computation or invoke the matching executable template"
+            - "Full repair: perform the bounded computation or invoke the matching executable template, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+            - "Action posture: compute_or_template"
+          In:
+            - "Prompt Surface String"
+            - "Encountered Non Achievedness String"
+            - "Lookup Keys Strings"
+            - "[ Component Non Achievedness ]"
+            - "Composed Non Achievedness"
+          Out:
+            - "Prior Encounter"
+            - "[ Reusable Artifact ]"
+            - "[ Reused Non Achievedness ]"
+            - "[ Composed Reuse ]"
+    entrypoint: main
+    dependencies:
+    - msgspec
+    - orjson
+    input_contract:
+      mass: number
+    output_contract:
+      m: number
+    python_script: |-
+      # /// script
+      # requires-python = ">=3.11"
+      # dependencies = ["msgspec", "orjson"]
+      # ///
+
+      from __future__ import annotations
+
+      import argparse
+      import ast
+      import math
+      import sys
+
+      import msgspec
+      import orjson
+
+
+      EXPRESSION = 'mass'
+      OUTPUT_FIELD = 'm'
+      ALLOWED_NAMES = ['mass']
+      ALLOWED_NODE_TYPES = (
+          ast.Expression,
+          ast.BinOp,
+          ast.UnaryOp,
+          ast.Add,
+          ast.Sub,
+          ast.Mult,
+          ast.Div,
+          ast.Pow,
+          ast.Mod,
+          ast.FloorDiv,
+          ast.USub,
+          ast.UAdd,
+          ast.Load,
+          ast.Name,
+          ast.Constant,
+      )
+
+
+      class InputPayload(msgspec.Struct, kw_only=True):
+          payload: dict[str, object] = {}
+
+
+      class OutputPayload(msgspec.Struct, kw_only=True):
+          status: str
+          answer: str = ""
+          result: dict[str, object]
+          notes: list[str] = []
+
+
+      def _validate_expression() -> ast.AST:
+          tree = ast.parse(EXPRESSION, mode="eval")
+          for node in ast.walk(tree):
+              if not isinstance(node, ALLOWED_NODE_TYPES):
+                  raise ValueError(f"disallowed expression node: {type(node).__name__}")
+              if isinstance(node, ast.Name) and node.id not in ALLOWED_NAMES:
+                  raise ValueError(f"disallowed symbol: {node.id}")
+          return tree
+
+
+      COMPILED = compile(_validate_expression(), "<expression>", "eval")
+
+
+      def _coerce_number(value: object) -> float:
+          if value is None:
+              raise ValueError("missing numeric input")
+          if isinstance(value, bool):
+              raise ValueError("boolean inputs are not numeric")
+          if isinstance(value, (int, float)):
+              return float(value)
+          text = str(value).strip()
+          if not text:
+              raise ValueError("empty numeric input")
+          return float(text)
+
+
+      def run(payload: InputPayload) -> OutputPayload:
+          values = {
+          "mass": _coerce_number(payload.payload.get("mass")),
+          }
+          result = eval(COMPILED, {"__builtins__": {}, "math": math}, values)
+          normalized = int(result) if isinstance(result, float) and result.is_integer() else result
+          return OutputPayload(
+              status="ok",
+              answer=str(normalized),
+              result={OUTPUT_FIELD: normalized},
+              notes=[],
+          )
+
+
+      def main() -> None:
+          parser = argparse.ArgumentParser(description='1 Core Meaning')
+          parser.add_argument("--input-json", help="Optional JSON payload. Prefer stdin when omitted.")
+          args = parser.parse_args()
+          raw = args.input_json.encode("utf-8") if args.input_json else sys.stdin.buffer.read()
+          payload = orjson.loads(raw) if raw else {}
+          typed_input = msgspec.convert({"payload": payload}, type=InputPayload)
+          result = run(typed_input)
+          sys.stdout.buffer.write(orjson.dumps(msgspec.to_builtins(result), option=orjson.OPT_INDENT_2))
+          sys.stdout.buffer.write(b"\n")
+
+
+      if __name__ == "__main__":
+          main()
+    script_language: python
+    content:
+      source_path: /Users/ravindranathakila/service/realized/LEARN_MOMENTUM.md
+      source_document: LEARN_MOMENTUM.md
+      output_field: m
+      compute_expression: mass
+      parameter_aliases:
+        mass:
+        - mass
+        m:
+        - m
+        - mass
+        - '3'
+        - '5'
+        - momentum
+        - multiply
+        - means
+        - metres
+      source_kind: markdown
+      source_title: Momentum
+      source_sections:
+      - 1. Core meaning
+      encounter_id: cluster_1
+      equation_bearing: true
+      parameterized: true
+      node_id: not_learn-from-markdown-learn-momentum-md_7d377c
+      aliases:
+      - p = m * v
+      - 1. Core meaning
+      - m = mass
+      - v = velocity
+      - p = momentum
+      - velocity and speed can be used as the same input value for v
+      - momentum and linear momentum can be used as the same output idea for p
+      - momentum
+      - 'We will use:'
+      structured_learning:
+        encountered_not: 1 Core Meaning
+        lookup_keys:
+        - calculate m mass
+        - calculate m
+        - m mass
+        - perform bound computation or invoke match executable template
+        - perform bound
+        - bound computation
+        - computation or
+        - or invoke
+        - invoke match
+        - match executable
+        - executable template
+        - perform bound computation
+        - bound computation or
+        - computation or invoke
+        - or invoke match
+        - invoke match executable
+        - match executable template
+        - without reduc remainder item cannot clos with govern confidence
+        - without reduc remainder item cannot clo
+        - govern confidence
+        - without reduc
+        - reduc remainder
+        - remainder item
+        - item cannot
+        component_nots:
+        - Mass
+        - M
+        composed_not: 1 Core Meaning
+        goal: How do you calculate m from mass?
+        intended_object: 'Momentum How do you calculate m from mass? 1 Core Meaning
+          p = m * v 1. Core meaning m = mass v = velocity p = momentum velocity and
+          speed can be used as the same input value for v momentum and linear momentum
+          can be used as the same output idea for p momentum We will use: `m` = mass
+          `v` = velocity `p` = momentum `velocity` and `speed` can be used as the
+          same input value for `v` `momentum` and `linear momentum` can be used as
+          the same output idea for `p` For this scalar calculation: Useful natural-language
+          aliases:'
+        success_criteria:
+        - all required inputs are explicit and the bounded computation or template
+          is applied faithfully
+        - the result is returned in the requested usable form
+        actual_realization: 'the prompt surface is present; explicit givens are present:
+          1 Core Meaning p = m * v 1, Core meaning m = mass v = velocity p = momentum
+          velocity and speed can be used as the same input value for v momentum and
+          linear momentum can be used as the same output idea for p momentum We will
+          use: `m` = mass `v` = velocity `p` = momentum `velocity` and `speed` can
+          be used as the same input value for `v` `momentum` and `linear momentum`
+          can be used as the same output idea for `p` For this scalar calculation:
+          Useful natural-language aliases:; no justified final closure has been admitted
+          yet'
+        givens:
+        - 1 Core Meaning p = m * v 1
+        - 'Core meaning m = mass v = velocity p = momentum velocity and speed can
+          be used as the same input value for v momentum and linear momentum can be
+          used as the same output idea for p momentum We will use: `m` = mass `v`
+          = velocity `p` = momentum `velocity` and `speed` can be used as the same
+          input value for `v` `momentum` and `linear momentum` can be used as the
+          same output idea for `p` For this scalar calculation: Useful natural-language
+          aliases:'
+        missing_components:
+        - a justified final realization has not yet been produced
+        differentiators:
+        - 'named inputs supplied: p, m, v, use, calculation, aliases'
+        misalignment_types:
+        - functional
+        - completion
+        origin_layers:
+        - model
+        degree: partial
+        remainder_shapes:
+        - missing
+        why_it_matters:
+        - without reducing the remainder, the item cannot be closed with governed
+          confidence
+        minimal_repair:
+        - perform the bounded computation or invoke the matching executable template
+        full_repair:
+        - perform the bounded computation or invoke the matching executable template
+        - 'satisfy success condition: all required inputs are explicit and the bounded
+          computation or template is applied faithfully'
+        - 'satisfy success condition: the result is returned in the requested usable
+          form'
+        boundary_shape:
+        - d*
+        action_posture: compute_or_template
+        notation_yaml: |-
+          "How Do You Calculate M From Mass":
+            Description:
+              - "Structured learning declaration for the active non-achievedness."
+              - "Encountered non-achievedness: 1 Core Meaning"
+              - "Components: Mass, M"
+              - "Composition: 1 Core Meaning"
+              - "Intended object: Momentum How do you calculate m from mass? 1 Core Meaning p = m * v 1. Core meaning m = mass v = velocity p = momentum velocity and speed can be used as the same input value for v momentum and linear momentum can be used as the same output idea for p momentum We will use: `m` = mass `v` = velocity `p` = momentum `velocity` and `speed` can be used as the same input value for `v` `momentum` and `linear momentum` can be used as the same output idea for `p` For this scalar calculation: Useful natural-language aliases:"
+              - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+              - "Actual realization: the prompt surface is present; explicit givens are present: 1 Core Meaning p = m * v 1, Core meaning m = mass v = velocity p = momentum velocity and speed can be used as the same input value for v momentum and linear momentum can be used as the same output idea for p momentum We will use: `m` = mass `v` = velocity `p` = momentum `velocity` and `speed` can be used as the same input value for `v` `momentum` and `linear momentum` can be used as the same output idea for `p` For this scalar calculation: Useful natural-language aliases:; no justified final closure has been admitted yet"
+              - "Givens: 1 Core Meaning p = m * v 1, Core meaning m = mass v = velocity p = momentum velocity and speed can be used as the same input value for v momentum and linear momentum can be used as the same output idea for p momentum We will use: `m` = mass `v` = velocity `p` = momentum `velocity` and `speed` can be used as the same input value for `v` `momentum` and `linear momentum` can be used as the same output idea for `p` For this scalar calculation: Useful natural-language aliases:"
+              - "Missing components: a justified final realization has not yet been produced"
+              - "Differentiators: named inputs supplied: p, m, v, use, calculation, aliases"
+              - "Misalignment types: functional, completion"
+              - "Origin layers: model"
+              - "Degree: partial"
+              - "Remainder shapes: missing"
+              - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+              - "Minimal repair: perform the bounded computation or invoke the matching executable template"
+              - "Full repair: perform the bounded computation or invoke the matching executable template, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+              - "Action posture: compute_or_template"
+            In:
+              - "Prompt Surface String"
+              - "Encountered Non Achievedness String"
+              - "Lookup Keys Strings"
+              - "[ Component Non Achievedness ]"
+              - "Composed Non Achievedness"
+            Out:
+              - "Prior Encounter"
+              - "[ Reusable Artifact ]"
+              - "[ Reused Non Achievedness ]"
+              - "[ Composed Reuse ]"
+---
+2 Core Equation:
+  Description:
+  - Uses the same momentum relation p = m * v for any mass m and velocity v.
+  - Executable ability artifact.
+  In:
+  - 'm: number'
+  - 'v: number'
+  Out:
+  - 'p: number'
+  Metadata:
+    artifact_id: artifact_ability-2-core-equation_7f7688
+    artifact_type: ability
+    representation: python_script
+    function_bit: 1
+    boundary_shape:
+    - a*
+    - d*
+    scope: reuse when later prompts ask to compute p from m, v
+    reusability: broad_reuse
+    admissibility: candidate
+    learning_relation: extends_parameters
+    created_at: '2026-03-25T11:09:57+00:00'
+    provenance:
+    - not_learn-from-markdown-learn-momentum-md_7d377c
+    - /Users/ravindranathakila/service/realized/LEARN_MOMENTUM.md
+    related_artifact_ids:
+    - artifact_ability-1-core-meaning_e548f7
+    constraints:
+    - derive only from the supplied encounter
+    template_schema:
+      preconditions:
+      - the active item matches the artifact scope
+      - the current state is admissible for governed reuse
+      governed_function: reuse ability in a governed way
+      completion_conditions:
+      - the artifact is instantiated in scope and its use conditions are met
+      failure_conditions:
+      - scope or HoldOn conditions are violated
+      scope_of_reuse: reuse when later prompts ask to compute p from m, v
+      bssc_awareness:
+        admissible_place_in_realization: governed realization state
+        required_governed_state: active represented non-achievedness with durable
+          state
+        permitted_governed_effect: support ability reuse without self-justifying closure
+        may_not_by_itself_justify:
+        - closure
+      holdon_awareness:
+        relevant_holdon_blocks_instantiation: true
+        diagnostic_use_allowed: true
+        relevant_holdon_conditions:
+        - missing evidence
+        - pause boundary
+        - governance block
+        resumption_condition: resume ordinary use only when the blocking condition
+          is cleared
+    justification: Uses the same momentum relation p = m * v for any mass m and velocity
+      v.
+    question: How do you calculate p from m, v?
+    structured_learning:
+      encountered_not: 2 Core Equation
+      goal: How do you calculate p from m, v?
+      intended_object: 'Momentum How do you calculate p from m, v? 2 Core Equation
+        p = m * v 2. Core equation multiply mass by velocity the result is momentum
+        The reusable rule is: This means: $$ p = m * v $$'
+      success_criteria:
+      - all required inputs are explicit and the bounded computation or template is
+        applied faithfully
+      - the result is returned in the requested usable form
+      actual_realization: 'the prompt surface is present; explicit givens are present:
+        2 Core Equation p = m * v 2, Core equation multiply mass by velocity the result
+        is momentum The reusable rule is: This means: $$ p = m * v $$; no justified
+        final closure has been admitted yet'
+      givens:
+      - 2 Core Equation p = m * v 2
+      - 'Core equation multiply mass by velocity the result is momentum The reusable
+        rule is: This means: $$ p = m * v $$'
+      unknowns: []
+      missing_components:
+      - a justified final realization has not yet been produced
+      distorted_components: []
+      differentiators:
+      - 'named inputs supplied: p, is, means'
+      contrastive_cases: []
+      risk_of_wrong_closure: []
+      disallowed_assumptions: []
+      misalignment_types:
+      - functional
+      - completion
+      origin_layers:
+      - model
+      degree: partial
+      remainder_shapes:
+      - missing
+      why_it_matters:
+      - without reducing the remainder, the item cannot be closed with governed confidence
+      minimal_repair:
+      - perform the bounded computation or invoke the matching executable template
+      full_repair:
+      - perform the bounded computation or invoke the matching executable template
+      - 'satisfy success condition: all required inputs are explicit and the bounded
+        computation or template is applied faithfully'
+      - 'satisfy success condition: the result is returned in the requested usable
+        form'
+      boundary_shape:
+      - d*
+      action_posture: compute_or_template
+      component_nots:
+      - M
+      - V
+      - P
+      composed_not: 2 Core Equation
+      lookup_keys:
+      - calculate p m v
+      - calculate p
+      - p m
+      - m v
+      - calculate p m
+      - p m v
+      - perform bound computation or invoke match executable template
+      - perform bound
+      - bound computation
+      - computation or
+      - or invoke
+      - invoke match
+      - match executable
+      - executable template
+      - perform bound computation
+      - bound computation or
+      - computation or invoke
+      - or invoke match
+      - invoke match executable
+      - match executable template
+      - without reduc remainder item cannot clos with govern confidence
+      - without reduc remainder item cannot clo
+      - govern confidence
+      - without reduc
+      notation_yaml: |-
+        "How Do You Calculate P From M V":
+          Description:
+            - "Structured learning declaration for the active non-achievedness."
+            - "Encountered non-achievedness: 2 Core Equation"
+            - "Components: M, V, P"
+            - "Composition: 2 Core Equation"
+            - "Intended object: Momentum How do you calculate p from m, v? 2 Core Equation p = m * v 2. Core equation multiply mass by velocity the result is momentum The reusable rule is: This means: $$ p = m * v $$"
+            - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+            - "Actual realization: the prompt surface is present; explicit givens are present: 2 Core Equation p = m * v 2, Core equation multiply mass by velocity the result is momentum The reusable rule is: This means: $$ p = m * v $$; no justified final closure has been admitted yet"
+            - "Givens: 2 Core Equation p = m * v 2, Core equation multiply mass by velocity the result is momentum The reusable rule is: This means: $$ p = m * v $$"
+            - "Missing components: a justified final realization has not yet been produced"
+            - "Differentiators: named inputs supplied: p, is, means"
+            - "Misalignment types: functional, completion"
+            - "Origin layers: model"
+            - "Degree: partial"
+            - "Remainder shapes: missing"
+            - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+            - "Minimal repair: perform the bounded computation or invoke the matching executable template"
+            - "Full repair: perform the bounded computation or invoke the matching executable template, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+            - "Action posture: compute_or_template"
+          In:
+            - "Prompt Surface String"
+            - "Encountered Non Achievedness String"
+            - "Lookup Keys Strings"
+            - "[ Component Non Achievedness ]"
+            - "Composed Non Achievedness"
+          Out:
+            - "Prior Encounter"
+            - "[ Reusable Artifact ]"
+            - "[ Reused Non Achievedness ]"
+            - "[ Composed Reuse ]"
+    entrypoint: main
+    dependencies:
+    - msgspec
+    - orjson
+    input_contract:
+      m: number
+      v: number
+    output_contract:
+      p: number
+    python_script: |-
+      # /// script
+      # requires-python = ">=3.11"
+      # dependencies = ["msgspec", "orjson"]
+      # ///
+
+      from __future__ import annotations
+
+      import argparse
+      import ast
+      import math
+      import sys
+
+      import msgspec
+      import orjson
+
+
+      EXPRESSION = 'm * v'
+      OUTPUT_FIELD = 'p'
+      ALLOWED_NAMES = ['m', 'v']
+      ALLOWED_NODE_TYPES = (
+          ast.Expression,
+          ast.BinOp,
+          ast.UnaryOp,
+          ast.Add,
+          ast.Sub,
+          ast.Mult,
+          ast.Div,
+          ast.Pow,
+          ast.Mod,
+          ast.FloorDiv,
+          ast.USub,
+          ast.UAdd,
+          ast.Load,
+          ast.Name,
+          ast.Constant,
+      )
+
+
+      class InputPayload(msgspec.Struct, kw_only=True):
+          payload: dict[str, object] = {}
+
+
+      class OutputPayload(msgspec.Struct, kw_only=True):
+          status: str
+          answer: str = ""
+          result: dict[str, object]
+          notes: list[str] = []
+
+
+      def _validate_expression() -> ast.AST:
+          tree = ast.parse(EXPRESSION, mode="eval")
+          for node in ast.walk(tree):
+              if not isinstance(node, ALLOWED_NODE_TYPES):
+                  raise ValueError(f"disallowed expression node: {type(node).__name__}")
+              if isinstance(node, ast.Name) and node.id not in ALLOWED_NAMES:
+                  raise ValueError(f"disallowed symbol: {node.id}")
+          return tree
+
+
+      COMPILED = compile(_validate_expression(), "<expression>", "eval")
+
+
+      def _coerce_number(value: object) -> float:
+          if value is None:
+              raise ValueError("missing numeric input")
+          if isinstance(value, bool):
+              raise ValueError("boolean inputs are not numeric")
+          if isinstance(value, (int, float)):
+              return float(value)
+          text = str(value).strip()
+          if not text:
+              raise ValueError("empty numeric input")
+          return float(text)
+
+
+      def run(payload: InputPayload) -> OutputPayload:
+          values = {
+          "m": _coerce_number(payload.payload.get("m")),
+          "v": _coerce_number(payload.payload.get("v")),
+          }
+          result = eval(COMPILED, {"__builtins__": {}, "math": math}, values)
+          normalized = int(result) if isinstance(result, float) and result.is_integer() else result
+          return OutputPayload(
+              status="ok",
+              answer=str(normalized),
+              result={OUTPUT_FIELD: normalized},
+              notes=[],
+          )
+
+
+      def main() -> None:
+          parser = argparse.ArgumentParser(description='2 Core Equation')
+          parser.add_argument("--input-json", help="Optional JSON payload. Prefer stdin when omitted.")
+          args = parser.parse_args()
+          raw = args.input_json.encode("utf-8") if args.input_json else sys.stdin.buffer.read()
+          payload = orjson.loads(raw) if raw else {}
+          typed_input = msgspec.convert({"payload": payload}, type=InputPayload)
+          result = run(typed_input)
+          sys.stdout.buffer.write(orjson.dumps(msgspec.to_builtins(result), option=orjson.OPT_INDENT_2))
+          sys.stdout.buffer.write(b"\n")
+
+
+      if __name__ == "__main__":
+          main()
+    script_language: python
+    content:
+      source_path: /Users/ravindranathakila/service/realized/LEARN_MOMENTUM.md
+      source_document: LEARN_MOMENTUM.md
+      output_field: p
+      compute_expression: m * v
+      parameter_aliases:
+        m:
+        - m
+        - mass
+        - '3'
+        - '5'
+        - momentum
+        - multiply
+        - means
+        - metres
+        v:
+        - v
+        - velocity
+        - '4'
+        - '2'
+        - value
+        p:
+        - p
+        - momentum
+        - m * v
+        - 3 * 4 = 12
+        - per
+        - product
+      source_kind: markdown
+      source_title: Momentum
+      source_sections:
+      - 2. Core equation
+      encounter_id: cluster_2
+      equation_bearing: true
+      parameterized: true
+      node_id: not_learn-from-markdown-learn-momentum-md_7d377c
+      aliases:
+      - p = m * v
+      - 2. Core equation
+      - multiply mass by velocity
+      - the result is momentum
+      - 'The reusable rule is:'
+      - 'This means:'
+      structured_learning:
+        encountered_not: 2 Core Equation
+        lookup_keys:
+        - calculate p m v
+        - calculate p
+        - p m
+        - m v
+        - calculate p m
+        - p m v
+        - perform bound computation or invoke match executable template
+        - perform bound
+        - bound computation
+        - computation or
+        - or invoke
+        - invoke match
+        - match executable
+        - executable template
+        - perform bound computation
+        - bound computation or
+        - computation or invoke
+        - or invoke match
+        - invoke match executable
+        - match executable template
+        - without reduc remainder item cannot clos with govern confidence
+        - without reduc remainder item cannot clo
+        - govern confidence
+        - without reduc
+        component_nots:
+        - M
+        - V
+        - P
+        composed_not: 2 Core Equation
+        goal: How do you calculate p from m, v?
+        intended_object: 'Momentum How do you calculate p from m, v? 2 Core Equation
+          p = m * v 2. Core equation multiply mass by velocity the result is momentum
+          The reusable rule is: This means: $$ p = m * v $$'
+        success_criteria:
+        - all required inputs are explicit and the bounded computation or template
+          is applied faithfully
+        - the result is returned in the requested usable form
+        actual_realization: 'the prompt surface is present; explicit givens are present:
+          2 Core Equation p = m * v 2, Core equation multiply mass by velocity the
+          result is momentum The reusable rule is: This means: $$ p = m * v $$; no
+          justified final closure has been admitted yet'
+        givens:
+        - 2 Core Equation p = m * v 2
+        - 'Core equation multiply mass by velocity the result is momentum The reusable
+          rule is: This means: $$ p = m * v $$'
+        missing_components:
+        - a justified final realization has not yet been produced
+        differentiators:
+        - 'named inputs supplied: p, is, means'
+        misalignment_types:
+        - functional
+        - completion
+        origin_layers:
+        - model
+        degree: partial
+        remainder_shapes:
+        - missing
+        why_it_matters:
+        - without reducing the remainder, the item cannot be closed with governed
+          confidence
+        minimal_repair:
+        - perform the bounded computation or invoke the matching executable template
+        full_repair:
+        - perform the bounded computation or invoke the matching executable template
+        - 'satisfy success condition: all required inputs are explicit and the bounded
+          computation or template is applied faithfully'
+        - 'satisfy success condition: the result is returned in the requested usable
+          form'
+        boundary_shape:
+        - d*
+        action_posture: compute_or_template
+        notation_yaml: |-
+          "How Do You Calculate P From M V":
+            Description:
+              - "Structured learning declaration for the active non-achievedness."
+              - "Encountered non-achievedness: 2 Core Equation"
+              - "Components: M, V, P"
+              - "Composition: 2 Core Equation"
+              - "Intended object: Momentum How do you calculate p from m, v? 2 Core Equation p = m * v 2. Core equation multiply mass by velocity the result is momentum The reusable rule is: This means: $$ p = m * v $$"
+              - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+              - "Actual realization: the prompt surface is present; explicit givens are present: 2 Core Equation p = m * v 2, Core equation multiply mass by velocity the result is momentum The reusable rule is: This means: $$ p = m * v $$; no justified final closure has been admitted yet"
+              - "Givens: 2 Core Equation p = m * v 2, Core equation multiply mass by velocity the result is momentum The reusable rule is: This means: $$ p = m * v $$"
+              - "Missing components: a justified final realization has not yet been produced"
+              - "Differentiators: named inputs supplied: p, is, means"
+              - "Misalignment types: functional, completion"
+              - "Origin layers: model"
+              - "Degree: partial"
+              - "Remainder shapes: missing"
+              - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+              - "Minimal repair: perform the bounded computation or invoke the matching executable template"
+              - "Full repair: perform the bounded computation or invoke the matching executable template, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+              - "Action posture: compute_or_template"
+            In:
+              - "Prompt Surface String"
+              - "Encountered Non Achievedness String"
+              - "Lookup Keys Strings"
+              - "[ Component Non Achievedness ]"
+              - "Composed Non Achievedness"
+            Out:
+              - "Prior Encounter"
+              - "[ Reusable Artifact ]"
+              - "[ Reused Non Achievedness ]"
+              - "[ Composed Reuse ]"
+---
+4 Worked Examples:
+  Description:
+  - General momentum relation p = m * v; reusable for any values of m and v.
+  - Executable ability artifact.
+  In:
+  - 'm: number'
+  - 'v: number'
+  Out:
+  - 'p: number'
+  Metadata:
+    artifact_id: artifact_ability-4-worked-examples_ccb536
+    artifact_type: ability
+    representation: python_script
+    function_bit: 1
+    boundary_shape:
+    - a*
+    - d*
+    scope: reuse when later prompts ask to compute p from m, v
+    reusability: broad_reuse
+    admissibility: candidate
+    learning_relation: extends_parameters
+    created_at: '2026-03-25T11:09:57+00:00'
+    provenance:
+    - not_learn-from-markdown-learn-momentum-md_7d377c
+    - /Users/ravindranathakila/service/realized/LEARN_MOMENTUM.md
+    related_artifact_ids:
+    - artifact_ability-1-core-meaning_e548f7
+    - artifact_ability-2-core-equation_7f7688
+    constraints:
+    - derive only from the supplied encounter
+    template_schema:
+      preconditions:
+      - the active item matches the artifact scope
+      - the current state is admissible for governed reuse
+      governed_function: reuse ability in a governed way
+      completion_conditions:
+      - the artifact is instantiated in scope and its use conditions are met
+      failure_conditions:
+      - scope or HoldOn conditions are violated
+      scope_of_reuse: reuse when later prompts ask to compute p from m, v
+      bssc_awareness:
+        admissible_place_in_realization: governed realization state
+        required_governed_state: active represented non-achievedness with durable
+          state
+        permitted_governed_effect: support ability reuse without self-justifying closure
+        may_not_by_itself_justify:
+        - closure
+      holdon_awareness:
+        relevant_holdon_blocks_instantiation: true
+        diagnostic_use_allowed: true
+        relevant_holdon_conditions:
+        - missing evidence
+        - pause boundary
+        - governance block
+        resumption_condition: resume ordinary use only when the blocking condition
+          is cleared
+    justification: General momentum relation p = m * v; reusable for any values of
+      m and v.
+    question: What is the momentum p given mass m and velocity v?
+    structured_learning:
+      encountered_not: 4 Worked Examples
+      goal: What is the momentum p given mass m and velocity v?
+      intended_object: 'Momentum What is the momentum p given mass m and velocity
+        v? 4 Worked Examples p = m * v 4. Worked examples m = 3 v = 4 m = 5 v = 2
+        If: Then: p = 3 * 4 = 12 `m = 3` `v = 4` `m = 5` `v = 2` $$ p = 3 * 4 = 12
+        $$'
+      success_criteria:
+      - all required inputs are explicit and the bounded computation or template is
+        applied faithfully
+      - the result is returned in the requested usable form
+      actual_realization: 'the prompt surface is present; explicit givens are present:
+        Momentum What is the momentum p given mass m and velocity v, 4 Worked Examples
+        p = m * v 4, Worked examples m = 3 v = 4 m = 5 v = 2 If: Then: p = 3 * 4 =
+        12 `m = 3` `v = 4` `m = 5` `v = 2` $$ p = 3 * 4 = 12 $$; no justified final
+        closure has been admitted yet'
+      givens:
+      - Momentum What is the momentum p given mass m and velocity v
+      - 4 Worked Examples p = m * v 4
+      - 'Worked examples m = 3 v = 4 m = 5 v = 2 If: Then: p = 3 * 4 = 12 `m = 3`
+        `v = 4` `m = 5` `v = 2` $$ p = 3 * 4 = 12 $$'
+      unknowns: []
+      missing_components:
+      - a justified final realization has not yet been produced
+      distorted_components: []
+      differentiators:
+      - 'named inputs supplied: p, m, v, if, then'
+      contrastive_cases:
+      - condition holds versus condition does not hold
+      risk_of_wrong_closure: []
+      disallowed_assumptions: []
+      misalignment_types:
+      - functional
+      - completion
+      origin_layers:
+      - model
+      degree: partial
+      remainder_shapes:
+      - missing
+      why_it_matters:
+      - without reducing the remainder, the item cannot be closed with governed confidence
+      minimal_repair:
+      - perform the bounded computation or invoke the matching executable template
+      full_repair:
+      - perform the bounded computation or invoke the matching executable template
+      - 'satisfy success condition: all required inputs are explicit and the bounded
+        computation or template is applied faithfully'
+      - 'satisfy success condition: the result is returned in the requested usable
+        form'
+      boundary_shape:
+      - d*
+      action_posture: compute_or_template
+      component_nots:
+      - M
+      - V
+      - P
+      - Momentum P Given Mass M
+      - Velocity V
+      composed_not: 4 Worked Examples
+      lookup_keys:
+      - momentum p given mass m velocity v
+      - momentum p given mass m
+      - velocity v
+      - momentum p
+      - p given
+      - given mass
+      - mass m
+      - m velocity
+      - momentum p given
+      - p given mass
+      - given mass m
+      - mass m velocity
+      - m velocity v
+      - perform bound computation or invoke match executable template
+      - perform bound
+      - bound computation
+      - computation or
+      - or invoke
+      - invoke match
+      - match executable
+      - executable template
+      - perform bound computation
+      - bound computation or
+      - computation or invoke
+      notation_yaml: |-
+        "What Is The Momentum P Given Mass M And Velocity V":
+          Description:
+            - "Structured learning declaration for the active non-achievedness."
+            - "Encountered non-achievedness: 4 Worked Examples"
+            - "Components: M, V, P, Momentum P Given Mass M, Velocity V"
+            - "Composition: 4 Worked Examples"
+            - "Intended object: Momentum What is the momentum p given mass m and velocity v? 4 Worked Examples p = m * v 4. Worked examples m = 3 v = 4 m = 5 v = 2 If: Then: p = 3 * 4 = 12 `m = 3` `v = 4` `m = 5` `v = 2` $$ p = 3 * 4 = 12 $$"
+            - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+            - "Actual realization: the prompt surface is present; explicit givens are present: Momentum What is the momentum p given mass m and velocity v, 4 Worked Examples p = m * v 4, Worked examples m = 3 v = 4 m = 5 v = 2 If: Then: p = 3 * 4 = 12 `m = 3` `v = 4` `m = 5` `v = 2` $$ p = 3 * 4 = 12 $$; no justified final closure has been admitted yet"
+            - "Givens: Momentum What is the momentum p given mass m and velocity v, 4 Worked Examples p = m * v 4, Worked examples m = 3 v = 4 m = 5 v = 2 If: Then: p = 3 * 4 = 12 `m = 3` `v = 4` `m = 5` `v = 2` $$ p = 3 * 4 = 12 $$"
+            - "Missing components: a justified final realization has not yet been produced"
+            - "Differentiators: named inputs supplied: p, m, v, if, then"
+            - "Contrastive cases: condition holds versus condition does not hold"
+            - "Misalignment types: functional, completion"
+            - "Origin layers: model"
+            - "Degree: partial"
+            - "Remainder shapes: missing"
+            - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+            - "Minimal repair: perform the bounded computation or invoke the matching executable template"
+            - "Full repair: perform the bounded computation or invoke the matching executable template, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+            - "Action posture: compute_or_template"
+          In:
+            - "Prompt Surface String"
+            - "Encountered Non Achievedness String"
+            - "Lookup Keys Strings"
+            - "[ Component Non Achievedness ]"
+            - "Composed Non Achievedness"
+          Out:
+            - "Prior Encounter"
+            - "[ Reusable Artifact ]"
+            - "[ Reused Non Achievedness ]"
+            - "[ Composed Reuse ]"
+    entrypoint: main
+    dependencies:
+    - msgspec
+    - orjson
+    input_contract:
+      m: number
+      v: number
+    output_contract:
+      p: number
+    python_script: |-
+      # /// script
+      # requires-python = ">=3.11"
+      # dependencies = ["msgspec", "orjson"]
+      # ///
+
+      from __future__ import annotations
+
+      import argparse
+      import ast
+      import math
+      import sys
+
+      import msgspec
+      import orjson
+
+
+      EXPRESSION = 'm * v'
+      OUTPUT_FIELD = 'p'
+      ALLOWED_NAMES = ['m', 'v']
+      ALLOWED_NODE_TYPES = (
+          ast.Expression,
+          ast.BinOp,
+          ast.UnaryOp,
+          ast.Add,
+          ast.Sub,
+          ast.Mult,
+          ast.Div,
+          ast.Pow,
+          ast.Mod,
+          ast.FloorDiv,
+          ast.USub,
+          ast.UAdd,
+          ast.Load,
+          ast.Name,
+          ast.Constant,
+      )
+
+
+      class InputPayload(msgspec.Struct, kw_only=True):
+          payload: dict[str, object] = {}
+
+
+      class OutputPayload(msgspec.Struct, kw_only=True):
+          status: str
+          answer: str = ""
+          result: dict[str, object]
+          notes: list[str] = []
+
+
+      def _validate_expression() -> ast.AST:
+          tree = ast.parse(EXPRESSION, mode="eval")
+          for node in ast.walk(tree):
+              if not isinstance(node, ALLOWED_NODE_TYPES):
+                  raise ValueError(f"disallowed expression node: {type(node).__name__}")
+              if isinstance(node, ast.Name) and node.id not in ALLOWED_NAMES:
+                  raise ValueError(f"disallowed symbol: {node.id}")
+          return tree
+
+
+      COMPILED = compile(_validate_expression(), "<expression>", "eval")
+
+
+      def _coerce_number(value: object) -> float:
+          if value is None:
+              raise ValueError("missing numeric input")
+          if isinstance(value, bool):
+              raise ValueError("boolean inputs are not numeric")
+          if isinstance(value, (int, float)):
+              return float(value)
+          text = str(value).strip()
+          if not text:
+              raise ValueError("empty numeric input")
+          return float(text)
+
+
+      def run(payload: InputPayload) -> OutputPayload:
+          values = {
+          "m": _coerce_number(payload.payload.get("m")),
+          "v": _coerce_number(payload.payload.get("v")),
+          }
+          result = eval(COMPILED, {"__builtins__": {}, "math": math}, values)
+          normalized = int(result) if isinstance(result, float) and result.is_integer() else result
+          return OutputPayload(
+              status="ok",
+              answer=str(normalized),
+              result={OUTPUT_FIELD: normalized},
+              notes=[],
+          )
+
+
+      def main() -> None:
+          parser = argparse.ArgumentParser(description='4 Worked Examples')
+          parser.add_argument("--input-json", help="Optional JSON payload. Prefer stdin when omitted.")
+          args = parser.parse_args()
+          raw = args.input_json.encode("utf-8") if args.input_json else sys.stdin.buffer.read()
+          payload = orjson.loads(raw) if raw else {}
+          typed_input = msgspec.convert({"payload": payload}, type=InputPayload)
+          result = run(typed_input)
+          sys.stdout.buffer.write(orjson.dumps(msgspec.to_builtins(result), option=orjson.OPT_INDENT_2))
+          sys.stdout.buffer.write(b"\n")
+
+
+      if __name__ == "__main__":
+          main()
+    script_language: python
+    content:
+      source_path: /Users/ravindranathakila/service/realized/LEARN_MOMENTUM.md
+      source_document: LEARN_MOMENTUM.md
+      output_field: p
+      compute_expression: m * v
+      source_kind: markdown
+      source_title: Momentum
+      source_sections:
+      - 4. Worked examples
+      encounter_id: cluster_4
+      equation_bearing: true
+      parameterized: true
+      node_id: not_learn-from-markdown-learn-momentum-md_7d377c
+      aliases:
+      - p = m * v
+      - 4. Worked examples
+      - m = 3
+      - v = 4
+      - m = 5
+      - v = 2
+      - 'If:'
+      - 'Then:'
+      - p = 3 * 4 = 12
+      structured_learning:
+        encountered_not: 4 Worked Examples
+        lookup_keys:
+        - momentum p given mass m velocity v
+        - momentum p given mass m
+        - velocity v
+        - momentum p
+        - p given
+        - given mass
+        - mass m
+        - m velocity
+        - momentum p given
+        - p given mass
+        - given mass m
+        - mass m velocity
+        - m velocity v
+        - perform bound computation or invoke match executable template
+        - perform bound
+        - bound computation
+        - computation or
+        - or invoke
+        - invoke match
+        - match executable
+        - executable template
+        - perform bound computation
+        - bound computation or
+        - computation or invoke
+        component_nots:
+        - M
+        - V
+        - P
+        - Momentum P Given Mass M
+        - Velocity V
+        composed_not: 4 Worked Examples
+        goal: What is the momentum p given mass m and velocity v?
+        intended_object: 'Momentum What is the momentum p given mass m and velocity
+          v? 4 Worked Examples p = m * v 4. Worked examples m = 3 v = 4 m = 5 v =
+          2 If: Then: p = 3 * 4 = 12 `m = 3` `v = 4` `m = 5` `v = 2` $$ p = 3 * 4
+          = 12 $$'
+        success_criteria:
+        - all required inputs are explicit and the bounded computation or template
+          is applied faithfully
+        - the result is returned in the requested usable form
+        actual_realization: 'the prompt surface is present; explicit givens are present:
+          Momentum What is the momentum p given mass m and velocity v, 4 Worked Examples
+          p = m * v 4, Worked examples m = 3 v = 4 m = 5 v = 2 If: Then: p = 3 * 4
+          = 12 `m = 3` `v = 4` `m = 5` `v = 2` $$ p = 3 * 4 = 12 $$; no justified
+          final closure has been admitted yet'
+        givens:
+        - Momentum What is the momentum p given mass m and velocity v
+        - 4 Worked Examples p = m * v 4
+        - 'Worked examples m = 3 v = 4 m = 5 v = 2 If: Then: p = 3 * 4 = 12 `m = 3`
+          `v = 4` `m = 5` `v = 2` $$ p = 3 * 4 = 12 $$'
+        missing_components:
+        - a justified final realization has not yet been produced
+        differentiators:
+        - 'named inputs supplied: p, m, v, if, then'
+        contrastive_cases:
+        - condition holds versus condition does not hold
+        misalignment_types:
+        - functional
+        - completion
+        origin_layers:
+        - model
+        degree: partial
+        remainder_shapes:
+        - missing
+        why_it_matters:
+        - without reducing the remainder, the item cannot be closed with governed
+          confidence
+        minimal_repair:
+        - perform the bounded computation or invoke the matching executable template
+        full_repair:
+        - perform the bounded computation or invoke the matching executable template
+        - 'satisfy success condition: all required inputs are explicit and the bounded
+          computation or template is applied faithfully'
+        - 'satisfy success condition: the result is returned in the requested usable
+          form'
+        boundary_shape:
+        - d*
+        action_posture: compute_or_template
+        notation_yaml: |-
+          "What Is The Momentum P Given Mass M And Velocity V":
+            Description:
+              - "Structured learning declaration for the active non-achievedness."
+              - "Encountered non-achievedness: 4 Worked Examples"
+              - "Components: M, V, P, Momentum P Given Mass M, Velocity V"
+              - "Composition: 4 Worked Examples"
+              - "Intended object: Momentum What is the momentum p given mass m and velocity v? 4 Worked Examples p = m * v 4. Worked examples m = 3 v = 4 m = 5 v = 2 If: Then: p = 3 * 4 = 12 `m = 3` `v = 4` `m = 5` `v = 2` $$ p = 3 * 4 = 12 $$"
+              - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+              - "Actual realization: the prompt surface is present; explicit givens are present: Momentum What is the momentum p given mass m and velocity v, 4 Worked Examples p = m * v 4, Worked examples m = 3 v = 4 m = 5 v = 2 If: Then: p = 3 * 4 = 12 `m = 3` `v = 4` `m = 5` `v = 2` $$ p = 3 * 4 = 12 $$; no justified final closure has been admitted yet"
+              - "Givens: Momentum What is the momentum p given mass m and velocity v, 4 Worked Examples p = m * v 4, Worked examples m = 3 v = 4 m = 5 v = 2 If: Then: p = 3 * 4 = 12 `m = 3` `v = 4` `m = 5` `v = 2` $$ p = 3 * 4 = 12 $$"
+              - "Missing components: a justified final realization has not yet been produced"
+              - "Differentiators: named inputs supplied: p, m, v, if, then"
+              - "Contrastive cases: condition holds versus condition does not hold"
+              - "Misalignment types: functional, completion"
+              - "Origin layers: model"
+              - "Degree: partial"
+              - "Remainder shapes: missing"
+              - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+              - "Minimal repair: perform the bounded computation or invoke the matching executable template"
+              - "Full repair: perform the bounded computation or invoke the matching executable template, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+              - "Action posture: compute_or_template"
+            In:
+              - "Prompt Surface String"
+              - "Encountered Non Achievedness String"
+              - "Lookup Keys Strings"
+              - "[ Component Non Achievedness ]"
+              - "Composed Non Achievedness"
+            Out:
+              - "Prior Encounter"
+              - "[ Reusable Artifact ]"
+              - "[ Reused Non Achievedness ]"
+              - "[ Composed Reuse ]"
+---
+Direct closure pattern for learned_reuse:
+  Description:
+  - the run closed through direct resolution without requiring subordinate achievement
+    decomposition
+  - Reusable closure pattern artifact.
+  In:
+  - Direct Closure Pattern
+  - Learn Reuse
+  Out: []
+  Metadata:
+    artifact_id: artifact_closure-pattern-direct-closure-pattern-for-learn_b87836
+    artifact_type: closure_pattern
+    representation: json
+    function_bit: 0
+    boundary_shape:
+    - d*
+    scope: bounded learned_reuse prompts that are self-contained and conventionally
+      interpreted
+    reusability: broad_reuse
+    admissibility: admitted
+    learning_relation: new_family
+    created_at: '2026-03-25T11:10:00+00:00'
+    provenance:
+    - proposal_discoveryauditproposal_1e16b6
+    - not_calculate-momentum-for-mass-8-and-velocity-12_762081
+    constraints:
+    - use only when the question is self-contained and the ordinary interpretation
+      is stable
+    template_schema:
+      preconditions:
+      - the active item matches the artifact scope
+      - the current state is admissible for governed reuse
+      governed_function: keep the item whole and close directly when a stable ordinary
+        reading yields a ready direct answer
+      completion_conditions:
+      - direct resolution is ready
+      - support-bearing answer evidence is attached
+      failure_conditions:
+      - ordinary interpretation is unstable
+      - external evidence is required
+      scope_of_reuse: bounded learned_reuse prompts that are self-contained and conventionally
+        interpreted
+      bssc_awareness:
+        admissible_place_in_realization: governed realization state
+        required_governed_state: active represented non-achievedness with durable
+          state
+        permitted_governed_effect: support closure_pattern reuse without self-justifying
+          closure
+        may_not_by_itself_justify:
+        - closure
+      holdon_awareness:
+        relevant_holdon_blocks_instantiation: true
+        diagnostic_use_allowed: true
+        relevant_holdon_conditions:
+        - missing evidence
+        - pause boundary
+        - governance block
+        resumption_condition: resume ordinary use only when the blocking condition
+          is cleared
+    justification: the run closed through direct resolution without requiring subordinate
+      achievement decomposition
+    structured_learning:
+      encountered_not: Direct Closure Pattern Learn Reuse
+      goal: Direct closure pattern for learned_reuse
+      intended_object: Direct closure pattern for learned_reuse
+      success_criteria:
+      - the response directly resolves the stated ask without erasing material distinctions
+      actual_realization: the prompt surface is present; no justified final closure
+        has been admitted yet
+      givens: []
+      unknowns: []
+      missing_components:
+      - a justified final realization has not yet been produced
+      distorted_components: []
+      differentiators: []
+      contrastive_cases: []
+      risk_of_wrong_closure: []
+      disallowed_assumptions: []
+      misalignment_types:
+      - completion
+      origin_layers:
+      - model
+      degree: partial
+      remainder_shapes:
+      - missing
+      why_it_matters:
+      - without reducing the remainder, the item cannot be closed with governed confidence
+      minimal_repair: []
+      full_repair:
+      - 'satisfy success condition: the response directly resolves the stated ask
+        without erasing material distinctions'
+      boundary_shape:
+      - d*
+      action_posture: direct_resolution
+      component_nots:
+      - Direct Closure Pattern
+      - Learn Reuse
+      composed_not: Direct Closure Pattern Learn Reuse
+      lookup_keys:
+      - direct closure pattern learn reuse
+      - direct closure pattern
+      - learn reuse
+      - direct closure
+      - closure pattern
+      - pattern learn
+      - closure pattern learn
+      - pattern learn reuse
+      - without reduc remainder item cannot clos with govern confidence
+      - without reduc remainder item cannot clo
+      - govern confidence
+      - without reduc
+      - reduc remainder
+      - remainder item
+      - item cannot
+      - cannot clos
+      - clos with
+      - with govern
+      - without reduc remainder
+      - reduc remainder item
+      - remainder item cannot
+      - item cannot clos
+      - cannot clos with
+      - clos with govern
+      notation_yaml: |-
+        "Direct Closure Pattern For Learned Reuse":
+          Description:
+            - "Structured learning declaration for the active non-achievedness."
+            - "Encountered non-achievedness: Direct Closure Pattern Learn Reuse"
+            - "Components: Direct Closure Pattern, Learn Reuse"
+            - "Composition: Direct Closure Pattern Learn Reuse"
+            - "Intended object: Direct closure pattern for learned_reuse"
+            - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+            - "Actual realization: the prompt surface is present; no justified final closure has been admitted yet"
+            - "Missing components: a justified final realization has not yet been produced"
+            - "Misalignment types: completion"
+            - "Origin layers: model"
+            - "Degree: partial"
+            - "Remainder shapes: missing"
+            - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+            - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+            - "Action posture: direct_resolution"
+          In:
+            - "Prompt Surface String"
+            - "Encountered Non Achievedness String"
+            - "Lookup Keys Strings"
+            - "[ Component Non Achievedness ]"
+            - "Composed Non Achievedness"
+          Out:
+            - "Prior Encounter"
+            - "[ Reusable Artifact ]"
+            - "[ Reused Non Achievedness ]"
+            - "[ Composed Reuse ]"
+    content:
+      node_id: not_calculate-momentum-for-mass-8-and-velocity-12_762081
+      answer_kind: learned_reuse
+      closure_rule: if direct resolution is ready, keep the item whole and close it
+        after support-bearing evidence is attached
+      structured_learning:
+        encountered_not: Direct Closure Pattern Learn Reuse
+        lookup_keys:
+        - direct closure pattern learn reuse
+        - direct closure pattern
+        - learn reuse
+        - direct closure
+        - closure pattern
+        - pattern learn
+        - closure pattern learn
+        - pattern learn reuse
+        - without reduc remainder item cannot clos with govern confidence
+        - without reduc remainder item cannot clo
+        - govern confidence
+        - without reduc
+        - reduc remainder
+        - remainder item
+        - item cannot
+        - cannot clos
+        - clos with
+        - with govern
+        - without reduc remainder
+        - reduc remainder item
+        - remainder item cannot
+        - item cannot clos
+        - cannot clos with
+        - clos with govern
+        component_nots:
+        - Direct Closure Pattern
+        - Learn Reuse
+        composed_not: Direct Closure Pattern Learn Reuse
+        goal: Direct closure pattern for learned_reuse
+        intended_object: Direct closure pattern for learned_reuse
+        success_criteria:
+        - the response directly resolves the stated ask without erasing material distinctions
+        actual_realization: the prompt surface is present; no justified final closure
+          has been admitted yet
+        missing_components:
+        - a justified final realization has not yet been produced
+        misalignment_types:
+        - completion
+        origin_layers:
+        - model
+        degree: partial
+        remainder_shapes:
+        - missing
+        why_it_matters:
+        - without reducing the remainder, the item cannot be closed with governed
+          confidence
+        full_repair:
+        - 'satisfy success condition: the response directly resolves the stated ask
+          without erasing material distinctions'
+        boundary_shape:
+        - d*
+        action_posture: direct_resolution
+        notation_yaml: |-
+          "Direct Closure Pattern For Learned Reuse":
+            Description:
+              - "Structured learning declaration for the active non-achievedness."
+              - "Encountered non-achievedness: Direct Closure Pattern Learn Reuse"
+              - "Components: Direct Closure Pattern, Learn Reuse"
+              - "Composition: Direct Closure Pattern Learn Reuse"
+              - "Intended object: Direct closure pattern for learned_reuse"
+              - "Success criteria: the response directly resolves the stated ask without erasing material distinctions"
+              - "Actual realization: the prompt surface is present; no justified final closure has been admitted yet"
+              - "Missing components: a justified final realization has not yet been produced"
+              - "Misalignment types: completion"
+              - "Origin layers: model"
+              - "Degree: partial"
+              - "Remainder shapes: missing"
+              - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+              - "Full repair: satisfy success condition: the response directly resolves the stated ask without erasing material distinctions"
+              - "Action posture: direct_resolution"
+            In:
+              - "Prompt Surface String"
+              - "Encountered Non Achievedness String"
+              - "Lookup Keys Strings"
+              - "[ Component Non Achievedness ]"
+              - "Composed Non Achievedness"
+            Out:
+              - "Prior Encounter"
+              - "[ Reusable Artifact ]"
+              - "[ Reused Non Achievedness ]"
+              - "[ Composed Reuse ]"
+---
+Structured learning record for Calculate Momentum Mass 8 Velocity 12:
+  Description:
+  - the run produced a structured non-achievedness view that can be reused for prior-encounter
+    lookup, decomposition-aware reuse, and composition-aware reuse
+  - 'Knowledge artifact for: Calculate momentum for mass=8 and velocity=12.'
+  In:
+  - Calculate Momentum
+  - Mass 8
+  - Velocity 12
+  Out:
+  - '96'
+  Metadata:
+    artifact_id: artifact_knowledge-structured-learning-record-for-calcula_b9a48c
+    artifact_type: knowledge
+    representation: yaml
+    function_bit: 0
+    boundary_shape:
+    - d*
+    scope: reuse when the same non-achievedness, a paraphrase of it, or a compatible
+      decomposition reappears
+    reusability: broad_reuse
+    admissibility: admitted
+    learning_relation: instance_of_existing
+    created_at: '2026-03-25T11:10:00+00:00'
+    provenance:
+    - not_calculate-momentum-for-mass-8-and-velocity-12_762081
+    - artifact_closure-pattern-direct-closure-pattern-for-learn_b87836
+    related_artifact_ids:
+    - artifact_closure-pattern-direct-closure-pattern-for-learn_b87836
+    constraints:
+    - reuse the record only when the active non-achievedness is semantically aligned
+      under ordinary reading
+    - treat structure alone as support only after governance checks for scope, conflict,
+      and stability
+    justification: the run produced a structured non-achievedness view that can be
+      reused for prior-encounter lookup, decomposition-aware reuse, and composition-aware
+      reuse
+    question: Calculate momentum for mass=8 and velocity=12.
+    answer: '96'
+    structured_learning:
+      encountered_not: Calculate Momentum Mass 8 Velocity 12
+      goal: Calculate momentum for mass=8 and velocity=12.
+      intended_object: Calculate momentum for mass=8 and velocity=12.
+      success_criteria:
+      - all required inputs are explicit and the bounded computation or template is
+        applied faithfully
+      - the result is returned in the requested usable form
+      actual_realization: 'the prompt surface is present; explicit givens are present:
+        Calculate momentum for mass=8 and velocity=12; no justified final closure
+        has been admitted yet'
+      givens:
+      - Calculate momentum for mass=8 and velocity=12
+      unknowns: []
+      missing_components:
+      - a justified final realization has not yet been produced
+      distorted_components: []
+      differentiators:
+      - 'named inputs supplied: mass, velocity'
+      contrastive_cases: []
+      risk_of_wrong_closure: []
+      disallowed_assumptions: []
+      misalignment_types:
+      - functional
+      - completion
+      origin_layers:
+      - model
+      degree: partial
+      remainder_shapes:
+      - missing
+      why_it_matters:
+      - without reducing the remainder, the item cannot be closed with governed confidence
+      minimal_repair:
+      - perform the bounded computation or invoke the matching executable template
+      full_repair:
+      - perform the bounded computation or invoke the matching executable template
+      - 'satisfy success condition: all required inputs are explicit and the bounded
+        computation or template is applied faithfully'
+      - 'satisfy success condition: the result is returned in the requested usable
+        form'
+      boundary_shape:
+      - a*
+      - d*
+      action_posture: compute_or_template
+      component_nots:
+      - Calculate Momentum
+      - Mass 8
+      - Velocity 12
+      composed_not: Calculate Momentum Mass 8 Velocity 12
+      lookup_keys:
+      - calculate momentum mass 8 velocity 12
+      - calculate momentum
+      - mass 8
+      - velocity 12
+      - momentum mass
+      - 8 velocity
+      - calculate momentum mass
+      - momentum mass 8
+      - mass 8 velocity
+      - 8 velocity 12
+      - perform bound computation or invoke match executable template
+      - perform bound
+      - bound computation
+      - computation or
+      - or invoke
+      - invoke match
+      - match executable
+      - executable template
+      - perform bound computation
+      - bound computation or
+      - computation or invoke
+      - or invoke match
+      - invoke match executable
+      - match executable template
+      notation_yaml: |-
+        "Calculate Momentum For Mass 8 And Velocity 12":
+          Description:
+            - "Structured learning declaration for the active non-achievedness."
+            - "Encountered non-achievedness: Calculate Momentum Mass 8 Velocity 12"
+            - "Components: Calculate Momentum, Mass 8, Velocity 12"
+            - "Composition: Calculate Momentum Mass 8 Velocity 12"
+            - "Intended object: Calculate momentum for mass=8 and velocity=12."
+            - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+            - "Actual realization: the prompt surface is present; explicit givens are present: Calculate momentum for mass=8 and velocity=12; no justified final closure has been admitted yet"
+            - "Givens: Calculate momentum for mass=8 and velocity=12"
+            - "Missing components: a justified final realization has not yet been produced"
+            - "Differentiators: named inputs supplied: mass, velocity"
+            - "Misalignment types: functional, completion"
+            - "Origin layers: model"
+            - "Degree: partial"
+            - "Remainder shapes: missing"
+            - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+            - "Minimal repair: perform the bounded computation or invoke the matching executable template"
+            - "Full repair: perform the bounded computation or invoke the matching executable template, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+            - "Action posture: compute_or_template"
+          In:
+            - "Prompt Surface String"
+            - "Encountered Non Achievedness String"
+            - "Lookup Keys Strings"
+            - "[ Component Non Achievedness ]"
+            - "Composed Non Achievedness"
+          Out:
+            - "Prior Encounter"
+            - "[ Reusable Artifact ]"
+            - "[ Reused Non Achievedness ]"
+            - "[ Composed Reuse ]"
+    content:
+      node_id: not_calculate-momentum-for-mass-8-and-velocity-12_762081
+      answer_source: direct_resolution
+      structured_learning:
+        encountered_not: Calculate Momentum Mass 8 Velocity 12
+        lookup_keys:
+        - calculate momentum mass 8 velocity 12
+        - calculate momentum
+        - mass 8
+        - velocity 12
+        - momentum mass
+        - 8 velocity
+        - calculate momentum mass
+        - momentum mass 8
+        - mass 8 velocity
+        - 8 velocity 12
+        - perform bound computation or invoke match executable template
+        - perform bound
+        - bound computation
+        - computation or
+        - or invoke
+        - invoke match
+        - match executable
+        - executable template
+        - perform bound computation
+        - bound computation or
+        - computation or invoke
+        - or invoke match
+        - invoke match executable
+        - match executable template
+        component_nots:
+        - Calculate Momentum
+        - Mass 8
+        - Velocity 12
+        composed_not: Calculate Momentum Mass 8 Velocity 12
+        goal: Calculate momentum for mass=8 and velocity=12.
+        intended_object: Calculate momentum for mass=8 and velocity=12.
+        success_criteria:
+        - all required inputs are explicit and the bounded computation or template
+          is applied faithfully
+        - the result is returned in the requested usable form
+        actual_realization: 'the prompt surface is present; explicit givens are present:
+          Calculate momentum for mass=8 and velocity=12; no justified final closure
+          has been admitted yet'
+        givens:
+        - Calculate momentum for mass=8 and velocity=12
+        missing_components:
+        - a justified final realization has not yet been produced
+        differentiators:
+        - 'named inputs supplied: mass, velocity'
+        misalignment_types:
+        - functional
+        - completion
+        origin_layers:
+        - model
+        degree: partial
+        remainder_shapes:
+        - missing
+        why_it_matters:
+        - without reducing the remainder, the item cannot be closed with governed
+          confidence
+        minimal_repair:
+        - perform the bounded computation or invoke the matching executable template
+        full_repair:
+        - perform the bounded computation or invoke the matching executable template
+        - 'satisfy success condition: all required inputs are explicit and the bounded
+          computation or template is applied faithfully'
+        - 'satisfy success condition: the result is returned in the requested usable
+          form'
+        boundary_shape:
+        - a*
+        - d*
+        action_posture: compute_or_template
+        notation_yaml: |-
+          "Calculate Momentum For Mass 8 And Velocity 12":
+            Description:
+              - "Structured learning declaration for the active non-achievedness."
+              - "Encountered non-achievedness: Calculate Momentum Mass 8 Velocity 12"
+              - "Components: Calculate Momentum, Mass 8, Velocity 12"
+              - "Composition: Calculate Momentum Mass 8 Velocity 12"
+              - "Intended object: Calculate momentum for mass=8 and velocity=12."
+              - "Success criteria: all required inputs are explicit and the bounded computation or template is applied faithfully, the result is returned in the requested usable form"
+              - "Actual realization: the prompt surface is present; explicit givens are present: Calculate momentum for mass=8 and velocity=12; no justified final closure has been admitted yet"
+              - "Givens: Calculate momentum for mass=8 and velocity=12"
+              - "Missing components: a justified final realization has not yet been produced"
+              - "Differentiators: named inputs supplied: mass, velocity"
+              - "Misalignment types: functional, completion"
+              - "Origin layers: model"
+              - "Degree: partial"
+              - "Remainder shapes: missing"
+              - "Why it matters: without reducing the remainder, the item cannot be closed with governed confidence"
+              - "Minimal repair: perform the bounded computation or invoke the matching executable template"
+              - "Full repair: perform the bounded computation or invoke the matching executable template, satisfy success condition: all required inputs are explicit and the bounded computation or template is applied faithfully, satisfy success condition: the result is returned in the requested usable form"
+              - "Action posture: compute_or_template"
+            In:
+              - "Prompt Surface String"
+              - "Encountered Non Achievedness String"
+              - "Lookup Keys Strings"
+              - "[ Component Non Achievedness ]"
+              - "Composed Non Achievedness"
+            Out:
+              - "Prior Encounter"
+              - "[ Reusable Artifact ]"
+              - "[ Reused Non Achievedness ]"
+              - "[ Composed Reuse ]"

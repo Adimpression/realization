@@ -1,0 +1,1169 @@
+{
+  "query": "",
+  "returned_skill_count": 62,
+  "skill_exports_attachment": "skills_exports",
+  "skill_home": {
+    "exports_path": "/Users/ravindranathakila/service/realized/reports/validation_ladder_20260411_134118/workstation_trial_validation/physics/exports",
+    "home_path": "/Users/ravindranathakila/service/realized/reports/validation_ladder_20260411_134118/workstation_trial_validation/physics",
+    "imports_path": "/Users/ravindranathakila/service/realized/reports/validation_ladder_20260411_134118/workstation_trial_validation/physics/imports",
+    "store_path": "/Users/ravindranathakila/service/realized/reports/validation_ladder_20260411_134118/workstation_trial_validation/physics/physics.sqlite3"
+  },
+  "skill_imports_attachment": "skills_imports",
+  "skill_store_attachment": "skills",
+  "skills": [
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Circular Motion / Centripetal acceleration"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Circular Motion / Centripetal force"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Circular Motion / Earlier Acceleration"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Circular Motion / Physics Relations Circular Motion"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Electric Circuits / Electric power"
+    },
+    {
+      "authorities_requested": [
+        "execute"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "R": "number",
+        "V": "number"
+      },
+      "kind": "ability",
+      "outputs": {
+        "I": "number"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Electric Circuits / Ohm S Law"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Electric Circuits / Ohm's law"
+    },
+    {
+      "authorities_requested": [
+        "execute"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "drive": "number",
+        "opposition": "number"
+      },
+      "kind": "ability",
+      "outputs": {
+        "response": "number"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Electric Circuits / Python Ability"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Electric Circuits / Ratio"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Electric Circuits / Resistive power forms"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Electric Circuits / Response From Drive And Opposition"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Force and Mass-Acceleration Relation / Determinate Specialization Of The Broader Force"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Force and Mass-Acceleration Relation / Force from mass and acceleration"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Force and Mass-Acceleration Relation / General Mass Acceleration"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Force and Mass-Acceleration Relation / Multiplicative Combination"
+    },
+    {
+      "authorities_requested": [
+        "execute"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "acceleration": "number",
+        "general": "number",
+        "is": "number",
+        "law": "number",
+        "ma": "number",
+        "mass": "number",
+        "the": "number"
+      },
+      "kind": "ability",
+      "outputs": {
+        "F": "number"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Force and Mass-Acceleration Relation / Python Ability"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Force and Mass-Acceleration Relation / Weight as a special force"
+    },
+    {
+      "authorities_requested": [
+        "execute"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "G": "number",
+        "M": "number",
+        "r": "number"
+      },
+      "kind": "ability",
+      "outputs": {
+        "g": "number"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Gravitation / Gravitational Field Strength"
+    },
+    {
+      "authorities_requested": [
+        "execute"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "m_1": "number",
+        "m_2": "number",
+        "r": "number"
+      },
+      "kind": "ability",
+      "outputs": {
+        "F": "number"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Gravitation / Newtonian Gravitation"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Gravitation / Physics Relations Gravitation"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Gravitation / Reusable substrate under the law"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Linear Motion Under Constant Acceleration / Earlier Motion Quantities"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Linear Motion Under Constant Acceleration / Position update"
+    },
+    {
+      "authorities_requested": [
+        "execute"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "S_": "number",
+        "change": "number",
+        "initial": "number"
+      },
+      "kind": "ability",
+      "outputs": {
+        "S_times_later": "number"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Linear Motion Under Constant Acceleration / Python Ability"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Linear Motion Under Constant Acceleration / S Times Later From S And Initial And Change"
+    },
+    {
+      "authorities_requested": [
+        "execute"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "as": "number",
+        "u": "number"
+      },
+      "kind": "ability",
+      "outputs": {
+        "v_times_times_2": "number"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Linear Motion Under Constant Acceleration / Velocity Displacement Relation"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Linear Motion Under Constant Acceleration / Velocity update"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Linear Motion Under Constant Acceleration / Velocity-displacement relation"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Momentum and Impulse / Impulse from force and time"
+    },
+    {
+      "authorities_requested": [
+        "execute"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "Delta": "number",
+        "p": "number"
+      },
+      "kind": "ability",
+      "outputs": {
+        "J": "number"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Momentum and Impulse / Impulse Momentum Theorem"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Momentum and Impulse / Impulse-momentum theorem"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Momentum and Impulse / Momentum from mass and velocity"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Momentum and Impulse / Multiplicative Combination"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Momentum and Impulse / Physics Relations Momentum And Impulse"
+    },
+    {
+      "authorities_requested": [
+        "execute"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "Delta": "number",
+        "Q": "number"
+      },
+      "kind": "ability",
+      "outputs": {
+        "ext_times_interaction_times_effect": "number"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Momentum and Impulse / Python Ability"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Oscillation and Waves / Pendulum period"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Oscillation and Waves / Periodic Recurrence"
+    },
+    {
+      "authorities_requested": [
+        "execute"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "T": "number"
+      },
+      "kind": "ability",
+      "outputs": {
+        "f": "number"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Oscillation and Waves / Python Ability"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Oscillation and Waves / Spring oscillation period"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Oscillation and Waves / Wave speed"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Rate of Change in Motion / Acceleration from velocity change and time"
+    },
+    {
+      "authorities_requested": [
+        "execute"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "Delta_A": "number",
+        "Delta_B": "number"
+      },
+      "kind": "ability",
+      "outputs": {
+        "R": "number"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Rate of Change in Motion / Python Ability"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Rate of Change in Motion / Ratio Of Change"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Rate of Change in Motion / Speed from distance and time"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Rate of Change in Motion / The Same Deeper Ratio Of Change"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Rate of Change in Motion / Velocity from displacement and time"
+    },
+    {
+      "authorities_requested": [
+        "execute"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "ext": "number",
+        "magnitude": "number",
+        "only": "number"
+      },
+      "kind": "ability",
+      "outputs": {
+        "d": "number"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Scalars and Vectors / Distance And Displacement"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Scalars and Vectors / Physics Relations Scalars And Vectors"
+    },
+    {
+      "authorities_requested": [
+        "execute"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "magnitude": "number"
+      },
+      "kind": "ability",
+      "outputs": {
+        "Q": "number"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Scalars and Vectors / Python Ability"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Scalars and Vectors / Q From Magnitude"
+    },
+    {
+      "authorities_requested": [
+        "execute"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "ext": "number",
+        "magnitude": "number",
+        "only": "number"
+      },
+      "kind": "ability",
+      "outputs": {
+        "ext_times_speed": "number"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Scalars and Vectors / Speed And Velocity"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Work and Energy Transfer / E Times Final From E And Initial And Delta"
+    },
+    {
+      "authorities_requested": [
+        "execute"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "m": "number",
+        "v": "number"
+      },
+      "kind": "ability",
+      "outputs": {
+        "KE": "number"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Work and Energy Transfer / Kinetic Energy"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Work and Energy Transfer / Physics Relations Work And Energy Transfer"
+    },
+    {
+      "authorities_requested": [
+        "execute"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "Delta": "number",
+        "E_": "number",
+        "initial": "number"
+      },
+      "kind": "ability",
+      "outputs": {
+        "E_times_final": "number"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Work and Energy Transfer / Python Ability"
+    },
+    {
+      "authorities_requested": [
+        "execute"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "Delta": "number",
+        "KE": "number"
+      },
+      "kind": "ability",
+      "outputs": {
+        "W_times_net": "number"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Work and Energy Transfer / Work Energy Theorem"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Work and Energy Transfer / Work from force and displacement"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Physics Relations \u2014 Work and Energy Transfer / Work-energy theorem"
+    },
+    {
+      "authorities_requested": [
+        "read"
+      ],
+      "executor_framework": "",
+      "inputs": {
+        "question": "knowledge request"
+      },
+      "kind": "knowledge",
+      "outputs": {
+        "answer": "knowledge answer"
+      },
+      "representation": "yaml",
+      "risk_tier": "tier0_passive",
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Prompts"
+    },
+    {
+      "authorities_requested": [
+        "execute"
+      ],
+      "executor_framework": "wasm_wasi",
+      "inputs": {
+        "payload": "stdin payload or JSON input"
+      },
+      "kind": "ability",
+      "outputs": {
+        "greeting": "greeting text"
+      },
+      "representation": "wasm_module",
+      "risk_tier": "tier1_bounded_transform",
+      "source_kind": "builtin_workstation",
+      "source_target": "",
+      "title": "Workstation Greeting From Wasm"
+    },
+    {
+      "authorities_requested": [
+        "execute",
+        "read"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "glob": "optional fnmatch-style relative path filter",
+        "max_matches": "maximum match lines to return",
+        "mount": "governed workstation attachment mount name",
+        "pattern": "regular expression or literal text to search for",
+        "relative_path": "optional relative directory inside the mount"
+      },
+      "kind": "ability",
+      "outputs": {
+        "match_count": "number of matches returned",
+        "matches": "matched lines with file and line number"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "source_kind": "builtin_workstation",
+      "source_target": "",
+      "title": "Workstation Repo Search"
+    },
+    {
+      "authorities_requested": [
+        "execute",
+        "read"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "max_depth": "maximum traversal depth",
+        "max_entries": "maximum lines to return",
+        "mount": "governed workstation attachment mount name",
+        "relative_path": "optional relative directory inside the mount"
+      },
+      "kind": "ability",
+      "outputs": {
+        "entry_count": "number of entries returned",
+        "tree": "bounded directory-tree lines"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "source_kind": "builtin_workstation",
+      "source_target": "",
+      "title": "Workstation Repo Tree"
+    }
+  ],
+  "total_skill_count": 62
+}

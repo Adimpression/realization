@@ -1,0 +1,25 @@
+{
+  "assistant_text": "{'status': 'written', 'mount': 'skill_tmp', 'relative_path': 'data.csv'}",
+  "model": "workstation-direct-composition",
+  "rounds": 0,
+  "task_contract": {
+    "semantic_unit": "Write the CSV text `name,score\\nAda,10\\nBob,9\\n` to mount `skill_tmp` at `data.csv`."
+  },
+  "tool_receipts": [
+    {
+      "arguments": {
+        "skill_title": "Python Commands 11 \u2014 Write Csv File / Python Commands 11 Write Csv File",
+        "target": ""
+      },
+      "name": "ws.skill.invoke",
+      "result": {
+        "answer": "{'status': 'written', 'mount': 'skill_tmp', 'relative_path': 'data.csv'}",
+        "error": "",
+        "error_type": "",
+        "executor_framework": "python3",
+        "skill_title": "Python Commands 11 \u2014 Write Csv File / Python Commands 11 Write Csv File",
+        "status": "ok"
+      }
+    }
+  ]
+}

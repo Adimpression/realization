@@ -1,0 +1,39 @@
+[project]
+name = "realized-core-runtime"
+version = "0.1.0"
+description = "Dependency-inverted realization lifecycle for the Realized governed runtime."
+readme = "README.md"
+requires-python = ">=3.14"
+authors = [{ name = "Ravindranath Akila" }]
+maintainers = [{ name = "Adimpression", email = "talktome@adimpression.mobi" }]
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+keywords = ["governance", "reasoning", "runtime", "artifacts", "replay"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/Adimpression/realization"
+Repository = "https://github.com/Adimpression/realization"
+Issues = "https://github.com/Adimpression/realization/issues"
+
+[build-system]
+requires = ["setuptools>=77.0.3", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["realized_core_runtime"]
+
+[tool.setuptools.package-data]
+realized_core_runtime = ["py.typed"]

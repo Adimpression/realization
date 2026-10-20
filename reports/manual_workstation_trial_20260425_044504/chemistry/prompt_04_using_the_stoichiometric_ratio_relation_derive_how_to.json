@@ -1,0 +1,9 @@
+{
+  "assistant_text": "Short derivation using extent of reaction.\n\n- Start with a balanced reaction:\n  \u03b1 A + \u03b2 B \u2192 ... (\u03b1 and \u03b2 are the stoichiometric coefficients, positive numbers)\n\n- Define the extent of reaction \u03be (in moles). Then the moles of A and B change as:\n  n_A = n_A0 \u2212 \u03b1 \u03be\n  n_B = n_B0 \u00b1 \u03b2 \u03be\n  - Use +\u03b2\u03be if B is produced (product), and \u2212\u03b2\u03be if B is consumed (reactant).\n\n- Solve for \u03be from the A balance:\n  \u03be = (n_A0 \u2212 n_A) / \u03b1\n\n- Substitute into the B balance:\n  n_B = n_B0 \u00b1 \u03b2 (n_A0 \u2212 n_A) / \u03b1\n\nThus, given:\n- the current amount n_A,\n- the initial amounts n_A0, n_B0,\n- and the balanced coefficients \u03b1, \u03b2,\n\nyou can compute n_B via:\nn_B = n_B0 + (\u03b2/\u03b1) (n_A0 \u2212 n_A)  if B is a product\nn_B = n_B0 \u2212 (\u03b2/\u03b1) (n_A0 \u2212 n_A)  if B is a reactant\n\nGeneralization to a full reaction \u03b1A + \u03b2B \u2192 \u03b3C + \u03b4D is exactly the same idea:\nn_A = n_A0 \u2212 \u03b1 \u03be\nn_B = n_B0 \u2212 \u03b2 \u03be\nwith \u03be = (n_A0 \u2212 n_A)/\u03b1, so\nn_B = n_B0 \u2212 \u03b2 (n_A0 \u2212 n_A)/\u03b1\n\nImportant note:\n- You need initial amounts (n_A0, n_B0). Without them, n_B cannot be determined uniquely from n_A alone.",
+  "model": "gpt-5-nano-2025-08-07",
+  "rounds": 1,
+  "task_contract": {
+    "semantic_unit": "Using the stoichiometric ratio relation, derive how to compute the amount of substance ( n_B ) from a known ( n_A ) and coefficients."
+  },
+  "tool_receipts": []
+}

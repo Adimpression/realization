@@ -1,0 +1,162 @@
+#!/usr/bin/env python3
+import json
+import os
+import shutil
+import sys
+import zipfile
+from pathlib import Path
+
+_FAKE_LOG = os.getenv('WORKSTATION_ANSIBLE_FAKE_LOG', '')
+
+
+def _append_log(message):
+    if not _FAKE_LOG:
+        return
+    with open(_FAKE_LOG, 'a', encoding='utf-8') as handle:
+        handle.write(str(message) + '\n')
+
+
+def _load_vars(argv):
+    for index, value in enumerate(argv):
+        if value == '--extra-vars' and index + 1 < len(argv):
+            extra = argv[index + 1]
+            if extra.startswith('@'):
+                return json.loads(Path(extra[1:]).read_text(encoding='utf-8'))
+    return {}
+
+
+def _load_playbook_text(argv):
+    for value in argv[1:]:
+        if value.startswith('-'):
+            continue
+        candidate = Path(value)
+        if candidate.exists():
+            return candidate.read_text(encoding='utf-8')
+    return ''
+
+
+def _task_name(playbook_text):
+    for line in playbook_text.splitlines():
+        stripped = line.strip()
+        if stripped.startswith('- name:'):
+            return stripped.split(':', 1)[1].strip()
+    return ''
+
+
+def _render_port(value):
+    return str(value).strip() or '8080'
+
+
+def _write_text(path_text, content):
+    path = Path(path_text)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(content, encoding='utf-8')
+
+
+def _stdout(task_name, *, changed=True, ok=True, message='localhost'):
+    task_status = 'changed' if changed else 'ok'
+    recap_ok = '1' if ok else '0'
+    recap_changed = '1' if changed and ok else '0'
+    recap_failed = '0' if ok else '1'
+    return '\n'.join([
+        'PLAY [localhost] ***************************************************************',
+        '',
+        f'TASK [{task_name}] ******************************************************',
+        f'{task_status}: [{message}]',
+        '',
+        'PLAY RECAP *********************************************************************',
+        f'{message:<26} : ok={recap_ok}    changed={recap_changed}    unreachable=0    failed={recap_failed}    skipped=0    rescued=0    ignored=0',
+    ])
+
+
+def main(argv):
+    playbook_text = _load_playbook_text(argv)
+    payload = _load_vars(argv)
+    task_name = _task_name(playbook_text)
+    _append_log(json.dumps({'argv': argv[1:], 'task_name': task_name, 'payload': payload}, sort_keys=True))
+    try:
+        if 'package:' in playbook_text:
+            sys.stdout.write(_stdout(task_name or 'Ensure package is installed', changed=False) + '\n')
+            return 0
+        if 'file:' in playbook_text and 'state: directory' in playbook_text:
+            path = Path(str(payload.get('path', '')))
+            path.mkdir(parents=True, exist_ok=True)
+            mode = str(payload.get('mode', '')).strip()
+            if mode:
+                path.chmod(int(mode, 8))
+            sys.stdout.write(_stdout(task_name or 'Ensure directory exists') + '\n')
+            return 0
+        if 'copy:' in playbook_text and 'remote_src: true' in playbook_text:
+            source = Path(str(payload.get('source', '')))
+            destination = Path(str(payload.get('destination', '')))
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(source, destination)
+            sys.stdout.write(_stdout(task_name or 'Copy file to destination') + '\n')
+            return 0
+        if 'copy:' in playbook_text and 'content:' in playbook_text and 'port={{ port }}' not in playbook_text:
+            _write_text(str(payload.get('path', '')), str(payload.get('content', '')))
+            sys.stdout.write(_stdout(task_name or 'Write file content') + '\n')
+            return 0
+        if 'lineinfile:' in playbook_text:
+            path = Path(str(payload.get('path', '')))
+            path.parent.mkdir(parents=True, exist_ok=True)
+            existing = path.read_text(encoding='utf-8') if path.exists() else ''
+            line = str(payload.get('line', ''))
+            lines = existing.splitlines()
+            if line not in lines:
+                if existing and not existing.endswith('\n'):
+                    existing += '\n'
+                existing += line + '\n'
+                path.write_text(existing, encoding='utf-8')
+            sys.stdout.write(_stdout(task_name or 'Ensure line is present') + '\n')
+            return 0
+        if 'get_url:' in playbook_text:
+            destination = Path(str(payload.get('destination', '')))
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            destination.write_text('<html><body>fake ansible download</body></html>\n', encoding='utf-8')
+            sys.stdout.write(_stdout(task_name or 'Download URL to file') + '\n')
+            return 0
+        if 'unarchive:' in playbook_text:
+            archive = Path(str(payload.get('archive', '')))
+            destination = Path(str(payload.get('destination', '')))
+            destination.mkdir(parents=True, exist_ok=True)
+            with zipfile.ZipFile(archive, 'r') as handle:
+                handle.extractall(destination)
+            sys.stdout.write(_stdout(task_name or 'Extract archive') + '\n')
+            return 0
+        if 'service:' in playbook_text:
+            sys.stdout.write(_stdout(task_name or 'Ensure service is started and enabled', changed=False) + '\n')
+            return 0
+        if 'git:' in playbook_text:
+            destination = Path(str(payload.get('destination', '')))
+            destination.mkdir(parents=True, exist_ok=True)
+            _write_text(str(destination / 'README.md'), '# fake cloned repo\n')
+            _write_text(str(destination / '.git' / 'HEAD'), 'ref: refs/heads/main\n')
+            sys.stdout.write(_stdout(task_name or 'Clone Git repository') + '\n')
+            return 0
+        if 'file:' in playbook_text and 'state: file' in playbook_text:
+            path = Path(str(payload.get('path', '')))
+            if not path.exists():
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text('', encoding='utf-8')
+            mode = str(payload.get('mode', '')).strip()
+            if mode:
+                path.chmod(int(mode, 8))
+            sys.stdout.write(_stdout(task_name or 'Ensure file mode') + '\n')
+            return 0
+        if 'user:' in playbook_text:
+            sys.stdout.write(_stdout(task_name or 'Ensure user exists', changed=False) + '\n')
+            return 0
+        if 'copy:' in playbook_text and 'port={{ port }}' in playbook_text:
+            _write_text(str(payload.get('path', '')), f"port={_render_port(payload.get('port'))}\n")
+            sys.stdout.write(_stdout(task_name or 'Render template content') + '\n')
+            return 0
+        sys.stderr.write('fake ansible-playbook did not recognize the playbook shape\n')
+        return 2
+    except Exception as exc:
+        sys.stderr.write(str(exc) + '\n')
+        return 1
+
+
+if __name__ == '__main__':
+    raise SystemExit(main(sys.argv))

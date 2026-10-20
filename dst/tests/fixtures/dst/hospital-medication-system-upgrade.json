@@ -1,0 +1,106 @@
+{
+  "fixture_id": "hospital-medication-system-upgrade",
+  "title": "Hospital medication system upgrade",
+  "title_key": "hospital-medication-system-upgrade",
+  "source_ref": "dst/Hospital medication system upgrade.md",
+  "summary": "A hospital is deciding how to replace handwritten medication orders with digital prescribing while preserving patient safety and uninterrupted clinical operations.",
+  "sections": [
+    {
+      "key": "situation",
+      "title": "Situation",
+      "narrative": "The organization wants the benefits of electronic prescribing and barcode verification, but it cannot tolerate a rollout that creates unsafe mixed workflows for controlled drugs or pushes incomplete clinical integration into live use.",
+      "entries": []
+    },
+    {
+      "key": "actors",
+      "title": "Actors",
+      "narrative": "",
+      "entries": [
+        {"code": "", "text": "Hospital administration"},
+        {"code": "", "text": "Clinical safety board"},
+        {"code": "", "text": "Doctors"},
+        {"code": "", "text": "Pharmacy department"},
+        {"code": "", "text": "IT vendor"}
+      ]
+    },
+    {
+      "key": "objectives",
+      "title": "Objective",
+      "narrative": "",
+      "entries": [
+        {"code": "", "text": "prevent medication errors while keeping care running"}
+      ]
+    },
+    {
+      "key": "capabilities",
+      "title": "Capabilities",
+      "narrative": "",
+      "entries": [
+        {"code": "k1", "text": "paper prescribing"},
+        {"code": "k2", "text": "electronic prescribing"},
+        {"code": "k3", "text": "barcode medication verification"}
+      ]
+    },
+    {
+      "key": "dependencies",
+      "title": "Dependencies",
+      "narrative": "",
+      "entries": [
+        {"code": "d1", "text": "regulator approval for digital prescribing"},
+        {"code": "d2", "text": "staff training completed"},
+        {"code": "d3", "text": "pharmacy system integration working"}
+      ]
+    },
+    {
+      "key": "constraints",
+      "title": "Constraints",
+      "narrative": "",
+      "entries": [
+        {"code": "q1", "text": "no dual prescribing allowed for controlled drugs"},
+        {"code": "q2", "text": "patient safety rules require fully validated workflows before live use"}
+      ]
+    },
+    {
+      "key": "boundaries",
+      "title": "Boundary",
+      "narrative": "",
+      "entries": [
+        {"code": "β1", "text": "clinical-to-IT boundary"},
+        {"code": "β2", "text": "hospital-to-regulator boundary"}
+      ]
+    },
+    {
+      "key": "states",
+      "title": "States",
+      "narrative": "",
+      "entries": [
+        {"code": "s0", "text": "paper only"},
+        {"code": "s1", "text": "mixed paper and electronic"},
+        {"code": "s2", "text": "fully electronic and validated"}
+      ]
+    },
+    {
+      "key": "transitions",
+      "title": "Transitions",
+      "narrative": "",
+      "entries": [
+        {"code": "τ1", "text": "move from paper-only to mixed mode"},
+        {"code": "τ2", "text": "move from mixed mode to full electronic"},
+        {"code": "τ3", "text": "direct cutover from paper-only to full electronic"}
+      ]
+    }
+  ],
+  "candidate_paths": [
+    {
+      "title": "Outcome",
+      "parent_title": "Candidate paths",
+      "route_expression": "s0 -> s2",
+      "narrative": "The operational conclusion is that the hospital has one viable path: complete the dependencies first, then move directly to the validated electronic state.",
+      "highlights": [
+        "`s0 -> s2`",
+        "mixed-mode prescribing remains inadmissible because it violates safety and regulatory constraints",
+        "direct cutover becomes viable only after training, integration, and approval are complete before go-live"
+      ]
+    }
+  ]
+}

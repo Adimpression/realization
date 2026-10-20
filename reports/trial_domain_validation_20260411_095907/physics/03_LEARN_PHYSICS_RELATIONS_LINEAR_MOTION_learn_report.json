@@ -1,0 +1,916 @@
+{
+  "artifact_persistence": [
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-linear-motion-under-_ba44f9",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.001187,
+        "connect_seconds": 0.023702,
+        "ensure_schema_seconds": 0.028249,
+        "existing_payload_batch_lookup_seconds": 0.000337,
+        "index_seconds": 0.108993,
+        "prepare_seconds": 0.952416,
+        "total_seconds": 1.116625
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "98280c8aebe73e053cfed0247127515031eda746493f143291e9a29e8ea4b2d5",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.106138,
+        "existing_payload_lookup_seconds": 3.37e-05,
+        "total_seconds": 0.1061717
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-linear-motion-under-_a1c2f6",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.001187,
+        "connect_seconds": 0.023702,
+        "ensure_schema_seconds": 0.028249,
+        "existing_payload_batch_lookup_seconds": 0.000337,
+        "index_seconds": 0.108993,
+        "prepare_seconds": 0.952416,
+        "total_seconds": 1.116625
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "60e8b0792896208caaf4d68da0b31e625700c51e8d91759a71a2051d93ed8f1a",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.196381,
+        "existing_payload_lookup_seconds": 3.37e-05,
+        "total_seconds": 0.1964147
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-linear-motion-under-_a5085b",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.001187,
+        "connect_seconds": 0.023702,
+        "ensure_schema_seconds": 0.028249,
+        "existing_payload_batch_lookup_seconds": 0.000337,
+        "index_seconds": 0.108993,
+        "prepare_seconds": 0.952416,
+        "total_seconds": 1.116625
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "8d161ac49dd957cca463812fbb0339477b9872e854373b13e06193592d701d6c",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.095827,
+        "existing_payload_lookup_seconds": 3.37e-05,
+        "total_seconds": 0.0958607
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-linear-motion-under-_bdae62",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.001187,
+        "connect_seconds": 0.023702,
+        "ensure_schema_seconds": 0.028249,
+        "existing_payload_batch_lookup_seconds": 0.000337,
+        "index_seconds": 0.108993,
+        "prepare_seconds": 0.952416,
+        "total_seconds": 1.116625
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "55578793933076df91ec4e1423ddc530651acf05ee75ddb468560b77c76239e3",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.088574,
+        "existing_payload_lookup_seconds": 3.37e-05,
+        "total_seconds": 0.0886077
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-linear-motion-under-_eb081f",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.001187,
+        "connect_seconds": 0.023702,
+        "ensure_schema_seconds": 0.028249,
+        "existing_payload_batch_lookup_seconds": 0.000337,
+        "index_seconds": 0.108993,
+        "prepare_seconds": 0.952416,
+        "total_seconds": 1.116625
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "f3e2f2c44f52e4fafac33dab8ca40fa99825dac2b5284229098e6e7ba6836846",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.099828,
+        "existing_payload_lookup_seconds": 3.37e-05,
+        "total_seconds": 0.0998617
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-linear-motion-under-_cda1bc",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.001187,
+        "connect_seconds": 0.023702,
+        "ensure_schema_seconds": 0.028249,
+        "existing_payload_batch_lookup_seconds": 0.000337,
+        "index_seconds": 0.108993,
+        "prepare_seconds": 0.952416,
+        "total_seconds": 1.116625
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "86b51d50e64f1f492bb3041ac8a380a36ae68d722f0e34e91594bda6b92256ef",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.09141,
+        "existing_payload_lookup_seconds": 3.37e-05,
+        "total_seconds": 0.0914437
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_ability-physics-relations-linear-motion-under-co_0f8904",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.001187,
+        "connect_seconds": 0.023702,
+        "ensure_schema_seconds": 0.028249,
+        "existing_payload_batch_lookup_seconds": 0.000337,
+        "index_seconds": 0.108993,
+        "prepare_seconds": 0.952416,
+        "total_seconds": 1.116625
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "095dc14c0d663600789119a35c0bb6d438bc4cb13599f870c9a964b3ced441f8",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.000566,
+        "existing_payload_lookup_seconds": 3.37e-05,
+        "total_seconds": 0.0005997
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-linear-motion-under-_a5085b",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.001187,
+        "connect_seconds": 0.023702,
+        "ensure_schema_seconds": 0.028249,
+        "existing_payload_batch_lookup_seconds": 0.000337,
+        "index_seconds": 0.108993,
+        "prepare_seconds": 0.952416,
+        "total_seconds": 1.116625
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "d8adf75f872e22c586ceb358688eec62f304ae72ccbc7c9ef0624704d794dd39",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.000497,
+        "existing_payload_lookup_seconds": 3.37e-05,
+        "index_seconds": 0.108993,
+        "total_seconds": 0.18994070000000002,
+        "write_rows_seconds": 0.080417
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-linear-motion-under-_bdae62",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.001187,
+        "connect_seconds": 0.023702,
+        "ensure_schema_seconds": 0.028249,
+        "existing_payload_batch_lookup_seconds": 0.000337,
+        "index_seconds": 0.108993,
+        "prepare_seconds": 0.952416,
+        "total_seconds": 1.116625
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "1b403f3e9c482509ee8fe8f438b57f4dccd697d424a344a7bff36d2f9f6c9872",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.000435,
+        "existing_payload_lookup_seconds": 3.37e-05,
+        "index_seconds": 0.108993,
+        "total_seconds": 0.1711737,
+        "write_rows_seconds": 0.061712
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_ability-physics-relations-linear-motion-under-co_ab2e23",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.001187,
+        "connect_seconds": 0.023702,
+        "ensure_schema_seconds": 0.028249,
+        "existing_payload_batch_lookup_seconds": 0.000337,
+        "index_seconds": 0.108993,
+        "prepare_seconds": 0.952416,
+        "total_seconds": 1.116625
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "7b00a46b6c8c15d1d67c765356805571aaa973f00e4daff5f4b555e3f1941c87",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.001004,
+        "existing_payload_lookup_seconds": 3.37e-05,
+        "total_seconds": 0.0010377
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-linear-motion-under-_ba44f9",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.001548,
+        "connect_seconds": 0.003744,
+        "ensure_schema_seconds": 0.020614,
+        "existing_payload_batch_lookup_seconds": 0.000306,
+        "index_seconds": 0.128658,
+        "prepare_seconds": 0.41528,
+        "total_seconds": 0.574856
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "98280c8aebe73e053cfed0247127515031eda746493f143291e9a29e8ea4b2d5",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.047502,
+        "existing_payload_lookup_seconds": 3.825e-05,
+        "total_seconds": 0.04754025
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-linear-motion-under-_a5085b",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.001548,
+        "connect_seconds": 0.003744,
+        "ensure_schema_seconds": 0.020614,
+        "existing_payload_batch_lookup_seconds": 0.000306,
+        "index_seconds": 0.128658,
+        "prepare_seconds": 0.41528,
+        "total_seconds": 0.574856
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "8d161ac49dd957cca463812fbb0339477b9872e854373b13e06193592d701d6c",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.046868,
+        "existing_payload_lookup_seconds": 3.825e-05,
+        "index_seconds": 0.128658,
+        "total_seconds": 0.21173524999999999,
+        "write_rows_seconds": 0.036171
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-linear-motion-under-_bdae62",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.001548,
+        "connect_seconds": 0.003744,
+        "ensure_schema_seconds": 0.020614,
+        "existing_payload_batch_lookup_seconds": 0.000306,
+        "index_seconds": 0.128658,
+        "prepare_seconds": 0.41528,
+        "total_seconds": 0.574856
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "55578793933076df91ec4e1423ddc530651acf05ee75ddb468560b77c76239e3",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.046353,
+        "existing_payload_lookup_seconds": 3.825e-05,
+        "index_seconds": 0.128658,
+        "total_seconds": 0.21266825,
+        "write_rows_seconds": 0.037619
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-linear-motion-under-_eb081f",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.001548,
+        "connect_seconds": 0.003744,
+        "ensure_schema_seconds": 0.020614,
+        "existing_payload_batch_lookup_seconds": 0.000306,
+        "index_seconds": 0.128658,
+        "prepare_seconds": 0.41528,
+        "total_seconds": 0.574856
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "f3e2f2c44f52e4fafac33dab8ca40fa99825dac2b5284229098e6e7ba6836846",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.047628,
+        "existing_payload_lookup_seconds": 3.825e-05,
+        "total_seconds": 0.04766624999999999
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-linear-motion-under-_cda1bc",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.001548,
+        "connect_seconds": 0.003744,
+        "ensure_schema_seconds": 0.020614,
+        "existing_payload_batch_lookup_seconds": 0.000306,
+        "index_seconds": 0.128658,
+        "prepare_seconds": 0.41528,
+        "total_seconds": 0.574856
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "86b51d50e64f1f492bb3041ac8a380a36ae68d722f0e34e91594bda6b92256ef",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.047092,
+        "existing_payload_lookup_seconds": 3.825e-05,
+        "total_seconds": 0.04713025
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-linear-motion-under-_a5085b",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.001548,
+        "connect_seconds": 0.003744,
+        "ensure_schema_seconds": 0.020614,
+        "existing_payload_batch_lookup_seconds": 0.000306,
+        "index_seconds": 0.128658,
+        "prepare_seconds": 0.41528,
+        "total_seconds": 0.574856
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "d8adf75f872e22c586ceb358688eec62f304ae72ccbc7c9ef0624704d794dd39",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 7.8e-05,
+        "existing_payload_lookup_seconds": 3.825e-05,
+        "total_seconds": 0.00011625
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-linear-motion-under-_bdae62",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.001548,
+        "connect_seconds": 0.003744,
+        "ensure_schema_seconds": 0.020614,
+        "existing_payload_batch_lookup_seconds": 0.000306,
+        "index_seconds": 0.128658,
+        "prepare_seconds": 0.41528,
+        "total_seconds": 0.574856
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "1b403f3e9c482509ee8fe8f438b57f4dccd697d424a344a7bff36d2f9f6c9872",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 7.5e-05,
+        "existing_payload_lookup_seconds": 3.825e-05,
+        "total_seconds": 0.00011324999999999999
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_ability-physics-relations-linear-motion-under-co_ab2e23",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.001548,
+        "connect_seconds": 0.003744,
+        "ensure_schema_seconds": 0.020614,
+        "existing_payload_batch_lookup_seconds": 0.000306,
+        "index_seconds": 0.128658,
+        "prepare_seconds": 0.41528,
+        "total_seconds": 0.574856
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "payload_digest": "7b00a46b6c8c15d1d67c765356805571aaa973f00e4daff5f4b555e3f1941c87",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.000133,
+        "existing_payload_lookup_seconds": 3.825e-05,
+        "total_seconds": 0.00017125000000000002
+      },
+      "vector_enabled": false
+    }
+  ],
+  "document": {
+    "section_count": 5,
+    "source_path": "/Users/ravindranathakila/service/realized/trials/physics/03_LEARN_PHYSICS_RELATIONS_LINEAR_MOTION.md",
+    "title": "Physics Relations \u2014 Linear Motion Under Constant Acceleration"
+  },
+  "encounter_proposal": {
+    "encounters": [
+      {
+        "bullets": [
+          "input: `S_initial`",
+          "input: `change`",
+          "output: `S_later`"
+        ],
+        "candidate_kinds": [
+          "equation",
+          "template",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_1",
+        "equation_bearing": true,
+        "equations": [
+          "$$ S_{ ext{later}} = S_{ ext{initial}} + ext{change} $$"
+        ],
+        "heading": "1. Reusable substrate",
+        "paragraphs": [
+          "A later state can be obtained from an earlier state plus a change term.",
+          "The reusable formula is:",
+          "$$ S_{ ext{later}} = S_{ ext{initial}} + ext{change} $$"
+        ],
+        "path": [
+          "Physics Relations \u2014 Linear Motion Under Constant Acceleration",
+          "1. Reusable substrate"
+        ],
+        "sections": [
+          "1. Reusable substrate"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `u` initial velocity",
+          "input: `a` acceleration",
+          "input: `t` time",
+          "output: `v` final velocity"
+        ],
+        "candidate_kinds": [
+          "equation",
+          "template",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_2",
+        "equation_bearing": true,
+        "equations": [
+          "$$ v = u + at $$"
+        ],
+        "heading": "2. Velocity update",
+        "paragraphs": [
+          "Under constant acceleration, velocity changes linearly with time.",
+          "$$ v = u + at $$",
+          "Where:"
+        ],
+        "path": [
+          "Physics Relations \u2014 Linear Motion Under Constant Acceleration",
+          "2. Velocity update"
+        ],
+        "sections": [
+          "2. Velocity update"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `u`",
+          "input: `a`",
+          "input: `t`",
+          "output: `s`"
+        ],
+        "candidate_kinds": [
+          "equation",
+          "template",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_3",
+        "equation_bearing": true,
+        "equations": [
+          "$$ s = ut + rac{1}{2}at^2 $$"
+        ],
+        "heading": "3. Position update",
+        "paragraphs": [
+          "Displacement under constant acceleration is:",
+          "$$ s = ut + rac{1}{2}at^2 $$",
+          "Where:"
+        ],
+        "path": [
+          "Physics Relations \u2014 Linear Motion Under Constant Acceleration",
+          "3. Position update"
+        ],
+        "sections": [
+          "3. Position update"
+        ]
+      },
+      {
+        "bullets": [],
+        "candidate_kinds": [
+          "equation",
+          "logic",
+          "template",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_4",
+        "equation_bearing": true,
+        "equations": [
+          "$$ v^2 = u^2 + 2as $$"
+        ],
+        "heading": "4. Velocity-displacement relation",
+        "paragraphs": [
+          "A time-eliminated kinematic law is:",
+          "$$ v^2 = u^2 + 2as $$",
+          "This relation still depends on the same motion quantities, but removes explicit time."
+        ],
+        "path": [
+          "Physics Relations \u2014 Linear Motion Under Constant Acceleration",
+          "4. Velocity-displacement relation"
+        ],
+        "sections": [
+          "4. Velocity-displacement relation"
+        ]
+      },
+      {
+        "bullets": [],
+        "candidate_kinds": [
+          "logic",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_5",
+        "equation_bearing": false,
+        "equations": [],
+        "heading": "5. One-sentence summary",
+        "paragraphs": [
+          "Constant-acceleration kinematics reuses earlier motion quantities and assembles them into state-update laws."
+        ],
+        "path": [
+          "Physics Relations \u2014 Linear Motion Under Constant Acceleration",
+          "5. One-sentence summary"
+        ],
+        "sections": [
+          "5. One-sentence summary"
+        ]
+      }
+    ],
+    "proposal_id": "proposal_markdownabilitylearningproposal_59f97e",
+    "rationale": "Markdown ability learning proposals are bounded executable-harvest plans grounded in the structural ir.",
+    "source": "llm"
+  },
+  "final_answer": "Learned 10 artifacts from 03_LEARN_PHYSICS_RELATIONS_LINEAR_MOTION.md.",
+  "functionalization_proposal": {
+    "proposal_id": "proposal_markdownfunctionalizationproposal_cb84de",
+    "rationale": "Markdown functionalization proposals are bounded executable extractions from already classified encounters.",
+    "source": "llm"
+  },
+  "ir": {
+    "clusters": [
+      {
+        "bullets": [
+          "input: `S_initial`",
+          "input: `change`",
+          "output: `S_later`"
+        ],
+        "code_blocks": [],
+        "equations": [
+          "$$ S_{ ext{later}} = S_{ ext{initial}} + ext{change} $$"
+        ],
+        "heading": "1. Reusable substrate",
+        "paragraphs": [
+          "A later state can be obtained from an earlier state plus a change term.",
+          "The reusable formula is:",
+          "$$ S_{ ext{later}} = S_{ ext{initial}} + ext{change} $$"
+        ],
+        "path": [
+          "Physics Relations \u2014 Linear Motion Under Constant Acceleration",
+          "1. Reusable substrate"
+        ],
+        "sections": [
+          "1. Reusable substrate"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `u` initial velocity",
+          "input: `a` acceleration",
+          "input: `t` time",
+          "output: `v` final velocity"
+        ],
+        "code_blocks": [],
+        "equations": [
+          "$$ v = u + at $$"
+        ],
+        "heading": "2. Velocity update",
+        "paragraphs": [
+          "Under constant acceleration, velocity changes linearly with time.",
+          "$$ v = u + at $$",
+          "Where:"
+        ],
+        "path": [
+          "Physics Relations \u2014 Linear Motion Under Constant Acceleration",
+          "2. Velocity update"
+        ],
+        "sections": [
+          "2. Velocity update"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `u`",
+          "input: `a`",
+          "input: `t`",
+          "output: `s`"
+        ],
+        "code_blocks": [],
+        "equations": [
+          "$$ s = ut + rac{1}{2}at^2 $$"
+        ],
+        "heading": "3. Position update",
+        "paragraphs": [
+          "Displacement under constant acceleration is:",
+          "$$ s = ut + rac{1}{2}at^2 $$",
+          "Where:"
+        ],
+        "path": [
+          "Physics Relations \u2014 Linear Motion Under Constant Acceleration",
+          "3. Position update"
+        ],
+        "sections": [
+          "3. Position update"
+        ]
+      },
+      {
+        "bullets": [],
+        "code_blocks": [],
+        "equations": [
+          "$$ v^2 = u^2 + 2as $$"
+        ],
+        "heading": "4. Velocity-displacement relation",
+        "paragraphs": [
+          "A time-eliminated kinematic law is:",
+          "$$ v^2 = u^2 + 2as $$",
+          "This relation still depends on the same motion quantities, but removes explicit time."
+        ],
+        "path": [
+          "Physics Relations \u2014 Linear Motion Under Constant Acceleration",
+          "4. Velocity-displacement relation"
+        ],
+        "sections": [
+          "4. Velocity-displacement relation"
+        ]
+      },
+      {
+        "bullets": [],
+        "code_blocks": [],
+        "equations": [],
+        "heading": "5. One-sentence summary",
+        "paragraphs": [
+          "Constant-acceleration kinematics reuses earlier motion quantities and assembles them into state-update laws."
+        ],
+        "path": [
+          "Physics Relations \u2014 Linear Motion Under Constant Acceleration",
+          "5. One-sentence summary"
+        ],
+        "sections": [
+          "5. One-sentence summary"
+        ]
+      }
+    ],
+    "intro_bullets": [],
+    "intro_paragraphs": [
+      "This document teaches how earlier motion quantities combine into predictive kinematic laws.",
+      "The point is to preserve the relation between initial state, rate of change, elapsed time, and resulting motion."
+    ],
+    "section_count": 5,
+    "source_path": "/Users/ravindranathakila/service/realized/trials/physics/03_LEARN_PHYSICS_RELATIONS_LINEAR_MOTION.md",
+    "title": "Physics Relations \u2014 Linear Motion Under Constant Acceleration"
+  },
+  "learned_artifacts": [
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-linear-motion-under-_ba44f9",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Velocity update?",
+      "related_artifact_ids": [
+        "artifact_knowledge-physics-relations-linear-motion-under-_a1c2f6"
+      ],
+      "representation": "yaml",
+      "source_sections": [],
+      "title": "Physics Relations Linear Motion Under Constant Acceleration / Velocity update"
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-linear-motion-under-_a1c2f6",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is S Times Ext Times Later From S And Ext And Initial And Change?",
+      "related_artifact_ids": [],
+      "representation": "yaml",
+      "source_sections": [
+        "1. Reusable substrate"
+      ],
+      "title": "Physics Relations \u2014 Linear Motion Under Constant Acceleration / S Times Ext Times Later From S And Ext And Initial And Change"
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-linear-motion-under-_a5085b",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Velocity update?",
+      "related_artifact_ids": [
+        "artifact_knowledge-physics-relations-linear-motion-under-_a1c2f6"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "2. Velocity update"
+      ],
+      "title": "Physics Relations \u2014 Linear Motion Under Constant Acceleration / Velocity update"
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-linear-motion-under-_bdae62",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Position update?",
+      "related_artifact_ids": [
+        "artifact_knowledge-physics-relations-linear-motion-under-_a1c2f6"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "3. Position update"
+      ],
+      "title": "Physics Relations \u2014 Linear Motion Under Constant Acceleration / Position update"
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-linear-motion-under-_eb081f",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Velocity-displacement relation?",
+      "related_artifact_ids": [
+        "artifact_ability-physics-relations-linear-motion-under-co_ab2e23",
+        "artifact_knowledge-physics-relations-linear-motion-under-_a1c2f6"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "4. Velocity-displacement relation"
+      ],
+      "title": "Physics Relations \u2014 Linear Motion Under Constant Acceleration / Velocity-displacement relation"
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-linear-motion-under-_cda1bc",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Earlier Motion Quantities?",
+      "related_artifact_ids": [
+        "artifact_knowledge-physics-relations-linear-motion-under-_a1c2f6"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "5. One-sentence summary"
+      ],
+      "title": "Physics Relations Linear Motion Under Constant Acceleration / Earlier Motion Quantities"
+    },
+    {
+      "artifact_id": "artifact_ability-physics-relations-linear-motion-under-co_0f8904",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate S_times_ext_times_later from S_, ext, initial, change?",
+      "related_artifact_ids": [],
+      "representation": "python_script",
+      "source_sections": [
+        "1. Reusable substrate"
+      ],
+      "title": "Physics Relations \u2014 Linear Motion Under Constant Acceleration / Python Ability"
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-linear-motion-under-_a5085b",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate v from u, at?",
+      "related_artifact_ids": [],
+      "representation": "python_script",
+      "source_sections": [
+        "2. Velocity update"
+      ],
+      "title": "Physics Relations \u2014 Linear Motion Under Constant Acceleration / Velocity Update"
+    },
+    {
+      "artifact_id": "artifact_knowledge-physics-relations-linear-motion-under-_bdae62",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate s from u, a, t?",
+      "related_artifact_ids": [],
+      "representation": "python_script",
+      "source_sections": [
+        "3. Position update"
+      ],
+      "title": "Physics Relations \u2014 Linear Motion Under Constant Acceleration / Position Update"
+    },
+    {
+      "artifact_id": "artifact_ability-physics-relations-linear-motion-under-co_ab2e23",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate v_times_times_2 from u, as?",
+      "related_artifact_ids": [
+        "artifact_knowledge-physics-relations-linear-motion-under-_eb081f",
+        "artifact_knowledge-physics-relations-linear-motion-under-_a1c2f6"
+      ],
+      "representation": "python_script",
+      "source_sections": [
+        "4. Velocity-displacement relation"
+      ],
+      "title": "Physics Relations \u2014 Linear Motion Under Constant Acceleration / Velocity Displacement Relation"
+    }
+  ],
+  "learned_count": 10,
+  "learning_context": {
+    "applied_delta_count": 2,
+    "canonical_title": "Physics Relations \u2014 Linear Motion Under Constant Acceleration",
+    "context_path": "/Users/ravindranathakila/service/realized/trials/physics/corpus/physics-relations-linear-motion-under-constant-acceleration/context.json",
+    "corpus_root": "/Users/ravindranathakila/service/realized/trials/physics",
+    "delta_id": "delta_physics-relations-linear-motion-under-constant-a_2a8b08",
+    "delta_path": "/Users/ravindranathakila/service/realized/trials/physics/corpus/physics-relations-linear-motion-under-constant-acceleration/deltas/delta_physics-relations-linear-motion-under-constant-a_2a8b08.json",
+    "matched_existing_subject_id": "physics-relations-linear-motion-under-constant-acceleration",
+    "source_id": "source_users-ravindranathakila-service-realized-trials-_4b3ec4a31a",
+    "source_record_path": "/Users/ravindranathakila/service/realized/trials/physics/corpus/physics-relations-linear-motion-under-constant-acceleration/sources/source_users-ravindranathakila-service-realized-trials-_4b3ec4a31a.json",
+    "subject_family": "Physics Relations \u2014 Linear Motion Under Constant Acceleration",
+    "subject_id": "physics-relations-linear-motion-under-constant-acceleration",
+    "unit_count": 9
+  },
+  "parsing_failures": [],
+  "proposal": {
+    "proposal_id": "proposal_markdownlearningproposal_703b6c",
+    "rationale": "Markdown learning proposals are bounded ingestion plans for external-source harvest and remain governed before artifact admission.",
+    "source": "llm"
+  },
+  "run_id": "run_eae32f6c_0957bb",
+  "run_outcome": "completed",
+  "supported_executors": [
+    "python3"
+  ]
+}

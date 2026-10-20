@@ -1,0 +1,25 @@
+{
+  "assistant_text": "{'status': 'ok', 'key': 'session:42', 'value': 'fake-session-value'}",
+  "model": "workstation-direct-composition",
+  "rounds": 0,
+  "task_contract": {
+    "semantic_unit": "Read the Redis key `session:42`."
+  },
+  "tool_receipts": [
+    {
+      "arguments": {
+        "skill_title": "SDK User Commands 10 \u2014 Redis Get Key / Sdk User Commands 10 Redis Get Key",
+        "target": ""
+      },
+      "name": "ws.skill.invoke",
+      "result": {
+        "answer": "{'status': 'ok', 'key': 'session:42', 'value': 'fake-session-value'}",
+        "error": "",
+        "error_type": "",
+        "executor_framework": "python3",
+        "skill_title": "SDK User Commands 10 \u2014 Redis Get Key / Sdk User Commands 10 Redis Get Key",
+        "status": "ok"
+      }
+    }
+  ]
+}

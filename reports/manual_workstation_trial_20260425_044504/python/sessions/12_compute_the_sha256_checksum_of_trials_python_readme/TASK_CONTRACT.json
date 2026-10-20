@@ -1,0 +1,22 @@
+{
+  "assumptions": [],
+  "boundary_shape": [
+    "b*",
+    "a*",
+    "d*"
+  ],
+  "completion_conditions": [
+    "requested result is returned to the user"
+  ],
+  "input_values": {},
+  "missing_requirements": [],
+  "output_values": [
+    "result"
+  ],
+  "read_references": [
+    "external reference"
+  ],
+  "semantic_unit": "Compute the sha256 checksum of `trials/python/README.md` from mount `skill_input`.",
+  "side_effects": [],
+  "write_targets": []
+}

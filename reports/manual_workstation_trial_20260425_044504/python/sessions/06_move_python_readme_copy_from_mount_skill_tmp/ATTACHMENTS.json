@@ -1,0 +1,136 @@
+{
+  "attachments": [
+    {
+      "access_mode": "read_write",
+      "kind": "session_root",
+      "metadata": {},
+      "mount_path": "/workstation/session",
+      "name": "session",
+      "source": "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/sessions/06_move_python_readme_copy_from_mount_skill_tmp"
+    },
+    {
+      "access_mode": "read_write",
+      "kind": "workspace",
+      "metadata": {
+        "blend_world_id": "bworld_e0c1cf0f80db",
+        "blend_world_mount": "main",
+        "blend_world_root": "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/world"
+      },
+      "mount_path": "/workstation/mounts/main",
+      "name": "main",
+      "source": "/Users/ravindranathakila/service/realized"
+    },
+    {
+      "access_mode": "read_write",
+      "kind": "scratch",
+      "metadata": {
+        "blend_world_id": "bworld_e0c1cf0f80db",
+        "blend_world_mount": "scratch",
+        "blend_world_root": "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/world"
+      },
+      "mount_path": "/workstation/scratch",
+      "name": "scratch",
+      "source": "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/world/scratch"
+    },
+    {
+      "access_mode": "write",
+      "kind": "output",
+      "metadata": {
+        "blend_world_id": "bworld_e0c1cf0f80db",
+        "blend_world_mount": "output",
+        "blend_world_root": "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/world"
+      },
+      "mount_path": "/workstation/output",
+      "name": "output",
+      "source": "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/world/output"
+    },
+    {
+      "access_mode": "indirect",
+      "kind": "secret_ref",
+      "metadata": {
+        "profile": "openai_default"
+      },
+      "mount_path": "/workstation/secrets/openai",
+      "name": "openai",
+      "source": "host:OPENAI_API_KEY"
+    },
+    {
+      "access_mode": "read",
+      "kind": "workspace",
+      "metadata": {
+        "alias_of": "main",
+        "blend_world_id": "bworld_e0c1cf0f80db",
+        "blend_world_mount": "main",
+        "blend_world_root": "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/world"
+      },
+      "mount_path": "/workstation/mounts/skill_input",
+      "name": "skill_input",
+      "source": "/Users/ravindranathakila/service/realized"
+    },
+    {
+      "access_mode": "read_write",
+      "kind": "scratch",
+      "metadata": {
+        "alias_of": "scratch",
+        "blend_world_id": "bworld_e0c1cf0f80db",
+        "blend_world_mount": "scratch",
+        "blend_world_root": "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/world"
+      },
+      "mount_path": "/workstation/mounts/skill_tmp",
+      "name": "skill_tmp",
+      "source": "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/world/scratch"
+    },
+    {
+      "access_mode": "write",
+      "kind": "output",
+      "metadata": {
+        "alias_of": "output",
+        "blend_world_id": "bworld_e0c1cf0f80db",
+        "blend_world_mount": "output",
+        "blend_world_root": "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/world"
+      },
+      "mount_path": "/workstation/mounts/skill_output",
+      "name": "skill_output",
+      "source": "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/world/output"
+    },
+    {
+      "access_mode": "read_write",
+      "kind": "skill_store",
+      "metadata": {
+        "exports_path": "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/exports",
+        "home_path": "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python",
+        "imports_path": "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/imports",
+        "store_path": "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/python.sqlite3"
+      },
+      "mount_path": "/workstation/skills/store.sqlite3",
+      "name": "skills",
+      "source": "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/python.sqlite3"
+    },
+    {
+      "access_mode": "read_write",
+      "kind": "skill_exports",
+      "metadata": {
+        "exports_path": "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/exports",
+        "home_path": "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python",
+        "imports_path": "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/imports",
+        "store_path": "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/python.sqlite3"
+      },
+      "mount_path": "/workstation/skills/exports",
+      "name": "skills_exports",
+      "source": "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/exports"
+    },
+    {
+      "access_mode": "read_write",
+      "kind": "skill_imports",
+      "metadata": {
+        "exports_path": "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/exports",
+        "home_path": "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python",
+        "imports_path": "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/imports",
+        "store_path": "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/python.sqlite3"
+      },
+      "mount_path": "/workstation/skills/imports",
+      "name": "skills_imports",
+      "source": "/Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/python/imports"
+    }
+  ]
+}

@@ -1,0 +1,932 @@
+{
+  "artifact_persistence": [
+    {
+      "artifact_id": "artifact-skill-991f041af675",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000469,
+        "connect_seconds": 0.000571,
+        "ensure_schema_seconds": 0.003728,
+        "existing_payload_batch_lookup_seconds": 4.9e-05,
+        "index_seconds": 0.095883,
+        "prepare_seconds": 0.253732,
+        "total_seconds": 0.355233
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "a250bfaa98514e32ed3a5ca0b34276e0e8682ff7a210ac24819e045e6911efd8",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.026126,
+        "existing_payload_lookup_seconds": 4.9e-06,
+        "index_seconds": 0.095883,
+        "total_seconds": 0.1406719,
+        "write_rows_seconds": 0.018658
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-07-dilution-as-sol_88c636",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000469,
+        "connect_seconds": 0.000571,
+        "ensure_schema_seconds": 0.003728,
+        "existing_payload_batch_lookup_seconds": 4.9e-05,
+        "index_seconds": 0.095883,
+        "prepare_seconds": 0.253732,
+        "total_seconds": 0.355233
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "65ce9258ffcb5a4f7eb51900c9156bc07a6034d12c49c4570ce6cc807239dcef",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.021908,
+        "existing_payload_lookup_seconds": 4.9e-06,
+        "total_seconds": 0.0219129
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-991f041af675",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000469,
+        "connect_seconds": 0.000571,
+        "ensure_schema_seconds": 0.003728,
+        "existing_payload_batch_lookup_seconds": 4.9e-05,
+        "index_seconds": 0.095883,
+        "prepare_seconds": 0.253732,
+        "total_seconds": 0.355233
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "e20eba30f4b3cdcbdf30953e3686c5a7597b135f331e03e93ff0551eefab1a8e",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.024364,
+        "existing_payload_lookup_seconds": 4.9e-06,
+        "index_seconds": 0.095883,
+        "total_seconds": 0.1366019,
+        "write_rows_seconds": 0.01635
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-d6ca2324b09f",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000469,
+        "connect_seconds": 0.000571,
+        "ensure_schema_seconds": 0.003728,
+        "existing_payload_batch_lookup_seconds": 4.9e-05,
+        "index_seconds": 0.095883,
+        "prepare_seconds": 0.253732,
+        "total_seconds": 0.355233
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "d1379145a956a0c64ca93a92a13635a496c2f09a6fabfa626f5dbdf805b55d36",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.018713,
+        "existing_payload_lookup_seconds": 4.9e-06,
+        "index_seconds": 0.095883,
+        "total_seconds": 0.1274679,
+        "write_rows_seconds": 0.012867
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-07-right_de2bfe",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000469,
+        "connect_seconds": 0.000571,
+        "ensure_schema_seconds": 0.003728,
+        "existing_payload_batch_lookup_seconds": 4.9e-05,
+        "index_seconds": 0.095883,
+        "prepare_seconds": 0.253732,
+        "total_seconds": 0.355233
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "d984c409e28d05047ab4d132fef2989067723dd4f10c4b93d285abb9f77dddd5",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.008541,
+        "existing_payload_lookup_seconds": 4.9e-06,
+        "index_seconds": 0.095883,
+        "total_seconds": 0.11214289999999999,
+        "write_rows_seconds": 0.007714
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-9400f0c57eb9",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000469,
+        "connect_seconds": 0.000571,
+        "ensure_schema_seconds": 0.003728,
+        "existing_payload_batch_lookup_seconds": 4.9e-05,
+        "index_seconds": 0.095883,
+        "prepare_seconds": 0.253732,
+        "total_seconds": 0.355233
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "72939800ad3e8f7a0ba10faffa6c910f67b230f0af2ccbf8d29ecb584d3862a4",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.019754,
+        "existing_payload_lookup_seconds": 4.9e-06,
+        "total_seconds": 0.0197589
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-062c79ed26f5",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000469,
+        "connect_seconds": 0.000571,
+        "ensure_schema_seconds": 0.003728,
+        "existing_payload_batch_lookup_seconds": 4.9e-05,
+        "index_seconds": 0.095883,
+        "prepare_seconds": 0.253732,
+        "total_seconds": 0.355233
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "8cca63536c797f3bc02cf4849be0faa187401a520421ef470b62623390606638",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.000162,
+        "existing_payload_lookup_seconds": 4.9e-06,
+        "total_seconds": 0.00016690000000000002
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-991f041af675",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000469,
+        "connect_seconds": 0.000571,
+        "ensure_schema_seconds": 0.003728,
+        "existing_payload_batch_lookup_seconds": 4.9e-05,
+        "index_seconds": 0.095883,
+        "prepare_seconds": 0.253732,
+        "total_seconds": 0.355233
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "1a44dcbfe525e79e5ce5c40a039680ca6fe229ba8d38e3d979aade5c553ec164",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.000155,
+        "existing_payload_lookup_seconds": 4.9e-06,
+        "total_seconds": 0.0001599
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-d6ca2324b09f",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000469,
+        "connect_seconds": 0.000571,
+        "ensure_schema_seconds": 0.003728,
+        "existing_payload_batch_lookup_seconds": 4.9e-05,
+        "index_seconds": 0.095883,
+        "prepare_seconds": 0.253732,
+        "total_seconds": 0.355233
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "4bc2183f41d55575074787e4a8a019d7c13ff3a17e454b54fc57ffcab65bbd2c",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.00015,
+        "existing_payload_lookup_seconds": 4.9e-06,
+        "total_seconds": 0.0001549
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-a74003eadff0",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000469,
+        "connect_seconds": 0.000571,
+        "ensure_schema_seconds": 0.003728,
+        "existing_payload_batch_lookup_seconds": 4.9e-05,
+        "index_seconds": 0.095883,
+        "prepare_seconds": 0.253732,
+        "total_seconds": 0.355233
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "5faaa49466308f35a02c6bd53dd129043be84bb4a2d513aabb3d96b47b5af271",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.000152,
+        "existing_payload_lookup_seconds": 4.9e-06,
+        "total_seconds": 0.00015690000000000002
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-991f041af675",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000347,
+        "connect_seconds": 0.000808,
+        "ensure_schema_seconds": 0.003824,
+        "existing_payload_batch_lookup_seconds": 4.3e-05,
+        "index_seconds": 0.06731,
+        "prepare_seconds": 0.200237,
+        "total_seconds": 0.273368
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "a250bfaa98514e32ed3a5ca0b34276e0e8682ff7a210ac24819e045e6911efd8",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.026,
+        "existing_payload_lookup_seconds": 5.375e-06,
+        "index_seconds": 0.06731,
+        "total_seconds": 0.11183637499999999,
+        "write_rows_seconds": 0.018521
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-991f041af675",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000347,
+        "connect_seconds": 0.000808,
+        "ensure_schema_seconds": 0.003824,
+        "existing_payload_batch_lookup_seconds": 4.3e-05,
+        "index_seconds": 0.06731,
+        "prepare_seconds": 0.200237,
+        "total_seconds": 0.273368
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "e20eba30f4b3cdcbdf30953e3686c5a7597b135f331e03e93ff0551eefab1a8e",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.02425,
+        "existing_payload_lookup_seconds": 5.375e-06,
+        "total_seconds": 0.024255375
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-d6ca2324b09f",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000347,
+        "connect_seconds": 0.000808,
+        "ensure_schema_seconds": 0.003824,
+        "existing_payload_batch_lookup_seconds": 4.3e-05,
+        "index_seconds": 0.06731,
+        "prepare_seconds": 0.200237,
+        "total_seconds": 0.273368
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "d1379145a956a0c64ca93a92a13635a496c2f09a6fabfa626f5dbdf805b55d36",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.018637,
+        "existing_payload_lookup_seconds": 5.375e-06,
+        "total_seconds": 0.018642375
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-07-right_de2bfe",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000347,
+        "connect_seconds": 0.000808,
+        "ensure_schema_seconds": 0.003824,
+        "existing_payload_batch_lookup_seconds": 4.3e-05,
+        "index_seconds": 0.06731,
+        "prepare_seconds": 0.200237,
+        "total_seconds": 0.273368
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "d984c409e28d05047ab4d132fef2989067723dd4f10c4b93d285abb9f77dddd5",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.008538,
+        "existing_payload_lookup_seconds": 5.375e-06,
+        "total_seconds": 0.008543375
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-9400f0c57eb9",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000347,
+        "connect_seconds": 0.000808,
+        "ensure_schema_seconds": 0.003824,
+        "existing_payload_batch_lookup_seconds": 4.3e-05,
+        "index_seconds": 0.06731,
+        "prepare_seconds": 0.200237,
+        "total_seconds": 0.273368
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "72939800ad3e8f7a0ba10faffa6c910f67b230f0af2ccbf8d29ecb584d3862a4",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.019654,
+        "existing_payload_lookup_seconds": 5.375e-06,
+        "total_seconds": 0.019659375
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-991f041af675",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000347,
+        "connect_seconds": 0.000808,
+        "ensure_schema_seconds": 0.003824,
+        "existing_payload_batch_lookup_seconds": 4.3e-05,
+        "index_seconds": 0.06731,
+        "prepare_seconds": 0.200237,
+        "total_seconds": 0.273368
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "1a44dcbfe525e79e5ce5c40a039680ca6fe229ba8d38e3d979aade5c553ec164",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 3.3e-05,
+        "existing_payload_lookup_seconds": 5.375e-06,
+        "index_seconds": 0.06731,
+        "total_seconds": 0.085510375,
+        "write_rows_seconds": 0.018162
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-d6ca2324b09f",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000347,
+        "connect_seconds": 0.000808,
+        "ensure_schema_seconds": 0.003824,
+        "existing_payload_batch_lookup_seconds": 4.3e-05,
+        "index_seconds": 0.06731,
+        "prepare_seconds": 0.200237,
+        "total_seconds": 0.273368
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "4bc2183f41d55575074787e4a8a019d7c13ff3a17e454b54fc57ffcab65bbd2c",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 2.8e-05,
+        "existing_payload_lookup_seconds": 5.375e-06,
+        "index_seconds": 0.06731,
+        "total_seconds": 0.08293337499999999,
+        "write_rows_seconds": 0.01559
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-a74003eadff0",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000347,
+        "connect_seconds": 0.000808,
+        "ensure_schema_seconds": 0.003824,
+        "existing_payload_batch_lookup_seconds": 4.3e-05,
+        "index_seconds": 0.06731,
+        "prepare_seconds": 0.200237,
+        "total_seconds": 0.273368
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "5faaa49466308f35a02c6bd53dd129043be84bb4a2d513aabb3d96b47b5af271",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 3.8e-05,
+        "existing_payload_lookup_seconds": 5.375e-06,
+        "total_seconds": 4.3375000000000004e-05
+      },
+      "vector_enabled": false
+    }
+  ],
+  "document": {
+    "section_count": 5,
+    "source_path": "/Users/ravindranathakila/service/realized/trials/chemistry/07_LEARN_CHEMISTRY_RELATIONS_DILUTION.md",
+    "title": "Chemistry Relations 07 \u2014 Dilution as Solute Conservation with Volume Change"
+  },
+  "encounter_proposal": {
+    "encounters": [
+      {
+        "bullets": [
+          "input: `n_1`",
+          "output: `n_2`"
+        ],
+        "candidate_kinds": [
+          "equation",
+          "logic",
+          "template",
+          "definition",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_1",
+        "equation_bearing": true,
+        "equations": [
+          "$$ n_1 = n_2 $$"
+        ],
+        "heading": "1. Reusable substrate",
+        "paragraphs": [
+          "If the amount of solute stays the same before and after dilution, the reusable family is conservation of carried substance.",
+          "The reusable formula is:",
+          "$$ n_1 = n_2 $$"
+        ],
+        "path": [
+          "Chemistry Relations 07 \u2014 Dilution as Solute Conservation with Volume Change",
+          "1. Reusable substrate"
+        ],
+        "sections": [
+          "1. Reusable substrate"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `C_1`",
+          "input: `V_1`",
+          "input: `C_2`",
+          "input: `V_2`"
+        ],
+        "candidate_kinds": [
+          "equation",
+          "template",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_2",
+        "equation_bearing": true,
+        "equations": [
+          "$$ n_1 = C_1 V_1 $$",
+          "$$ n_2 = C_2 V_2 $$"
+        ],
+        "heading": "2. Concentration form before and after dilution",
+        "paragraphs": [
+          "Using the concentration relation from the previous lesson:",
+          "$$ n_1 = C_1 V_1 $$",
+          "$$ n_2 = C_2 V_2 $$"
+        ],
+        "path": [
+          "Chemistry Relations 07 \u2014 Dilution as Solute Conservation with Volume Change",
+          "2. Concentration form before and after dilution"
+        ],
+        "sections": [
+          "2. Concentration form before and after dilution"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `C_1`",
+          "input: `V_1`",
+          "input: `C_2`",
+          "input: `V_2`"
+        ],
+        "candidate_kinds": [
+          "equation",
+          "logic",
+          "template",
+          "definition",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_3",
+        "equation_bearing": true,
+        "equations": [
+          "$$ C_1 V_1 = C_2 V_2 $$"
+        ],
+        "heading": "3. Dilution law",
+        "paragraphs": [
+          "Because solute amount is conserved:",
+          "$$ C_1 V_1 = C_2 V_2 $$",
+          "Where:"
+        ],
+        "path": [
+          "Chemistry Relations 07 \u2014 Dilution as Solute Conservation with Volume Change",
+          "3. Dilution law"
+        ],
+        "sections": [
+          "3. Dilution law"
+        ]
+      },
+      {
+        "bullets": [
+          "concentration says amount per volume",
+          "conservation says the carried solute amount is unchanged",
+          "dilution joins both to relate initial and final states"
+        ],
+        "candidate_kinds": [
+          "logic",
+          "definition",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_4",
+        "equation_bearing": false,
+        "equations": [],
+        "heading": "4. Distinguishing the law",
+        "paragraphs": [
+          "Dilution is not just concentration and not just conservation.",
+          "If a prompt asks about adding solvent without adding solute, dilution is the right law family."
+        ],
+        "path": [
+          "Chemistry Relations 07 \u2014 Dilution as Solute Conservation with Volume Change",
+          "4. Distinguishing the law"
+        ],
+        "sections": [
+          "4. Distinguishing the law"
+        ]
+      },
+      {
+        "bullets": [],
+        "candidate_kinds": [
+          "equation",
+          "logic",
+          "template",
+          "definition",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_5",
+        "equation_bearing": true,
+        "equations": [
+          "Dilution is a composed determinate law: it reuses solute conservation together with concentration to produce the relation `C_1 V_1 = C_2 V_2`."
+        ],
+        "heading": "5. One-sentence summary",
+        "paragraphs": [
+          "Dilution is a composed determinate law: it reuses solute conservation together with concentration to produce the relation `C_1 V_1 = C_2 V_2`."
+        ],
+        "path": [
+          "Chemistry Relations 07 \u2014 Dilution as Solute Conservation with Volume Change",
+          "5. One-sentence summary"
+        ],
+        "sections": [
+          "5. One-sentence summary"
+        ]
+      }
+    ],
+    "proposal_id": "proposal_markdownabilitylearningproposal_e25453",
+    "rationale": "Markdown ability learning proposals are bounded executable-harvest plans grounded in the structural ir.",
+    "source": "llm"
+  },
+  "final_answer": "Learned 10 artifacts from 07_LEARN_CHEMISTRY_RELATIONS_DILUTION.md.",
+  "functionalization_proposal": {
+    "proposal_id": "proposal_markdownfunctionalizationproposal_67e3ff",
+    "rationale": "Markdown functionalization proposals are bounded executable extractions from already classified encounters.",
+    "source": "llm"
+  },
+  "ir": {
+    "clusters": [
+      {
+        "bullets": [
+          "input: `n_1`",
+          "output: `n_2`"
+        ],
+        "code_blocks": [],
+        "equations": [
+          "$$ n_1 = n_2 $$"
+        ],
+        "heading": "1. Reusable substrate",
+        "paragraphs": [
+          "If the amount of solute stays the same before and after dilution, the reusable family is conservation of carried substance.",
+          "The reusable formula is:",
+          "$$ n_1 = n_2 $$"
+        ],
+        "path": [
+          "Chemistry Relations 07 \u2014 Dilution as Solute Conservation with Volume Change",
+          "1. Reusable substrate"
+        ],
+        "sections": [
+          "1. Reusable substrate"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `C_1`",
+          "input: `V_1`",
+          "input: `C_2`",
+          "input: `V_2`"
+        ],
+        "code_blocks": [],
+        "equations": [
+          "$$ n_1 = C_1 V_1 $$",
+          "$$ n_2 = C_2 V_2 $$"
+        ],
+        "heading": "2. Concentration form before and after dilution",
+        "paragraphs": [
+          "Using the concentration relation from the previous lesson:",
+          "$$ n_1 = C_1 V_1 $$",
+          "$$ n_2 = C_2 V_2 $$"
+        ],
+        "path": [
+          "Chemistry Relations 07 \u2014 Dilution as Solute Conservation with Volume Change",
+          "2. Concentration form before and after dilution"
+        ],
+        "sections": [
+          "2. Concentration form before and after dilution"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `C_1`",
+          "input: `V_1`",
+          "input: `C_2`",
+          "input: `V_2`"
+        ],
+        "code_blocks": [],
+        "equations": [
+          "$$ C_1 V_1 = C_2 V_2 $$"
+        ],
+        "heading": "3. Dilution law",
+        "paragraphs": [
+          "Because solute amount is conserved:",
+          "$$ C_1 V_1 = C_2 V_2 $$",
+          "Where:"
+        ],
+        "path": [
+          "Chemistry Relations 07 \u2014 Dilution as Solute Conservation with Volume Change",
+          "3. Dilution law"
+        ],
+        "sections": [
+          "3. Dilution law"
+        ]
+      },
+      {
+        "bullets": [
+          "concentration says amount per volume",
+          "conservation says the carried solute amount is unchanged",
+          "dilution joins both to relate initial and final states"
+        ],
+        "code_blocks": [],
+        "equations": [],
+        "heading": "4. Distinguishing the law",
+        "paragraphs": [
+          "Dilution is not just concentration and not just conservation.",
+          "If a prompt asks about adding solvent without adding solute, dilution is the right law family."
+        ],
+        "path": [
+          "Chemistry Relations 07 \u2014 Dilution as Solute Conservation with Volume Change",
+          "4. Distinguishing the law"
+        ],
+        "sections": [
+          "4. Distinguishing the law"
+        ]
+      },
+      {
+        "bullets": [],
+        "code_blocks": [],
+        "equations": [
+          "Dilution is a composed determinate law: it reuses solute conservation together with concentration to produce the relation `C_1 V_1 = C_2 V_2`."
+        ],
+        "heading": "5. One-sentence summary",
+        "paragraphs": [
+          "Dilution is a composed determinate law: it reuses solute conservation together with concentration to produce the relation `C_1 V_1 = C_2 V_2`."
+        ],
+        "path": [
+          "Chemistry Relations 07 \u2014 Dilution as Solute Conservation with Volume Change",
+          "5. One-sentence summary"
+        ],
+        "sections": [
+          "5. One-sentence summary"
+        ]
+      }
+    ],
+    "intro_bullets": [],
+    "intro_paragraphs": [
+      "This document combines an earlier conservation substrate with concentration reasoning.",
+      "The point is not only to store the dilution equation, but to preserve the reusable semantic relation between conserved solute amount and changed container size."
+    ],
+    "section_count": 5,
+    "source_path": "/Users/ravindranathakila/service/realized/trials/chemistry/07_LEARN_CHEMISTRY_RELATIONS_DILUTION.md",
+    "title": "Chemistry Relations 07 \u2014 Dilution as Solute Conservation with Volume Change"
+  },
+  "learned_artifacts": [
+    {
+      "artifact_id": "artifact-skill-991f041af675",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is 2. Concentration form before and after dilution?",
+      "related_artifact_ids": [
+        "artifact_knowledge-chemistry-relations-07-dilution-as-sol_88c636"
+      ],
+      "representation": "yaml",
+      "source_sections": [],
+      "title": "Chemistry Relations 07 \u2014 Dilution as Solute Conservation with Volume Change / Concentration form before and after dilution"
+    },
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-07-dilution-as-sol_88c636",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Conservation Of Carried Substance?",
+      "related_artifact_ids": [],
+      "representation": "yaml",
+      "source_sections": [
+        "1. Reusable substrate"
+      ],
+      "title": "Chemistry Relations 07 \u2014 Dilution as Solute Conservation with Volume Change / Conservation Of Carried Substance"
+    },
+    {
+      "artifact_id": "artifact-skill-991f041af675",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Concentration form before and after dilution?",
+      "related_artifact_ids": [],
+      "representation": "yaml",
+      "source_sections": [
+        "2. Concentration form before and after dilution"
+      ],
+      "title": "Chemistry Relations 07 \u2014 Dilution as Solute Conservation with Volume Change / Concentration form before and after dilution"
+    },
+    {
+      "artifact_id": "artifact-skill-d6ca2324b09f",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is 3. Dilution law?",
+      "related_artifact_ids": [
+        "artifact_knowledge-chemistry-relations-07-dilution-as-sol_88c636"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "3. Dilution law"
+      ],
+      "title": "Chemistry Relations 07 \u2014 Dilution as Solute Conservation with Volume Change / Dilution law"
+    },
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-07-right_de2bfe",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Right?",
+      "related_artifact_ids": [
+        "artifact_knowledge-chemistry-relations-07-dilution-as-sol_b90b2f",
+        "artifact_knowledge-chemistry-relations-07-dilution-as-sol_88c636"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "4. Distinguishing the law"
+      ],
+      "title": "Chemistry Relations 07 / Right"
+    },
+    {
+      "artifact_id": "artifact-skill-9400f0c57eb9",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Composed Determinate?",
+      "related_artifact_ids": [
+        "artifact_knowledge-chemistry-relations-07-dilution-as-sol_88c636"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "5. One-sentence summary"
+      ],
+      "title": "Chemistry Relations 07 Dilution as Solute Conservation with Volume Change / Composed Determinate"
+    },
+    {
+      "artifact_id": "artifact-skill-062c79ed26f5",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate n_1 from n_2?",
+      "related_artifact_ids": [],
+      "representation": "python_script",
+      "source_sections": [
+        "1. Reusable substrate"
+      ],
+      "title": "Chemistry Relations 07 \u2014 Dilution as Solute Conservation with Volume Change / Python Ability"
+    },
+    {
+      "artifact_id": "artifact-skill-991f041af675",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate n_1 from C_1, V_1?",
+      "related_artifact_ids": [],
+      "representation": "python_script",
+      "source_sections": [
+        "2. Concentration form before and after dilution"
+      ],
+      "title": "Chemistry Relations 07 \u2014 Dilution as Solute Conservation with Volume Change / Concentration Form Before And After Dilution"
+    },
+    {
+      "artifact_id": "artifact-skill-d6ca2324b09f",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate C_1_times_V_1 from C_2, V_2?",
+      "related_artifact_ids": [],
+      "representation": "python_script",
+      "source_sections": [
+        "3. Dilution law"
+      ],
+      "title": "Chemistry Relations 07 \u2014 Dilution as Solute Conservation with Volume Change / Dilution Law"
+    },
+    {
+      "artifact_id": "artifact-skill-a74003eadff0",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate Dilution_times_is_times_a_times_composed_times_determinate_times_law_it_times_reuses_times_solute_times_conservation_times_together_times_with_times_concentration_times_to_times_produce_times_the_times_relation_times_C_1_times_V_1 from C_2, V_2?",
+      "related_artifact_ids": [
+        "artifact_knowledge-chemistry-relations-07-dilution-as-sol_88c636"
+      ],
+      "representation": "python_script",
+      "source_sections": [
+        "5. One-sentence summary"
+      ],
+      "title": "Chemistry Relations 07 \u2014 Dilution as Solute Conservation with Volume Change / One Sentence Summary"
+    }
+  ],
+  "learned_count": 10,
+  "learning_context": {
+    "applied_delta_count": 7,
+    "canonical_title": "Chemistry Relations 07 \u2014 Dilution as Solute Conservation with Volume Change",
+    "context_path": "/Users/ravindranathakila/service/realized/trials/chemistry/corpus/chemistry-relations-07-dilution-as-solute-conservation-with-volu/context.json",
+    "corpus_root": "/Users/ravindranathakila/service/realized/trials/chemistry",
+    "delta_id": "delta_chemistry-relations-07-dilution-as-solute-conser_63e0cc",
+    "delta_path": "/Users/ravindranathakila/service/realized/trials/chemistry/corpus/chemistry-relations-07-dilution-as-solute-conservation-with-volu/deltas/delta_chemistry-relations-07-dilution-as-solute-conser_63e0cc.json",
+    "matched_existing_subject_id": "chemistry-relations-07-dilution-as-solute-conservation-with-volu",
+    "source_id": "source_users-ravindranathakila-service-realized-trials-_8480253c7a",
+    "source_record_path": "/Users/ravindranathakila/service/realized/trials/chemistry/corpus/chemistry-relations-07-dilution-as-solute-conservation-with-volu/sources/source_users-ravindranathakila-service-realized-trials-_8480253c7a.json",
+    "subject_family": "Chemistry Relations 07 \u2014 Dilution as Solute Conservation with Volume Change",
+    "subject_id": "chemistry-relations-07-dilution-as-solute-conservation-with-volu",
+    "unit_count": 9
+  },
+  "parsing_failures": [],
+  "proposal": {
+    "proposal_id": "proposal_markdownlearningproposal_dab560",
+    "rationale": "Markdown learning proposals are bounded ingestion plans for external-source harvest and remain governed before artifact admission.",
+    "source": "llm"
+  },
+  "run_id": "run_6062436b_061948",
+  "run_outcome": "completed",
+  "supported_executors": [
+    "python3"
+  ]
+}

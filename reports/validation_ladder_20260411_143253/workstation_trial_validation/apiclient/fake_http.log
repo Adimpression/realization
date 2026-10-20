@@ -1,0 +1,13 @@
+GET https://api.example.com/items/42
+GET https://api.example.com/search?limit=10&q=widgets
+POST https://api.example.com/users
+PUT https://api.example.com/users/42
+PATCH https://api.example.com/users/42
+DELETE https://api.example.com/users/42
+GET https://api.example.com/profile
+GET https://api.example.com/items
+GET https://api.example.com/items?page=2&per_page=50
+GET https://example.com/report.pdf
+POST https://api.example.com/token
+GET https://api.example.com/jobs/42
+GET https://api.example.com/jobs/42

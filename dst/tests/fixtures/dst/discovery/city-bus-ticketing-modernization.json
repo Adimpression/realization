@@ -1,0 +1,80 @@
+{
+  "schema_version": "dst_discovery.v1",
+  "fixture_id": "city-bus-ticketing-modernization",
+  "source_ref": "dst/City bus ticketing modernization.md",
+  "system_name": "City bus ticketing modernization",
+  "decision_problem": "Choose the transformation path for modernizing fare payment without exclusion or service disruption.",
+  "root_non_achievedness": "What are the materially distinct admissible transformation paths for City bus ticketing modernization, what unresolved distinctions separate those paths, and what missing facts block commitment?",
+  "candidate_paths": [
+    {
+      "path_id": "p1-conservative-modernization",
+      "title": "Path A: conservative modernization",
+      "path_kind": "multi_step",
+      "route_expression": "s0 -> s1 -> s2",
+      "summary": "Improve the closed-loop fare system first, then add compatibility and inspection tools.",
+      "supporting_points": [
+        "lower coordination burden",
+        "preserve access for unbanked riders",
+        "politically safer rollout"
+      ],
+      "blockers": [
+        "budget_headroom_under_q1",
+        "operator_upgrade_readiness"
+      ],
+      "required_information": [
+        "whether phased validator upgrades can be funded inside the annual cap"
+      ]
+    },
+    {
+      "path_id": "p2-coordinated-leap",
+      "title": "Path B: coordinated leap",
+      "path_kind": "single_step",
+      "route_expression": "s0 -> s3",
+      "summary": "Move directly to account-based contactless payment.",
+      "supporting_points": [
+        "highest performance gain",
+        "largest boarding-time reduction",
+        "stronger integration with bank-card ecosystem"
+      ],
+      "blockers": [
+        "banking_readiness",
+        "legal_approval_for_account_based_processing",
+        "cross_actor_coordination_strength"
+      ],
+      "required_information": [
+        "whether banking and legal dependencies can be satisfied before launch"
+      ]
+    }
+  ],
+  "dominant_distinctions": [
+    {
+      "distinction_id": "u1",
+      "title": "Phased compatibility versus direct open-loop leap",
+      "description": "The main separation is whether the city preserves a staged compatibility path or commits immediately to open-loop payment.",
+      "separates_path_ids": [
+        "p1-conservative-modernization",
+        "p2-coordinated-leap"
+      ]
+    },
+    {
+      "distinction_id": "u2",
+      "title": "Inclusion buffering versus maximum performance",
+      "description": "The staged path protects riders without bank cards, while the leap path maximizes performance but heightens inclusion risk.",
+      "separates_path_ids": [
+        "p1-conservative-modernization",
+        "p2-coordinated-leap"
+      ]
+    }
+  ],
+  "shared_blockers": [
+    "annual_budget_cap",
+    "no_service_downtime"
+  ],
+  "assumptions": [],
+  "ambiguities": [
+    "The use case frames good path families more clearly than formal single-transition decisions."
+  ],
+  "missing_information": [
+    "The current satisfaction status of banking and legal dependencies is not stated."
+  ]
+}

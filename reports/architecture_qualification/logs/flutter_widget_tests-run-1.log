@@ -1,0 +1,54 @@
+Upgrading analysis_options.yaml to exclude build and platform directories.
+00:00 +0: loading /Users/ravindranathakila/.codex/worktrees/boundary-followup/service/realized/workstation/ui_flutter/test/workstation_app_test.dart
+00:00 +0: renders the bootstrap connection shell
+00:00 +1: bootstrap can still manually open a workstation root from the landing route
+00:01 +2: workstation routes auto-reconnect after a browser-style reload without losing the requested tab
+00:01 +3: chat bdd previews routing and submits prompts
+00:01 +4: subject tabs render placeholder workflow states instead of blank fallbacks
+00:02 +5: gather markdown import bdd stages then advances through the workflow
+00:02 +6: gather in-panel import action uses the picker flow instead of a dead-end guidance action
+00:02 +7: gather markdown import failure keeps gather renderable and retryable
+00:02 +8: flutter gather flow mirrors the textual import approval BDD
+00:02 +9: gather empty-state follow-up action switches to chat
+00:02 +10: gather maintained-files check can advance directly to review when the report plan is next
+00:03 +11: approved import flow exposes publication import controls after refreshing the report plan
+00:03 +12: publication import widgets update selected import target included state and usage
+00:04 +13: utility tabs render long content without overflow
+00:04 +14: steady-state shells hide persistent connected and stale markdown staging banners
+00:04 +15: layout remains stable on medium desktop widths
+00:04 +16: subject layout stacks cleanly on narrower widths
+00:04 +17: desktop gather shell renders the textual parity sections
+00:04 +18: structured itemize and draft panes match the textual inventory shell
+00:04 +19: prefixed current-step actions execute against their home phase
+00:04 +20: weak prose v10 draft later row keeps start decision analysis primary
+00:04 +21: same-subject v2 then v10 draft later row keeps refresh dst analysis primary
+00:04 +22: weak prose v10 review and publication route back to start decision analysis
+00:05 +23: same-subject v2 then v10 review and publication route back to refresh dst analysis
+00:05 +24: weak prose after construct suggestion shows start decision analysis and open model
+00:05 +25: same-subject v2 then v10 draft toggle stays responsive on a later nonincluded row
+00:05 +26: dst happy path steps from start to run to approve for report
+00:05 +27: draft after decision analysis completion keeps rerun and open model available
+00:05 +28: review and publication keep open model as a draft phase-nav and return to draft compose
+00:05 +29: built publication actions keep open model available with artifact actions
+00:05 +30: publication more actions keep build report visible when the action key is plain build_report
+00:05 +31: draft lens tabs switch between frame model and explore shells
+00:05 +32: itemize inventory rows and pane-scope shortcuts drive the detail pane
+00:06 +33: draft compose inventory rows and pane-scope shortcuts drive the detail pane
+00:06 +34: draft lens case objects stay interactive while the active lens changes
+00:06 +35: review scope rows and shared shortcuts drive selection details
+00:06 +36: publication scope rows and shared shortcuts drive selection details
+00:06 +37: more actions select and switch controls dispatch existing workflow actions
+00:06 +38: draft pane checkbox toggles the selected item and stays in sync with the outer switch
+00:06 +39: draft pane checkbox on another row selects it first and then syncs the outer switch
+00:06 +40: report scope pane checkbox selects the row and dispatches the report-scope toggle action
+00:06 +41: checkbox-like draft and report scope rows render inline checkbox widgets
+00:07 +42: current step gate section no longer renders a visible border
+00:07 +43: layout spec parses pane height scroll and wrap metadata
+00:07 +44: wrapper focus drives maximize and info for the active pane
+00:07 +45: detached review scope pane stays interactive and restores selection details
+00:07 +46: draft model layout remains bounded with both upper and lower panes visible
+00:07 +47: review scope tree scroll stays local to its pane
+00:07 +48: watch-error filtering ignores expected browser abort noise
+00:07 +49: connected shell banner filtering hides only low-signal steady-state notices
+00:07 +50: subject shell last action text hides only low-signal steady-state notices
+00:07 +51: All tests passed!

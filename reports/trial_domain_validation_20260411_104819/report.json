@@ -1,0 +1,361 @@
+{
+  "started_at": "2026-04-11T10:48:19+00:00",
+  "finished_at": "2026-04-11T10:56:19+00:00",
+  "status": "failed",
+  "report_root": "/Users/ravindranathakila/service/realized/reports/trial_domain_validation_20260411_104819",
+  "domains": [
+    {
+      "domain": "physics",
+      "status": "failed",
+      "learn_mode": "import_skill_bundle",
+      "bundle_file": "/Users/ravindranathakila/service/realized/trials/physics/skill.yaml",
+      "learned_files": 10,
+      "learn_results": [
+        {
+          "file": "/Users/ravindranathakila/service/realized/trials/physics/skill.yaml",
+          "returncode": 0,
+          "stdout_tail": "out\": \"\",\n      \"representation\": \"yaml\",\n      \"skill_file\": \"/Users/ravindranathakila/service/realized/trials/physics/skill.yaml\",\n      \"store_report\": {\n        \"artifact_id\": \"artifact-skill-eb7526362ee7\",\n        \"backend\": \"sqlite_vec\",\n        \"configured\": true,\n        \"database\": \"/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3\",\n        \"payload_digest\": \"8a5e0b024eb86791f5d00543944da310eaa7881183f2c87750eca16faac51ca1\",\n        \"persisted_artifacts\": 0,\n        \"reason\": \"\",\n        \"status\": \"unchanged\",\n        \"timings\": {\n          \"canonicalize_seconds\": 0.004606,\n          \"existing_payload_lookup_seconds\": 3.948275862068965e-06,\n          \"total_seconds\": 0.004609948275862068\n        },\n        \"vector_enabled\": false\n      },\n      \"title\": \"Prompts\",\n      \"trust_status\": \"trusted\"\n    }\n  ],\n  \"imported_count\": 59,\n  \"persist_summaries\": {\n    \"policy\": {\n      \"error_artifacts\": 0,\n      \"persisted_artifacts\": 0,\n      \"timings\": {\n        \"commit_seconds\": 1e-06,\n        \"connect_seconds\": 0.001921,\n        \"ensure_schema_seconds\": 0.00864,\n        \"existing_payload_batch_lookup_seconds\": 6e-05,\n        \"prepare_seconds\": 0.006362,\n        \"total_seconds\": 0.016939\n      },\n      \"unchanged_artifacts\": 1\n    },\n    \"skill\": {\n      \"error_artifacts\": 0,\n      \"persisted_artifacts\": 0,\n      \"timings\": {\n        \"commit_seconds\": 1e-06,\n        \"connect_seconds\": 0.00077,\n        \"ensure_schema_seconds\": 0.005824,\n        \"existing_payload_batch_lookup_seconds\": 0.000229,\n        \"prepare_seconds\": 0.288417,\n        \"total_seconds\": 0.295038\n      },\n      \"unchanged_artifacts\": 58\n    }\n  },\n  \"timings\": {\n    \"admission_seconds\": 0.138075,\n    \"classify_seconds\": 7.7e-05,\n    \"governance_persist_seconds\": 0.025822,\n    \"governance_snapshot_seconds\": 0.614176,\n    \"load_payload_seconds\": 0.620602,\n    \"normalized_export_seconds\": 0.000252,\n    \"skill_persist_seconds\": 0.310593,\n    \"total_seconds\": 1.70982\n  }\n}\n",
+          "stderr_tail": "",
+          "report": "",
+          "state": "",
+          "resumed": false,
+          "learn_mode": "import_skill_bundle",
+          "elapsed_seconds": 2.370599,
+          "command_timings": {
+            "admission_seconds": 0.138075,
+            "classify_seconds": 7.7e-05,
+            "governance_persist_seconds": 0.025822,
+            "governance_snapshot_seconds": 0.614176,
+            "load_payload_seconds": 0.620602,
+            "normalized_export_seconds": 0.000252,
+            "skill_persist_seconds": 0.310593,
+            "total_seconds": 1.70982
+          }
+        }
+      ],
+      "probe_results": [
+        {
+          "name": "what_distinguishes_a_scalar_quantity_from_a_vector",
+          "prompt": "What distinguishes a scalar quantity from a vector quantity, and how is this represented in the reusable relation?",
+          "returncode": 0,
+          "stdout_tail": "id\": \"not_what-distinguishes-a-scalar-quantity-from-a-vect_6b8ec8\",\n      \"payload\": {\n        \"proposal_id\": \"proposal_explanationdraft_61c40a\",\n        \"rationale\": \"Explanation drafts may be admitted as communicative artifacts without changing formal commitment state.\",\n        \"status\": \"admitted\"\n      },\n      \"result\": \"proposal governance state updated\",\n      \"seq\": 71,\n      \"timestamp\": \"2026-04-11T10:48:35+00:00\"\n    },\n    {\n      \"action\": \"register outlet trace_report\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"boundary transition preserved semantic continuity\",\n      \"intent\": \"Preserve outlet semantics in BSSC-consistent carrier form.\",\n      \"kind\": \"boundary_outlet\",\n      \"node_id\": null,\n      \"payload\": {\n        \"carrier_id\": \"outlet_what-distinguishes-a-scalar-quantity-from-a-vect_223595\",\n        \"kind\": \"trace_report\"\n      },\n      \"result\": \"outlet durably recorded\",\n      \"seq\": 72,\n      \"timestamp\": \"2026-04-11T10:48:35+00:00\"\n    },\n    {\n      \"action\": \"finalize run\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"run ended according to closure, pause, or incompletion conditions\",\n      \"intent\": \"Summarize the bounded run outcome under current conditions.\",\n      \"kind\": \"run_outcome\",\n      \"node_id\": \"not_what-distinguishes-a-scalar-quantity-from-a-vect_6b8ec8\",\n      \"payload\": {},\n      \"result\": \"completed\",\n      \"seq\": 73,\n      \"timestamp\": \"2026-04-11T10:48:35+00:00\"\n    }\n  ],\n  \"root\": {\n    \"boundary_shape\": [\n      \"d*\"\n    ],\n    \"certainty\": \"high\",\n    \"id\": \"not_what-distinguishes-a-scalar-quantity-from-a-vect_6b8ec8\",\n    \"not\": \"Not<What distinguishes a scalar quantity from a vector quantity, and how is this represented in the reusable relation?>\",\n    \"semantic_unit\": \"What distinguishes a scalar quantity from a vector quantity, and how is this represented in the reusable relation?\",\n    \"status\": \"closed\"\n  },\n  \"run_id\": \"run_72be27e3_b0b534\",\n  \"run_outcome\": \"completed\",\n  \"theory_version\": \"2.2.2\"\n}\n",
+          "stderr_tail": "",
+          "state": "/Users/ravindranathakila/service/realized/reports/trial_domain_validation_20260411_104819/physics/probe_what_distinguishes_a_scalar_quantity_from_a_vector.json",
+          "resumed": false,
+          "elapsed_seconds": 13.477833,
+          "timeout_seconds": 66,
+          "command_timings": {},
+          "attempt_count": 1,
+          "attempts": [
+            {
+              "attempt": 1,
+              "timeout_seconds": 66,
+              "returncode": 0,
+              "stdout_tail": "id\": \"not_what-distinguishes-a-scalar-quantity-from-a-vect_6b8ec8\",\n      \"payload\": {\n        \"proposal_id\": \"proposal_explanationdraft_61c40a\",\n        \"rationale\": \"Explanation drafts may be admitted as communicative artifacts without changing formal commitment state.\",\n        \"status\": \"admitted\"\n      },\n      \"result\": \"proposal governance state updated\",\n      \"seq\": 71,\n      \"timestamp\": \"2026-04-11T10:48:35+00:00\"\n    },\n    {\n      \"action\": \"register outlet trace_report\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"boundary transition preserved semantic continuity\",\n      \"intent\": \"Preserve outlet semantics in BSSC-consistent carrier form.\",\n      \"kind\": \"boundary_outlet\",\n      \"node_id\": null,\n      \"payload\": {\n        \"carrier_id\": \"outlet_what-distinguishes-a-scalar-quantity-from-a-vect_223595\",\n        \"kind\": \"trace_report\"\n      },\n      \"result\": \"outlet durably recorded\",\n      \"seq\": 72,\n      \"timestamp\": \"2026-04-11T10:48:35+00:00\"\n    },\n    {\n      \"action\": \"finalize run\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"run ended according to closure, pause, or incompletion conditions\",\n      \"intent\": \"Summarize the bounded run outcome under current conditions.\",\n      \"kind\": \"run_outcome\",\n      \"node_id\": \"not_what-distinguishes-a-scalar-quantity-from-a-vect_6b8ec8\",\n      \"payload\": {},\n      \"result\": \"completed\",\n      \"seq\": 73,\n      \"timestamp\": \"2026-04-11T10:48:35+00:00\"\n    }\n  ],\n  \"root\": {\n    \"boundary_shape\": [\n      \"d*\"\n    ],\n    \"certainty\": \"high\",\n    \"id\": \"not_what-distinguishes-a-scalar-quantity-from-a-vect_6b8ec8\",\n    \"not\": \"Not<What distinguishes a scalar quantity from a vector quantity, and how is this represented in the reusable relation?>\",\n    \"semantic_unit\": \"What distinguishes a scalar quantity from a vector quantity, and how is this represented in the reusable relation?\",\n    \"status\": \"closed\"\n  },\n  \"run_id\": \"run_72be27e3_b0b534\",\n  \"run_outcome\": \"completed\",\n  \"theory_version\": \"2.2.2\"\n}\n",
+              "stderr_tail": "",
+              "elapsed_seconds": 13.477833,
+              "timed_out": false,
+              "command_timings": {}
+            }
+          ],
+          "run_outcome": "completed",
+          "final_answer": "What distinguishes a scalar quantity from a vector quantity, and how is this represented in the reusable relation?; State the general ratio-of-change formula and give one example from motion that uses it.; Using the constant-acceleration relation, write the equation that updates velocity from initial velocity, acceleration, and time, and identify the \u201cstate-plus-change\u201d structure.; State Newton\u2019s second law and explain how it fits the multiplicative-combination substrate.; Explain the difference between the general force law ( F = ma ) and the specific case of weight ( W = mg ).",
+          "passed": true,
+          "reason": "freeform_overlap:7"
+        },
+        {
+          "name": "state_the_general_ratio_of_change_formula_and",
+          "prompt": "State the general ratio-of-change formula and give one example from motion that uses it.",
+          "returncode": 0,
+          "stdout_tail": "\",\n      \"kind\": \"proposal_governance\",\n      \"node_id\": \"not_state-the-general-ratio-of-change-formula-and-gi_2c9aab\",\n      \"payload\": {\n        \"proposal_id\": \"proposal_explanationdraft_2d37b8\",\n        \"rationale\": \"Explanation drafts may be admitted as communicative artifacts without changing formal commitment state.\",\n        \"status\": \"admitted\"\n      },\n      \"result\": \"proposal governance state updated\",\n      \"seq\": 59,\n      \"timestamp\": \"2026-04-11T10:49:10+00:00\"\n    },\n    {\n      \"action\": \"register outlet trace_report\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"boundary transition preserved semantic continuity\",\n      \"intent\": \"Preserve outlet semantics in BSSC-consistent carrier form.\",\n      \"kind\": \"boundary_outlet\",\n      \"node_id\": null,\n      \"payload\": {\n        \"carrier_id\": \"outlet_state-the-general-ratio-of-change-formula-and-gi_a1cf6f\",\n        \"kind\": \"trace_report\"\n      },\n      \"result\": \"outlet durably recorded\",\n      \"seq\": 60,\n      \"timestamp\": \"2026-04-11T10:49:10+00:00\"\n    },\n    {\n      \"action\": \"finalize run\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"run ended according to closure, pause, or incompletion conditions\",\n      \"intent\": \"Summarize the bounded run outcome under current conditions.\",\n      \"kind\": \"run_outcome\",\n      \"node_id\": \"not_state-the-general-ratio-of-change-formula-and-gi_2c9aab\",\n      \"payload\": {},\n      \"result\": \"completed\",\n      \"seq\": 61,\n      \"timestamp\": \"2026-04-11T10:49:10+00:00\"\n    }\n  ],\n  \"root\": {\n    \"boundary_shape\": [\n      \"d*\"\n    ],\n    \"certainty\": \"high\",\n    \"id\": \"not_state-the-general-ratio-of-change-formula-and-gi_2c9aab\",\n    \"not\": \"Not<State the general ratio-of-change formula and give one example from motion that uses it.>\",\n    \"semantic_unit\": \"State the general ratio-of-change formula and give one example from motion that uses it.\",\n    \"status\": \"closed\"\n  },\n  \"run_id\": \"run_eeaee54f_c02abb\",\n  \"run_outcome\": \"completed\",\n  \"theory_version\": \"2.2.2\"\n}\n",
+          "stderr_tail": "",
+          "state": "/Users/ravindranathakila/service/realized/reports/trial_domain_validation_20260411_104819/physics/probe_state_the_general_ratio_of_change_formula_and.json",
+          "resumed": false,
+          "elapsed_seconds": 35.757213,
+          "timeout_seconds": 62,
+          "command_timings": {},
+          "attempt_count": 1,
+          "attempts": [
+            {
+              "attempt": 1,
+              "timeout_seconds": 62,
+              "returncode": 0,
+              "stdout_tail": "\",\n      \"kind\": \"proposal_governance\",\n      \"node_id\": \"not_state-the-general-ratio-of-change-formula-and-gi_2c9aab\",\n      \"payload\": {\n        \"proposal_id\": \"proposal_explanationdraft_2d37b8\",\n        \"rationale\": \"Explanation drafts may be admitted as communicative artifacts without changing formal commitment state.\",\n        \"status\": \"admitted\"\n      },\n      \"result\": \"proposal governance state updated\",\n      \"seq\": 59,\n      \"timestamp\": \"2026-04-11T10:49:10+00:00\"\n    },\n    {\n      \"action\": \"register outlet trace_report\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"boundary transition preserved semantic continuity\",\n      \"intent\": \"Preserve outlet semantics in BSSC-consistent carrier form.\",\n      \"kind\": \"boundary_outlet\",\n      \"node_id\": null,\n      \"payload\": {\n        \"carrier_id\": \"outlet_state-the-general-ratio-of-change-formula-and-gi_a1cf6f\",\n        \"kind\": \"trace_report\"\n      },\n      \"result\": \"outlet durably recorded\",\n      \"seq\": 60,\n      \"timestamp\": \"2026-04-11T10:49:10+00:00\"\n    },\n    {\n      \"action\": \"finalize run\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"run ended according to closure, pause, or incompletion conditions\",\n      \"intent\": \"Summarize the bounded run outcome under current conditions.\",\n      \"kind\": \"run_outcome\",\n      \"node_id\": \"not_state-the-general-ratio-of-change-formula-and-gi_2c9aab\",\n      \"payload\": {},\n      \"result\": \"completed\",\n      \"seq\": 61,\n      \"timestamp\": \"2026-04-11T10:49:10+00:00\"\n    }\n  ],\n  \"root\": {\n    \"boundary_shape\": [\n      \"d*\"\n    ],\n    \"certainty\": \"high\",\n    \"id\": \"not_state-the-general-ratio-of-change-formula-and-gi_2c9aab\",\n    \"not\": \"Not<State the general ratio-of-change formula and give one example from motion that uses it.>\",\n    \"semantic_unit\": \"State the general ratio-of-change formula and give one example from motion that uses it.\",\n    \"status\": \"closed\"\n  },\n  \"run_id\": \"run_eeaee54f_c02abb\",\n  \"run_outcome\": \"completed\",\n  \"theory_version\": \"2.2.2\"\n}\n",
+              "stderr_tail": "",
+              "elapsed_seconds": 35.757213,
+              "timed_out": false,
+              "command_timings": {}
+            }
+          ],
+          "run_outcome": "completed",
+          "final_answer": "What distinguishes a scalar quantity from a vector quantity, and how is this represented in the reusable relation?; State the general ratio-of-change formula and give one example from motion that uses it.; Using the constant-acceleration relation, write the equation that updates velocity from initial velocity, acceleration, and time, and identify the \u201cstate-plus-change\u201d structure.; State Newton\u2019s second law and explain how it fits the multiplicative-combination substrate.; Explain the difference between the general force law ( F = ma ) and the specific case of weight ( W = mg ). Constant Acceleration Equation Connecting Initial Velocity Acceleration Time And Final Velocity And Identify The State Plus Change Structure Underneath It: S Times Ext Times Later From S And Ext And Initial And Change. A later state can be obtained from an earlier state plus a change term. The reusable formula is: $$ S{ ext{later}} = S{ ext{initial}} + ext{change} $$ input: Sinitial input: change output: Slater Constant-acceleration kinematics reuses earlier motion quantities and assembles them into state-update laws.",
+          "passed": true,
+          "reason": "freeform_overlap:6"
+        },
+        {
+          "name": "using_the_constant_acceleration_relation_write_the_equation",
+          "prompt": "Using the constant-acceleration relation, write the equation that updates velocity from initial velocity, acceleration, and time, and identify the \u201cstate-plus-change\u201d structure.",
+          "returncode": 0,
+          "stdout_tail": "planation drafts may be admitted as communicative artifacts without changing formal commitment state.\",\n        \"status\": \"admitted\"\n      },\n      \"result\": \"proposal governance state updated\",\n      \"seq\": 59,\n      \"timestamp\": \"2026-04-11T10:50:06+00:00\"\n    },\n    {\n      \"action\": \"register outlet trace_report\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"boundary transition preserved semantic continuity\",\n      \"intent\": \"Preserve outlet semantics in BSSC-consistent carrier form.\",\n      \"kind\": \"boundary_outlet\",\n      \"node_id\": null,\n      \"payload\": {\n        \"carrier_id\": \"outlet_using-the-constant-acceleration-relation-write-t_663a5a\",\n        \"kind\": \"trace_report\"\n      },\n      \"result\": \"outlet durably recorded\",\n      \"seq\": 60,\n      \"timestamp\": \"2026-04-11T10:50:06+00:00\"\n    },\n    {\n      \"action\": \"finalize run\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"run ended according to closure, pause, or incompletion conditions\",\n      \"intent\": \"Summarize the bounded run outcome under current conditions.\",\n      \"kind\": \"run_outcome\",\n      \"node_id\": \"not_using-the-constant-acceleration-relation-write-t_feacdb\",\n      \"payload\": {},\n      \"result\": \"completed\",\n      \"seq\": 61,\n      \"timestamp\": \"2026-04-11T10:50:06+00:00\"\n    }\n  ],\n  \"root\": {\n    \"boundary_shape\": [\n      \"c*\",\n      \"a*\",\n      \"d*\"\n    ],\n    \"certainty\": \"high\",\n    \"id\": \"not_using-the-constant-acceleration-relation-write-t_feacdb\",\n    \"not\": \"Not<Using the constant-acceleration relation, write the equation that updates velocity from initial velocity, acceleration, and time, and identify the \\u201cstate-plus-change\\u201d structure.>\",\n    \"semantic_unit\": \"Using the constant-acceleration relation, write the equation that updates velocity from initial velocity, acceleration, and time, and identify the \\u201cstate-plus-change\\u201d structure.\",\n    \"status\": \"closed\"\n  },\n  \"run_id\": \"run_57e44033_2f40dc\",\n  \"run_outcome\": \"completed\",\n  \"theory_version\": \"2.2.2\"\n}\n",
+          "stderr_tail": "",
+          "state": "/Users/ravindranathakila/service/realized/reports/trial_domain_validation_20260411_104819/physics/probe_using_the_constant_acceleration_relation_write_the_equation.json",
+          "resumed": false,
+          "elapsed_seconds": 55.937298,
+          "timeout_seconds": 87,
+          "command_timings": {},
+          "attempt_count": 1,
+          "attempts": [
+            {
+              "attempt": 1,
+              "timeout_seconds": 87,
+              "returncode": 0,
+              "stdout_tail": "planation drafts may be admitted as communicative artifacts without changing formal commitment state.\",\n        \"status\": \"admitted\"\n      },\n      \"result\": \"proposal governance state updated\",\n      \"seq\": 59,\n      \"timestamp\": \"2026-04-11T10:50:06+00:00\"\n    },\n    {\n      \"action\": \"register outlet trace_report\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"boundary transition preserved semantic continuity\",\n      \"intent\": \"Preserve outlet semantics in BSSC-consistent carrier form.\",\n      \"kind\": \"boundary_outlet\",\n      \"node_id\": null,\n      \"payload\": {\n        \"carrier_id\": \"outlet_using-the-constant-acceleration-relation-write-t_663a5a\",\n        \"kind\": \"trace_report\"\n      },\n      \"result\": \"outlet durably recorded\",\n      \"seq\": 60,\n      \"timestamp\": \"2026-04-11T10:50:06+00:00\"\n    },\n    {\n      \"action\": \"finalize run\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"run ended according to closure, pause, or incompletion conditions\",\n      \"intent\": \"Summarize the bounded run outcome under current conditions.\",\n      \"kind\": \"run_outcome\",\n      \"node_id\": \"not_using-the-constant-acceleration-relation-write-t_feacdb\",\n      \"payload\": {},\n      \"result\": \"completed\",\n      \"seq\": 61,\n      \"timestamp\": \"2026-04-11T10:50:06+00:00\"\n    }\n  ],\n  \"root\": {\n    \"boundary_shape\": [\n      \"c*\",\n      \"a*\",\n      \"d*\"\n    ],\n    \"certainty\": \"high\",\n    \"id\": \"not_using-the-constant-acceleration-relation-write-t_feacdb\",\n    \"not\": \"Not<Using the constant-acceleration relation, write the equation that updates velocity from initial velocity, acceleration, and time, and identify the \\u201cstate-plus-change\\u201d structure.>\",\n    \"semantic_unit\": \"Using the constant-acceleration relation, write the equation that updates velocity from initial velocity, acceleration, and time, and identify the \\u201cstate-plus-change\\u201d structure.\",\n    \"status\": \"closed\"\n  },\n  \"run_id\": \"run_57e44033_2f40dc\",\n  \"run_outcome\": \"completed\",\n  \"theory_version\": \"2.2.2\"\n}\n",
+              "stderr_tail": "",
+              "elapsed_seconds": 55.937298,
+              "timed_out": false,
+              "command_timings": {}
+            }
+          ],
+          "run_outcome": "completed",
+          "final_answer": "Constant Acceleration Velocity: Velocity update. Under constant acceleration, velocity changes linearly with time. $$ v = u + at $$ Where: input: u initial velocity input: a acceleration input: t time output: v final velocity A time-eliminated kinematic law is: $$ v^2 = u^2 + 2as $$ This relation still depends on the same motion quantities, but removes explicit time.",
+          "passed": true,
+          "reason": "freeform_overlap:7"
+        },
+        {
+          "name": "state_newton_s_second_law_and_explain_how",
+          "prompt": "State Newton\u2019s second law and explain how it fits the multiplicative-combination substrate.",
+          "returncode": 0,
+          "stdout_tail": " \"proposal_governance\",\n      \"node_id\": \"not_state-newton-s-second-law-and-explain-how-it-fit_7d2ace\",\n      \"payload\": {\n        \"proposal_id\": \"proposal_explanationdraft_b63a8f\",\n        \"rationale\": \"Explanation drafts may be admitted as communicative artifacts without changing formal commitment state.\",\n        \"status\": \"admitted\"\n      },\n      \"result\": \"proposal governance state updated\",\n      \"seq\": 59,\n      \"timestamp\": \"2026-04-11T10:50:40+00:00\"\n    },\n    {\n      \"action\": \"register outlet trace_report\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"boundary transition preserved semantic continuity\",\n      \"intent\": \"Preserve outlet semantics in BSSC-consistent carrier form.\",\n      \"kind\": \"boundary_outlet\",\n      \"node_id\": null,\n      \"payload\": {\n        \"carrier_id\": \"outlet_state-newton-s-second-law-and-explain-how-it-fit_4563ee\",\n        \"kind\": \"trace_report\"\n      },\n      \"result\": \"outlet durably recorded\",\n      \"seq\": 60,\n      \"timestamp\": \"2026-04-11T10:50:40+00:00\"\n    },\n    {\n      \"action\": \"finalize run\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"run ended according to closure, pause, or incompletion conditions\",\n      \"intent\": \"Summarize the bounded run outcome under current conditions.\",\n      \"kind\": \"run_outcome\",\n      \"node_id\": \"not_state-newton-s-second-law-and-explain-how-it-fit_7d2ace\",\n      \"payload\": {},\n      \"result\": \"completed\",\n      \"seq\": 61,\n      \"timestamp\": \"2026-04-11T10:50:40+00:00\"\n    }\n  ],\n  \"root\": {\n    \"boundary_shape\": [\n      \"d*\"\n    ],\n    \"certainty\": \"high\",\n    \"id\": \"not_state-newton-s-second-law-and-explain-how-it-fit_7d2ace\",\n    \"not\": \"Not<State Newton\\u2019s second law and explain how it fits the multiplicative-combination substrate.>\",\n    \"semantic_unit\": \"State Newton\\u2019s second law and explain how it fits the multiplicative-combination substrate.\",\n    \"status\": \"closed\"\n  },\n  \"run_id\": \"run_0f474768_bdca9d\",\n  \"run_outcome\": \"completed\",\n  \"theory_version\": \"2.2.2\"\n}\n",
+          "stderr_tail": "",
+          "state": "/Users/ravindranathakila/service/realized/reports/trial_domain_validation_20260411_104819/physics/probe_state_newton_s_second_law_and_explain_how.json",
+          "resumed": false,
+          "elapsed_seconds": 33.855557,
+          "timeout_seconds": 60,
+          "command_timings": {},
+          "attempt_count": 1,
+          "attempts": [
+            {
+              "attempt": 1,
+              "timeout_seconds": 60,
+              "returncode": 0,
+              "stdout_tail": " \"proposal_governance\",\n      \"node_id\": \"not_state-newton-s-second-law-and-explain-how-it-fit_7d2ace\",\n      \"payload\": {\n        \"proposal_id\": \"proposal_explanationdraft_b63a8f\",\n        \"rationale\": \"Explanation drafts may be admitted as communicative artifacts without changing formal commitment state.\",\n        \"status\": \"admitted\"\n      },\n      \"result\": \"proposal governance state updated\",\n      \"seq\": 59,\n      \"timestamp\": \"2026-04-11T10:50:40+00:00\"\n    },\n    {\n      \"action\": \"register outlet trace_report\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"boundary transition preserved semantic continuity\",\n      \"intent\": \"Preserve outlet semantics in BSSC-consistent carrier form.\",\n      \"kind\": \"boundary_outlet\",\n      \"node_id\": null,\n      \"payload\": {\n        \"carrier_id\": \"outlet_state-newton-s-second-law-and-explain-how-it-fit_4563ee\",\n        \"kind\": \"trace_report\"\n      },\n      \"result\": \"outlet durably recorded\",\n      \"seq\": 60,\n      \"timestamp\": \"2026-04-11T10:50:40+00:00\"\n    },\n    {\n      \"action\": \"finalize run\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"run ended according to closure, pause, or incompletion conditions\",\n      \"intent\": \"Summarize the bounded run outcome under current conditions.\",\n      \"kind\": \"run_outcome\",\n      \"node_id\": \"not_state-newton-s-second-law-and-explain-how-it-fit_7d2ace\",\n      \"payload\": {},\n      \"result\": \"completed\",\n      \"seq\": 61,\n      \"timestamp\": \"2026-04-11T10:50:40+00:00\"\n    }\n  ],\n  \"root\": {\n    \"boundary_shape\": [\n      \"d*\"\n    ],\n    \"certainty\": \"high\",\n    \"id\": \"not_state-newton-s-second-law-and-explain-how-it-fit_7d2ace\",\n    \"not\": \"Not<State Newton\\u2019s second law and explain how it fits the multiplicative-combination substrate.>\",\n    \"semantic_unit\": \"State Newton\\u2019s second law and explain how it fits the multiplicative-combination substrate.\",\n    \"status\": \"closed\"\n  },\n  \"run_id\": \"run_0f474768_bdca9d\",\n  \"run_outcome\": \"completed\",\n  \"theory_version\": \"2.2.2\"\n}\n",
+              "stderr_tail": "",
+              "elapsed_seconds": 33.855557,
+              "timed_out": false,
+              "command_timings": {}
+            }
+          ],
+          "run_outcome": "completed",
+          "final_answer": "What distinguishes a scalar quantity from a vector quantity, and how is this represented in the reusable relation?; State the general ratio-of-change formula and give one example from motion that uses it.; Using the constant-acceleration relation, write the equation that updates velocity from initial velocity, acceleration, and time, and identify the \u201cstate-plus-change\u201d structure.; State Newton\u2019s second law and explain how it fits the multiplicative-combination substrate.; Explain the difference between the general force law ( F = ma ) and the specific case of weight ( W = mg ). Constant Acceleration Equation Connecting Initial Velocity Acceleration Time And Final Velocity And Identify The State Plus Change Structure Underneath It: S Times Ext Times Later From S And Ext And Initial And Change. A later state can be obtained from an earlier state plus a change term. The reusable formula is: $$ S{ ext{later}} = S{ ext{initial}} + ext{change} $$ input: Sinitial input: change output: Slater Constant-acceleration kinematics reuses earlier motion quantities and assembles them into state-update laws.",
+          "passed": true,
+          "reason": "freeform_overlap:7"
+        },
+        {
+          "name": "explain_the_difference_between_the_general_force_law",
+          "prompt": "Explain the difference between the general force law ( F = ma ) and the specific case of weight ( W = mg ).",
+          "returncode": 0,
+          "stdout_tail": "e_id\": \"not_explain-the-difference-between-the-general-force_75ad26\",\n      \"payload\": {\n        \"proposal_id\": \"proposal_explanationdraft_0a1eae\",\n        \"rationale\": \"Explanation drafts may be admitted as communicative artifacts without changing formal commitment state.\",\n        \"status\": \"admitted\"\n      },\n      \"result\": \"proposal governance state updated\",\n      \"seq\": 71,\n      \"timestamp\": \"2026-04-11T10:50:53+00:00\"\n    },\n    {\n      \"action\": \"register outlet trace_report\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"boundary transition preserved semantic continuity\",\n      \"intent\": \"Preserve outlet semantics in BSSC-consistent carrier form.\",\n      \"kind\": \"boundary_outlet\",\n      \"node_id\": null,\n      \"payload\": {\n        \"carrier_id\": \"outlet_explain-the-difference-between-the-general-force_c98e2b\",\n        \"kind\": \"trace_report\"\n      },\n      \"result\": \"outlet durably recorded\",\n      \"seq\": 72,\n      \"timestamp\": \"2026-04-11T10:50:53+00:00\"\n    },\n    {\n      \"action\": \"finalize run\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"run ended according to closure, pause, or incompletion conditions\",\n      \"intent\": \"Summarize the bounded run outcome under current conditions.\",\n      \"kind\": \"run_outcome\",\n      \"node_id\": \"not_explain-the-difference-between-the-general-force_75ad26\",\n      \"payload\": {},\n      \"result\": \"completed\",\n      \"seq\": 73,\n      \"timestamp\": \"2026-04-11T10:50:53+00:00\"\n    }\n  ],\n  \"root\": {\n    \"boundary_shape\": [\n      \"a*\",\n      \"d*\"\n    ],\n    \"certainty\": \"high\",\n    \"id\": \"not_explain-the-difference-between-the-general-force_75ad26\",\n    \"not\": \"Not<Explain the difference between the general force law ( F = ma ) and the specific case of weight ( W = mg ).>\",\n    \"semantic_unit\": \"Explain the difference between the general force law ( F = ma ) and the specific case of weight ( W = mg ).\",\n    \"status\": \"closed\"\n  },\n  \"run_id\": \"run_eeb58510_3a21b6\",\n  \"run_outcome\": \"completed\",\n  \"theory_version\": \"2.2.2\"\n}\n",
+          "stderr_tail": "",
+          "state": "/Users/ravindranathakila/service/realized/reports/trial_domain_validation_20260411_104819/physics/probe_explain_the_difference_between_the_general_force_law.json",
+          "resumed": false,
+          "elapsed_seconds": 12.937807,
+          "timeout_seconds": 66,
+          "command_timings": {},
+          "attempt_count": 1,
+          "attempts": [
+            {
+              "attempt": 1,
+              "timeout_seconds": 66,
+              "returncode": 0,
+              "stdout_tail": "e_id\": \"not_explain-the-difference-between-the-general-force_75ad26\",\n      \"payload\": {\n        \"proposal_id\": \"proposal_explanationdraft_0a1eae\",\n        \"rationale\": \"Explanation drafts may be admitted as communicative artifacts without changing formal commitment state.\",\n        \"status\": \"admitted\"\n      },\n      \"result\": \"proposal governance state updated\",\n      \"seq\": 71,\n      \"timestamp\": \"2026-04-11T10:50:53+00:00\"\n    },\n    {\n      \"action\": \"register outlet trace_report\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"boundary transition preserved semantic continuity\",\n      \"intent\": \"Preserve outlet semantics in BSSC-consistent carrier form.\",\n      \"kind\": \"boundary_outlet\",\n      \"node_id\": null,\n      \"payload\": {\n        \"carrier_id\": \"outlet_explain-the-difference-between-the-general-force_c98e2b\",\n        \"kind\": \"trace_report\"\n      },\n      \"result\": \"outlet durably recorded\",\n      \"seq\": 72,\n      \"timestamp\": \"2026-04-11T10:50:53+00:00\"\n    },\n    {\n      \"action\": \"finalize run\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"run ended according to closure, pause, or incompletion conditions\",\n      \"intent\": \"Summarize the bounded run outcome under current conditions.\",\n      \"kind\": \"run_outcome\",\n      \"node_id\": \"not_explain-the-difference-between-the-general-force_75ad26\",\n      \"payload\": {},\n      \"result\": \"completed\",\n      \"seq\": 73,\n      \"timestamp\": \"2026-04-11T10:50:53+00:00\"\n    }\n  ],\n  \"root\": {\n    \"boundary_shape\": [\n      \"a*\",\n      \"d*\"\n    ],\n    \"certainty\": \"high\",\n    \"id\": \"not_explain-the-difference-between-the-general-force_75ad26\",\n    \"not\": \"Not<Explain the difference between the general force law ( F = ma ) and the specific case of weight ( W = mg ).>\",\n    \"semantic_unit\": \"Explain the difference between the general force law ( F = ma ) and the specific case of weight ( W = mg ).\",\n    \"status\": \"closed\"\n  },\n  \"run_id\": \"run_eeb58510_3a21b6\",\n  \"run_outcome\": \"completed\",\n  \"theory_version\": \"2.2.2\"\n}\n",
+              "stderr_tail": "",
+              "elapsed_seconds": 12.937807,
+              "timed_out": false,
+              "command_timings": {}
+            }
+          ],
+          "run_outcome": "completed",
+          "final_answer": "What distinguishes a scalar quantity from a vector quantity, and how is this represented in the reusable relation?; State the general ratio-of-change formula and give one example from motion that uses it.; Using the constant-acceleration relation, write the equation that updates velocity from initial velocity, acceleration, and time, and identify the \u201cstate-plus-change\u201d structure.; State Newton\u2019s second law and explain how it fits the multiplicative-combination substrate.; Explain the difference between the general force law ( F = ma ) and the specific case of weight ( W = mg ).",
+          "passed": true,
+          "reason": "freeform_overlap:7"
+        },
+        {
+          "name": "explain_how_work_relates_to_energy_change_and",
+          "prompt": "Explain how work relates to energy change, and state the work-energy theorem in terms of the transfer substrate.",
+          "returncode": 0,
+          "stdout_tail": "ode_id\": \"not_explain-how-work-relates-to-energy-change-and-st_f73fe5\",\n      \"payload\": {\n        \"proposal_id\": \"proposal_explanationdraft_6d03f8\",\n        \"rationale\": \"Explanation drafts may be admitted as communicative artifacts without changing formal commitment state.\",\n        \"status\": \"admitted\"\n      },\n      \"result\": \"proposal governance state updated\",\n      \"seq\": 59,\n      \"timestamp\": \"2026-04-11T10:51:32+00:00\"\n    },\n    {\n      \"action\": \"register outlet trace_report\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"boundary transition preserved semantic continuity\",\n      \"intent\": \"Preserve outlet semantics in BSSC-consistent carrier form.\",\n      \"kind\": \"boundary_outlet\",\n      \"node_id\": null,\n      \"payload\": {\n        \"carrier_id\": \"outlet_explain-how-work-relates-to-energy-change-and-st_d630bc\",\n        \"kind\": \"trace_report\"\n      },\n      \"result\": \"outlet durably recorded\",\n      \"seq\": 60,\n      \"timestamp\": \"2026-04-11T10:51:32+00:00\"\n    },\n    {\n      \"action\": \"finalize run\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"run ended according to closure, pause, or incompletion conditions\",\n      \"intent\": \"Summarize the bounded run outcome under current conditions.\",\n      \"kind\": \"run_outcome\",\n      \"node_id\": \"not_explain-how-work-relates-to-energy-change-and-st_f73fe5\",\n      \"payload\": {},\n      \"result\": \"completed\",\n      \"seq\": 61,\n      \"timestamp\": \"2026-04-11T10:51:32+00:00\"\n    }\n  ],\n  \"root\": {\n    \"boundary_shape\": [\n      \"d*\"\n    ],\n    \"certainty\": \"high\",\n    \"id\": \"not_explain-how-work-relates-to-energy-change-and-st_f73fe5\",\n    \"not\": \"Not<Explain how work relates to energy change, and state the work-energy theorem in terms of the transfer substrate.>\",\n    \"semantic_unit\": \"Explain how work relates to energy change, and state the work-energy theorem in terms of the transfer substrate.\",\n    \"status\": \"closed\"\n  },\n  \"run_id\": \"run_aa947a10_aeaf1a\",\n  \"run_outcome\": \"completed\",\n  \"theory_version\": \"2.2.2\"\n}\n",
+          "stderr_tail": "",
+          "state": "/Users/ravindranathakila/service/realized/reports/trial_domain_validation_20260411_104819/physics/probe_explain_how_work_relates_to_energy_change_and.json",
+          "resumed": false,
+          "elapsed_seconds": 38.472269,
+          "timeout_seconds": 68,
+          "command_timings": {},
+          "attempt_count": 1,
+          "attempts": [
+            {
+              "attempt": 1,
+              "timeout_seconds": 68,
+              "returncode": 0,
+              "stdout_tail": "ode_id\": \"not_explain-how-work-relates-to-energy-change-and-st_f73fe5\",\n      \"payload\": {\n        \"proposal_id\": \"proposal_explanationdraft_6d03f8\",\n        \"rationale\": \"Explanation drafts may be admitted as communicative artifacts without changing formal commitment state.\",\n        \"status\": \"admitted\"\n      },\n      \"result\": \"proposal governance state updated\",\n      \"seq\": 59,\n      \"timestamp\": \"2026-04-11T10:51:32+00:00\"\n    },\n    {\n      \"action\": \"register outlet trace_report\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"boundary transition preserved semantic continuity\",\n      \"intent\": \"Preserve outlet semantics in BSSC-consistent carrier form.\",\n      \"kind\": \"boundary_outlet\",\n      \"node_id\": null,\n      \"payload\": {\n        \"carrier_id\": \"outlet_explain-how-work-relates-to-energy-change-and-st_d630bc\",\n        \"kind\": \"trace_report\"\n      },\n      \"result\": \"outlet durably recorded\",\n      \"seq\": 60,\n      \"timestamp\": \"2026-04-11T10:51:32+00:00\"\n    },\n    {\n      \"action\": \"finalize run\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"run ended according to closure, pause, or incompletion conditions\",\n      \"intent\": \"Summarize the bounded run outcome under current conditions.\",\n      \"kind\": \"run_outcome\",\n      \"node_id\": \"not_explain-how-work-relates-to-energy-change-and-st_f73fe5\",\n      \"payload\": {},\n      \"result\": \"completed\",\n      \"seq\": 61,\n      \"timestamp\": \"2026-04-11T10:51:32+00:00\"\n    }\n  ],\n  \"root\": {\n    \"boundary_shape\": [\n      \"d*\"\n    ],\n    \"certainty\": \"high\",\n    \"id\": \"not_explain-how-work-relates-to-energy-change-and-st_f73fe5\",\n    \"not\": \"Not<Explain how work relates to energy change, and state the work-energy theorem in terms of the transfer substrate.>\",\n    \"semantic_unit\": \"Explain how work relates to energy change, and state the work-energy theorem in terms of the transfer substrate.\",\n    \"status\": \"closed\"\n  },\n  \"run_id\": \"run_aa947a10_aeaf1a\",\n  \"run_outcome\": \"completed\",\n  \"theory_version\": \"2.2.2\"\n}\n",
+              "stderr_tail": "",
+              "elapsed_seconds": 38.472269,
+              "timed_out": false,
+              "command_timings": {}
+            }
+          ],
+          "run_outcome": "completed",
+          "final_answer": "How Work Relates To Energy Change And State The Work Energy Theorem In Terms Of The Transfer Substrate: Work-energy theorem. Net work changes kinetic energy. $$ W{ ext{net}} = \\Delta KE $$ This reuses the transfer substrate: work is the change term for kinetic energy. A system's energy can change because some process transfers energy into or out of it. The reusable relation is: $$ E{ ext{final}} = E{ ext{initial}} + \\Delta E $$ input: Einitial input: \\Delta E output: Efinal",
+          "passed": true,
+          "reason": "freeform_overlap:9"
+        },
+        {
+          "name": "describe_how_impulse_and_momentum_are_related_and",
+          "prompt": "Describe how impulse and momentum are related, and explain how both reuse the multiplicative-combination and interaction-change substrates.",
+          "returncode": 0,
+          "stdout_tail": "lated-an_f0850f\",\n      \"payload\": {\n        \"proposal_id\": \"proposal_explanationdraft_76b580\",\n        \"rationale\": \"Explanation drafts may be admitted as communicative artifacts without changing formal commitment state.\",\n        \"status\": \"admitted\"\n      },\n      \"result\": \"proposal governance state updated\",\n      \"seq\": 59,\n      \"timestamp\": \"2026-04-11T10:53:51+00:00\"\n    },\n    {\n      \"action\": \"register outlet trace_report\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"boundary transition preserved semantic continuity\",\n      \"intent\": \"Preserve outlet semantics in BSSC-consistent carrier form.\",\n      \"kind\": \"boundary_outlet\",\n      \"node_id\": null,\n      \"payload\": {\n        \"carrier_id\": \"outlet_describe-how-impulse-and-momentum-are-related-an_d81493\",\n        \"kind\": \"trace_report\"\n      },\n      \"result\": \"outlet durably recorded\",\n      \"seq\": 60,\n      \"timestamp\": \"2026-04-11T10:53:51+00:00\"\n    },\n    {\n      \"action\": \"finalize run\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"run ended according to closure, pause, or incompletion conditions\",\n      \"intent\": \"Summarize the bounded run outcome under current conditions.\",\n      \"kind\": \"run_outcome\",\n      \"node_id\": \"not_describe-how-impulse-and-momentum-are-related-an_f0850f\",\n      \"payload\": {},\n      \"result\": \"completed\",\n      \"seq\": 61,\n      \"timestamp\": \"2026-04-11T10:53:51+00:00\"\n    }\n  ],\n  \"root\": {\n    \"boundary_shape\": [\n      \"d*\"\n    ],\n    \"certainty\": \"high\",\n    \"id\": \"not_describe-how-impulse-and-momentum-are-related-an_f0850f\",\n    \"not\": \"Not<Describe how impulse and momentum are related, and explain how both reuse the multiplicative-combination and interaction-change substrates.>\",\n    \"semantic_unit\": \"Describe how impulse and momentum are related, and explain how both reuse the multiplicative-combination and interaction-change substrates.\",\n    \"status\": \"closed\"\n  },\n  \"run_id\": \"run_a43a3233_6e2d4e\",\n  \"run_outcome\": \"completed\",\n  \"theory_version\": \"2.2.2\"\n}\n",
+          "stderr_tail": "",
+          "state": "/Users/ravindranathakila/service/realized/reports/trial_domain_validation_20260411_104819/physics/probe_describe_how_impulse_and_momentum_are_related_and.json",
+          "resumed": false,
+          "elapsed_seconds": 68.274441,
+          "timeout_seconds": 142,
+          "command_timings": {},
+          "attempt_count": 2,
+          "attempts": [
+            {
+              "attempt": 1,
+              "timeout_seconds": 71,
+              "returncode": -1,
+              "stdout_tail": "",
+              "stderr_tail": "",
+              "elapsed_seconds": 71,
+              "timed_out": true
+            },
+            {
+              "attempt": 2,
+              "timeout_seconds": 142,
+              "returncode": 0,
+              "stdout_tail": "lated-an_f0850f\",\n      \"payload\": {\n        \"proposal_id\": \"proposal_explanationdraft_76b580\",\n        \"rationale\": \"Explanation drafts may be admitted as communicative artifacts without changing formal commitment state.\",\n        \"status\": \"admitted\"\n      },\n      \"result\": \"proposal governance state updated\",\n      \"seq\": 59,\n      \"timestamp\": \"2026-04-11T10:53:51+00:00\"\n    },\n    {\n      \"action\": \"register outlet trace_report\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"boundary transition preserved semantic continuity\",\n      \"intent\": \"Preserve outlet semantics in BSSC-consistent carrier form.\",\n      \"kind\": \"boundary_outlet\",\n      \"node_id\": null,\n      \"payload\": {\n        \"carrier_id\": \"outlet_describe-how-impulse-and-momentum-are-related-an_d81493\",\n        \"kind\": \"trace_report\"\n      },\n      \"result\": \"outlet durably recorded\",\n      \"seq\": 60,\n      \"timestamp\": \"2026-04-11T10:53:51+00:00\"\n    },\n    {\n      \"action\": \"finalize run\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"run ended according to closure, pause, or incompletion conditions\",\n      \"intent\": \"Summarize the bounded run outcome under current conditions.\",\n      \"kind\": \"run_outcome\",\n      \"node_id\": \"not_describe-how-impulse-and-momentum-are-related-an_f0850f\",\n      \"payload\": {},\n      \"result\": \"completed\",\n      \"seq\": 61,\n      \"timestamp\": \"2026-04-11T10:53:51+00:00\"\n    }\n  ],\n  \"root\": {\n    \"boundary_shape\": [\n      \"d*\"\n    ],\n    \"certainty\": \"high\",\n    \"id\": \"not_describe-how-impulse-and-momentum-are-related-an_f0850f\",\n    \"not\": \"Not<Describe how impulse and momentum are related, and explain how both reuse the multiplicative-combination and interaction-change substrates.>\",\n    \"semantic_unit\": \"Describe how impulse and momentum are related, and explain how both reuse the multiplicative-combination and interaction-change substrates.\",\n    \"status\": \"closed\"\n  },\n  \"run_id\": \"run_a43a3233_6e2d4e\",\n  \"run_outcome\": \"completed\",\n  \"theory_version\": \"2.2.2\"\n}\n",
+              "stderr_tail": "",
+              "elapsed_seconds": 68.274441,
+              "timed_out": false,
+              "command_timings": {}
+            }
+          ],
+          "run_outcome": "completed",
+          "final_answer": "How Impulse And Momentum Are Related And Explain How Both Reuse The Multiplicative Combination And Interaction Change Substrates: Momentum from mass and velocity. Momentum is a multiplicative-combination law. $$ p = mv $$ Where: input: m input: v output: p Momentum and impulse reuse multiplicative combination and connect interaction over time to change in motion state.",
+          "passed": true,
+          "reason": "freeform_overlap:10"
+        },
+        {
+          "name": "explain_how_centripetal_force_is_constructed_by_combining",
+          "prompt": "Explain how centripetal force is constructed by combining earlier relations for force and centripetal acceleration.",
+          "returncode": 0,
+          "stdout_tail": "\"not_explain-how-centripetal-force-is-constructed-by-_0c1894\",\n      \"payload\": {\n        \"proposal_id\": \"proposal_explanationdraft_c7595a\",\n        \"rationale\": \"Explanation drafts may be admitted as communicative artifacts without changing formal commitment state.\",\n        \"status\": \"admitted\"\n      },\n      \"result\": \"proposal governance state updated\",\n      \"seq\": 258,\n      \"timestamp\": \"2026-04-11T10:55:57+00:00\"\n    },\n    {\n      \"action\": \"register outlet trace_report\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"boundary transition preserved semantic continuity\",\n      \"intent\": \"Preserve outlet semantics in BSSC-consistent carrier form.\",\n      \"kind\": \"boundary_outlet\",\n      \"node_id\": null,\n      \"payload\": {\n        \"carrier_id\": \"outlet_explain-how-centripetal-force-is-constructed-by-_73e30f\",\n        \"kind\": \"trace_report\"\n      },\n      \"result\": \"outlet durably recorded\",\n      \"seq\": 259,\n      \"timestamp\": \"2026-04-11T10:55:57+00:00\"\n    },\n    {\n      \"action\": \"finalize run\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"run ended according to closure, pause, or incompletion conditions\",\n      \"intent\": \"Summarize the bounded run outcome under current conditions.\",\n      \"kind\": \"run_outcome\",\n      \"node_id\": \"not_explain-how-centripetal-force-is-constructed-by-_0c1894\",\n      \"payload\": {},\n      \"result\": \"completed\",\n      \"seq\": 260,\n      \"timestamp\": \"2026-04-11T10:55:57+00:00\"\n    }\n  ],\n  \"root\": {\n    \"boundary_shape\": [\n      \"d*\"\n    ],\n    \"certainty\": \"high\",\n    \"id\": \"not_explain-how-centripetal-force-is-constructed-by-_0c1894\",\n    \"not\": \"Not<Explain how centripetal force is constructed by combining earlier relations for force and centripetal acceleration.>\",\n    \"semantic_unit\": \"Explain how centripetal force is constructed by combining earlier relations for force and centripetal acceleration.\",\n    \"status\": \"closed\"\n  },\n  \"run_id\": \"run_9aac3c59_a7163d\",\n  \"run_outcome\": \"completed\",\n  \"theory_version\": \"2.2.2\"\n}\n",
+          "stderr_tail": "",
+          "state": "/Users/ravindranathakila/service/realized/reports/trial_domain_validation_20260411_104819/physics/probe_explain_how_centripetal_force_is_constructed_by_combining.json",
+          "resumed": false,
+          "elapsed_seconds": 65.823151,
+          "timeout_seconds": 120,
+          "command_timings": {},
+          "attempt_count": 2,
+          "attempts": [
+            {
+              "attempt": 1,
+              "timeout_seconds": 60,
+              "returncode": -1,
+              "stdout_tail": "",
+              "stderr_tail": "",
+              "elapsed_seconds": 60,
+              "timed_out": true
+            },
+            {
+              "attempt": 2,
+              "timeout_seconds": 120,
+              "returncode": 0,
+              "stdout_tail": "\"not_explain-how-centripetal-force-is-constructed-by-_0c1894\",\n      \"payload\": {\n        \"proposal_id\": \"proposal_explanationdraft_c7595a\",\n        \"rationale\": \"Explanation drafts may be admitted as communicative artifacts without changing formal commitment state.\",\n        \"status\": \"admitted\"\n      },\n      \"result\": \"proposal governance state updated\",\n      \"seq\": 258,\n      \"timestamp\": \"2026-04-11T10:55:57+00:00\"\n    },\n    {\n      \"action\": \"register outlet trace_report\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"boundary transition preserved semantic continuity\",\n      \"intent\": \"Preserve outlet semantics in BSSC-consistent carrier form.\",\n      \"kind\": \"boundary_outlet\",\n      \"node_id\": null,\n      \"payload\": {\n        \"carrier_id\": \"outlet_explain-how-centripetal-force-is-constructed-by-_73e30f\",\n        \"kind\": \"trace_report\"\n      },\n      \"result\": \"outlet durably recorded\",\n      \"seq\": 259,\n      \"timestamp\": \"2026-04-11T10:55:57+00:00\"\n    },\n    {\n      \"action\": \"finalize run\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"run ended according to closure, pause, or incompletion conditions\",\n      \"intent\": \"Summarize the bounded run outcome under current conditions.\",\n      \"kind\": \"run_outcome\",\n      \"node_id\": \"not_explain-how-centripetal-force-is-constructed-by-_0c1894\",\n      \"payload\": {},\n      \"result\": \"completed\",\n      \"seq\": 260,\n      \"timestamp\": \"2026-04-11T10:55:57+00:00\"\n    }\n  ],\n  \"root\": {\n    \"boundary_shape\": [\n      \"d*\"\n    ],\n    \"certainty\": \"high\",\n    \"id\": \"not_explain-how-centripetal-force-is-constructed-by-_0c1894\",\n    \"not\": \"Not<Explain how centripetal force is constructed by combining earlier relations for force and centripetal acceleration.>\",\n    \"semantic_unit\": \"Explain how centripetal force is constructed by combining earlier relations for force and centripetal acceleration.\",\n    \"status\": \"closed\"\n  },\n  \"run_id\": \"run_9aac3c59_a7163d\",\n  \"run_outcome\": \"completed\",\n  \"theory_version\": \"2.2.2\"\n}\n",
+              "stderr_tail": "",
+              "elapsed_seconds": 65.823151,
+              "timed_out": false,
+              "command_timings": {}
+            }
+          ],
+          "run_outcome": "completed",
+          "final_answer": "Centripetal Force Construct Combin Earlier Relation: Centripetal Force Construct Combin Earlier Relation: Physics Relations D Circular Motion. The required inward force is: $$ Fc = m rac{v^2}{r} $$ Where: input: m input: v input: r output: Fc The gravitational force between two masses is: $$ F = G rac{m1 m2}{r^2} $$ Where: input: m1 input: m2 input: r constant: G output: F; Force: The required inward force is: $$ Fc = m rac{v^2}{r} $$ Where: input: m input: v input: r output: Fc Weight is a force produced by gravitational acceleration. $$ W = mg $$ Where: input: m input: g output: W What distinguishes a scalar quantity from a vector quantity, and how is this represented in the reusable relation?; State the general ratio-of-change formula and give one example from motion that uses it.; Using the constant-acceleration relation, write the equation that updates velocity from initial velocity, acceleration, and time, and identify the \u201cstate-plus-change\u201d structure.; State Newton\u2019s second law and explain how it fits the multiplicative-combination substrate.; Explain the difference between the general force law ( F = ma ) and the specific case of weight ( W = mg ).; Centripetal Acceleration: Centripetal Acceleration: Centripetal acceleration. For uniform circular motion: $$ ac = rac{v^2}{r} $$ Where: input: v input: r output: ac The required inward force is: $$ Fc = m rac{v^2}{r} $$ Where: input: m input: v input: r output: Fc",
+          "passed": true,
+          "reason": "freeform_overlap:7"
+        },
+        {
+          "name": "identify_the_reusable_substrate_underlying_gravitational_force_and",
+          "prompt": "Identify the reusable substrate underlying gravitational force and explain how both multiplicative combination and inverse-square dependence appear in the law.",
+          "returncode": 0,
+          "stdout_tail": "     \"proposal_id\": \"proposal_explanationdraft_9d5043\",\n        \"rationale\": \"Explanation drafts may be admitted as communicative artifacts without changing formal commitment state.\",\n        \"status\": \"admitted\"\n      },\n      \"result\": \"proposal governance state updated\",\n      \"seq\": 59,\n      \"timestamp\": \"2026-04-11T10:56:05+00:00\"\n    },\n    {\n      \"action\": \"register outlet trace_report\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"boundary transition preserved semantic continuity\",\n      \"intent\": \"Preserve outlet semantics in BSSC-consistent carrier form.\",\n      \"kind\": \"boundary_outlet\",\n      \"node_id\": null,\n      \"payload\": {\n        \"carrier_id\": \"outlet_identify-the-reusable-substrate-underlying-gravi_763425\",\n        \"kind\": \"trace_report\"\n      },\n      \"result\": \"outlet durably recorded\",\n      \"seq\": 60,\n      \"timestamp\": \"2026-04-11T10:56:05+00:00\"\n    },\n    {\n      \"action\": \"finalize run\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"run ended according to closure, pause, or incompletion conditions\",\n      \"intent\": \"Summarize the bounded run outcome under current conditions.\",\n      \"kind\": \"run_outcome\",\n      \"node_id\": \"not_identify-the-reusable-substrate-underlying-gravi_4e6f83\",\n      \"payload\": {},\n      \"result\": \"completed\",\n      \"seq\": 61,\n      \"timestamp\": \"2026-04-11T10:56:05+00:00\"\n    }\n  ],\n  \"root\": {\n    \"boundary_shape\": [\n      \"d*\"\n    ],\n    \"certainty\": \"high\",\n    \"id\": \"not_identify-the-reusable-substrate-underlying-gravi_4e6f83\",\n    \"not\": \"Not<Identify the reusable substrate underlying gravitational force and explain how both multiplicative combination and inverse-square dependence appear in the law.>\",\n    \"semantic_unit\": \"Identify the reusable substrate underlying gravitational force and explain how both multiplicative combination and inverse-square dependence appear in the law.\",\n    \"status\": \"closed\"\n  },\n  \"run_id\": \"run_549a5d83_371de3\",\n  \"run_outcome\": \"completed\",\n  \"theory_version\": \"2.2.2\"\n}\n",
+          "stderr_tail": "",
+          "state": "/Users/ravindranathakila/service/realized/reports/trial_domain_validation_20260411_104819/physics/probe_identify_the_reusable_substrate_underlying_gravitational_force_and.json",
+          "resumed": false,
+          "elapsed_seconds": 8.601538,
+          "timeout_seconds": 153,
+          "command_timings": {},
+          "attempt_count": 1,
+          "attempts": [
+            {
+              "attempt": 1,
+              "timeout_seconds": 153,
+              "returncode": 0,
+              "stdout_tail": "     \"proposal_id\": \"proposal_explanationdraft_9d5043\",\n        \"rationale\": \"Explanation drafts may be admitted as communicative artifacts without changing formal commitment state.\",\n        \"status\": \"admitted\"\n      },\n      \"result\": \"proposal governance state updated\",\n      \"seq\": 59,\n      \"timestamp\": \"2026-04-11T10:56:05+00:00\"\n    },\n    {\n      \"action\": \"register outlet trace_report\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"boundary transition preserved semantic continuity\",\n      \"intent\": \"Preserve outlet semantics in BSSC-consistent carrier form.\",\n      \"kind\": \"boundary_outlet\",\n      \"node_id\": null,\n      \"payload\": {\n        \"carrier_id\": \"outlet_identify-the-reusable-substrate-underlying-gravi_763425\",\n        \"kind\": \"trace_report\"\n      },\n      \"result\": \"outlet durably recorded\",\n      \"seq\": 60,\n      \"timestamp\": \"2026-04-11T10:56:05+00:00\"\n    },\n    {\n      \"action\": \"finalize run\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"run ended according to closure, pause, or incompletion conditions\",\n      \"intent\": \"Summarize the bounded run outcome under current conditions.\",\n      \"kind\": \"run_outcome\",\n      \"node_id\": \"not_identify-the-reusable-substrate-underlying-gravi_4e6f83\",\n      \"payload\": {},\n      \"result\": \"completed\",\n      \"seq\": 61,\n      \"timestamp\": \"2026-04-11T10:56:05+00:00\"\n    }\n  ],\n  \"root\": {\n    \"boundary_shape\": [\n      \"d*\"\n    ],\n    \"certainty\": \"high\",\n    \"id\": \"not_identify-the-reusable-substrate-underlying-gravi_4e6f83\",\n    \"not\": \"Not<Identify the reusable substrate underlying gravitational force and explain how both multiplicative combination and inverse-square dependence appear in the law.>\",\n    \"semantic_unit\": \"Identify the reusable substrate underlying gravitational force and explain how both multiplicative combination and inverse-square dependence appear in the law.\",\n    \"status\": \"closed\"\n  },\n  \"run_id\": \"run_549a5d83_371de3\",\n  \"run_outcome\": \"completed\",\n  \"theory_version\": \"2.2.2\"\n}\n",
+              "stderr_tail": "",
+              "elapsed_seconds": 8.601538,
+              "timed_out": false,
+              "command_timings": {}
+            }
+          ],
+          "run_outcome": "completed",
+          "final_answer": "How do you calculate g from G, rac, M, r?. g = G * rac * ( M ) * ( r ** 2 ). inputs: G, rac, M, r. output: g",
+          "passed": false,
+          "reason": "freeform_low_overlap:reusable,substrate,underlying,gravitational,force,both"
+        },
+        {
+          "name": "explain_how_electric_power_expressions_p_vi_p",
+          "prompt": "Explain how electric power expressions ( P = VI ), ( P = I^2 R ), and ( P = \\frac{V^2}{R} ) are derived through composition of the driving-response relation and multiplicative combination. Provide the full reasoning chain.",
+          "returncode": 0,
+          "stdout_tail": "without changing formal commitment state.\",\n        \"status\": \"admitted\"\n      },\n      \"result\": \"proposal governance state updated\",\n      \"seq\": 71,\n      \"timestamp\": \"2026-04-11T10:56:19+00:00\"\n    },\n    {\n      \"action\": \"register outlet trace_report\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"boundary transition preserved semantic continuity\",\n      \"intent\": \"Preserve outlet semantics in BSSC-consistent carrier form.\",\n      \"kind\": \"boundary_outlet\",\n      \"node_id\": null,\n      \"payload\": {\n        \"carrier_id\": \"outlet_explain-how-electric-power-expressions-p-vi-p-i-_88ee0b\",\n        \"kind\": \"trace_report\"\n      },\n      \"result\": \"outlet durably recorded\",\n      \"seq\": 72,\n      \"timestamp\": \"2026-04-11T10:56:19+00:00\"\n    },\n    {\n      \"action\": \"finalize run\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"run ended according to closure, pause, or incompletion conditions\",\n      \"intent\": \"Summarize the bounded run outcome under current conditions.\",\n      \"kind\": \"run_outcome\",\n      \"node_id\": \"not_explain-how-electric-power-expressions-p-vi-p-i-_e82b7b\",\n      \"payload\": {},\n      \"result\": \"completed\",\n      \"seq\": 73,\n      \"timestamp\": \"2026-04-11T10:56:19+00:00\"\n    }\n  ],\n  \"root\": {\n    \"boundary_shape\": [\n      \"a*\",\n      \"d*\"\n    ],\n    \"certainty\": \"high\",\n    \"id\": \"not_explain-how-electric-power-expressions-p-vi-p-i-_e82b7b\",\n    \"not\": \"Not<Explain how electric power expressions ( P = VI ), ( P = I^2 R ), and ( P = \\\\frac{V^2}{R} ) are derived through composition of the driving-response relation and multiplicative combination. Provide the full reasoning chain.>\",\n    \"semantic_unit\": \"Explain how electric power expressions ( P = VI ), ( P = I^2 R ), and ( P = \\\\frac{V^2}{R} ) are derived through composition of the driving-response relation and multiplicative combination. Provide the full reasoning chain.\",\n    \"status\": \"closed\"\n  },\n  \"run_id\": \"run_7f5e5da9_dcec43\",\n  \"run_outcome\": \"completed\",\n  \"theory_version\": \"2.2.2\"\n}\n",
+          "stderr_tail": "",
+          "state": "/Users/ravindranathakila/service/realized/reports/trial_domain_validation_20260411_104819/physics/probe_explain_how_electric_power_expressions_p_vi_p.json",
+          "resumed": false,
+          "elapsed_seconds": 13.89248,
+          "timeout_seconds": 180,
+          "command_timings": {},
+          "attempt_count": 1,
+          "attempts": [
+            {
+              "attempt": 1,
+              "timeout_seconds": 180,
+              "returncode": 0,
+              "stdout_tail": "without changing formal commitment state.\",\n        \"status\": \"admitted\"\n      },\n      \"result\": \"proposal governance state updated\",\n      \"seq\": 71,\n      \"timestamp\": \"2026-04-11T10:56:19+00:00\"\n    },\n    {\n      \"action\": \"register outlet trace_report\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"boundary transition preserved semantic continuity\",\n      \"intent\": \"Preserve outlet semantics in BSSC-consistent carrier form.\",\n      \"kind\": \"boundary_outlet\",\n      \"node_id\": null,\n      \"payload\": {\n        \"carrier_id\": \"outlet_explain-how-electric-power-expressions-p-vi-p-i-_88ee0b\",\n        \"kind\": \"trace_report\"\n      },\n      \"result\": \"outlet durably recorded\",\n      \"seq\": 72,\n      \"timestamp\": \"2026-04-11T10:56:19+00:00\"\n    },\n    {\n      \"action\": \"finalize run\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"run ended according to closure, pause, or incompletion conditions\",\n      \"intent\": \"Summarize the bounded run outcome under current conditions.\",\n      \"kind\": \"run_outcome\",\n      \"node_id\": \"not_explain-how-electric-power-expressions-p-vi-p-i-_e82b7b\",\n      \"payload\": {},\n      \"result\": \"completed\",\n      \"seq\": 73,\n      \"timestamp\": \"2026-04-11T10:56:19+00:00\"\n    }\n  ],\n  \"root\": {\n    \"boundary_shape\": [\n      \"a*\",\n      \"d*\"\n    ],\n    \"certainty\": \"high\",\n    \"id\": \"not_explain-how-electric-power-expressions-p-vi-p-i-_e82b7b\",\n    \"not\": \"Not<Explain how electric power expressions ( P = VI ), ( P = I^2 R ), and ( P = \\\\frac{V^2}{R} ) are derived through composition of the driving-response relation and multiplicative combination. Provide the full reasoning chain.>\",\n    \"semantic_unit\": \"Explain how electric power expressions ( P = VI ), ( P = I^2 R ), and ( P = \\\\frac{V^2}{R} ) are derived through composition of the driving-response relation and multiplicative combination. Provide the full reasoning chain.\",\n    \"status\": \"closed\"\n  },\n  \"run_id\": \"run_7f5e5da9_dcec43\",\n  \"run_outcome\": \"completed\",\n  \"theory_version\": \"2.2.2\"\n}\n",
+              "stderr_tail": "",
+              "elapsed_seconds": 13.89248,
+              "timed_out": false,
+              "command_timings": {}
+            }
+          ],
+          "run_outcome": "completed",
+          "final_answer": "Electric Power Expressions P Vi P I 2 R And P Frac V 2 R: Power in a circuit is: $$ P = VI $$ Where: input: V input: I output: P Then, Electric current obeys: $$ I = rac{V}{R} $$ Where: input: V input: R output: I Therefore, Momentum is a multiplicative-combination law. $$ p = mv $$ Where: input: m input: v output: p",
+          "passed": true,
+          "reason": "freeform_overlap:6"
+        }
+      ],
+      "probe_summary": {
+        "passed": 9,
+        "total": 10
+      },
+      "sqlite": "/Users/ravindranathakila/service/realized/reports/trial_domain_validation_20260411_104819/physics/physics.sqlite3",
+      "sqlite_runtime": "/Users/ravindranathakila/service/realized/ram/sqlite/physics/physics.sqlite3",
+      "metrics": {
+        "artifacts": 119,
+        "abilities": 17,
+        "knowledge": 93,
+        "related_items": 51,
+        "prolog_heads": 76
+      }
+    }
+  ]
+}

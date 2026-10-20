@@ -1,0 +1,10 @@
+open:-a Google Chrome https://example.com
+open:-a TextEdit
+open:-a Preview /Users/example/Documents/report.pdf
+open:/Users/example/Downloads
+open:-a Terminal /Users/example/projects
+open:-a Safari https://www.google.com/search?q=right+triangle+hypotenuse
+open:-R /Users/example/Downloads/archive.zip
+open:x-apple.systempreferences:com.apple.Network-Settings.extension
+pbcopy:hello world
+screencapture:-x /Users/ravindranathakila/service/realized/reports/validation_ladder_20260411_071823/workstation_trial_validation/deviceuser/world/scratch/deviceuser-screen.png

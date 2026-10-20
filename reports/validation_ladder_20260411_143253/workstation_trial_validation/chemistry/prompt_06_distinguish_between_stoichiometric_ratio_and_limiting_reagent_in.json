@@ -1,0 +1,25 @@
+{
+  "assistant_text": "Here\u2019s the distinction in terms of how each concept shapes reaction outcomes:\n\n- Stoichiometric ratio (molar ratio from the balanced equation)\n  - What it is: The fixed proportion of reactants and products given by the balanced equation (the coefficients).\n  - Functional role: It sets the theoretical proportions you would need for a complete, ideal reaction. It lets you convert between amounts of different substances (e.g., how many moles of A are needed to react with a given moles of B, or how many moles of product you can make if you had excess of all reactants).\n  - Key point: It is a property of the reaction itself, independent of how much of each reactant you actually start with.\n  - Example: For 2 H2 + O2 -> 2 H2O, the stoichiometric ratio is H2:O2 = 2:1. This tells you how much H2 is required per mole of O2 to maximize product formation.\n\n- Limiting reagent\n  - What it is: The reactant that is consumed first when the reaction proceeds with given initial amounts.\n  - Functional role: It determines the actual extent of the reaction and thus the actual yield of products. Once the limiting reagent runs out, the reaction stops, leaving any excess of other reactants unused.\n  - Key point: It depends on the starting quantities of reactants; it governs what can actually be produced under those conditions.\n  - Example (continuing the same reaction): If you start with 4 moles H2 and 2.5 moles O2, the limiting reagent is H2 (you need 2 moles O2 to use up 4 moles H2, but you only need 2 moles O2 for that amount\u2014H2 runs out first in terms of the required ratio). The maximum product is 4 moles of H2O, with 0.5 moles O2 left over.\n\nIn short:\n- Stoichiometric ratio tells you how the amounts should relate if everything reacts completely.\n- Limiting reagent tells you which reactant will run out first and thus how much product you will actually obtain (the real yield) for the given starting amounts.",
+  "model": "gpt-5-nano-2025-08-07",
+  "rounds": 2,
+  "task_contract": {
+    "semantic_unit": "Distinguish between stoichiometric ratio and limiting reagent in terms of their functional role in determining reaction outcomes."
+  },
+  "tool_receipts": [
+    {
+      "arguments": {
+        "skill_title": "Chemistry Relations 04 \u2014 Stoichiometric Ratio from Balanced Equations / Connection to earlier lessons",
+        "target": ""
+      },
+      "name": "ws.skill.invoke",
+      "result": {
+        "answer": "Balanced coefficients matter because atom conservation fixed them. Once the equation is balanced, molar ratios let one known mole amount determine another. So conservation gives the structure, and proportion gives the calculation.",
+        "error": "",
+        "error_type": "",
+        "executor_framework": "",
+        "skill_title": "Chemistry Relations 04 \u2014 Stoichiometric Ratio from Balanced Equations / Connection to earlier lessons",
+        "status": "ok"
+      }
+    }
+  ]
+}

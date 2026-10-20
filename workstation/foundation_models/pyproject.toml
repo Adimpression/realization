@@ -1,0 +1,18 @@
+[project]
+name = "realized-workstation-foundation-models"
+version = "0.1.0"
+description = "Workstation foundation models package for Realized."
+requires-python = ">=3.14"
+dependencies = ["realized-workstation"]
+
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["workstation.foundation.models"]
+namespaces = true

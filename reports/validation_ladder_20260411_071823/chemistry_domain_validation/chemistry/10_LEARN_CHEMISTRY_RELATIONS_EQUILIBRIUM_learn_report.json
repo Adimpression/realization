@@ -1,0 +1,868 @@
+{
+  "artifact_persistence": [
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-10-equilibrium-con_cc9061",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000539,
+        "connect_seconds": 0.000493,
+        "ensure_schema_seconds": 0.003846,
+        "existing_payload_batch_lookup_seconds": 4.4e-05,
+        "index_seconds": 0.113891,
+        "prepare_seconds": 0.294847,
+        "total_seconds": 0.414461
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "34e41462b617460b794f1f8029c822dc99f79f937c4403165c3eaee5a18eed4a",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.03117,
+        "existing_payload_lookup_seconds": 4.8888888888888885e-06,
+        "index_seconds": 0.113891,
+        "total_seconds": 0.1653808888888889,
+        "write_rows_seconds": 0.020315
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-10-equilibrium-con_f1e748",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000539,
+        "connect_seconds": 0.000493,
+        "ensure_schema_seconds": 0.003846,
+        "existing_payload_batch_lookup_seconds": 4.4e-05,
+        "index_seconds": 0.113891,
+        "prepare_seconds": 0.294847,
+        "total_seconds": 0.414461
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "0242accde36d80a17af73c66507d23c73c562f98dc33fda78d5d8f5235fcd3b2",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.020411,
+        "existing_payload_lookup_seconds": 4.8888888888888885e-06,
+        "index_seconds": 0.113891,
+        "total_seconds": 0.1486668888888889,
+        "write_rows_seconds": 0.01436
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-e6fb47bf66f8",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000539,
+        "connect_seconds": 0.000493,
+        "ensure_schema_seconds": 0.003846,
+        "existing_payload_batch_lookup_seconds": 4.4e-05,
+        "index_seconds": 0.113891,
+        "prepare_seconds": 0.294847,
+        "total_seconds": 0.414461
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "9ab8171cc1f3cffe8f6dc435dc56ba16df1e7949085d606ccc03a86fa1eb6bfe",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.022176,
+        "existing_payload_lookup_seconds": 4.8888888888888885e-06,
+        "index_seconds": 0.113891,
+        "total_seconds": 0.1512408888888889,
+        "write_rows_seconds": 0.015169
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-63435df4b69c",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000539,
+        "connect_seconds": 0.000493,
+        "ensure_schema_seconds": 0.003846,
+        "existing_payload_batch_lookup_seconds": 4.4e-05,
+        "index_seconds": 0.113891,
+        "prepare_seconds": 0.294847,
+        "total_seconds": 0.414461
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "0b8fe9a84542a7dfc5aaf4ae25f221abe65642a41b2519a3c6bbb6a1fcb079fe",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.02053,
+        "existing_payload_lookup_seconds": 4.8888888888888885e-06,
+        "index_seconds": 0.113891,
+        "total_seconds": 0.14803088888888888,
+        "write_rows_seconds": 0.013605
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-8e2f7961ff4d",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000539,
+        "connect_seconds": 0.000493,
+        "ensure_schema_seconds": 0.003846,
+        "existing_payload_batch_lookup_seconds": 4.4e-05,
+        "index_seconds": 0.113891,
+        "prepare_seconds": 0.294847,
+        "total_seconds": 0.414461
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "493627db9f4e1e0cb37ee37eea2c10fa9278615080a18e08caaebce669f45e8d",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.021729,
+        "existing_payload_lookup_seconds": 4.8888888888888885e-06,
+        "total_seconds": 0.021733888888888886
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-8f16cc5a3e2f",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000539,
+        "connect_seconds": 0.000493,
+        "ensure_schema_seconds": 0.003846,
+        "existing_payload_batch_lookup_seconds": 4.4e-05,
+        "index_seconds": 0.113891,
+        "prepare_seconds": 0.294847,
+        "total_seconds": 0.414461
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "56f77a3c847521160cd23238acb7e8b5c0aeba212ccc515e9cd38d735660cac9",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.020249,
+        "existing_payload_lookup_seconds": 4.8888888888888885e-06,
+        "total_seconds": 0.020253888888888887
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-bc445d625f63",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000539,
+        "connect_seconds": 0.000493,
+        "ensure_schema_seconds": 0.003846,
+        "existing_payload_batch_lookup_seconds": 4.4e-05,
+        "index_seconds": 0.113891,
+        "prepare_seconds": 0.294847,
+        "total_seconds": 0.414461
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "13660235f35d7b94b47af22c22b07554ca01b61ba9299e1f15bfe85f8f0b63b0",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.000183,
+        "existing_payload_lookup_seconds": 4.8888888888888885e-06,
+        "total_seconds": 0.0001878888888888889
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-e6fb47bf66f8",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000539,
+        "connect_seconds": 0.000493,
+        "ensure_schema_seconds": 0.003846,
+        "existing_payload_batch_lookup_seconds": 4.4e-05,
+        "index_seconds": 0.113891,
+        "prepare_seconds": 0.294847,
+        "total_seconds": 0.414461
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "25979f0f5bc687efa1c39647099fb3c8a7350994bafa6cddbbe35132b421a62d",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.00016,
+        "existing_payload_lookup_seconds": 4.8888888888888885e-06,
+        "total_seconds": 0.0001648888888888889
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-63435df4b69c",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000539,
+        "connect_seconds": 0.000493,
+        "ensure_schema_seconds": 0.003846,
+        "existing_payload_batch_lookup_seconds": 4.4e-05,
+        "index_seconds": 0.113891,
+        "prepare_seconds": 0.294847,
+        "total_seconds": 0.414461
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "3020454e33a8c8c75f85c4356c3aa4c8ea95b5216c15a43c1b6b2b7529afc5e9",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.000194,
+        "existing_payload_lookup_seconds": 4.8888888888888885e-06,
+        "total_seconds": 0.00019888888888888888
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-10-equilibrium-con_cc9061",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000364,
+        "connect_seconds": 0.000653,
+        "ensure_schema_seconds": 0.004029,
+        "existing_payload_batch_lookup_seconds": 4.1e-05,
+        "index_seconds": 0.054069,
+        "prepare_seconds": 0.204644,
+        "total_seconds": 0.264412
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "34e41462b617460b794f1f8029c822dc99f79f937c4403165c3eaee5a18eed4a",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.031158,
+        "existing_payload_lookup_seconds": 5.857142857142857e-06,
+        "total_seconds": 0.031163857142857146
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-e6fb47bf66f8",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000364,
+        "connect_seconds": 0.000653,
+        "ensure_schema_seconds": 0.004029,
+        "existing_payload_batch_lookup_seconds": 4.1e-05,
+        "index_seconds": 0.054069,
+        "prepare_seconds": 0.204644,
+        "total_seconds": 0.264412
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "9ab8171cc1f3cffe8f6dc435dc56ba16df1e7949085d606ccc03a86fa1eb6bfe",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.022102,
+        "existing_payload_lookup_seconds": 5.857142857142857e-06,
+        "total_seconds": 0.022107857142857144
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-63435df4b69c",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000364,
+        "connect_seconds": 0.000653,
+        "ensure_schema_seconds": 0.004029,
+        "existing_payload_batch_lookup_seconds": 4.1e-05,
+        "index_seconds": 0.054069,
+        "prepare_seconds": 0.204644,
+        "total_seconds": 0.264412
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "0b8fe9a84542a7dfc5aaf4ae25f221abe65642a41b2519a3c6bbb6a1fcb079fe",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.020449,
+        "existing_payload_lookup_seconds": 5.857142857142857e-06,
+        "total_seconds": 0.020454857142857143
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-8e2f7961ff4d",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000364,
+        "connect_seconds": 0.000653,
+        "ensure_schema_seconds": 0.004029,
+        "existing_payload_batch_lookup_seconds": 4.1e-05,
+        "index_seconds": 0.054069,
+        "prepare_seconds": 0.204644,
+        "total_seconds": 0.264412
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "493627db9f4e1e0cb37ee37eea2c10fa9278615080a18e08caaebce669f45e8d",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.021652,
+        "existing_payload_lookup_seconds": 5.857142857142857e-06,
+        "total_seconds": 0.021657857142857145
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-8f16cc5a3e2f",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000364,
+        "connect_seconds": 0.000653,
+        "ensure_schema_seconds": 0.004029,
+        "existing_payload_batch_lookup_seconds": 4.1e-05,
+        "index_seconds": 0.054069,
+        "prepare_seconds": 0.204644,
+        "total_seconds": 0.264412
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "56f77a3c847521160cd23238acb7e8b5c0aeba212ccc515e9cd38d735660cac9",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.020188,
+        "existing_payload_lookup_seconds": 5.857142857142857e-06,
+        "total_seconds": 0.020193857142857145
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-e6fb47bf66f8",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000364,
+        "connect_seconds": 0.000653,
+        "ensure_schema_seconds": 0.004029,
+        "existing_payload_batch_lookup_seconds": 4.1e-05,
+        "index_seconds": 0.054069,
+        "prepare_seconds": 0.204644,
+        "total_seconds": 0.264412
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "25979f0f5bc687efa1c39647099fb3c8a7350994bafa6cddbbe35132b421a62d",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 3.8e-05,
+        "existing_payload_lookup_seconds": 5.857142857142857e-06,
+        "index_seconds": 0.054069,
+        "total_seconds": 0.07978085714285714,
+        "write_rows_seconds": 0.025668
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-63435df4b69c",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000364,
+        "connect_seconds": 0.000653,
+        "ensure_schema_seconds": 0.004029,
+        "existing_payload_batch_lookup_seconds": 4.1e-05,
+        "index_seconds": 0.054069,
+        "prepare_seconds": 0.204644,
+        "total_seconds": 0.264412
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "3020454e33a8c8c75f85c4356c3aa4c8ea95b5216c15a43c1b6b2b7529afc5e9",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 3.6e-05,
+        "existing_payload_lookup_seconds": 5.857142857142857e-06,
+        "index_seconds": 0.054069,
+        "total_seconds": 0.07841685714285715,
+        "write_rows_seconds": 0.024306
+      },
+      "vector_enabled": false
+    }
+  ],
+  "document": {
+    "section_count": 5,
+    "source_path": "/Users/ravindranathakila/service/realized/trials/chemistry/10_LEARN_CHEMISTRY_RELATIONS_EQUILIBRIUM.md",
+    "title": "Chemistry Relations 10 \u2014 Equilibrium Constant as Product-to-Reactant Power Ratio"
+  },
+  "encounter_proposal": {
+    "encounters": [
+      {
+        "bullets": [
+          "input: `a_i`",
+          "input: `\\alpha_i`",
+          "input: `b_j`",
+          "input: `\\beta_j`",
+          "output: `R`"
+        ],
+        "candidate_kinds": [
+          "equation",
+          "template",
+          "definition",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_1",
+        "equation_bearing": true,
+        "equations": [
+          "$$ R = \\frac{\\prod_i a_i^{\\alpha_i}}{\\prod_j b_j^{\\beta_j}} $$"
+        ],
+        "heading": "1. Reusable substrate",
+        "paragraphs": [
+          "When a state measure is formed as one weighted product divided by another weighted product, the reusable family is weighted product ratio.",
+          "The reusable formula is:",
+          "$$ R = \\frac{\\prod_i a_i^{\\alpha_i}}{\\prod_j b_j^{\\beta_j}} $$"
+        ],
+        "path": [
+          "Chemistry Relations 10 \u2014 Equilibrium Constant as Product-to-Reactant Power Ratio",
+          "1. Reusable substrate"
+        ],
+        "sections": [
+          "1. Reusable substrate"
+        ]
+      },
+      {
+        "bullets": [
+          "input: product concentrations",
+          "input: reactant concentrations",
+          "input: stoichiometric coefficients `\\nu`",
+          "output: `K`"
+        ],
+        "candidate_kinds": [
+          "equation",
+          "template",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_2",
+        "equation_bearing": true,
+        "equations": [
+          "$$ K = \\frac{\\prod (\\text{product concentration})^{\\nu}}{\\prod (\\text{reactant concentration})^{\\nu}} $$"
+        ],
+        "heading": "2. Equilibrium constant expression",
+        "paragraphs": [
+          "For a reaction with products and reactants, chemistry uses:",
+          "$$ K = \\frac{\\prod (\\text{product concentration})^{\\nu}}{\\prod (\\text{reactant concentration})^{\\nu}} $$",
+          "Where:"
+        ],
+        "path": [
+          "Chemistry Relations 10 \u2014 Equilibrium Constant as Product-to-Reactant Power Ratio",
+          "2. Equilibrium constant expression"
+        ],
+        "sections": [
+          "2. Equilibrium constant expression"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `[A]`",
+          "input: `[B]`",
+          "input: `[C]`",
+          "input: `[D]`",
+          "input: `a, b, c, d`",
+          "output: `K`"
+        ],
+        "candidate_kinds": [
+          "equation",
+          "logic",
+          "template",
+          "summary",
+          "example",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_3",
+        "equation_bearing": true,
+        "equations": [
+          "$$ K = \\frac{[C]^c [D]^d}{[A]^a [B]^b} $$"
+        ],
+        "heading": "3. Example schematic form",
+        "paragraphs": [
+          "For",
+          "$$ aA + bB \\rightleftharpoons cC + dD $$",
+          "the equilibrium law is:"
+        ],
+        "path": [
+          "Chemistry Relations 10 \u2014 Equilibrium Constant as Product-to-Reactant Power Ratio",
+          "3. Example schematic form"
+        ],
+        "sections": [
+          "3. Example schematic form"
+        ]
+      },
+      {
+        "bullets": [
+          "concentration from solution chemistry",
+          "coefficients from balanced equations",
+          "multiplicative combination and ratio structures from earlier reusable families"
+        ],
+        "candidate_kinds": [
+          "logic",
+          "definition",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_4",
+        "equation_bearing": false,
+        "equations": [],
+        "heading": "4. Connection to earlier lessons",
+        "paragraphs": [
+          "This law reuses several earlier semantic parts:",
+          "So equilibrium is more advanced not because it abandons previous lessons, but because it composes them."
+        ],
+        "path": [
+          "Chemistry Relations 10 \u2014 Equilibrium Constant as Product-to-Reactant Power Ratio",
+          "4. Connection to earlier lessons"
+        ],
+        "sections": [
+          "4. Connection to earlier lessons"
+        ]
+      },
+      {
+        "bullets": [],
+        "candidate_kinds": [
+          "logic",
+          "definition",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_5",
+        "equation_bearing": false,
+        "equations": [],
+        "heading": "5. One-sentence summary",
+        "paragraphs": [
+          "Weighted product ratio is the broader reusable substrate; the equilibrium constant expression is a narrower determinate chemistry law that compares product and reactant concentration structures using stoichiometric exponents."
+        ],
+        "path": [
+          "Chemistry Relations 10 \u2014 Equilibrium Constant as Product-to-Reactant Power Ratio",
+          "5. One-sentence summary"
+        ],
+        "sections": [
+          "5. One-sentence summary"
+        ]
+      }
+    ],
+    "proposal_id": "proposal_markdownabilitylearningproposal_ef26b4",
+    "rationale": "Markdown ability learning proposals are bounded executable-harvest plans grounded in the structural ir.",
+    "source": "llm"
+  },
+  "final_answer": "Learned 9 artifacts from 10_LEARN_CHEMISTRY_RELATIONS_EQUILIBRIUM.md.",
+  "functionalization_proposal": {
+    "proposal_id": "proposal_markdownfunctionalizationproposal_c94091",
+    "rationale": "Markdown functionalization proposals are bounded executable extractions from already classified encounters.",
+    "source": "llm"
+  },
+  "ir": {
+    "clusters": [
+      {
+        "bullets": [
+          "input: `a_i`",
+          "input: `\\alpha_i`",
+          "input: `b_j`",
+          "input: `\\beta_j`",
+          "output: `R`"
+        ],
+        "code_blocks": [],
+        "equations": [
+          "$$ R = \\frac{\\prod_i a_i^{\\alpha_i}}{\\prod_j b_j^{\\beta_j}} $$"
+        ],
+        "heading": "1. Reusable substrate",
+        "paragraphs": [
+          "When a state measure is formed as one weighted product divided by another weighted product, the reusable family is weighted product ratio.",
+          "The reusable formula is:",
+          "$$ R = \\frac{\\prod_i a_i^{\\alpha_i}}{\\prod_j b_j^{\\beta_j}} $$"
+        ],
+        "path": [
+          "Chemistry Relations 10 \u2014 Equilibrium Constant as Product-to-Reactant Power Ratio",
+          "1. Reusable substrate"
+        ],
+        "sections": [
+          "1. Reusable substrate"
+        ]
+      },
+      {
+        "bullets": [
+          "input: product concentrations",
+          "input: reactant concentrations",
+          "input: stoichiometric coefficients `\\nu`",
+          "output: `K`"
+        ],
+        "code_blocks": [],
+        "equations": [
+          "$$ K = \\frac{\\prod (\\text{product concentration})^{\\nu}}{\\prod (\\text{reactant concentration})^{\\nu}} $$"
+        ],
+        "heading": "2. Equilibrium constant expression",
+        "paragraphs": [
+          "For a reaction with products and reactants, chemistry uses:",
+          "$$ K = \\frac{\\prod (\\text{product concentration})^{\\nu}}{\\prod (\\text{reactant concentration})^{\\nu}} $$",
+          "Where:"
+        ],
+        "path": [
+          "Chemistry Relations 10 \u2014 Equilibrium Constant as Product-to-Reactant Power Ratio",
+          "2. Equilibrium constant expression"
+        ],
+        "sections": [
+          "2. Equilibrium constant expression"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `[A]`",
+          "input: `[B]`",
+          "input: `[C]`",
+          "input: `[D]`",
+          "input: `a, b, c, d`",
+          "output: `K`"
+        ],
+        "code_blocks": [],
+        "equations": [
+          "$$ K = \\frac{[C]^c [D]^d}{[A]^a [B]^b} $$"
+        ],
+        "heading": "3. Example schematic form",
+        "paragraphs": [
+          "For",
+          "$$ aA + bB \\rightleftharpoons cC + dD $$",
+          "the equilibrium law is:"
+        ],
+        "path": [
+          "Chemistry Relations 10 \u2014 Equilibrium Constant as Product-to-Reactant Power Ratio",
+          "3. Example schematic form"
+        ],
+        "sections": [
+          "3. Example schematic form"
+        ]
+      },
+      {
+        "bullets": [
+          "concentration from solution chemistry",
+          "coefficients from balanced equations",
+          "multiplicative combination and ratio structures from earlier reusable families"
+        ],
+        "code_blocks": [],
+        "equations": [],
+        "heading": "4. Connection to earlier lessons",
+        "paragraphs": [
+          "This law reuses several earlier semantic parts:",
+          "So equilibrium is more advanced not because it abandons previous lessons, but because it composes them."
+        ],
+        "path": [
+          "Chemistry Relations 10 \u2014 Equilibrium Constant as Product-to-Reactant Power Ratio",
+          "4. Connection to earlier lessons"
+        ],
+        "sections": [
+          "4. Connection to earlier lessons"
+        ]
+      },
+      {
+        "bullets": [],
+        "code_blocks": [],
+        "equations": [],
+        "heading": "5. One-sentence summary",
+        "paragraphs": [
+          "Weighted product ratio is the broader reusable substrate; the equilibrium constant expression is a narrower determinate chemistry law that compares product and reactant concentration structures using stoichiometric exponents."
+        ],
+        "path": [
+          "Chemistry Relations 10 \u2014 Equilibrium Constant as Product-to-Reactant Power Ratio",
+          "5. One-sentence summary"
+        ],
+        "sections": [
+          "5. One-sentence summary"
+        ]
+      }
+    ],
+    "intro_bullets": [],
+    "intro_paragraphs": [
+      "This document teaches one reusable weighted-ratio substrate and then reuses it in chemical equilibrium.",
+      "The point is not only to store the equilibrium expression, but to preserve the reusable semantic relation between multiplied factors, exponent weighting, and reactant-product comparison."
+    ],
+    "section_count": 5,
+    "source_path": "/Users/ravindranathakila/service/realized/trials/chemistry/10_LEARN_CHEMISTRY_RELATIONS_EQUILIBRIUM.md",
+    "title": "Chemistry Relations 10 \u2014 Equilibrium Constant as Product-to-Reactant Power Ratio"
+  },
+  "learned_artifacts": [
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-10-equilibrium-con_cc9061",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Example schematic form?",
+      "related_artifact_ids": [
+        "artifact_knowledge-chemistry-relations-10-equilibrium-con_f1e748"
+      ],
+      "representation": "yaml",
+      "source_sections": [],
+      "title": "Chemistry Relations 10 \u2014 Equilibrium Constant as Product-to-Reactant Power Ratio / Chemistry Relations 10 Equilibrium Constant as Product-to-Reactant Power Ratio"
+    },
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-10-equilibrium-con_f1e748",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Weighted Product Ratio?",
+      "related_artifact_ids": [],
+      "representation": "yaml",
+      "source_sections": [
+        "1. Reusable substrate"
+      ],
+      "title": "Chemistry Relations 10 Equilibrium Constant as Product-to-Reactant Power Ratio / Weighted Product Ratio"
+    },
+    {
+      "artifact_id": "artifact-skill-e6fb47bf66f8",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Equilibrium constant expression?",
+      "related_artifact_ids": [
+        "artifact_knowledge-chemistry-relations-10-equilibrium-con_f1e748"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "2. Equilibrium constant expression"
+      ],
+      "title": "Chemistry Relations 10 \u2014 Equilibrium Constant as Product-to-Reactant Power Ratio / Equilibrium constant expression"
+    },
+    {
+      "artifact_id": "artifact-skill-63435df4b69c",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Example schematic form?",
+      "related_artifact_ids": [
+        "artifact_knowledge-chemistry-relations-10-equilibrium-con_f1e748"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "3. Example schematic form"
+      ],
+      "title": "Chemistry Relations 10 \u2014 Equilibrium Constant as Product-to-Reactant Power Ratio / Example schematic form"
+    },
+    {
+      "artifact_id": "artifact-skill-8e2f7961ff4d",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Connection to earlier lessons?",
+      "related_artifact_ids": [
+        "artifact_knowledge-chemistry-relations-10-equilibrium-con_f1e748"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "4. Connection to earlier lessons"
+      ],
+      "title": "Chemistry Relations 10 \u2014 Equilibrium Constant as Product-to-Reactant Power Ratio / Connection to earlier lessons"
+    },
+    {
+      "artifact_id": "artifact-skill-8f16cc5a3e2f",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Weighted Product Ratio?",
+      "related_artifact_ids": [
+        "artifact_knowledge-chemistry-relations-10-equilibrium-con_f1e748"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "5. One-sentence summary"
+      ],
+      "title": "Chemistry Relations 10 \u2014 Equilibrium Constant as Product-to-Reactant Power Ratio / Weighted Product Ratio"
+    },
+    {
+      "artifact_id": "artifact-skill-bc445d625f63",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate R from a_i, alpha_i, b_j, beta_j?",
+      "related_artifact_ids": [],
+      "representation": "python_script",
+      "source_sections": [
+        "1. Reusable substrate"
+      ],
+      "title": "Chemistry Relations 10 \u2014 Equilibrium Constant as Product-to-Reactant Power Ratio / Python Ability"
+    },
+    {
+      "artifact_id": "artifact-skill-e6fb47bf66f8",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate K from product_concentrations, reactant_concentrations, stoichiometric_coefficients_nu?",
+      "related_artifact_ids": [],
+      "representation": "python_script",
+      "source_sections": [
+        "2. Equilibrium constant expression"
+      ],
+      "title": "Chemistry Relations 10 \u2014 Equilibrium Constant as Product-to-Reactant Power Ratio / Equilibrium Constant Expression"
+    },
+    {
+      "artifact_id": "artifact-skill-63435df4b69c",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate K from C, c, D, d, A, a, B, b?",
+      "related_artifact_ids": [],
+      "representation": "python_script",
+      "source_sections": [
+        "3. Example schematic form"
+      ],
+      "title": "Chemistry Relations 10 \u2014 Equilibrium Constant as Product-to-Reactant Power Ratio / Example Schematic Form"
+    }
+  ],
+  "learned_count": 9,
+  "learning_context": {
+    "applied_delta_count": 7,
+    "canonical_title": "Chemistry Relations 10 \u2014 Equilibrium Constant as Product-to-Reactant Power Ratio",
+    "context_path": "/Users/ravindranathakila/service/realized/trials/chemistry/corpus/chemistry-relations-10-equilibrium-constant-as-product-to-reacta/context.json",
+    "corpus_root": "/Users/ravindranathakila/service/realized/trials/chemistry",
+    "delta_id": "delta_chemistry-relations-10-equilibrium-constant-as-p_45b355",
+    "delta_path": "/Users/ravindranathakila/service/realized/trials/chemistry/corpus/chemistry-relations-10-equilibrium-constant-as-product-to-reacta/deltas/delta_chemistry-relations-10-equilibrium-constant-as-p_45b355.json",
+    "matched_existing_subject_id": "chemistry-relations-10-equilibrium-constant-as-product-to-reacta",
+    "source_id": "source_users-ravindranathakila-service-realized-trials-_43d163f5be",
+    "source_record_path": "/Users/ravindranathakila/service/realized/trials/chemistry/corpus/chemistry-relations-10-equilibrium-constant-as-product-to-reacta/sources/source_users-ravindranathakila-service-realized-trials-_43d163f5be.json",
+    "subject_family": "Chemistry Relations 10 \u2014 Equilibrium Constant as Product-to-Reactant Power Ratio",
+    "subject_id": "chemistry-relations-10-equilibrium-constant-as-product-to-reacta",
+    "unit_count": 8
+  },
+  "parsing_failures": [],
+  "proposal": {
+    "proposal_id": "proposal_markdownlearningproposal_b25868",
+    "rationale": "Markdown learning proposals are bounded ingestion plans for external-source harvest and remain governed before artifact admission.",
+    "source": "llm"
+  },
+  "run_id": "run_cfc67517_6b34e8",
+  "run_outcome": "completed",
+  "supported_executors": [
+    "python3"
+  ]
+}

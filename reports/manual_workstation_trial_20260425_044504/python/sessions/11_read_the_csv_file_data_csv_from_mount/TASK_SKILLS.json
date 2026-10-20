@@ -1,0 +1,270 @@
+{
+  "prompt": "Read the CSV file `data.csv` from mount `skill_tmp`.",
+  "returned_skill_count": 12,
+  "skills": [
+    {
+      "authorities_requested": [
+        "execute",
+        "read"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "mount": "required input value",
+        "relative_path": "required input value"
+      },
+      "kind": "ability",
+      "outputs": {
+        "result": "execution result"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "score": 12,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Python Commands 10 \u2014 Read Csv File / Python Commands 10 Read Csv File"
+    },
+    {
+      "authorities_requested": [
+        "execute",
+        "write"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "csv_text": "required input value",
+        "mount": "required input value",
+        "relative_path": "required input value"
+      },
+      "kind": "ability",
+      "outputs": {
+        "result": "execution result"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier2_connected",
+      "score": 9,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Python Commands 11 \u2014 Write Csv File / Python Commands 11 Write Csv File"
+    },
+    {
+      "authorities_requested": [
+        "execute",
+        "read"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "mount": "required input value",
+        "relative_path": "required input value"
+      },
+      "kind": "ability",
+      "outputs": {
+        "result": "execution result"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "score": 6,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Python Commands 02 \u2014 Read Text File / Python Commands 02 Read Text File"
+    },
+    {
+      "authorities_requested": [
+        "execute",
+        "read"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "mount": "required input value",
+        "relative_path": "required input value"
+      },
+      "kind": "ability",
+      "outputs": {
+        "result": "execution result"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "score": 6,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Python Commands 08 \u2014 Read Json File / Python Commands 08 Read Json File"
+    },
+    {
+      "authorities_requested": [
+        "execute",
+        "write"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "mount": "required input value",
+        "relative_path": "required input value",
+        "text": "required input value"
+      },
+      "kind": "ability",
+      "outputs": {
+        "result": "execution result"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier2_connected",
+      "score": 3,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Python Commands 03 \u2014 Write Text File / Python Commands 03 Write Text File"
+    },
+    {
+      "authorities_requested": [
+        "execute",
+        "write"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "mount": "required input value",
+        "relative_path": "required input value",
+        "text": "required input value"
+      },
+      "kind": "ability",
+      "outputs": {
+        "result": "execution result"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier2_connected",
+      "score": 3,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Python Commands 04 \u2014 Append Text File / Python Commands 04 Append Text File"
+    },
+    {
+      "authorities_requested": [
+        "execute",
+        "write"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "destination_mount": "required input value",
+        "destination_relative_path": "required input value",
+        "source_mount": "required input value",
+        "source_relative_path": "required input value"
+      },
+      "kind": "ability",
+      "outputs": {
+        "result": "execution result"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier2_connected",
+      "score": 3,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Python Commands 05 \u2014 Copy File / Python Commands 05 Copy File"
+    },
+    {
+      "authorities_requested": [
+        "execute",
+        "write"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "destination_mount": "required input value",
+        "destination_relative_path": "required input value",
+        "source_mount": "required input value",
+        "source_relative_path": "required input value"
+      },
+      "kind": "ability",
+      "outputs": {
+        "result": "execution result"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier2_connected",
+      "score": 3,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Python Commands 06 \u2014 Move File / Python Commands 06 Move File"
+    },
+    {
+      "authorities_requested": [
+        "execute",
+        "write"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "mount": "required input value",
+        "relative_path": "required input value"
+      },
+      "kind": "ability",
+      "outputs": {
+        "result": "execution result"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier2_connected",
+      "score": 3,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Python Commands 07 \u2014 Delete File / Python Commands 07 Delete File"
+    },
+    {
+      "authorities_requested": [
+        "execute",
+        "write"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "json_text": "required input value",
+        "mount": "required input value",
+        "relative_path": "required input value"
+      },
+      "kind": "ability",
+      "outputs": {
+        "result": "execution result"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier2_connected",
+      "score": 3,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Python Commands 09 \u2014 Write Json File / Python Commands 09 Write Json File"
+    },
+    {
+      "authorities_requested": [
+        "execute",
+        "write",
+        "communicate"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "mount": "required input value",
+        "relative_path": "required input value",
+        "url": "required input value"
+      },
+      "kind": "ability",
+      "outputs": {
+        "result": "execution result"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier2_connected",
+      "score": 3,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Python Commands 15 \u2014 Download Url To File / Python Commands 15 Download Url To File"
+    },
+    {
+      "authorities_requested": [
+        "execute",
+        "read"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "mount": "required input value",
+        "relative_path": "required input value",
+        "suffix": "required input value"
+      },
+      "kind": "ability",
+      "outputs": {
+        "result": "execution result"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "score": 3,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Python Commands 16 \u2014 Find Files By Suffix / Python Commands 16 Find Files By Suffix"
+    }
+  ],
+  "total_skill_count": 19
+}

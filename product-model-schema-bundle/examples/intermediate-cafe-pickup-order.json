@@ -1,0 +1,894 @@
+{
+  "schemaVersion": "2.0.0",
+  "modelId": "model.cafe-pickup-order",
+  "modelName": "Cafe Pickup Order Product Model",
+  "modelPurpose": "Represents how a cafe app turns a paid order into prepared food for pickup while separating payment correctness from real-world preparation.",
+  "createdAt": "2026-05-16T00:00:00Z",
+  "updatedAt": "2026-05-16T00:00:00Z",
+  "product": {
+    "productId": "product.cafe-app",
+    "name": "Cafe Ordering App",
+    "description": "A product that lets customers order food and drinks for pickup from a cafe.",
+    "domain": "Cafe ordering and pickup"
+  },
+  "lexicon": [
+    {
+      "termId": "term.duty",
+      "term": "Duty",
+      "definition": "A world-anchored obligation or capability the product must support, expressed as the KR title.",
+      "allowedAliases": [
+        "Product Duty",
+        "Obligated Work"
+      ],
+      "forbiddenAliases": [
+        "Persona",
+        "User Type"
+      ],
+      "examples": [
+        "Reserve an available book copy for pickup",
+        "Prepare a paid cafe order for customer pickup",
+        "Return an eligible delivered item and issue the correct refund"
+      ]
+    },
+    {
+      "termId": "term.user-journey",
+      "term": "User Journey",
+      "definition": "The canonical end-to-end path that fulfills one primary duty, expressed as the KR description.",
+      "allowedAliases": [
+        "Journey",
+        "Duty Journey"
+      ],
+      "forbiddenAliases": [
+        "Screen Flow Only",
+        "Persona Story"
+      ],
+      "examples": [
+        "A member searches for a book, reserves a copy, and receives pickup details."
+      ]
+    },
+    {
+      "termId": "term.gwt-step",
+      "term": "Given-When-Then Step",
+      "definition": "An atomic behavioral transition with preconditions, trigger, and observable postconditions.",
+      "allowedAliases": [
+        "GWT",
+        "Behavioral Step"
+      ],
+      "forbiddenAliases": [
+        "Implementation Task",
+        "Engineering Ticket"
+      ],
+      "examples": [
+        "Given a copy is available, when a member reserves it, then one active hold is created."
+      ]
+    },
+    {
+      "termId": "term.ux-sli",
+      "term": "UX SLI",
+      "definition": "A measurable indicator of user-experienced quality, such as latency, correctness, freshness, or recoverability.",
+      "allowedAliases": [
+        "Experience Indicator"
+      ],
+      "forbiddenAliases": [
+        "Infrastructure Metric Only"
+      ],
+      "examples": [
+        "Reservation confirmation time",
+        "Refund status freshness"
+      ]
+    },
+    {
+      "termId": "term.ux-slo",
+      "term": "UX SLO",
+      "definition": "A threshold target for a UX SLI that defines acceptable experience for a critical duty or journey.",
+      "allowedAliases": [
+        "Experience Objective"
+      ],
+      "forbiddenAliases": [
+        "Aspirational Goal"
+      ],
+      "examples": [
+        "99% of valid reservations confirm in under one second."
+      ]
+    },
+    {
+      "termId": "term.golden-trace",
+      "term": "Golden Trace",
+      "definition": "A concrete end-to-end execution example that demonstrates correct behavior for a duty journey.",
+      "allowedAliases": [
+        "Correct Trace",
+        "Canonical Success Trace"
+      ],
+      "forbiddenAliases": [
+        "Happy Path Only"
+      ],
+      "examples": [
+        "Successful reservation of one available library copy."
+      ]
+    },
+    {
+      "termId": "term.anti-golden-trace",
+      "term": "Anti-Golden Trace",
+      "definition": "A concrete execution example that demonstrates forbidden, failed, misleading, or unacceptable behavior.",
+      "allowedAliases": [
+        "Forbidden Trace",
+        "Negative Trace"
+      ],
+      "forbiddenAliases": [
+        "Bug Report Only"
+      ],
+      "examples": [
+        "Two members receive confirmation for the same physical copy."
+      ]
+    },
+    {
+      "termId": "term.real-world-object",
+      "term": "Real-World Object",
+      "definition": "A domain entity that exists or is meaningful in the real world and anchors the product architecture.",
+      "allowedAliases": [
+        "Domain Object",
+        "World Object"
+      ],
+      "forbiddenAliases": [
+        "Database Table"
+      ],
+      "examples": [
+        "Book Copy",
+        "Kitchen Ticket",
+        "Refund"
+      ]
+    },
+    {
+      "termId": "term.network-boundary",
+      "term": "Network Boundary",
+      "definition": "An architectural separation justified by real-world duration, externality, or human/physical delay.",
+      "allowedAliases": [
+        "Causal Boundary"
+      ],
+      "forbiddenAliases": [
+        "Arbitrary Microservice Boundary"
+      ],
+      "examples": [
+        "Kitchen preparation may be asynchronous because cooking takes real-world time."
+      ]
+    },
+    {
+      "termId": "term.invariant",
+      "term": "Invariant",
+      "definition": "A product law that must remain true across all valid states and transitions.",
+      "allowedAliases": [
+        "Product Law",
+        "Non-Negotiable Rule"
+      ],
+      "forbiddenAliases": [
+        "Preference",
+        "Suggestion"
+      ],
+      "examples": [
+        "One accepted return may issue at most one refund."
+      ]
+    }
+  ],
+  "ambiguityPolicy": {
+    "principle": "The model must be internally decidable. If ambiguity remains, the model must name the missing external fact instead of hiding uncertainty in vague wording.",
+    "unresolvedQuestionHandling": "block-change",
+    "requiresClarificationWhen": [
+      "A duty cannot be mapped to at least one real-world object or interaction.",
+      "A network boundary lacks a real-world latency or causality justification.",
+      "A trace can be interpreted as both golden and anti-golden.",
+      "A weakening or breaking update lacks explicit compatibility classification.",
+      "A journey completion criterion cannot be evaluated from observable state."
+    ]
+  },
+  "realWorldModel": {
+    "objects": [
+      {
+        "objectId": "object.customer",
+        "name": "Customer",
+        "definition": "A person placing and picking up a cafe order.",
+        "lifecycleStates": [
+          "active",
+          "blocked"
+        ],
+        "ownedByDutyIds": [
+          "duty.prepare-paid-cafe-order"
+        ]
+      },
+      {
+        "objectId": "object.cart",
+        "name": "Cart",
+        "definition": "A temporary collection of available menu items before checkout.",
+        "lifecycleStates": [
+          "open",
+          "checked-out",
+          "abandoned"
+        ],
+        "ownedByDutyIds": [
+          "duty.prepare-paid-cafe-order"
+        ]
+      },
+      {
+        "objectId": "object.payment",
+        "name": "Payment Authorization",
+        "definition": "A payment decision that approves or declines the order amount.",
+        "lifecycleStates": [
+          "pending",
+          "accepted",
+          "declined"
+        ],
+        "ownedByDutyIds": [
+          "duty.prepare-paid-cafe-order"
+        ]
+      },
+      {
+        "objectId": "object.paid-order",
+        "name": "Paid Order",
+        "definition": "An order that exists after payment acceptance.",
+        "lifecycleStates": [
+          "created",
+          "sent-to-kitchen",
+          "preparing",
+          "ready",
+          "picked-up"
+        ],
+        "ownedByDutyIds": [
+          "duty.prepare-paid-cafe-order"
+        ]
+      },
+      {
+        "objectId": "object.kitchen-ticket",
+        "name": "Kitchen Ticket",
+        "definition": "The kitchen-facing instruction to prepare the paid order.",
+        "lifecycleStates": [
+          "created",
+          "accepted",
+          "ready",
+          "voided"
+        ],
+        "ownedByDutyIds": [
+          "duty.prepare-paid-cafe-order"
+        ]
+      }
+    ],
+    "interactions": [
+      {
+        "interactionId": "interaction.checkout",
+        "name": "Checkout cart",
+        "description": "The customer submits cart and payment for order creation.",
+        "participantObjectIds": [
+          "object.customer",
+          "object.cart",
+          "object.payment",
+          "object.paid-order"
+        ],
+        "expectedRealWorldDuration": {
+          "class": "mixed",
+          "explanation": "Checkout is digital but external payment can take seconds."
+        }
+      },
+      {
+        "interactionId": "interaction.prepare-food",
+        "name": "Prepare food",
+        "description": "Kitchen staff prepare the paid order in the real world.",
+        "participantObjectIds": [
+          "object.paid-order",
+          "object.kitchen-ticket"
+        ],
+        "expectedRealWorldDuration": {
+          "class": "over-or-equal-1s",
+          "explanation": "Food preparation takes real-world time and can be asynchronous."
+        }
+      }
+    ],
+    "invariants": [
+      {
+        "invariantId": "invariant.no-ticket-without-payment",
+        "name": "No kitchen ticket without payment",
+        "statement": "A kitchen ticket must not be created unless payment is accepted.",
+        "rationale": "The kitchen should not prepare unpaid orders accidentally.",
+        "severity": "critical",
+        "objectIds": [
+          "object.payment",
+          "object.kitchen-ticket",
+          "object.paid-order"
+        ],
+        "interactionIds": [
+          "interaction.checkout"
+        ],
+        "enforcedByStepIds": [
+          "step.create-paid-order",
+          "step.create-kitchen-ticket",
+          "step.reject-payment-failure"
+        ],
+        "guardedByAntiTraceIds": [
+          "antitrace.unpaid-ticket"
+        ]
+      }
+    ],
+    "networkBoundaries": [
+      {
+        "boundaryId": "boundary.checkout-payment",
+        "name": "Checkout and payment boundary",
+        "description": "Payment acceptance and paid order creation must be causally linked.",
+        "interactionId": "interaction.checkout",
+        "realWorldProcess": "A customer exchanges payment authorization for a cafe order obligation.",
+        "realWorldLatencyClass": "mixed",
+        "separationAllowed": false,
+        "consistencyExpectation": "strong",
+        "causalityJustification": "The order must not be sent to the kitchen unless payment acceptance and order creation are causally connected.",
+        "userVisibleImpact": "The customer receives confirmation or payment failure.",
+        "failureMode": "An unpaid kitchen ticket may be created."
+      },
+      {
+        "boundaryId": "boundary.kitchen-preparation",
+        "name": "Kitchen preparation boundary",
+        "description": "Kitchen preparation may progress asynchronously after a paid order exists.",
+        "interactionId": "interaction.prepare-food",
+        "realWorldProcess": "Kitchen staff prepare food and drinks over minutes.",
+        "realWorldLatencyClass": "over-or-equal-1s",
+        "separationAllowed": true,
+        "consistencyExpectation": "eventual",
+        "causalityJustification": "Cooking is physically delayed and can safely proceed asynchronously after payment.",
+        "userVisibleImpact": "The customer sees preparing and ready states.",
+        "failureMode": "A lost ticket leaves a paid order without preparation."
+      }
+    ]
+  },
+  "objectives": [
+    {
+      "objectiveId": "objective.fast-accurate-pickup",
+      "title": "Make pickup orders fast and accurate",
+      "description": "Customers can pay for available items and receive reliable preparation status.",
+      "successMeaning": "Paid orders reach the kitchen exactly once and customers can trust ready status."
+    }
+  ],
+  "duties": [
+    {
+      "dutyId": "duty.prepare-paid-cafe-order",
+      "title": "Prepare a paid cafe order for customer pickup",
+      "intent": "Transform a paid cart into food prepared for pickup.",
+      "scope": "Covers checkout, payment acceptance, kitchen ticket creation, preparation status, and ready notification.",
+      "nonGoals": [
+        "Refunds after pickup."
+      ],
+      "criticality": "critical",
+      "status": "active",
+      "objectiveIds": [
+        "objective.fast-accurate-pickup"
+      ],
+      "primaryJourneyIds": [
+        "journey.prepare-paid-cafe-order"
+      ],
+      "usesRealWorldObjectIds": [
+        "object.customer",
+        "object.cart",
+        "object.payment",
+        "object.paid-order",
+        "object.kitchen-ticket"
+      ],
+      "usesRealWorldInteractionIds": [
+        "interaction.checkout",
+        "interaction.prepare-food"
+      ],
+      "invariantIds": [
+        "invariant.no-ticket-without-payment"
+      ],
+      "version": "1.0.0",
+      "okrMapping": {
+        "keyResultTitle": "Prepare a paid cafe order for customer pickup",
+        "keyResultDescription": "A customer pays for items, the kitchen prepares them, and the customer sees ready status."
+      },
+      "dependsOnDutyIds": []
+    }
+  ],
+  "journeys": [
+    {
+      "journeyId": "journey.prepare-paid-cafe-order",
+      "dutyId": "duty.prepare-paid-cafe-order",
+      "title": "Order cafe items for pickup",
+      "description": "A customer checks out a cart, payment is accepted, a kitchen ticket is created, and the order becomes ready for pickup.",
+      "purpose": "Bridge digital payment with real-world food preparation.",
+      "trigger": "Customer submits checkout.",
+      "preconditions": [
+        "The cafe is open.",
+        "The cart contains available items."
+      ],
+      "primaryFlow": [
+        "Customer checks out.",
+        "Payment is accepted.",
+        "System creates paid order.",
+        "System creates kitchen ticket.",
+        "Kitchen prepares order.",
+        "Kitchen marks order ready."
+      ],
+      "completionCriteria": [
+        "A paid order exists.",
+        "Exactly one kitchen ticket exists.",
+        "The customer sees ready status."
+      ],
+      "variants": [
+        "Order may remain preparing for several minutes."
+      ],
+      "failureBoundaries": [
+        "If payment fails, no kitchen ticket is created."
+      ],
+      "nonGoals": [
+        "In-store table service is outside this journey."
+      ],
+      "inputObjectIds": [
+        "object.customer",
+        "object.cart",
+        "object.payment"
+      ],
+      "outputObjectIds": [
+        "object.paid-order",
+        "object.kitchen-ticket"
+      ],
+      "invariantIds": [
+        "invariant.no-ticket-without-payment"
+      ],
+      "stepIds": [
+        "step.checkout-cart",
+        "step.create-paid-order",
+        "step.create-kitchen-ticket",
+        "step.mark-ready",
+        "step.reject-payment-failure"
+      ],
+      "sliIds": [
+        "sli.checkout-confirmation-time",
+        "sli.ticket-creation-reliability"
+      ],
+      "sloIds": [
+        "slo.checkout-under-3s",
+        "slo.ticket-created-for-paid-orders"
+      ],
+      "goldenTraceIds": [
+        "trace.successful-cafe-order"
+      ],
+      "antiGoldenTraceIds": [
+        "antitrace.unpaid-ticket"
+      ],
+      "timing": {
+        "realWorldLatencyClass": "mixed",
+        "syncExpectation": "mixed",
+        "causalJustification": "Checkout requires digital consistency; food preparation takes real-world time and may be asynchronous."
+      },
+      "networkBoundaryIds": [
+        "boundary.checkout-payment",
+        "boundary.kitchen-preparation"
+      ],
+      "status": "active",
+      "version": "1.0.0",
+      "invokesDutyIds": [],
+      "flow": {
+        "entryStepId": "step.checkout-cart",
+        "exitStepIds": [
+          "step.reject-payment-failure"
+        ],
+        "edges": [
+          {
+            "fromStepId": "step.checkout-cart",
+            "toStepId": "step.create-paid-order",
+            "edgeType": "primary",
+            "condition": "",
+            "notes": ""
+          },
+          {
+            "fromStepId": "step.create-paid-order",
+            "toStepId": "step.create-kitchen-ticket",
+            "edgeType": "primary",
+            "condition": "",
+            "notes": ""
+          },
+          {
+            "fromStepId": "step.create-kitchen-ticket",
+            "toStepId": "step.mark-ready",
+            "edgeType": "primary",
+            "condition": "",
+            "notes": ""
+          },
+          {
+            "fromStepId": "step.mark-ready",
+            "toStepId": "step.reject-payment-failure",
+            "edgeType": "primary",
+            "condition": "",
+            "notes": ""
+          }
+        ],
+        "notes": "Linear primary flow derived from step order."
+      }
+    }
+  ],
+  "steps": [
+    {
+      "stepId": "step.checkout-cart",
+      "journeyId": "journey.prepare-paid-cafe-order",
+      "sequence": 1,
+      "title": "Checkout cart",
+      "given": "The cart contains available items.",
+      "when": "The customer submits checkout.",
+      "then": "The system requests payment authorization and shows a resolving state.",
+      "thenAssertions": [
+        "Checkout total matches cart contents."
+      ],
+      "relatedObjectIds": [
+        "object.cart",
+        "object.payment"
+      ],
+      "relatedInteractionIds": [
+        "interaction.checkout"
+      ],
+      "relatedInvariantIds": [],
+      "expectedUserVisibleOutcome": "The customer sees checkout progressing.",
+      "status": "active",
+      "stateTransitions": [
+        {
+          "objectId": "object.cart",
+          "fromState": "open",
+          "toState": "checked-out",
+          "notes": "The cart is submitted for checkout."
+        },
+        {
+          "objectId": "object.payment",
+          "fromState": "pending",
+          "toState": "pending",
+          "notes": "A payment attempt is initiated (still pending until authorization)."
+        }
+      ]
+    },
+    {
+      "stepId": "step.create-paid-order",
+      "journeyId": "journey.prepare-paid-cafe-order",
+      "sequence": 2,
+      "title": "Create paid order",
+      "given": "Payment authorization is accepted.",
+      "when": "Checkout completes.",
+      "then": "The system creates a paid order.",
+      "thenAssertions": [
+        "The order records accepted payment."
+      ],
+      "relatedObjectIds": [
+        "object.payment",
+        "object.paid-order"
+      ],
+      "relatedInteractionIds": [
+        "interaction.checkout"
+      ],
+      "relatedInvariantIds": [
+        "invariant.no-ticket-without-payment"
+      ],
+      "expectedUserVisibleOutcome": "The customer sees order confirmation.",
+      "status": "active",
+      "stateTransitions": [
+        {
+          "objectId": "object.payment",
+          "fromState": "pending",
+          "toState": "accepted",
+          "notes": "Payment is authorized/accepted."
+        },
+        {
+          "objectId": "object.paid-order",
+          "fromState": "none",
+          "toState": "created",
+          "notes": "A paid order is created after payment acceptance."
+        }
+      ]
+    },
+    {
+      "stepId": "step.create-kitchen-ticket",
+      "journeyId": "journey.prepare-paid-cafe-order",
+      "sequence": 3,
+      "title": "Create kitchen ticket",
+      "given": "A paid order exists.",
+      "when": "The order is accepted for preparation.",
+      "then": "The system creates exactly one kitchen ticket.",
+      "thenAssertions": [
+        "No ticket exists without payment."
+      ],
+      "relatedObjectIds": [
+        "object.paid-order",
+        "object.kitchen-ticket"
+      ],
+      "relatedInteractionIds": [
+        "interaction.prepare-food"
+      ],
+      "relatedInvariantIds": [
+        "invariant.no-ticket-without-payment"
+      ],
+      "expectedUserVisibleOutcome": "The customer sees the order was received by the cafe.",
+      "status": "active",
+      "stateTransitions": [
+        {
+          "objectId": "object.paid-order",
+          "fromState": "created",
+          "toState": "sent-to-kitchen",
+          "notes": "The paid order is sent to the kitchen."
+        },
+        {
+          "objectId": "object.kitchen-ticket",
+          "fromState": "none",
+          "toState": "created",
+          "notes": "A kitchen ticket is created for preparation."
+        }
+      ]
+    },
+    {
+      "stepId": "step.mark-ready",
+      "journeyId": "journey.prepare-paid-cafe-order",
+      "sequence": 4,
+      "title": "Mark ready",
+      "given": "Kitchen staff have prepared the order.",
+      "when": "Staff mark the ticket ready.",
+      "then": "The order status changes to ready.",
+      "thenAssertions": [
+        "Ready state is visible to the customer."
+      ],
+      "relatedObjectIds": [
+        "object.paid-order",
+        "object.kitchen-ticket"
+      ],
+      "relatedInteractionIds": [
+        "interaction.prepare-food"
+      ],
+      "relatedInvariantIds": [],
+      "expectedUserVisibleOutcome": "The customer sees ready for pickup.",
+      "status": "active",
+      "stateTransitions": [
+        {
+          "objectId": "object.kitchen-ticket",
+          "fromState": "accepted",
+          "toState": "ready",
+          "notes": "Kitchen marks the ticket ready."
+        },
+        {
+          "objectId": "object.paid-order",
+          "fromState": "preparing",
+          "toState": "ready",
+          "notes": "Order becomes ready for pickup."
+        }
+      ]
+    },
+    {
+      "stepId": "step.reject-payment-failure",
+      "journeyId": "journey.prepare-paid-cafe-order",
+      "sequence": 5,
+      "title": "Reject failed payment",
+      "given": "Payment authorization is declined.",
+      "when": "Checkout resolves.",
+      "then": "The system does not create a paid order or kitchen ticket.",
+      "thenAssertions": [
+        "No kitchen ticket exists after failed payment."
+      ],
+      "relatedObjectIds": [
+        "object.payment",
+        "object.paid-order",
+        "object.kitchen-ticket"
+      ],
+      "relatedInteractionIds": [
+        "interaction.checkout"
+      ],
+      "relatedInvariantIds": [
+        "invariant.no-ticket-without-payment"
+      ],
+      "expectedUserVisibleOutcome": "The customer sees payment failure and can retry.",
+      "status": "active",
+      "stateTransitions": [
+        {
+          "objectId": "object.payment",
+          "fromState": "pending",
+          "toState": "declined",
+          "notes": "Payment is declined."
+        },
+        {
+          "objectId": "object.paid-order",
+          "fromState": "none",
+          "toState": "none",
+          "notes": "No paid order is created when payment fails."
+        },
+        {
+          "objectId": "object.kitchen-ticket",
+          "fromState": "none",
+          "toState": "none",
+          "notes": "No kitchen ticket is created when payment fails."
+        }
+      ]
+    }
+  ],
+  "experience": {
+    "slis": [
+      {
+        "sliId": "sli.checkout-confirmation-time",
+        "name": "Checkout confirmation time",
+        "description": "Time from checkout submission to confirmation or clear failure.",
+        "measurementType": "latency",
+        "unit": "milliseconds",
+        "eventSource": "checkout-events",
+        "appliesToDutyIds": [
+          "duty.prepare-paid-cafe-order"
+        ],
+        "appliesToJourneyIds": [
+          "journey.prepare-paid-cafe-order"
+        ],
+        "status": "active"
+      },
+      {
+        "sliId": "sli.ticket-creation-reliability",
+        "name": "Kitchen ticket creation reliability",
+        "description": "Percentage of paid orders that create exactly one kitchen ticket.",
+        "measurementType": "success-rate",
+        "unit": "percent",
+        "eventSource": "order-ticket-audit",
+        "appliesToDutyIds": [
+          "duty.prepare-paid-cafe-order"
+        ],
+        "appliesToJourneyIds": [
+          "journey.prepare-paid-cafe-order"
+        ],
+        "status": "active"
+      }
+    ],
+    "slos": [
+      {
+        "sloId": "slo.checkout-under-3s",
+        "sliId": "sli.checkout-confirmation-time",
+        "name": "Checkout resolves under three seconds",
+        "targetOperator": "<=",
+        "targetValue": 3000,
+        "measurementWindow": "rolling 7 days",
+        "consequenceOfViolation": "Customers may retry payment or distrust the order state.",
+        "severity": "high",
+        "status": "active"
+      },
+      {
+        "sloId": "slo.ticket-created-for-paid-orders",
+        "sliId": "sli.ticket-creation-reliability",
+        "name": "Kitchen ticket exists for paid orders",
+        "targetOperator": ">=",
+        "targetValue": 99.9,
+        "measurementWindow": "rolling 30 days",
+        "consequenceOfViolation": "Paid customer orders may not reach the kitchen.",
+        "severity": "critical",
+        "status": "active"
+      }
+    ]
+  },
+  "traces": {
+    "golden": [
+      {
+        "traceId": "trace.successful-cafe-order",
+        "traceType": "golden",
+        "title": "Successful cafe pickup order",
+        "description": "A customer pays successfully and the kitchen prepares the order.",
+        "dutyId": "duty.prepare-paid-cafe-order",
+        "journeyId": "journey.prepare-paid-cafe-order",
+        "scenario": "Cafe is open and cart items are available.",
+        "trigger": "Customer submits checkout.",
+        "events": [
+          {
+            "sequence": 1,
+            "title": "Checkout succeeds",
+            "event": "Customer pays.",
+            "stateBefore": "Cart is open.",
+            "stateAfter": "Paid order exists.",
+            "observedOutcome": "Customer sees confirmation.",
+            "elapsedTimeMs": 1800,
+            "relatedStepIds": [
+              "step.checkout-cart",
+              "step.create-paid-order"
+            ]
+          },
+          {
+            "sequence": 2,
+            "title": "Kitchen ticket created",
+            "event": "System sends order to kitchen.",
+            "stateBefore": "Paid order exists.",
+            "stateAfter": "Kitchen ticket exists.",
+            "observedOutcome": "Cafe receives preparation request.",
+            "elapsedTimeMs": 300,
+            "relatedStepIds": [
+              "step.create-kitchen-ticket"
+            ]
+          },
+          {
+            "sequence": 3,
+            "title": "Order ready",
+            "event": "Staff marks ticket ready.",
+            "stateBefore": "Kitchen ticket is active.",
+            "stateAfter": "Order is ready.",
+            "observedOutcome": "Customer sees ready status.",
+            "elapsedTimeMs": 600000,
+            "relatedStepIds": [
+              "step.mark-ready"
+            ]
+          }
+        ],
+        "finalState": "Paid order is ready for pickup.",
+        "validatesStepIds": [
+          "step.checkout-cart",
+          "step.create-paid-order",
+          "step.create-kitchen-ticket",
+          "step.mark-ready"
+        ],
+        "classificationReason": "The trace satisfies payment-before-preparation and ready-state behavior.",
+        "status": "active"
+      }
+    ],
+    "antiGolden": [
+      {
+        "traceId": "antitrace.unpaid-ticket",
+        "traceType": "anti-golden",
+        "title": "Unpaid order sent to kitchen",
+        "description": "A declined payment still creates a kitchen ticket.",
+        "dutyId": "duty.prepare-paid-cafe-order",
+        "journeyId": "journey.prepare-paid-cafe-order",
+        "scenario": "Payment provider declines checkout.",
+        "trigger": "Customer submits checkout with invalid payment.",
+        "events": [
+          {
+            "sequence": 1,
+            "title": "Payment fails",
+            "event": "Payment is declined.",
+            "stateBefore": "Cart is submitted.",
+            "stateAfter": "Payment declined.",
+            "observedOutcome": "Checkout should fail.",
+            "relatedStepIds": [
+              "step.reject-payment-failure"
+            ]
+          },
+          {
+            "sequence": 2,
+            "title": "Ticket wrongly created",
+            "event": "System creates kitchen ticket.",
+            "stateBefore": "No paid order exists.",
+            "stateAfter": "Kitchen ticket exists.",
+            "observedOutcome": "Kitchen receives unpaid order.",
+            "relatedStepIds": [
+              "step.create-kitchen-ticket"
+            ]
+          }
+        ],
+        "finalState": "A kitchen ticket exists without payment.",
+        "violatesStepIds": [
+          "step.reject-payment-failure",
+          "step.create-kitchen-ticket"
+        ],
+        "violatesInvariantIds": [
+          "invariant.no-ticket-without-payment"
+        ],
+        "classificationReason": "This violates payment-before-preparation causality.",
+        "status": "active"
+      }
+    ]
+  },
+  "updates": [
+    {
+      "changeId": "change.initial-cafe-model",
+      "changeType": "add-duty",
+      "targetRefs": [
+        "duty.prepare-paid-cafe-order"
+      ],
+      "summary": "Initial model for preparing paid cafe pickup orders.",
+      "reason": "Establishes the first complete version of this product representation.",
+      "compatibility": "additive",
+      "impactAssessment": {
+        "affectedDuties": [
+          "duty.prepare-paid-cafe-order"
+        ],
+        "affectedJourneys": [],
+        "affectedSlis": [],
+        "affectedSlos": [],
+        "affectedTraces": [],
+        "affectedInvariants": [],
+        "riskLevel": "medium",
+        "riskExplanation": "Initial additive example model."
+      },
+      "migrationPlan": null,
+      "rolloutPlan": "Adopt as baseline after schema and semantic validation.",
+      "approvalStatus": "approved",
+      "approvedBy": "example-owner",
+      "createdAt": "2026-05-16T00:00:00Z",
+      "effectiveAt": "2026-05-16T00:00:00Z"
+    }
+  ],
+  "openQuestions": []
+}

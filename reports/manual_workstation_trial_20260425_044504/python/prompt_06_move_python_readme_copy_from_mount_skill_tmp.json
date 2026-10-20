@@ -1,0 +1,25 @@
+{
+  "assistant_text": "Invocation of Python Commands 06 \u2014 Move File / Python Commands 06 Move File failed: ModuleNotFoundError: No module named 'yaml'",
+  "model": "workstation-direct-composition",
+  "rounds": 0,
+  "task_contract": {
+    "semantic_unit": "Move `python-readme.copy` from mount `skill_tmp` to mount `skill_output` at `python-readme.moved`."
+  },
+  "tool_receipts": [
+    {
+      "arguments": {
+        "skill_title": "Python Commands 06 \u2014 Move File / Python Commands 06 Move File",
+        "target": ""
+      },
+      "name": "ws.skill.invoke",
+      "result": {
+        "answer": "Invocation of Python Commands 06 \u2014 Move File / Python Commands 06 Move File failed: ModuleNotFoundError: No module named 'yaml'",
+        "error": "",
+        "error_type": "",
+        "executor_framework": "python3",
+        "skill_title": "Python Commands 06 \u2014 Move File / Python Commands 06 Move File",
+        "status": "error"
+      }
+    }
+  ]
+}

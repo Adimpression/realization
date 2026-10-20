@@ -1,0 +1,22 @@
+{
+  "assumptions": [],
+  "boundary_shape": [
+    "c*",
+    "a*",
+    "d*"
+  ],
+  "completion_conditions": [
+    "requested result is returned to the user"
+  ],
+  "input_values": {},
+  "missing_requirements": [],
+  "output_values": [
+    "result"
+  ],
+  "read_references": [],
+  "semantic_unit": "Create `realized-tests.zip` in mount `skill_tmp` from mount `skill_input` at `tests`.",
+  "side_effects": [],
+  "write_targets": [
+    "external write target"
+  ]
+}

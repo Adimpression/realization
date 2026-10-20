@@ -1,0 +1,222 @@
+schema_version = 1
+default_include = true
+default_category = "project-source"
+default_provenance = "realization-project"
+
+[provenance.realization-project]
+origin = "Maintainer-controlled Realization source and documentation."
+license = "Apache-2.0"
+redistribution = "included"
+
+[provenance.reviewed-fixture]
+origin = "Maintainer-reviewed synthetic test, BDD, trial, or integration material."
+license = "Apache-2.0"
+redistribution = "included-for-reproducibility"
+
+[provenance.generated-project-source]
+origin = "Generated from checked-in Realization interface definitions."
+license = "Apache-2.0"
+redistribution = "included-required-source"
+
+[provenance.flutter-tooling]
+origin = "Flutter-generated scaffold and assets; generating revision is recorded in workstation/ui_flutter/.metadata."
+license = "BSD-3-Clause AND Apache-2.0"
+redistribution = "included-with-notice"
+third_party = true
+notice_key = "Flutter Project Scaffold"
+
+[provenance.dependency-metadata]
+origin = "Tool-generated dependency resolution and integrity metadata."
+license = "Apache-2.0"
+redistribution = "included-as-metadata"
+
+[provenance.derived-specification]
+origin = "Maintainer-reviewed specification derived from and reconciled against the Realization codebase."
+license = "Apache-2.0"
+redistribution = "included-as-documentation"
+
+[provenance.captured-runtime]
+origin = "Environment-specific runtime, model, tool, or qualification output."
+license = "NOASSERTION"
+redistribution = "excluded"
+
+[provenance.generated-corpus]
+origin = "Machine-produced learning corpus, projection, or runtime state."
+license = "NOASSERTION"
+redistribution = "excluded"
+
+[provenance.historical-evidence]
+origin = "Superseded architecture and qualification capture."
+license = "NOASSERTION"
+redistribution = "excluded"
+
+[provenance.local-state]
+origin = "Local editor, runtime, cache, build, or credential-bearing state."
+license = "NOASSERTION"
+redistribution = "excluded"
+
+[provenance.unverified-binary]
+origin = "Third-party binary whose exact generating distribution has not been reconciled."
+license = "NOASSERTION"
+redistribution = "excluded-pending-provenance"
+
+[[rules]]
+pattern = "reports/**"
+include = false
+category = "captured-runtime-output"
+provenance = "captured-runtime"
+reason = "Captured reports contain environment-specific paths, copied files, archives, and generated output."
+
+[[rules]]
+pattern = "corpus/**"
+include = false
+category = "generated-runtime-corpus"
+provenance = "generated-corpus"
+reason = "The root corpus is generated runtime state."
+
+[[rules]]
+pattern = "trials/corpus/**"
+include = false
+category = "generated-trial-corpus"
+provenance = "generated-corpus"
+reason = "Trial corpus projections are regenerated from reviewed trial inputs."
+
+[[rules]]
+pattern = "trials/*/corpus/**"
+include = false
+category = "generated-trial-corpus"
+provenance = "generated-corpus"
+reason = "Domain corpus projections are regenerated from reviewed trial inputs."
+
+[[rules]]
+pattern = "trials/reports/**"
+include = false
+category = "generated-trial-report"
+provenance = "captured-runtime"
+reason = "Trial reports are environment-specific generated evidence."
+
+[[rules]]
+pattern = "trials/*_TRIAL.md"
+include = false
+category = "historical-trial-evidence"
+provenance = "historical-evidence"
+reason = "Trial result narratives describe historical runs and point to excluded runtime reports."
+
+[[rules]]
+pattern = "trials/*_TRIAL.json"
+include = false
+category = "captured-trial-output"
+provenance = "captured-runtime"
+reason = "Trial result payloads contain environment-specific paths and captured runtime state."
+
+[[rules]]
+pattern = "trials/*_TRIAL_CONCLUSION.MD"
+include = false
+category = "historical-trial-evidence"
+provenance = "historical-evidence"
+reason = "Trial conclusion narratives record superseded runs rather than reproducible inputs."
+
+[[rules]]
+pattern = "architecture/baselines/**"
+include = false
+category = "historical-architecture-evidence"
+provenance = "historical-evidence"
+reason = "Only live architecture controls and current baselines are released."
+
+[[rules]]
+pattern = "*.code-workspace"
+include = false
+category = "local-editor-state"
+provenance = "local-state"
+reason = "Editor workspaces are machine-specific."
+
+[[rules]]
+pattern = "workstation/ui_flutter/android/gradle/wrapper/gradle-wrapper.jar"
+include = false
+category = "unverified-third-party-binary"
+provenance = "unverified-binary"
+reason = "The wrapper binary version cannot be reconciled with the configured Gradle distribution."
+
+[[rules]]
+pattern = "workstation/grpc_definitions/src/workstation/grpc/definitions/*_pb2*.py"
+include = true
+category = "generated-protocol-source"
+provenance = "generated-project-source"
+reason = "Generated bindings are required by the checked-in gRPC interface."
+
+[[rules]]
+pattern = "workstation/ui_flutter/**/generated_*"
+include = true
+category = "flutter-generated-scaffold"
+provenance = "flutter-tooling"
+reason = "Generated platform registration source is required by the Flutter client."
+
+[[rules]]
+pattern = "workstation/ui_flutter/**/GeneratedPluginRegistrant.*"
+include = true
+category = "flutter-generated-scaffold"
+provenance = "flutter-tooling"
+reason = "Generated platform registration source is required by the Flutter client."
+
+[[rules]]
+pattern = "workstation/ui_flutter/**/*.png"
+include = true
+category = "flutter-generated-asset"
+provenance = "flutter-tooling"
+reason = "Flutter template and project launcher assets are required by platform builds."
+
+[[rules]]
+pattern = "workstation/ui_flutter/**/*.ico"
+include = true
+category = "flutter-generated-asset"
+provenance = "flutter-tooling"
+reason = "Flutter template and project launcher assets are required by platform builds."
+
+[[rules]]
+pattern = "uv.lock"
+include = true
+category = "dependency-lock"
+provenance = "dependency-metadata"
+reason = "The Python workspace lock supports repeatable dependency resolution."
+
+[[rules]]
+pattern = ".terraform.lock.hcl"
+include = true
+category = "dependency-lock"
+provenance = "dependency-metadata"
+reason = "Terraform provider integrity data is release metadata."
+
+[[rules]]
+pattern = "workstation/ui_flutter/pubspec.lock"
+include = true
+category = "dependency-lock"
+provenance = "dependency-metadata"
+reason = "The Flutter lock supports repeatable dependency resolution."
+
+[[rules]]
+pattern = "dst/tests/fixtures/**"
+include = true
+category = "deterministic-fixture"
+provenance = "reviewed-fixture"
+reason = "Synthetic DST scenarios are required by deterministic tests."
+
+[[rules]]
+pattern = "workstation/ui_flutter/assets/integration/**"
+include = true
+category = "deterministic-fixture"
+provenance = "reviewed-fixture"
+reason = "Synthetic integration input is required by Flutter workflow tests."
+
+[[rules]]
+pattern = "trials/**"
+include = true
+category = "reviewed-trial-material"
+provenance = "reviewed-fixture"
+reason = "Authored trial inputs and compiled bundles are required by qualification and BDD tests."
+
+[[rules]]
+pattern = "product-self-representation.yaml"
+include = true
+category = "derived-product-specification"
+provenance = "derived-specification"
+reason = "The specification is generated and then reconciled against the maintained codebase."

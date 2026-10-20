@@ -1,0 +1,57 @@
+@startuml
+title Markdown Learning And Relation Persistence Flow
+
+actor "User" as User
+participant "Controller Entrypoints" as CLI
+participant "SystemState" as State
+participant "BSSCController" as Controller
+participant "External Markdown Learning Pipeline" as Pipeline
+participant "Markdown IR" as IR
+participant "LLM Learning Proposals" as LLM
+participant "Markdown Artifact Semantics" as Semantics
+participant "Artifact Store" as Store
+
+User -> CLI: markdown-learn --markdown-file <document>
+CLI -> State: bootstrap("Learn from markdown: <file>",\nbootstrap_mode=markdown_ingestion)
+CLI -> Controller: BSSCController(state, llm_policy)
+CLI -> Pipeline: learn_from_markdown_document(path)
+
+note over CLI,Pipeline
+markdown-learn is a bounded document-learning pipeline.
+It deconstructs markdown into reusable artifacts,
+but it does not call the governed runtime loop
+run() / reduce_not().
+end note
+
+Pipeline -> IR: parse_markdown_document_ir(markdown_text)
+IR --> Pipeline: document IR
+Pipeline -> LLM: propose_markdown_learning(root, document)
+LLM --> Pipeline: knowledge artifact payloads
+Pipeline -> LLM: propose_markdown_ability_learning(root, document)
+LLM --> Pipeline: encounter summaries
+Pipeline -> LLM: propose_markdown_functionalization(root, document, encounters)
+LLM --> Pipeline: ability artifact payloads
+
+opt direct expression fallback
+  Pipeline -> Pipeline: markdown_expression_artifact_payload(...)
+end
+
+loop each accepted payload
+  Pipeline -> Semantics: build_markdown_learning_artifact(...)
+  opt title repair or encounter-derived answer shaping
+    Semantics -> LLM: propose_markdown_title_repair(...)\nor encounter-aware shaping
+    LLM --> Semantics: repaired title / semantic hints
+  end
+  Semantics --> Pipeline: Artifact
+  Pipeline -> Store: persist_artifact(artifact)
+end
+
+Pipeline -> Pipeline: apply_markdown_batch_relations(built_artifacts)
+loop each updated related artifact
+  Pipeline -> Store: persist_artifact(updated_artifact)
+end
+
+Pipeline -> State: set learned artifacts,\nroot answer,\nrun outcome
+CLI --> User: markdown learning report
+
+@enduml

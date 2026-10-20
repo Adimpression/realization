@@ -1,0 +1,25 @@
+{
+  "assistant_text": "{'status': 'completed', 'attempt': 2, 'payload': {'status': 'completed', 'attempt': 2}}",
+  "model": "workstation-direct-composition",
+  "rounds": 0,
+  "task_contract": {
+    "semantic_unit": "Poll `https://api.example.com/jobs/42` until the JSON field `status` becomes `completed`."
+  },
+  "tool_receipts": [
+    {
+      "arguments": {
+        "skill_title": "API Client Commands 12 \u2014 Poll Job Status Until Complete / Api Client Commands 12 Poll Job Status Until Complete",
+        "target": ""
+      },
+      "name": "ws.skill.invoke",
+      "result": {
+        "answer": "{'status': 'completed', 'attempt': 2, 'payload': {'status': 'completed', 'attempt': 2}}",
+        "error": "",
+        "error_type": "",
+        "executor_framework": "python3",
+        "skill_title": "API Client Commands 12 \u2014 Poll Job Status Until Complete / Api Client Commands 12 Poll Job Status Until Complete",
+        "status": "ok"
+      }
+    }
+  ]
+}

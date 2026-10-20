@@ -1,0 +1,343 @@
+{
+  "started_at": "2026-04-11T14:12:07+00:00",
+  "finished_at": "2026-04-11T14:18:50+00:00",
+  "status": "failed",
+  "report_root": "/Users/ravindranathakila/service/realized/reports/validation_ladder_20260411_134118/chemistry_domain_validation",
+  "domains": [
+    {
+      "domain": "chemistry",
+      "status": "failed",
+      "learn_mode": "import_skill_bundle",
+      "bundle_file": "/Users/ravindranathakila/service/realized/trials/chemistry/skill.yaml",
+      "learned_files": 10,
+      "learn_results": [
+        {
+          "file": "/Users/ravindranathakila/service/realized/trials/chemistry/skill.yaml",
+          "returncode": 0,
+          "stdout_tail": "\": true,\n        \"database\": \"/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3\",\n        \"payload_digest\": \"688127aa2f24ecd031f90b9a0885f482ca28d2e1a39d5b12e812d038d8429ca2\",\n        \"persisted_artifacts\": 0,\n        \"reason\": \"\",\n        \"status\": \"unchanged\",\n        \"timings\": {\n          \"canonicalize_seconds\": 0.019257,\n          \"existing_payload_lookup_seconds\": 3.74025974025974e-06,\n          \"total_seconds\": 0.01926074025974026\n        },\n        \"vector_enabled\": false\n      },\n      \"title\": \"Structured learning record for Equilibrium Constant Expression Compose Multiple Earlier Semantic Substrate Concentration Stoichiometric Coefficient Weight Product Ratio Reconstruct Full Reason Path These Component Final Form K\",\n      \"trust_status\": \"trusted\"\n    }\n  ],\n  \"imported_count\": 78,\n  \"persist_summaries\": {\n    \"policy\": {\n      \"error_artifacts\": 0,\n      \"persisted_artifacts\": 0,\n      \"timings\": {\n        \"commit_seconds\": 2e-06,\n        \"connect_seconds\": 0.001439,\n        \"ensure_schema_seconds\": 0.006196,\n        \"existing_payload_batch_lookup_seconds\": 4.3e-05,\n        \"prepare_seconds\": 0.004403,\n        \"total_seconds\": 0.012056\n      },\n      \"unchanged_artifacts\": 1\n    },\n    \"skill\": {\n      \"error_artifacts\": 0,\n      \"persisted_artifacts\": 22,\n      \"timings\": {\n        \"commit_seconds\": 0.001389,\n        \"connect_seconds\": 0.00063,\n        \"ensure_schema_seconds\": 0.004004,\n        \"existing_payload_batch_lookup_seconds\": 0.000288,\n        \"index_seconds\": 0.314274,\n        \"prepare_seconds\": 1.022332,\n        \"total_seconds\": 1.34869\n      },\n      \"unchanged_artifacts\": 55\n    }\n  },\n  \"timings\": {\n    \"admission_seconds\": 0.396227,\n    \"classify_seconds\": 0.000103,\n    \"governance_persist_seconds\": 0.021067,\n    \"governance_snapshot_seconds\": 0.560851,\n    \"load_payload_seconds\": 0.829171,\n    \"normalized_export_seconds\": 0.000276,\n    \"skill_persist_seconds\": 1.365169,\n    \"total_seconds\": 3.17304\n  }\n}\n",
+          "stderr_tail": "",
+          "report": "",
+          "state": "",
+          "resumed": false,
+          "learn_mode": "import_skill_bundle",
+          "elapsed_seconds": 3.65535,
+          "command_timings": {
+            "admission_seconds": 0.396227,
+            "classify_seconds": 0.000103,
+            "governance_persist_seconds": 0.021067,
+            "governance_snapshot_seconds": 0.560851,
+            "load_payload_seconds": 0.829171,
+            "normalized_export_seconds": 0.000276,
+            "skill_persist_seconds": 1.365169,
+            "total_seconds": 3.17304
+          }
+        }
+      ],
+      "probe_results": [
+        {
+          "name": "state_the_general_conservation_formula_and_explain_what",
+          "prompt": "State the general conservation formula and explain what the inputs and outputs represent.",
+          "returncode": 0,
+          "stdout_tail": "\n      \"kind\": \"proposal_governance\",\n      \"node_id\": \"not_state-the-general-conservation-formula-and-expla_2abdaa\",\n      \"payload\": {\n        \"proposal_id\": \"proposal_explanationdraft_e80f5d\",\n        \"rationale\": \"Explanation drafts may be admitted as communicative artifacts without changing formal commitment state.\",\n        \"status\": \"admitted\"\n      },\n      \"result\": \"proposal governance state updated\",\n      \"seq\": 59,\n      \"timestamp\": \"2026-04-11T14:12:51+00:00\"\n    },\n    {\n      \"action\": \"register outlet trace_report\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"boundary transition preserved semantic continuity\",\n      \"intent\": \"Preserve outlet semantics in BSSC-consistent carrier form.\",\n      \"kind\": \"boundary_outlet\",\n      \"node_id\": null,\n      \"payload\": {\n        \"carrier_id\": \"outlet_state-the-general-conservation-formula-and-expla_8c087d\",\n        \"kind\": \"trace_report\"\n      },\n      \"result\": \"outlet durably recorded\",\n      \"seq\": 60,\n      \"timestamp\": \"2026-04-11T14:12:51+00:00\"\n    },\n    {\n      \"action\": \"finalize run\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"run ended according to closure, pause, or incompletion conditions\",\n      \"intent\": \"Summarize the bounded run outcome under current conditions.\",\n      \"kind\": \"run_outcome\",\n      \"node_id\": \"not_state-the-general-conservation-formula-and-expla_2abdaa\",\n      \"payload\": {},\n      \"result\": \"completed\",\n      \"seq\": 61,\n      \"timestamp\": \"2026-04-11T14:12:51+00:00\"\n    }\n  ],\n  \"root\": {\n    \"boundary_shape\": [\n      \"d*\"\n    ],\n    \"certainty\": \"high\",\n    \"id\": \"not_state-the-general-conservation-formula-and-expla_2abdaa\",\n    \"not\": \"Not<State the general conservation formula and explain what the inputs and outputs represent.>\",\n    \"semantic_unit\": \"State the general conservation formula and explain what the inputs and outputs represent.\",\n    \"status\": \"closed\"\n  },\n  \"run_id\": \"run_73db2530_f133e2\",\n  \"run_outcome\": \"completed\",\n  \"theory_version\": \"2.2.2\"\n}\n",
+          "stderr_tail": "",
+          "state": "/Users/ravindranathakila/service/realized/reports/validation_ladder_20260411_134118/chemistry_domain_validation/chemistry/probe_state_the_general_conservation_formula_and_explain_what.json",
+          "resumed": false,
+          "elapsed_seconds": 40.336815,
+          "timeout_seconds": 90,
+          "command_timings": {},
+          "attempt_count": 1,
+          "attempts": [
+            {
+              "attempt": 1,
+              "timeout_seconds": 90,
+              "returncode": 0,
+              "stdout_tail": "\n      \"kind\": \"proposal_governance\",\n      \"node_id\": \"not_state-the-general-conservation-formula-and-expla_2abdaa\",\n      \"payload\": {\n        \"proposal_id\": \"proposal_explanationdraft_e80f5d\",\n        \"rationale\": \"Explanation drafts may be admitted as communicative artifacts without changing formal commitment state.\",\n        \"status\": \"admitted\"\n      },\n      \"result\": \"proposal governance state updated\",\n      \"seq\": 59,\n      \"timestamp\": \"2026-04-11T14:12:51+00:00\"\n    },\n    {\n      \"action\": \"register outlet trace_report\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"boundary transition preserved semantic continuity\",\n      \"intent\": \"Preserve outlet semantics in BSSC-consistent carrier form.\",\n      \"kind\": \"boundary_outlet\",\n      \"node_id\": null,\n      \"payload\": {\n        \"carrier_id\": \"outlet_state-the-general-conservation-formula-and-expla_8c087d\",\n        \"kind\": \"trace_report\"\n      },\n      \"result\": \"outlet durably recorded\",\n      \"seq\": 60,\n      \"timestamp\": \"2026-04-11T14:12:51+00:00\"\n    },\n    {\n      \"action\": \"finalize run\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"run ended according to closure, pause, or incompletion conditions\",\n      \"intent\": \"Summarize the bounded run outcome under current conditions.\",\n      \"kind\": \"run_outcome\",\n      \"node_id\": \"not_state-the-general-conservation-formula-and-expla_2abdaa\",\n      \"payload\": {},\n      \"result\": \"completed\",\n      \"seq\": 61,\n      \"timestamp\": \"2026-04-11T14:12:51+00:00\"\n    }\n  ],\n  \"root\": {\n    \"boundary_shape\": [\n      \"d*\"\n    ],\n    \"certainty\": \"high\",\n    \"id\": \"not_state-the-general-conservation-formula-and-expla_2abdaa\",\n    \"not\": \"Not<State the general conservation formula and explain what the inputs and outputs represent.>\",\n    \"semantic_unit\": \"State the general conservation formula and explain what the inputs and outputs represent.\",\n    \"status\": \"closed\"\n  },\n  \"run_id\": \"run_73db2530_f133e2\",\n  \"run_outcome\": \"completed\",\n  \"theory_version\": \"2.2.2\"\n}\n",
+              "stderr_tail": "",
+              "elapsed_seconds": 40.336815,
+              "timed_out": false,
+              "command_timings": {}
+            }
+          ],
+          "run_outcome": "completed",
+          "final_answer": "General Conservation Formula: Conservation. When the total amount before a process equals the total amount after a process, the reusable family is conservation. The reusable formula is: $$ T{before} = T{after} $$ input: Tbefore output: Tafter If the amount of solute stays the same before and after dilution, the reusable family is conservation of carried substance. The reusable formula is: $$ n1 = n2 $$ input: n1 output: n2",
+          "passed": true,
+          "reason": "freeform_overlap:2"
+        },
+        {
+          "name": "write_the_formula_that_relates_number_of_particles",
+          "prompt": "Write the formula that relates number of particles to moles, and identify the role of each variable.",
+          "returncode": 0,
+          "stdout_tail": "ode_id\": \"not_write-the-formula-that-relates-number-of-particl_5d3575\",\n      \"payload\": {\n        \"proposal_id\": \"proposal_explanationdraft_0b53c9\",\n        \"rationale\": \"Explanation drafts may be admitted as communicative artifacts without changing formal commitment state.\",\n        \"status\": \"admitted\"\n      },\n      \"result\": \"proposal governance state updated\",\n      \"seq\": 59,\n      \"timestamp\": \"2026-04-11T14:13:39+00:00\"\n    },\n    {\n      \"action\": \"register outlet trace_report\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"boundary transition preserved semantic continuity\",\n      \"intent\": \"Preserve outlet semantics in BSSC-consistent carrier form.\",\n      \"kind\": \"boundary_outlet\",\n      \"node_id\": null,\n      \"payload\": {\n        \"carrier_id\": \"outlet_write-the-formula-that-relates-number-of-particl_5f6863\",\n        \"kind\": \"trace_report\"\n      },\n      \"result\": \"outlet durably recorded\",\n      \"seq\": 60,\n      \"timestamp\": \"2026-04-11T14:13:39+00:00\"\n    },\n    {\n      \"action\": \"finalize run\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"run ended according to closure, pause, or incompletion conditions\",\n      \"intent\": \"Summarize the bounded run outcome under current conditions.\",\n      \"kind\": \"run_outcome\",\n      \"node_id\": \"not_write-the-formula-that-relates-number-of-particl_5d3575\",\n      \"payload\": {},\n      \"result\": \"completed\",\n      \"seq\": 61,\n      \"timestamp\": \"2026-04-11T14:13:39+00:00\"\n    }\n  ],\n  \"root\": {\n    \"boundary_shape\": [\n      \"c*\",\n      \"a*\",\n      \"d*\"\n    ],\n    \"certainty\": \"high\",\n    \"id\": \"not_write-the-formula-that-relates-number-of-particl_5d3575\",\n    \"not\": \"Not<Write the formula that relates number of particles to moles, and identify the role of each variable.>\",\n    \"semantic_unit\": \"Write the formula that relates number of particles to moles, and identify the role of each variable.\",\n    \"status\": \"closed\"\n  },\n  \"run_id\": \"run_4a2e55db_6177be\",\n  \"run_outcome\": \"completed\",\n  \"theory_version\": \"2.2.2\"\n}\n",
+          "stderr_tail": "",
+          "state": "/Users/ravindranathakila/service/realized/reports/validation_ladder_20260411_134118/chemistry_domain_validation/chemistry/probe_write_the_formula_that_relates_number_of_particles.json",
+          "resumed": false,
+          "elapsed_seconds": 47.813043,
+          "timeout_seconds": 94,
+          "command_timings": {},
+          "attempt_count": 1,
+          "attempts": [
+            {
+              "attempt": 1,
+              "timeout_seconds": 94,
+              "returncode": 0,
+              "stdout_tail": "ode_id\": \"not_write-the-formula-that-relates-number-of-particl_5d3575\",\n      \"payload\": {\n        \"proposal_id\": \"proposal_explanationdraft_0b53c9\",\n        \"rationale\": \"Explanation drafts may be admitted as communicative artifacts without changing formal commitment state.\",\n        \"status\": \"admitted\"\n      },\n      \"result\": \"proposal governance state updated\",\n      \"seq\": 59,\n      \"timestamp\": \"2026-04-11T14:13:39+00:00\"\n    },\n    {\n      \"action\": \"register outlet trace_report\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"boundary transition preserved semantic continuity\",\n      \"intent\": \"Preserve outlet semantics in BSSC-consistent carrier form.\",\n      \"kind\": \"boundary_outlet\",\n      \"node_id\": null,\n      \"payload\": {\n        \"carrier_id\": \"outlet_write-the-formula-that-relates-number-of-particl_5f6863\",\n        \"kind\": \"trace_report\"\n      },\n      \"result\": \"outlet durably recorded\",\n      \"seq\": 60,\n      \"timestamp\": \"2026-04-11T14:13:39+00:00\"\n    },\n    {\n      \"action\": \"finalize run\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"run ended according to closure, pause, or incompletion conditions\",\n      \"intent\": \"Summarize the bounded run outcome under current conditions.\",\n      \"kind\": \"run_outcome\",\n      \"node_id\": \"not_write-the-formula-that-relates-number-of-particl_5d3575\",\n      \"payload\": {},\n      \"result\": \"completed\",\n      \"seq\": 61,\n      \"timestamp\": \"2026-04-11T14:13:39+00:00\"\n    }\n  ],\n  \"root\": {\n    \"boundary_shape\": [\n      \"c*\",\n      \"a*\",\n      \"d*\"\n    ],\n    \"certainty\": \"high\",\n    \"id\": \"not_write-the-formula-that-relates-number-of-particl_5d3575\",\n    \"not\": \"Not<Write the formula that relates number of particles to moles, and identify the role of each variable.>\",\n    \"semantic_unit\": \"Write the formula that relates number of particles to moles, and identify the role of each variable.\",\n    \"status\": \"closed\"\n  },\n  \"run_id\": \"run_4a2e55db_6177be\",\n  \"run_outcome\": \"completed\",\n  \"theory_version\": \"2.2.2\"\n}\n",
+              "stderr_tail": "",
+              "elapsed_seconds": 47.813043,
+              "timed_out": false,
+              "command_timings": {}
+            }
+          ],
+          "run_outcome": "completed",
+          "final_answer": "Formula That Relates Number Of Particles To Moles: Grouped Counting. When a total count is obtained by multiplying the number of groups by the count per group, the reusable family is grouped counting. The reusable formula is: $$ C = G cg $$ input: G input: cg output: C When the number of units is obtained by dividing a total by the amount per unit, the reusable family is total-per-unit division. The reusable formula is: $$ U = \\frac{T}{qu} $$ input: T input: qu output: U",
+          "passed": true,
+          "reason": "freeform_overlap:5"
+        },
+        {
+          "name": "given_the_relation_for_molar_mass_express_how",
+          "prompt": "Given the relation for molar mass, express how to compute mass from moles and molar mass, and explain how this relates to the reusable substrate.",
+          "returncode": 0,
+          "stdout_tail": "\",\n      \"payload\": {\n        \"proposal_id\": \"proposal_explanationdraft_5779bb\",\n        \"rationale\": \"Explanation drafts may be admitted as communicative artifacts without changing formal commitment state.\",\n        \"status\": \"admitted\"\n      },\n      \"result\": \"proposal governance state updated\",\n      \"seq\": 206,\n      \"timestamp\": \"2026-04-11T14:14:31+00:00\"\n    },\n    {\n      \"action\": \"register outlet trace_report\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"boundary transition preserved semantic continuity\",\n      \"intent\": \"Preserve outlet semantics in BSSC-consistent carrier form.\",\n      \"kind\": \"boundary_outlet\",\n      \"node_id\": null,\n      \"payload\": {\n        \"carrier_id\": \"outlet_given-the-relation-for-molar-mass-express-how-to_902564\",\n        \"kind\": \"trace_report\"\n      },\n      \"result\": \"outlet durably recorded\",\n      \"seq\": 207,\n      \"timestamp\": \"2026-04-11T14:14:31+00:00\"\n    },\n    {\n      \"action\": \"finalize run\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"run ended according to closure, pause, or incompletion conditions\",\n      \"intent\": \"Summarize the bounded run outcome under current conditions.\",\n      \"kind\": \"run_outcome\",\n      \"node_id\": \"not_given-the-relation-for-molar-mass-express-how-to_952808\",\n      \"payload\": {},\n      \"result\": \"completed\",\n      \"seq\": 208,\n      \"timestamp\": \"2026-04-11T14:14:31+00:00\"\n    }\n  ],\n  \"root\": {\n    \"boundary_shape\": [\n      \"d*\"\n    ],\n    \"certainty\": \"high\",\n    \"id\": \"not_given-the-relation-for-molar-mass-express-how-to_952808\",\n    \"not\": \"Not<Given the relation for molar mass, express how to compute mass from moles and molar mass, and explain how this relates to the reusable substrate.>\",\n    \"semantic_unit\": \"Given the relation for molar mass, express how to compute mass from moles and molar mass, and explain how this relates to the reusable substrate.\",\n    \"status\": \"closed\"\n  },\n  \"run_id\": \"run_01cc4305_12c074\",\n  \"run_outcome\": \"completed\",\n  \"theory_version\": \"2.2.2\"\n}\n",
+          "stderr_tail": "",
+          "state": "/Users/ravindranathakila/service/realized/reports/validation_ladder_20260411_134118/chemistry_domain_validation/chemistry/probe_given_the_relation_for_molar_mass_express_how.json",
+          "resumed": false,
+          "elapsed_seconds": 52.06063,
+          "timeout_seconds": 159,
+          "command_timings": {},
+          "attempt_count": 1,
+          "attempts": [
+            {
+              "attempt": 1,
+              "timeout_seconds": 159,
+              "returncode": 0,
+              "stdout_tail": "\",\n      \"payload\": {\n        \"proposal_id\": \"proposal_explanationdraft_5779bb\",\n        \"rationale\": \"Explanation drafts may be admitted as communicative artifacts without changing formal commitment state.\",\n        \"status\": \"admitted\"\n      },\n      \"result\": \"proposal governance state updated\",\n      \"seq\": 206,\n      \"timestamp\": \"2026-04-11T14:14:31+00:00\"\n    },\n    {\n      \"action\": \"register outlet trace_report\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"boundary transition preserved semantic continuity\",\n      \"intent\": \"Preserve outlet semantics in BSSC-consistent carrier form.\",\n      \"kind\": \"boundary_outlet\",\n      \"node_id\": null,\n      \"payload\": {\n        \"carrier_id\": \"outlet_given-the-relation-for-molar-mass-express-how-to_902564\",\n        \"kind\": \"trace_report\"\n      },\n      \"result\": \"outlet durably recorded\",\n      \"seq\": 207,\n      \"timestamp\": \"2026-04-11T14:14:31+00:00\"\n    },\n    {\n      \"action\": \"finalize run\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"run ended according to closure, pause, or incompletion conditions\",\n      \"intent\": \"Summarize the bounded run outcome under current conditions.\",\n      \"kind\": \"run_outcome\",\n      \"node_id\": \"not_given-the-relation-for-molar-mass-express-how-to_952808\",\n      \"payload\": {},\n      \"result\": \"completed\",\n      \"seq\": 208,\n      \"timestamp\": \"2026-04-11T14:14:31+00:00\"\n    }\n  ],\n  \"root\": {\n    \"boundary_shape\": [\n      \"d*\"\n    ],\n    \"certainty\": \"high\",\n    \"id\": \"not_given-the-relation-for-molar-mass-express-how-to_952808\",\n    \"not\": \"Not<Given the relation for molar mass, express how to compute mass from moles and molar mass, and explain how this relates to the reusable substrate.>\",\n    \"semantic_unit\": \"Given the relation for molar mass, express how to compute mass from moles and molar mass, and explain how this relates to the reusable substrate.\",\n    \"status\": \"closed\"\n  },\n  \"run_id\": \"run_01cc4305_12c074\",\n  \"run_outcome\": \"completed\",\n  \"theory_version\": \"2.2.2\"\n}\n",
+              "stderr_tail": "",
+              "elapsed_seconds": 52.06063,
+              "timed_out": false,
+              "command_timings": {}
+            }
+          ],
+          "run_outcome": "completed",
+          "final_answer": "Express How To Compute Mass From Moles And Molar Mass: How To Compute Mass From Moles: How do you calculate m from n, M?. m = n * M. inputs: n, M. output: m Then, How do you calculate n from m, M?. n = ( ( m ) / ( M ) ). inputs: m, M. output: n Therefore, How do you calculate n from N, N_A?. n = ( ( N ) / ( N_A ) ). inputs: N, N_A. output: n; Reusable Substrate For Molar Mass: Amount-per-container is the broader reusable substrate; molar concentration is a narrower determinate chemistry law that expresses amount of solute per unit volume of solution.",
+          "passed": true,
+          "reason": "freeform_overlap:10"
+        },
+        {
+          "name": "using_the_stoichiometric_ratio_relation_derive_how_to",
+          "prompt": "Using the stoichiometric ratio relation, derive how to compute the amount of substance ( n_B ) from a known ( n_A ) and coefficients.",
+          "returncode": 0,
+          "stdout_tail": "relation-derive-h_f42647\",\n      \"payload\": {\n        \"proposal_id\": \"proposal_explanationdraft_37eecd\",\n        \"rationale\": \"Explanation drafts may be admitted as communicative artifacts without changing formal commitment state.\",\n        \"status\": \"admitted\"\n      },\n      \"result\": \"proposal governance state updated\",\n      \"seq\": 206,\n      \"timestamp\": \"2026-04-11T14:15:28+00:00\"\n    },\n    {\n      \"action\": \"register outlet trace_report\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"boundary transition preserved semantic continuity\",\n      \"intent\": \"Preserve outlet semantics in BSSC-consistent carrier form.\",\n      \"kind\": \"boundary_outlet\",\n      \"node_id\": null,\n      \"payload\": {\n        \"carrier_id\": \"outlet_using-the-stoichiometric-ratio-relation-derive-h_6b7b2b\",\n        \"kind\": \"trace_report\"\n      },\n      \"result\": \"outlet durably recorded\",\n      \"seq\": 207,\n      \"timestamp\": \"2026-04-11T14:15:28+00:00\"\n    },\n    {\n      \"action\": \"finalize run\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"run ended according to closure, pause, or incompletion conditions\",\n      \"intent\": \"Summarize the bounded run outcome under current conditions.\",\n      \"kind\": \"run_outcome\",\n      \"node_id\": \"not_using-the-stoichiometric-ratio-relation-derive-h_f42647\",\n      \"payload\": {},\n      \"result\": \"completed\",\n      \"seq\": 208,\n      \"timestamp\": \"2026-04-11T14:15:28+00:00\"\n    }\n  ],\n  \"root\": {\n    \"boundary_shape\": [\n      \"d*\"\n    ],\n    \"certainty\": \"high\",\n    \"id\": \"not_using-the-stoichiometric-ratio-relation-derive-h_f42647\",\n    \"not\": \"Not<Using the stoichiometric ratio relation, derive how to compute the amount of substance ( n_B ) from a known ( n_A ) and coefficients.>\",\n    \"semantic_unit\": \"Using the stoichiometric ratio relation, derive how to compute the amount of substance ( n_B ) from a known ( n_A ) and coefficients.\",\n    \"status\": \"closed\"\n  },\n  \"run_id\": \"run_36e91f81_e7e385\",\n  \"run_outcome\": \"completed\",\n  \"theory_version\": \"2.2.2\"\n}\n",
+          "stderr_tail": "",
+          "state": "/Users/ravindranathakila/service/realized/reports/validation_ladder_20260411_134118/chemistry_domain_validation/chemistry/probe_using_the_stoichiometric_ratio_relation_derive_how_to.json",
+          "resumed": false,
+          "elapsed_seconds": 56.695724,
+          "timeout_seconds": 147,
+          "command_timings": {},
+          "attempt_count": 1,
+          "attempts": [
+            {
+              "attempt": 1,
+              "timeout_seconds": 147,
+              "returncode": 0,
+              "stdout_tail": "relation-derive-h_f42647\",\n      \"payload\": {\n        \"proposal_id\": \"proposal_explanationdraft_37eecd\",\n        \"rationale\": \"Explanation drafts may be admitted as communicative artifacts without changing formal commitment state.\",\n        \"status\": \"admitted\"\n      },\n      \"result\": \"proposal governance state updated\",\n      \"seq\": 206,\n      \"timestamp\": \"2026-04-11T14:15:28+00:00\"\n    },\n    {\n      \"action\": \"register outlet trace_report\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"boundary transition preserved semantic continuity\",\n      \"intent\": \"Preserve outlet semantics in BSSC-consistent carrier form.\",\n      \"kind\": \"boundary_outlet\",\n      \"node_id\": null,\n      \"payload\": {\n        \"carrier_id\": \"outlet_using-the-stoichiometric-ratio-relation-derive-h_6b7b2b\",\n        \"kind\": \"trace_report\"\n      },\n      \"result\": \"outlet durably recorded\",\n      \"seq\": 207,\n      \"timestamp\": \"2026-04-11T14:15:28+00:00\"\n    },\n    {\n      \"action\": \"finalize run\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"run ended according to closure, pause, or incompletion conditions\",\n      \"intent\": \"Summarize the bounded run outcome under current conditions.\",\n      \"kind\": \"run_outcome\",\n      \"node_id\": \"not_using-the-stoichiometric-ratio-relation-derive-h_f42647\",\n      \"payload\": {},\n      \"result\": \"completed\",\n      \"seq\": 208,\n      \"timestamp\": \"2026-04-11T14:15:28+00:00\"\n    }\n  ],\n  \"root\": {\n    \"boundary_shape\": [\n      \"d*\"\n    ],\n    \"certainty\": \"high\",\n    \"id\": \"not_using-the-stoichiometric-ratio-relation-derive-h_f42647\",\n    \"not\": \"Not<Using the stoichiometric ratio relation, derive how to compute the amount of substance ( n_B ) from a known ( n_A ) and coefficients.>\",\n    \"semantic_unit\": \"Using the stoichiometric ratio relation, derive how to compute the amount of substance ( n_B ) from a known ( n_A ) and coefficients.\",\n    \"status\": \"closed\"\n  },\n  \"run_id\": \"run_36e91f81_e7e385\",\n  \"run_outcome\": \"completed\",\n  \"theory_version\": \"2.2.2\"\n}\n",
+              "stderr_tail": "",
+              "elapsed_seconds": 56.695724,
+              "timed_out": false,
+              "command_timings": {}
+            }
+          ],
+          "run_outcome": "completed",
+          "final_answer": "Stoichiometric Ratio: Proportional mapping is the broader reusable substrate; stoichiometric ratio is a narrower determinate chemistry law that maps one substance amount to another by balanced coefficients. Now chemistry can move across several layers: This makes solutions part of the same reusable conversion network. mass to moles by molar mass moles across substances by stoichiometric ratio moles to concentration by volume division Stoichiometric ratio and limiting reagent are related, but not identical. If a prompt asks for the controller of production, do not answer with only a ratio. stoichiometric ratio tells what one amount implies about another limiting reagent chooses which reactant actually controls the reaction outcome; Derive How To Compute The Amount Of Substance N B From A Known N A And Coefficients: How To Compute The Amount Of Substance N B From A Known N A: If the amount of solute stays the same before and after dilution, the reusable family is conservation of carried substance. The reusable formula is: $$ n1 = n2 $$ input: n1 output: n2 Then, The ideal gas law can be written as: $$ P = \\frac{nRT}{V} $$ Where: input: n input: R input: T input: V output: P Therefore, Proportional mapping is the broader reusable substrate; stoichiometric ratio is a narrower determinate chemistry law that maps one substance amount to another by balanced coefficients.",
+          "passed": true,
+          "reason": "freeform_overlap:8"
+        },
+        {
+          "name": "explain_why_mass_conservation_and_atom_conservation_belong",
+          "prompt": "Explain why mass conservation and atom conservation belong to the same family but must not be treated as the same law.",
+          "returncode": 0,
+          "stdout_tail": "t_explain-why-mass-conservation-and-atom-conservat_3a3cf9\",\n      \"payload\": {\n        \"proposal_id\": \"proposal_explanationdraft_c43146\",\n        \"rationale\": \"Explanation drafts may be admitted as communicative artifacts without changing formal commitment state.\",\n        \"status\": \"admitted\"\n      },\n      \"result\": \"proposal governance state updated\",\n      \"seq\": 71,\n      \"timestamp\": \"2026-04-11T14:15:40+00:00\"\n    },\n    {\n      \"action\": \"register outlet trace_report\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"boundary transition preserved semantic continuity\",\n      \"intent\": \"Preserve outlet semantics in BSSC-consistent carrier form.\",\n      \"kind\": \"boundary_outlet\",\n      \"node_id\": null,\n      \"payload\": {\n        \"carrier_id\": \"outlet_explain-why-mass-conservation-and-atom-conservat_b0920b\",\n        \"kind\": \"trace_report\"\n      },\n      \"result\": \"outlet durably recorded\",\n      \"seq\": 72,\n      \"timestamp\": \"2026-04-11T14:15:40+00:00\"\n    },\n    {\n      \"action\": \"finalize run\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"run ended according to closure, pause, or incompletion conditions\",\n      \"intent\": \"Summarize the bounded run outcome under current conditions.\",\n      \"kind\": \"run_outcome\",\n      \"node_id\": \"not_explain-why-mass-conservation-and-atom-conservat_3a3cf9\",\n      \"payload\": {},\n      \"result\": \"completed\",\n      \"seq\": 73,\n      \"timestamp\": \"2026-04-11T14:15:40+00:00\"\n    }\n  ],\n  \"root\": {\n    \"boundary_shape\": [\n      \"d*\"\n    ],\n    \"certainty\": \"high\",\n    \"id\": \"not_explain-why-mass-conservation-and-atom-conservat_3a3cf9\",\n    \"not\": \"Not<Explain why mass conservation and atom conservation belong to the same family but must not be treated as the same law.>\",\n    \"semantic_unit\": \"Explain why mass conservation and atom conservation belong to the same family but must not be treated as the same law.\",\n    \"status\": \"closed\"\n  },\n  \"run_id\": \"run_ea996561_25b915\",\n  \"run_outcome\": \"completed\",\n  \"theory_version\": \"2.2.2\"\n}\n",
+          "stderr_tail": "",
+          "state": "/Users/ravindranathakila/service/realized/reports/validation_ladder_20260411_134118/chemistry_domain_validation/chemistry/probe_explain_why_mass_conservation_and_atom_conservation_belong.json",
+          "resumed": false,
+          "elapsed_seconds": 11.848962,
+          "timeout_seconds": 72,
+          "command_timings": {},
+          "attempt_count": 1,
+          "attempts": [
+            {
+              "attempt": 1,
+              "timeout_seconds": 72,
+              "returncode": 0,
+              "stdout_tail": "t_explain-why-mass-conservation-and-atom-conservat_3a3cf9\",\n      \"payload\": {\n        \"proposal_id\": \"proposal_explanationdraft_c43146\",\n        \"rationale\": \"Explanation drafts may be admitted as communicative artifacts without changing formal commitment state.\",\n        \"status\": \"admitted\"\n      },\n      \"result\": \"proposal governance state updated\",\n      \"seq\": 71,\n      \"timestamp\": \"2026-04-11T14:15:40+00:00\"\n    },\n    {\n      \"action\": \"register outlet trace_report\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"boundary transition preserved semantic continuity\",\n      \"intent\": \"Preserve outlet semantics in BSSC-consistent carrier form.\",\n      \"kind\": \"boundary_outlet\",\n      \"node_id\": null,\n      \"payload\": {\n        \"carrier_id\": \"outlet_explain-why-mass-conservation-and-atom-conservat_b0920b\",\n        \"kind\": \"trace_report\"\n      },\n      \"result\": \"outlet durably recorded\",\n      \"seq\": 72,\n      \"timestamp\": \"2026-04-11T14:15:40+00:00\"\n    },\n    {\n      \"action\": \"finalize run\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"run ended according to closure, pause, or incompletion conditions\",\n      \"intent\": \"Summarize the bounded run outcome under current conditions.\",\n      \"kind\": \"run_outcome\",\n      \"node_id\": \"not_explain-why-mass-conservation-and-atom-conservat_3a3cf9\",\n      \"payload\": {},\n      \"result\": \"completed\",\n      \"seq\": 73,\n      \"timestamp\": \"2026-04-11T14:15:40+00:00\"\n    }\n  ],\n  \"root\": {\n    \"boundary_shape\": [\n      \"d*\"\n    ],\n    \"certainty\": \"high\",\n    \"id\": \"not_explain-why-mass-conservation-and-atom-conservat_3a3cf9\",\n    \"not\": \"Not<Explain why mass conservation and atom conservation belong to the same family but must not be treated as the same law.>\",\n    \"semantic_unit\": \"Explain why mass conservation and atom conservation belong to the same family but must not be treated as the same law.\",\n    \"status\": \"closed\"\n  },\n  \"run_id\": \"run_ea996561_25b915\",\n  \"run_outcome\": \"completed\",\n  \"theory_version\": \"2.2.2\"\n}\n",
+              "stderr_tail": "",
+              "elapsed_seconds": 11.848962,
+              "timed_out": false,
+              "command_timings": {}
+            }
+          ],
+          "run_outcome": "completed",
+          "final_answer": "Conservation is the broader reusable substrate; mass conservation and atom conservation are narrower determinate chemistry laws that reuse that substrate with different preserved quantities.",
+          "passed": true,
+          "reason": "freeform_overlap:4"
+        },
+        {
+          "name": "distinguish_between_stoichiometric_ratio_and_limiting_reagent_in",
+          "prompt": "Distinguish between stoichiometric ratio and limiting reagent in terms of their functional role in determining reaction outcomes.",
+          "returncode": 0,
+          "stdout_tail": "stoichiometric-ratio-and-lim_f24420\",\n      \"payload\": {\n        \"proposal_id\": \"proposal_explanationdraft_bc48bb\",\n        \"rationale\": \"Explanation drafts may be admitted as communicative artifacts without changing formal commitment state.\",\n        \"status\": \"admitted\"\n      },\n      \"result\": \"proposal governance state updated\",\n      \"seq\": 71,\n      \"timestamp\": \"2026-04-11T14:15:53+00:00\"\n    },\n    {\n      \"action\": \"register outlet trace_report\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"boundary transition preserved semantic continuity\",\n      \"intent\": \"Preserve outlet semantics in BSSC-consistent carrier form.\",\n      \"kind\": \"boundary_outlet\",\n      \"node_id\": null,\n      \"payload\": {\n        \"carrier_id\": \"outlet_distinguish-between-stoichiometric-ratio-and-lim_7b6345\",\n        \"kind\": \"trace_report\"\n      },\n      \"result\": \"outlet durably recorded\",\n      \"seq\": 72,\n      \"timestamp\": \"2026-04-11T14:15:53+00:00\"\n    },\n    {\n      \"action\": \"finalize run\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"run ended according to closure, pause, or incompletion conditions\",\n      \"intent\": \"Summarize the bounded run outcome under current conditions.\",\n      \"kind\": \"run_outcome\",\n      \"node_id\": \"not_distinguish-between-stoichiometric-ratio-and-lim_f24420\",\n      \"payload\": {},\n      \"result\": \"completed\",\n      \"seq\": 73,\n      \"timestamp\": \"2026-04-11T14:15:53+00:00\"\n    }\n  ],\n  \"root\": {\n    \"boundary_shape\": [\n      \"d*\"\n    ],\n    \"certainty\": \"high\",\n    \"id\": \"not_distinguish-between-stoichiometric-ratio-and-lim_f24420\",\n    \"not\": \"Not<Distinguish between stoichiometric ratio and limiting reagent in terms of their functional role in determining reaction outcomes.>\",\n    \"semantic_unit\": \"Distinguish between stoichiometric ratio and limiting reagent in terms of their functional role in determining reaction outcomes.\",\n    \"status\": \"closed\"\n  },\n  \"run_id\": \"run_68ae2f08_1158f4\",\n  \"run_outcome\": \"completed\",\n  \"theory_version\": \"2.2.2\"\n}\n",
+          "stderr_tail": "",
+          "state": "/Users/ravindranathakila/service/realized/reports/validation_ladder_20260411_134118/chemistry_domain_validation/chemistry/probe_distinguish_between_stoichiometric_ratio_and_limiting_reagent_in.json",
+          "resumed": false,
+          "elapsed_seconds": 13.652345,
+          "timeout_seconds": 65,
+          "command_timings": {},
+          "attempt_count": 1,
+          "attempts": [
+            {
+              "attempt": 1,
+              "timeout_seconds": 65,
+              "returncode": 0,
+              "stdout_tail": "stoichiometric-ratio-and-lim_f24420\",\n      \"payload\": {\n        \"proposal_id\": \"proposal_explanationdraft_bc48bb\",\n        \"rationale\": \"Explanation drafts may be admitted as communicative artifacts without changing formal commitment state.\",\n        \"status\": \"admitted\"\n      },\n      \"result\": \"proposal governance state updated\",\n      \"seq\": 71,\n      \"timestamp\": \"2026-04-11T14:15:53+00:00\"\n    },\n    {\n      \"action\": \"register outlet trace_report\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"boundary transition preserved semantic continuity\",\n      \"intent\": \"Preserve outlet semantics in BSSC-consistent carrier form.\",\n      \"kind\": \"boundary_outlet\",\n      \"node_id\": null,\n      \"payload\": {\n        \"carrier_id\": \"outlet_distinguish-between-stoichiometric-ratio-and-lim_7b6345\",\n        \"kind\": \"trace_report\"\n      },\n      \"result\": \"outlet durably recorded\",\n      \"seq\": 72,\n      \"timestamp\": \"2026-04-11T14:15:53+00:00\"\n    },\n    {\n      \"action\": \"finalize run\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"run ended according to closure, pause, or incompletion conditions\",\n      \"intent\": \"Summarize the bounded run outcome under current conditions.\",\n      \"kind\": \"run_outcome\",\n      \"node_id\": \"not_distinguish-between-stoichiometric-ratio-and-lim_f24420\",\n      \"payload\": {},\n      \"result\": \"completed\",\n      \"seq\": 73,\n      \"timestamp\": \"2026-04-11T14:15:53+00:00\"\n    }\n  ],\n  \"root\": {\n    \"boundary_shape\": [\n      \"d*\"\n    ],\n    \"certainty\": \"high\",\n    \"id\": \"not_distinguish-between-stoichiometric-ratio-and-lim_f24420\",\n    \"not\": \"Not<Distinguish between stoichiometric ratio and limiting reagent in terms of their functional role in determining reaction outcomes.>\",\n    \"semantic_unit\": \"Distinguish between stoichiometric ratio and limiting reagent in terms of their functional role in determining reaction outcomes.\",\n    \"status\": \"closed\"\n  },\n  \"run_id\": \"run_68ae2f08_1158f4\",\n  \"run_outcome\": \"completed\",\n  \"theory_version\": \"2.2.2\"\n}\n",
+              "stderr_tail": "",
+              "elapsed_seconds": 13.652345,
+              "timed_out": false,
+              "command_timings": {}
+            }
+          ],
+          "run_outcome": "completed",
+          "final_answer": "Stoichiometric ratio and limiting reagent are related, but not identical. If a prompt asks for the controller of production, do not answer with only a ratio. stoichiometric ratio tells what one amount implies about another limiting reagent chooses which reactant actually controls the reaction outcome",
+          "passed": true,
+          "reason": "freeform_overlap:5"
+        },
+        {
+          "name": "describe_the_full_chain_of_transformations_required_to",
+          "prompt": "Describe the full chain of transformations required to convert mass of a reactant into concentration of a product in solution, naming each intermediate relation used.",
+          "returncode": 0,
+          "stdout_tail": "\": \"proposal_explanationdraft_65d7f8\",\n        \"rationale\": \"Explanation drafts may be admitted as communicative artifacts without changing formal commitment state.\",\n        \"status\": \"admitted\"\n      },\n      \"result\": \"proposal governance state updated\",\n      \"seq\": 258,\n      \"timestamp\": \"2026-04-11T14:16:52+00:00\"\n    },\n    {\n      \"action\": \"register outlet trace_report\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"boundary transition preserved semantic continuity\",\n      \"intent\": \"Preserve outlet semantics in BSSC-consistent carrier form.\",\n      \"kind\": \"boundary_outlet\",\n      \"node_id\": null,\n      \"payload\": {\n        \"carrier_id\": \"outlet_describe-the-full-chain-of-transformations-requi_8c0f6d\",\n        \"kind\": \"trace_report\"\n      },\n      \"result\": \"outlet durably recorded\",\n      \"seq\": 259,\n      \"timestamp\": \"2026-04-11T14:16:52+00:00\"\n    },\n    {\n      \"action\": \"finalize run\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"run ended according to closure, pause, or incompletion conditions\",\n      \"intent\": \"Summarize the bounded run outcome under current conditions.\",\n      \"kind\": \"run_outcome\",\n      \"node_id\": \"not_describe-the-full-chain-of-transformations-requi_d6aac8\",\n      \"payload\": {},\n      \"result\": \"completed\",\n      \"seq\": 260,\n      \"timestamp\": \"2026-04-11T14:16:52+00:00\"\n    }\n  ],\n  \"root\": {\n    \"boundary_shape\": [\n      \"d*\"\n    ],\n    \"certainty\": \"high\",\n    \"id\": \"not_describe-the-full-chain-of-transformations-requi_d6aac8\",\n    \"not\": \"Not<Describe the full chain of transformations required to convert mass of a reactant into concentration of a product in solution, naming each intermediate relation used.>\",\n    \"semantic_unit\": \"Describe the full chain of transformations required to convert mass of a reactant into concentration of a product in solution, naming each intermediate relation used.\",\n    \"status\": \"closed\"\n  },\n  \"run_id\": \"run_d8db7664_4bfc7c\",\n  \"run_outcome\": \"completed\",\n  \"theory_version\": \"2.2.2\"\n}\n",
+          "stderr_tail": "",
+          "state": "/Users/ravindranathakila/service/realized/reports/validation_ladder_20260411_134118/chemistry_domain_validation/chemistry/probe_describe_the_full_chain_of_transformations_required_to.json",
+          "resumed": false,
+          "elapsed_seconds": 58.495399,
+          "timeout_seconds": 162,
+          "command_timings": {},
+          "attempt_count": 1,
+          "attempts": [
+            {
+              "attempt": 1,
+              "timeout_seconds": 162,
+              "returncode": 0,
+              "stdout_tail": "\": \"proposal_explanationdraft_65d7f8\",\n        \"rationale\": \"Explanation drafts may be admitted as communicative artifacts without changing formal commitment state.\",\n        \"status\": \"admitted\"\n      },\n      \"result\": \"proposal governance state updated\",\n      \"seq\": 258,\n      \"timestamp\": \"2026-04-11T14:16:52+00:00\"\n    },\n    {\n      \"action\": \"register outlet trace_report\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"boundary transition preserved semantic continuity\",\n      \"intent\": \"Preserve outlet semantics in BSSC-consistent carrier form.\",\n      \"kind\": \"boundary_outlet\",\n      \"node_id\": null,\n      \"payload\": {\n        \"carrier_id\": \"outlet_describe-the-full-chain-of-transformations-requi_8c0f6d\",\n        \"kind\": \"trace_report\"\n      },\n      \"result\": \"outlet durably recorded\",\n      \"seq\": 259,\n      \"timestamp\": \"2026-04-11T14:16:52+00:00\"\n    },\n    {\n      \"action\": \"finalize run\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"run ended according to closure, pause, or incompletion conditions\",\n      \"intent\": \"Summarize the bounded run outcome under current conditions.\",\n      \"kind\": \"run_outcome\",\n      \"node_id\": \"not_describe-the-full-chain-of-transformations-requi_d6aac8\",\n      \"payload\": {},\n      \"result\": \"completed\",\n      \"seq\": 260,\n      \"timestamp\": \"2026-04-11T14:16:52+00:00\"\n    }\n  ],\n  \"root\": {\n    \"boundary_shape\": [\n      \"d*\"\n    ],\n    \"certainty\": \"high\",\n    \"id\": \"not_describe-the-full-chain-of-transformations-requi_d6aac8\",\n    \"not\": \"Not<Describe the full chain of transformations required to convert mass of a reactant into concentration of a product in solution, naming each intermediate relation used.>\",\n    \"semantic_unit\": \"Describe the full chain of transformations required to convert mass of a reactant into concentration of a product in solution, naming each intermediate relation used.\",\n    \"status\": \"closed\"\n  },\n  \"run_id\": \"run_d8db7664_4bfc7c\",\n  \"run_outcome\": \"completed\",\n  \"theory_version\": \"2.2.2\"\n}\n",
+              "stderr_tail": "",
+              "elapsed_seconds": 58.495399,
+              "timed_out": false,
+              "command_timings": {}
+            }
+          ],
+          "run_outcome": "completed",
+          "final_answer": "Mass To Mole Conversion: Mass To Mole Conversion: Total Per Unit Division. When the number of units is obtained by dividing a total by the amount per unit, the reusable family is total-per-unit division. The reusable formula is: $$ U = \\frac{T}{qu} $$ input: T input: qu output: U Total-per-unit division is the broader reusable substrate; molar-mass conversion is a narrower determinate chemistry law that uses grams per mole as the unit size.; Stoichiometric Ratio From Balanced Equations: Stoichiometric Ratio From Balanced Equations: Proportional Mapping. Proportional mapping is the broader reusable substrate; stoichiometric ratio is a narrower determinate chemistry law that maps one substance amount to another by balanced coefficients. In a balanced chemical equation, mole amounts follow the coefficient ratio. The reusable formula is: $$ \\frac{nA}{nB} = \\frac{\\nuA}{\\nuB} $$ input: nA input: nB input: \\nuA input: \\nuB; Concentration As Amount Per Volume: Concentration As Amount Per Volume: Amount Per Container. Amount-per-container is the broader reusable substrate; molar concentration is a narrower determinate chemistry law that expresses amount of solute per unit volume of solution. When an intensity or density is formed by dividing total amount by containing size, the reusable family is amount-per-container. The reusable formula is: $$ D = \\frac{Q}{S} $$ input: Q input: S output: D Now chemistry can move across several layers: This makes solutions part of the same reusable conversion network. mass to moles by molar mass moles across substances by stoichiometric ratio moles to concentration by volume division",
+          "passed": true,
+          "reason": "freeform_overlap:3"
+        },
+        {
+          "name": "starting_from_solute_conservation_and_concentration_definitions_derive",
+          "prompt": "Starting from solute conservation and concentration definitions, derive the dilution law ( C_1 V_1 = C_2 V_2 ) and explain each substitution step.",
+          "returncode": 0,
+          "stdout_tail": "payload\": {\n        \"proposal_id\": \"proposal_explanationdraft_1349f7\",\n        \"rationale\": \"Explanation drafts may be admitted as communicative artifacts without changing formal commitment state.\",\n        \"status\": \"admitted\"\n      },\n      \"result\": \"proposal governance state updated\",\n      \"seq\": 356,\n      \"timestamp\": \"2026-04-11T14:18:26+00:00\"\n    },\n    {\n      \"action\": \"register outlet trace_report\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"boundary transition preserved semantic continuity\",\n      \"intent\": \"Preserve outlet semantics in BSSC-consistent carrier form.\",\n      \"kind\": \"boundary_outlet\",\n      \"node_id\": null,\n      \"payload\": {\n        \"carrier_id\": \"outlet_starting-from-solute-conservation-and-concentrat_24c657\",\n        \"kind\": \"trace_report\"\n      },\n      \"result\": \"outlet durably recorded\",\n      \"seq\": 357,\n      \"timestamp\": \"2026-04-11T14:18:26+00:00\"\n    },\n    {\n      \"action\": \"finalize run\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"run ended according to closure, pause, or incompletion conditions\",\n      \"intent\": \"Summarize the bounded run outcome under current conditions.\",\n      \"kind\": \"run_outcome\",\n      \"node_id\": \"not_starting-from-solute-conservation-and-concentrat_f676de\",\n      \"payload\": {},\n      \"result\": \"paused\",\n      \"seq\": 358,\n      \"timestamp\": \"2026-04-11T14:18:26+00:00\"\n    }\n  ],\n  \"root\": {\n    \"boundary_shape\": [\n      \"a*\",\n      \"d*\"\n    ],\n    \"certainty\": \"medium\",\n    \"id\": \"not_starting-from-solute-conservation-and-concentrat_f676de\",\n    \"not\": \"Not<Starting from solute conservation and concentration definitions, derive the dilution law ( C_1 V_1 = C_2 V_2 ) and explain each substitution step.>\",\n    \"semantic_unit\": \"Starting from solute conservation and concentration definitions, derive the dilution law ( C_1 V_1 = C_2 V_2 ) and explain each substitution step.\",\n    \"status\": \"paused\"\n  },\n  \"run_id\": \"run_7212279a_872d80\",\n  \"run_outcome\": \"paused\",\n  \"theory_version\": \"2.2.2\"\n}\n",
+          "stderr_tail": "",
+          "state": "/Users/ravindranathakila/service/realized/reports/validation_ladder_20260411_134118/chemistry_domain_validation/chemistry/probe_starting_from_solute_conservation_and_concentration_definitions_derive.json",
+          "resumed": false,
+          "elapsed_seconds": 93.770187,
+          "timeout_seconds": 149,
+          "command_timings": {},
+          "attempt_count": 1,
+          "attempts": [
+            {
+              "attempt": 1,
+              "timeout_seconds": 149,
+              "returncode": 0,
+              "stdout_tail": "payload\": {\n        \"proposal_id\": \"proposal_explanationdraft_1349f7\",\n        \"rationale\": \"Explanation drafts may be admitted as communicative artifacts without changing formal commitment state.\",\n        \"status\": \"admitted\"\n      },\n      \"result\": \"proposal governance state updated\",\n      \"seq\": 356,\n      \"timestamp\": \"2026-04-11T14:18:26+00:00\"\n    },\n    {\n      \"action\": \"register outlet trace_report\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"boundary transition preserved semantic continuity\",\n      \"intent\": \"Preserve outlet semantics in BSSC-consistent carrier form.\",\n      \"kind\": \"boundary_outlet\",\n      \"node_id\": null,\n      \"payload\": {\n        \"carrier_id\": \"outlet_starting-from-solute-conservation-and-concentrat_24c657\",\n        \"kind\": \"trace_report\"\n      },\n      \"result\": \"outlet durably recorded\",\n      \"seq\": 357,\n      \"timestamp\": \"2026-04-11T14:18:26+00:00\"\n    },\n    {\n      \"action\": \"finalize run\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"run ended according to closure, pause, or incompletion conditions\",\n      \"intent\": \"Summarize the bounded run outcome under current conditions.\",\n      \"kind\": \"run_outcome\",\n      \"node_id\": \"not_starting-from-solute-conservation-and-concentrat_f676de\",\n      \"payload\": {},\n      \"result\": \"paused\",\n      \"seq\": 358,\n      \"timestamp\": \"2026-04-11T14:18:26+00:00\"\n    }\n  ],\n  \"root\": {\n    \"boundary_shape\": [\n      \"a*\",\n      \"d*\"\n    ],\n    \"certainty\": \"medium\",\n    \"id\": \"not_starting-from-solute-conservation-and-concentrat_f676de\",\n    \"not\": \"Not<Starting from solute conservation and concentration definitions, derive the dilution law ( C_1 V_1 = C_2 V_2 ) and explain each substitution step.>\",\n    \"semantic_unit\": \"Starting from solute conservation and concentration definitions, derive the dilution law ( C_1 V_1 = C_2 V_2 ) and explain each substitution step.\",\n    \"status\": \"paused\"\n  },\n  \"run_id\": \"run_7212279a_872d80\",\n  \"run_outcome\": \"paused\",\n  \"theory_version\": \"2.2.2\"\n}\n",
+              "stderr_tail": "",
+              "elapsed_seconds": 93.770187,
+              "timed_out": false,
+              "command_timings": {}
+            }
+          ],
+          "run_outcome": "paused",
+          "final_answer": "committed_state supports reduction of Not<Starting from solute conservation and concentration definitions, derive the dilution law ( C_1 V_1 = C_2 V_2 ) and explain each substitution step.>.",
+          "passed": false,
+          "reason": "run_incomplete"
+        },
+        {
+          "name": "identify_the_reusable_substrate_underlying_the_ideal_gas",
+          "prompt": "Identify the reusable substrate underlying the ideal gas law, and explain how each variable maps onto that abstract structure.",
+          "returncode": 0,
+          "stdout_tail": "eusable-substrate-underlying-the-i_cb11a7\",\n      \"payload\": {\n        \"proposal_id\": \"proposal_explanationdraft_5faf21\",\n        \"rationale\": \"Explanation drafts may be admitted as communicative artifacts without changing formal commitment state.\",\n        \"status\": \"admitted\"\n      },\n      \"result\": \"proposal governance state updated\",\n      \"seq\": 59,\n      \"timestamp\": \"2026-04-11T14:18:37+00:00\"\n    },\n    {\n      \"action\": \"register outlet trace_report\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"boundary transition preserved semantic continuity\",\n      \"intent\": \"Preserve outlet semantics in BSSC-consistent carrier form.\",\n      \"kind\": \"boundary_outlet\",\n      \"node_id\": null,\n      \"payload\": {\n        \"carrier_id\": \"outlet_identify-the-reusable-substrate-underlying-the-i_52718e\",\n        \"kind\": \"trace_report\"\n      },\n      \"result\": \"outlet durably recorded\",\n      \"seq\": 60,\n      \"timestamp\": \"2026-04-11T14:18:37+00:00\"\n    },\n    {\n      \"action\": \"finalize run\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"run ended according to closure, pause, or incompletion conditions\",\n      \"intent\": \"Summarize the bounded run outcome under current conditions.\",\n      \"kind\": \"run_outcome\",\n      \"node_id\": \"not_identify-the-reusable-substrate-underlying-the-i_cb11a7\",\n      \"payload\": {},\n      \"result\": \"completed\",\n      \"seq\": 61,\n      \"timestamp\": \"2026-04-11T14:18:37+00:00\"\n    }\n  ],\n  \"root\": {\n    \"boundary_shape\": [\n      \"d*\"\n    ],\n    \"certainty\": \"high\",\n    \"id\": \"not_identify-the-reusable-substrate-underlying-the-i_cb11a7\",\n    \"not\": \"Not<Identify the reusable substrate underlying the ideal gas law, and explain how each variable maps onto that abstract structure.>\",\n    \"semantic_unit\": \"Identify the reusable substrate underlying the ideal gas law, and explain how each variable maps onto that abstract structure.\",\n    \"status\": \"closed\"\n  },\n  \"run_id\": \"run_d47ec639_343768\",\n  \"run_outcome\": \"completed\",\n  \"theory_version\": \"2.2.2\"\n}\n",
+          "stderr_tail": "",
+          "state": "/Users/ravindranathakila/service/realized/reports/validation_ladder_20260411_134118/chemistry_domain_validation/chemistry/probe_identify_the_reusable_substrate_underlying_the_ideal_gas.json",
+          "resumed": false,
+          "elapsed_seconds": 11.204214,
+          "timeout_seconds": 144,
+          "command_timings": {},
+          "attempt_count": 1,
+          "attempts": [
+            {
+              "attempt": 1,
+              "timeout_seconds": 144,
+              "returncode": 0,
+              "stdout_tail": "eusable-substrate-underlying-the-i_cb11a7\",\n      \"payload\": {\n        \"proposal_id\": \"proposal_explanationdraft_5faf21\",\n        \"rationale\": \"Explanation drafts may be admitted as communicative artifacts without changing formal commitment state.\",\n        \"status\": \"admitted\"\n      },\n      \"result\": \"proposal governance state updated\",\n      \"seq\": 59,\n      \"timestamp\": \"2026-04-11T14:18:37+00:00\"\n    },\n    {\n      \"action\": \"register outlet trace_report\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"boundary transition preserved semantic continuity\",\n      \"intent\": \"Preserve outlet semantics in BSSC-consistent carrier form.\",\n      \"kind\": \"boundary_outlet\",\n      \"node_id\": null,\n      \"payload\": {\n        \"carrier_id\": \"outlet_identify-the-reusable-substrate-underlying-the-i_52718e\",\n        \"kind\": \"trace_report\"\n      },\n      \"result\": \"outlet durably recorded\",\n      \"seq\": 60,\n      \"timestamp\": \"2026-04-11T14:18:37+00:00\"\n    },\n    {\n      \"action\": \"finalize run\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"run ended according to closure, pause, or incompletion conditions\",\n      \"intent\": \"Summarize the bounded run outcome under current conditions.\",\n      \"kind\": \"run_outcome\",\n      \"node_id\": \"not_identify-the-reusable-substrate-underlying-the-i_cb11a7\",\n      \"payload\": {},\n      \"result\": \"completed\",\n      \"seq\": 61,\n      \"timestamp\": \"2026-04-11T14:18:37+00:00\"\n    }\n  ],\n  \"root\": {\n    \"boundary_shape\": [\n      \"d*\"\n    ],\n    \"certainty\": \"high\",\n    \"id\": \"not_identify-the-reusable-substrate-underlying-the-i_cb11a7\",\n    \"not\": \"Not<Identify the reusable substrate underlying the ideal gas law, and explain how each variable maps onto that abstract structure.>\",\n    \"semantic_unit\": \"Identify the reusable substrate underlying the ideal gas law, and explain how each variable maps onto that abstract structure.\",\n    \"status\": \"closed\"\n  },\n  \"run_id\": \"run_d47ec639_343768\",\n  \"run_outcome\": \"completed\",\n  \"theory_version\": \"2.2.2\"\n}\n",
+              "stderr_tail": "",
+              "elapsed_seconds": 11.204214,
+              "timed_out": false,
+              "command_timings": {}
+            }
+          ],
+          "run_outcome": "completed",
+          "final_answer": "Scaled product-over-extent is the broader reusable substrate; the ideal gas law is a narrower determinate chemistry law that links gas pressure, volume, temperature, and amount.",
+          "passed": true,
+          "reason": "freeform_overlap:5"
+        },
+        {
+          "name": "explain_how_the_equilibrium_constant_expression_composes_multiple",
+          "prompt": "Explain how the equilibrium constant expression composes multiple earlier semantic substrates (concentration, stoichiometric coefficients, and weighted product ratios), and reconstruct the full reasoning path from these components to the final form of ( K ).",
+          "returncode": 0,
+          "stdout_tail": "s\": \"admitted\"\n      },\n      \"result\": \"proposal governance state updated\",\n      \"seq\": 71,\n      \"timestamp\": \"2026-04-11T14:18:50+00:00\"\n    },\n    {\n      \"action\": \"register outlet trace_report\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"boundary transition preserved semantic continuity\",\n      \"intent\": \"Preserve outlet semantics in BSSC-consistent carrier form.\",\n      \"kind\": \"boundary_outlet\",\n      \"node_id\": null,\n      \"payload\": {\n        \"carrier_id\": \"outlet_explain-how-the-equilibrium-constant-expression-_29725d\",\n        \"kind\": \"trace_report\"\n      },\n      \"result\": \"outlet durably recorded\",\n      \"seq\": 72,\n      \"timestamp\": \"2026-04-11T14:18:50+00:00\"\n    },\n    {\n      \"action\": \"finalize run\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"run ended according to closure, pause, or incompletion conditions\",\n      \"intent\": \"Summarize the bounded run outcome under current conditions.\",\n      \"kind\": \"run_outcome\",\n      \"node_id\": \"not_explain-how-the-equilibrium-constant-expression-_2a780f\",\n      \"payload\": {},\n      \"result\": \"completed\",\n      \"seq\": 73,\n      \"timestamp\": \"2026-04-11T14:18:50+00:00\"\n    }\n  ],\n  \"root\": {\n    \"boundary_shape\": [\n      \"d*\"\n    ],\n    \"certainty\": \"high\",\n    \"id\": \"not_explain-how-the-equilibrium-constant-expression-_2a780f\",\n    \"not\": \"Not<Explain how the equilibrium constant expression composes multiple earlier semantic substrates (concentration, stoichiometric coefficients, and weighted product ratios), and reconstruct the full reasoning path from these components to the final form of ( K ).>\",\n    \"semantic_unit\": \"Explain how the equilibrium constant expression composes multiple earlier semantic substrates (concentration, stoichiometric coefficients, and weighted product ratios), and reconstruct the full reasoning path from these components to the final form of ( K ).\",\n    \"status\": \"closed\"\n  },\n  \"run_id\": \"run_962e3ab9_e0e486\",\n  \"run_outcome\": \"completed\",\n  \"theory_version\": \"2.2.2\"\n}\n",
+          "stderr_tail": "",
+          "state": "/Users/ravindranathakila/service/realized/reports/validation_ladder_20260411_134118/chemistry_domain_validation/chemistry/probe_explain_how_the_equilibrium_constant_expression_composes_multiple.json",
+          "resumed": false,
+          "elapsed_seconds": 13.360366,
+          "timeout_seconds": 180,
+          "command_timings": {},
+          "attempt_count": 1,
+          "attempts": [
+            {
+              "attempt": 1,
+              "timeout_seconds": 180,
+              "returncode": 0,
+              "stdout_tail": "s\": \"admitted\"\n      },\n      \"result\": \"proposal governance state updated\",\n      \"seq\": 71,\n      \"timestamp\": \"2026-04-11T14:18:50+00:00\"\n    },\n    {\n      \"action\": \"register outlet trace_report\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"boundary transition preserved semantic continuity\",\n      \"intent\": \"Preserve outlet semantics in BSSC-consistent carrier form.\",\n      \"kind\": \"boundary_outlet\",\n      \"node_id\": null,\n      \"payload\": {\n        \"carrier_id\": \"outlet_explain-how-the-equilibrium-constant-expression-_29725d\",\n        \"kind\": \"trace_report\"\n      },\n      \"result\": \"outlet durably recorded\",\n      \"seq\": 72,\n      \"timestamp\": \"2026-04-11T14:18:50+00:00\"\n    },\n    {\n      \"action\": \"finalize run\",\n      \"commit_effect\": \"\",\n      \"evaluation\": \"run ended according to closure, pause, or incompletion conditions\",\n      \"intent\": \"Summarize the bounded run outcome under current conditions.\",\n      \"kind\": \"run_outcome\",\n      \"node_id\": \"not_explain-how-the-equilibrium-constant-expression-_2a780f\",\n      \"payload\": {},\n      \"result\": \"completed\",\n      \"seq\": 73,\n      \"timestamp\": \"2026-04-11T14:18:50+00:00\"\n    }\n  ],\n  \"root\": {\n    \"boundary_shape\": [\n      \"d*\"\n    ],\n    \"certainty\": \"high\",\n    \"id\": \"not_explain-how-the-equilibrium-constant-expression-_2a780f\",\n    \"not\": \"Not<Explain how the equilibrium constant expression composes multiple earlier semantic substrates (concentration, stoichiometric coefficients, and weighted product ratios), and reconstruct the full reasoning path from these components to the final form of ( K ).>\",\n    \"semantic_unit\": \"Explain how the equilibrium constant expression composes multiple earlier semantic substrates (concentration, stoichiometric coefficients, and weighted product ratios), and reconstruct the full reasoning path from these components to the final form of ( K ).\",\n    \"status\": \"closed\"\n  },\n  \"run_id\": \"run_962e3ab9_e0e486\",\n  \"run_outcome\": \"completed\",\n  \"theory_version\": \"2.2.2\"\n}\n",
+              "stderr_tail": "",
+              "elapsed_seconds": 13.360366,
+              "timed_out": false,
+              "command_timings": {}
+            }
+          ],
+          "run_outcome": "completed",
+          "final_answer": "Explain How The Equilibrium Constant Expression Composes Multiple Earlier Semantic Substrates Concentration Stoichiometric Coefficients And Weighted Product Ratios And Reconstruct The Full Reasoning Path From These Components To The Final Form Of K: Weighted product ratio is the broader reusable substrate; the equilibrium constant expression is a narrower determinate chemistry law that compares product and reactant concentration structures using stoichiometric exponents. Then, Equilibrium Constant Expression. K.",
+          "passed": true,
+          "reason": "freeform_overlap:20"
+        }
+      ],
+      "probe_summary": {
+        "passed": 9,
+        "total": 10
+      },
+      "sqlite": "/Users/ravindranathakila/service/realized/reports/validation_ladder_20260411_134118/chemistry_domain_validation/chemistry/chemistry.sqlite3",
+      "sqlite_runtime": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "metrics": {
+        "artifacts": 112,
+        "abilities": 34,
+        "knowledge": 70,
+        "related_items": 58,
+        "prolog_heads": 93
+      }
+    }
+  ]
+}

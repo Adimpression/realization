@@ -1,0 +1,203 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/service-interface-notation.schema.json",
+  "title": "Service Interface Notation YAML Authoring Schema",
+  "type": "object",
+  "description": "Schema for one YAML declaration in the Service Interface Notation authoring layer.",
+  "minProperties": 1,
+  "maxProperties": 1,
+  "propertyNames": {
+    "$ref": "#/$defs/semanticUnit"
+  },
+  "patternProperties": {
+    ".*": {
+      "$ref": "#/$defs/declaration"
+    }
+  },
+  "additionalProperties": false,
+
+  "$defs": {
+    "ws": {
+      "type": "string",
+      "pattern": "^\\s*$"
+    },
+
+    "word": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Za-z0-9]*(?:[-][A-Za-z0-9]+)*$"
+    },
+
+    "semanticSegment": {
+      "type": "string",
+      "description": "A noun or noun-phrase segment, e.g. 'User' or 'Identified User'.",
+      "pattern": "^[A-Z][A-Za-z0-9]*(?:[-][A-Za-z0-9]+)*(?: [A-Z][A-Za-z0-9]*(?:[-][A-Za-z0-9]+)*)*$"
+    },
+
+    "semanticUnit": {
+      "type": "string",
+      "description": "A semantic unit key, optionally segmented with '/'. Examples: 'User', 'User / Identified', 'Thing / Qualifier / Predicate'.",
+      "pattern": "^[A-Z][A-Za-z0-9]*(?:[-][A-Za-z0-9]+)*(?: [A-Z][A-Za-z0-9]*(?:[-][A-Za-z0-9]+)*)*(?:\\s*/\\s*[A-Z][A-Za-z0-9]*(?:[-][A-Za-z0-9]+)*(?: [A-Z][A-Za-z0-9]*(?:[-][A-Za-z0-9]+)*)*)*$",
+      "allOf": [
+        {
+          "not": {
+            "pattern": "^Not\\s*<.*>$"
+          }
+        },
+        {
+          "not": {
+            "pattern": "^Is\\s*<.*>$"
+          }
+        }
+      ]
+    },
+
+    "primitiveKind": {
+      "type": "string",
+      "enum": ["String", "Bytes", "Int", "Boolean", "Float"]
+    },
+
+    "repeatedPrimitiveKind": {
+      "type": "string",
+      "enum": ["Strings", "Bytess", "Ints", "Bools", "Floats"]
+    },
+
+    "primitiveEntry": {
+      "type": "string",
+      "description": "Primitive entry, e.g. 'Value String', 'Count Int'.",
+      "pattern": "^[A-Z][A-Za-z0-9]*(?:[-][A-Za-z0-9]+)*(?: [A-Z][A-Za-z0-9]*(?:[-][A-Za-z0-9]+)*)* (?:String|Bytes|Int|Boolean|Float)$",
+      "allOf": [
+        {
+          "not": {
+            "pattern": "\\|"
+          }
+        },
+        {
+          "not": {
+            "pattern": "\\[|\\]"
+          }
+        },
+        {
+          "not": {
+            "pattern": "\\bNot\\s*<"
+          }
+        }
+      ]
+    },
+
+    "repeatedPrimitiveEntry": {
+      "type": "string",
+      "description": "Repeated primitive entry, e.g. 'Values Strings', 'Flags Bools'.",
+      "pattern": "^[A-Z][A-Za-z0-9]*(?:[-][A-Za-z0-9]+)*(?: [A-Z][A-Za-z0-9]*(?:[-][A-Za-z0-9]+)*)* (?:Strings|Bytess|Ints|Bools|Floats)$",
+      "allOf": [
+        {
+          "not": {
+            "pattern": "\\|"
+          }
+        },
+        {
+          "not": {
+            "pattern": "\\[|\\]"
+          }
+        },
+        {
+          "not": {
+            "pattern": "\\bNot\\s*<"
+          }
+        }
+      ]
+    },
+
+    "singularSemanticEntry": {
+      "$ref": "#/$defs/semanticUnit"
+    },
+
+    "repeatedSemanticEntry": {
+      "type": "string",
+      "description": "Repeated semantic unit entry, e.g. '[ User ]' or '[ User / Identified ]'.",
+      "pattern": "^\\[\\s*[A-Z][A-Za-z0-9]*(?:[-][A-Za-z0-9]+)*(?: [A-Z][A-Za-z0-9]*(?:[-][A-Za-z0-9]+)*)*(?:\\s*/\\s*[A-Z][A-Za-z0-9]*(?:[-][A-Za-z0-9]+)*(?: [A-Z][A-Za-z0-9]*(?:[-][A-Za-z0-9]+)*)*)*\\s*\\]$",
+      "allOf": [
+        {
+          "not": {
+            "pattern": "\\bNot\\s*<"
+          }
+        },
+        {
+          "not": {
+            "pattern": "\\|"
+          }
+        }
+      ]
+    },
+
+    "oneOfSemanticEntry": {
+      "type": "string",
+      "description": "One-of semantic unit entry, e.g. 'A | B' or 'Source File | Source Folder'.",
+      "pattern": "^[A-Z][A-Za-z0-9]*(?:[-][A-Za-z0-9]+)*(?: [A-Z][A-Za-z0-9]*(?:[-][A-Za-z0-9]+)*)*(?:\\s*/\\s*[A-Z][A-Za-z0-9]*(?:[-][A-Za-z0-9]+)*(?: [A-Z][A-Za-z0-9]*(?:[-][A-Za-z0-9]+)*)*)*\\s*\\|\\s*[A-Z][A-Za-z0-9]*(?:[-][A-Za-z0-9]+)*(?: [A-Z][A-Za-z0-9]*(?:[-][A-Za-z0-9]+)*)*(?:\\s*/\\s*[A-Z][A-Za-z0-9]*(?:[-][A-Za-z0-9]+)*(?: [A-Z][A-Za-z0-9]*(?:[-][A-Za-z0-9]+)*)*)*(?:\\s*\\|\\s*[A-Z][A-Za-z0-9]*(?:[-][A-Za-z0-9]+)*(?: [A-Z][A-Za-z0-9]*(?:[-][A-Za-z0-9]+)*)*(?:\\s*/\\s*[A-Z][A-Za-z0-9]*(?:[-][A-Za-z0-9]+)*(?: [A-Z][A-Za-z0-9]*(?:[-][A-Za-z0-9]+)*)*)*)*$",
+      "allOf": [
+        {
+          "not": {
+            "pattern": "\\b(?:String|Bytes|Int|Boolean|Float|Strings|Bytess|Ints|Bools|Floats)\\b"
+          }
+        },
+        {
+          "not": {
+            "pattern": "\\[|\\]"
+          }
+        },
+        {
+          "not": {
+            "pattern": "\\bNot\\s*<"
+          }
+        }
+      ]
+    },
+
+    "entry": {
+      "description": "Allowed In/Out entry form.",
+      "oneOf": [
+        { "$ref": "#/$defs/primitiveEntry" },
+        { "$ref": "#/$defs/repeatedPrimitiveEntry" },
+        { "$ref": "#/$defs/repeatedSemanticEntry" },
+        { "$ref": "#/$defs/oneOfSemanticEntry" },
+        { "$ref": "#/$defs/singularSemanticEntry" }
+      ]
+    },
+
+    "descriptionArray": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+
+    "entryArray": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/entry"
+      },
+      "uniqueItems": true
+    },
+
+    "declaration": {
+      "type": "object",
+      "properties": {
+        "Description": {
+          "$ref": "#/$defs/descriptionArray"
+        },
+        "In": {
+          "$ref": "#/$defs/entryArray"
+        },
+        "Out": {
+          "$ref": "#/$defs/entryArray"
+        }
+      },
+      "additionalProperties": false,
+      "anyOf": [
+        { "required": ["In"] },
+        { "required": ["Out"] }
+      ],
+      "$comment": "At least one of In or Out must be present. Out may be empty according to the spec. In may also be empty structurally, though a meaningful declaration normally defines at least one side materially."
+    }
+  }
+}

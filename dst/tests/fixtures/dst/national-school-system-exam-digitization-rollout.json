@@ -1,0 +1,201 @@
+{
+  "fixture_id": "national-school-system-exam-digitization-rollout",
+  "title": "National school exam digitization rollout",
+  "title_key": "national-school-exam-digitization-rollout",
+  "source_ref": "dst/National School System Exam Digitization Rollout.md",
+  "summary": "A country wants to replace paper-based final secondary-school exams with a digital exam system.",
+  "sections": [
+    {
+      "key": "actors",
+      "title": "Actors",
+      "narrative": "No single actor controls success.",
+      "entries": [
+        {"code": "a1", "text": "national education ministry"},
+        {"code": "a2", "text": "exam authority"},
+        {"code": "a3", "text": "regional education boards"},
+        {"code": "a4", "text": "school administrators"},
+        {"code": "a5", "text": "teachers / invigilators"},
+        {"code": "a6", "text": "students"},
+        {"code": "a7", "text": "disability accommodation office"},
+        {"code": "a8", "text": "device and platform vendor"},
+        {"code": "a9", "text": "telecom / network providers"},
+        {"code": "a10", "text": "courts / legal oversight body"},
+        {"code": "a11", "text": "cybersecurity authority"}
+      ]
+    },
+    {
+      "key": "objectives",
+      "title": "Objectives",
+      "narrative": "These objectives are not perfectly aligned. Stronger security can reduce usability, faster grading can create legitimacy concerns, and full digitization can improve efficiency while widening regional inequity if readiness is uneven.",
+      "entries": [
+        {"code": "o1", "text": "exam integrity"},
+        {"code": "o2", "text": "equal fairness across schools and regions"},
+        {"code": "o3", "text": "operational continuity on exam day"},
+        {"code": "o4", "text": "grading efficiency"},
+        {"code": "o5", "text": "accessibility for students with disabilities"},
+        {"code": "o6", "text": "public trust and legitimacy"},
+        {"code": "o7", "text": "lower long-term administrative cost"},
+        {"code": "o8", "text": "resilience against cheating and cyberattack"}
+      ]
+    },
+    {
+      "key": "capabilities",
+      "title": "Capabilities",
+      "narrative": "These capabilities interact tightly. Some require others, some create new vulnerabilities, and some only become useful when governance and operational dependencies are already in place.",
+      "entries": [
+        {"code": "k1", "text": "traditional paper exam delivery"},
+        {"code": "k2", "text": "digital exam authoring platform"},
+        {"code": "k3", "text": "secure student login and identity verification"},
+        {"code": "k4", "text": "locked-down exam-taking application"},
+        {"code": "k5", "text": "local offline exam caching"},
+        {"code": "k6", "text": "real-time submission to central servers"},
+        {"code": "k7", "text": "auto-marking for structured questions"},
+        {"code": "k8", "text": "digital accommodations interface"},
+        {"code": "k9", "text": "remote audit and proctoring dashboard"},
+        {"code": "k10", "text": "post-failure recovery and re-sync process"},
+        {"code": "k11", "text": "emergency paper fallback kit"},
+        {"code": "k12", "text": "plagiarism / anomaly detection"},
+        {"code": "k13", "text": "school device readiness management"},
+        {"code": "k14", "text": "region-wide scheduling coordination"}
+      ]
+    },
+    {
+      "key": "dependencies",
+      "title": "Dependencies",
+      "narrative": "Many of these dependencies are jointly necessary and owned by different actors.",
+      "entries": [
+        {"code": "d1", "text": "every school has sufficient functioning devices"},
+        {"code": "d2", "text": "electricity reliability for exam sessions"},
+        {"code": "d3", "text": "internet connectivity or offline sync readiness"},
+        {"code": "d4", "text": "student identity records are accurate"},
+        {"code": "d5", "text": "invigilators are trained"},
+        {"code": "d6", "text": "legal approval of digital exam results"},
+        {"code": "d7", "text": "accessibility workflows tested"},
+        {"code": "d8", "text": "cybersecurity certification complete"},
+        {"code": "d9", "text": "data protection approval granted"},
+        {"code": "d10", "text": "item bank successfully migrated"},
+        {"code": "d11", "text": "telecom surge capacity confirmed"},
+        {"code": "d12", "text": "paper fallback logistics preserved"},
+        {"code": "d13", "text": "dispute-resolution process updated for digital evidence"},
+        {"code": "d14", "text": "interoperability between ministry, vendor, and regional systems works"}
+      ]
+    },
+    {
+      "key": "constraints",
+      "title": "Constraints",
+      "narrative": "These are admissibility-shaping constraints, not optional preferences.",
+      "entries": [
+        {"code": "q1", "text": "national law requires equal treatment across all exam candidates"},
+        {"code": "q2", "text": "no student may be disadvantaged by disability, region, or school wealth"},
+        {"code": "q3", "text": "high-stakes exams must be legally challengeable and auditable"},
+        {"code": "q4", "text": "exam content must remain confidential before the sitting"},
+        {"code": "q5", "text": "the exam must proceed even under partial technical failure"},
+        {"code": "q6", "text": "budget caps prohibit replacing all school hardware at once"},
+        {"code": "q7", "text": "unions limit invigilator workflow changes without training"},
+        {"code": "q8", "text": "privacy law restricts biometric proctoring"},
+        {"code": "q9", "text": "some regions prohibit external cloud hosting of student data"},
+        {"code": "q10", "text": "schools cannot suspend all legacy processes immediately"},
+        {"code": "q11", "text": "national results calendar cannot slip beyond a fixed deadline"}
+      ]
+    },
+    {
+      "key": "boundaries",
+      "title": "Boundaries",
+      "narrative": "These boundaries are where coordination friction and design mismatch appear.",
+      "entries": [
+        {"code": "β1", "text": "national ministry ↔ regional boards"},
+        {"code": "β2", "text": "school operations ↔ national exam platform"},
+        {"code": "β3", "text": "vendor system ↔ government records"},
+        {"code": "β4", "text": "urban schools ↔ rural schools"},
+        {"code": "β5", "text": "accessibility office ↔ standard exam workflow"},
+        {"code": "β6", "text": "privacy law ↔ proctoring technology"},
+        {"code": "β7", "text": "legal oversight ↔ operational design"},
+        {"code": "β8", "text": "online infrastructure ↔ offline continuity mechanisms"}
+      ]
+    },
+    {
+      "key": "states",
+      "title": "States",
+      "narrative": "The transition is not a single linear upgrade. Some states are target-like, some are mixed, some are degraded, and some are crisis states.",
+      "entries": [
+        {"code": "s0", "text": "fully paper-based national exam system"},
+        {"code": "s1", "text": "digital authoring, paper sitting"},
+        {"code": "s2", "text": "limited pilot digital exams in selected schools"},
+        {"code": "s3", "text": "mixed-mode national operation, some digital and some paper"},
+        {"code": "s4", "text": "digital exams with offline local resilience"},
+        {"code": "s5", "text": "fully digital centralized real-time exam operation"},
+        {"code": "s6", "text": "digitally integrated target state with audited fallback capacity"},
+        {"code": "s7", "text": "degraded emergency state using paper fallback during system failure"},
+        {"code": "s8", "text": "legally contested state after exam irregularity"},
+        {"code": "s9", "text": "regionally asymmetric state where some regions are compliant and others are not"}
+      ]
+    },
+    {
+      "key": "transitions",
+      "title": "Transitions",
+      "narrative": "",
+      "entries": [
+        {"code": "τ1", "text": "move from paper-only to digital authoring but paper sitting"},
+        {"code": "τ2", "text": "expand pilot digital exams to selected schools"},
+        {"code": "τ3", "text": "move from pilot to mixed-mode nationwide digital-paper coexistence"},
+        {"code": "τ4", "text": "move directly from paper-only to full digital delivery"},
+        {"code": "τ5", "text": "add offline caching and local continuity capability"},
+        {"code": "τ6", "text": "introduce digital accommodations layer"},
+        {"code": "τ7", "text": "retire paper fallback"},
+        {"code": "τ8", "text": "centralize all live submissions in real time"},
+        {"code": "τ9", "text": "revert from digital exam session to emergency paper fallback"},
+        {"code": "τ10", "text": "split rollout by region according to readiness"},
+        {"code": "τ11", "text": "delay deployment and preserve paper while dependencies are repaired"},
+        {"code": "τ12", "text": "enable anomaly detection and digital audit trail"},
+        {"code": "τ13", "text": "legal remediation transition after contested results"}
+      ]
+    }
+  ],
+  "candidate_paths": [
+    {
+      "title": "Path A: conservative layering",
+      "parent_title": "Candidate paths",
+      "route_expression": "s0 -> s1 -> s2 -> s5",
+      "narrative": "Interpretation: digitize authoring first, then pilot, then scale.\n\nStrength: lower operational shock.\n\nRisk: mixed-mode drift, legal inconsistency, uneven fairness.",
+      "highlights": [
+        "`s0 -> s1 -> s2 -> s5`"
+      ]
+    },
+    {
+      "title": "Path B: resilience-first modernization",
+      "parent_title": "Candidate paths",
+      "route_expression": "s0 -> s1 -> s2 -> s4 -> s6",
+      "narrative": "Interpretation: do not go fully digital until offline resilience, accessibility, and fallback are built.\n\nStrength: strong continuity and legitimacy.\n\nRisk: slower, more expensive, politically frustrating.",
+      "highlights": [
+        "`s0 -> s1 -> s2 -> s4 -> s6`"
+      ]
+    },
+    {
+      "title": "Path C: direct leap",
+      "parent_title": "Candidate paths",
+      "route_expression": "s0 -> s5",
+      "narrative": "Interpretation: national big-bang full digital switch.\n\nStrength: fastest structural simplification.\n\nRisk: catastrophic if dependencies are uneven.",
+      "highlights": [
+        "`s0 -> s5`"
+      ]
+    },
+    {
+      "title": "Path D: regional rollout",
+      "parent_title": "Candidate paths",
+      "route_expression": "s0 -> s1 -> s2 -> s9 -> s6",
+      "narrative": "Interpretation: different regions adopt at different speeds.\n\nStrength: realistic under uneven infrastructure.\n\nRisk: fairness and legitimacy conflict at national scale.",
+      "highlights": [
+        "`s0 -> s1 -> s2 -> s9 -> s6`"
+      ]
+    },
+    {
+      "title": "Path E: pilot then stall",
+      "parent_title": "Candidate paths",
+      "route_expression": "s0 -> s1 -> s2 -> s3",
+      "narrative": "Interpretation: the system becomes permanently mixed-mode.\n\nStrength: short-term convenience.\n\nRisk: the transformation fails to converge.\n\nThis is often the real-world failure mode.",
+      "highlights": [
+        "`s0 -> s1 -> s2 -> s3 -> s11-like persistence`"
+      ]
+    }
+  ]
+}

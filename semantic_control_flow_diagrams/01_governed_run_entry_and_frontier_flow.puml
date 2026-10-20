@@ -1,0 +1,48 @@
+@startuml
+title Governed Run Entry And Frontier Flow
+
+actor "User" as User
+participant "Controller Entrypoints" as CLI
+participant "SystemState" as State
+participant "BSSCController" as Controller
+participant "Semantic Prompt Posture" as Posture
+participant "Governed Semantic Reduction Runtime" as Runtime
+participant "Governed Closure And Commitment" as Closure
+participant "Governed Prior Learning Reuse" as Reuse
+participant "Root Node" as Root
+participant "Frontier Node" as Node
+
+User -> CLI: run --prompt "<semantic prompt>"
+CLI -> State: bootstrap(prompt)
+CLI -> Controller: BSSCController(state, llm_policy)
+Controller -> Controller: should_load_initial_learning_context(root)?
+opt standard bootstrap
+  Controller -> Reuse: load_learning_context(root)
+end
+
+CLI -> Controller: run(max_steps)
+Controller -> Runtime: run(max_steps)
+Runtime -> Controller: prepare_root_prior_learning_fast_path()
+Runtime -> Controller: initialize_root_semantics()
+Runtime -> Posture: classify root prompt posture
+Posture --> Runtime: direct / compute / clarify / next-step
+Runtime -> Controller: propagate([root])
+
+alt root already committable
+  Runtime -> Closure: commit_closure(root)
+  Runtime -> Controller: finalize_run()
+else governed frontier loop
+  Runtime -> Controller: refresh_frontier()
+  loop while frontier and steps < max_steps
+    Runtime -> Controller: pop_best_frontier()
+    Runtime -> Node: reduce_not(node)
+    Runtime -> Controller: propagate([node])
+    Runtime -> Controller: refresh_frontier()
+  end
+  Runtime -> Controller: finalize_run()
+end
+
+CLI -> State: summary()
+CLI --> User: JSON run summary
+
+@enduml

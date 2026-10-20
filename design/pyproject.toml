@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "realized-design"
+version = "0.1.0"
+description = "Cross-domain design mediation theory and implementation guidance"
+readme = "CROSS_DOMAIN_DESIGN_MEDIATION.md"
+requires-python = ">=3.14"
+
+[tool.setuptools.packages.find]
+where = [".."]
+include = ["design*"]
+
+[tool.setuptools.package-dir]
+"" = ".."
+
+[tool.setuptools.package-data]
+design = [
+    "*.md",
+]

@@ -1,0 +1,629 @@
+{
+  "gates": [
+    {
+      "artifacts": [],
+      "category": "architecture",
+      "command": [
+        "python",
+        "scripts/check_architecture_boundaries.py"
+      ],
+      "cwd": ".",
+      "environment_overrides": {},
+      "id": "architecture_ratchet",
+      "performance": {
+        "median_seconds": 0.728,
+        "p95_seconds": 0.728,
+        "runs": 1
+      },
+      "required": true,
+      "runs": [
+        {
+          "duration_seconds": 0.728,
+          "failure": "",
+          "log_path": "reports/architecture_qualification/logs/architecture_ratchet-run-1.log",
+          "output_sha256": "602e5f290f69aff7d390c3c856626eb04cf254f5b2e6a13e43548724ac9feb8c",
+          "returncode": 0,
+          "status": "passed"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "artifacts": [],
+      "category": "unit",
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ],
+      "cwd": ".",
+      "environment_overrides": {
+        "OPENAI_API_KEY": "<cleared>"
+      },
+      "id": "root_unit_tests",
+      "performance": {
+        "median_seconds": 1184.503,
+        "p95_seconds": 1184.503,
+        "runs": 1
+      },
+      "required": true,
+      "runs": [
+        {
+          "duration_seconds": 1184.503,
+          "failure": "",
+          "log_path": "reports/architecture_qualification/logs/root_unit_tests-run-1.log",
+          "output_sha256": "b7772833c1af94369391257fb4fe9fee7127c099064d12039d29dd97d24c7b52",
+          "returncode": 0,
+          "status": "passed"
+        }
+      ],
+      "status": "passed",
+      "unittest": {
+        "errors": [],
+        "failures": [],
+        "tests_run": 634
+      }
+    },
+    {
+      "artifacts": [],
+      "category": "workstation",
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "workstation/tests",
+        "-t",
+        ".",
+        "-p",
+        "test_*.py"
+      ],
+      "cwd": ".",
+      "environment_overrides": {
+        "OPENAI_API_KEY": "<cleared>"
+      },
+      "id": "workstation_tests",
+      "performance": {
+        "median_seconds": 4247.211,
+        "p95_seconds": 4247.211,
+        "runs": 1
+      },
+      "required": true,
+      "runs": [
+        {
+          "duration_seconds": 4247.211,
+          "failure": "",
+          "log_path": "reports/architecture_qualification/logs/workstation_tests-run-1.log",
+          "output_sha256": "e2ddbc5e14dcbe611e0faa60a2ed3a9205663a21a9ea258817de44e7bca83427",
+          "returncode": 1,
+          "status": "failed"
+        }
+      ],
+      "status": "failed",
+      "unittest": {
+        "errors": [],
+        "failures": [
+          "test_textual_publication_import_widgets_update_selected_import_scope_and_usage (workstation.tests.test_workstation_chat_ui.WorkstationChatUiTests.test_textual_publication_import_widgets_update_selected_import_scope_and_usage)",
+          "test_textual_publication_include_section_switch_enables_after_section_target_selected (workstation.tests.test_workstation_chat_ui.WorkstationChatUiTests.test_textual_publication_include_section_switch_enables_after_section_target_selected)",
+          "test_textual_publication_preview_diff_opens_result_pane_and_hides_legacy_baseline_action (workstation.tests.test_workstation_chat_ui.WorkstationChatUiTests.test_textual_publication_preview_diff_opens_result_pane_and_hides_legacy_baseline_action)",
+          "test_textual_publication_scope_tree_supports_keyboard_selection_and_preview (workstation.tests.test_workstation_chat_ui.WorkstationChatUiTests.test_textual_publication_scope_tree_supports_keyboard_selection_and_preview)",
+          "test_textual_publication_section_target_selection_scrolls_tree_to_visible_section (workstation.tests.test_workstation_chat_ui.WorkstationChatUiTests.test_textual_publication_section_target_selection_scrolls_tree_to_visible_section)",
+          "test_textual_publication_select_action_keeps_active_publication_tab (workstation.tests.test_workstation_chat_ui.WorkstationChatUiTests.test_textual_publication_select_action_keeps_active_publication_tab)"
+        ],
+        "tests_run": 587
+      }
+    },
+    {
+      "artifacts": [],
+      "category": "bdd",
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "workstation.tests.bdd.test_trial_skill_routing_bdd"
+      ],
+      "cwd": ".",
+      "environment_overrides": {
+        "OPENAI_API_KEY": "<cleared>"
+      },
+      "id": "trial_skill_routing_bdd",
+      "performance": {
+        "median_seconds": 20.841,
+        "p95_seconds": 20.841,
+        "runs": 1
+      },
+      "required": true,
+      "runs": [
+        {
+          "duration_seconds": 20.841,
+          "failure": "",
+          "log_path": "reports/architecture_qualification/logs/trial_skill_routing_bdd-run-1.log",
+          "output_sha256": "122ed1054e70b795f4fdc9d0406625563f5dedb9fb07d29752d82878fcc71155",
+          "returncode": 0,
+          "status": "passed"
+        }
+      ],
+      "status": "passed",
+      "unittest": {
+        "errors": [],
+        "failures": [],
+        "tests_run": 2
+      }
+    },
+    {
+      "artifacts": [],
+      "category": "bdd",
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "workstation.tests.bdd.test_report_creation_bdd"
+      ],
+      "cwd": ".",
+      "environment_overrides": {
+        "OPENAI_API_KEY": "<cleared>"
+      },
+      "id": "publication_bdd",
+      "performance": {
+        "median_seconds": 1063.246,
+        "p95_seconds": 1063.246,
+        "runs": 1
+      },
+      "required": true,
+      "runs": [
+        {
+          "duration_seconds": 1063.246,
+          "failure": "",
+          "log_path": "reports/architecture_qualification/logs/publication_bdd-run-1.log",
+          "output_sha256": "1eef2557e3747801e74418efb16e9425397fd4ec93af8be3692ab30eacd6a085",
+          "returncode": 0,
+          "status": "passed"
+        }
+      ],
+      "status": "passed",
+      "unittest": {
+        "errors": [],
+        "failures": [],
+        "tests_run": 34
+      }
+    },
+    {
+      "artifacts": [
+        {
+          "path": "reports/architecture_qualification/publication_reference/reference.json",
+          "sha256": "1c1a9914843a04fbfcde802680db8bb1331132b309535c663c86eb52f46152f9",
+          "size_bytes": 7405
+        },
+        {
+          "path": "reports/architecture_qualification/publication_reference/report.md",
+          "sha256": "d8332ecb52be9d0b79ec5dd38ad242fe20c5b2695288a17ddfb844de6b5bdaac",
+          "size_bytes": 972
+        },
+        {
+          "path": "reports/architecture_qualification/publication_reference/report.typ",
+          "sha256": "f2d29f0814e6ef1ace27f98540942426c47847a695cbab56b60bde46b98245e9",
+          "size_bytes": 5151
+        }
+      ],
+      "category": "artifact",
+      "command": [
+        "python",
+        "scripts/capture_publication_reference.py"
+      ],
+      "cwd": ".",
+      "environment_overrides": {
+        "OPENAI_API_KEY": "<cleared>"
+      },
+      "id": "publication_reference",
+      "performance": {
+        "median_seconds": 4.752,
+        "p95_seconds": 4.752,
+        "runs": 1
+      },
+      "required": true,
+      "runs": [
+        {
+          "duration_seconds": 4.752,
+          "failure": "",
+          "log_path": "reports/architecture_qualification/logs/publication_reference-run-1.log",
+          "output_sha256": "6fb6fc65e2ede1961ef9667a423933188cd7af3e9a14ff0978af3235e460d5ad",
+          "returncode": 0,
+          "status": "passed"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "artifacts": [],
+      "category": "bdd",
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "workstation.tests.bdd.test_smart_city_travel_incremental_report_ladder_bdd"
+      ],
+      "cwd": ".",
+      "environment_overrides": {
+        "OPENAI_API_KEY": "<cleared>"
+      },
+      "id": "incremental_publication_bdd",
+      "performance": {
+        "median_seconds": 59.635,
+        "p95_seconds": 59.635,
+        "runs": 1
+      },
+      "required": true,
+      "runs": [
+        {
+          "duration_seconds": 59.635,
+          "failure": "",
+          "log_path": "reports/architecture_qualification/logs/incremental_publication_bdd-run-1.log",
+          "output_sha256": "c132584f54b3852080218774795cf106ae4384332ee85cb2083c3a9777d31c5d",
+          "returncode": 0,
+          "status": "passed"
+        }
+      ],
+      "status": "passed",
+      "unittest": {
+        "errors": [],
+        "failures": [],
+        "tests_run": 1
+      }
+    },
+    {
+      "artifacts": [],
+      "category": "flutter_static",
+      "command": [
+        "flutter",
+        "analyze"
+      ],
+      "cwd": "workstation/ui_flutter",
+      "environment_overrides": {},
+      "id": "flutter_analyze",
+      "performance": {
+        "median_seconds": 5.672,
+        "p95_seconds": 5.672,
+        "runs": 1
+      },
+      "required": true,
+      "runs": [
+        {
+          "duration_seconds": 5.672,
+          "failure": "",
+          "log_path": "reports/architecture_qualification/logs/flutter_analyze-run-1.log",
+          "output_sha256": "b82d364443f1fbe4d7980cd935fd4095790dc706d5cfb872a724f90e3fde0cdd",
+          "returncode": 0,
+          "status": "passed"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "artifacts": [],
+      "category": "bdd_provider",
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "workstation.tests.bdd.test_smart_city_travel_incremental_report_ladder_live"
+      ],
+      "cwd": ".",
+      "environment_overrides": {},
+      "id": "incremental_publication_bdd_live",
+      "performance": {
+        "median_seconds": 362.713,
+        "p95_seconds": 362.713,
+        "runs": 1
+      },
+      "required": true,
+      "runs": [
+        {
+          "duration_seconds": 362.713,
+          "failure": "",
+          "log_path": "reports/architecture_qualification/logs/incremental_publication_bdd_live-run-1.log",
+          "output_sha256": "4a7c2fd255b126646b5e7a6e5fc88662424033522a298a1c27443d78cf7edb88",
+          "returncode": 0,
+          "status": "passed"
+        }
+      ],
+      "status": "passed",
+      "unittest": {
+        "errors": [],
+        "failures": [],
+        "tests_run": 1
+      }
+    },
+    {
+      "artifacts": [],
+      "category": "flutter_test",
+      "command": [
+        "flutter",
+        "test"
+      ],
+      "cwd": "workstation/ui_flutter",
+      "environment_overrides": {},
+      "id": "flutter_widget_tests",
+      "performance": {
+        "median_seconds": 10.895,
+        "p95_seconds": 10.895,
+        "runs": 1
+      },
+      "required": true,
+      "runs": [
+        {
+          "duration_seconds": 10.895,
+          "failure": "",
+          "log_path": "reports/architecture_qualification/logs/flutter_widget_tests-run-1.log",
+          "output_sha256": "8eceebe20df13e8aa60adc52f3047b2f5b2036ce5bac9770d2465de7c1defe26",
+          "returncode": 0,
+          "status": "passed"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "artifacts": [],
+      "category": "flutter_browser_integration",
+      "command": [
+        "./scripts/run_subject_tab_screenshot_test.sh"
+      ],
+      "cwd": "workstation/ui_flutter",
+      "environment_overrides": {
+        "WORKSTATION_INTEGRATION_TARGET": "integration_test/direct_v10_publication_flow_test.dart",
+        "WORKSTATION_SCREENSHOT_ROOT": "/tmp/workstation-direct-v10-qualification"
+      },
+      "id": "flutter_direct_v10_publication",
+      "performance": {
+        "median_seconds": 124.614,
+        "p95_seconds": 124.614,
+        "runs": 1
+      },
+      "required": true,
+      "runs": [
+        {
+          "duration_seconds": 124.614,
+          "failure": "",
+          "log_path": "reports/architecture_qualification/logs/flutter_direct_v10_publication-run-1.log",
+          "output_sha256": "cd296ff3108f7203accd081f533d7f0f333101638add7c55308bfc2a103a3ec1",
+          "returncode": 0,
+          "status": "passed"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "artifacts": [],
+      "category": "flutter_browser_integration",
+      "command": [
+        "./scripts/run_subject_tab_screenshot_test.sh"
+      ],
+      "cwd": "workstation/ui_flutter",
+      "environment_overrides": {
+        "WORKSTATION_INTEGRATION_TARGET": "integration_test/gate_scroll_behavior_test.dart",
+        "WORKSTATION_SCREENSHOT_ROOT": "/tmp/workstation-gate-scroll-qualification"
+      },
+      "id": "flutter_gate_scroll_integration",
+      "performance": {
+        "median_seconds": 31.429,
+        "p95_seconds": 31.429,
+        "runs": 1
+      },
+      "required": true,
+      "runs": [
+        {
+          "duration_seconds": 31.429,
+          "failure": "",
+          "log_path": "reports/architecture_qualification/logs/flutter_gate_scroll_integration-run-1.log",
+          "output_sha256": "cd3a9d303a3406b7feddcbe2371d9992bef869cfadaa778c964bd528358023a8",
+          "returncode": 0,
+          "status": "passed"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "artifacts": [
+        {
+          "path": "workstation/ui_flutter/build/integration_test_screenshots/01-gather-main.png",
+          "sha256": "024e94a751a6cdc39024e42cc3c61727f6d06ecfa92313722854037f0b1ced65",
+          "size_bytes": 140760
+        },
+        {
+          "path": "workstation/ui_flutter/build/integration_test_screenshots/02-gather-source-detail.png",
+          "sha256": "1d51de7a2d36681e6f26fccff761e874cfd4caa07459579830d4f805d8919e6e",
+          "size_bytes": 129130
+        },
+        {
+          "path": "workstation/ui_flutter/build/integration_test_screenshots/03-gather-journal.png",
+          "sha256": "a446ac5c7440b3e7894e379e421cb87904c4b79836c03e183c4f89d90694b81e",
+          "size_bytes": 50048
+        },
+        {
+          "path": "workstation/ui_flutter/build/integration_test_screenshots/04-itemize-main.png",
+          "sha256": "3c7f18881b7f0514c96c88f81a8102156a78fde5b883cafb5ed60458d23050f4",
+          "size_bytes": 140308
+        },
+        {
+          "path": "workstation/ui_flutter/build/integration_test_screenshots/05-draft-compose.png",
+          "sha256": "2df2e248f4aa3f722b207e99026503cdd049f8b00697fa61218fba867c6c73e1",
+          "size_bytes": 135920
+        },
+        {
+          "path": "workstation/ui_flutter/build/integration_test_screenshots/06-draft-frame.png",
+          "sha256": "1d1ac61c312b63b3210e6ba776778d7f65a6877b21889c04129075fb1c25f159",
+          "size_bytes": 121134
+        },
+        {
+          "path": "workstation/ui_flutter/build/integration_test_screenshots/07-draft-model.png",
+          "sha256": "d1c1b0c0f2e61d996c69d2493e55ecf682656d5158f4b0e02f608fd81bb74674",
+          "size_bytes": 119507
+        },
+        {
+          "path": "workstation/ui_flutter/build/integration_test_screenshots/08-draft-explore.png",
+          "sha256": "e5bab7d29f20a470c024564452e3fae5fc4e6050cd23db6e2c139eea8993938a",
+          "size_bytes": 120765
+        },
+        {
+          "path": "workstation/ui_flutter/build/integration_test_screenshots/09-review-main.png",
+          "sha256": "59fb540e817b836077981fa416c713be6a261c34d6410f08b10f4792294c0751",
+          "size_bytes": 145322
+        },
+        {
+          "path": "workstation/ui_flutter/build/integration_test_screenshots/10-review-journal.png",
+          "sha256": "8741a2c3e279aeaf803b40f6c02f05277e8602160463ddc397e52207bd910c21",
+          "size_bytes": 99204
+        },
+        {
+          "path": "workstation/ui_flutter/build/integration_test_screenshots/11-publication-main.png",
+          "sha256": "ec8f7fc2970ccf403da814f1b3aea2d352951a6b1ee71421d7c8ef2df1c28c39",
+          "size_bytes": 121205
+        }
+      ],
+      "category": "screenshot",
+      "command": [
+        "./scripts/run_subject_tab_screenshot_test.sh"
+      ],
+      "cwd": "workstation/ui_flutter",
+      "environment_overrides": {
+        "WORKSTATION_SCREENSHOT_ROOT": "/tmp/workstation-screenshot-qualification"
+      },
+      "id": "flutter_subject_tab_screenshots",
+      "performance": {
+        "median_seconds": 179.728,
+        "p95_seconds": 179.728,
+        "runs": 1
+      },
+      "required": true,
+      "runs": [
+        {
+          "duration_seconds": 179.728,
+          "failure": "",
+          "log_path": "reports/architecture_qualification/logs/flutter_subject_tab_screenshots-run-1.log",
+          "output_sha256": "68b00b6d58ba1da49fb88f8dd2ac5c9045dd20f3e90280d843fcb5049a5d9a7e",
+          "returncode": 0,
+          "status": "passed"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "artifacts": [
+        {
+          "path": "reports/architecture_qualification/workstation_trials.json",
+          "sha256": "670cd8fb2ee7a4c8f429b80995623eb2df3e24241a1092455b30c73c77b7a392",
+          "size_bytes": 261254
+        }
+      ],
+      "category": "trial",
+      "command": [
+        "python",
+        "main.py",
+        "workstation-trial-validate",
+        "--workspace",
+        ".",
+        "--report-root",
+        "reports/architecture_qualification/workstation_trials",
+        "--report-out",
+        "reports/architecture_qualification/workstation_trials.json"
+      ],
+      "cwd": ".",
+      "environment_overrides": {},
+      "id": "workstation_trial_validation",
+      "performance": {
+        "median_seconds": 1613.339,
+        "p95_seconds": 1613.339,
+        "runs": 1
+      },
+      "required": true,
+      "result_evidence": {
+        "accepted": true,
+        "accepted_statuses": [
+          "ok",
+          "partial"
+        ],
+        "observed_status": "partial",
+        "path": "reports/architecture_qualification/workstation_trials.json",
+        "sha256": "670cd8fb2ee7a4c8f429b80995623eb2df3e24241a1092455b30c73c77b7a392",
+        "size_bytes": 261254
+      },
+      "runs": [
+        {
+          "duration_seconds": 1613.339,
+          "failure": "",
+          "log_path": "reports/architecture_qualification/workstation_trials.json",
+          "output_sha256": "670cd8fb2ee7a4c8f429b80995623eb2df3e24241a1092455b30c73c77b7a392",
+          "returncode": 0,
+          "status": "passed"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "artifacts": [
+        {
+          "path": "reports/architecture_qualification/validation_ladder.json",
+          "sha256": "cbcb88719e4313acf7e333cab687044ad802d2ce9bf2a5ef8bd0854e2c727c5b",
+          "size_bytes": 370237
+        }
+      ],
+      "category": "trial",
+      "command": [
+        "python",
+        "main.py",
+        "validation-ladder",
+        "--workspace",
+        ".",
+        "--report-root",
+        "reports/architecture_qualification/validation_ladder",
+        "--report-out",
+        "reports/architecture_qualification/validation_ladder.json"
+      ],
+      "cwd": ".",
+      "environment_overrides": {},
+      "id": "validation_ladder",
+      "performance": {
+        "median_seconds": 2272.0,
+        "p95_seconds": 2272.0,
+        "runs": 1
+      },
+      "required": true,
+      "result_evidence": {
+        "accepted": true,
+        "accepted_statuses": [
+          "ok"
+        ],
+        "observed_status": "ok",
+        "path": "reports/architecture_qualification/validation_ladder.json",
+        "sha256": "cbcb88719e4313acf7e333cab687044ad802d2ce9bf2a5ef8bd0854e2c727c5b",
+        "size_bytes": 370237
+      },
+      "runs": [
+        {
+          "duration_seconds": 2272.0,
+          "failure": "",
+          "log_path": "reports/architecture_qualification/validation_ladder.json",
+          "output_sha256": "cbcb88719e4313acf7e333cab687044ad802d2ce9bf2a5ef8bd0854e2c727c5b",
+          "returncode": 0,
+          "status": "passed"
+        }
+      ],
+      "status": "passed"
+    }
+  ],
+  "policy": {
+    "max_median_regression_percent": 10.0,
+    "max_p95_regression_percent": 10.0,
+    "performance_runs": 3
+  },
+  "schema_version": 1,
+  "summary": {
+    "blocked": 0,
+    "failed": 1,
+    "not_run": 0,
+    "passed": 14
+  }
+}

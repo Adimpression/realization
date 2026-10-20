@@ -1,0 +1,25 @@
+{
+  "assistant_text": "Here is the general derivation and the resulting formula, using signed stoichiometric coefficients.\n\n- Let a balanced equation be written with signed coefficients \u03bd_A and \u03bd_B for A and B, respectively. If A is a reactant, \u03bd_A is negative in many sign conventions, but here we adopt the convention that changes follow n_i = n_i0 + \u03bd_i \u03be, where \u03be is the extent of reaction (in moles of reaction events) and \u03bd_i carries the appropriate sign (positive if formed, negative if consumed). For clarity, you can think of \u03bd_A and \u03bd_B as the stoichiometric coefficients with the sign indicating formation or consumption.\n\n- Change in amount due to the same extent \u03be:\n  n_A = n_A0 + \u03bd_A \u03be\n  n_B = n_B0 + \u03bd_B \u03be\n\n- Solve for the extent from A:\n  \u03be = (n_A \u2212 n_A0) / \u03bd_A\n\n- Substitute into B:\n  n_B = n_B0 + \u03bd_B [(n_A \u2212 n_A0) / \u03bd_A]\n  equivalently,\n  n_B = n_B0 + (\u03bd_B / \u03bd_A) (n_A \u2212 n_A0)\n\nNotes:\n- If you don\u2019t have initial amounts, you can set n_A0 and n_B0 to the known starting values.\n- If B is a product, \u03bd_B will be positive; if B is a reactant, \u03bd_B will be negative in the chosen sign convention, and the formula still holds.\n- If there is no initial amount of B (n_B0 = 0) and you know both n_A and the initial n_A0, you still use the same formula.\n\nConcrete numeric example:\nReaction: 2 H2 + O2 -> 2 H2O\n- \u03bd_A for H2 = 2\n- \u03bd_B for O2 = 1\n- Initial amounts: n_A0 = 3 mol H2, n_B0 = 2 mol O2\n- After reaction: n_A = 1 mol H2\n\nCompute n_B:\nn_B = n_B0 + (\u03bd_B / \u03bd_A) (n_A \u2212 n_A0)\nn_B = 2 + (1/2) (1 \u2212 3) = 2 + (1/2)(\u22122) = 1 mol O2\n\nThus, with these conditions you\u2019d have 1 mole of O2 remaining. If you provide a specific balanced equation (\u03bd_A and \u03bd_B) and initial amounts, I can run through a tailored calculation.",
+  "model": "gpt-5-nano-2025-08-07",
+  "rounds": 2,
+  "task_contract": {
+    "semantic_unit": "Using the stoichiometric ratio relation, derive how to compute the amount of substance ( n_B ) from a known ( n_A ) and coefficients."
+  },
+  "tool_receipts": [
+    {
+      "arguments": {
+        "skill_title": "Chemistry Relations 04 \u2014 Stoichiometric Ratio from Balanced Equations / Solving for an unknown amount",
+        "target": ""
+      },
+      "name": "ws.skill.invoke",
+      "result": {
+        "answer": "If one amount is known, another can be obtained by ratio transfer. The reusable formula is: $$ nB = nA \\frac{\\nuB}{\\nuA} $$ input: nA input: \\nuA input: \\nuB output: nB",
+        "error": "",
+        "error_type": "",
+        "executor_framework": "",
+        "skill_title": "Chemistry Relations 04 \u2014 Stoichiometric Ratio from Balanced Equations / Solving for an unknown amount",
+        "status": "ok"
+      }
+    }
+  ]
+}

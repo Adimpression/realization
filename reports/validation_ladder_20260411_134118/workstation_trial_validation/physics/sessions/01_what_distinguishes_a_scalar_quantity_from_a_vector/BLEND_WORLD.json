@@ -1,0 +1,36 @@
+{
+  "created_at": "2026-04-11T14:06:12.303103+00:00",
+  "metadata": {
+    "source_kind": "workstation_world",
+    "workspace_name": "main",
+    "workspace_path": "/Users/ravindranathakila/service/realized"
+  },
+  "mounts": [
+    {
+      "access_mode": "read_write",
+      "kind": "workspace",
+      "metadata": {},
+      "mount_path": "/world/mounts/main",
+      "name": "main",
+      "source": "/Users/ravindranathakila/service/realized"
+    },
+    {
+      "access_mode": "read_write",
+      "kind": "scratch",
+      "metadata": {},
+      "mount_path": "/world/scratch",
+      "name": "scratch",
+      "source": "/Users/ravindranathakila/service/realized/reports/validation_ladder_20260411_134118/workstation_trial_validation/physics/world/scratch"
+    },
+    {
+      "access_mode": "read_write",
+      "kind": "output",
+      "metadata": {},
+      "mount_path": "/world/output",
+      "name": "output",
+      "source": "/Users/ravindranathakila/service/realized/reports/validation_ladder_20260411_134118/workstation_trial_validation/physics/world/output"
+    }
+  ],
+  "root_path": "/Users/ravindranathakila/service/realized/reports/validation_ladder_20260411_134118/workstation_trial_validation/physics/world",
+  "world_id": "bworld_d3ecbf207c44"
+}

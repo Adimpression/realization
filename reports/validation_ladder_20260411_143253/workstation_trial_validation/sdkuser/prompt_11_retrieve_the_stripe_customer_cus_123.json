@@ -1,0 +1,25 @@
+{
+  "assistant_text": "{'status': 'ok', 'customer_id': 'cus_123', 'email': 'customer@example.com'}",
+  "model": "workstation-direct-composition",
+  "rounds": 0,
+  "task_contract": {
+    "semantic_unit": "Retrieve the Stripe customer `cus_123`."
+  },
+  "tool_receipts": [
+    {
+      "arguments": {
+        "skill_title": "SDK User Commands 11 \u2014 Stripe Retrieve Customer / Sdk User Commands 11 Stripe Retrieve Customer",
+        "target": ""
+      },
+      "name": "ws.skill.invoke",
+      "result": {
+        "answer": "{'status': 'ok', 'customer_id': 'cus_123', 'email': 'customer@example.com'}",
+        "error": "",
+        "error_type": "",
+        "executor_framework": "python3",
+        "skill_title": "SDK User Commands 11 \u2014 Stripe Retrieve Customer / Sdk User Commands 11 Stripe Retrieve Customer",
+        "status": "ok"
+      }
+    }
+  ]
+}

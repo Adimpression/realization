@@ -1,0 +1,25 @@
+{
+  "assistant_text": "{'status': 'ok', 'url': 'https://api.example.com/profile', 'status_code': 200, 'payload': {'status': 'ok', 'authorization': 'Bearer secret-token', 'profile': {'name': 'demo-user'}}}",
+  "model": "workstation-direct-composition",
+  "rounds": 0,
+  "task_contract": {
+    "semantic_unit": "Fetch JSON from `https://api.example.com/profile` using the bearer token `secret-token`."
+  },
+  "tool_receipts": [
+    {
+      "arguments": {
+        "skill_title": "API Client Commands 07 \u2014 Get Json With Bearer Token / Api Client Commands 07 Get Json With Bearer Token",
+        "target": ""
+      },
+      "name": "ws.skill.invoke",
+      "result": {
+        "answer": "{'status': 'ok', 'url': 'https://api.example.com/profile', 'status_code': 200, 'payload': {'status': 'ok', 'authorization': 'Bearer secret-token', 'profile': {'name': 'demo-user'}}}",
+        "error": "",
+        "error_type": "",
+        "executor_framework": "python3",
+        "skill_title": "API Client Commands 07 \u2014 Get Json With Bearer Token / Api Client Commands 07 Get Json With Bearer Token",
+        "status": "ok"
+      }
+    }
+  ]
+}

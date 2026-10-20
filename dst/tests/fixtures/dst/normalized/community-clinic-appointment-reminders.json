@@ -1,0 +1,208 @@
+{
+  "schema_version": "dst_normalized_case.v1",
+  "fixture_id": "community-clinic-appointment-reminders",
+  "source_ref": "dst/Community clinic appointment reminders.md",
+  "context": {
+    "system_name": "Community clinic appointment reminders",
+    "decision_problem": "Choose a reminder model that reduces missed appointments without excluding patients or breaking consent and privacy rules.",
+    "evaluation_state_id": "s0",
+    "planning_horizon": "",
+    "notes": [
+      "The publication question is which reminder operating model the clinic network should approve, not whether reminders matter."
+    ]
+  },
+  "actors": [
+    {"id": "a1", "name": "clinic operations lead", "roles": ["decision_maker", "coordinator"], "can_decide": true},
+    {"id": "a2", "name": "front-desk staff", "roles": ["operator"], "can_decide": false},
+    {"id": "a3", "name": "messaging vendor", "roles": ["provider"], "can_decide": false},
+    {"id": "a4", "name": "privacy officer", "roles": ["oversight"], "can_decide": true},
+    {"id": "a5", "name": "patients", "roles": ["beneficiary"], "can_decide": false}
+  ],
+  "objectives": [
+    {"id": "o1", "name": "reduce missed appointments", "shared": true, "mandatory": true, "pursued_by": ["a1", "a2"]},
+    {"id": "o2", "name": "keep reminders accessible across language and device differences", "shared": true, "mandatory": true, "pursued_by": ["a1", "a2", "a4"]},
+    {"id": "o3", "name": "protect consent and privacy rules", "shared": true, "mandatory": true, "pursued_by": ["a1", "a4"]}
+  ],
+  "capabilities": [
+    {"id": "k1", "name": "automated SMS reminders", "kind": "core", "advances_objectives": ["o1"], "controlled_by": ["a1", "a3"], "benefits_to": ["a5"], "costs_to": ["a1"], "risks_to": ["a5"]},
+    {"id": "k2", "name": "multilingual reminder templates", "kind": "accessibility", "advances_objectives": ["o2"], "controlled_by": ["a1", "a3"], "benefits_to": ["a5"], "costs_to": ["a1"], "risks_to": []},
+    {"id": "k3", "name": "call fallback for high-risk visits", "kind": "support", "advances_objectives": ["o1", "o2"], "controlled_by": ["a2"], "benefits_to": ["a5"], "costs_to": ["a2"], "risks_to": []},
+    {"id": "k4", "name": "portal-app-only reminders", "kind": "digital_only", "advances_objectives": ["o1"], "controlled_by": ["a1", "a3"], "benefits_to": ["a5"], "costs_to": ["a1"], "risks_to": ["a5"]}
+  ],
+  "dependencies": [
+    {"id": "d1", "name": "patient phone numbers are current"},
+    {"id": "d2", "name": "consent records are complete"},
+    {"id": "d3", "name": "multilingual content approved"},
+    {"id": "d4", "name": "follow-up lists reach front-desk staff"}
+  ],
+  "constraints": [
+    {"id": "q1", "name": "patients without smartphones must still receive reminders", "kind": "hard"},
+    {"id": "q2", "name": "reminder messages require recorded consent", "kind": "hard"},
+    {"id": "q3", "name": "the front desk cannot absorb unlimited manual callback work", "kind": "hard"}
+  ],
+  "boundaries": [
+    {"id": "b1", "name": "clinic-to-vendor messaging boundary"},
+    {"id": "b2", "name": "privacy-to-patient-communication boundary"},
+    {"id": "b3", "name": "digital channel-to-manual follow-up boundary"}
+  ],
+  "states": [
+    {
+      "id": "s0",
+      "name": "manual phone reminders only",
+      "is_current": true,
+      "is_target": false,
+      "available_capabilities": [],
+      "operational_capabilities": [],
+      "satisfied_dependencies": ["d1", "d2", "d3", "d4"],
+      "active_constraints": ["q1", "q2", "q3"],
+      "boundary_friction": [
+        {"boundary_id": "b1", "present": true},
+        {"boundary_id": "b2", "present": true},
+        {"boundary_id": "b3", "present": true}
+      ]
+    },
+    {
+      "id": "s1",
+      "name": "SMS reminders only",
+      "is_current": false,
+      "is_target": false,
+      "available_capabilities": ["k1", "k2"],
+      "operational_capabilities": ["k1", "k2"],
+      "satisfied_dependencies": ["d1", "d2", "d3"],
+      "active_constraints": ["q1", "q2", "q3"],
+      "boundary_friction": [
+        {"boundary_id": "b1", "present": true},
+        {"boundary_id": "b3", "present": true}
+      ]
+    },
+    {
+      "id": "s2",
+      "name": "SMS reminders with multilingual templates and call fallback",
+      "is_current": false,
+      "is_target": true,
+      "available_capabilities": ["k1", "k2", "k3"],
+      "operational_capabilities": ["k1", "k2", "k3"],
+      "satisfied_dependencies": ["d1", "d2", "d3", "d4"],
+      "active_constraints": ["q1", "q2", "q3"],
+      "boundary_friction": [
+        {"boundary_id": "b1", "present": true},
+        {"boundary_id": "b2", "present": true}
+      ]
+    },
+    {
+      "id": "s3",
+      "name": "portal-app-only reminders",
+      "is_current": false,
+      "is_target": false,
+      "available_capabilities": ["k4"],
+      "operational_capabilities": ["k4"],
+      "satisfied_dependencies": ["d2"],
+      "active_constraints": ["q1", "q2", "q3"],
+      "boundary_friction": [
+        {"boundary_id": "b2", "present": true},
+        {"boundary_id": "b3", "present": true}
+      ]
+    }
+  ],
+  "capability_requirements": [
+    {"capability_id": "k1", "required_dependencies": ["d1", "d2"], "limiting_constraints": ["q2"], "crossed_boundaries": ["b1", "b2"]},
+    {"capability_id": "k2", "required_dependencies": ["d3"], "limiting_constraints": ["q1"], "crossed_boundaries": ["b1", "b2"]},
+    {"capability_id": "k3", "required_dependencies": ["d4"], "limiting_constraints": ["q1", "q3"], "crossed_boundaries": ["b3"]},
+    {"capability_id": "k4", "required_dependencies": ["d2"], "limiting_constraints": ["q1", "q2"], "crossed_boundaries": ["b2", "b3"]}
+  ],
+  "capability_admissibility": [
+    {"capability_id": "k1", "state_id": "s0", "admissible": true, "reasons": []},
+    {"capability_id": "k2", "state_id": "s0", "admissible": true, "reasons": []},
+    {"capability_id": "k3", "state_id": "s0", "admissible": true, "reasons": []},
+    {"capability_id": "k4", "state_id": "s0", "admissible": false, "reasons": ["portal-only channel excludes patients without reliable app access"]}
+  ],
+  "transitions": [
+    {
+      "id": "t1",
+      "name": "Inclusive reminder rollout",
+      "source_state_id": "s0",
+      "target_state_id": "s2",
+      "changes_capabilities": ["k1", "k2", "k3"],
+      "required_dependencies": ["d1", "d2", "d3", "d4"],
+      "constraining_constraints": ["q1", "q2", "q3"],
+      "crossed_boundaries": ["b1", "b2", "b3"]
+    },
+    {
+      "id": "t2",
+      "name": "Lean SMS rollout",
+      "source_state_id": "s0",
+      "target_state_id": "s1",
+      "changes_capabilities": ["k1", "k2"],
+      "required_dependencies": ["d1", "d2", "d3"],
+      "constraining_constraints": ["q1", "q2", "q3"],
+      "crossed_boundaries": ["b1", "b2"]
+    },
+    {
+      "id": "t3",
+      "name": "Portal-only reminders",
+      "source_state_id": "s0",
+      "target_state_id": "s3",
+      "changes_capabilities": ["k4"],
+      "required_dependencies": ["d2"],
+      "constraining_constraints": ["q1", "q2", "q3"],
+      "crossed_boundaries": ["b2", "b3"]
+    }
+  ],
+  "transition_admissibility": [
+    {"transition_id": "t1", "state_id": "s0", "admissible": true, "reasons": []},
+    {"transition_id": "t2", "state_id": "s0", "admissible": true, "reasons": []},
+    {"transition_id": "t3", "state_id": "s0", "admissible": false, "reasons": ["portal-only reminders fail the accessibility and device-coverage standard"]}
+  ],
+  "decisions": [
+    {
+      "id": "x1",
+      "name": "Inclusive reminder rollout",
+      "selects_transition_id": "t1",
+      "assignments": [
+        {"actor_id": "a1", "capability_id": "k1"},
+        {"actor_id": "a1", "capability_id": "k2"},
+        {"actor_id": "a1", "capability_id": "k3"}
+      ],
+      "time_label": ""
+    },
+    {
+      "id": "x2",
+      "name": "Lean SMS rollout",
+      "selects_transition_id": "t2",
+      "assignments": [
+        {"actor_id": "a2", "capability_id": "k1"},
+        {"actor_id": "a1", "capability_id": "k2"}
+      ],
+      "time_label": ""
+    },
+    {
+      "id": "x3",
+      "name": "Portal-only reminders",
+      "selects_transition_id": "t3",
+      "assignments": [
+        {"actor_id": "a1", "capability_id": "k4"}
+      ],
+      "time_label": ""
+    }
+  ],
+  "decision_status": [
+    {"decision_id": "x1", "state_id": "s0", "valid": true, "executable": true, "reasons": []},
+    {"decision_id": "x2", "state_id": "s0", "valid": true, "executable": false, "reasons": ["follow_up_capacity_not_reliable_enough_for_patients_who_need_manual_reach_back"]},
+    {"decision_id": "x3", "state_id": "s0", "valid": false, "executable": false, "reasons": ["selected_transition_inadmissible:t3"]}
+  ],
+  "coordination_requirements": [
+    {"type": "transition", "target_id": "t1", "required": true, "actors": ["a1", "a2", "a3", "a4"], "basis": "explicit_cross_boundary_requirement"}
+  ],
+  "risk_indicators": [
+    {"target_type": "transition", "target_id": "t2", "state_id": "s0", "risks": ["follow_up_gap", "message_only_coverage_risk"]},
+    {"target_type": "transition", "target_id": "t3", "state_id": "s0", "risks": ["device_exclusion", "accessibility_failure"]}
+  ],
+  "fallbacks": [],
+  "candidate_sets": {
+    "candidate_transition_ids_from_current_state": ["t1", "t2", "t3"],
+    "candidate_decision_ids_from_current_state": ["x1", "x2", "x3"]
+  },
+  "assumptions": [],
+  "ambiguities": [],
+  "missing_information": []
+}

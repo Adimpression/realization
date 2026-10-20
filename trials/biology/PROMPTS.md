@@ -1,0 +1,10 @@
+- What are the main functional roles of the cell membrane, and how do they relate to the distinction between the cell interior and the external environment?
+- State the relation that describes diffusion and explain the directional rule it follows.
+- What is the relation between enzyme and substrate, and what aspect of the reaction does the enzyme change?
+- Write the simplified input-output relation for cellular respiration and identify the role of ATP in this process.
+- Explain the complementary relationship between photosynthesis and cellular respiration in terms of energy direction.
+- Describe the structure of a negative feedback system and explain how it restores a variable to its range.
+- Describe the full staged transformation from DNA to protein, including transcription and translation, and explain how regulation affects this process.
+- Explain how genotype, regulation, and environment together determine phenotype, and why genotype alone is insufficient.
+- Construct the full signaling pathway from stimulus detection to response, and explain why receptor presence is necessary for signal effectiveness.
+- Explain how evolution emerges from the composition of earlier relations: gene expression, inheritance, variation, and environmental interaction. Provide the full chain of reasoning from molecular processes to population-level change.

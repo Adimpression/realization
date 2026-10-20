@@ -1,0 +1,48 @@
+@startuml
+title Workstation, Skills, And Shared Host Substrate
+
+actor "User" as User
+participant "Workstation CLI / UI" as UI
+participant "Workstation Session Driver" as Session
+participant "Task Contract" as Task
+participant "Direct Composition" as Compose
+participant "Workstation Capability Server" as Capability
+participant "Shared Host Interaction Substrate" as Substrate
+participant "Governed Skill Invocation" as Invoke
+participant "Skill Runtime\n(python/bash/ansible/wasm)" as SkillRuntime
+participant "Optional Controller Planning Bridge" as ControllerBridge
+
+User -> UI: prompt
+UI -> Session: send prompt
+Session -> Task: normalize boundary-complete contract
+Session -> Compose: attempt direct skill composition
+
+alt direct worker plan exists
+  Compose --> Session: skill title + invocation payload
+  Session -> Capability: ws.skill.invoke(...)
+  Capability -> Substrate: attachments + delegation + receipts
+  Substrate -> Invoke: governed skill invocation
+  Invoke -> SkillRuntime: execute selected worker
+  SkillRuntime --> Invoke: result
+  Invoke --> Substrate: result + traces
+  Substrate --> Capability: receipt-backed result
+  Capability --> Session: worker result
+else direct plan insufficient
+  Session -> ControllerBridge: optional planning request
+  ControllerBridge --> Session: worker plan or clarification
+end
+
+Session --> UI: response
+UI --> User: assistant output
+
+note right of Substrate
+This is the planned convergence seam
+for workstation and governed runtime.
+The runtime should consume this contract,
+not the workstation package directly.
+The same contract should expose
+host-native and workstation-backed
+implementations.
+end note
+
+@enduml

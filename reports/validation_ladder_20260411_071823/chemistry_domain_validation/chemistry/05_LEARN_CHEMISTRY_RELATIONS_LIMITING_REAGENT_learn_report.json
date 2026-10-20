@@ -1,0 +1,854 @@
+{
+  "artifact_persistence": [
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-05-limiting-reagen_2d8a6b",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000578,
+        "connect_seconds": 0.000474,
+        "ensure_schema_seconds": 0.003642,
+        "existing_payload_batch_lookup_seconds": 3.8e-05,
+        "index_seconds": 0.115212,
+        "prepare_seconds": 0.297089,
+        "total_seconds": 0.417953
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "b1a35767b3373d01ce4191c74386bd925a608fc3bb3f4c5f770ed0526d394ada",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.029073,
+        "existing_payload_lookup_seconds": 4.222222222222223e-06,
+        "index_seconds": 0.115212,
+        "total_seconds": 0.1638222222222222,
+        "write_rows_seconds": 0.019533
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-84a7ff194cfa",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000578,
+        "connect_seconds": 0.000474,
+        "ensure_schema_seconds": 0.003642,
+        "existing_payload_batch_lookup_seconds": 3.8e-05,
+        "index_seconds": 0.115212,
+        "prepare_seconds": 0.297089,
+        "total_seconds": 0.417953
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "08add7b37f64907106a27e2f93e51b169e4169438611761029e0adcdee99daa1",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.019358,
+        "existing_payload_lookup_seconds": 4.222222222222223e-06,
+        "index_seconds": 0.115212,
+        "total_seconds": 0.1480962222222222,
+        "write_rows_seconds": 0.013522
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-76ce5666f522",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000578,
+        "connect_seconds": 0.000474,
+        "ensure_schema_seconds": 0.003642,
+        "existing_payload_batch_lookup_seconds": 3.8e-05,
+        "index_seconds": 0.115212,
+        "prepare_seconds": 0.297089,
+        "total_seconds": 0.417953
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "d23fa172c2b1508d093d11c8291e5c65c0275a094ec87e7f845bd2e514631eb6",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.021451,
+        "existing_payload_lookup_seconds": 4.222222222222223e-06,
+        "total_seconds": 0.021455222222222223
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-2d91d38f6b9e",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000578,
+        "connect_seconds": 0.000474,
+        "ensure_schema_seconds": 0.003642,
+        "existing_payload_batch_lookup_seconds": 3.8e-05,
+        "index_seconds": 0.115212,
+        "prepare_seconds": 0.297089,
+        "total_seconds": 0.417953
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "2ec967515809bb60c5e4fa551e0164dcae9a49d50dbce8a0513749b2b1a76557",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.021731,
+        "existing_payload_lookup_seconds": 4.222222222222223e-06,
+        "total_seconds": 0.021735222222222222
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-05-limiting-reagen_80e68a",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000578,
+        "connect_seconds": 0.000474,
+        "ensure_schema_seconds": 0.003642,
+        "existing_payload_batch_lookup_seconds": 3.8e-05,
+        "index_seconds": 0.115212,
+        "prepare_seconds": 0.297089,
+        "total_seconds": 0.417953
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "21f486d25de218f5dd1c6610dd16b6f7f99458cb819c23aecb29f82df8da56f0",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.014624,
+        "existing_payload_lookup_seconds": 4.222222222222223e-06,
+        "index_seconds": 0.115212,
+        "total_seconds": 0.14114322222222223,
+        "write_rows_seconds": 0.011303
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-84a7ff194cfa",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000578,
+        "connect_seconds": 0.000474,
+        "ensure_schema_seconds": 0.003642,
+        "existing_payload_batch_lookup_seconds": 3.8e-05,
+        "index_seconds": 0.115212,
+        "prepare_seconds": 0.297089,
+        "total_seconds": 0.417953
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "fde6cf32d10ad322bd6dab3cb2cc9870ca6a702a49cdac85c8a58f4b9b7c5001",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.019313,
+        "existing_payload_lookup_seconds": 4.222222222222223e-06,
+        "total_seconds": 0.019317222222222222
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-fc844c817eb0",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000578,
+        "connect_seconds": 0.000474,
+        "ensure_schema_seconds": 0.003642,
+        "existing_payload_batch_lookup_seconds": 3.8e-05,
+        "index_seconds": 0.115212,
+        "prepare_seconds": 0.297089,
+        "total_seconds": 0.417953
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "81d1c434135ce03e3c58338d8ad0ff925f2cf66e5a2853d820ddb09876ec94c5",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.000168,
+        "existing_payload_lookup_seconds": 4.222222222222223e-06,
+        "total_seconds": 0.0001722222222222222
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-76ce5666f522",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000578,
+        "connect_seconds": 0.000474,
+        "ensure_schema_seconds": 0.003642,
+        "existing_payload_batch_lookup_seconds": 3.8e-05,
+        "index_seconds": 0.115212,
+        "prepare_seconds": 0.297089,
+        "total_seconds": 0.417953
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "758aa1e53bfc4b4fd8a84113e4583661bc89d3dddf2f4569f72576f740cb058b",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.000164,
+        "existing_payload_lookup_seconds": 4.222222222222223e-06,
+        "index_seconds": 0.115212,
+        "total_seconds": 0.1340192222222222,
+        "write_rows_seconds": 0.018639
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-2d91d38f6b9e",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000578,
+        "connect_seconds": 0.000474,
+        "ensure_schema_seconds": 0.003642,
+        "existing_payload_batch_lookup_seconds": 3.8e-05,
+        "index_seconds": 0.115212,
+        "prepare_seconds": 0.297089,
+        "total_seconds": 0.417953
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "0ffcc5775041f1447e7cc8dedfb08f41aec1ecf408a971304e33ba7d36dbcf4e",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.000148,
+        "existing_payload_lookup_seconds": 4.222222222222223e-06,
+        "index_seconds": 0.115212,
+        "total_seconds": 0.13292822222222223,
+        "write_rows_seconds": 0.017564
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-05-limiting-reagen_2d8a6b",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000381,
+        "connect_seconds": 0.000786,
+        "ensure_schema_seconds": 0.003822,
+        "existing_payload_batch_lookup_seconds": 4.3e-05,
+        "index_seconds": 0.075441,
+        "prepare_seconds": 0.210621,
+        "total_seconds": 0.291905
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "b1a35767b3373d01ce4191c74386bd925a608fc3bb3f4c5f770ed0526d394ada",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.029041,
+        "existing_payload_lookup_seconds": 6.142857142857143e-06,
+        "total_seconds": 0.029047142857142858
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-76ce5666f522",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000381,
+        "connect_seconds": 0.000786,
+        "ensure_schema_seconds": 0.003822,
+        "existing_payload_batch_lookup_seconds": 4.3e-05,
+        "index_seconds": 0.075441,
+        "prepare_seconds": 0.210621,
+        "total_seconds": 0.291905
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "d23fa172c2b1508d093d11c8291e5c65c0275a094ec87e7f845bd2e514631eb6",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.021247,
+        "existing_payload_lookup_seconds": 6.142857142857143e-06,
+        "index_seconds": 0.075441,
+        "total_seconds": 0.11165614285714284,
+        "write_rows_seconds": 0.014962
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-2d91d38f6b9e",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000381,
+        "connect_seconds": 0.000786,
+        "ensure_schema_seconds": 0.003822,
+        "existing_payload_batch_lookup_seconds": 4.3e-05,
+        "index_seconds": 0.075441,
+        "prepare_seconds": 0.210621,
+        "total_seconds": 0.291905
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "2ec967515809bb60c5e4fa551e0164dcae9a49d50dbce8a0513749b2b1a76557",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.02151,
+        "existing_payload_lookup_seconds": 6.142857142857143e-06,
+        "index_seconds": 0.075441,
+        "total_seconds": 0.11133814285714286,
+        "write_rows_seconds": 0.014381
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-05-limiting-reagen_80e68a",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000381,
+        "connect_seconds": 0.000786,
+        "ensure_schema_seconds": 0.003822,
+        "existing_payload_batch_lookup_seconds": 4.3e-05,
+        "index_seconds": 0.075441,
+        "prepare_seconds": 0.210621,
+        "total_seconds": 0.291905
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "21f486d25de218f5dd1c6610dd16b6f7f99458cb819c23aecb29f82df8da56f0",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.014646,
+        "existing_payload_lookup_seconds": 6.142857142857143e-06,
+        "total_seconds": 0.014652142857142857
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-84a7ff194cfa",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000381,
+        "connect_seconds": 0.000786,
+        "ensure_schema_seconds": 0.003822,
+        "existing_payload_batch_lookup_seconds": 4.3e-05,
+        "index_seconds": 0.075441,
+        "prepare_seconds": 0.210621,
+        "total_seconds": 0.291905
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "fde6cf32d10ad322bd6dab3cb2cc9870ca6a702a49cdac85c8a58f4b9b7c5001",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.019143,
+        "existing_payload_lookup_seconds": 6.142857142857143e-06,
+        "index_seconds": 0.075441,
+        "total_seconds": 0.10760414285714284,
+        "write_rows_seconds": 0.013014
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-76ce5666f522",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000381,
+        "connect_seconds": 0.000786,
+        "ensure_schema_seconds": 0.003822,
+        "existing_payload_batch_lookup_seconds": 4.3e-05,
+        "index_seconds": 0.075441,
+        "prepare_seconds": 0.210621,
+        "total_seconds": 0.291905
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "758aa1e53bfc4b4fd8a84113e4583661bc89d3dddf2f4569f72576f740cb058b",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 3.7e-05,
+        "existing_payload_lookup_seconds": 6.142857142857143e-06,
+        "total_seconds": 4.314285714285714e-05
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-2d91d38f6b9e",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000381,
+        "connect_seconds": 0.000786,
+        "ensure_schema_seconds": 0.003822,
+        "existing_payload_batch_lookup_seconds": 4.3e-05,
+        "index_seconds": 0.075441,
+        "prepare_seconds": 0.210621,
+        "total_seconds": 0.291905
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "0ffcc5775041f1447e7cc8dedfb08f41aec1ecf408a971304e33ba7d36dbcf4e",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 2.4e-05,
+        "existing_payload_lookup_seconds": 6.142857142857143e-06,
+        "total_seconds": 3.0142857142857143e-05
+      },
+      "vector_enabled": false
+    }
+  ],
+  "document": {
+    "section_count": 5,
+    "source_path": "/Users/ravindranathakila/service/realized/trials/chemistry/05_LEARN_CHEMISTRY_RELATIONS_LIMITING_REAGENT.md",
+    "title": "Chemistry Relations 05 \u2014 Limiting Reagent as Minimum Achievable Production"
+  },
+  "encounter_proposal": {
+    "encounters": [
+      {
+        "bullets": [
+          "input: `c_1 ... c_n`",
+          "output: `O`"
+        ],
+        "candidate_kinds": [
+          "equation",
+          "template",
+          "definition",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_1",
+        "equation_bearing": true,
+        "equations": [
+          "$$ O = \\min(c_1, c_2, \\dots, c_n) $$"
+        ],
+        "heading": "1. Reusable substrate",
+        "paragraphs": [
+          "When several inputs could determine an output, but the actual output is set by the smallest achievable capacity, the reusable family is bottleneck determination.",
+          "The reusable formula is:",
+          "$$ O = \\min(c_1, c_2, \\dots, c_n) $$"
+        ],
+        "path": [
+          "Chemistry Relations 05 \u2014 Limiting Reagent as Minimum Achievable Production",
+          "1. Reusable substrate"
+        ],
+        "sections": [
+          "1. Reusable substrate"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `n_i`",
+          "input: `\\nu_i`",
+          "input: `\\nu_P`",
+          "output: `n_P^(i)`"
+        ],
+        "candidate_kinds": [
+          "equation",
+          "template",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_2",
+        "equation_bearing": true,
+        "equations": [
+          "$$ n_P^{(i)} = n_i * \\frac{\\nu_P}{\\nu_i} $$"
+        ],
+        "heading": "2. Product possible from each reactant",
+        "paragraphs": [
+          "For each reactant, compute the product moles it could produce.",
+          "The reusable formula is:",
+          "$$ n_P^{(i)} = n_i * \\frac{\\nu_P}{\\nu_i} $$"
+        ],
+        "path": [
+          "Chemistry Relations 05 \u2014 Limiting Reagent as Minimum Achievable Production",
+          "2. Product possible from each reactant"
+        ],
+        "sections": [
+          "2. Product possible from each reactant"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `n_P^(1) ... n_P^(k)`",
+          "output: `n_P`"
+        ],
+        "candidate_kinds": [
+          "equation",
+          "template",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_3",
+        "equation_bearing": true,
+        "equations": [
+          "$$ n_P = \\min\\left(n_P^{(1)}, n_P^{(2)}, \\dots, n_P^{(k)}\\right) $$"
+        ],
+        "heading": "3. Actual product from the limiting reagent",
+        "paragraphs": [
+          "The real product amount is:",
+          "$$ n_P = \\min\\left(n_P^{(1)}, n_P^{(2)}, \\dots, n_P^{(k)}\\right) $$",
+          "Where:"
+        ],
+        "path": [
+          "Chemistry Relations 05 \u2014 Limiting Reagent as Minimum Achievable Production",
+          "3. Actual product from the limiting reagent"
+        ],
+        "sections": [
+          "3. Actual product from the limiting reagent"
+        ]
+      },
+      {
+        "bullets": [
+          "stoichiometric ratio tells what one amount implies about another",
+          "limiting reagent chooses which reactant actually controls the reaction outcome"
+        ],
+        "candidate_kinds": [
+          "logic",
+          "definition",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_4",
+        "equation_bearing": false,
+        "equations": [],
+        "heading": "4. Distinguishing the ideas",
+        "paragraphs": [
+          "Stoichiometric ratio and limiting reagent are related, but not identical.",
+          "If a prompt asks for the controller of production, do not answer with only a ratio."
+        ],
+        "path": [
+          "Chemistry Relations 05 \u2014 Limiting Reagent as Minimum Achievable Production",
+          "4. Distinguishing the ideas"
+        ],
+        "sections": [
+          "4. Distinguishing the ideas"
+        ]
+      },
+      {
+        "bullets": [],
+        "candidate_kinds": [
+          "logic",
+          "definition",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_5",
+        "equation_bearing": false,
+        "equations": [],
+        "heading": "5. One-sentence summary",
+        "paragraphs": [
+          "Bottleneck determination is the broader reusable substrate; limiting-reagent analysis is a narrower determinate chemistry law that selects the smallest stoichiometrically possible product amount."
+        ],
+        "path": [
+          "Chemistry Relations 05 \u2014 Limiting Reagent as Minimum Achievable Production",
+          "5. One-sentence summary"
+        ],
+        "sections": [
+          "5. One-sentence summary"
+        ]
+      }
+    ],
+    "proposal_id": "proposal_markdownabilitylearningproposal_d9464b",
+    "rationale": "Markdown ability learning proposals are bounded executable-harvest plans grounded in the structural ir.",
+    "source": "llm"
+  },
+  "final_answer": "Learned 9 artifacts from 05_LEARN_CHEMISTRY_RELATIONS_LIMITING_REAGENT.md.",
+  "functionalization_proposal": {
+    "proposal_id": "proposal_markdownfunctionalizationproposal_24d505",
+    "rationale": "Markdown functionalization proposals are bounded executable extractions from already classified encounters.",
+    "source": "llm"
+  },
+  "ir": {
+    "clusters": [
+      {
+        "bullets": [
+          "input: `c_1 ... c_n`",
+          "output: `O`"
+        ],
+        "code_blocks": [],
+        "equations": [
+          "$$ O = \\min(c_1, c_2, \\dots, c_n) $$"
+        ],
+        "heading": "1. Reusable substrate",
+        "paragraphs": [
+          "When several inputs could determine an output, but the actual output is set by the smallest achievable capacity, the reusable family is bottleneck determination.",
+          "The reusable formula is:",
+          "$$ O = \\min(c_1, c_2, \\dots, c_n) $$"
+        ],
+        "path": [
+          "Chemistry Relations 05 \u2014 Limiting Reagent as Minimum Achievable Production",
+          "1. Reusable substrate"
+        ],
+        "sections": [
+          "1. Reusable substrate"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `n_i`",
+          "input: `\\nu_i`",
+          "input: `\\nu_P`",
+          "output: `n_P^(i)`"
+        ],
+        "code_blocks": [],
+        "equations": [
+          "$$ n_P^{(i)} = n_i * \\frac{\\nu_P}{\\nu_i} $$"
+        ],
+        "heading": "2. Product possible from each reactant",
+        "paragraphs": [
+          "For each reactant, compute the product moles it could produce.",
+          "The reusable formula is:",
+          "$$ n_P^{(i)} = n_i * \\frac{\\nu_P}{\\nu_i} $$"
+        ],
+        "path": [
+          "Chemistry Relations 05 \u2014 Limiting Reagent as Minimum Achievable Production",
+          "2. Product possible from each reactant"
+        ],
+        "sections": [
+          "2. Product possible from each reactant"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `n_P^(1) ... n_P^(k)`",
+          "output: `n_P`"
+        ],
+        "code_blocks": [],
+        "equations": [
+          "$$ n_P = \\min\\left(n_P^{(1)}, n_P^{(2)}, \\dots, n_P^{(k)}\\right) $$"
+        ],
+        "heading": "3. Actual product from the limiting reagent",
+        "paragraphs": [
+          "The real product amount is:",
+          "$$ n_P = \\min\\left(n_P^{(1)}, n_P^{(2)}, \\dots, n_P^{(k)}\\right) $$",
+          "Where:"
+        ],
+        "path": [
+          "Chemistry Relations 05 \u2014 Limiting Reagent as Minimum Achievable Production",
+          "3. Actual product from the limiting reagent"
+        ],
+        "sections": [
+          "3. Actual product from the limiting reagent"
+        ]
+      },
+      {
+        "bullets": [
+          "stoichiometric ratio tells what one amount implies about another",
+          "limiting reagent chooses which reactant actually controls the reaction outcome"
+        ],
+        "code_blocks": [],
+        "equations": [],
+        "heading": "4. Distinguishing the ideas",
+        "paragraphs": [
+          "Stoichiometric ratio and limiting reagent are related, but not identical.",
+          "If a prompt asks for the controller of production, do not answer with only a ratio."
+        ],
+        "path": [
+          "Chemistry Relations 05 \u2014 Limiting Reagent as Minimum Achievable Production",
+          "4. Distinguishing the ideas"
+        ],
+        "sections": [
+          "4. Distinguishing the ideas"
+        ]
+      },
+      {
+        "bullets": [],
+        "code_blocks": [],
+        "equations": [],
+        "heading": "5. One-sentence summary",
+        "paragraphs": [
+          "Bottleneck determination is the broader reusable substrate; limiting-reagent analysis is a narrower determinate chemistry law that selects the smallest stoichiometrically possible product amount."
+        ],
+        "path": [
+          "Chemistry Relations 05 \u2014 Limiting Reagent as Minimum Achievable Production",
+          "5. One-sentence summary"
+        ],
+        "sections": [
+          "5. One-sentence summary"
+        ]
+      }
+    ],
+    "intro_bullets": [],
+    "intro_paragraphs": [
+      "This document teaches one reusable bottleneck substrate and then reuses it in reaction yield reasoning.",
+      "The point is not only to store a procedure, but to preserve the reusable semantic relation between several candidate capacities and the smallest actual achiever."
+    ],
+    "section_count": 5,
+    "source_path": "/Users/ravindranathakila/service/realized/trials/chemistry/05_LEARN_CHEMISTRY_RELATIONS_LIMITING_REAGENT.md",
+    "title": "Chemistry Relations 05 \u2014 Limiting Reagent as Minimum Achievable Production"
+  },
+  "learned_artifacts": [
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-05-limiting-reagen_2d8a6b",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Product possible from each reactant?",
+      "related_artifact_ids": [
+        "artifact-skill-84a7ff194cfa"
+      ],
+      "representation": "yaml",
+      "source_sections": [],
+      "title": "Chemistry Relations 05 \u2014 Limiting Reagent as Minimum Achievable Production / Chemistry Relations 05 94 Limiting Reagent as Minimum Achievable Production"
+    },
+    {
+      "artifact_id": "artifact-skill-84a7ff194cfa",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Bottleneck Determination?",
+      "related_artifact_ids": [
+        "artifact_knowledge-chemistry-relations-05-limiting-reagen_c2151b"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "1. Reusable substrate"
+      ],
+      "title": "Chemistry Relations 05 Limiting Reagent as Minimum Achievable Production / Bottleneck Determination"
+    },
+    {
+      "artifact_id": "artifact-skill-76ce5666f522",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Product possible from each reactant?",
+      "related_artifact_ids": [
+        "artifact-skill-84a7ff194cfa"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "2. Product possible from each reactant"
+      ],
+      "title": "Chemistry Relations 05 \u2014 Limiting Reagent as Minimum Achievable Production / Product possible from each reactant"
+    },
+    {
+      "artifact_id": "artifact-skill-2d91d38f6b9e",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Actual product from the limiting reagent?",
+      "related_artifact_ids": [
+        "artifact-skill-84a7ff194cfa"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "3. Actual product from the limiting reagent"
+      ],
+      "title": "Chemistry Relations 05 \u2014 Limiting Reagent as Minimum Achievable Production / Actual product from the limiting reagent"
+    },
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-05-limiting-reagen_80e68a",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is 4. Distinguishing the ideas?",
+      "related_artifact_ids": [
+        "artifact-skill-84a7ff194cfa"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "4. Distinguishing the ideas"
+      ],
+      "title": "Chemistry Relations 05 Limiting Reagent as Minimum Achievable Production"
+    },
+    {
+      "artifact_id": "artifact-skill-84a7ff194cfa",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Bottleneck Determination?",
+      "related_artifact_ids": [],
+      "representation": "yaml",
+      "source_sections": [
+        "5. One-sentence summary"
+      ],
+      "title": "Chemistry Relations 05 Limiting Reagent as Minimum Achievable Production / Bottleneck Determination"
+    },
+    {
+      "artifact_id": "artifact-skill-fc844c817eb0",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate O from c_1_c_n?",
+      "related_artifact_ids": [],
+      "representation": "python_script",
+      "source_sections": [
+        "1. Reusable substrate"
+      ],
+      "title": "Chemistry Relations 05 \u2014 Limiting Reagent as Minimum Achievable Production / Python Ability"
+    },
+    {
+      "artifact_id": "artifact-skill-76ce5666f522",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate n_P_times_times_i from n_i, nu_P, nu_i?",
+      "related_artifact_ids": [],
+      "representation": "python_script",
+      "source_sections": [
+        "2. Product possible from each reactant"
+      ],
+      "title": "Chemistry Relations 05 \u2014 Limiting Reagent as Minimum Achievable Production / Product Possible From Each Reactant"
+    },
+    {
+      "artifact_id": "artifact-skill-2d91d38f6b9e",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate n_P from n_P_1_n_P_k?",
+      "related_artifact_ids": [],
+      "representation": "python_script",
+      "source_sections": [
+        "3. Actual product from the limiting reagent"
+      ],
+      "title": "Chemistry Relations 05 \u2014 Limiting Reagent as Minimum Achievable Production / Actual Product From The Limiting Reagent"
+    }
+  ],
+  "learned_count": 9,
+  "learning_context": {
+    "applied_delta_count": 7,
+    "canonical_title": "Chemistry Relations 05 \u2014 Limiting Reagent as Minimum Achievable Production",
+    "context_path": "/Users/ravindranathakila/service/realized/trials/chemistry/corpus/chemistry-relations-05-limiting-reagent-as-minimum-achievable-pr/context.json",
+    "corpus_root": "/Users/ravindranathakila/service/realized/trials/chemistry",
+    "delta_id": "delta_chemistry-relations-05-limiting-reagent-as-minim_ebd303",
+    "delta_path": "/Users/ravindranathakila/service/realized/trials/chemistry/corpus/chemistry-relations-05-limiting-reagent-as-minimum-achievable-pr/deltas/delta_chemistry-relations-05-limiting-reagent-as-minim_ebd303.json",
+    "matched_existing_subject_id": "chemistry-relations-05-limiting-reagent-as-minimum-achievable-pr",
+    "source_id": "source_users-ravindranathakila-service-realized-trials-_1ba0218001",
+    "source_record_path": "/Users/ravindranathakila/service/realized/trials/chemistry/corpus/chemistry-relations-05-limiting-reagent-as-minimum-achievable-pr/sources/source_users-ravindranathakila-service-realized-trials-_1ba0218001.json",
+    "subject_family": "Chemistry Relations 05 \u2014 Limiting Reagent as Minimum Achievable Production",
+    "subject_id": "chemistry-relations-05-limiting-reagent-as-minimum-achievable-pr",
+    "unit_count": 10
+  },
+  "parsing_failures": [],
+  "proposal": {
+    "proposal_id": "proposal_markdownlearningproposal_160e43",
+    "rationale": "Markdown learning proposals are bounded ingestion plans for external-source harvest and remain governed before artifact admission.",
+    "source": "llm"
+  },
+  "run_id": "run_eac68562_e97941",
+  "run_outcome": "completed",
+  "supported_executors": [
+    "python3"
+  ]
+}

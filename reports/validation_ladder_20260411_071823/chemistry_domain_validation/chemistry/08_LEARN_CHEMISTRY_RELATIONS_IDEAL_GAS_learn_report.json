@@ -1,0 +1,830 @@
+{
+  "artifact_persistence": [
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-08-ideal-gas-state_48e4ab",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000418,
+        "connect_seconds": 0.00055,
+        "ensure_schema_seconds": 0.0037,
+        "existing_payload_batch_lookup_seconds": 4.6e-05,
+        "index_seconds": 0.059117,
+        "prepare_seconds": 0.190427,
+        "total_seconds": 0.254942
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "909b91f9f2fa127253b273d1491230c862f9a3954feca24b1963385d27494e76",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.020013,
+        "existing_payload_lookup_seconds": 5.1111111111111115e-06,
+        "index_seconds": 0.059117,
+        "total_seconds": 0.09294711111111112,
+        "write_rows_seconds": 0.013812
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-d4cc4af2b2f7",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000418,
+        "connect_seconds": 0.00055,
+        "ensure_schema_seconds": 0.0037,
+        "existing_payload_batch_lookup_seconds": 4.6e-05,
+        "index_seconds": 0.059117,
+        "prepare_seconds": 0.190427,
+        "total_seconds": 0.254942
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "03e2c56786edf41ff39137f27fe71bc8049feaac15eae2077d7f307c24f9fd3e",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.015963,
+        "existing_payload_lookup_seconds": 5.1111111111111115e-06,
+        "index_seconds": 0.059117,
+        "total_seconds": 0.08663011111111112,
+        "write_rows_seconds": 0.011545
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-938144194ef8",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000418,
+        "connect_seconds": 0.00055,
+        "ensure_schema_seconds": 0.0037,
+        "existing_payload_batch_lookup_seconds": 4.6e-05,
+        "index_seconds": 0.059117,
+        "prepare_seconds": 0.190427,
+        "total_seconds": 0.254942
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "95a01014780dff2530911c831d505737ca7848751863e9e87455bf072c96bc6f",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.019269,
+        "existing_payload_lookup_seconds": 5.1111111111111115e-06,
+        "total_seconds": 0.019274111111111113
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-6e520e338621",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000418,
+        "connect_seconds": 0.00055,
+        "ensure_schema_seconds": 0.0037,
+        "existing_payload_batch_lookup_seconds": 4.6e-05,
+        "index_seconds": 0.059117,
+        "prepare_seconds": 0.190427,
+        "total_seconds": 0.254942
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "949d6cf3e2e37e62c5d60be20dd5681c9be5708e569cc2dc9cf76d66b9a41f81",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.014796,
+        "existing_payload_lookup_seconds": 5.1111111111111115e-06,
+        "total_seconds": 0.01480111111111111
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-975874d09cdb",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000418,
+        "connect_seconds": 0.00055,
+        "ensure_schema_seconds": 0.0037,
+        "existing_payload_batch_lookup_seconds": 4.6e-05,
+        "index_seconds": 0.059117,
+        "prepare_seconds": 0.190427,
+        "total_seconds": 0.254942
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "bf1653c6875c963a409c29b6c00fa2322362c3b5f16358cc6996ee24ae1e2916",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.01625,
+        "existing_payload_lookup_seconds": 5.1111111111111115e-06,
+        "total_seconds": 0.016255111111111113
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-6a6d610ef19a",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000418,
+        "connect_seconds": 0.00055,
+        "ensure_schema_seconds": 0.0037,
+        "existing_payload_batch_lookup_seconds": 4.6e-05,
+        "index_seconds": 0.059117,
+        "prepare_seconds": 0.190427,
+        "total_seconds": 0.254942
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "cdcf9aa089051e2903a07fbfe31295eae2c01a4e3ec0270ab03ba668f81d1189",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.015796,
+        "existing_payload_lookup_seconds": 5.1111111111111115e-06,
+        "total_seconds": 0.015801111111111113
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_ability-chemistry-relations-08-ideal-gas-state-r_be379b",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000418,
+        "connect_seconds": 0.00055,
+        "ensure_schema_seconds": 0.0037,
+        "existing_payload_batch_lookup_seconds": 4.6e-05,
+        "index_seconds": 0.059117,
+        "prepare_seconds": 0.190427,
+        "total_seconds": 0.254942
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "62f01361d4aef57bf514699ce697b78c5f84d6e80c403811f8f00b0f74eee3fc",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.000183,
+        "existing_payload_lookup_seconds": 5.1111111111111115e-06,
+        "total_seconds": 0.00018811111111111112
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_ability-chemistry-relations-08-ideal-gas-state-r_fbc028",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000418,
+        "connect_seconds": 0.00055,
+        "ensure_schema_seconds": 0.0037,
+        "existing_payload_batch_lookup_seconds": 4.6e-05,
+        "index_seconds": 0.059117,
+        "prepare_seconds": 0.190427,
+        "total_seconds": 0.254942
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "93ed63aecfe8dbc4b4680379eb4eb7ec6fb6d7338040dd9eda85fadaeeba97a1",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.000177,
+        "existing_payload_lookup_seconds": 5.1111111111111115e-06,
+        "total_seconds": 0.0001821111111111111
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-6e520e338621",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000418,
+        "connect_seconds": 0.00055,
+        "ensure_schema_seconds": 0.0037,
+        "existing_payload_batch_lookup_seconds": 4.6e-05,
+        "index_seconds": 0.059117,
+        "prepare_seconds": 0.190427,
+        "total_seconds": 0.254942
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "2abcb1368a4122b0ef24394327706508b04025452eb948705f21d052a50bd23c",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.000161,
+        "existing_payload_lookup_seconds": 5.1111111111111115e-06,
+        "index_seconds": 0.059117,
+        "total_seconds": 0.07436611111111112,
+        "write_rows_seconds": 0.015083
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-938144194ef8",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000309,
+        "connect_seconds": 0.000701,
+        "ensure_schema_seconds": 0.003839,
+        "existing_payload_batch_lookup_seconds": 4.2e-05,
+        "index_seconds": 0.01814,
+        "prepare_seconds": 0.091728,
+        "total_seconds": 0.115232
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "95a01014780dff2530911c831d505737ca7848751863e9e87455bf072c96bc6f",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.01916,
+        "existing_payload_lookup_seconds": 7e-06,
+        "total_seconds": 0.019167
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-6e520e338621",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000309,
+        "connect_seconds": 0.000701,
+        "ensure_schema_seconds": 0.003839,
+        "existing_payload_batch_lookup_seconds": 4.2e-05,
+        "index_seconds": 0.01814,
+        "prepare_seconds": 0.091728,
+        "total_seconds": 0.115232
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "949d6cf3e2e37e62c5d60be20dd5681c9be5708e569cc2dc9cf76d66b9a41f81",
+      "persisted_artifacts": 1,
+      "reason": "",
+      "status": "persisted",
+      "timings": {
+        "canonicalize_seconds": 0.014737,
+        "existing_payload_lookup_seconds": 7e-06,
+        "index_seconds": 0.01814,
+        "total_seconds": 0.043822,
+        "write_rows_seconds": 0.010938
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-975874d09cdb",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000309,
+        "connect_seconds": 0.000701,
+        "ensure_schema_seconds": 0.003839,
+        "existing_payload_batch_lookup_seconds": 4.2e-05,
+        "index_seconds": 0.01814,
+        "prepare_seconds": 0.091728,
+        "total_seconds": 0.115232
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "bf1653c6875c963a409c29b6c00fa2322362c3b5f16358cc6996ee24ae1e2916",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.016072,
+        "existing_payload_lookup_seconds": 7e-06,
+        "total_seconds": 0.016079
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-6a6d610ef19a",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000309,
+        "connect_seconds": 0.000701,
+        "ensure_schema_seconds": 0.003839,
+        "existing_payload_batch_lookup_seconds": 4.2e-05,
+        "index_seconds": 0.01814,
+        "prepare_seconds": 0.091728,
+        "total_seconds": 0.115232
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "cdcf9aa089051e2903a07fbfe31295eae2c01a4e3ec0270ab03ba668f81d1189",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 0.015562,
+        "existing_payload_lookup_seconds": 7e-06,
+        "total_seconds": 0.015569
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact_ability-chemistry-relations-08-ideal-gas-state-r_fbc028",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000309,
+        "connect_seconds": 0.000701,
+        "ensure_schema_seconds": 0.003839,
+        "existing_payload_batch_lookup_seconds": 4.2e-05,
+        "index_seconds": 0.01814,
+        "prepare_seconds": 0.091728,
+        "total_seconds": 0.115232
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "93ed63aecfe8dbc4b4680379eb4eb7ec6fb6d7338040dd9eda85fadaeeba97a1",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 4.4e-05,
+        "existing_payload_lookup_seconds": 7e-06,
+        "total_seconds": 5.1e-05
+      },
+      "vector_enabled": false
+    },
+    {
+      "artifact_id": "artifact-skill-6e520e338621",
+      "backend": "sqlite_vec",
+      "batch_timings": {
+        "commit_seconds": 0.000309,
+        "connect_seconds": 0.000701,
+        "ensure_schema_seconds": 0.003839,
+        "existing_payload_batch_lookup_seconds": 4.2e-05,
+        "index_seconds": 0.01814,
+        "prepare_seconds": 0.091728,
+        "total_seconds": 0.115232
+      },
+      "configured": true,
+      "database": "/Users/ravindranathakila/service/realized/ram/sqlite/chemistry/chemistry.sqlite3",
+      "payload_digest": "2abcb1368a4122b0ef24394327706508b04025452eb948705f21d052a50bd23c",
+      "persisted_artifacts": 0,
+      "reason": "",
+      "status": "unchanged",
+      "timings": {
+        "canonicalize_seconds": 3.1e-05,
+        "existing_payload_lookup_seconds": 7e-06,
+        "total_seconds": 3.8e-05
+      },
+      "vector_enabled": false
+    }
+  ],
+  "document": {
+    "section_count": 5,
+    "source_path": "/Users/ravindranathakila/service/realized/trials/chemistry/08_LEARN_CHEMISTRY_RELATIONS_IDEAL_GAS.md",
+    "title": "Chemistry Relations 08 \u2014 Ideal Gas State Relation"
+  },
+  "encounter_proposal": {
+    "encounters": [
+      {
+        "bullets": [
+          "input: `a`",
+          "input: `b`",
+          "input: `s`",
+          "input: `d`",
+          "output: `Y`"
+        ],
+        "candidate_kinds": [
+          "equation",
+          "template",
+          "definition",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_1",
+        "equation_bearing": true,
+        "equations": [
+          "$$ Y = \\frac{a * b * s}{d} $$"
+        ],
+        "heading": "1. Reusable substrate",
+        "paragraphs": [
+          "When a state variable is determined by a scaled product divided by another extent, the reusable family is scaled product-over-extent.",
+          "The reusable formula is:",
+          "$$ Y = \\frac{a * b * s}{d} $$"
+        ],
+        "path": [
+          "Chemistry Relations 08 \u2014 Ideal Gas State Relation",
+          "1. Reusable substrate"
+        ],
+        "sections": [
+          "1. Reusable substrate"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `n`",
+          "input: `R`",
+          "input: `T`",
+          "input: `V`",
+          "output: `P`"
+        ],
+        "candidate_kinds": [
+          "equation",
+          "logic",
+          "template",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_2",
+        "equation_bearing": true,
+        "equations": [
+          "$$ P = \\frac{nRT}{V} $$"
+        ],
+        "heading": "2. Pressure from amount, temperature, and volume",
+        "paragraphs": [
+          "The ideal gas law can be written as:",
+          "$$ P = \\frac{nRT}{V} $$",
+          "Where:"
+        ],
+        "path": [
+          "Chemistry Relations 08 \u2014 Ideal Gas State Relation",
+          "2. Pressure from amount, temperature, and volume"
+        ],
+        "sections": [
+          "2. Pressure from amount, temperature, and volume"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `P`",
+          "input: `V`",
+          "input: `n`",
+          "input: `R`",
+          "input: `T`"
+        ],
+        "candidate_kinds": [
+          "equation",
+          "template",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_3",
+        "equation_bearing": true,
+        "equations": [
+          "$$ PV = nRT $$"
+        ],
+        "heading": "3. Standard full form",
+        "paragraphs": [
+          "The standard state relation is:",
+          "$$ PV = nRT $$",
+          "Where:"
+        ],
+        "path": [
+          "Chemistry Relations 08 \u2014 Ideal Gas State Relation",
+          "3. Standard full form"
+        ],
+        "sections": [
+          "3. Standard full form"
+        ]
+      },
+      {
+        "bullets": [],
+        "candidate_kinds": [
+          "definition",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_4",
+        "equation_bearing": false,
+        "equations": [],
+        "heading": "4. Connection to earlier lessons",
+        "paragraphs": [
+          "The amount `n` here is the same mole quantity introduced earlier.",
+          "So the mole concept is not local to counting and stoichiometry; it also enters the state relation for gases.",
+          "This is a sign of reusable semantic centrality."
+        ],
+        "path": [
+          "Chemistry Relations 08 \u2014 Ideal Gas State Relation",
+          "4. Connection to earlier lessons"
+        ],
+        "sections": [
+          "4. Connection to earlier lessons"
+        ]
+      },
+      {
+        "bullets": [],
+        "candidate_kinds": [
+          "logic",
+          "definition",
+          "summary",
+          "other"
+        ],
+        "code_bearing": false,
+        "code_blocks": [],
+        "encounter_id": "cluster_5",
+        "equation_bearing": false,
+        "equations": [],
+        "heading": "5. One-sentence summary",
+        "paragraphs": [
+          "Scaled product-over-extent is the broader reusable substrate; the ideal gas law is a narrower determinate chemistry law that links gas pressure, volume, temperature, and amount."
+        ],
+        "path": [
+          "Chemistry Relations 08 \u2014 Ideal Gas State Relation",
+          "5. One-sentence summary"
+        ],
+        "sections": [
+          "5. One-sentence summary"
+        ]
+      }
+    ],
+    "proposal_id": "proposal_markdownabilitylearningproposal_24afde",
+    "rationale": "Markdown ability learning proposals are bounded executable-harvest plans grounded in the structural ir.",
+    "source": "llm"
+  },
+  "final_answer": "Learned 9 artifacts from 08_LEARN_CHEMISTRY_RELATIONS_IDEAL_GAS.md.",
+  "functionalization_proposal": {
+    "proposal_id": "proposal_markdownfunctionalizationproposal_097a0a",
+    "rationale": "Markdown functionalization proposals are bounded executable extractions from already classified encounters.",
+    "source": "llm"
+  },
+  "ir": {
+    "clusters": [
+      {
+        "bullets": [
+          "input: `a`",
+          "input: `b`",
+          "input: `s`",
+          "input: `d`",
+          "output: `Y`"
+        ],
+        "code_blocks": [],
+        "equations": [
+          "$$ Y = \\frac{a * b * s}{d} $$"
+        ],
+        "heading": "1. Reusable substrate",
+        "paragraphs": [
+          "When a state variable is determined by a scaled product divided by another extent, the reusable family is scaled product-over-extent.",
+          "The reusable formula is:",
+          "$$ Y = \\frac{a * b * s}{d} $$"
+        ],
+        "path": [
+          "Chemistry Relations 08 \u2014 Ideal Gas State Relation",
+          "1. Reusable substrate"
+        ],
+        "sections": [
+          "1. Reusable substrate"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `n`",
+          "input: `R`",
+          "input: `T`",
+          "input: `V`",
+          "output: `P`"
+        ],
+        "code_blocks": [],
+        "equations": [
+          "$$ P = \\frac{nRT}{V} $$"
+        ],
+        "heading": "2. Pressure from amount, temperature, and volume",
+        "paragraphs": [
+          "The ideal gas law can be written as:",
+          "$$ P = \\frac{nRT}{V} $$",
+          "Where:"
+        ],
+        "path": [
+          "Chemistry Relations 08 \u2014 Ideal Gas State Relation",
+          "2. Pressure from amount, temperature, and volume"
+        ],
+        "sections": [
+          "2. Pressure from amount, temperature, and volume"
+        ]
+      },
+      {
+        "bullets": [
+          "input: `P`",
+          "input: `V`",
+          "input: `n`",
+          "input: `R`",
+          "input: `T`"
+        ],
+        "code_blocks": [],
+        "equations": [
+          "$$ PV = nRT $$"
+        ],
+        "heading": "3. Standard full form",
+        "paragraphs": [
+          "The standard state relation is:",
+          "$$ PV = nRT $$",
+          "Where:"
+        ],
+        "path": [
+          "Chemistry Relations 08 \u2014 Ideal Gas State Relation",
+          "3. Standard full form"
+        ],
+        "sections": [
+          "3. Standard full form"
+        ]
+      },
+      {
+        "bullets": [],
+        "code_blocks": [],
+        "equations": [],
+        "heading": "4. Connection to earlier lessons",
+        "paragraphs": [
+          "The amount `n` here is the same mole quantity introduced earlier.",
+          "So the mole concept is not local to counting and stoichiometry; it also enters the state relation for gases.",
+          "This is a sign of reusable semantic centrality."
+        ],
+        "path": [
+          "Chemistry Relations 08 \u2014 Ideal Gas State Relation",
+          "4. Connection to earlier lessons"
+        ],
+        "sections": [
+          "4. Connection to earlier lessons"
+        ]
+      },
+      {
+        "bullets": [],
+        "code_blocks": [],
+        "equations": [],
+        "heading": "5. One-sentence summary",
+        "paragraphs": [
+          "Scaled product-over-extent is the broader reusable substrate; the ideal gas law is a narrower determinate chemistry law that links gas pressure, volume, temperature, and amount."
+        ],
+        "path": [
+          "Chemistry Relations 08 \u2014 Ideal Gas State Relation",
+          "5. One-sentence summary"
+        ],
+        "sections": [
+          "5. One-sentence summary"
+        ]
+      }
+    ],
+    "intro_bullets": [],
+    "intro_paragraphs": [
+      "This document teaches one reusable multi-factor state substrate and then reuses it in gas behavior.",
+      "The point is not only to store an equation, but to preserve the reusable semantic relation between amount, temperature, volume, and pressure."
+    ],
+    "section_count": 5,
+    "source_path": "/Users/ravindranathakila/service/realized/trials/chemistry/08_LEARN_CHEMISTRY_RELATIONS_IDEAL_GAS.md",
+    "title": "Chemistry Relations 08 \u2014 Ideal Gas State Relation"
+  },
+  "learned_artifacts": [
+    {
+      "artifact_id": "artifact_knowledge-chemistry-relations-08-ideal-gas-state_48e4ab",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Scaled Product Over Extent?",
+      "related_artifact_ids": [],
+      "representation": "yaml",
+      "source_sections": [],
+      "title": "Chemistry Relations 08 \u2014 Ideal Gas State Relation / Chemistry Relations 08 4e4 Ideal Gas State Relation"
+    },
+    {
+      "artifact_id": "artifact-skill-d4cc4af2b2f7",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Scaled Product Over Extent?",
+      "related_artifact_ids": [],
+      "representation": "yaml",
+      "source_sections": [
+        "1. Reusable substrate"
+      ],
+      "title": "Chemistry Relations 08 \u2014 Ideal Gas State Relation / Scaled Product Over Extent"
+    },
+    {
+      "artifact_id": "artifact-skill-938144194ef8",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Pressure from amount, temperature, and volume?",
+      "related_artifact_ids": [
+        "artifact-skill-d4cc4af2b2f7"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "2. Pressure from amount, temperature, and volume"
+      ],
+      "title": "Chemistry Relations 08 \u2014 Ideal Gas State Relation / Pressure from amount, temperature, and volume"
+    },
+    {
+      "artifact_id": "artifact-skill-6e520e338621",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Standard full form?",
+      "related_artifact_ids": [
+        "artifact-skill-d4cc4af2b2f7"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "3. Standard full form"
+      ],
+      "title": "Chemistry Relations 08 \u2014 Ideal Gas State Relation / Standard full form"
+    },
+    {
+      "artifact_id": "artifact-skill-975874d09cdb",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Connection to earlier lessons?",
+      "related_artifact_ids": [
+        "artifact-skill-d4cc4af2b2f7"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "4. Connection to earlier lessons"
+      ],
+      "title": "Chemistry Relations 08 \u2014 Ideal Gas State Relation / Connection to earlier lessons"
+    },
+    {
+      "artifact_id": "artifact-skill-6a6d610ef19a",
+      "artifact_type": "knowledge",
+      "function_bit": 0,
+      "question": "What is Scaled Product Over Extent?",
+      "related_artifact_ids": [
+        "artifact-skill-d4cc4af2b2f7"
+      ],
+      "representation": "yaml",
+      "source_sections": [
+        "5. One-sentence summary"
+      ],
+      "title": "Chemistry Relations 08 Ideal Gas State Relation / Scaled Product Over Extent"
+    },
+    {
+      "artifact_id": "artifact_ability-chemistry-relations-08-ideal-gas-state-r_be379b",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate Y from a, b, s, d?",
+      "related_artifact_ids": [],
+      "representation": "python_script",
+      "source_sections": [
+        "1. Reusable substrate"
+      ],
+      "title": "Chemistry Relations 08 \u2014 Ideal Gas State Relation / Python Ability"
+    },
+    {
+      "artifact_id": "artifact_ability-chemistry-relations-08-ideal-gas-state-r_fbc028",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate P from n, R, T, V?",
+      "related_artifact_ids": [
+        "artifact-skill-d4cc4af2b2f7"
+      ],
+      "representation": "python_script",
+      "source_sections": [
+        "2. Pressure from amount, temperature, and volume"
+      ],
+      "title": "Chemistry Relations 08 \u2014 Ideal Gas State Relation / Pressure From Amount Temperature And Volume"
+    },
+    {
+      "artifact_id": "artifact-skill-6e520e338621",
+      "artifact_type": "ability",
+      "function_bit": 1,
+      "question": "How do you calculate P_times_V from n, R, T?",
+      "related_artifact_ids": [],
+      "representation": "python_script",
+      "source_sections": [
+        "3. Standard full form"
+      ],
+      "title": "Chemistry Relations 08 \u2014 Ideal Gas State Relation / Standard Full Form"
+    }
+  ],
+  "learned_count": 9,
+  "learning_context": {
+    "applied_delta_count": 7,
+    "canonical_title": "Chemistry Relations 08 \u2014 Ideal Gas State Relation",
+    "context_path": "/Users/ravindranathakila/service/realized/trials/chemistry/corpus/chemistry-relations-08-ideal-gas-state-relation/context.json",
+    "corpus_root": "/Users/ravindranathakila/service/realized/trials/chemistry",
+    "delta_id": "delta_chemistry-relations-08-ideal-gas-state-relation_5da556",
+    "delta_path": "/Users/ravindranathakila/service/realized/trials/chemistry/corpus/chemistry-relations-08-ideal-gas-state-relation/deltas/delta_chemistry-relations-08-ideal-gas-state-relation_5da556.json",
+    "matched_existing_subject_id": "chemistry-relations-08-ideal-gas-state-relation",
+    "source_id": "source_users-ravindranathakila-service-realized-trials-_fdb0bdbc05",
+    "source_record_path": "/Users/ravindranathakila/service/realized/trials/chemistry/corpus/chemistry-relations-08-ideal-gas-state-relation/sources/source_users-ravindranathakila-service-realized-trials-_fdb0bdbc05.json",
+    "subject_family": "Chemistry Relations 08 \u2014 Ideal Gas State Relation",
+    "subject_id": "chemistry-relations-08-ideal-gas-state-relation",
+    "unit_count": 9
+  },
+  "parsing_failures": [],
+  "proposal": {
+    "proposal_id": "proposal_markdownlearningproposal_35546d",
+    "rationale": "Markdown learning proposals are bounded ingestion plans for external-source harvest and remain governed before artifact admission.",
+    "source": "llm"
+  },
+  "run_id": "run_63902ef4_8202c5",
+  "run_outcome": "completed",
+  "supported_executors": [
+    "python3"
+  ]
+}

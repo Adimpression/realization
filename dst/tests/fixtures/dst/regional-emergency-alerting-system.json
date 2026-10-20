@@ -1,0 +1,148 @@
+{
+  "fixture_id": "regional-emergency-alerting-system",
+  "title": "Regional emergency alerting system",
+  "title_key": "regional-emergency-alerting-system",
+  "source_ref": "dst/Regional emergency alerting system.md",
+  "summary": "A region is designing a more reliable public-alerting system for floods, fires, chemical incidents, and major transport disruptions. The objective is not just faster delivery. The system also has to remain understandable, inclusive, and resilient under partial failure.",
+  "sections": [
+    {
+      "key": "situation",
+      "title": "Situation",
+      "narrative": "Emergency alerts currently depend on uneven local capabilities and fragmented operating arrangements. No single agency controls the whole system, yet the public experiences the output as one regional service.",
+      "entries": []
+    },
+    {
+      "key": "actors",
+      "title": "Actors",
+      "narrative": "",
+      "entries": [
+        {"code": "", "text": "National emergency agency"},
+        {"code": "", "text": "Local governments"},
+        {"code": "", "text": "Telecom operators"},
+        {"code": "", "text": "Weather service"},
+        {"code": "", "text": "Police and fire services"},
+        {"code": "", "text": "Hospitals"},
+        {"code": "", "text": "Media broadcasters"}
+      ]
+    },
+    {
+      "key": "objectives",
+      "title": "Objectives",
+      "narrative": "",
+      "entries": [
+        {"code": "o1", "text": "fast alert delivery"},
+        {"code": "o2", "text": "reliable delivery under failure"},
+        {"code": "o3", "text": "accessibility for all populations"},
+        {"code": "o4", "text": "interoperability across agencies"},
+        {"code": "o5", "text": "public trust and clarity"}
+      ]
+    },
+    {
+      "key": "capabilities",
+      "title": "Capabilities",
+      "narrative": "",
+      "entries": [
+        {"code": "k1", "text": "cell broadcast alerts"},
+        {"code": "k2", "text": "SMS alerts"},
+        {"code": "k3", "text": "app push notifications"},
+        {"code": "k4", "text": "multilingual message templating"},
+        {"code": "k5", "text": "siren fallback"},
+        {"code": "k6", "text": "alert coordination dashboard"},
+        {"code": "k7", "text": "location-specific geofencing"},
+        {"code": "k8", "text": "accessibility features for disabled users"}
+      ]
+    },
+    {
+      "key": "dependencies",
+      "title": "Dependencies",
+      "narrative": "",
+      "entries": [
+        {"code": "d1", "text": "telecom integration"},
+        {"code": "d2", "text": "shared message standards"},
+        {"code": "d3", "text": "legal authority for who may send alerts"},
+        {"code": "d4", "text": "funding for local rollout"},
+        {"code": "d5", "text": "training and operating procedures"}
+      ]
+    },
+    {
+      "key": "constraints",
+      "title": "Constraints",
+      "narrative": "",
+      "entries": [
+        {"code": "q1", "text": "privacy law"},
+        {"code": "q2", "text": "uneven municipal budgets"},
+        {"code": "q3", "text": "legacy systems must remain active during rollout"},
+        {"code": "q4", "text": "no single point of failure"},
+        {"code": "q5", "text": "alerts must remain understandable to the public"}
+      ]
+    },
+    {
+      "key": "boundaries",
+      "title": "Boundaries",
+      "narrative": "",
+      "entries": [
+        {"code": "β1", "text": "national-local governance boundary"},
+        {"code": "β2", "text": "agency-to-telecom boundary"},
+        {"code": "β3", "text": "technical standards boundary"},
+        {"code": "β4", "text": "language and accessibility boundary"}
+      ]
+    },
+    {
+      "key": "states",
+      "title": "States",
+      "narrative": "The relevant operating states are combinatorial because municipalities and agencies can adopt different capability bundles at different times.",
+      "entries": []
+    }
+  ],
+  "candidate_paths": [
+    {
+      "title": "Example A: speed-first configuration",
+      "parent_title": "Candidate paths",
+      "route_expression": "",
+      "narrative": "Very fast for urgent incidents, but weaker for accessibility and richer public guidance.",
+      "highlights": [
+        "cell broadcast",
+        "geofencing",
+        "dashboard",
+        "minimal app reliance"
+      ]
+    },
+    {
+      "title": "Example B: resilience-first configuration",
+      "parent_title": "Candidate paths",
+      "route_expression": "",
+      "narrative": "Less technically elegant, but strong under partial telecom or smartphone failure.",
+      "highlights": [
+        "SMS",
+        "sirens",
+        "radio and media integration",
+        "multilingual templates"
+      ]
+    },
+    {
+      "title": "Example C: inclusion-first configuration",
+      "parent_title": "Candidate paths",
+      "route_expression": "",
+      "narrative": "Strong for public understanding and equity, but slower and more governance-heavy to coordinate.",
+      "highlights": [
+        "app plus SMS",
+        "multilingual templates",
+        "accessibility features",
+        "local-agency dashboard"
+      ]
+    },
+    {
+      "title": "Example D: balanced configuration",
+      "parent_title": "Candidate paths",
+      "route_expression": "",
+      "narrative": "Broadly strong, but more expensive and harder to coordinate than narrower options.",
+      "highlights": [
+        "cell broadcast",
+        "SMS fallback",
+        "multilingual templates",
+        "dashboard",
+        "accessibility support"
+      ]
+    }
+  ]
+}

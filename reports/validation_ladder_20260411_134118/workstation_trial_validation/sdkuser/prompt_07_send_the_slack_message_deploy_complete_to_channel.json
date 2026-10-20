@@ -1,0 +1,25 @@
+{
+  "assistant_text": "{'status': 'sent', 'channel': 'C12345678', 'timestamp': '12345.6789'}",
+  "model": "workstation-direct-composition",
+  "rounds": 0,
+  "task_contract": {
+    "semantic_unit": "Send the Slack message `deploy complete` to channel `C12345678`."
+  },
+  "tool_receipts": [
+    {
+      "arguments": {
+        "skill_title": "SDK User Commands 07 \u2014 Slack Send Message / Sdk User Commands 07 Slack Send Message",
+        "target": ""
+      },
+      "name": "ws.skill.invoke",
+      "result": {
+        "answer": "{'status': 'sent', 'channel': 'C12345678', 'timestamp': '12345.6789'}",
+        "error": "",
+        "error_type": "",
+        "executor_framework": "python3",
+        "skill_title": "SDK User Commands 07 \u2014 Slack Send Message / Sdk User Commands 07 Slack Send Message",
+        "status": "ok"
+      }
+    }
+  ]
+}

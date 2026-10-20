@@ -1,0 +1,6 @@
+- uv for running
+- inline meta-data for dependencies
+- argparse for CLI arguments (in most cases, prefer stdin)
+- msgspec for typed validation
+- orjson for extra speed for JSON serialization/parsing
+- https://github.com/defog-ai/introspect

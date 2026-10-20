@@ -1,0 +1,3 @@
+#!/bin/zsh
+input=$(cat)
+print -r -- "pbcopy:$input" >> /Users/ravindranathakila/service/realized/reports/manual_workstation_trial_20260425_044504/deviceuser/fake_macos_tools.log

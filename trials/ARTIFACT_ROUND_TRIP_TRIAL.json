@@ -1,0 +1,134 @@
+{
+  "base_dir": "/Users/ravindranathakila/service/realized/reports/curriculum_bundle_build_20260325_190119",
+  "bundles_dir": "/Users/ravindranathakila/service/realized/reports/curriculum_bundle_build_20260325_190119/bundles",
+  "combined_import_smoke_note": "Combined import of all unrelated bundles into one DB can create ambiguity on overly generic prompts like Python script?. Use per-bundle imports for future tests unless domain gating is added.",
+  "import_smoke": {
+    "imported_count": 54,
+    "normalized_dir": "/Users/ravindranathakila/service/realized/reports/curriculum_bundle_build_20260325_190119/import_smoke/normalized",
+    "smoke_runs": [
+      {
+        "final_answer": "12",
+        "label": "newton_force",
+        "prompt": "Calculate force for mass=3 and acceleration=4.",
+        "run_outcome": "completed",
+        "state_path": "/Users/ravindranathakila/service/realized/reports/curriculum_bundle_build_20260325_190119/import_smoke/newton_force.json"
+      },
+      {
+        "final_answer": "96",
+        "label": "momentum",
+        "prompt": "Calculate momentum for mass=8 and velocity=12.",
+        "run_outcome": "completed",
+        "state_path": "/Users/ravindranathakila/service/realized/reports/curriculum_bundle_build_20260325_190119/import_smoke/momentum.json"
+      },
+      {
+        "final_answer": "7.0710678118654755",
+        "label": "pythagorean",
+        "prompt": "Calculate the length of the slanted side of a right angeled triangle if the other two sides are 5 metres each",
+        "run_outcome": "completed",
+        "state_path": "/Users/ravindranathakila/service/realized/reports/curriculum_bundle_build_20260325_190119/import_smoke/pythagorean.json"
+      },
+      {
+        "final_answer": "If you cannot tell exactly which tablet you are holding, or you cannot tell whether it is the right strength, do not take it yet. The next step is to identify the tablet first from a reliable source such as: the labeled packaging the tablet imprint the prescribing instructions a pharmacist Poison Help in the United States: 1-800-222-1222",
+        "label": "tablet_safety",
+        "prompt": "I have 2 tablets in my hand, one could be 10 mg and the other could be 100 mg. What should I do next?",
+        "run_outcome": "completed",
+        "state_path": "/Users/ravindranathakila/service/realized/reports/curriculum_bundle_build_20260325_190119/import_smoke/tablet_safety.json"
+      },
+      {
+        "final_answer": "First Law: Objects resist changes in motion. Second Law: Force determines acceleration. Third Law: Forces occur in pairs.",
+        "label": "statistical_python",
+        "prompt": "Python script?",
+        "run_outcome": "completed",
+        "state_path": "/Users/ravindranathakila/service/realized/reports/curriculum_bundle_build_20260325_190119/import_smoke/statistical_python.json"
+      }
+    ],
+    "sqlite_path": "/Users/ravindranathakila/service/realized/reports/curriculum_bundle_build_20260325_190119/import_smoke/bundle_import_smoke.sqlite3"
+  },
+  "per_bundle_import_smoke": {
+    "reports": [
+      {
+        "bundle_path": "/Users/ravindranathakila/service/realized/reports/curriculum_bundle_build_20260325_190119/bundles/LEARN_NEWTOWNS_LAWS.yaml",
+        "final_answer": "12",
+        "imported_count": 10,
+        "prompt": "Calculate force for mass=3 and acceleration=4.",
+        "run_outcome": "completed",
+        "source_stem": "LEARN_NEWTOWNS_LAWS",
+        "state_path": "/Users/ravindranathakila/service/realized/reports/curriculum_bundle_build_20260325_190119/import_smoke/by_bundle/LEARN_NEWTOWNS_LAWS/probe.json"
+      },
+      {
+        "bundle_path": "/Users/ravindranathakila/service/realized/reports/curriculum_bundle_build_20260325_190119/bundles/LEARN_MOMENTUM.yaml",
+        "final_answer": "96",
+        "imported_count": 12,
+        "prompt": "Calculate momentum for mass=8 and velocity=12.",
+        "run_outcome": "completed",
+        "source_stem": "LEARN_MOMENTUM",
+        "state_path": "/Users/ravindranathakila/service/realized/reports/curriculum_bundle_build_20260325_190119/import_smoke/by_bundle/LEARN_MOMENTUM/probe.json"
+      },
+      {
+        "bundle_path": "/Users/ravindranathakila/service/realized/reports/curriculum_bundle_build_20260325_190119/bundles/GAIN_PYTHOGOREAN_THEORM.yaml",
+        "final_answer": "7.0710678118654755",
+        "imported_count": 12,
+        "prompt": "Calculate the length of the slanted side of a right angeled triangle if the other two sides are 5 metres each",
+        "run_outcome": "completed",
+        "source_stem": "GAIN_PYTHOGOREAN_THEORM",
+        "state_path": "/Users/ravindranathakila/service/realized/reports/curriculum_bundle_build_20260325_190119/import_smoke/by_bundle/GAIN_PYTHOGOREAN_THEORM/probe.json"
+      },
+      {
+        "bundle_path": "/Users/ravindranathakila/service/realized/reports/curriculum_bundle_build_20260325_190119/bundles/LEARN_TABLET_SAFETY.yaml",
+        "final_answer": "If you cannot tell exactly which tablet you are holding, or you cannot tell whether it is the right strength, do not take it yet. The next step is to identify the tablet first from a reliable source such as: the labeled packaging the tablet imprint the prescribing instructions a pharmacist Poison Help in the United States: 1-800-222-1222",
+        "imported_count": 13,
+        "prompt": "I have 2 tablets in my hand, one could be 10 mg and the other could be 100 mg. What should I do next?",
+        "run_outcome": "completed",
+        "source_stem": "LEARN_TABLET_SAFETY",
+        "state_path": "/Users/ravindranathakila/service/realized/reports/curriculum_bundle_build_20260325_190119/import_smoke/by_bundle/LEARN_TABLET_SAFETY/probe.json"
+      },
+      {
+        "bundle_path": "/Users/ravindranathakila/service/realized/reports/curriculum_bundle_build_20260325_190119/bundles/GAIN_STATISTICAL_PYTHON_SCRIPT_WRITING_EXPERTISE.yaml",
+        "final_answer": "committed_state supports reduction of Not<Python script?>.",
+        "imported_count": 7,
+        "prompt": "Python script?",
+        "run_outcome": "incomplete",
+        "source_stem": "GAIN_STATISTICAL_PYTHON_SCRIPT_WRITING_EXPERTISE",
+        "state_path": "/Users/ravindranathakila/service/realized/reports/curriculum_bundle_build_20260325_190119/import_smoke/by_bundle/GAIN_STATISTICAL_PYTHON_SCRIPT_WRITING_EXPERTISE/probe.json"
+      }
+    ]
+  },
+  "runs_dir": "/Users/ravindranathakila/service/realized/reports/curriculum_bundle_build_20260325_190119/runs",
+  "sources": [
+    {
+      "bundle_docs": 10,
+      "bundle_path": "/Users/ravindranathakila/service/realized/reports/curriculum_bundle_build_20260325_190119/bundles/LEARN_NEWTOWNS_LAWS.yaml",
+      "report_path": "/Users/ravindranathakila/service/realized/reports/curriculum_bundle_build_20260325_190119/runs/LEARN_NEWTOWNS_LAWS/report.json",
+      "source_stem": "LEARN_NEWTOWNS_LAWS",
+      "sqlite_path": "/Users/ravindranathakila/service/realized/reports/curriculum_bundle_build_20260325_190119/runs/LEARN_NEWTOWNS_LAWS/newton_force/newton_force.sqlite3"
+    },
+    {
+      "bundle_docs": 12,
+      "bundle_path": "/Users/ravindranathakila/service/realized/reports/curriculum_bundle_build_20260325_190119/bundles/LEARN_MOMENTUM.yaml",
+      "report_path": "/Users/ravindranathakila/service/realized/reports/curriculum_bundle_build_20260325_190119/runs/LEARN_MOMENTUM/report.json",
+      "source_stem": "LEARN_MOMENTUM",
+      "sqlite_path": "/Users/ravindranathakila/service/realized/reports/curriculum_bundle_build_20260325_190119/runs/LEARN_MOMENTUM/momentum/momentum.sqlite3"
+    },
+    {
+      "bundle_docs": 12,
+      "bundle_path": "/Users/ravindranathakila/service/realized/reports/curriculum_bundle_build_20260325_190119/bundles/GAIN_PYTHOGOREAN_THEORM.yaml",
+      "report_path": "/Users/ravindranathakila/service/realized/reports/curriculum_bundle_build_20260325_190119/runs/GAIN_PYTHOGOREAN_THEORM/report.json",
+      "source_stem": "GAIN_PYTHOGOREAN_THEORM",
+      "sqlite_path": "/Users/ravindranathakila/service/realized/reports/curriculum_bundle_build_20260325_190119/runs/GAIN_PYTHOGOREAN_THEORM/attempt_1/pythagorean.sqlite3"
+    },
+    {
+      "bundle_docs": 13,
+      "bundle_path": "/Users/ravindranathakila/service/realized/reports/curriculum_bundle_build_20260325_190119/bundles/LEARN_TABLET_SAFETY.yaml",
+      "report_path": "/Users/ravindranathakila/service/realized/reports/curriculum_bundle_build_20260325_190119/runs/LEARN_TABLET_SAFETY/report.json",
+      "source_stem": "LEARN_TABLET_SAFETY",
+      "sqlite_path": "/Users/ravindranathakila/service/realized/reports/curriculum_bundle_build_20260325_190119/runs/LEARN_TABLET_SAFETY/tablet_safety.sqlite3"
+    },
+    {
+      "bundle_docs": 7,
+      "bundle_path": "/Users/ravindranathakila/service/realized/reports/curriculum_bundle_build_20260325_190119/bundles/GAIN_STATISTICAL_PYTHON_SCRIPT_WRITING_EXPERTISE.yaml",
+      "report_path": "/Users/ravindranathakila/service/realized/reports/curriculum_bundle_build_20260325_190119/runs/GAIN_STATISTICAL_PYTHON_SCRIPT_WRITING_EXPERTISE/report.json",
+      "source_stem": "GAIN_STATISTICAL_PYTHON_SCRIPT_WRITING_EXPERTISE",
+      "sqlite_path": "/Users/ravindranathakila/service/realized/reports/curriculum_bundle_build_20260325_190119/runs/GAIN_STATISTICAL_PYTHON_SCRIPT_WRITING_EXPERTISE/GAIN_STATISTICAL_PYTHON_SCRIPT_WRITING_EXPERTISE.sqlite3"
+    }
+  ]
+}

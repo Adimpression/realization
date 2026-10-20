@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "coordinated-transformation"
+version = "0.1.0"
+description = "Coordinated transformation in federated systems theory"
+requires-python = ">=3.14"
+
+[tool.setuptools]
+packages = ["coordinated_transformation"]
+
+[tool.setuptools.package-dir]
+"" = ".."
+
+[tool.setuptools.package-data]
+coordinated_transformation = [
+    "*.md",
+]

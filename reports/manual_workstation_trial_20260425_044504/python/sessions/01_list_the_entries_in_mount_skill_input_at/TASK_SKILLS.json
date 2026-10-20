@@ -1,0 +1,28 @@
+{
+  "prompt": "List the entries in mount `skill_input` at `trials`.",
+  "returned_skill_count": 1,
+  "skills": [
+    {
+      "authorities_requested": [
+        "execute",
+        "read"
+      ],
+      "executor_framework": "python3",
+      "inputs": {
+        "mount": "required input value",
+        "relative_path": "required input value"
+      },
+      "kind": "ability",
+      "outputs": {
+        "result": "execution result"
+      },
+      "representation": "python_script",
+      "risk_tier": "tier1_bounded_transform",
+      "score": 6,
+      "source_kind": "attached_skill_store",
+      "source_target": "skills",
+      "title": "Python Commands 01 \u2014 List Directory Entries / Python Commands 01 List Directory Entries"
+    }
+  ],
+  "total_skill_count": 19
+}

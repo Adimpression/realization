@@ -1,0 +1,748 @@
+{
+  "schemaVersion": "2.0.0",
+  "modelId": "model.library-reservation",
+  "modelName": "Library Reservation Product Model",
+  "modelPurpose": "Represents the duty of reserving one available physical book copy for pickup while preserving correctness, user feedback, and causal consistency.",
+  "createdAt": "2026-05-16T00:00:00Z",
+  "updatedAt": "2026-05-16T00:00:00Z",
+  "product": {
+    "productId": "product.library-app",
+    "name": "Library App",
+    "description": "A product that lets library members search for and reserve physical books for pickup at a branch.",
+    "domain": "Public library borrowing"
+  },
+  "lexicon": [
+    {
+      "termId": "term.duty",
+      "term": "Duty",
+      "definition": "A world-anchored obligation or capability the product must support, expressed as the KR title.",
+      "allowedAliases": [
+        "Product Duty",
+        "Obligated Work"
+      ],
+      "forbiddenAliases": [
+        "Persona",
+        "User Type"
+      ],
+      "examples": [
+        "Reserve an available book copy for pickup",
+        "Prepare a paid cafe order for customer pickup",
+        "Return an eligible delivered item and issue the correct refund"
+      ]
+    },
+    {
+      "termId": "term.user-journey",
+      "term": "User Journey",
+      "definition": "The canonical end-to-end path that fulfills one primary duty, expressed as the KR description.",
+      "allowedAliases": [
+        "Journey",
+        "Duty Journey"
+      ],
+      "forbiddenAliases": [
+        "Screen Flow Only",
+        "Persona Story"
+      ],
+      "examples": [
+        "A member searches for a book, reserves a copy, and receives pickup details."
+      ]
+    },
+    {
+      "termId": "term.gwt-step",
+      "term": "Given-When-Then Step",
+      "definition": "An atomic behavioral transition with preconditions, trigger, and observable postconditions.",
+      "allowedAliases": [
+        "GWT",
+        "Behavioral Step"
+      ],
+      "forbiddenAliases": [
+        "Implementation Task",
+        "Engineering Ticket"
+      ],
+      "examples": [
+        "Given a copy is available, when a member reserves it, then one active hold is created."
+      ]
+    },
+    {
+      "termId": "term.ux-sli",
+      "term": "UX SLI",
+      "definition": "A measurable indicator of user-experienced quality, such as latency, correctness, freshness, or recoverability.",
+      "allowedAliases": [
+        "Experience Indicator"
+      ],
+      "forbiddenAliases": [
+        "Infrastructure Metric Only"
+      ],
+      "examples": [
+        "Reservation confirmation time",
+        "Refund status freshness"
+      ]
+    },
+    {
+      "termId": "term.ux-slo",
+      "term": "UX SLO",
+      "definition": "A threshold target for a UX SLI that defines acceptable experience for a critical duty or journey.",
+      "allowedAliases": [
+        "Experience Objective"
+      ],
+      "forbiddenAliases": [
+        "Aspirational Goal"
+      ],
+      "examples": [
+        "99% of valid reservations confirm in under one second."
+      ]
+    },
+    {
+      "termId": "term.golden-trace",
+      "term": "Golden Trace",
+      "definition": "A concrete end-to-end execution example that demonstrates correct behavior for a duty journey.",
+      "allowedAliases": [
+        "Correct Trace",
+        "Canonical Success Trace"
+      ],
+      "forbiddenAliases": [
+        "Happy Path Only"
+      ],
+      "examples": [
+        "Successful reservation of one available library copy."
+      ]
+    },
+    {
+      "termId": "term.anti-golden-trace",
+      "term": "Anti-Golden Trace",
+      "definition": "A concrete execution example that demonstrates forbidden, failed, misleading, or unacceptable behavior.",
+      "allowedAliases": [
+        "Forbidden Trace",
+        "Negative Trace"
+      ],
+      "forbiddenAliases": [
+        "Bug Report Only"
+      ],
+      "examples": [
+        "Two members receive confirmation for the same physical copy."
+      ]
+    },
+    {
+      "termId": "term.real-world-object",
+      "term": "Real-World Object",
+      "definition": "A domain entity that exists or is meaningful in the real world and anchors the product architecture.",
+      "allowedAliases": [
+        "Domain Object",
+        "World Object"
+      ],
+      "forbiddenAliases": [
+        "Database Table"
+      ],
+      "examples": [
+        "Book Copy",
+        "Kitchen Ticket",
+        "Refund"
+      ]
+    },
+    {
+      "termId": "term.network-boundary",
+      "term": "Network Boundary",
+      "definition": "An architectural separation justified by real-world duration, externality, or human/physical delay.",
+      "allowedAliases": [
+        "Causal Boundary"
+      ],
+      "forbiddenAliases": [
+        "Arbitrary Microservice Boundary"
+      ],
+      "examples": [
+        "Kitchen preparation may be asynchronous because cooking takes real-world time."
+      ]
+    },
+    {
+      "termId": "term.invariant",
+      "term": "Invariant",
+      "definition": "A product law that must remain true across all valid states and transitions.",
+      "allowedAliases": [
+        "Product Law",
+        "Non-Negotiable Rule"
+      ],
+      "forbiddenAliases": [
+        "Preference",
+        "Suggestion"
+      ],
+      "examples": [
+        "One accepted return may issue at most one refund."
+      ]
+    }
+  ],
+  "ambiguityPolicy": {
+    "principle": "The model must be internally decidable. If ambiguity remains, the model must name the missing external fact instead of hiding uncertainty in vague wording.",
+    "unresolvedQuestionHandling": "block-change",
+    "requiresClarificationWhen": [
+      "A duty cannot be mapped to at least one real-world object or interaction.",
+      "A network boundary lacks a real-world latency or causality justification.",
+      "A trace can be interpreted as both golden and anti-golden.",
+      "A weakening or breaking update lacks explicit compatibility classification.",
+      "A journey completion criterion cannot be evaluated from observable state."
+    ]
+  },
+  "realWorldModel": {
+    "objects": [
+      {
+        "objectId": "object.member",
+        "name": "Member",
+        "definition": "A person with a valid library account who may reserve materials.",
+        "lifecycleStates": [
+          "active",
+          "blocked"
+        ],
+        "ownedByDutyIds": [
+          "duty.reserve-book-copy"
+        ]
+      },
+      {
+        "objectId": "object.book-copy",
+        "name": "Physical Book Copy",
+        "definition": "A specific physical copy of a book located at a branch.",
+        "lifecycleStates": [
+          "available",
+          "reserved",
+          "checked-out",
+          "lost"
+        ],
+        "ownedByDutyIds": [
+          "duty.reserve-book-copy"
+        ]
+      },
+      {
+        "objectId": "object.hold",
+        "name": "Hold",
+        "definition": "A reservation that prevents a book copy from being reserved by another member.",
+        "lifecycleStates": [
+          "active",
+          "expired",
+          "fulfilled",
+          "cancelled"
+        ],
+        "ownedByDutyIds": [
+          "duty.reserve-book-copy"
+        ]
+      }
+    ],
+    "interactions": [
+      {
+        "interactionId": "interaction.search-book",
+        "name": "Search book catalog",
+        "description": "A member searches the catalog and sees availability.",
+        "participantObjectIds": [
+          "object.member",
+          "object.book-copy"
+        ],
+        "expectedRealWorldDuration": {
+          "class": "under-1s",
+          "explanation": "Catalog search is a fast digital lookup."
+        }
+      },
+      {
+        "interactionId": "interaction.place-hold",
+        "name": "Place hold on copy",
+        "description": "A member reserves one specific available physical book copy.",
+        "participantObjectIds": [
+          "object.member",
+          "object.book-copy",
+          "object.hold"
+        ],
+        "expectedRealWorldDuration": {
+          "class": "under-1s",
+          "explanation": "Creating a hold is a fast state change that must prevent double booking."
+        }
+      }
+    ],
+    "invariants": [
+      {
+        "invariantId": "invariant.single-active-hold-per-copy",
+        "name": "Single active hold per copy",
+        "statement": "A physical book copy may have at most one active hold at a time.",
+        "rationale": "Two members cannot pick up the same physical object.",
+        "severity": "critical",
+        "objectIds": [
+          "object.book-copy",
+          "object.hold"
+        ],
+        "interactionIds": [
+          "interaction.place-hold"
+        ],
+        "enforcedByStepIds": [
+          "step.reserve-copy"
+        ],
+        "guardedByAntiTraceIds": [
+          "antitrace.double-reservation"
+        ]
+      }
+    ],
+    "networkBoundaries": [
+      {
+        "boundaryId": "boundary.hold-creation",
+        "name": "Hold creation consistency boundary",
+        "description": "Availability check and hold creation must remain causally tight.",
+        "interactionId": "interaction.place-hold",
+        "realWorldProcess": "A member claims one physical copy that no other member can simultaneously claim.",
+        "realWorldLatencyClass": "under-1s",
+        "separationAllowed": false,
+        "consistencyExpectation": "strong",
+        "causalityJustification": "The real-world object is singular, so the system must synchronously prevent two active holds for one copy.",
+        "userVisibleImpact": "The member immediately sees whether the reservation succeeded.",
+        "failureMode": "Two members could receive confirmations for the same copy."
+      }
+    ]
+  },
+  "objectives": [
+    {
+      "objectiveId": "objective.borrowing-easy-reliable",
+      "title": "Make borrowing easy and reliable",
+      "description": "Members can reserve available books without confusion or double booking.",
+      "successMeaning": "A member can find an available copy, reserve it once, and understand pickup details."
+    }
+  ],
+  "duties": [
+    {
+      "dutyId": "duty.reserve-book-copy",
+      "title": "Reserve an available book copy for pickup",
+      "intent": "Allow a member to claim one available physical copy for pickup.",
+      "scope": "Covers search, selecting a copy, creating a hold, and showing confirmation.",
+      "nonGoals": [
+        "Checking out the book at the counter."
+      ],
+      "criticality": "high",
+      "status": "active",
+      "objectiveIds": [
+        "objective.borrowing-easy-reliable"
+      ],
+      "primaryJourneyIds": [
+        "journey.reserve-book-copy"
+      ],
+      "usesRealWorldObjectIds": [
+        "object.member",
+        "object.book-copy",
+        "object.hold"
+      ],
+      "usesRealWorldInteractionIds": [
+        "interaction.search-book",
+        "interaction.place-hold"
+      ],
+      "invariantIds": [
+        "invariant.single-active-hold-per-copy"
+      ],
+      "version": "1.0.0",
+      "okrMapping": {
+        "keyResultTitle": "Reserve an available book copy for pickup",
+        "keyResultDescription": "A member searches for a book, selects an available copy, and receives pickup confirmation."
+      },
+      "dependsOnDutyIds": []
+    }
+  ],
+  "journeys": [
+    {
+      "journeyId": "journey.reserve-book-copy",
+      "dutyId": "duty.reserve-book-copy",
+      "title": "Reserve a library book for pickup",
+      "description": "A member searches for a title, selects an available physical copy, reserves it, and receives pickup details.",
+      "purpose": "Make a physical copy unavailable to others and available for this member.",
+      "trigger": "Member searches for a book title.",
+      "preconditions": [
+        "The member has an active account.",
+        "At least one matching book copy exists."
+      ],
+      "primaryFlow": [
+        "Member searches for the book.",
+        "System shows availability.",
+        "Member reserves an available copy.",
+        "System creates one active hold.",
+        "System shows confirmation and deadline."
+      ],
+      "completionCriteria": [
+        "An active hold exists for exactly one copy.",
+        "The selected copy is no longer generally available.",
+        "The member sees pickup details."
+      ],
+      "variants": [
+        "If no copy is available, the member may join a waitlist."
+      ],
+      "failureBoundaries": [
+        "If the last copy was just reserved, no duplicate hold is created."
+      ],
+      "nonGoals": [
+        "Checkout at pickup is outside this journey."
+      ],
+      "inputObjectIds": [
+        "object.member",
+        "object.book-copy"
+      ],
+      "outputObjectIds": [
+        "object.hold",
+        "object.book-copy"
+      ],
+      "invariantIds": [
+        "invariant.single-active-hold-per-copy"
+      ],
+      "stepIds": [
+        "step.search-availability",
+        "step.reserve-copy",
+        "step.show-confirmation",
+        "step.handle-copy-unavailable"
+      ],
+      "sliIds": [
+        "sli.reservation-confirmation-time",
+        "sli.reservation-correctness"
+      ],
+      "sloIds": [
+        "slo.confirm-under-1s",
+        "slo.prevent-double-reservation"
+      ],
+      "goldenTraceIds": [
+        "trace.successful-book-reservation"
+      ],
+      "antiGoldenTraceIds": [
+        "antitrace.double-reservation"
+      ],
+      "timing": {
+        "realWorldLatencyClass": "under-1s",
+        "syncExpectation": "synchronous",
+        "causalJustification": "Search and hold creation are fast digital actions, and the physical copy can only be claimed by one member."
+      },
+      "networkBoundaryIds": [
+        "boundary.hold-creation"
+      ],
+      "status": "active",
+      "version": "1.0.0",
+      "invokesDutyIds": [],
+      "flow": {
+        "entryStepId": "step.search-availability",
+        "exitStepIds": [
+          "step.handle-copy-unavailable"
+        ],
+        "edges": [
+          {
+            "fromStepId": "step.search-availability",
+            "toStepId": "step.reserve-copy",
+            "edgeType": "primary",
+            "condition": "",
+            "notes": ""
+          },
+          {
+            "fromStepId": "step.reserve-copy",
+            "toStepId": "step.show-confirmation",
+            "edgeType": "primary",
+            "condition": "",
+            "notes": ""
+          },
+          {
+            "fromStepId": "step.show-confirmation",
+            "toStepId": "step.handle-copy-unavailable",
+            "edgeType": "primary",
+            "condition": "",
+            "notes": ""
+          }
+        ],
+        "notes": "Linear primary flow derived from step order."
+      }
+    }
+  ],
+  "steps": [
+    {
+      "stepId": "step.search-availability",
+      "journeyId": "journey.reserve-book-copy",
+      "sequence": 1,
+      "title": "Show copy availability",
+      "given": "A member has an active account and searches for a cataloged title.",
+      "when": "The member submits the search query.",
+      "then": "The system shows available physical copies.",
+      "thenAssertions": [
+        "Availability is tied to copy state."
+      ],
+      "relatedObjectIds": [
+        "object.member",
+        "object.book-copy"
+      ],
+      "relatedInteractionIds": [
+        "interaction.search-book"
+      ],
+      "relatedInvariantIds": [],
+      "expectedUserVisibleOutcome": "The member sees whether a copy is reservable.",
+      "status": "active",
+      "stateTransitions": []
+    },
+    {
+      "stepId": "step.reserve-copy",
+      "journeyId": "journey.reserve-book-copy",
+      "sequence": 2,
+      "title": "Create hold",
+      "given": "A selected physical book copy is available.",
+      "when": "The member selects reserve for pickup.",
+      "then": "The system creates exactly one active hold for that copy.",
+      "thenAssertions": [
+        "No other active hold exists for the same copy."
+      ],
+      "relatedObjectIds": [
+        "object.member",
+        "object.book-copy",
+        "object.hold"
+      ],
+      "relatedInteractionIds": [
+        "interaction.place-hold"
+      ],
+      "relatedInvariantIds": [
+        "invariant.single-active-hold-per-copy"
+      ],
+      "expectedUserVisibleOutcome": "The member sees reservation confirmation.",
+      "status": "active",
+      "stateTransitions": [
+        {
+          "objectId": "object.book-copy",
+          "fromState": "available",
+          "toState": "reserved",
+          "notes": "The selected physical copy becomes reserved."
+        },
+        {
+          "objectId": "object.hold",
+          "fromState": "none",
+          "toState": "active",
+          "notes": "A new hold is created and becomes active."
+        }
+      ]
+    },
+    {
+      "stepId": "step.show-confirmation",
+      "journeyId": "journey.reserve-book-copy",
+      "sequence": 3,
+      "title": "Show confirmation",
+      "given": "An active hold has been created.",
+      "when": "The reservation completes.",
+      "then": "The system shows reservation ID, branch, and pickup deadline.",
+      "thenAssertions": [
+        "Confirmation refers to the created hold."
+      ],
+      "relatedObjectIds": [
+        "object.hold"
+      ],
+      "relatedInteractionIds": [
+        "interaction.place-hold"
+      ],
+      "relatedInvariantIds": [],
+      "expectedUserVisibleOutcome": "The member knows where and when to pick up the book.",
+      "status": "active",
+      "stateTransitions": []
+    },
+    {
+      "stepId": "step.handle-copy-unavailable",
+      "journeyId": "journey.reserve-book-copy",
+      "sequence": 4,
+      "title": "Reject duplicate attempt",
+      "given": "The last available copy has already been reserved.",
+      "when": "Another member attempts to reserve it.",
+      "then": "The system does not create a duplicate hold and offers another path.",
+      "thenAssertions": [
+        "No second active hold is created."
+      ],
+      "relatedObjectIds": [
+        "object.book-copy",
+        "object.hold"
+      ],
+      "relatedInteractionIds": [
+        "interaction.place-hold"
+      ],
+      "relatedInvariantIds": [
+        "invariant.single-active-hold-per-copy"
+      ],
+      "expectedUserVisibleOutcome": "The member sees that the copy is no longer available.",
+      "status": "active",
+      "stateTransitions": [
+        {
+          "objectId": "object.hold",
+          "fromState": "none",
+          "toState": "none",
+          "notes": "No hold is created for the unavailable copy."
+        }
+      ]
+    }
+  ],
+  "experience": {
+    "slis": [
+      {
+        "sliId": "sli.reservation-confirmation-time",
+        "name": "Reservation confirmation time",
+        "description": "Time from selecting reserve to seeing confirmation or clear failure.",
+        "measurementType": "latency",
+        "unit": "milliseconds",
+        "eventSource": "hold-creation-events",
+        "appliesToDutyIds": [
+          "duty.reserve-book-copy"
+        ],
+        "appliesToJourneyIds": [
+          "journey.reserve-book-copy"
+        ],
+        "status": "active"
+      },
+      {
+        "sliId": "sli.reservation-correctness",
+        "name": "Duplicate reservation prevention",
+        "description": "Whether one physical copy has no more than one active hold.",
+        "measurementType": "correctness",
+        "unit": "boolean",
+        "eventSource": "hold-state-audit",
+        "appliesToDutyIds": [
+          "duty.reserve-book-copy"
+        ],
+        "appliesToJourneyIds": [
+          "journey.reserve-book-copy"
+        ],
+        "status": "active"
+      }
+    ],
+    "slos": [
+      {
+        "sloId": "slo.confirm-under-1s",
+        "sliId": "sli.reservation-confirmation-time",
+        "name": "Confirm under one second",
+        "targetOperator": "<=",
+        "targetValue": 1000,
+        "measurementWindow": "rolling 7 days",
+        "consequenceOfViolation": "Members may retry and lose trust in whether the hold exists.",
+        "severity": "high",
+        "status": "active"
+      },
+      {
+        "sloId": "slo.prevent-double-reservation",
+        "sliId": "sli.reservation-correctness",
+        "name": "Prevent double reservation",
+        "targetOperator": "=",
+        "targetValue": 1,
+        "measurementWindow": "all active holds",
+        "consequenceOfViolation": "Two members can be promised the same physical book copy.",
+        "severity": "critical",
+        "status": "active"
+      }
+    ]
+  },
+  "traces": {
+    "golden": [
+      {
+        "traceId": "trace.successful-book-reservation",
+        "traceType": "golden",
+        "title": "Successful book reservation",
+        "description": "A member finds one available copy, reserves it, and sees pickup details.",
+        "dutyId": "duty.reserve-book-copy",
+        "journeyId": "journey.reserve-book-copy",
+        "scenario": "One available copy exists.",
+        "trigger": "Member searches for a known title.",
+        "events": [
+          {
+            "sequence": 1,
+            "title": "Search title",
+            "event": "Member searches for Charlotte Web.",
+            "stateBefore": "Member is active.",
+            "stateAfter": "Available copy is shown.",
+            "observedOutcome": "The member can reserve the copy.",
+            "elapsedTimeMs": 400,
+            "relatedStepIds": [
+              "step.search-availability"
+            ]
+          },
+          {
+            "sequence": 2,
+            "title": "Reserve copy",
+            "event": "Member selects reserve.",
+            "stateBefore": "Copy is available.",
+            "stateAfter": "Hold is active.",
+            "observedOutcome": "Exactly one hold is created.",
+            "elapsedTimeMs": 300,
+            "relatedStepIds": [
+              "step.reserve-copy"
+            ]
+          },
+          {
+            "sequence": 3,
+            "title": "Show confirmation",
+            "event": "Reservation completes.",
+            "stateBefore": "Hold exists.",
+            "stateAfter": "Confirmation is visible.",
+            "observedOutcome": "Member sees pickup deadline.",
+            "elapsedTimeMs": 200,
+            "relatedStepIds": [
+              "step.show-confirmation"
+            ]
+          }
+        ],
+        "finalState": "One active hold exists and the member sees pickup details.",
+        "validatesStepIds": [
+          "step.search-availability",
+          "step.reserve-copy",
+          "step.show-confirmation"
+        ],
+        "classificationReason": "The trace satisfies the duty and the single-hold invariant.",
+        "status": "active"
+      }
+    ],
+    "antiGolden": [
+      {
+        "traceId": "antitrace.double-reservation",
+        "traceType": "anti-golden",
+        "title": "Double reservation for one copy",
+        "description": "Two members receive confirmation for the same physical book copy.",
+        "dutyId": "duty.reserve-book-copy",
+        "journeyId": "journey.reserve-book-copy",
+        "scenario": "Two members attempt to reserve the last copy concurrently.",
+        "trigger": "Both members select reserve.",
+        "events": [
+          {
+            "sequence": 1,
+            "title": "Concurrent attempt",
+            "event": "Two reservation attempts succeed.",
+            "stateBefore": "Copy is available.",
+            "stateAfter": "Two active holds exist.",
+            "observedOutcome": "Both members see confirmation.",
+            "relatedStepIds": [
+              "step.reserve-copy",
+              "step.handle-copy-unavailable"
+            ]
+          }
+        ],
+        "finalState": "The same copy has two active holds.",
+        "violatesStepIds": [
+          "step.reserve-copy",
+          "step.handle-copy-unavailable"
+        ],
+        "violatesInvariantIds": [
+          "invariant.single-active-hold-per-copy"
+        ],
+        "classificationReason": "This violates the invariant that one physical copy may have at most one active hold.",
+        "status": "active"
+      }
+    ]
+  },
+  "updates": [
+    {
+      "changeId": "change.initial-library-model",
+      "changeType": "add-duty",
+      "targetRefs": [
+        "duty.reserve-book-copy"
+      ],
+      "summary": "Initial model for reserving an available physical book copy.",
+      "reason": "Establishes the first complete version of this product representation.",
+      "compatibility": "additive",
+      "impactAssessment": {
+        "affectedDuties": [
+          "duty.reserve-book-copy"
+        ],
+        "affectedJourneys": [],
+        "affectedSlis": [],
+        "affectedSlos": [],
+        "affectedTraces": [],
+        "affectedInvariants": [],
+        "riskLevel": "low",
+        "riskExplanation": "Initial additive example model."
+      },
+      "migrationPlan": null,
+      "rolloutPlan": "Adopt as baseline after schema and semantic validation.",
+      "approvalStatus": "approved",
+      "approvedBy": "example-owner",
+      "createdAt": "2026-05-16T00:00:00Z",
+      "effectiveAt": "2026-05-16T00:00:00Z"
+    }
+  ],
+  "openQuestions": []
+}

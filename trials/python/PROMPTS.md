@@ -1,0 +1,16 @@
+- List the entries in mount `skill_input` at `trials`.
+- Read the text file `trials/python/README.md` from mount `skill_input`.
+- Write `hello world` to mount `skill_tmp` at `python-suite.txt`.
+- Append `another line` to mount `skill_tmp` at `python-suite.txt`.
+- Copy `trials/python/README.md` from mount `skill_input` to mount `skill_tmp` at `python-readme.copy`.
+- Move `python-readme.copy` from mount `skill_tmp` to mount `skill_output` at `python-readme.moved`.
+- Delete `python-readme.moved` from mount `skill_output`.
+- Write the JSON text `{"status":"ok","enabled":true}` to mount `skill_tmp` at `config.json`.
+- Load the JSON file `config.json` from mount `skill_tmp`.
+- Write the CSV text `name,score\nAda,10\nBob,9\n` to mount `skill_tmp` at `data.csv`.
+- Read the CSV file `data.csv` from mount `skill_tmp`.
+- Compute the sha256 checksum of `trials/python/README.md` from mount `skill_input`.
+- Create `realized-tests.zip` in mount `skill_tmp` from mount `skill_input` at `tests`.
+- Extract `realized-tests.zip` from mount `skill_tmp` into mount `skill_output` at `extracted-tests`.
+- Download `https://example.com` to mount `skill_tmp` at `example-python.html`.
+- Find files ending in `.md` under mount `skill_input` at `trials`.

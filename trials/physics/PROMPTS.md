@@ -1,0 +1,10 @@
+- What distinguishes a scalar quantity from a vector quantity, and how is this represented in the reusable relation?
+- State the general ratio-of-change formula and give one example from motion that uses it.
+- Using the constant-acceleration relation, write the equation that updates velocity from initial velocity, acceleration, and time, and identify the “state-plus-change” structure.
+- State Newton’s second law and explain how it fits the multiplicative-combination substrate.
+- Explain the difference between the general force law ( F = ma ) and the specific case of weight ( W = mg ).
+- Explain how work relates to energy change, and state the work-energy theorem in terms of the transfer substrate.
+- Describe how impulse and momentum are related, and explain how both reuse the multiplicative-combination and interaction-change substrates.
+- Explain how centripetal force is constructed by combining earlier relations for force and centripetal acceleration.
+- Identify the reusable substrate underlying gravitational force and explain how both multiplicative combination and inverse-square dependence appear in the law.
+- Explain how electric power expressions ( P = VI ), ( P = I^2 R ), and ( P = \frac{V^2}{R} ) are derived through composition of the driving-response relation and multiplicative combination. Provide the full reasoning chain.

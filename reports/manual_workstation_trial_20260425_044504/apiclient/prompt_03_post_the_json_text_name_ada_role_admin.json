@@ -1,0 +1,25 @@
+{
+  "assistant_text": "{'status': 'ok', 'url': 'https://api.example.com/users', 'status_code': 201, 'payload': {'status': 'created', 'payload': {'name': 'Ada', 'role': 'admin'}}}",
+  "model": "workstation-direct-composition",
+  "rounds": 0,
+  "task_contract": {
+    "semantic_unit": "Post the JSON text `{\"name\":\"Ada\",\"role\":\"admin\"}` to `https://api.example.com/users`."
+  },
+  "tool_receipts": [
+    {
+      "arguments": {
+        "skill_title": "API Client Commands 03 \u2014 Post Json Body / Api Client Commands 03 Post Json Body",
+        "target": ""
+      },
+      "name": "ws.skill.invoke",
+      "result": {
+        "answer": "{'status': 'ok', 'url': 'https://api.example.com/users', 'status_code': 201, 'payload': {'status': 'created', 'payload': {'name': 'Ada', 'role': 'admin'}}}",
+        "error": "",
+        "error_type": "",
+        "executor_framework": "python3",
+        "skill_title": "API Client Commands 03 \u2014 Post Json Body / Api Client Commands 03 Post Json Body",
+        "status": "ok"
+      }
+    }
+  ]
+}

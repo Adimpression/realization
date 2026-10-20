@@ -1,0 +1,59 @@
+@startuml
+title Six-Layer Architecture Context
+
+rectangle "6. Entry / Exchange" as Entry {
+  component "CLI / import-export /\nrun bundles / launch surfaces" as EntrySurface
+}
+
+rectangle "5. Workstation" as Workstation {
+  component "Session driver /\nchat / task contract /\ncapability server" as WorkstationShell
+}
+
+rectangle "4. LLM" as LLM {
+  component "Prompt construction /\nprovider calls" as LLMCore
+}
+
+rectangle "3. Governance" as Governance {
+  component "policy / lifecycle /\nadmission / approvals" as GovernanceCore
+}
+
+rectangle "2. Controller" as Controller {
+  component "recursive Not reduction /\ndecomposition / closure" as ControllerCore
+}
+
+rectangle "1. Runtime + Skill Execution" as Runtime {
+  component "executors / brokers /\nWasm / governed skill invoke" as RuntimeCore
+}
+
+rectangle "Planned Shared Host Interaction Substrate" as Substrate {
+  component "attachments / capabilities /\ndelegation / receipts /\ngoverned skill invocation helpers" as SubstrateCore
+}
+
+EntrySurface --> WorkstationShell
+EntrySurface --> ControllerCore
+EntrySurface --> GovernanceCore
+
+WorkstationShell --> LLMCore
+WorkstationShell --> GovernanceCore
+WorkstationShell --> SubstrateCore
+
+ControllerCore --> LLMCore
+ControllerCore --> GovernanceCore
+ControllerCore --> SubstrateCore
+
+SubstrateCore --> RuntimeCore
+GovernanceCore --> RuntimeCore
+
+note right of ControllerCore
+Controller and workstation
+must converge downward on the
+shared substrate, not on each other.
+end note
+
+note right of WorkstationShell
+Workstation is the shell.
+Skills are pluggable workers.
+Wasmtime is one worker runtime.
+end note
+
+@enduml
