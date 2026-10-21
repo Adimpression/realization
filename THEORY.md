@@ -4369,7 +4369,7 @@ This last transformation is crucial. It captures the case where suspension revea
 
 ## 17. Relation to reflection
 
-Reflection, by your definition, is over the actual composition subset within a higher `Not`.
+Under the definition in Section 13, reflection operates over the actual composition subset within a higher `Not`.
 
 Therefore reflection must be able to inspect Hold On locally.
 
@@ -4393,7 +4393,7 @@ So reflection is not external to Hold On. It is one of the mechanisms that keeps
 
 ## 18. Relation to contemplation
 
-Contemplation, by your definition, may move up the ladder.
+Under the definition in Section 14, contemplation may move up the ladder.
 
 This means contemplation may use a Hold On as evidence that the current lower framing is malformed, too narrow, or wrongly decomposed.
 

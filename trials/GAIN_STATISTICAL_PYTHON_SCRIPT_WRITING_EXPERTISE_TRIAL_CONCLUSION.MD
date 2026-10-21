@@ -1,61 +1,49 @@
-`supplement.py` is now the canonical home for the LLM supplement layer, and the statistical path is materially better.
+# Statistical Python Script-Writing Expertise Trial Conclusion
 
-What I changed:
-- moved `LLMSupplement`, `ask_llm`, and the related helpers into [supplement.py](supplement.py)
-- strengthened the statistical curriculum in [GAIN_STATISTICAL_PYTHON_SCRIPT_WRITING_EXPERTISE.md](GAIN_STATISTICAL_PYTHON_SCRIPT_WRITING_EXPERTISE.md) so it now explicitly teaches `z-score`, required inputs, the formula, and a function-bearing step
-- fixed a real SQLite persistence bug in [store.py](store.py) where hybrid search links could fail with `FOREIGN KEY constraint failed` if a `related_artifact_id` had not been persisted yet
-- added a regression for that in [tests/test_artifact_search_hybrid.py](tests/test_artifact_search_hybrid.py)
+## Foundation phase
 
-Verification:
-- full test suite: `python3 -m unittest discover -s tests`
-- result: `Ran 44 tests in 299.745s`, `OK`
+`supplement.py` became the canonical home for the LLM supplement layer, accompanied by the following changes:
 
-Fresh statistical validation after the fix:
-- first, after teaching only `What is statistics?`, I probed `What is Python scripting?` with `--llm off`
-- it stayed `incomplete` instead of wrongly answering with the statistics definition
-- that proves the old cross-topic collapse is fixed
+- `LLMSupplement`, `ask_llm`, and related helpers moved into [supplement.py](supplement.py).
+- The curriculum in [GAIN_STATISTICAL_PYTHON_SCRIPT_WRITING_EXPERTISE.md](GAIN_STATISTICAL_PYTHON_SCRIPT_WRITING_EXPERTISE.md) was extended to teach `z-score`, required inputs, the formula, and a function-bearing step explicitly.
+- The SQLite persistence path in [store.py](store.py) was corrected so hybrid search links do not fail with `FOREIGN KEY constraint failed` when a `related_artifact_id` has not yet been persisted.
+- Regression coverage was added in [tests/test_artifact_search_hybrid.py](tests/test_artifact_search_hybrid.py).
 
-Then on the same fresh DB:
-- `What is statistics?` -> completed with the statistics answer in [1.json](reports/statistical_minicheck_after_fk_fix_20260325_210718/1.json)
-- `What is Python scripting?` -> completed with a distinct Python scripting answer in [2.json](reports/statistical_minicheck_after_fk_fix_20260325_210718/2.json)
-- `Python script?` with `--llm off` -> completed from prior learning in [3_probe_python_script.json](reports/statistical_minicheck_after_fk_fix_20260325_210718/3_probe_python_script.json)
+The full test suite was run with `python3 -m unittest discover -s tests` and reported `Ran 44 tests in 299.745s`, `OK`.
 
-So the verified state is:
-- supplement split: done
-- persistence regression: fixed
-- statistical concept collapse: fixed
-- off-LLM reuse for `Python script?`: working on a fresh DB
+Fresh statistical validation first taught only `What is statistics?`, then probed `What is Python scripting?` with `--llm off`. The probe remained `incomplete` rather than returning the statistics definition, demonstrating that the previous cross-topic collapse no longer occurred.
 
-What I did not finish in this turn:
-- the full expanded statistical curriculum rerun and final YAML export/import bundle
-- the live z-score ability step was still LLM-bound; it had started harvesting z-score-specific artifacts in the fresh DB, but it had not completed cleanly enough yet to certify the executable bundle end-to-end
+The same fresh database produced these results:
 
-The next exact step is to rerun the full expanded [GAIN_STATISTICAL_PYTHON_SCRIPT_WRITING_EXPERTISE.md](GAIN_STATISTICAL_PYTHON_SCRIPT_WRITING_EXPERTISE.md) on a fresh DB, then export that DB’s artifacts through [side.py](side.py) as the reusable YAML bundle.
+- `What is statistics?` completed with the statistics answer in [1.json](reports/statistical_minicheck_after_fk_fix_20260325_210718/1.json).
+- `What is Python scripting?` completed with a distinct Python scripting answer in [2.json](reports/statistical_minicheck_after_fk_fix_20260325_210718/2.json).
+- `Python script?` completed from prior learning with `--llm off` in [3_probe_python_script.json](reports/statistical_minicheck_after_fk_fix_20260325_210718/3_probe_python_script.json).
 
+This phase verified the supplement split, the persistence correction, the statistical concept-isolation correction, and off-LLM reuse for `Python script?` on a fresh database. It did not certify the complete executable bundle: the expanded curriculum had not yet been rerun, and the live z-score ability remained LLM-bound while collecting z-score-specific artifacts.
 
-Finished the statistical bundle path in the practical way that matters for future reuse.
+## Bundle certification phase
 
-The fixes are in [main.py](main.py) and the new regression coverage is in [tests/test_function_boundary.py](tests/test_function_boundary.py). The important runtime changes were:
-- repaired generated Python ability wrappers so callable snippets become valid executable scripts
-- made compute/template reuse prefer invokable function artifacts instead of falling back to structured-learning records
-- included explicit `lookup_keys` in structured matching
-- relaxed the boundary-shape rejection that was wrongly blocking internal compute abilities with `c*`
+The subsequent certification phase completed the reusable statistical bundle path. Runtime changes in [main.py](main.py), with regression coverage in [tests/test_function_boundary.py](tests/test_function_boundary.py), accomplished the following:
 
-The certified statistical bundle is here:
-- [GAIN_STATISTICAL_PYTHON_SCRIPT_WRITING_EXPERTISE.yaml](reports/statistical_bundle_from_learned_db_20260325_225632/GAIN_STATISTICAL_PYTHON_SCRIPT_WRITING_EXPERTISE.yaml)
+- Generated Python ability wrappers were repaired so callable snippets become valid executable scripts.
+- Compute/template reuse was changed to prefer invokable function artifacts over structured-learning records.
+- Explicit `lookup_keys` were included in structured matching.
+- Boundary-shape rejection was relaxed where it had incorrectly blocked internal compute abilities with `c*`.
 
-The fresh imported DB used for verification is:
-- [import_fixed.sqlite3](reports/statistical_bundle_from_learned_db_20260325_225632/import_fixed.sqlite3)
+Certification used these artifacts:
 
-The final certification summary is:
-- [summary_final_cert.json](reports/statistical_bundle_from_learned_db_20260325_225632/summary_final_cert.json)
+- Bundle: [GAIN_STATISTICAL_PYTHON_SCRIPT_WRITING_EXPERTISE.yaml](reports/statistical_bundle_from_learned_db_20260325_225632/GAIN_STATISTICAL_PYTHON_SCRIPT_WRITING_EXPERTISE.yaml)
+- Fresh imported database: [import_fixed.sqlite3](reports/statistical_bundle_from_learned_db_20260325_225632/import_fixed.sqlite3)
+- Certification summary: [summary_final_cert.json](reports/statistical_bundle_from_learned_db_20260325_225632/summary_final_cert.json)
 
-Verified prompts on both the learned source DB and the fresh imported DB with `--llm off`:
-- `Python script?` -> completed
-- `Write a Python script that computes the z-score for x=12, mean=10, std=2.` -> `1`
-- `If x=14, mean=11, and std=1.5, what z-score would your script produce?` -> `2`
+The learned source database and fresh imported database produced the following results with `--llm off`:
 
-Use it like this:
+- `Python script?` completed.
+- `Write a Python script that computes the z-score for x=12, mean=10, std=2.` returned `1`.
+- `If x=14, mean=11, and std=1.5, what z-score would your script produce?` returned `2`.
+
+The imported bundle can be exercised with:
+
 ```bash
 export STATE_SQLITE_PATH=reports/statistical_bundle_from_learned_db_20260325_225632/import_fixed.sqlite3
 
@@ -64,7 +52,8 @@ python3 main.py run --prompt 'Write a Python script that computes the z-score fo
 python3 main.py run --prompt 'If x=14, mean=11, and std=1.5, what z-score would your script produce?' --llm off --max-steps 24
 ```
 
-To load the bundle again into a new DB:
+The bundle can be loaded into another database with:
+
 ```bash
 export STATE_SQLITE_PATH=/path/to/new.sqlite3
 python3 main.py artifact-import \
@@ -72,8 +61,6 @@ python3 main.py artifact-import \
   --normalized-out-dir reports/statistical_bundle_from_learned_db_20260325_225632/normalized_dir
 ```
 
-Test status:
-- focused regression suite passed, including the new function-boundary cases
-- the full `python3 -m unittest discover -s tests` run was started, but it did not finish within this turn because the repo’s long LLM/network-bound section kept running after the fast suites were already green
+The focused regression suite, including the new function-boundary cases, passed. A full `python3 -m unittest discover -s tests` run was started but did not complete because the repository's long LLM/network-bound section continued after the fast suites passed.
 
-One explicit caveat: I did not complete a cold line-by-line full-expanded statistical curriculum rerun on a brand-new DB. I started those runs, but they are operationally too slow to be the right certification path. The export/import bundle above is fully verified on a fresh imported DB, which is the future-loading path you asked for.
+The certification did not include a cold, line-by-line execution of the complete expanded curriculum against a brand-new database. Those runs were operationally too slow to serve as the certification path. Instead, the exported bundle was imported and fully verified against a fresh database, establishing the supported future-loading path.
