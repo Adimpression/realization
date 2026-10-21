@@ -28,7 +28,7 @@ It also reflects the downstream proto intent:
 * repeated nouns are repeated achieved references
 * one-of is semantic alternation only
 
-The crucial philosophical point is this: **EBNF can govern form, but not fully govern semantic singularity**. So the best complete answer is “EBNF + semantic side-conditions.” That is exactly the maximum extent possible.
+The crucial philosophical point is this: **EBNF can govern form, but not fully govern semantic singularity**. The complete contract therefore consists of EBNF plus semantic side conditions; EBNF alone cannot provide stronger enforcement.
 
 ---
 
@@ -680,7 +680,7 @@ generated-out-field     = generated-primitive-field
                         | generated-oneof ;
 ```
 
-This abstract grammar reflects the production reference in your document:
+This abstract grammar reflects the production reference in [State Interface Notation Specification](STATE_INTERFACE_NOTATION_SPECIFICATION.md):
 
 * one service
 * four RPCs
@@ -694,7 +694,7 @@ while leaving naming normalization, field numbering, and import closure to gener
 
 ## 10. Recommended implementation contract
 
-For implementation, the most faithful and robust answer is:
+The implementation contract has three layers:
 
 1. **Use the YAML EBNF above as the syntactic contract.**
 2. **Use a semantic validator for the non-context-free doctrine.**
@@ -706,4 +706,4 @@ That three-layer separation mirrors the specification’s own structure:
 * application / YAML authoring
 * proto generation
 
-So the mathematically clean answer is not to force everything into EBNF, but to let EBNF do what grammars do best and let semantic validation do what ontologies require. That is the maximum faithful enforcement possible.
+The three-layer design does not force semantic constraints into EBNF: EBNF governs grammatical form, while semantic validation enforces ontological requirements. This is the maximum faithful enforcement possible.
