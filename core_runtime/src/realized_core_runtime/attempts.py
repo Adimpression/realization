@@ -105,6 +105,29 @@ class InterruptionRequest:
     reason: str | None = None
     correlation: Mapping[str, Any] = field(default_factory=dict)
 
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "attempt_id": self.attempt_id,
+            "requesting_principal": self.requesting_principal,
+            "authority_context": dict(self.authority_context),
+            "reason": self.reason,
+            "correlation": dict(self.correlation),
+        }
+
+    @classmethod
+    def from_dict(cls, value: Mapping[str, Any]) -> InterruptionRequest:
+        return cls(
+            attempt_id=str(value["attempt_id"]),
+            requesting_principal=str(value["requesting_principal"]),
+            authority_context=dict(value.get("authority_context", {})),
+            reason=(
+                str(value["reason"])
+                if value.get("reason") is not None
+                else None
+            ),
+            correlation=dict(value.get("correlation", {})),
+        )
+
 
 @dataclass(frozen=True, slots=True)
 class InterruptionResult:
@@ -117,6 +140,17 @@ class InterruptionResult:
     latest_admitted_revision_id: str | None
     attempt_artifact_reference: str
     semantic_revision_created: bool = False
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "attempt_id": self.attempt_id,
+            "prior_status": self.prior_status.value,
+            "resulting_status": self.resulting_status.value,
+            "disposition": self.disposition.value,
+            "latest_admitted_revision_id": self.latest_admitted_revision_id,
+            "attempt_artifact_reference": self.attempt_artifact_reference,
+            "semantic_revision_created": self.semantic_revision_created,
+        }
 
 
 @runtime_checkable

@@ -15,16 +15,84 @@ if str(CORE_ENGINE_SRC) not in sys.path:
     sys.path.insert(0, str(CORE_ENGINE_SRC))
 
 from realized_core_engine import (
+    ContinuationInlet,
     EngineConfiguration,
     EngineInlet,
     EngineResult,
+    GoverningDirection,
+    InletRelationship,
+    InspectionRequest,
+    InspectionTargetKind,
+    InspectionView,
+    StartRequest,
     inspect,
+    inspect_resumption,
     resume,
     run,
+    start_objective,
 )
 
 
 class CoreEngineApiTests(unittest.TestCase):
+    def test_typed_resumption_abi_round_trips_through_plain_sqlite(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_dir:
+            sqlite_path = Path(temporary_dir) / "resumption.sqlite3"
+            request = StartRequest(
+                scope_id="scope-api",
+                objective_id="objective-api",
+                branch_id="main",
+                initial_inlet=ContinuationInlet(
+                    inlet_id="inlet-api",
+                    kind="prompt",
+                    payload={"prompt": "Represent this objective durably."},
+                    target="root",
+                    relationship=InletRelationship.CONTINUATION,
+                    source="human",
+                    provenance=("message-api",),
+                    correlation={},
+                    authority_context={"principal": "tester"},
+                ),
+                governing_direction=GoverningDirection(
+                    objective="Represent this objective durably.",
+                    scope="scope-api",
+                ),
+            )
+            self.assertEqual(request, StartRequest.from_dict(request.to_dict()))
+            configuration = EngineConfiguration(
+                sqlite_path=sqlite_path,
+                max_steps=0,
+                llm_policy="off",
+                discovery="off",
+                reflection="off",
+                contemplation="off",
+            )
+
+            with patch.dict(os.environ, {"OPENAI_API_KEY": ""}, clear=False):
+                started = start_objective(
+                    request,
+                    configuration=configuration,
+                )
+                inspected = inspect_resumption(
+                    InspectionRequest(
+                        target_kind=InspectionTargetKind.BRANCH_HEAD,
+                        target_id="scope-api/objective-api/main",
+                        view=InspectionView.CURRENT_STATE,
+                        scope_id="scope-api",
+                        objective_id="objective-api",
+                        branch_id="main",
+                    ),
+                    configuration=configuration,
+                )
+
+            self.assertTrue(sqlite_path.is_file())
+            self.assertIsNotNone(started.resulting_revision_identity)
+            self.assertEqual(
+                "Represent this objective durably.",
+                inspected.payload["governing_direction"]["objective"],
+            )
+            json.dumps(started.to_dict(), sort_keys=True)
+            json.dumps(inspected.to_dict(), sort_keys=True)
+
     def test_resume_admits_only_explicit_typed_human_contribution(self) -> None:
         with tempfile.TemporaryDirectory() as temporary_dir:
             root = Path(temporary_dir)

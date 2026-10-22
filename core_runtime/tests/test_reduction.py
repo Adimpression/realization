@@ -4,7 +4,11 @@ import unittest
 from dataclasses import dataclass, field
 from typing import Any
 
-from realized_core_runtime import resume_to_realization, run_to_realization
+from realized_core_runtime import (
+    AttemptInterrupted,
+    resume_to_realization,
+    run_to_realization,
+)
 
 
 @dataclass
@@ -181,6 +185,17 @@ class RealizationLifecycleContractTests(unittest.TestCase):
         self.assertNotIn("pop_frontier", runtime.actions)
         self.assertFalse(any(action.startswith("reduce:") for action in runtime.actions))
         self.assertEqual("finalize", runtime.actions[-1])
+
+    def test_optional_attempt_stop_probe_interrupts_before_semantic_work(self) -> None:
+        runtime = FakeRuntime()
+        runtime.attempt_stop_requested = lambda: True
+
+        with self.assertRaises(AttemptInterrupted):
+            run_to_realization(runtime, max_steps=4)
+
+        self.assertEqual([], runtime.actions)
+        self.assertEqual(set(), runtime.state.closed)
+        self.assertEqual([], runtime.state.steps)
 
     def test_terminal_frontier_node_is_not_reduced(self) -> None:
         runtime = FakeRuntime()

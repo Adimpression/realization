@@ -42,6 +42,7 @@ def content_digest(value: Any) -> str:
 class OperationKind(StrEnum):
     START = "start"
     CONTINUE = "continue"
+    DERIVE = "derive"
     RESUME_AFTER_INTERRUPTION = "resume_after_interruption"
     RESUME_SUSPENDED = "resume_suspended"
     AUGMENT = "augment"
@@ -626,6 +627,15 @@ class ProjectionPolicy:
             "permitted_item_ids": list(self.permitted_item_ids),
         }
 
+    @classmethod
+    def from_dict(cls, value: JsonObject) -> ProjectionPolicy:
+        return cls(
+            policy_id=str(value.get("policy_id", "resumption-projection-v1")),
+            max_inline_items=int(value.get("max_inline_items", 512)),
+            include_path=bool(value.get("include_path", False)),
+            permitted_item_ids=tuple(value.get("permitted_item_ids", ())),
+        )
+
 
 @dataclass(frozen=True, slots=True)
 class ResumptionProjection:
@@ -685,6 +695,27 @@ class ContinuationInlet:
     @property
     def digest(self) -> str:
         return content_digest(self.to_dict())
+
+    @classmethod
+    def from_dict(cls, value: JsonObject) -> ContinuationInlet:
+        raw_realignment = value.get("realignment")
+        return cls(
+            inlet_id=str(value["inlet_id"]),
+            kind=str(value["kind"]),
+            payload=dict(value.get("payload", {})),
+            target=str(value.get("target", "root")),
+            relationship=InletRelationship(value["relationship"]),
+            source=str(value.get("source", "external")),
+            provenance=tuple(value.get("provenance", ())),
+            correlation=dict(value.get("correlation", {})),
+            authority_context=dict(value.get("authority_context", {})),
+            delta=SemanticDelta.from_dict(dict(value.get("delta", {}))),
+            realignment=(
+                Realignment.from_dict(dict(raw_realignment))
+                if isinstance(raw_realignment, dict)
+                else None
+            ),
+        )
 
 
 @dataclass(frozen=True, slots=True)
@@ -786,6 +817,37 @@ class StartRequest:
     execution_policy: JsonObject = field(default_factory=dict)
     projection_policy: ProjectionPolicy = field(default_factory=ProjectionPolicy)
 
+    def to_dict(self) -> JsonObject:
+        return {
+            "scope_id": self.scope_id,
+            "objective_id": self.objective_id,
+            "branch_id": self.branch_id,
+            "initial_inlet": self.initial_inlet.to_dict(),
+            "governing_direction": self.governing_direction.to_dict(),
+            "governance_policy": dict(self.governance_policy),
+            "execution_policy": dict(self.execution_policy),
+            "projection_policy": self.projection_policy.to_dict(),
+        }
+
+    @classmethod
+    def from_dict(cls, value: JsonObject) -> StartRequest:
+        return cls(
+            scope_id=str(value["scope_id"]),
+            objective_id=str(value["objective_id"]),
+            branch_id=str(value.get("branch_id", "main")),
+            initial_inlet=ContinuationInlet.from_dict(
+                dict(value["initial_inlet"])
+            ),
+            governing_direction=GoverningDirection.from_dict(
+                dict(value["governing_direction"])
+            ),
+            governance_policy=dict(value.get("governance_policy", {})),
+            execution_policy=dict(value.get("execution_policy", {})),
+            projection_policy=ProjectionPolicy.from_dict(
+                dict(value.get("projection_policy", {}))
+            ),
+        )
+
 
 @dataclass(frozen=True, slots=True)
 class ResumptionRequest:
@@ -799,12 +861,60 @@ class ResumptionRequest:
     source_attempt_id: str | None = None
     merge_parent_identities: tuple[ResumptionIdentity, ...] = ()
 
+    def to_dict(self) -> JsonObject:
+        return {
+            "anchor": self.anchor.to_dict(),
+            "operation": self.operation.value,
+            "expected_branch_head_revision_id": (
+                self.expected_branch_head_revision_id
+            ),
+            "inlet": self.inlet.to_dict() if self.inlet is not None else None,
+            "projection_policy": self.projection_policy.to_dict(),
+            "governance_policy": dict(self.governance_policy),
+            "execution_policy": dict(self.execution_policy),
+            "source_attempt_id": self.source_attempt_id,
+            "merge_parent_identities": [
+                identity.to_dict()
+                for identity in self.merge_parent_identities
+            ],
+        }
+
+    @classmethod
+    def from_dict(cls, value: JsonObject) -> ResumptionRequest:
+        raw_inlet = value.get("inlet")
+        return cls(
+            anchor=ResumptionIdentity.from_dict(dict(value["anchor"])),
+            operation=OperationKind(value["operation"]),
+            expected_branch_head_revision_id=str(
+                value["expected_branch_head_revision_id"]
+            ),
+            inlet=(
+                ContinuationInlet.from_dict(dict(raw_inlet))
+                if isinstance(raw_inlet, dict)
+                else None
+            ),
+            projection_policy=ProjectionPolicy.from_dict(
+                dict(value.get("projection_policy", {}))
+            ),
+            governance_policy=dict(value.get("governance_policy", {})),
+            execution_policy=dict(value.get("execution_policy", {})),
+            source_attempt_id=(
+                str(value["source_attempt_id"])
+                if value.get("source_attempt_id") is not None
+                else None
+            ),
+            merge_parent_identities=tuple(
+                ResumptionIdentity.from_dict(dict(item))
+                for item in value.get("merge_parent_identities", ())
+            ),
+        )
+
 
 @dataclass(frozen=True, slots=True)
 class ReductionContext:
     """Prepared semantic context supplied to a controller reduction adapter."""
 
-    projection: ResumptionProjection
+    projection: ResumptionProjection | None
     operation: OperationKind
     admitted_inlet: ContinuationInlet | None
     candidate_state: SemanticState
@@ -816,6 +926,7 @@ class ReductionProposal:
     """Advisory externally represented result of advancing prepared reduction."""
 
     delta: SemanticDelta = field(default_factory=SemanticDelta)
+    resulting_state: SemanticState | None = None
     semantic_outcome: SemanticOutcome | None = None
     proposal_references: tuple[str, ...] = ()
     capability_receipt_references: tuple[str, ...] = ()
@@ -853,6 +964,48 @@ class ResumptionResult:
     diagnostics: JsonObject
     presentation: JsonObject = field(default_factory=dict)
 
+    def to_dict(self) -> JsonObject:
+        return {
+            "source_revision_identity": (
+                self.source_revision_identity.to_dict()
+                if self.source_revision_identity is not None
+                else None
+            ),
+            "execution_attempt_id": self.execution_attempt_id,
+            "execution_outcome": self.execution_outcome.value,
+            "semantic_outcome": (
+                self.semantic_outcome.value
+                if self.semantic_outcome is not None
+                else None
+            ),
+            "resulting_revision_identity": (
+                self.resulting_revision_identity.to_dict()
+                if self.resulting_revision_identity is not None
+                else None
+            ),
+            "transition_artifact_reference": (
+                self.transition_artifact_reference
+            ),
+            "attempt_artifact_reference": self.attempt_artifact_reference,
+            "realignment_summary": (
+                dict(self.realignment_summary)
+                if self.realignment_summary is not None
+                else None
+            ),
+            "identity_disposition": (
+                self.identity_disposition.to_dict()
+                if self.identity_disposition is not None
+                else None
+            ),
+            "achieved_state_summary": list(self.achieved_state_summary),
+            "non_achievedness_summary": list(
+                self.non_achievedness_summary
+            ),
+            "active_hold_summary": list(self.active_hold_summary),
+            "diagnostics": dict(self.diagnostics),
+            "presentation": dict(self.presentation),
+        }
+
 
 @dataclass(frozen=True, slots=True)
 class InspectionRequest:
@@ -865,6 +1018,43 @@ class InspectionRequest:
     principal: str = "local"
     authority_context: JsonObject = field(default_factory=dict)
 
+    def to_dict(self) -> JsonObject:
+        return {
+            "target_kind": self.target_kind.value,
+            "target_id": self.target_id,
+            "view": self.view.value,
+            "scope_id": self.scope_id,
+            "objective_id": self.objective_id,
+            "branch_id": self.branch_id,
+            "principal": self.principal,
+            "authority_context": dict(self.authority_context),
+        }
+
+    @classmethod
+    def from_dict(cls, value: JsonObject) -> InspectionRequest:
+        return cls(
+            target_kind=InspectionTargetKind(value["target_kind"]),
+            target_id=str(value["target_id"]),
+            view=InspectionView(value["view"]),
+            scope_id=(
+                str(value["scope_id"])
+                if value.get("scope_id") is not None
+                else None
+            ),
+            objective_id=(
+                str(value["objective_id"])
+                if value.get("objective_id") is not None
+                else None
+            ),
+            branch_id=(
+                str(value["branch_id"])
+                if value.get("branch_id") is not None
+                else None
+            ),
+            principal=str(value.get("principal", "local")),
+            authority_context=dict(value.get("authority_context", {})),
+        )
+
 
 @dataclass(frozen=True, slots=True)
 class InspectionResult:
@@ -872,6 +1062,14 @@ class InspectionResult:
     target_id: str
     view: InspectionView
     payload: JsonObject
+
+    def to_dict(self) -> JsonObject:
+        return {
+            "target_kind": self.target_kind.value,
+            "target_id": self.target_id,
+            "view": self.view.value,
+            "payload": dict(self.payload),
+        }
 
 
 __all__ = [

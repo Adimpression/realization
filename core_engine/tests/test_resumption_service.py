@@ -15,6 +15,8 @@ from realized_core_runtime import (
 )
 
 from realized_core_engine.resumption_contracts import (
+    AdmissionDecision,
+    AdmissionDisposition,
     ContinuationInlet,
     GoverningDirection,
     HoldOn,
@@ -35,6 +37,7 @@ from realized_core_engine.resumption_contracts import (
     SemanticOutcome,
     StartRequest,
     Supersession,
+    canonical_json,
 )
 from realized_core_engine.resumption_repository import SQLiteResumptionRepository
 from realized_core_engine.resumption_service import ResumptionService
@@ -201,6 +204,37 @@ class ResumptionServiceTests(unittest.TestCase):
         self.assertTrue(
             self.repository.require_revision(revision.identity).verify()
         )
+
+    def test_start_admits_the_inlet_before_invoking_the_controller(self) -> None:
+        controller = ProposalController(ReductionProposal())
+        rejected_service = ResumptionService(
+            self.repository,
+            reduction_controller=controller,
+            admission_evaluator=lambda *args: AdmissionDecision(
+                disposition=AdmissionDisposition.REJECTED,
+                rationale="policy rejected the inlet",
+            ),
+            id_factory=self.ids,
+        )
+
+        result = rejected_service.start(
+            StartRequest(
+                scope_id="scope-1",
+                objective_id="objective-1",
+                branch_id="main",
+                initial_inlet=inlet(
+                    "rejected-start",
+                    InletRelationship.CONTINUATION,
+                ),
+                governing_direction=GoverningDirection(
+                    objective="Rejected objective",
+                    scope="scope-1",
+                ),
+            )
+        )
+
+        self.assertEqual(SemanticOutcome.REJECTED, result.semantic_outcome)
+        self.assertEqual([], controller.contexts)
 
     def test_presentation_and_transcript_wording_do_not_mutate_state(self) -> None:
         _, revision = self._start(
@@ -676,6 +710,48 @@ class ResumptionServiceTests(unittest.TestCase):
         )
         self.assertEqual((revision.identity.revision_id,), derived.parent_revision_ids)
 
+    def test_derive_carries_only_explicitly_selected_admitted_material(self) -> None:
+        selected = item("fact-selected", "Selected source fact")
+        ambient = item("fact-ambient", "Unselected ambient fact")
+        _, source = self._start(achieved=(selected, ambient))
+        direction = GoverningDirection(
+            objective="Produce a derived result",
+            scope="scope-derived",
+        )
+
+        result = self.service.resume(
+            self._request(
+                source,
+                OperationKind.DERIVE,
+                inlet(
+                    "derive-explicit",
+                    InletRelationship.CONTINUATION,
+                    payload={
+                        "target_scope_id": "scope-derived",
+                        "target_objective_id": "objective-derived",
+                        "target_branch_id": "main",
+                        "selected_item_ids": [selected.item_id],
+                    },
+                    delta=SemanticDelta(governing_direction=direction),
+                ),
+            )
+        )
+        derived = self.repository.require_revision(
+            result.resulting_revision_identity
+        )
+
+        self.assertEqual("scope-derived", derived.identity.scope_id)
+        self.assertEqual("objective-derived", derived.identity.objective_id)
+        self.assertEqual(
+            (selected.item_id,),
+            tuple(item.item_id for item in derived.state.achieved),
+        )
+        self.assertEqual({}, derived.state.engine_state)
+        self.assertIn(
+            self.repository.revision_reference(source.identity.revision_id),
+            derived.state.provenance_references,
+        )
+
     def test_concurrent_children_are_explicit_branches_and_can_merge(self) -> None:
         _, revision = self._start(achieved=(item("fact-1", "Base"),))
         branch_a = self.service.resume(
@@ -833,8 +909,51 @@ class ResumptionServiceTests(unittest.TestCase):
 
         self.assertTrue(projection.verify())
         self.assertEqual(2, len(projection.state.achieved) + len(projection.state.non_achievedness))
-        self.assertEqual(4, len(projection.external_references))
-        self.assertIn("4 are represented", projection.completeness_statement)
+        self.assertEqual(5, len(projection.external_references))
+        self.assertIn(
+            "4 permitted items are represented",
+            projection.completeness_statement,
+        )
+
+    def test_projection_cannot_bypass_bounds_or_permissions_via_engine_state(self) -> None:
+        public = item("fact-public", "Visible")
+        secret = item("fact-secret", "Withheld")
+        _, revision = self._start(
+            achieved=(public, secret),
+            payload={"engine_state": {"secret": "must-not-be-inline"}},
+        )
+
+        projection = self.service.project(
+            revision,
+            replace(
+                self._request(
+                    revision,
+                    OperationKind.CONTINUE,
+                    inlet("continue", InletRelationship.CONTINUATION),
+                ).projection_policy,
+                permitted_item_ids=(public.item_id,),
+            ),
+        )
+        serialized = canonical_json(projection.canonical_content())
+
+        self.assertEqual({}, projection.state.engine_state)
+        self.assertEqual((public.item_id,), tuple(
+            item.item_id for item in projection.state.achieved
+        ))
+        self.assertNotIn(secret.item_id, serialized)
+        self.assertNotIn("must-not-be-inline", serialized)
+        self.assertTrue(
+            any(
+                reference.endswith("/restricted-items")
+                for reference in projection.external_references
+            )
+        )
+        self.assertTrue(
+            any(
+                reference.endswith("/engine-state")
+                for reference in projection.external_references
+            )
+        )
 
     def test_recorded_proposals_and_decision_signature_support_replay(self) -> None:
         _, revision = self._start(

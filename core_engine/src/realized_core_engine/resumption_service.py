@@ -204,9 +204,10 @@ class ResumptionService:
         inline_ids = {
             item.item_id for item in eligible[: max(policy.max_inline_items, 0)]
         }
-        external_ids = [
-            item.item_id for item in all_items if item.item_id not in inline_ids
+        overflow_ids = [
+            item.item_id for item in eligible if item.item_id not in inline_ids
         ]
+        restricted_count = len(all_items) - len(eligible)
         state = replace(
             revision.state,
             achieved=tuple(
@@ -219,25 +220,43 @@ class ResumptionService:
                 for item in revision.state.non_achievedness
                 if item.item_id in inline_ids
             ),
+            engine_state={},
         )
-        references = tuple(
+        references = [
             f"{self.repository.revision_reference(revision.identity.revision_id)}"
             f"/item/{item_id}"
-            for item_id in external_ids
+            for item_id in overflow_ids
+        ]
+        revision_reference = self.repository.revision_reference(
+            revision.identity.revision_id
         )
-        completeness = (
-            "All current semantic items are inline."
-            if not references
-            else (
-                f"{len(inline_ids)} items are inline and "
-                f"{len(references)} are represented by stable revision references."
+        if restricted_count:
+            references.append(f"{revision_reference}/restricted-items")
+        if overflow_ids or restricted_count:
+            references.append(f"{revision_reference}/semantic-context")
+            state = _redact_non_inline_semantic_context(state, inline_ids)
+        if revision.state.engine_state:
+            references.append(f"{revision_reference}/engine-state")
+
+        statements = [f"{len(inline_ids)} current semantic items are inline."]
+        if overflow_ids:
+            statements.append(
+                f"{len(overflow_ids)} permitted items are represented by stable references."
             )
-        )
+        if restricted_count:
+            statements.append(
+                f"{restricted_count} items are withheld by projection policy."
+            )
+        if revision.state.engine_state:
+            statements.append(
+                "Canonical reducer reconstruction data is held behind an authorized reference."
+            )
+        completeness = " ".join(statements)
         projection = ResumptionProjection(
             identity=revision.identity,
             policy=policy,
             state=state,
-            external_references=references,
+            external_references=tuple(references),
             completeness_statement=completeness,
             projection_digest="",
         )
@@ -402,6 +421,32 @@ class ResumptionService:
             )
             if decision.disposition is not AdmissionDisposition.ACCEPTED:
                 raise TransitionValidationError(decision.rationale)
+            proposal = self._reduce_start(
+                request,
+                candidate,
+                should_stop,
+            )
+            candidate, proposal_reconciliation = (
+                self._apply_reduction_proposal(candidate, proposal)
+            )
+            reconciliation = {
+                **reconciliation,
+                "inlet_admission": decision.to_dict(),
+                "reduction": {
+                    **proposal_reconciliation,
+                    **dict(proposal.reconciliation),
+                },
+            }
+            decision = self.admission_evaluator(
+                OperationKind.START,
+                None,
+                request.initial_inlet,
+                candidate,
+                dict(request.governance_policy),
+                dict(request.execution_policy),
+            )
+            if decision.disposition is not AdmissionDisposition.ACCEPTED:
+                raise TransitionValidationError(decision.rationale)
         except TransitionValidationError as exc:
             return self._non_committing_work_result(
                 attempt,
@@ -414,7 +459,7 @@ class ResumptionService:
             )
 
         self._raise_if_stopped(should_stop)
-        outcome = _infer_semantic_outcome(candidate)
+        outcome = proposal.semantic_outcome or _infer_semantic_outcome(candidate)
         revision, artifact = self._revision_and_artifact(
             source=None,
             target_scope_id=request.scope_id,
@@ -429,6 +474,7 @@ class ResumptionService:
             admission=decision,
             semantic_outcome=outcome,
             realignment=None,
+            proposal=proposal,
         )
         try:
             self.repository.commit_revision(
@@ -454,7 +500,7 @@ class ResumptionService:
             revision=revision,
             artifact=artifact,
             semantic_outcome=outcome,
-            presentation={},
+            presentation=dict(proposal.presentation),
         )
         return AttemptWorkResult(
             semantic_outcome=outcome.value,
@@ -496,6 +542,16 @@ class ResumptionService:
                 source,
                 target,
             )
+            inlet_admission = self.admission_evaluator(
+                request.operation,
+                source,
+                request.inlet,
+                candidate,
+                dict(request.governance_policy),
+                dict(request.execution_policy),
+            )
+            if inlet_admission.disposition is not AdmissionDisposition.ACCEPTED:
+                raise TransitionValidationError(inlet_admission.rationale)
             self._raise_if_stopped(should_stop)
             proposal = self._reduce(
                 request,
@@ -503,14 +559,13 @@ class ResumptionService:
                 candidate,
                 should_stop,
             )
-            candidate, proposal_reconciliation = self._apply_delta(
+            candidate, proposal_reconciliation = self._apply_reduction_proposal(
                 candidate,
-                proposal.delta,
-                allow_supersession=False,
-                allow_direction=False,
+                proposal,
             )
             reconciliation = {
                 **reconciliation,
+                "inlet_admission": inlet_admission.to_dict(),
                 "reduction": {
                     **proposal_reconciliation,
                     **dict(proposal.reconciliation),
@@ -673,6 +728,7 @@ class ResumptionService:
 
         required_relationships = {
             OperationKind.CONTINUE: InletRelationship.CONTINUATION,
+            OperationKind.DERIVE: InletRelationship.CONTINUATION,
             OperationKind.AUGMENT: InletRelationship.AUGMENTATION,
             OperationKind.CORRECT: InletRelationship.CORRECTION,
             OperationKind.REDIRECT_AND_REALIGN: InletRelationship.REDIRECTION,
@@ -733,6 +789,44 @@ class ResumptionService:
                     "branch requires a distinct explicit target_branch_id"
                 )
 
+        if request.operation is OperationKind.DERIVE:
+            assert request.inlet is not None
+            payload = request.inlet.payload
+            target_scope = str(payload.get("target_scope_id", "")).strip()
+            target_objective = str(
+                payload.get("target_objective_id", "")
+            ).strip()
+            target_branch = str(payload.get("target_branch_id", "main")).strip()
+            selected = {
+                str(item) for item in payload.get("selected_item_ids", ())
+            }
+            available = {
+                item.item_id
+                for item in (
+                    *source.state.achieved,
+                    *source.state.non_achievedness,
+                )
+            }
+            if not target_scope or not target_objective or not target_branch:
+                raise TransitionValidationError(
+                    "derive requires explicit target scope, objective, and branch"
+                )
+            if (
+                target_scope == source.identity.scope_id
+                and target_objective == source.identity.objective_id
+            ):
+                raise TransitionValidationError(
+                    "derive requires a new objective or scope identity"
+                )
+            if not selected or not selected.issubset(available):
+                raise TransitionValidationError(
+                    "derive requires explicit admitted source item identities"
+                )
+            if request.inlet.delta.governing_direction is None:
+                raise TransitionValidationError(
+                    "derive requires an explicit governing direction"
+                )
+
         if request.operation is OperationKind.MERGE:
             if not request.merge_parent_identities:
                 raise TransitionValidationError(
@@ -755,6 +849,14 @@ class ResumptionService:
         if request.operation is OperationKind.BRANCH:
             target_branch = str(request.inlet.payload["target_branch_id"])
             target = (target[0], target[1], target_branch)
+            expected = None
+        elif request.operation is OperationKind.DERIVE:
+            assert request.inlet is not None
+            target = (
+                str(request.inlet.payload["target_scope_id"]),
+                str(request.inlet.payload["target_objective_id"]),
+                str(request.inlet.payload.get("target_branch_id", "main")),
+            )
             expected = None
         elif request.operation is OperationKind.REDIRECT_AND_REALIGN:
             assert request.inlet is not None
@@ -791,6 +893,53 @@ class ResumptionService:
                 target,
             )
             return state, reconciliation, request.inlet.realignment
+        if request.operation is OperationKind.DERIVE:
+            assert request.inlet is not None
+            selected_ids = {
+                str(item)
+                for item in request.inlet.payload.get("selected_item_ids", ())
+            }
+            selected_achieved = tuple(
+                item
+                for item in source.state.achieved
+                if item.item_id in selected_ids
+            )
+            selected_non_achieved = tuple(
+                item
+                for item in source.state.non_achievedness
+                if item.item_id in selected_ids
+            )
+            direction = request.inlet.delta.governing_direction
+            assert direction is not None
+            derived = SemanticState(
+                achieved=selected_achieved,
+                non_achievedness=selected_non_achieved,
+                governing_direction=direction,
+                provenance_references=(
+                    self.repository.revision_reference(
+                        source.identity.revision_id
+                    ),
+                    request.inlet.inlet_id,
+                    *request.inlet.provenance,
+                ),
+                governance_references=source.state.governance_references,
+            )
+            derived, delta_reconciliation = self._apply_delta(
+                derived,
+                replace(request.inlet.delta, governing_direction=None),
+                allow_supersession=False,
+                allow_direction=False,
+            )
+            return (
+                derived,
+                {
+                    "kind": "derived_objective",
+                    "selected_source_item_ids": sorted(selected_ids),
+                    "source_revision_id": source.identity.revision_id,
+                    "delta": delta_reconciliation,
+                },
+                None,
+            )
         if request.operation is OperationKind.MERGE:
             state, reconciliation = self._merge_states(
                 source,
@@ -949,6 +1098,87 @@ class ResumptionService:
             "superseded": [
                 item.target_item_id for item in delta.supersessions
             ],
+        }
+
+    def _apply_reduction_proposal(
+        self,
+        candidate: SemanticState,
+        proposal: ReductionProposal,
+    ) -> tuple[SemanticState, dict[str, Any]]:
+        """Apply and verify controller-owned output after inlet admission."""
+
+        proposed, reconciliation = self._apply_delta(
+            candidate,
+            proposal.delta,
+            allow_supersession=False,
+            allow_direction=False,
+        )
+        if proposal.resulting_state is None:
+            return proposed, reconciliation
+
+        resulting = proposal.resulting_state
+        if resulting.governing_direction != proposed.governing_direction:
+            raise TransitionValidationError(
+                "a reduction proposal cannot change the governing direction"
+            )
+
+        for field_name in (
+            "supersession_edges",
+            "contradiction_edges",
+            "realignments",
+            "hold_evaluations",
+            "provenance_references",
+            "governance_references",
+        ):
+            admitted = tuple(getattr(proposed, field_name))
+            supplied = tuple(getattr(resulting, field_name))
+            if supplied[: len(admitted)] != admitted:
+                raise TransitionValidationError(
+                    f"a reduction proposal cannot rewrite admitted {field_name}"
+                )
+
+        proposed_achieved = {item.item_id for item in proposed.achieved}
+        resulting_achieved = {item.item_id for item in resulting.achieved}
+        if not proposed_achieved.issubset(resulting_achieved):
+            raise TransitionValidationError(
+                "a reduction proposal cannot silently withdraw achieved state"
+            )
+        resulting_non_achieved = {
+            item.item_id for item in resulting.non_achievedness
+        }
+        if resulting_achieved & resulting_non_achieved:
+            raise TransitionValidationError(
+                "a semantic item cannot be both achieved and non-achieved"
+            )
+
+        admitted_holds = {hold.hold_id: hold for hold in proposed.holds}
+        resulting_holds = {hold.hold_id: hold for hold in resulting.holds}
+        missing_holds = set(admitted_holds) - set(resulting_holds)
+        if missing_holds:
+            raise TransitionValidationError(
+                "a reduction proposal cannot silently discharge HoldOn: "
+                + ", ".join(sorted(missing_holds))
+            )
+        if any(
+            resulting_holds[hold_id] != admitted
+            for hold_id, admitted in admitted_holds.items()
+        ):
+            raise TransitionValidationError(
+                "a reduction proposal cannot rewrite an admitted HoldOn"
+            )
+
+        admitted_imports = tuple(proposed.scope_imports)
+        if tuple(resulting.scope_imports)[: len(admitted_imports)] != admitted_imports:
+            raise TransitionValidationError(
+                "a reduction proposal cannot rewrite admitted scope imports"
+            )
+        return resulting, {
+            **reconciliation,
+            "resulting_state_digest": resulting.digest,
+            "resolved_by_reduction": sorted(
+                {item.item_id for item in proposed.non_achievedness}
+                - resulting_non_achieved
+            ),
         }
 
     def _apply_realignment(
@@ -1293,6 +1523,23 @@ class ResumptionService:
             projection=projection,
             operation=request.operation,
             admitted_inlet=request.inlet,
+            candidate_state=candidate,
+            execution_policy=dict(request.execution_policy),
+        )
+        return self.reduction_controller.reduce(context, should_stop=should_stop)
+
+    def _reduce_start(
+        self,
+        request: StartRequest,
+        candidate: SemanticState,
+        should_stop: Callable[[], bool],
+    ) -> ReductionProposal:
+        if self.reduction_controller is None:
+            return ReductionProposal()
+        context = ReductionContext(
+            projection=None,
+            operation=OperationKind.START,
+            admitted_inlet=request.initial_inlet,
             candidate_state=candidate,
             execution_policy=dict(request.execution_policy),
         )
@@ -1877,6 +2124,99 @@ def _delta_is_empty(delta: SemanticDelta) -> bool:
             delta.supersessions,
             delta.governing_direction is not None,
         )
+    )
+
+
+def _redact_non_inline_semantic_context(
+    state: SemanticState,
+    inline_item_ids: set[str],
+) -> SemanticState:
+    """Keep only context mechanically attributable to inline semantic items."""
+
+    inline_items = {
+        item.item_id: item
+        for item in (*state.achieved, *state.non_achievedness)
+        if item.item_id in inline_item_ids
+    }
+    inline_node_ids = {
+        str(node.get("id"))
+        for item in inline_items.values()
+        if isinstance((node := item.payload.get("node")), dict)
+        and node.get("id") is not None
+    }
+    allowed_ids = inline_item_ids | inline_node_ids
+
+    graph_nodes = [
+        dict(node)
+        for node in state.refinement_graph.get("nodes", ())
+        if str(node.get("id")) in inline_node_ids
+    ]
+    graph_edges = [
+        dict(edge)
+        for edge in state.refinement_graph.get("edges", ())
+        if str(edge.get("src")) in inline_node_ids
+        and str(edge.get("dst")) in inline_node_ids
+    ]
+
+    def keyed(values: dict[str, Any]) -> dict[str, Any]:
+        return {
+            key: value for key, value in values.items() if key in allowed_ids
+        }
+
+    def attributable(values: tuple[dict[str, Any], ...]) -> tuple[dict[str, Any], ...]:
+        return tuple(
+            value
+            for value in values
+            if str(value.get("item_id") or value.get("node_id") or "")
+            in allowed_ids
+        )
+
+    holds = tuple(
+        hold
+        for hold in state.holds
+        if str(hold.unresolved_semantic_object.get("item_id", ""))
+        in inline_item_ids
+    )
+    hold_ids = {hold.hold_id for hold in holds}
+    return replace(
+        state,
+        refinement_graph={"nodes": graph_nodes, "edges": graph_edges},
+        duties_and_obligations=attributable(state.duties_and_obligations),
+        certainty=keyed(state.certainty),
+        blockers=keyed(state.blockers),
+        conflicts=keyed(state.conflicts),
+        evidence_and_support={},
+        commitments=attributable(state.commitments),
+        supersession_edges=tuple(
+            edge
+            for edge in state.supersession_edges
+            if str(edge.get("prior_item_id", "")) in inline_item_ids
+            and (
+                edge.get("replacement_item_id") is None
+                or str(edge.get("replacement_item_id")) in inline_item_ids
+            )
+        ),
+        contradiction_edges=tuple(
+            edge
+            for edge in state.contradiction_edges
+            if {
+                str(edge.get("left_item_id", "")),
+                str(edge.get("right_item_id", "")),
+            }.issubset(inline_item_ids)
+        ),
+        realignments=(),
+        unresolved_applicability_item_ids=tuple(
+            item_id
+            for item_id in state.unresolved_applicability_item_ids
+            if item_id in inline_item_ids
+        ),
+        holds=holds,
+        hold_evaluations=tuple(
+            evaluation
+            for evaluation in state.hold_evaluations
+            if str(evaluation.get("hold_id", "")) in hold_ids
+        ),
+        provenance_references=(),
     )
 
 
