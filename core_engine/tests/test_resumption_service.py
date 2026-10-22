@@ -29,6 +29,7 @@ from realized_core_engine.resumption_contracts import (
     InspectionTargetKind,
     InspectionView,
     OperationKind,
+    ProjectionPolicy,
     Realignment,
     Reversal,
     ReductionContext,
@@ -261,6 +262,196 @@ class ResumptionServiceTests(unittest.TestCase):
 
         self.assertEqual(SemanticOutcome.REJECTED, result.semantic_outcome)
         self.assertEqual([], controller.contexts)
+
+    def test_scope_authorization_rejects_before_controller_execution(self) -> None:
+        controller = ProposalController(ReductionProposal())
+        service = ResumptionService(
+            self.repository,
+            reduction_controller=controller,
+            id_factory=self.ids,
+        )
+
+        result = service.start(
+            StartRequest(
+                scope_id="scope-1",
+                objective_id="objective-1",
+                branch_id="main",
+                initial_inlet=inlet(
+                    "unauthorized-scope",
+                    InletRelationship.CONTINUATION,
+                ),
+                governing_direction=GoverningDirection(
+                    objective="Rejected objective",
+                    scope="scope-1",
+                ),
+                governance_policy={"allowed_scope_ids": ["scope-2"]},
+            )
+        )
+
+        self.assertEqual(SemanticOutcome.REJECTED, result.semantic_outcome)
+        self.assertEqual([], controller.contexts)
+        self.assertIsNone(
+            self.repository.load_branch_head(
+                "scope-1", "objective-1", "main"
+            )
+        )
+
+    def test_proposal_cache_key_includes_every_normative_input(self) -> None:
+        _, revision = self._start(achieved=(item("fact-1", "Base"),))
+        projection = self.service.project(revision, ProjectionPolicy())
+        contribution = inlet(
+            "cache-inlet",
+            InletRelationship.CONTINUATION,
+        )
+        arguments = {
+            "projection": projection,
+            "inlet": contribution,
+            "operation": OperationKind.CONTINUE,
+            "proposal_schema_version": "schema-1",
+            "prompt_version": "prompt-1",
+            "model_identity": "model-1",
+            "provider_identity": "provider-1",
+            "governance_posture": {"policy": "one"},
+        }
+        baseline = self.service.proposal_cache_key(**arguments)
+        changed_direction = replace(
+            projection,
+            state=replace(
+                projection.state,
+                governing_direction=replace(
+                    projection.state.governing_direction,
+                    required_outcome="different outcome",
+                ),
+            ),
+        )
+        variants = {
+            "projection digest": {
+                "projection": replace(
+                    projection,
+                    projection_digest="different-projection",
+                )
+            },
+            "inlet digest": {
+                "inlet": replace(contribution, inlet_id="different-inlet")
+            },
+            "operation": {"operation": OperationKind.AUGMENT},
+            "direction digest": {"projection": changed_direction},
+            "realignment digest": {
+                "projection": replace(
+                    projection,
+                    state=replace(
+                        projection.state,
+                        realignments=(
+                            Realignment(
+                                source_revision_id="source",
+                                redirection_inlet_id="redirect",
+                                affected_item_ids=(),
+                                identity_disposition=IdentityDisposition(
+                                    kind=IdentityDispositionKind.SAME_OBJECTIVE,
+                                    target_scope_id="scope-1",
+                                    target_objective_id="objective-1",
+                                    target_branch_id="main",
+                                    rationale="cache test",
+                                ),
+                                retained_item_ids=(),
+                                superseded_item_ids=(),
+                                introduced_items=(),
+                                unresolved_applicability_item_ids=(),
+                                resulting_non_achievedness=(),
+                                evidence_references=(),
+                                governance_references=(),
+                                completeness_statement="complete",
+                            ),
+                        ),
+                    ),
+                )
+            },
+            "proposal schema": {"proposal_schema_version": "schema-2"},
+            "prompt": {"prompt_version": "prompt-2"},
+            "model": {"model_identity": "model-2"},
+            "provider": {"provider_identity": "provider-2"},
+            "governance": {
+                "governance_posture": {"policy": "two"}
+            },
+        }
+
+        for label, change in variants.items():
+            with self.subTest(input=label):
+                self.assertNotEqual(
+                    baseline,
+                    self.service.proposal_cache_key(
+                        **{**arguments, **change}
+                    ),
+                )
+
+        self.assertEqual(
+            baseline,
+            self.service.proposal_cache_key(**arguments),
+        )
+
+    def test_post_reduction_rejection_preserves_externalized_proposal(self) -> None:
+        _, revision = self._start(achieved=(item("fact-1", "Base"),))
+        decisions = [
+            AdmissionDecision(
+                disposition=AdmissionDisposition.ACCEPTED,
+                rationale="inlet accepted",
+            ),
+            AdmissionDecision(
+                disposition=AdmissionDisposition.REJECTED,
+                rationale="proposal rejected",
+            ),
+        ]
+        controller = ProposalController(
+            ReductionProposal(
+                delta=SemanticDelta(
+                    achieved=(item("proposed-fact", "Unadmitted"),)
+                ),
+                proposal_references=("proposal-1",),
+                proposal_interactions=(
+                    {
+                        "request": {"kind": "proposal"},
+                        "proposals": [{"id": "proposal-1"}],
+                    },
+                ),
+                reconciliation={"proposal_checked": True},
+            )
+        )
+        service = ResumptionService(
+            self.repository,
+            reduction_controller=controller,
+            admission_evaluator=lambda *args: decisions.pop(0),
+            id_factory=self.ids,
+        )
+
+        result = service.resume(
+            self._request(
+                revision,
+                OperationKind.CONTINUE,
+                inlet("rejected-proposal", InletRelationship.CONTINUATION),
+            )
+        )
+        attempt = self.repository.load_attempt(result.execution_attempt_id)
+        artifact_id = attempt.transition_artifact_references[-1]
+        artifact = self.repository.load_transition_artifact(artifact_id)
+
+        self.assertEqual(SemanticOutcome.REJECTED, result.semantic_outcome)
+        self.assertEqual(["proposal-1"], artifact["proposal_references"])
+        self.assertEqual(
+            "proposal-1",
+            artifact["proposal_interactions"][0]["proposals"][0]["id"],
+        )
+        self.assertTrue(
+            artifact["reconciliation"]["reduction"]["proposal_checked"]
+        )
+        self.assertEqual(
+            revision.identity,
+            self.repository.load_branch_head(
+                "scope-1", "objective-1", "main"
+            ).identity,
+        )
+        self.assertTrue(
+            self.repository.verify_transition_replay(artifact_id)["verified"]
+        )
 
     def test_presentation_and_transcript_wording_do_not_mutate_state(self) -> None:
         _, revision = self._start(

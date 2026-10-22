@@ -1072,25 +1072,28 @@ class SQLiteResumptionRepository:
             )
         return tuple(ordered)
 
-    def branch_graph(self, objective_id: str) -> dict[str, Any]:
+    def branch_graph(self, scope_id: str, objective_id: str) -> dict[str, Any]:
         with self._connection() as connection:
             revisions = connection.execute(
                 """
                 SELECT revision_id, scope_id, branch_id, revision_digest
                 FROM resumption_revisions
-                WHERE objective_id = ? ORDER BY created_at, revision_id
+                WHERE scope_id = ? AND objective_id = ?
+                ORDER BY created_at, revision_id
                 """,
-                (objective_id,),
+                (scope_id, objective_id),
             ).fetchall()
             heads = connection.execute(
                 """
                 SELECT scope_id, branch_id, revision_id
                 FROM resumption_branch_heads
-                WHERE objective_id = ? ORDER BY scope_id, branch_id
+                WHERE scope_id = ? AND objective_id = ?
+                ORDER BY branch_id
                 """,
-                (objective_id,),
+                (scope_id, objective_id),
             ).fetchall()
         return {
+            "scope_id": scope_id,
             "objective_id": objective_id,
             "revisions": [
                 {

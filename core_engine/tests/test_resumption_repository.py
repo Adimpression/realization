@@ -62,11 +62,14 @@ def _revision_and_artifact(
     parents: tuple[str, ...] = (),
     attempt_id: str = "attempt-1",
     expected_head_revision_id: str | None = None,
+    scope_id: str = "scope-1",
+    objective_id: str = "objective-1",
+    branch_id: str = "main",
 ) -> tuple[Revision, TransitionArtifact]:
     identity = ResumptionIdentity(
-        scope_id="scope-1",
-        objective_id="objective-1",
-        branch_id="main",
+        scope_id=scope_id,
+        objective_id=objective_id,
+        branch_id=branch_id,
         revision_id=revision_id,
         state_digest=state.digest,
     )
@@ -483,6 +486,48 @@ class ResumptionRepositoryTests(unittest.TestCase):
         )
         self.assertEqual(before, after)
         self.assertEqual((), self.repository.verify_integrity())
+
+    def test_branch_graph_is_confined_to_the_authorized_scope(self) -> None:
+        self._running_attempt("attempt-1")
+        first, first_artifact = _revision_and_artifact(
+            revision_id="revision-scope-1",
+            artifact_id="transition-scope-1",
+            state=_state("scope-1"),
+            attempt_id="attempt-1",
+            scope_id="scope-1",
+        )
+        self.repository.commit_revision(
+            first,
+            first_artifact,
+            expected_head_revision_id=None,
+            attempt_id="attempt-1",
+        )
+        self._running_attempt("attempt-2")
+        second, second_artifact = _revision_and_artifact(
+            revision_id="revision-scope-2",
+            artifact_id="transition-scope-2",
+            state=_state("scope-2"),
+            attempt_id="attempt-2",
+            scope_id="scope-2",
+        )
+        self.repository.commit_revision(
+            second,
+            second_artifact,
+            expected_head_revision_id=None,
+            attempt_id="attempt-2",
+        )
+
+        graph = self.repository.branch_graph("scope-1", "objective-1")
+
+        self.assertEqual("scope-1", graph["scope_id"])
+        self.assertEqual(
+            ["revision-scope-1"],
+            [record["revision_id"] for record in graph["revisions"]],
+        )
+        self.assertEqual(
+            ["revision-scope-1"],
+            [record["revision_id"] for record in graph["heads"]],
+        )
 
     def test_replay_reproduces_the_decision_flow_signature(self) -> None:
         self._running_attempt()

@@ -631,6 +631,9 @@ class ResumptionService:
                     ),
                 )
             )
+        proposal: ReductionProposal | None = None
+        decision: AdmissionDecision | None = None
+        reconciliation: dict[str, Any] = {}
         try:
             candidate, reconciliation = self._apply_delta(
                 empty,
@@ -653,13 +656,14 @@ class ResumptionService:
             with performance.measure(
                 "verification_and_admission_latency_ns"
             ):
-                decision = self.admission_evaluator(
+                decision = self._evaluate_admission(
                     OperationKind.START,
                     None,
                     request.initial_inlet,
                     candidate,
                     dict(request.governance_policy),
                     dict(request.execution_policy),
+                    scope_id=request.scope_id,
                 )
             if decision.disposition is not AdmissionDisposition.ACCEPTED:
                 raise TransitionValidationError(decision.rationale)
@@ -682,13 +686,14 @@ class ResumptionService:
             with performance.measure(
                 "verification_and_admission_latency_ns"
             ):
-                decision = self.admission_evaluator(
+                decision = self._evaluate_admission(
                     OperationKind.START,
                     None,
                     request.initial_inlet,
                     candidate,
                     dict(request.governance_policy),
                     dict(request.execution_policy),
+                    scope_id=request.scope_id,
                 )
             if decision.disposition is not AdmissionDisposition.ACCEPTED:
                 raise TransitionValidationError(decision.rationale)
@@ -701,9 +706,14 @@ class ResumptionService:
                 projection=None,
                 outcome=exc.outcome,
                 rationale=str(exc),
+                proposal=proposal,
+                admission=decision,
+                reconciliation=reconciliation,
                 performance=performance,
             )
 
+        assert proposal is not None
+        assert decision is not None
         self._raise_if_stopped(should_stop)
         outcome = proposal.semantic_outcome or _infer_semantic_outcome(candidate)
         revision, artifact = self._revision_and_artifact(
@@ -757,10 +767,10 @@ class ResumptionService:
         )
         return self._attach_performance(
             AttemptWorkResult(
-            semantic_outcome=outcome.value,
-            latest_admitted_revision_id=revision.identity.revision_id,
-            transition_artifact_references=(artifact.artifact_id,),
-            payload={"resumption_result": public},
+                semantic_outcome=outcome.value,
+                latest_admitted_revision_id=revision.identity.revision_id,
+                transition_artifact_references=(artifact.artifact_id,),
+                payload={"resumption_result": public},
             ),
             performance,
             proposal,
@@ -803,6 +813,9 @@ class ResumptionService:
             ),
         )
 
+        proposal: ReductionProposal | None = None
+        admission: AdmissionDecision | None = None
+        reconciliation: dict[str, Any] = {}
         try:
             self._validate_operation_request(request, source)
             target, parent_ids, expected_head = self._candidate_for_request(
@@ -825,15 +838,17 @@ class ResumptionService:
             with performance.measure(
                 "verification_and_admission_latency_ns"
             ):
-                inlet_admission = self.admission_evaluator(
+                inlet_admission = self._evaluate_admission(
                     request.operation,
                     source,
                     request.inlet,
                     candidate,
                     dict(request.governance_policy),
                     dict(request.execution_policy),
+                    scope_id=source.identity.scope_id,
                 )
             if inlet_admission.disposition is not AdmissionDisposition.ACCEPTED:
+                admission = inlet_admission
                 raise TransitionValidationError(inlet_admission.rationale)
             self._raise_if_stopped(should_stop)
             if request.operation in {
@@ -872,13 +887,14 @@ class ResumptionService:
             with performance.measure(
                 "verification_and_admission_latency_ns"
             ):
-                admission = self.admission_evaluator(
+                admission = self._evaluate_admission(
                     request.operation,
                     source,
                     request.inlet,
                     candidate,
                     dict(request.governance_policy),
                     dict(request.execution_policy),
+                    scope_id=source.identity.scope_id,
                 )
             if admission.disposition is not AdmissionDisposition.ACCEPTED:
                 raise TransitionValidationError(admission.rationale)
@@ -891,9 +907,14 @@ class ResumptionService:
                 projection=projection,
                 outcome=exc.outcome,
                 rationale=str(exc),
+                proposal=proposal,
+                admission=admission,
+                reconciliation=reconciliation,
                 performance=performance,
             )
 
+        assert proposal is not None
+        assert admission is not None
         state_changed = candidate.digest != source.state.digest
         forced_outcome = reconciliation.get("forced_semantic_outcome")
         outcome = (
@@ -904,15 +925,15 @@ class ResumptionService:
         if not state_changed:
             return self._attach_performance(
                 self._unchanged_work_result(
-                attempt=attempt,
-                source=source,
-                operation=request.operation,
-                inlet=request.inlet,
-                projection=projection,
-                outcome=outcome,
-                reconciliation=reconciliation,
-                admission=admission,
-                proposal=proposal,
+                    attempt=attempt,
+                    source=source,
+                    operation=request.operation,
+                    inlet=request.inlet,
+                    projection=projection,
+                    outcome=outcome,
+                    reconciliation=reconciliation,
+                    admission=admission,
+                    proposal=proposal,
                 ),
                 performance,
                 proposal,
@@ -971,19 +992,19 @@ class ResumptionService:
         )
         return self._attach_performance(
             AttemptWorkResult(
-            semantic_outcome=outcome.value,
-            latest_admitted_revision_id=revision.identity.revision_id,
-            proposal_references=proposal.proposal_references,
-            receipt_references=tuple(
-                dict.fromkeys(
-                    (
-                        *proposal.capability_receipt_references,
-                        *proposal.effect_receipt_references,
+                semantic_outcome=outcome.value,
+                latest_admitted_revision_id=revision.identity.revision_id,
+                proposal_references=proposal.proposal_references,
+                receipt_references=tuple(
+                    dict.fromkeys(
+                        (
+                            *proposal.capability_receipt_references,
+                            *proposal.effect_receipt_references,
+                        )
                     )
-                )
-            ),
-            transition_artifact_references=(artifact.artifact_id,),
-            payload={"resumption_result": public},
+                ),
+                transition_artifact_references=(artifact.artifact_id,),
+                payload={"resumption_result": public},
             ),
             performance,
             proposal,
@@ -2628,7 +2649,10 @@ class ResumptionService:
                 ),
             }
         if view is InspectionView.BRANCH_GRAPH:
-            return self.repository.branch_graph(revision.identity.objective_id)
+            return self.repository.branch_graph(
+                revision.identity.scope_id,
+                revision.identity.objective_id,
+            )
         if view is InspectionView.TRANSITION:
             artifact = self.repository.load_transition_artifact(
                 revision.transition_artifact_id
@@ -2712,6 +2736,57 @@ class ResumptionService:
             raise PermissionError(
                 f"principal {request.principal!r} cannot inspect this scope"
             )
+
+    @staticmethod
+    def _scope_admission_decision(
+        scope_id: str,
+        governance_policy: dict[str, Any],
+    ) -> AdmissionDecision | None:
+        allowed = set(governance_policy.get("allowed_scope_ids", ()))
+        if allowed and scope_id not in allowed:
+            return AdmissionDecision(
+                disposition=AdmissionDisposition.REJECTED,
+                rationale="the transition scope is not authorized",
+                checks={
+                    "scope_authorized": False,
+                    "scope_id": scope_id,
+                },
+            )
+        return None
+
+    def _evaluate_admission(
+        self,
+        operation: OperationKind,
+        source: Revision | None,
+        inlet: ContinuationInlet | None,
+        candidate: SemanticState,
+        governance_policy: dict[str, Any],
+        execution_policy: dict[str, Any],
+        *,
+        scope_id: str,
+    ) -> AdmissionDecision:
+        scope_rejection = self._scope_admission_decision(
+            scope_id,
+            governance_policy,
+        )
+        if scope_rejection is not None:
+            return scope_rejection
+        decision = self.admission_evaluator(
+            operation,
+            source,
+            inlet,
+            candidate,
+            governance_policy,
+            execution_policy,
+        )
+        return replace(
+            decision,
+            checks={
+                **dict(decision.checks),
+                "scope_authorized": True,
+                "scope_id": scope_id,
+            },
+        )
 
     @staticmethod
     def _default_admission_evaluator(
