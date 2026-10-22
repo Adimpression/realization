@@ -12,6 +12,8 @@ This is a normative implementation design derived from:
 - [Event Bus](EVENT_BUS.md)
 - [Open Governance](OPEN_GOVERNANCE.md)
 - [Six-Layer Architecture](6-LAYER_ARCHITECTURE.md)
+- [Module Ownership Map](MODULES.md)
+- [Architecture Boundary Controls](architecture/README.md)
 
 It is not a description of the implementation present when this document was
 written. In particular, implementation changes made on 22 October 2026 are
@@ -53,6 +55,18 @@ The implementation must make a resumed reduction correct even when every model
 session, process, cache, and presentation surface from the earlier reduction has
 disappeared.
 
+This design also covers four distinct events at the inter-reduction boundary:
+
+- interruption, which stops active execution without itself changing semantic
+  state;
+- augmentation, which proposes additive semantic material;
+- redirection, which establishes a changed intended direction;
+- and realignment, which reconciles current state and non-achievedness with an
+  established redirection.
+
+These are not aliases for resumption. They constrain what a later resumption is
+allowed to resume.
+
 ## Governing Invariants
 
 1. History records what occurred.
@@ -77,6 +91,20 @@ disappeared.
 17. Authority and host capabilities are reevaluated at continuation time.
 18. Guarantees within one reduction cross into another only through an explicit
     inter-reduction contract.
+19. Interruption changes execution status, not achieved state,
+    non-achievedness, direction, or branch identity.
+20. Unfinished or merely proposed work at an interruption boundary is not
+    promoted into current state.
+21. Augmentation is additive and cannot silently withdraw, replace, invalidate,
+    or redirect existing material.
+22. Once redirection is established, unchanged continuation under the prior
+    direction is prohibited until realignment has been admitted.
+23. Realignment explicitly classifies affected material as retained,
+    superseded, introduced, or unresolved in applicability.
+24. Uncertain applicability remains non-achievedness; it is not resolved by
+    retrieval rank, transcript proximity, or model confidence.
+25. Execution-attempt status and semantic-revision status remain separately
+    representable.
 
 ## Semantic Identity
 
@@ -101,6 +129,18 @@ it does not infer scope from conversational similarity.
 
 The objective identifies the continuing governed realization, independently of
 how many reductions, user turns, pauses, or model invocations have occurred.
+
+A redirection does not silently mutate this identity. Realignment determines
+whether the redirected work:
+
+- remains the same objective under a revised direction;
+- becomes a causally derived objective with a new identity;
+- or branches as an alternative direction from the prior revision.
+
+If the constitutive meaning of the objective or scope changes, a new objective
+or scope identity is required. The prior identity remains a causal ancestor.
+This determination is governed and explicit; semantic similarity cannot make
+it on its own.
 
 ### Branch Identity
 
@@ -135,7 +175,11 @@ realization:
 - blockers, conflicts, and unknowns;
 - admitted evidence and support relationships;
 - current commitments;
+- the currently governing direction, including applicable objective, scope,
+  constraints, and required outcome;
 - supersession and contradiction relationships;
+- admitted redirection and realignment records that affect the current state;
+- unresolved applicability created by realignment;
 - active `HoldOn` conditions;
 - relevant capability and ability declarations;
 - subject or scope imports and version pins;
@@ -167,6 +211,56 @@ A revision is created only after the proposed state transition has been
 verified and admitted. Failed, rejected, expired, or ambiguous attempts produce
 receipts but do not masquerade as committed revisions.
 
+Interruption alone never creates a semantic revision. The current branch head
+remains the latest admitted revision, including any independently admitted
+transition committed before the interruption. Work that was generated but not
+admitted remains attempt provenance, not current state.
+
+A redirection and its realignment commit as one governed semantic transition.
+The resulting revision may contain unresolved applicability as explicit
+non-achievedness, but it cannot leave the old frontier active as though the
+redirection had not occurred.
+
+## Execution Attempt Model
+
+An execution attempt is the operational episode during which a prepared
+reduction is advanced. It is not the semantic object being resumed.
+
+```text
+ExecutionAttempt =
+  <attempt identity,
+   causal anchor,
+   operation,
+   execution policy,
+   lifecycle status,
+   externalized proposal and receipt references,
+   latest admitted revision reference>
+```
+
+Attempt identity is provenance, not causal identity. It cannot replace scope,
+objective, branch, or revision identity.
+
+An attempt lifecycle distinguishes at least:
+
+- prepared;
+- running;
+- interrupted;
+- terminated after a semantic outcome;
+- and operationally failed.
+
+An interruption record identifies the attempt, the causal anchor, the latest
+admitted revision known at the boundary, the stopping cause when known, and
+references to any externalized unfinished proposals. It does not serialize
+private reasoning or infer state from a partially emitted answer.
+
+Attempt artifacts remain addressable from history and path inspection as
+non-state operational episodes. They are never projected as accepted semantic
+steps merely because they occurred.
+
+If a process disappears before recording an interruption, correctness is still
+preserved: the immutable revision repository and branch head remain
+authoritative, and any uncommitted work remains non-state.
+
 ## Resumption Projection
 
 The next reduction does not consume all durable material indiscriminately. It
@@ -182,6 +276,10 @@ The projection contains:
 - every live non-achievedness relevant to the objective;
 - active refinement relationships needed to interpret that non-achievedness;
 - blockers, conflicts, certainty, and commitments;
+- the currently governing direction;
+- any admitted redirection and realignment dispositions affecting the current
+  objective;
+- unresolved applicability that must remain non-achievedness;
 - active `HoldOn` records;
 - supersession status;
 - supporting provenance references;
@@ -205,6 +303,10 @@ completeness record declares what is referenced and why.
 
 The full reduction path is added only when the operation requires explanation,
 verification, reversal, correction, merge, or reconstruction.
+
+Uncommitted work from an interrupted attempt is never included as achieved
+state. It may be retrieved as clearly typed proposal provenance when a later
+operation explicitly elects to reconsider it.
 
 ## Continuation Inlet
 
@@ -241,6 +343,20 @@ An inlet can propose:
 
 An inlet does not become current state by arrival alone.
 
+The inlet relationship is explicit. At minimum, the resumption contract
+distinguishes:
+
+- `continuation`, which proceeds under the current governing direction;
+- `augmentation`, which adds semantic material without implied withdrawal;
+- `redirection`, which proposes a changed objective, scope, constraint set, or
+  required outcome;
+- `correction`, which proposes explicit supersession;
+- and `hold_satisfaction`, which addresses a specific `HoldOn` predicate.
+
+These relationships cannot be inferred solely from where a message appears in
+a transcript. If the relationship is materially ambiguous, that ambiguity is
+resolved before state mutation or remains non-achievedness.
+
 ## Resumption Operations
 
 ### Start
@@ -257,11 +373,45 @@ its governed resume predicate.
 The new invocation is operationally distinct, while the semantic thread remains
 continuous.
 
+### Resume After Interruption
+
+This operation starts a new execution attempt from the latest admitted revision
+of an interrupted attempt. It does not require or satisfy a `HoldOn` predicate,
+because interruption alone did not create a semantic suspension.
+
+By default, unfinished proposals from the interrupted attempt are not active
+context. A caller may explicitly select them for governed reconsideration as
+proposal provenance. If the causal branch head has moved, ordinary stale-anchor
+and branch rules apply.
+
 ### Continue Objective
 
 This operation begins a new reduction from the current state of the same
 objective. It may preserve state, add non-achievedness, or refine existing
 non-achievedness.
+
+### Augment Objective
+
+This operation submits an explicitly additive inlet. Reconciliation may admit
+new evidence, achieved material, or non-achievedness, and may expose a conflict
+that requires later work. It cannot remove or supersede existing current
+material unless a separate correction or redirection relationship is proposed
+and admitted.
+
+### Redirect And Realign
+
+This operation proposes a new governing direction and computes the governed
+realignment required before further reduction. It produces an explicit
+identity disposition and classifies affected state and non-achievedness as:
+
+- retained;
+- superseded from active state;
+- introduced;
+- or unresolved in applicability.
+
+The operation commits the redirection and realignment atomically. A result with
+unresolved applicability is valid only when that uncertainty is represented as
+non-achievedness and the old frontier is not allowed to continue unchanged.
 
 ### Derive Objective
 
@@ -336,6 +486,26 @@ Every evaluation yields one explicit disposition:
 Only the non-achievedness made eligible by the satisfied condition enters the
 new active frontier. Unrelated suspended state remains suspended.
 
+### Interruption Is Not HoldOn
+
+`HoldOn` is a governed semantic state that preserves unfinishedness under an
+explicit resume predicate. Interruption is an operational event that stops an
+attempt. Therefore:
+
+- interruption does not synthesize a `HoldOn`;
+- a `HoldOn` can remain active across one or more interruptions;
+- resuming an interrupted attempt does not satisfy a `HoldOn`;
+- and converting interrupted work into a semantic suspension requires a
+  separate admitted transition.
+
+This distinction prevents process control, cancellation, or host loss from
+silently changing the semantic state of the objective.
+
+A request to abandon, terminate, or replace the objective is therefore not
+modeled as interruption alone. It is a separate governed semantic operation,
+potentially a redirection or terminal transition, with its own admission and
+provenance.
+
 ## Inlet Reconciliation
 
 Reconciliation compares the inlet with the anchored projection and produces a
@@ -357,6 +527,82 @@ Reconciliation determines whether the inlet:
 If more than one interpretation remains materially plausible, reconciliation
 emits ambiguity as non-achievedness or requests clarification. It does not
 select an interpretation from transcript proximity.
+
+Augmentation reconciliation is monotonic with respect to existing current
+material: it can add candidates, evidence, conflicts, and non-achievedness, but
+cannot classify existing material as withdrawn or superseded merely because the
+new material differs from it.
+
+Redirection reconciliation is not complete until realignment has accounted for
+the affected semantic basis.
+
+## Realignment Contract
+
+Realignment is a governed reconciliation result, not a text rewrite and not a
+fresh prompt assembled without causal state.
+
+```text
+Realignment =
+  <source revision,
+   redirection inlet,
+   affected scope,
+   identity disposition,
+   retained set,
+   superseded set,
+   introduced set,
+   unresolved-applicability set,
+   resulting non-achievedness,
+   evidence and governance references,
+   completeness statement>
+```
+
+For every item in the affected current achieved state and current
+non-achievedness, the realignment records exactly one carry-forward
+disposition:
+
+- **retained** means evidence establishes continued applicability;
+- **superseded** means evidence establishes that the item no longer governs
+  active state under the new direction;
+- **unresolved** means available evidence does not establish applicability.
+
+The **introduced** set separately records semantic material that did not exist
+in the source revision and is proposed by the redirection or its
+reconciliation.
+
+The carry-forward disposition sets are mutually exclusive and exhaustive over
+the affected source material. Introduced identities cannot simultaneously be
+classified as source material. The completeness statement proves that all
+affected material was considered directly or through a stable bounded
+reference. Material outside the affected scope remains current only when that
+non-impact is explicit in the realignment basis.
+
+Superseded material remains in provenance and path history. Unresolved material
+becomes non-achievedness and cannot participate as an assumed current fact.
+Introduced material in a realignment candidate remains proposed until
+independently verified and admitted under its proper semantic kind. Once the
+transition commits, admitted introduced material becomes current according to
+that kind.
+
+Identity disposition is part of realignment. It explicitly records whether the
+result continues the same objective, derives a new objective or scope identity,
+or creates a branch. A change to constitutive identity cannot be hidden inside
+ordinary revision metadata.
+
+The controller may use deterministic rules, explicit relationships, and
+advisory model proposals to construct a realignment candidate. Governance and
+verification admit the result. Retrieval similarity can nominate evidence but
+cannot decide a disposition.
+
+### Redirection Is Not Correction
+
+Correction asserts that identified current material should be replaced or
+invalidated. Redirection changes what the reduction is directed toward even
+when prior material was valid under the former direction.
+
+Accordingly, a realignment supersession means that material no longer governs
+active state under the redirected objective. It does not, by itself, assert
+that the material was false. If both truth correction and directional change
+are required, the transition records both relationships explicitly.
 
 ## Correction And Supersession
 
@@ -400,6 +646,17 @@ caller may then request:
 
 The system never applies last-write-wins silently.
 
+Interruption does not advance the branch head. A late result from an interrupted
+attempt may not commit merely because it eventually finishes. It must still
+pass attempt-lifecycle checks and compare-and-swap against the exact expected
+head.
+
+Augmentation and redirection are anchored to exact revisions. If a redirection
+realigns a branch while an older continuation is in flight, the older
+continuation becomes stale for that branch. It may be abandoned, reconciled
+against the new head, or preserved as an explicit branch; it cannot overwrite
+the realigned state.
+
 ## Transition Admission
 
 The reconciled candidate transition is admitted only after governance evaluates:
@@ -414,6 +671,18 @@ The reconciled candidate transition is admitted only after governance evaluates:
 - policy and approval state;
 - current capability availability;
 - and requested authority.
+
+For augmentation, admission also verifies that no existing state is silently
+withdrawn or superseded.
+
+For redirection, admission also verifies:
+
+- that the new direction is explicit;
+- that identity impact is resolved or represented as non-achievedness;
+- that every affected item has a realignment disposition;
+- that retained and superseded classifications have evidence;
+- that unresolved applicability remains non-achievedness;
+- and that unchanged continuation under the prior direction is disabled.
 
 Admission can accept, reject, narrow, hold, or require clarification. An LLM
 assessment can be evidence for this evaluation but cannot perform admission.
@@ -436,9 +705,30 @@ The runtime does not decide which historical conversation is relevant, which
 revision is causal, whether a correction supersedes state, or whether a waiting
 condition has been satisfied.
 
-## Artifact-Mediated Transition Verification
+The runtime may observe a stop signal or loss of execution capacity and return
+an interrupted attempt outcome. It does not reinterpret that outcome as
+`HoldOn`, incompletion, failure of the objective, redirection, or state change.
+The controller and repository preserve the latest admitted revision and record
+the attempt boundary separately.
 
-Every attempted transition emits an inspectable transition artifact containing:
+After an admitted redirection, the runtime receives only the realigned frontier.
+It must not continue an already prepared frontier derived from the prior
+direction.
+
+## Artifact-Mediated Attempt And Transition Verification
+
+Every execution attempt emits an inspectable attempt artifact containing:
+
+- attempt identity and lifecycle status;
+- exact causal anchor and initial branch-head digest;
+- operation and execution policy;
+- externalized proposal and receipt references;
+- interruption cause and boundary, when known;
+- latest admitted revision observed by the attempt;
+- and any semantic transition-artifact references produced by the attempt.
+
+Every proposed semantic transition emits an inspectable transition artifact
+containing:
 
 - source identity and revision digest;
 - projection policy, projection digest, and completeness statement;
@@ -452,6 +742,11 @@ Every attempted transition emits an inspectable transition artifact containing:
 - execution outcome;
 - resulting revision identity and digest, when committed;
 - and a decision-flow signature.
+
+An interrupted attempt with no admitted semantic transition has an attempt
+artifact but no resulting semantic revision. Externalized unfinished proposals
+remain visibly typed as proposals. Private or partially emitted model reasoning
+is neither reconstructed nor promoted into the artifact.
 
 The transition artifact is verified independently of the generator that
 proposed the transition. A successful verification does not imply that internal
@@ -472,6 +767,9 @@ An LLM may:
 An LLM may not:
 
 - choose causal identity by semantic resemblance;
+- decide that an interruption changed semantic state;
+- silently reinterpret augmentation as correction or redirection;
+- authoritatively classify realignment dispositions;
 - turn transcript text into state without admission;
 - establish that a `HoldOn` predicate is satisfied merely by assertion;
 - grant authority;
@@ -494,6 +792,7 @@ Retrieval does not establish:
 - which objective is being continued;
 - whether an artifact is true;
 - whether an artifact remains admissible;
+- whether existing material remains applicable after redirection;
 - whether a correction is valid;
 - whether authority exists;
 - or whether a transition may commit.
@@ -535,21 +834,43 @@ The revision repository must support:
 - parent and child traversal;
 - branch-head lookup;
 - atomic compare-and-swap branch-head update;
+- admitted redirection and realignment traversal;
+- realignment disposition and completeness verification;
 - transition-artifact append;
 - provenance and supersession traversal;
 - deterministic state and projection digest verification;
 - and reconstruction without model-provider state.
 
+The persistence boundary must also support an attempt journal that is distinct
+from semantic revisions. It records attempt lifecycle, interruption, and links
+to externalized proposals, transition artifacts, and the latest admitted
+revision. Recording an attempt does not update a semantic branch head.
+
+The prepared attempt record is durable before runtime execution begins.
+Terminal lifecycle updates are conditional on the current attempt status. If a
+worker disappears, recovery can observe and close the abandoned operational
+episode without inferring a semantic outcome or changing the branch head.
+
 The repository commits the new revision, transition artifact, and branch-head
 change atomically. A partial commit is not visible as a valid continuation.
+
+For redirection, that atomic unit also contains the admitted realignment and its
+identity disposition. For interruption, the durable unit is only the attempt
+record and related receipts unless an independent semantic transition had
+already committed.
 
 Derived indexes, caches, search vectors, and materialized views are rebuildable.
 They are not canonical state.
 
 ## Event Delivery
 
-Events are emitted only after authoritative commit. An event identifies the
-committed revision and allows subscribers to reread their projections.
+Semantic-state events are emitted only after authoritative revision commit. An
+event identifies the committed revision and allows subscribers to reread their
+projections.
+
+Attempt-lifecycle notifications, including interruption, may be emitted only
+after the corresponding attempt record is durable. They identify an attempt and
+its observed branch head, but never claim that semantic state changed.
 
 Correctness must survive:
 
@@ -568,6 +889,7 @@ The active context for a reduction is assembled from:
 
 - the resumption projection;
 - the admitted inlet relationship;
+- the admitted governing direction and any realignment disposition;
 - retrieved candidate artifacts kept distinct from admitted state;
 - currently available capabilities;
 - and the execution policy for the reduction.
@@ -579,6 +901,12 @@ The path taken so far is included only when required by the operation. Ordinary
 continuation does not require replay of the path once its admitted result is
 represented in current state.
 
+Resume-after-interruption begins from the latest admitted revision. Unfinished
+proposal artifacts from the interrupted attempt are excluded unless the caller
+explicitly selects them for governed reconsideration. After redirection, no
+cached or previously assembled context from the prior direction is reusable
+without reconstruction against the realigned revision.
+
 ## Cache Semantics
 
 Caching is optional and cannot affect correctness.
@@ -588,6 +916,7 @@ A reusable proposal cache key includes at least:
 - exact projection digest;
 - inlet digest;
 - operation kind;
+- governing-direction and realignment digest;
 - proposal schema and prompt version;
 - model and provider identity;
 - and relevant governance posture.
@@ -601,6 +930,10 @@ different revision.
 ### Runtime And Skill Execution
 
 - Advance an already prepared active reduction.
+- Own the dependency-inverted execution-attempt lifecycle and observe stop
+  signals without assigning them semantic meaning.
+- Return an explicit interrupted-attempt outcome when execution stops before a
+  semantic disposition.
 - Execute mechanically bound host realizers under current authority.
 - Return effect results and receipts.
 - Own no transcript, causal routing, revision selection, or state admission.
@@ -611,14 +944,19 @@ different revision.
 - Construct projections.
 - Reconcile inlets with current state.
 - Govern active non-achievedness and reduction flow.
-- Represent correction, supersession, branching, and merge semantics.
+- Represent correction, supersession, branching, merge, augmentation,
+  redirection, and realignment semantics.
+- Construct only a realigned frontier after an admitted redirection.
 - Prepare the frontier supplied to the runtime.
 
 ### Governance
 
 - Evaluate admission, policy, lifecycle, approval, revocation, freshness, and
   current-use authority.
-- Record decisions in transition artifacts.
+- Evaluate realignment evidence, completeness, identity impact, and authority.
+- Return inspectable decisions for inclusion in applicable transition
+  artifacts; interruption without semantic change requires no fabricated
+  admission decision.
 
 ### LLM
 
@@ -630,6 +968,8 @@ different revision.
 - Own sessions, transcripts, user interaction, and presentation.
 - Let the user select or confirm a causal objective when necessary.
 - Submit explicit identities and inlets through the application contract.
+- Submit interruption requests against attempt identity rather than pretending
+  that cancellation is a semantic inlet.
 - Render structured outcomes without converting rendered prose back into state.
 
 ### Entry And Exchange
@@ -637,6 +977,8 @@ different revision.
 - Compose repository, governance, controller, runtime, model, and host
   implementations.
 - Expose ingress, export, inspection, and administrative surfaces.
+- Route conversation turns, interruption controls, and typed continuation
+  operations without making transcript order a causal-state contract.
 
 ### Shared Host Interaction Substrate
 
@@ -644,6 +986,24 @@ different revision.
   and effect receipts.
 - Remain below both controller and workstation without absorbing either one's
   responsibilities.
+
+### Package Boundary Placement
+
+- `realized-core-runtime` owns only the dependency-inverted attempt lifecycle
+  and protocols for prepared state, interruption observation, closure,
+  finalization, and persistence adapters.
+- `realized-core-engine` owns the canonical semantic implementation: identity,
+  projection, reconciliation, realignment, governance integration, state model,
+  and plain-SQLite adapters exposed through its public typed ABI.
+- `realized-core` owns CLI and conversation-host composition, including mapping
+  user controls and turns to typed engine operations.
+- workstation shells and transports consume supported application contracts;
+  they do not import controller internals or infer state from rendered panes.
+
+This placement preserves the allowed dependency direction. The runtime package
+does not depend on engine, entry, workstation, model-provider, or storage
+implementations. The engine does not acquire transcript ownership. Entry and
+workstation layers remain replaceable hosts over the same semantic contract.
 
 ## Application Contract
 
@@ -665,12 +1025,42 @@ continuation commands.
 - projection policy;
 - governance and execution policy.
 
+The operation kind distinguishes ordinary continuation, resume after
+interruption, suspended-objective resumption, augmentation, correction,
+redirection with realignment, branching, and merge. An inlet is optional only
+where the operation is semantically valid without one, such as restarting
+execution from an unchanged admitted revision after interruption.
+
+### Interruption Request
+
+- exact execution-attempt identity;
+- requesting principal and authority context when user initiated;
+- reason or cause when known;
+- and correlation metadata.
+
+An interruption request targets execution, not a semantic revision. Its result
+reports whether the attempt was stopped or had already terminated; it does not
+claim semantic mutation.
+
+### Interruption Result
+
+- exact execution-attempt identity;
+- observed prior and resulting attempt lifecycle status;
+- whether stop was accepted, already complete, or not applicable;
+- latest admitted revision and branch head observed;
+- attempt-artifact reference;
+- and explicit confirmation that no semantic revision was created by the
+  interruption itself.
+
 ### Resumption Result
 
 - source revision identity;
-- outcome;
+- execution-attempt outcome;
+- semantic outcome when one was established;
 - resulting revision identity when committed;
-- transition-artifact reference;
+- transition-artifact reference when a transition was proposed;
+- attempt-artifact reference;
+- realignment summary and identity disposition when applicable;
 - current achieved-state summary;
 - current non-achievedness summary;
 - active `HoldOn` summary;
@@ -679,16 +1069,26 @@ continuation commands.
 
 ### Inspection Request
 
-- exact revision or branch-head identity;
-- requested view: current state, non-achievedness, path, provenance, transition,
-  branch graph, or reconstruction data.
+- exact revision, branch-head, or execution-attempt identity;
+- requested view: current state, non-achievedness, governing direction,
+  realignment, path, provenance, attempt, transition, branch graph, or
+  reconstruction data.
 
 The transport may be an in-process interface, command line, RPC, or another
 mechanism. Transport does not alter semantics.
 
 ## Outcome Model
 
-An invocation concludes with one explicit outcome:
+Execution-attempt outcome and semantic outcome are separate.
+
+An execution attempt concludes as one of:
+
+- `terminated`: it reached a governed semantic disposition;
+- `interrupted`: execution stopped without interruption itself changing state;
+- `operationally_failed`: infrastructure or execution failed before a semantic
+  disposition could be established.
+
+When an attempt reaches a semantic disposition, that disposition is one of:
 
 - `completed`: the active objective is achieved under governance;
 - `paused`: a durable `HoldOn` governs continuation;
@@ -700,6 +1100,15 @@ An invocation concludes with one explicit outcome:
 - `expired`: the continuation condition expired;
 - `failed`: execution or verification failed;
 - `exhausted`: the bounded reduction ended without another semantic outcome.
+
+`interrupted` is intentionally absent from the semantic list. It reports what
+happened to execution, not what is achieved or non-achieved. An interrupted
+attempt can cite the latest admitted revision but cannot create one solely to
+record interruption.
+
+`operationally_failed` means no semantic failure disposition was established.
+The semantic `failed` outcome is used only when failure itself was externally
+represented, verified, and governed as the disposition of the reduction.
 
 A valid conversational response may accompany any outcome. The response does
 not alter the outcome or imply objective closure.
@@ -714,7 +1123,9 @@ final answer. The replay record includes:
 - frontier selections;
 - retrieved candidate sets and ordering;
 - proposal request and response receipts;
+- attempt lifecycle and interruption records;
 - governance and admission decisions;
+- redirection and realignment dispositions;
 - `HoldOn` decisions;
 - capability and effect receipts;
 - pause, failure, and commitment decisions;
@@ -746,6 +1157,8 @@ The implementation measures independently:
 - revision load latency;
 - projection construction latency;
 - projection size;
+- attempt preparation and interruption latency;
+- realignment construction and verification latency;
 - candidate retrieval latency;
 - proposal latency;
 - verification and admission latency;
@@ -784,6 +1197,29 @@ A conforming implementation demonstrates at least these behaviors:
 19. LLM-enabled replay uses recorded proposal interactions.
 20. Every committed transition has an independently inspectable artifact and
     revision digest.
+21. Interruption without a committed transition leaves achieved state,
+    non-achievedness, direction, and branch head unchanged.
+22. Unfinished proposals from an interrupted attempt do not enter ordinary
+    current-state projection.
+23. Resume after interruption reconstructs from the latest admitted revision,
+    not from hidden process or provider state.
+24. Interruption does not create or satisfy a `HoldOn`.
+25. Augmentation can add material and expose conflict but cannot silently
+    supersede existing state.
+26. Redirection prevents execution of a frontier prepared under the prior
+    direction.
+27. Realignment accounts for every affected item as retained, superseded,
+    introduced, or unresolved.
+28. Retained and superseded dispositions require inspectable support.
+29. Unresolved applicability becomes non-achievedness.
+30. A constitutive objective or scope change receives a new causally linked
+    identity rather than mutating the old identity silently.
+31. A late result from an interrupted or pre-redirection attempt cannot commit
+    over the current branch head.
+32. Attempt records, transition artifacts, and semantic revisions remain
+    distinguishable under inspection and replay.
+33. LLM-off execution can perform identity, augmentation, interruption, and
+    mechanically decidable realignment flows without semantic degradation.
 
 ## Non-Goals
 
@@ -799,12 +1235,18 @@ This design does not:
 - persist native handles or ambient authority;
 - prescribe one database technology or transport;
 - erase history during correction;
+- turn interruption into an implicit pause, failure, or state transition;
+- treat augmentation as implicit withdrawal;
+- continue an old frontier after established redirection;
+- resolve uncertain applicability by similarity or model confidence;
 - or impose a single linear continuation model.
 
 ## Completion Standard
 
 An implementation conforms when every continuation can be reconstructed from
 its explicit causal anchor, admitted state, current non-achievedness,
-provenance, transition artifact, and resulting revision without relying on a
-transcript, hidden model state, provider session, cache, process lifetime, or
-ambient host authority.
+governing direction, provenance, attempt artifact, transition artifact, and
+resulting revision without relying on a transcript, hidden model state,
+provider session, cache, process lifetime, or ambient host authority. It must
+also be possible to prove that interruption alone changed no semantic state and
+that every admitted redirection was followed by an inspectable realignment.

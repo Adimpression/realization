@@ -128,7 +128,112 @@ The projection is therefore not a summary chosen merely to save tokens. It is
 the explicit representation of what the next reduction is entitled to treat as
 current.
 
-## 6. When the path becomes necessary
+## 6. Interruption
+
+Suppose a reduction begins to determine the missing audience. It develops
+`city officials` as a candidate, but processing is interrupted before that
+candidate is validated and admitted.
+
+The interruption does not change the semantic state:
+
+```text
+Current achieved state:
+  project = Cedar
+  color = green
+  deadline = Monday
+
+Current non-achievedness:
+  audience is undetermined
+
+Unfinished work:
+  city officials is an unaccepted candidate audience
+```
+
+The unfinished candidate can remain available in the path and provenance. It
+does not become the current audience, and the missing-audience obligation is not
+discharged. If reduction later resumes without another inlet, it resumes from
+the same achieved state and non-achievedness.
+
+## 7. Augmentation
+
+Before reduction resumes, the next inlet is:
+
+> Also include a budget summary.
+
+This is an augmentation. It adds a requirement without withdrawing the Cedar
+brief, green, Monday, or the unresolved audience:
+
+```text
+Current achieved state:
+  project = Cedar
+  color = green
+  deadline = Monday
+
+Current non-achievedness:
+  audience is undetermined
+  budget summary content is undetermined
+```
+
+The addition may eventually affect layout, evidence needs, or completion. Those
+are consequences to determine separately. They are not implicit withdrawals or
+redirections contained in the augmentation itself.
+
+## 8. Redirection
+
+After that augmentation, suppose another inlet says:
+
+> Instead of a brief, create a launch checklist for Cedar.
+
+This changes the intended direction. Continuing to produce the brief unchanged
+would no longer follow the governing request. But the redirection alone does not
+decide which details of the prior state remain applicable to the checklist.
+
+Before further reduction, the existing achieved state and non-achievedness must
+therefore be reconciled with the launch-checklist direction.
+
+## 9. Realignment
+
+Realignment can immediately establish some relationships:
+
+```text
+Retained:
+  project = Cedar
+
+Superseded active direction:
+  create a brief
+
+Introduced active direction:
+  create a launch checklist
+
+Applicability still undetermined:
+  color = green
+  deadline = Monday
+  audience is undetermined
+  budget summary is required
+```
+
+The redirection does not provide enough evidence to decide whether the
+checklist should remain green, remain due Monday, target an audience, or include
+the budget summary. Realignment must not silently retain or discard those
+details. Their applicability remains non-achievedness.
+
+Suppose a later inlet clarifies:
+
+> Keep Monday and the budget summary, but drop the color and audience
+> requirements.
+
+An accepted realignment can then retain Monday and the budget-summary
+requirement, supersede the active color and audience requirements, and continue
+toward the launch checklist. The prior brief direction, green requirement, and
+audience requirement remain in the path and provenance rather than being
+erased.
+
+The remaining examples return to the Cedar-brief state established at the end
+of Section 4. The launch-checklist sequence is one illustrative continuation
+from that state, not a replacement for the baseline used by every later
+example.
+
+## 10. When the path becomes necessary
 
 The reduction path remains relevant even though it is not ordinarily projected
 as current state.
@@ -158,7 +263,7 @@ ambiguity as non-achievedness rather than guessing from transcript proximity.
 Thus the path supports explanation, verification, reversal, and reconstruction.
 It does not replace current state.
 
-## 7. Turn completion is not objective completion
+## 11. Turn completion is not objective completion
 
 Each correction can receive a valid response:
 
@@ -173,7 +278,7 @@ the audience obligation. A valid resumption must therefore carry forward the
 remaining non-achievedness independently of whether earlier turns were answered
 successfully.
 
-## 8. Presentation is not continuation state
+## 12. Presentation is not continuation state
 
 The system might render the third result as:
 
@@ -187,7 +292,7 @@ The authoritative continuation state is the admitted structured result from
 which the sentence was rendered. Presentation can change without changing what
 has been achieved or what remains non-achieved.
 
-## 9. Branching
+## 13. Branching
 
 Suppose two later inlets continue from the same state revision:
 
@@ -204,7 +309,7 @@ If the technical branch later changes its deadline, that transition belongs to
 that branch unless a governed merge admits it elsewhere. A single linear
 transcript cannot express this distinction reliably by ordering alone.
 
-## 10. Independent continuation
+## 14. Independent continuation
 
 Suppose the next inlet is instead:
 
@@ -218,7 +323,7 @@ Continuation therefore requires explicit identity. Similarity may help locate
 candidate prior state, but it cannot establish the subject, objective, revision,
 and branch to be resumed.
 
-## 11. Loosely chained reductions
+## 15. Loosely chained reductions
 
 Assume each individual reduction correctly enforces admission, supersession,
 provenance, and non-achievedness. Those guarantees still do not automatically
@@ -233,7 +338,7 @@ Local correctness has not composed into end-to-end correctness. Composition
 requires an inter-reduction contract carrying governed state relationships, not
 merely a natural-language handoff.
 
-## 12. What must survive the boundary
+## 16. What must survive the boundary
 
 The scenario shows why a resumable boundary must preserve:
 
@@ -243,6 +348,11 @@ The scenario shows why a resumable boundary must preserve:
 - that green and Monday are currently admitted;
 - that blue and Friday are superseded;
 - that the audience remains non-achieved;
+- where an interruption separated accepted state from unfinished work;
+- which augmentations were added without displacing existing material;
+- which direction currently governs continuation;
+- which prior material was retained or superseded through realignment;
+- which applicability questions remain unresolved;
 - and which provenance supports each transition.
 
 The precise storage representation remains an implementation concern. The
