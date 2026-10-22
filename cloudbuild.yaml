@@ -28,6 +28,8 @@ steps:
         core_engine.tests.test_distribution
         core_app.tests.test_distribution
         core_app.tests.test_chat
+        tests.test_governed_chat_validation
+        tests.test_supplement_provider_compatibility
         tests.test_core_runtime_package_adapter
         tests.test_core_app_cli_equivalence
         tests.test_governed_turn_provider

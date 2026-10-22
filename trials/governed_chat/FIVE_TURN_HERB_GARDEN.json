@@ -1,0 +1,68 @@
+{
+  "scenario_id": "five_turn_herb_garden",
+  "description": "A bounded five-turn conversation that tests instruction following, retained constraints, correction, and final synthesis through explicit governed turn relationships.",
+  "minimum_semantic_score": 1.0,
+  "turns": [
+    {
+      "turn_id": "establish_plan",
+      "treatment": "independent",
+      "prompt": "Help me plan a tiny herb garden. I have a sunny 2m by 1m balcony, only 20 minutes a week, and basil is my favorite. Give me a concise three-bullet plan, and retain every constraint in the answer so we can refine it.",
+      "required_concepts": [
+        {"label": "favorite herb", "any_of": ["basil"]},
+        {"label": "weekly time budget", "any_of": ["20 minutes", "twenty minutes"]},
+        {"label": "sunlight", "any_of": ["sunny", "full sun"]},
+        {"label": "balcony dimensions", "any_of": ["2m by 1m", "2 m by 1 m", "2m x 1m", "2 m x 1 m", "2-by-1"]}
+      ]
+    },
+    {
+      "turn_id": "narrow_choice",
+      "treatment": "follow_up",
+      "prompt": "Reduce the plan to exactly two herbs while keeping my favorite. Restate the complete space, sunlight, and weekly-time constraints in the revised answer.",
+      "required_concepts": [
+        {"label": "favorite herb", "any_of": ["basil"]},
+        {"label": "weekly time budget", "any_of": ["20 minutes", "twenty minutes"]},
+        {"label": "sunlight", "any_of": ["sunny", "full sun"]},
+        {"label": "balcony dimensions", "any_of": ["2m by 1m", "2 m by 1 m", "2m x 1m", "2 m x 1 m", "2-by-1"]},
+        {"label": "two-herb scope", "any_of": ["two herbs", "2 herbs", "two-herb"]}
+      ]
+    },
+    {
+      "turn_id": "recall_constraints",
+      "treatment": "follow_up",
+      "prompt": "Before changing anything else, state the four governing constraints and the two-herb scope in one compact paragraph.",
+      "required_concepts": [
+        {"label": "favorite herb", "any_of": ["basil"]},
+        {"label": "weekly time budget", "any_of": ["20 minutes", "twenty minutes"]},
+        {"label": "sunlight", "any_of": ["sunny", "full sun"]},
+        {"label": "balcony dimensions", "any_of": ["2m by 1m", "2 m by 1 m", "2m x 1m", "2 m x 1 m", "2-by-1"]},
+        {"label": "two-herb scope", "any_of": ["two herbs", "2 herbs", "two-herb"]}
+      ]
+    },
+    {
+      "turn_id": "correct_sunlight",
+      "treatment": "correction",
+      "prompt": "Correction: the balcony gets partial sun, not full sun. Revise the complete two-herb plan while preserving every other constraint.",
+      "required_concepts": [
+        {"label": "favorite herb", "any_of": ["basil"]},
+        {"label": "weekly time budget", "any_of": ["20 minutes", "twenty minutes"]},
+        {"label": "corrected sunlight", "any_of": ["partial sun", "part sun", "partial sunlight"]},
+        {"label": "balcony dimensions", "any_of": ["2m by 1m", "2 m by 1 m", "2m x 1m", "2 m x 1 m", "2-by-1"]},
+        {"label": "two-herb scope", "any_of": ["two herbs", "2 herbs", "two-herb"]}
+      ]
+    },
+    {
+      "turn_id": "final_synthesis",
+      "treatment": "follow_up",
+      "prompt": "Summarize the final plan in two sentences. Include every current constraint and explicitly say that sunlight changed from sunny to partial sun.",
+      "required_concepts": [
+        {"label": "favorite herb", "any_of": ["basil"]},
+        {"label": "weekly time budget", "any_of": ["20 minutes", "twenty minutes"]},
+        {"label": "corrected sunlight", "any_of": ["partial sun", "part sun", "partial sunlight"]},
+        {"label": "original sunlight", "any_of": ["sunny", "full sun"]},
+        {"label": "balcony dimensions", "any_of": ["2m by 1m", "2 m by 1 m", "2m x 1m", "2 m x 1 m", "2-by-1"]},
+        {"label": "two-herb scope", "any_of": ["two herbs", "2 herbs", "two-herb"]},
+        {"label": "explicit change", "any_of": ["changed", "corrected", "instead of", "rather than"]}
+      ]
+    }
+  ]
+}

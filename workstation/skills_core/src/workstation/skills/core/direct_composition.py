@@ -365,7 +365,14 @@ def _skill_action_penalty(*, prompt: str, skill_title: str) -> int:
         "read": ("write text file", "append text file"),
         "write": ("read text file", "read json file", "read csv file"),
     }
-    penalty = 6 if any(marker in lowered_title for marker in conflicting_pairs.get(primary_action, ())) else 0
+    penalty = (
+        6
+        if any(
+            re.search(rf"\b{re.escape(marker)}\b", lowered_title)
+            for marker in conflicting_pairs.get(primary_action, ())
+        )
+        else 0
+    )
     plain_write_literal_match = re.search(r"\bwrite\s+`([^`]+)`", str(prompt), flags=re.IGNORECASE)
     plain_write_literal = collapse_ws(str(plain_write_literal_match.group(1))) if plain_write_literal_match else ""
     writes_plain_text = bool(plain_write_literal) and not plain_write_literal.startswith(("{", "["))

@@ -381,7 +381,15 @@ def ask_llm(
             unsupported_reasoning_effort = (
                 "reasoning_effort" in request_kwargs
                 and "reasoning_effort" in error_text
-                and "unsupported" in error_text
+                and any(
+                    marker in error_text
+                    for marker in (
+                        "unsupported",
+                        "unrecognized request argument",
+                        "unknown parameter",
+                        "not supported",
+                    )
+                )
             )
             if unsupported_reasoning_effort:
                 request_kwargs.pop("reasoning_effort", None)

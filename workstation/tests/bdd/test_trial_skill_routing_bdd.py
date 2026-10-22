@@ -66,6 +66,34 @@ class WorkstationTrialSkillRoutingBDD(unittest.TestCase):
             member_names = archive.getnames()
         self.assertTrue(any(name.endswith("test_architecture_boundaries.py") for name in member_names))
 
+    def test_fresh_bash_bundle_removes_named_file_without_llm(self) -> None:
+        target_path = self.root / "stale.txt"
+        target_path.write_text("remove me\n", encoding="utf-8")
+        prompt = f"Remove `{target_path}`."
+        trials_root = self._trial_root(domain="bash", prompts=(prompt,))
+
+        with patch(
+            "workstation.foundation.host.llm_driver.build_workstation_openai_client",
+            side_effect=AssertionError("the deterministic trial path must not call a provider"),
+        ):
+            report = validate_workstation_trial_domains(
+                domains=("bash",),
+                workspace_path=REPO_ROOT,
+                trials_root=trials_root,
+                report_root=self.root / "bash-remove-report",
+                max_tool_rounds=2,
+            )
+
+        prompt_result = report["domains"][0]["prompt_results"][0]
+        self.assertEqual("ok", prompt_result["status"], msg=prompt_result)
+        self.assertTrue(prompt_result["route"]["used_direct_composition"])
+        self.assertTrue(prompt_result["route"]["used_skill_invoke"])
+        self.assertIn(
+            "Bash Commands 09 — Remove File / Bash Commands 09 Remove File",
+            prompt_result["route"]["invoked_skill_titles"],
+        )
+        self.assertFalse(target_path.exists())
+
     def test_fresh_physics_bundle_routes_conceptual_prompts_to_knowledge(self) -> None:
         prompts = (
             "What distinguishes a scalar quantity from a vector quantity, and how is this represented in the reusable relation?",

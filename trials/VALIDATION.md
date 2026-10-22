@@ -124,6 +124,16 @@ Static sanity check:
 python3 -m py_compile main.py
 ```
 
+Run the five-turn governed conversation characterization trial:
+
+```bash
+uv run --frozen python trials/GOVERNED_CHAT_VALIDATION.py
+```
+
+This trial reports structural governance, deterministic semantic continuity,
+and logical-LLM-request versus controller timing separately. See
+[GOVERNED_CHAT_VALIDATION.md](GOVERNED_CHAT_VALIDATION.md).
+
 Layered acceptance ladder:
 
 ```bash
