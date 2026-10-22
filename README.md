@@ -5,7 +5,7 @@
 ### Governed reduction. Durable artifacts. Inspectable consequences.
 
 <p>
-  <img alt="Status: pre-1.0 research" src="https://img.shields.io/badge/status-pre--1.0_research-D4A72C?style=for-the-badge">
+  <img alt="Status: pre-alpha" src="https://img.shields.io/badge/status-pre--alpha-D4A72C?style=for-the-badge">
   <img alt="Python 3.14" src="https://img.shields.io/badge/python-3.14-1B998B?style=for-the-badge">
   <img alt="Persistence: SQLite" src="https://img.shields.io/badge/persistence-SQLite-0B132B?style=for-the-badge">
   <img alt="License: Apache 2.0" src="https://img.shields.io/badge/license-Apache--2.0-3A506B?style=for-the-badge">
@@ -16,7 +16,7 @@ justified, governed outcomes.**
 
 `Not<X> -> governed reduction -> Is<X>`
 
-[Quick start](#quick-start) |
+[Get things done](#get-things-done) |
 [How it works](#how-it-works) |
 [Current surface](#what-exists-today) |
 [Architecture](#architecture) |
@@ -35,6 +35,24 @@ justified, governed outcomes.**
 > a working subject-to-publication workflow, and machine-enforced architecture
 > boundaries. It is not a claim of AGI, production readiness, empirical proof
 > of the theory, or deterministic behavior from external models.
+
+## Get Things Done
+
+Choose the smallest surface that matches the work:
+
+| Goal | Start here |
+| --- | --- |
+| Answer or calculate from deterministic mechanisms, without a model provider | [Run the standalone core](#run-one-local-task) |
+| Ground a run in facts supplied by a person or another system | [Add evidence](#add-evidence) |
+| Examine or continue a durable run | [Inspect or continue](#inspect-or-continue) |
+| Learn, export, import, and reuse governed artifacts | [Reuse knowledge and abilities](#reuse-knowledge-and-abilities) |
+| Turn source material into a reviewed report | [Workstation and publication](#workstation-and-publication) |
+| Embed only the lifecycle engine in another application | [`core_runtime/`](core_runtime/) and [`core_engine/`](core_engine/) |
+
+Start with `--llm off` unless model assistance is necessary. This gives the
+clearest view of what Realization itself can determine from rules, supplied
+evidence, and admitted artifacts. A run is successful only when its status and
+certainty justify closure; the presence of fluent output alone is not success.
 
 ## The Idea
 
@@ -140,7 +158,9 @@ git clone https://github.com/Adimpression/realization.git
 cd realization
 ```
 
-Run a complete provider-free core cycle:
+### Run one local task
+
+Create a local state directory and run a bounded provider-free request:
 
 ```console
 mkdir -p state
@@ -153,15 +173,70 @@ uv run --frozen --package realized-core realized-core run \
   --llm off
 ```
 
-The command emits a JSON summary and persists both the SQLite-backed artifact
-state and the durable run state. Inspect the saved run without executing it:
+This exact example returns `4` without contacting a model provider. The command
+prints a JSON summary, persists reusable artifacts in SQLite, and writes the
+durable run state to `state/run.json`.
+
+### Read the outcome
+
+Do not evaluate a run from `final_answer` alone. Check these fields together:
+
+| Field | What it tells you |
+| --- | --- |
+| `run_outcome` | Whether the bounded run completed, paused, or remained incomplete |
+| `root.status` | Whether the root `Not<X>` is closed, paused, or still open |
+| `root.certainty` | The certainty attached to the current root state |
+| `final_answer` | The current communicative answer, if one was justified |
+| `development.artifact_persistence` | Whether reusable artifacts were persisted and where |
+| `recent_ledger` | Why the latest transitions, admissions, and commitments occurred |
+
+An incomplete run may still emit a useful candidate answer. That candidate is
+not equivalent to a closed, high-certainty result.
+
+### Add evidence
+
+Evidence is explicit input rather than hidden prompt context. Create
+`state/evidence.json`:
+
+```json
+[
+  {
+    "target": "root",
+    "observation": "The approved budget ceiling is SGD 25,000.",
+    "source": "project charter",
+    "support_strength": "high",
+    "confidence": "high"
+  }
+]
+```
+
+Supply it to a fresh run:
+
+```console
+uv run --frozen --package realized-core realized-core run \
+  --prompt "What is the approved budget ceiling?" \
+  --evidence-file ./state/evidence.json \
+  --sqlite ./state/realization.sqlite3 \
+  --state-out ./state/budget-run.json \
+  --max-steps 24 \
+  --llm off
+```
+
+Evidence participates in governance; it does not force closure. Realization may
+remain incomplete when the supplied observation does not determine the request
+strongly enough.
+
+### Inspect or continue
+
+Inspect a saved state without executing another reduction step:
 
 ```console
 uv run --frozen --package realized-core realized-core inspect \
   --state ./state/run.json
 ```
 
-Resume it through the same governed lifecycle:
+Resume from the durable state, optionally adding new evidence. Reuse the same
+SQLite store so prior artifacts remain available:
 
 ```console
 uv run --frozen --package realized-core realized-core resume \
@@ -171,7 +246,10 @@ uv run --frozen --package realized-core realized-core resume \
   --llm off
 ```
 
-### LLM policy
+Writing resumed state to a new path preserves the prior checkpoint for audit
+or comparison.
+
+### Choose an LLM policy
 
 | Mode | Behavior |
 | --- | --- |
@@ -184,6 +262,12 @@ qualification context permit sending material outside the local process.
 Credential-free templates are provided in
 [`local.env.example`](local.env.example) and
 [`offline.env.example`](offline.env.example).
+
+List every standalone option directly from the installed command:
+
+```console
+uv run --frozen --package realized-core realized-core run --help
+```
 
 ## The Standalone Core
 
@@ -228,6 +312,49 @@ See [`core_app/README.md`](core_app/README.md) for the distribution contract
 and [`scripts/verify_core_distribution.py`](scripts/verify_core_distribution.py)
 for the isolation checks.
 
+## Reuse Knowledge And Abilities
+
+The repository workspace exposes artifact and ability operations that are not
+part of the narrow `realized-core` distribution. Use these commands from a
+checkout when developing, qualifying, or curating reusable material.
+
+Learn governed artifacts from a Markdown document into SQLite:
+
+```console
+uv run --frozen python3 main.py markdown-learn \
+  --markdown-file ./notes.md \
+  --sqlite ./state/realization.sqlite3 \
+  --state-out ./state/learning-run.json \
+  --report-out ./state/learning-report.json \
+  --llm off
+```
+
+Export admitted artifacts as reviewable YAML:
+
+```console
+uv run --frozen python3 main.py artifact-export \
+  --all \
+  --out-dir ./state/exported-artifacts \
+  --sqlite ./state/realization.sqlite3
+```
+
+Import a reviewed artifact directory and run against the resulting store:
+
+```console
+uv run --frozen python3 main.py load-yaml-and-run \
+  --artifact-dir ./state/exported-artifacts \
+  --prompt "Apply the imported knowledge to this request." \
+  --sqlite ./state/imported.sqlite3 \
+  --state-out ./state/imported-run.json \
+  --llm off
+```
+
+Import does not imply unconditional selection. Admissibility, current scope,
+request matching, host-realizer availability, and authority remain separate
+checks. Use `artifact-import`, `import-skill`, `export-skill`, and
+`export-skill-registry` when the distinction between general artifacts and
+portable abilities matters.
+
 ## Workstation And Publication
 
 The full workspace adds a host-owned interaction surface around the governed
@@ -246,6 +373,29 @@ Chat
 - **Draft** shapes report scope and composition.
 - **Review** owns approval and decision-oriented review.
 - **Publication** locks inputs, builds outputs, and records release evidence.
+
+Create a workstation session rooted in local state and attach the current
+checkout as its workspace:
+
+```console
+uv run --frozen python3 controller_entrypoints.py workstation-launch \
+  --root ./state/workstation \
+  --workspace "$PWD" \
+  --task "Build a reviewed report from the supplied source material."
+```
+
+Open the terminal workstation for that session:
+
+```console
+uv run --frozen python3 controller_entrypoints.py workstation-chat \
+  --root ./state/workstation
+```
+
+Interactive natural-language chat requires the configured provider named by
+the workstation session. The governed subject workflow and its deterministic
+tests remain distinct from provider qualification. For the visual
+source-to-publication flow, start the gRPC host and Flutter client as documented
+in the Flutter guide below.
 
 Textual and Flutter consume shared application and transport contracts, but
 they are allowed to use different layout systems. Their behavioral boundaries
@@ -366,7 +516,7 @@ exercise.
 ## Status
 
 > [!WARNING]
-> Realization is pre-1.0 research software. Persisted formats and public ABIs are
+> Realization is pre-alpha research software. Persisted formats and public ABIs are
 > treated carefully and covered by compatibility tests, but future changes may
 > still require explicit migrations. Review host capabilities, imported
 > abilities, authority grants, external-provider use, and generated publication
