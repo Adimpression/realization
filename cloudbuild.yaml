@@ -23,9 +23,14 @@ steps:
         uv build --wheel core_app --out-dir /workspace/core-app-dist &&
         uv run --frozen python -m unittest
         tests.test_architecture_boundaries
+        core_runtime.tests.test_attempts
         core_runtime.tests.test_reduction
+        core_runtime.tests.test_telemetry
         core_engine.tests.test_api
+        core_engine.tests.test_canonical_reduction
         core_engine.tests.test_distribution
+        core_engine.tests.test_resumption_repository
+        core_engine.tests.test_resumption_service
         core_app.tests.test_distribution
         core_app.tests.test_chat
         tests.test_governed_chat_validation

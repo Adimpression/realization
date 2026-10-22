@@ -244,6 +244,15 @@ class PreparedAttemptWork(Protocol):
 class AttemptInterrupted(RuntimeError):
     """Raised by prepared work after observing an accepted stop request."""
 
+    def __init__(
+        self,
+        message: str = "accepted stop request observed",
+        *,
+        work_result: AttemptWorkResult | None = None,
+    ) -> None:
+        super().__init__(message)
+        self.work_result = work_result
+
 
 def attempt_stop_requested(journal: AttemptJournal, attempt_id: str) -> bool:
     """Return whether the durable attempt lifecycle records interruption."""
@@ -298,20 +307,51 @@ def run_execution_attempt(
         result = work.execute(
             should_stop=lambda: attempt_stop_requested(journal, running.attempt_id)
         )
-    except AttemptInterrupted:
+    except AttemptInterrupted as exc:
         current = journal.load_attempt(running.attempt_id)
         if current is None:
             raise RuntimeError("interrupted execution attempt disappeared")
-        if current.status is not AttemptLifecycleStatus.INTERRUPTED:
+        partial = exc.work_result
+        can_record_interruption = current.status in {
+            AttemptLifecycleStatus.RUNNING,
+            AttemptLifecycleStatus.INTERRUPTED,
+        }
+        has_new_interruption_data = (
+            current.status is not AttemptLifecycleStatus.INTERRUPTED
+            or partial is not None
+        )
+        if can_record_interruption and has_new_interruption_data:
             current = journal.transition_attempt(
                 running.attempt_id,
-                expected_statuses=(AttemptLifecycleStatus.RUNNING,),
+                expected_statuses=(current.status,),
                 update=AttemptUpdate(
                     status=AttemptLifecycleStatus.INTERRUPTED,
                     latest_admitted_revision_id=(
-                        running.latest_admitted_revision_id
+                        partial.latest_admitted_revision_id
+                        if partial is not None
+                        and partial.latest_admitted_revision_id is not None
+                        else current.latest_admitted_revision_id
                     ),
-                    interruption_cause="stop signal observed",
+                    proposal_references=(
+                        partial.proposal_references if partial is not None else ()
+                    ),
+                    receipt_references=(
+                        partial.receipt_references if partial is not None else ()
+                    ),
+                    transition_artifact_references=(
+                        partial.transition_artifact_references
+                        if partial is not None
+                        else ()
+                    ),
+                    interruption_cause=(
+                        current.interruption_cause or "stop signal observed"
+                    ),
+                    interruption_correlation=current.interruption_correlation,
+                    performance_measurements=(
+                        partial.performance_measurements
+                        if partial is not None
+                        else {}
+                    ),
                 ),
             ) or journal.load_attempt(running.attempt_id)
         if current is None:
@@ -319,6 +359,7 @@ def run_execution_attempt(
         return AttemptRunResult(
             outcome=AttemptExecutionOutcome.INTERRUPTED,
             attempt=current,
+            work_result=partial,
         )
     except Exception as exc:
         failed = journal.transition_attempt(

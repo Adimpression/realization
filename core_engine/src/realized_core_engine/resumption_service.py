@@ -80,6 +80,9 @@ AdmissionEvaluator = Callable[
     AdmissionDecision,
 ]
 
+_INTERNAL_ITEM_PREFIX = "engine:"
+_INTERNAL_ITEM_MARKER = "resumption_projection"
+
 
 class TransitionValidationError(ValueError):
     """A mechanically invalid semantic transition proposal."""
@@ -591,6 +594,11 @@ class ResumptionService:
                 performance=performance,
             )
 
+        semantic_inlet_payload = {
+            key: value
+            for key, value in request.initial_inlet.payload.items()
+            if key != "engine_state"
+        }
         empty = SemanticState(
             achieved=(),
             non_achievedness=(),
@@ -607,9 +615,7 @@ class ResumptionService:
                     "scope_imports", ()
                 )
             ),
-            engine_state=dict(
-                request.initial_inlet.payload.get("engine_state", {})
-            ),
+            engine_state={},
         )
         initial_delta = request.initial_inlet.delta
         if _delta_is_empty(initial_delta):
@@ -621,7 +627,7 @@ class ResumptionService:
                         ),
                         kind="objective",
                         payload={
-                            "inlet": dict(request.initial_inlet.payload),
+                            "inlet": semantic_inlet_payload,
                             "target": request.initial_inlet.target,
                         },
                         provenance_references=(
@@ -816,6 +822,8 @@ class ResumptionService:
         proposal: ReductionProposal | None = None
         admission: AdmissionDecision | None = None
         reconciliation: dict[str, Any] = {}
+        reduction_baseline: SemanticState | None = None
+        reduction_managed_state: SemanticState | None = None
         try:
             self._validate_operation_request(request, source)
             target, parent_ids, expected_head = self._candidate_for_request(
@@ -866,15 +874,18 @@ class ResumptionService:
                     reconciliation={"historical_operation": "reverse"}
                 )
             else:
-                proposal = self._reduce(
+                proposal, reduction_baseline = self._reduce(
                     request,
                     projection,
                     candidate,
                     should_stop,
                 )
+                reduction_managed_state = projection.state
             candidate, proposal_reconciliation = self._apply_reduction_proposal(
                 candidate,
                 proposal,
+                reduction_baseline=reduction_baseline,
+                reduction_managed_state=reduction_managed_state,
             )
             reconciliation = {
                 **reconciliation,
@@ -1519,6 +1530,9 @@ class ResumptionService:
         self,
         candidate: SemanticState,
         proposal: ReductionProposal,
+        *,
+        reduction_baseline: SemanticState | None = None,
+        reduction_managed_state: SemanticState | None = None,
     ) -> tuple[SemanticState, dict[str, Any]]:
         """Apply and verify controller-owned output after inlet admission."""
 
@@ -1532,6 +1546,41 @@ class ResumptionService:
             return proposed, reconciliation
 
         resulting = proposal.resulting_state
+        if reduction_baseline is not None:
+            active_proposed, _ = self._apply_delta(
+                reduction_baseline,
+                proposal.delta,
+                allow_supersession=False,
+                allow_direction=False,
+            )
+            self._validate_reduction_result(active_proposed, resulting)
+            resulting = _overlay_reduction_state(
+                proposed,
+                active_proposed,
+                resulting,
+                managed_state=reduction_managed_state,
+            )
+        self._validate_reduction_result(proposed, resulting)
+
+        resulting_non_achieved = {
+            item.item_id for item in resulting.non_achievedness
+        }
+        return resulting, {
+            **reconciliation,
+            "resulting_state_digest": resulting.digest,
+            "resolved_by_reduction": sorted(
+                {item.item_id for item in proposed.non_achievedness}
+                - resulting_non_achieved
+            ),
+        }
+
+    @staticmethod
+    def _validate_reduction_result(
+        proposed: SemanticState,
+        resulting: SemanticState,
+    ) -> None:
+        """Reject controller output that rewrites already-admitted state."""
+
         if resulting.governing_direction != proposed.governing_direction:
             raise TransitionValidationError(
                 "a reduction proposal cannot change the governing direction"
@@ -1587,14 +1636,6 @@ class ResumptionService:
             raise TransitionValidationError(
                 "a reduction proposal cannot rewrite admitted scope imports"
             )
-        return resulting, {
-            **reconciliation,
-            "resulting_state_digest": resulting.digest,
-            "resolved_by_reduction": sorted(
-                {item.item_id for item in proposed.non_achievedness}
-                - resulting_non_achieved
-            ),
-        }
 
     def _apply_realignment(
         self,
@@ -1975,17 +2016,28 @@ class ResumptionService:
         projection: ResumptionProjection,
         candidate: SemanticState,
         should_stop: Callable[[], bool],
-    ) -> ReductionProposal:
+    ) -> tuple[ReductionProposal, SemanticState]:
+        active_candidate = _active_reduction_state(
+            projection,
+            candidate,
+            request.inlet,
+        )
         if self.reduction_controller is None:
-            return ReductionProposal()
+            return ReductionProposal(), active_candidate
         context = ReductionContext(
             projection=projection,
             operation=request.operation,
             admitted_inlet=request.inlet,
-            candidate_state=candidate,
+            candidate_state=active_candidate,
             execution_policy=dict(request.execution_policy),
         )
-        return self.reduction_controller.reduce(context, should_stop=should_stop)
+        return (
+            self.reduction_controller.reduce(
+                context,
+                should_stop=should_stop,
+            ),
+            active_candidate,
+        )
 
     def _reduce_start(
         self,
@@ -2771,6 +2823,9 @@ class ResumptionService:
         )
         if scope_rejection is not None:
             return scope_rejection
+        reserved_item_rejection = self._reserved_item_admission_decision(inlet)
+        if reserved_item_rejection is not None:
+            return reserved_item_rejection
         decision = self.admission_evaluator(
             operation,
             source,
@@ -2786,6 +2841,40 @@ class ResumptionService:
                 "scope_authorized": True,
                 "scope_id": scope_id,
             },
+        )
+
+    @staticmethod
+    def _reserved_item_admission_decision(
+        inlet: ContinuationInlet | None,
+    ) -> AdmissionDecision | None:
+        if inlet is None:
+            return None
+        items = [
+            *inlet.delta.achieved,
+            *inlet.delta.non_achievedness,
+            *(
+                supersession.replacement
+                for supersession in inlet.delta.supersessions
+                if supersession.replacement is not None
+            ),
+        ]
+        if inlet.realignment is not None:
+            items.extend(inlet.realignment.introduced_items)
+            items.extend(inlet.realignment.resulting_non_achievedness)
+        invalid_ids = sorted(
+            {
+                item.item_id
+                for item in items
+                if item.item_id.startswith(_INTERNAL_ITEM_PREFIX)
+                or bool(item.payload.get(_INTERNAL_ITEM_MARKER))
+            }
+        )
+        if not invalid_ids:
+            return None
+        return AdmissionDecision(
+            disposition=AdmissionDisposition.REJECTED,
+            rationale="the inlet uses reserved internal semantic identities",
+            checks={"reserved_item_ids": invalid_ids},
         )
 
     @staticmethod
@@ -2974,12 +3063,69 @@ def _redact_non_inline_semantic_context(
             in allowed_ids
         )
 
-    holds = tuple(
-        hold
-        for hold in state.holds
-        if str(hold.unresolved_semantic_object.get("item_id", ""))
-        in inline_item_ids
+    support = dict(state.evidence_and_support)
+    evidence = {
+        key: value
+        for key, value in dict(support.get("evidence", {})).items()
+        if isinstance(value, dict)
+        and str(value.get("node_id", "")) in inline_node_ids
+    }
+    claims = {
+        key: value
+        for key, value in dict(support.get("claims", {})).items()
+        if isinstance(value, dict)
+        and str(value.get("node_id", "")) in inline_node_ids
+    }
+    support_views = {
+        key: value
+        for key, value in dict(support.get("support", {})).items()
+        if key in inline_node_ids
+    }
+    provenance_links = {
+        key: value
+        for key, value in dict(
+            support.get("provenance_links", {})
+        ).items()
+        if key in inline_node_ids
+    }
+
+    realignments = tuple(
+        replace(
+            realignment,
+            affected_item_ids=tuple(
+                item_id
+                for item_id in realignment.affected_item_ids
+                if item_id in inline_item_ids
+            ),
+            retained_item_ids=tuple(
+                item_id
+                for item_id in realignment.retained_item_ids
+                if item_id in inline_item_ids
+            ),
+            superseded_item_ids=tuple(
+                item_id
+                for item_id in realignment.superseded_item_ids
+                if item_id in inline_item_ids
+            ),
+            introduced_items=tuple(
+                item
+                for item in realignment.introduced_items
+                if item.item_id in inline_item_ids
+            ),
+            unresolved_applicability_item_ids=tuple(
+                item_id
+                for item_id in realignment.unresolved_applicability_item_ids
+                if item_id in inline_item_ids
+            ),
+            resulting_non_achievedness=tuple(
+                item
+                for item in realignment.resulting_non_achievedness
+                if item.item_id in inline_item_ids
+            ),
+        )
+        for realignment in state.realignments
     )
+    holds = tuple(state.holds)
     hold_ids = {hold.hold_id for hold in holds}
     return replace(
         state,
@@ -2988,7 +3134,12 @@ def _redact_non_inline_semantic_context(
         certainty=keyed(state.certainty),
         blockers=keyed(state.blockers),
         conflicts=keyed(state.conflicts),
-        evidence_and_support={},
+        evidence_and_support={
+            "evidence": evidence,
+            "claims": claims,
+            "support": support_views,
+            "provenance_links": provenance_links,
+        },
         commitments=attributable(state.commitments),
         supersession_edges=tuple(
             edge
@@ -3007,7 +3158,7 @@ def _redact_non_inline_semantic_context(
                 str(edge.get("right_item_id", "")),
             }.issubset(inline_item_ids)
         ),
-        realignments=(),
+        realignments=realignments,
         unresolved_applicability_item_ids=tuple(
             item_id
             for item_id in state.unresolved_applicability_item_ids
@@ -3020,7 +3171,306 @@ def _redact_non_inline_semantic_context(
             if str(evaluation.get("hold_id", "")) in hold_ids
         ),
         provenance_references=(),
+        engine_state={},
     )
+
+
+def _active_reduction_state(
+    projection: ResumptionProjection,
+    candidate: SemanticState,
+    inlet: ContinuationInlet | None,
+) -> SemanticState:
+    """Construct the exact admitted semantic state visible to reduction."""
+
+    active_item_ids = {
+        item.item_id
+        for item in (
+            *projection.state.achieved,
+            *projection.state.non_achievedness,
+        )
+    }
+    if inlet is not None:
+        active_item_ids.update(
+            item.item_id
+            for item in (
+                *inlet.delta.achieved,
+                *inlet.delta.non_achievedness,
+            )
+        )
+        active_item_ids.update(
+            supersession.replacement.item_id
+            for supersession in inlet.delta.supersessions
+            if supersession.replacement is not None
+        )
+        if inlet.realignment is not None:
+            active_item_ids.update(
+                item.item_id
+                for item in (
+                    *inlet.realignment.introduced_items,
+                    *inlet.realignment.resulting_non_achievedness,
+                )
+            )
+
+    bounded = replace(
+        candidate,
+        achieved=tuple(
+            item
+            for item in candidate.achieved
+            if item.item_id in active_item_ids
+        ),
+        non_achievedness=tuple(
+            item
+            for item in candidate.non_achievedness
+            if item.item_id in active_item_ids
+        ),
+        engine_state={},
+    )
+    return _redact_non_inline_semantic_context(bounded, active_item_ids)
+
+
+def _overlay_reduction_state(
+    full_state: SemanticState,
+    active_before: SemanticState,
+    active_after: SemanticState,
+    *,
+    managed_state: SemanticState | None,
+) -> SemanticState:
+    """Overlay an admitted bounded reduction without exposing or losing state."""
+
+    managed_states = tuple(
+        state
+        for state in (managed_state, active_before, active_after)
+        if state is not None
+    )
+    managed_item_ids = {
+        item.item_id
+        for state in managed_states
+        for item in (*state.achieved, *state.non_achievedness)
+    }
+    managed_node_ids = {
+        str(node.get("id"))
+        for state in managed_states
+        for node in state.refinement_graph.get("nodes", ())
+        if node.get("id") is not None
+    }
+    managed_ids = managed_item_ids | managed_node_ids
+
+    achieved = {
+        item.item_id: item
+        for item in full_state.achieved
+        if item.item_id not in managed_item_ids
+    }
+    non_achieved = {
+        item.item_id: item
+        for item in full_state.non_achievedness
+        if item.item_id not in managed_item_ids
+    }
+    achieved.update({item.item_id: item for item in active_after.achieved})
+    non_achieved.update(
+        {item.item_id: item for item in active_after.non_achievedness}
+    )
+
+    full_graph = dict(full_state.refinement_graph)
+    nodes = {
+        str(node["id"]): dict(node)
+        for node in full_graph.get("nodes", ())
+        if str(node.get("id")) not in managed_node_ids
+    }
+    nodes.update(
+        {
+            str(node["id"]): dict(node)
+            for node in active_after.refinement_graph.get("nodes", ())
+            if node.get("id") is not None
+        }
+    )
+    final_node_ids = set(nodes)
+    edges = []
+    for edge in full_graph.get("edges", ()):
+        source = str(edge.get("src", ""))
+        destination = str(edge.get("dst", ""))
+        if source not in final_node_ids or destination not in final_node_ids:
+            continue
+        if source in managed_node_ids and destination in managed_node_ids:
+            continue
+        edges.append(dict(edge))
+    edges.extend(
+        dict(edge) for edge in active_after.refinement_graph.get("edges", ())
+    )
+    edges = _unique_records(edges)
+
+    def overlay_keyed(
+        full_values: dict[str, Any],
+        active_values: dict[str, Any],
+    ) -> dict[str, Any]:
+        values = {
+            key: value
+            for key, value in full_values.items()
+            if key not in managed_ids
+        }
+        values.update(active_values)
+        return values
+
+    def overlay_attributable(
+        full_values: tuple[dict[str, Any], ...],
+        active_values: tuple[dict[str, Any], ...],
+    ) -> tuple[dict[str, Any], ...]:
+        retained = [
+            value
+            for value in full_values
+            if str(
+                value.get("item_id")
+                or value.get("node_id")
+                or value.get("id")
+                or ""
+            )
+            not in managed_ids
+        ]
+        return tuple(_unique_records([*retained, *active_values]))
+
+    def append_new(
+        full_values: Iterable[Any],
+        before_values: Iterable[Any],
+        after_values: Iterable[Any],
+    ) -> tuple[Any, ...]:
+        before_keys = {canonical_json(value) for value in before_values}
+        result = list(full_values)
+        result_keys = {canonical_json(value) for value in result}
+        for value in after_values:
+            key = canonical_json(value)
+            if key in before_keys or key in result_keys:
+                continue
+            result.append(value)
+            result_keys.add(key)
+        return tuple(result)
+
+    evidence_and_support = _overlay_evidence_and_support(
+        full_state.evidence_and_support,
+        active_after.evidence_and_support,
+        managed_node_ids,
+    )
+    managed_hold_ids = {
+        hold.hold_id for state in managed_states for hold in state.holds
+    }
+    holds = {
+        hold.hold_id: hold
+        for hold in full_state.holds
+        if hold.hold_id not in managed_hold_ids
+    }
+    holds.update({hold.hold_id: hold for hold in active_after.holds})
+
+    return replace(
+        full_state,
+        achieved=tuple(achieved[key] for key in sorted(achieved)),
+        non_achievedness=tuple(
+            non_achieved[key] for key in sorted(non_achieved)
+        ),
+        refinement_graph={
+            "nodes": [nodes[key] for key in sorted(nodes)],
+            "edges": edges,
+        },
+        duties_and_obligations=overlay_attributable(
+            full_state.duties_and_obligations,
+            active_after.duties_and_obligations,
+        ),
+        certainty=overlay_keyed(full_state.certainty, active_after.certainty),
+        blockers=overlay_keyed(full_state.blockers, active_after.blockers),
+        conflicts=overlay_keyed(full_state.conflicts, active_after.conflicts),
+        evidence_and_support=evidence_and_support,
+        commitments=overlay_attributable(
+            full_state.commitments,
+            active_after.commitments,
+        ),
+        supersession_edges=append_new(
+            full_state.supersession_edges,
+            active_before.supersession_edges,
+            active_after.supersession_edges,
+        ),
+        contradiction_edges=append_new(
+            full_state.contradiction_edges,
+            active_before.contradiction_edges,
+            active_after.contradiction_edges,
+        ),
+        realignments=append_new(
+            full_state.realignments,
+            active_before.realignments,
+            active_after.realignments,
+        ),
+        unresolved_applicability_item_ids=tuple(
+            sorted(
+                {
+                    item_id
+                    for item_id in full_state.unresolved_applicability_item_ids
+                    if item_id not in managed_item_ids
+                }
+                | set(active_after.unresolved_applicability_item_ids)
+            )
+        ),
+        holds=tuple(holds[key] for key in sorted(holds)),
+        hold_evaluations=append_new(
+            full_state.hold_evaluations,
+            active_before.hold_evaluations,
+            active_after.hold_evaluations,
+        ),
+        capability_declarations=append_new(
+            full_state.capability_declarations,
+            active_before.capability_declarations,
+            active_after.capability_declarations,
+        ),
+        scope_imports=append_new(
+            full_state.scope_imports,
+            active_before.scope_imports,
+            active_after.scope_imports,
+        ),
+        provenance_references=append_new(
+            full_state.provenance_references,
+            active_before.provenance_references,
+            active_after.provenance_references,
+        ),
+        governance_references=append_new(
+            full_state.governance_references,
+            active_before.governance_references,
+            active_after.governance_references,
+        ),
+        engine_state={},
+    )
+
+
+def _overlay_evidence_and_support(
+    full_values: dict[str, Any],
+    active_values: dict[str, Any],
+    managed_node_ids: set[str],
+) -> dict[str, Any]:
+    result = dict(full_values)
+    for bucket in ("evidence", "claims"):
+        values = {
+            key: value
+            for key, value in dict(full_values.get(bucket, {})).items()
+            if not isinstance(value, dict)
+            or str(value.get("node_id", "")) not in managed_node_ids
+        }
+        values.update(dict(active_values.get(bucket, {})))
+        result[bucket] = values
+    for bucket in ("support", "provenance_links"):
+        values = {
+            key: value
+            for key, value in dict(full_values.get(bucket, {})).items()
+            if key not in managed_node_ids
+        }
+        values.update(dict(active_values.get(bucket, {})))
+        result[bucket] = values
+    return result
+
+
+def _unique_records(values: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
+    records: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for value in values:
+        key = canonical_json(value)
+        if key in seen:
+            continue
+        seen.add(key)
+        records.append(dict(value))
+    return records
 
 
 def _infer_semantic_outcome(state: SemanticState) -> SemanticOutcome:

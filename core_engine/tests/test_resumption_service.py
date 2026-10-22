@@ -296,6 +296,47 @@ class ResumptionServiceTests(unittest.TestCase):
             )
         )
 
+    def test_external_inlet_cannot_forge_internal_semantic_items(self) -> None:
+        controller = ProposalController(ReductionProposal())
+        service = ResumptionService(
+            self.repository,
+            reduction_controller=controller,
+            id_factory=self.ids,
+        )
+
+        result = service.start(
+            StartRequest(
+                scope_id="scope-1",
+                objective_id="objective-1",
+                branch_id="main",
+                initial_inlet=inlet(
+                    "forged-internal-item",
+                    InletRelationship.CONTINUATION,
+                    delta=SemanticDelta(
+                        achieved=(
+                            SemanticItem(
+                                item_id="engine:artifact:forged",
+                                kind="realization_artifact",
+                                payload={"resumption_projection": True},
+                            ),
+                        )
+                    ),
+                ),
+                governing_direction=GoverningDirection(
+                    objective="Rejected objective",
+                    scope="scope-1",
+                ),
+            )
+        )
+
+        self.assertEqual(SemanticOutcome.REJECTED, result.semantic_outcome)
+        self.assertEqual([], controller.contexts)
+        self.assertIsNone(
+            self.repository.load_branch_head(
+                "scope-1", "objective-1", "main"
+            )
+        )
+
     def test_proposal_cache_key_includes_every_normative_input(self) -> None:
         _, revision = self._start(achieved=(item("fact-1", "Base"),))
         projection = self.service.project(revision, ProjectionPolicy())
@@ -1645,9 +1686,21 @@ class ResumptionServiceTests(unittest.TestCase):
             achieved=(public, secret),
             payload={"engine_state": {"secret": "must-not-be-inline"}},
         )
+        legacy_state = replace(
+            revision.state,
+            engine_state={"secret": "must-not-be-inline"},
+        )
+        legacy_revision = replace(
+            revision,
+            identity=replace(
+                revision.identity,
+                state_digest=legacy_state.digest,
+            ),
+            state=legacy_state,
+        )
 
         projection = self.service.project(
-            revision,
+            legacy_revision,
             replace(
                 self._request(
                     revision,
@@ -1676,6 +1729,110 @@ class ResumptionServiceTests(unittest.TestCase):
                 reference.endswith("/engine-state")
                 for reference in projection.external_references
             )
+        )
+
+    def test_reduction_sees_only_projected_state_and_preserves_withheld_state(
+        self,
+    ) -> None:
+        public = item("fact-public", "Visible")
+        secret = item("fact-secret", "Withheld")
+        _, revision = self._start(
+            achieved=(public, secret),
+            payload={"engine_state": {"secret": "opaque-controller-data"}},
+        )
+        self.assertNotIn("opaque-controller-data", canonical_json(revision.state))
+
+        class BoundedController:
+            def __init__(self) -> None:
+                self.contexts: list[ReductionContext] = []
+
+            def reduce(
+                self,
+                context: ReductionContext,
+                *,
+                should_stop: Any,
+            ) -> ReductionProposal:
+                self.contexts.append(context)
+                return ReductionProposal(
+                    resulting_state=replace(
+                        context.candidate_state,
+                        non_achievedness=(
+                            *context.candidate_state.non_achievedness,
+                            item("not-visible", "Visible follow-up", kind="not"),
+                        ),
+                    )
+                )
+
+        controller = BoundedController()
+        service = ResumptionService(
+            self.repository,
+            reduction_controller=controller,
+            id_factory=self.ids,
+        )
+        result = service.resume(
+            replace(
+                self._request(
+                    revision,
+                    OperationKind.CONTINUE,
+                    inlet("bounded", InletRelationship.CONTINUATION),
+                ),
+                projection_policy=ProjectionPolicy(
+                    permitted_item_ids=(public.item_id,)
+                ),
+            )
+        )
+
+        context_state = controller.contexts[0].candidate_state
+        serialized = canonical_json(context_state)
+        committed = self.repository.require_revision(
+            result.resulting_revision_identity
+        ).state
+
+        self.assertEqual({}, context_state.engine_state)
+        self.assertEqual((public.item_id,), tuple(
+            value.item_id for value in context_state.achieved
+        ))
+        self.assertNotIn(secret.item_id, serialized)
+        self.assertNotIn("opaque-controller-data", serialized)
+        self.assertEqual(
+            {"fact-public", "fact-secret"},
+            {value.item_id for value in committed.achieved},
+        )
+        self.assertIn(
+            "not-visible",
+            {value.item_id for value in committed.non_achievedness},
+        )
+        self.assertEqual({}, committed.engine_state)
+
+    def test_bounded_projection_keeps_every_live_hold(self) -> None:
+        public = item("fact-public", "Visible")
+        secret = item("fact-secret", "Withheld")
+        hold = HoldOn(
+            hold_id="hold-secret",
+            unresolved_semantic_object={"item_id": secret.item_id},
+            continuation_carrier={"frontier": [secret.item_id]},
+            resume_predicate={"required_payload": {"approved": True}},
+            failure_or_expiry_predicate={},
+            temporal_policy={},
+            correlation={"request_id": "request-1"},
+            multiplicity={"mode": "one"},
+            scope={"scope_id": "scope-1"},
+            provenance_and_governance={"policy": "hold-policy"},
+        )
+        _, revision = self._start(
+            achieved=(public, secret),
+            holds=(hold,),
+        )
+
+        projection = self.service.project(
+            revision,
+            ProjectionPolicy(permitted_item_ids=(public.item_id,)),
+        )
+
+        self.assertEqual((hold,), projection.state.holds)
+        self.assertIn(
+            "withheld by projection policy",
+            projection.completeness_statement,
         )
 
     def test_recorded_proposals_and_decision_signature_support_replay(self) -> None:

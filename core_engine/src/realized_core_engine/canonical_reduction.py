@@ -31,7 +31,10 @@ from realized_core_engine.resumption_contracts import (
 
 _PROJECTED_ITEM_MARKER = "resumption_projection"
 _PROJECTED_NODE_PREFIX = "engine:node:"
+_PROJECTED_ARTIFACT_PREFIX = "engine:artifact:"
+_PROJECTED_PRODUCT_PREFIX = "engine:product:"
 _PROJECTED_HOLD_PREFIX = "engine:hold:"
+_SUBJECT_SCOPE_IMPORT_KIND = "subject_reasoning_scope"
 
 
 class CanonicalReductionAdapter:
@@ -43,7 +46,11 @@ class CanonicalReductionAdapter:
         *,
         should_stop: Callable[[], bool],
     ) -> ReductionProposal:
-        reconstructed = bool(context.candidate_state.engine_state)
+        reconstructed = (
+            context.projection is not None
+            or bool(context.candidate_state.engine_state)
+            or bool(context.candidate_state.refinement_graph)
+        )
         state = self._load_or_bootstrap_state(context)
         trace_start = len(state.trace) if reconstructed else 0
         existing_proposal_ids = set(state.proposals) if reconstructed else set()
@@ -129,9 +136,36 @@ class CanonicalReductionAdapter:
 
     @staticmethod
     def _load_or_bootstrap_state(context: ReductionContext) -> SystemState:
+        if context.operation is OperationKind.REDIRECT_AND_REALIGN:
+            state = SystemState.bootstrap(
+                context.candidate_state.governing_direction.objective
+            )
+            seed = _root_seed_item(context.candidate_state)
+            if seed is not None:
+                state.root().metadata["resumption_item_id"] = seed.item_id
+            return state
+
+        if context.projection is not None:
+            return system_state_from_semantic_state(context.candidate_state)
+
+        inlet_snapshot = (
+            context.admitted_inlet.payload.get("engine_state")
+            if context.admitted_inlet is not None
+            else None
+        )
+        if (
+            context.operation is OperationKind.START
+            and isinstance(inlet_snapshot, Mapping)
+            and inlet_snapshot
+        ):
+            return SystemState.from_dict(dict(inlet_snapshot))
+
         snapshot = context.candidate_state.engine_state
         if snapshot:
             return SystemState.from_dict(dict(snapshot))
+
+        if context.candidate_state.refinement_graph.get("nodes"):
+            return system_state_from_semantic_state(context.candidate_state)
 
         inlet_payload = (
             context.admitted_inlet.payload
@@ -145,11 +179,16 @@ class CanonicalReductionAdapter:
         ).strip()
         if not prompt:
             raise ValueError("the canonical reduction requires an explicit objective")
-        state = SystemState.bootstrap(prompt)
-        seed = _root_seed_item(context.candidate_state)
-        if seed is not None:
-            state.root().metadata["resumption_item_id"] = seed.item_id
-        return state
+        candidate = context.candidate_state
+        if not candidate.governing_direction.objective:
+            candidate = replace(
+                candidate,
+                governing_direction=replace(
+                    candidate.governing_direction,
+                    objective=prompt,
+                ),
+            )
+        return system_state_from_semantic_state(candidate)
 
     @staticmethod
     def _apply_execution_policy(
@@ -296,29 +335,92 @@ def semantic_state_from_system_state(
 
     projected_items: dict[str, SemanticItem] = {}
     achieved_ids: set[str] = set()
+    baseline_items = {
+        item.item_id: item
+        for item in (*baseline.achieved, *baseline.non_achievedness)
+    }
     for node_id, node in sorted(state.graph.nodes.items()):
         item_id = str(
             node.metadata.get("resumption_item_id")
             or f"{_PROJECTED_NODE_PREFIX}{node_id}"
         )
         status = state.node_status(node_id).value
+        prior = baseline_items.get(item_id)
+        payload = {
+            **(dict(prior.payload) if prior is not None else {}),
+            _PROJECTED_ITEM_MARKER: True,
+            "node": node.to_dict(),
+            "status": status,
+            "certainty": _json_value(state.certainty.get(node_id)),
+            "blockers": list(state.blockers.get(node_id, ())),
+            "conflicts": list(state.conflicts.get(node_id, ())),
+        }
         item = SemanticItem(
             item_id=item_id,
-            kind="realization_node",
-            payload={
-                _PROJECTED_ITEM_MARKER: True,
-                "node": node.to_dict(),
-                "status": status,
-                "certainty": _json_value(state.certainty.get(node_id)),
-                "blockers": list(state.blockers.get(node_id, ())),
-                "conflicts": list(state.conflicts.get(node_id, ())),
-            },
-            evidence_references=tuple(state.evidence_by_node.get(node_id, ())),
-            provenance_references=tuple(state.provenance_links.get(node_id, ())),
+            kind=prior.kind if prior is not None else "realization_node",
+            payload=payload,
+            evidence_references=tuple(
+                dict.fromkeys(
+                    (
+                        *(prior.evidence_references if prior is not None else ()),
+                        *state.evidence_by_node.get(node_id, ()),
+                    )
+                )
+            ),
+            provenance_references=tuple(
+                dict.fromkeys(
+                    (
+                        *(prior.provenance_references if prior is not None else ()),
+                        *state.provenance_links.get(node_id, ()),
+                    )
+                )
+            ),
+            governance_references=(
+                prior.governance_references if prior is not None else ()
+            ),
         )
         projected_items[item_id] = item
         if node_id in state.closed or status == "closed":
             achieved_ids.add(item_id)
+
+    for collection, artifacts in (
+        ("artifacts", state.artifacts),
+        ("learned_artifacts", state.learned_artifacts),
+    ):
+        for artifact_id, artifact in sorted(artifacts.items()):
+            if _json_value(artifact.admissibility) != "admitted":
+                continue
+            item_id = f"{_PROJECTED_ARTIFACT_PREFIX}{collection}:{artifact_id}"
+            projected_items[item_id] = SemanticItem(
+                item_id=item_id,
+                kind="realization_artifact",
+                payload={
+                    _PROJECTED_ITEM_MARKER: True,
+                    "engine_collection": collection,
+                    "artifact": artifact.to_dict(),
+                    "origin": dict(
+                        state.learned_artifact_origins.get(artifact_id, {})
+                    ),
+                },
+                provenance_references=tuple(artifact.provenance),
+            )
+            achieved_ids.add(item_id)
+
+    for product_id, product in sorted(state.products.items()):
+        if not product.committed:
+            continue
+        item_id = f"{_PROJECTED_PRODUCT_PREFIX}{product_id}"
+        projected_items[item_id] = SemanticItem(
+            item_id=item_id,
+            kind="realization_product",
+            payload={
+                _PROJECTED_ITEM_MARKER: True,
+                "engine_collection": "products",
+                "product": product.to_dict(),
+            },
+            provenance_references=tuple(product.provenance),
+        )
+        achieved_ids.add(item_id)
 
     projected_ids = set(projected_items)
     external_achieved = {
@@ -377,6 +479,19 @@ def semantic_state_from_system_state(
             )
         )
     )
+    scope_imports = tuple(
+        value
+        for value in baseline.scope_imports
+        if value.get("kind") != _SUBJECT_SCOPE_IMPORT_KIND
+    )
+    if state.subject_reasoning_scope:
+        scope_imports = (
+            *scope_imports,
+            {
+                "kind": _SUBJECT_SCOPE_IMPORT_KIND,
+                "value": dict(state.subject_reasoning_scope),
+            },
+        )
     return replace(
         baseline,
         achieved=tuple(achieved[key] for key in sorted(achieved)),
@@ -417,9 +532,344 @@ def semantic_state_from_system_state(
             capability_declarations[key]
             for key in sorted(capability_declarations)
         ),
+        scope_imports=scope_imports,
         provenance_references=provenance,
-        engine_state=state.to_dict(),
+        engine_state={},
     )
+
+
+def system_state_from_semantic_state(state: SemanticState) -> SystemState:
+    """Reconstruct active reducer state from admitted semantic fields only."""
+
+    graph = dict(state.refinement_graph)
+    nodes = [dict(item) for item in graph.get("nodes", ())]
+    bootstrap_payload: dict[str, Any] = {}
+    if not nodes:
+        bootstrap = SystemState.bootstrap(
+            state.governing_direction.objective
+        )
+        seed = _root_seed_item(state)
+        if seed is not None:
+            bootstrap.root().metadata["resumption_item_id"] = seed.item_id
+        bootstrap_payload = bootstrap.to_dict()
+        graph = dict(bootstrap_payload["graph"])
+        nodes = [dict(item) for item in graph.get("nodes", ())]
+
+    root = next(
+        (item for item in nodes if item.get("role") == "root"),
+        next(
+            (
+                item
+                for item in nodes
+                if item.get("parent_id") in {None, ""}
+            ),
+            nodes[0],
+        ),
+    )
+    root_id = str(root["id"])
+    edges = [dict(item) for item in graph.get("edges", ())]
+    known_node_ids = {
+        str(item["id"]) for item in nodes if item.get("id") is not None
+    }
+    root_seed = _root_seed_item(state)
+    root_depth = int(root.get("depth", 0))
+    for item in state.non_achievedness:
+        if (
+            root_seed is not None
+            and item.item_id == root_seed.item_id
+        ) or _is_projected_item(item):
+            continue
+        node = item.payload.get("node")
+        if isinstance(node, Mapping) and node.get("id") is not None:
+            continue
+        node_id = f"semantic:{item.item_id}"
+        if node_id in known_node_ids:
+            continue
+        nodes.append(
+            {
+                "id": node_id,
+                "semantic_unit": _semantic_item_text(item),
+                "role": "resumption_non_achievedness",
+                "description": "Admitted non-achievedness from semantic state.",
+                "required": True,
+                "depth": root_depth + 1,
+                "parent_id": root_id,
+                "origin": "controller",
+                "metadata": {
+                    "resumption_item_id": item.item_id,
+                    "resumption_item_kind": item.kind,
+                },
+            }
+        )
+        edges.append(
+            {
+                "src": root_id,
+                "dst": node_id,
+                "type": "refines",
+            }
+        )
+        known_node_ids.add(node_id)
+    graph = {"nodes": nodes, "edges": edges}
+    node_ids = set(known_node_ids)
+
+    item_by_node: dict[str, tuple[SemanticItem, bool]] = {}
+    items_by_id = {
+        item.item_id: (item, achieved)
+        for achieved, items in (
+            (True, state.achieved),
+            (False, state.non_achievedness),
+        )
+        for item in items
+    }
+    for achieved, items in (
+        (True, state.achieved),
+        (False, state.non_achievedness),
+    ):
+        for item in items:
+            node = item.payload.get("node")
+            if isinstance(node, Mapping) and node.get("id") is not None:
+                item_by_node[str(node["id"])] = (item, achieved)
+    for node in nodes:
+        metadata = node.get("metadata", {})
+        if not isinstance(metadata, Mapping):
+            continue
+        item_id = metadata.get("resumption_item_id")
+        if item_id is not None and str(item_id) in items_by_id:
+            item_by_node[str(node["id"])] = items_by_id[str(item_id)]
+
+    status: dict[str, str] = {}
+    closed: set[str] = set()
+    paused: set[str] = set()
+    incomplete: set[str] = set()
+    inadmissible: set[str] = set()
+    frontier: set[str] = set()
+    for node_id in node_ids:
+        item_entry = item_by_node.get(node_id)
+        item = item_entry[0] if item_entry is not None else None
+        achieved = item_entry[1] if item_entry is not None else False
+        raw_status = (
+            str(item.payload.get("status", "")) if item is not None else ""
+        )
+        normalized = raw_status or ("closed" if achieved else "open")
+        status[node_id] = normalized
+        if normalized == "closed" or achieved:
+            closed.add(node_id)
+        elif normalized == "paused":
+            paused.add(node_id)
+        elif normalized == "incomplete":
+            incomplete.add(node_id)
+        elif normalized == "inadmissible":
+            inadmissible.add(node_id)
+        else:
+            frontier.add(node_id)
+
+    pause_points: dict[str, dict[str, Any]] = {}
+    for hold in state.holds:
+        carrier = hold.continuation_carrier
+        hold_node_ids = {
+            str(item)
+            for item in carrier.get("frontier", ())
+            if str(item) in node_ids
+        }
+        raw_boundary = hold.resume_predicate.get("required_boundary")
+        for pause_id in carrier.get("pause_point_ids", ()):
+            if not hold_node_ids or not isinstance(raw_boundary, str):
+                continue
+            node_id = sorted(hold_node_ids)[0]
+            pause_points[str(pause_id)] = {
+                "id": str(pause_id),
+                "node_id": node_id,
+                "reason": str(
+                    hold.provenance_and_governance.get(
+                        "reason", "governed suspension"
+                    )
+                ),
+                "required_boundary": raw_boundary,
+                "created_at": str(
+                    hold.provenance_and_governance.get("created_at", "")
+                ),
+            }
+            frontier.discard(node_id)
+            paused.add(node_id)
+            status[node_id] = "paused"
+
+    support = state.evidence_and_support
+    evidence = {
+        str(key): dict(value)
+        for key, value in dict(support.get("evidence", {})).items()
+        if isinstance(value, Mapping)
+        and str(value.get("node_id", "")) in node_ids
+    }
+    for item in state.achieved:
+        if _is_projected_item(item) or item.payload.get("engine_collection"):
+            continue
+        raw_node = item.payload.get("node")
+        node_id = (
+            str(raw_node["id"])
+            if isinstance(raw_node, Mapping)
+            and str(raw_node.get("id", "")) in node_ids
+            else root_id
+        )
+        evidence_id = f"resumption:evidence:{item.item_id}"
+        evidence.setdefault(
+            evidence_id,
+            {
+                "id": evidence_id,
+                "node_id": node_id,
+                "observation": _semantic_item_text(item),
+                "source": "admitted_semantic_state",
+                "context": {
+                    "resumption_item_id": item.item_id,
+                    "resumption_item_kind": item.kind,
+                },
+                "support_effect": "high",
+                "confidence": "high",
+                "polarity": "support",
+                "provenance": list(item.provenance_references),
+                "created_at": str(item.payload.get("created_at", "")),
+            },
+        )
+    evidence_by_node: dict[str, list[str]] = {}
+    for evidence_id, value in evidence.items():
+        evidence_by_node.setdefault(str(value["node_id"]), []).append(evidence_id)
+    claims = {
+        str(key): dict(value)
+        for key, value in dict(support.get("claims", {})).items()
+        if isinstance(value, Mapping)
+        and str(value.get("node_id", "")) in node_ids
+    }
+    capabilities = dict(bootstrap_payload.get("capabilities", {}))
+    capabilities.update(
+        {
+            str(value["id"]): dict(value)
+            for value in state.capability_declarations
+            if isinstance(value, Mapping)
+            and value.get("id") is not None
+            and all(
+                key in value
+                for key in (
+                    "affordance",
+                    "input_form",
+                    "output_form",
+                    "limits",
+                    "semantic_role",
+                )
+            )
+        }
+    )
+    commitments = {
+        str(value["id"]): dict(value)
+        for value in state.commitments
+        if isinstance(value, Mapping)
+        and value.get("id") is not None
+        and str(value.get("node_id", "")) in node_ids
+    }
+    products: dict[str, dict[str, Any]] = {}
+    artifacts: dict[str, dict[str, Any]] = {}
+    learned_artifacts: dict[str, dict[str, Any]] = {}
+    learned_artifact_origins: dict[str, dict[str, Any]] = {}
+    for item in state.achieved:
+        if not _is_projected_item(item):
+            continue
+        collection = str(item.payload.get("engine_collection", ""))
+        if collection == "products":
+            value = item.payload.get("product")
+            if isinstance(value, Mapping) and value.get("id") is not None:
+                products[str(value["id"])] = dict(value)
+            continue
+        if collection not in {"artifacts", "learned_artifacts"}:
+            continue
+        value = item.payload.get("artifact")
+        if not isinstance(value, Mapping) or value.get("id") is None:
+            continue
+        artifact_id = str(value["id"])
+        destination = (
+            artifacts if collection == "artifacts" else learned_artifacts
+        )
+        destination[artifact_id] = dict(value)
+        origin = item.payload.get("origin")
+        if collection == "learned_artifacts" and isinstance(origin, Mapping):
+            learned_artifact_origins[artifact_id] = dict(origin)
+
+    subject_reasoning_scope: dict[str, Any] = {}
+    for scope_import in state.scope_imports:
+        if scope_import.get("kind") != _SUBJECT_SCOPE_IMPORT_KIND:
+            continue
+        value = scope_import.get("value")
+        if isinstance(value, Mapping):
+            subject_reasoning_scope = dict(value)
+            break
+
+    restored = SystemState.from_dict(
+        {
+            **bootstrap_payload,
+            "root_id": root_id,
+            "graph": {
+                "nodes": nodes,
+                "edges": [
+                    dict(item)
+                    for item in graph.get("edges", ())
+                    if str(item.get("src", "")) in node_ids
+                    and str(item.get("dst", "")) in node_ids
+                ],
+            },
+            "frontier": sorted(frontier),
+            "evidence": evidence,
+            "evidence_by_node": evidence_by_node,
+            "claims": claims,
+            "capabilities": capabilities,
+            "products": products,
+            "artifacts": artifacts,
+            "learned_artifacts": learned_artifacts,
+            "subject_reasoning_scope": subject_reasoning_scope,
+            "learned_artifact_origins": learned_artifact_origins,
+            "pause_points": pause_points,
+            "commitments": commitments,
+            "certainty": {
+                key: value
+                for key, value in state.certainty.items()
+                if key in node_ids
+            },
+            "status": status,
+            "blockers": {
+                key: list(value)
+                for key, value in state.blockers.items()
+                if key in node_ids
+            },
+            "support": {
+                key: dict(value)
+                for key, value in dict(support.get("support", {})).items()
+                if key in node_ids and isinstance(value, Mapping)
+            },
+            "conflicts": {
+                key: list(value)
+                for key, value in state.conflicts.items()
+                if key in node_ids
+            },
+            "closed": sorted(closed),
+            "paused": sorted(paused),
+            "incomplete": sorted(incomplete),
+            "inadmissible": sorted(inadmissible),
+            "provenance_links": {
+                key: list(value)
+                for key, value in dict(
+                    support.get("provenance_links", {})
+                ).items()
+                if key in node_ids
+            },
+            "run_outcome": "ongoing",
+        }
+    )
+    restored.llm_transcript = []
+    restored.proposals = {}
+    restored.ledger = []
+    restored.trace = []
+    restored.capability_grants = []
+    restored.effect_traces = []
+    restored.artifact_persistence = []
+    restored.sequence_counter = 0
+    restored.visit_counts = {}
+    return restored
 
 
 def _holds_from_system_state(
@@ -433,7 +883,16 @@ def _holds_from_system_state(
         hold_id = f"{_PROJECTED_HOLD_PREFIX}{pause_id}"
         prior = existing.get(hold_id)
         if prior is not None:
-            holds.append(prior)
+            holds.append(
+                replace(
+                    prior,
+                    continuation_carrier={
+                        key: value
+                        for key, value in prior.continuation_carrier.items()
+                        if key != "run_id"
+                    },
+                )
+            )
             continue
         node_item_id = f"{_PROJECTED_NODE_PREFIX}{pause.node_id}"
         if pause.node_id in state.graph.nodes:
@@ -449,7 +908,6 @@ def _holds_from_system_state(
                 continuation_carrier={
                     "frontier": [pause.node_id],
                     "pause_point_ids": [pause_id],
-                    "run_id": state.run_id,
                 },
                 resume_predicate={
                     "kind": "boundary_contribution",
@@ -476,6 +934,30 @@ def _root_seed_item(state: SemanticState) -> SemanticItem | None:
         if item.kind == "objective" or item.payload.get("target") == "root"
     ]
     return sorted(candidates, key=lambda item: item.item_id)[0] if candidates else None
+
+
+def _semantic_item_text(item: SemanticItem) -> str:
+    for key in (
+        "text",
+        "content",
+        "statement",
+        "observation",
+        "title",
+        "question",
+        "objective",
+    ):
+        value = item.payload.get(key)
+        if isinstance(value, str) and value.strip():
+            return value.strip()
+
+    inlet = item.payload.get("inlet")
+    if isinstance(inlet, Mapping):
+        for key in ("content", "observation", "text", "statement"):
+            value = inlet.get(key)
+            if isinstance(value, str) and value.strip():
+                return value.strip()
+
+    return f"{item.kind}: {item.item_id}"
 
 
 def _target_node_id(state: SystemState, inlet: ContinuationInlet) -> str:
@@ -643,4 +1125,8 @@ def _json_value(value: Any) -> Any:
     return value.value if hasattr(value, "value") else value
 
 
-__all__ = ["CanonicalReductionAdapter", "semantic_state_from_system_state"]
+__all__ = [
+    "CanonicalReductionAdapter",
+    "semantic_state_from_system_state",
+    "system_state_from_semantic_state",
+]

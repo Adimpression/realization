@@ -6,14 +6,20 @@ from pathlib import Path
 from unittest.mock import patch
 
 from applied_theory_types import (
+    Artifact,
     NodeStatus,
     PauseBoundary,
     PausePoint,
+    Product,
     SemanticNode,
 )
 from system_state import SystemState
 
-from realized_core_engine.canonical_reduction import CanonicalReductionAdapter
+from realized_core_engine.canonical_reduction import (
+    CanonicalReductionAdapter,
+    semantic_state_from_system_state,
+    system_state_from_semantic_state,
+)
 from realized_core_engine.resumption_contracts import (
     ContinuationInlet,
     GoverningDirection,
@@ -24,6 +30,8 @@ from realized_core_engine.resumption_contracts import (
     Realignment,
     ResumptionRequest,
     SemanticDelta,
+    SemanticItem,
+    SemanticState,
     StartRequest,
 )
 from realized_core_engine.resumption_repository import SQLiteResumptionRepository
@@ -98,8 +106,9 @@ class CanonicalReductionAdapterTests(unittest.TestCase):
         revision = self.repository.require_revision(
             result.resulting_revision_identity
         )
-        reconstructed = SystemState.from_dict(revision.state.engine_state)
+        reconstructed = system_state_from_semantic_state(revision.state)
 
+        self.assertEqual({}, revision.state.engine_state)
         self.assertEqual(
             "Produce a governed answer.",
             reconstructed.root().semantic_unit,
@@ -112,10 +121,7 @@ class CanonicalReductionAdapterTests(unittest.TestCase):
             result.non_achievedness_summary[0],
             reconstructed.root().metadata["resumption_item_id"],
         )
-        self.assertEqual(
-            reconstructed.summary()["run_id"],
-            result.presentation["run_id"],
-        )
+        self.assertTrue(result.presentation["run_id"])
         artifact_id = result.transition_artifact_reference.rsplit("/", 1)[-1]
         artifact = self.repository.load_transition_artifact(artifact_id)
         self.assertEqual(
@@ -162,7 +168,7 @@ class CanonicalReductionAdapterTests(unittest.TestCase):
             source = self.repository.require_revision(
                 started.resulting_revision_identity
             )
-            first_run_id = source.state.engine_state["run_id"]
+            self.assertEqual({}, source.state.engine_state)
             started_artifact = self.repository.load_transition_artifact(
                 started.transition_artifact_reference.rsplit("/", 1)[-1]
             )
@@ -188,24 +194,26 @@ class CanonicalReductionAdapterTests(unittest.TestCase):
         revision = self.repository.require_revision(
             continued.resulting_revision_identity
         )
-        reconstructed = SystemState.from_dict(revision.state.engine_state)
+        reconstructed = system_state_from_semantic_state(revision.state)
 
-        self.assertEqual(first_run_id, reconstructed.run_id)
-        self.assertEqual(1, len(reconstructed.human_contributions))
-        contribution = next(iter(reconstructed.human_contributions.values()))
-        self.assertEqual("The value is 42.", contribution.content)
-        self.assertIn("message:continue-1", contribution.provenance)
+        self.assertEqual({}, revision.state.engine_state)
+        evidence = revision.state.evidence_and_support["evidence"].values()
+        contribution = next(
+            value
+            for value in evidence
+            if value["observation"] == "The value is 42."
+        )
+        self.assertIn("message:continue-1", contribution["provenance"])
+        self.assertTrue(reconstructed.evidence)
         continued_artifact = self.repository.load_transition_artifact(
             continued.transition_artifact_reference.rsplit("/", 1)[-1]
         )
-        prior_sequences = {
-            item["sequence"] for item in started_artifact["reduction_trace"]
-        }
-        current_sequences = {
-            item["sequence"] for item in continued_artifact["reduction_trace"]
-        }
-        self.assertTrue(current_sequences)
-        self.assertTrue(prior_sequences.isdisjoint(current_sequences))
+        self.assertTrue(started_artifact["reduction_trace"])
+        self.assertTrue(continued_artifact["reduction_trace"])
+        self.assertNotEqual(
+            started_artifact["reduction_trace"],
+            continued_artifact["reduction_trace"],
+        )
         continued_attempt = self.repository.load_attempt(
             continued.execution_attempt_id
         )
@@ -296,7 +304,7 @@ class CanonicalReductionAdapterTests(unittest.TestCase):
         revision = self.repository.require_revision(
             resumed.resulting_revision_identity
         )
-        reconstructed = SystemState.from_dict(revision.state.engine_state)
+        reconstructed = system_state_from_semantic_state(revision.state)
 
         self.assertNotIn(state.root_id, reconstructed.paused)
         self.assertIn(child.id, reconstructed.paused)
@@ -387,7 +395,7 @@ class CanonicalReductionAdapterTests(unittest.TestCase):
         revision = self.repository.require_revision(
             redirected.resulting_revision_identity
         )
-        reconstructed = SystemState.from_dict(revision.state.engine_state)
+        reconstructed = system_state_from_semantic_state(revision.state)
         attempt = self.repository.load_attempt(
             redirected.execution_attempt_id
         )
@@ -402,6 +410,184 @@ class CanonicalReductionAdapterTests(unittest.TestCase):
         self.assertNotIn(prior_root_id, reconstructed.graph.nodes)
         self.assertNotIn(prior_root_id, prepared_frontier)
         self.assertEqual([reconstructed.root_id], prepared_frontier)
+
+    def test_operational_controller_state_does_not_change_semantic_digest(
+        self,
+    ) -> None:
+        first = SystemState.bootstrap("Stable objective")
+        second = SystemState.from_dict(first.to_dict())
+        second.run_id = "different-operational-run"
+        second.llm_transcript = [
+            {
+                "role": "assistant",
+                "content": "Different private wording",
+            }
+        ]
+        baseline = SemanticState(
+            achieved=(),
+            non_achievedness=(),
+            governing_direction=GoverningDirection(
+                objective="Stable objective",
+                scope="scope-1",
+            ),
+        )
+
+        first_state = semantic_state_from_system_state(first, baseline=baseline)
+        second_state = semantic_state_from_system_state(second, baseline=baseline)
+
+        self.assertEqual({}, first_state.engine_state)
+        self.assertEqual({}, second_state.engine_state)
+        self.assertEqual(first_state.digest, second_state.digest)
+
+    def test_admitted_artifacts_products_and_subject_scope_round_trip(
+        self,
+    ) -> None:
+        state = SystemState.bootstrap("Use admitted subject knowledge")
+        state.artifacts["artifact-current"] = Artifact.from_dict(
+            {
+                "id": "artifact-current",
+                "title": "Current admitted artifact",
+                "admissibility": "admitted",
+                "content": {"fact": "current"},
+                "provenance": ["source:current"],
+            }
+        )
+        state.artifacts["artifact-candidate"] = Artifact.from_dict(
+            {
+                "id": "artifact-candidate",
+                "title": "Unadmitted candidate",
+                "admissibility": "candidate",
+            }
+        )
+        state.learned_artifacts["artifact-learned"] = Artifact.from_dict(
+            {
+                "id": "artifact-learned",
+                "title": "Admitted learned artifact",
+                "admissibility": "admitted",
+                "content": {"fact": "learned"},
+                "provenance": ["source:learned"],
+            }
+        )
+        state.learned_artifact_origins["artifact-learned"] = {
+            "subject_id": "subject-1"
+        }
+        state.products["product-1"] = Product.from_dict(
+            {
+                "id": "product-1",
+                "node_id": state.root_id,
+                "content": {"answer": "ready"},
+                "committed": True,
+                "provenance": ["commitment:1"],
+            }
+        )
+        state.subject_reasoning_scope = {
+            "subject_id": "subject-1",
+            "linked_skill_ids": ["skill-1"],
+        }
+        baseline = SemanticState(
+            achieved=(),
+            non_achievedness=(),
+            governing_direction=GoverningDirection(
+                objective="Use admitted subject knowledge",
+                scope="scope-1",
+            ),
+        )
+
+        semantic = semantic_state_from_system_state(state, baseline=baseline)
+        reconstructed = system_state_from_semantic_state(semantic)
+
+        item_ids = {item.item_id for item in semantic.achieved}
+        self.assertIn(
+            "engine:artifact:artifacts:artifact-current",
+            item_ids,
+        )
+        self.assertIn(
+            "engine:artifact:learned_artifacts:artifact-learned",
+            item_ids,
+        )
+        self.assertIn("engine:product:product-1", item_ids)
+        self.assertNotIn(
+            "engine:artifact:artifacts:artifact-candidate",
+            item_ids,
+        )
+        self.assertEqual(
+            {"artifact-current"},
+            set(reconstructed.artifacts),
+        )
+        self.assertEqual(
+            {"artifact-learned"},
+            set(reconstructed.learned_artifacts),
+        )
+        self.assertEqual({"product-1"}, set(reconstructed.products))
+        self.assertEqual(
+            state.subject_reasoning_scope,
+            reconstructed.subject_reasoning_scope,
+        )
+        self.assertEqual(
+            {"subject_id": "subject-1"},
+            reconstructed.learned_artifact_origins["artifact-learned"],
+        )
+
+    def test_generic_semantic_items_reach_reducer_and_round_trip(self) -> None:
+        achieved = SemanticItem(
+            item_id="fact-1",
+            kind="fact",
+            payload={"statement": "The admitted value is 42."},
+            provenance_references=("source:fact-1",),
+        )
+        unresolved = SemanticItem(
+            item_id="question-1",
+            kind="question",
+            payload={"question": "Explain why the value is 42."},
+            provenance_references=("request:question-1",),
+        )
+        semantic = SemanticState(
+            achieved=(achieved,),
+            non_achievedness=(unresolved,),
+            governing_direction=GoverningDirection(
+                objective="Explain the admitted value.",
+                scope="scope-1",
+            ),
+        )
+
+        reconstructed = system_state_from_semantic_state(semantic)
+
+        self.assertTrue(
+            any(
+                value.observation == "The admitted value is 42."
+                for value in reconstructed.evidence.values()
+            )
+        )
+        unresolved_node = next(
+            node
+            for node in reconstructed.graph.nodes.values()
+            if node.metadata.get("resumption_item_id") == "question-1"
+        )
+        self.assertEqual(
+            "Explain why the value is 42.",
+            unresolved_node.semantic_unit,
+        )
+
+        round_tripped = semantic_state_from_system_state(
+            reconstructed,
+            baseline=semantic,
+        )
+        achieved_by_id = {
+            item.item_id: item for item in round_tripped.achieved
+        }
+        unresolved_by_id = {
+            item.item_id: item for item in round_tripped.non_achievedness
+        }
+        self.assertEqual("fact", achieved_by_id["fact-1"].kind)
+        self.assertEqual(
+            "The admitted value is 42.",
+            achieved_by_id["fact-1"].payload["statement"],
+        )
+        self.assertEqual("question", unresolved_by_id["question-1"].kind)
+        self.assertEqual(
+            "Explain why the value is 42.",
+            unresolved_by_id["question-1"].payload["question"],
+        )
 
 
 if __name__ == "__main__":

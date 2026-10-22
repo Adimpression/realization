@@ -39,6 +39,7 @@ This report is generated deterministically by `scripts/check_architecture_bounda
 | `app_cli` | `ui_shared` | yes | yes | `workstation/app_cli/src/workstation/app/cli/cli.py` |
 | `app_cli` | `ui_textual` | yes | yes | `workstation/app_cli/src/workstation/app/cli/cli.py` |
 | `core_app` | `core_engine` | yes | yes | `core_app/src/realized_core/chat.py`, `core_app/src/realized_core/cli.py` |
+| `core_engine` | `governed_core` | yes | yes | `core_engine/src/realized_core_engine/__init__.py`, `core_engine/src/realized_core_engine/api.py`, `core_engine/src/realized_core_engine/canonical_reduction.py` (+3 more) |
 | `foundation_events` | `contracts` | yes | yes | `workstation/foundation_events/src/workstation/foundation/events/event_bus.py` |
 | `foundation_host` | `contracts` | yes | yes | `workstation/foundation_host/src/workstation/foundation/host/controller_runtime.py`, `workstation/foundation_host/src/workstation/foundation/host/subject_workflow.py` |
 | `foundation_host` | `foundation_models` | yes | yes | `workstation/foundation_host/src/workstation/foundation/host/delegation.py`, `workstation/foundation_host/src/workstation/foundation/host/host_interaction.py`, `workstation/foundation_host/src/workstation/foundation/host/learning_capture.py` (+1 more) |
@@ -109,7 +110,7 @@ These edges exist only to preserve historical import paths. They are excluded fr
 | Metric | Count |
 | --- | ---: |
 | Nodes | 148 |
-| Edges | 631 |
+| Edges | 635 |
 | Cyclic SCCs | 0 |
 | Nodes in cyclic SCCs | 0 |
 | Edges internal to cyclic SCCs | 0 |
@@ -128,6 +129,7 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | --- | --- | --- | --- |
 | `component_to_root` | `app_cli` | `host_interaction_receipts` | `orchestration` |
 | `component_to_root` | `app_cli` | `semantic_text` | `pure_helper` |
+| `component_to_root` | `core_engine` | `applied_theory_types` | `dto_constants` |
 | `component_to_root` | `core_engine` | `args` | `orchestration` |
 | `component_to_root` | `core_engine` | `controller_runtime` | `orchestration` |
 | `component_to_root` | `core_engine` | `system_state` | `orchestration` |
@@ -218,6 +220,8 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `root_to_component` | `controller_entrypoints` | `core_engine` | `orchestration` |
 | `root_to_component` | `controller_entrypoints` | `foundation_host` | `orchestration` |
 | `root_to_component` | `controller_entrypoints` | `subject_service` | `orchestration` |
+| `root_to_component` | `controller_runtime` | `governed_core` | `orchestration` |
+| `root_to_component` | `execution_frameworks` | `governed_core` | `orchestration` |
 | `root_to_component` | `governed_semantic_reduction_runtime` | `governed_core` | `orchestration` |
 | `root_to_component` | `skill_invocation_contract` | `skills_core` | `compatibility` |
 
@@ -225,10 +229,11 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 
 - `app_cli` -> `host_interaction_receipts` (`workstation/app_cli/src/workstation/app/cli/cli.py`)
 - `app_cli` -> `semantic_text` (`workstation/app_cli/src/workstation/app/cli/cli.py`)
-- `core_engine` -> `args` (`core_engine/src/realized_core_engine/api.py`, `core_engine/src/realized_core_engine/cli_support.py`)
-- `core_engine` -> `controller_runtime` (`core_engine/src/realized_core_engine/api.py`)
-- `core_engine` -> `system_state` (`core_engine/src/realized_core_engine/api.py`)
-- `core_engine` -> `title_semantics` (`core_engine/src/realized_core_engine/api.py`)
+- `core_engine` -> `applied_theory_types` (`core_engine/src/realized_core_engine/canonical_reduction.py`)
+- `core_engine` -> `args` (`core_engine/src/realized_core_engine/api.py`, `core_engine/src/realized_core_engine/canonical_reduction.py`, `core_engine/src/realized_core_engine/cli_support.py`)
+- `core_engine` -> `controller_runtime` (`core_engine/src/realized_core_engine/api.py`, `core_engine/src/realized_core_engine/canonical_reduction.py`)
+- `core_engine` -> `system_state` (`core_engine/src/realized_core_engine/api.py`, `core_engine/src/realized_core_engine/canonical_reduction.py`)
+- `core_engine` -> `title_semantics` (`core_engine/src/realized_core_engine/api.py`, `core_engine/src/realized_core_engine/canonical_reduction.py`)
 - `foundation_events` -> `host_interaction_receipts` (`workstation/foundation_events/src/workstation/foundation/events/event_bus.py`)
 - `foundation_events` -> `semantic_text` (`workstation/foundation_events/src/workstation/foundation/events/event_bus.py`, `workstation/foundation_events/src/workstation/foundation/events/message_tracing.py`)
 - `foundation_host` -> `applied_theory_types` (`workstation/foundation_host/src/workstation/foundation/host/delegation.py`)
@@ -318,6 +323,8 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 - `controller_entrypoints` -> `core_engine` (`controller_entrypoints.py`)
 - `controller_entrypoints` -> `foundation_host` (`controller_entrypoints.py`)
 - `controller_entrypoints` -> `subject_service` (`controller_entrypoints.py`)
+- `controller_runtime` -> `governed_core` (`controller_runtime.py`)
+- `execution_frameworks` -> `governed_core` (`execution_frameworks.py`)
 - `governed_semantic_reduction_runtime` -> `governed_core` (`governed_semantic_reduction_runtime.py`)
 - `skill_invocation_contract` -> `skills_core` (`skill_invocation_contract.py`)
 

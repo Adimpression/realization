@@ -138,6 +138,31 @@ class InterruptingWork:
             raise AssertionError("accepted interruption was not observable")
 
 
+class InterruptingWorkWithExternalizedEvidence:
+    def __init__(self, journal: MemoryAttemptJournal) -> None:
+        self.journal = journal
+
+    def execute(self, *, should_stop: Any) -> AttemptWorkResult:
+        request_attempt_interruption(
+            self.journal,
+            InterruptionRequest(
+                attempt_id="attempt-1",
+                requesting_principal="operator",
+                reason="user stop",
+                correlation={"request_id": "stop-1"},
+            ),
+        )
+        InterruptingWork.assert_stop(should_stop())
+        raise AttemptInterrupted(
+            work_result=AttemptWorkResult(
+                latest_admitted_revision_id="revision-1",
+                proposal_references=("proposal:unfinished",),
+                receipt_references=("receipt:proposal",),
+                performance_measurements={"proposal_latency_ns": 17},
+            )
+        )
+
+
 class FailingWork:
     def execute(self, *, should_stop: Any) -> AttemptWorkResult:
         raise OSError("host disappeared")
@@ -225,6 +250,35 @@ class AttemptLifecycleTests(unittest.TestCase):
             {"request_id": "stop-1"},
             result.attempt.interruption_correlation,
         )
+
+    def test_interruption_records_externalized_unfinished_work(self) -> None:
+        journal = MemoryAttemptJournal()
+
+        result = run_execution_attempt(
+            journal,
+            prepared_attempt(),
+            InterruptingWorkWithExternalizedEvidence(journal),
+        )
+
+        self.assertEqual(AttemptExecutionOutcome.INTERRUPTED, result.outcome)
+        self.assertEqual(
+            ("proposal:unfinished",),
+            result.attempt.proposal_references,
+        )
+        self.assertEqual(
+            ("receipt:proposal",),
+            result.attempt.receipt_references,
+        )
+        self.assertEqual("user stop", result.attempt.interruption_cause)
+        self.assertEqual(
+            {"request_id": "stop-1"},
+            result.attempt.interruption_correlation,
+        )
+        self.assertEqual(
+            17,
+            result.attempt.performance_measurements["proposal_latency_ns"],
+        )
+        self.assertIsNotNone(result.work_result)
 
     def test_operational_exception_is_not_a_semantic_failure(self) -> None:
         journal = MemoryAttemptJournal()
