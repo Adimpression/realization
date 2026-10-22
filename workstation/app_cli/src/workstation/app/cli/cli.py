@@ -91,6 +91,11 @@ def handle_workstation_prompt_command(args) -> int:
         prompt=args.prompt,
         model=args.model,
         max_tool_rounds=args.max_tool_rounds,
+        interaction_mode=getattr(args, "mode", "normal"),
+        governed_treatment=getattr(args, "governed_treatment", "independent"),
+        governed_parent_run_id=getattr(args, "governed_parent_run_id", ""),
+        governed_llm_policy=getattr(args, "governed_llm", "auto"),
+        governed_max_steps=int(getattr(args, "governed_max_steps", 256)),
     )
     if getattr(args, "report_out", None):
         Path(args.report_out).write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")

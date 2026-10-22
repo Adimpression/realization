@@ -38,6 +38,11 @@ class WorkstationContractSurfaceTest(unittest.TestCase):
     def test_root_contract_surface_is_explicit_and_importable(self) -> None:
         expected = {
             "ControllerRuntimeProvider",
+            "GovernedTurnRuntimeProvider",
+            "GovernedTurnLlmPolicy",
+            "GovernedTurnRequest",
+            "GovernedTurnResult",
+            "GovernedTurnTreatment",
             "SubjectImportStaging",
             "SubjectWorkflowActionOutcomeView",
             "SubjectWorkflowActionSpecView",

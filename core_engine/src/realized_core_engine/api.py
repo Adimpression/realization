@@ -48,11 +48,14 @@ def _apply_configuration(
             supported_executors=configuration.supported_executors,
         ),
     )
-    if configuration.evidence_path is not None:
-        attach_evidence_specs(
-            state,
-            load_evidence_specs(configuration.evidence_path),
-        )
+    evidence_specs = (
+        load_evidence_specs(configuration.evidence_path)
+        if configuration.evidence_path is not None
+        else []
+    )
+    evidence_specs.extend(inlet.to_evidence_spec() for inlet in configuration.inlets)
+    if evidence_specs:
+        attach_evidence_specs(state, evidence_specs)
 
 
 def _execute(

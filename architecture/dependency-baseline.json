@@ -226,7 +226,7 @@
     "cyclic_internal_edge_count": 0,
     "cyclic_node_count": 0,
     "cyclic_scc_count": 0,
-    "edge_count": 629,
+    "edge_count": 631,
     "largest_cyclic_scc_node_count": 0,
     "node_count": 148
   },
@@ -783,6 +783,18 @@
       "category": "orchestration",
       "direction": "root_to_component",
       "source": "controller_entrypoints",
+      "target": "contracts"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "controller_entrypoints",
+      "target": "core_engine"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "controller_entrypoints",
       "target": "foundation_host"
     },
     {
@@ -1158,6 +1170,14 @@
     {
       "source": "controller_entrypoints",
       "target": "app_cli"
+    },
+    {
+      "source": "controller_entrypoints",
+      "target": "contracts"
+    },
+    {
+      "source": "controller_entrypoints",
+      "target": "core_engine"
     },
     {
       "source": "controller_entrypoints",

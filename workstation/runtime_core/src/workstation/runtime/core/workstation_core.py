@@ -790,6 +790,9 @@ def workstation_chat_transcript_view(
                     role=role,
                     content=content,
                     timestamp_epoch_ms=_message_timestamp_epoch_ms(payload),
+                    message_id=collapse_ws(str(payload.get("message_id", ""))),
+                    turn_id=collapse_ws(str(payload.get("turn_id", ""))),
+                    sequence=int(payload.get("sequence", 0) or 0),
                 )
             )
     return WorkstationChatTranscriptView(messages=tuple(messages[-max(int(limit), 1) :]))

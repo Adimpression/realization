@@ -22,7 +22,11 @@ from realized_core_engine.contracts import (
 )
 
 
-def add_runtime_arguments(parser: argparse.ArgumentParser) -> None:
+def add_runtime_arguments(
+    parser: argparse.ArgumentParser,
+    *,
+    include_state_out: bool = True,
+) -> None:
     """Add the established engine options to a command parser."""
 
     parser.add_argument(
@@ -30,11 +34,12 @@ def add_runtime_arguments(parser: argparse.ArgumentParser) -> None:
         type=Path,
         help="Optional JSON file containing evidence items.",
     )
-    parser.add_argument(
-        "--state-out",
-        type=Path,
-        help="Optional path for the resulting durable state JSON.",
-    )
+    if include_state_out:
+        parser.add_argument(
+            "--state-out",
+            type=Path,
+            help="Optional path for the resulting durable state JSON.",
+        )
     parser.add_argument(
         "--sqlite",
         type=Path,

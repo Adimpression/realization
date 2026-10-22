@@ -16,6 +16,7 @@ from realized_core_engine.cli_support import (
     add_runtime_arguments,
     configuration_from_namespace,
 )
+from realized_core.chat import CoreConversationHost, run_core_chat_loop
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -61,6 +62,18 @@ def build_parser() -> argparse.ArgumentParser:
         required=True,
         help="Path to the saved durable state JSON.",
     )
+
+    chat_parser = subparsers.add_parser(
+        "chat",
+        help="Run a thin conversation host over explicit governed reductions.",
+    )
+    chat_parser.add_argument(
+        "--root",
+        type=Path,
+        required=True,
+        help="Directory for transcript, run bindings, checkpoints, and SQLite.",
+    )
+    add_runtime_arguments(chat_parser, include_state_out=False)
     return parser
 
 
@@ -78,6 +91,13 @@ def main(argv: Sequence[str] | None = None) -> int:
         )
     elif args.command == "inspect":
         result = inspect_state(args.state)
+    elif args.command == "chat":
+        return run_core_chat_loop(
+            CoreConversationHost(
+                root=args.root,
+                configuration=configuration_from_namespace(args),
+            )
+        )
     else:
         return 1
     print(json.dumps(result.summary, indent=2, sort_keys=True))

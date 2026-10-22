@@ -27,8 +27,10 @@ steps:
         core_engine.tests.test_api
         core_engine.tests.test_distribution
         core_app.tests.test_distribution
+        core_app.tests.test_chat
         tests.test_core_runtime_package_adapter
         tests.test_core_app_cli_equivalence
+        tests.test_governed_turn_provider
         tests.test_side_boundary_extraction
         tests.test_skill_invocation_contract
         tests.test_artifact_boundary_shape
@@ -40,6 +42,7 @@ steps:
         tests.test_llm_layer_hygiene
         tests.test_exchange_layer_hygiene
         tests.test_skill_boundary_normalization
+        workstation.tests.test_workstation_proto_documentation
         workstation.tests.test_six_layer_workstation_boundary_hygiene &&
         uv run --frozen python scripts/verify_core_distribution.py
         --app-wheel /workspace/core-app-dist/realized_core-0.1.0-py3-none-any.whl
@@ -59,6 +62,7 @@ steps:
         uv sync --frozen &&
         uv run --frozen python -m unittest
         workstation.tests.bdd.test_report_creation_bdd
+        workstation.tests.bdd.test_governed_reduction_chat_bdd
         workstation.tests.bdd.test_smart_city_travel_incremental_report_ladder_bdd
         workstation.tests.bdd.test_trial_skill_routing_bdd
         tests.test_architecture_compatibility_facades

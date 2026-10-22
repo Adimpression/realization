@@ -1,7 +1,14 @@
 """Stable public contract surface for workstation implementations and clients."""
 
 from workstation.contracts.events import WorkstationEvent
-from workstation.contracts.runtime import ControllerRuntimeProvider
+from workstation.contracts.runtime import (
+    ControllerRuntimeProvider,
+    GovernedTurnRuntimeProvider,
+    GovernedTurnLlmPolicy,
+    GovernedTurnRequest,
+    GovernedTurnResult,
+    GovernedTurnTreatment,
+)
 from workstation.contracts.shell import (
     WorkstationChatContext,
     WorkstationChatMessageView,
@@ -45,6 +52,11 @@ from workstation.contracts.subject import (
 
 __all__ = [
     "ControllerRuntimeProvider",
+    "GovernedTurnRuntimeProvider",
+    "GovernedTurnLlmPolicy",
+    "GovernedTurnRequest",
+    "GovernedTurnResult",
+    "GovernedTurnTreatment",
     "SubjectImportStaging",
     "SubjectWorkflowActionOutcomeView",
     "SubjectWorkflowActionSpecView",

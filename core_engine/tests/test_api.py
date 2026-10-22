@@ -16,6 +16,7 @@ if str(CORE_ENGINE_SRC) not in sys.path:
 
 from realized_core_engine import (
     EngineConfiguration,
+    EngineInlet,
     EngineResult,
     inspect,
     resume,
@@ -24,6 +25,48 @@ from realized_core_engine import (
 
 
 class CoreEngineApiTests(unittest.TestCase):
+    def test_resume_admits_only_explicit_typed_human_contribution(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_dir:
+            root = Path(temporary_dir)
+            sqlite_path = root / "state.sqlite3"
+            state_path = root / "run.json"
+            with patch.dict(os.environ, {"OPENAI_API_KEY": ""}, clear=False):
+                run(
+                    "Wait for an explicit human answer.",
+                    configuration=EngineConfiguration(
+                        state_output_path=state_path,
+                        sqlite_path=sqlite_path,
+                        max_steps=0,
+                        llm_policy="off",
+                    ),
+                )
+                resume(
+                    state_path,
+                    configuration=EngineConfiguration(
+                        state_output_path=state_path,
+                        sqlite_path=sqlite_path,
+                        max_steps=0,
+                        llm_policy="off",
+                        inlets=(
+                            EngineInlet(
+                                kind="human_contribution",
+                                content="The selected answer is forty-two.",
+                                source_ref="message-42",
+                                provenance=("turn-7",),
+                                context={"session_id": "session-3"},
+                            ),
+                        ),
+                    ),
+                )
+
+            payload = json.loads(state_path.read_text(encoding="utf-8"))
+            contributions = list(payload["human_contributions"].values())
+            self.assertEqual(1, len(contributions))
+            self.assertEqual("The selected answer is forty-two.", contributions[0]["content"])
+            self.assertIn("message-42", contributions[0]["provenance"])
+            self.assertIn("turn-7", contributions[0]["provenance"])
+            self.assertNotIn("unselected transcript text", state_path.read_text(encoding="utf-8"))
+
     def test_run_applies_typed_configuration_and_plain_sqlite(self) -> None:
         with tempfile.TemporaryDirectory() as temporary_dir:
             root = Path(temporary_dir)

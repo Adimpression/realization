@@ -254,6 +254,9 @@ class WorkstationChatMessage extends $pb.GeneratedMessage {
     $core.String? role,
     $core.String? content,
     $fixnum.Int64? timestampEpochMs,
+    $core.String? messageId,
+    $core.String? turnId,
+    $fixnum.Int64? sequence,
   }) {
     final $result = create();
     if (role != null) {
@@ -265,6 +268,15 @@ class WorkstationChatMessage extends $pb.GeneratedMessage {
     if (timestampEpochMs != null) {
       $result.timestampEpochMs = timestampEpochMs;
     }
+    if (messageId != null) {
+      $result.messageId = messageId;
+    }
+    if (turnId != null) {
+      $result.turnId = turnId;
+    }
+    if (sequence != null) {
+      $result.sequence = sequence;
+    }
     return $result;
   }
   WorkstationChatMessage._() : super();
@@ -275,6 +287,9 @@ class WorkstationChatMessage extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'role')
     ..aOS(2, _omitFieldNames ? '' : 'content')
     ..aInt64(3, _omitFieldNames ? '' : 'timestampEpochMs')
+    ..aOS(4, _omitFieldNames ? '' : 'messageId')
+    ..aOS(5, _omitFieldNames ? '' : 'turnId')
+    ..aInt64(6, _omitFieldNames ? '' : 'sequence')
     ..hasRequiredFields = false
   ;
 
@@ -338,6 +353,36 @@ class WorkstationChatMessage extends $pb.GeneratedMessage {
   $core.bool hasTimestampEpochMs() => $_has(2);
   @$pb.TagNumber(3)
   void clearTimestampEpochMs() => clearField(3);
+
+  /// Stable identity of this persisted transcript record.
+  @$pb.TagNumber(4)
+  $core.String get messageId => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set messageId($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasMessageId() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearMessageId() => clearField(4);
+
+  /// Stable identity shared by the user and response records for one turn.
+  @$pb.TagNumber(5)
+  $core.String get turnId => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set turnId($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasTurnId() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearTurnId() => clearField(5);
+
+  /// Monotonic position inside the workstation transcript.
+  @$pb.TagNumber(6)
+  $fixnum.Int64 get sequence => $_getI64(5);
+  @$pb.TagNumber(6)
+  set sequence($fixnum.Int64 v) { $_setInt64(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasSequence() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearSequence() => clearField(6);
 }
 
 /// What: Request for a bounded transcript snapshot.
@@ -974,6 +1019,11 @@ class SubmitChatInputRequest extends $pb.GeneratedMessage {
     $core.String? model,
     $core.int? maxToolRounds,
     $core.bool? forceLlmOnly,
+    $core.String? interactionMode,
+    $core.String? governedTreatment,
+    $core.String? governedParentRunId,
+    $core.String? governedLlmPolicy,
+    $core.int? governedMaxSteps,
   }) {
     final $result = create();
     if (rootPath != null) {
@@ -994,6 +1044,21 @@ class SubmitChatInputRequest extends $pb.GeneratedMessage {
     if (forceLlmOnly != null) {
       $result.forceLlmOnly = forceLlmOnly;
     }
+    if (interactionMode != null) {
+      $result.interactionMode = interactionMode;
+    }
+    if (governedTreatment != null) {
+      $result.governedTreatment = governedTreatment;
+    }
+    if (governedParentRunId != null) {
+      $result.governedParentRunId = governedParentRunId;
+    }
+    if (governedLlmPolicy != null) {
+      $result.governedLlmPolicy = governedLlmPolicy;
+    }
+    if (governedMaxSteps != null) {
+      $result.governedMaxSteps = governedMaxSteps;
+    }
     return $result;
   }
   SubmitChatInputRequest._() : super();
@@ -1007,6 +1072,11 @@ class SubmitChatInputRequest extends $pb.GeneratedMessage {
     ..aOS(4, _omitFieldNames ? '' : 'model')
     ..a<$core.int>(5, _omitFieldNames ? '' : 'maxToolRounds', $pb.PbFieldType.O3)
     ..aOB(6, _omitFieldNames ? '' : 'forceLlmOnly')
+    ..aOS(7, _omitFieldNames ? '' : 'interactionMode')
+    ..aOS(8, _omitFieldNames ? '' : 'governedTreatment')
+    ..aOS(9, _omitFieldNames ? '' : 'governedParentRunId')
+    ..aOS(10, _omitFieldNames ? '' : 'governedLlmPolicy')
+    ..a<$core.int>(11, _omitFieldNames ? '' : 'governedMaxSteps', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -1109,6 +1179,56 @@ class SubmitChatInputRequest extends $pb.GeneratedMessage {
   $core.bool hasForceLlmOnly() => $_has(5);
   @$pb.TagNumber(6)
   void clearForceLlmOnly() => clearField(6);
+
+  /// Explicit execution route: normal, llm_only, or governed_reduction.
+  @$pb.TagNumber(7)
+  $core.String get interactionMode => $_getSZ(6);
+  @$pb.TagNumber(7)
+  set interactionMode($core.String v) { $_setString(6, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasInteractionMode() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearInteractionMode() => clearField(7);
+
+  /// Explicit governed treatment for governed_reduction mode.
+  @$pb.TagNumber(8)
+  $core.String get governedTreatment => $_getSZ(7);
+  @$pb.TagNumber(8)
+  set governedTreatment($core.String v) { $_setString(7, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasGovernedTreatment() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearGovernedTreatment() => clearField(8);
+
+  /// Optional prior governed run selected by the conversation host.
+  @$pb.TagNumber(9)
+  $core.String get governedParentRunId => $_getSZ(8);
+  @$pb.TagNumber(9)
+  set governedParentRunId($core.String v) { $_setString(8, v); }
+  @$pb.TagNumber(9)
+  $core.bool hasGovernedParentRunId() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearGovernedParentRunId() => clearField(9);
+
+  /// Core LLM supplement policy: off, auto, or required.
+  @$pb.TagNumber(10)
+  $core.String get governedLlmPolicy => $_getSZ(9);
+  @$pb.TagNumber(10)
+  set governedLlmPolicy($core.String v) { $_setString(9, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasGovernedLlmPolicy() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearGovernedLlmPolicy() => clearField(10);
+
+  /// Maximum bounded reduction steps for the governed turn.
+  @$pb.TagNumber(11)
+  $core.int get governedMaxSteps => $_getIZ(10);
+  @$pb.TagNumber(11)
+  set governedMaxSteps($core.int v) { $_setSignedInt32(10, v); }
+  @$pb.TagNumber(11)
+  $core.bool hasGovernedMaxSteps() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearGovernedMaxSteps() => clearField(11);
 }
 
 /// What: Result of one shell prompt submission.
@@ -1149,6 +1269,10 @@ class SubmitChatInputResponse extends $pb.GeneratedMessage {
     $core.String? statusText,
     $core.String? snapshotVersion,
     $core.String? progressFingerprint,
+    $core.String? turnId,
+    $core.String? runId,
+    $core.String? runOutcome,
+    $core.String? checkpointPath,
     $core.String? traceId,
     $core.String? parentId,
   }) {
@@ -1177,6 +1301,18 @@ class SubmitChatInputResponse extends $pb.GeneratedMessage {
     if (progressFingerprint != null) {
       $result.progressFingerprint = progressFingerprint;
     }
+    if (turnId != null) {
+      $result.turnId = turnId;
+    }
+    if (runId != null) {
+      $result.runId = runId;
+    }
+    if (runOutcome != null) {
+      $result.runOutcome = runOutcome;
+    }
+    if (checkpointPath != null) {
+      $result.checkpointPath = checkpointPath;
+    }
     if (traceId != null) {
       $result.traceId = traceId;
     }
@@ -1198,6 +1334,10 @@ class SubmitChatInputResponse extends $pb.GeneratedMessage {
     ..aOS(6, _omitFieldNames ? '' : 'statusText')
     ..aOS(7, _omitFieldNames ? '' : 'snapshotVersion')
     ..aOS(8, _omitFieldNames ? '' : 'progressFingerprint')
+    ..aOS(9, _omitFieldNames ? '' : 'turnId')
+    ..aOS(10, _omitFieldNames ? '' : 'runId')
+    ..aOS(11, _omitFieldNames ? '' : 'runOutcome')
+    ..aOS(12, _omitFieldNames ? '' : 'checkpointPath')
     ..aOS(100, _omitFieldNames ? '' : 'traceId')
     ..aOS(101, _omitFieldNames ? '' : 'parentId')
     ..hasRequiredFields = false
@@ -1326,17 +1466,57 @@ class SubmitChatInputResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(8)
   void clearProgressFingerprint() => clearField(8);
 
+  /// Stable conversation-host turn identity.
+  @$pb.TagNumber(9)
+  $core.String get turnId => $_getSZ(8);
+  @$pb.TagNumber(9)
+  set turnId($core.String v) { $_setString(8, v); }
+  @$pb.TagNumber(9)
+  $core.bool hasTurnId() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearTurnId() => clearField(9);
+
+  /// Governed run identity when fulfilled by governed_reduction.
+  @$pb.TagNumber(10)
+  $core.String get runId => $_getSZ(9);
+  @$pb.TagNumber(10)
+  set runId($core.String v) { $_setString(9, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasRunId() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearRunId() => clearField(10);
+
+  /// Governed run outcome when fulfilled by governed_reduction.
+  @$pb.TagNumber(11)
+  $core.String get runOutcome => $_getSZ(10);
+  @$pb.TagNumber(11)
+  set runOutcome($core.String v) { $_setString(10, v); }
+  @$pb.TagNumber(11)
+  $core.bool hasRunOutcome() => $_has(10);
+  @$pb.TagNumber(11)
+  void clearRunOutcome() => clearField(11);
+
+  /// Durable reduction checkpoint when fulfilled by governed_reduction.
+  @$pb.TagNumber(12)
+  $core.String get checkpointPath => $_getSZ(11);
+  @$pb.TagNumber(12)
+  set checkpointPath($core.String v) { $_setString(11, v); }
+  @$pb.TagNumber(12)
+  $core.bool hasCheckpointPath() => $_has(11);
+  @$pb.TagNumber(12)
+  void clearCheckpointPath() => clearField(12);
+
   /// What: Trace id for the submit response.
   /// Why: Prompt execution must be traceable across shell, tools, and host
   /// layers.
   /// How: Log it for diagnostics when needed.
   /// Example: "shell-submit-response_a245df05"
   @$pb.TagNumber(100)
-  $core.String get traceId => $_getSZ(8);
+  $core.String get traceId => $_getSZ(12);
   @$pb.TagNumber(100)
-  set traceId($core.String v) { $_setString(8, v); }
+  set traceId($core.String v) { $_setString(12, v); }
   @$pb.TagNumber(100)
-  $core.bool hasTraceId() => $_has(8);
+  $core.bool hasTraceId() => $_has(12);
   @$pb.TagNumber(100)
   void clearTraceId() => clearField(100);
 
@@ -1345,11 +1525,11 @@ class SubmitChatInputResponse extends $pb.GeneratedMessage {
   /// How: Treat it as opaque correlation metadata.
   /// Example: "shell-submit-request_377bea11"
   @$pb.TagNumber(101)
-  $core.String get parentId => $_getSZ(9);
+  $core.String get parentId => $_getSZ(13);
   @$pb.TagNumber(101)
-  set parentId($core.String v) { $_setString(9, v); }
+  set parentId($core.String v) { $_setString(13, v); }
   @$pb.TagNumber(101)
-  $core.bool hasParentId() => $_has(9);
+  $core.bool hasParentId() => $_has(13);
   @$pb.TagNumber(101)
   void clearParentId() => clearField(101);
 }

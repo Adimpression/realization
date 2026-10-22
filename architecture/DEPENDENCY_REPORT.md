@@ -38,7 +38,7 @@ This report is generated deterministically by `scripts/check_architecture_bounda
 | `app_cli` | `shell_core` | yes | yes | `workstation/app_cli/src/workstation/app/cli/cli.py` |
 | `app_cli` | `ui_shared` | yes | yes | `workstation/app_cli/src/workstation/app/cli/cli.py` |
 | `app_cli` | `ui_textual` | yes | yes | `workstation/app_cli/src/workstation/app/cli/cli.py` |
-| `core_app` | `core_engine` | yes | yes | `core_app/src/realized_core/cli.py` |
+| `core_app` | `core_engine` | yes | yes | `core_app/src/realized_core/chat.py`, `core_app/src/realized_core/cli.py` |
 | `foundation_events` | `contracts` | yes | yes | `workstation/foundation_events/src/workstation/foundation/events/event_bus.py` |
 | `foundation_host` | `contracts` | yes | yes | `workstation/foundation_host/src/workstation/foundation/host/controller_runtime.py`, `workstation/foundation_host/src/workstation/foundation/host/subject_workflow.py` |
 | `foundation_host` | `foundation_models` | yes | yes | `workstation/foundation_host/src/workstation/foundation/host/delegation.py`, `workstation/foundation_host/src/workstation/foundation/host/host_interaction.py`, `workstation/foundation_host/src/workstation/foundation/host/learning_capture.py` (+1 more) |
@@ -51,7 +51,7 @@ This report is generated deterministically by `scripts/check_architecture_bounda
 | `grpc_implementation` | `shell_core` | yes | yes | `workstation/grpc_implementation/src/workstation/grpc/implementation/workstation_grpc_host.py`, `workstation/grpc_implementation/src/workstation/grpc/implementation/workstation_shell_grpc.py` |
 | `grpc_implementation` | `subject_core` | yes | yes | `workstation/grpc_implementation/src/workstation/grpc/implementation/subject_workflow_grpc.py` |
 | `grpc_implementation` | `subject_service` | yes | yes | `workstation/grpc_implementation/src/workstation/grpc/implementation/subject_workflow_grpc.py`, `workstation/grpc_implementation/src/workstation/grpc/implementation/workstation_grpc_host.py` |
-| `runtime_core` | `contracts` | yes | yes | `workstation/runtime_core/src/workstation/runtime/core/chat_commands.py`, `workstation/runtime_core/src/workstation/runtime/core/projection_subscriber_controller.py` |
+| `runtime_core` | `contracts` | yes | yes | `workstation/runtime_core/src/workstation/runtime/core/chat_commands.py`, `workstation/runtime_core/src/workstation/runtime/core/projection_subscriber_controller.py`, `workstation/runtime_core/src/workstation/runtime/core/session.py` |
 | `runtime_core` | `foundation_events` | yes | yes | `workstation/runtime_core/src/workstation/runtime/core/capabilities.py`, `workstation/runtime_core/src/workstation/runtime/core/chat_commands.py`, `workstation/runtime_core/src/workstation/runtime/core/projection_subscriber_controller.py` (+2 more) |
 | `runtime_core` | `foundation_host` | yes | yes | `workstation/runtime_core/src/workstation/runtime/core/capabilities.py`, `workstation/runtime_core/src/workstation/runtime/core/session.py`, `workstation/runtime_core/src/workstation/runtime/core/workstation_core.py` |
 | `runtime_core` | `foundation_models` | yes | yes | `workstation/runtime_core/src/workstation/runtime/core/capabilities.py`, `workstation/runtime_core/src/workstation/runtime/core/chat_commands.py`, `workstation/runtime_core/src/workstation/runtime/core/llm_driver.py` (+2 more) |
@@ -109,7 +109,7 @@ These edges exist only to preserve historical import paths. They are excluded fr
 | Metric | Count |
 | --- | ---: |
 | Nodes | 148 |
-| Edges | 629 |
+| Edges | 631 |
 | Cyclic SCCs | 0 |
 | Nodes in cyclic SCCs | 0 |
 | Edges internal to cyclic SCCs | 0 |
@@ -214,6 +214,8 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `root_to_component` | `blend_context` | `foundation_models` | `orchestration` |
 | `root_to_component` | `blend_session` | `foundation_models` | `orchestration` |
 | `root_to_component` | `controller_entrypoints` | `app_cli` | `orchestration` |
+| `root_to_component` | `controller_entrypoints` | `contracts` | `orchestration` |
+| `root_to_component` | `controller_entrypoints` | `core_engine` | `orchestration` |
 | `root_to_component` | `controller_entrypoints` | `foundation_host` | `orchestration` |
 | `root_to_component` | `controller_entrypoints` | `subject_service` | `orchestration` |
 | `root_to_component` | `governed_semantic_reduction_runtime` | `governed_core` | `orchestration` |
@@ -312,6 +314,8 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 - `blend_context` -> `foundation_models` (`blend_context.py`)
 - `blend_session` -> `foundation_models` (`blend_session.py`)
 - `controller_entrypoints` -> `app_cli` (`controller_entrypoints.py`)
+- `controller_entrypoints` -> `contracts` (`controller_entrypoints.py`)
+- `controller_entrypoints` -> `core_engine` (`controller_entrypoints.py`)
 - `controller_entrypoints` -> `foundation_host` (`controller_entrypoints.py`)
 - `controller_entrypoints` -> `subject_service` (`controller_entrypoints.py`)
 - `governed_semantic_reduction_runtime` -> `governed_core` (`governed_semantic_reduction_runtime.py`)

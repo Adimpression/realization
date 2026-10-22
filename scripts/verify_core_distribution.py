@@ -51,6 +51,7 @@ def _verify_contents(
     app_required = {
         "realized_core/__init__.py",
         "realized_core/__main__.py",
+        "realized_core/chat.py",
         "realized_core/cli.py",
     }
     app_missing = sorted(app_required - app_entries)

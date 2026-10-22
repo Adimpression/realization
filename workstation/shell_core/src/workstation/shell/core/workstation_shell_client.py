@@ -28,6 +28,9 @@ def _message_view_from_message(message: workstation_shell_pb2.WorkstationChatMes
         role=message.role,
         content=message.content,
         timestamp_epoch_ms=int(message.timestamp_epoch_ms or 0),
+        message_id=message.message_id,
+        turn_id=message.turn_id,
+        sequence=int(message.sequence or 0),
     )
 
 
@@ -103,6 +106,11 @@ class InProcessWorkstationShellClient:
         model: str | None = None,
         max_tool_rounds: int = 8,
         force_llm_only: bool = False,
+        interaction_mode: str = "normal",
+        governed_treatment: str = "independent",
+        governed_parent_run_id: str = "",
+        governed_llm_policy: str = "auto",
+        governed_max_steps: int = 256,
     ) -> WorkstationSubmitChatInputResultView:
         return self.service.submit_chat_input(
             root_path=root_path,
@@ -111,6 +119,11 @@ class InProcessWorkstationShellClient:
             model=model,
             max_tool_rounds=max_tool_rounds,
             force_llm_only=force_llm_only,
+            interaction_mode=interaction_mode,
+            governed_treatment=governed_treatment,
+            governed_parent_run_id=governed_parent_run_id,
+            governed_llm_policy=governed_llm_policy,
+            governed_max_steps=governed_max_steps,
         )
 
     def append_shell_turn(
@@ -227,6 +240,11 @@ class GrpcWorkstationShellClient:
         model: str | None = None,
         max_tool_rounds: int = 8,
         force_llm_only: bool = False,
+        interaction_mode: str = "normal",
+        governed_treatment: str = "independent",
+        governed_parent_run_id: str = "",
+        governed_llm_policy: str = "auto",
+        governed_max_steps: int = 256,
     ) -> WorkstationSubmitChatInputResultView:
         response = self._stub.SubmitChatInput(
             workstation_shell_pb2.SubmitChatInputRequest(
@@ -236,6 +254,11 @@ class GrpcWorkstationShellClient:
                 model=str(model or ""),
                 max_tool_rounds=max(int(max_tool_rounds or 0), 0),
                 force_llm_only=bool(force_llm_only),
+                interaction_mode=str(interaction_mode or "normal"),
+                governed_treatment=str(governed_treatment or "independent"),
+                governed_parent_run_id=str(governed_parent_run_id or ""),
+                governed_llm_policy=str(governed_llm_policy or "auto"),
+                governed_max_steps=max(int(governed_max_steps or 0), 0),
             )
         )
         return WorkstationSubmitChatInputResultView(
@@ -247,6 +270,10 @@ class GrpcWorkstationShellClient:
             status_text=response.status_text,
             snapshot_version=response.snapshot_version,
             progress_fingerprint=response.progress_fingerprint,
+            turn_id=response.turn_id,
+            run_id=response.run_id,
+            run_outcome=response.run_outcome,
+            checkpoint_path=response.checkpoint_path,
         )
 
     def append_shell_turn(

@@ -34,11 +34,16 @@ from workstation.runtime.core.chat_commands import run_workstation_natural_langu
 from workstation.skills.core.direct_composition import preferred_workstation_skill_invocation_plan
 from workstation.foundation.events.event_bus import append_workstation_receipt_and_publish, publish_workstation_event
 from workstation.foundation.host.learning_capture import capture_workstation_chat_learning_from_tool_receipts
+from workstation.foundation.host.controller_runtime import controller_runtime_provider
 from workstation.foundation.models import (
     WorkstationAttachment,
     WorkstationDelegationEscalationDecision,
     WorkstationDelegationEscalationRequest,
     WorkstationSession,
+)
+from workstation.contracts.runtime import (
+    GovernedTurnRequest,
+    GovernedTurnRuntimeProvider,
 )
 from workstation.skills.planning.skill_composition_planning import preferred_workstation_skill_composition_plan
 from workstation.skills.planning.skill_home import resolve_workstation_skill_home, workstation_skill_home_metadata
@@ -231,6 +236,7 @@ def launch_workstation_session(
         write_workstation_skill_catalog(root, session)
         write_workstation_prompt_skill_shortlist(root, session=session, prompt=initial_task or "")
     (root / "MESSAGES.jsonl").write_text("")
+    (root / "GOVERNED_TURNS.jsonl").write_text("")
     (root / "receipts" / "events.jsonl").write_text("")
     (root / "TASK.md").write_text(initial_task.strip() or "No active task yet.\n")
     (root / "README.md").write_text(_render_readme(session))
@@ -417,6 +423,11 @@ def prompt_workstation_session(
     client: Any | None = None,
     max_tool_rounds: int = 8,
     force_llm_only: bool = False,
+    interaction_mode: str = "normal",
+    governed_treatment: str = "independent",
+    governed_parent_run_id: str = "",
+    governed_llm_policy: str = "auto",
+    governed_max_steps: int = 256,
     delegation_approval_callback: Callable[[WorkstationDelegationEscalationRequest], WorkstationDelegationEscalationDecision | bool | None] | None = None,
 ) -> dict[str, Any]:
     """
@@ -443,12 +454,41 @@ def prompt_workstation_session(
     """
     root = Path(root_path).expanduser().resolve()
     session = load_workstation_session(root)
+    normalized_interaction_mode = collapse_ws(interaction_mode).casefold() or "normal"
+    if force_llm_only:
+        if normalized_interaction_mode == "governed_reduction":
+            raise ValueError("LLM-only and governed-reduction modes are mutually exclusive.")
+        normalized_interaction_mode = "llm_only"
+    if normalized_interaction_mode not in {"normal", "llm_only", "governed_reduction"}:
+        raise ValueError(f"Unsupported workstation interaction mode: {interaction_mode}")
+    normalized_governed_treatment = collapse_ws(governed_treatment).casefold() or "independent"
+    if normalized_governed_treatment not in {
+        "independent",
+        "human_contribution",
+        "follow_up",
+        "correction",
+    }:
+        raise ValueError(f"Unsupported governed turn treatment: {governed_treatment}")
+    if normalized_interaction_mode != "governed_reduction" and normalized_governed_treatment != "independent":
+        raise ValueError("Governed turn treatment requires governed-reduction mode.")
+    normalized_governed_llm_policy = collapse_ws(governed_llm_policy).casefold() or "auto"
+    if normalized_governed_llm_policy not in {"off", "auto", "required"}:
+        raise ValueError(f"Unsupported governed LLM policy: {governed_llm_policy}")
     task_contract = normalize_prompt_to_task_boundary_contract(prompt)
     _write_json(root / "TASK_CONTRACT.json", task_contract.to_dict())
     (root / "TASK.md").write_text(prompt.strip() + "\n")
     if any(attachment.kind == "skill_store" for attachment in session.attachments):
         write_workstation_prompt_skill_shortlist(root, session=session, prompt=prompt)
-    _append_message(root, {"role": "user", "content": prompt})
+    turn_id = f"turn_{uuid.uuid4().hex}"
+    user_message = _append_message(
+        root,
+        {
+            "role": "user",
+            "content": prompt,
+            "turn_id": turn_id,
+            "interaction_mode": normalized_interaction_mode,
+        },
+    )
     publish_workstation_event(
         root_path=root,
         session_id=session.session_id,
@@ -458,6 +498,10 @@ def prompt_workstation_session(
             "task_contract": task_contract.to_dict(),
             "model": str(model or ""),
             "max_tool_rounds": int(max_tool_rounds),
+            "turn_id": turn_id,
+            "message_id": user_message["message_id"],
+            "interaction_mode": normalized_interaction_mode,
+            "governed_treatment": normalized_governed_treatment,
         },
     )
     append_workstation_receipt_and_publish(
@@ -470,7 +514,123 @@ def prompt_workstation_session(
     )
     message_history = _load_message_history(root)
 
-    if force_llm_only:
+    if normalized_interaction_mode == "governed_reduction":
+        parent_binding = (
+            _resolve_governed_turn_binding(
+                root,
+                run_id=collapse_ws(governed_parent_run_id),
+            )
+            if normalized_governed_treatment != "independent"
+            else None
+        )
+        governed_root = root / "governed_reduction"
+        states_root = governed_root / "states"
+        states_root.mkdir(parents=True, exist_ok=True)
+        sqlite_path = governed_root / "artifacts.sqlite3"
+        checkpoint_path = (
+            Path(str(parent_binding["checkpoint_path"])).expanduser().resolve()
+            if normalized_governed_treatment == "human_contribution" and parent_binding is not None
+            else states_root / f"{turn_id}.json"
+        )
+        runtime_provider = controller_runtime_provider()
+        if not isinstance(runtime_provider, GovernedTurnRuntimeProvider):
+            raise RuntimeError(
+                "The configured controller provider does not support governed turns."
+            )
+        governed_result = runtime_provider.perform_governed_turn(
+            GovernedTurnRequest(
+                session_id=session.session_id,
+                turn_id=turn_id,
+                user_message_id=str(user_message["message_id"]),
+                prompt=prompt,
+                treatment=normalized_governed_treatment,
+                checkpoint_path=checkpoint_path,
+                sqlite_path=sqlite_path,
+                parent_run_id=(
+                    str(parent_binding.get("run_id", ""))
+                    if parent_binding is not None
+                    else ""
+                ),
+                parent_checkpoint_path=(
+                    Path(str(parent_binding["checkpoint_path"]))
+                    if parent_binding is not None
+                    else None
+                ),
+                llm_policy=normalized_governed_llm_policy,
+                max_steps=max(0, int(governed_max_steps)),
+            )
+        )
+        assistant_message = _append_message(
+            root,
+            {
+                "role": "assistant",
+                "content": governed_result.assistant_text,
+                "turn_id": turn_id,
+                "interaction_mode": normalized_interaction_mode,
+                "governed_run_id": governed_result.run_id,
+            },
+        )
+        binding = {
+            "binding_id": f"binding_{uuid.uuid4().hex}",
+            "session_id": session.session_id,
+            "turn_id": turn_id,
+            "user_message_id": user_message["message_id"],
+            "assistant_message_id": assistant_message["message_id"],
+            "treatment": normalized_governed_treatment,
+            "run_id": governed_result.run_id,
+            "parent_run_id": governed_result.parent_run_id,
+            "checkpoint_path": str(governed_result.checkpoint_path),
+            "sqlite_path": str(governed_result.sqlite_path),
+            "run_outcome": governed_result.run_outcome,
+            "root_status": governed_result.root_status,
+            "created_at": datetime.now(timezone.utc).isoformat(),
+        }
+        _append_jsonl(root / "GOVERNED_TURNS.jsonl", binding)
+        turn_report = {
+            "assistant_text": governed_result.assistant_text,
+            "tool_receipts": [],
+            "model": "realized-core",
+            "rounds": 0,
+            "fulfilled_by": "governed_reduction",
+            "fallback_used": False,
+            "interaction_mode": normalized_interaction_mode,
+            "governed_treatment": normalized_governed_treatment,
+            "turn_id": turn_id,
+            "run_id": governed_result.run_id,
+            "parent_run_id": governed_result.parent_run_id,
+            "run_outcome": governed_result.run_outcome,
+            "checkpoint_path": str(governed_result.checkpoint_path),
+            "binding": binding,
+        }
+        _write_json(root / "LAST_RESPONSE.json", turn_report)
+        append_workstation_receipt_and_publish(
+            root_path=root,
+            session_id=session.session_id,
+            receipt=host_interaction_assistant_response_receipt(
+                assistant_text=governed_result.assistant_text,
+                model="realized-core",
+                rounds=0,
+                tool_calls=0,
+                fulfilled_by="governed_reduction",
+                fallback_used=False,
+            ),
+        )
+        _publish_turn_finished_event(
+            root=root,
+            session=session,
+            assistant_text=governed_result.assistant_text,
+            fulfilled_by="governed_reduction",
+            tool_calls=0,
+            model="realized-core",
+        )
+        return {
+            "session_id": session.session_id,
+            "root_path": str(root),
+            "task_contract": task_contract.to_dict(),
+            **turn_report,
+        }
+
+    if normalized_interaction_mode == "llm_only":
         turn_report = run_workstation_openai_turn(
             session=session,
             task_contract=task_contract,
@@ -485,7 +645,17 @@ def prompt_workstation_session(
             client=client,
             max_tool_rounds=1,
         )
-        _append_message(root, {"role": "assistant", "content": turn_report["assistant_text"]})
+        turn_report["turn_id"] = turn_id
+        turn_report["interaction_mode"] = normalized_interaction_mode
+        _append_message(
+            root,
+            {
+                "role": "assistant",
+                "content": turn_report["assistant_text"],
+                "turn_id": turn_id,
+                "interaction_mode": normalized_interaction_mode,
+            },
+        )
         _write_json(root / "LAST_RESPONSE.json", turn_report)
         append_workstation_receipt_and_publish(
             root_path=root,
@@ -518,6 +688,8 @@ def prompt_workstation_session(
             "model": turn_report["model"],
             "rounds": turn_report["rounds"],
             "learning_context_updates": [],
+            "turn_id": turn_id,
+            "interaction_mode": normalized_interaction_mode,
         }
 
     handled_shell_utility, shell_utility_report = run_workstation_natural_language_shell_command(
@@ -532,8 +704,18 @@ def prompt_workstation_session(
             "rounds": 0,
             "fulfilled_by": collapse_ws(str(shell_utility_report.get("fulfilled_by", ""))),
             "fallback_used": False,
+            "turn_id": turn_id,
+            "interaction_mode": normalized_interaction_mode,
         }
-        _append_message(root, {"role": "assistant", "content": turn_report["assistant_text"]})
+        _append_message(
+            root,
+            {
+                "role": "assistant",
+                "content": turn_report["assistant_text"],
+                "turn_id": turn_id,
+                "interaction_mode": normalized_interaction_mode,
+            },
+        )
         _write_json(root / "LAST_RESPONSE.json", turn_report)
         append_workstation_receipt_and_publish(
             root_path=root,
@@ -643,8 +825,18 @@ def prompt_workstation_session(
                     "model": "workstation-direct-composition",
                     "rounds": 0,
                     "direct_result_status": collapse_ws(str(composition_result.get("status", ""))).casefold(),
+                    "turn_id": turn_id,
+                    "interaction_mode": normalized_interaction_mode,
                 }
-                _append_message(root, {"role": "assistant", "content": turn_report["assistant_text"]})
+                _append_message(
+                    root,
+                    {
+                        "role": "assistant",
+                        "content": turn_report["assistant_text"],
+                        "turn_id": turn_id,
+                        "interaction_mode": normalized_interaction_mode,
+                    },
+                )
                 _write_json(root / "LAST_RESPONSE.json", turn_report)
                 append_workstation_receipt_and_publish(
                     root_path=root,
@@ -694,8 +886,18 @@ def prompt_workstation_session(
                     "model": "workstation-direct-composition",
                     "rounds": 0,
                     "direct_result_status": direct_status,
+                    "turn_id": turn_id,
+                    "interaction_mode": normalized_interaction_mode,
                 }
-                _append_message(root, {"role": "assistant", "content": turn_report["assistant_text"]})
+                _append_message(
+                    root,
+                    {
+                        "role": "assistant",
+                        "content": turn_report["assistant_text"],
+                        "turn_id": turn_id,
+                        "interaction_mode": normalized_interaction_mode,
+                    },
+                )
                 _write_json(root / "LAST_RESPONSE.json", turn_report)
                 append_workstation_receipt_and_publish(
                     root_path=root,
@@ -737,6 +939,8 @@ def prompt_workstation_session(
         client=client,
         max_tool_rounds=max_tool_rounds,
     )
+    turn_report["turn_id"] = turn_id
+    turn_report["interaction_mode"] = normalized_interaction_mode
     learning_context_update = capture_workstation_chat_learning_from_tool_receipts(
         session=session,
         prompt=prompt,
@@ -744,7 +948,15 @@ def prompt_workstation_session(
     )
     if learning_context_update is not None:
         turn_report["learning_context_updates"] = [learning_context_update]
-    _append_message(root, {"role": "assistant", "content": turn_report["assistant_text"]})
+    _append_message(
+        root,
+        {
+            "role": "assistant",
+            "content": turn_report["assistant_text"],
+            "turn_id": turn_id,
+            "interaction_mode": normalized_interaction_mode,
+        },
+    )
     _write_json(root / "LAST_RESPONSE.json", turn_report)
     append_workstation_receipt_and_publish(
         root_path=root,
@@ -777,6 +989,8 @@ def prompt_workstation_session(
         "model": turn_report["model"],
         "rounds": turn_report["rounds"],
         "learning_context_updates": list(turn_report.get("learning_context_updates", [])),
+        "turn_id": turn_id,
+        "interaction_mode": normalized_interaction_mode,
     }
 
 
@@ -1014,7 +1228,7 @@ def _blend_world_from_session(session: WorkstationSession) -> BlendWorld | None:
     )
 
 
-def _append_message(root: Path, payload: dict[str, Any]) -> None:
+def _append_message(root: Path, payload: dict[str, Any]) -> dict[str, Any]:
     """
     High Level Purpose:
         In circumstances like workstation turn recording, helps with appending one conversational message to the session-visible message log.
@@ -1031,7 +1245,7 @@ def _append_message(root: Path, payload: dict[str, Any]) -> None:
         payload: Value for `payload` used by `_append_message`. Expected type: `dict[str, Any]`.
 
     Returns:
-        None: This function mutates state or performs side effects without returning a value.
+        dict[str, Any]: The normalized, durably appended message record.
     """
     normalized_payload = dict(payload)
     raw_epoch_ms = normalized_payload.get("timestamp_epoch_ms", 0)
@@ -1042,8 +1256,74 @@ def _append_message(root: Path, payload: dict[str, Any]) -> None:
     if epoch_ms <= 0:
         epoch_ms = int(time.time() * 1000)
     normalized_payload["timestamp_epoch_ms"] = epoch_ms
-    with (root / "MESSAGES.jsonl").open("a", encoding="utf-8") as handle:
-        handle.write(json.dumps(json_safe(normalized_payload), sort_keys=True) + "\n")
+    normalized_payload["message_id"] = collapse_ws(str(normalized_payload.get("message_id", ""))) or f"msg_{uuid.uuid4().hex}"
+    normalized_payload["turn_id"] = collapse_ws(str(normalized_payload.get("turn_id", ""))) or f"turn_{uuid.uuid4().hex}"
+    try:
+        sequence = int(normalized_payload.get("sequence", 0) or 0)
+    except Exception:
+        sequence = 0
+    if sequence <= 0:
+        sequence = _next_message_sequence(root)
+    normalized_payload["sequence"] = sequence
+    _append_jsonl(root / "MESSAGES.jsonl", normalized_payload)
+    return normalized_payload
+
+
+def _append_jsonl(path: Path, payload: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("a", encoding="utf-8") as handle:
+        handle.write(json.dumps(json_safe(payload), sort_keys=True) + "\n")
+
+
+def _next_message_sequence(root: Path) -> int:
+    message_path = root / "MESSAGES.jsonl"
+    if not message_path.exists():
+        return 1
+    maximum = 0
+    count = 0
+    for line in message_path.read_text(encoding="utf-8").splitlines():
+        stripped = line.strip()
+        if not stripped:
+            continue
+        count += 1
+        try:
+            maximum = max(maximum, int(json.loads(stripped).get("sequence", 0) or 0))
+        except Exception:
+            continue
+    return max(maximum, count) + 1
+
+
+def _load_governed_turn_bindings(root: Path) -> list[dict[str, Any]]:
+    binding_path = root / "GOVERNED_TURNS.jsonl"
+    if not binding_path.exists():
+        return []
+    bindings: list[dict[str, Any]] = []
+    for line in binding_path.read_text(encoding="utf-8").splitlines():
+        stripped = line.strip()
+        if not stripped:
+            continue
+        try:
+            payload = json.loads(stripped)
+        except Exception:
+            continue
+        if isinstance(payload, dict) and collapse_ws(str(payload.get("run_id", ""))):
+            bindings.append(dict(payload))
+    return bindings
+
+
+def _resolve_governed_turn_binding(root: Path, *, run_id: str = "") -> dict[str, Any]:
+    bindings = _load_governed_turn_bindings(root)
+    normalized_run_id = collapse_ws(run_id)
+    if normalized_run_id:
+        bindings = [
+            binding
+            for binding in bindings
+            if collapse_ws(str(binding.get("run_id", ""))) == normalized_run_id
+        ]
+    if not bindings:
+        qualifier = f" for run {normalized_run_id}" if normalized_run_id else ""
+        raise ValueError(f"No governed turn binding is available{qualifier}.")
+    return bindings[-1]
 
 
 def _load_message_history(root: Path) -> list[dict[str, Any]]:
@@ -1068,7 +1348,13 @@ def _load_message_history(root: Path) -> list[dict[str, Any]]:
     for line in (root / "MESSAGES.jsonl").read_text().splitlines():
         stripped = line.strip()
         if stripped:
-            messages.append(json.loads(stripped))
+            payload = json.loads(stripped)
+            if not isinstance(payload, dict):
+                continue
+            role = collapse_ws(str(payload.get("role", "")))
+            content = str(payload.get("content", "") or "")
+            if role and content:
+                messages.append({"role": role, "content": content})
     return messages
 
 

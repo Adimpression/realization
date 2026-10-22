@@ -54,6 +54,9 @@ const WorkstationChatMessage$json = {
     {'1': 'role', '3': 1, '4': 1, '5': 9, '10': 'role'},
     {'1': 'content', '3': 2, '4': 1, '5': 9, '10': 'content'},
     {'1': 'timestamp_epoch_ms', '3': 3, '4': 1, '5': 3, '10': 'timestampEpochMs'},
+    {'1': 'message_id', '3': 4, '4': 1, '5': 9, '10': 'messageId'},
+    {'1': 'turn_id', '3': 5, '4': 1, '5': 9, '10': 'turnId'},
+    {'1': 'sequence', '3': 6, '4': 1, '5': 3, '10': 'sequence'},
   ],
 };
 
@@ -61,7 +64,8 @@ const WorkstationChatMessage$json = {
 final $typed_data.Uint8List workstationChatMessageDescriptor = $convert.base64Decode(
     'ChZXb3Jrc3RhdGlvbkNoYXRNZXNzYWdlEhIKBHJvbGUYASABKAlSBHJvbGUSGAoHY29udGVudB'
     'gCIAEoCVIHY29udGVudBIsChJ0aW1lc3RhbXBfZXBvY2hfbXMYAyABKANSEHRpbWVzdGFtcEVw'
-    'b2NoTXM=');
+    'b2NoTXMSHQoKbWVzc2FnZV9pZBgEIAEoCVIJbWVzc2FnZUlkEhcKB3R1cm5faWQYBSABKAlSBn'
+    'R1cm5JZBIaCghzZXF1ZW5jZRgGIAEoA1IIc2VxdWVuY2U=');
 
 @$core.Deprecated('Use chatSnapshotRequestDescriptor instead')
 const ChatSnapshotRequest$json = {
@@ -155,6 +159,14 @@ const SubmitChatInputRequest$json = {
     {'1': 'model', '3': 4, '4': 1, '5': 9, '10': 'model'},
     {'1': 'max_tool_rounds', '3': 5, '4': 1, '5': 5, '10': 'maxToolRounds'},
     {'1': 'force_llm_only', '3': 6, '4': 1, '5': 8, '10': 'forceLlmOnly'},
+    {'1': 'interaction_mode', '3': 7, '4': 1, '5': 9, '10': 'interactionMode'},
+    {'1': 'governed_treatment', '3': 8, '4': 1, '5': 9, '10': 'governedTreatment'},
+    {'1': 'governed_parent_run_id', '3': 9, '4': 1, '5': 9, '10': 'governedParentRunId'},
+    {'1': 'governed_llm_policy', '3': 10, '4': 1, '5': 9, '10': 'governedLlmPolicy'},
+    {'1': 'governed_max_steps', '3': 11, '4': 1, '5': 5, '9': 0, '10': 'governedMaxSteps', '17': true},
+  ],
+  '8': [
+    {'1': '_governed_max_steps'},
   ],
 };
 
@@ -164,7 +176,11 @@ final $typed_data.Uint8List submitChatInputRequestDescriptor = $convert.base64De
     'oRY2xpZW50X3Nlc3Npb25faWQYAiABKAlSD2NsaWVudFNlc3Npb25JZBIfCgtwcm9tcHRfdGV4'
     'dBgDIAEoCVIKcHJvbXB0VGV4dBIUCgVtb2RlbBgEIAEoCVIFbW9kZWwSJgoPbWF4X3Rvb2xfcm'
     '91bmRzGAUgASgFUg1tYXhUb29sUm91bmRzEiQKDmZvcmNlX2xsbV9vbmx5GAYgASgIUgxmb3Jj'
-    'ZUxsbU9ubHk=');
+    'ZUxsbU9ubHkSKQoQaW50ZXJhY3Rpb25fbW9kZRgHIAEoCVIPaW50ZXJhY3Rpb25Nb2RlEi0KEm'
+    'dvdmVybmVkX3RyZWF0bWVudBgIIAEoCVIRZ292ZXJuZWRUcmVhdG1lbnQSMwoWZ292ZXJuZWRf'
+    'cGFyZW50X3J1bl9pZBgJIAEoCVITZ292ZXJuZWRQYXJlbnRSdW5JZBIuChNnb3Zlcm5lZF9sbG'
+    '1fcG9saWN5GAogASgJUhFnb3Zlcm5lZExsbVBvbGljeRIxChJnb3Zlcm5lZF9tYXhfc3RlcHMY'
+    'CyABKAVIAFIQZ292ZXJuZWRNYXhTdGVwc4gBAUIVChNfZ292ZXJuZWRfbWF4X3N0ZXBz');
 
 @$core.Deprecated('Use submitChatInputResponseDescriptor instead')
 const SubmitChatInputResponse$json = {
@@ -178,6 +194,10 @@ const SubmitChatInputResponse$json = {
     {'1': 'status_text', '3': 6, '4': 1, '5': 9, '10': 'statusText'},
     {'1': 'snapshot_version', '3': 7, '4': 1, '5': 9, '10': 'snapshotVersion'},
     {'1': 'progress_fingerprint', '3': 8, '4': 1, '5': 9, '10': 'progressFingerprint'},
+    {'1': 'turn_id', '3': 9, '4': 1, '5': 9, '10': 'turnId'},
+    {'1': 'run_id', '3': 10, '4': 1, '5': 9, '10': 'runId'},
+    {'1': 'run_outcome', '3': 11, '4': 1, '5': 9, '10': 'runOutcome'},
+    {'1': 'checkpoint_path', '3': 12, '4': 1, '5': 9, '10': 'checkpointPath'},
     {'1': 'trace_id', '3': 100, '4': 1, '5': 9, '10': 'traceId'},
     {'1': 'parent_id', '3': 101, '4': 1, '5': 9, '10': 'parentId'},
   ],
@@ -191,8 +211,10 @@ final $typed_data.Uint8List submitChatInputResponseDescriptor = $convert.base64D
     'oGcm91bmRzGAQgASgFUgZyb3VuZHMSLAoSdG9vbF9yZWNlaXB0c19qc29uGAUgASgJUhB0b29s'
     'UmVjZWlwdHNKc29uEh8KC3N0YXR1c190ZXh0GAYgASgJUgpzdGF0dXNUZXh0EikKEHNuYXBzaG'
     '90X3ZlcnNpb24YByABKAlSD3NuYXBzaG90VmVyc2lvbhIxChRwcm9ncmVzc19maW5nZXJwcmlu'
-    'dBgIIAEoCVITcHJvZ3Jlc3NGaW5nZXJwcmludBIZCgh0cmFjZV9pZBhkIAEoCVIHdHJhY2VJZB'
-    'IbCglwYXJlbnRfaWQYZSABKAlSCHBhcmVudElk');
+    'dBgIIAEoCVITcHJvZ3Jlc3NGaW5nZXJwcmludBIXCgd0dXJuX2lkGAkgASgJUgZ0dXJuSWQSFQ'
+    'oGcnVuX2lkGAogASgJUgVydW5JZBIfCgtydW5fb3V0Y29tZRgLIAEoCVIKcnVuT3V0Y29tZRIn'
+    'Cg9jaGVja3BvaW50X3BhdGgYDCABKAlSDmNoZWNrcG9pbnRQYXRoEhkKCHRyYWNlX2lkGGQgAS'
+    'gJUgd0cmFjZUlkEhsKCXBhcmVudF9pZBhlIAEoCVIIcGFyZW50SWQ=');
 
 @$core.Deprecated('Use appendShellTurnRequestDescriptor instead')
 const AppendShellTurnRequest$json = {

@@ -413,6 +413,21 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     workstation_prompt_parser.add_argument("--prompt", required=True, help="Natural-language prompt to send through the workstation session.")
     workstation_prompt_parser.add_argument("--model", help="Optional explicit OpenAI-compatible model override for this turn.")
     workstation_prompt_parser.add_argument("--max-tool-rounds", type=int, default=8, help="Maximum OpenAI tool rounds for this workstation turn.")
+    workstation_prompt_parser.add_argument(
+        "--mode",
+        choices=["normal", "llm_only", "governed_reduction"],
+        default="normal",
+        help="Explicit turn route. Governed reduction is opt-in and never replaces normal chat.",
+    )
+    workstation_prompt_parser.add_argument(
+        "--governed-treatment",
+        choices=["independent", "human_contribution", "follow_up", "correction"],
+        default="independent",
+        help="How an explicitly governed turn relates to any selected prior run.",
+    )
+    workstation_prompt_parser.add_argument("--governed-parent-run-id", default="", help="Prior governed run selected for continuation, follow-up, or correction.")
+    workstation_prompt_parser.add_argument("--governed-llm", choices=["off", "auto", "required"], default="auto", help="LLM supplement policy for an explicitly governed turn.")
+    workstation_prompt_parser.add_argument("--governed-max-steps", type=int, default=256, help="Maximum bounded reduction steps for an explicitly governed turn.")
     workstation_prompt_parser.add_argument("--report-out", type=Path, help="Optional path to write the workstation turn report JSON.")
 
     workstation_chat_parser = subparsers.add_parser("workstation-chat", help="Start an interactive host-owned chat loop against an existing workstation session.")

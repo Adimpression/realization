@@ -117,7 +117,7 @@ and invocation authority all agree.
 
 | Surface | Current reality |
 | --- | --- |
-| **Governed core CLI** | Fresh `run`, durable `resume`, and read-only `inspect` over plain SQLite |
+| **Governed core CLI** | Fresh `run`, durable `resume`, read-only `inspect`, and an optional thin `chat` entry host over plain SQLite |
 | **Core Python API** | Typed `run`, `resume`, and `inspect` functions behind a narrow package ABI |
 | **Reduction loop** | Durable non-achievedness state, bounded steps, evidence, proposals, commitments, artifacts, and ledger entries |
 | **LLM-off mode** | Provider-free execution through deterministic rules, parsers, retrieval, persisted artifacts, and available evidence |
@@ -249,6 +249,23 @@ uv run --frozen --package realized-core realized-core resume \
 Writing resumed state to a new path preserves the prior checkpoint for audit
 or comparison.
 
+### Use the core as a governed chat participant
+
+The standalone application also includes a thin terminal conversation host:
+
+```console
+uv run --frozen --package realized-core realized-core chat \
+  --root ./state/chat \
+  --llm off
+```
+
+Plain input creates an independent governed run. Use `/continue <text>` only
+to supply a selected human contribution to the latest paused or incomplete
+run. Use `/follow-up <text>` or `/correct <text>` to create a new run linked to
+the latest completed result. The host keeps transcript, run bindings, state
+JSON, and SQLite as separate durable domains; prior chat text is never admitted
+as evidence merely because it appeared in the conversation.
+
 ### Choose an LLM policy
 
 | Mode | Behavior |
@@ -283,7 +300,7 @@ realized-core
 | --- | --- |
 | [`core_runtime/`](core_runtime/) | Dependency-inverted run/resume lifecycle and protocols; no third-party dependencies |
 | [`core_engine/`](core_engine/) | Canonical domain engine, state model, host mediation, and SQLite adapter |
-| [`core_app/`](core_app/) | Thin `realized-core` command-line composition |
+| [`core_app/`](core_app/) | Thin `realized-core` command-line and conversation-host composition |
 
 <details>
 <summary><strong>What the standalone core deliberately does not include</strong></summary>
@@ -292,7 +309,8 @@ The `realized-core` distribution does not contain the workstation, Flutter or
 Textual UI code, gRPC services, or publication workflow. Its public ABI does not
 currently expose governed skill installation, subject activation, or
 caller-supplied host-realizer registration. It executes only the packaged core
-surface behind `run`, `resume`, and `inspect`.
+surface behind `run`, `resume`, and `inspect`; its optional `chat` command is an
+entry-layer host over that same engine ABI, not another reasoning engine.
 
 The projects are independently buildable. An eventual `uvx` installation path
 depends on publishing all three distributions to an index; this README does not

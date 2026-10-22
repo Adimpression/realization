@@ -132,6 +132,15 @@ message WorkstationChatMessage {
   // How: Convert to local time for presentation.
   // Example: 1777780023123
   int64 timestamp_epoch_ms = 3;
+
+  // Stable identity of this persisted transcript record.
+  string message_id = 4;
+
+  // Stable identity shared by the user and response records for one turn.
+  string turn_id = 5;
+
+  // Monotonic position inside the workstation transcript.
+  int64 sequence = 6;
 }
 
 // What: Request for a bounded transcript snapshot.
@@ -391,6 +400,21 @@ message SubmitChatInputRequest {
   // How: Set true only when intentionally bypassing tool use.
   // Example: false
   bool force_llm_only = 6;
+
+  // Explicit execution route: normal, llm_only, or governed_reduction.
+  string interaction_mode = 7;
+
+  // Explicit governed treatment for governed_reduction mode.
+  string governed_treatment = 8;
+
+  // Optional prior governed run selected by the conversation host.
+  string governed_parent_run_id = 9;
+
+  // Core LLM supplement policy: off, auto, or required.
+  string governed_llm_policy = 10;
+
+  // Maximum bounded reduction steps for the governed turn.
+  optional int32 governed_max_steps = 11;
 }
 
 // What: Result of one shell prompt submission.
@@ -473,6 +497,18 @@ message SubmitChatInputResponse {
   // How: Treat it as an opaque checksum.
   // Example: "c9537d2bd4abf311"
   string progress_fingerprint = 8;
+
+  // Stable conversation-host turn identity.
+  string turn_id = 9;
+
+  // Governed run identity when fulfilled by governed_reduction.
+  string run_id = 10;
+
+  // Governed run outcome when fulfilled by governed_reduction.
+  string run_outcome = 11;
+
+  // Durable reduction checkpoint when fulfilled by governed_reduction.
+  string checkpoint_path = 12;
 
   // What: Trace id for the submit response.
   // Why: Prompt execution must be traceable across shell, tools, and host

@@ -17,6 +17,7 @@ from learning_context import new_learning_context, persist_learning_context
 import workstation.ui.textual.chat_ui as workstation_chat_ui_module
 from workstation.ui.textual.chat_ui import _TextualWorkstationChatApp
 from workstation.foundation.host.client_sessions import WorkstationClientSessionRegistry
+from workstation.contracts.shell import WorkstationSubmitChatInputResultView
 from workstation.grpc.definitions import workstation_shell_pb2, workstation_shell_pb2_grpc
 from workstation.runtime.core.session import launch_workstation_session
 from workstation.subject.service.subject_workflow_client import new_grpc_subject_workflow_client_for_unix_socket
@@ -30,7 +31,10 @@ from workstation.shell.core.workstation_shell_client import (
     InProcessWorkstationShellClient,
     new_grpc_workstation_shell_client_for_unix_socket,
 )
-from workstation.grpc.implementation.workstation_shell_grpc import build_workstation_shell_grpc_server
+from workstation.grpc.implementation.workstation_shell_grpc import (
+    WorkstationShellGrpcService,
+    build_workstation_shell_grpc_server,
+)
 
 
 class WorkstationShellApiTests(unittest.TestCase):
@@ -109,6 +113,40 @@ class WorkstationShellApiTests(unittest.TestCase):
         finally:
             client.close()
             server.stop(grace=None).wait()
+
+    def test_grpc_governed_step_limit_distinguishes_omitted_from_zero(self) -> None:
+        service = mock.create_autospec(WorkstationShellApiService, instance=True)
+        service.submit_chat_input.return_value = WorkstationSubmitChatInputResultView(
+            assistant_text="",
+            messages=(),
+            fulfilled_by="governed_reduction",
+            rounds=0,
+            tool_receipts_json="[]",
+            status_text="",
+            snapshot_version="",
+            progress_fingerprint="",
+        )
+        grpc_service = WorkstationShellGrpcService(service=service)
+
+        grpc_service.SubmitChatInput(
+            workstation_shell_pb2.SubmitChatInputRequest(root_path=str(self.root)),
+            None,
+        )
+        self.assertEqual(
+            256,
+            service.submit_chat_input.call_args.kwargs["governed_max_steps"],
+        )
+
+        explicit_zero = workstation_shell_pb2.SubmitChatInputRequest(
+            root_path=str(self.root),
+            governed_max_steps=0,
+        )
+        self.assertTrue(explicit_zero.HasField("governed_max_steps"))
+        grpc_service.SubmitChatInput(explicit_zero, None)
+        self.assertEqual(
+            0,
+            service.submit_chat_input.call_args.kwargs["governed_max_steps"],
+        )
 
     def test_combined_workstation_grpc_host_supports_unix_socket_clients(self) -> None:
         shared_sessions = WorkstationClientSessionRegistry()

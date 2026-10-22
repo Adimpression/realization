@@ -82,6 +82,7 @@ class CoreApplicationDistributionTests(unittest.TestCase):
         self.assertIn("core_app", workspace["tool"]["uv"]["workspace"]["members"])
         self.assertIn("uv build --wheel core_app", cloud_build)
         self.assertIn("core_app.tests.test_distribution", cloud_build)
+        self.assertIn("core_app.tests.test_chat", cloud_build)
         self.assertIn("tests.test_core_app_cli_equivalence", cloud_build)
         self.assertIn("scripts/verify_core_distribution.py", cloud_build)
 

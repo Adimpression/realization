@@ -22,6 +22,9 @@ def _message_message_from_view(view) -> workstation_shell_pb2.WorkstationChatMes
         role=view.role,
         content=view.content,
         timestamp_epoch_ms=int(getattr(view, "timestamp_epoch_ms", 0) or 0),
+        message_id=str(getattr(view, "message_id", "") or ""),
+        turn_id=str(getattr(view, "turn_id", "") or ""),
+        sequence=int(getattr(view, "sequence", 0) or 0),
     )
 
 
@@ -173,6 +176,15 @@ class WorkstationShellGrpcService(workstation_shell_pb2_grpc.WorkstationShellSer
             model=request.model or None,
             max_tool_rounds=int(request.max_tool_rounds or 0),
             force_llm_only=bool(request.force_llm_only),
+            interaction_mode=request.interaction_mode or "normal",
+            governed_treatment=request.governed_treatment or "independent",
+            governed_parent_run_id=request.governed_parent_run_id,
+            governed_llm_policy=request.governed_llm_policy or "auto",
+            governed_max_steps=(
+                int(request.governed_max_steps)
+                if request.HasField("governed_max_steps")
+                else 256
+            ),
         )
         return workstation_shell_pb2.SubmitChatInputResponse(
             assistant_text=view.assistant_text,
@@ -185,6 +197,10 @@ class WorkstationShellGrpcService(workstation_shell_pb2_grpc.WorkstationShellSer
             progress_fingerprint=view.progress_fingerprint,
             trace_id=view.trace_id,
             parent_id=view.parent_id,
+            turn_id=view.turn_id,
+            run_id=view.run_id,
+            run_outcome=view.run_outcome,
+            checkpoint_path=view.checkpoint_path,
         )
 
     def AppendShellTurn(self, request, context):

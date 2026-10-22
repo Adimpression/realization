@@ -41,6 +41,7 @@ dependencies = [
     "protobuf>=6.33.6",
     "grpcio-tools>=1.80.0",
     "realized-core-runtime",
+    "realized-core-engine",
     "realized-workstation",
     "realized-workstation-contracts",
     "realized-workstation-foundation-models",
