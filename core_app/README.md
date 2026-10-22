@@ -64,15 +64,21 @@ uvx realized-core chat \
   --llm off
 ```
 
-Plain input starts an independent run. `/continue` contributes to the latest
-paused or incomplete run, while `/follow-up` and `/correct` start new runs
-linked to the latest completed result. The host stores `MESSAGES.jsonl`,
-`RUN_BINDINGS.jsonl`, state checkpoints, and SQLite separately. Transcript text
-does not automatically become engine evidence.
+Plain input creates a new typed objective. `/use <revision-id>` selects the
+exact causal revision for a related turn. `/continue <text>` submits a typed
+continuation; with multiple active holds, use
+`/continue <hold-id> -- <text>`. A follow-up derives a new objective from
+explicit admitted material using `/follow-up <item-id,...> -- <text>`.
+Correction requires an exact current target:
+`/correct <item-id> -- <replacement>`.
 
-The conversation loop belongs to `realized-core`, the entry package. The
-engine ABI remains `run`, `resume`, and `inspect` plus typed configuration and
-inlets; the engine does not own a transcript or choose how turns relate.
+The host stores transcript, exact revision bindings, active user selection,
+and SQLite separately. It does not create JSON state checkpoints or infer
+causal identity from transcript position.
+
+The conversation loop belongs to `realized-core`, the entry package. It calls
+the engine's typed start, resumption, interruption, and inspection ABI; the
+engine does not own a transcript or choose how turns relate.
 
 Plain SQLite is always selected by this executable. Vector storage and Wasm
 execution are not required. Wasmtime remains an optional extra for callers that

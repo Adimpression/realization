@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import json
 import sqlite3
-from collections.abc import Callable, Iterable
+from collections.abc import Callable, Iterator
 from contextlib import contextmanager
 from dataclasses import replace
 from datetime import datetime, timezone
@@ -24,10 +24,12 @@ from realized_core_runtime import (
 
 from realized_core_engine.resumption_contracts import (
     ResumptionIdentity,
+    ResumptionProjection,
     Revision,
     SemanticState,
     TransitionArtifact,
     canonical_json,
+    content_digest,
 )
 
 
@@ -76,7 +78,7 @@ class SQLiteResumptionRepository:
         return connection
 
     @contextmanager
-    def _connection(self) -> Iterable[sqlite3.Connection]:
+    def _connection(self) -> Iterator[sqlite3.Connection]:
         connection = self._connect()
         try:
             yield connection
@@ -173,6 +175,32 @@ class SQLiteResumptionRepository:
                     ON resumption_attempts(status);
                 """
             )
+
+    def rebuild_derived_indexes(self) -> tuple[str, ...]:
+        """Recreate non-authoritative indexes without touching canonical rows."""
+
+        definitions = {
+            "idx_resumption_revisions_identity": (
+                "CREATE INDEX idx_resumption_revisions_identity "
+                "ON resumption_revisions(scope_id, objective_id, branch_id)"
+            ),
+            "idx_resumption_parents_parent": (
+                "CREATE INDEX idx_resumption_parents_parent "
+                "ON resumption_revision_parents(parent_revision_id)"
+            ),
+            "idx_resumption_attempts_status": (
+                "CREATE INDEX idx_resumption_attempts_status "
+                "ON resumption_attempts(status)"
+            ),
+        }
+        with self._connection() as connection:
+            connection.execute("BEGIN IMMEDIATE")
+            for name in definitions:
+                connection.execute(f"DROP INDEX IF EXISTS {name}")
+            for statement in definitions.values():
+                connection.execute(statement)
+            connection.commit()
+        return tuple(definitions)
 
     # Execution-attempt journal -------------------------------------------------
 
@@ -647,6 +675,153 @@ class SQLiteResumptionRepository:
             ).fetchone()
         return json.loads(str(row["payload_json"])) if row else None
 
+    def load_transition_artifact_record(
+        self,
+        artifact_id: str,
+    ) -> TransitionArtifact | None:
+        payload = self.load_transition_artifact(artifact_id)
+        if payload is None:
+            return None
+        artifact = TransitionArtifact.from_dict(payload)
+        if artifact.artifact_id != artifact_id:
+            raise RepositoryIntegrityError(
+                f"transition artifact identity mismatch: {artifact_id}"
+            )
+        return artifact
+
+    def verify_transition_replay(self, artifact_id: str) -> dict[str, Any]:
+        """Reproduce and verify an externalized transition decision flow."""
+
+        with self._connection() as connection:
+            row = connection.execute(
+                """
+                SELECT payload_json, decision_flow_signature
+                FROM resumption_transition_artifacts
+                WHERE artifact_id = ?
+                """,
+                (artifact_id,),
+            ).fetchone()
+        if row is None:
+            raise KeyError(f"unknown transition artifact: {artifact_id}")
+
+        artifact = TransitionArtifact.from_dict(
+            json.loads(str(row["payload_json"]))
+        )
+        failures: list[str] = []
+        if artifact.artifact_id != artifact_id:
+            failures.append("artifact identity does not match its repository key")
+        stored_signature = str(row["decision_flow_signature"])
+        if stored_signature != artifact.decision_flow_signature:
+            failures.append("artifact payload and signature column disagree")
+        reproduced_signature = artifact.expected_decision_flow_signature
+        if not artifact.verify_decision_flow_signature():
+            failures.append("decision-flow signature could not be reproduced")
+
+        if artifact.projection_artifact is not None:
+            try:
+                projection = ResumptionProjection.from_dict(
+                    artifact.projection_artifact
+                )
+            except (KeyError, TypeError, ValueError) as exc:
+                failures.append(f"projection artifact is invalid: {exc}")
+            else:
+                if not projection.verify():
+                    failures.append("projection digest could not be reproduced")
+                if projection.projection_digest != artifact.projection_digest:
+                    failures.append(
+                        "projection artifact and transition digest disagree"
+                    )
+        elif artifact.projection_digest is not None:
+            failures.append("projection artifact required for replay is missing")
+
+        if artifact.inlet_artifact is not None:
+            if content_digest(artifact.inlet_artifact) != artifact.inlet_digest:
+                failures.append("inlet digest could not be reproduced")
+            if (
+                artifact.inlet_artifact.get("inlet_id")
+                != artifact.inlet_id
+            ):
+                failures.append(
+                    "inlet artifact and transition identity disagree"
+                )
+        elif artifact.inlet_digest is not None:
+            failures.append("inlet artifact required for replay is missing")
+
+        if artifact.source_identity is not None:
+            source = self.load_revision(
+                artifact.source_identity.revision_id
+            )
+            if source is None:
+                failures.append("source revision is missing")
+            elif source.identity != artifact.source_identity:
+                failures.append("source identity does not match its revision")
+            elif source.revision_digest != artifact.source_revision_digest:
+                failures.append("source revision digest does not match")
+
+        resulting_revision = None
+        if artifact.resulting_revision_id is not None:
+            resulting_revision = self.load_revision(
+                artifact.resulting_revision_id
+            )
+            if resulting_revision is None:
+                failures.append("resulting revision is missing")
+            elif (
+                resulting_revision.revision_digest
+                != artifact.resulting_revision_digest
+            ):
+                failures.append("resulting revision digest does not match")
+            elif resulting_revision.transition_artifact_id != artifact_id:
+                failures.append(
+                    "resulting revision points at a different transition"
+                )
+        else:
+            with self._connection() as connection:
+                committed = connection.execute(
+                    """
+                    SELECT revision_id FROM resumption_revisions
+                    WHERE transition_artifact_id = ?
+                    """,
+                    (artifact_id,),
+                ).fetchone()
+            if committed is not None:
+                failures.append(
+                    "non-committing artifact is referenced by a revision"
+                )
+
+        has_llm_receipts = any(
+            bool(item.get("llm_receipts"))
+            for item in artifact.proposal_interactions
+        )
+        replay_mode = (
+            "recorded_proposal_interactions"
+            if has_llm_receipts
+            else "deterministic_externalized_flow"
+        )
+        return {
+            "artifact_id": artifact_id,
+            "verified": not failures,
+            "failures": failures,
+            "stored_decision_flow_signature": stored_signature,
+            "reproduced_decision_flow_signature": reproduced_signature,
+            "replay_mode": replay_mode,
+            "proposal_interaction_references": list(
+                artifact.proposal_references
+            ),
+            "recorded_proposal_interaction_count": len(
+                artifact.proposal_interactions
+            ),
+            "source_revision_id": (
+                artifact.source_identity.revision_id
+                if artifact.source_identity is not None
+                else None
+            ),
+            "resulting_revision_id": (
+                resulting_revision.identity.revision_id
+                if resulting_revision is not None
+                else artifact.resulting_revision_id
+            ),
+        }
+
     def transition_artifact_reference(self, artifact_id: str) -> str:
         return f"sqlite-resumption://transition/{artifact_id}"
 
@@ -760,6 +935,12 @@ class SQLiteResumptionRepository:
             head_rows = connection.execute(
                 "SELECT * FROM resumption_branch_heads"
             ).fetchall()
+            artifact_ids = [
+                str(row["artifact_id"])
+                for row in connection.execute(
+                    "SELECT artifact_id FROM resumption_transition_artifacts"
+                ).fetchall()
+            ]
         for revision_id in revision_ids:
             try:
                 self.load_revision(revision_id)
@@ -774,6 +955,16 @@ class SQLiteResumptionRepository:
                 failures.append(
                     f"branch head digest mismatch: {revision.identity.revision_id}"
                 )
+        for artifact_id in artifact_ids:
+            try:
+                replay = self.verify_transition_replay(artifact_id)
+            except (KeyError, RepositoryIntegrityError, ValueError) as exc:
+                failures.append(str(exc))
+                continue
+            failures.extend(
+                f"transition {artifact_id}: {failure}"
+                for failure in replay["failures"]
+            )
         return tuple(failures)
 
     @staticmethod

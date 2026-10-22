@@ -17,9 +17,13 @@ from realized_core_engine.canonical_reduction import CanonicalReductionAdapter
 from realized_core_engine.resumption_contracts import (
     ContinuationInlet,
     GoverningDirection,
+    IdentityDisposition,
+    IdentityDispositionKind,
     InletRelationship,
     OperationKind,
+    Realignment,
     ResumptionRequest,
+    SemanticDelta,
     StartRequest,
 )
 from realized_core_engine.resumption_repository import SQLiteResumptionRepository
@@ -33,6 +37,8 @@ def _inlet(
     payload: dict[str, object] | None = None,
     target: str = "root",
     correlation: dict[str, object] | None = None,
+    delta: SemanticDelta = SemanticDelta(),
+    realignment: Realignment | None = None,
 ) -> ContinuationInlet:
     return ContinuationInlet(
         inlet_id=inlet_id,
@@ -44,6 +50,8 @@ def _inlet(
         provenance=(f"message:{inlet_id}",),
         correlation=correlation or {},
         authority_context={"principal": "tester"},
+        delta=delta,
+        realignment=realignment,
     )
 
 
@@ -245,6 +253,102 @@ class CanonicalReductionAdapterTests(unittest.TestCase):
             ("engine:hold:pause-two",),
             resumed.active_hold_summary,
         )
+
+    def test_redirection_never_runs_the_frontier_from_the_prior_direction(
+        self,
+    ) -> None:
+        prior_state = SystemState.bootstrap("Continue the prior direction.")
+        prior_root_id = prior_state.root_id
+        with patch.dict("os.environ", {"OPENAI_API_KEY": ""}, clear=False):
+            started = self.service.start(
+                StartRequest(
+                    scope_id="scope-1",
+                    objective_id="objective-1",
+                    branch_id="main",
+                    initial_inlet=_inlet(
+                        "start-prior",
+                        payload={
+                            "prompt": prior_state.root().semantic_unit,
+                            "engine_state": prior_state.to_dict(),
+                        },
+                    ),
+                    governing_direction=GoverningDirection(
+                        objective=prior_state.root().semantic_unit,
+                        scope="scope-1",
+                    ),
+                    execution_policy=self.policy,
+                )
+            )
+            source = self.repository.require_revision(
+                started.resulting_revision_identity
+            )
+            affected = tuple(
+                item.item_id
+                for item in (
+                    *source.state.achieved,
+                    *source.state.non_achievedness,
+                )
+            )
+            direction = GoverningDirection(
+                objective="Advance only the redirected objective.",
+                scope="scope-1",
+            )
+            realignment = Realignment(
+                source_revision_id=source.identity.revision_id,
+                redirection_inlet_id="redirect-new",
+                affected_item_ids=affected,
+                identity_disposition=IdentityDisposition(
+                    kind=IdentityDispositionKind.SAME_OBJECTIVE,
+                    target_scope_id="scope-1",
+                    target_objective_id="objective-1",
+                    target_branch_id="main",
+                    rationale="The same objective now has an explicit new direction.",
+                ),
+                retained_item_ids=(),
+                superseded_item_ids=affected,
+                introduced_items=(),
+                unresolved_applicability_item_ids=(),
+                resulting_non_achievedness=(),
+                evidence_references=("direction:redirect-new",),
+                governance_references=("policy:realignment",),
+                completeness_statement="All prior frontier material is superseded.",
+            )
+            redirected = self.service.resume(
+                ResumptionRequest(
+                    anchor=source.identity,
+                    operation=OperationKind.REDIRECT_AND_REALIGN,
+                    expected_branch_head_revision_id=(
+                        source.identity.revision_id
+                    ),
+                    inlet=_inlet(
+                        "redirect-new",
+                        relationship=InletRelationship.REDIRECTION,
+                        payload={"prompt": direction.objective},
+                        delta=SemanticDelta(governing_direction=direction),
+                        realignment=realignment,
+                    ),
+                    execution_policy=self.policy,
+                )
+            )
+
+        revision = self.repository.require_revision(
+            redirected.resulting_revision_identity
+        )
+        reconstructed = SystemState.from_dict(revision.state.engine_state)
+        attempt = self.repository.load_attempt(
+            redirected.execution_attempt_id
+        )
+        artifact = self.repository.load_transition_artifact(
+            attempt.transition_artifact_references[-1]
+        )
+        prepared_frontier = artifact["reconciliation"]["reduction"][
+            "prepared_frontier"
+        ]
+
+        self.assertEqual(direction.objective, reconstructed.root().semantic_unit)
+        self.assertNotIn(prior_root_id, reconstructed.graph.nodes)
+        self.assertNotIn(prior_root_id, prepared_frontier)
+        self.assertEqual([reconstructed.root_id], prepared_frontier)
 
 
 if __name__ == "__main__":

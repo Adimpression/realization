@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import uuid
 from collections.abc import Callable, Iterable
 from dataclasses import replace
@@ -272,13 +273,61 @@ class ResumptionService:
             attempt = self.repository.load_attempt(request.target_id)
             if attempt is None:
                 raise KeyError(f"unknown execution attempt: {request.target_id}")
-            payload = _attempt_payload(attempt)
+            self._authorize_attempt_inspection(request, attempt)
+            if request.view is InspectionView.RECONSTRUCTION:
+                latest = (
+                    self.repository.load_revision(
+                        attempt.latest_admitted_revision_id
+                    )
+                    if attempt.latest_admitted_revision_id is not None
+                    else None
+                )
+                payload = {
+                    "attempt": _attempt_payload(attempt),
+                    "transitions": [
+                        {
+                            "transition_artifact": (
+                                self.repository.load_transition_artifact(
+                                    artifact_id
+                                )
+                            ),
+                            "replay_verification": (
+                                self.repository.verify_transition_replay(
+                                    artifact_id
+                                )
+                            ),
+                        }
+                        for artifact_id in (
+                            attempt.transition_artifact_references
+                        )
+                    ],
+                    "latest_admitted_revision": (
+                        {
+                            **latest.canonical_content(),
+                            "revision_digest": latest.revision_digest,
+                        }
+                        if latest is not None
+                        else None
+                    ),
+                }
+            else:
+                payload = _attempt_payload(attempt)
         elif request.target_kind is InspectionTargetKind.TRANSITION:
             payload = self.repository.load_transition_artifact(request.target_id)
             if payload is None:
                 raise KeyError(
                     f"unknown transition artifact: {request.target_id}"
                 )
+            self._authorize_transition_inspection(request, payload)
+            if request.view is InspectionView.RECONSTRUCTION:
+                payload = {
+                    "transition_artifact": payload,
+                    "replay_verification": (
+                        self.repository.verify_transition_replay(
+                            request.target_id
+                        )
+                    ),
+                }
         else:
             revision = self._inspection_revision(request)
             self._authorize_inspection(request, revision)
@@ -1467,16 +1516,41 @@ class ResumptionService:
                 raise TransitionValidationError(
                     f"inlet correlation does not satisfy HoldOn {hold_id}"
                 )
-        required_payload = hold.resume_predicate.get("required_payload", {})
-        if isinstance(required_payload, dict):
-            for key, expected in required_payload.items():
-                if inlet.payload.get(key) != expected:
-                    raise TransitionValidationError(
-                        f"resume predicate does not hold for {hold_id}"
-                    )
-        disposition = HoldDisposition(
-            inlet.payload.get("hold_disposition", HoldDisposition.RESUME.value)
-        )
+        try:
+            disposition = HoldDisposition(
+                inlet.payload.get(
+                    "hold_disposition",
+                    HoldDisposition.RESUME.value,
+                )
+            )
+        except ValueError as exc:
+            raise TransitionValidationError(
+                f"unknown HoldOn disposition for {hold_id}"
+            ) from exc
+        evaluated_predicate: dict[str, Any] = {}
+        if disposition is HoldDisposition.RESUME:
+            evaluated_predicate = dict(hold.resume_predicate)
+            self._require_hold_predicate(
+                hold_id,
+                "resume",
+                evaluated_predicate,
+                inlet,
+            )
+        elif disposition in {
+            HoldDisposition.EXPIRE,
+            HoldDisposition.FAIL,
+        }:
+            family = hold.failure_or_expiry_predicate
+            selected = family.get(disposition.value, family)
+            evaluated_predicate = (
+                dict(selected) if isinstance(selected, dict) else {}
+            )
+            self._require_hold_predicate(
+                hold_id,
+                disposition.value,
+                evaluated_predicate,
+                inlet,
+            )
         outcome = {
             HoldDisposition.RESUME: None,
             HoldDisposition.REMAIN_HELD: SemanticOutcome.PAUSED,
@@ -1495,6 +1569,7 @@ class ResumptionService:
             "disposition": disposition.value,
             "correlation": dict(inlet.correlation),
             "inlet_id": inlet.inlet_id,
+            "evaluated_predicate": evaluated_predicate,
         }
         return (
             replace(
@@ -1509,6 +1584,24 @@ class ResumptionService:
                 "forced_semantic_outcome": outcome.value if outcome else None,
             },
         )
+
+    @staticmethod
+    def _require_hold_predicate(
+        hold_id: str,
+        predicate_kind: str,
+        predicate: dict[str, Any],
+        inlet: ContinuationInlet,
+    ) -> None:
+        required_payload = predicate.get("required_payload", {})
+        if not isinstance(required_payload, dict):
+            raise TransitionValidationError(
+                f"{predicate_kind} predicate is malformed for {hold_id}"
+            )
+        for key, expected in required_payload.items():
+            if inlet.payload.get(key) != expected:
+                raise TransitionValidationError(
+                    f"{predicate_kind} predicate does not hold for {hold_id}"
+                )
 
     def _reduce(
         self,
@@ -1596,20 +1689,6 @@ class ResumptionService:
             revision,
             revision_digest=content_digest(revision.canonical_content()),
         )
-        signature_payload = {
-            "source_revision_id": (
-                source.identity.revision_id if source else None
-            ),
-            "projection_digest": (
-                projection.projection_digest if projection else None
-            ),
-            "inlet_digest": inlet.digest if inlet else None,
-            "operation": operation.value,
-            "reconciliation": reconciliation,
-            "admission": admission.to_dict(),
-            "semantic_outcome": semantic_outcome.value,
-            "resulting_revision_digest": revision.revision_digest,
-        }
         artifact = TransitionArtifact(
             artifact_id=artifact_id,
             source_identity=source.identity if source else None,
@@ -1665,8 +1744,26 @@ class ResumptionService:
             semantic_outcome=semantic_outcome,
             resulting_revision_id=revision.identity.revision_id,
             resulting_revision_digest=revision.revision_digest,
-            decision_flow_signature=content_digest(signature_payload),
+            decision_flow_signature="",
             realignment=realignment,
+            projection_artifact=(
+                {
+                    **projection.canonical_content(),
+                    "projection_digest": projection.projection_digest,
+                }
+                if projection is not None
+                else None
+            ),
+            inlet_artifact=inlet.to_dict() if inlet is not None else None,
+            proposal_interactions=(
+                proposal.proposal_interactions if proposal else ()
+            ),
+        )
+        artifact = replace(
+            artifact,
+            decision_flow_signature=(
+                artifact.expected_decision_flow_signature
+            ),
         )
         return revision, artifact
 
@@ -1692,16 +1789,6 @@ class ResumptionService:
             checks={"committed": False},
         )
         artifact_id = self._id_factory("transition")
-        signature = content_digest(
-            {
-                "source": source.identity.to_dict() if source else None,
-                "projection": projection.projection_digest if projection else None,
-                "inlet": inlet.digest if inlet else None,
-                "operation": operation.value,
-                "outcome": outcome.value,
-                "rationale": rationale,
-            }
-        )
         artifact = TransitionArtifact(
             artifact_id=artifact_id,
             source_identity=source.identity if source else None,
@@ -1734,7 +1821,22 @@ class ResumptionService:
             semantic_outcome=outcome,
             resulting_revision_id=None,
             resulting_revision_digest=None,
-            decision_flow_signature=signature,
+            decision_flow_signature="",
+            projection_artifact=(
+                {
+                    **projection.canonical_content(),
+                    "projection_digest": projection.projection_digest,
+                }
+                if projection is not None
+                else None
+            ),
+            inlet_artifact=inlet.to_dict() if inlet is not None else None,
+        )
+        artifact = replace(
+            artifact,
+            decision_flow_signature=(
+                artifact.expected_decision_flow_signature
+            ),
         )
         reference = self.repository.append_uncommitted_transition_artifact(
             artifact,
@@ -1979,8 +2081,61 @@ class ResumptionService:
         request: InspectionRequest,
         revision: Revision,
     ) -> None:
-        allowed = request.authority_context.get("allowed_scope_ids", ())
-        if allowed and revision.identity.scope_id not in set(allowed):
+        ResumptionService._authorize_inspection_scope(
+            request,
+            revision.identity.scope_id,
+        )
+
+    def _authorize_attempt_inspection(
+        self,
+        request: InspectionRequest,
+        attempt: AttemptRecord,
+    ) -> None:
+        scope_id: str | None = None
+        if attempt.latest_admitted_revision_id is not None:
+            revision = self.repository.load_revision(
+                attempt.latest_admitted_revision_id
+            )
+            scope_id = revision.identity.scope_id if revision else None
+        elif attempt.causal_anchor.startswith("start:"):
+            scope_id = attempt.causal_anchor.removeprefix("start:").split(
+                "/", 1
+            )[0]
+        else:
+            try:
+                scope_id = str(json.loads(attempt.causal_anchor)["scope_id"])
+            except (KeyError, TypeError, ValueError, json.JSONDecodeError):
+                scope_id = None
+        self._authorize_inspection_scope(request, scope_id)
+
+    def _authorize_transition_inspection(
+        self,
+        request: InspectionRequest,
+        payload: dict[str, Any],
+    ) -> None:
+        source_identity = payload.get("source_identity")
+        scope_id = (
+            str(source_identity.get("scope_id"))
+            if isinstance(source_identity, dict)
+            and source_identity.get("scope_id") is not None
+            else None
+        )
+        if scope_id is None and payload.get("resulting_revision_id"):
+            revision = self.repository.load_revision(
+                str(payload["resulting_revision_id"])
+            )
+            scope_id = revision.identity.scope_id if revision else None
+        self._authorize_inspection_scope(request, scope_id)
+
+    @staticmethod
+    def _authorize_inspection_scope(
+        request: InspectionRequest,
+        scope_id: str | None,
+    ) -> None:
+        allowed = set(
+            request.authority_context.get("allowed_scope_ids", ())
+        )
+        if allowed and scope_id not in allowed:
             raise PermissionError(
                 f"principal {request.principal!r} cannot inspect this scope"
             )

@@ -117,7 +117,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--root",
         type=Path,
         required=True,
-        help="Directory for transcript, run bindings, checkpoints, and SQLite.",
+        help="Directory for transcript, exact revision bindings, and SQLite.",
     )
     add_runtime_arguments(chat_parser, include_state_out=False)
     return parser

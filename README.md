@@ -259,12 +259,18 @@ uv run --frozen --package realized-core realized-core chat \
   --llm off
 ```
 
-Plain input creates an independent governed run. Use `/continue <text>` only
-to supply a selected human contribution to the latest paused or incomplete
-run. Use `/follow-up <text>` or `/correct <text>` to create a new run linked to
-the latest completed result. The host keeps transcript, run bindings, state
-JSON, and SQLite as separate durable domains; prior chat text is never admitted
-as evidence merely because it appeared in the conversation.
+Plain input creates an independent governed objective. Use
+`/use <revision-id>` to select the exact causal revision for related turns.
+`/continue <text>` contributes to that objective; when more than one hold is
+active, use `/continue <hold-id> -- <text>`. Use
+`/follow-up <item-id,...> -- <text>` to derive a new objective from explicitly
+selected admitted material. Use `/correct <item-id> -- <replacement>` to
+supersede one explicitly identified current item.
+
+The host keeps transcript, exact revision bindings, active user selection, and
+SQLite as separate durable domains. It does not use transcript order or a JSON
+checkpoint as causal state, and prior chat text is never admitted merely
+because it appeared in the conversation.
 
 ### Choose an LLM policy
 

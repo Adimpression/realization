@@ -658,6 +658,21 @@ class ResumptionProjection:
     def verify(self) -> bool:
         return self.projection_digest == content_digest(self.canonical_content())
 
+    @classmethod
+    def from_dict(cls, value: JsonObject) -> ResumptionProjection:
+        return cls(
+            identity=ResumptionIdentity.from_dict(dict(value["identity"])),
+            policy=ProjectionPolicy.from_dict(dict(value["policy"])),
+            state=SemanticState.from_dict(dict(value["state"])),
+            external_references=tuple(
+                value.get("external_references", ())
+            ),
+            completeness_statement=str(
+                value.get("completeness_statement", "")
+            ),
+            projection_digest=str(value.get("projection_digest", "")),
+        )
+
 
 @dataclass(frozen=True, slots=True)
 class ContinuationInlet:
@@ -733,6 +748,17 @@ class AdmissionDecision:
             "checks": dict(self.checks),
         }
 
+    @classmethod
+    def from_dict(cls, value: JsonObject) -> AdmissionDecision:
+        return cls(
+            disposition=AdmissionDisposition(value["disposition"]),
+            rationale=str(value.get("rationale", "")),
+            governance_references=tuple(
+                value.get("governance_references", ())
+            ),
+            checks=dict(value.get("checks", {})),
+        )
+
 
 @dataclass(frozen=True, slots=True)
 class TransitionArtifact:
@@ -761,6 +787,9 @@ class TransitionArtifact:
     resulting_revision_digest: str | None
     decision_flow_signature: str
     realignment: Realignment | None = None
+    projection_artifact: JsonObject | None = None
+    inlet_artifact: JsonObject | None = None
+    proposal_interactions: tuple[JsonObject, ...] = ()
 
     def to_dict(self) -> JsonObject:
         return {
@@ -803,7 +832,176 @@ class TransitionArtifact:
                 if self.realignment is not None
                 else None
             ),
+            "projection_artifact": (
+                dict(self.projection_artifact)
+                if self.projection_artifact is not None
+                else None
+            ),
+            "inlet_artifact": (
+                dict(self.inlet_artifact)
+                if self.inlet_artifact is not None
+                else None
+            ),
+            "proposal_interactions": [
+                dict(item) for item in self.proposal_interactions
+            ],
         }
+
+    @classmethod
+    def from_dict(cls, value: JsonObject) -> TransitionArtifact:
+        raw_source = value.get("source_identity")
+        raw_realignment = value.get("realignment")
+        return cls(
+            artifact_id=str(value["artifact_id"]),
+            source_identity=(
+                ResumptionIdentity.from_dict(dict(raw_source))
+                if isinstance(raw_source, dict)
+                else None
+            ),
+            source_revision_digest=(
+                str(value["source_revision_digest"])
+                if value.get("source_revision_digest") is not None
+                else None
+            ),
+            projection_policy=ProjectionPolicy.from_dict(
+                dict(value.get("projection_policy", {}))
+            ),
+            projection_digest=(
+                str(value["projection_digest"])
+                if value.get("projection_digest") is not None
+                else None
+            ),
+            projection_completeness_statement=str(
+                value.get("projection_completeness_statement", "")
+            ),
+            inlet_id=(
+                str(value["inlet_id"])
+                if value.get("inlet_id") is not None
+                else None
+            ),
+            inlet_digest=(
+                str(value["inlet_digest"])
+                if value.get("inlet_digest") is not None
+                else None
+            ),
+            operation=OperationKind(value["operation"]),
+            reconciliation=dict(value.get("reconciliation", {})),
+            proposal_references=tuple(value.get("proposal_references", ())),
+            admission=AdmissionDecision.from_dict(
+                dict(value["admission"])
+            ),
+            admitted_delta=dict(value.get("admitted_delta", {})),
+            rejected_delta=dict(value.get("rejected_delta", {})),
+            superseded_delta=dict(value.get("superseded_delta", {})),
+            conflicting_delta=dict(value.get("conflicting_delta", {})),
+            unresolved_delta=dict(value.get("unresolved_delta", {})),
+            hold_evaluation=dict(value.get("hold_evaluation", {})),
+            capability_receipt_references=tuple(
+                value.get("capability_receipt_references", ())
+            ),
+            effect_receipt_references=tuple(
+                value.get("effect_receipt_references", ())
+            ),
+            semantic_outcome=SemanticOutcome(value["semantic_outcome"]),
+            resulting_revision_id=(
+                str(value["resulting_revision_id"])
+                if value.get("resulting_revision_id") is not None
+                else None
+            ),
+            resulting_revision_digest=(
+                str(value["resulting_revision_digest"])
+                if value.get("resulting_revision_digest") is not None
+                else None
+            ),
+            decision_flow_signature=str(
+                value.get("decision_flow_signature", "")
+            ),
+            realignment=(
+                Realignment.from_dict(dict(raw_realignment))
+                if isinstance(raw_realignment, dict)
+                else None
+            ),
+            projection_artifact=(
+                dict(value["projection_artifact"])
+                if isinstance(value.get("projection_artifact"), dict)
+                else None
+            ),
+            inlet_artifact=(
+                dict(value["inlet_artifact"])
+                if isinstance(value.get("inlet_artifact"), dict)
+                else None
+            ),
+            proposal_interactions=tuple(
+                dict(item)
+                for item in value.get("proposal_interactions", ())
+            ),
+        )
+
+    def decision_flow_content(self) -> JsonObject:
+        """Return the externally represented flow covered by the signature."""
+
+        return {
+            "source_identity": (
+                self.source_identity.to_dict()
+                if self.source_identity is not None
+                else None
+            ),
+            "source_revision_digest": self.source_revision_digest,
+            "projection_policy": self.projection_policy.to_dict(),
+            "projection_digest": self.projection_digest,
+            "projection_completeness_statement": (
+                self.projection_completeness_statement
+            ),
+            "inlet_id": self.inlet_id,
+            "inlet_digest": self.inlet_digest,
+            "operation": self.operation.value,
+            "reconciliation": dict(self.reconciliation),
+            "proposal_references": list(self.proposal_references),
+            "admission": self.admission.to_dict(),
+            "admitted_delta": dict(self.admitted_delta),
+            "rejected_delta": dict(self.rejected_delta),
+            "superseded_delta": dict(self.superseded_delta),
+            "conflicting_delta": dict(self.conflicting_delta),
+            "unresolved_delta": dict(self.unresolved_delta),
+            "hold_evaluation": dict(self.hold_evaluation),
+            "capability_receipt_references": list(
+                self.capability_receipt_references
+            ),
+            "effect_receipt_references": list(
+                self.effect_receipt_references
+            ),
+            "semantic_outcome": self.semantic_outcome.value,
+            "resulting_revision_id": self.resulting_revision_id,
+            "resulting_revision_digest": self.resulting_revision_digest,
+            "realignment": (
+                self.realignment.to_dict()
+                if self.realignment is not None
+                else None
+            ),
+            "projection_artifact": (
+                dict(self.projection_artifact)
+                if self.projection_artifact is not None
+                else None
+            ),
+            "inlet_artifact": (
+                dict(self.inlet_artifact)
+                if self.inlet_artifact is not None
+                else None
+            ),
+            "proposal_interactions": [
+                dict(item) for item in self.proposal_interactions
+            ],
+        }
+
+    @property
+    def expected_decision_flow_signature(self) -> str:
+        return content_digest(self.decision_flow_content())
+
+    def verify_decision_flow_signature(self) -> bool:
+        return (
+            self.decision_flow_signature
+            == self.expected_decision_flow_signature
+        )
 
 
 @dataclass(frozen=True, slots=True)
@@ -929,6 +1127,7 @@ class ReductionProposal:
     resulting_state: SemanticState | None = None
     semantic_outcome: SemanticOutcome | None = None
     proposal_references: tuple[str, ...] = ()
+    proposal_interactions: tuple[JsonObject, ...] = ()
     capability_receipt_references: tuple[str, ...] = ()
     effect_receipt_references: tuple[str, ...] = ()
     reconciliation: JsonObject = field(default_factory=dict)

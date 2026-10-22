@@ -4,6 +4,7 @@ import tempfile
 import unittest
 from dataclasses import replace
 from pathlib import Path
+import sqlite3
 
 from realized_core_runtime import (
     AttemptLifecycleStatus,
@@ -25,6 +26,7 @@ from realized_core_engine.resumption_contracts import (
     SemanticOutcome,
     SemanticState,
     TransitionArtifact,
+    canonical_json,
     content_digest,
 )
 from realized_core_engine.resumption_repository import (
@@ -80,6 +82,7 @@ def _revision_and_artifact(
         revision,
         revision_digest=content_digest(revision.canonical_content()),
     )
+    inlet_artifact = {"inlet_id": "inlet-1", "kind": "repository-test"}
     artifact = TransitionArtifact(
         artifact_id=artifact_id,
         source_identity=None,
@@ -88,7 +91,7 @@ def _revision_and_artifact(
         projection_digest=None,
         projection_completeness_statement="complete",
         inlet_id="inlet-1",
-        inlet_digest="inlet-digest",
+        inlet_digest=content_digest(inlet_artifact),
         operation=OperationKind.START,
         reconciliation={"kind": "test"},
         proposal_references=(),
@@ -107,7 +110,12 @@ def _revision_and_artifact(
         semantic_outcome=SemanticOutcome.COMPLETED,
         resulting_revision_id=revision_id,
         resulting_revision_digest=revision.revision_digest,
-        decision_flow_signature="signature-1",
+        decision_flow_signature="",
+        inlet_artifact=inlet_artifact,
+    )
+    artifact = replace(
+        artifact,
+        decision_flow_signature=artifact.expected_decision_flow_signature,
     )
     return revision, artifact
 
@@ -294,6 +302,122 @@ class ResumptionRepositoryTests(unittest.TestCase):
         self.assertEqual(
             ("revision-2", "revision-1"),
             self.repository.path_to_roots("revision-2"),
+        )
+
+    def test_complete_event_loss_does_not_lose_authoritative_state(self) -> None:
+        self._running_attempt()
+        revision, artifact = _revision_and_artifact(
+            revision_id="revision-1",
+            artifact_id="transition-1",
+            state=_state("one"),
+        )
+        self.repository.commit_revision(
+            revision,
+            artifact,
+            expected_head_revision_id=None,
+            attempt_id="attempt-1",
+        )
+
+        with sqlite3.connect(self.repository.path) as connection:
+            connection.execute("DELETE FROM resumption_events")
+            connection.commit()
+        reopened = SQLiteResumptionRepository(self.repository.path)
+
+        self.assertEqual((), reopened.list_events())
+        self.assertEqual(
+            revision.identity,
+            reopened.load_branch_head(
+                "scope-1", "objective-1", "main"
+            ).identity,
+        )
+        self.assertEqual((), reopened.verify_integrity())
+
+    def test_derived_indexes_rebuild_without_semantic_loss(self) -> None:
+        self._running_attempt()
+        revision, artifact = _revision_and_artifact(
+            revision_id="revision-1",
+            artifact_id="transition-1",
+            state=_state("one"),
+        )
+        self.repository.commit_revision(
+            revision,
+            artifact,
+            expected_head_revision_id=None,
+            attempt_id="attempt-1",
+        )
+        before = self.repository.require_revision(revision.identity)
+
+        rebuilt = self.repository.rebuild_derived_indexes()
+        after = self.repository.require_revision(revision.identity)
+
+        self.assertEqual(
+            {
+                "idx_resumption_revisions_identity",
+                "idx_resumption_parents_parent",
+                "idx_resumption_attempts_status",
+            },
+            set(rebuilt),
+        )
+        self.assertEqual(before, after)
+        self.assertEqual((), self.repository.verify_integrity())
+
+    def test_replay_reproduces_the_decision_flow_signature(self) -> None:
+        self._running_attempt()
+        revision, artifact = _revision_and_artifact(
+            revision_id="revision-1",
+            artifact_id="transition-1",
+            state=_state("one"),
+        )
+        self.repository.commit_revision(
+            revision,
+            artifact,
+            expected_head_revision_id=None,
+            attempt_id="attempt-1",
+        )
+
+        replay = self.repository.verify_transition_replay("transition-1")
+
+        self.assertTrue(replay["verified"])
+        self.assertEqual(
+            replay["stored_decision_flow_signature"],
+            replay["reproduced_decision_flow_signature"],
+        )
+        self.assertEqual(
+            "deterministic_externalized_flow",
+            replay["replay_mode"],
+        )
+
+    def test_replay_detects_tampered_externalized_flow(self) -> None:
+        self._running_attempt()
+        revision, artifact = _revision_and_artifact(
+            revision_id="revision-1",
+            artifact_id="transition-1",
+            state=_state("one"),
+        )
+        self.repository.commit_revision(
+            revision,
+            artifact,
+            expected_head_revision_id=None,
+            attempt_id="attempt-1",
+        )
+        payload = self.repository.load_transition_artifact("transition-1")
+        payload["semantic_outcome"] = SemanticOutcome.FAILED.value
+        with sqlite3.connect(self.repository.path) as connection:
+            connection.execute(
+                """
+                UPDATE resumption_transition_artifacts
+                SET payload_json = ? WHERE artifact_id = ?
+                """,
+                (canonical_json(payload), "transition-1"),
+            )
+            connection.commit()
+
+        replay = self.repository.verify_transition_replay("transition-1")
+
+        self.assertFalse(replay["verified"])
+        self.assertIn(
+            "decision-flow signature could not be reproduced",
+            replay["failures"],
         )
 
 

@@ -11,6 +11,7 @@ from realized_core_runtime import (
     AttemptLifecycleStatus,
     AttemptRecord,
     AttemptUpdate,
+    InterruptionDisposition,
     InterruptionRequest,
 )
 
@@ -183,7 +184,6 @@ class ResumptionServiceTests(unittest.TestCase):
 
         replacement = ResumptionService(
             SQLiteResumptionRepository(self.database),
-            id_factory=SequenceIds(),
         )
         inspected = replacement.inspect(
             InspectionRequest(
@@ -203,6 +203,28 @@ class ResumptionServiceTests(unittest.TestCase):
         )
         self.assertTrue(
             self.repository.require_revision(revision.identity).verify()
+        )
+        continued = replacement.resume(
+            ResumptionRequest(
+                anchor=revision.identity,
+                operation=OperationKind.AUGMENT,
+                expected_branch_head_revision_id=revision.identity.revision_id,
+                inlet=inlet(
+                    "scope-import-continuation",
+                    InletRelationship.AUGMENTATION,
+                    delta=SemanticDelta(
+                        achieved=(item("fact-1", "Result"),)
+                    ),
+                ),
+                execution_policy={"llm_policy": "off"},
+            )
+        )
+        continued_revision = self.repository.require_revision(
+            continued.resulting_revision_identity
+        )
+        self.assertEqual(
+            ({"source_id": "subject-7", "version": "sha256:abc"},),
+            continued_revision.state.scope_imports,
         )
 
     def test_start_admits_the_inlet_before_invoking_the_controller(self) -> None:
@@ -452,7 +474,7 @@ class ResumptionServiceTests(unittest.TestCase):
                     target="hold-1",
                     payload={
                         "hold_id": "hold-1",
-                        "answer": "ready",
+                        "expired": True,
                         "hold_disposition": "expire",
                     },
                     correlation={"token": "correlation-1"},
@@ -466,6 +488,76 @@ class ResumptionServiceTests(unittest.TestCase):
         self.assertEqual(SemanticOutcome.EXPIRED, result.semantic_outcome)
         self.assertEqual((), result.active_hold_summary)
         self.assertEqual("expire", updated.state.hold_evaluations[-1]["disposition"])
+
+    def test_all_non_resume_hold_dispositions_are_durable(self) -> None:
+        holds = tuple(
+            self._hold(f"hold-{index}", f"correlation-{index}")
+            for index in range(1, 5)
+        )
+        _, current = self._start(
+            non_achievedness=(item("not-1", "Waiting", kind="not"),),
+            holds=holds,
+        )
+        cases = (
+            ("hold-1", "remain_held", {}, SemanticOutcome.PAUSED, True),
+            (
+                "hold-2",
+                "fail",
+                {"failed": True},
+                SemanticOutcome.FAILED,
+                False,
+            ),
+            (
+                "hold-3",
+                "escalate",
+                {"escalation_target": "operator"},
+                SemanticOutcome.INCOMPLETE,
+                False,
+            ),
+            (
+                "hold-4",
+                "reframe",
+                {"reframe": "await a different signal"},
+                SemanticOutcome.INCOMPLETE,
+                False,
+            ),
+        )
+
+        for hold_id, disposition, extra, expected, remains in cases:
+            with self.subTest(disposition=disposition):
+                result = self.service.resume(
+                    self._request(
+                        current,
+                        OperationKind.RESUME_SUSPENDED,
+                        inlet(
+                            f"signal-{disposition}",
+                            InletRelationship.HOLD_SATISFACTION,
+                            target=hold_id,
+                            payload={
+                                "hold_id": hold_id,
+                                "hold_disposition": disposition,
+                                **extra,
+                            },
+                            correlation={
+                                "token": hold_id.replace(
+                                    "hold", "correlation"
+                                )
+                            },
+                        ),
+                    )
+                )
+                current = self.repository.require_revision(
+                    result.resulting_revision_identity
+                )
+                self.assertEqual(expected, result.semantic_outcome)
+                self.assertEqual(
+                    remains,
+                    hold_id in result.active_hold_summary,
+                )
+                self.assertEqual(
+                    disposition,
+                    current.state.hold_evaluations[-1]["disposition"],
+                )
 
     def test_interruption_leaves_branch_state_direction_and_holds_unchanged(self) -> None:
         hold = self._hold("hold-1", "correlation-1")
@@ -804,6 +896,201 @@ class ResumptionServiceTests(unittest.TestCase):
             {value.item_id for value in merged_revision.state.achieved},
         )
 
+    def test_merge_preserves_parents_and_represents_conflicts_explicitly(
+        self,
+    ) -> None:
+        _, revision = self._start()
+        branch_a = self.service.resume(
+            self._request(
+                revision,
+                OperationKind.BRANCH,
+                inlet(
+                    "branch-conflict-a",
+                    InletRelationship.CONTINUATION,
+                    payload={"target_branch_id": "branch-conflict-a"},
+                    delta=SemanticDelta(
+                        achieved=(item("fact-shared", "Value A"),)
+                    ),
+                ),
+            )
+        )
+        branch_b = self.service.resume(
+            self._request(
+                revision,
+                OperationKind.BRANCH,
+                inlet(
+                    "branch-conflict-b",
+                    InletRelationship.CONTINUATION,
+                    payload={"target_branch_id": "branch-conflict-b"},
+                    delta=SemanticDelta(
+                        achieved=(item("fact-shared", "Value B"),)
+                    ),
+                ),
+            )
+        )
+        revision_a = self.repository.require_revision(
+            branch_a.resulting_revision_identity
+        )
+
+        merged = self.service.resume(
+            ResumptionRequest(
+                anchor=revision_a.identity,
+                operation=OperationKind.MERGE,
+                expected_branch_head_revision_id=(
+                    revision_a.identity.revision_id
+                ),
+                merge_parent_identities=(
+                    branch_b.resulting_revision_identity,
+                ),
+                execution_policy={"llm_policy": "off"},
+            )
+        )
+        merged_revision = self.repository.require_revision(
+            merged.resulting_revision_identity
+        )
+        conflict_items = [
+            value
+            for value in merged_revision.state.non_achievedness
+            if value.kind == "merge_conflict"
+        ]
+
+        self.assertEqual(
+            {
+                revision_a.identity.revision_id,
+                branch_b.resulting_revision_identity.revision_id,
+            },
+            set(merged_revision.parent_revision_ids),
+        )
+        self.assertEqual(1, len(conflict_items))
+        self.assertEqual(
+            "fact-shared",
+            conflict_items[0].payload["item_id"],
+        )
+        self.assertIn(
+            conflict_items[0].item_id,
+            merged_revision.state.conflicts,
+        )
+
+    def test_llm_off_flow_preserves_identity_augmentation_interruption_and_realignment(
+        self,
+    ) -> None:
+        _, started = self._start(
+            achieved=(item("fact-1", "Base", evidence=("evidence-1",)),)
+        )
+        augmented_result = self.service.resume(
+            self._request(
+                started,
+                OperationKind.AUGMENT,
+                inlet(
+                    "augment-off",
+                    InletRelationship.AUGMENTATION,
+                    delta=SemanticDelta(
+                        achieved=(
+                            item(
+                                "fact-2",
+                                "Additional",
+                                evidence=("evidence-2",),
+                            ),
+                        )
+                    ),
+                ),
+            )
+        )
+        augmented = self.repository.require_revision(
+            augmented_result.resulting_revision_identity
+        )
+        self.repository.prepare_attempt(
+            AttemptRecord(
+                attempt_id="attempt-interrupted-off",
+                causal_anchor=augmented.identity.causal_anchor,
+                operation=OperationKind.CONTINUE.value,
+                execution_policy={"llm_policy": "off"},
+                latest_admitted_revision_id=augmented.identity.revision_id,
+            )
+        )
+        self.repository.transition_attempt(
+            "attempt-interrupted-off",
+            expected_statuses=(AttemptLifecycleStatus.PREPARED,),
+            update=AttemptUpdate(status=AttemptLifecycleStatus.RUNNING),
+        )
+        interrupted = self.service.interrupt(
+            InterruptionRequest(
+                attempt_id="attempt-interrupted-off",
+                requesting_principal="tester",
+                reason="operator requested stop",
+            )
+        )
+        resumed = self.service.resume(
+            self._request(
+                augmented,
+                OperationKind.RESUME_AFTER_INTERRUPTION,
+                source_attempt_id="attempt-interrupted-off",
+            )
+        )
+        direction = GoverningDirection(
+            objective="Produce redirected result",
+            scope="scope-1",
+            required_outcome="redirected result",
+        )
+        affected = tuple(
+            item.item_id for item in augmented.state.achieved
+        )
+        realignment = Realignment(
+            source_revision_id=augmented.identity.revision_id,
+            redirection_inlet_id="redirect-off",
+            affected_item_ids=affected,
+            identity_disposition=IdentityDisposition(
+                kind=IdentityDispositionKind.SAME_OBJECTIVE,
+                target_scope_id="scope-1",
+                target_objective_id="objective-1",
+                target_branch_id="main",
+                rationale="The governing direction changed within the objective.",
+            ),
+            retained_item_ids=affected,
+            superseded_item_ids=(),
+            introduced_items=(),
+            unresolved_applicability_item_ids=(),
+            resulting_non_achievedness=(),
+            evidence_references=("evidence-1", "evidence-2"),
+            governance_references=("policy:realignment",),
+            completeness_statement="Every admitted item remains applicable.",
+        )
+        redirected_result = self.service.resume(
+            self._request(
+                augmented,
+                OperationKind.REDIRECT_AND_REALIGN,
+                inlet(
+                    "redirect-off",
+                    InletRelationship.REDIRECTION,
+                    delta=SemanticDelta(governing_direction=direction),
+                    realignment=realignment,
+                ),
+            )
+        )
+        redirected = self.repository.require_revision(
+            redirected_result.resulting_revision_identity
+        )
+
+        self.assertEqual(
+            InterruptionDisposition.ACCEPTED,
+            interrupted.disposition,
+        )
+        self.assertIsNone(resumed.resulting_revision_identity)
+        self.assertEqual(
+            augmented.identity.revision_id,
+            resumed.source_revision_identity.revision_id,
+        )
+        self.assertEqual(direction, redirected.state.governing_direction)
+        self.assertEqual(set(affected), {
+            value.item_id for value in redirected.state.achieved
+        })
+        self.assertEqual(
+            {"llm_policy": "off"},
+            self.repository.load_attempt(
+                redirected_result.execution_attempt_id
+            ).execution_policy,
+        )
+
     def test_stale_anchor_and_similarity_cannot_bind_causal_identity(self) -> None:
         _, revision = self._start(achieved=(item("fact-1", "Base"),))
         first = self.service.resume(
@@ -967,6 +1254,17 @@ class ResumptionServiceTests(unittest.TestCase):
                 ),
                 semantic_outcome=SemanticOutcome.COMPLETED,
                 proposal_references=("llm-receipt-1",),
+                proposal_interactions=(
+                    {
+                        "proposals": [{"id": "llm-receipt-1"}],
+                        "llm_receipts": [
+                            {
+                                "request_digest": "request-1",
+                                "response_digest": "response-1",
+                            }
+                        ],
+                    },
+                ),
             )
         )
         service = ResumptionService(
@@ -993,6 +1291,88 @@ class ResumptionServiceTests(unittest.TestCase):
             result.resulting_revision_identity.revision_id,
             artifact["resulting_revision_id"],
         )
+        replay = self.repository.verify_transition_replay(
+            artifact["artifact_id"]
+        )
+        self.assertTrue(replay["verified"])
+        self.assertEqual(
+            "recorded_proposal_interactions",
+            replay["replay_mode"],
+        )
+        self.assertEqual(
+            ["llm-receipt-1"],
+            replay["proposal_interaction_references"],
+        )
+
+    def test_attempt_transition_and_revision_remain_distinct_on_reconstruction(
+        self,
+    ) -> None:
+        result, revision = self._start(
+            non_achievedness=(item("not-1", "Need answer", kind="not"),)
+        )
+        attempt = self.service.inspect(
+            InspectionRequest(
+                target_kind=InspectionTargetKind.ATTEMPT,
+                target_id=result.execution_attempt_id,
+                view=InspectionView.RECONSTRUCTION,
+            )
+        ).payload
+        transition_id = self.repository.load_attempt(
+            result.execution_attempt_id
+        ).transition_artifact_references[-1]
+        transition = self.service.inspect(
+            InspectionRequest(
+                target_kind=InspectionTargetKind.TRANSITION,
+                target_id=transition_id,
+                view=InspectionView.RECONSTRUCTION,
+            )
+        ).payload
+        semantic_revision = self.service.inspect(
+            InspectionRequest(
+                target_kind=InspectionTargetKind.REVISION,
+                target_id=revision.identity.revision_id,
+                view=InspectionView.RECONSTRUCTION,
+            )
+        ).payload
+
+        self.assertEqual(
+            result.execution_attempt_id,
+            attempt["attempt"]["attempt_id"],
+        )
+        self.assertEqual(1, len(attempt["transitions"]))
+        self.assertEqual(
+            transition_id,
+            transition["transition_artifact"]["artifact_id"],
+        )
+        self.assertTrue(transition["replay_verification"]["verified"])
+        self.assertEqual(
+            revision.identity.revision_id,
+            semantic_revision["revision"]["identity"]["revision_id"],
+        )
+        self.assertNotIn("attempt_id", semantic_revision["revision"])
+
+    def test_reconstruction_inspection_rechecks_scope_authority(self) -> None:
+        result, _ = self._start(achieved=(item("fact-1", "Base"),))
+        transition_id = self.repository.load_attempt(
+            result.execution_attempt_id
+        ).transition_artifact_references[-1]
+
+        for target_kind, target_id in (
+            (InspectionTargetKind.ATTEMPT, result.execution_attempt_id),
+            (InspectionTargetKind.TRANSITION, transition_id),
+        ):
+            with self.subTest(target_kind=target_kind):
+                with self.assertRaises(PermissionError):
+                    self.service.inspect(
+                        InspectionRequest(
+                            target_kind=target_kind,
+                            target_id=target_id,
+                            view=InspectionView.RECONSTRUCTION,
+                            authority_context={
+                                "allowed_scope_ids": ["different-scope"]
+                            },
+                        )
+                    )
 
     @staticmethod
     def _hold(hold_id: str, token: str) -> HoldOn:
@@ -1001,7 +1381,10 @@ class ResumptionServiceTests(unittest.TestCase):
             unresolved_semantic_object={"item_id": "not-1"},
             continuation_carrier={"frontier": ["not-1"]},
             resume_predicate={"required_payload": {"answer": "ready"}},
-            failure_or_expiry_predicate={},
+            failure_or_expiry_predicate={
+                "expire": {"required_payload": {"expired": True}},
+                "fail": {"required_payload": {"failed": True}},
+            },
             temporal_policy={},
             correlation={"token": token},
             multiplicity={"mode": "one"},

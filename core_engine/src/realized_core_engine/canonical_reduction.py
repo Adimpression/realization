@@ -9,6 +9,7 @@ from types import SimpleNamespace
 from typing import Any
 
 from args import STATE_SQLITE_PATH_ENV, apply_controller_feature_toggle_overrides
+from applied_theory_types import RuntimeDeterminismPolicy
 from controller_runtime import build_controller
 from system_state import SystemState, attach_evidence_specs
 from title_semantics import PROLOG_QUERY_PRIMING_MODE_ENV
@@ -44,6 +45,7 @@ class CanonicalReductionAdapter:
         self._apply_execution_policy(state, context.execution_policy)
         self._prepare_operation(state, context)
         self._apply_inlet(state, context)
+        prepared_frontier = tuple(sorted(state.frontier))
 
         controller = build_controller(
             state=state,
@@ -60,6 +62,7 @@ class CanonicalReductionAdapter:
             resulting_state=resulting,
             semantic_outcome=_semantic_outcome(state),
             proposal_references=tuple(sorted(state.proposals)),
+            proposal_interactions=_proposal_interactions(state),
             capability_receipt_references=_receipt_references(
                 state.capability_grants,
                 prefix="capability",
@@ -72,6 +75,8 @@ class CanonicalReductionAdapter:
                 "adapter": "canonical_system_state",
                 "run_id": state.run_id,
                 "run_outcome": state.run_outcome.value,
+                "prepared_frontier": list(prepared_frontier),
+                "resulting_frontier": sorted(state.frontier),
             },
             presentation=state.summary(),
         )
@@ -112,6 +117,11 @@ class CanonicalReductionAdapter:
         priming = str(execution_policy.get("prolog_query_priming", "")).strip()
         if priming:
             os.environ[PROLOG_QUERY_PRIMING_MODE_ENV] = priming
+        determinism_policy = execution_policy.get("determinism_policy")
+        if isinstance(determinism_policy, Mapping):
+            state.determinism_policy = RuntimeDeterminismPolicy.from_dict(
+                determinism_policy
+            )
 
         apply_controller_feature_toggle_overrides(
             state,
@@ -475,6 +485,21 @@ def _receipt_references(
         if reference:
             references.append(reference)
     return tuple(dict.fromkeys(references))
+
+
+def _proposal_interactions(state: SystemState) -> tuple[dict[str, Any], ...]:
+    if not state.proposals and not state.llm_transcript:
+        return ()
+    return (
+        {
+            "proposals": [
+                state.proposals[key].to_dict()
+                for key in sorted(state.proposals)
+            ],
+            "llm_receipts": [dict(item) for item in state.llm_transcript],
+            "determinism_policy": state.determinism_policy.to_dict(),
+        },
+    )
 
 
 def _json_value(value: Any) -> Any:
