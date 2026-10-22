@@ -14,6 +14,8 @@ from controller_runtime import build_controller
 from system_state import SystemState, attach_evidence_specs
 from title_semantics import PROLOG_QUERY_PRIMING_MODE_ENV
 
+from realized_core_runtime import PerformanceRecorder, performance_scope
+
 from realized_core_engine.resumption_contracts import (
     ContinuationInlet,
     HoldOn,
@@ -41,7 +43,15 @@ class CanonicalReductionAdapter:
         *,
         should_stop: Callable[[], bool],
     ) -> ReductionProposal:
+        reconstructed = bool(context.candidate_state.engine_state)
         state = self._load_or_bootstrap_state(context)
+        trace_start = len(state.trace) if reconstructed else 0
+        existing_proposal_ids = set(state.proposals) if reconstructed else set()
+        llm_receipt_start = len(state.llm_transcript) if reconstructed else 0
+        capability_receipt_start = (
+            len(state.capability_grants) if reconstructed else 0
+        )
+        effect_receipt_start = len(state.effect_traces) if reconstructed else 0
         self._apply_execution_policy(state, context.execution_policy)
         self._prepare_operation(state, context)
         self._apply_inlet(state, context)
@@ -52,25 +62,61 @@ class CanonicalReductionAdapter:
             llm_policy=str(context.execution_policy.get("llm_policy", "auto")),
         )
         controller.attempt_stop_requested = should_stop
-        controller.run(max_steps=int(context.execution_policy.get("max_steps", 256)))
+        performance = PerformanceRecorder()
+        with performance_scope(performance):
+            with performance.measure("reduction_latency_ns"):
+                controller.run(
+                    max_steps=int(
+                        context.execution_policy.get("max_steps", 256)
+                    )
+                )
 
         resulting = semantic_state_from_system_state(
             state,
             baseline=context.candidate_state,
         )
+        proposal_ids = tuple(
+            sorted(set(state.proposals) - existing_proposal_ids)
+        )
+        reduction_trace = tuple(
+            _step_replay_record(record)
+            for record in state.trace[trace_start:]
+        )
         return ReductionProposal(
             resulting_state=resulting,
             semantic_outcome=_semantic_outcome(state),
-            proposal_references=tuple(sorted(state.proposals)),
-            proposal_interactions=_proposal_interactions(state),
+            proposal_references=proposal_ids,
+            proposal_interactions=_proposal_interactions(
+                state,
+                proposal_ids=proposal_ids,
+                llm_receipt_start=llm_receipt_start,
+            ),
+            reduction_trace=reduction_trace,
+            frontier_selections=_frontier_selection_records(
+                reduction_trace
+            ),
+            retrieved_candidate_sets=_retrieved_candidate_records(
+                reduction_trace
+            ),
+            execution_decisions=(
+                {
+                    "kind": "runtime_outcome",
+                    "outcome": state.run_outcome.value,
+                    "remaining_frontier": sorted(state.frontier),
+                    "paused_node_ids": sorted(state.paused),
+                    "incomplete_node_ids": sorted(state.incomplete),
+                    "closed_node_ids": sorted(state.closed),
+                },
+            ),
             capability_receipt_references=_receipt_references(
-                state.capability_grants,
+                state.capability_grants[capability_receipt_start:],
                 prefix="capability",
             ),
             effect_receipt_references=_receipt_references(
-                state.effect_traces,
+                state.effect_traces[effect_receipt_start:],
                 prefix="effect",
             ),
+            performance_measurements=performance.snapshot(),
             reconciliation={
                 "adapter": "canonical_system_state",
                 "run_id": state.run_id,
@@ -487,19 +533,110 @@ def _receipt_references(
     return tuple(dict.fromkeys(references))
 
 
-def _proposal_interactions(state: SystemState) -> tuple[dict[str, Any], ...]:
-    if not state.proposals and not state.llm_transcript:
+def _proposal_interactions(
+    state: SystemState,
+    *,
+    proposal_ids: tuple[str, ...],
+    llm_receipt_start: int,
+) -> tuple[dict[str, Any], ...]:
+    proposals = [state.proposals[key] for key in proposal_ids]
+    receipts = [dict(item) for item in state.llm_transcript[llm_receipt_start:]]
+    if not receipts:
+        for proposal in proposals:
+            if proposal.source != "replay":
+                continue
+            matching = next(
+                (
+                    dict(item)
+                    for item in state.llm_transcript
+                    if str(item.get("proposal_type", ""))
+                    == proposal.proposal_type.value
+                    and str(item.get("mode", "")) == proposal.mode.value
+                    and _json_value(item.get("payload"))
+                    == _json_value(proposal.payload)
+                ),
+                None,
+            )
+            if matching is not None and matching not in receipts:
+                receipts.append(matching)
+    if not proposals and not receipts:
         return ()
     return (
         {
             "proposals": [
-                state.proposals[key].to_dict()
-                for key in sorted(state.proposals)
+                proposal.to_dict() for proposal in proposals
             ],
-            "llm_receipts": [dict(item) for item in state.llm_transcript],
+            "llm_receipts": receipts,
             "determinism_policy": state.determinism_policy.to_dict(),
         },
     )
+
+
+def _step_replay_record(record: Any) -> dict[str, Any]:
+    """Externalize decision content without wall-clock presentation noise."""
+
+    return {
+        "sequence": int(record.seq),
+        "kind": str(record.kind),
+        "node_id": record.node_id,
+        "intent": str(record.intent),
+        "action": str(record.action),
+        "result": str(record.result),
+        "evaluation": str(record.evaluation),
+        "commit_effect": str(record.commit_effect),
+        "payload": _json_value(record.payload),
+    }
+
+
+def _frontier_selection_records(
+    reduction_trace: tuple[dict[str, Any], ...],
+) -> tuple[dict[str, Any], ...]:
+    return tuple(
+        {
+            "sequence": record["sequence"],
+            "selected_node_id": record.get("node_id"),
+            "proposal_id": record.get("payload", {}).get("proposal_id", ""),
+            "candidate_order": list(
+                record.get("payload", {}).get("candidate_order", ())
+            ),
+        }
+        for record in reduction_trace
+        if record.get("kind") == "frontier_selection"
+    )
+
+
+def _retrieved_candidate_records(
+    reduction_trace: tuple[dict[str, Any], ...],
+) -> tuple[dict[str, Any], ...]:
+    records: list[dict[str, Any]] = []
+    for record in reduction_trace:
+        kind = str(record.get("kind", ""))
+        payload = record.get("payload", {})
+        if not isinstance(payload, Mapping):
+            continue
+        if kind != "learning_context" and "retriev" not in kind:
+            continue
+        ordered = next(
+            (
+                payload[key]
+                for key in (
+                    "artifact_ids",
+                    "ordered_candidate_ids",
+                    "candidate_ids",
+                    "candidate_order",
+                )
+                if isinstance(payload.get(key), (list, tuple))
+            ),
+            (),
+        )
+        records.append(
+            {
+                "sequence": record["sequence"],
+                "kind": kind,
+                "ordered_candidate_ids": [str(item) for item in ordered],
+            }
+        )
+    return tuple(records)
 
 
 def _json_value(value: Any) -> Any:

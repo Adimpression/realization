@@ -10,8 +10,8 @@ from __future__ import annotations
 from collections.abc import Callable, Mapping
 from dataclasses import dataclass, field
 from enum import StrEnum
+from time import perf_counter_ns
 from typing import Any, Protocol, runtime_checkable
-
 
 class AttemptLifecycleStatus(StrEnum):
     """Durable lifecycle states for one execution attempt."""
@@ -40,6 +40,52 @@ class InterruptionDisposition(StrEnum):
 
 
 @dataclass(frozen=True, slots=True)
+class AttemptLifecycleRecord:
+    """One append-only, externally represented attempt lifecycle transition."""
+
+    status: AttemptLifecycleStatus
+    prior_status: AttemptLifecycleStatus | None = None
+    recorded_at: str = ""
+    cause: str | None = None
+    correlation: Mapping[str, Any] = field(default_factory=dict)
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "status": self.status.value,
+            "prior_status": (
+                self.prior_status.value
+                if self.prior_status is not None
+                else None
+            ),
+            "recorded_at": self.recorded_at,
+            "cause": self.cause,
+            "correlation": dict(self.correlation),
+        }
+
+    @classmethod
+    def from_dict(
+        cls,
+        value: Mapping[str, Any],
+    ) -> AttemptLifecycleRecord:
+        raw_prior = value.get("prior_status")
+        return cls(
+            status=AttemptLifecycleStatus(str(value["status"])),
+            prior_status=(
+                AttemptLifecycleStatus(str(raw_prior))
+                if raw_prior is not None
+                else None
+            ),
+            recorded_at=str(value.get("recorded_at", "")),
+            cause=(
+                str(value["cause"])
+                if value.get("cause") is not None
+                else None
+            ),
+            correlation=dict(value.get("correlation", {})),
+        )
+
+
+@dataclass(frozen=True, slots=True)
 class AttemptRecord:
     """Durable operational record; none of its fields constitute semantic state."""
 
@@ -57,6 +103,8 @@ class AttemptRecord:
     interruption_cause: str | None = None
     interruption_correlation: Mapping[str, Any] = field(default_factory=dict)
     operational_error: str | None = None
+    lifecycle_records: tuple[AttemptLifecycleRecord, ...] = ()
+    performance_measurements: Mapping[str, int] = field(default_factory=dict)
     created_at: str = ""
     updated_at: str = ""
 
@@ -73,6 +121,7 @@ class AttemptUpdate:
     interruption_cause: str | None = None
     interruption_correlation: Mapping[str, Any] = field(default_factory=dict)
     operational_error: str | None = None
+    performance_measurements: Mapping[str, int] = field(default_factory=dict)
 
 
 @dataclass(frozen=True, slots=True)
@@ -84,6 +133,7 @@ class AttemptWorkResult:
     proposal_references: tuple[str, ...] = ()
     receipt_references: tuple[str, ...] = ()
     transition_artifact_references: tuple[str, ...] = ()
+    performance_measurements: Mapping[str, int] = field(default_factory=dict)
     payload: Mapping[str, Any] = field(default_factory=dict)
 
 
@@ -173,6 +223,12 @@ class AttemptJournal(Protocol):
 
     def attempt_artifact_reference(self, attempt_id: str) -> str: ...
 
+    def record_attempt_performance(
+        self,
+        attempt_id: str,
+        measurements: Mapping[str, int],
+    ) -> AttemptRecord | None: ...
+
 
 @runtime_checkable
 class PreparedAttemptWork(Protocol):
@@ -209,6 +265,7 @@ def run_execution_attempt(
     if attempt.status is not AttemptLifecycleStatus.PREPARED:
         raise ValueError("an execution attempt must begin in prepared status")
 
+    preparation_started = perf_counter_ns()
     prepared = journal.prepare_attempt(attempt)
     running = journal.transition_attempt(
         prepared.attempt_id,
@@ -226,6 +283,16 @@ def run_execution_attempt(
             outcome=_execution_outcome(current.status),
             attempt=current,
         )
+    measured_running = journal.record_attempt_performance(
+        running.attempt_id,
+        {
+            "attempt_preparation_latency_ns": (
+                perf_counter_ns() - preparation_started
+            )
+        },
+    )
+    if measured_running is not None:
+        running = measured_running
 
     try:
         result = work.execute(
@@ -282,6 +349,9 @@ def run_execution_attempt(
             receipt_references=result.receipt_references,
             transition_artifact_references=(
                 result.transition_artifact_references
+            ),
+            performance_measurements=(
+                result.performance_measurements
             ),
         ),
     )
@@ -376,6 +446,7 @@ __all__ = [
     "AttemptExecutionOutcome",
     "AttemptInterrupted",
     "AttemptJournal",
+    "AttemptLifecycleRecord",
     "AttemptLifecycleStatus",
     "AttemptRecord",
     "AttemptRunResult",

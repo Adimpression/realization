@@ -598,6 +598,13 @@ class ResumptionServiceTests(unittest.TestCase):
         self.assertEqual(revision.identity, head.identity)
         self.assertEqual(revision.state.digest, head.state.digest)
         self.assertEqual(("hold-1",), tuple(x.hold_id for x in head.state.holds))
+        interrupted_attempt = self.repository.load_attempt("external-attempt")
+        self.assertGreater(
+            interrupted_attempt.performance_measurements[
+                "interruption_latency_ns"
+            ],
+            0,
+        )
 
     def test_resume_after_interruption_uses_latest_admitted_revision(self) -> None:
         _, revision = self._start(achieved=(item("fact-1", "Value"),))
@@ -1706,6 +1713,7 @@ class ResumptionServiceTests(unittest.TestCase):
                 operation_result = result.presentation["operation_result"]
 
                 self.assertIsNone(result.resulting_revision_identity)
+                self.assertIsNotNone(result.transition_artifact_reference)
                 self.assertEqual(operation.value, operation_result["operation"])
                 self.assertEqual(
                     [
@@ -1715,6 +1723,13 @@ class ResumptionServiceTests(unittest.TestCase):
                     operation_result["path_revision_ids"],
                 )
                 self.assertTrue(operation_result["verified"])
+                artifact_id = result.transition_artifact_reference.rsplit(
+                    "/", 1
+                )[-1]
+                replay = self.repository.verify_transition_replay(
+                    artifact_id
+                )
+                self.assertTrue(replay["verified"], replay["failures"])
 
         self.assertEqual([], controller.contexts)
         self.assertEqual(

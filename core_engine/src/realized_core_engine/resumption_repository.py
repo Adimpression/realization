@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import json
 import sqlite3
-from collections.abc import Callable, Iterator
+from collections.abc import Callable, Iterable, Iterator, Mapping
 from contextlib import contextmanager
 from dataclasses import replace
 from datetime import datetime, timezone
@@ -17,9 +17,11 @@ from pathlib import Path
 from typing import Any
 
 from realized_core_runtime import (
+    AttemptLifecycleRecord,
     AttemptLifecycleStatus,
     AttemptRecord,
     AttemptUpdate,
+    merge_performance_measurements,
 )
 
 from realized_core_engine.resumption_contracts import (
@@ -155,6 +157,8 @@ class SQLiteResumptionRepository:
                     interruption_cause TEXT,
                     interruption_correlation_json TEXT NOT NULL,
                     operational_error TEXT,
+                    lifecycle_records_json TEXT NOT NULL,
+                    performance_measurements_json TEXT NOT NULL,
                     created_at TEXT NOT NULL,
                     updated_at TEXT NOT NULL
                 );
@@ -188,6 +192,18 @@ class SQLiteResumptionRepository:
                 table="resumption_attempts",
                 column="initial_branch_head_digest",
                 definition="TEXT",
+            )
+            self._add_column_if_missing(
+                connection,
+                table="resumption_attempts",
+                column="lifecycle_records_json",
+                definition="TEXT NOT NULL DEFAULT '[]'",
+            )
+            self._add_column_if_missing(
+                connection,
+                table="resumption_attempts",
+                column="performance_measurements_json",
+                definition="TEXT NOT NULL DEFAULT '{}'",
             )
 
     def rebuild_derived_indexes(self) -> tuple[str, ...]:
@@ -224,6 +240,13 @@ class SQLiteResumptionRepository:
         now = self._clock()
         durable = replace(
             attempt,
+            lifecycle_records=(
+                *attempt.lifecycle_records,
+                AttemptLifecycleRecord(
+                    status=AttemptLifecycleStatus.PREPARED,
+                    recorded_at=attempt.created_at or now,
+                ),
+            ),
             created_at=attempt.created_at or now,
             updated_at=now,
         )
@@ -240,8 +263,9 @@ class SQLiteResumptionRepository:
                         proposal_references_json, receipt_references_json,
                         transition_artifact_references_json,
                         interruption_cause, interruption_correlation_json,
-                        operational_error, created_at, updated_at
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                        operational_error, lifecycle_records_json,
+                        performance_measurements_json, created_at, updated_at
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                     """,
                     _attempt_values(durable),
                 )
@@ -299,7 +323,8 @@ class SQLiteResumptionRepository:
                     proposal_references_json = ?, receipt_references_json = ?,
                     transition_artifact_references_json = ?,
                     interruption_cause = ?, interruption_correlation_json = ?,
-                    operational_error = ?, updated_at = ?
+                    operational_error = ?, lifecycle_records_json = ?,
+                    performance_measurements_json = ?, updated_at = ?
                 WHERE attempt_id = ? AND status IN ({placeholders})
                 """,
                 (
@@ -313,6 +338,15 @@ class SQLiteResumptionRepository:
                     replacement.interruption_cause,
                     canonical_json(dict(replacement.interruption_correlation)),
                     replacement.operational_error,
+                    canonical_json(
+                        [
+                            record.to_dict()
+                            for record in replacement.lifecycle_records
+                        ]
+                    ),
+                    canonical_json(
+                        dict(replacement.performance_measurements)
+                    ),
                     replacement.updated_at,
                     attempt_id,
                     *(status.value for status in expected_statuses),
@@ -338,6 +372,45 @@ class SQLiteResumptionRepository:
 
     def attempt_artifact_reference(self, attempt_id: str) -> str:
         return f"sqlite-resumption://attempt/{attempt_id}"
+
+    def record_attempt_performance(
+        self,
+        attempt_id: str,
+        measurements: Mapping[str, int],
+    ) -> AttemptRecord | None:
+        """Merge non-semantic measurements into the operational artifact."""
+
+        if not measurements:
+            return self.load_attempt(attempt_id)
+        now = self._clock()
+        with self._connection() as connection:
+            connection.execute("BEGIN IMMEDIATE")
+            row = connection.execute(
+                "SELECT * FROM resumption_attempts WHERE attempt_id = ?",
+                (attempt_id,),
+            ).fetchone()
+            if row is None:
+                connection.rollback()
+                return None
+            current = _attempt_from_row(row)
+            merged = merge_performance_measurements(
+                current.performance_measurements,
+                measurements,
+            )
+            connection.execute(
+                """
+                UPDATE resumption_attempts
+                SET performance_measurements_json = ?, updated_at = ?
+                WHERE attempt_id = ?
+                """,
+                (canonical_json(merged), now, attempt_id),
+            )
+            connection.commit()
+        return replace(
+            current,
+            performance_measurements=merged,
+            updated_at=now,
+        )
 
     def recover_running_attempts(self, *, reason: str) -> tuple[AttemptRecord, ...]:
         """Close abandoned operational episodes without changing semantic state."""
@@ -436,6 +509,23 @@ class SQLiteResumptionRepository:
         if artifact.resulting_revision_digest != revision.revision_digest:
             raise RepositoryIntegrityError(
                 "transition artifact carries the wrong revision digest"
+            )
+        if artifact.execution_attempt_id != attempt_id:
+            raise RepositoryIntegrityError(
+                "transition artifact points at a different execution attempt"
+            )
+        if artifact.commit_decision.get("disposition") != "commit":
+            raise RepositoryIntegrityError(
+                "committed transition artifact lacks a commit decision"
+            )
+        if (
+            artifact.commit_decision.get(
+                "expected_branch_head_revision_id"
+            )
+            != expected_head_revision_id
+        ):
+            raise RepositoryIntegrityError(
+                "transition commit decision carries the wrong expected head"
             )
 
         now = self._clock()
@@ -629,6 +719,14 @@ class SQLiteResumptionRepository:
     ) -> str:
         """Persist a rejected/stale/ambiguous transition without a revision."""
 
+        if artifact.execution_attempt_id != attempt_id:
+            raise RepositoryIntegrityError(
+                "transition artifact points at a different execution attempt"
+            )
+        if artifact.commit_decision.get("disposition") == "commit":
+            raise RepositoryIntegrityError(
+                "uncommitted transition artifact claims a commit decision"
+            )
         now = self._clock()
         with self._connection() as connection:
             connection.execute("BEGIN IMMEDIATE")
@@ -804,6 +902,82 @@ class SQLiteResumptionRepository:
                     "non-committing artifact is referenced by a revision"
                 )
 
+        attempt = None
+        if artifact.execution_attempt_id is not None:
+            attempt = self.load_attempt(artifact.execution_attempt_id)
+            if attempt is None:
+                failures.append("execution attempt is missing")
+            else:
+                if artifact_id not in attempt.transition_artifact_references:
+                    failures.append(
+                        "execution attempt does not reference the transition"
+                    )
+                failures.extend(_attempt_lifecycle_failures(attempt))
+
+        if artifact.commit_decision:
+            disposition = artifact.commit_decision.get("disposition")
+            if disposition == "commit":
+                if artifact.resulting_revision_id is None:
+                    failures.append(
+                        "commit decision has no resulting revision"
+                    )
+                if (
+                    artifact.commit_decision.get("resulting_revision_id")
+                    != artifact.resulting_revision_id
+                ):
+                    failures.append(
+                        "commit decision and resulting revision disagree"
+                    )
+                if (
+                    artifact.commit_decision.get(
+                        "resulting_revision_digest"
+                    )
+                    != artifact.resulting_revision_digest
+                ):
+                    failures.append(
+                        "commit decision and resulting digest disagree"
+                    )
+            elif artifact.resulting_revision_id is not None:
+                failures.append(
+                    "non-commit decision carries a resulting revision"
+                )
+
+        if artifact.reduction_trace:
+            replayed_frontier = _frontier_selections_from_trace(
+                artifact.reduction_trace
+            )
+            if replayed_frontier != artifact.frontier_selections:
+                failures.append(
+                    "frontier selections do not match the reduction trace"
+                )
+            replayed_retrieval = _retrievals_from_trace(
+                artifact.reduction_trace
+            )
+            if replayed_retrieval != artifact.retrieved_candidate_sets:
+                failures.append(
+                    "retrieved candidate ordering does not match the reduction trace"
+                )
+
+        proposal_ids = tuple(
+            str(proposal.get("id"))
+            for interaction in artifact.proposal_interactions
+            for proposal in interaction.get("proposals", ())
+            if isinstance(proposal, dict) and proposal.get("id") is not None
+        )
+        if proposal_ids and proposal_ids != artifact.proposal_references:
+            failures.append(
+                "proposal references do not match recorded interactions"
+            )
+
+        if artifact.execution_decisions and not any(
+            item.get("kind") == "semantic_outcome"
+            and item.get("outcome") == artifact.semantic_outcome.value
+            for item in artifact.execution_decisions
+        ):
+            failures.append(
+                "execution decisions do not record the semantic outcome"
+            )
+
         has_llm_receipts = any(
             bool(item.get("llm_receipts"))
             for item in artifact.proposal_interactions
@@ -825,6 +999,18 @@ class SQLiteResumptionRepository:
             ),
             "recorded_proposal_interaction_count": len(
                 artifact.proposal_interactions
+            ),
+            "execution_attempt_id": artifact.execution_attempt_id,
+            "attempt_lifecycle_records": (
+                [record.to_dict() for record in attempt.lifecycle_records]
+                if attempt is not None
+                else []
+            ),
+            "frontier_selection_count": len(
+                artifact.frontier_selections
+            ),
+            "retrieved_candidate_set_count": len(
+                artifact.retrieved_candidate_sets
             ),
             "source_revision_id": (
                 artifact.source_identity.revision_id
@@ -1061,6 +1247,10 @@ def _attempt_values(attempt: AttemptRecord) -> tuple[Any, ...]:
         attempt.interruption_cause,
         canonical_json(dict(attempt.interruption_correlation)),
         attempt.operational_error,
+        canonical_json(
+            [record.to_dict() for record in attempt.lifecycle_records]
+        ),
+        canonical_json(dict(attempt.performance_measurements)),
         attempt.created_at,
         attempt.updated_at,
     )
@@ -1092,6 +1282,13 @@ def _attempt_from_row(row: sqlite3.Row) -> AttemptRecord:
             str(row["interruption_correlation_json"])
         ),
         operational_error=row["operational_error"],
+        lifecycle_records=tuple(
+            AttemptLifecycleRecord.from_dict(dict(item))
+            for item in json.loads(str(row["lifecycle_records_json"]))
+        ),
+        performance_measurements=json.loads(
+            str(row["performance_measurements_json"])
+        ),
         created_at=str(row["created_at"]),
         updated_at=str(row["updated_at"]),
     )
@@ -1141,6 +1338,24 @@ def _apply_attempt_update(
             if update.operational_error is not None
             else current.operational_error
         ),
+        lifecycle_records=(
+            *current.lifecycle_records,
+            AttemptLifecycleRecord(
+                status=update.status,
+                prior_status=current.status,
+                recorded_at=now,
+                cause=(
+                    update.interruption_cause
+                    if update.interruption_cause is not None
+                    else update.operational_error
+                ),
+                correlation=dict(update.interruption_correlation),
+            ),
+        ),
+        performance_measurements=merge_performance_measurements(
+            current.performance_measurements,
+            update.performance_measurements,
+        ),
         updated_at=now,
     )
 
@@ -1173,6 +1388,92 @@ def _revision_from_rows(
         revision_digest=str(row["revision_digest"]),
         created_at=str(row["created_at"]),
     )
+
+
+def _attempt_lifecycle_failures(attempt: AttemptRecord) -> list[str]:
+    records = attempt.lifecycle_records
+    if not records:
+        return ["execution attempt lifecycle records are missing"]
+    failures: list[str] = []
+    if (
+        records[0].status is not AttemptLifecycleStatus.PREPARED
+        or records[0].prior_status is not None
+    ):
+        failures.append("execution attempt lifecycle does not begin prepared")
+    for prior, current in zip(records, records[1:], strict=False):
+        if current.prior_status is not prior.status:
+            failures.append(
+                "execution attempt lifecycle has a discontinuous transition"
+            )
+            break
+    if records[-1].status is not attempt.status:
+        failures.append(
+            "execution attempt lifecycle does not end at its current status"
+        )
+    if attempt.status is AttemptLifecycleStatus.INTERRUPTED:
+        final = records[-1]
+        if final.cause != attempt.interruption_cause:
+            failures.append(
+                "interruption lifecycle cause disagrees with the attempt"
+            )
+        if dict(final.correlation) != dict(
+            attempt.interruption_correlation
+        ):
+            failures.append(
+                "interruption lifecycle correlation disagrees with the attempt"
+            )
+    return failures
+
+
+def _frontier_selections_from_trace(
+    trace: tuple[dict[str, Any], ...],
+) -> tuple[dict[str, Any], ...]:
+    return tuple(
+        {
+            "sequence": record["sequence"],
+            "selected_node_id": record.get("node_id"),
+            "proposal_id": record.get("payload", {}).get("proposal_id", ""),
+            "candidate_order": list(
+                record.get("payload", {}).get("candidate_order", ())
+            ),
+        }
+        for record in trace
+        if record.get("kind") == "frontier_selection"
+    )
+
+
+def _retrievals_from_trace(
+    trace: tuple[dict[str, Any], ...],
+) -> tuple[dict[str, Any], ...]:
+    records: list[dict[str, Any]] = []
+    for record in trace:
+        kind = str(record.get("kind", ""))
+        payload = record.get("payload", {})
+        if not isinstance(payload, dict):
+            continue
+        if kind != "learning_context" and "retriev" not in kind:
+            continue
+        ordered = next(
+            (
+                payload[key]
+                for key in (
+                    "artifact_ids",
+                    "ordered_candidate_ids",
+                    "candidate_ids",
+                    "candidate_order",
+                )
+                if isinstance(payload.get(key), (list, tuple))
+            ),
+            (),
+        )
+        records.append(
+            {
+                "sequence": record["sequence"],
+                "kind": kind,
+                "ordered_candidate_ids": [str(item) for item in ordered],
+            }
+        )
+    return tuple(records)
 
 
 def _utc_now() -> str:

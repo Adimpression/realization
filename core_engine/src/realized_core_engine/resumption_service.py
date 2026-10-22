@@ -7,6 +7,7 @@ import uuid
 from collections.abc import Callable, Iterable
 from dataclasses import replace
 from datetime import datetime, timezone
+from time import perf_counter_ns
 from typing import Any
 
 from realized_core_runtime import (
@@ -18,7 +19,9 @@ from realized_core_runtime import (
     AttemptWorkResult,
     InterruptionRequest,
     InterruptionResult,
+    PerformanceRecorder,
     PreparedAttemptWork,
+    merge_performance_measurements,
     request_attempt_interruption,
     run_execution_attempt,
 )
@@ -133,12 +136,14 @@ class ResumptionService:
     def start(self, request: StartRequest) -> ResumptionResult:
         """Start a new objective with no causal parent revision."""
 
+        performance = PerformanceRecorder()
         attempt_id = self._id_factory("attempt")
-        initial_head = self.repository.load_branch_head(
-            request.scope_id,
-            request.objective_id,
-            request.branch_id,
-        )
+        with performance.measure("revision_load_latency_ns"):
+            initial_head = self.repository.load_branch_head(
+                request.scope_id,
+                request.objective_id,
+                request.branch_id,
+            )
         attempt = AttemptRecord(
             attempt_id=attempt_id,
             causal_anchor=(
@@ -164,6 +169,7 @@ class ResumptionService:
                     request,
                     attempt_id,
                     should_stop,
+                    performance,
                 )
             ),
         )
@@ -172,12 +178,14 @@ class ResumptionService:
     def resume(self, request: ResumptionRequest) -> ResumptionResult:
         """Execute one typed continuation operation from an exact anchor."""
 
+        performance = PerformanceRecorder()
         attempt_id = self._id_factory("attempt")
-        initial_head = self.repository.load_branch_head(
-            request.anchor.scope_id,
-            request.anchor.objective_id,
-            request.anchor.branch_id,
-        )
+        with performance.measure("revision_load_latency_ns"):
+            initial_head = self.repository.load_branch_head(
+                request.anchor.scope_id,
+                request.anchor.objective_id,
+                request.anchor.branch_id,
+            )
         attempt = AttemptRecord(
             attempt_id=attempt_id,
             causal_anchor=request.anchor.causal_anchor,
@@ -201,6 +209,7 @@ class ResumptionService:
                     request,
                     attempt_id,
                     should_stop,
+                    performance,
                 )
             ),
         )
@@ -210,7 +219,15 @@ class ResumptionService:
     def interrupt(self, request: InterruptionRequest) -> InterruptionResult:
         """Interrupt an attempt without synthesizing a semantic transition."""
 
-        return request_attempt_interruption(self.repository, request)
+        started = perf_counter_ns()
+        result = request_attempt_interruption(self.repository, request)
+        self.repository.record_attempt_performance(
+            request.attempt_id,
+            {
+                "interruption_latency_ns": perf_counter_ns() - started,
+            },
+        )
+        return result
 
     def project(
         self,
@@ -549,14 +566,16 @@ class ResumptionService:
         request: StartRequest,
         attempt_id: str,
         should_stop: Callable[[], bool],
+        performance: PerformanceRecorder,
     ) -> AttemptWorkResult:
         self._raise_if_stopped(should_stop)
         attempt = self._require_running_attempt(attempt_id)
-        existing = self.repository.load_branch_head(
-            request.scope_id,
-            request.objective_id,
-            request.branch_id,
-        )
+        with performance.measure("revision_load_latency_ns"):
+            existing = self.repository.load_branch_head(
+                request.scope_id,
+                request.objective_id,
+                request.branch_id,
+            )
         if existing is not None:
             return self._non_committing_work_result(
                 attempt,
@@ -569,6 +588,7 @@ class ResumptionService:
                 diagnostics={
                     "actual_branch_head": existing.identity.revision_id
                 },
+                performance=performance,
             )
 
         empty = SemanticState(
@@ -630,14 +650,17 @@ class ResumptionService:
                     )
                 ),
             )
-            decision = self.admission_evaluator(
-                OperationKind.START,
-                None,
-                request.initial_inlet,
-                candidate,
-                dict(request.governance_policy),
-                dict(request.execution_policy),
-            )
+            with performance.measure(
+                "verification_and_admission_latency_ns"
+            ):
+                decision = self.admission_evaluator(
+                    OperationKind.START,
+                    None,
+                    request.initial_inlet,
+                    candidate,
+                    dict(request.governance_policy),
+                    dict(request.execution_policy),
+                )
             if decision.disposition is not AdmissionDisposition.ACCEPTED:
                 raise TransitionValidationError(decision.rationale)
             proposal = self._reduce_start(
@@ -656,14 +679,17 @@ class ResumptionService:
                     **dict(proposal.reconciliation),
                 },
             }
-            decision = self.admission_evaluator(
-                OperationKind.START,
-                None,
-                request.initial_inlet,
-                candidate,
-                dict(request.governance_policy),
-                dict(request.execution_policy),
-            )
+            with performance.measure(
+                "verification_and_admission_latency_ns"
+            ):
+                decision = self.admission_evaluator(
+                    OperationKind.START,
+                    None,
+                    request.initial_inlet,
+                    candidate,
+                    dict(request.governance_policy),
+                    dict(request.execution_policy),
+                )
             if decision.disposition is not AdmissionDisposition.ACCEPTED:
                 raise TransitionValidationError(decision.rationale)
         except TransitionValidationError as exc:
@@ -675,11 +701,13 @@ class ResumptionService:
                 projection=None,
                 outcome=exc.outcome,
                 rationale=str(exc),
+                performance=performance,
             )
 
         self._raise_if_stopped(should_stop)
         outcome = proposal.semantic_outcome or _infer_semantic_outcome(candidate)
         revision, artifact = self._revision_and_artifact(
+            attempt_id=attempt.attempt_id,
             source=None,
             target_scope_id=request.scope_id,
             target_objective_id=request.objective_id,
@@ -694,14 +722,16 @@ class ResumptionService:
             semantic_outcome=outcome,
             realignment=None,
             proposal=proposal,
+            expected_branch_head_revision_id=None,
         )
         try:
-            self.repository.commit_revision(
-                revision,
-                artifact,
-                expected_head_revision_id=None,
-                attempt_id=attempt.attempt_id,
-            )
+            with performance.measure("atomic_commit_latency_ns"):
+                self.repository.commit_revision(
+                    revision,
+                    artifact,
+                    expected_head_revision_id=None,
+                    attempt_id=attempt.attempt_id,
+                )
         except StaleAnchorError as exc:
             return self._non_committing_work_result(
                 attempt,
@@ -712,6 +742,10 @@ class ResumptionService:
                 outcome=SemanticOutcome.STALE,
                 rationale=str(exc),
                 diagnostics={"actual_branch_head": exc.actual},
+                proposal=proposal,
+                admission=decision,
+                reconciliation=reconciliation,
+                performance=performance,
             )
         public = self._result_for_revision(
             attempt_id=attempt.attempt_id,
@@ -721,11 +755,15 @@ class ResumptionService:
             semantic_outcome=outcome,
             presentation=dict(proposal.presentation),
         )
-        return AttemptWorkResult(
+        return self._attach_performance(
+            AttemptWorkResult(
             semantic_outcome=outcome.value,
             latest_admitted_revision_id=revision.identity.revision_id,
             transition_artifact_references=(artifact.artifact_id,),
             payload={"resumption_result": public},
+            ),
+            performance,
+            proposal,
         )
 
     def _resume_work(
@@ -733,11 +771,13 @@ class ResumptionService:
         request: ResumptionRequest,
         attempt_id: str,
         should_stop: Callable[[], bool],
+        performance: PerformanceRecorder,
     ) -> AttemptWorkResult:
         self._raise_if_stopped(should_stop)
         attempt = self._require_running_attempt(attempt_id)
         try:
-            source = self.repository.require_revision(request.anchor)
+            with performance.measure("revision_load_latency_ns"):
+                source = self.repository.require_revision(request.anchor)
         except (KeyError, ValueError, RepositoryIntegrityError) as exc:
             return self._non_committing_work_result(
                 attempt,
@@ -747,8 +787,21 @@ class ResumptionService:
                 projection=None,
                 outcome=SemanticOutcome.REJECTED,
                 rationale=str(exc),
+                performance=performance,
             )
-        projection = self.project(source, request.projection_policy)
+        with performance.measure("projection_construction_latency_ns"):
+            projection = self.project(source, request.projection_policy)
+        performance.add(
+            "projection_size_bytes",
+            len(
+                canonical_json(
+                    {
+                        **projection.canonical_content(),
+                        "projection_digest": projection.projection_digest,
+                    }
+                ).encode("utf-8")
+            ),
+        )
 
         try:
             self._validate_operation_request(request, source)
@@ -756,19 +809,30 @@ class ResumptionService:
                 request,
                 source,
             )
-            candidate, reconciliation, realignment = self._apply_request(
-                request,
-                source,
-                target,
-            )
-            inlet_admission = self.admission_evaluator(
-                request.operation,
-                source,
-                request.inlet,
-                candidate,
-                dict(request.governance_policy),
-                dict(request.execution_policy),
-            )
+            if request.operation is OperationKind.REDIRECT_AND_REALIGN:
+                with performance.measure(
+                    "realignment_construction_and_verification_latency_ns"
+                ):
+                    candidate, reconciliation, realignment = (
+                        self._apply_request(request, source, target)
+                    )
+            else:
+                candidate, reconciliation, realignment = self._apply_request(
+                    request,
+                    source,
+                    target,
+                )
+            with performance.measure(
+                "verification_and_admission_latency_ns"
+            ):
+                inlet_admission = self.admission_evaluator(
+                    request.operation,
+                    source,
+                    request.inlet,
+                    candidate,
+                    dict(request.governance_policy),
+                    dict(request.execution_policy),
+                )
             if inlet_admission.disposition is not AdmissionDisposition.ACCEPTED:
                 raise TransitionValidationError(inlet_admission.rationale)
             self._raise_if_stopped(should_stop)
@@ -805,14 +869,17 @@ class ResumptionService:
                     **dict(proposal.reconciliation),
                 },
             }
-            admission = self.admission_evaluator(
-                request.operation,
-                source,
-                request.inlet,
-                candidate,
-                dict(request.governance_policy),
-                dict(request.execution_policy),
-            )
+            with performance.measure(
+                "verification_and_admission_latency_ns"
+            ):
+                admission = self.admission_evaluator(
+                    request.operation,
+                    source,
+                    request.inlet,
+                    candidate,
+                    dict(request.governance_policy),
+                    dict(request.execution_policy),
+                )
             if admission.disposition is not AdmissionDisposition.ACCEPTED:
                 raise TransitionValidationError(admission.rationale)
         except TransitionValidationError as exc:
@@ -824,6 +891,7 @@ class ResumptionService:
                 projection=projection,
                 outcome=exc.outcome,
                 rationale=str(exc),
+                performance=performance,
             )
 
         state_changed = candidate.digest != source.state.digest
@@ -834,47 +902,25 @@ class ResumptionService:
             or _infer_semantic_outcome(candidate)
         )
         if not state_changed:
-            public = ResumptionResult(
-                source_revision_identity=source.identity,
-                execution_attempt_id=attempt.attempt_id,
-                execution_outcome=AttemptExecutionOutcome.TERMINATED,
-                semantic_outcome=outcome,
-                resulting_revision_identity=None,
-                transition_artifact_reference=None,
-                attempt_artifact_reference=(
-                    self.repository.attempt_artifact_reference(attempt.attempt_id)
+            return self._attach_performance(
+                self._unchanged_work_result(
+                attempt=attempt,
+                source=source,
+                operation=request.operation,
+                inlet=request.inlet,
+                projection=projection,
+                outcome=outcome,
+                reconciliation=reconciliation,
+                admission=admission,
+                proposal=proposal,
                 ),
-                realignment_summary=None,
-                identity_disposition=None,
-                achieved_state_summary=tuple(
-                    item.item_id for item in source.state.achieved
-                ),
-                non_achievedness_summary=tuple(
-                    item.item_id for item in source.state.non_achievedness
-                ),
-                active_hold_summary=tuple(
-                    hold.hold_id for hold in _active_holds(source.state)
-                ),
-                diagnostics={"semantic_state_changed": False},
-                presentation=dict(proposal.presentation),
-            )
-            return AttemptWorkResult(
-                semantic_outcome=outcome.value,
-                latest_admitted_revision_id=source.identity.revision_id,
-                proposal_references=proposal.proposal_references,
-                receipt_references=tuple(
-                    dict.fromkeys(
-                        (
-                            *proposal.capability_receipt_references,
-                            *proposal.effect_receipt_references,
-                        )
-                    )
-                ),
-                payload={"resumption_result": public},
+                performance,
+                proposal,
             )
 
         self._raise_if_stopped(should_stop)
         revision, artifact = self._revision_and_artifact(
+            attempt_id=attempt.attempt_id,
             source=source,
             target_scope_id=target[0],
             target_objective_id=target[1],
@@ -889,14 +935,16 @@ class ResumptionService:
             semantic_outcome=outcome,
             realignment=realignment,
             proposal=proposal,
+            expected_branch_head_revision_id=expected_head,
         )
         try:
-            self.repository.commit_revision(
-                revision,
-                artifact,
-                expected_head_revision_id=expected_head,
-                attempt_id=attempt.attempt_id,
-            )
+            with performance.measure("atomic_commit_latency_ns"):
+                self.repository.commit_revision(
+                    revision,
+                    artifact,
+                    expected_head_revision_id=expected_head,
+                    attempt_id=attempt.attempt_id,
+                )
         except (StaleAnchorError, AttemptNotRunningError) as exc:
             actual = exc.actual if isinstance(exc, StaleAnchorError) else None
             return self._non_committing_work_result(
@@ -908,6 +956,10 @@ class ResumptionService:
                 outcome=SemanticOutcome.STALE,
                 rationale=str(exc),
                 diagnostics={"actual_branch_head": actual},
+                proposal=proposal,
+                admission=admission,
+                reconciliation=reconciliation,
+                performance=performance,
             )
         public = self._result_for_revision(
             attempt_id=attempt.attempt_id,
@@ -917,7 +969,8 @@ class ResumptionService:
             semantic_outcome=outcome,
             presentation=dict(proposal.presentation),
         )
-        return AttemptWorkResult(
+        return self._attach_performance(
+            AttemptWorkResult(
             semantic_outcome=outcome.value,
             latest_admitted_revision_id=revision.identity.revision_id,
             proposal_references=proposal.proposal_references,
@@ -931,6 +984,9 @@ class ResumptionService:
             ),
             transition_artifact_references=(artifact.artifact_id,),
             payload={"resumption_result": public},
+            ),
+            performance,
+            proposal,
         )
 
     # Reconciliation -----------------------------------------------------------
@@ -1932,6 +1988,7 @@ class ResumptionService:
     def _revision_and_artifact(
         self,
         *,
+        attempt_id: str,
         source: Revision | None,
         target_scope_id: str,
         target_objective_id: str,
@@ -1945,6 +2002,7 @@ class ResumptionService:
         admission: AdmissionDecision,
         semantic_outcome: SemanticOutcome,
         realignment: Realignment | None,
+        expected_branch_head_revision_id: str | None,
         proposal: ReductionProposal | None = None,
     ) -> tuple[Revision, TransitionArtifact]:
         revision_id = self._id_factory("revision")
@@ -2047,6 +2105,31 @@ class ResumptionService:
             proposal_interactions=(
                 proposal.proposal_interactions if proposal else ()
             ),
+            execution_attempt_id=attempt_id,
+            reduction_trace=(
+                proposal.reduction_trace if proposal else ()
+            ),
+            frontier_selections=(
+                proposal.frontier_selections if proposal else ()
+            ),
+            retrieved_candidate_sets=(
+                proposal.retrieved_candidate_sets if proposal else ()
+            ),
+            execution_decisions=(
+                *(proposal.execution_decisions if proposal else ()),
+                {
+                    "kind": "semantic_outcome",
+                    "outcome": semantic_outcome.value,
+                },
+            ),
+            commit_decision={
+                "disposition": "commit",
+                "expected_branch_head_revision_id": (
+                    expected_branch_head_revision_id
+                ),
+                "resulting_revision_id": revision.identity.revision_id,
+                "resulting_revision_digest": revision.revision_digest,
+            },
         )
         artifact = replace(
             artifact,
@@ -2055,6 +2138,154 @@ class ResumptionService:
             ),
         )
         return revision, artifact
+
+    @staticmethod
+    def _attach_performance(
+        result: AttemptWorkResult,
+        performance: PerformanceRecorder,
+        proposal: ReductionProposal | None = None,
+    ) -> AttemptWorkResult:
+        return replace(
+            result,
+            performance_measurements=merge_performance_measurements(
+                result.performance_measurements,
+                performance.snapshot(),
+                (
+                    proposal.performance_measurements
+                    if proposal is not None
+                    else {}
+                ),
+            ),
+        )
+
+    def _unchanged_work_result(
+        self,
+        *,
+        attempt: AttemptRecord,
+        source: Revision,
+        operation: OperationKind,
+        inlet: ContinuationInlet | None,
+        projection: ResumptionProjection,
+        outcome: SemanticOutcome,
+        reconciliation: dict[str, Any],
+        admission: AdmissionDecision,
+        proposal: ReductionProposal,
+    ) -> AttemptWorkResult:
+        """Persist an accepted decision flow that creates no semantic revision."""
+
+        artifact_id = self._id_factory("transition")
+        artifact = TransitionArtifact(
+            artifact_id=artifact_id,
+            source_identity=source.identity,
+            source_revision_digest=source.revision_digest,
+            projection_policy=projection.policy,
+            projection_digest=projection.projection_digest,
+            projection_completeness_statement=(
+                projection.completeness_statement
+            ),
+            inlet_id=inlet.inlet_id if inlet else None,
+            inlet_digest=inlet.digest if inlet else None,
+            operation=operation,
+            reconciliation=reconciliation,
+            proposal_references=proposal.proposal_references,
+            admission=admission,
+            admitted_delta={"state_changed": False},
+            rejected_delta={},
+            superseded_delta={},
+            conflicting_delta={"conflicts": dict(source.state.conflicts)},
+            unresolved_delta={
+                "applicability_item_ids": list(
+                    source.state.unresolved_applicability_item_ids
+                )
+            },
+            hold_evaluation={
+                "active_hold_ids": [
+                    hold.hold_id for hold in _active_holds(source.state)
+                ],
+                "evaluations": list(source.state.hold_evaluations),
+            },
+            capability_receipt_references=(
+                proposal.capability_receipt_references
+            ),
+            effect_receipt_references=(
+                proposal.effect_receipt_references
+            ),
+            semantic_outcome=outcome,
+            resulting_revision_id=None,
+            resulting_revision_digest=None,
+            decision_flow_signature="",
+            projection_artifact={
+                **projection.canonical_content(),
+                "projection_digest": projection.projection_digest,
+            },
+            inlet_artifact=inlet.to_dict() if inlet is not None else None,
+            proposal_interactions=proposal.proposal_interactions,
+            execution_attempt_id=attempt.attempt_id,
+            reduction_trace=proposal.reduction_trace,
+            frontier_selections=proposal.frontier_selections,
+            retrieved_candidate_sets=proposal.retrieved_candidate_sets,
+            execution_decisions=(
+                *proposal.execution_decisions,
+                {
+                    "kind": "semantic_outcome",
+                    "outcome": outcome.value,
+                },
+            ),
+            commit_decision={
+                "disposition": "not_required",
+                "reason": "semantic_state_unchanged",
+                "source_revision_id": source.identity.revision_id,
+            },
+        )
+        artifact = replace(
+            artifact,
+            decision_flow_signature=(
+                artifact.expected_decision_flow_signature
+            ),
+        )
+        reference = self.repository.append_uncommitted_transition_artifact(
+            artifact,
+            attempt_id=attempt.attempt_id,
+        )
+        public = ResumptionResult(
+            source_revision_identity=source.identity,
+            execution_attempt_id=attempt.attempt_id,
+            execution_outcome=AttemptExecutionOutcome.TERMINATED,
+            semantic_outcome=outcome,
+            resulting_revision_identity=None,
+            transition_artifact_reference=reference,
+            attempt_artifact_reference=(
+                self.repository.attempt_artifact_reference(attempt.attempt_id)
+            ),
+            realignment_summary=None,
+            identity_disposition=None,
+            achieved_state_summary=tuple(
+                item.item_id for item in source.state.achieved
+            ),
+            non_achievedness_summary=tuple(
+                item.item_id for item in source.state.non_achievedness
+            ),
+            active_hold_summary=tuple(
+                hold.hold_id for hold in _active_holds(source.state)
+            ),
+            diagnostics={"semantic_state_changed": False},
+            presentation=dict(proposal.presentation),
+        )
+        return AttemptWorkResult(
+            semantic_outcome=outcome.value,
+            latest_admitted_revision_id=source.identity.revision_id,
+            proposal_references=proposal.proposal_references,
+            receipt_references=tuple(
+                dict.fromkeys(
+                    (
+                        *proposal.capability_receipt_references,
+                        *proposal.effect_receipt_references,
+                    )
+                )
+            ),
+            transition_artifact_references=(artifact_id,),
+            payload={"resumption_result": public},
+        )
 
     def _non_committing_work_result(
         self,
@@ -2067,8 +2298,12 @@ class ResumptionService:
         outcome: SemanticOutcome,
         rationale: str,
         diagnostics: dict[str, Any] | None = None,
+        proposal: ReductionProposal | None = None,
+        admission: AdmissionDecision | None = None,
+        reconciliation: dict[str, Any] | None = None,
+        performance: PerformanceRecorder | None = None,
     ) -> AttemptWorkResult:
-        admission = AdmissionDecision(
+        decision = admission or AdmissionDecision(
             disposition=(
                 AdmissionDisposition.CLARIFICATION_REQUIRED
                 if outcome is SemanticOutcome.AMBIGUOUS
@@ -2096,17 +2331,23 @@ class ResumptionService:
             inlet_id=inlet.inlet_id if inlet else None,
             inlet_digest=inlet.digest if inlet else None,
             operation=operation,
-            reconciliation={"rationale": rationale},
-            proposal_references=(),
-            admission=admission,
+            reconciliation={**(reconciliation or {}), "rationale": rationale},
+            proposal_references=(
+                proposal.proposal_references if proposal else ()
+            ),
+            admission=decision,
             admitted_delta={},
             rejected_delta={"rationale": rationale},
             superseded_delta={},
             conflicting_delta={},
             unresolved_delta={},
             hold_evaluation={},
-            capability_receipt_references=(),
-            effect_receipt_references=(),
+            capability_receipt_references=(
+                proposal.capability_receipt_references if proposal else ()
+            ),
+            effect_receipt_references=(
+                proposal.effect_receipt_references if proposal else ()
+            ),
             semantic_outcome=outcome,
             resulting_revision_id=None,
             resulting_revision_digest=None,
@@ -2120,6 +2361,31 @@ class ResumptionService:
                 else None
             ),
             inlet_artifact=inlet.to_dict() if inlet is not None else None,
+            proposal_interactions=(
+                proposal.proposal_interactions if proposal else ()
+            ),
+            execution_attempt_id=attempt.attempt_id,
+            reduction_trace=(
+                proposal.reduction_trace if proposal else ()
+            ),
+            frontier_selections=(
+                proposal.frontier_selections if proposal else ()
+            ),
+            retrieved_candidate_sets=(
+                proposal.retrieved_candidate_sets if proposal else ()
+            ),
+            execution_decisions=(
+                *(proposal.execution_decisions if proposal else ()),
+                {
+                    "kind": "semantic_outcome",
+                    "outcome": outcome.value,
+                },
+            ),
+            commit_decision={
+                "disposition": "not_committed",
+                "rationale": rationale,
+                **(diagnostics or {}),
+            },
         )
         artifact = replace(
             artifact,
@@ -2157,14 +2423,32 @@ class ResumptionService:
             ),
             diagnostics={"rationale": rationale, **(diagnostics or {})},
         )
-        return AttemptWorkResult(
+        result = AttemptWorkResult(
             semantic_outcome=outcome.value,
             latest_admitted_revision_id=(
                 source.identity.revision_id if source else None
             ),
+            proposal_references=(
+                proposal.proposal_references if proposal else ()
+            ),
+            receipt_references=(
+                tuple(
+                    dict.fromkeys(
+                        (
+                            *proposal.capability_receipt_references,
+                            *proposal.effect_receipt_references,
+                        )
+                    )
+                )
+                if proposal
+                else ()
+            ),
             transition_artifact_references=(artifact_id,),
             payload={"resumption_result": public},
         )
+        if performance is None:
+            return result
+        return self._attach_performance(result, performance, proposal)
 
     def _result_for_revision(
         self,
@@ -2702,6 +2986,12 @@ def _attempt_payload(attempt: AttemptRecord) -> dict[str, Any]:
         "interruption_cause": attempt.interruption_cause,
         "interruption_correlation": dict(attempt.interruption_correlation),
         "operational_error": attempt.operational_error,
+        "lifecycle_records": [
+            record.to_dict() for record in attempt.lifecycle_records
+        ],
+        "performance_measurements": dict(
+            attempt.performance_measurements
+        ),
         "created_at": attempt.created_at,
         "updated_at": attempt.updated_at,
     }

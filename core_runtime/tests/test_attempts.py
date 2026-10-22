@@ -56,12 +56,34 @@ class MemoryAttemptJournal:
             interruption_cause=update.interruption_cause,
             interruption_correlation=dict(update.interruption_correlation),
             operational_error=update.operational_error,
+            performance_measurements={
+                **current.performance_measurements,
+                **update.performance_measurements,
+            },
         )
         self.records[attempt_id] = replacement
         return replacement
 
     def attempt_artifact_reference(self, attempt_id: str) -> str:
         return f"attempt:{attempt_id}"
+
+    def record_attempt_performance(
+        self,
+        attempt_id: str,
+        measurements: dict[str, int],
+    ) -> AttemptRecord | None:
+        current = self.records.get(attempt_id)
+        if current is None:
+            return None
+        merged = dict(current.performance_measurements)
+        for key, value in measurements.items():
+            merged[key] = merged.get(key, 0) + value
+        replacement = replace(
+            current,
+            performance_measurements=merged,
+        )
+        self.records[attempt_id] = replacement
+        return replacement
 
 
 class ReturningWork:
@@ -149,6 +171,12 @@ class AttemptLifecycleTests(unittest.TestCase):
         self.assertEqual(AttemptExecutionOutcome.TERMINATED, result.outcome)
         self.assertEqual("revision-2", result.attempt.latest_admitted_revision_id)
         self.assertEqual(("transition-1",), result.attempt.transition_artifact_references)
+        self.assertGreater(
+            result.attempt.performance_measurements[
+                "attempt_preparation_latency_ns"
+            ],
+            0,
+        )
 
     def test_interruption_is_operational_and_carries_no_semantic_revision(self) -> None:
         journal = MemoryAttemptJournal()

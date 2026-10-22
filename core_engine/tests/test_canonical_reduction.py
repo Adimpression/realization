@@ -116,6 +116,30 @@ class CanonicalReductionAdapterTests(unittest.TestCase):
             reconstructed.summary()["run_id"],
             result.presentation["run_id"],
         )
+        artifact_id = result.transition_artifact_reference.rsplit("/", 1)[-1]
+        artifact = self.repository.load_transition_artifact(artifact_id)
+        self.assertEqual(
+            result.execution_attempt_id,
+            artifact["execution_attempt_id"],
+        )
+        self.assertEqual("commit", artifact["commit_decision"]["disposition"])
+        self.assertTrue(artifact["reduction_trace"])
+        attempt = self.repository.load_attempt(result.execution_attempt_id)
+        for measurement in (
+            "attempt_preparation_latency_ns",
+            "revision_load_latency_ns",
+            "verification_and_admission_latency_ns",
+            "reduction_latency_ns",
+            "atomic_commit_latency_ns",
+        ):
+            self.assertGreater(
+                attempt.performance_measurements[measurement],
+                0,
+            )
+        self.assertNotIn(
+            "performance_measurements",
+            revision.state.to_dict(),
+        )
 
     def test_continuation_reconstructs_without_process_or_provider_state(self) -> None:
         with patch.dict("os.environ", {"OPENAI_API_KEY": ""}, clear=False):
@@ -139,6 +163,9 @@ class CanonicalReductionAdapterTests(unittest.TestCase):
                 started.resulting_revision_identity
             )
             first_run_id = source.state.engine_state["run_id"]
+            started_artifact = self.repository.load_transition_artifact(
+                started.transition_artifact_reference.rsplit("/", 1)[-1]
+            )
 
             replacement_service = ResumptionService(
                 SQLiteResumptionRepository(self.database),
@@ -168,6 +195,32 @@ class CanonicalReductionAdapterTests(unittest.TestCase):
         contribution = next(iter(reconstructed.human_contributions.values()))
         self.assertEqual("The value is 42.", contribution.content)
         self.assertIn("message:continue-1", contribution.provenance)
+        continued_artifact = self.repository.load_transition_artifact(
+            continued.transition_artifact_reference.rsplit("/", 1)[-1]
+        )
+        prior_sequences = {
+            item["sequence"] for item in started_artifact["reduction_trace"]
+        }
+        current_sequences = {
+            item["sequence"] for item in continued_artifact["reduction_trace"]
+        }
+        self.assertTrue(current_sequences)
+        self.assertTrue(prior_sequences.isdisjoint(current_sequences))
+        continued_attempt = self.repository.load_attempt(
+            continued.execution_attempt_id
+        )
+        self.assertGreater(
+            continued_attempt.performance_measurements[
+                "projection_construction_latency_ns"
+            ],
+            0,
+        )
+        self.assertGreater(
+            continued_attempt.performance_measurements[
+                "projection_size_bytes"
+            ],
+            0,
+        )
 
     def test_hold_satisfaction_reopens_only_its_continuation_carrier(self) -> None:
         state = SystemState.bootstrap("Wait for two independent answers.")

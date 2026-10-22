@@ -832,9 +832,15 @@ class TransitionArtifact:
     projection_artifact: JsonObject | None = None
     inlet_artifact: JsonObject | None = None
     proposal_interactions: tuple[JsonObject, ...] = ()
+    execution_attempt_id: str | None = None
+    reduction_trace: tuple[JsonObject, ...] = ()
+    frontier_selections: tuple[JsonObject, ...] = ()
+    retrieved_candidate_sets: tuple[JsonObject, ...] = ()
+    execution_decisions: tuple[JsonObject, ...] = ()
+    commit_decision: JsonObject = field(default_factory=dict)
 
     def to_dict(self) -> JsonObject:
-        return {
+        payload = {
             "artifact_id": self.artifact_id,
             "source_identity": (
                 self.source_identity.to_dict()
@@ -888,6 +894,27 @@ class TransitionArtifact:
                 dict(item) for item in self.proposal_interactions
             ],
         }
+        if self.execution_attempt_id is not None:
+            payload["execution_attempt_id"] = self.execution_attempt_id
+        if self.reduction_trace:
+            payload["reduction_trace"] = [
+                dict(item) for item in self.reduction_trace
+            ]
+        if self.frontier_selections:
+            payload["frontier_selections"] = [
+                dict(item) for item in self.frontier_selections
+            ]
+        if self.retrieved_candidate_sets:
+            payload["retrieved_candidate_sets"] = [
+                dict(item) for item in self.retrieved_candidate_sets
+            ]
+        if self.execution_decisions:
+            payload["execution_decisions"] = [
+                dict(item) for item in self.execution_decisions
+            ]
+        if self.commit_decision:
+            payload["commit_decision"] = dict(self.commit_decision)
+        return payload
 
     @classmethod
     def from_dict(cls, value: JsonObject) -> TransitionArtifact:
@@ -977,12 +1004,31 @@ class TransitionArtifact:
                 dict(item)
                 for item in value.get("proposal_interactions", ())
             ),
+            execution_attempt_id=(
+                str(value["execution_attempt_id"])
+                if value.get("execution_attempt_id") is not None
+                else None
+            ),
+            reduction_trace=tuple(
+                dict(item) for item in value.get("reduction_trace", ())
+            ),
+            frontier_selections=tuple(
+                dict(item) for item in value.get("frontier_selections", ())
+            ),
+            retrieved_candidate_sets=tuple(
+                dict(item)
+                for item in value.get("retrieved_candidate_sets", ())
+            ),
+            execution_decisions=tuple(
+                dict(item) for item in value.get("execution_decisions", ())
+            ),
+            commit_decision=dict(value.get("commit_decision", {})),
         )
 
     def decision_flow_content(self) -> JsonObject:
         """Return the externally represented flow covered by the signature."""
 
-        return {
+        payload = {
             "source_identity": (
                 self.source_identity.to_dict()
                 if self.source_identity is not None
@@ -1034,6 +1080,28 @@ class TransitionArtifact:
                 dict(item) for item in self.proposal_interactions
             ],
         }
+        if self.execution_attempt_id is not None:
+            payload["execution_attempt_id"] = self.execution_attempt_id
+        if self.reduction_trace:
+            payload["reduction_trace"] = [
+                dict(item) for item in self.reduction_trace
+            ]
+        if self.frontier_selections:
+            payload["frontier_selections"] = [
+                dict(item) for item in self.frontier_selections
+            ]
+        if self.retrieved_candidate_sets:
+            payload["retrieved_candidate_sets"] = [
+                dict(item)
+                for item in self.retrieved_candidate_sets
+            ]
+        if self.execution_decisions:
+            payload["execution_decisions"] = [
+                dict(item) for item in self.execution_decisions
+            ]
+        if self.commit_decision:
+            payload["commit_decision"] = dict(self.commit_decision)
+        return payload
 
     @property
     def expected_decision_flow_signature(self) -> str:
@@ -1170,8 +1238,13 @@ class ReductionProposal:
     semantic_outcome: SemanticOutcome | None = None
     proposal_references: tuple[str, ...] = ()
     proposal_interactions: tuple[JsonObject, ...] = ()
+    reduction_trace: tuple[JsonObject, ...] = ()
+    frontier_selections: tuple[JsonObject, ...] = ()
+    retrieved_candidate_sets: tuple[JsonObject, ...] = ()
+    execution_decisions: tuple[JsonObject, ...] = ()
     capability_receipt_references: tuple[str, ...] = ()
     effect_receipt_references: tuple[str, ...] = ()
+    performance_measurements: JsonObject = field(default_factory=dict)
     reconciliation: JsonObject = field(default_factory=dict)
     presentation: JsonObject = field(default_factory=dict)
 

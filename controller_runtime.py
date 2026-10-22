@@ -19,6 +19,8 @@ from pathlib import Path
 from textwrap import dedent
 from typing import Any, Iterable
 
+from realized_core_runtime import measured_performance
+
 from args import add_controller_feature_toggle_arguments, parse_args
 from boundary import (
     boundary_shape_rank,
@@ -6386,6 +6388,7 @@ import ast
         ranked.sort()
         return [artifact for *_, artifact in ranked[:limit]]
 
+    @measured_performance("candidate_retrieval_latency_ns")
     def store_relevant_artifacts(self, semantic_unit: str, *, limit: int = 8) -> list[Artifact]:
         local_artifacts = self.subject_scope_relevant_artifacts(semantic_unit, limit=limit)
         if self.subject_reasoning_scope_payload() and not self.subject_scope_global_retrieval_enabled():
@@ -7043,6 +7046,7 @@ import ast
             break
         return ordered_unique(component for component in components if collapse_ws(component))[:4]
 
+    @measured_performance("proposal_latency_ns")
     def request_proposal(
         self,
         *,

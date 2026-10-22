@@ -11,6 +11,7 @@ from pathlib import Path
 from typing import Any
 
 from applied_theory_types import CrossBoundaryResult
+from realized_core_runtime import measured_performance
 from execution_framework_primitives import (
     DEFAULT_SUPPORTED_EXECUTOR_FRAMEWORKS,
     EXECUTOR_FRAMEWORK_ALIASES,
@@ -925,6 +926,7 @@ def _ansible_cross_boundary(
         )
 
 
+@measured_performance("effect_latency_ns")
 def execute_cross_boundary(
     *,
     framework: str,

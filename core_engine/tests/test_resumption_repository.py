@@ -60,6 +60,8 @@ def _revision_and_artifact(
     artifact_id: str,
     state: SemanticState,
     parents: tuple[str, ...] = (),
+    attempt_id: str = "attempt-1",
+    expected_head_revision_id: str | None = None,
 ) -> tuple[Revision, TransitionArtifact]:
     identity = ResumptionIdentity(
         scope_id="scope-1",
@@ -112,6 +114,58 @@ def _revision_and_artifact(
         resulting_revision_digest=revision.revision_digest,
         decision_flow_signature="",
         inlet_artifact=inlet_artifact,
+        execution_attempt_id=attempt_id,
+        execution_decisions=(
+            {"kind": "semantic_outcome", "outcome": "completed"},
+        ),
+        reduction_trace=(
+            {
+                "sequence": 1,
+                "kind": "frontier_selection",
+                "node_id": "node-1",
+                "intent": "select",
+                "action": "choose",
+                "result": "selected",
+                "evaluation": "ordered",
+                "commit_effect": "",
+                "payload": {
+                    "proposal_id": "proposal-frontier",
+                    "candidate_order": ["node-1", "node-2"],
+                },
+            },
+            {
+                "sequence": 2,
+                "kind": "learning_context",
+                "node_id": "node-1",
+                "intent": "retrieve",
+                "action": "load",
+                "result": "loaded",
+                "evaluation": "ordered",
+                "commit_effect": "",
+                "payload": {"artifact_ids": ["artifact-2", "artifact-1"]},
+            },
+        ),
+        frontier_selections=(
+            {
+                "sequence": 1,
+                "selected_node_id": "node-1",
+                "proposal_id": "proposal-frontier",
+                "candidate_order": ["node-1", "node-2"],
+            },
+        ),
+        retrieved_candidate_sets=(
+            {
+                "sequence": 2,
+                "kind": "learning_context",
+                "ordered_candidate_ids": ["artifact-2", "artifact-1"],
+            },
+        ),
+        commit_decision={
+            "disposition": "commit",
+            "expected_branch_head_revision_id": expected_head_revision_id,
+            "resulting_revision_id": revision_id,
+            "resulting_revision_digest": revision.revision_digest,
+        },
     )
     artifact = replace(
         artifact,
@@ -198,6 +252,8 @@ class ResumptionRepositoryTests(unittest.TestCase):
             artifact_id="transition-stale",
             state=_state("stale"),
             parents=("revision-1",),
+            attempt_id="attempt-2",
+            expected_head_revision_id="not-the-head",
         )
 
         with self.assertRaises(StaleAnchorError):
@@ -283,6 +339,10 @@ class ResumptionRepositoryTests(unittest.TestCase):
             loaded.initial_branch_head_revision_id,
         )
         self.assertEqual("digest-1", loaded.initial_branch_head_digest)
+        self.assertEqual(
+            [AttemptLifecycleStatus.PREPARED],
+            [record.status for record in loaded.lifecycle_records],
+        )
 
     def test_existing_attempt_schema_is_migrated_additively(self) -> None:
         legacy_path = Path(self.temporary.name) / "legacy-attempts.sqlite3"
@@ -323,6 +383,7 @@ class ResumptionRepositoryTests(unittest.TestCase):
         loaded = migrated.load_attempt("migrated-attempt")
         self.assertEqual("revision-1", loaded.initial_branch_head_revision_id)
         self.assertEqual("digest-1", loaded.initial_branch_head_digest)
+        self.assertEqual(1, len(loaded.lifecycle_records))
 
     def test_parent_and_child_traversal_preserve_branch_history(self) -> None:
         self._running_attempt("attempt-1")
@@ -343,6 +404,8 @@ class ResumptionRepositoryTests(unittest.TestCase):
             artifact_id="transition-2",
             state=_state("two"),
             parents=("revision-1",),
+            attempt_id="attempt-2",
+            expected_head_revision_id="revision-1",
         )
         self.repository.commit_revision(
             second,
@@ -446,6 +509,10 @@ class ResumptionRepositoryTests(unittest.TestCase):
             "deterministic_externalized_flow",
             replay["replay_mode"],
         )
+        self.assertEqual("attempt-1", replay["execution_attempt_id"])
+        self.assertEqual(2, len(replay["attempt_lifecycle_records"]))
+        self.assertEqual(1, replay["frontier_selection_count"])
+        self.assertEqual(1, replay["retrieved_candidate_set_count"])
 
     def test_replay_detects_tampered_externalized_flow(self) -> None:
         self._running_attempt()
@@ -477,6 +544,54 @@ class ResumptionRepositoryTests(unittest.TestCase):
         self.assertFalse(replay["verified"])
         self.assertIn(
             "decision-flow signature could not be reproduced",
+            replay["failures"],
+        )
+
+    def test_replay_cross_checks_frontier_order_against_reduction_trace(self) -> None:
+        self._running_attempt()
+        revision, artifact = _revision_and_artifact(
+            revision_id="revision-1",
+            artifact_id="transition-1",
+            state=_state("one"),
+        )
+        self.repository.commit_revision(
+            revision,
+            artifact,
+            expected_head_revision_id=None,
+            attempt_id="attempt-1",
+        )
+        payload = self.repository.load_transition_artifact("transition-1")
+        payload["frontier_selections"][0]["candidate_order"] = [
+            "node-2",
+            "node-1",
+        ]
+        rewritten = TransitionArtifact.from_dict(payload)
+        rewritten = replace(
+            rewritten,
+            decision_flow_signature=(
+                rewritten.expected_decision_flow_signature
+            ),
+        )
+        with sqlite3.connect(self.repository.path) as connection:
+            connection.execute(
+                """
+                UPDATE resumption_transition_artifacts
+                SET payload_json = ?, decision_flow_signature = ?
+                WHERE artifact_id = ?
+                """,
+                (
+                    canonical_json(rewritten.to_dict()),
+                    rewritten.decision_flow_signature,
+                    "transition-1",
+                ),
+            )
+            connection.commit()
+
+        replay = self.repository.verify_transition_replay("transition-1")
+
+        self.assertFalse(replay["verified"])
+        self.assertIn(
+            "frontier selections do not match the reduction trace",
             replay["failures"],
         )
 

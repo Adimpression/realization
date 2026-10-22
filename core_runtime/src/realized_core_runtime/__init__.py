@@ -4,6 +4,7 @@ from realized_core_runtime.attempts import (
     AttemptExecutionOutcome,
     AttemptInterrupted,
     AttemptJournal,
+    AttemptLifecycleRecord,
     AttemptLifecycleStatus,
     AttemptRecord,
     AttemptRunResult,
@@ -29,11 +30,19 @@ from realized_core_runtime.reduction import (
     resume_to_realization,
     run_to_realization,
 )
+from realized_core_runtime.telemetry import (
+    PerformanceRecorder,
+    measure_performance,
+    measured_performance,
+    merge_performance_measurements,
+    performance_scope,
+)
 
 __all__ = [
     "AttemptExecutionOutcome",
     "AttemptInterrupted",
     "AttemptJournal",
+    "AttemptLifecycleRecord",
     "AttemptLifecycleStatus",
     "AttemptRecord",
     "AttemptRunResult",
@@ -43,6 +52,7 @@ __all__ = [
     "InterruptionRequest",
     "InterruptionResult",
     "PreparedAttemptWork",
+    "PerformanceRecorder",
     "RealizationNode",
     "RealizationResumePort",
     "RealizationResumeState",
@@ -50,6 +60,10 @@ __all__ = [
     "RealizationRunState",
     "SerializableWorkspace",
     "attempt_stop_requested",
+    "measure_performance",
+    "measured_performance",
+    "merge_performance_measurements",
+    "performance_scope",
     "request_attempt_interruption",
     "resume_to_realization",
     "run_execution_attempt",
