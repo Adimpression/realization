@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import tempfile
+import threading
 import unittest
 from dataclasses import replace
 from pathlib import Path
@@ -29,6 +30,7 @@ from realized_core_engine.resumption_contracts import (
     InspectionView,
     OperationKind,
     Realignment,
+    Reversal,
     ReductionContext,
     ReductionProposal,
     ResumptionIdentity,
@@ -87,6 +89,7 @@ def inlet(
     target: str = "root",
     correlation: dict[str, Any] | None = None,
     realignment: Realignment | None = None,
+    reversal: Reversal | None = None,
 ) -> ContinuationInlet:
     return ContinuationInlet(
         inlet_id=inlet_id,
@@ -100,6 +103,7 @@ def inlet(
         authority_context={"principal": "tester"},
         delta=delta,
         realignment=realignment,
+        reversal=reversal,
     )
 
 
@@ -628,6 +632,47 @@ class ResumptionServiceTests(unittest.TestCase):
             ).identity.revision_id,
         )
 
+    def test_interrupted_proposals_are_not_active_resumption_context(self) -> None:
+        _, revision = self._start(
+            non_achievedness=(item("not-1", "Need answer", kind="not"),)
+        )
+        self.repository.prepare_attempt(
+            AttemptRecord(
+                attempt_id="interrupted-with-proposal",
+                causal_anchor=revision.identity.causal_anchor,
+                operation=OperationKind.CONTINUE.value,
+                latest_admitted_revision_id=revision.identity.revision_id,
+                proposal_references=("proposal:unfinished",),
+            )
+        )
+        self.repository.transition_attempt(
+            "interrupted-with-proposal",
+            expected_statuses=(AttemptLifecycleStatus.PREPARED,),
+            update=AttemptUpdate(status=AttemptLifecycleStatus.INTERRUPTED),
+        )
+        controller = ProposalController(ReductionProposal())
+        service = ResumptionService(
+            self.repository,
+            reduction_controller=controller,
+            id_factory=self.ids,
+        )
+
+        service.resume(
+            self._request(
+                revision,
+                OperationKind.RESUME_AFTER_INTERRUPTION,
+                source_attempt_id="interrupted-with-proposal",
+            )
+        )
+
+        self.assertEqual(1, len(controller.contexts))
+        projection = controller.contexts[0].projection
+        self.assertIsNotNone(projection)
+        self.assertNotIn(
+            "proposal:unfinished",
+            canonical_json(projection.canonical_content()),
+        )
+
     def test_redirection_realigns_every_affected_item_and_clears_old_frontier(self) -> None:
         retained = item("fact-1", "Still applies", evidence=("evidence-1",))
         unresolved = item("not-1", "Former question", kind="not")
@@ -697,6 +742,116 @@ class ResumptionServiceTests(unittest.TestCase):
         )
         self.assertIsNotNone(result.realignment_summary)
 
+    def test_pre_redirection_attempt_cannot_commit_over_realigned_head(self) -> None:
+        retained = item("fact-1", "Still applies", evidence=("evidence-1",))
+        _, source = self._start(achieved=(retained,))
+
+        class BlockingController:
+            def __init__(self) -> None:
+                self.entered = threading.Event()
+                self.release = threading.Event()
+
+            def reduce(
+                self,
+                context: ReductionContext,
+                *,
+                should_stop: Any,
+            ) -> ReductionProposal:
+                self.entered.set()
+                if not self.release.wait(timeout=5):
+                    raise TimeoutError("test did not release the old reduction")
+                return ReductionProposal()
+
+        controller = BlockingController()
+        old_service = ResumptionService(
+            self.repository,
+            reduction_controller=controller,
+        )
+        old_results: list[Any] = []
+        old_errors: list[BaseException] = []
+
+        def run_old_continuation() -> None:
+            try:
+                old_results.append(
+                    old_service.resume(
+                        self._request(
+                            source,
+                            OperationKind.AUGMENT,
+                            inlet(
+                                "late-augmentation",
+                                InletRelationship.AUGMENTATION,
+                                delta=SemanticDelta(
+                                    achieved=(item("fact-late", "Late"),)
+                                ),
+                            ),
+                        )
+                    )
+                )
+            except BaseException as exc:
+                old_errors.append(exc)
+
+        worker = threading.Thread(target=run_old_continuation)
+        worker.start()
+        self.assertTrue(controller.entered.wait(timeout=5))
+
+        direction = replace(
+            source.state.governing_direction,
+            objective="Redirected direction",
+        )
+        realignment = Realignment(
+            source_revision_id=source.identity.revision_id,
+            redirection_inlet_id="redirect-during-reduction",
+            affected_item_ids=("fact-1",),
+            identity_disposition=IdentityDisposition(
+                kind=IdentityDispositionKind.SAME_OBJECTIVE,
+                target_scope_id="scope-1",
+                target_objective_id="objective-1",
+                target_branch_id="main",
+                rationale="same objective with an explicit new direction",
+            ),
+            retained_item_ids=("fact-1",),
+            superseded_item_ids=(),
+            introduced_items=(),
+            unresolved_applicability_item_ids=(),
+            resulting_non_achievedness=(),
+            evidence_references=("evidence:redirection",),
+            governance_references=("policy:realignment",),
+            completeness_statement="All affected material was classified.",
+        )
+        redirected_result = self.service.resume(
+            self._request(
+                source,
+                OperationKind.REDIRECT_AND_REALIGN,
+                inlet(
+                    "redirect-during-reduction",
+                    InletRelationship.REDIRECTION,
+                    delta=SemanticDelta(governing_direction=direction),
+                    realignment=realignment,
+                ),
+            )
+        )
+        redirected = self.repository.require_revision(
+            redirected_result.resulting_revision_identity
+        )
+        controller.release.set()
+        worker.join(timeout=5)
+
+        self.assertFalse(worker.is_alive())
+        self.assertEqual([], old_errors)
+        self.assertEqual(1, len(old_results))
+        self.assertEqual(SemanticOutcome.STALE, old_results[0].semantic_outcome)
+        self.assertIsNone(old_results[0].resulting_revision_identity)
+        self.assertEqual(
+            redirected.identity,
+            self.repository.load_branch_head(
+                "scope-1", "objective-1", "main"
+            ).identity,
+        )
+        self.assertNotIn(
+            "fact-late",
+            {item.item_id for item in redirected.state.achieved},
+        )
+
     def test_incomplete_realignment_is_rejected_without_moving_head(self) -> None:
         _, revision = self._start(
             achieved=(item("fact-1", "Value", evidence=("evidence-1",)),),
@@ -746,6 +901,89 @@ class ResumptionServiceTests(unittest.TestCase):
                 "scope-1", "objective-1", "main"
             ).identity.revision_id,
         )
+
+    def test_retained_and_superseded_realignment_require_support(self) -> None:
+        for disposition in ("retained", "superseded"):
+            with self.subTest(disposition=disposition):
+                database = Path(self.temporary.name) / f"{disposition}.sqlite3"
+                repository = SQLiteResumptionRepository(database)
+                service = ResumptionService(repository)
+                started = service.start(
+                    StartRequest(
+                        scope_id="scope-1",
+                        objective_id="objective-1",
+                        branch_id="main",
+                        initial_inlet=inlet(
+                            f"start-{disposition}",
+                            InletRelationship.CONTINUATION,
+                            delta=SemanticDelta(
+                                achieved=(item("fact-1", "Unsupported"),)
+                            ),
+                        ),
+                        governing_direction=GoverningDirection(
+                            objective="Original direction",
+                            scope="scope-1",
+                        ),
+                    )
+                )
+                source = repository.require_revision(
+                    started.resulting_revision_identity
+                )
+                direction = replace(
+                    source.state.governing_direction,
+                    objective="Redirected direction",
+                )
+                realignment = Realignment(
+                    source_revision_id=source.identity.revision_id,
+                    redirection_inlet_id=f"redirect-{disposition}",
+                    affected_item_ids=("fact-1",),
+                    identity_disposition=IdentityDisposition(
+                        kind=IdentityDispositionKind.SAME_OBJECTIVE,
+                        target_scope_id="scope-1",
+                        target_objective_id="objective-1",
+                        target_branch_id="main",
+                        rationale="same identity",
+                    ),
+                    retained_item_ids=(
+                        ("fact-1",) if disposition == "retained" else ()
+                    ),
+                    superseded_item_ids=(
+                        ("fact-1",) if disposition == "superseded" else ()
+                    ),
+                    introduced_items=(),
+                    unresolved_applicability_item_ids=(),
+                    resulting_non_achievedness=(),
+                    evidence_references=(),
+                    governance_references=("policy:realignment",),
+                    completeness_statement="The affected item was classified.",
+                )
+
+                result = service.resume(
+                    ResumptionRequest(
+                        anchor=source.identity,
+                        operation=OperationKind.REDIRECT_AND_REALIGN,
+                        expected_branch_head_revision_id=(
+                            source.identity.revision_id
+                        ),
+                        inlet=inlet(
+                            f"redirect-{disposition}",
+                            InletRelationship.REDIRECTION,
+                            delta=SemanticDelta(governing_direction=direction),
+                            realignment=realignment,
+                        ),
+                    )
+                )
+
+                self.assertEqual(
+                    SemanticOutcome.REJECTED,
+                    result.semantic_outcome,
+                )
+                self.assertEqual(
+                    source.identity,
+                    repository.load_branch_head(
+                        "scope-1", "objective-1", "main"
+                    ).identity,
+                )
 
     def test_constitutive_redirection_uses_a_new_derived_objective_identity(self) -> None:
         _, revision = self._start(
@@ -1304,6 +1542,59 @@ class ResumptionServiceTests(unittest.TestCase):
             replay["proposal_interaction_references"],
         )
 
+    def test_capability_and_effect_receipts_link_attempt_and_transition(self) -> None:
+        _, revision = self._start(
+            non_achievedness=(item("not-1", "Need answer", kind="not"),)
+        )
+        controller = ProposalController(
+            ReductionProposal(
+                delta=SemanticDelta(
+                    achieved=(item("fact-1", "Answer"),),
+                    resolved_non_achievedness_ids=("not-1",),
+                ),
+                capability_receipt_references=("capability-receipt-1",),
+                effect_receipt_references=("effect-receipt-1",),
+            )
+        )
+        service = ResumptionService(
+            self.repository,
+            reduction_controller=controller,
+            id_factory=self.ids,
+        )
+
+        result = service.resume(
+            self._request(
+                revision,
+                OperationKind.CONTINUE,
+                inlet("continue-with-effects", InletRelationship.CONTINUATION),
+            )
+        )
+        attempt = self.repository.load_attempt(result.execution_attempt_id)
+        artifact = self.repository.load_transition_artifact(
+            attempt.transition_artifact_references[-1]
+        )
+
+        self.assertEqual(
+            ("capability-receipt-1", "effect-receipt-1"),
+            attempt.receipt_references,
+        )
+        self.assertEqual(
+            ["capability-receipt-1"],
+            artifact["capability_receipt_references"],
+        )
+        self.assertEqual(
+            ["effect-receipt-1"],
+            artifact["effect_receipt_references"],
+        )
+        self.assertEqual(
+            revision.identity.revision_id,
+            attempt.initial_branch_head_revision_id,
+        )
+        self.assertEqual(
+            revision.revision_digest,
+            attempt.initial_branch_head_digest,
+        )
+
     def test_attempt_transition_and_revision_remain_distinct_on_reconstruction(
         self,
     ) -> None:
@@ -1373,6 +1664,165 @@ class ResumptionServiceTests(unittest.TestCase):
                             },
                         )
                     )
+
+    def test_historical_operations_are_read_only_and_bypass_reduction(self) -> None:
+        _, base = self._start(achieved=(item("fact-1", "Base"),))
+        augmented_result = self.service.resume(
+            self._request(
+                base,
+                OperationKind.AUGMENT,
+                inlet(
+                    "augment-for-history",
+                    InletRelationship.AUGMENTATION,
+                    delta=SemanticDelta(
+                        achieved=(item("fact-2", "Additional"),)
+                    ),
+                ),
+            )
+        )
+        augmented = self.repository.require_revision(
+            augmented_result.resulting_revision_identity
+        )
+        controller = ProposalController(
+            ReductionProposal(
+                delta=SemanticDelta(
+                    achieved=(item("should-not-run", "Wrong"),)
+                )
+            )
+        )
+        service = ResumptionService(
+            self.repository,
+            reduction_controller=controller,
+            id_factory=self.ids,
+        )
+
+        for operation in (
+            OperationKind.EXPLAIN,
+            OperationKind.VERIFY,
+            OperationKind.RECONSTRUCT,
+        ):
+            with self.subTest(operation=operation):
+                result = service.resume(self._request(augmented, operation))
+                operation_result = result.presentation["operation_result"]
+
+                self.assertIsNone(result.resulting_revision_identity)
+                self.assertEqual(operation.value, operation_result["operation"])
+                self.assertEqual(
+                    [
+                        augmented.identity.revision_id,
+                        base.identity.revision_id,
+                    ],
+                    operation_result["path_revision_ids"],
+                )
+                self.assertTrue(operation_result["verified"])
+
+        self.assertEqual([], controller.contexts)
+        self.assertEqual(
+            augmented.identity,
+            self.repository.load_branch_head(
+                "scope-1", "objective-1", "main"
+            ).identity,
+        )
+
+    def test_reversal_creates_a_new_transition_without_erasing_history(self) -> None:
+        _, base = self._start(achieved=(item("fact-1", "Base"),))
+        augmented_result = self.service.resume(
+            self._request(
+                base,
+                OperationKind.AUGMENT,
+                inlet(
+                    "augment-before-reverse",
+                    InletRelationship.AUGMENTATION,
+                    delta=SemanticDelta(
+                        achieved=(item("fact-2", "Additional"),)
+                    ),
+                ),
+            )
+        )
+        augmented = self.repository.require_revision(
+            augmented_result.resulting_revision_identity
+        )
+
+        reversed_result = self.service.resume(
+            self._request(
+                augmented,
+                OperationKind.REVERSE,
+                inlet(
+                    "reverse-1",
+                    InletRelationship.REVERSAL,
+                    reversal=Reversal(
+                        target_transition_artifact_id=(
+                            augmented.transition_artifact_id
+                        ),
+                        restore_parent_revision_id=base.identity.revision_id,
+                        evidence_references=("review:approved",),
+                        rationale="withdraw the admitted augmentation",
+                    ),
+                ),
+            )
+        )
+        reversed_revision = self.repository.require_revision(
+            reversed_result.resulting_revision_identity
+        )
+        artifact = self.repository.load_transition_artifact(
+            reversed_revision.transition_artifact_id
+        )
+
+        self.assertEqual(
+            (augmented.identity.revision_id,),
+            reversed_revision.parent_revision_ids,
+        )
+        self.assertEqual(
+            ("fact-1",),
+            tuple(item.item_id for item in reversed_revision.state.achieved),
+        )
+        self.assertEqual(OperationKind.REVERSE.value, artifact["operation"])
+        self.assertEqual(
+            augmented.transition_artifact_id,
+            artifact["reconciliation"]["target_transition_artifact_id"],
+        )
+        self.assertIsNotNone(
+            self.repository.load_revision(augmented.identity.revision_id)
+        )
+        self.assertEqual(
+            (
+                reversed_revision.identity.revision_id,
+                augmented.identity.revision_id,
+                base.identity.revision_id,
+            ),
+            self.repository.path_to_roots(
+                reversed_revision.identity.revision_id
+            ),
+        )
+
+    def test_reversal_cannot_guess_or_target_a_non_current_transition(self) -> None:
+        _, base = self._start(achieved=(item("fact-1", "Base"),))
+
+        result = self.service.resume(
+            self._request(
+                base,
+                OperationKind.REVERSE,
+                inlet(
+                    "reverse-invalid",
+                    InletRelationship.REVERSAL,
+                    reversal=Reversal(
+                        target_transition_artifact_id="different-transition",
+                        restore_parent_revision_id="guessed-parent",
+                        evidence_references=("review:approved",),
+                        rationale="invalid target",
+                    ),
+                ),
+            )
+        )
+
+        self.assertEqual(SemanticOutcome.REJECTED, result.semantic_outcome)
+        self.assertIsNone(result.resulting_revision_identity)
+        self.assertEqual(
+            base.identity,
+            self.repository.load_branch_head(
+                "scope-1", "objective-1", "main"
+            ).identity,
+        )
 
     @staticmethod
     def _hold(hold_id: str, token: str) -> HoldOn:

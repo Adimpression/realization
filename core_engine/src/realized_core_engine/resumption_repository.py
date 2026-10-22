@@ -144,6 +144,8 @@ class SQLiteResumptionRepository:
                     attempt_id TEXT PRIMARY KEY,
                     causal_anchor TEXT NOT NULL,
                     operation TEXT NOT NULL,
+                    initial_branch_head_revision_id TEXT,
+                    initial_branch_head_digest TEXT,
                     execution_policy_json TEXT NOT NULL,
                     status TEXT NOT NULL,
                     latest_admitted_revision_id TEXT,
@@ -174,6 +176,18 @@ class SQLiteResumptionRepository:
                 CREATE INDEX IF NOT EXISTS idx_resumption_attempts_status
                     ON resumption_attempts(status);
                 """
+            )
+            self._add_column_if_missing(
+                connection,
+                table="resumption_attempts",
+                column="initial_branch_head_revision_id",
+                definition="TEXT",
+            )
+            self._add_column_if_missing(
+                connection,
+                table="resumption_attempts",
+                column="initial_branch_head_digest",
+                definition="TEXT",
             )
 
     def rebuild_derived_indexes(self) -> tuple[str, ...]:
@@ -219,13 +233,15 @@ class SQLiteResumptionRepository:
                     """
                     INSERT INTO resumption_attempts (
                         attempt_id, causal_anchor, operation,
+                        initial_branch_head_revision_id,
+                        initial_branch_head_digest,
                         execution_policy_json, status,
                         latest_admitted_revision_id,
                         proposal_references_json, receipt_references_json,
                         transition_artifact_references_json,
                         interruption_cause, interruption_correlation_json,
                         operational_error, created_at, updated_at
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                     """,
                     _attempt_values(durable),
                 )
@@ -968,6 +984,23 @@ class SQLiteResumptionRepository:
         return tuple(failures)
 
     @staticmethod
+    def _add_column_if_missing(
+        connection: sqlite3.Connection,
+        *,
+        table: str,
+        column: str,
+        definition: str,
+    ) -> None:
+        columns = {
+            str(row["name"])
+            for row in connection.execute(f"PRAGMA table_info({table})").fetchall()
+        }
+        if column not in columns:
+            connection.execute(
+                f"ALTER TABLE {table} ADD COLUMN {column} {definition}"
+            )
+
+    @staticmethod
     def _branch_head_id(
         connection: sqlite3.Connection,
         scope_id: str,
@@ -1017,6 +1050,8 @@ def _attempt_values(attempt: AttemptRecord) -> tuple[Any, ...]:
         attempt.attempt_id,
         attempt.causal_anchor,
         attempt.operation,
+        attempt.initial_branch_head_revision_id,
+        attempt.initial_branch_head_digest,
         canonical_json(dict(attempt.execution_policy)),
         attempt.status.value,
         attempt.latest_admitted_revision_id,
@@ -1036,6 +1071,10 @@ def _attempt_from_row(row: sqlite3.Row) -> AttemptRecord:
         attempt_id=str(row["attempt_id"]),
         causal_anchor=str(row["causal_anchor"]),
         operation=str(row["operation"]),
+        initial_branch_head_revision_id=row[
+            "initial_branch_head_revision_id"
+        ],
+        initial_branch_head_digest=row["initial_branch_head_digest"],
         execution_policy=json.loads(str(row["execution_policy_json"])),
         status=AttemptLifecycleStatus(str(row["status"])),
         latest_admitted_revision_id=row["latest_admitted_revision_id"],

@@ -61,6 +61,7 @@ class InletRelationship(StrEnum):
     AUGMENTATION = "augmentation"
     REDIRECTION = "redirection"
     CORRECTION = "correction"
+    REVERSAL = "reversal"
     HOLD_SATISFACTION = "hold_satisfaction"
 
 
@@ -357,6 +358,37 @@ class Supersession:
                 SemanticItem.from_dict(dict(raw_replacement))
                 if isinstance(raw_replacement, dict)
                 else None
+            ),
+            evidence_references=tuple(value.get("evidence_references", ())),
+            rationale=str(value.get("rationale", "")),
+        )
+
+
+@dataclass(frozen=True, slots=True)
+class Reversal:
+    """Explicit request to restore one direct parent of the current revision."""
+
+    target_transition_artifact_id: str
+    restore_parent_revision_id: str
+    evidence_references: tuple[str, ...]
+    rationale: str
+
+    def to_dict(self) -> JsonObject:
+        return {
+            "target_transition_artifact_id": self.target_transition_artifact_id,
+            "restore_parent_revision_id": self.restore_parent_revision_id,
+            "evidence_references": list(self.evidence_references),
+            "rationale": self.rationale,
+        }
+
+    @classmethod
+    def from_dict(cls, value: JsonObject) -> Reversal:
+        return cls(
+            target_transition_artifact_id=str(
+                value["target_transition_artifact_id"]
+            ),
+            restore_parent_revision_id=str(
+                value["restore_parent_revision_id"]
             ),
             evidence_references=tuple(value.get("evidence_references", ())),
             rationale=str(value.get("rationale", "")),
@@ -687,9 +719,10 @@ class ContinuationInlet:
     authority_context: JsonObject
     delta: SemanticDelta = field(default_factory=SemanticDelta)
     realignment: Realignment | None = None
+    reversal: Reversal | None = None
 
     def to_dict(self) -> JsonObject:
-        return {
+        value = {
             "inlet_id": self.inlet_id,
             "kind": self.kind,
             "payload": dict(self.payload),
@@ -706,6 +739,9 @@ class ContinuationInlet:
                 else None
             ),
         }
+        if self.reversal is not None:
+            value["reversal"] = self.reversal.to_dict()
+        return value
 
     @property
     def digest(self) -> str:
@@ -714,6 +750,7 @@ class ContinuationInlet:
     @classmethod
     def from_dict(cls, value: JsonObject) -> ContinuationInlet:
         raw_realignment = value.get("realignment")
+        raw_reversal = value.get("reversal")
         return cls(
             inlet_id=str(value["inlet_id"]),
             kind=str(value["kind"]),
@@ -728,6 +765,11 @@ class ContinuationInlet:
             realignment=(
                 Realignment.from_dict(dict(raw_realignment))
                 if isinstance(raw_realignment, dict)
+                else None
+            ),
+            reversal=(
+                Reversal.from_dict(dict(raw_reversal))
+                if isinstance(raw_reversal, dict)
                 else None
             ),
         )
@@ -1289,6 +1331,7 @@ __all__ = [
     "OperationKind",
     "ProjectionPolicy",
     "Realignment",
+    "Reversal",
     "ReductionContext",
     "ReductionController",
     "ReductionProposal",

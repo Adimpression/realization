@@ -39,6 +39,7 @@ from realized_core_engine.resumption_contracts import (
     OperationKind,
     ProjectionPolicy,
     Realignment,
+    Reversal,
     ReductionContext,
     ReductionController,
     ReductionProposal,
@@ -133,6 +134,11 @@ class ResumptionService:
         """Start a new objective with no causal parent revision."""
 
         attempt_id = self._id_factory("attempt")
+        initial_head = self.repository.load_branch_head(
+            request.scope_id,
+            request.objective_id,
+            request.branch_id,
+        )
         attempt = AttemptRecord(
             attempt_id=attempt_id,
             causal_anchor=(
@@ -140,6 +146,14 @@ class ResumptionService:
                 f"{request.branch_id}"
             ),
             operation=OperationKind.START.value,
+            initial_branch_head_revision_id=(
+                initial_head.identity.revision_id
+                if initial_head is not None
+                else None
+            ),
+            initial_branch_head_digest=(
+                initial_head.revision_digest if initial_head is not None else None
+            ),
             execution_policy=dict(request.execution_policy),
         )
         run_result = run_execution_attempt(
@@ -159,10 +173,23 @@ class ResumptionService:
         """Execute one typed continuation operation from an exact anchor."""
 
         attempt_id = self._id_factory("attempt")
+        initial_head = self.repository.load_branch_head(
+            request.anchor.scope_id,
+            request.anchor.objective_id,
+            request.anchor.branch_id,
+        )
         attempt = AttemptRecord(
             attempt_id=attempt_id,
             causal_anchor=request.anchor.causal_anchor,
             operation=request.operation.value,
+            initial_branch_head_revision_id=(
+                initial_head.identity.revision_id
+                if initial_head is not None
+                else None
+            ),
+            initial_branch_head_digest=(
+                initial_head.revision_digest if initial_head is not None else None
+            ),
             execution_policy=dict(request.execution_policy),
             latest_admitted_revision_id=request.anchor.revision_id,
         )
@@ -370,6 +397,149 @@ class ResumptionService:
                 "provider_identity": provider_identity,
                 "governance_posture": governance_posture,
             }
+        )
+
+    def _historical_operation_proposal(
+        self,
+        operation: OperationKind,
+        source: Revision,
+        projection: ResumptionProjection,
+    ) -> ReductionProposal:
+        """Build a read-only path view without invoking semantic reduction."""
+
+        revision_records: list[dict[str, Any]] = []
+        transition_records: list[dict[str, Any]] = []
+        verification_failures: list[str] = []
+        for revision_id in self.repository.path_to_roots(
+            source.identity.revision_id
+        ):
+            try:
+                revision = self.repository.load_revision(revision_id)
+            except RepositoryIntegrityError as exc:
+                verification_failures.append(str(exc))
+                continue
+            if revision is None:
+                verification_failures.append(
+                    f"path revision is missing: {revision_id}"
+                )
+                continue
+            revision_records.append(
+                {
+                    **revision.canonical_content(),
+                    "revision_digest": revision.revision_digest,
+                    "created_at": revision.created_at,
+                    "verified": revision.verify(),
+                }
+            )
+            artifact = self.repository.load_transition_artifact(
+                revision.transition_artifact_id
+            )
+            if artifact is None:
+                verification_failures.append(
+                    "transition artifact is missing: "
+                    f"{revision.transition_artifact_id}"
+                )
+                continue
+            try:
+                replay = self.repository.verify_transition_replay(
+                    revision.transition_artifact_id
+                )
+            except (KeyError, RepositoryIntegrityError, ValueError) as exc:
+                replay = {
+                    "verified": False,
+                    "failures": [str(exc)],
+                }
+            verification_failures.extend(
+                f"transition {revision.transition_artifact_id}: {failure}"
+                for failure in replay.get("failures", ())
+            )
+            transition_records.append(
+                {
+                    "artifact": artifact,
+                    "replay_verification": replay,
+                }
+            )
+
+        common = {
+            "operation": operation.value,
+            "source_identity": source.identity.to_dict(),
+            "path_revision_ids": [
+                record["identity"]["revision_id"]
+                for record in revision_records
+            ],
+            "verified": not verification_failures,
+            "verification_failures": verification_failures,
+        }
+        if operation is OperationKind.EXPLAIN:
+            data = {
+                **common,
+                "revisions": [
+                    {
+                        "identity": record["identity"],
+                        "parent_revision_ids": record["parent_revision_ids"],
+                        "provenance_references": record[
+                            "provenance_references"
+                        ],
+                        "governance_references": record[
+                            "governance_references"
+                        ],
+                        "transition_artifact_id": record[
+                            "transition_artifact_id"
+                        ],
+                        "revision_digest": record["revision_digest"],
+                    }
+                    for record in revision_records
+                ],
+                "transitions": [
+                    {
+                        "artifact_id": record["artifact"]["artifact_id"],
+                        "operation": record["artifact"]["operation"],
+                        "reconciliation": record["artifact"][
+                            "reconciliation"
+                        ],
+                        "admission": record["artifact"]["admission"],
+                        "semantic_outcome": record["artifact"][
+                            "semantic_outcome"
+                        ],
+                    }
+                    for record in transition_records
+                ],
+            }
+        elif operation is OperationKind.VERIFY:
+            data = {
+                **common,
+                "revision_verifications": [
+                    {
+                        "revision_id": record["identity"]["revision_id"],
+                        "revision_digest": record["revision_digest"],
+                        "verified": record["verified"],
+                    }
+                    for record in revision_records
+                ],
+                "transition_verifications": [
+                    record["replay_verification"]
+                    for record in transition_records
+                ],
+            }
+        elif operation is OperationKind.RECONSTRUCT:
+            data = {
+                **common,
+                "projection": {
+                    **projection.canonical_content(),
+                    "projection_digest": projection.projection_digest,
+                },
+                "revisions": revision_records,
+                "transitions": transition_records,
+            }
+        else:
+            raise ValueError(f"unsupported historical operation: {operation}")
+        return ReductionProposal(
+            reconciliation={
+                "historical_operation": operation.value,
+                "path_revision_count": len(revision_records),
+                "verified": not verification_failures,
+            },
+            presentation={"operation_result": data},
         )
 
     # Attempt work -------------------------------------------------------------
@@ -602,12 +772,27 @@ class ResumptionService:
             if inlet_admission.disposition is not AdmissionDisposition.ACCEPTED:
                 raise TransitionValidationError(inlet_admission.rationale)
             self._raise_if_stopped(should_stop)
-            proposal = self._reduce(
-                request,
-                projection,
-                candidate,
-                should_stop,
-            )
+            if request.operation in {
+                OperationKind.EXPLAIN,
+                OperationKind.VERIFY,
+                OperationKind.RECONSTRUCT,
+            }:
+                proposal = self._historical_operation_proposal(
+                    request.operation,
+                    source,
+                    projection,
+                )
+            elif request.operation is OperationKind.REVERSE:
+                proposal = ReductionProposal(
+                    reconciliation={"historical_operation": "reverse"}
+                )
+            else:
+                proposal = self._reduce(
+                    request,
+                    projection,
+                    candidate,
+                    should_stop,
+                )
             candidate, proposal_reconciliation = self._apply_reduction_proposal(
                 candidate,
                 proposal,
@@ -780,6 +965,7 @@ class ResumptionService:
             OperationKind.DERIVE: InletRelationship.CONTINUATION,
             OperationKind.AUGMENT: InletRelationship.AUGMENTATION,
             OperationKind.CORRECT: InletRelationship.CORRECTION,
+            OperationKind.REVERSE: InletRelationship.REVERSAL,
             OperationKind.REDIRECT_AND_REALIGN: InletRelationship.REDIRECTION,
             OperationKind.RESUME_SUSPENDED: (
                 InletRelationship.HOLD_SATISFACTION
@@ -795,6 +981,47 @@ class ResumptionService:
                 raise TransitionValidationError(
                     f"{request.operation.value} requires a "
                     f"{expected.value} inlet"
+                )
+
+        if request.operation in {
+            OperationKind.EXPLAIN,
+            OperationKind.VERIFY,
+            OperationKind.RECONSTRUCT,
+        }:
+            if request.inlet is not None:
+                raise TransitionValidationError(
+                    f"{request.operation.value} is read-only and accepts no inlet"
+                )
+            if request.merge_parent_identities:
+                raise TransitionValidationError(
+                    f"{request.operation.value} accepts no merge parents"
+                )
+
+        if request.operation is OperationKind.REVERSE:
+            assert request.inlet is not None
+            reversal = request.inlet.reversal
+            if reversal is None:
+                raise TransitionValidationError(
+                    "reverse requires an explicit typed reversal"
+                )
+            if not _delta_is_empty(request.inlet.delta):
+                raise TransitionValidationError(
+                    "reverse cannot combine restoration with another semantic delta"
+                )
+            if not reversal.rationale.strip() or not reversal.evidence_references:
+                raise TransitionValidationError(
+                    "reverse requires a rationale and inspectable evidence"
+                )
+            if (
+                reversal.target_transition_artifact_id
+                != source.transition_artifact_id
+            ):
+                raise TransitionValidationError(
+                    "reverse must target the transition that produced the causal head"
+                )
+            if reversal.restore_parent_revision_id not in source.parent_revision_ids:
+                raise TransitionValidationError(
+                    "reverse must select one direct parent of the causal head"
                 )
 
         if request.operation is OperationKind.RESUME_AFTER_INTERRUPTION:
@@ -942,6 +1169,15 @@ class ResumptionService:
                 target,
             )
             return state, reconciliation, request.inlet.realignment
+        if request.operation is OperationKind.REVERSE:
+            assert request.inlet is not None
+            assert request.inlet.reversal is not None
+            state, reconciliation = self._apply_reversal(
+                source,
+                request.inlet,
+                request.inlet.reversal,
+            )
+            return state, reconciliation, None
         if request.operation is OperationKind.DERIVE:
             assert request.inlet is not None
             selected_ids = {
@@ -1038,6 +1274,59 @@ class ResumptionService:
             allow_direction=False,
         )
         return state, reconciliation, None
+
+    def _apply_reversal(
+        self,
+        source: Revision,
+        inlet: ContinuationInlet,
+        reversal: Reversal,
+    ) -> tuple[SemanticState, dict[str, Any]]:
+        restored = self.repository.load_revision(
+            reversal.restore_parent_revision_id
+        )
+        if restored is None:
+            raise TransitionValidationError(
+                "the selected reversal parent does not exist"
+            )
+        if (
+            restored.identity.scope_id != source.identity.scope_id
+            or restored.identity.objective_id != source.identity.objective_id
+        ):
+            raise TransitionValidationError(
+                "reverse cannot silently change scope or objective identity"
+            )
+        restored_state = replace(
+            restored.state,
+            provenance_references=tuple(
+                dict.fromkeys(
+                    (
+                        *restored.state.provenance_references,
+                        self.repository.revision_reference(
+                            source.identity.revision_id
+                        ),
+                        self.repository.transition_artifact_reference(
+                            reversal.target_transition_artifact_id
+                        ),
+                        self.repository.revision_reference(
+                            restored.identity.revision_id
+                        ),
+                        inlet.inlet_id,
+                        *inlet.provenance,
+                        *reversal.evidence_references,
+                    )
+                )
+            ),
+        )
+        return restored_state, {
+            "kind": "governed_reversal",
+            "target_transition_artifact_id": (
+                reversal.target_transition_artifact_id
+            ),
+            "restore_parent_revision_id": restored.identity.revision_id,
+            "restore_parent_revision_digest": restored.revision_digest,
+            "evidence_references": list(reversal.evidence_references),
+            "rationale": reversal.rationale,
+        }
 
     def _apply_delta(
         self,
@@ -2397,6 +2686,10 @@ def _attempt_payload(attempt: AttemptRecord) -> dict[str, Any]:
     return {
         "attempt_id": attempt.attempt_id,
         "causal_anchor": attempt.causal_anchor,
+        "initial_branch_head_revision_id": (
+            attempt.initial_branch_head_revision_id
+        ),
+        "initial_branch_head_digest": attempt.initial_branch_head_digest,
         "operation": attempt.operation,
         "execution_policy": dict(attempt.execution_policy),
         "status": attempt.status.value,

@@ -264,6 +264,66 @@ class ResumptionRepositoryTests(unittest.TestCase):
             self.repository.load_branch_head("scope-1", "objective-1", "main")
         )
 
+    def test_attempt_round_trip_preserves_initial_branch_head_evidence(self) -> None:
+        prepared = self.repository.prepare_attempt(
+            AttemptRecord(
+                attempt_id="attempt-with-head",
+                causal_anchor="anchor",
+                operation="continue",
+                initial_branch_head_revision_id="revision-1",
+                initial_branch_head_digest="digest-1",
+            )
+        )
+
+        loaded = self.repository.load_attempt(prepared.attempt_id)
+
+        self.assertIsNotNone(loaded)
+        self.assertEqual(
+            "revision-1",
+            loaded.initial_branch_head_revision_id,
+        )
+        self.assertEqual("digest-1", loaded.initial_branch_head_digest)
+
+    def test_existing_attempt_schema_is_migrated_additively(self) -> None:
+        legacy_path = Path(self.temporary.name) / "legacy-attempts.sqlite3"
+        with sqlite3.connect(legacy_path) as connection:
+            connection.execute(
+                """
+                CREATE TABLE resumption_attempts (
+                    attempt_id TEXT PRIMARY KEY,
+                    causal_anchor TEXT NOT NULL,
+                    operation TEXT NOT NULL,
+                    execution_policy_json TEXT NOT NULL,
+                    status TEXT NOT NULL,
+                    latest_admitted_revision_id TEXT,
+                    proposal_references_json TEXT NOT NULL,
+                    receipt_references_json TEXT NOT NULL,
+                    transition_artifact_references_json TEXT NOT NULL,
+                    interruption_cause TEXT,
+                    interruption_correlation_json TEXT NOT NULL,
+                    operational_error TEXT,
+                    created_at TEXT NOT NULL,
+                    updated_at TEXT NOT NULL
+                )
+                """
+            )
+            connection.commit()
+
+        migrated = SQLiteResumptionRepository(legacy_path)
+        migrated.prepare_attempt(
+            AttemptRecord(
+                attempt_id="migrated-attempt",
+                causal_anchor="anchor",
+                operation="continue",
+                initial_branch_head_revision_id="revision-1",
+                initial_branch_head_digest="digest-1",
+            )
+        )
+
+        loaded = migrated.load_attempt("migrated-attempt")
+        self.assertEqual("revision-1", loaded.initial_branch_head_revision_id)
+        self.assertEqual("digest-1", loaded.initial_branch_head_digest)
+
     def test_parent_and_child_traversal_preserve_branch_history(self) -> None:
         self._running_attempt("attempt-1")
         first, first_artifact = _revision_and_artifact(

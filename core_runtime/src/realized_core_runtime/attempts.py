@@ -46,6 +46,8 @@ class AttemptRecord:
     attempt_id: str
     causal_anchor: str
     operation: str
+    initial_branch_head_revision_id: str | None = None
+    initial_branch_head_digest: str | None = None
     execution_policy: Mapping[str, Any] = field(default_factory=dict)
     status: AttemptLifecycleStatus = AttemptLifecycleStatus.PREPARED
     latest_admitted_revision_id: str | None = None
