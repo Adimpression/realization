@@ -2,7 +2,7 @@
 
 # Realization
 
-### Governed reduction. Durable artifacts. Inspectable consequences.
+### Governed state that survives the model, process, and transcript.
 
 <p>
   <img alt="Status: pre-alpha" src="https://img.shields.io/badge/status-pre--alpha-D4A72C?style=for-the-badge">
@@ -11,14 +11,16 @@
   <img alt="License: Apache 2.0" src="https://img.shields.io/badge/license-Apache--2.0-3A506B?style=for-the-badge">
 </p>
 
-**A stateful research system for reducing represented non-achievedness toward
-justified, governed outcomes.**
+**A research implementation of reduction over durable semantic state: what
+holds, what remains unresolved, why either claim is admissible, and exactly
+what another run may resume.**
 
 `Not<X> -> governed reduction -> Is<X>`
 
 [Get things done](#get-things-done) |
+[Resumption](#resumption-is-state-not-replay) |
 [How it works](#how-it-works) |
-[Current surface](#what-exists-today) |
+[Quick start](#quick-start) |
 [Architecture](#architecture) |
 [Theory](#theory-reading-path)
 
@@ -27,14 +29,13 @@ justified, governed outcomes.**
 ---
 
 > [!NOTE]
-> **This repository implements and tests the model it documents.**
+> **Realization does not "remember" by replaying prose.**
 >
-> That is a deliberately bounded statement. The repository now contains a
-> runnable provider-free core, durable SQLite state, inspectable ledgers and
-> artifacts, separately buildable core packages, governed ability machinery,
-> a working subject-to-publication workflow, and machine-enforced architecture
-> boundaries. It is not a claim of AGI, production readiness, empirical proof
-> of the theory, or deterministic behavior from external models.
+> It persists governed state in SQLite and resumes from an exact scope,
+> objective, branch, and revision identity. The implementation is runnable and
+> extensively tested, but remains pre-alpha research software. This is not a
+> claim of AGI, production readiness, empirical proof of the theory, or
+> deterministic behavior from external models.
 
 ## Get Things Done
 
@@ -45,6 +46,7 @@ Choose the smallest surface that matches the work:
 | Answer or calculate from deterministic mechanisms, without a model provider | [Run the standalone core](#run-one-local-task) |
 | Ground a run in facts supplied by a person or another system | [Add evidence](#add-evidence) |
 | Examine or continue a durable run | [Inspect or continue](#inspect-or-continue) |
+| Correct, interrupt, resume, branch, merge, or realign governed work | [Use the governed conversation host](#use-the-core-as-a-governed-chat-participant) |
 | Learn, export, import, and reuse governed artifacts | [Reuse knowledge and abilities](#reuse-knowledge-and-abilities) |
 | Turn source material into a reviewed report | [Workstation and publication](#workstation-and-publication) |
 | Embed only the lifecycle engine in another application | [`core_runtime/`](core_runtime/) and [`core_engine/`](core_engine/) |
@@ -54,10 +56,12 @@ clearest view of what Realization itself can determine from rules, supplied
 evidence, and admitted artifacts. A run is successful only when its status and
 certainty justify closure; the presence of fluent output alone is not success.
 
-## The Idea
+## Why It Exists
 
-Most systems interpret a request as work to schedule. Realization first treats
-it as a represented remainder:
+Generating another answer is comparatively easy. Preserving the meaning of an
+unfinished objective across corrections, interruptions, process restarts,
+branches, and provider replacement is harder. Realization treats the request
+first as a represented remainder:
 
 ```text
 Not<X> = what remains insufficiently determined, evidenced, governed, or achieved
@@ -77,6 +81,58 @@ This distinction drives the implementation:
 - model output remains advisory until governed;
 - artifacts, receipts, and decisions remain inspectable after the run;
 - deterministic operation remains available without an LLM.
+
+## Resumption Is State, Not Replay
+
+A resumable boundary carries four things explicitly:
+
+```text
+Resumable State = achieved state
+                + non-achievedness
+                + supporting provenance
+                + exact causal identity
+```
+
+The causal identity is the product of `scope x objective x branch x revision`.
+A transcript may help a person understand what happened, but it cannot select
+that identity, recreate supersession, or silently discharge unresolved work.
+
+```mermaid
+flowchart LR
+    R1["r1: blue, Friday<br/>audience unresolved"]
+    R2["r2: green, Friday<br/>audience unresolved"]
+    R3["r3: resumed from r2"]
+    EX["executive branch"]
+    TE["technical branch"]
+    M["governed merge"]
+    R4["r4: redirected<br/>applicability explicit"]
+
+    R1 -- "correct blue to green" --> R2
+    R2 -. "interrupt attempt; no semantic revision" .-> R2
+    R2 -- "resume exact revision" --> R3
+    R2 -- "branch" --> EX
+    R2 -- "branch" --> TE
+    EX --> M
+    TE --> M
+    R3 -- "redirect and realign" --> R4
+```
+
+The repository qualifies this with a concrete Cedar journey:
+
+1. Start a brief with admitted facts and an unresolved audience.
+2. Correct values without erasing their superseded provenance.
+3. Interrupt candidate work without promoting it into semantic state.
+4. Resume after restart or provider replacement from the exact admitted revision.
+5. Augment, redirect, and realign while preserving uncertainty about applicability.
+6. Branch concurrent work, merge explicit parents, and reject stale continuation.
+7. Explain, verify, reconstruct, and reverse from persisted path artifacts.
+8. Start an independent objective without inheriting linguistically similar state.
+
+The mechanically decidable contracts run provider-free across the real host,
+engine, lifecycle, and SQLite repository. A separate provider-backed Cedar
+qualification checks ordinary-language interpretation and rendering. That
+qualification is evidence about one configured provider path, not a substitute
+for deterministic tests or a general model-quality claim.
 
 ## How It Works
 
@@ -120,6 +176,8 @@ and invocation authority all agree.
 | **Governed core CLI** | Fresh `run`, durable `resume`, read-only `inspect`, and an optional thin `chat` entry host over plain SQLite |
 | **Core Python API** | Typed `run`, `resume`, and `inspect` functions behind a narrow package ABI |
 | **Reduction loop** | Durable non-achievedness state, bounded steps, evidence, proposals, commitments, artifacts, and ledger entries |
+| **Governed resumption** | Exact causal anchors, immutable revisions, interruption, correction, augmentation, redirection and realignment, branching, merge, reversal, reconstruction, and replay |
+| **Conversation boundary** | Provider-neutral planning and rendering around mechanical identity, selector resolution, validation, admission, recovery, and receipts |
 | **LLM-off mode** | Provider-free execution through deterministic rules, parsers, retrieval, persisted artifacts, and available evidence |
 | **Ability system** | Declaration, governance, admission, scope, semantic matching, realizer binding, authority, execution, and receipts in the full workspace |
 | **Workstation** | Textual and Flutter clients over shared shell and subject-workflow contracts; visual parity is not claimed |
