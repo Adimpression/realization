@@ -2,7 +2,7 @@
 
 # Realization
 
-### Governed state that survives the model, process, and transcript.
+### Stop the process. Replace the model. Resume the meaning.
 
 <p>
   <img alt="Status: pre-alpha" src="https://img.shields.io/badge/status-pre--alpha-D4A72C?style=for-the-badge">
@@ -11,14 +11,14 @@
   <img alt="License: Apache 2.0" src="https://img.shields.io/badge/license-Apache--2.0-3A506B?style=for-the-badge">
 </p>
 
-**A research implementation of reduction over durable semantic state: what
-holds, what remains unresolved, why either claim is admissible, and exactly
-what another run may resume.**
+**Realization is a research implementation for giving unfinished work a
+durable semantic existence: what holds, what remains unresolved, why, and the
+exact state from which another reduction may continue.**
 
 `Not<X> -> governed reduction -> Is<X>`
 
 [Get things done](#get-things-done) |
-[Resumption](#resumption-is-state-not-replay) |
+[Resumption](#resumption-the-work-survives-its-machinery) |
 [How it works](#how-it-works) |
 [Quick start](#quick-start) |
 [Architecture](#architecture) |
@@ -28,14 +28,375 @@ what another run may resume.**
 
 ---
 
-> [!NOTE]
-> **Realization does not "remember" by replaying prose.**
+> [!IMPORTANT]
+> **A transcript can preserve what was said. Realization preserves what the
+> next reduction is entitled to treat as current.**
 >
-> It persists governed state in SQLite and resumes from an exact scope,
-> objective, branch, and revision identity. The implementation is runnable and
-> extensively tested, but remains pre-alpha research software. This is not a
-> claim of AGI, production readiness, empirical proof of the theory, or
-> deterministic behavior from external models.
+> The process may stop. Its model session and cache may vanish. A different
+> model may later take its place. The work can still resume from an exact,
+> persisted account of current state, unresolved obligations, provenance, and
+> causal identity rather than from a model's recollection of a conversation.
+
+> [!CAUTION]
+> Realization is runnable and extensively tested, but remains pre-alpha
+> research software. This is not a claim of AGI, production readiness,
+> empirical proof of the theory, or deterministic behavior from external
+> models.
+
+## Why It Exists
+
+Generating another answer is comparatively easy. Continuing the *same work*
+after its machinery has disappeared is a deeper problem.
+
+A language model can receive yesterday's transcript and produce a plausible
+next sentence. But plausibility cannot establish which correction is current,
+which candidate was never accepted, which obligation remains open, which
+branch is being continued, or whether the new request belongs to that objective
+at all. A summary can compress words while silently destroying those
+relationships.
+
+Realization treats continuity as a problem of semantic integrity, not
+conversational memory. A request begins as a represented remainder:
+
+```text
+Not<X> = what remains insufficiently determined, evidenced, governed, or achieved
+```
+
+The controller asks whether that remainder should be closed directly, refined
+into subordinate remainders, matched to prior artifacts, supported by evidence,
+or held because certainty is not yet justified. Progress is not measured by
+motion or fluent output. It is measured by increased determination and an
+inspectable basis for commitment.
+
+This distinction drives the implementation:
+
+- state survives the process that created it;
+- proposals remain separate from admitted facts and actions;
+- abilities remain separate from the host operations that realize them;
+- model output remains advisory until governed;
+- artifacts, receipts, and decisions remain inspectable after the run;
+- deterministic operation remains available without an LLM.
+
+## Resumption: The Work Survives Its Machinery
+
+Resumption asks an unusually strict question:
+
+> If the process, model session, cache, and rendered answer all disappear,
+> what must remain so that the next reduction continues the same undertaking
+> rather than inventing a plausible replacement for it?
+
+The answer is not private reasoning and not a replay of everything ever said.
+It is a governed boundary carrying four explicit things:
+
+```text
+Resumable State = achieved state
+                + non-achievedness
+                + supporting provenance
+                + exact causal identity
+```
+
+The causal identity is the product of `scope x objective x branch x revision`.
+That identity turns continuation from a linguistic impression into an
+inspectable state transition. A transcript can explain what happened, but it
+cannot select the state being continued, recreate supersession, or silently
+discharge unresolved work.
+
+This changes the meaning of familiar events:
+
+- A **correction** changes current admitted state without rewriting history.
+- An **interruption** stops activity without promoting unfinished work into fact.
+- A **restart** or **provider replacement** changes the machinery, not the
+  semantic state.
+- A **branch** creates another valid future from an exact shared past.
+- A **merge** names its parents instead of pretending parallel work was linear.
+- A **redirection** forces realignment rather than carrying old assumptions
+  forward by accident.
+- An **unrelated objective** inherits nothing merely because its words are
+  similar.
+
+### Cedar at a glance
+
+One continuing example makes the difference between conversational memory and
+governed resumption visible:
+
+```mermaid
+flowchart LR
+    R1["r1: blue, Friday<br/>audience unresolved"]
+    R2["r2: green, Friday<br/>audience unresolved"]
+    R3["r3: green, Monday<br/>audience unresolved"]
+    RR["resumed r3<br/>new process or model"]
+    AU["augmented<br/>budget also unresolved"]
+    RL["redirected and realigned<br/>launch checklist"]
+    EX["executive branch"]
+    TE["technical branch"]
+    M["governed merge"]
+
+    R1 -- "correct blue to green" --> R2
+    R2 -- "correct Friday to Monday" --> R3
+    R3 -. "interrupted attempt<br/>recorded without a semantic revision" .-> IA["attempt journal only"]
+    R3 -- "resume exact revision" --> RR
+    RR -- "augment" --> AU
+    AU -- "redirect + realign" --> RL
+    R3 -- "branch" --> EX
+    R3 -- "branch" --> TE
+    EX --> M
+    TE --> M
+```
+
+### 1. Begin with both achievement and non-achievedness
+
+The first inlet asks for a Cedar brief in blue, due Friday. Those facts can be
+admitted while its required audience remains unknown. A valid reply can finish
+the turn without pretending that it finished the objective.
+
+```mermaid
+flowchart LR
+    I["Inlet<br/>Create the Cedar brief<br/>blue, due Friday"]
+    G{"Governed<br/>reduction"}
+    A["Achieved state<br/>project = Cedar<br/>color = blue<br/>deadline = Friday"]
+    N["Non-achievedness<br/>audience = undetermined"]
+    T["Turn may complete"]
+    O["Objective remains open"]
+
+    I --> G
+    G -- "admit supported facts" --> A
+    G -- "preserve the remainder" --> N
+    A --> T
+    N --> O
+```
+
+The transcript records the request. The governed state separately records what
+currently holds and what still prevents closure.
+
+### 2. Correct without erasing the past
+
+Two later inlets change blue to green and Friday to Monday. Each correction
+creates a new immutable revision. The old values remain historically real and
+inspectable, but no longer compete as current facts. The audience obligation
+survives both successful turns.
+
+```mermaid
+flowchart LR
+    R1["r1<br/>blue, Friday<br/>audience unresolved"]
+    R2["r2<br/>green, Friday<br/>audience unresolved"]
+    R3["r3<br/>green, Monday<br/>audience unresolved"]
+    P[("Persisted path<br/>blue -> green<br/>Friday -> Monday")]
+
+    R1 -- "correct color" --> R2
+    R2 -- "correct deadline" --> R3
+    R1 -. "superseded, not deleted" .-> P
+    R2 -. "superseded, not deleted" .-> P
+    R3 -- "current head" --> P
+```
+
+Replaying the transcript would expose all four values. Resuming `r3` exposes
+green and Monday as current, the audience as unresolved, and the earlier values
+through provenance only.
+
+### 3. Interrupt without accidentally admitting unfinished work
+
+A reduction starts resolving the audience and develops `city officials` as a
+candidate. It is interrupted before validation and admission. Operational
+activity stops; semantic state does not advance.
+
+```mermaid
+flowchart LR
+    R3["Current semantic head: r3<br/>audience unresolved"]
+    A["Running attempt<br/>candidate: city officials"]
+    J[("Attempt journal<br/>interrupted")]
+    H["Head remains r3"]
+    N["Audience remains unresolved"]
+
+    R3 --> A
+    A -. "interrupt" .-> J
+    R3 --> H
+    A -. "no admitted transition" .-> N
+```
+
+The candidate is not discarded; it can remain in path evidence. But an
+interruption cannot promote it into current state or discharge the open
+obligation.
+
+### 4. Preserve ambiguity instead of guessing from proximity
+
+After both corrections, the inlet `Change it back` is ambiguous. It might mean
+green back to blue or Monday back to Friday. Transcript recency is not enough
+to choose a semantic target.
+
+```mermaid
+flowchart LR
+    I["Inlet<br/>Change it back"]
+    Q{"Exactly one governed<br/>target and predecessor?"}
+    C["color<br/>green -> blue"]
+    D["deadline<br/>Monday -> Friday"]
+    H["HoldOn<br/>clarification required"]
+    S["No new semantic revision<br/>r3 remains current"]
+
+    I --> Q
+    Q -- "candidate" --> C
+    Q -- "candidate" --> D
+    C --> H
+    D --> H
+    H --> S
+```
+
+Here uncertainty is not a model failure to hide. It becomes explicit
+non-achievedness that a later inlet can resolve.
+
+### 5. Resume after the machinery disappears
+
+Once `r3` is admitted, the process can terminate, its cache can disappear, and
+the model provider can be replaced. A new host resumes by exact causal identity,
+not by asking a new model to reconstruct state from prose.
+
+```mermaid
+flowchart LR
+    OLD["Process A + Model A"]
+    DB[("SQLite<br/>scope + objective<br/>branch + revision r3<br/>state + remainder + provenance")]
+    GONE["Old process, session,<br/>and cache not required"]
+    NEW["Process B + Model B<br/>or LLM-off host"]
+    TR["Transcript and<br/>rendered answer"]
+
+    OLD -- "admit and persist" --> DB
+    OLD -. "may disappear" .-> GONE
+    DB -- "resume exact anchor" --> NEW
+    TR -. "explanation, not authority" .-> NEW
+```
+
+The new machinery may render different prose. It is not allowed to silently
+change which facts are current, what remains unresolved, or which revision it
+continued.
+
+### 6. Distinguish augmentation, redirection, and realignment
+
+`Also include a budget summary` augments the brief: it adds work without
+withdrawing anything. `Instead, create a launch checklist` redirects the
+objective. Realignment must then decide what survives that change rather than
+blindly carrying every old assumption forward.
+
+```mermaid
+flowchart LR
+    R3["Cedar brief<br/>green, Monday<br/>audience unresolved"]
+    AU["Augmented brief<br/>audience unresolved<br/>budget unresolved"]
+    D{"Redirect to<br/>launch checklist"}
+    K["Retain<br/>project = Cedar"]
+    S["Supersede<br/>brief direction"]
+    U["Applicability unresolved<br/>green, Monday, audience, budget"]
+    C["Clarification<br/>keep Monday + budget<br/>drop color + audience"]
+    R4["Realigned checklist<br/>Cedar, Monday<br/>budget unresolved"]
+
+    R3 -- "augment" --> AU
+    AU -- "redirect" --> D
+    D --> K
+    D --> S
+    D --> U
+    U -- "later inlet" --> C
+    K --> R4
+    S --> R4
+    C --> R4
+```
+
+Redirection changes where work is heading. Realignment governs the semantic
+consequences. Anything whose applicability cannot yet be established remains
+unresolved instead of being silently retained or deleted.
+
+### 7. Branch, merge, and reject stale continuation
+
+An executive brief and a technical brief may both continue from `r3`. They are
+parallel futures with a shared parent, not two adjacent paragraphs in one
+linear history. A merge names both parents, while an attempt anchored to an old
+head cannot overwrite newer state.
+
+```mermaid
+flowchart LR
+    B["r3<br/>shared causal parent"]
+    EX["Executive branch<br/>revision ex-1"]
+    TE["Technical branch<br/>revision tech-1"]
+    M["Merge revision<br/>parents: ex-1 + tech-1"]
+    H["Current merged head"]
+    ST["Stale continuation<br/>anchored to r3"]
+    RJ["Rejected<br/>head changed"]
+
+    B -- "branch" --> EX
+    B -- "branch" --> TE
+    EX --> M
+    TE --> M
+    M --> H
+    ST -. "compare-and-swap guard" .-> RJ
+    H -. "cannot be overwritten" .-> RJ
+```
+
+Concurrency therefore becomes visible causal structure rather than
+last-writer-wins conversation order.
+
+### 8. Keep independent objectives independent
+
+`Plan my holiday` may be linguistically close to planning Cedar work. Semantic
+retrieval may nominate Cedar artifacts for attention, but similarity cannot
+establish that the holiday continues Cedar's objective.
+
+```mermaid
+flowchart LR
+    I["Inlet<br/>Plan my holiday"]
+    RET["Similarity retrieval<br/>may find Cedar"]
+    ID{"Matching scope + objective<br/>branch + revision?"}
+    NO["No causal anchor<br/>do not inherit Cedar"]
+    NEW["Start independent objective"]
+
+    I -. "attention" .-> RET
+    RET --> ID
+    ID -- "no" --> NO
+    I -- "explicit new work" --> NEW
+    NO --> NEW
+```
+
+Retrieval can suggest what to inspect. It cannot verify applicability or create
+a continuation relationship.
+
+### 9. Use the path when the present alone is not enough
+
+Ordinary continuation consumes current state and non-achievedness. The full
+path remains available when someone asks why Monday is current, requests a
+reversal, verifies a transition, or rebuilds derived state after loss.
+
+```mermaid
+flowchart LR
+    P[("Persisted path<br/>r1 -> r2 -> r3<br/>artifacts + receipts + provenance")]
+    E["Explain<br/>why Monday?"]
+    V["Verify<br/>inspect supporting transitions"]
+    R["Reverse<br/>create a governed successor"]
+    C["Reconstruct<br/>derive state and indexes"]
+
+    P --> E
+    P --> V
+    P --> R
+    P --> C
+```
+
+Reversal is not deletion and reconstruction is not invention. Both operate
+from retained, inspectable relationships.
+
+The striking result is not another generated sentence. It is that after every
+correction, interruption, restart, branch, and redirection, the system can still
+answer:
+
+```text
+What is current?
+What remains unresolved?
+What was superseded?
+What was merely proposed?
+Which branch and revision are being continued?
+What evidence and transition made this state admissible?
+```
+
+That is resumption as a governed computational object.
+
+The mechanically decidable contracts run provider-free across the real host,
+engine, lifecycle, and SQLite repository. A separate provider-backed Cedar
+qualification checks ordinary-language interpretation and rendering. The
+project does not claim that a model will interpret every inlet correctly; it
+ensures that model judgment cannot silently redefine causal identity,
+admission, or the persisted meaning of the work.
 
 ## Get Things Done
 
@@ -55,84 +416,6 @@ Start with `--llm off` unless model assistance is necessary. This gives the
 clearest view of what Realization itself can determine from rules, supplied
 evidence, and admitted artifacts. A run is successful only when its status and
 certainty justify closure; the presence of fluent output alone is not success.
-
-## Why It Exists
-
-Generating another answer is comparatively easy. Preserving the meaning of an
-unfinished objective across corrections, interruptions, process restarts,
-branches, and provider replacement is harder. Realization treats the request
-first as a represented remainder:
-
-```text
-Not<X> = what remains insufficiently determined, evidenced, governed, or achieved
-```
-
-The controller asks whether that remainder should be closed directly, refined
-into subordinate remainders, matched to prior artifacts, supported by evidence,
-or held because certainty is not yet justified. Progress is not measured merely
-by activity. It is measured by increased determination and an inspectable basis
-for commitment.
-
-This distinction drives the implementation:
-
-- state survives the process that created it;
-- proposals remain separate from admitted facts and actions;
-- abilities remain separate from the host operations that realize them;
-- model output remains advisory until governed;
-- artifacts, receipts, and decisions remain inspectable after the run;
-- deterministic operation remains available without an LLM.
-
-## Resumption Is State, Not Replay
-
-A resumable boundary carries four things explicitly:
-
-```text
-Resumable State = achieved state
-                + non-achievedness
-                + supporting provenance
-                + exact causal identity
-```
-
-The causal identity is the product of `scope x objective x branch x revision`.
-A transcript may help a person understand what happened, but it cannot select
-that identity, recreate supersession, or silently discharge unresolved work.
-
-```mermaid
-flowchart LR
-    R1["r1: blue, Friday<br/>audience unresolved"]
-    R2["r2: green, Friday<br/>audience unresolved"]
-    R3["r3: resumed from r2"]
-    EX["executive branch"]
-    TE["technical branch"]
-    M["governed merge"]
-    R4["r4: redirected<br/>applicability explicit"]
-
-    R1 -- "correct blue to green" --> R2
-    R2 -. "interrupt attempt; no semantic revision" .-> R2
-    R2 -- "resume exact revision" --> R3
-    R2 -- "branch" --> EX
-    R2 -- "branch" --> TE
-    EX --> M
-    TE --> M
-    R3 -- "redirect and realign" --> R4
-```
-
-The repository qualifies this with a concrete Cedar journey:
-
-1. Start a brief with admitted facts and an unresolved audience.
-2. Correct values without erasing their superseded provenance.
-3. Interrupt candidate work without promoting it into semantic state.
-4. Resume after restart or provider replacement from the exact admitted revision.
-5. Augment, redirect, and realign while preserving uncertainty about applicability.
-6. Branch concurrent work, merge explicit parents, and reject stale continuation.
-7. Explain, verify, reconstruct, and reverse from persisted path artifacts.
-8. Start an independent objective without inheriting linguistically similar state.
-
-The mechanically decidable contracts run provider-free across the real host,
-engine, lifecycle, and SQLite repository. A separate provider-backed Cedar
-qualification checks ordinary-language interpretation and rendering. That
-qualification is evidence about one configured provider path, not a substitute
-for deterministic tests or a general model-quality claim.
 
 ## How It Works
 
