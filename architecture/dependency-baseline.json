@@ -22,7 +22,23 @@
     },
     {
       "source": "core_app",
+      "target": "core_conversation"
+    },
+    {
+      "source": "core_app",
       "target": "core_engine"
+    },
+    {
+      "source": "core_app",
+      "target": "core_llm"
+    },
+    {
+      "source": "core_conversation",
+      "target": "core_engine"
+    },
+    {
+      "source": "core_conversation",
+      "target": "core_llm"
     },
     {
       "source": "core_engine",
@@ -107,6 +123,14 @@
     {
       "source": "shell_core",
       "target": "contracts"
+    },
+    {
+      "source": "shell_core",
+      "target": "core_conversation"
+    },
+    {
+      "source": "shell_core",
+      "target": "core_llm"
     },
     {
       "source": "shell_core",
@@ -230,9 +254,9 @@
     "cyclic_internal_edge_count": 0,
     "cyclic_node_count": 0,
     "cyclic_scc_count": 0,
-    "edge_count": 635,
+    "edge_count": 641,
     "largest_cyclic_scc_node_count": 0,
-    "node_count": 148
+    "node_count": 150
   },
   "compatibility_edges": [
     {
@@ -1428,7 +1452,7 @@
       "source": "capability_runtime"
     },
     {
-      "module": "execution_frameworks",
+      "module": "execution_framework_primitives",
       "source": "capability_runtime"
     },
     {

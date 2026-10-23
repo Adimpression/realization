@@ -62,7 +62,9 @@ from realized_core_engine.resumption_contracts import (
 )
 from realized_core_engine.resumption_repository import (
     AttemptNotRunningError,
+    NormalizedRequestBinding,
     RepositoryIntegrityError,
+    ResumptionRepositoryError,
     SQLiteResumptionRepository,
     StaleAnchorError,
 )
@@ -82,6 +84,14 @@ AdmissionEvaluator = Callable[
 
 _INTERNAL_ITEM_PREFIX = "engine:"
 _INTERNAL_ITEM_MARKER = "resumption_projection"
+_INTERNAL_PROJECTION_PAYLOAD_KEYS = {
+    _INTERNAL_ITEM_MARKER,
+    "blockers",
+    "certainty",
+    "conflicts",
+    "node",
+    "status",
+}
 
 
 class TransitionValidationError(ValueError):
@@ -95,6 +105,18 @@ class TransitionValidationError(ValueError):
     ) -> None:
         self.outcome = outcome
         super().__init__(message)
+
+
+class NormalizedRequestInProgressError(RuntimeError):
+    """The durable normalized request already has a running attempt."""
+
+    def __init__(self, normalized_request_id: str, attempt_id: str) -> None:
+        self.normalized_request_id = normalized_request_id
+        self.attempt_id = attempt_id
+        super().__init__(
+            "normalized request is already executing: "
+            f"{normalized_request_id} ({attempt_id})"
+        )
 
 
 class _FunctionWork(PreparedAttemptWork):
@@ -136,11 +158,21 @@ class ResumptionService:
             lambda: datetime.now(timezone.utc).isoformat()
         )
 
-    def start(self, request: StartRequest) -> ResumptionResult:
+    def start(
+        self,
+        request: StartRequest,
+        *,
+        on_attempt_running: Callable[[str], None] | None = None,
+    ) -> ResumptionResult:
         """Start a new objective with no causal parent revision."""
 
         performance = PerformanceRecorder()
-        attempt_id = self._id_factory("attempt")
+        attempt_id, recovered = self._claim_normalized_request(
+            request,
+            operation=OperationKind.START,
+        )
+        if recovered is not None:
+            return recovered
         with performance.measure("revision_load_latency_ns"):
             initial_head = self.repository.load_branch_head(
                 request.scope_id,
@@ -164,25 +196,52 @@ class ResumptionService:
             ),
             execution_policy=dict(request.execution_policy),
         )
-        run_result = run_execution_attempt(
-            self.repository,
-            attempt,
-            _FunctionWork(
-                lambda should_stop: self._start_work(
-                    request,
-                    attempt_id,
-                    should_stop,
-                    performance,
-                )
-            ),
-        )
-        return self._public_result(run_result, source_revision=None)
+        try:
+            run_result = run_execution_attempt(
+                self.repository,
+                attempt,
+                _FunctionWork(
+                    lambda should_stop: self._start_work(
+                        request,
+                        attempt_id,
+                        should_stop,
+                        performance,
+                    )
+                ),
+                on_running=(
+                    (lambda running: on_attempt_running(running.attempt_id))
+                    if on_attempt_running is not None
+                    else None
+                ),
+            )
+        except ResumptionRepositoryError:
+            recovered = self.lookup_normalized_request(
+                request.normalized_request_id
+            )
+            if recovered is not None:
+                return recovered
+            self._raise_normalized_request_in_progress(
+                request.normalized_request_id
+            )
+            raise
+        result = self._public_result(run_result, source_revision=None)
+        return self._complete_normalized_request(request, result)
 
-    def resume(self, request: ResumptionRequest) -> ResumptionResult:
+    def resume(
+        self,
+        request: ResumptionRequest,
+        *,
+        on_attempt_running: Callable[[str], None] | None = None,
+    ) -> ResumptionResult:
         """Execute one typed continuation operation from an exact anchor."""
 
         performance = PerformanceRecorder()
-        attempt_id = self._id_factory("attempt")
+        attempt_id, recovered = self._claim_normalized_request(
+            request,
+            operation=request.operation,
+        )
+        if recovered is not None:
+            return recovered
         with performance.measure("revision_load_latency_ns"):
             initial_head = self.repository.load_branch_head(
                 request.anchor.scope_id,
@@ -204,20 +263,152 @@ class ResumptionService:
             execution_policy=dict(request.execution_policy),
             latest_admitted_revision_id=request.anchor.revision_id,
         )
-        run_result = run_execution_attempt(
-            self.repository,
-            attempt,
-            _FunctionWork(
-                lambda should_stop: self._resume_work(
-                    request,
-                    attempt_id,
-                    should_stop,
-                    performance,
-                )
-            ),
-        )
+        try:
+            run_result = run_execution_attempt(
+                self.repository,
+                attempt,
+                _FunctionWork(
+                    lambda should_stop: self._resume_work(
+                        request,
+                        attempt_id,
+                        should_stop,
+                        performance,
+                    )
+                ),
+                on_running=(
+                    (lambda running: on_attempt_running(running.attempt_id))
+                    if on_attempt_running is not None
+                    else None
+                ),
+            )
+        except ResumptionRepositoryError:
+            recovered = self.lookup_normalized_request(
+                request.normalized_request_id
+            )
+            if recovered is not None:
+                return recovered
+            self._raise_normalized_request_in_progress(
+                request.normalized_request_id
+            )
+            raise
         source = self.repository.load_revision(request.anchor.revision_id)
-        return self._public_result(run_result, source_revision=source)
+        result = self._public_result(run_result, source_revision=source)
+        return self._complete_normalized_request(request, result)
+
+    def lookup_normalized_request(
+        self,
+        normalized_request_id: str,
+    ) -> ResumptionResult | None:
+        """Recover a durable result without creating another attempt."""
+
+        request_id = str(normalized_request_id).strip()
+        if not request_id:
+            return None
+        binding = self.repository.load_normalized_request(request_id)
+        if binding is None:
+            return None
+        if binding.result is not None:
+            return binding.result
+        attempt = self.repository.load_attempt(binding.attempt_id)
+        if attempt is None or attempt.status is AttemptLifecycleStatus.PREPARED:
+            return None
+        if attempt.status is AttemptLifecycleStatus.RUNNING:
+            raise NormalizedRequestInProgressError(
+                request_id,
+                binding.attempt_id,
+            )
+        source = self._normalized_request_source(binding)
+        run_result = AttemptRunResult(
+            outcome=_attempt_execution_outcome(attempt.status),
+            attempt=attempt,
+            error=attempt.operational_error,
+        )
+        result = self._public_result(
+            run_result,
+            source_revision=source,
+        )
+        self.repository.record_normalized_request_result(
+            request_id,
+            attempt_id=attempt.attempt_id,
+            result=result,
+        )
+        return result
+
+    def _claim_normalized_request(
+        self,
+        request: StartRequest | ResumptionRequest,
+        *,
+        operation: OperationKind,
+    ) -> tuple[str, ResumptionResult | None]:
+        proposed_attempt_id = self._id_factory("attempt")
+        request_id = request.normalized_request_id.strip()
+        if not request_id:
+            return proposed_attempt_id, None
+        request_payload = request.to_dict()
+        request_payload.pop("normalized_request_id", None)
+        request_digest = content_digest(
+            {
+                "operation": operation.value,
+                "request": request_payload,
+            }
+        )
+        binding, _created = self.repository.claim_normalized_request(
+            normalized_request_id=request_id,
+            request_digest=request_digest,
+            operation=operation.value,
+            request_payload=request_payload,
+            proposed_attempt_id=proposed_attempt_id,
+        )
+        recovered = self.lookup_normalized_request(request_id)
+        return binding.attempt_id, recovered
+
+    def _complete_normalized_request(
+        self,
+        request: StartRequest | ResumptionRequest,
+        result: ResumptionResult,
+    ) -> ResumptionResult:
+        request_id = request.normalized_request_id.strip()
+        if not request_id:
+            return result
+        binding = self.repository.record_normalized_request_result(
+            request_id,
+            attempt_id=result.execution_attempt_id,
+            result=result,
+        )
+        if binding.result is None:
+            raise RepositoryIntegrityError(
+                "normalized request completed without a durable result"
+            )
+        return binding.result
+
+    def _normalized_request_source(
+        self,
+        binding: NormalizedRequestBinding,
+    ) -> Revision | None:
+        if binding.operation == OperationKind.START.value:
+            return None
+        request = ResumptionRequest.from_dict(binding.request_payload)
+        return self.repository.load_revision(request.anchor.revision_id)
+
+    def _raise_normalized_request_in_progress(
+        self,
+        normalized_request_id: str,
+    ) -> None:
+        request_id = str(normalized_request_id).strip()
+        if not request_id:
+            return
+        binding = self.repository.load_normalized_request(request_id)
+        if binding is None:
+            return
+        attempt = self.repository.load_attempt(binding.attempt_id)
+        if (
+            attempt is not None
+            and attempt.status is AttemptLifecycleStatus.RUNNING
+        ):
+            raise NormalizedRequestInProgressError(
+                request_id,
+                binding.attempt_id,
+            )
 
     def interrupt(self, request: InterruptionRequest) -> InterruptionResult:
         """Interrupt an attempt without synthesizing a semantic transition."""
@@ -1033,20 +1224,21 @@ class ResumptionService:
                 "expected branch head must identify the exact causal anchor",
                 outcome=SemanticOutcome.STALE,
             )
-        current_head = self.repository.load_branch_head(
-            source.identity.scope_id,
-            source.identity.objective_id,
-            source.identity.branch_id,
-        )
-        if (
-            current_head is None
-            or current_head.identity.revision_id
-            != request.expected_branch_head_revision_id
-        ):
-            raise TransitionValidationError(
-                "causal anchor is not the current source branch head",
-                outcome=SemanticOutcome.STALE,
+        if request.operation is not OperationKind.BRANCH:
+            current_head = self.repository.load_branch_head(
+                source.identity.scope_id,
+                source.identity.objective_id,
+                source.identity.branch_id,
             )
+            if (
+                current_head is None
+                or current_head.identity.revision_id
+                != request.expected_branch_head_revision_id
+            ):
+                raise TransitionValidationError(
+                    "causal anchor is not the current source branch head",
+                    outcome=SemanticOutcome.STALE,
+                )
 
         required_relationships = {
             OperationKind.CONTINUE: InletRelationship.CONTINUATION,
@@ -1433,6 +1625,20 @@ class ResumptionService:
                 "this operation cannot change the governing direction"
             )
 
+        unresolved_applicability_ids = set(
+            state.unresolved_applicability_item_ids
+        )
+        invalid_applicability_resolutions = (
+            set(delta.resolved_applicability_item_ids)
+            - unresolved_applicability_ids
+        )
+        if invalid_applicability_resolutions:
+            raise TransitionValidationError(
+                "applicability resolution targets are not unresolved in "
+                "applicability: "
+                + ", ".join(sorted(invalid_applicability_resolutions))
+            )
+
         achieved = {item.item_id: item for item in state.achieved}
         non_achieved = {
             item.item_id: item for item in state.non_achievedness
@@ -1497,6 +1703,13 @@ class ResumptionService:
                 }
             )
 
+        resolved_applicability_ids = {
+            *(item.item_id for item in delta.achieved),
+            *delta.resolved_non_achievedness_ids,
+            *delta.resolved_applicability_item_ids,
+            *(item.target_item_id for item in delta.supersessions),
+        }
+
         result = replace(
             state,
             achieved=tuple(achieved[key] for key in sorted(achieved)),
@@ -1510,6 +1723,11 @@ class ResumptionService:
                 if delta.governing_direction is not None
                 else state.governing_direction
             ),
+            unresolved_applicability_item_ids=tuple(
+                item_id
+                for item_id in state.unresolved_applicability_item_ids
+                if item_id not in resolved_applicability_ids
+            ),
         )
         return result, {
             "added_achieved": [item.item_id for item in delta.achieved],
@@ -1518,6 +1736,9 @@ class ResumptionService:
             ],
             "resolved_non_achievedness": list(
                 delta.resolved_non_achievedness_ids
+            ),
+            "resolved_applicability": list(
+                delta.resolved_applicability_item_ids
             ),
             "added_holds": [hold.hold_id for hold in delta.holds],
             "resolved_holds": list(delta.resolved_hold_ids),
@@ -1703,7 +1924,7 @@ class ResumptionService:
                 )
 
         unresolved_items = {
-            item.item_id: item
+            item.item_id: _externalize_reclassified_item(item)
             for item in realignment.resulting_non_achievedness
         }
         if set(unresolved_items) != unresolved:
@@ -1735,16 +1956,20 @@ class ResumptionService:
                     f"introduced material differs from its classified delta: {item_id}"
                 )
 
-        achieved = {
-            item.item_id: item
-            for item in source.state.achieved
-            if item.item_id not in superseded | unresolved
-        }
-        non_achieved = {
-            item.item_id: item
-            for item in source.state.non_achievedness
-            if item.item_id not in superseded | unresolved
-        }
+        achieved: dict[str, SemanticItem] = {}
+        for item in source.state.achieved:
+            if item.item_id in superseded | unresolved:
+                continue
+            carried = _carry_forward_realignment_item(item)
+            if carried is not None:
+                achieved[carried.item_id] = carried
+        non_achieved: dict[str, SemanticItem] = {}
+        for item in source.state.non_achievedness:
+            if item.item_id in superseded | unresolved:
+                continue
+            carried = _carry_forward_realignment_item(item)
+            if carried is not None:
+                non_achieved[carried.item_id] = carried
         non_achieved.update(unresolved_items)
         supersession_edges = [
             *source.state.supersession_edges,
@@ -1760,6 +1985,19 @@ class ResumptionService:
                 for item_id in sorted(superseded)
             ),
         ]
+        reframed_hold_evaluations = tuple(
+            {
+                "hold_id": hold.hold_id,
+                "disposition": HoldDisposition.REFRAME.value,
+                "correlation": dict(hold.correlation),
+                "inlet_id": inlet.inlet_id,
+                "evaluated_predicate": {
+                    "kind": "governing_direction_changed",
+                    "source_revision_id": source.identity.revision_id,
+                },
+            }
+            for hold in source.state.holds
+        )
         aligned = replace(
             source.state,
             achieved=tuple(achieved[key] for key in sorted(achieved)),
@@ -1771,6 +2009,11 @@ class ResumptionService:
             supersession_edges=tuple(supersession_edges),
             realignments=(*source.state.realignments, realignment),
             unresolved_applicability_item_ids=tuple(sorted(unresolved)),
+            holds=(),
+            hold_evaluations=(
+                *source.state.hold_evaluations,
+                *reframed_hold_evaluations,
+            ),
             engine_state={},
         )
         aligned, delta_reconciliation = self._apply_delta(
@@ -1788,6 +2031,10 @@ class ResumptionService:
             "superseded": sorted(superseded),
             "introduced": sorted(introduced),
             "unresolved": sorted(unresolved),
+            "reframed_holds": [
+                evaluation["hold_id"]
+                for evaluation in reframed_hold_evaluations
+            ],
             "identity_disposition": (
                 realignment.identity_disposition.to_dict()
             ),
@@ -2823,7 +3070,10 @@ class ResumptionService:
         )
         if scope_rejection is not None:
             return scope_rejection
-        reserved_item_rejection = self._reserved_item_admission_decision(inlet)
+        reserved_item_rejection = self._reserved_item_admission_decision(
+            inlet,
+            source,
+        )
         if reserved_item_rejection is not None:
             return reserved_item_rejection
         decision = self.admission_evaluator(
@@ -2846,6 +3096,7 @@ class ResumptionService:
     @staticmethod
     def _reserved_item_admission_decision(
         inlet: ContinuationInlet | None,
+        source: Revision | None,
     ) -> AdmissionDecision | None:
         if inlet is None:
             return None
@@ -2860,7 +3111,22 @@ class ResumptionService:
         ]
         if inlet.realignment is not None:
             items.extend(inlet.realignment.introduced_items)
-            items.extend(inlet.realignment.resulting_non_achievedness)
+            source_items = {
+                item.item_id: item
+                for item in (
+                    *((source.state.achieved) if source is not None else ()),
+                    *((source.state.non_achievedness) if source is not None else ()),
+                )
+            }
+            unresolved_ids = set(
+                inlet.realignment.unresolved_applicability_item_ids
+            )
+            items.extend(
+                item
+                for item in inlet.realignment.resulting_non_achievedness
+                if item.item_id not in unresolved_ids
+                or source_items.get(item.item_id) != item
+            )
         invalid_ids = sorted(
             {
                 item.item_id
@@ -3005,12 +3271,36 @@ class ResumptionService:
         return f"{prefix}_{content_digest(value)[:24]}"
 
 
+def _externalize_reclassified_item(item: SemanticItem) -> SemanticItem:
+    if not item.payload.get(_INTERNAL_ITEM_MARKER):
+        return item
+    return replace(
+        item,
+        payload={
+            key: value
+            for key, value in item.payload.items()
+            if key not in _INTERNAL_PROJECTION_PAYLOAD_KEYS
+        },
+    )
+
+
+def _carry_forward_realignment_item(
+    item: SemanticItem,
+) -> SemanticItem | None:
+    if not item.payload.get(_INTERNAL_ITEM_MARKER):
+        return item
+    if not str(item.payload.get("semantic_key", "")).strip():
+        return None
+    return _externalize_reclassified_item(item)
+
+
 def _delta_is_empty(delta: SemanticDelta) -> bool:
     return not any(
         (
             delta.achieved,
             delta.non_achievedness,
             delta.resolved_non_achievedness_ids,
+            delta.resolved_applicability_item_ids,
             delta.holds,
             delta.resolved_hold_ids,
             delta.supersessions,
@@ -3491,6 +3781,16 @@ def _active_holds(state: SemanticState) -> tuple[Any, ...]:
     )
 
 
+def _attempt_execution_outcome(
+    status: AttemptLifecycleStatus,
+) -> AttemptExecutionOutcome:
+    if status is AttemptLifecycleStatus.TERMINATED:
+        return AttemptExecutionOutcome.TERMINATED
+    if status is AttemptLifecycleStatus.INTERRUPTED:
+        return AttemptExecutionOutcome.INTERRUPTED
+    return AttemptExecutionOutcome.OPERATIONALLY_FAILED
+
+
 def _attempt_payload(attempt: AttemptRecord) -> dict[str, Any]:
     return {
         "attempt_id": attempt.attempt_id,
@@ -3524,6 +3824,7 @@ def _attempt_payload(attempt: AttemptRecord) -> dict[str, Any]:
 
 __all__ = [
     "AdmissionEvaluator",
+    "NormalizedRequestInProgressError",
     "ResumptionService",
     "TransitionValidationError",
 ]

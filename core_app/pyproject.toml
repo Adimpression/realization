@@ -18,7 +18,9 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
 ]
 dependencies = [
+    "realized-core-conversation==0.1.0",
     "realized-core-engine==0.1.0",
+    "realized-core-llm==0.1.0",
 ]
 
 [project.urls]
@@ -44,4 +46,6 @@ where = ["src"]
 include = ["realized_core"]
 
 [tool.uv.sources]
+realized-core-conversation = { workspace = true }
 realized-core-engine = { workspace = true }
+realized-core-llm = { workspace = true }

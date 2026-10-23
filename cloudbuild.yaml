@@ -20,6 +20,8 @@ steps:
         uv sync --frozen &&
         uv build core_runtime --out-dir /workspace/core-runtime-dist &&
         uv build --wheel core_engine --out-dir /workspace/core-engine-dist &&
+        uv build --wheel core_llm --out-dir /workspace/core-llm-dist &&
+        uv build --wheel core_conversation --out-dir /workspace/core-conversation-dist &&
         uv build --wheel core_app --out-dir /workspace/core-app-dist &&
         uv run --frozen python -m unittest
         tests.test_architecture_boundaries
@@ -31,9 +33,18 @@ steps:
         core_engine.tests.test_distribution
         core_engine.tests.test_resumption_repository
         core_engine.tests.test_resumption_service
+        core_llm.tests.test_planning_contract
+        core_llm.tests.test_provider
+        core_conversation.tests.test_journal
+        core_conversation.tests.test_pipeline
+        core_conversation.tests.test_schemas
         core_app.tests.test_distribution
         core_app.tests.test_chat
+        core_app.tests.test_planning
+        core_app.tests.test_resumption_journey
+        tests.test_resumption_journey_spec
         tests.test_governed_chat_validation
+        tests.test_public_package_metadata
         tests.test_supplement_provider_compatibility
         tests.test_core_runtime_package_adapter
         tests.test_core_app_cli_equivalence
@@ -53,7 +64,9 @@ steps:
         workstation.tests.test_six_layer_workstation_boundary_hygiene &&
         uv run --frozen python scripts/verify_core_distribution.py
         --app-wheel /workspace/core-app-dist/realized_core-0.1.0-py3-none-any.whl
+        --conversation-wheel /workspace/core-conversation-dist/realized_core_conversation-0.1.0-py3-none-any.whl
         --engine-wheel /workspace/core-engine-dist/realized_core_engine-0.1.0-py3-none-any.whl
+        --llm-wheel /workspace/core-llm-dist/realized_core_llm-0.1.0-py3-none-any.whl
         --runtime-wheel /workspace/core-runtime-dist/realized_core_runtime-0.1.0-py3-none-any.whl
 
   - name: 'python:3.14-slim'

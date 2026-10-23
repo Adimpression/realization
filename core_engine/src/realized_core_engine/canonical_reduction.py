@@ -271,6 +271,21 @@ class CanonicalReductionAdapter:
         if inlet.relationship is InletRelationship.REDIRECTION:
             return
 
+        if context.operation not in {
+            OperationKind.CONTINUE,
+            OperationKind.RESUME_SUSPENDED,
+        }:
+            state.record_inlet(
+                kind=inlet.kind,
+                semantic_identity=inlet.target,
+                payload={
+                    "inlet_id": inlet.inlet_id,
+                    "relationship": inlet.relationship.value,
+                },
+                provenance=list(inlet.provenance),
+            )
+            return
+
         content = str(
             inlet.payload.get("content")
             or inlet.payload.get("observation")

@@ -11,7 +11,7 @@ import json
 import sqlite3
 from collections.abc import Callable, Iterable, Iterator, Mapping
 from contextlib import contextmanager
-from dataclasses import replace
+from dataclasses import dataclass, replace
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -27,6 +27,7 @@ from realized_core_runtime import (
 from realized_core_engine.resumption_contracts import (
     ResumptionIdentity,
     ResumptionProjection,
+    ResumptionResult,
     Revision,
     SemanticState,
     TransitionArtifact,
@@ -56,6 +57,20 @@ class AttemptNotRunningError(ResumptionRepositoryError):
 
 class RepositoryIntegrityError(ResumptionRepositoryError):
     """Raised when persisted canonical data fails digest or identity checks."""
+
+
+@dataclass(frozen=True, slots=True)
+class NormalizedRequestBinding:
+    """Durable idempotency binding from one request to one attempt/result."""
+
+    normalized_request_id: str
+    request_digest: str
+    operation: str
+    request_payload: dict[str, Any]
+    attempt_id: str
+    result: ResumptionResult | None
+    created_at: str
+    updated_at: str
 
 
 class SQLiteResumptionRepository:
@@ -163,6 +178,17 @@ class SQLiteResumptionRepository:
                     updated_at TEXT NOT NULL
                 );
 
+                CREATE TABLE IF NOT EXISTS resumption_normalized_requests (
+                    normalized_request_id TEXT PRIMARY KEY,
+                    request_digest TEXT NOT NULL,
+                    operation TEXT NOT NULL,
+                    request_json TEXT NOT NULL,
+                    attempt_id TEXT NOT NULL UNIQUE,
+                    result_json TEXT,
+                    created_at TEXT NOT NULL,
+                    updated_at TEXT NOT NULL
+                );
+
                 CREATE TABLE IF NOT EXISTS resumption_events (
                     event_id INTEGER PRIMARY KEY AUTOINCREMENT,
                     event_kind TEXT NOT NULL,
@@ -205,6 +231,166 @@ class SQLiteResumptionRepository:
                 column="performance_measurements_json",
                 definition="TEXT NOT NULL DEFAULT '{}'",
             )
+
+    # Normalized request idempotency -----------------------------------------
+
+    def claim_normalized_request(
+        self,
+        *,
+        normalized_request_id: str,
+        request_digest: str,
+        operation: str,
+        request_payload: Mapping[str, Any],
+        proposed_attempt_id: str,
+    ) -> tuple[NormalizedRequestBinding, bool]:
+        """Bind one canonical request identity to exactly one attempt."""
+
+        request_id = str(normalized_request_id).strip()
+        if not request_id:
+            raise ValueError("normalized_request_id is required")
+        digest = str(request_digest).strip()
+        if not digest:
+            raise ValueError("request_digest is required")
+        encoded_request = canonical_json(dict(request_payload))
+        now = self._clock()
+        with self._connection() as connection:
+            connection.execute("BEGIN IMMEDIATE")
+            cursor = connection.execute(
+                """
+                INSERT OR IGNORE INTO resumption_normalized_requests (
+                    normalized_request_id, request_digest, operation,
+                    request_json, attempt_id, result_json,
+                    created_at, updated_at
+                ) VALUES (?, ?, ?, ?, ?, NULL, ?, ?)
+                """,
+                (
+                    request_id,
+                    digest,
+                    str(operation),
+                    encoded_request,
+                    str(proposed_attempt_id),
+                    now,
+                    now,
+                ),
+            )
+            row = connection.execute(
+                """
+                SELECT * FROM resumption_normalized_requests
+                WHERE normalized_request_id = ?
+                """,
+                (request_id,),
+            ).fetchone()
+            if row is None:
+                raise RepositoryIntegrityError(
+                    "normalized request claim disappeared"
+                )
+            binding = _normalized_request_from_row(row)
+            if (
+                binding.request_digest != digest
+                or binding.operation != str(operation)
+                or canonical_json(binding.request_payload) != encoded_request
+            ):
+                raise RepositoryIntegrityError(
+                    "normalized request identity names different content: "
+                    f"{request_id}"
+                )
+            if cursor.rowcount == 1:
+                self._append_event(
+                    connection,
+                    event_kind="normalized_request_claimed",
+                    aggregate_id=request_id,
+                    attempt_id=binding.attempt_id,
+                    payload={
+                        "operation": binding.operation,
+                        "request_digest": binding.request_digest,
+                    },
+                    created_at=now,
+                )
+            return binding, cursor.rowcount == 1
+
+    def load_normalized_request(
+        self,
+        normalized_request_id: str,
+    ) -> NormalizedRequestBinding | None:
+        with self._connection() as connection:
+            row = connection.execute(
+                """
+                SELECT * FROM resumption_normalized_requests
+                WHERE normalized_request_id = ?
+                """,
+                (str(normalized_request_id),),
+            ).fetchone()
+        return _normalized_request_from_row(row) if row is not None else None
+
+    def record_normalized_request_result(
+        self,
+        normalized_request_id: str,
+        *,
+        attempt_id: str,
+        result: ResumptionResult,
+    ) -> NormalizedRequestBinding:
+        """Record the immutable public result for an idempotent request."""
+
+        encoded_result = canonical_json(result.to_dict())
+        now = self._clock()
+        with self._connection() as connection:
+            connection.execute("BEGIN IMMEDIATE")
+            row = connection.execute(
+                """
+                SELECT * FROM resumption_normalized_requests
+                WHERE normalized_request_id = ?
+                """,
+                (str(normalized_request_id),),
+            ).fetchone()
+            if row is None:
+                raise KeyError(
+                    f"unknown normalized request: {normalized_request_id}"
+                )
+            current = _normalized_request_from_row(row)
+            if current.attempt_id != str(attempt_id):
+                raise RepositoryIntegrityError(
+                    "normalized request result points at another attempt"
+                )
+            if current.result is not None:
+                if canonical_json(current.result.to_dict()) != encoded_result:
+                    raise RepositoryIntegrityError(
+                        "normalized request already has a different result"
+                    )
+                return current
+            connection.execute(
+                """
+                UPDATE resumption_normalized_requests
+                SET result_json = ?, updated_at = ?
+                WHERE normalized_request_id = ? AND result_json IS NULL
+                """,
+                (encoded_result, now, str(normalized_request_id)),
+            )
+            self._append_event(
+                connection,
+                event_kind="normalized_request_completed",
+                aggregate_id=str(normalized_request_id),
+                attempt_id=str(attempt_id),
+                revision_id=(
+                    result.resulting_revision_identity.revision_id
+                    if result.resulting_revision_identity is not None
+                    else None
+                ),
+                payload={
+                    "execution_outcome": result.execution_outcome.value,
+                    "semantic_outcome": (
+                        result.semantic_outcome.value
+                        if result.semantic_outcome is not None
+                        else None
+                    ),
+                },
+                created_at=now,
+            )
+        restored = self.load_normalized_request(normalized_request_id)
+        if restored is None:
+            raise RepositoryIntegrityError(
+                "normalized request result disappeared"
+            )
+        return restored
 
     def rebuild_derived_indexes(self) -> tuple[str, ...]:
         """Recreate non-authoritative indexes without touching canonical rows."""
@@ -278,6 +464,13 @@ class SQLiteResumptionRepository:
                     created_at=now,
                 )
         except sqlite3.IntegrityError as exc:
+            existing = self.load_attempt(attempt.attempt_id)
+            if (
+                existing is not None
+                and existing.status is AttemptLifecycleStatus.PREPARED
+                and _same_attempt_intent(existing, durable)
+            ):
+                return existing
             raise ResumptionRepositoryError(
                 f"execution attempt already exists: {attempt.attempt_id}"
             ) from exc
@@ -1146,6 +1339,9 @@ class SQLiteResumptionRepository:
                     "SELECT artifact_id FROM resumption_transition_artifacts"
                 ).fetchall()
             ]
+            normalized_rows = connection.execute(
+                "SELECT * FROM resumption_normalized_requests"
+            ).fetchall()
         for revision_id in revision_ids:
             try:
                 self.load_revision(revision_id)
@@ -1170,6 +1366,38 @@ class SQLiteResumptionRepository:
                 f"transition {artifact_id}: {failure}"
                 for failure in replay["failures"]
             )
+        for row in normalized_rows:
+            try:
+                binding = _normalized_request_from_row(row)
+            except (KeyError, TypeError, ValueError) as exc:
+                failures.append(f"invalid normalized request binding: {exc}")
+                continue
+            expected_digest = content_digest(
+                {
+                    "operation": binding.operation,
+                    "request": binding.request_payload,
+                }
+            )
+            if binding.request_digest != expected_digest:
+                failures.append(
+                    "normalized request digest mismatch: "
+                    f"{binding.normalized_request_id}"
+                )
+            attempt = self.load_attempt(binding.attempt_id)
+            if binding.result is not None:
+                if attempt is None:
+                    failures.append(
+                        "normalized request result has no attempt: "
+                        f"{binding.normalized_request_id}"
+                    )
+                elif (
+                    binding.result.execution_attempt_id
+                    != binding.attempt_id
+                ):
+                    failures.append(
+                        "normalized request result attempt mismatch: "
+                        f"{binding.normalized_request_id}"
+                    )
         return tuple(failures)
 
     @staticmethod
@@ -1256,6 +1484,40 @@ def _attempt_values(attempt: AttemptRecord) -> tuple[Any, ...]:
         canonical_json(dict(attempt.performance_measurements)),
         attempt.created_at,
         attempt.updated_at,
+    )
+
+
+def _same_attempt_intent(left: AttemptRecord, right: AttemptRecord) -> bool:
+    return (
+        left.attempt_id == right.attempt_id
+        and left.causal_anchor == right.causal_anchor
+        and left.operation == right.operation
+        and left.initial_branch_head_revision_id
+        == right.initial_branch_head_revision_id
+        and left.initial_branch_head_digest == right.initial_branch_head_digest
+        and dict(left.execution_policy) == dict(right.execution_policy)
+        and left.latest_admitted_revision_id
+        == right.latest_admitted_revision_id
+    )
+
+
+def _normalized_request_from_row(
+    row: sqlite3.Row,
+) -> NormalizedRequestBinding:
+    raw_result = row["result_json"]
+    return NormalizedRequestBinding(
+        normalized_request_id=str(row["normalized_request_id"]),
+        request_digest=str(row["request_digest"]),
+        operation=str(row["operation"]),
+        request_payload=json.loads(str(row["request_json"])),
+        attempt_id=str(row["attempt_id"]),
+        result=(
+            ResumptionResult.from_dict(json.loads(str(raw_result)))
+            if raw_result is not None
+            else None
+        ),
+        created_at=str(row["created_at"]),
+        updated_at=str(row["updated_at"]),
     )
 
 

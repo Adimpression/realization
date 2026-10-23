@@ -42,9 +42,16 @@ from realized_core_engine.resumption_contracts import (
     StartRequest,
     Supersession,
     canonical_json,
+    content_digest,
 )
-from realized_core_engine.resumption_repository import SQLiteResumptionRepository
-from realized_core_engine.resumption_service import ResumptionService
+from realized_core_engine.resumption_repository import (
+    RepositoryIntegrityError,
+    SQLiteResumptionRepository,
+)
+from realized_core_engine.resumption_service import (
+    NormalizedRequestInProgressError,
+    ResumptionService,
+)
 
 
 class SequenceIds:
@@ -231,6 +238,240 @@ class ResumptionServiceTests(unittest.TestCase):
             ({"source_id": "subject-7", "version": "sha256:abc"},),
             continued_revision.state.scope_imports,
         )
+
+    def test_normalized_start_is_idempotent_across_service_restart(self) -> None:
+        request = StartRequest(
+            scope_id="scope-idempotent",
+            objective_id="objective-idempotent",
+            branch_id="main",
+            initial_inlet=inlet(
+                "normalized-start",
+                InletRelationship.CONTINUATION,
+                delta=SemanticDelta(
+                    achieved=(item("fact-idempotent", "One result"),)
+                ),
+            ),
+            governing_direction=GoverningDirection(
+                objective="Produce one result",
+                scope="scope-idempotent",
+            ),
+            execution_policy={"llm_policy": "off"},
+            normalized_request_id="normalized-request-1",
+        )
+
+        first = self.service.start(request)
+        replacement = ResumptionService(
+            SQLiteResumptionRepository(self.database),
+            id_factory=SequenceIds(),
+        )
+        second = replacement.start(request)
+        looked_up = replacement.lookup_normalized_request(
+            "normalized-request-1"
+        )
+
+        self.assertEqual(first.to_dict(), second.to_dict())
+        self.assertEqual(first.to_dict(), looked_up.to_dict())
+        self.assertEqual(
+            first.execution_attempt_id,
+            second.execution_attempt_id,
+        )
+        with self.repository._connection() as connection:
+            attempt_count = connection.execute(
+                "SELECT COUNT(*) FROM resumption_attempts"
+            ).fetchone()[0]
+            revision_count = connection.execute(
+                "SELECT COUNT(*) FROM resumption_revisions"
+            ).fetchone()[0]
+        self.assertEqual(1, attempt_count)
+        self.assertEqual(1, revision_count)
+
+    def test_normalized_identity_rejects_different_request_content(self) -> None:
+        original = StartRequest(
+            scope_id="scope-conflict",
+            objective_id="objective-conflict",
+            branch_id="main",
+            initial_inlet=inlet(
+                "normalized-conflict",
+                InletRelationship.CONTINUATION,
+            ),
+            governing_direction=GoverningDirection(
+                objective="Original",
+                scope="scope-conflict",
+            ),
+            normalized_request_id="normalized-conflict-1",
+        )
+        self.service.start(original)
+
+        with self.assertRaisesRegex(
+            RepositoryIntegrityError,
+            "names different content",
+        ):
+            self.service.start(
+                replace(
+                    original,
+                    governing_direction=replace(
+                        original.governing_direction,
+                        objective="Different",
+                    ),
+                )
+            )
+
+    def test_normalized_claim_without_attempt_is_safely_completed(self) -> None:
+        request = StartRequest(
+            scope_id="scope-claimed",
+            objective_id="objective-claimed",
+            branch_id="main",
+            initial_inlet=inlet(
+                "claimed-start",
+                InletRelationship.CONTINUATION,
+            ),
+            governing_direction=GoverningDirection(
+                objective="Resume after request claim",
+                scope="scope-claimed",
+            ),
+            normalized_request_id="normalized-claimed-1",
+        )
+        payload = request.to_dict()
+        payload.pop("normalized_request_id")
+        self.repository.claim_normalized_request(
+            normalized_request_id=request.normalized_request_id,
+            request_digest=content_digest(
+                {"operation": "start", "request": payload}
+            ),
+            operation="start",
+            request_payload=payload,
+            proposed_attempt_id="attempt-from-prior-process",
+        )
+
+        result = self.service.start(request)
+
+        self.assertEqual(
+            "attempt-from-prior-process",
+            result.execution_attempt_id,
+        )
+        self.assertEqual(
+            result.to_dict(),
+            self.service.lookup_normalized_request(
+                request.normalized_request_id
+            ).to_dict(),
+        )
+
+    def test_lookup_reconstructs_commit_when_result_record_was_lost(self) -> None:
+        class LoseFirstResultRepository(SQLiteResumptionRepository):
+            def __init__(self, path: Path) -> None:
+                super().__init__(path)
+                self.fail_once = True
+
+            def record_normalized_request_result(self, *args, **kwargs):
+                if self.fail_once:
+                    self.fail_once = False
+                    raise RuntimeError("simulated crash after semantic commit")
+                return super().record_normalized_request_result(*args, **kwargs)
+
+        repository = LoseFirstResultRepository(self.database)
+        service = ResumptionService(repository, id_factory=self.ids)
+        request = StartRequest(
+            scope_id="scope-lost-result",
+            objective_id="objective-lost-result",
+            branch_id="main",
+            initial_inlet=inlet(
+                "lost-result-start",
+                InletRelationship.CONTINUATION,
+            ),
+            governing_direction=GoverningDirection(
+                objective="Recover the committed result",
+                scope="scope-lost-result",
+            ),
+            normalized_request_id="normalized-lost-result-1",
+        )
+        with self.assertRaisesRegex(RuntimeError, "simulated crash"):
+            service.start(request)
+
+        replacement = ResumptionService(
+            SQLiteResumptionRepository(self.database)
+        )
+        recovered = replacement.start(request)
+
+        self.assertIsNotNone(recovered.resulting_revision_identity)
+        self.assertEqual(
+            "objective-lost-result",
+            recovered.resulting_revision_identity.objective_id,
+        )
+        with self.repository._connection() as connection:
+            self.assertEqual(
+                1,
+                connection.execute(
+                    "SELECT COUNT(*) FROM resumption_attempts"
+                ).fetchone()[0],
+            )
+            self.assertEqual(
+                1,
+                connection.execute(
+                    "SELECT COUNT(*) FROM resumption_revisions"
+                ).fetchone()[0],
+            )
+
+    def test_concurrent_normalized_duplicate_observes_existing_attempt(self) -> None:
+        class BlockingController:
+            def __init__(self) -> None:
+                self.entered = threading.Event()
+                self.release = threading.Event()
+
+            def reduce(self, context, *, should_stop):
+                self.entered.set()
+                if not self.release.wait(timeout=5):
+                    raise TimeoutError("test did not release the reduction")
+                return ReductionProposal()
+
+        controller = BlockingController()
+        service = ResumptionService(
+            self.repository,
+            reduction_controller=controller,
+            id_factory=self.ids,
+        )
+        request = StartRequest(
+            scope_id="scope-concurrent",
+            objective_id="objective-concurrent",
+            branch_id="main",
+            initial_inlet=inlet(
+                "concurrent-start",
+                InletRelationship.CONTINUATION,
+            ),
+            governing_direction=GoverningDirection(
+                objective="Execute once",
+                scope="scope-concurrent",
+            ),
+            normalized_request_id="normalized-concurrent-1",
+        )
+        results: list[Any] = []
+
+        worker = threading.Thread(
+            target=lambda: results.append(service.start(request))
+        )
+        worker.start()
+        self.assertTrue(controller.entered.wait(timeout=5))
+
+        with self.assertRaises(NormalizedRequestInProgressError) as observed:
+            service.start(request)
+
+        self.assertEqual("attempt-1", observed.exception.attempt_id)
+        controller.release.set()
+        worker.join(timeout=5)
+        self.assertFalse(worker.is_alive())
+        self.assertEqual(1, len(results))
+        with self.repository._connection() as connection:
+            self.assertEqual(
+                1,
+                connection.execute(
+                    "SELECT COUNT(*) FROM resumption_attempts"
+                ).fetchone()[0],
+            )
+            self.assertEqual(
+                1,
+                connection.execute(
+                    "SELECT COUNT(*) FROM resumption_revisions"
+                ).fetchone()[0],
+            )
 
     def test_start_admits_the_inlet_before_invoking_the_controller(self) -> None:
         controller = ProposalController(ReductionProposal())
@@ -918,6 +1159,7 @@ class ResumptionServiceTests(unittest.TestCase):
         _, revision = self._start(
             achieved=(retained,),
             non_achievedness=(unresolved,),
+            holds=(self._hold("hold-old-direction", "old-direction"),),
             payload={"engine_state": {"frontier": ["old-frontier"]}},
         )
         introduced = item("fact-2", "New direction fact", evidence=("evidence-2",))
@@ -974,12 +1216,216 @@ class ResumptionServiceTests(unittest.TestCase):
 
         self.assertEqual(direction, updated.state.governing_direction)
         self.assertEqual({}, updated.state.engine_state)
+        self.assertEqual((), updated.state.holds)
+        self.assertIn(
+            {
+                "hold_id": "hold-old-direction",
+                "disposition": "reframe",
+                "correlation": {"token": "old-direction"},
+                "inlet_id": "redirect-1",
+                "evaluated_predicate": {
+                    "kind": "governing_direction_changed",
+                    "source_revision_id": revision.identity.revision_id,
+                },
+            },
+            updated.state.hold_evaluations,
+        )
         self.assertEqual(("not-1",), updated.state.unresolved_applicability_item_ids)
         self.assertEqual(
             {"fact-1", "fact-2"},
             {value.item_id for value in updated.state.achieved},
         )
         self.assertIsNotNone(result.realignment_summary)
+
+        clarified = self.service.resume(
+            self._request(
+                updated,
+                OperationKind.CONTINUE,
+                inlet(
+                    "clarify-applicability",
+                    InletRelationship.CONTINUATION,
+                    delta=SemanticDelta(
+                        resolved_applicability_item_ids=("not-1",),
+                    ),
+                ),
+            )
+        )
+        clarified_revision = self.repository.require_revision(
+            clarified.resulting_revision_identity
+        )
+        self.assertEqual(
+            (),
+            clarified_revision.state.unresolved_applicability_item_ids,
+        )
+        self.assertIn(
+            "not-1",
+            {
+                value.item_id
+                for value in clarified_revision.state.non_achievedness
+            },
+        )
+
+        rejected = self.service.resume(
+            self._request(
+                clarified_revision,
+                OperationKind.CONTINUE,
+                inlet(
+                    "repeat-applicability-resolution",
+                    InletRelationship.CONTINUATION,
+                    delta=SemanticDelta(
+                        resolved_applicability_item_ids=("not-1",),
+                    ),
+                ),
+            )
+        )
+        self.assertEqual(SemanticOutcome.REJECTED, rejected.semantic_outcome)
+        self.assertIn(
+            "not unresolved in applicability",
+            canonical_json(rejected.diagnostics),
+        )
+
+    def test_semantic_delta_applicability_resolution_is_backward_compatible(
+        self,
+    ) -> None:
+        legacy = SemanticDelta.from_dict(
+            {
+                "resolved_non_achievedness_ids": ["not-1"],
+            }
+        )
+        current = SemanticDelta.from_dict(
+            {
+                "resolved_applicability_item_ids": ["not-2"],
+            }
+        )
+
+        self.assertEqual((), legacy.resolved_applicability_item_ids)
+        self.assertEqual(
+            ("not-2",),
+            current.resolved_applicability_item_ids,
+        )
+        self.assertEqual(
+            ["not-2"],
+            current.to_dict()["resolved_applicability_item_ids"],
+        )
+
+    def test_redirection_retires_private_projection_from_active_state(self) -> None:
+        projected = SemanticItem(
+            item_id="engine:artifact:prior-frontier",
+            kind="realization_artifact",
+            payload={
+                "resumption_projection": True,
+                "node": "prior-frontier",
+                "status": "achieved",
+            },
+        )
+
+        class ProjectingController:
+            def reduce(
+                self,
+                context: ReductionContext,
+                *,
+                should_stop: Any,
+            ) -> ReductionProposal:
+                if context.operation is OperationKind.START:
+                    return ReductionProposal(
+                        resulting_state=replace(
+                            context.candidate_state,
+                            achieved=(
+                                *context.candidate_state.achieved,
+                                projected,
+                            ),
+                        )
+                    )
+                return ReductionProposal(
+                    resulting_state=context.candidate_state,
+                )
+
+        repository = SQLiteResumptionRepository(
+            Path(self.temporary.name) / "private-projection.sqlite3"
+        )
+        service = ResumptionService(
+            repository,
+            reduction_controller=ProjectingController(),
+        )
+        public = item(
+            "fact-public",
+            "Public material",
+            evidence=("evidence-public",),
+        )
+        started = service.start(
+            StartRequest(
+                scope_id="scope-1",
+                objective_id="objective-1",
+                branch_id="main",
+                initial_inlet=inlet(
+                    "start-with-private-projection",
+                    InletRelationship.CONTINUATION,
+                    delta=SemanticDelta(achieved=(public,)),
+                ),
+                governing_direction=GoverningDirection(
+                    objective="Original direction",
+                    scope="scope-1",
+                ),
+                execution_policy={"llm_policy": "off"},
+            )
+        )
+        source = repository.require_revision(
+            started.resulting_revision_identity
+        )
+        self.assertIn(projected, source.state.achieved)
+        redirected_direction = replace(
+            source.state.governing_direction,
+            objective="Redirected direction",
+        )
+        realignment = Realignment(
+            source_revision_id=source.identity.revision_id,
+            redirection_inlet_id="redirect-private-projection",
+            affected_item_ids=(public.item_id,),
+            identity_disposition=IdentityDisposition(
+                kind=IdentityDispositionKind.SAME_OBJECTIVE,
+                target_scope_id="scope-1",
+                target_objective_id="objective-1",
+                target_branch_id="main",
+                rationale="The objective identity remains stable.",
+            ),
+            retained_item_ids=(public.item_id,),
+            superseded_item_ids=(),
+            introduced_items=(),
+            unresolved_applicability_item_ids=(),
+            resulting_non_achievedness=(),
+            evidence_references=("evidence-public",),
+            governance_references=("policy:realignment",),
+            completeness_statement="Every public item was classified.",
+        )
+
+        redirected = service.resume(
+            ResumptionRequest(
+                anchor=source.identity,
+                operation=OperationKind.REDIRECT_AND_REALIGN,
+                expected_branch_head_revision_id=source.identity.revision_id,
+                inlet=inlet(
+                    "redirect-private-projection",
+                    InletRelationship.REDIRECTION,
+                    delta=SemanticDelta(
+                        governing_direction=redirected_direction
+                    ),
+                    realignment=realignment,
+                ),
+                execution_policy={"llm_policy": "off"},
+            )
+        )
+        active = repository.require_revision(
+            redirected.resulting_revision_identity
+        )
+
+        self.assertEqual(
+            {public.item_id},
+            {value.item_id for value in active.state.achieved},
+        )
+        self.assertIn(
+            projected,
+            repository.require_revision(source.identity).state.achieved,
+        )
 
     def test_pre_redirection_attempt_cannot_commit_over_realigned_head(self) -> None:
         retained = item("fact-1", "Still applies", evidence=("evidence-1",))
@@ -1372,6 +1818,103 @@ class ResumptionServiceTests(unittest.TestCase):
             {"fact-1", "fact-a", "fact-b"},
             {value.item_id for value in merged_revision.state.achieved},
         )
+
+    def test_branch_cannot_recreate_an_existing_target_branch(self) -> None:
+        _, source = self._start(achieved=(item("fact-1", "Base"),))
+        first = self.service.resume(
+            self._request(
+                source,
+                OperationKind.BRANCH,
+                inlet(
+                    "branch-technical",
+                    InletRelationship.CONTINUATION,
+                    payload={"target_branch_id": "technical"},
+                    delta=SemanticDelta(
+                        achieved=(item("fact-technical-1", "Technical"),)
+                    ),
+                ),
+            )
+        )
+
+        duplicate = self.service.resume(
+            self._request(
+                source,
+                OperationKind.BRANCH,
+                inlet(
+                    "branch-technical-again",
+                    InletRelationship.CONTINUATION,
+                    payload={"target_branch_id": "technical"},
+                    delta=SemanticDelta(
+                        achieved=(item("fact-technical-2", "Replacement"),)
+                    ),
+                ),
+            )
+        )
+        technical_head = self.repository.load_branch_head(
+            source.identity.scope_id,
+            source.identity.objective_id,
+            "technical",
+        )
+
+        self.assertEqual(SemanticOutcome.STALE, duplicate.semantic_outcome)
+        self.assertEqual(
+            first.resulting_revision_identity,
+            technical_head.identity,
+        )
+
+    def test_historical_exact_revision_can_seed_an_explicit_branch(self) -> None:
+        _, source = self._start(achieved=(item("fact-1", "Base"),))
+        advanced_result = self.service.resume(
+            self._request(
+                source,
+                OperationKind.AUGMENT,
+                inlet(
+                    "advance-main",
+                    InletRelationship.AUGMENTATION,
+                    delta=SemanticDelta(
+                        achieved=(item("fact-main", "Main advance"),)
+                    ),
+                ),
+            )
+        )
+        advanced = self.repository.require_revision(
+            advanced_result.resulting_revision_identity
+        )
+
+        branched_result = self.service.resume(
+            self._request(
+                source,
+                OperationKind.BRANCH,
+                inlet(
+                    "branch-from-history",
+                    InletRelationship.CONTINUATION,
+                    payload={"target_branch_id": "historical-branch"},
+                    delta=SemanticDelta(
+                        achieved=(item("fact-branch", "Branch advance"),)
+                    ),
+                ),
+            )
+        )
+        branched = self.repository.require_revision(
+            branched_result.resulting_revision_identity
+        )
+        main_head = self.repository.load_branch_head(
+            source.identity.scope_id,
+            source.identity.objective_id,
+            source.identity.branch_id,
+        )
+
+        self.assertEqual(
+            SemanticOutcome.COMPLETED,
+            branched_result.semantic_outcome,
+        )
+        self.assertEqual((source.identity.revision_id,), branched.parent_revision_ids)
+        self.assertEqual("historical-branch", branched.identity.branch_id)
+        self.assertEqual(
+            {"fact-1", "fact-branch"},
+            {value.item_id for value in branched.state.achieved},
+        )
+        self.assertEqual(advanced.identity, main_head.identity)
 
     def test_merge_preserves_parents_and_represents_conflicts_explicitly(
         self,

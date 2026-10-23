@@ -5,11 +5,15 @@ from realized_core_engine.api import (
     inspect,
     inspect_resumption,
     interrupt_attempt,
+    lookup_normalized_request,
     open_resumption_engine,
     resume,
     resume_objective,
     run,
     start_objective,
+)
+from realized_core_engine.resumption_service import (
+    NormalizedRequestInProgressError,
 )
 from realized_core_engine.contracts import (
     EngineConfiguration,
@@ -75,6 +79,7 @@ __all__ = [
     "InterruptionRequest",
     "InterruptionResult",
     "OperationKind",
+    "NormalizedRequestInProgressError",
     "ProjectionPolicy",
     "Realignment",
     "Reversal",
@@ -90,6 +95,7 @@ __all__ = [
     "inspect",
     "inspect_resumption",
     "interrupt_attempt",
+    "lookup_normalized_request",
     "open_resumption_engine",
     "resume",
     "resume_objective",

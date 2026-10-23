@@ -602,6 +602,9 @@ class WorkstationTests(unittest.TestCase):
         Returns:
             None: This function mutates state or performs side effects without returning a value.
         """
+        from controller_entrypoints import ensure_application_controller_runtime
+
+        ensure_application_controller_runtime()
         self.tempdir = tempfile.TemporaryDirectory(prefix="workstation_tests_")
         self.workstation_home = Path(self.tempdir.name) / ".workstation"
         self.workstation_home.mkdir(parents=True, exist_ok=True)

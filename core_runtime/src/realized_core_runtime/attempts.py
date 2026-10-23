@@ -268,6 +268,8 @@ def run_execution_attempt(
     journal: AttemptJournal,
     attempt: AttemptRecord,
     work: PreparedAttemptWork,
+    *,
+    on_running: Callable[[AttemptRecord], None] | None = None,
 ) -> AttemptRunResult:
     """Durably run prepared work without assigning semantic meaning to stopping."""
 
@@ -304,6 +306,8 @@ def run_execution_attempt(
         running = measured_running
 
     try:
+        if on_running is not None:
+            on_running(running)
         result = work.execute(
             should_stop=lambda: attempt_stop_requested(journal, running.attempt_id)
         )

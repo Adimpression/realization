@@ -25,6 +25,10 @@ from realized_core_engine.cli_support import (
     configuration_from_namespace,
 )
 from realized_core.chat import CoreConversationHost, run_core_chat_loop
+from realized_core_llm import (
+    ConversationProviderConfigurationError,
+    build_environment_conversation_advisors,
+)
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -158,11 +162,21 @@ def main(argv: Sequence[str] | None = None) -> int:
             configuration=configuration_from_namespace(args),
         )
     elif args.command == "chat":
+        planner = None
+        renderer = None
+        if args.llm != "off":
+            try:
+                planner, renderer = build_environment_conversation_advisors()
+            except ConversationProviderConfigurationError:
+                if args.llm == "required":
+                    raise
         return run_core_chat_loop(
             CoreConversationHost(
                 root=args.root,
                 configuration=configuration_from_namespace(args),
-            )
+            ),
+            planner=planner,
+            renderer=renderer,
         )
     else:
         return 1

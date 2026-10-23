@@ -71,12 +71,26 @@ module_prefix = "realized_core_engine"
 layer = "controller"
 allowed_dependencies = ["governed_core"]
 
+[components.core_llm]
+project_dir = "core_llm"
+distribution = "realized-core-llm"
+module_prefix = "realized_core_llm"
+layer = "llm"
+allowed_dependencies = []
+
+[components.core_conversation]
+project_dir = "core_conversation"
+distribution = "realized-core-conversation"
+module_prefix = "realized_core_conversation"
+layer = "workstation"
+allowed_dependencies = ["core_engine", "core_llm"]
+
 [components.core_app]
 project_dir = "core_app"
 distribution = "realized-core"
 module_prefix = "realized_core"
 layer = "entry"
-allowed_dependencies = ["core_engine"]
+allowed_dependencies = ["core_conversation", "core_engine", "core_llm"]
 
 [components.namespace]
 project_dir = "workstation/namespace"
@@ -164,6 +178,8 @@ distribution = "realized-workstation-shell-core"
 module_prefix = "workstation.shell.core"
 layer = "workstation"
 allowed_dependencies = [
+  "core_conversation",
+  "core_llm",
   "contracts",
   "foundation_events",
   "foundation_models",

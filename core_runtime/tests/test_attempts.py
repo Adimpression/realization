@@ -181,10 +181,19 @@ class AttemptLifecycleTests(unittest.TestCase):
     def test_attempt_is_durable_and_running_before_work_executes(self) -> None:
         journal = MemoryAttemptJournal()
         work = ReturningWork(journal)
+        observed: list[AttemptRecord] = []
 
-        result = run_execution_attempt(journal, prepared_attempt(), work)
+        result = run_execution_attempt(
+            journal,
+            prepared_attempt(),
+            work,
+            on_running=observed.append,
+        )
 
         self.assertTrue(work.saw_running)
+        self.assertEqual(1, len(observed))
+        self.assertEqual("attempt-1", observed[0].attempt_id)
+        self.assertEqual(AttemptLifecycleStatus.RUNNING, observed[0].status)
         self.assertEqual(
             [
                 "prepare:attempt-1",

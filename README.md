@@ -259,7 +259,11 @@ uv run --frozen --package realized-core realized-core chat \
   --llm off
 ```
 
-Plain input creates an independent governed objective. Use
+With `--llm off`, or with `--llm auto` when no provider is configured, plain
+input creates an independent governed objective. With an available provider,
+`auto` and `required` send plain input through the transport-neutral planning
+and rendering path; the resulting proposal still crosses the same mechanical
+validation and engine boundary. Use
 `/use <revision-id>` to select the exact causal revision for related turns.
 `/continue <text>` contributes to that objective; when more than one hold is
 active, use `/continue <hold-id> -- <text>`. Use
@@ -294,19 +298,24 @@ uv run --frozen --package realized-core realized-core run --help
 
 ## The Standalone Core
 
-The distributable core is intentionally split into three cohesive UV projects:
+The distributable core is intentionally split into five cohesive UV projects:
 
 ```text
 realized-core
+    -> realized-core-conversation
+        -> realized-core-llm
+        -> realized-core-engine
+            -> realized-core-runtime
     -> realized-core-engine
-        -> realized-core-runtime
 ```
 
 | Project | Responsibility |
 | --- | --- |
 | [`core_runtime/`](core_runtime/) | Dependency-inverted run/resume lifecycle and protocols; no third-party dependencies |
 | [`core_engine/`](core_engine/) | Canonical domain engine, state model, host mediation, and SQLite adapter |
-| [`core_app/`](core_app/) | Thin `realized-core` command-line and conversation-host composition |
+| [`core_llm/`](core_llm/) | Model-facing planning and rendering contracts; no engine dependency |
+| [`core_conversation/`](core_conversation/) | Transport-neutral governed-conversation application service |
+| [`core_app/`](core_app/) | Thin `realized-core` command-line and composition entry point |
 
 <details>
 <summary><strong>What the standalone core deliberately does not include</strong></summary>
@@ -319,7 +328,7 @@ surface behind `run`, `resume`, and `inspect`; its optional `chat` command is an
 entry-layer host over that same engine ABI, not another reasoning engine.
 
 The projects are independently buildable. An eventual `uvx` installation path
-depends on publishing all three distributions to an index; this README does not
+depends on publishing all five distributions to an index; this README does not
 claim that they are already published.
 
 </details>
@@ -329,6 +338,8 @@ Build and verify source distributions and wheels locally:
 ```console
 uv build core_runtime --out-dir dist/core-runtime
 uv build core_engine --out-dir dist/core-engine
+uv build core_llm --out-dir dist/core-llm
+uv build core_conversation --out-dir dist/core-conversation
 uv build core_app --out-dir dist/core-app
 ```
 

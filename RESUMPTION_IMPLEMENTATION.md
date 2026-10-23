@@ -28,6 +28,139 @@ The theory remains authoritative over this document. Architectural placement
 must preserve the theory rather than reinterpret it around convenient
 implementation details.
 
+## Current Implementation Baseline
+
+This section is a conformance inventory recorded after the theory-derived
+design was established. It describes the implementation present on 23 October
+2026; it does not make that implementation authoritative over the design.
+
+The dependency-inverted attempt layer in `realized-core-runtime` currently
+provides:
+
+- prepared, running, interrupted, terminated, and operationally failed attempt
+  lifecycles;
+- typed interruption requests and results;
+- optional observation of an attempt only after it is durably running, so an
+  outer application can expose interruption without treating attempt identity
+  as semantic identity;
+- conditional attempt-state transitions; and
+- an attempt-journal protocol that does not own semantic revisions.
+
+The canonical engine in `realized-core-engine` currently provides:
+
+- typed identities, immutable semantic revisions, projections, inlets,
+  semantic deltas, realignments, reversals, transition artifacts, and
+  inspection results;
+- the complete declared operation set: start, continue, derive,
+  resume-after-interruption, resume-suspended, augment, correct,
+  redirect-and-realign, branch, merge, explain, verify, reverse, and
+  reconstruct;
+- exact-anchor and compare-and-swap branch-head validation;
+- a plain-SQLite revision, attempt, transition-artifact, event, and derived-index
+  repository;
+- interruption separated from semantic mutation;
+- correction, supersession, `HoldOn`, branching, merge, realignment, path,
+  replay, and inspection behavior; and
+- an adapter that projects admitted semantic state into the canonical reduction
+  controller and projects controller output back into typed semantic state.
+
+The engine test suites exercise these contracts directly, including restart
+and provider replacement, transcript and presentation independence,
+non-achievedness preservation, correction, ambiguity, augmentation,
+interruption, realignment, stale anchors, branching, merge, replay, event loss,
+and LLM-off mechanically decidable paths. Those tests establish engine-level
+behavior only. They do not establish that an ordinary conversation host can
+express or route every operation correctly.
+
+The transport-neutral `realized-core-conversation` component provides the
+explicit application boundary needed for conversational resumption. The
+`realized-core` Entry/Exchange package retains compatibility imports and
+composes that component for the narrow CLI, but does not own its behavior:
+
+- `ConversationTurnPlan` separates advisory application planning from engine
+  requests and records the original message, plan, request, and resulting
+  binding independently;
+- typed plans route start, continuation, derivation, hold satisfaction,
+  augmentation, correction, redirection and realignment, interruption resume,
+  branch, merge, explanation, verification, reversal, and reconstruction;
+- exact causal bindings are resolved mechanically before a request reaches the
+  engine, and absent bindings cannot be inferred from similar wording;
+- correction and selection accept uniquely resolvable semantic selectors as
+  well as exact item identifiers, while zero or multiple matches are rejected;
+- a structured start or continuation delta works with LLM operation disabled;
+- live execution may expose its durably running attempt identifier through an
+  optional callback, while interruption remains a separate operational call;
+- provider-neutral planning and rendering protocols plus a natural-language
+  host entry point can produce an advisory proposal, normalize it into a typed
+  turn plan, submit it through the engine, and render the structured result;
+- planning and rendering interactions are recorded separately from semantic
+  revisions;
+- contribution, proposal, normalized request, engine submission, structured
+  result, rendering, and delivery stages have stable identities in a durable
+  SQLite activity journal;
+- normalized requests reconcile against authoritative engine records after a
+  restart, so retrying a submitted turn cannot silently create a second
+  semantic transition;
+- the original four-treatment API remains as a compatibility adapter; and
+- unknown terminal slash commands are rejected rather than started as
+  independent objectives.
+
+The reusable `realized-core-llm` adapter owns provider prompt construction,
+schema-constrained planning and rendering calls, provider-response parsing,
+and interaction receipts. It returns advisory structures only. The
+conversation component retains mechanical ownership of proposal validation,
+causal binding, selector resolution, admission, engine submission, recovery,
+and result identity.
+
+Both ordinary hosts now compose this same product path:
+
+- the core CLI sends ordinary provider-backed input through
+  `realized-core-conversation` and `realized-core-llm`; and
+- the workstation shell exposes an additive `governed_conversation` mode that
+  consumes those same public packages without depending on the CLI entry
+  package.
+
+The following surface constraints remain deliberate rather than missing
+semantic behavior:
+
+- the terminal loop exposes only the four compatibility routing commands and
+  binding selection as dedicated slash commands; the complete operation set is
+  available through typed plans and the ordinary-language planning path rather
+  than a separate command for every operation;
+- `follow_up` in the compatibility adapter still means derivation, whereas a
+  provider-backed turn uses the complete operation vocabulary to distinguish
+  continuation, hold satisfaction, derivation, explanation, and independent
+  work; and
+- concurrency remains owned by the embedding application. The host exposes the
+  running-attempt notification and interruption method but does not create an
+  application thread or task itself.
+
+The obsolete five-turn provider-backed characterization has been replaced by a
+full Cedar scenario that covers all 21 resumption principles. The runner
+imports only the public conversation and LLM product surfaces, admits only
+declared scenario operations, and observes product-owned receipts for timing
+and provenance. It does not own a planner, prompt, normalizer, selector
+resolver, journal, or recovery path. Its deterministic structural validation
+passes. Its configured live-provider qualification also passes the complete
+24-turn journey with 94 structural, 20 interpretation, and 22 rendering checks.
+
+The deterministic cross-layer journey maps every principle in `RESUMPTION.md`
+to a concrete probe and exercises the real conversation host, engine, runtime
+lifecycle, and SQLite repository with model operation disabled. It covers the
+mechanically decidable operation and continuity contracts. This establishes
+the explicit-control path and protects the semantic engine independently of a
+provider, but it is not the complete conversational qualification.
+
+The provider-backed product path now interprets ordinary user contributions as
+advisory proposals, mechanically retains causal identity, resolves public
+selectors, rejects unresolved interpretation, submits only a validated typed
+request, and renders only the structured outcome. Its provider adapter,
+schemas, prompt policy, receipt capture, and retry behavior live in product
+packages below Entry/Exchange and UI adapters. A configured live Cedar run now
+provides evidence that the real provider traverses that path across the complete
+bounded scenario. That evidence complements rather than substitutes for the
+deterministic engine and typed-host tests.
+
 ## Design Objective
 
 Resumption initiates a new governed reduction from an exact, persisted account
@@ -995,8 +1128,10 @@ different revision.
 - `realized-core-engine` owns the canonical semantic implementation: identity,
   projection, reconciliation, realignment, governance integration, state model,
   and plain-SQLite adapters exposed through its public typed ABI.
-- `realized-core` owns CLI and conversation-host composition, including mapping
-  user controls and turns to typed engine operations.
+- `realized-core` owns the narrow CLI and Entry/Exchange composition. It adapts
+  terminal input and output to the transport-neutral conversation application
+  contract; reusable turn planning, normalization, and recovery behavior does
+  not remain private to that entry package.
 - workstation shells and transports consume supported application contracts;
   they do not import controller internals or infer state from rendered panes.
 
@@ -1009,6 +1144,477 @@ workstation layers remain replaceable hosts over the same semantic contract.
 
 The application boundary exposes semantic operations rather than transcript
 continuation commands.
+
+### Conversation Planning Boundary
+
+A conversation host needs one additional application-layer boundary between a
+user contribution and the semantic engine request. That boundary is a planner,
+not a second controller and not an admission authority.
+
+```text
+ConversationTurnPlan =
+  <selected causal binding,
+   proposed operation,
+   proposed inlet relationship,
+   proposed semantic target selectors,
+   proposed semantic delta or realignment,
+   unresolved interpretation,
+   provenance>
+```
+
+The host establishes the causal binding mechanically before semantic
+interpretation. It comes from one of:
+
+- an explicitly selected scope, objective, branch, and revision;
+- the session's explicitly selected active binding;
+- an exact branch-head lookup requested by the user; or
+- no prior binding, in which case the request is a candidate start operation.
+
+Neither an LLM nor similarity retrieval may invent, replace, or silently change
+that binding. If more than one causal binding could apply and the user has not
+selected one, the plan remains ambiguous and asks for selection before any
+state mutation.
+
+The planner then proposes how the contribution relates to the selected state.
+It may use deterministic syntax, structured UI controls, exact semantic
+selectors, or an LLM-assisted interpretation. Its output remains a proposal.
+The application resolves public selectors against the anchored projection and
+constructs an exact typed request. The engine validates the resolved targets
+and operation/relationship pair, verifies the proposed delta, applies
+governance, and alone decides whether a transition commits.
+
+Semantic targets exposed to a person or transport should be stable public
+selectors where possible, such as an item key, kind, field, or exact inspected
+identity. The application resolves a unique selector to the corresponding
+current item identity. Zero or multiple matches produce explicit unresolved
+interpretation; they do not authorize a guess. Raw internal item identifiers
+remain accepted for exact automation and inspection workflows, but are not the
+only usable correction journey.
+
+The planner distinguishes at least:
+
+- independent start;
+- continuation of the same objective;
+- satisfaction of a selected `HoldOn`;
+- additive augmentation;
+- explicit correction and supersession;
+- redirection with an explicit realignment proposal;
+- resume after interruption;
+- derivation of a new objective from selected admitted material;
+- branch and merge;
+- and explain, verify, reverse, or reconstruct path operations.
+
+The word "follow-up" is not itself an operation. Depending on user intent, a
+later turn may continue the same objective, satisfy a hold, derive a new
+objective, explain the current one, or start unrelated work. The host must not
+map every follow-up to derivation.
+
+Explicit commands and structured controls are mechanically interpreted and
+must work with LLM operation disabled. Unknown commands are rejected as unknown
+commands; they are never stripped of their control meaning and submitted as a
+new objective. Natural-language interpretation may be model-assisted, but the
+resulting plan remains advisory and must expose uncertainty rather than hiding
+it in a confidence score.
+
+An initial start plan may carry a structured semantic delta containing facts
+already explicit in the inlet and non-achievedness explicitly stated or
+mechanically derivable from it. This permits deterministic, LLM-off chat flows
+without treating raw prose as admitted state. When a model proposes the
+structure, the proposal still passes the same verification and admission
+boundary.
+
+A clarification after redirection does not rewrite the prior realignment. It
+creates another anchored transition that explicitly resolves, retains, or
+supersedes the applicability items left non-achieved by that realignment.
+
+Interruption remains a separate control path. The host targets the exact
+execution-attempt identity with an interruption request; it does not encode
+"stop" as a semantic inlet. Resume-after-interruption targets the latest
+admitted revision recorded by that attempt and does not promote unfinished
+proposal material.
+
+A host that permits interruption must be able to observe the attempt identity
+while execution is still active. The runtime therefore exposes an optional
+lifecycle observation only after the attempt has been durably recorded as
+running. The engine narrows that observation to the opaque attempt identity,
+and the application decides whether to run the request concurrently and expose
+an interruption control. This observation is operational coordination: it does
+not enter the semantic inlet, alter causal identity, or make the attempt a
+state revision. If execution wins the race and terminates first, the ordinary
+already-complete interruption disposition applies.
+
+The host records the original message, the typed plan, the exact engine
+request, and the resulting binding separately. Presentation is rendered from
+the structured result and is never reparsed to manufacture the next plan.
+
+Turn-level response completion is also kept separate from the engine's
+objective-level semantic outcome. A host may render a complete response to a
+turn whose objective remains `incomplete`, `paused`, `ambiguous`, or
+`conflicted`; it must not relabel that objective as completed merely because a
+message was emitted.
+
+### Natural-Language Conversation Pipeline
+
+An ordinary user contribution is an inlet at the inter-reduction boundary, but
+it is not yet a normalized semantic inlet and is not an engine request. Its
+original envelope is retained even when interpretation fails. The
+conversational path interprets that envelope into a bounded candidate, then
+crosses the same typed engine boundary used by explicit controls. The order is
+strict:
+
+1. The host durably records the original contribution envelope, provenance,
+   correlation identity, and idempotency identity without treating its prose as
+   admitted semantic state.
+2. The host resolves the selected causal binding mechanically, or records that
+   no binding exists for a possible start.
+3. The host inspects the exact anchored projection and constructs a bounded
+   planning context.
+4. A planner proposes a structured interpretation of the inlet: an operation,
+   inlet relationship, public semantic selectors, candidate delta or
+   realignment, and any unresolved interpretation.
+5. The host records the planning interaction and validates and normalizes its
+   proposal without granting it authority.
+6. The host resolves selectors only against the anchored projection and builds
+   the typed engine request.
+7. The engine performs reconciliation, verification, governance, execution,
+   and admission.
+8. The host durably records the engine result and resulting causal binding
+   before presentation begins.
+9. A renderer produces conversational presentation only from the original
+   contribution, the admitted structured result, and explicitly permitted
+   inspection views.
+10. The host records the rendering receipt and presentation as records distinct
+    from semantic state.
+
+For an existing objective, the planner receives the binding selected by the
+host and cannot replace it. For an unbound contribution, the planner may
+propose `start` or report unresolved intent, but the host allocates all new
+scope, objective, branch, and revision identities. A model-produced identity
+is never accepted as causal identity.
+
+The bounded planning context contains only what is needed to interpret the
+current contribution:
+
+- the original contribution and its provenance;
+- whether an exact causal binding is selected;
+- the selected binding and deterministic projection when one exists;
+- the available operation and inlet-relationship vocabulary;
+- active `HoldOn` summaries and current non-achievedness;
+- stable public selectors for eligible current material;
+- explicit branch or source aliases already resolved by the host; and
+- schema, policy, and prompt versions needed to interpret the proposal.
+
+Transcript history is not included by default. If a prior contribution is
+needed as evidence, it is supplied as explicitly selected provenance and
+remains distinguishable from admitted state. Internal item identifiers,
+unselected objectives, ambient branch heads, native capability handles, and
+hidden provider memory are not exposed as choices for the planner.
+
+The advisory planning result contains at least:
+
+- a proposed operation and inlet relationship;
+- proposed public selectors and source references;
+- proposed facts, non-achievedness, corrections, or realignment material;
+- an explicit unresolved interpretation and clarification request when needed;
+- planner schema and prompt versions;
+- provider and model receipt references when a model is used; and
+- timing and failure information kept separate from semantic outcome.
+
+The host accepts a proposal for engine submission only after deterministic
+checks establish that:
+
+- the proposal conforms to the planning schema;
+- the operation is available for the current binding state;
+- the proposal did not choose or alter causal identity;
+- every selector resolves uniquely within the anchored projection;
+- the inlet relationship is compatible with the operation;
+- a correction names explicit material to supersede;
+- augmentation does not imply withdrawal;
+- redirection carries a complete realignment candidate or explicit unresolved
+  applicability;
+- interruption targets an observed running attempt through the separate
+  operational path; and
+- ambiguity is represented rather than converted into a guessed transition.
+
+Malformed output, provider failure, timeout, zero selector matches, multiple
+selector matches, or materially ambiguous intent creates no semantic mutation.
+The host may ask for clarification or report an operational planning failure,
+but it must not silently fall back to `continue`, `derive`, or `start`.
+
+Interpretation ambiguity before a valid structured semantic interpretation has
+been constructed is not silently inserted into the objective as semantic
+non-achievedness. The original contribution remains a durable inlet and
+provenance record, while its unresolved interpretation remains an
+application-level condition that may produce a clarification turn. Ambiguity
+discovered by engine reconciliation after a normalized inlet crosses the typed
+boundary may become governed semantic non-achievedness. This keeps a
+provider's inability to parse a message distinct from uncertainty in the
+realized subject state without discarding the contribution itself.
+
+Planning and rendering are separate ports. The planner consumes a bounded
+projection and proposes structure before admission. The renderer consumes the
+structured outcome after admission and produces presentation. A provider may
+implement both ports, but the calls, schemas, receipts, and failure handling
+remain independent. Rendered prose is never reparsed to recover a plan or
+state.
+
+### Conversational Transaction And Retry Boundaries
+
+A conversation turn spans multiple durable activities but is not one database
+transaction and not one model session:
+
+```text
+received contribution
+  -> planning activity
+  -> normalized typed request
+  -> semantic execution attempt and optional revision commit
+  -> rendering activity
+  -> delivered presentation
+```
+
+Each arrow is recoverable from explicit identities and receipts. The
+contribution identity deduplicates receipt of the same user contribution. The
+normalized request identity deduplicates semantic submission. A rendering
+identity allows presentation to be retried without resubmitting the semantic
+transition.
+
+The stage identities are distinct:
+
+- `contribution_id` identifies the received user contribution and is stable
+  across delivery retries;
+- `planning_attempt_id` identifies one advisory interpretation attempt and
+  links its complete or partial receipt to the contribution;
+- `normalized_request_id` identifies the canonical typed request together with
+  its exact causal anchor and remains stable across semantic-submission retries;
+- `execution_attempt_id` identifies the runtime episode created or recovered
+  for that request;
+- `result_id` identifies the durable structured engine result, including a
+  no-commit semantic disposition; and
+- `rendering_attempt_id` identifies one presentation attempt over that result.
+
+These identifiers are correlation, provenance, and idempotency identities.
+None substitutes for scope, objective, branch, or revision identity.
+
+Failure or interruption has stage-specific meaning:
+
+- before a valid plan exists, no semantic execution attempt has started and no
+  semantic state changes;
+- after a plan is recorded but before engine submission, retry may reuse the
+  recorded proposal only through the same deterministic validation boundary;
+- after engine submission, the exact attempt and request identities determine
+  whether execution is still running, terminated, interrupted, or failed;
+- after semantic commit but before successful rendering, the committed revision
+  remains authoritative and presentation can be regenerated from its
+  structured result; and
+- interruption or partial output from planning or rendering is application
+  activity provenance, not a semantic interruption and not resumable hidden
+  model state.
+
+Retries never infer success from a provider response alone. They inspect the
+request, attempt, transition artifact, revision, and rendering records to
+determine the last durable boundary. Repeating a delivery, planning call,
+engine submission, or rendering call cannot create a duplicate semantic
+transition for the same normalized request.
+
+Idempotency must survive process restart. An in-memory set, the currently
+selected conversation binding, or a provider session is insufficient. When a
+caller repeats a normalized request after losing the response, the engine
+either returns the already recorded attempt/result or proves that no attempt
+was durably created before beginning one. A committed revision is never
+recreated merely because its presentation receipt is absent.
+
+### Conversational Architecture Placement
+
+The reusable capability is a transport-neutral conversation application
+component at the Workstation/application-service boundary, independent of any
+concrete shell or UI. It owns:
+
+- contribution, binding, plan, normalized-request, structured-result, and
+  rendering contracts;
+- deterministic operation and relationship validation;
+- selector and alias resolution against an exact projection;
+- orchestration of the conversational transaction stages; and
+- recovery decisions based on durable stage records.
+
+That component is below CLI and UI entry adapters. It consumes a narrow public
+semantic-resumption port rather than controller internals, and it contains no
+provider client, terminal loop, Flutter/Textual widget, or trial assertion. It
+may be extracted as a cohesive UV project or placed in an existing package only
+if that package has the same responsibility and allowed dependency direction.
+Its contracts must not remain owned solely by `realized-core`, because
+`realized-core` is an Entry/Exchange package and workstation code must not
+depend upward on it.
+
+The logical LLM layer owns prompt construction, concrete model/provider calls,
+provider-response parsing, provider receipts, and the provider-neutral model
+interaction ABI consumed by planner and renderer application adapters. The
+conversation component depends toward that LLM ABI; the LLM implementation
+does not import Workstation or Entry contracts. If boundary DTOs need a shared
+home, they reside in a dependency-free contract package declared in the
+architecture manifest rather than creating an LLM-to-Workstation edge. The
+conversation component owns normalization and mechanical validation of the
+returned proposal; the LLM adapter cannot admit state or choose causal
+identity. A dedicated LLM package or correctly classified LLM module may house
+the adapter, but trial code may not be its sole owner.
+
+The Controller, exposed by `realized-core-engine`, owns semantic identity,
+projection, reconciliation, governance integration, execution, admission, and
+revision persistence. It receives a validated typed request, not a transcript,
+provider session, prompt cache, or rendered answer. The runtime continues to
+own only execution-attempt lifecycle and dependency-inverted execution.
+
+The conversation host owns session selection, transcript display, user-input
+delivery, presentation delivery, and a durable conversation-activity journal
+implementation. For the narrow CLI this host is composed by `realized-core`.
+For Flutter or Textual it is composed by the workstation entry surface. Both
+consume the same transport-neutral conversation application contract; neither
+duplicates planning normalization or reparses presentation into state.
+
+Entry/Exchange composes the host, conversation component, LLM adapters,
+semantic-resumption adapter, repository, governance, and runtime. This allows a
+small model, a recorded-proposal adapter, a deterministic explicit-control
+planner, or no model at all to occupy the same advisory boundary without
+reversing dependencies.
+
+Any new physical package is first declared in the workspace and architecture
+manifest with a narrow public API and only the dependencies required by this
+logical placement. Compatibility imports may preserve callers during
+migration. Entry/Exchange may compose a Workstation/application service as the
+six-layer direction permits; Workstation-to-Entry and provider-to-controller
+dependency reversals are prohibited.
+
+Planning and rendering receipts are application provenance. They are linked to
+the contribution, normalized request, and execution attempt but are not
+semantic revisions. Recorded provider responses may support replay of an
+LLM-enabled attempt; replaying such a receipt does not constitute a fresh
+live-provider qualification.
+
+### Conversation Activity Journal
+
+The host supplies a conversation-activity journal through a narrow persistence
+port. The reference CLI and workstation may use different adapters, but the
+observable contract is the same. The journal records, by stable identity:
+
+- the original contribution envelope and selected binding;
+- each planning request, complete or partial provider receipt, and normalized
+  proposal;
+- the canonical typed engine request and its submission disposition;
+- the execution-attempt identity and durable structured result;
+- each rendering request, complete or partial receipt, presentation, and
+  delivery disposition; and
+- recovery decisions linking a retry to the prior durable stage.
+
+The activity journal is not the semantic revision repository and does not
+acquire authority to admit state. The two may share one SQLite database and an
+outer transaction where useful, but their records, keys, ownership, and
+recovery meanings remain distinguishable. Conversation-record loss may degrade
+presentation history, but it must not corrupt or redefine an admitted semantic
+revision. Conversely, a contribution or planning receipt that has not produced
+an admitted engine result cannot be projected as achieved state.
+
+Recovery reads the journal and the engine's authoritative attempt, transition,
+and revision records together. If the activity journal says `submitted` but
+lacks a result, recovery queries the engine by normalized request identity. If
+the engine reports a durable result, the host records that result and proceeds
+to rendering. If no execution attempt exists, the exact normalized request may
+be submitted once. The host never resolves this uncertainty by submitting a
+different request or by asking the model whether the previous request
+succeeded.
+
+### Required Product Surface
+
+The reusable application boundary exposes operations equivalent to:
+
+- accept or recover a contribution by idempotency identity;
+- inspect or select an exact causal binding;
+- plan and normalize a contribution without semantic mutation;
+- submit or recover an exact normalized semantic request;
+- render or rerender a durable structured result without resubmission;
+- inspect conversational stage receipts and their semantic links; and
+- interrupt an observed execution attempt through the separate operational
+  control.
+
+These are semantic/application operations, not transport endpoints. A CLI,
+in-process API, workstation client, or future RPC may expose them without
+altering their identities or stage semantics.
+
+### Product Boundary Versus Qualification Harness
+
+The conversational implementation is a shipped application capability, not a
+feature of the Cedar trial. Product code owns:
+
+- the transport-neutral conversation application contract and orchestration;
+- semantic-resumption and activity-journal ports at the conversation boundary;
+- the provider-neutral planning and rendering ABI in the LLM layer, consumed
+  in the allowed Workstation-to-LLM direction;
+- versioned planning and rendering schemas;
+- LLM-layer prompt policy and concrete provider adapters selected by
+  composition;
+- bounded context assembly and proposal normalization;
+- selector and alias resolution;
+- contribution, planning, engine, binding, and rendering receipts;
+- idempotency and recovery across conversational transaction boundaries; and
+- the public entry point used by the core chatbot and any workstation host.
+
+The qualification harness may select configuration, supply ordinary user
+messages, invoke supported operational controls, observe public receipts, and
+assert outcomes. It may not own a private planner adapter, duplicate prompt or
+schema logic, normalize proposals differently from product code, manufacture a
+typed plan for a semantic turn, or repair product state directly. If deleting
+the trial runner would remove the only working natural-language conversation
+path, the product implementation is incomplete.
+
+### Cedar Conversational Qualification
+
+The Cedar trial is the full conversational qualification for this
+implementation. It is one coherent provider-backed chat journey whose probes
+collectively cover every governing principle in `RESUMPTION.md`. It complements
+rather than replaces deterministic engine and typed-host conformance.
+
+Every semantic user turn that claims to test natural-language interpretation
+must enter as ordinary language through the planner port. The harness may not
+preconstruct a `ConversationTurnPlan` for that turn and then claim the model
+understood it. It must use the same public conversational entry point and
+product-owned provider adapter available to an ordinary core-chat or
+workstation composition. The harness may perform operational actions that are
+not semantic language interpretation, including:
+
+- selecting an exact initial or active binding;
+- restarting the host or replacing the provider instance;
+- interrupting an observed running attempt;
+- arranging concurrent branches or a stale-anchor race;
+- deleting transcript availability or changing presentation wording;
+- rebuilding a derived index; and
+- inspecting revisions, path, attempts, transition artifacts, and receipts.
+
+Those actions must use supported public host or engine contracts. They cannot
+write repository state directly, invent admission results, or substitute fake
+semantic transitions for the conversation being qualified.
+
+The trial records and evaluates four result classes separately:
+
+1. **Harness validity:** the real packaged host, engine, runtime lifecycle, and
+   SQLite repository were used through public contracts.
+2. **Structural conformance:** causal bindings, normalized operations,
+   selectors, revisions, non-achievedness, realignments, attempts, and path
+   artifacts satisfy deterministic assertions.
+3. **Interpretation and presentation:** the live provider proposed the intended
+   operation and semantic material from ordinary language, and the renderer
+   communicated the admitted outcome without inventing state.
+4. **Provider performance:** planning latency, rendering latency, token or
+   request measurements when available, and failures are reported without
+   being conflated with engine latency.
+
+A live-provider failure is a failed conversational qualification, not grounds
+to weaken a structural assertion or bypass the planner with a typed fixture.
+Recorded proposals and fake adapters remain appropriate for deterministic CI
+tests of orchestration and replay, but they are not evidence that the configured
+model can conduct the Cedar conversation.
+
+The model-off journey remains mandatory because semantic correctness cannot
+depend on provider availability. The live Cedar journey is also mandatory
+before claiming this repository's natural-language conversational resumption
+scope complete. Passing either one alone is insufficient for that claim.
 
 ### Start Request
 
@@ -1076,6 +1682,24 @@ claim semantic mutation.
 
 The transport may be an in-process interface, command line, RPC, or another
 mechanism. Transport does not alter semantics.
+
+### Compatibility Migration
+
+The existing `independent`, `human_contribution`, `follow_up`, and `correction`
+arguments remain temporary compatibility inputs while callers move to typed
+turn plans. Their mapping is explicit and testable:
+
+- `independent` maps to start;
+- `human_contribution` maps to continue or resume-suspended according to an
+  exact selected hold;
+- `follow_up` maps only to derive and therefore requires explicit selected
+  source material; and
+- `correction` maps to correct and requires a uniquely resolved current target.
+
+Compatibility mapping must not claim support for operations it cannot express.
+New structured controls use the typed plan directly. Compatibility inputs can
+be removed only after repository-wide callers and qualification trials no
+longer depend on them.
 
 ## Outcome Model
 
@@ -1220,6 +1844,181 @@ A conforming implementation demonstrates at least these behaviors:
     distinguishable under inspection and replay.
 33. LLM-off execution can perform identity, augmentation, interruption, and
     mechanically decidable realignment flows without semantic degradation.
+34. The real conversation host, not a fake engine or evaluator-only harness,
+    can execute a neutral multi-turn journey that establishes explicit state,
+    preserves non-achievedness, corrects two fields, and survives host restart.
+35. Every governing principle in `RESUMPTION.md` is mapped to at least one
+    executable neutral scenario probe, and the mapping fails when a principle
+    is added without a probe.
+36. Explicit chat controls cover every application operation family without
+    requiring model interpretation, and an unknown control is rejected rather
+    than started as an independent objective.
+37. Natural-language interpretation cannot choose causal identity; an absent
+    or ambiguous binding prevents mutation even when retrieval finds a similar
+    objective.
+38. A uniquely resolved semantic selector can drive correction without asking
+    a person for an opaque item identifier, while an ambiguous selector cannot
+    commit.
+39. A complete turn response does not erase objective non-achievedness or force
+    the objective outcome to `completed`.
+40. Conversation-level augmentation preserves all current material unless a
+    separately represented conflict is exposed.
+41. Conversation-level redirection commits only with exhaustive realignment,
+    prevents execution of the old frontier, and carries uncertain
+    applicability as non-achievedness.
+42. A later clarification resolves realignment uncertainty through a new
+    anchored transition rather than mutating the prior realignment artifact.
+43. Conversation interruption targets an attempt, creates no semantic revision,
+    and resume-after-interruption excludes unfinished candidate work.
+44. Explanation and reversal use admitted path artifacts; presentation prose
+    alone cannot reconstruct or reverse state.
+45. Two conversation branches from one revision remain distinct, and a stale
+    continuation cannot overwrite either branch head.
+46. Replacing the provider, changing presentation wording, deleting transcript
+    availability, or rebuilding derived indexes leaves continuation semantics
+    unchanged.
+47. The executable governed-chat trial validates current result fields and
+    supplies every selector required by the application contract; it contains
+    no obsolete checkpoint assertion.
+48. The host resolves or withholds causal binding before natural-language
+    planning, and the planner cannot choose a similar objective as the target.
+49. Every Cedar semantic turn used as interpretation evidence enters as
+    ordinary language through the provider-backed planner rather than as a
+    preconstructed typed plan.
+50. Provider timeout, malformed output, and unresolved interpretation cause no
+    semantic mutation and do not silently fall back to another operation.
+51. Planner-proposed public selectors are resolved uniquely against the exact
+    anchored projection before an engine request is constructed.
+52. Planning, engine admission, and rendering produce separate receipts, and a
+    rendering change cannot alter the admitted revision or the next planning
+    projection.
+53. The Cedar journey maps all 21 resumption principles to observable probes
+    while distinguishing semantic user turns from explicit operational harness
+    actions.
+54. A recorded provider proposal can replay the same advisory input, but only a
+    live provider run counts as provider-backed conversational qualification.
+55. Deleting the Cedar runner leaves a reusable product entry point capable of
+    planning, validating, executing, and rendering an ordinary conversation.
+56. The trial and ordinary chatbot use the same provider adapter, schemas,
+    prompt policy, normalization, and selector-resolution implementation.
+57. A duplicate contribution or normalized request cannot create a duplicate
+    semantic transition.
+58. A crash after contribution receipt but before planning leaves the
+    contribution recoverable and semantic state unchanged.
+59. A crash after planning but before engine submission permits deterministic
+    revalidation without treating the proposal as admitted state.
+60. A crash after semantic commit but before rendering preserves the committed
+    revision and retries only presentation.
+61. Partial or interrupted planner and renderer output never enters semantic
+    state and is not treated as an interrupted reduction attempt.
+62. Planning ambiguity remains application-level unresolved interpretation,
+    while ambiguity admitted through engine reconciliation remains durable
+    semantic non-achievedness.
+63. A contribution whose planning fails remains inspectable as inlet
+    provenance, but creates no normalized engine request or semantic revision.
+64. Conversation-activity records remain distinguishable from semantic
+    revisions even when both use the same SQLite database.
+65. The CLI and workstation hosts consume the same transport-neutral
+    conversation application contract without either importing the other's
+    entry or UI package.
+66. Prompt construction, provider calls, and provider-response parsing remain
+    in the LLM layer, while selector resolution and admission remain outside
+    the provider adapter.
+67. After process restart, a repeated normalized request recovers its existing
+    engine attempt/result or proves that none exists before executing; an
+    in-memory deduplication result is insufficient.
+68. Recovery from a `submitted` conversation stage with no local result
+    reconciles against authoritative engine records and cannot create a second
+    semantic transition.
+69. The Cedar harness contains no product planner, renderer, normalization,
+    selector-resolution, journal, or recovery implementation; removing it
+    leaves ordinary natural-language conversation operational.
+
+The deterministic cross-layer scenario derives its operations and assertions
+directly from the resumption principles rather than from model behavior. The
+Cedar scenario applies the same principles to a real provider-backed
+conversation. Provider interpretation, prose quality, and latency are reported
+separately from deterministic engine correctness, but interpretation is not an
+optional concern when qualifying the natural-language conversation product
+path.
+
+## Implementation Sequence
+
+The safe correction order is:
+
+1. [x] Retain the direct engine conformance suite and deterministic cross-layer
+   scenario as the model-independent semantic baseline.
+2. [x] Retain the typed conversation-plan contract, exact semantic-selector
+   resolver, complete operation routing, separate interruption control, and
+   compatibility adapter.
+3. [x] Establish the transport-neutral conversation application component and its
+   allowed dependency edges in the architecture manifest before moving code.
+   It must be consumable by both Entry/Exchange and Workstation without one
+   depending on the other's package.
+4. [x] Define its semantic-resumption and activity-journal ports plus versioned,
+   serializable contribution, proposal, request, result, and receipt schemas.
+   Define the generic planning and rendering ABI on the LLM side of the
+   boundary, or in a dependency-free contracts package, so dependency direction
+   remains Workstation-to-LLM. Preserve existing imports through compatibility
+   shims while callers migrate.
+5. [x] Add the durable conversation-activity journal and stable contribution,
+   planning, normalized-request, result, and rendering identities. Keep these
+   records logically distinct from semantic revisions.
+6. [x] Implement the product pipeline in strict contribution receipt, binding,
+   projection, planning, normalization, selector resolution, engine submission,
+   durable result capture, rendering, and delivery order.
+7. [x] Add restart-safe engine lookup and idempotency for normalized request
+   identity, then implement recovery at every conversational transaction
+   boundary. Do not rely on an in-memory host map to prevent duplicate commits.
+8. [x] Implement the reusable planner and renderer provider adapter in the LLM
+   layer. Prompt construction and provider calls remain there; proposal
+   normalization and selector resolution remain in the conversation component.
+   Do not place the only adapter in a trial module.
+9. [x] Compose the same product path into the narrow core chatbot and workstation
+   entry surfaces. Keep terminal, Flutter, Textual, and other transport details
+   outside the transport-neutral component.
+10. [x] Add deterministic fake-provider and failure-injection tests for schema
+   handling, ambiguity, partial provider output, orchestration, idempotency,
+   crash recovery, recorded-proposal replay, and package-boundary direction.
+11. [x] Replace the stale five-turn runner with the full Cedar conversational
+   scenario, current bindings and selectors, supported operational harness
+   actions, and separate structural, interpretation, rendering, and
+   performance evidence.
+12. [x] Verify that the Cedar harness imports the product surface and owns no
+   private planner, prompt, normalizer, journal, or recovery behavior.
+13. [x] Run Cedar against the configured live provider and require its natural
+   language turns to pass through the real planner and host path.
+14. [x] Run core-runtime, core-engine, conversation-component, LLM-adapter,
+   core-app, workstation, architecture-ratchet, replay,
+   distribution, deterministic journey, governed-chat runner, and live Cedar
+   qualification gates before declaring the scope complete or removing any
+   compatibility path.
+
+As of 23 October 2026, sequence items 1 through 14 are implemented: the direct
+engine baseline, typed operation path, transport-neutral conversation package,
+versioned ports and records, durable activity journal, strict conversation
+pipeline, restart-safe normalized-request recovery, and reusable live-provider
+planner and renderer adapter are present and covered by focused tests. The
+narrow core chatbot and workstation shell now compose that same product path
+without either importing the other's entry surface. Deterministic tests cover
+schema rejection, ambiguity, partial provider output, orchestration ordering,
+idempotency, crash recovery, recorded-proposal replay, and package direction.
+The default Cedar journey covers all 21 resumption principles, admits only
+declared semantic and operational harness actions, consumes the public product
+surfaces, and reports structural, interpretation, rendering, and performance
+evidence separately. The deterministic architecture/core gate passes 318
+tests, the deterministic BDD gate passes 76 tests, the replay gate passes 9
+tests, the complete workstation gate passes 602 tests with 1 intentional skip,
+and fresh builds of all five core wheels pass isolated-import and SQLite smoke
+verification. The live Cedar qualification passes all 24 turns through the
+configured OpenAI planner and renderer with engine-internal model use disabled:
+94 of 94 structural checks, 20 of 20 interpretation checks, and 22 of 22
+rendering checks pass with no operational failure. Draft proposal types,
+recorded replays, or runner fixtures remain supporting tests rather than
+substitutes for that live end-to-end evidence.
+
+No step changes persisted schema or an existing public import path without a
+separate compatibility and migration decision.
 
 ## Non-Goals
 
@@ -1239,6 +2038,8 @@ This design does not:
 - treat augmentation as implicit withdrawal;
 - continue an old frontier after established redirection;
 - resolve uncertain applicability by similarity or model confidence;
+- make a qualification trial the owner of conversational product behavior;
+- require workstation code to depend on a CLI or other Entry/Exchange package;
 - or impose a single linear continuation model.
 
 ## Completion Standard
@@ -1250,3 +2051,18 @@ resulting revision without relying on a transcript, hidden model state,
 provider session, cache, process lifetime, or ambient host authority. It must
 also be possible to prove that interruption alone changed no semantic state and
 that every admitted redirection was followed by an inspectable realignment.
+
+The natural-language conversational implementation in this repository is
+complete only when ordinary user contributions can traverse the provider-
+neutral planning boundary, deterministic application validation, canonical
+engine, and separate rendering boundary without the model choosing identity or
+admission. That path must be reusable by Entry/Exchange and Workstation hosts
+through a transport-neutral product contract independent of the trial harness,
+with provider behavior owned by the LLM layer and semantic admission owned by
+the Controller. Its contribution, planning, normalized-request, semantic
+result, rendering, and delivery boundaries must be durably distinguishable,
+idempotent, and recoverable without transcript or provider-session state.
+Completion additionally requires both the deterministic model-off journey and
+a successful live Cedar qualification covering all 21 resumption principles.
+A typed fixture, fake provider, recorded replay, trial-local adapter, or
+prose-only evaluation cannot substitute for that live end-to-end evidence.

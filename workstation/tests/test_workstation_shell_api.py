@@ -31,6 +31,9 @@ from workstation.shell.core.workstation_shell_client import (
     InProcessWorkstationShellClient,
     new_grpc_workstation_shell_client_for_unix_socket,
 )
+from workstation.shell.core.governed_conversation import (
+    submit_governed_conversation_turn,
+)
 from workstation.grpc.implementation.workstation_shell_grpc import (
     WorkstationShellGrpcService,
     build_workstation_shell_grpc_server,
@@ -76,6 +79,103 @@ class WorkstationShellApiTests(unittest.TestCase):
         result = client.submit_chat_input(root_path=self.root, prompt_text="/help")
         self.assertEqual(result.fulfilled_by, "shell.help")
         self.assertTrue(any(message.role == "shell" for message in result.messages))
+
+    def test_shell_routes_governed_conversation_through_injected_product_path(
+        self,
+    ) -> None:
+        calls: list[dict[str, object]] = []
+
+        def submitter(**kwargs):
+            calls.append(dict(kwargs))
+            return {
+                "assistant_text": "The admitted answer.",
+                "turn_id": "conversation-turn-1",
+                "run_id": "revision-1",
+                "run_outcome": "incomplete",
+            }
+
+        service = WorkstationShellApiService(
+            governed_conversation_submitter=submitter
+        )
+        client = InProcessWorkstationShellClient(
+            service=service,
+            client_session_id="shell-governed",
+        )
+
+        result = client.submit_chat_input(
+            root_path=self.root,
+            prompt_text="Continue from the admitted state.",
+            model="test-model",
+            interaction_mode="governed_conversation",
+            governed_parent_run_id="revision-parent",
+            governed_llm_policy="required",
+            governed_max_steps=17,
+        )
+
+        self.assertEqual("governed_conversation", result.fulfilled_by)
+        self.assertEqual("The admitted answer.", result.assistant_text)
+        self.assertEqual("conversation-turn-1", result.turn_id)
+        self.assertEqual("revision-1", result.run_id)
+        self.assertEqual("incomplete", result.run_outcome)
+        self.assertEqual(
+            ["user", "assistant"],
+            [message.role for message in result.messages[-2:]],
+        )
+        self.assertEqual(
+            {
+                "root_path": self.root.resolve(),
+                "prompt_text": "Continue from the admitted state.",
+                "model": "test-model",
+                "max_steps": 17,
+                "llm_policy": "required",
+                "parent_run_id": "revision-parent",
+            },
+            calls[0],
+        )
+
+    def test_workstation_composer_uses_public_conversation_and_llm_packages(
+        self,
+    ) -> None:
+        host = mock.Mock()
+        host.submit_text.return_value = {
+            "assistant_text": "Composed answer.",
+            "run_id": "revision-2",
+        }
+        planner = object()
+        renderer = object()
+
+        with (
+            mock.patch(
+                "workstation.shell.core.governed_conversation.CoreConversationHost.open",
+                return_value=host,
+            ) as open_host,
+            mock.patch(
+                "workstation.shell.core.governed_conversation.build_environment_conversation_advisors",
+                return_value=(planner, renderer),
+            ) as build_advisors,
+        ):
+            report = submit_governed_conversation_turn(
+                root_path=self.root,
+                prompt_text="Resume it.",
+                model="small-model",
+                max_steps=9,
+                llm_policy="required",
+                parent_run_id="revision-1",
+            )
+
+        self.assertEqual("Composed answer.", report["assistant_text"])
+        open_host.assert_called_once_with(
+            root=self.root.resolve() / "governed_conversation",
+            max_steps=9,
+            llm_policy="required",
+        )
+        build_advisors.assert_called_once_with(model="small-model")
+        host.submit_text.assert_called_once_with(
+            "Resume it.",
+            planner=planner,
+            renderer=renderer,
+            parent_run_id="revision-1",
+        )
 
     def test_grpc_shell_service_round_trips_snapshot_and_help_prompt(self) -> None:
         server = build_workstation_shell_grpc_server(service=WorkstationShellApiService())

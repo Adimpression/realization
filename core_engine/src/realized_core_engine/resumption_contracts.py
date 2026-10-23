@@ -400,6 +400,7 @@ class SemanticDelta:
     achieved: tuple[SemanticItem, ...] = ()
     non_achievedness: tuple[SemanticItem, ...] = ()
     resolved_non_achievedness_ids: tuple[str, ...] = ()
+    resolved_applicability_item_ids: tuple[str, ...] = ()
     holds: tuple[HoldOn, ...] = ()
     resolved_hold_ids: tuple[str, ...] = ()
     supersessions: tuple[Supersession, ...] = ()
@@ -413,6 +414,9 @@ class SemanticDelta:
             ],
             "resolved_non_achievedness_ids": list(
                 self.resolved_non_achievedness_ids
+            ),
+            "resolved_applicability_item_ids": list(
+                self.resolved_applicability_item_ids
             ),
             "holds": [hold.to_dict() for hold in self.holds],
             "resolved_hold_ids": list(self.resolved_hold_ids),
@@ -438,6 +442,9 @@ class SemanticDelta:
             ),
             resolved_non_achievedness_ids=tuple(
                 value.get("resolved_non_achievedness_ids", ())
+            ),
+            resolved_applicability_item_ids=tuple(
+                value.get("resolved_applicability_item_ids", ())
             ),
             holds=tuple(
                 HoldOn.from_dict(dict(item))
@@ -1124,9 +1131,10 @@ class StartRequest:
     governance_policy: JsonObject = field(default_factory=dict)
     execution_policy: JsonObject = field(default_factory=dict)
     projection_policy: ProjectionPolicy = field(default_factory=ProjectionPolicy)
+    normalized_request_id: str = ""
 
     def to_dict(self) -> JsonObject:
-        return {
+        payload = {
             "scope_id": self.scope_id,
             "objective_id": self.objective_id,
             "branch_id": self.branch_id,
@@ -1136,6 +1144,9 @@ class StartRequest:
             "execution_policy": dict(self.execution_policy),
             "projection_policy": self.projection_policy.to_dict(),
         }
+        if self.normalized_request_id:
+            payload["normalized_request_id"] = self.normalized_request_id
+        return payload
 
     @classmethod
     def from_dict(cls, value: JsonObject) -> StartRequest:
@@ -1154,6 +1165,9 @@ class StartRequest:
             projection_policy=ProjectionPolicy.from_dict(
                 dict(value.get("projection_policy", {}))
             ),
+            normalized_request_id=str(
+                value.get("normalized_request_id", "")
+            ),
         )
 
 
@@ -1168,9 +1182,10 @@ class ResumptionRequest:
     execution_policy: JsonObject = field(default_factory=dict)
     source_attempt_id: str | None = None
     merge_parent_identities: tuple[ResumptionIdentity, ...] = ()
+    normalized_request_id: str = ""
 
     def to_dict(self) -> JsonObject:
-        return {
+        payload = {
             "anchor": self.anchor.to_dict(),
             "operation": self.operation.value,
             "expected_branch_head_revision_id": (
@@ -1186,6 +1201,9 @@ class ResumptionRequest:
                 for identity in self.merge_parent_identities
             ],
         }
+        if self.normalized_request_id:
+            payload["normalized_request_id"] = self.normalized_request_id
+        return payload
 
     @classmethod
     def from_dict(cls, value: JsonObject) -> ResumptionRequest:
@@ -1214,6 +1232,9 @@ class ResumptionRequest:
             merge_parent_identities=tuple(
                 ResumptionIdentity.from_dict(dict(item))
                 for item in value.get("merge_parent_identities", ())
+            ),
+            normalized_request_id=str(
+                value.get("normalized_request_id", "")
             ),
         )
 
@@ -1319,6 +1340,65 @@ class ResumptionResult:
             "diagnostics": dict(self.diagnostics),
             "presentation": dict(self.presentation),
         }
+
+    @classmethod
+    def from_dict(cls, value: JsonObject) -> ResumptionResult:
+        raw_source = value.get("source_revision_identity")
+        raw_result = value.get("resulting_revision_identity")
+        raw_semantic_outcome = value.get("semantic_outcome")
+        raw_realignment = value.get("realignment_summary")
+        raw_disposition = value.get("identity_disposition")
+        return cls(
+            source_revision_identity=(
+                ResumptionIdentity.from_dict(dict(raw_source))
+                if isinstance(raw_source, dict)
+                else None
+            ),
+            execution_attempt_id=str(value["execution_attempt_id"]),
+            execution_outcome=AttemptExecutionOutcome(
+                str(value["execution_outcome"])
+            ),
+            semantic_outcome=(
+                SemanticOutcome(str(raw_semantic_outcome))
+                if raw_semantic_outcome is not None
+                else None
+            ),
+            resulting_revision_identity=(
+                ResumptionIdentity.from_dict(dict(raw_result))
+                if isinstance(raw_result, dict)
+                else None
+            ),
+            transition_artifact_reference=(
+                str(value["transition_artifact_reference"])
+                if value.get("transition_artifact_reference") is not None
+                else None
+            ),
+            attempt_artifact_reference=str(
+                value["attempt_artifact_reference"]
+            ),
+            realignment_summary=(
+                dict(raw_realignment)
+                if isinstance(raw_realignment, dict)
+                else None
+            ),
+            identity_disposition=(
+                IdentityDisposition.from_dict(dict(raw_disposition))
+                if isinstance(raw_disposition, dict)
+                else None
+            ),
+            achieved_state_summary=tuple(
+                str(item) for item in value.get("achieved_state_summary", ())
+            ),
+            non_achievedness_summary=tuple(
+                str(item)
+                for item in value.get("non_achievedness_summary", ())
+            ),
+            active_hold_summary=tuple(
+                str(item) for item in value.get("active_hold_summary", ())
+            ),
+            diagnostics=dict(value.get("diagnostics", {})),
+            presentation=dict(value.get("presentation", {})),
+        )
 
 
 @dataclass(frozen=True, slots=True)

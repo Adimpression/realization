@@ -415,9 +415,17 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     workstation_prompt_parser.add_argument("--max-tool-rounds", type=int, default=8, help="Maximum OpenAI tool rounds for this workstation turn.")
     workstation_prompt_parser.add_argument(
         "--mode",
-        choices=["normal", "llm_only", "governed_reduction"],
+        choices=[
+            "normal",
+            "llm_only",
+            "governed_reduction",
+            "governed_conversation",
+        ],
         default="normal",
-        help="Explicit turn route. Governed reduction is opt-in and never replaces normal chat.",
+        help=(
+            "Explicit turn route. Governed reduction and governed conversation "
+            "are opt-in and never replace normal chat."
+        ),
     )
     workstation_prompt_parser.add_argument(
         "--governed-treatment",

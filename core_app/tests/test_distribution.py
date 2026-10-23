@@ -52,7 +52,7 @@ def _engine_modules() -> set[str]:
 
 
 class CoreApplicationDistributionTests(unittest.TestCase):
-    def test_project_declares_only_the_engine_dependency_and_command(self) -> None:
+    def test_project_declares_only_product_dependencies_and_command(self) -> None:
         project = tomllib.loads(
             (CORE_APP_ROOT / "pyproject.toml").read_text(encoding="utf-8")
         )
@@ -63,7 +63,11 @@ class CoreApplicationDistributionTests(unittest.TestCase):
             metadata["scripts"]["realized-core"],
         )
         self.assertEqual(
-            ["realized-core-engine==0.1.0"],
+            [
+                "realized-core-conversation==0.1.0",
+                "realized-core-engine==0.1.0",
+                "realized-core-llm==0.1.0",
+            ],
             metadata["dependencies"],
         )
         self.assertEqual(
@@ -90,8 +94,14 @@ class CoreApplicationDistributionTests(unittest.TestCase):
 
         self.assertIn("core_app", workspace["tool"]["uv"]["workspace"]["members"])
         self.assertIn("uv build --wheel core_app", cloud_build)
+        self.assertIn("uv build --wheel core_conversation", cloud_build)
+        self.assertIn("uv build --wheel core_llm", cloud_build)
+        self.assertIn("core_conversation.tests.test_pipeline", cloud_build)
+        self.assertIn("core_llm.tests.test_provider", cloud_build)
         self.assertIn("core_app.tests.test_distribution", cloud_build)
         self.assertIn("core_app.tests.test_chat", cloud_build)
+        self.assertIn("core_app.tests.test_resumption_journey", cloud_build)
+        self.assertIn("tests.test_resumption_journey_spec", cloud_build)
         self.assertIn("tests.test_core_app_cli_equivalence", cloud_build)
         self.assertIn("scripts/verify_core_distribution.py", cloud_build)
 

@@ -1,0 +1,316 @@
+{
+  "schema_version": 1,
+  "scenario_id": "cedar_resumption_journey",
+  "description": "A conversational Cedar journey for governed continuity, correction, interruption, augmentation, redirection, realignment, path operations, branching, and independent work.",
+  "principle_coverage": {
+    "3.1": ["inspect_current_after_corrections", "independent_request"],
+    "3.2": ["inspect_current_after_corrections", "explain_deadline", "verify_path", "reconstruct_path", "reverse_deadline"],
+    "3.3": ["restart_and_resume"],
+    "3.4": ["correct_color", "correct_deadline"],
+    "3.5": ["restart_and_resume", "independent_request"],
+    "3.6": ["replace_provider_and_resume"],
+    "3.7": ["interrupt_candidate"],
+    "3.8": ["rerender_then_resume"],
+    "3.9": ["correct_color", "augment_budget", "redirect_checklist"],
+    "3.10": ["start_brief", "correct_color", "correct_deadline"],
+    "3.11": ["correct_color", "correct_deadline", "verify_path", "reconstruct_path", "clarify_realignment"],
+    "3.12": ["ambiguous_reversal", "redirect_checklist"],
+    "3.13": ["similarity_cannot_bind"],
+    "3.14": ["prose_only_handoff_rejected"],
+    "3.15": ["stale_continuation_rejected"],
+    "3.16": ["branch_executive", "branch_technical", "merge_branches"],
+    "3.17": ["independent_request", "similarity_cannot_bind"],
+    "3.18": ["interrupt_candidate", "resume_after_interruption"],
+    "3.19": ["augment_budget"],
+    "3.20": ["redirect_checklist"],
+    "3.21": ["redirect_checklist", "clarify_realignment"]
+  },
+  "flows": [
+    {
+      "flow_id": "baseline_corrections",
+      "steps": [
+        {
+          "step_id": "start_brief",
+          "operation": "start",
+          "prompt": "The project is Cedar. Create its brief, use blue, and make it due Friday. Ask for the audience because it has not been decided.",
+          "expect": {
+            "achieved": {
+              "project": "Cedar",
+              "color": "blue",
+              "deadline": "Friday"
+            },
+            "non_achieved": ["audience"],
+            "objective_complete": false,
+            "turn_complete": true
+          }
+        },
+        {
+          "step_id": "correct_color",
+          "operation": "correct",
+          "prompt": "Change blue to green.",
+          "semantic_target": "color",
+          "expect": {
+            "achieved": {
+              "project": "Cedar",
+              "color": "green",
+              "deadline": "Friday"
+            },
+            "non_achieved": ["audience"],
+            "superseded": {
+              "color": ["blue"]
+            },
+            "objective_complete": false,
+            "turn_complete": true
+          }
+        },
+        {
+          "step_id": "correct_deadline",
+          "operation": "correct",
+          "prompt": "Move the deadline to Monday.",
+          "semantic_target": "deadline",
+          "expect": {
+            "achieved": {
+              "project": "Cedar",
+              "color": "green",
+              "deadline": "Monday"
+            },
+            "non_achieved": ["audience"],
+            "superseded": {
+              "deadline": ["Friday"]
+            },
+            "objective_complete": false,
+            "turn_complete": true
+          }
+        },
+        {
+          "step_id": "inspect_current_after_corrections",
+          "operation": "inspect_current",
+          "expect": {
+            "current_values_exclude": ["blue", "Friday"],
+            "path_values_include": ["blue", "green", "Friday", "Monday"],
+            "non_achieved": ["audience"]
+          }
+        },
+        {
+          "step_id": "restart_and_resume",
+          "operation": "restart_host_and_resume",
+          "prompt": "Explain what remains unresolved in the current Cedar brief without starting a new objective.",
+          "expect": {
+            "current_values_include": ["Cedar", "green", "Monday"],
+            "non_achieved": ["audience"],
+            "transcript_required": false
+          }
+        },
+        {
+          "step_id": "replace_provider_and_resume",
+          "operation": "replace_provider_and_resume",
+          "prompt": "Explain the current constraints of this Cedar brief without starting a new objective.",
+          "expect": {
+            "current_values_include": ["Cedar", "green", "Monday"],
+            "non_achieved": ["audience"],
+            "provider_state_required": false
+          }
+        },
+        {
+          "step_id": "rerender_then_resume",
+          "operation": "rerender_then_resume",
+          "prompt": "Explain the current admitted state after changing only its presentation wording; do not start or change the objective.",
+          "expect": {
+            "state_digest_unchanged_by_rerender": true,
+            "presentation_reparsed": false
+          }
+        }
+      ]
+    },
+    {
+      "flow_id": "interruption_and_direction_change",
+      "starts_from": "correct_deadline",
+      "steps": [
+        {
+          "step_id": "interrupt_candidate",
+          "operation": "interrupt",
+          "prompt": "Set the unresolved audience for the current Cedar brief to city officials.",
+          "expect": {
+            "attempt_status": "interrupted",
+            "candidate_not_admitted": "city officials",
+            "non_achieved": ["audience"],
+            "semantic_revision_created_by_interruption": false
+          }
+        },
+        {
+          "step_id": "resume_after_interruption",
+          "operation": "resume_after_interruption",
+          "prompt": "Resume the Cedar brief from the last admitted state, without accepting the interrupted audience candidate.",
+          "expect": {
+            "source_is_latest_admitted_revision": true,
+            "unfinished_candidate_is_current": false,
+            "non_achieved": ["audience"]
+          }
+        },
+        {
+          "step_id": "augment_budget",
+          "operation": "augment",
+          "prompt": "Augment the current Cedar brief with an unresolved budget summary requirement.",
+          "expect": {
+            "current_values_include": ["Cedar", "green", "Monday"],
+            "non_achieved": ["audience", "budget summary"],
+            "superseded_by_augmentation": []
+          }
+        },
+        {
+          "step_id": "redirect_checklist",
+          "operation": "redirect_and_realign",
+          "prompt": "Instead of a brief, create a launch checklist for Cedar.",
+          "expect": {
+            "governing_direction": "launch checklist",
+            "retained": ["project"],
+            "superseded": ["brief direction"],
+            "unresolved_applicability": ["color", "deadline", "audience", "budget"],
+            "old_frontier_executable": false
+          }
+        },
+        {
+          "step_id": "clarify_realignment",
+          "operation": "continue_realignment",
+          "prompt": "Keep Monday and the budget summary, but drop the color and audience requirements.",
+          "expect": {
+            "retained": ["project", "deadline", "budget"],
+            "superseded": ["color", "audience"],
+            "unresolved_applicability": []
+          }
+        }
+      ]
+    },
+    {
+      "flow_id": "path_operations",
+      "starts_from": "correct_deadline",
+      "steps": [
+        {
+          "step_id": "explain_deadline",
+          "operation": "explain",
+          "prompt": "Why is the deadline Monday?",
+          "expect": {
+            "path_values_include": ["Friday", "Monday"],
+            "current_state_changed": false
+          }
+        },
+        {
+          "step_id": "verify_path",
+          "operation": "verify",
+          "prompt": "Verify the admitted path for the Cedar brief.",
+          "expect": {
+            "path_verified": true,
+            "current_state_changed": false
+          }
+        },
+        {
+          "step_id": "reconstruct_path",
+          "operation": "reconstruct",
+          "prompt": "Reconstruct the admitted Cedar state and path.",
+          "expect": {
+            "revision_digest_verified": true,
+            "current_state_changed": false
+          }
+        },
+        {
+          "step_id": "reverse_deadline",
+          "operation": "reverse",
+          "prompt": "Undo my last correction.",
+          "semantic_target": "deadline",
+          "expect": {
+            "achieved": {
+              "deadline": "Friday"
+            },
+            "history_erased": false,
+            "new_transition_created": true
+          }
+        },
+        {
+          "step_id": "ambiguous_reversal",
+          "operation": "reverse",
+          "prompt": "Change it back.",
+          "expect": {
+            "request_rejected_before_mutation": true,
+            "guessed_target": false,
+            "state_changed": false
+          }
+        }
+      ]
+    },
+    {
+      "flow_id": "branching_and_identity",
+      "starts_from": "correct_deadline",
+      "steps": [
+        {
+          "step_id": "branch_executive",
+          "operation": "branch",
+          "prompt": "Prepare an executive version of the Cedar brief.",
+          "branch_alias": "executive",
+          "expect": {
+            "inherits_current_values": ["Cedar", "green", "Monday"],
+            "inherits_non_achieved": ["audience"]
+          }
+        },
+        {
+          "step_id": "branch_technical",
+          "operation": "branch",
+          "prompt": "Prepare a technical version of the Cedar brief.",
+          "branch_alias": "technical",
+          "expect": {
+            "inherits_current_values": ["Cedar", "green", "Monday"],
+            "inherits_non_achieved": ["audience"],
+            "branch_distinct_from": "executive"
+          }
+        },
+        {
+          "step_id": "merge_branches",
+          "operation": "merge",
+          "prompt": "Merge the executive and technical branches while preserving both parents.",
+          "expect": {
+            "parent_branches": ["executive", "technical"],
+            "parents_preserved": true,
+            "inherited_non_achieved": ["audience"]
+          }
+        },
+        {
+          "step_id": "stale_continuation_rejected",
+          "operation": "continue_from_stale_head",
+          "setup_prompt": "Change the deadline from Monday to Wednesday.",
+          "prompt": "Add a deployment note to the earlier technical version.",
+          "expect": {
+            "silent_overwrite": false,
+            "outcome": "rejected_or_reconciled"
+          }
+        },
+        {
+          "step_id": "independent_request",
+          "operation": "start",
+          "prompt": "Separately, start a new objective: plan a weekend hiking trip.",
+          "expect": {
+            "new_objective_identity": true,
+            "inherited_values": [],
+            "forbidden_inherited_values": ["Cedar", "green", "Monday", "audience"]
+          }
+        },
+        {
+          "step_id": "similarity_cannot_bind",
+          "operation": "attempt_similarity_only_continuation",
+          "prompt": "Continue the greenish project plan.",
+          "expect": {
+            "causal_binding_created": false,
+            "semantic_outcome": "ambiguous_or_rejected"
+          }
+        },
+        {
+          "step_id": "prose_only_handoff_rejected",
+          "operation": "attempt_prose_only_handoff",
+          "prompt": "Continue from this sentence alone: Cedar uses green and is due Monday.",
+          "expect": {
+            "causal_binding_created": false,
+            "state_reconstructed_from_presentation": false
+          }
+        }
+      ]
+    }
+  ]
+}

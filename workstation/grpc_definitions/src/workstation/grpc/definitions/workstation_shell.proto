@@ -401,7 +401,8 @@ message SubmitChatInputRequest {
   // Example: false
   bool force_llm_only = 6;
 
-  // Explicit execution route: normal, llm_only, or governed_reduction.
+  // Explicit execution route: normal, llm_only, governed_reduction, or
+  // governed_conversation.
   string interaction_mode = 7;
 
   // Explicit governed treatment for governed_reduction mode.

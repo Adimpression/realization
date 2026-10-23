@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+from collections.abc import Callable
 from dataclasses import replace
 from pathlib import Path
 from types import SimpleNamespace
@@ -142,28 +143,48 @@ class ResumptionEngine:
             reduction_controller=CanonicalReductionAdapter(),
         )
 
-    def start(self, request: StartRequest) -> ResumptionResult:
+    def start(
+        self,
+        request: StartRequest,
+        *,
+        on_attempt_running: Callable[[str], None] | None = None,
+    ) -> ResumptionResult:
         return self._service.start(
             replace(
                 request,
                 execution_policy=self._execution_policy(
                     request.execution_policy
                 ),
-            )
+            ),
+            on_attempt_running=on_attempt_running,
         )
 
-    def resume(self, request: ResumptionRequest) -> ResumptionResult:
+    def resume(
+        self,
+        request: ResumptionRequest,
+        *,
+        on_attempt_running: Callable[[str], None] | None = None,
+    ) -> ResumptionResult:
         return self._service.resume(
             replace(
                 request,
                 execution_policy=self._execution_policy(
                     request.execution_policy
                 ),
-            )
+            ),
+            on_attempt_running=on_attempt_running,
         )
 
     def interrupt(self, request: InterruptionRequest) -> InterruptionResult:
         return self._service.interrupt(request)
+
+    def lookup_normalized_request(
+        self,
+        normalized_request_id: str,
+    ) -> ResumptionResult | None:
+        return self._service.lookup_normalized_request(
+            normalized_request_id
+        )
 
     def inspect(self, request: InspectionRequest) -> InspectionResult:
         return self._service.inspect(request)
@@ -237,6 +258,16 @@ def interrupt_attempt(
     return open_resumption_engine(configuration=configuration).interrupt(request)
 
 
+def lookup_normalized_request(
+    normalized_request_id: str,
+    *,
+    configuration: EngineConfiguration | None = None,
+) -> ResumptionResult | None:
+    return open_resumption_engine(
+        configuration=configuration
+    ).lookup_normalized_request(normalized_request_id)
+
+
 def inspect_resumption(
     request: InspectionRequest,
     *,
@@ -250,6 +281,7 @@ __all__ = [
     "inspect",
     "inspect_resumption",
     "interrupt_attempt",
+    "lookup_normalized_request",
     "open_resumption_engine",
     "resume",
     "resume_objective",

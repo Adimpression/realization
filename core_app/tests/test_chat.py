@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from io import StringIO
 from pathlib import Path
 import sys
 import tempfile
@@ -14,7 +15,7 @@ if str(CORE_APP_SRC) not in sys.path:
     sys.path.insert(0, str(CORE_APP_SRC))
 
 from realized_core import cli
-from realized_core.chat import CoreConversationHost
+from realized_core.chat import CoreConversationHost, run_core_chat_loop
 from realized_core_engine import (
     EngineConfiguration,
     InspectionResult,
@@ -26,6 +27,7 @@ from realized_core_engine import (
     SemanticOutcome,
 )
 from realized_core_runtime import AttemptExecutionOutcome
+from realized_core_llm import ConversationProviderConfigurationError
 
 
 def _identity(
@@ -277,7 +279,7 @@ class CoreConversationHostTests(unittest.TestCase):
 
         with (
             patch(
-                "realized_core.chat.open_resumption_engine",
+                "realized_core_conversation.service.open_resumption_engine",
                 return_value=self.engine,
             ),
             patch("realized_core.cli.run_core_chat_loop", return_value=0) as loop,
@@ -301,6 +303,111 @@ class CoreConversationHostTests(unittest.TestCase):
         self.assertEqual("off", host.configuration.llm_policy)
         self.assertEqual(7, host.configuration.max_steps)
         self.assertIs(self.engine, host.engine)
+
+    def test_cli_composes_product_advisors_when_llm_is_enabled(self) -> None:
+        chat_root = self.root / "provider-chat"
+        planner = object()
+        renderer = object()
+
+        with (
+            patch(
+                "realized_core_conversation.service.open_resumption_engine",
+                return_value=self.engine,
+            ),
+            patch(
+                "realized_core.cli.build_environment_conversation_advisors",
+                return_value=(planner, renderer),
+            ) as build_advisors,
+            patch("realized_core.cli.run_core_chat_loop", return_value=0) as loop,
+        ):
+            status = cli.main(
+                [
+                    "chat",
+                    "--root",
+                    str(chat_root),
+                    "--llm",
+                    "required",
+                ]
+            )
+
+        self.assertEqual(0, status)
+        build_advisors.assert_called_once_with()
+        self.assertIs(planner, loop.call_args.kwargs["planner"])
+        self.assertIs(renderer, loop.call_args.kwargs["renderer"])
+
+    def test_cli_auto_retains_deterministic_chat_without_provider_config(self) -> None:
+        chat_root = self.root / "auto-chat"
+
+        with (
+            patch(
+                "realized_core_conversation.service.open_resumption_engine",
+                return_value=self.engine,
+            ),
+            patch(
+                "realized_core.cli.build_environment_conversation_advisors",
+                side_effect=ConversationProviderConfigurationError(
+                    "No provider is configured."
+                ),
+            ),
+            patch("realized_core.cli.run_core_chat_loop", return_value=0) as loop,
+        ):
+            status = cli.main(
+                [
+                    "chat",
+                    "--root",
+                    str(chat_root),
+                    "--llm",
+                    "auto",
+                ]
+            )
+
+        self.assertEqual(0, status)
+        self.assertIsNone(loop.call_args.kwargs["planner"])
+        self.assertIsNone(loop.call_args.kwargs["renderer"])
+
+    def test_plain_input_uses_natural_language_product_path_when_configured(
+        self,
+    ) -> None:
+        planner = object()
+        renderer = object()
+        output = StringIO()
+
+        with patch.object(
+            self.host,
+            "submit_text",
+            return_value={"assistant_text": "Governed answer."},
+        ) as submit_text:
+            status = run_core_chat_loop(
+                self.host,
+                planner=planner,
+                renderer=renderer,
+                input_stream=StringIO("Continue our work.\n/quit\n"),
+                output_stream=output,
+            )
+
+        self.assertEqual(0, status)
+        submit_text.assert_called_once_with(
+            "Continue our work.",
+            planner=planner,
+            renderer=renderer,
+        )
+        self.assertIn("Governed answer.", output.getvalue())
+
+    def test_unknown_chat_control_is_rejected_without_starting_an_objective(
+        self,
+    ) -> None:
+        output = StringIO()
+
+        status = run_core_chat_loop(
+            self.host,
+            input_stream=StringIO("/unknown do not run this\n/quit\n"),
+            output_stream=output,
+        )
+
+        self.assertEqual(0, status)
+        self.assertIn("unknown command: /unknown", output.getvalue().casefold())
+        self.assertEqual([], self.engine.start_requests)
+        self.assertEqual([], self.engine.resume_requests)
 
     def test_real_host_continues_from_exact_sqlite_revision_without_checkpoint(
         self,
