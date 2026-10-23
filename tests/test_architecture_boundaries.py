@@ -351,12 +351,40 @@ class RepositoryArchitectureBoundaryTest(unittest.TestCase):
             ),
         )
         self.assertEqual(
-            {"realized-core-engine==0.1.0"},
+            {
+                "realized-core-conversation==0.1.0",
+                "realized-core-engine==0.1.0",
+                "realized-core-llm==0.1.0",
+            },
             set(
                 measured["components"]["core_app"]["project"]["project"].get(
                     "dependencies", []
                 )
             ),
+        )
+        actual_edges = {
+            (row["source"], row["target"])
+            for row in measured["baseline"]["actual_edges"]
+        }
+        self.assertTrue(
+            {
+                ("core_app", "core_conversation"),
+                ("core_app", "core_llm"),
+                ("core_conversation", "core_engine"),
+                ("core_conversation", "core_llm"),
+                ("shell_core", "core_conversation"),
+                ("shell_core", "core_llm"),
+            }.issubset(actual_edges)
+        )
+        self.assertFalse(
+            {
+                ("core_conversation", "core_app"),
+                ("core_conversation", "shell_core"),
+                ("core_llm", "core_app"),
+                ("core_llm", "core_conversation"),
+                ("core_llm", "shell_core"),
+            }
+            & actual_edges
         )
         self.assertIn(
             "realized-core-runtime==0.1.0",

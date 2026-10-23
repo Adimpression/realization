@@ -19,6 +19,15 @@ if str(CORE_APP_SRC) not in sys.path:
     sys.path.insert(0, str(CORE_APP_SRC))
 
 from realized_core import cli
+from realized_core_engine import (
+    ContinuationInlet,
+    GoverningDirection,
+    InletRelationship,
+    InspectionRequest,
+    InspectionTargetKind,
+    InspectionView,
+    StartRequest,
+)
 
 
 def _root_imports(path: Path) -> set[str]:
@@ -43,7 +52,7 @@ def _engine_modules() -> set[str]:
 
 
 class CoreApplicationDistributionTests(unittest.TestCase):
-    def test_project_declares_only_the_engine_dependency_and_command(self) -> None:
+    def test_project_declares_only_product_dependencies_and_command(self) -> None:
         project = tomllib.loads(
             (CORE_APP_ROOT / "pyproject.toml").read_text(encoding="utf-8")
         )
@@ -54,7 +63,11 @@ class CoreApplicationDistributionTests(unittest.TestCase):
             metadata["scripts"]["realized-core"],
         )
         self.assertEqual(
-            ["realized-core-engine==0.1.0"],
+            [
+                "realized-core-conversation==0.1.0",
+                "realized-core-engine==0.1.0",
+                "realized-core-llm==0.1.0",
+            ],
             metadata["dependencies"],
         )
         self.assertEqual(
@@ -81,7 +94,14 @@ class CoreApplicationDistributionTests(unittest.TestCase):
 
         self.assertIn("core_app", workspace["tool"]["uv"]["workspace"]["members"])
         self.assertIn("uv build --wheel core_app", cloud_build)
+        self.assertIn("uv build --wheel core_conversation", cloud_build)
+        self.assertIn("uv build --wheel core_llm", cloud_build)
+        self.assertIn("core_conversation.tests.test_pipeline", cloud_build)
+        self.assertIn("core_llm.tests.test_provider", cloud_build)
         self.assertIn("core_app.tests.test_distribution", cloud_build)
+        self.assertIn("core_app.tests.test_chat", cloud_build)
+        self.assertIn("core_app.tests.test_resumption_journey", cloud_build)
+        self.assertIn("tests.test_resumption_journey_spec", cloud_build)
         self.assertIn("tests.test_core_app_cli_equivalence", cloud_build)
         self.assertIn("scripts/verify_core_distribution.py", cloud_build)
 
@@ -199,6 +219,96 @@ class CoreApplicationDistributionTests(unittest.TestCase):
             self.assertEqual(
                 "Resume this deterministic realization.",
                 inspected_summary["root"]["semantic_unit"],
+            )
+
+    def test_cli_exposes_typed_objective_start_and_inspection(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_dir:
+            root = Path(temporary_dir)
+            sqlite_path = root / "resumption.sqlite3"
+            start_request_path = root / "start.json"
+            inspect_request_path = root / "inspect.json"
+            start_request = StartRequest(
+                scope_id="scope-cli",
+                objective_id="objective-cli",
+                branch_id="main",
+                initial_inlet=ContinuationInlet(
+                    inlet_id="inlet-cli",
+                    kind="prompt",
+                    payload={"prompt": "Exercise typed CLI resumption."},
+                    target="root",
+                    relationship=InletRelationship.CONTINUATION,
+                    source="human",
+                    provenance=("message-cli",),
+                    correlation={},
+                    authority_context={"principal": "tester"},
+                ),
+                governing_direction=GoverningDirection(
+                    objective="Exercise typed CLI resumption.",
+                    scope="scope-cli",
+                ),
+            )
+            start_request_path.write_text(
+                json.dumps(start_request.to_dict()),
+                encoding="utf-8",
+            )
+            inspect_request = InspectionRequest(
+                target_kind=InspectionTargetKind.BRANCH_HEAD,
+                target_id="scope-cli/objective-cli/main",
+                view=InspectionView.GOVERNING_DIRECTION,
+                scope_id="scope-cli",
+                objective_id="objective-cli",
+                branch_id="main",
+            )
+            inspect_request_path.write_text(
+                json.dumps(inspect_request.to_dict()),
+                encoding="utf-8",
+            )
+
+            with patch.dict(os.environ, {"OPENAI_API_KEY": ""}, clear=False), patch(
+                "builtins.print"
+            ) as output:
+                self.assertEqual(
+                    0,
+                    cli.main(
+                        [
+                            "objective-start",
+                            "--request",
+                            str(start_request_path),
+                            "--sqlite",
+                            str(sqlite_path),
+                            "--llm",
+                            "off",
+                            "--max-steps",
+                            "0",
+                            "--discovery",
+                            "off",
+                            "--reflection",
+                            "off",
+                            "--contemplation",
+                            "off",
+                        ]
+                    ),
+                )
+                started = json.loads(output.call_args.args[0])
+                output.reset_mock()
+                self.assertEqual(
+                    0,
+                    cli.main(
+                        [
+                            "resumption-inspect",
+                            "--request",
+                            str(inspect_request_path),
+                            "--sqlite",
+                            str(sqlite_path),
+                        ]
+                    ),
+                )
+                inspected = json.loads(output.call_args.args[0])
+
+            self.assertEqual("terminated", started["execution_outcome"])
+            self.assertEqual(
+                "Exercise typed CLI resumption.",
+                inspected["payload"]["objective"],
             )
 
 

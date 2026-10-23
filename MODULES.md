@@ -16,7 +16,10 @@ Top-line rule used in Python files:
 - `workstation/subject_service/` owns the subject workflow application service,
   client-session registry, and subject in-process/gRPC client adapters.
 - `workstation/shell_core/` owns shell application services, chat orchestration,
-  and shell in-process/gRPC client adapters.
+  and shell in-process/gRPC client adapters. Its additive governed-conversation
+  mode composes the public `realized-core-conversation` application surface and
+  `realized-core-llm` provider adapter directly; it does not depend on the
+  `realized-core` CLI package or duplicate product planning behavior.
 - `workstation/foundation_events/` owns event publication. Its historical
   `subscriber_controllers` module is a compatibility alias to `runtime_core`.
 - `workstation/foundation_host/` owns host interaction. Its historical
@@ -41,10 +44,17 @@ legacy aliases.
 
 ## Core Runtime, Theory, Governance, and Exchange
 - `core_app/`: Independently buildable `realized-core` UV project. Its wheel
-  contains only the narrow `run` / `resume` / `inspect` CLI and composition;
-  it depends on `realized-core-engine` and owns no engine implementation. This
-  first distribution slice does not expose governed skill installation,
-  subject activation, or registration of new host realizers.
+  contains the narrow CLI/composition surface and compatibility imports; it
+  owns no engine, conversational application, or provider implementation.
+- `core_conversation/`: Independently buildable `realized-core-conversation`
+  UV project. It owns the transport-neutral governed-conversation application
+  service, typed turn plans, exact selector materialization, and translation
+  between advisory model values and the engine ABI. It contains no terminal,
+  Flutter, Textual, trial, or provider implementation.
+- `core_llm/`: Independently buildable `realized-core-llm` UV project. It owns
+  provider-neutral planning and rendering contracts, schemas, and model-side
+  operation vocabulary. It does not import the engine or decide causal
+  identity, selector resolution, admission, or semantic commitment.
 - `core_engine/`: Independently buildable, wheel-only `realized-core-engine` UV
   project. It assembles the canonical governed engine module closure, state
   model, host mediation, and plain SQLite persistence path without any CLI,

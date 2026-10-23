@@ -6,7 +6,9 @@ requires-python = ">=3.14"
 members = [
     "realized",
     "realized-core",
+    "realized-core-conversation",
     "realized-core-engine",
+    "realized-core-llm",
     "realized-core-runtime",
     "realized-workstation",
     "realized-workstation-app-cli",
@@ -769,6 +771,10 @@ dependencies = [
     { name = "pydantic-core" },
     { name = "pygments" },
     { name = "pyyaml" },
+    { name = "realized-core" },
+    { name = "realized-core-conversation" },
+    { name = "realized-core-engine" },
+    { name = "realized-core-llm" },
     { name = "realized-core-runtime" },
     { name = "realized-workstation" },
     { name = "realized-workstation-app-cli" },
@@ -834,6 +840,10 @@ requires-dist = [
     { name = "pydantic-core", specifier = "==2.41.5" },
     { name = "pygments", specifier = "==2.20.0" },
     { name = "pyyaml", specifier = "==6.0.3" },
+    { name = "realized-core", editable = "core_app" },
+    { name = "realized-core-conversation", editable = "core_conversation" },
+    { name = "realized-core-engine", editable = "core_engine" },
+    { name = "realized-core-llm", editable = "core_llm" },
     { name = "realized-core-runtime", editable = "core_runtime" },
     { name = "realized-workstation", editable = "workstation/namespace" },
     { name = "realized-workstation-app-cli", editable = "workstation/app_cli" },
@@ -875,7 +885,9 @@ name = "realized-core"
 version = "0.1.0"
 source = { editable = "core_app" }
 dependencies = [
+    { name = "realized-core-conversation" },
     { name = "realized-core-engine" },
+    { name = "realized-core-llm" },
 ]
 
 [package.optional-dependencies]
@@ -885,10 +897,27 @@ wasm = [
 
 [package.metadata]
 requires-dist = [
+    { name = "realized-core-conversation", editable = "core_conversation" },
     { name = "realized-core-engine", editable = "core_engine" },
     { name = "realized-core-engine", extras = ["wasm"], marker = "extra == 'wasm'", editable = "core_engine" },
+    { name = "realized-core-llm", editable = "core_llm" },
 ]
 provides-extras = ["wasm"]
+
+[[package]]
+name = "realized-core-conversation"
+version = "0.1.0"
+source = { editable = "core_conversation" }
+dependencies = [
+    { name = "realized-core-engine" },
+    { name = "realized-core-llm" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "realized-core-engine", editable = "core_engine" },
+    { name = "realized-core-llm", editable = "core_llm" },
+]
 
 [[package]]
 name = "realized-core-engine"
@@ -915,6 +944,17 @@ requires-dist = [
     { name = "wasmtime", marker = "extra == 'wasm'", specifier = "==43.0.0" },
 ]
 provides-extras = ["wasm"]
+
+[[package]]
+name = "realized-core-llm"
+version = "0.1.0"
+source = { editable = "core_llm" }
+dependencies = [
+    { name = "openai" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "openai", specifier = "==2.29.0" }]
 
 [[package]]
 name = "realized-core-runtime"
@@ -1093,6 +1133,8 @@ version = "0.1.0"
 source = { editable = "workstation/shell_core" }
 dependencies = [
     { name = "grpcio" },
+    { name = "realized-core-conversation" },
+    { name = "realized-core-llm" },
     { name = "realized-workstation" },
     { name = "realized-workstation-contracts" },
     { name = "realized-workstation-foundation-events" },
@@ -1107,6 +1149,8 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "grpcio", specifier = ">=1.80.0" },
+    { name = "realized-core-conversation", editable = "core_conversation" },
+    { name = "realized-core-llm", editable = "core_llm" },
     { name = "realized-workstation", editable = "workstation/namespace" },
     { name = "realized-workstation-contracts", editable = "workstation/contracts_api" },
     { name = "realized-workstation-foundation-events", editable = "workstation/foundation_events" },

@@ -29,6 +29,9 @@ from workstation.shell.core.chat_shell import (
     workstation_chat_prepare_last_assistant_resolution,
     workstation_chat_prompt_target_plan,
 )
+from workstation.shell.core.governed_conversation import (
+    submit_governed_conversation_turn,
+)
 from workstation.foundation.events.event_bus import publish_workstation_event, workstation_event_bus
 from workstation.runtime.core.session import _append_message, prompt_workstation_session
 from workstation.runtime.core.workstation_core import workstation_chat_transcript_view
@@ -106,6 +109,9 @@ def _latest_assistant_transcript_text(messages: tuple[WorkstationChatMessageView
 class WorkstationShellApiService:
     client_sessions: WorkstationClientSessionRegistry = field(default_factory=WorkstationClientSessionRegistry)
     shell_projection_backend: WorkstationShellProjectionBackend = field(default_factory=WorkstationShellProjectionBackend)
+    governed_conversation_submitter: Callable[..., dict[str, Any]] = (
+        submit_governed_conversation_turn
+    )
 
     def open_client_session(
         self,
@@ -261,10 +267,21 @@ class WorkstationShellApiService:
         normalized_prompt = str(prompt_text or "").strip()
         normalized_assistant = str(assistant_text or "").strip()
         normalized_role = collapse_ws(assistant_role) or "shell"
+        turn_id = new_trace_id("shell-turn")
         if normalized_prompt:
-            _append_message(resolved_root, {"role": "user", "content": normalized_prompt})
+            _append_message(
+                resolved_root,
+                {"role": "user", "content": normalized_prompt, "turn_id": turn_id},
+            )
         if normalized_assistant:
-            _append_message(resolved_root, {"role": normalized_role, "content": normalized_assistant})
+            _append_message(
+                resolved_root,
+                {
+                    "role": normalized_role,
+                    "content": normalized_assistant,
+                    "turn_id": turn_id,
+                },
+            )
         if normalized_prompt or normalized_assistant:
             publish_workstation_event(
                 root_path=resolved_root,
@@ -287,6 +304,11 @@ class WorkstationShellApiService:
         model: str | None = None,
         max_tool_rounds: int = 8,
         force_llm_only: bool = False,
+        interaction_mode: str = "normal",
+        governed_treatment: str = "independent",
+        governed_parent_run_id: str = "",
+        governed_llm_policy: str = "auto",
+        governed_max_steps: int = 256,
     ) -> WorkstationSubmitChatInputResultView:
         resolved_root = Path(root_path).expanduser().resolve()
         parent_trace_id = new_trace_id("shell-submit-request")
@@ -362,12 +384,66 @@ class WorkstationShellApiService:
                     )[0],
                     parent_id=parent_trace_id,
                 )
+        normalized_interaction_mode = collapse_ws(interaction_mode).casefold() or "normal"
+        if normalized_interaction_mode == "governed_conversation":
+            if force_llm_only:
+                raise ValueError(
+                    "LLM-only and governed-conversation modes are mutually exclusive."
+                )
+            report = self.governed_conversation_submitter(
+                root_path=resolved_root,
+                prompt_text=normalized_prompt,
+                model=model,
+                max_steps=governed_max_steps,
+                llm_policy=governed_llm_policy,
+                parent_run_id=governed_parent_run_id,
+            )
+            assistant_text = str(report.get("assistant_text", "") or "")
+            snapshot = self.append_shell_turn(
+                root_path=resolved_root,
+                client_session_id=client_session_id,
+                prompt_text=normalized_prompt,
+                assistant_text=assistant_text,
+                assistant_role="assistant",
+            )
+            trace_id, parent_id = _registered_trace(
+                message_kind="SubmitChatInput.governed_conversation",
+                prefix="shell-submit-response",
+                parent_id=parent_trace_id,
+                components=(
+                    parent_trace_id,
+                    resolved_root,
+                    normalized_prompt,
+                    snapshot.snapshot_version,
+                ),
+            )
+            return WorkstationSubmitChatInputResultView(
+                assistant_text=assistant_text,
+                messages=snapshot.messages,
+                fulfilled_by="governed_conversation",
+                rounds=0,
+                tool_receipts_json="[]",
+                status_text="ok",
+                snapshot_version=snapshot.snapshot_version,
+                progress_fingerprint=snapshot.progress_fingerprint,
+                trace_id=trace_id,
+                parent_id=parent_id,
+                turn_id=collapse_ws(str(report.get("turn_id", ""))),
+                run_id=collapse_ws(str(report.get("run_id", ""))),
+                run_outcome=collapse_ws(str(report.get("run_outcome", ""))),
+                checkpoint_path="",
+            )
         report = prompt_workstation_session(
             root_path=resolved_root,
             prompt=normalized_prompt,
             model=model,
             max_tool_rounds=max_tool_rounds,
             force_llm_only=force_llm_only,
+            interaction_mode=interaction_mode,
+            governed_treatment=governed_treatment,
+            governed_parent_run_id=governed_parent_run_id,
+            governed_llm_policy=governed_llm_policy,
+            governed_max_steps=governed_max_steps,
         )
         snapshot = self.get_chat_snapshot(root_path=resolved_root, client_session_id=client_session_id)
         trace_id, parent_id = _registered_trace(
@@ -387,6 +463,10 @@ class WorkstationShellApiService:
             progress_fingerprint=snapshot.progress_fingerprint,
             trace_id=trace_id,
             parent_id=parent_id,
+            turn_id=collapse_ws(str(report.get("turn_id", ""))),
+            run_id=collapse_ws(str(report.get("run_id", ""))),
+            run_outcome=collapse_ws(str(report.get("run_outcome", ""))),
+            checkpoint_path=str(report.get("checkpoint_path", "") or ""),
         )
 
     def get_activity_view(

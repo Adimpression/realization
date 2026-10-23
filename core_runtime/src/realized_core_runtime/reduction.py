@@ -2,7 +2,10 @@
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from typing import Any
+
+from realized_core_runtime.attempts import AttemptInterrupted
 
 from realized_core_runtime.contracts import (
     RealizationResumePort,
@@ -17,6 +20,7 @@ def run_to_realization(
     max_steps: int = 256,
 ) -> RealizationRunState:
     """Advance the supplied runtime until closure, pause, exhaustion, or budget."""
+    _observe_stop(runtime)
     host_interaction = runtime.runtime_host_interaction_context_payload()
     runtime.state.root().metadata["host_interaction"] = dict(host_interaction)
     runtime.state.root().metadata["host_interaction_backend_kind"] = str(
@@ -39,6 +43,7 @@ def run_to_realization(
     runtime.refresh_frontier()
     steps = 0
     while runtime.state.frontier and steps < max_steps:
+        _observe_stop(runtime)
         steps += 1
         node = runtime.pop_best_frontier()
         if node is None:
@@ -70,6 +75,7 @@ def run_to_realization(
         )
 
         runtime.reduce_not(node)
+        _observe_stop(runtime)
         runtime.propagate([node])
         runtime.refresh_frontier()
 
@@ -82,7 +88,16 @@ def run_to_realization(
             break
 
     runtime.finalize_run()
+    _observe_stop(runtime)
     return runtime.state
+
+
+def _observe_stop(runtime: RealizationRunPort) -> None:
+    """Honor an optional attempt stop probe without giving it semantic meaning."""
+
+    probe = getattr(runtime, "attempt_stop_requested", None)
+    if isinstance(probe, Callable) and probe():
+        raise AttemptInterrupted()
 
 
 def resume_to_realization(

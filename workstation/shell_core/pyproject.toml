@@ -4,6 +4,8 @@ version = "0.1.0"
 description = "Workstation shell runtime package for Realized."
 requires-python = ">=3.14"
 dependencies = [
+    "realized-core-conversation==0.1.0",
+    "realized-core-llm==0.1.0",
     "realized-workstation",
     "realized-workstation-contracts",
     "realized-workstation-foundation-events",
@@ -15,6 +17,10 @@ dependencies = [
     "realized-workstation-subject-service",
     "grpcio>=1.80.0",
 ]
+
+[tool.uv.sources]
+realized-core-conversation = { workspace = true }
+realized-core-llm = { workspace = true }
 
 [build-system]
 requires = ["setuptools>=69", "wheel"]

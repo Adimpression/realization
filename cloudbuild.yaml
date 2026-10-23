@@ -20,15 +20,35 @@ steps:
         uv sync --frozen &&
         uv build core_runtime --out-dir /workspace/core-runtime-dist &&
         uv build --wheel core_engine --out-dir /workspace/core-engine-dist &&
+        uv build --wheel core_llm --out-dir /workspace/core-llm-dist &&
+        uv build --wheel core_conversation --out-dir /workspace/core-conversation-dist &&
         uv build --wheel core_app --out-dir /workspace/core-app-dist &&
         uv run --frozen python -m unittest
         tests.test_architecture_boundaries
+        core_runtime.tests.test_attempts
         core_runtime.tests.test_reduction
+        core_runtime.tests.test_telemetry
         core_engine.tests.test_api
+        core_engine.tests.test_canonical_reduction
         core_engine.tests.test_distribution
+        core_engine.tests.test_resumption_repository
+        core_engine.tests.test_resumption_service
+        core_llm.tests.test_planning_contract
+        core_llm.tests.test_provider
+        core_conversation.tests.test_journal
+        core_conversation.tests.test_pipeline
+        core_conversation.tests.test_schemas
         core_app.tests.test_distribution
+        core_app.tests.test_chat
+        core_app.tests.test_planning
+        core_app.tests.test_resumption_journey
+        tests.test_resumption_journey_spec
+        tests.test_governed_chat_validation
+        tests.test_public_package_metadata
+        tests.test_supplement_provider_compatibility
         tests.test_core_runtime_package_adapter
         tests.test_core_app_cli_equivalence
+        tests.test_governed_turn_provider
         tests.test_side_boundary_extraction
         tests.test_skill_invocation_contract
         tests.test_artifact_boundary_shape
@@ -40,10 +60,13 @@ steps:
         tests.test_llm_layer_hygiene
         tests.test_exchange_layer_hygiene
         tests.test_skill_boundary_normalization
+        workstation.tests.test_workstation_proto_documentation
         workstation.tests.test_six_layer_workstation_boundary_hygiene &&
         uv run --frozen python scripts/verify_core_distribution.py
         --app-wheel /workspace/core-app-dist/realized_core-0.1.0-py3-none-any.whl
+        --conversation-wheel /workspace/core-conversation-dist/realized_core_conversation-0.1.0-py3-none-any.whl
         --engine-wheel /workspace/core-engine-dist/realized_core_engine-0.1.0-py3-none-any.whl
+        --llm-wheel /workspace/core-llm-dist/realized_core_llm-0.1.0-py3-none-any.whl
         --runtime-wheel /workspace/core-runtime-dist/realized_core_runtime-0.1.0-py3-none-any.whl
 
   - name: 'python:3.14-slim'
@@ -59,6 +82,7 @@ steps:
         uv sync --frozen &&
         uv run --frozen python -m unittest
         workstation.tests.bdd.test_report_creation_bdd
+        workstation.tests.bdd.test_governed_reduction_chat_bdd
         workstation.tests.bdd.test_smart_city_travel_incremental_report_ladder_bdd
         workstation.tests.bdd.test_trial_skill_routing_bdd
         tests.test_architecture_compatibility_facades

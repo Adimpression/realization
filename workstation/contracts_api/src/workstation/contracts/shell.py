@@ -35,12 +35,18 @@ class WorkstationChatMessageView:
     role: str
     content: str
     timestamp_epoch_ms: int = 0
+    message_id: str = ""
+    turn_id: str = ""
+    sequence: int = 0
 
     def to_dict(self) -> dict[str, Any]:
         return {
             "role": self.role,
             "content": self.content,
             "timestamp_epoch_ms": int(self.timestamp_epoch_ms or 0),
+            "message_id": self.message_id,
+            "turn_id": self.turn_id,
+            "sequence": int(self.sequence or 0),
         }
 
 
@@ -87,6 +93,10 @@ class WorkstationSubmitChatInputResultView:
     progress_fingerprint: str
     trace_id: str = ""
     parent_id: str = ""
+    turn_id: str = ""
+    run_id: str = ""
+    run_outcome: str = ""
+    checkpoint_path: str = ""
 
 
 @dataclass(frozen=True)
@@ -130,6 +140,11 @@ class WorkstationShellClient(Protocol):
         model: str | None = None,
         max_tool_rounds: int = 8,
         force_llm_only: bool = False,
+        interaction_mode: str = "normal",
+        governed_treatment: str = "independent",
+        governed_parent_run_id: str = "",
+        governed_llm_policy: str = "auto",
+        governed_max_steps: int = 256,
     ) -> WorkstationSubmitChatInputResultView: ...
 
     def append_shell_turn(

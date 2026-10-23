@@ -34,8 +34,8 @@ realizer remain separate architectural facts.
 ## Python API
 
 The public ABI is the typed `realized_core_engine` package. Applications use
-`EngineConfiguration` and the `run`, `resume`, and `inspect` functions rather
-than importing the canonical implementation modules directly:
+`EngineConfiguration`, `EngineInlet`, and the `run`, `resume`, and `inspect`
+functions rather than importing the canonical implementation modules directly:
 
 ```python
 from pathlib import Path
@@ -52,6 +52,12 @@ result = run(
 )
 print(result.summary)
 ```
+
+`EngineInlet` is the explicit, provenance-bearing boundary for selected
+evidence, human contributions, and committed prior results. A conversation
+host may attach such an inlet and resume a paused run, but it must not pass an
+ambient transcript as evidence. Turn ownership, transcript persistence, and
+turn-to-run routing remain outside this engine package.
 
 ## Build
 

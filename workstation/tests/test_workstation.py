@@ -602,6 +602,9 @@ class WorkstationTests(unittest.TestCase):
         Returns:
             None: This function mutates state or performs side effects without returning a value.
         """
+        from controller_entrypoints import ensure_application_controller_runtime
+
+        ensure_application_controller_runtime()
         self.tempdir = tempfile.TemporaryDirectory(prefix="workstation_tests_")
         self.workstation_home = Path(self.tempdir.name) / ".workstation"
         self.workstation_home.mkdir(parents=True, exist_ok=True)
@@ -2073,6 +2076,41 @@ class WorkstationTests(unittest.TestCase):
         self.assertIsNotNone(plan)
         assert plan is not None
         self.assertEqual(plan["skill_title"], "Bash Commands 09 — Remove File")
+        self.assertEqual(plan["invocation_payload"], {"path": "/tmp/hosts.moved"})
+
+    def test_preferred_direct_composition_plan_does_not_treat_remove_file_as_move_file(self) -> None:
+        session = WorkstationSession.from_dict(
+            launch_workstation_session(
+                root_path=self.root,
+                workspace_path=self.workspace,
+                skills_sqlite_path=self.skills_sqlite,
+                initial_task="Use installed trial skills when appropriate.",
+            )
+        )
+        with patch(
+            "workstation.skills.core.direct_composition.workstation_prompt_skill_shortlist_payload",
+            return_value={
+                "skills": [
+                    {
+                        "title": "Bash Commands 09 — Remove File / Bash Commands 09 Remove File",
+                        "score": 3,
+                        "inputs": {
+                            "path": "required input value",
+                        },
+                    },
+                ]
+            },
+        ):
+            plan = preferred_workstation_skill_invocation_plan(
+                session=session,
+                prompt="Remove `/tmp/hosts.moved`.",
+            )
+        self.assertIsNotNone(plan)
+        assert plan is not None
+        self.assertEqual(
+            plan["skill_title"],
+            "Bash Commands 09 — Remove File / Bash Commands 09 Remove File",
+        )
         self.assertEqual(plan["invocation_payload"], {"path": "/tmp/hosts.moved"})
 
     def test_preferred_direct_composition_plan_prefers_write_text_file_for_plain_text_prompt(self) -> None:

@@ -1846,6 +1846,11 @@ def attach_evidence_specs(state: SystemState, evidence_specs: list[dict[str, Any
         if not targets:
             targets = [state.root()]
         for node in targets:
+            external_provenance = [
+                str(item).strip()
+                for item in spec.get("provenance", [])
+                if str(item).strip()
+            ]
             evidence = Evidence(
                 id=_make_id("evidence", spec.get("observation", node.semantic_unit)),
                 node_id=node.id,
@@ -1863,8 +1868,9 @@ def attach_evidence_specs(state: SystemState, evidence_specs: list[dict[str, Any
                 kind="evidence",
                 semantic_identity=node.semantic_unit,
                 payload={"node_id": node.id, "source": evidence.source, "observation": evidence.observation},
+                provenance=external_provenance,
             )
-            evidence.provenance.append(carrier.id)
+            evidence.provenance.extend([carrier.id, *external_provenance])
             state.attach_evidence(evidence)
             if evidence_capability is not None:
                 state.provenance_links.setdefault(node.id, []).append(evidence_capability.id)
@@ -1887,7 +1893,7 @@ def attach_evidence_specs(state: SystemState, evidence_specs: list[dict[str, Any
                     id=_make_id("human", evidence.observation),
                     content=evidence.observation,
                     related_node_id=node.id,
-                    provenance=[carrier.id, evidence.id],
+                    provenance=[carrier.id, evidence.id, *external_provenance],
                 )
                 state.human_contributions[contribution.id] = contribution
                 state.provenance_links.setdefault(node.id, []).append(contribution.id)

@@ -3,7 +3,7 @@
 ## Status
 
 This document records the continuity and versioning behavior implemented by the
-current repository. It was reconciled with the codebase on 2026-10-20.
+current repository. It was reconciled with the codebase on 2026-10-22.
 
 Statements under **Current behavior** describe implemented behavior. Statements
 under **Required hardening** describe gaps or proposed work and must not be read
@@ -49,7 +49,7 @@ does not necessarily permit another domain to resume.
 | Workstation session | A workstation session root | Session material can be reopened | Pure client-view state is process-local |
 | Core execution | Saved `SystemState` JSON plus the configured SQLite database | A run can resume only when state was explicitly saved | No single atomic checkpoint across state, SQLite, configuration, and host realizers |
 | Subject corpus | `corpus/<subject_id>/` | Subject workflow gates and editor state can resume | No immutable named subject versions or global work queues |
-| Chat transcript | Session `MESSAGES.jsonl` | Conversation history can be inspected | No stable message identity and incomplete backlinks from admitted subject material |
+| Chat transcript | Session `MESSAGES.jsonl` | Conversation history can be inspected with stable identity for newly written rows | Incomplete backlinks from admitted subject material; historical rows may predate identity fields |
 | Publication | `corpus/<subject_id>/publications/<publication_id>/` | Builds and compositions can be inspected and rebuilt | No first-class release record or release pointer |
 | Skill/governance home | Workstation skill home and its SQLite store | Admitted and installed abilities survive restart | No repository-wide backup/migration contract with the other stores |
 | Blend world/workflow | Session/world JSON and workflow plan/run files | Durable plans and runs can be reopened | No atomic checkpoint with session, subject, or core state |
@@ -70,6 +70,7 @@ A session can contain:
 - `ATTACHMENTS.json`
 - `TOOLS.json`
 - `MESSAGES.jsonl`
+- `GOVERNED_TURNS.jsonl`
 - `receipts/events.jsonl`
 - `LAST_RESPONSE.json`
 - `README.md`
@@ -81,6 +82,8 @@ A session can contain:
 - `workflows/plans/*.json`
 - `workflows/runs/*.json`
 - configured skill catalog and shortlist projections
+- optional `governed_reduction/states/*.json` checkpoints and
+  `governed_reduction/artifacts.sqlite3`
 
 The session root is durable operational material. It is not the canonical home
 of subject truth, core reduction state, skill admission state, or publication
@@ -134,6 +137,13 @@ Two durable resources have different responsibilities:
 Saving the state JSON is optional. A run that was not given a state output path
 does not acquire a resumable state checkpoint merely because SQLite was
 enabled.
+
+The `realized-core chat` entry-layer host writes `MESSAGES.jsonl`,
+`RUN_BINDINGS.jsonl`, per-run state JSON, and SQLite separately. Workstation's
+explicit governed-turn route uses the same separation under the session root
+and records its correlations in `GOVERNED_TURNS.jsonl`. A binding records
+identity and location; it is not an atomic checkpoint manifest or a substitute
+for preserving both state and SQLite.
 
 A faithful resume also depends on compatible runtime configuration, code and
 schema versions, and the same declared host realizers for any operation that
@@ -276,22 +286,21 @@ Captured source and delta records can retain useful origin metadata such as a
 session ID and prompt.
 
 The linkage is not complete in every path. Assistant-markdown research capture
-can use a timestamped `chat://` source reference without a stable message ID or
-transcript position. The transcript itself does not currently assign a stable,
-globally addressable identity to every message.
+can still use a timestamped `chat://` source reference without persisting the
+exact originating message ID. Newly written transcript rows carry stable
+message IDs, shared turn IDs, and session-local sequence positions; historical
+rows without those additive fields remain readable.
 
 ### Continuity verdict
 
 - Chat history survives when the session root survives.
 - Losing chat does not necessarily destroy already admitted subject truth.
-- Chat cannot currently provide a complete, stable backlink for every admitted
-  unit.
+- Chat cannot currently provide a complete backlink for every admitted unit.
 - Chat must remain separate from the subject corpus; admission is the governed
   boundary between conversation and subject truth.
 
 ### Required hardening
 
-- Assign stable message IDs and transcript sequence positions.
 - Persist capture references that identify the exact source messages or spans.
 - Add a provenance query from an admitted unit back to its session and message
   material without making the transcript the owner of subject truth.
@@ -529,8 +538,10 @@ point in time.
 
 ### Core execution
 
-The core supports explicit state snapshots. It does not currently expose a
-first-class parented run-checkpoint lineage tying state and SQLite together.
+The core supports explicit state snapshots. The thin core chat host and
+Workstation governed-turn host persist parent/run/checkpoint/SQLite bindings,
+but those append-only correlations are not yet atomic, hashed checkpoint
+manifests.
 
 ### Subject corpus
 
@@ -540,8 +551,9 @@ versions with parentage do not yet exist.
 
 ### Chat transcript
 
-The transcript is an application-appended log. It lacks stable message IDs and
-first-class version or branch semantics.
+The transcript is an application-appended log. Newly written rows have stable
+message and turn IDs plus sequence positions, but the log has no first-class
+version or branch semantics and older rows may lack those fields.
 
 ### Publication
 
@@ -595,7 +607,8 @@ compatibility tests prove migration safety.
    meaning of existing successful builds.
 7. Add rebuildable global subject indexes and work queues derived from canonical
    subject and publication material.
-8. Add stable chat message IDs and exact capture backlinks.
+8. Add exact capture backlinks from admitted material to stable chat messages
+   or spans.
 9. Define and test skill-home and Blend export/restore contracts.
 10. Qualify clean-host restoration across all enabled domains and enforce it in
     release gates.

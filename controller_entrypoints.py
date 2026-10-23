@@ -8,6 +8,13 @@ from pathlib import Path
 from typing import Any, Iterator
 
 import controller_runtime
+from realized_core_engine import (
+    EngineConfiguration,
+    EngineInlet,
+    inspect as inspect_core_state,
+    resume as resume_core_run,
+    run as start_core_run,
+)
 from args import (
     STATE_SQLITE_PATH_ENV,
     apply_controller_feature_toggle_overrides,
@@ -48,6 +55,7 @@ from workstation.app.cli.cli import (
 )
 from workstation.foundation.host.controller_runtime import register_controller_runtime_provider
 from workstation.foundation.host.subject_workflow import register_subject_workflow_client_factory
+from workstation.contracts.runtime import GovernedTurnRequest, GovernedTurnResult
 from workstation.subject.service.subject_workflow_client import InProcessSubjectWorkflowClient
 
 
@@ -107,6 +115,127 @@ class _ApplicationControllerRuntimeProvider:
     ) -> tuple[Any, Any]:
         state = SystemState.bootstrap(semantic_unit)
         return state, build_controller(state=state, llm_policy=llm_policy)
+
+    def perform_governed_turn(
+        self,
+        request: GovernedTurnRequest,
+    ) -> GovernedTurnResult:
+        checkpoint_path = Path(request.checkpoint_path).expanduser().resolve()
+        sqlite_path = Path(request.sqlite_path).expanduser().resolve()
+        checkpoint_path.parent.mkdir(parents=True, exist_ok=True)
+        sqlite_path.parent.mkdir(parents=True, exist_ok=True)
+        treatment = str(request.treatment).strip()
+        parent_run_id = str(request.parent_run_id or "").strip()
+        parent_summary: dict[str, Any] | None = None
+        parent_checkpoint_path = (
+            Path(request.parent_checkpoint_path).expanduser().resolve()
+            if request.parent_checkpoint_path is not None
+            else None
+        )
+
+        if treatment != "independent":
+            if parent_checkpoint_path is None or not parent_checkpoint_path.is_file():
+                raise ValueError(
+                    f"{treatment} requires an existing parent reduction checkpoint."
+                )
+            parent_summary = inspect_core_state(parent_checkpoint_path).summary
+            actual_parent_run_id = str(parent_summary.get("run_id", "")).strip()
+            if parent_run_id and parent_run_id != actual_parent_run_id:
+                raise ValueError("The selected parent run does not match its checkpoint.")
+            parent_run_id = actual_parent_run_id
+
+        inlets: tuple[EngineInlet, ...] = ()
+        if treatment == "human_contribution":
+            parent_outcome = str((parent_summary or {}).get("run_outcome", ""))
+            if parent_outcome not in {"paused", "incomplete"}:
+                raise ValueError(
+                    "A human contribution may resume only a paused or incomplete run."
+                )
+            inlets = (
+                EngineInlet(
+                    kind="human_contribution",
+                    content=request.prompt,
+                    source_ref=request.user_message_id,
+                    provenance=(request.turn_id, request.session_id, parent_run_id),
+                    context={
+                        "session_id": request.session_id,
+                        "turn_id": request.turn_id,
+                        "parent_run_id": parent_run_id,
+                    },
+                ),
+            )
+            result = resume_core_run(
+                parent_checkpoint_path,
+                configuration=EngineConfiguration(
+                    state_output_path=checkpoint_path,
+                    sqlite_path=sqlite_path,
+                    max_steps=max(0, int(request.max_steps)),
+                    llm_policy=request.llm_policy,
+                    inlets=inlets,
+                ),
+            )
+        elif treatment in {"follow_up", "correction"}:
+            parent_outcome = str((parent_summary or {}).get("run_outcome", ""))
+            prior_answer = str((parent_summary or {}).get("final_answer", "") or "").strip()
+            if parent_outcome != "completed" or not prior_answer:
+                raise ValueError(
+                    f"A {treatment} requires a completed parent run with a committed result."
+                )
+            inlets = (
+                EngineInlet(
+                    kind="prior_result",
+                    content=prior_answer,
+                    source_ref=parent_run_id,
+                    provenance=(request.turn_id, request.session_id),
+                    context={
+                        "relationship": treatment,
+                        "parent_run_id": parent_run_id,
+                    },
+                ),
+            )
+            result = start_core_run(
+                request.prompt,
+                configuration=EngineConfiguration(
+                    state_output_path=checkpoint_path,
+                    sqlite_path=sqlite_path,
+                    max_steps=max(0, int(request.max_steps)),
+                    llm_policy=request.llm_policy,
+                    inlets=inlets,
+                ),
+            )
+        elif treatment == "independent":
+            result = start_core_run(
+                request.prompt,
+                configuration=EngineConfiguration(
+                    state_output_path=checkpoint_path,
+                    sqlite_path=sqlite_path,
+                    max_steps=max(0, int(request.max_steps)),
+                    llm_policy=request.llm_policy,
+                ),
+            )
+        else:
+            raise ValueError(f"Unsupported governed turn treatment: {treatment}")
+
+        summary = dict(result.summary)
+        run_outcome = str(summary.get("run_outcome", "ongoing"))
+        root_status = str(dict(summary.get("root", {})).get("status", "open"))
+        assistant_text = str(summary.get("final_answer", "") or "").strip()
+        if not assistant_text:
+            assistant_text = {
+                "paused": "The governed run paused for an explicit boundary contribution.",
+                "incomplete": "The governed run is incomplete and remains available for explicit continuation.",
+                "ongoing": "The governed run remains in progress.",
+            }.get(run_outcome, "The governed run completed without a projected answer.")
+        return GovernedTurnResult(
+            assistant_text=assistant_text,
+            run_id=str(summary.get("run_id", "")),
+            parent_run_id=parent_run_id,
+            run_outcome=run_outcome,
+            root_status=root_status,
+            checkpoint_path=checkpoint_path,
+            sqlite_path=sqlite_path,
+            summary=summary,
+        )
 
     def learn_markdown_bundle(
         self,

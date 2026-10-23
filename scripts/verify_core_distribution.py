@@ -29,11 +29,15 @@ def _extract(path: Path, target: Path) -> None:
 
 def _verify_contents(
     app_wheel: Path,
+    conversation_wheel: Path,
     engine_wheel: Path,
+    llm_wheel: Path,
     runtime_wheel: Path,
 ) -> dict[str, object]:
     app_entries = _wheel_entries(app_wheel)
+    conversation_entries = _wheel_entries(conversation_wheel)
     engine_entries = _wheel_entries(engine_wheel)
+    llm_entries = _wheel_entries(llm_wheel)
     runtime_entries = _wheel_entries(runtime_wheel)
     declared_modules = {
         line
@@ -51,7 +55,10 @@ def _verify_contents(
     app_required = {
         "realized_core/__init__.py",
         "realized_core/__main__.py",
+        "realized_core/chat.py",
         "realized_core/cli.py",
+        "realized_core/conversation.py",
+        "realized_core/planning.py",
     }
     app_missing = sorted(app_required - app_entries)
     app_python_entries = {
@@ -60,6 +67,40 @@ def _verify_contents(
         if entry.endswith(".py") and ".dist-info/" not in entry
     }
     app_unexpected = sorted(app_python_entries - app_required)
+
+    conversation_required = {
+        "realized_core_conversation/__init__.py",
+        "realized_core_conversation/contracts.py",
+        "realized_core_conversation/identity.py",
+        "realized_core_conversation/journal.py",
+        "realized_core_conversation/ports.py",
+        "realized_core_conversation/schemas.py",
+        "realized_core_conversation/service.py",
+    }
+    conversation_missing = sorted(
+        conversation_required - conversation_entries
+    )
+    conversation_forbidden = sorted(
+        entry
+        for entry in conversation_entries
+        if entry.startswith("realized_core/")
+        or entry.startswith("workstation/")
+    )
+
+    llm_required = {
+        "realized_core_llm/__init__.py",
+        "realized_core_llm/planning.py",
+        "realized_core_llm/provider.py",
+    }
+    llm_missing = sorted(llm_required - llm_entries)
+    llm_forbidden = sorted(
+        entry
+        for entry in llm_entries
+        if entry.startswith("realized_core/")
+        or entry.startswith("realized_core_conversation/")
+        or entry.startswith("realized_core_engine/")
+        or entry.startswith("workstation/")
+    )
 
     engine_required = {
         "controller_runtime.py",
@@ -89,8 +130,12 @@ def _verify_contents(
     if (
         app_missing
         or app_unexpected
+        or conversation_forbidden
+        or conversation_missing
         or engine_forbidden
         or engine_missing
+        or llm_forbidden
+        or llm_missing
         or runtime_missing
         or undeclared_modules
         or unpackaged_modules
@@ -100,8 +145,12 @@ def _verify_contents(
                 {
                     "app_missing": app_missing,
                     "app_unexpected": app_unexpected,
+                    "conversation_forbidden": conversation_forbidden,
+                    "conversation_missing": conversation_missing,
                     "engine_forbidden": engine_forbidden,
                     "engine_missing": engine_missing,
+                    "llm_forbidden": llm_forbidden,
+                    "llm_missing": llm_missing,
                     "runtime_missing": runtime_missing,
                     "undeclared_modules": undeclared_modules,
                     "unpackaged_modules": unpackaged_modules,
@@ -114,26 +163,42 @@ def _verify_contents(
         "app_entry_count": len(app_entries),
         "app_python_entries": sorted(app_python_entries),
         "canonical_module_count": len(packaged_modules),
+        "conversation_entry_count": len(conversation_entries),
+        "conversation_forbidden_entries": conversation_forbidden,
         "engine_entry_count": len(engine_entries),
         "engine_forbidden_entries": engine_forbidden,
+        "llm_entry_count": len(llm_entries),
+        "llm_forbidden_entries": llm_forbidden,
         "runtime_entry_count": len(runtime_entries),
     }
 
 
 def _smoke(
     app_wheel: Path,
+    conversation_wheel: Path,
     engine_wheel: Path,
+    llm_wheel: Path,
     runtime_wheel: Path,
 ) -> dict[str, object]:
     with tempfile.TemporaryDirectory(prefix="realized-core-wheel-") as temporary_dir:
         root = Path(temporary_dir).resolve()
         app_installed = root / "app"
+        conversation_installed = root / "conversation"
         engine_installed = root / "engine"
+        llm_installed = root / "llm"
         runtime_installed = root / "runtime"
-        for target in (app_installed, engine_installed, runtime_installed):
+        for target in (
+            app_installed,
+            conversation_installed,
+            engine_installed,
+            llm_installed,
+            runtime_installed,
+        ):
             target.mkdir()
         _extract(app_wheel, app_installed)
+        _extract(conversation_wheel, conversation_installed)
         _extract(engine_wheel, engine_installed)
+        _extract(llm_wheel, llm_installed)
         _extract(runtime_wheel, runtime_installed)
         sqlite_path = root / "state.sqlite3"
         state_path = root / "state.json"
@@ -143,19 +208,31 @@ from pathlib import Path
 import sys
 
 app_target = Path(sys.argv.pop(1)).resolve()
+conversation_target = Path(sys.argv.pop(1)).resolve()
 engine_target = Path(sys.argv.pop(1)).resolve()
+llm_target = Path(sys.argv.pop(1)).resolve()
 runtime_target = Path(sys.argv.pop(1)).resolve()
-sys.path[:0] = [str(app_target), str(engine_target), str(runtime_target)]
+sys.path[:0] = [
+    str(app_target),
+    str(conversation_target),
+    str(engine_target),
+    str(llm_target),
+    str(runtime_target),
+]
 import controller_runtime
 import realized_core
+import realized_core_conversation
 import realized_core_engine
+import realized_core_llm
 import realized_core_runtime
 from realized_core.cli import main
 
 expected_owners = (
     (controller_runtime, engine_target),
     (realized_core, app_target),
+    (realized_core_conversation, conversation_target),
     (realized_core_engine, engine_target),
+    (realized_core_llm, llm_target),
     (realized_core_runtime, runtime_target),
 )
 for module, owner in expected_owners:
@@ -175,7 +252,9 @@ raise SystemExit(main())
                 "-c",
                 script,
                 str(app_installed),
+                str(conversation_installed),
                 str(engine_installed),
+                str(llm_installed),
                 str(runtime_installed),
                 "run",
                 "--prompt",
@@ -211,18 +290,24 @@ raise SystemExit(main())
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--app-wheel", type=Path, required=True)
+    parser.add_argument("--conversation-wheel", type=Path, required=True)
     parser.add_argument("--engine-wheel", type=Path, required=True)
+    parser.add_argument("--llm-wheel", type=Path, required=True)
     parser.add_argument("--runtime-wheel", type=Path, required=True)
     args = parser.parse_args()
     report = {
         "contents": _verify_contents(
             args.app_wheel,
+            args.conversation_wheel,
             args.engine_wheel,
+            args.llm_wheel,
             args.runtime_wheel,
         ),
         "smoke": _smoke(
             args.app_wheel,
+            args.conversation_wheel,
             args.engine_wheel,
+            args.llm_wheel,
             args.runtime_wheel,
         ),
     }

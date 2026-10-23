@@ -1,0 +1,71 @@
+{
+  "scenario_id": "five_turn_project_brief",
+  "description": "A bounded five-turn conversation that tests exact state retention, revision, correction, and final change synthesis through explicit governed turn relationships.",
+  "minimum_semantic_score": 1.0,
+  "turns": [
+    {
+      "turn_id": "establish_brief",
+      "treatment": "independent",
+      "prompt": "Create a concise one-sentence project brief. The project codename is Cedar, the interface color is blue, and the deadline is Friday. Repeat all three values exactly and add no assumptions.",
+      "required_concepts": [
+        {"label": "codename", "any_of": ["cedar"]},
+        {"label": "original color", "any_of": ["blue"]},
+        {"label": "original deadline", "any_of": ["friday"]}
+      ]
+    },
+    {
+      "turn_id": "change_color",
+      "treatment": "follow_up",
+      "prompt": "Change only the interface color from blue to green. Return the complete one-sentence brief, retaining the codename and deadline.",
+      "required_concepts": [
+        {"label": "codename", "any_of": ["cedar"]},
+        {"label": "current color", "any_of": ["green"]},
+        {"label": "original deadline", "any_of": ["friday"]}
+      ],
+      "forbidden_concepts": [
+        {"label": "superseded color absent", "any_of": ["blue"]}
+      ]
+    },
+    {
+      "turn_id": "recall_current_state",
+      "treatment": "follow_up",
+      "prompt": "State the current codename, color, and deadline as exactly three labeled clauses.",
+      "required_concepts": [
+        {"label": "codename", "any_of": ["cedar"]},
+        {"label": "current color", "any_of": ["green"]},
+        {"label": "current deadline", "any_of": ["friday"]}
+      ],
+      "forbidden_concepts": [
+        {"label": "superseded color absent", "any_of": ["blue"]}
+      ]
+    },
+    {
+      "turn_id": "correct_deadline",
+      "treatment": "correction",
+      "prompt": "Correction: the deadline is Monday, not Friday. Return the complete current brief and keep every other value unchanged.",
+      "required_concepts": [
+        {"label": "codename", "any_of": ["cedar"]},
+        {"label": "current color", "any_of": ["green"]},
+        {"label": "corrected deadline", "any_of": ["monday"]}
+      ],
+      "forbidden_concepts": [
+        {"label": "superseded deadline absent", "any_of": ["friday"]},
+        {"label": "superseded color absent", "any_of": ["blue"]}
+      ]
+    },
+    {
+      "turn_id": "final_synthesis",
+      "treatment": "follow_up",
+      "prompt": "Summarize the final brief in one sentence and explicitly state that color changed from blue to green and deadline changed from Friday to Monday.",
+      "required_concepts": [
+        {"label": "codename", "any_of": ["cedar"]},
+        {"label": "original color", "any_of": ["blue"]},
+        {"label": "current color", "any_of": ["green"]},
+        {"label": "original deadline", "any_of": ["friday"]},
+        {"label": "current deadline", "any_of": ["monday"]},
+        {"label": "color field", "any_of": ["color", "colour"]},
+        {"label": "deadline field", "any_of": ["deadline"]}
+      ]
+    }
+  ]
+}

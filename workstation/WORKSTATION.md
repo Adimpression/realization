@@ -100,6 +100,40 @@ Recommended transport posture:
 - server-side streaming for watch/update delivery
 - bidi only if a later session protocol truly needs continuous client event streaming
 
+## Chat And Governed Reduction Boundary
+
+Workstation conversation remains host-owned. A normal prompt still follows the
+existing shell, LLM, skill, and tool route; it does not enter the core reduction
+loop implicitly.
+
+The shared shell contract also exposes an explicit per-turn
+`governed_reduction` route. That route crosses the typed
+governed-turn extension to the `ControllerRuntimeProvider` seam, whose
+implementation is registered only by the outer application composition root.
+The extension is interface-segregated so existing providers remain valid until
+that route is selected. Workstation packages do not import the core engine or
+receive controller objects.
+
+The four governed treatments are deliberately distinct:
+
+- `independent` starts a new run
+- `human_contribution` attaches only the selected message, with message and
+  turn provenance, then resumes a paused or incomplete run
+- `follow_up` starts a new linked run using only the committed prior result
+- `correction` starts a new corrective run rather than reopening a closed run
+
+Each new transcript record has a stable message ID, turn ID, and session-local
+sequence position. Existing transcript rows without those additive fields
+remain readable. `GOVERNED_TURNS.jsonl` binds Workstation turn/message IDs to
+run IDs and checkpoint paths; `governed_reduction/states/` owns state JSON and
+`governed_reduction/artifacts.sqlite3` owns reusable core artifacts. These
+stores are correlated, not conflated.
+
+The one-shot `workstation-prompt` CLI and the in-process/gRPC shell contract can
+select this route explicitly. Textual and Flutter continue to submit normal
+chat by default, preserving current behavior until a deliberate UX exposes the
+mode.
+
 ## UI Hierarchy Rule
 
 Workstation surfaces should be visually ordered as:

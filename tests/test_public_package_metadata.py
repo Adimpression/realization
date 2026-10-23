@@ -8,7 +8,9 @@ import unittest
 REPO_ROOT = Path(__file__).resolve().parents[1]
 PUBLIC_PACKAGES = {
     "core_app": "realized-core",
+    "core_conversation": "realized-core-conversation",
     "core_engine": "realized-core-engine",
+    "core_llm": "realized-core-llm",
     "core_runtime": "realized-core-runtime",
 }
 

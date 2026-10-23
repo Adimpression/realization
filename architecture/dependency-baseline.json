@@ -22,7 +22,27 @@
     },
     {
       "source": "core_app",
+      "target": "core_conversation"
+    },
+    {
+      "source": "core_app",
       "target": "core_engine"
+    },
+    {
+      "source": "core_app",
+      "target": "core_llm"
+    },
+    {
+      "source": "core_conversation",
+      "target": "core_engine"
+    },
+    {
+      "source": "core_conversation",
+      "target": "core_llm"
+    },
+    {
+      "source": "core_engine",
+      "target": "governed_core"
     },
     {
       "source": "foundation_events",
@@ -103,6 +123,14 @@
     {
       "source": "shell_core",
       "target": "contracts"
+    },
+    {
+      "source": "shell_core",
+      "target": "core_conversation"
+    },
+    {
+      "source": "shell_core",
+      "target": "core_llm"
     },
     {
       "source": "shell_core",
@@ -226,9 +254,9 @@
     "cyclic_internal_edge_count": 0,
     "cyclic_node_count": 0,
     "cyclic_scc_count": 0,
-    "edge_count": 629,
+    "edge_count": 641,
     "largest_cyclic_scc_node_count": 0,
-    "node_count": 148
+    "node_count": 150
   },
   "compatibility_edges": [
     {
@@ -262,6 +290,12 @@
       "direction": "component_to_root",
       "source": "app_cli",
       "target": "semantic_text"
+    },
+    {
+      "category": "dto_constants",
+      "direction": "component_to_root",
+      "source": "core_engine",
+      "target": "applied_theory_types"
     },
     {
       "category": "orchestration",
@@ -783,6 +817,18 @@
       "category": "orchestration",
       "direction": "root_to_component",
       "source": "controller_entrypoints",
+      "target": "contracts"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "controller_entrypoints",
+      "target": "core_engine"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "controller_entrypoints",
       "target": "foundation_host"
     },
     {
@@ -790,6 +836,18 @@
       "direction": "root_to_component",
       "source": "controller_entrypoints",
       "target": "subject_service"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "controller_runtime",
+      "target": "governed_core"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "execution_frameworks",
+      "target": "governed_core"
     },
     {
       "category": "orchestration",
@@ -812,6 +870,10 @@
     {
       "module": "semantic_text",
       "source": "app_cli"
+    },
+    {
+      "module": "applied_theory_types",
+      "source": "core_engine"
     },
     {
       "module": "args",
@@ -1161,11 +1223,27 @@
     },
     {
       "source": "controller_entrypoints",
+      "target": "contracts"
+    },
+    {
+      "source": "controller_entrypoints",
+      "target": "core_engine"
+    },
+    {
+      "source": "controller_entrypoints",
       "target": "foundation_host"
     },
     {
       "source": "controller_entrypoints",
       "target": "subject_service"
+    },
+    {
+      "source": "controller_runtime",
+      "target": "governed_core"
+    },
+    {
+      "source": "execution_frameworks",
+      "target": "governed_core"
     },
     {
       "source": "governed_semantic_reduction_runtime",
@@ -1374,7 +1452,7 @@
       "source": "capability_runtime"
     },
     {
-      "module": "execution_frameworks",
+      "module": "execution_framework_primitives",
       "source": "capability_runtime"
     },
     {
