@@ -114,10 +114,12 @@ This changes the meaning of familiar events:
 - An **unrelated objective** inherits nothing merely because its words are
   similar.
 
-### Cedar at a glance
+### Follow Cedar
 
-One continuing example makes the difference between conversational memory and
-governed resumption visible:
+The story begins with an ordinary request and follows the same undertaking
+through changed facts, unfinished thought, vanished machinery, a new model,
+changed intent, and parallel futures. Finally, a completely unrelated request
+tests the boundary. At a glance, its shape looks like this:
 
 ```mermaid
 flowchart LR
@@ -143,11 +145,12 @@ flowchart LR
     TE --> M
 ```
 
-### 1. Begin with both achievement and non-achievedness
+#### It starts with an unfinished brief
 
-The first inlet asks for a Cedar brief in blue, due Friday. Those facts can be
-admitted while its required audience remains unknown. A valid reply can finish
-the turn without pretending that it finished the objective.
+The user begins simply: `Create a brief for Cedar, use blue, due Friday.` The
+project, color, and deadline can all be admitted. But a useful brief also needs
+an audience, and no audience was given. Realization answers the turn without
+pretending that the larger undertaking is complete.
 
 ```mermaid
 flowchart LR
@@ -165,15 +168,18 @@ flowchart LR
     N --> O
 ```
 
-The transcript records the request. The governed state separately records what
-currently holds and what still prevents closure.
+The transcript remembers the sentence. Cedar's governed state remembers
+something different: three facts currently hold, and one obligation still
+prevents closure. The conversation has moved forward; the work remains
+unfinished.
 
-### 2. Correct without erasing the past
+#### The user changes their mind
 
-Two later inlets change blue to green and Friday to Monday. Each correction
-creates a new immutable revision. The old values remain historically real and
-inspectable, but no longer compete as current facts. The audience obligation
-survives both successful turns.
+Then come two ordinary corrections: `Change blue to green`, followed by `Move
+the deadline to Monday.` Each one creates a new immutable revision. Blue and
+Friday remain part of what happened, but they no longer compete with green and
+Monday as current facts. Through both completed turns, the missing audience
+quietly remains unresolved.
 
 ```mermaid
 flowchart LR
@@ -189,15 +195,17 @@ flowchart LR
     R3 -- "current head" --> P
 ```
 
-Replaying the transcript would expose all four values. Resuming `r3` exposes
-green and Monday as current, the audience as unresolved, and the earlier values
-through provenance only.
+The conversation now contains blue, green, Friday, and Monday. A replay leaves
+the next model to infer which pair won. Resuming `r3` does not: green and Monday
+are current, the audience is unresolved, and the older values are reachable
+through provenance rather than revived as possibilities.
 
-### 3. Interrupt without accidentally admitting unfinished work
+#### Work stops in the middle of a thought
 
-A reduction starts resolving the audience and develops `city officials` as a
-candidate. It is interrupted before validation and admission. Operational
-activity stops; semantic state does not advance.
+Now reduction turns to the missing audience. `City officials` emerges as a
+candidate, but the attempt is interrupted before validation and admission.
+Computation stops in the middle of a thought. Cedar's semantic state does not
+pretend otherwise.
 
 ```mermaid
 flowchart LR
@@ -213,15 +221,17 @@ flowchart LR
     A -. "no admitted transition" .-> N
 ```
 
-The candidate is not discarded; it can remain in path evidence. But an
-interruption cannot promote it into current state or discharge the open
-obligation.
+The unfinished candidate need not be forgotten; it can remain in path evidence.
+But it is not allowed to become the audience merely because it was the last
+thing under consideration. The head remains `r3`, and the audience remains
+unresolved.
 
-### 4. Preserve ambiguity instead of guessing from proximity
+#### Three words expose the danger of replay
 
-After both corrections, the inlet `Change it back` is ambiguous. It might mean
-green back to blue or Monday back to Friday. Transcript recency is not enough
-to choose a semantic target.
+Suppose the user now says: `Change it back.` The phrase is only three words,
+yet Cedar has two legitimate predecessors. Does *it* mean green should become
+blue, or Monday should become Friday? Recency in the transcript cannot confer
+semantic authority on either interpretation.
 
 ```mermaid
 flowchart LR
@@ -240,14 +250,16 @@ flowchart LR
     H --> S
 ```
 
-Here uncertainty is not a model failure to hide. It becomes explicit
-non-achievedness that a later inlet can resolve.
+So Realization does not reward a confident guess. The ambiguity becomes
+explicit non-achievedness, `r3` remains current, and a later inlet can resolve
+the question without first repairing an invented transition.
 
-### 5. Resume after the machinery disappears
+#### Then the machinery disappears
 
-Once `r3` is admitted, the process can terminate, its cache can disappear, and
-the model provider can be replaced. A new host resumes by exact causal identity,
-not by asking a new model to reconstruct state from prose.
+With `r3` safely admitted, the process terminates. Its cache vanishes. Even the
+model provider can be replaced. Later, another host appears with none of that
+hidden computational continuity. It does not ask a new model to reconstruct
+Cedar from prose; it resumes the exact causal state that survived them both.
 
 ```mermaid
 flowchart LR
@@ -263,16 +275,18 @@ flowchart LR
     TR -. "explanation, not authority" .-> NEW
 ```
 
-The new machinery may render different prose. It is not allowed to silently
-change which facts are current, what remains unresolved, or which revision it
-continued.
+The new machinery may phrase its answer differently. It may use another model,
+or no model at all. What it cannot do is silently alter which facts are current,
+which obligation remains open, or which revision it continued. The machinery
+was replaceable; the meaning of the work was not.
 
-### 6. Distinguish augmentation, redirection, and realignment
+#### The assignment itself changes
 
-`Also include a budget summary` augments the brief: it adds work without
-withdrawing anything. `Instead, create a launch checklist` redirects the
-objective. Realignment must then decide what survives that change rather than
-blindly carrying every old assumption forward.
+After resumption, the user adds: `Also include a budget summary.` Cedar now has
+more work, but it is still a brief; nothing was withdrawn. Then the user changes
+direction entirely: `Instead, create a launch checklist.` The old undertaking
+cannot continue unchanged, yet the new sentence does not say which of Cedar's
+existing facts still belong. That is the work of realignment.
 
 ```mermaid
 flowchart LR
@@ -296,16 +310,18 @@ flowchart LR
     C --> R4
 ```
 
-Redirection changes where work is heading. Realignment governs the semantic
-consequences. Anything whose applicability cannot yet be established remains
-unresolved instead of being silently retained or deleted.
+The project remains Cedar and the brief direction is superseded. But green,
+Monday, the audience, and the budget do not acquire a new meaning by accident.
+Their applicability remains unresolved until the user clarifies: keep Monday
+and the budget summary; drop the color and audience requirements. Redirection
+changed the destination. Realignment governed what could travel there.
 
-### 7. Branch, merge, and reject stale continuation
+#### The story forks
 
-An executive brief and a technical brief may both continue from `r3`. They are
-parallel futures with a shared parent, not two adjacent paragraphs in one
-linear history. A merge names both parents, while an attempt anchored to an old
-head cannot overwrite newer state.
+Resumption need not have only one future. Return to `r3`, before the launch
+checklist continuation. One team prepares an executive version of the brief;
+another prepares a technical version. Both inherit the same green, Monday, and
+unresolved audience. Neither is pretending to be the other.
 
 ```mermaid
 flowchart LR
@@ -326,14 +342,18 @@ flowchart LR
     H -. "cannot be overwritten" .-> RJ
 ```
 
-Concurrency therefore becomes visible causal structure rather than
-last-writer-wins conversation order.
+When their work rejoins, the merge names both parents. Meanwhile, an old attempt
+still anchored to `r3` tries to write after the head has moved and is rejected.
+What would look like neighboring messages in a transcript becomes honest causal
+structure: one past, two futures, an explicit reunion, and no last-writer-wins
+amnesia.
 
-### 8. Keep independent objectives independent
+#### A new journey tests the boundary
 
-`Plan my holiday` may be linguistically close to planning Cedar work. Semantic
-retrieval may nominate Cedar artifacts for attention, but similarity cannot
-establish that the holiday continues Cedar's objective.
+Eventually the user says: `Plan my holiday.` The words *plan* and *deadline*
+might retrieve Cedar artifacts. A fluent model might even weave them into a
+plausible continuation. But the holiday has no Cedar causal identity. It is a
+new undertaking, not the next chapter of the brief.
 
 ```mermaid
 flowchart LR
@@ -350,14 +370,16 @@ flowchart LR
     NO --> NEW
 ```
 
-Retrieval can suggest what to inspect. It cannot verify applicability or create
-a continuation relationship.
+Retrieval may bring Cedar to attention. It cannot make Cedar applicable, and it
+cannot manufacture a continuation relationship. The holiday begins without
+green, Monday, a budget summary, or a missing audience.
 
-### 9. Use the path when the present alone is not enough
+#### Later, someone asks why
 
-Ordinary continuation consumes current state and non-achievedness. The full
-path remains available when someone asks why Monday is current, requests a
-reversal, verifies a transition, or rebuilds derived state after loss.
+Ordinary continuation did not need to carry blue and Friday as live candidates.
+But they were never erased. When someone later asks why Monday is current,
+requests a reversal, verifies the correction, or rebuilds derived state after
+loss, Cedar's persisted path becomes the subject of the next reduction.
 
 ```mermaid
 flowchart LR
@@ -373,12 +395,14 @@ flowchart LR
     P --> C
 ```
 
-Reversal is not deletion and reconstruction is not invention. Both operate
-from retained, inspectable relationships.
+The answer can show that Friday was admitted and Monday superseded it. A
+reversal creates another governed successor rather than editing history.
+Reconstruction derives state from retained artifacts rather than asking a model
+to invent a likely past.
 
-The striking result is not another generated sentence. It is that after every
-correction, interruption, restart, branch, and redirection, the system can still
-answer:
+By the end of Cedar's story, the remarkable result is not another generated
+sentence. It is that after every correction, interruption, disappearance,
+branch, and redirection, the system can still answer:
 
 ```text
 What is current?
