@@ -9,7 +9,8 @@ This filename is legacy. The implementation tracker is now six-layer.
 - [x] Exchange/schema/export responsibilities are split out of the old mixed `skill_io` surface.
 - [x] Workstation exists as a separate sibling surface under [workstation](workstation).
 - [x] Workstation trial validation is green for the current governed portable trial corpus.
-- [x] A first shared host-interaction contract exists at repo root.
+- [x] The shared host-interaction contract and common mechanics are packaged as
+  the dependency-free `realized-host-interaction` substrate.
 - [x] The governed runtime can now describe an injected host backend through that contract without importing workstation shell code.
 - [x] The workstation now has a workstation-backed adapter for the shared host-interaction contract.
 - [x] A first lower runtime/controller bootstrap facade now exists in [runtime_controller_api.py](runtime_controller_api.py), so workstation nested skill invocation no longer imports `main.py` directly.

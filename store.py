@@ -3815,14 +3815,18 @@ class SQLiteVectorArtifactStore:
         """
         self.sqlite_path.parent.mkdir(parents=True, exist_ok=True)
         connection = self.sqlite3.connect(str(self.sqlite_path))
-        connection.row_factory = self.sqlite3.Row
-        connection.execute("PRAGMA foreign_keys=ON")
-        if self.vector_schema_enabled():
-            connection.enable_load_extension(True)
-            self.sqlite_vec.load(connection)
-        connection.execute("PRAGMA journal_mode=WAL")
-        connection.execute("PRAGMA synchronous=NORMAL")
-        return connection
+        try:
+            connection.row_factory = self.sqlite3.Row
+            connection.execute("PRAGMA foreign_keys=ON")
+            if self.vector_schema_enabled():
+                connection.enable_load_extension(True)
+                self.sqlite_vec.load(connection)
+            connection.execute("PRAGMA journal_mode=WAL")
+            connection.execute("PRAGMA synchronous=NORMAL")
+            return connection
+        except Exception:
+            connection.close()
+            raise
 
     def _artifact_learning_projection(self, artifact: Artifact) -> dict[str, Any]:
         """

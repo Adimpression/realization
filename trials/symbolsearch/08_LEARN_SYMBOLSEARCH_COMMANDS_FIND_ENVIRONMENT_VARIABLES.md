@@ -31,7 +31,7 @@ Output:
 
 ## 4. Natural-language paraphrases
 
-* find environment variable names containing `OPENAI` under `/Users/ravindranathakila/service/realized`
+* find environment variable names containing `OPENAI` under `.`
 * search a codebase for one env-var pattern
 * locate environment variable references by text
 

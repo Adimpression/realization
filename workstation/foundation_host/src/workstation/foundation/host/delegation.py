@@ -5,7 +5,7 @@ from collections.abc import Mapping
 from typing import Any
 
 from applied_theory_types import Artifact
-from host_interaction_delegation import (
+from realized_host_interaction.delegation import (
     artifact_with_delegated_virtual_mounts,
     build_host_interaction_delegated_mounts,
 )

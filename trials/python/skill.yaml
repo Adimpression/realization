@@ -120,7 +120,7 @@ governance:
   created_at: '2026-04-01T12:34:12+00:00'
   provenance:
   - not_learn-from-markdown-01-learn-python-commands-lis_d87d2a
-  - /Users/ravindranathakila/service/realized/trials/python/01_LEARN_PYTHON_COMMANDS_LIST_DIRECTORY.md
+  - trials/python/01_LEARN_PYTHON_COMMANDS_LIST_DIRECTORY.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -402,7 +402,7 @@ governance:
   created_at: '2026-04-01T12:34:27+00:00'
   provenance:
   - not_learn-from-markdown-02-learn-python-commands-rea_d669ac
-  - /Users/ravindranathakila/service/realized/trials/python/02_LEARN_PYTHON_COMMANDS_READ_TEXT_FILE.md
+  - trials/python/02_LEARN_PYTHON_COMMANDS_READ_TEXT_FILE.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -689,7 +689,7 @@ governance:
   created_at: '2026-04-01T12:34:44+00:00'
   provenance:
   - not_learn-from-markdown-03-learn-python-commands-wri_fa5f04
-  - /Users/ravindranathakila/service/realized/trials/python/03_LEARN_PYTHON_COMMANDS_WRITE_TEXT_FILE.md
+  - trials/python/03_LEARN_PYTHON_COMMANDS_WRITE_TEXT_FILE.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -979,7 +979,7 @@ governance:
   created_at: '2026-04-01T12:34:56+00:00'
   provenance:
   - not_learn-from-markdown-04-learn-python-commands-app_d02f3f
-  - /Users/ravindranathakila/service/realized/trials/python/04_LEARN_PYTHON_COMMANDS_APPEND_TEXT_FILE.md
+  - trials/python/04_LEARN_PYTHON_COMMANDS_APPEND_TEXT_FILE.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -1274,7 +1274,7 @@ governance:
   created_at: '2026-04-01T12:35:08+00:00'
   provenance:
   - not_learn-from-markdown-05-learn-python-commands-cop_e5361e
-  - /Users/ravindranathakila/service/realized/trials/python/05_LEARN_PYTHON_COMMANDS_COPY_FILE.md
+  - trials/python/05_LEARN_PYTHON_COMMANDS_COPY_FILE.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -1583,7 +1583,7 @@ governance:
   created_at: '2026-04-01T12:35:21+00:00'
   provenance:
   - not_learn-from-markdown-06-learn-python-commands-mov_7849de
-  - /Users/ravindranathakila/service/realized/trials/python/06_LEARN_PYTHON_COMMANDS_MOVE_FILE.md
+  - trials/python/06_LEARN_PYTHON_COMMANDS_MOVE_FILE.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -1881,7 +1881,7 @@ governance:
   created_at: '2026-04-01T12:35:31+00:00'
   provenance:
   - not_learn-from-markdown-07-learn-python-commands-del_04f850
-  - /Users/ravindranathakila/service/realized/trials/python/07_LEARN_PYTHON_COMMANDS_DELETE_FILE.md
+  - trials/python/07_LEARN_PYTHON_COMMANDS_DELETE_FILE.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -2162,7 +2162,7 @@ governance:
   created_at: '2026-04-01T12:35:43+00:00'
   provenance:
   - not_learn-from-markdown-08-learn-python-commands-rea_298928
-  - /Users/ravindranathakila/service/realized/trials/python/08_LEARN_PYTHON_COMMANDS_READ_JSON_FILE.md
+  - trials/python/08_LEARN_PYTHON_COMMANDS_READ_JSON_FILE.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -2451,7 +2451,7 @@ governance:
   created_at: '2026-04-01T12:35:56+00:00'
   provenance:
   - not_learn-from-markdown-09-learn-python-commands-wri_6587ae
-  - /Users/ravindranathakila/service/realized/trials/python/09_LEARN_PYTHON_COMMANDS_WRITE_JSON_FILE.md
+  - trials/python/09_LEARN_PYTHON_COMMANDS_WRITE_JSON_FILE.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -2736,7 +2736,7 @@ governance:
   created_at: '2026-04-01T12:36:09+00:00'
   provenance:
   - not_learn-from-markdown-10-learn-python-commands-rea_acbb02
-  - /Users/ravindranathakila/service/realized/trials/python/10_LEARN_PYTHON_COMMANDS_READ_CSV_FILE.md
+  - trials/python/10_LEARN_PYTHON_COMMANDS_READ_CSV_FILE.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -3022,7 +3022,7 @@ governance:
   created_at: '2026-04-01T12:36:22+00:00'
   provenance:
   - not_learn-from-markdown-11-learn-python-commands-wri_8750b3
-  - /Users/ravindranathakila/service/realized/trials/python/11_LEARN_PYTHON_COMMANDS_WRITE_CSV_FILE.md
+  - trials/python/11_LEARN_PYTHON_COMMANDS_WRITE_CSV_FILE.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -3308,7 +3308,7 @@ governance:
   created_at: '2026-04-01T12:36:37+00:00'
   provenance:
   - not_learn-from-markdown-12-learn-python-commands-sha_2e6575
-  - /Users/ravindranathakila/service/realized/trials/python/12_LEARN_PYTHON_COMMANDS_SHA256_CHECKSUM.md
+  - trials/python/12_LEARN_PYTHON_COMMANDS_SHA256_CHECKSUM.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -3614,7 +3614,7 @@ governance:
   created_at: '2026-04-01T12:36:53+00:00'
   provenance:
   - not_learn-from-markdown-13-learn-python-commands-cre_ca3179
-  - /Users/ravindranathakila/service/realized/trials/python/13_LEARN_PYTHON_COMMANDS_CREATE_ZIP_ARCHIVE.md
+  - trials/python/13_LEARN_PYTHON_COMMANDS_CREATE_ZIP_ARCHIVE.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -3925,7 +3925,7 @@ governance:
   created_at: '2026-04-01T12:37:10+00:00'
   provenance:
   - not_learn-from-markdown-14-learn-python-commands-ext_c97e81
-  - /Users/ravindranathakila/service/realized/trials/python/14_LEARN_PYTHON_COMMANDS_EXTRACT_ZIP_ARCHIVE.md
+  - trials/python/14_LEARN_PYTHON_COMMANDS_EXTRACT_ZIP_ARCHIVE.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -4243,7 +4243,7 @@ governance:
   created_at: '2026-04-01T12:37:24+00:00'
   provenance:
   - not_learn-from-markdown-15-learn-python-commands-dow_7c6b42
-  - /Users/ravindranathakila/service/realized/trials/python/15_LEARN_PYTHON_COMMANDS_DOWNLOAD_URL.md
+  - trials/python/15_LEARN_PYTHON_COMMANDS_DOWNLOAD_URL.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -4533,7 +4533,7 @@ governance:
   created_at: '2026-04-01T12:37:40+00:00'
   provenance:
   - not_learn-from-markdown-16-learn-python-commands-fin_443a63
-  - /Users/ravindranathakila/service/realized/trials/python/16_LEARN_PYTHON_COMMANDS_FIND_FILES_BY_SUFFIX.md
+  - trials/python/16_LEARN_PYTHON_COMMANDS_FIND_FILES_BY_SUFFIX.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:

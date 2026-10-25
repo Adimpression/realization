@@ -30,7 +30,7 @@ Output:
 
 ## 4. Natural-language paraphrases
 
-* find Python decorators under `/Users/ravindranathakila/service/realized`
+* find Python decorators under `.`
 * locate `@` decorator lines in a codebase
 * search a tree for decorator usage
 

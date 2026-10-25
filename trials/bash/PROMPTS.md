@@ -1,9 +1,9 @@
 - Create the directory `/tmp/bash-suite-demo`.
-- List the contents of `/Users/ravindranathakila/service/realized`.
+- List the contents of `.`.
 - Print the contents of `/etc/hosts`.
 - Search for `TODO` in `README.md`.
 - Count the lines in `/etc/hosts`.
-- Find files named `README.md` under `/Users/ravindranathakila/service/realized`.
+- Find files named `README.md` under `.`.
 - Copy `/etc/hosts` to `/tmp/hosts.copy`.
 - Move `/tmp/hosts.copy` to `/tmp/hosts.moved`.
 - Remove `/tmp/hosts.moved`.

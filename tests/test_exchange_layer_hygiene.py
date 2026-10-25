@@ -18,7 +18,7 @@ def module_import_map(path: Path) -> dict[str, set[str]]:
         Verifies the five-layer architecture by checking that governed installation depends on the exchange/schema surface for portable skill documents rather than on mixed exchange-export internals.
 
     Example Input Output:
-        Input: `module_import_map(path=Path('/Users/ravindranathakila/service/realized/governed_skill_installation.py'))`
+        Input: `module_import_map(path=Path('/workspace/realized/governed_skill_installation.py'))`
         Output: {'skill_schema_io': {'artifact_from_skill_document', 'resolve_import_skill_files'}, 'skill_export_projection': {'export_skill_bundle_text'}}
 
     Args:
@@ -44,7 +44,7 @@ def module_import_roots(path: Path) -> set[str]:
         Verifies that exchange-facing modules depend on narrower root helpers instead of importing controller/runtime composition directly.
 
     Example Input Output:
-        Input: `module_import_roots(path=Path('/Users/ravindranathakila/service/realized/skill_registry.py'))`
+        Input: `module_import_roots(path=Path('/workspace/realized/skill_registry.py'))`
         Output: {'json', 'artifact', 'store', 'skill_export_projection'}
 
     Args:

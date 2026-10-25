@@ -24,7 +24,7 @@ Momentum:
     created_at: '2026-03-25T11:09:51+00:00'
     provenance:
     - not_learn-from-markdown-learn-momentum-md_7d377c
-    - /Users/ravindranathakila/service/realized/LEARN_MOMENTUM.md
+    - trials/LEARN_MOMENTUM.md
     justification: The markdown document states the overall topic directly in its
       introduction.
     question: What is 1. Core meaning?
@@ -158,7 +158,7 @@ Momentum:
             - "[ Reused Non Achievedness ]"
             - "[ Composed Reuse ]"
     content:
-      source_path: /Users/ravindranathakila/service/realized/LEARN_MOMENTUM.md
+      source_path: trials/LEARN_MOMENTUM.md
       source_document: LEARN_MOMENTUM.md
       source_kind: markdown
       source_title: Momentum
@@ -326,7 +326,7 @@ Momentum:
     created_at: '2026-03-25T11:09:54+00:00'
     provenance:
     - not_learn-from-markdown-learn-momentum-md_7d377c
-    - /Users/ravindranathakila/service/realized/LEARN_MOMENTUM.md
+    - trials/LEARN_MOMENTUM.md
     related_artifact_ids:
     - artifact_knowledge-momentum_664572
     justification: The markdown document contains a bounded section that directly
@@ -458,7 +458,7 @@ Momentum:
             - "[ Reused Non Achievedness ]"
             - "[ Composed Reuse ]"
     content:
-      source_path: /Users/ravindranathakila/service/realized/LEARN_MOMENTUM.md
+      source_path: trials/LEARN_MOMENTUM.md
       source_document: LEARN_MOMENTUM.md
       source_kind: markdown
       source_title: Momentum
@@ -622,7 +622,7 @@ Momentum:
     created_at: '2026-03-25T11:09:54+00:00'
     provenance:
     - not_learn-from-markdown-learn-momentum-md_7d377c
-    - /Users/ravindranathakila/service/realized/LEARN_MOMENTUM.md
+    - trials/LEARN_MOMENTUM.md
     related_artifact_ids:
     - artifact_knowledge-momentum_664572
     - artifact_knowledge-1-core-meaning_2a5fb9
@@ -743,7 +743,7 @@ Momentum:
             - "[ Reused Non Achievedness ]"
             - "[ Composed Reuse ]"
     content:
-      source_path: /Users/ravindranathakila/service/realized/LEARN_MOMENTUM.md
+      source_path: trials/LEARN_MOMENTUM.md
       source_document: LEARN_MOMENTUM.md
       source_kind: markdown
       source_title: Momentum
@@ -892,7 +892,7 @@ Momentum:
     created_at: '2026-03-25T11:09:55+00:00'
     provenance:
     - not_learn-from-markdown-learn-momentum-md_7d377c
-    - /Users/ravindranathakila/service/realized/LEARN_MOMENTUM.md
+    - trials/LEARN_MOMENTUM.md
     related_artifact_ids:
     - artifact_knowledge-momentum_664572
     - artifact_knowledge-1-core-meaning_2a5fb9
@@ -1018,7 +1018,7 @@ Momentum:
             - "[ Reused Non Achievedness ]"
             - "[ Composed Reuse ]"
     content:
-      source_path: /Users/ravindranathakila/service/realized/LEARN_MOMENTUM.md
+      source_path: trials/LEARN_MOMENTUM.md
       source_document: LEARN_MOMENTUM.md
       source_kind: markdown
       source_title: Momentum
@@ -1171,7 +1171,7 @@ Momentum:
     created_at: '2026-03-25T11:09:55+00:00'
     provenance:
     - not_learn-from-markdown-learn-momentum-md_7d377c
-    - /Users/ravindranathakila/service/realized/LEARN_MOMENTUM.md
+    - trials/LEARN_MOMENTUM.md
     related_artifact_ids:
     - artifact_knowledge-momentum_664572
     - artifact_knowledge-1-core-meaning_2a5fb9
@@ -1293,7 +1293,7 @@ Momentum:
             - "[ Reused Non Achievedness ]"
             - "[ Composed Reuse ]"
     content:
-      source_path: /Users/ravindranathakila/service/realized/LEARN_MOMENTUM.md
+      source_path: trials/LEARN_MOMENTUM.md
       source_document: LEARN_MOMENTUM.md
       source_kind: markdown
       source_title: Momentum
@@ -1446,7 +1446,7 @@ Momentum:
     created_at: '2026-03-25T11:09:56+00:00'
     provenance:
     - not_learn-from-markdown-learn-momentum-md_7d377c
-    - /Users/ravindranathakila/service/realized/LEARN_MOMENTUM.md
+    - trials/LEARN_MOMENTUM.md
     related_artifact_ids:
     - artifact_knowledge-momentum_664572
     - artifact_knowledge-1-core-meaning_2a5fb9
@@ -1587,7 +1587,7 @@ Momentum:
             - "[ Reused Non Achievedness ]"
             - "[ Composed Reuse ]"
     content:
-      source_path: /Users/ravindranathakila/service/realized/LEARN_MOMENTUM.md
+      source_path: trials/LEARN_MOMENTUM.md
       source_document: LEARN_MOMENTUM.md
       source_kind: markdown
       source_title: Momentum
@@ -1753,7 +1753,7 @@ Momentum:
     created_at: '2026-03-25T11:09:56+00:00'
     provenance:
     - not_learn-from-markdown-learn-momentum-md_7d377c
-    - /Users/ravindranathakila/service/realized/LEARN_MOMENTUM.md
+    - trials/LEARN_MOMENTUM.md
     related_artifact_ids:
     - artifact_knowledge-momentum_664572
     - artifact_knowledge-1-core-meaning_2a5fb9
@@ -1870,7 +1870,7 @@ Momentum:
             - "[ Reused Non Achievedness ]"
             - "[ Composed Reuse ]"
     content:
-      source_path: /Users/ravindranathakila/service/realized/LEARN_MOMENTUM.md
+      source_path: trials/LEARN_MOMENTUM.md
       source_document: LEARN_MOMENTUM.md
       source_kind: markdown
       source_title: Momentum
@@ -2010,7 +2010,7 @@ Momentum:
     created_at: '2026-03-25T11:09:57+00:00'
     provenance:
     - not_learn-from-markdown-learn-momentum-md_7d377c
-    - /Users/ravindranathakila/service/realized/LEARN_MOMENTUM.md
+    - trials/LEARN_MOMENTUM.md
     constraints:
     - derive only from the supplied encounter
     template_schema:
@@ -2277,7 +2277,7 @@ Momentum:
           main()
     script_language: python
     content:
-      source_path: /Users/ravindranathakila/service/realized/LEARN_MOMENTUM.md
+      source_path: trials/LEARN_MOMENTUM.md
       source_document: LEARN_MOMENTUM.md
       output_field: m
       compute_expression: mass
@@ -2456,7 +2456,7 @@ Momentum:
     created_at: '2026-03-25T11:09:57+00:00'
     provenance:
     - not_learn-from-markdown-learn-momentum-md_7d377c
-    - /Users/ravindranathakila/service/realized/LEARN_MOMENTUM.md
+    - trials/LEARN_MOMENTUM.md
     related_artifact_ids:
     - artifact_ability-1-core-meaning_e548f7
     constraints:
@@ -2716,7 +2716,7 @@ Momentum:
           main()
     script_language: python
     content:
-      source_path: /Users/ravindranathakila/service/realized/LEARN_MOMENTUM.md
+      source_path: trials/LEARN_MOMENTUM.md
       source_document: LEARN_MOMENTUM.md
       output_field: p
       compute_expression: m * v
@@ -2889,7 +2889,7 @@ Momentum:
     created_at: '2026-03-25T11:09:57+00:00'
     provenance:
     - not_learn-from-markdown-learn-momentum-md_7d377c
-    - /Users/ravindranathakila/service/realized/LEARN_MOMENTUM.md
+    - trials/LEARN_MOMENTUM.md
     related_artifact_ids:
     - artifact_ability-1-core-meaning_e548f7
     - artifact_ability-2-core-equation_7f7688
@@ -3157,7 +3157,7 @@ Momentum:
           main()
     script_language: python
     content:
-      source_path: /Users/ravindranathakila/service/realized/LEARN_MOMENTUM.md
+      source_path: trials/LEARN_MOMENTUM.md
       source_document: LEARN_MOMENTUM.md
       output_field: p
       compute_expression: m * v

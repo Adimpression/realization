@@ -16,14 +16,14 @@ from blend_session import blend_session_from_workstation_session
 from blend_world import BlendWorld
 from blend_world_store import blend_world_mount_source, ensure_persisted_blend_workstation_world, load_blend_world
 from blend_workflow import blend_workflow_plan_from_skill_compose_arguments, ensure_blend_workflow_store
-from host_interaction_receipts import (
+from realized_host_interaction.receipts import (
     host_interaction_assistant_response_receipt,
     host_interaction_capability_call_receipt,
     host_interaction_delegation_approval_decision_receipt,
     host_interaction_delegation_approval_requested_receipt,
     host_interaction_user_prompt_receipt,
 )
-from host_interaction_delegation import normalized_requested_delegation
+from realized_host_interaction.delegation import normalized_requested_delegation
 from semantic_text import collapse_ws
 from workstation.runtime.core.capabilities import (
     DEFAULT_WORKSTATION_CAPABILITIES,

@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "Workstation CLI package for Realized."
 requires-python = ">=3.14"
 dependencies = [
+    "realized-host-interaction",
     "realized-workstation",
     "realized-workstation-foundation-host",
     "realized-workstation-grpc-implementation",

@@ -19,6 +19,7 @@ This report is generated deterministically by `scripts/check_architecture_bounda
 | `governed_core` | `core` | `realized-core-runtime` | `realized_core_runtime` |
 | `grpc_definitions` | `exchange_contracts` | `realized-workstation-grpc-definitions` | `workstation.grpc.definitions` |
 | `grpc_implementation` | `exchange_adapters` | `realized-workstation-grpc-implementation` | `workstation.grpc.implementation` |
+| `host_interaction` | `host_substrate` | `realized-host-interaction` | `realized_host_interaction` |
 | `namespace` | `namespace` | `realized-workstation` | `workstation` |
 | `runtime_core` | `controller` | `realized-workstation-runtime-core` | `workstation.runtime.core` |
 | `shell_core` | `workstation` | `realized-workstation-shell-core` | `workstation.shell.core` |
@@ -37,6 +38,7 @@ This report is generated deterministically by `scripts/check_architecture_bounda
 | --- | --- | --- | --- | --- |
 | `app_cli` | `foundation_host` | yes | yes | `workstation/app_cli/src/workstation/app/cli/cli.py` |
 | `app_cli` | `grpc_implementation` | yes | yes | `workstation/app_cli/src/workstation/app/cli/cli.py` |
+| `app_cli` | `host_interaction` | yes | yes | `workstation/app_cli/src/workstation/app/cli/cli.py` |
 | `app_cli` | `shell_core` | yes | yes | `workstation/app_cli/src/workstation/app/cli/cli.py` |
 | `app_cli` | `ui_shared` | yes | yes | `workstation/app_cli/src/workstation/app/cli/cli.py` |
 | `app_cli` | `ui_textual` | yes | yes | `workstation/app_cli/src/workstation/app/cli/cli.py` |
@@ -47,8 +49,10 @@ This report is generated deterministically by `scripts/check_architecture_bounda
 | `core_conversation` | `core_llm` | yes | yes | `core_conversation/src/realized_core_conversation/service.py` |
 | `core_engine` | `governed_core` | yes | yes | `core_engine/src/realized_core_engine/__init__.py`, `core_engine/src/realized_core_engine/api.py`, `core_engine/src/realized_core_engine/canonical_reduction.py` (+3 more) |
 | `foundation_events` | `contracts` | yes | yes | `workstation/foundation_events/src/workstation/foundation/events/event_bus.py` |
+| `foundation_events` | `host_interaction` | yes | yes | `workstation/foundation_events/src/workstation/foundation/events/event_bus.py` |
 | `foundation_host` | `contracts` | yes | yes | `workstation/foundation_host/src/workstation/foundation/host/controller_runtime.py`, `workstation/foundation_host/src/workstation/foundation/host/subject_workflow.py` |
 | `foundation_host` | `foundation_models` | yes | yes | `workstation/foundation_host/src/workstation/foundation/host/delegation.py`, `workstation/foundation_host/src/workstation/foundation/host/host_interaction.py`, `workstation/foundation_host/src/workstation/foundation/host/learning_capture.py` (+1 more) |
+| `foundation_host` | `host_interaction` | yes | yes | `workstation/foundation_host/src/workstation/foundation/host/delegation.py`, `workstation/foundation_host/src/workstation/foundation/host/host_interaction.py` |
 | `foundation_projections` | `contracts` | yes | yes | `workstation/foundation_projections/src/workstation/foundation/projections/projection_models.py` |
 | `foundation_projections` | `foundation_models` | yes | yes | `workstation/foundation_projections/src/workstation/foundation/projections/projection_models.py` |
 | `grpc_implementation` | `contracts` | yes | yes | `workstation/grpc_implementation/src/workstation/grpc/implementation/subject_workflow_grpc.py`, `workstation/grpc_implementation/src/workstation/grpc/implementation/workstation_assets_grpc.py`, `workstation/grpc_implementation/src/workstation/grpc/implementation/workstation_shell_grpc.py` |
@@ -63,6 +67,7 @@ This report is generated deterministically by `scripts/check_architecture_bounda
 | `runtime_core` | `foundation_host` | yes | yes | `workstation/runtime_core/src/workstation/runtime/core/capabilities.py`, `workstation/runtime_core/src/workstation/runtime/core/session.py`, `workstation/runtime_core/src/workstation/runtime/core/workstation_core.py` |
 | `runtime_core` | `foundation_models` | yes | yes | `workstation/runtime_core/src/workstation/runtime/core/capabilities.py`, `workstation/runtime_core/src/workstation/runtime/core/chat_commands.py`, `workstation/runtime_core/src/workstation/runtime/core/llm_driver.py` (+2 more) |
 | `runtime_core` | `foundation_projections` | yes | yes | `workstation/runtime_core/src/workstation/runtime/core/capabilities.py`, `workstation/runtime_core/src/workstation/runtime/core/chat_commands.py`, `workstation/runtime_core/src/workstation/runtime/core/projection_subscriber_controller.py` (+1 more) |
+| `runtime_core` | `host_interaction` | yes | yes | `workstation/runtime_core/src/workstation/runtime/core/capabilities.py`, `workstation/runtime_core/src/workstation/runtime/core/chat_commands.py`, `workstation/runtime_core/src/workstation/runtime/core/session.py` (+1 more) |
 | `runtime_core` | `skills_core` | yes | yes | `workstation/runtime_core/src/workstation/runtime/core/capabilities.py`, `workstation/runtime_core/src/workstation/runtime/core/chat_commands.py`, `workstation/runtime_core/src/workstation/runtime/core/llm_driver.py` (+2 more) |
 | `runtime_core` | `skills_planning` | yes | yes | `workstation/runtime_core/src/workstation/runtime/core/session.py` |
 | `shell_core` | `contracts` | yes | yes | `workstation/shell_core/src/workstation/shell/core/chat_shell.py`, `workstation/shell_core/src/workstation/shell/core/workstation_shell_api.py`, `workstation/shell_core/src/workstation/shell/core/workstation_shell_client.py` |
@@ -78,6 +83,7 @@ This report is generated deterministically by `scripts/check_architecture_bounda
 | `skills_core` | `contracts` | yes | yes | `workstation/skills_core/src/workstation/skills/core/direct_composition.py` |
 | `skills_core` | `foundation_host` | yes | yes | `workstation/skills_core/src/workstation/skills/core/skill_invocation.py`, `workstation/skills_core/src/workstation/skills/core/skill_management.py` |
 | `skills_core` | `foundation_models` | yes | yes | `workstation/skills_core/src/workstation/skills/core/direct_composition.py`, `workstation/skills_core/src/workstation/skills/core/skill_management.py` |
+| `skills_core` | `host_interaction` | yes | yes | `workstation/skills_core/src/workstation/skills/core/skill_invocation.py` |
 | `skills_core` | `skills_builtin` | yes | yes | `workstation/skills_core/src/workstation/skills/core/skill_invocation.py` |
 | `skills_planning` | `contracts` | yes | yes | `workstation/skills_planning/src/workstation/skills/planning/skill_composition_planning.py` |
 | `skills_planning` | `foundation_host` | yes | yes | `workstation/skills_planning/src/workstation/skills/planning/skill_home.py` |
@@ -92,6 +98,7 @@ This report is generated deterministically by `scripts/check_architecture_bounda
 | `subject_service` | `subject_core` | yes | yes | `workstation/subject_service/src/workstation/subject/service/client_sessions.py`, `workstation/subject_service/src/workstation/subject/service/subject_workflow_api.py`, `workstation/subject_service/src/workstation/subject/service/subject_workflow_client.py` |
 | `subject_textual` | `contracts` | yes | yes | `workstation/subject_textual/src/workstation/subject/textual/application_facade.py`, `workstation/subject_textual/src/workstation/subject/textual/models.py`, `workstation/subject_textual/src/workstation/subject/textual/subject_workflow_textual_backend.py` |
 | `ui_shared` | `foundation_projections` | yes | yes | `workstation/ui_shared/src/workstation/ui/shared/activity_view.py` |
+| `ui_shared` | `host_interaction` | yes | yes | `workstation/ui_shared/src/workstation/ui/shared/activity_view.py` |
 | `ui_textual` | `contracts` | yes | yes | `workstation/ui_textual/src/workstation/ui/textual/chat_ui.py` |
 | `ui_textual` | `foundation_projections` | yes | yes | `workstation/ui_textual/src/workstation/ui/textual/chat_ui.py` |
 | `ui_textual` | `shell_core` | yes | yes | `workstation/ui_textual/src/workstation/ui/textual/chat_ui.py` |
@@ -117,8 +124,8 @@ These edges exist only to preserve historical import paths. They are excluded fr
 
 | Metric | Count |
 | --- | ---: |
-| Nodes | 150 |
-| Edges | 641 |
+| Nodes | 151 |
+| Edges | 629 |
 | Cyclic SCCs | 0 |
 | Nodes in cyclic SCCs | 0 |
 | Edges internal to cyclic SCCs | 0 |
@@ -135,22 +142,17 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 
 | Direction | Source | Target | Category |
 | --- | --- | --- | --- |
-| `component_to_root` | `app_cli` | `host_interaction_receipts` | `orchestration` |
 | `component_to_root` | `app_cli` | `semantic_text` | `pure_helper` |
 | `component_to_root` | `core_engine` | `applied_theory_types` | `dto_constants` |
 | `component_to_root` | `core_engine` | `args` | `orchestration` |
 | `component_to_root` | `core_engine` | `controller_runtime` | `orchestration` |
 | `component_to_root` | `core_engine` | `system_state` | `orchestration` |
 | `component_to_root` | `core_engine` | `title_semantics` | `orchestration` |
-| `component_to_root` | `foundation_events` | `host_interaction_receipts` | `orchestration` |
 | `component_to_root` | `foundation_events` | `semantic_text` | `pure_helper` |
 | `component_to_root` | `foundation_host` | `applied_theory_types` | `dto_constants` |
 | `component_to_root` | `foundation_host` | `boundary` | `orchestration` |
 | `component_to_root` | `foundation_host` | `gather_sources` | `orchestration` |
 | `component_to_root` | `foundation_host` | `governance_inventory` | `orchestration` |
-| `component_to_root` | `foundation_host` | `host_interaction_context` | `orchestration` |
-| `component_to_root` | `foundation_host` | `host_interaction_delegation` | `orchestration` |
-| `component_to_root` | `foundation_host` | `host_interaction_models` | `dto_constants` |
 | `component_to_root` | `foundation_host` | `learning_context` | `orchestration` |
 | `component_to_root` | `foundation_host` | `markdown_ir` | `orchestration` |
 | `component_to_root` | `foundation_host` | `semantic_text` | `pure_helper` |
@@ -170,11 +172,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `component_to_root` | `runtime_core` | `capability_runtime` | `orchestration` |
 | `component_to_root` | `runtime_core` | `execution_frameworks` | `orchestration` |
 | `component_to_root` | `runtime_core` | `gather_sources` | `orchestration` |
-| `component_to_root` | `runtime_core` | `host_interaction_action_dispatch` | `orchestration` |
-| `component_to_root` | `runtime_core` | `host_interaction_delegation` | `orchestration` |
-| `component_to_root` | `runtime_core` | `host_interaction_models` | `dto_constants` |
-| `component_to_root` | `runtime_core` | `host_interaction_receipts` | `orchestration` |
-| `component_to_root` | `runtime_core` | `host_interaction_resolution` | `orchestration` |
 | `component_to_root` | `runtime_core` | `learning_context` | `orchestration` |
 | `component_to_root` | `runtime_core` | `semantic_text` | `pure_helper` |
 | `component_to_root` | `runtime_core` | `skill_export_projection` | `orchestration` |
@@ -189,7 +186,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `component_to_root` | `skills_core` | `applied_theory_types` | `dto_constants` |
 | `component_to_root` | `skills_core` | `capability_runtime` | `orchestration` |
 | `component_to_root` | `skills_core` | `execution_frameworks` | `orchestration` |
-| `component_to_root` | `skills_core` | `host_interaction_delegation` | `orchestration` |
 | `component_to_root` | `skills_core` | `semantic_text` | `pure_helper` |
 | `component_to_root` | `skills_core` | `side` | `orchestration` |
 | `component_to_root` | `skills_core` | `skill_export_projection` | `orchestration` |
@@ -218,39 +214,44 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `component_to_root` | `subject_core` | `runtime_temp` | `orchestration` |
 | `component_to_root` | `subject_core` | `semantic_text` | `pure_helper` |
 | `component_to_root` | `subject_service` | `semantic_text` | `pure_helper` |
-| `component_to_root` | `ui_shared` | `host_interaction_receipts` | `orchestration` |
 | `component_to_root` | `ui_shared` | `semantic_text` | `pure_helper` |
 | `component_to_root` | `ui_textual` | `semantic_text` | `pure_helper` |
 | `root_to_component` | `blend_context` | `foundation_models` | `orchestration` |
 | `root_to_component` | `blend_session` | `foundation_models` | `orchestration` |
+| `root_to_component` | `blend_workflow_execution` | `host_interaction` | `orchestration` |
 | `root_to_component` | `controller_entrypoints` | `app_cli` | `orchestration` |
 | `root_to_component` | `controller_entrypoints` | `contracts` | `orchestration` |
 | `root_to_component` | `controller_entrypoints` | `core_engine` | `orchestration` |
 | `root_to_component` | `controller_entrypoints` | `foundation_host` | `orchestration` |
 | `root_to_component` | `controller_entrypoints` | `subject_service` | `orchestration` |
 | `root_to_component` | `controller_runtime` | `governed_core` | `orchestration` |
+| `root_to_component` | `controller_runtime` | `host_interaction` | `orchestration` |
 | `root_to_component` | `execution_frameworks` | `governed_core` | `orchestration` |
 | `root_to_component` | `governed_semantic_reduction_runtime` | `governed_core` | `orchestration` |
+| `root_to_component` | `governed_semantic_reduction_runtime` | `host_interaction` | `orchestration` |
+| `root_to_component` | `host_interaction_action_dispatch` | `host_interaction` | `compatibility` |
+| `root_to_component` | `host_interaction_actions` | `host_interaction` | `compatibility` |
+| `root_to_component` | `host_interaction_context` | `host_interaction` | `compatibility` |
+| `root_to_component` | `host_interaction_delegation` | `host_interaction` | `compatibility` |
+| `root_to_component` | `host_interaction_models` | `host_interaction` | `compatibility` |
+| `root_to_component` | `host_interaction_receipts` | `host_interaction` | `compatibility` |
+| `root_to_component` | `host_interaction_resolution` | `host_interaction` | `compatibility` |
+| `root_to_component` | `host_mediation` | `host_interaction` | `orchestration` |
 | `root_to_component` | `skill_invocation_contract` | `skills_core` | `compatibility` |
 
 ## Root-Module Dependencies
 
-- `app_cli` -> `host_interaction_receipts` (`workstation/app_cli/src/workstation/app/cli/cli.py`)
 - `app_cli` -> `semantic_text` (`workstation/app_cli/src/workstation/app/cli/cli.py`)
 - `core_engine` -> `applied_theory_types` (`core_engine/src/realized_core_engine/canonical_reduction.py`)
 - `core_engine` -> `args` (`core_engine/src/realized_core_engine/api.py`, `core_engine/src/realized_core_engine/canonical_reduction.py`, `core_engine/src/realized_core_engine/cli_support.py`)
 - `core_engine` -> `controller_runtime` (`core_engine/src/realized_core_engine/api.py`, `core_engine/src/realized_core_engine/canonical_reduction.py`)
 - `core_engine` -> `system_state` (`core_engine/src/realized_core_engine/api.py`, `core_engine/src/realized_core_engine/canonical_reduction.py`)
 - `core_engine` -> `title_semantics` (`core_engine/src/realized_core_engine/api.py`, `core_engine/src/realized_core_engine/canonical_reduction.py`)
-- `foundation_events` -> `host_interaction_receipts` (`workstation/foundation_events/src/workstation/foundation/events/event_bus.py`)
 - `foundation_events` -> `semantic_text` (`workstation/foundation_events/src/workstation/foundation/events/event_bus.py`, `workstation/foundation_events/src/workstation/foundation/events/message_tracing.py`)
 - `foundation_host` -> `applied_theory_types` (`workstation/foundation_host/src/workstation/foundation/host/delegation.py`)
 - `foundation_host` -> `boundary` (`workstation/foundation_host/src/workstation/foundation/host/task_contract.py`)
 - `foundation_host` -> `gather_sources` (`workstation/foundation_host/src/workstation/foundation/host/learning_capture.py`)
 - `foundation_host` -> `governance_inventory` (`workstation/foundation_host/src/workstation/foundation/host/governance.py`)
-- `foundation_host` -> `host_interaction_context` (`workstation/foundation_host/src/workstation/foundation/host/host_interaction.py`)
-- `foundation_host` -> `host_interaction_delegation` (`workstation/foundation_host/src/workstation/foundation/host/delegation.py`)
-- `foundation_host` -> `host_interaction_models` (`workstation/foundation_host/src/workstation/foundation/host/host_interaction.py`)
 - `foundation_host` -> `learning_context` (`workstation/foundation_host/src/workstation/foundation/host/learning_capture.py`)
 - `foundation_host` -> `markdown_ir` (`workstation/foundation_host/src/workstation/foundation/host/learning_capture.py`)
 - `foundation_host` -> `semantic_text` (`workstation/foundation_host/src/workstation/foundation/host/governance.py`, `workstation/foundation_host/src/workstation/foundation/host/learning_capture.py`)
@@ -270,11 +271,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 - `runtime_core` -> `capability_runtime` (`workstation/runtime_core/src/workstation/runtime/core/capabilities.py`, `workstation/runtime_core/src/workstation/runtime/core/chat_commands.py`)
 - `runtime_core` -> `execution_frameworks` (`workstation/runtime_core/src/workstation/runtime/core/capabilities.py`, `workstation/runtime_core/src/workstation/runtime/core/chat_commands.py`, `workstation/runtime_core/src/workstation/runtime/core/workstation_core.py`)
 - `runtime_core` -> `gather_sources` (`workstation/runtime_core/src/workstation/runtime/core/workstation_core.py`)
-- `runtime_core` -> `host_interaction_action_dispatch` (`workstation/runtime_core/src/workstation/runtime/core/capabilities.py`)
-- `runtime_core` -> `host_interaction_delegation` (`workstation/runtime_core/src/workstation/runtime/core/capabilities.py`, `workstation/runtime_core/src/workstation/runtime/core/session.py`)
-- `runtime_core` -> `host_interaction_models` (`workstation/runtime_core/src/workstation/runtime/core/capabilities.py`)
-- `runtime_core` -> `host_interaction_receipts` (`workstation/runtime_core/src/workstation/runtime/core/chat_commands.py`, `workstation/runtime_core/src/workstation/runtime/core/session.py`, `workstation/runtime_core/src/workstation/runtime/core/workstation_core.py`)
-- `runtime_core` -> `host_interaction_resolution` (`workstation/runtime_core/src/workstation/runtime/core/capabilities.py`)
 - `runtime_core` -> `learning_context` (`workstation/runtime_core/src/workstation/runtime/core/workstation_core.py`)
 - `runtime_core` -> `semantic_text` (`workstation/runtime_core/src/workstation/runtime/core/capabilities.py`, `workstation/runtime_core/src/workstation/runtime/core/chat_commands.py`, `workstation/runtime_core/src/workstation/runtime/core/llm_driver.py`, `workstation/runtime_core/src/workstation/runtime/core/projection_subscriber_controller.py`, `workstation/runtime_core/src/workstation/runtime/core/session.py`, `workstation/runtime_core/src/workstation/runtime/core/workstation_core.py`)
 - `runtime_core` -> `skill_export_projection` (`workstation/runtime_core/src/workstation/runtime/core/capabilities.py`, `workstation/runtime_core/src/workstation/runtime/core/chat_commands.py`)
@@ -289,7 +285,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 - `skills_core` -> `applied_theory_types` (`workstation/skills_core/src/workstation/skills/core/invocation_contract.py`)
 - `skills_core` -> `capability_runtime` (`workstation/skills_core/src/workstation/skills/core/invocation_contract.py`, `workstation/skills_core/src/workstation/skills/core/skill_invocation.py`)
 - `skills_core` -> `execution_frameworks` (`workstation/skills_core/src/workstation/skills/core/invocation_contract.py`, `workstation/skills_core/src/workstation/skills/core/skill_invocation.py`, `workstation/skills_core/src/workstation/skills/core/skill_management.py`)
-- `skills_core` -> `host_interaction_delegation` (`workstation/skills_core/src/workstation/skills/core/skill_invocation.py`)
 - `skills_core` -> `semantic_text` (`workstation/skills_core/src/workstation/skills/core/direct_composition.py`, `workstation/skills_core/src/workstation/skills/core/invocation_contract.py`, `workstation/skills_core/src/workstation/skills/core/skill_invocation.py`, `workstation/skills_core/src/workstation/skills/core/skill_management.py`)
 - `skills_core` -> `side` (`workstation/skills_core/src/workstation/skills/core/skill_management.py`)
 - `skills_core` -> `skill_export_projection` (`workstation/skills_core/src/workstation/skills/core/invocation_contract.py`, `workstation/skills_core/src/workstation/skills/core/skill_invocation.py`, `workstation/skills_core/src/workstation/skills/core/skill_management.py`)
@@ -318,7 +313,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 - `subject_core` -> `runtime_temp` (`workstation/subject_core/src/workstation/subject/core/subject_workflow.py`)
 - `subject_core` -> `semantic_text` (`workstation/subject_core/src/workstation/subject/core/subject_workflow.py`)
 - `subject_service` -> `semantic_text` (`workstation/subject_service/src/workstation/subject/service/client_sessions.py`, `workstation/subject_service/src/workstation/subject/service/subject_workflow_api.py`, `workstation/subject_service/src/workstation/subject/service/subject_workflow_client.py`)
-- `ui_shared` -> `host_interaction_receipts` (`workstation/ui_shared/src/workstation/ui/shared/activity_view.py`)
 - `ui_shared` -> `semantic_text` (`workstation/ui_shared/src/workstation/ui/shared/activity_view.py`)
 - `ui_textual` -> `semantic_text` (`workstation/ui_textual/src/workstation/ui/textual/chat_ui.py`)
 
@@ -326,14 +320,25 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 
 - `blend_context` -> `foundation_models` (`blend_context.py`)
 - `blend_session` -> `foundation_models` (`blend_session.py`)
+- `blend_workflow_execution` -> `host_interaction` (`blend_workflow_execution.py`)
 - `controller_entrypoints` -> `app_cli` (`controller_entrypoints.py`)
 - `controller_entrypoints` -> `contracts` (`controller_entrypoints.py`)
 - `controller_entrypoints` -> `core_engine` (`controller_entrypoints.py`)
 - `controller_entrypoints` -> `foundation_host` (`controller_entrypoints.py`)
 - `controller_entrypoints` -> `subject_service` (`controller_entrypoints.py`)
 - `controller_runtime` -> `governed_core` (`controller_runtime.py`)
+- `controller_runtime` -> `host_interaction` (`controller_runtime.py`)
 - `execution_frameworks` -> `governed_core` (`execution_frameworks.py`)
 - `governed_semantic_reduction_runtime` -> `governed_core` (`governed_semantic_reduction_runtime.py`)
+- `governed_semantic_reduction_runtime` -> `host_interaction` (`governed_semantic_reduction_runtime.py`)
+- `host_interaction_action_dispatch` -> `host_interaction` (`host_interaction_action_dispatch.py`)
+- `host_interaction_actions` -> `host_interaction` (`host_interaction_actions.py`)
+- `host_interaction_context` -> `host_interaction` (`host_interaction_context.py`)
+- `host_interaction_delegation` -> `host_interaction` (`host_interaction_delegation.py`)
+- `host_interaction_models` -> `host_interaction` (`host_interaction_models.py`)
+- `host_interaction_receipts` -> `host_interaction` (`host_interaction_receipts.py`)
+- `host_interaction_resolution` -> `host_interaction` (`host_interaction_resolution.py`)
+- `host_mediation` -> `host_interaction` (`host_mediation.py`)
 - `skill_invocation_contract` -> `skills_core` (`skill_invocation_contract.py`)
 
 ## Root-to-Root Dependencies
@@ -373,7 +378,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 - `blend_workflow_execution` -> `blend_operator_store` (`blend_workflow_execution.py`)
 - `blend_workflow_execution` -> `blend_workflow` (`blend_workflow_execution.py`)
 - `blend_workflow_execution` -> `blend_workflow_store` (`blend_workflow_execution.py`)
-- `blend_workflow_execution` -> `host_interaction_delegation` (`blend_workflow_execution.py`)
 - `blend_workflow_execution` -> `semantic_text` (`blend_workflow_execution.py`)
 - `blend_workflow_execution` -> `skill_composition` (`blend_workflow_execution.py`)
 - `blend_workflow_models` -> `semantic_text` (`blend_workflow_models.py`)
@@ -424,7 +428,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 - `controller_runtime` -> `governed_closure_and_commitment` (`controller_runtime.py`)
 - `controller_runtime` -> `governed_prior_learning_reuse` (`controller_runtime.py`)
 - `controller_runtime` -> `governed_semantic_reduction_runtime` (`controller_runtime.py`)
-- `controller_runtime` -> `host_interaction_context` (`controller_runtime.py`)
 - `controller_runtime` -> `host_mediation` (`controller_runtime.py`)
 - `controller_runtime` -> `id_generation` (`controller_runtime.py`)
 - `controller_runtime` -> `learn` (`controller_runtime.py`)
@@ -514,7 +517,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 - `governed_prior_learning_reuse` -> `semantic_text` (`governed_prior_learning_reuse.py`)
 - `governed_prior_learning_reuse` -> `title_semantics` (`governed_prior_learning_reuse.py`)
 - `governed_semantic_reduction_runtime` -> `applied_theory_types` (`governed_semantic_reduction_runtime.py`)
-- `governed_semantic_reduction_runtime` -> `host_interaction_context` (`governed_semantic_reduction_runtime.py`)
 - `governed_semantic_reduction_runtime` -> `normalize` (`governed_semantic_reduction_runtime.py`)
 - `governed_semantic_reduction_runtime` -> `semantic_prompt_posture` (`governed_semantic_reduction_runtime.py`)
 - `governed_semantic_reduction_runtime` -> `semantic_text` (`governed_semantic_reduction_runtime.py`)
@@ -544,25 +546,11 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 - `host_brokers` -> `skill_governance` (`host_brokers.py`)
 - `host_brokers` -> `store` (`host_brokers.py`)
 - `host_brokers` -> `virtual_mounts` (`host_brokers.py`)
-- `host_interaction_action_dispatch` -> `host_interaction_actions` (`host_interaction_action_dispatch.py`)
-- `host_interaction_action_dispatch` -> `host_interaction_models` (`host_interaction_action_dispatch.py`)
-- `host_interaction_actions` -> `host_interaction_models` (`host_interaction_actions.py`)
-- `host_interaction_actions` -> `host_interaction_resolution` (`host_interaction_actions.py`)
-- `host_interaction_context` -> `host_interaction_models` (`host_interaction_context.py`)
-- `host_interaction_context` -> `host_interaction_resolution` (`host_interaction_context.py`)
-- `host_interaction_context` -> `semantic_text` (`host_interaction_context.py`)
-- `host_interaction_delegation` -> `applied_theory_types` (`host_interaction_delegation.py`)
-- `host_interaction_delegation` -> `host_interaction_models` (`host_interaction_delegation.py`)
-- `host_interaction_delegation` -> `semantic_text` (`host_interaction_delegation.py`)
-- `host_interaction_receipts` -> `applied_theory_primitives` (`host_interaction_receipts.py`)
-- `host_interaction_resolution` -> `host_interaction_models` (`host_interaction_resolution.py`)
-- `host_interaction_resolution` -> `semantic_text` (`host_interaction_resolution.py`)
 - `host_mediation` -> `applied_theory_types` (`host_mediation.py`)
 - `host_mediation` -> `capability_runtime` (`host_mediation.py`)
 - `host_mediation` -> `execution_frameworks` (`host_mediation.py`)
 - `host_mediation` -> `host_abi` (`host_mediation.py`)
 - `host_mediation` -> `host_brokers` (`host_mediation.py`)
-- `host_mediation` -> `host_interaction_context` (`host_mediation.py`)
 - `host_mediation` -> `runtime_governance_context` (`host_mediation.py`)
 - `host_mediation` -> `semantic_text` (`host_mediation.py`)
 - `itemize` -> `applied_theory_types` (`itemize.py`)

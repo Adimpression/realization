@@ -31,7 +31,7 @@ Output:
 
 ## 4. Natural-language paraphrases
 
-* find the Python class definition for `BSSCController` under `/Users/ravindranathakila/service/realized`
+* find the Python class definition for `BSSCController` under `.`
 * locate where a class is defined
 * search for a `class` line by name
 

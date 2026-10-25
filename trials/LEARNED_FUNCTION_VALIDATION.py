@@ -38,7 +38,7 @@ def resolve_trial_markdown_path(name: str) -> Path:
 
     Example Input Output:
         Input: `resolve_trial_markdown_path(name='LEARN_NEWTOWNS_LAWS.md')`
-        Output: Path('/Users/ravindranathakila/service/realized/trials/LEARN_NEWTOWNS_LAWS.md')
+        Output: Path('/workspace/realized/trials/LEARN_NEWTOWNS_LAWS.md')
 
     Args:
         name: Value for `name` used by `resolve_trial_markdown_path`. Expected type: `str`.
@@ -61,8 +61,8 @@ def resolve_trial_bundle_path(markdown_path: Path) -> Path | None:
         Keeps the validator aligned with the current governance posture by preferring persisted governed artifacts when they already exist.
 
     Example Input Output:
-        Input: `resolve_trial_bundle_path(markdown_path=Path('/Users/ravindranathakila/service/realized/trials/LEARN_MOMENTUM.md'))`
-        Output: Path('/Users/ravindranathakila/service/realized/trials/LEARN_MOMENTUM.yaml')
+        Input: `resolve_trial_bundle_path(markdown_path=Path('/workspace/realized/trials/LEARN_MOMENTUM.md'))`
+        Output: Path('/workspace/realized/trials/LEARN_MOMENTUM.yaml')
 
     Args:
         markdown_path: Value for `markdown_path` used by `resolve_trial_bundle_path`. Expected type: `Path`.

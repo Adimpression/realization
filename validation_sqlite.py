@@ -93,7 +93,7 @@ def ensure_validation_ram_root() -> Path:
 
     Example Input Output:
         Input: `ensure_validation_ram_root()`
-        Output: Path('/Users/ravindranathakila/service/realized/ram/sqlite')
+        Output: Path('/workspace/realized/ram/sqlite')
 
     Args:
         None.
@@ -131,7 +131,7 @@ def validation_sqlite_paths(*, report_dir: Path, basename: str) -> tuple[Path, P
 
     Example Input Output:
         Input: `validation_sqlite_paths(report_dir=Path('/tmp/report'), basename='physics.sqlite3')`
-        Output: (Path('/Users/ravindranathakila/service/realized/ram/sqlite/report/physics.sqlite3'), Path('/tmp/report/physics.sqlite3'))
+        Output: (Path('/workspace/realized/ram/sqlite/report/physics.sqlite3'), Path('/tmp/report/physics.sqlite3'))
 
     Args:
         report_dir: Value for `report_dir` used by `validation_sqlite_paths`. Expected type: `Path`.

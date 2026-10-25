@@ -5,7 +5,7 @@ import json
 from collections.abc import Mapping
 from typing import Any, Iterable
 
-from host_interaction_context import host_interaction_descriptor_payload
+from realized_host_interaction.context import host_interaction_descriptor_payload
 from realized_core_runtime import resume_to_realization, run_to_realization
 
 from applied_theory_types import (

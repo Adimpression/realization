@@ -31,7 +31,7 @@ Output:
 
 ## 4. Natural-language paraphrases
 
-* find all TODO lines under `/Users/ravindranathakila/service/realized`
+* find all TODO lines under `.`
 * search a tree for FIXME comments
 * collect tagged comment lines
 

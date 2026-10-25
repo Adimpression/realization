@@ -1,5 +1,9 @@
 schema_version = 1
-workspace_globs = ["core_*/pyproject.toml", "workstation/*/pyproject.toml"]
+workspace_globs = [
+  "core_*/pyproject.toml",
+  "host_interaction/pyproject.toml",
+  "workstation/*/pyproject.toml",
+]
 baseline_path = "architecture/dependency-baseline.json"
 report_path = "architecture/DEPENDENCY_REPORT.md"
 root_module_glob = "*.py"
@@ -38,7 +42,6 @@ dto_constant_modules = [
   "applied_theory_types",
   "artifact_contracts",
   "decision_review_models",
-  "host_interaction_models",
   "itemize_models",
   "skill_ir",
   "skill_leaf_types",
@@ -50,6 +53,13 @@ persistence_modules = [
   "store",
 ]
 compatibility_modules = [
+  "host_interaction_action_dispatch",
+  "host_interaction_actions",
+  "host_interaction_context",
+  "host_interaction_delegation",
+  "host_interaction_models",
+  "host_interaction_receipts",
+  "host_interaction_resolution",
   "skill_invocation_contract",
 ]
 
@@ -64,12 +74,19 @@ module_prefix = "realized_core_runtime"
 layer = "core"
 allowed_dependencies = []
 
+[components.host_interaction]
+project_dir = "host_interaction"
+distribution = "realized-host-interaction"
+module_prefix = "realized_host_interaction"
+layer = "host_substrate"
+allowed_dependencies = []
+
 [components.core_engine]
 project_dir = "core_engine"
 distribution = "realized-core-engine"
 module_prefix = "realized_core_engine"
 layer = "controller"
-allowed_dependencies = ["governed_core"]
+allowed_dependencies = ["governed_core", "host_interaction"]
 
 [components.core_llm]
 project_dir = "core_llm"
@@ -118,14 +135,19 @@ project_dir = "workstation/foundation_events"
 distribution = "realized-workstation-foundation-events"
 module_prefix = "workstation.foundation.events"
 layer = "foundation"
-allowed_dependencies = ["contracts", "foundation_models"]
+allowed_dependencies = ["contracts", "foundation_models", "host_interaction"]
 
 [components.foundation_host]
 project_dir = "workstation/foundation_host"
 distribution = "realized-workstation-foundation-host"
 module_prefix = "workstation.foundation.host"
 layer = "foundation"
-allowed_dependencies = ["contracts", "foundation_events", "foundation_models"]
+allowed_dependencies = [
+  "contracts",
+  "foundation_events",
+  "foundation_models",
+  "host_interaction",
+]
 
 [components.foundation_projections]
 project_dir = "workstation/foundation_projections"
@@ -168,6 +190,7 @@ allowed_dependencies = [
   "foundation_host",
   "foundation_models",
   "foundation_projections",
+  "host_interaction",
   "skills_core",
   "skills_planning",
 ]
@@ -207,6 +230,7 @@ allowed_dependencies = [
   "foundation_events",
   "foundation_host",
   "foundation_models",
+  "host_interaction",
   "skills_builtin",
 ]
 
@@ -265,6 +289,7 @@ allowed_dependencies = [
   "foundation_events",
   "foundation_models",
   "foundation_projections",
+  "host_interaction",
 ]
 
 [components.ui_textual]
@@ -288,6 +313,7 @@ layer = "entry"
 allowed_dependencies = [
   "foundation_host",
   "grpc_implementation",
+  "host_interaction",
   "shell_core",
   "ui_shared",
   "ui_textual",

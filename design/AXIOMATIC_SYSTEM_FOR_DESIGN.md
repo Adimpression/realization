@@ -250,9 +250,9 @@ It is the human-factors base, not the full mediation bridge and not the implemen
 
 The next layers are:
 
-* [CROSS_DOMAIN_DESIGN_MEDIATION.md](/Users/ravindranathakila/service/realized/design/CROSS_DOMAIN_DESIGN_MEDIATION.md)
-* [DESIGN_TYPE_SYSTEM.md](/Users/ravindranathakila/service/realized/design/DESIGN_TYPE_SYSTEM.md)
-* [DESIGN_TYPE_SYSTEM_IMPLEMENTATION.md](/Users/ravindranathakila/service/realized/design/DESIGN_TYPE_SYSTEM_IMPLEMENTATION.md)
+* [CROSS_DOMAIN_DESIGN_MEDIATION.md](CROSS_DOMAIN_DESIGN_MEDIATION.md)
+* [DESIGN_TYPE_SYSTEM.md](DESIGN_TYPE_SYSTEM.md)
+* [DESIGN_TYPE_SYSTEM_IMPLEMENTATION.md](DESIGN_TYPE_SYSTEM_IMPLEMENTATION.md)
 
 The why is direct:
 

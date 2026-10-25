@@ -4,7 +4,7 @@
 
 The project is not yet approved for public release. Content classification,
 source staging, provenance verification, secret scanning, and public metadata
-for the three standalone core distributions are in place. Final candidate
+for the six standalone core distributions are in place. Final candidate
 qualification, Cloud Build integration, and tagging remain. This preparation
 does not change runtime behavior, package boundaries, persisted formats, or
 current local operations.
@@ -37,9 +37,11 @@ staged release directory before publication.
   third-party notices, and public core-package metadata.
 - The public Git history was scanned with pinned Gitleaks 8.30.1 on 2026-10-20.
   It scanned the imported commit and approximately 155 MB without findings.
-- The `realized-core`, `realized-core-engine`, and `realized-core-runtime`
-  projects declare authorship, maintenance contact, Apache-2.0 licensing,
-  classifiers, keywords, and public project URLs, and package the license text.
+- The `realized-core`, `realized-core-conversation`, `realized-core-engine`,
+  `realized-core-llm`, `realized-core-runtime`, and `realized-host-interaction`
+  projects declare authorship,
+  maintenance contact, Apache-2.0 licensing, classifiers, keywords, and public
+  project URLs, and package the license text.
 
 ## Release Blockers
 

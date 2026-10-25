@@ -40,9 +40,7 @@ rm -rf /tmp/workstation-root
 From the repository root:
 
 ```bash
-PROJECT_HOME=/Users/ravindranathakila/service/realized/
-cd $PROJECT_HOME && \
-  uv run python controller_entrypoints.py workstation-grpc-host \
+uv run python controller_entrypoints.py workstation-grpc-host \
   --serve-root /tmp/workstation-root \
   --default-root /tmp/workstation-root \
   --host 127.0.0.1 \
@@ -64,8 +62,8 @@ Notes:
 From the repository root:
 
 ```bash
-PROJECT_HOME=/Users/ravindranathakila/service/realized/
-cd $PROJECT_HOME && (killall -9 envoy || true) && envoy -c workstation/ui_flutter/envoy/workstation_grpc_web.yaml
+(killall -9 envoy || true) && \
+  envoy -c workstation/ui_flutter/envoy/workstation_grpc_web.yaml
 ```
 
 Default ports in the committed Envoy config:

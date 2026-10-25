@@ -86,7 +86,7 @@ governance:
   created_at: '2026-03-31T10:28:31+00:00'
   provenance:
   - not_learn-from-markdown-01-learn-symbolsearch-comman_929a23
-  - /Users/ravindranathakila/service/realized/trials/symbolsearch/01_LEARN_SYMBOLSEARCH_COMMANDS_FIND_SYMBOL_OCCURRENCES.md
+  - trials/symbolsearch/01_LEARN_SYMBOLSEARCH_COMMANDS_FIND_SYMBOL_OCCURRENCES.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -348,7 +348,7 @@ governance:
   created_at: '2026-03-31T10:28:39+00:00'
   provenance:
   - not_learn-from-markdown-02-learn-symbolsearch-comman_bfb545
-  - /Users/ravindranathakila/service/realized/trials/symbolsearch/02_LEARN_SYMBOLSEARCH_COMMANDS_FIND_PYTHON_FUNCTION_DEFINITION.md
+  - trials/symbolsearch/02_LEARN_SYMBOLSEARCH_COMMANDS_FIND_PYTHON_FUNCTION_DEFINITION.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -612,7 +612,7 @@ governance:
   created_at: '2026-03-31T10:28:47+00:00'
   provenance:
   - not_learn-from-markdown-03-learn-symbolsearch-comman_2a2bef
-  - /Users/ravindranathakila/service/realized/trials/symbolsearch/03_LEARN_SYMBOLSEARCH_COMMANDS_FIND_PYTHON_CLASS_DEFINITION.md
+  - trials/symbolsearch/03_LEARN_SYMBOLSEARCH_COMMANDS_FIND_PYTHON_CLASS_DEFINITION.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -875,7 +875,7 @@ governance:
   created_at: '2026-03-31T10:28:56+00:00'
   provenance:
   - not_learn-from-markdown-04-learn-symbolsearch-comman_d22e85
-  - /Users/ravindranathakila/service/realized/trials/symbolsearch/04_LEARN_SYMBOLSEARCH_COMMANDS_FIND_IMPORTS.md
+  - trials/symbolsearch/04_LEARN_SYMBOLSEARCH_COMMANDS_FIND_IMPORTS.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -1135,7 +1135,7 @@ governance:
   created_at: '2026-03-31T10:29:05+00:00'
   provenance:
   - not_learn-from-markdown-05-learn-symbolsearch-comman_0998cb
-  - /Users/ravindranathakila/service/realized/trials/symbolsearch/05_LEARN_SYMBOLSEARCH_COMMANDS_FIND_TAG_LINES.md
+  - trials/symbolsearch/05_LEARN_SYMBOLSEARCH_COMMANDS_FIND_TAG_LINES.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -1395,7 +1395,7 @@ governance:
   created_at: '2026-03-31T10:29:13+00:00'
   provenance:
   - not_learn-from-markdown-06-learn-symbolsearch-comman_a1558f
-  - /Users/ravindranathakila/service/realized/trials/symbolsearch/06_LEARN_SYMBOLSEARCH_COMMANDS_FIND_MARKDOWN_HEADINGS.md
+  - trials/symbolsearch/06_LEARN_SYMBOLSEARCH_COMMANDS_FIND_MARKDOWN_HEADINGS.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -1658,7 +1658,7 @@ governance:
   created_at: '2026-03-31T10:29:23+00:00'
   provenance:
   - not_learn-from-markdown-07-learn-symbolsearch-comman_55c3ba
-  - /Users/ravindranathakila/service/realized/trials/symbolsearch/07_LEARN_SYMBOLSEARCH_COMMANDS_FIND_SYMBOL_IN_GLOB.md
+  - trials/symbolsearch/07_LEARN_SYMBOLSEARCH_COMMANDS_FIND_SYMBOL_IN_GLOB.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -1923,7 +1923,7 @@ governance:
   created_at: '2026-03-31T10:29:33+00:00'
   provenance:
   - not_learn-from-markdown-08-learn-symbolsearch-comman_54f96d
-  - /Users/ravindranathakila/service/realized/trials/symbolsearch/08_LEARN_SYMBOLSEARCH_COMMANDS_FIND_ENVIRONMENT_VARIABLES.md
+  - trials/symbolsearch/08_LEARN_SYMBOLSEARCH_COMMANDS_FIND_ENVIRONMENT_VARIABLES.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -2187,7 +2187,7 @@ governance:
   created_at: '2026-03-31T10:29:43+00:00'
   provenance:
   - not_learn-from-markdown-09-learn-symbolsearch-comman_b374a8
-  - /Users/ravindranathakila/service/realized/trials/symbolsearch/09_LEARN_SYMBOLSEARCH_COMMANDS_FIND_EXACT_WORD_REFERENCES.md
+  - trials/symbolsearch/09_LEARN_SYMBOLSEARCH_COMMANDS_FIND_EXACT_WORD_REFERENCES.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -2450,7 +2450,7 @@ governance:
   created_at: '2026-03-31T10:29:53+00:00'
   provenance:
   - not_learn-from-markdown-10-learn-symbolsearch-comman_1d6931
-  - /Users/ravindranathakila/service/realized/trials/symbolsearch/10_LEARN_SYMBOLSEARCH_COMMANDS_FIND_METHOD_CALLS.md
+  - trials/symbolsearch/10_LEARN_SYMBOLSEARCH_COMMANDS_FIND_METHOD_CALLS.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -2713,7 +2713,7 @@ governance:
   created_at: '2026-03-31T10:30:04+00:00'
   provenance:
   - not_learn-from-markdown-11-learn-symbolsearch-comman_fe5f91
-  - /Users/ravindranathakila/service/realized/trials/symbolsearch/11_LEARN_SYMBOLSEARCH_COMMANDS_FIND_YAML_KEYS.md
+  - trials/symbolsearch/11_LEARN_SYMBOLSEARCH_COMMANDS_FIND_YAML_KEYS.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -2971,7 +2971,7 @@ governance:
   created_at: '2026-03-31T10:30:13+00:00'
   provenance:
   - not_learn-from-markdown-12-learn-symbolsearch-comman_172d58
-  - /Users/ravindranathakila/service/realized/trials/symbolsearch/12_LEARN_SYMBOLSEARCH_COMMANDS_FIND_PYTHON_DECORATORS.md
+  - trials/symbolsearch/12_LEARN_SYMBOLSEARCH_COMMANDS_FIND_PYTHON_DECORATORS.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:

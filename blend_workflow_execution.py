@@ -21,7 +21,7 @@ from blend_operator import (
 from blend_operator_store import BlendOperatorProvider, resolve_blend_operator_record_for_workflow_step
 from blend_workflow import BlendWorkflowPlan, BlendWorkflowStep, blend_workflow_run_from_skill_compose_result
 from blend_workflow_store import persist_blend_workflow_objects
-from host_interaction_delegation import normalized_requested_delegation
+from realized_host_interaction.delegation import normalized_requested_delegation
 from semantic_text import collapse_ws
 from skill_composition import SkillCompositionExecutionEvent, execute_skill_composition_plan
 

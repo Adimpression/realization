@@ -71,7 +71,7 @@ governance:
   created_at: '2026-04-11T11:04:41+00:00'
   provenance:
   - not_learn-from-markdown-01-learn-physics-relations-s_eb72bc
-  - /Users/ravindranathakila/service/realized/trials/physics/01_LEARN_PHYSICS_RELATIONS_SCALAR_VECTOR.md
+  - trials/physics/01_LEARN_PHYSICS_RELATIONS_SCALAR_VECTOR.md
   structured_learning:
     title_identity: Reusable substrate
     encountered_not: 1 Reusable Substrate
@@ -388,7 +388,7 @@ governance:
   created_at: '2026-04-11T11:04:41+00:00'
   provenance:
   - not_learn-from-markdown-01-learn-physics-relations-s_eb72bc
-  - /Users/ravindranathakila/service/realized/trials/physics/01_LEARN_PHYSICS_RELATIONS_SCALAR_VECTOR.md
+  - trials/physics/01_LEARN_PHYSICS_RELATIONS_SCALAR_VECTOR.md
   structured_learning:
     title_identity: One-sentence summary
     encountered_not: 5 One Sentence Summary
@@ -699,7 +699,7 @@ governance:
   created_at: '2026-04-11T11:04:42+00:00'
   provenance:
   - not_learn-from-markdown-01-learn-physics-relations-s_eb72bc
-  - /Users/ravindranathakila/service/realized/trials/physics/01_LEARN_PHYSICS_RELATIONS_SCALAR_VECTOR.md
+  - trials/physics/01_LEARN_PHYSICS_RELATIONS_SCALAR_VECTOR.md
   constraints:
   - derive only from the supplied encounter
   template_schema:
@@ -1097,7 +1097,7 @@ governance:
   created_at: '2026-04-11T11:04:43+00:00'
   provenance:
   - not_learn-from-markdown-01-learn-physics-relations-s_eb72bc
-  - /Users/ravindranathakila/service/realized/trials/physics/01_LEARN_PHYSICS_RELATIONS_SCALAR_VECTOR.md
+  - trials/physics/01_LEARN_PHYSICS_RELATIONS_SCALAR_VECTOR.md
   constraints:
   - derive only from the supplied encounter
   template_schema:
@@ -1491,7 +1491,7 @@ governance:
   created_at: '2026-04-11T11:04:43+00:00'
   provenance:
   - not_learn-from-markdown-01-learn-physics-relations-s_eb72bc
-  - /Users/ravindranathakila/service/realized/trials/physics/01_LEARN_PHYSICS_RELATIONS_SCALAR_VECTOR.md
+  - trials/physics/01_LEARN_PHYSICS_RELATIONS_SCALAR_VECTOR.md
   constraints:
   - derive only from the supplied encounter
   template_schema:
@@ -1822,7 +1822,7 @@ governance:
   created_at: '2026-04-11T11:04:44+00:00'
   provenance:
   - not_learn-from-markdown-02-learn-physics-relations-r_9576de
-  - /Users/ravindranathakila/service/realized/trials/physics/02_LEARN_PHYSICS_RELATIONS_RATE_OF_CHANGE.md
+  - trials/physics/02_LEARN_PHYSICS_RELATIONS_RATE_OF_CHANGE.md
   structured_learning:
     title_identity: Reusable substrate
     encountered_not: 1 Reusable Substrate
@@ -2111,7 +2111,7 @@ governance:
   created_at: '2026-04-11T11:04:44+00:00'
   provenance:
   - not_learn-from-markdown-02-learn-physics-relations-r_9576de
-  - /Users/ravindranathakila/service/realized/trials/physics/02_LEARN_PHYSICS_RELATIONS_RATE_OF_CHANGE.md
+  - trials/physics/02_LEARN_PHYSICS_RELATIONS_RATE_OF_CHANGE.md
   related_artifact_ids:
   - artifact_knowledge-physics-relations-rate-of-change-in-mo_2067c5
   structured_learning:
@@ -2391,7 +2391,7 @@ governance:
   created_at: '2026-04-11T11:04:45+00:00'
   provenance:
   - not_learn-from-markdown-02-learn-physics-relations-r_9576de
-  - /Users/ravindranathakila/service/realized/trials/physics/02_LEARN_PHYSICS_RELATIONS_RATE_OF_CHANGE.md
+  - trials/physics/02_LEARN_PHYSICS_RELATIONS_RATE_OF_CHANGE.md
   related_artifact_ids:
   - artifact_knowledge-physics-relations-rate-of-change-in-mo_2067c5
   structured_learning:
@@ -2684,7 +2684,7 @@ governance:
   created_at: '2026-04-11T11:04:45+00:00'
   provenance:
   - not_learn-from-markdown-02-learn-physics-relations-r_9576de
-  - /Users/ravindranathakila/service/realized/trials/physics/02_LEARN_PHYSICS_RELATIONS_RATE_OF_CHANGE.md
+  - trials/physics/02_LEARN_PHYSICS_RELATIONS_RATE_OF_CHANGE.md
   related_artifact_ids:
   - artifact_knowledge-physics-relations-rate-of-change-in-mo_2067c5
   structured_learning:
@@ -2976,7 +2976,7 @@ governance:
   created_at: '2026-04-11T11:04:45+00:00'
   provenance:
   - not_learn-from-markdown-02-learn-physics-relations-r_9576de
-  - /Users/ravindranathakila/service/realized/trials/physics/02_LEARN_PHYSICS_RELATIONS_RATE_OF_CHANGE.md
+  - trials/physics/02_LEARN_PHYSICS_RELATIONS_RATE_OF_CHANGE.md
   structured_learning:
     title_identity: One-sentence summary
     encountered_not: 5 One Sentence Summary
@@ -3290,7 +3290,7 @@ governance:
   created_at: '2026-04-11T11:04:47+00:00'
   provenance:
   - not_learn-from-markdown-02-learn-physics-relations-r_9576de
-  - /Users/ravindranathakila/service/realized/trials/physics/02_LEARN_PHYSICS_RELATIONS_RATE_OF_CHANGE.md
+  - trials/physics/02_LEARN_PHYSICS_RELATIONS_RATE_OF_CHANGE.md
   constraints:
   - derive only from the supplied encounter
   template_schema:
@@ -3621,7 +3621,7 @@ governance:
   created_at: '2026-04-11T11:04:56+00:00'
   provenance:
   - not_learn-from-markdown-03-learn-physics-relations-l_d7b0d1
-  - /Users/ravindranathakila/service/realized/trials/physics/03_LEARN_PHYSICS_RELATIONS_LINEAR_MOTION.md
+  - trials/physics/03_LEARN_PHYSICS_RELATIONS_LINEAR_MOTION.md
   structured_learning:
     title_identity: Reusable substrate
     encountered_not: 1 Reusable Substrate
@@ -3908,7 +3908,7 @@ governance:
   created_at: '2026-04-11T11:04:57+00:00'
   provenance:
   - not_learn-from-markdown-03-learn-physics-relations-l_d7b0d1
-  - /Users/ravindranathakila/service/realized/trials/physics/03_LEARN_PHYSICS_RELATIONS_LINEAR_MOTION.md
+  - trials/physics/03_LEARN_PHYSICS_RELATIONS_LINEAR_MOTION.md
   related_artifact_ids:
   - artifact_knowledge-physics-relations-linear-motion-under-_41d57f
   structured_learning:
@@ -4198,7 +4198,7 @@ governance:
   created_at: '2026-04-11T11:04:57+00:00'
   provenance:
   - not_learn-from-markdown-03-learn-physics-relations-l_d7b0d1
-  - /Users/ravindranathakila/service/realized/trials/physics/03_LEARN_PHYSICS_RELATIONS_LINEAR_MOTION.md
+  - trials/physics/03_LEARN_PHYSICS_RELATIONS_LINEAR_MOTION.md
   related_artifact_ids:
   - artifact_knowledge-physics-relations-linear-motion-under-_41d57f
   structured_learning:
@@ -4489,7 +4489,7 @@ governance:
   created_at: '2026-04-11T11:04:58+00:00'
   provenance:
   - not_learn-from-markdown-03-learn-physics-relations-l_d7b0d1
-  - /Users/ravindranathakila/service/realized/trials/physics/03_LEARN_PHYSICS_RELATIONS_LINEAR_MOTION.md
+  - trials/physics/03_LEARN_PHYSICS_RELATIONS_LINEAR_MOTION.md
   structured_learning:
     title_identity: Velocity-displacement relation
     encountered_not: 4 Velocity Displacement Relation
@@ -4766,7 +4766,7 @@ governance:
   created_at: '2026-04-11T11:04:58+00:00'
   provenance:
   - not_learn-from-markdown-03-learn-physics-relations-l_d7b0d1
-  - /Users/ravindranathakila/service/realized/trials/physics/03_LEARN_PHYSICS_RELATIONS_LINEAR_MOTION.md
+  - trials/physics/03_LEARN_PHYSICS_RELATIONS_LINEAR_MOTION.md
   structured_learning:
     title_identity: One-sentence summary
     encountered_not: 5 One Sentence Summary
@@ -5088,7 +5088,7 @@ governance:
   created_at: '2026-04-11T11:05:02+00:00'
   provenance:
   - not_learn-from-markdown-03-learn-physics-relations-l_d7b0d1
-  - /Users/ravindranathakila/service/realized/trials/physics/03_LEARN_PHYSICS_RELATIONS_LINEAR_MOTION.md
+  - trials/physics/03_LEARN_PHYSICS_RELATIONS_LINEAR_MOTION.md
   constraints:
   - derive only from the supplied encounter
   template_schema:
@@ -5479,7 +5479,7 @@ governance:
   created_at: '2026-04-11T11:05:12+00:00'
   provenance:
   - not_learn-from-markdown-03-learn-physics-relations-l_d7b0d1
-  - /Users/ravindranathakila/service/realized/trials/physics/03_LEARN_PHYSICS_RELATIONS_LINEAR_MOTION.md
+  - trials/physics/03_LEARN_PHYSICS_RELATIONS_LINEAR_MOTION.md
   constraints:
   - derive only from the supplied encounter
   template_schema:
@@ -5806,7 +5806,7 @@ governance:
   created_at: '2026-04-11T11:05:18+00:00'
   provenance:
   - not_learn-from-markdown-04-learn-physics-relations-f_a0a924
-  - /Users/ravindranathakila/service/realized/trials/physics/04_LEARN_PHYSICS_RELATIONS_FORCE.md
+  - trials/physics/04_LEARN_PHYSICS_RELATIONS_FORCE.md
   structured_learning:
     title_identity: Reusable substrate
     encountered_not: 1 Reusable Substrate
@@ -6095,7 +6095,7 @@ governance:
   created_at: '2026-04-11T11:05:19+00:00'
   provenance:
   - not_learn-from-markdown-04-learn-physics-relations-f_a0a924
-  - /Users/ravindranathakila/service/realized/trials/physics/04_LEARN_PHYSICS_RELATIONS_FORCE.md
+  - trials/physics/04_LEARN_PHYSICS_RELATIONS_FORCE.md
   related_artifact_ids:
   - artifact_knowledge-physics-relations-force-and-mass-accel_eca298
   structured_learning:
@@ -6386,7 +6386,7 @@ governance:
   created_at: '2026-04-11T11:05:21+00:00'
   provenance:
   - not_learn-from-markdown-04-learn-physics-relations-f_a0a924
-  - /Users/ravindranathakila/service/realized/trials/physics/04_LEARN_PHYSICS_RELATIONS_FORCE.md
+  - trials/physics/04_LEARN_PHYSICS_RELATIONS_FORCE.md
   related_artifact_ids:
   - artifact_knowledge-physics-relations-force-and-mass-accel_eca298
   structured_learning:
@@ -6673,7 +6673,7 @@ governance:
   created_at: '2026-04-11T11:05:22+00:00'
   provenance:
   - not_learn-from-markdown-04-learn-physics-relations-f_a0a924
-  - /Users/ravindranathakila/service/realized/trials/physics/04_LEARN_PHYSICS_RELATIONS_FORCE.md
+  - trials/physics/04_LEARN_PHYSICS_RELATIONS_FORCE.md
   structured_learning:
     title_identity: Distinguishing the laws
     encountered_not: 4 Distinguishing The Laws
@@ -6960,7 +6960,7 @@ governance:
   created_at: '2026-04-11T11:05:22+00:00'
   provenance:
   - not_learn-from-markdown-04-learn-physics-relations-f_a0a924
-  - /Users/ravindranathakila/service/realized/trials/physics/04_LEARN_PHYSICS_RELATIONS_FORCE.md
+  - trials/physics/04_LEARN_PHYSICS_RELATIONS_FORCE.md
   structured_learning:
     title_identity: One-sentence summary
     encountered_not: 5 One Sentence Summary
@@ -7295,7 +7295,7 @@ governance:
   created_at: '2026-04-11T11:05:45+00:00'
   provenance:
   - not_learn-from-markdown-04-learn-physics-relations-f_a0a924
-  - /Users/ravindranathakila/service/realized/trials/physics/04_LEARN_PHYSICS_RELATIONS_FORCE.md
+  - trials/physics/04_LEARN_PHYSICS_RELATIONS_FORCE.md
   constraints:
   - derive only from the supplied encounter
   template_schema:
@@ -7667,7 +7667,7 @@ governance:
   created_at: '2026-04-11T11:05:56+00:00'
   provenance:
   - not_learn-from-markdown-05-learn-physics-relations-w_516dac
-  - /Users/ravindranathakila/service/realized/trials/physics/05_LEARN_PHYSICS_RELATIONS_WORK_ENERGY.md
+  - trials/physics/05_LEARN_PHYSICS_RELATIONS_WORK_ENERGY.md
   structured_learning:
     title_identity: Reusable substrate
     encountered_not: 1 Reusable Substrate
@@ -7950,7 +7950,7 @@ governance:
   created_at: '2026-04-11T11:05:56+00:00'
   provenance:
   - not_learn-from-markdown-05-learn-physics-relations-w_516dac
-  - /Users/ravindranathakila/service/realized/trials/physics/05_LEARN_PHYSICS_RELATIONS_WORK_ENERGY.md
+  - trials/physics/05_LEARN_PHYSICS_RELATIONS_WORK_ENERGY.md
   related_artifact_ids:
   - artifact_knowledge-physics-relations-work-and-energy-tran_8a1e45
   structured_learning:
@@ -8240,7 +8240,7 @@ governance:
   created_at: '2026-04-11T11:05:58+00:00'
   provenance:
   - not_learn-from-markdown-05-learn-physics-relations-w_516dac
-  - /Users/ravindranathakila/service/realized/trials/physics/05_LEARN_PHYSICS_RELATIONS_WORK_ENERGY.md
+  - trials/physics/05_LEARN_PHYSICS_RELATIONS_WORK_ENERGY.md
   structured_learning:
     title_identity: Work-energy theorem
     encountered_not: 4 Work Energy Theorem
@@ -8512,7 +8512,7 @@ governance:
   created_at: '2026-04-11T11:05:58+00:00'
   provenance:
   - not_learn-from-markdown-05-learn-physics-relations-w_516dac
-  - /Users/ravindranathakila/service/realized/trials/physics/05_LEARN_PHYSICS_RELATIONS_WORK_ENERGY.md
+  - trials/physics/05_LEARN_PHYSICS_RELATIONS_WORK_ENERGY.md
   structured_learning:
     title_identity: One-sentence summary
     encountered_not: 5 One Sentence Summary
@@ -8831,7 +8831,7 @@ governance:
   created_at: '2026-04-11T11:06:02+00:00'
   provenance:
   - not_learn-from-markdown-05-learn-physics-relations-w_516dac
-  - /Users/ravindranathakila/service/realized/trials/physics/05_LEARN_PHYSICS_RELATIONS_WORK_ENERGY.md
+  - trials/physics/05_LEARN_PHYSICS_RELATIONS_WORK_ENERGY.md
   constraints:
   - derive only from the supplied encounter
   template_schema:
@@ -9220,7 +9220,7 @@ governance:
   created_at: '2026-04-11T11:06:09+00:00'
   provenance:
   - not_learn-from-markdown-05-learn-physics-relations-w_516dac
-  - /Users/ravindranathakila/service/realized/trials/physics/05_LEARN_PHYSICS_RELATIONS_WORK_ENERGY.md
+  - trials/physics/05_LEARN_PHYSICS_RELATIONS_WORK_ENERGY.md
   constraints:
   - derive only from the supplied encounter
   template_schema:
@@ -9589,7 +9589,7 @@ governance:
   created_at: '2026-04-11T11:06:12+00:00'
   provenance:
   - not_learn-from-markdown-05-learn-physics-relations-w_516dac
-  - /Users/ravindranathakila/service/realized/trials/physics/05_LEARN_PHYSICS_RELATIONS_WORK_ENERGY.md
+  - trials/physics/05_LEARN_PHYSICS_RELATIONS_WORK_ENERGY.md
   constraints:
   - derive only from the supplied encounter
   template_schema:
@@ -9910,7 +9910,7 @@ governance:
   created_at: '2026-04-11T11:06:16+00:00'
   provenance:
   - not_learn-from-markdown-06-learn-physics-relations-m_0993d8
-  - /Users/ravindranathakila/service/realized/trials/physics/06_LEARN_PHYSICS_RELATIONS_MOMENTUM.md
+  - trials/physics/06_LEARN_PHYSICS_RELATIONS_MOMENTUM.md
   structured_learning:
     title_identity: Reusable substrate
     encountered_not: 1 Reusable Substrate
@@ -10187,7 +10187,7 @@ governance:
   created_at: '2026-04-11T11:06:17+00:00'
   provenance:
   - not_learn-from-markdown-06-learn-physics-relations-m_0993d8
-  - /Users/ravindranathakila/service/realized/trials/physics/06_LEARN_PHYSICS_RELATIONS_MOMENTUM.md
+  - trials/physics/06_LEARN_PHYSICS_RELATIONS_MOMENTUM.md
   related_artifact_ids:
   - artifact_knowledge-physics-relations-force-and-mass-accel_eca298
   structured_learning:
@@ -10473,7 +10473,7 @@ governance:
   created_at: '2026-04-11T11:06:17+00:00'
   provenance:
   - not_learn-from-markdown-06-learn-physics-relations-m_0993d8
-  - /Users/ravindranathakila/service/realized/trials/physics/06_LEARN_PHYSICS_RELATIONS_MOMENTUM.md
+  - trials/physics/06_LEARN_PHYSICS_RELATIONS_MOMENTUM.md
   related_artifact_ids:
   - artifact_knowledge-physics-relations-force-and-mass-accel_eca298
   structured_learning:
@@ -10759,7 +10759,7 @@ governance:
   created_at: '2026-04-11T11:06:18+00:00'
   provenance:
   - not_learn-from-markdown-06-learn-physics-relations-m_0993d8
-  - /Users/ravindranathakila/service/realized/trials/physics/06_LEARN_PHYSICS_RELATIONS_MOMENTUM.md
+  - trials/physics/06_LEARN_PHYSICS_RELATIONS_MOMENTUM.md
   structured_learning:
     title_identity: Impulse-momentum theorem
     encountered_not: 4 Impulse Momentum Theorem
@@ -11035,7 +11035,7 @@ governance:
   created_at: '2026-04-11T11:06:18+00:00'
   provenance:
   - not_learn-from-markdown-06-learn-physics-relations-m_0993d8
-  - /Users/ravindranathakila/service/realized/trials/physics/06_LEARN_PHYSICS_RELATIONS_MOMENTUM.md
+  - trials/physics/06_LEARN_PHYSICS_RELATIONS_MOMENTUM.md
   structured_learning:
     title_identity: One-sentence summary
     encountered_not: 5 One Sentence Summary
@@ -11349,7 +11349,7 @@ governance:
   created_at: '2026-04-11T11:06:21+00:00'
   provenance:
   - not_learn-from-markdown-06-learn-physics-relations-m_0993d8
-  - /Users/ravindranathakila/service/realized/trials/physics/06_LEARN_PHYSICS_RELATIONS_MOMENTUM.md
+  - trials/physics/06_LEARN_PHYSICS_RELATIONS_MOMENTUM.md
   constraints:
   - derive only from the supplied encounter
   template_schema:
@@ -11724,7 +11724,7 @@ governance:
   created_at: '2026-04-11T11:06:31+00:00'
   provenance:
   - not_learn-from-markdown-06-learn-physics-relations-m_0993d8
-  - /Users/ravindranathakila/service/realized/trials/physics/06_LEARN_PHYSICS_RELATIONS_MOMENTUM.md
+  - trials/physics/06_LEARN_PHYSICS_RELATIONS_MOMENTUM.md
   constraints:
   - derive only from the supplied encounter
   template_schema:
@@ -12045,7 +12045,7 @@ governance:
   created_at: '2026-04-11T11:06:40+00:00'
   provenance:
   - not_learn-from-markdown-07-learn-physics-relations-c_86198e
-  - /Users/ravindranathakila/service/realized/trials/physics/07_LEARN_PHYSICS_RELATIONS_CIRCULAR_MOTION.md
+  - trials/physics/07_LEARN_PHYSICS_RELATIONS_CIRCULAR_MOTION.md
   related_artifact_ids:
   - artifact_knowledge-physics-relations-circular-motion-earl_bd7ced
   structured_learning:
@@ -12330,7 +12330,7 @@ governance:
   created_at: '2026-04-11T11:06:41+00:00'
   provenance:
   - not_learn-from-markdown-07-learn-physics-relations-c_86198e
-  - /Users/ravindranathakila/service/realized/trials/physics/07_LEARN_PHYSICS_RELATIONS_CIRCULAR_MOTION.md
+  - trials/physics/07_LEARN_PHYSICS_RELATIONS_CIRCULAR_MOTION.md
   related_artifact_ids:
   - artifact_knowledge-physics-relations-circular-motion-earl_bd7ced
   structured_learning:
@@ -12617,7 +12617,7 @@ governance:
   created_at: '2026-04-11T11:06:42+00:00'
   provenance:
   - not_learn-from-markdown-07-learn-physics-relations-c_86198e
-  - /Users/ravindranathakila/service/realized/trials/physics/07_LEARN_PHYSICS_RELATIONS_CIRCULAR_MOTION.md
+  - trials/physics/07_LEARN_PHYSICS_RELATIONS_CIRCULAR_MOTION.md
   structured_learning:
     title_identity: Distinguishing the law
     encountered_not: 4 Distinguishing The Law
@@ -12887,7 +12887,7 @@ governance:
   created_at: '2026-04-11T11:06:42+00:00'
   provenance:
   - not_learn-from-markdown-07-learn-physics-relations-c_86198e
-  - /Users/ravindranathakila/service/realized/trials/physics/07_LEARN_PHYSICS_RELATIONS_CIRCULAR_MOTION.md
+  - trials/physics/07_LEARN_PHYSICS_RELATIONS_CIRCULAR_MOTION.md
   structured_learning:
     title_identity: One-sentence summary
     encountered_not: 5 One Sentence Summary
@@ -13153,7 +13153,7 @@ governance:
   created_at: '2026-04-11T11:06:58+00:00'
   provenance:
   - not_learn-from-markdown-08-learn-physics-relations-g_4df252
-  - /Users/ravindranathakila/service/realized/trials/physics/08_LEARN_PHYSICS_RELATIONS_GRAVITATION.md
+  - trials/physics/08_LEARN_PHYSICS_RELATIONS_GRAVITATION.md
   structured_learning:
     title_identity: Reusable substrate under the law
     encountered_not: 4 Reusable Substrate Under The Law
@@ -13426,7 +13426,7 @@ governance:
   created_at: '2026-04-11T11:06:59+00:00'
   provenance:
   - not_learn-from-markdown-08-learn-physics-relations-g_4df252
-  - /Users/ravindranathakila/service/realized/trials/physics/08_LEARN_PHYSICS_RELATIONS_GRAVITATION.md
+  - trials/physics/08_LEARN_PHYSICS_RELATIONS_GRAVITATION.md
   structured_learning:
     title_identity: One-sentence summary
     encountered_not: 6 One Sentence Summary
@@ -13746,7 +13746,7 @@ governance:
   created_at: '2026-04-11T11:07:03+00:00'
   provenance:
   - not_learn-from-markdown-08-learn-physics-relations-g_4df252
-  - /Users/ravindranathakila/service/realized/trials/physics/08_LEARN_PHYSICS_RELATIONS_GRAVITATION.md
+  - trials/physics/08_LEARN_PHYSICS_RELATIONS_GRAVITATION.md
   constraints:
   - derive only from the supplied encounter
   template_schema:
@@ -14131,7 +14131,7 @@ governance:
   created_at: '2026-04-11T11:07:07+00:00'
   provenance:
   - not_learn-from-markdown-08-learn-physics-relations-g_4df252
-  - /Users/ravindranathakila/service/realized/trials/physics/08_LEARN_PHYSICS_RELATIONS_GRAVITATION.md
+  - trials/physics/08_LEARN_PHYSICS_RELATIONS_GRAVITATION.md
   constraints:
   - derive only from the supplied encounter
   template_schema:
@@ -14460,7 +14460,7 @@ governance:
   created_at: '2026-04-11T11:07:11+00:00'
   provenance:
   - not_learn-from-markdown-09-learn-physics-relations-o_0a26a6
-  - /Users/ravindranathakila/service/realized/trials/physics/09_LEARN_PHYSICS_RELATIONS_OSCILLATION_WAVES.md
+  - trials/physics/09_LEARN_PHYSICS_RELATIONS_OSCILLATION_WAVES.md
   related_artifact_ids:
   - artifact_knowledge-physics-relations-oscillation-and-wave_f75c5c
   structured_learning:
@@ -14744,7 +14744,7 @@ governance:
   created_at: '2026-04-11T11:07:11+00:00'
   provenance:
   - not_learn-from-markdown-09-learn-physics-relations-o_0a26a6
-  - /Users/ravindranathakila/service/realized/trials/physics/09_LEARN_PHYSICS_RELATIONS_OSCILLATION_WAVES.md
+  - trials/physics/09_LEARN_PHYSICS_RELATIONS_OSCILLATION_WAVES.md
   related_artifact_ids:
   - artifact_knowledge-physics-relations-oscillation-and-wave_f75c5c
   structured_learning:
@@ -15029,7 +15029,7 @@ governance:
   created_at: '2026-04-11T11:07:12+00:00'
   provenance:
   - not_learn-from-markdown-09-learn-physics-relations-o_0a26a6
-  - /Users/ravindranathakila/service/realized/trials/physics/09_LEARN_PHYSICS_RELATIONS_OSCILLATION_WAVES.md
+  - trials/physics/09_LEARN_PHYSICS_RELATIONS_OSCILLATION_WAVES.md
   structured_learning:
     title_identity: One-sentence summary
     encountered_not: 5 One Sentence Summary
@@ -15294,7 +15294,7 @@ governance:
   created_at: '2026-04-11T11:07:12+00:00'
   provenance:
   - not_learn-from-markdown-09-learn-physics-relations-o_0a26a6
-  - /Users/ravindranathakila/service/realized/trials/physics/09_LEARN_PHYSICS_RELATIONS_OSCILLATION_WAVES.md
+  - trials/physics/09_LEARN_PHYSICS_RELATIONS_OSCILLATION_WAVES.md
   related_artifact_ids:
   - artifact_knowledge-physics-relations-oscillation-and-wave_f75c5c
   structured_learning:
@@ -15620,7 +15620,7 @@ governance:
   created_at: '2026-04-11T11:07:14+00:00'
   provenance:
   - not_learn-from-markdown-09-learn-physics-relations-o_0a26a6
-  - /Users/ravindranathakila/service/realized/trials/physics/09_LEARN_PHYSICS_RELATIONS_OSCILLATION_WAVES.md
+  - trials/physics/09_LEARN_PHYSICS_RELATIONS_OSCILLATION_WAVES.md
   constraints:
   - derive only from the supplied encounter
   template_schema:
@@ -15936,7 +15936,7 @@ governance:
   created_at: '2026-04-11T11:07:33+00:00'
   provenance:
   - not_learn-from-markdown-10-learn-physics-relations-e_b0b7bc
-  - /Users/ravindranathakila/service/realized/trials/physics/10_LEARN_PHYSICS_RELATIONS_ELECTRIC_CIRCUITS.md
+  - trials/physics/10_LEARN_PHYSICS_RELATIONS_ELECTRIC_CIRCUITS.md
   related_artifact_ids:
   - artifact_knowledge-physics-relations-electric-circuits-re_b9d789
   structured_learning:
@@ -16217,7 +16217,7 @@ governance:
   created_at: '2026-04-11T11:07:34+00:00'
   provenance:
   - not_learn-from-markdown-10-learn-physics-relations-e_b0b7bc
-  - /Users/ravindranathakila/service/realized/trials/physics/10_LEARN_PHYSICS_RELATIONS_ELECTRIC_CIRCUITS.md
+  - trials/physics/10_LEARN_PHYSICS_RELATIONS_ELECTRIC_CIRCUITS.md
   structured_learning:
     title_identity: Reusable substrate
     encountered_not: 1 Reusable Substrate
@@ -16493,7 +16493,7 @@ governance:
   created_at: '2026-04-11T11:07:35+00:00'
   provenance:
   - not_learn-from-markdown-10-learn-physics-relations-e_b0b7bc
-  - /Users/ravindranathakila/service/realized/trials/physics/10_LEARN_PHYSICS_RELATIONS_ELECTRIC_CIRCUITS.md
+  - trials/physics/10_LEARN_PHYSICS_RELATIONS_ELECTRIC_CIRCUITS.md
   related_artifact_ids:
   - artifact_knowledge-physics-relations-electric-circuits-re_b9d789
   structured_learning:
@@ -16774,7 +16774,7 @@ governance:
   created_at: '2026-04-11T11:07:35+00:00'
   provenance:
   - not_learn-from-markdown-10-learn-physics-relations-e_b0b7bc
-  - /Users/ravindranathakila/service/realized/trials/physics/10_LEARN_PHYSICS_RELATIONS_ELECTRIC_CIRCUITS.md
+  - trials/physics/10_LEARN_PHYSICS_RELATIONS_ELECTRIC_CIRCUITS.md
   related_artifact_ids:
   - artifact_knowledge-physics-relations-electric-circuits-re_b9d789
   structured_learning:
@@ -17052,7 +17052,7 @@ governance:
   created_at: '2026-04-11T11:07:36+00:00'
   provenance:
   - not_learn-from-markdown-10-learn-physics-relations-e_b0b7bc
-  - /Users/ravindranathakila/service/realized/trials/physics/10_LEARN_PHYSICS_RELATIONS_ELECTRIC_CIRCUITS.md
+  - trials/physics/10_LEARN_PHYSICS_RELATIONS_ELECTRIC_CIRCUITS.md
   structured_learning:
     title_identity: One-sentence summary
     encountered_not: 5 One Sentence Summary
@@ -17365,7 +17365,7 @@ governance:
   created_at: '2026-04-11T11:07:39+00:00'
   provenance:
   - not_learn-from-markdown-10-learn-physics-relations-e_b0b7bc
-  - /Users/ravindranathakila/service/realized/trials/physics/10_LEARN_PHYSICS_RELATIONS_ELECTRIC_CIRCUITS.md
+  - trials/physics/10_LEARN_PHYSICS_RELATIONS_ELECTRIC_CIRCUITS.md
   constraints:
   - derive only from the supplied encounter
   template_schema:
@@ -17732,7 +17732,7 @@ governance:
   created_at: '2026-04-11T11:07:42+00:00'
   provenance:
   - not_learn-from-markdown-10-learn-physics-relations-e_b0b7bc
-  - /Users/ravindranathakila/service/realized/trials/physics/10_LEARN_PHYSICS_RELATIONS_ELECTRIC_CIRCUITS.md
+  - trials/physics/10_LEARN_PHYSICS_RELATIONS_ELECTRIC_CIRCUITS.md
   constraints:
   - derive only from the supplied encounter
   template_schema:
@@ -18056,7 +18056,7 @@ governance:
   created_at: '2026-04-11T11:08:07+00:00'
   provenance:
   - not_learn-from-markdown-prompts-md_73bb96
-  - /Users/ravindranathakila/service/realized/trials/physics/PROMPTS.md
+  - trials/physics/PROMPTS.md
   structured_learning:
     title_identity: Prompts
     encountered_not: Prompts

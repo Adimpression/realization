@@ -31,7 +31,7 @@ Output:
 
 ## 4. Natural-language paraphrases
 
-* find files named `README.md` under `/Users/ravindranathakila/service/realized`
+* find files named `README.md` under `.`
 * search `/tmp` for files called `config.json`
 * locate files by name beneath a root directory
 

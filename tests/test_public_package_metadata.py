@@ -12,6 +12,7 @@ PUBLIC_PACKAGES = {
     "core_engine": "realized-core-engine",
     "core_llm": "realized-core-llm",
     "core_runtime": "realized-core-runtime",
+    "host_interaction": "realized-host-interaction",
 }
 
 

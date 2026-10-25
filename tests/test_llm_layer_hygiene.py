@@ -42,7 +42,7 @@ def module_import_roots(path: Path) -> set[str]:
         Verifies the five-layer architecture boundary by ensuring prompt and LLM modules stay free of governance and runtime-mediation imports.
 
     Example Input Output:
-        Input: `module_import_roots(path=Path('/Users/ravindranathakila/service/realized/supplement.py'))`
+        Input: `module_import_roots(path=Path('/workspace/realized/supplement.py'))`
         Output: {'json', 'os', 're', 'urllib', 'applied_theory_types'}
 
     Args:

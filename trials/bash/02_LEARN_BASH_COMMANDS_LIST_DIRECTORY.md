@@ -30,7 +30,7 @@ Output:
 
 ## 4. Natural-language paraphrases
 
-* list the contents of `/Users/ravindranathakila/service/realized`
+* list the contents of `.`
 * show me what is inside `/tmp`
 * display all entries in a directory
 

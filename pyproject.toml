@@ -40,6 +40,7 @@ dependencies = [
     "grpcio>=1.80.0",
     "protobuf>=6.33.6",
     "grpcio-tools>=1.80.0",
+    "realized-host-interaction",
     "realized-core-runtime",
     "realized-core-engine",
     "realized-core-conversation",
@@ -76,6 +77,7 @@ package = false
 
 [tool.uv.workspace]
 members = [
+    "host_interaction",
     "core_app",
     "core_conversation",
     "core_engine",
@@ -103,6 +105,7 @@ members = [
 ]
 
 [tool.uv.sources]
+realized-host-interaction = { workspace = true }
 realized-core = { workspace = true }
 realized-core-conversation = { workspace = true }
 realized-core-engine = { workspace = true }

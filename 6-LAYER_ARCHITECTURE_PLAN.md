@@ -70,8 +70,8 @@ It should not own:
 ### Phase 1: Define the substrate contract
 
 Add a narrow contract such as:
-- `host_interaction_context.py`
-- `host_interaction_models.py`
+- `host_interaction/src/realized_host_interaction/context.py`
+- `host_interaction/src/realized_host_interaction/models.py`
 
 The contract should cover:
 - attachments

@@ -1,5 +1,6 @@
 # Canonical root modules transitively required by controller_runtime,
-# system_state, and args. Keep sorted; tests recompute this closure.
+# system_state, and args, plus the explicitly tested host-interaction
+# compatibility facades. Keep sorted; tests recompute both sets.
 applied_theory_primitives
 applied_theory_types
 approval_governance

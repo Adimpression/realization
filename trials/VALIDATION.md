@@ -137,7 +137,7 @@ and logical-LLM-request versus controller timing separately. See
 Layered acceptance ladder:
 
 ```bash
-python3 main.py validation-ladder --workspace /Users/ravindranathakila/service/realized
+python3 main.py validation-ladder --workspace .
 ```
 
 This command runs the acceptance ladder in order:

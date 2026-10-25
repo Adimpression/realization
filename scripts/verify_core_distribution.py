@@ -31,12 +31,14 @@ def _verify_contents(
     app_wheel: Path,
     conversation_wheel: Path,
     engine_wheel: Path,
+    host_interaction_wheel: Path,
     llm_wheel: Path,
     runtime_wheel: Path,
 ) -> dict[str, object]:
     app_entries = _wheel_entries(app_wheel)
     conversation_entries = _wheel_entries(conversation_wheel)
     engine_entries = _wheel_entries(engine_wheel)
+    host_interaction_entries = _wheel_entries(host_interaction_wheel)
     llm_entries = _wheel_entries(llm_wheel)
     runtime_entries = _wheel_entries(runtime_wheel)
     declared_modules = {
@@ -121,6 +123,28 @@ def _verify_contents(
         or "publication" in entry.lower()
     )
 
+    host_interaction_required = {
+        "realized_host_interaction/__init__.py",
+        "realized_host_interaction/_normalization.py",
+        "realized_host_interaction/action_dispatch.py",
+        "realized_host_interaction/actions.py",
+        "realized_host_interaction/context.py",
+        "realized_host_interaction/delegation.py",
+        "realized_host_interaction/models.py",
+        "realized_host_interaction/receipts.py",
+        "realized_host_interaction/resolution.py",
+    }
+    host_interaction_missing = sorted(
+        host_interaction_required - host_interaction_entries
+    )
+    host_interaction_forbidden = sorted(
+        entry
+        for entry in host_interaction_entries
+        if entry.endswith(".py")
+        and not entry.startswith("realized_host_interaction/")
+        and ".dist-info/" not in entry
+    )
+
     runtime_required = {
         "realized_core_runtime/__init__.py",
         "realized_core_runtime/contracts.py",
@@ -134,6 +158,8 @@ def _verify_contents(
         or conversation_missing
         or engine_forbidden
         or engine_missing
+        or host_interaction_forbidden
+        or host_interaction_missing
         or llm_forbidden
         or llm_missing
         or runtime_missing
@@ -149,6 +175,8 @@ def _verify_contents(
                     "conversation_missing": conversation_missing,
                     "engine_forbidden": engine_forbidden,
                     "engine_missing": engine_missing,
+                    "host_interaction_forbidden": host_interaction_forbidden,
+                    "host_interaction_missing": host_interaction_missing,
                     "llm_forbidden": llm_forbidden,
                     "llm_missing": llm_missing,
                     "runtime_missing": runtime_missing,
@@ -167,6 +195,8 @@ def _verify_contents(
         "conversation_forbidden_entries": conversation_forbidden,
         "engine_entry_count": len(engine_entries),
         "engine_forbidden_entries": engine_forbidden,
+        "host_interaction_entry_count": len(host_interaction_entries),
+        "host_interaction_forbidden_entries": host_interaction_forbidden,
         "llm_entry_count": len(llm_entries),
         "llm_forbidden_entries": llm_forbidden,
         "runtime_entry_count": len(runtime_entries),
@@ -177,6 +207,7 @@ def _smoke(
     app_wheel: Path,
     conversation_wheel: Path,
     engine_wheel: Path,
+    host_interaction_wheel: Path,
     llm_wheel: Path,
     runtime_wheel: Path,
 ) -> dict[str, object]:
@@ -185,12 +216,14 @@ def _smoke(
         app_installed = root / "app"
         conversation_installed = root / "conversation"
         engine_installed = root / "engine"
+        host_interaction_installed = root / "host-interaction"
         llm_installed = root / "llm"
         runtime_installed = root / "runtime"
         for target in (
             app_installed,
             conversation_installed,
             engine_installed,
+            host_interaction_installed,
             llm_installed,
             runtime_installed,
         ):
@@ -198,6 +231,7 @@ def _smoke(
         _extract(app_wheel, app_installed)
         _extract(conversation_wheel, conversation_installed)
         _extract(engine_wheel, engine_installed)
+        _extract(host_interaction_wheel, host_interaction_installed)
         _extract(llm_wheel, llm_installed)
         _extract(runtime_wheel, runtime_installed)
         sqlite_path = root / "state.sqlite3"
@@ -210,12 +244,14 @@ import sys
 app_target = Path(sys.argv.pop(1)).resolve()
 conversation_target = Path(sys.argv.pop(1)).resolve()
 engine_target = Path(sys.argv.pop(1)).resolve()
+host_interaction_target = Path(sys.argv.pop(1)).resolve()
 llm_target = Path(sys.argv.pop(1)).resolve()
 runtime_target = Path(sys.argv.pop(1)).resolve()
 sys.path[:0] = [
     str(app_target),
     str(conversation_target),
     str(engine_target),
+    str(host_interaction_target),
     str(llm_target),
     str(runtime_target),
 ]
@@ -223,6 +259,7 @@ import controller_runtime
 import realized_core
 import realized_core_conversation
 import realized_core_engine
+import realized_host_interaction
 import realized_core_llm
 import realized_core_runtime
 from realized_core.cli import main
@@ -232,6 +269,7 @@ expected_owners = (
     (realized_core, app_target),
     (realized_core_conversation, conversation_target),
     (realized_core_engine, engine_target),
+    (realized_host_interaction, host_interaction_target),
     (realized_core_llm, llm_target),
     (realized_core_runtime, runtime_target),
 )
@@ -254,6 +292,7 @@ raise SystemExit(main())
                 str(app_installed),
                 str(conversation_installed),
                 str(engine_installed),
+                str(host_interaction_installed),
                 str(llm_installed),
                 str(runtime_installed),
                 "run",
@@ -292,6 +331,7 @@ def main() -> int:
     parser.add_argument("--app-wheel", type=Path, required=True)
     parser.add_argument("--conversation-wheel", type=Path, required=True)
     parser.add_argument("--engine-wheel", type=Path, required=True)
+    parser.add_argument("--host-interaction-wheel", type=Path, required=True)
     parser.add_argument("--llm-wheel", type=Path, required=True)
     parser.add_argument("--runtime-wheel", type=Path, required=True)
     args = parser.parse_args()
@@ -300,6 +340,7 @@ def main() -> int:
             args.app_wheel,
             args.conversation_wheel,
             args.engine_wheel,
+            args.host_interaction_wheel,
             args.llm_wheel,
             args.runtime_wheel,
         ),
@@ -307,6 +348,7 @@ def main() -> int:
             args.app_wheel,
             args.conversation_wheel,
             args.engine_wheel,
+            args.host_interaction_wheel,
             args.llm_wheel,
             args.runtime_wheel,
         ),

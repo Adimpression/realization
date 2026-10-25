@@ -90,8 +90,8 @@ def open_file(*, path: str, application: str = "") -> dict[str, Any]:
         Supports host-owned effects by moving file opening into a named mediated action rather than direct subprocess usage inside skills.
 
     Example Input Output:
-        Input: `open_file(path='/Users/ravindranathakila/Downloads/example.txt', application='TextEdit')`
-        Output: {'status': 'ok', 'path': '/Users/ravindranathakila/Downloads/example.txt', 'application': 'TextEdit'}
+        Input: `open_file(path='~/Downloads/example.txt', application='TextEdit')`
+        Output: {'status': 'ok', 'path': '~/Downloads/example.txt', 'application': 'TextEdit'}
 
     Args:
         path: Value for `path` used by `open_file`. Expected type: `str`.
@@ -164,8 +164,8 @@ def reveal_in_finder(*, path: str) -> dict[str, Any]:
         Supports host-owned device effects by separating Finder reveal from raw subprocess execution.
 
     Example Input Output:
-        Input: `reveal_in_finder(path='/Users/ravindranathakila/service/realized/README.md')`
-        Output: {'status': 'ok', 'path': '/Users/ravindranathakila/service/realized/README.md'}
+        Input: `reveal_in_finder(path='/workspace/realized/README.md')`
+        Output: {'status': 'ok', 'path': '/workspace/realized/README.md'}
 
     Args:
         path: Value for `path` used by `reveal_in_finder`. Expected type: `str`.

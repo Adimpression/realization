@@ -114,7 +114,7 @@ governance:
   created_at: '2026-03-31T10:30:21+00:00'
   provenance:
   - not_learn-from-markdown-01-learn-apiclient-commands-_5031a9
-  - /Users/ravindranathakila/service/realized/trials/apiclient/01_LEARN_APICLIENT_COMMANDS_GET_JSON.md
+  - trials/apiclient/01_LEARN_APICLIENT_COMMANDS_GET_JSON.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -403,7 +403,7 @@ governance:
   created_at: '2026-03-31T10:30:29+00:00'
   provenance:
   - not_learn-from-markdown-02-learn-apiclient-commands-_4efae1
-  - /Users/ravindranathakila/service/realized/trials/apiclient/02_LEARN_APICLIENT_COMMANDS_GET_JSON_WITH_QUERY.md
+  - trials/apiclient/02_LEARN_APICLIENT_COMMANDS_GET_JSON_WITH_QUERY.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -697,7 +697,7 @@ governance:
   created_at: '2026-03-31T10:30:31+00:00'
   provenance:
   - not_learn-from-markdown-02-learn-apiclient-commands-_4efae1
-  - /Users/ravindranathakila/service/realized/trials/apiclient/02_LEARN_APICLIENT_COMMANDS_GET_JSON_WITH_QUERY.md
+  - trials/apiclient/02_LEARN_APICLIENT_COMMANDS_GET_JSON_WITH_QUERY.md
   constraints:
   - derive only from the supplied encounter
   template_schema:
@@ -1006,7 +1006,7 @@ governance:
   created_at: '2026-03-31T10:30:40+00:00'
   provenance:
   - not_learn-from-markdown-03-learn-apiclient-commands-_35521e
-  - /Users/ravindranathakila/service/realized/trials/apiclient/03_LEARN_APICLIENT_COMMANDS_POST_JSON.md
+  - trials/apiclient/03_LEARN_APICLIENT_COMMANDS_POST_JSON.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -1294,7 +1294,7 @@ governance:
   created_at: '2026-03-31T10:30:48+00:00'
   provenance:
   - not_learn-from-markdown-04-learn-apiclient-commands-_142b94
-  - /Users/ravindranathakila/service/realized/trials/apiclient/04_LEARN_APICLIENT_COMMANDS_PUT_JSON.md
+  - trials/apiclient/04_LEARN_APICLIENT_COMMANDS_PUT_JSON.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -1581,7 +1581,7 @@ governance:
   created_at: '2026-03-31T10:30:57+00:00'
   provenance:
   - not_learn-from-markdown-05-learn-apiclient-commands-_04d920
-  - /Users/ravindranathakila/service/realized/trials/apiclient/05_LEARN_APICLIENT_COMMANDS_PATCH_JSON.md
+  - trials/apiclient/05_LEARN_APICLIENT_COMMANDS_PATCH_JSON.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -1865,7 +1865,7 @@ governance:
   created_at: '2026-03-31T10:31:05+00:00'
   provenance:
   - not_learn-from-markdown-06-learn-apiclient-commands-_7f4ca7
-  - /Users/ravindranathakila/service/realized/trials/apiclient/06_LEARN_APICLIENT_COMMANDS_DELETE_RESOURCE.md
+  - trials/apiclient/06_LEARN_APICLIENT_COMMANDS_DELETE_RESOURCE.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -2154,7 +2154,7 @@ governance:
   created_at: '2026-03-31T10:31:15+00:00'
   provenance:
   - not_learn-from-markdown-07-learn-apiclient-commands-_2956de
-  - /Users/ravindranathakila/service/realized/trials/apiclient/07_LEARN_APICLIENT_COMMANDS_GET_WITH_BEARER_TOKEN.md
+  - trials/apiclient/07_LEARN_APICLIENT_COMMANDS_GET_WITH_BEARER_TOKEN.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -2449,7 +2449,7 @@ governance:
   created_at: '2026-03-31T10:31:25+00:00'
   provenance:
   - not_learn-from-markdown-08-learn-apiclient-commands-_a467a0
-  - /Users/ravindranathakila/service/realized/trials/apiclient/08_LEARN_APICLIENT_COMMANDS_GET_WITH_HEADERS.md
+  - trials/apiclient/08_LEARN_APICLIENT_COMMANDS_GET_WITH_HEADERS.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -2746,7 +2746,7 @@ governance:
   created_at: '2026-03-31T10:31:36+00:00'
   provenance:
   - not_learn-from-markdown-09-learn-apiclient-commands-_01b3a1
-  - /Users/ravindranathakila/service/realized/trials/apiclient/09_LEARN_APICLIENT_COMMANDS_GET_PAGINATED_JSON.md
+  - trials/apiclient/09_LEARN_APICLIENT_COMMANDS_GET_PAGINATED_JSON.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -3037,7 +3037,7 @@ governance:
   created_at: '2026-03-31T10:31:47+00:00'
   provenance:
   - not_learn-from-markdown-10-learn-apiclient-commands-_2223f7
-  - /Users/ravindranathakila/service/realized/trials/apiclient/10_LEARN_APICLIENT_COMMANDS_DOWNLOAD_FILE.md
+  - trials/apiclient/10_LEARN_APICLIENT_COMMANDS_DOWNLOAD_FILE.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -3341,7 +3341,7 @@ governance:
   created_at: '2026-03-31T10:31:57+00:00'
   provenance:
   - not_learn-from-markdown-11-learn-apiclient-commands-_177da2
-  - /Users/ravindranathakila/service/realized/trials/apiclient/11_LEARN_APICLIENT_COMMANDS_POST_FORM_URLENCODED.md
+  - trials/apiclient/11_LEARN_APICLIENT_COMMANDS_POST_FORM_URLENCODED.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -3630,7 +3630,7 @@ governance:
   created_at: '2026-03-31T10:32:01+00:00'
   provenance:
   - not_learn-from-markdown-11-learn-apiclient-commands-_177da2
-  - /Users/ravindranathakila/service/realized/trials/apiclient/11_LEARN_APICLIENT_COMMANDS_POST_FORM_URLENCODED.md
+  - trials/apiclient/11_LEARN_APICLIENT_COMMANDS_POST_FORM_URLENCODED.md
   constraints:
   - derive only from the supplied encounter
   template_schema:
@@ -3943,7 +3943,7 @@ governance:
   created_at: '2026-03-31T10:32:15+00:00'
   provenance:
   - not_learn-from-markdown-12-learn-apiclient-commands-_654d09
-  - /Users/ravindranathakila/service/realized/trials/apiclient/12_LEARN_APICLIENT_COMMANDS_POLL_JOB_STATUS.md
+  - trials/apiclient/12_LEARN_APICLIENT_COMMANDS_POLL_JOB_STATUS.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:

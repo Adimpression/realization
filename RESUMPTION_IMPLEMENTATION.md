@@ -1994,7 +1994,7 @@ The safe correction order is:
    qualification gates before declaring the scope complete or removing any
    compatibility path.
 
-As of 23 October 2026, sequence items 1 through 14 are implemented: the direct
+As of 25 October 2026, sequence items 1 through 14 are implemented: the direct
 engine baseline, typed operation path, transport-neutral conversation package,
 versioned ports and records, durable activity journal, strict conversation
 pipeline, restart-safe normalized-request recovery, and reusable live-provider
@@ -2006,7 +2006,7 @@ idempotency, crash recovery, recorded-proposal replay, and package direction.
 The default Cedar journey covers all 21 resumption principles, admits only
 declared semantic and operational harness actions, consumes the public product
 surfaces, and reports structural, interpretation, rendering, and performance
-evidence separately. The deterministic architecture/core gate passes 318
+evidence separately. The deterministic architecture/core gate passes 329
 tests, the deterministic BDD gate passes 76 tests, the replay gate passes 9
 tests, the complete workstation gate passes 602 tests with 1 intentional skip,
 and fresh builds of all five core wheels pass isolated-import and SQLite smoke

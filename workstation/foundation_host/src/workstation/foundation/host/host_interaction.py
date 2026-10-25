@@ -1,8 +1,8 @@
 # See MODULES.md for the repository module map before editing.
 from __future__ import annotations
 
-from host_interaction_context import StaticHostInteractionContext
-from host_interaction_models import HostInteractionAttachment, HostInteractionDescriptor
+from realized_host_interaction.context import StaticHostInteractionContext
+from realized_host_interaction.models import HostInteractionAttachment, HostInteractionDescriptor
 from workstation.foundation.models import WorkstationSession
 
 

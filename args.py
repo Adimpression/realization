@@ -195,8 +195,8 @@ def apply_sqlite_path_override(args: argparse.Namespace) -> Path | None:
         Exposes CLI/runtime entry points for the theory-backed controller without changing the theory itself.
 
     Example Input Output:
-        Input: `apply_sqlite_path_override(args=Namespace(sqlite=Path('/Users/ravindranathakila/service/realized/state/common.sqlite3')))`
-        Output: Path('/Users/ravindranathakila/service/realized/state/common.sqlite3')
+        Input: `apply_sqlite_path_override(args=Namespace(sqlite=Path('/workspace/realized/state/common.sqlite3')))`
+        Output: Path('/workspace/realized/state/common.sqlite3')
 
     Args:
         args: Value for `args` used by `apply_sqlite_path_override`. Expected type: `argparse.Namespace`.

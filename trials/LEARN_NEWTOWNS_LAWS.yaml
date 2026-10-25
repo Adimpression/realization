@@ -24,7 +24,7 @@ Newton's Laws of Motion:
     created_at: '2026-03-25T11:05:50+00:00'
     provenance:
     - not_learn-from-markdown-learn-newtowns-laws-md_52c9aa
-    - /Users/ravindranathakila/service/realized/LEARN_NEWTOWNS_LAWS.md
+    - trials/LEARN_NEWTOWNS_LAWS.md
     justification: The markdown document states the overall topic directly in its
       introduction.
     question: 'What is Second Law: Law of Acceleration?'
@@ -160,7 +160,7 @@ Newton's Laws of Motion:
             - "[ Reused Non Achievedness ]"
             - "[ Composed Reuse ]"
     content:
-      source_path: /Users/ravindranathakila/service/realized/LEARN_NEWTOWNS_LAWS.md
+      source_path: trials/LEARN_NEWTOWNS_LAWS.md
       source_document: LEARN_NEWTOWNS_LAWS.md
       source_kind: markdown
       source_title: Newton's Laws of Motion
@@ -324,7 +324,7 @@ Newton's Laws of Motion:
     created_at: '2026-03-25T11:05:51+00:00'
     provenance:
     - not_learn-from-markdown-learn-newtowns-laws-md_52c9aa
-    - /Users/ravindranathakila/service/realized/LEARN_NEWTOWNS_LAWS.md
+    - trials/LEARN_NEWTOWNS_LAWS.md
     related_artifact_ids:
     - artifact_knowledge-newton-s-laws-of-motion_16affb
     justification: The markdown document contains a bounded section that directly
@@ -491,7 +491,7 @@ Newton's Laws of Motion:
             - "[ Reused Non Achievedness ]"
             - "[ Composed Reuse ]"
     content:
-      source_path: /Users/ravindranathakila/service/realized/LEARN_NEWTOWNS_LAWS.md
+      source_path: trials/LEARN_NEWTOWNS_LAWS.md
       source_document: LEARN_NEWTOWNS_LAWS.md
       source_kind: markdown
       source_title: Newton's Laws of Motion
@@ -694,7 +694,7 @@ Newton's Laws of Motion:
     created_at: '2026-03-25T11:05:51+00:00'
     provenance:
     - not_learn-from-markdown-learn-newtowns-laws-md_52c9aa
-    - /Users/ravindranathakila/service/realized/LEARN_NEWTOWNS_LAWS.md
+    - trials/LEARN_NEWTOWNS_LAWS.md
     related_artifact_ids:
     - artifact_knowledge-newton-s-laws-of-motion_16affb
     - artifact_knowledge-first-law-law-of-inertia_92a104
@@ -828,7 +828,7 @@ Newton's Laws of Motion:
             - "[ Reused Non Achievedness ]"
             - "[ Composed Reuse ]"
     content:
-      source_path: /Users/ravindranathakila/service/realized/LEARN_NEWTOWNS_LAWS.md
+      source_path: trials/LEARN_NEWTOWNS_LAWS.md
       source_document: LEARN_NEWTOWNS_LAWS.md
       source_kind: markdown
       source_title: Newton's Laws of Motion
@@ -996,7 +996,7 @@ Newton's Laws of Motion:
     created_at: '2026-03-25T11:05:52+00:00'
     provenance:
     - not_learn-from-markdown-learn-newtowns-laws-md_52c9aa
-    - /Users/ravindranathakila/service/realized/LEARN_NEWTOWNS_LAWS.md
+    - trials/LEARN_NEWTOWNS_LAWS.md
     related_artifact_ids:
     - artifact_knowledge-newton-s-laws-of-motion_16affb
     - artifact_knowledge-first-law-law-of-inertia_92a104
@@ -1130,7 +1130,7 @@ Newton's Laws of Motion:
             - "[ Reused Non Achievedness ]"
             - "[ Composed Reuse ]"
     content:
-      source_path: /Users/ravindranathakila/service/realized/LEARN_NEWTOWNS_LAWS.md
+      source_path: trials/LEARN_NEWTOWNS_LAWS.md
       source_document: LEARN_NEWTOWNS_LAWS.md
       source_kind: markdown
       source_title: Newton's Laws of Motion
@@ -1295,7 +1295,7 @@ Summary:
     created_at: '2026-03-25T11:05:52+00:00'
     provenance:
     - not_learn-from-markdown-learn-newtowns-laws-md_52c9aa
-    - /Users/ravindranathakila/service/realized/LEARN_NEWTOWNS_LAWS.md
+    - trials/LEARN_NEWTOWNS_LAWS.md
     related_artifact_ids:
     - artifact_knowledge-newton-s-laws-of-motion_16affb
     - artifact_knowledge-first-law-law-of-inertia_92a104
@@ -1418,7 +1418,7 @@ Summary:
             - "[ Reused Non Achievedness ]"
             - "[ Composed Reuse ]"
     content:
-      source_path: /Users/ravindranathakila/service/realized/LEARN_NEWTOWNS_LAWS.md
+      source_path: trials/LEARN_NEWTOWNS_LAWS.md
       source_document: LEARN_NEWTOWNS_LAWS.md
       source_kind: markdown
       source_title: Newton's Laws of Motion
@@ -1565,7 +1565,7 @@ First Law Law Of Inertia:
     created_at: '2026-03-25T11:05:53+00:00'
     provenance:
     - not_learn-from-markdown-learn-newtowns-laws-md_52c9aa
-    - /Users/ravindranathakila/service/realized/LEARN_NEWTOWNS_LAWS.md
+    - trials/LEARN_NEWTOWNS_LAWS.md
     constraints:
     - derive only from the supplied encounter
     template_schema:
@@ -1794,7 +1794,7 @@ First Law Law Of Inertia:
       \   main()"
     script_language: python
     content:
-      source_path: /Users/ravindranathakila/service/realized/LEARN_NEWTOWNS_LAWS.md
+      source_path: trials/LEARN_NEWTOWNS_LAWS.md
       source_document: LEARN_NEWTOWNS_LAWS.md
       output_field: F
       compute_expression: "0 \u21D2 v"
@@ -2007,7 +2007,7 @@ Second Law Law Of Acceleration:
     created_at: '2026-03-25T11:05:53+00:00'
     provenance:
     - not_learn-from-markdown-learn-newtowns-laws-md_52c9aa
-    - /Users/ravindranathakila/service/realized/LEARN_NEWTOWNS_LAWS.md
+    - trials/LEARN_NEWTOWNS_LAWS.md
     related_artifact_ids:
     - artifact_ability-first-law-law-of-inertia_684240
     constraints:
@@ -2274,7 +2274,7 @@ Second Law Law Of Acceleration:
           main()
     script_language: python
     content:
-      source_path: /Users/ravindranathakila/service/realized/LEARN_NEWTOWNS_LAWS.md
+      source_path: trials/LEARN_NEWTOWNS_LAWS.md
       source_document: LEARN_NEWTOWNS_LAWS.md
       output_field: F
       compute_expression: m * a
@@ -2460,7 +2460,7 @@ Third Law Action And Reaction:
     created_at: '2026-03-25T11:05:53+00:00'
     provenance:
     - not_learn-from-markdown-learn-newtowns-laws-md_52c9aa
-    - /Users/ravindranathakila/service/realized/LEARN_NEWTOWNS_LAWS.md
+    - trials/LEARN_NEWTOWNS_LAWS.md
     related_artifact_ids:
     - artifact_ability-first-law-law-of-inertia_684240
     - artifact_ability-second-law-law-of-acceleration_6f5458
@@ -2723,7 +2723,7 @@ Third Law Action And Reaction:
           main()
     script_language: python
     content:
-      source_path: /Users/ravindranathakila/service/realized/LEARN_NEWTOWNS_LAWS.md
+      source_path: trials/LEARN_NEWTOWNS_LAWS.md
       source_document: LEARN_NEWTOWNS_LAWS.md
       output_field: F12
       compute_expression: -F21
