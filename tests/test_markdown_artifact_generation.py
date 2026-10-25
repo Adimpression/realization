@@ -27,6 +27,9 @@ from markdown_ir import parse_markdown_document_ir
 from semantic_text import titleize_semantic_unit
 
 
+REPO_ROOT = Path(__file__).resolve().parents[1]
+
+
 class MarkdownArtifactGenerationTests(unittest.TestCase):
     def setUp(self) -> None:
         """
@@ -731,7 +734,7 @@ Velocity is the rate of change of position.
         Returns:
             None: This function mutates state or performs side effects without returning a value.
         """
-        source = Path("/Users/ravindranathakila/service/realized/trials/chemistry/02_LEARN_CHEMISTRY_RELATIONS_MOLE.md")
+        source = REPO_ROOT / "trials/chemistry/02_LEARN_CHEMISTRY_RELATIONS_MOLE.md"
         document = parse_markdown_document_ir(source.read_text(), source_path=str(source))
         artifact = self.controller.build_markdown_learning_artifact(
             node=self.node,
@@ -775,7 +778,7 @@ Velocity is the rate of change of position.
         previous_mode = os.environ.get("BSSC_TITLE_REPRESENTATION")
         os.environ["BSSC_TITLE_REPRESENTATION"] = "prolog"
         try:
-            source = Path("/Users/ravindranathakila/service/realized/trials/chemistry/02_LEARN_CHEMISTRY_RELATIONS_MOLE.md")
+            source = REPO_ROOT / "trials/chemistry/02_LEARN_CHEMISTRY_RELATIONS_MOLE.md"
             document = parse_markdown_document_ir(source.read_text(), source_path=str(source))
             artifact = self.controller.build_markdown_learning_artifact(
                 node=self.node,
@@ -1003,7 +1006,7 @@ $$ P = n * R * T / V $$
         Returns:
             None: This function mutates state or performs side effects without returning a value.
         """
-        source = Path("/Users/ravindranathakila/service/realized/trials/GAIN_PYTHOGOREAN_THEORM.md")
+        source = REPO_ROOT / "trials/GAIN_PYTHOGOREAN_THEORM.md"
         document = parse_markdown_document_ir(source.read_text(), source_path=str(source))
         artifact = self.controller.build_markdown_learning_artifact(
             node=self.node,

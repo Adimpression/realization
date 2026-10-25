@@ -18,6 +18,7 @@ PUBLIC_PACKAGES = {
     "core_app": "realized-core",
     "core_engine": "realized-core-engine",
     "core_runtime": "realized-core-runtime",
+    "host_interaction": "realized-host-interaction",
 }
 REQUIRED_CLASSIFIERS = {
     "Development Status :: 3 - Alpha",

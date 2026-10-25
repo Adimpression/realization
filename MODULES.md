@@ -22,7 +22,7 @@ Top-line rule used in Python files:
   `realized-core` CLI package or duplicate product planning behavior.
 - `workstation/foundation_events/` owns event publication. Its historical
   `subscriber_controllers` module is a compatibility alias to `runtime_core`.
-- `workstation/foundation_host/` owns host interaction. Its historical
+- `workstation/foundation_host/` owns the workstation-backed host adapter. Its historical
   `client_sessions` and `llm_driver` modules are compatibility aliases to
   `subject_service` and `runtime_core`, respectively. Its process-local
   controller and subject-client providers are composition seams: entry modules
@@ -69,6 +69,13 @@ legacy aliases.
   only the dependency-inverted run/resume lifecycle and stable protocols for
   state, domain reduction, closure, finalization, and persistence adapters; it
   imports no application, workstation, model-provider, or storage implementation.
+- `host_interaction/`: Independently buildable `realized-host-interaction` UV
+  project. It owns the backend-neutral attachment models, bounded resolution
+  and actions, delegated-rights narrowing, and receipt shaping shared by the
+  controller and workstation. It has no third-party or workstation dependency
+  and does not select abilities, grant authority, or register concrete host
+  realizers. The historical root `host_interaction_*.py` paths are explicit
+  compatibility facades over this package.
 - `applied_theory_primitives.py`: Dependency-light applied-theory enums, pure-theory aliases, derived value sets, canonical UTC timestamp helper, and recursive `json_safe` projection used by normalization and typed runtime models.
 - `artifact_contracts.py`: Dependency-light structural interfaces for consumers that inspect narrow, read-only artifact surfaces without depending on the concrete applied-theory record.
 - `applied_theory_types.py`: Applied dataclasses and compatibility re-exports for artifacts, proposals, abilities, controller payloads, and the historical `json_safe` import path.
@@ -111,13 +118,9 @@ legacy aliases.
 - `governed_semantic_reduction_runtime.py`: Compatibility adapter from `BSSCController` into `realized-core-runtime`, plus the existing domain-specific recursive `reduce_not` semantics.
 - `governed_skill_access.py`: Current-use governed access checks for skills and artifacts.
 - `governed_skill_installation.py`: Governed `import-skill` installation, admission, persistence, and normalization.
-- `host_interaction_action_dispatch.py`: Shared dispatcher and capability-boundary helpers for the extracted non-skill host action surface.
-- `host_interaction_actions.py`: Shared attachment-scoped host action helpers for bounded tree inspection, text reads, and process execution.
-- `host_interaction_context.py`: Shared host-interaction descriptor and bounded attachment/capability-scope contract. It does not register or execute arbitrary host operations; concrete executor and broker dispatch remains in the packaged runtime implementation.
-- `host_interaction_delegation.py`: Shared delegated-rights normalization, escalation splitting, and ephemeral mount projection helpers.
-- `host_interaction_models.py`: Shared host-interaction attachment and backend-descriptor dataclasses.
-- `host_interaction_receipts.py`: Shared host-interaction receipt builders and canonical JSONL append helpers for host-backed sessions and CLI flows, including bytes-safe receipt persistence.
-- `host_interaction_resolution.py`: Shared attachment resolution, bounded path joining, and delegation-target normalization helpers.
+- `host_interaction_*.py`: Historical compatibility facades preserving the
+  pre-package host-interaction import paths and object identities. New code
+  imports `realized_host_interaction`.
 - `host_abi.py`: Stable host ABI, broker stability rules, and Wasm ABI definitions.
 - `host_brokers.py`: Governed host brokers for fs, store, net, tool, and nested skill invocation through the current static broker registry.
 - `host_mediation.py`: Effect mediation, capability enforcement, and trace recording.
@@ -224,15 +227,15 @@ legacy aliases.
 - `workstation/skills/core/invocation_contract.py`: Canonical invocation request/result records and deterministic artifact/result projections used by workstation skill invocation.
 - `workstation/task_contract.py`: Boundary-complete workstation task normalization from natural-language prompts.
 - `scripts/generate_workstation_protos.py`: Regenerates the committed workstation protobuf/gRPC Python stubs from the checked-in `.proto` contracts.
-- `scripts/verify_core_distribution.py`: Inspects the built `realized-core`,
-  `realized-core-engine`, and `realized-core-runtime` wheels, verifies their
-  distinct file ownership, rejects outer-application files, then runs the
-  separately extracted wheel contents against plain SQLite outside the
-  repository import path.
+- `scripts/verify_core_distribution.py`: Inspects the six built standalone
+  core wheels, including `realized-host-interaction`, verifies their distinct
+  file ownership, rejects outer-application files, then runs the separately
+  extracted wheel contents against plain SQLite outside the repository import
+  path.
 
 ## Tests
 - `core_app/tests/test_distribution.py`: Verifies that the application declares
-  only the engine dependency, owns only CLI composition, and performs
+  only its composition dependencies, owns only CLI composition, and performs
   deterministic plain-SQLite run/resume/inspect operations with durable state.
 - `core_engine/tests/test_distribution.py`: Recomputes the explicit engine wheel
   module closure and verifies dependency allowlists, outer-surface exclusions,

@@ -31,7 +31,7 @@ Output:
 
 ## 4. Natural-language paraphrases
 
-* find exact word references to `artifact` under `/Users/ravindranathakila/service/realized`
+* find exact word references to `artifact` under `.`
 * search only exact matches for one word
 * avoid partial substring matches in a code search
 

@@ -23,7 +23,7 @@ def module_import_roots(path: Path) -> set[str]:
         Verifies the five-layer architecture by checking that runtime mediation depends on a runtime-governance facade instead of several low-level governance modules directly.
 
     Example Input Output:
-        Input: `module_import_roots(path=Path('/Users/ravindranathakila/service/realized/host_mediation.py'))`
+        Input: `module_import_roots(path=Path('/workspace/realized/host_mediation.py'))`
         Output: {'json', 'hashlib', 'runtime_governance_context', 'host_brokers'}
 
     Args:

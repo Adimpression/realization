@@ -31,7 +31,7 @@ Output:
 
 ## 4. Natural-language paraphrases
 
-* find lines containing the method call `.run(` under `/Users/ravindranathakila/service/realized`
+* find lines containing the method call `.run(` under `.`
 * search for a method-call pattern
 * find call sites that match one textual method pattern
 

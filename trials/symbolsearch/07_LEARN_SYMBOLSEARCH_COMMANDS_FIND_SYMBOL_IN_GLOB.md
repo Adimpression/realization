@@ -32,7 +32,7 @@ Output:
 
 ## 4. Natural-language paraphrases
 
-* search only `*.py` files under `/Users/ravindranathakila/service/realized` for `CrossBoundaryResult`
+* search only `*.py` files under `.` for `CrossBoundaryResult`
 * constrain a symbol search to one file family
 * search one symbol inside files matching a glob
 

@@ -31,7 +31,7 @@ Output:
 
 ## 4. Natural-language paraphrases
 
-* find import statements mentioning `json` under `/Users/ravindranathakila/service/realized`
+* find import statements mentioning `json` under `.`
 * locate import lines for one module
 * search for Python imports mentioning a target
 

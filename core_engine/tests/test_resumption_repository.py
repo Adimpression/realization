@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import tempfile
 import unittest
+from contextlib import closing
 from dataclasses import replace
 from pathlib import Path
 import sqlite3
@@ -349,7 +350,7 @@ class ResumptionRepositoryTests(unittest.TestCase):
 
     def test_existing_attempt_schema_is_migrated_additively(self) -> None:
         legacy_path = Path(self.temporary.name) / "legacy-attempts.sqlite3"
-        with sqlite3.connect(legacy_path) as connection:
+        with closing(sqlite3.connect(legacy_path)) as connection:
             connection.execute(
                 """
                 CREATE TABLE resumption_attempts (
@@ -444,7 +445,7 @@ class ResumptionRepositoryTests(unittest.TestCase):
             attempt_id="attempt-1",
         )
 
-        with sqlite3.connect(self.repository.path) as connection:
+        with closing(sqlite3.connect(self.repository.path)) as connection:
             connection.execute("DELETE FROM resumption_events")
             connection.commit()
         reopened = SQLiteResumptionRepository(self.repository.path)
@@ -574,7 +575,7 @@ class ResumptionRepositoryTests(unittest.TestCase):
         )
         payload = self.repository.load_transition_artifact("transition-1")
         payload["semantic_outcome"] = SemanticOutcome.FAILED.value
-        with sqlite3.connect(self.repository.path) as connection:
+        with closing(sqlite3.connect(self.repository.path)) as connection:
             connection.execute(
                 """
                 UPDATE resumption_transition_artifacts
@@ -617,7 +618,7 @@ class ResumptionRepositoryTests(unittest.TestCase):
                 rewritten.expected_decision_flow_signature
             ),
         )
-        with sqlite3.connect(self.repository.path) as connection:
+        with closing(sqlite3.connect(self.repository.path)) as connection:
             connection.execute(
                 """
                 UPDATE resumption_transition_artifacts

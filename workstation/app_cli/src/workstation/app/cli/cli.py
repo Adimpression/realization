@@ -7,7 +7,7 @@ import sys
 from pathlib import Path
 from typing import TextIO
 
-from host_interaction_receipts import host_interaction_capability_call_receipt
+from realized_host_interaction.receipts import host_interaction_capability_call_receipt
 from semantic_text import collapse_ws
 from workstation.foundation.host.subject_workflow import create_subject_workflow_client
 from workstation.ui.shared.activity_view import start_workstation_activity_tail, workstation_activity_log_offset

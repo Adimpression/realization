@@ -1097,8 +1097,8 @@ It does not by itself guarantee that the implementation will preserve that chain
 
 That preservation layer is addressed in:
 
-* [DESIGN_TYPE_SYSTEM.md](/Users/ravindranathakila/service/realized/design/DESIGN_TYPE_SYSTEM.md)
-* [DESIGN_TYPE_SYSTEM_IMPLEMENTATION.md](/Users/ravindranathakila/service/realized/design/DESIGN_TYPE_SYSTEM_IMPLEMENTATION.md)
+* [DESIGN_TYPE_SYSTEM.md](DESIGN_TYPE_SYSTEM.md)
+* [DESIGN_TYPE_SYSTEM_IMPLEMENTATION.md](DESIGN_TYPE_SYSTEM_IMPLEMENTATION.md)
 
 The why is simple:
 

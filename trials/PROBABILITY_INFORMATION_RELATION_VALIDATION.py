@@ -33,7 +33,7 @@ def resolve_trial_markdown_path(name: str) -> Path:
 
     Example Input Output:
         Input: `resolve_trial_markdown_path(name='01_LEARN_PROBABILITY_RELATIONS_FOUNDATIONS.md')`
-        Output: Path('/Users/ravindranathakila/service/realized/trials/01_LEARN_PROBABILITY_RELATIONS_FOUNDATIONS.md')
+        Output: Path('/workspace/realized/trials/01_LEARN_PROBABILITY_RELATIONS_FOUNDATIONS.md')
 
     Args:
         name: Value for `name` used by `resolve_trial_markdown_path`. Expected type: `str`.

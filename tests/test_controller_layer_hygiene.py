@@ -29,7 +29,7 @@ def module_import_roots(path: Path) -> set[str]:
         Verifies the five-layer architecture boundary by ensuring the controller depends on the governance bridge rather than on low-level governance inventory and admission modules directly.
 
     Example Input Output:
-        Input: `module_import_roots(path=Path('/Users/ravindranathakila/service/realized/controller_runtime.py'))`
+        Input: `module_import_roots(path=Path('/workspace/realized/controller_runtime.py'))`
         Output: {'json', 're', 'controller_governance_bridge', 'applied_theory_types'}
 
     Args:

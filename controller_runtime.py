@@ -65,7 +65,7 @@ from host_mediation import (
     execute_mediated_host_broker_request as execute_governed_mediated_host_broker_request,
     record_effect_trace as record_governed_effect_trace,
 )
-from host_interaction_context import (
+from realized_host_interaction.context import (
     HostInteractionContext,
     host_interaction_descriptor_payload,
     host_interaction_attachments,

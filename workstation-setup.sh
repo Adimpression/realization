@@ -1,4 +1,7 @@
-cd /Users/ravindranathakila/service/realized
+#!/usr/bin/env bash
+
+repo_root="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
+cd "$repo_root"
 
 set -a
 source ./local.env

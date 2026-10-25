@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+from contextlib import closing
 from dataclasses import dataclass, replace
 from datetime import datetime, timezone
 import json
@@ -713,8 +714,8 @@ class CedarTrialRunner:
         shutil.copytree(self.host.root, checkpoint, ignore=ignored)
         checkpoint_database = checkpoint / "artifacts.sqlite3"
         with (
-            sqlite3.connect(source_database) as source,
-            sqlite3.connect(checkpoint_database) as destination,
+            closing(sqlite3.connect(source_database)) as source,
+            closing(sqlite3.connect(checkpoint_database)) as destination,
         ):
             source.backup(destination)
         self.step_checkpoints[step_id] = checkpoint

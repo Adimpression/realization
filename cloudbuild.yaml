@@ -18,6 +18,7 @@ steps:
       - >-
         python -m pip install --disable-pip-version-check --no-cache-dir uv==0.10.10 &&
         uv sync --frozen &&
+        uv build --wheel host_interaction --out-dir /workspace/host-interaction-dist &&
         uv build core_runtime --out-dir /workspace/core-runtime-dist &&
         uv build --wheel core_engine --out-dir /workspace/core-engine-dist &&
         uv build --wheel core_llm --out-dir /workspace/core-llm-dist &&
@@ -45,6 +46,9 @@ steps:
         tests.test_resumption_journey_spec
         tests.test_governed_chat_validation
         tests.test_public_package_metadata
+        tests.test_clean_workspace
+        tests.test_repository_portability
+        tests.test_artifact_search_hybrid.ArtifactSearchHybridTests.test_connection_is_closed_when_sqlite_initialization_fails
         tests.test_supplement_provider_compatibility
         tests.test_core_runtime_package_adapter
         tests.test_core_app_cli_equivalence
@@ -66,6 +70,7 @@ steps:
         --app-wheel /workspace/core-app-dist/realized_core-0.1.0-py3-none-any.whl
         --conversation-wheel /workspace/core-conversation-dist/realized_core_conversation-0.1.0-py3-none-any.whl
         --engine-wheel /workspace/core-engine-dist/realized_core_engine-0.1.0-py3-none-any.whl
+        --host-interaction-wheel /workspace/host-interaction-dist/realized_host_interaction-0.1.0-py3-none-any.whl
         --llm-wheel /workspace/core-llm-dist/realized_core_llm-0.1.0-py3-none-any.whl
         --runtime-wheel /workspace/core-runtime-dist/realized_core_runtime-0.1.0-py3-none-any.whl
 

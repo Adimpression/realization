@@ -1,12 +1,12 @@
-- Find every occurrence of the symbol `BSSCController` under `/Users/ravindranathakila/service/realized`.
-- Find the Python function definition for `run` under `/Users/ravindranathakila/service/realized`.
-- Find the Python class definition for `BSSCController` under `/Users/ravindranathakila/service/realized`.
-- Find import statements mentioning `json` under `/Users/ravindranathakila/service/realized`.
-- Find all TODO lines under `/Users/ravindranathakila/service/realized`.
+- Find every occurrence of the symbol `BSSCController` under `.`.
+- Find the Python function definition for `run` under `.`.
+- Find the Python class definition for `BSSCController` under `.`.
+- Find import statements mentioning `json` under `.`.
+- Find all TODO lines under `.`.
 - Find Markdown headings under `trials`.
-- Search only `*.py` files under `/Users/ravindranathakila/service/realized` for `CrossBoundaryResult`.
-- Find environment variable names containing `OPENAI` under `/Users/ravindranathakila/service/realized`.
-- Find exact word references to `artifact` under `/Users/ravindranathakila/service/realized`.
-- Find lines containing the method call `.run(` under `/Users/ravindranathakila/service/realized`.
-- Find YAML keys named `artifact_type` under `/Users/ravindranathakila/service/realized`.
-- Find Python decorators under `/Users/ravindranathakila/service/realized`.
+- Search only `*.py` files under `.` for `CrossBoundaryResult`.
+- Find environment variable names containing `OPENAI` under `.`.
+- Find exact word references to `artifact` under `.`.
+- Find lines containing the method call `.run(` under `.`.
+- Find YAML keys named `artifact_type` under `.`.
+- Find Python decorators under `.`.

@@ -13,6 +13,11 @@ import unittest
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 CORE_ENGINE_ROOT = REPO_ROOT / "core_engine"
+COMPATIBILITY_MODULES = {
+    "host_interaction_context",
+    "host_interaction_models",
+    "host_interaction_resolution",
+}
 
 
 def _manifest_modules() -> list[str]:
@@ -60,7 +65,10 @@ class CoreEngineDistributionTests(unittest.TestCase):
         modules = _manifest_modules()
 
         self.assertEqual(sorted(set(modules)), modules)
-        self.assertEqual(_canonical_engine_closure(), set(modules))
+        self.assertEqual(
+            _canonical_engine_closure() | COMPATIBILITY_MODULES,
+            set(modules),
+        )
 
     def test_manifest_excludes_outer_application_surfaces(self) -> None:
         modules = set(_manifest_modules())
@@ -76,6 +84,7 @@ class CoreEngineDistributionTests(unittest.TestCase):
             "openai",
             "pydantic",
             "realized_core_runtime",
+            "realized_host_interaction",
             "wasmtime",
             "yaml",
         }
@@ -102,6 +111,7 @@ class CoreEngineDistributionTests(unittest.TestCase):
                 "pydantic==2.12.5",
                 "pyyaml==6.0.3",
                 "realized-core-runtime==0.1.0",
+                "realized-host-interaction==0.1.0",
             },
             set(metadata["dependencies"]),
         )
@@ -184,14 +194,17 @@ class CoreEngineDistributionTests(unittest.TestCase):
         cloud_build = (REPO_ROOT / "cloudbuild.yaml").read_text(encoding="utf-8")
 
         self.assertIn("core_engine", workspace["tool"]["uv"]["workspace"]["members"])
+        self.assertIn("host_interaction", workspace["tool"]["uv"]["workspace"]["members"])
         self.assertEqual(
             {"workspace": True},
             workspace["tool"]["uv"]["sources"]["realized-core-engine"],
         )
         self.assertIn("uv build --wheel core_engine", cloud_build)
+        self.assertIn("uv build --wheel host_interaction", cloud_build)
         self.assertIn("core_engine.tests.test_api", cloud_build)
         self.assertIn("core_engine.tests.test_distribution", cloud_build)
         self.assertIn("--engine-wheel", cloud_build)
+        self.assertIn("--host-interaction-wheel", cloud_build)
 
 
 if __name__ == "__main__":

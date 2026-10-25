@@ -11,7 +11,16 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 CONTROLLER_LAYER_MODULES = (
     REPO_ROOT / "controller_runtime.py",
 )
-SHARED_HOST_INTERACTION_MODULES = tuple(sorted(REPO_ROOT.glob("host_interaction_*.py")))
+SHARED_HOST_INTERACTION_MODULES = tuple(
+    sorted(
+        (
+            REPO_ROOT
+            / "host_interaction"
+            / "src"
+            / "realized_host_interaction"
+        ).glob("*.py")
+    )
+)
 RUNTIME_HOST_BACKEND_MODULES = (
     REPO_ROOT / "host_mediation.py",
     REPO_ROOT / "governed_semantic_reduction_runtime.py",
@@ -31,10 +40,10 @@ def module_import_roots(path: Path) -> set[str]:
         In circumstances like six-layer boundary regression testing, helps with extracting one module's import roots so direct workstation-shell couplings can be detected without executing the module.
 
     Reference to Theory:
-        Verifies the six-layer architecture rule that keeps controller and shared host-interaction substrate below workstation shell code.
+        Verifies the six-layer architecture rule that keeps controller and the packaged shared host-interaction substrate below workstation shell code.
 
     Example Input Output:
-        Input: `module_import_roots(path=Path('/Users/ravindranathakila/service/realized/controller_runtime.py'))`
+        Input: `module_import_roots(path=Path('/workspace/realized/controller_runtime.py'))`
         Output: {'json', 're', 'controller_governance_bridge', 'host_interaction_context'}
 
     Args:
@@ -74,7 +83,7 @@ def compares_against_workstation_backend(path: Path) -> bool:
         Verifies the six-layer rule that backend choice remains on the host-interaction contract boundary rather than as workstation-specific conditionals inside runtime-facing code.
 
     Example Input Output:
-        Input: `compares_against_workstation_backend(path=Path('/Users/ravindranathakila/service/realized/host_mediation.py'))`
+        Input: `compares_against_workstation_backend(path=Path('/workspace/realized/host_mediation.py'))`
         Output: False
 
     Args:
@@ -97,6 +106,18 @@ def compares_against_workstation_backend(path: Path) -> bool:
 
 
 class SixLayerWorkstationBoundaryHygieneTests(unittest.TestCase):
+    def test_shared_host_interaction_substrate_has_no_external_dependency(self) -> None:
+        for module_path in SHARED_HOST_INTERACTION_MODULES:
+            with self.subTest(module=str(module_path.relative_to(REPO_ROOT))):
+                imported_roots = {
+                    name.split(".", 1)[0]
+                    for name in imported_module_names(module_path)
+                }
+                self.assertEqual(
+                    [],
+                    sorted(imported_roots - sys.stdlib_module_names),
+                )
+
     def test_subject_textual_adapter_depends_only_on_contracts_and_local_models(self) -> None:
         allowed_workstation_prefixes = (
             "workstation.contracts",
@@ -201,9 +222,9 @@ class SixLayerWorkstationBoundaryHygieneTests(unittest.TestCase):
             with self.subTest(module=str(module_path.name)):
                 imported = module_import_roots(module_path)
                 self.assertIn(
-                    "host_interaction_context",
+                    "realized_host_interaction",
                     imported,
-                    msg=f"{module_path.name} should use shared host_interaction_context helpers for backend scope",
+                    msg=f"{module_path.name} should use the shared host-interaction package for backend scope",
                 )
                 self.assertFalse(
                     compares_against_workstation_backend(module_path),

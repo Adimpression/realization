@@ -6,7 +6,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable
 
-from host_interaction_receipts import append_host_interaction_receipt
+from realized_host_interaction.receipts import append_host_interaction_receipt
 from semantic_text import collapse_ws
 from workstation.contracts.events import WorkstationEvent
 from workstation.foundation.events.message_tracing import event_trace_id

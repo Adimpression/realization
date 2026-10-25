@@ -31,7 +31,7 @@ Output:
 
 ## 4. Natural-language paraphrases
 
-* find the Python function definition for `run` under `/Users/ravindranathakila/service/realized`
+* find the Python function definition for `run` under `.`
 * locate where a Python function is defined
 * search for a `def` line by function name
 

@@ -50,6 +50,7 @@ class RepositoryArchitectureBoundaryTest(unittest.TestCase):
         self.assertIn("args: ['scripts/check_architecture_boundaries.py']", build)
         self.assertIn("id: 'architecture-ratchet-tests'", build)
         self.assertIn("uv sync --frozen", architecture_test_step)
+        self.assertIn("uv build --wheel host_interaction", architecture_test_step)
         self.assertIn("uv build core_runtime", architecture_test_step)
         self.assertIn(
             "uv run --frozen python -m unittest",
@@ -351,6 +352,12 @@ class RepositoryArchitectureBoundaryTest(unittest.TestCase):
             ),
         )
         self.assertEqual(
+            [],
+            measured["components"]["host_interaction"]["project"]["project"].get(
+                "dependencies", []
+            ),
+        )
+        self.assertEqual(
             {
                 "realized-core-conversation==0.1.0",
                 "realized-core-engine==0.1.0",
@@ -392,9 +399,15 @@ class RepositoryArchitectureBoundaryTest(unittest.TestCase):
                 "dependencies", []
             ),
         )
+        self.assertIn(
+            "realized-host-interaction==0.1.0",
+            measured["components"]["core_engine"]["project"]["project"].get(
+                "dependencies", []
+            ),
+        )
         self.assertFalse(
             any(
-                row["source"] in {"contracts", "governed_core"}
+                row["source"] in {"contracts", "governed_core", "host_interaction"}
                 for row in measured["baseline"]["actual_edges"]
             )
         )

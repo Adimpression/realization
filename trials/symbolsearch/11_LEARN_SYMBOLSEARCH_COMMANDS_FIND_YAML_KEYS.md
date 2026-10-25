@@ -31,7 +31,7 @@ Output:
 
 ## 4. Natural-language paraphrases
 
-* find YAML keys named `artifact_type` under `/Users/ravindranathakila/service/realized`
+* find YAML keys named `artifact_type` under `.`
 * search YAML files for one key
 * locate one configuration key across a tree
 

@@ -46,6 +46,19 @@ flow, run the corresponding unit and BDD modules listed in `cloudbuild.yaml`.
 Provider-backed and desktop/browser qualification must be reported separately;
 they are not substitutes for deterministic tests.
 
+## Workspace Cleanup
+
+Preview generated caches and build products that can be removed safely:
+
+```bash
+python3 scripts/clean_workspace.py
+```
+
+Apply that cleanup with `--apply`. Dependency environments are preserved unless
+`--include-environments` is also supplied. The command never traverses
+`reports/`, `corpus/`, `ram/`, `state/`, or `tmp/`, and it refuses to remove
+tracked content.
+
 ## Sensitive and Generated Material
 
 - Never commit credentials, tokens, passwords, private keys, personal paths,

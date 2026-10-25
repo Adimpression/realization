@@ -118,7 +118,7 @@ governance:
   created_at: '2026-03-31T10:32:24+00:00'
   provenance:
   - not_learn-from-markdown-01-learn-sdkuser-commands-op_6bc989
-  - /Users/ravindranathakila/service/realized/trials/sdkuser/01_LEARN_SDKUSER_COMMANDS_OPENAI_TEXT_RESPONSE.md
+  - trials/sdkuser/01_LEARN_SDKUSER_COMMANDS_OPENAI_TEXT_RESPONSE.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -400,7 +400,7 @@ governance:
   created_at: '2026-03-31T10:32:40+00:00'
   provenance:
   - not_learn-from-markdown-02-learn-sdkuser-commands-op_9965e9
-  - /Users/ravindranathakila/service/realized/trials/sdkuser/02_LEARN_SDKUSER_COMMANDS_OPENAI_EMBEDDING.md
+  - trials/sdkuser/02_LEARN_SDKUSER_COMMANDS_OPENAI_EMBEDDING.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -686,7 +686,7 @@ governance:
   created_at: '2026-03-31T10:32:48+00:00'
   provenance:
   - not_learn-from-markdown-03-learn-sdkuser-commands-an_7e1be9
-  - /Users/ravindranathakila/service/realized/trials/sdkuser/03_LEARN_SDKUSER_COMMANDS_ANTHROPIC_MESSAGE.md
+  - trials/sdkuser/03_LEARN_SDKUSER_COMMANDS_ANTHROPIC_MESSAGE.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -970,7 +970,7 @@ governance:
   created_at: '2026-03-31T10:32:58+00:00'
   provenance:
   - not_learn-from-markdown-04-learn-sdkuser-commands-bo_a49974
-  - /Users/ravindranathakila/service/realized/trials/sdkuser/04_LEARN_SDKUSER_COMMANDS_BOTO3_LIST_S3_OBJECTS.md
+  - trials/sdkuser/04_LEARN_SDKUSER_COMMANDS_BOTO3_LIST_S3_OBJECTS.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -1259,7 +1259,7 @@ governance:
   created_at: '2026-03-31T10:33:08+00:00'
   provenance:
   - not_learn-from-markdown-05-learn-sdkuser-commands-bo_6ac350
-  - /Users/ravindranathakila/service/realized/trials/sdkuser/05_LEARN_SDKUSER_COMMANDS_BOTO3_UPLOAD_FILE.md
+  - trials/sdkuser/05_LEARN_SDKUSER_COMMANDS_BOTO3_UPLOAD_FILE.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -1553,7 +1553,7 @@ governance:
   created_at: '2026-03-31T10:33:18+00:00'
   provenance:
   - not_learn-from-markdown-06-learn-sdkuser-commands-gc_316af5
-  - /Users/ravindranathakila/service/realized/trials/sdkuser/06_LEARN_SDKUSER_COMMANDS_GCS_DOWNLOAD_BLOB.md
+  - trials/sdkuser/06_LEARN_SDKUSER_COMMANDS_GCS_DOWNLOAD_BLOB.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -1847,7 +1847,7 @@ governance:
   created_at: '2026-03-31T10:33:28+00:00'
   provenance:
   - not_learn-from-markdown-07-learn-sdkuser-commands-sl_d35453
-  - /Users/ravindranathakila/service/realized/trials/sdkuser/07_LEARN_SDKUSER_COMMANDS_SLACK_SEND_MESSAGE.md
+  - trials/sdkuser/07_LEARN_SDKUSER_COMMANDS_SLACK_SEND_MESSAGE.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -2136,7 +2136,7 @@ governance:
   created_at: '2026-03-31T10:33:38+00:00'
   provenance:
   - not_learn-from-markdown-08-learn-sdkuser-commands-gi_ff1d23
-  - /Users/ravindranathakila/service/realized/trials/sdkuser/08_LEARN_SDKUSER_COMMANDS_GITHUB_LIST_ISSUES.md
+  - trials/sdkuser/08_LEARN_SDKUSER_COMMANDS_GITHUB_LIST_ISSUES.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -2408,7 +2408,7 @@ governance:
   created_at: '2026-03-31T10:33:47+00:00'
   provenance:
   - not_learn-from-markdown-09-learn-sdkuser-commands-ku_3014f6
-  - /Users/ravindranathakila/service/realized/trials/sdkuser/09_LEARN_SDKUSER_COMMANDS_KUBERNETES_LIST_PODS.md
+  - trials/sdkuser/09_LEARN_SDKUSER_COMMANDS_KUBERNETES_LIST_PODS.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -2678,7 +2678,7 @@ governance:
   created_at: '2026-03-31T10:33:56+00:00'
   provenance:
   - not_learn-from-markdown-10-learn-sdkuser-commands-re_989fdb
-  - /Users/ravindranathakila/service/realized/trials/sdkuser/10_LEARN_SDKUSER_COMMANDS_REDIS_GET_KEY.md
+  - trials/sdkuser/10_LEARN_SDKUSER_COMMANDS_REDIS_GET_KEY.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -2961,7 +2961,7 @@ governance:
   created_at: '2026-03-31T10:34:06+00:00'
   provenance:
   - not_learn-from-markdown-11-learn-sdkuser-commands-st_0b987e
-  - /Users/ravindranathakila/service/realized/trials/sdkuser/11_LEARN_SDKUSER_COMMANDS_STRIPE_RETRIEVE_CUSTOMER.md
+  - trials/sdkuser/11_LEARN_SDKUSER_COMMANDS_STRIPE_RETRIEVE_CUSTOMER.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -3251,7 +3251,7 @@ governance:
   created_at: '2026-03-31T10:34:36+00:00'
   provenance:
   - not_learn-from-markdown-12-learn-sdkuser-commands-su_ca0d44
-  - /Users/ravindranathakila/service/realized/trials/sdkuser/12_LEARN_SDKUSER_COMMANDS_SUPABASE_SELECT_ROWS.md
+  - trials/sdkuser/12_LEARN_SDKUSER_COMMANDS_SUPABASE_SELECT_ROWS.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:

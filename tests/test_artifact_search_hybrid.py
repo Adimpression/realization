@@ -20,6 +20,7 @@ from main import (
     normalize_boundary_shape,
 )
 from store import EmbeddingGemmaEncoder
+from store import SQLiteVectorArtifactStore
 
 
 class ArtifactSearchHybridTests(unittest.TestCase):
@@ -517,6 +518,29 @@ class ArtifactSearchHybridTests(unittest.TestCase):
 
         self.assertEqual(report.get("status"), "persisted")
         self.assertEqual(seen_batches, [[artifact_a.id, artifact_b.id]])
+
+    def test_connection_is_closed_when_sqlite_initialization_fails(self) -> None:
+        class FailingConnection:
+            row_factory = None
+
+            def __init__(self) -> None:
+                self.closed = False
+
+            def execute(self, _statement: str) -> None:
+                raise sqlite3.OperationalError("simulated initialization failure")
+
+            def close(self) -> None:
+                self.closed = True
+
+        connection = FailingConnection()
+        store = SQLiteVectorArtifactStore()
+        store.sqlite3 = mock.Mock(Row=sqlite3.Row)
+        store.sqlite3.connect.return_value = connection
+
+        with self.assertRaisesRegex(sqlite3.OperationalError, "simulated initialization failure"):
+            store._connect()
+
+        self.assertTrue(connection.closed)
 
     def test_hybrid_search_skips_vector_when_exact_deterministic_match_exists(self) -> None:
         store = build_artifact_store()

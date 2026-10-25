@@ -19,6 +19,13 @@ import execution_framework_primitives
 import execution_frameworks
 import fallback_not_generation
 import fallback_not_semantics
+import host_interaction_action_dispatch
+import host_interaction_actions
+import host_interaction_context
+import host_interaction_delegation
+import host_interaction_models
+import host_interaction_receipts
+import host_interaction_resolution
 import itemize
 import itemize_models
 import learning_context
@@ -30,10 +37,64 @@ import semantic_text
 import skill_governance
 import skill_governance_primitives
 import skill_invocation_contract
+from realized_host_interaction import (
+    action_dispatch as packaged_host_action_dispatch,
+    actions as packaged_host_actions,
+    context as packaged_host_context,
+    delegation as packaged_host_delegation,
+    models as packaged_host_models,
+    receipts as packaged_host_receipts,
+    resolution as packaged_host_resolution,
+)
+from realized_host_interaction._normalization import (
+    collapse_ws as host_interaction_collapse_ws,
+    json_safe as host_interaction_json_safe,
+)
 from workstation.skills.core import invocation_contract
 
 
 class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
+    def test_host_interaction_facades_keep_packaged_identities(self) -> None:
+        facade_pairs = (
+            (host_interaction_action_dispatch, packaged_host_action_dispatch),
+            (host_interaction_actions, packaged_host_actions),
+            (host_interaction_context, packaged_host_context),
+            (host_interaction_delegation, packaged_host_delegation),
+            (host_interaction_models, packaged_host_models),
+            (host_interaction_receipts, packaged_host_receipts),
+            (host_interaction_resolution, packaged_host_resolution),
+        )
+        for facade, implementation in facade_pairs:
+            for name in facade.__all__:
+                with self.subTest(module=facade.__name__, name=name):
+                    self.assertIs(getattr(facade, name), getattr(implementation, name))
+
+    def test_host_interaction_private_normalization_preserves_existing_behavior(self) -> None:
+        for value in (" alpha\tbeta\n", "alpha\x00beta", "alpha\u2003beta"):
+            with self.subTest(value=value):
+                self.assertEqual(
+                    semantic_text.collapse_ws(value),
+                    host_interaction_collapse_ws(value),
+                )
+
+        attachment = packaged_host_models.HostInteractionAttachment(
+            name="main",
+            kind="workspace",
+            source="/tmp/project",
+            access_mode="read_write",
+            mount_path="/workstation/mounts/main",
+            metadata={"payload": bytearray(b"payload")},
+        )
+        value = {
+            "region": applied_theory_types.BoundaryShapeTerm.INPUT_VALUE,
+            "attachment": attachment,
+            "nested": (b"first", {"second"}),
+        }
+        self.assertEqual(
+            applied_theory_primitives.json_safe(value),
+            host_interaction_json_safe(value),
+        )
+
     def test_main_facade_is_the_canonical_controller_runtime(self) -> None:
         import main
 

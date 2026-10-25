@@ -663,13 +663,14 @@ uv run --frozen --package realized-core realized-core run --help
 
 ## The Standalone Core
 
-The distributable core is intentionally split into five cohesive UV projects:
+The distributable core is intentionally split into six cohesive UV projects:
 
 ```text
 realized-core
     -> realized-core-conversation
         -> realized-core-llm
         -> realized-core-engine
+            -> realized-host-interaction
             -> realized-core-runtime
     -> realized-core-engine
 ```
@@ -677,6 +678,7 @@ realized-core
 | Project | Responsibility |
 | --- | --- |
 | [`core_runtime/`](core_runtime/) | Dependency-inverted run/resume lifecycle and protocols; no third-party dependencies |
+| [`host_interaction/`](host_interaction/) | Backend-neutral attachment, bounded-action, delegation, and receipt substrate; no third-party dependencies |
 | [`core_engine/`](core_engine/) | Canonical domain engine, state model, host mediation, and SQLite adapter |
 | [`core_llm/`](core_llm/) | Model-facing planning and rendering contracts; no engine dependency |
 | [`core_conversation/`](core_conversation/) | Transport-neutral governed-conversation application service |
@@ -693,7 +695,7 @@ surface behind `run`, `resume`, and `inspect`; its optional `chat` command is an
 entry-layer host over that same engine ABI, not another reasoning engine.
 
 The projects are independently buildable. An eventual `uvx` installation path
-depends on publishing all five distributions to an index; this README does not
+depends on publishing all six distributions to an index; this README does not
 claim that they are already published.
 
 </details>
@@ -702,6 +704,7 @@ Build and verify source distributions and wheels locally:
 
 ```console
 uv build core_runtime --out-dir dist/core-runtime
+uv build host_interaction --out-dir dist/host-interaction
 uv build core_engine --out-dir dist/core-engine
 uv build core_llm --out-dir dist/core-llm
 uv build core_conversation --out-dir dist/core-conversation

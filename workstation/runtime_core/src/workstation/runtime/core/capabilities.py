@@ -31,18 +31,18 @@ from blend_workflow_store import (
 from capability_runtime import runtime_skill_declaration_for_artifact
 from execution_frameworks import ability_executor_framework, normalize_ability_runtime_content
 from applied_theory_types import json_safe
-from host_interaction_action_dispatch import (
+from realized_host_interaction.action_dispatch import (
     execute_shared_host_interaction_action,
     is_shared_host_interaction_action_capability,
 )
-from host_interaction_delegation import (
+from realized_host_interaction.delegation import (
     artifact_with_delegated_virtual_mounts,
     build_host_interaction_delegated_mounts,
     host_interaction_delegation_requires_escalation,
     normalized_requested_delegation,
 )
-from host_interaction_models import HostInteractionAttachment
-from host_interaction_resolution import (
+from realized_host_interaction.models import HostInteractionAttachment
+from realized_host_interaction.resolution import (
     normalize_host_interaction_attachment_relative_path,
     normalize_host_interaction_delegation_targets,
     primary_workspace_attachment,

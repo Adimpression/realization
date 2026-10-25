@@ -12,8 +12,9 @@ recompute the closure and reject undeclared dependencies or outer application
 surfaces.
 
 The package depends on `realized-core-runtime` for the dependency-inverted
-run/resume lifecycle. `realized-core` is a separate, thin command-line
-composition package that consumes this engine distribution.
+run/resume lifecycle and on `realized-host-interaction` for the shared,
+backend-neutral host substrate. `realized-core` is a separate, thin
+command-line composition package that consumes this engine distribution.
 
 ## Boundary Of This Distribution
 

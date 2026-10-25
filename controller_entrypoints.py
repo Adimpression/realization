@@ -307,8 +307,8 @@ def sqlite_override_scope(
         Exposes CLI/runtime entry points for the theory-backed controller without changing the theory itself.
 
     Example Input Output:
-        Input: `sqlite_override_scope(args=Namespace(sqlite=Path('/Users/ravindranathakila/service/realized/state/common.sqlite3')), temporary_when_missing=False)`
-        Output: `Path('/Users/ravindranathakila/service/realized/state/common.sqlite3')`
+        Input: `sqlite_override_scope(args=Namespace(sqlite=Path('/workspace/realized/state/common.sqlite3')), temporary_when_missing=False)`
+        Output: `Path('/workspace/realized/state/common.sqlite3')`
 
     Args:
         args: Parsed CLI arguments that may carry `--sqlite`.

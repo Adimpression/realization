@@ -31,7 +31,7 @@ Output:
 
 ## 4. Natural-language paraphrases
 
-* find every occurrence of `BSSCController` under `/Users/ravindranathakila/service/realized`
+* find every occurrence of `BSSCController` under `.`
 * search a tree for one symbol
 * locate all textual references to a symbol
 

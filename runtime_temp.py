@@ -20,7 +20,7 @@ def preferred_runtime_temp_root() -> Path:
 
     Example Input Output:
         Input: `preferred_runtime_temp_root()`
-        Output: Path('/Users/ravindranathakila/service/realized/ram/tmp')
+        Output: Path('/workspace/realized/ram/tmp')
 
     Args:
         None.
@@ -58,7 +58,7 @@ def runtime_temporary_directory(*, prefix: str) -> tempfile.TemporaryDirectory[s
 
     Example Input Output:
         Input: `runtime_temporary_directory(prefix='bssc-demo-')`
-        Output: TemporaryDirectory('/Users/ravindranathakila/service/realized/ram/tmp/bssc-demo-abc123')
+        Output: TemporaryDirectory('/workspace/realized/ram/tmp/bssc-demo-abc123')
 
     Args:
         prefix: Value for `prefix` used by `runtime_temporary_directory`. Expected type: `str`.
@@ -79,7 +79,7 @@ def runtime_mkdtemp(*, prefix: str) -> str:
 
     Example Input Output:
         Input: `runtime_mkdtemp(prefix='bssc-replay-')`
-        Output: '/Users/ravindranathakila/service/realized/ram/tmp/bssc-replay-abc123'
+        Output: '/workspace/realized/ram/tmp/bssc-replay-abc123'
 
     Args:
         prefix: Value for `prefix` used by `runtime_mkdtemp`. Expected type: `str`.

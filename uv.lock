@@ -10,6 +10,7 @@ members = [
     "realized-core-engine",
     "realized-core-llm",
     "realized-core-runtime",
+    "realized-host-interaction",
     "realized-workstation",
     "realized-workstation-app-cli",
     "realized-workstation-contracts",
@@ -776,6 +777,7 @@ dependencies = [
     { name = "realized-core-engine" },
     { name = "realized-core-llm" },
     { name = "realized-core-runtime" },
+    { name = "realized-host-interaction" },
     { name = "realized-workstation" },
     { name = "realized-workstation-app-cli" },
     { name = "realized-workstation-contracts" },
@@ -845,6 +847,7 @@ requires-dist = [
     { name = "realized-core-engine", editable = "core_engine" },
     { name = "realized-core-llm", editable = "core_llm" },
     { name = "realized-core-runtime", editable = "core_runtime" },
+    { name = "realized-host-interaction", editable = "host_interaction" },
     { name = "realized-workstation", editable = "workstation/namespace" },
     { name = "realized-workstation-app-cli", editable = "workstation/app_cli" },
     { name = "realized-workstation-contracts", editable = "workstation/contracts_api" },
@@ -928,6 +931,7 @@ dependencies = [
     { name = "pydantic" },
     { name = "pyyaml" },
     { name = "realized-core-runtime" },
+    { name = "realized-host-interaction" },
 ]
 
 [package.optional-dependencies]
@@ -941,6 +945,7 @@ requires-dist = [
     { name = "pydantic", specifier = "==2.12.5" },
     { name = "pyyaml", specifier = "==6.0.3" },
     { name = "realized-core-runtime", editable = "core_runtime" },
+    { name = "realized-host-interaction", editable = "host_interaction" },
     { name = "wasmtime", marker = "extra == 'wasm'", specifier = "==43.0.0" },
 ]
 provides-extras = ["wasm"]
@@ -962,6 +967,11 @@ version = "0.1.0"
 source = { editable = "core_runtime" }
 
 [[package]]
+name = "realized-host-interaction"
+version = "0.1.0"
+source = { editable = "host_interaction" }
+
+[[package]]
 name = "realized-workstation"
 version = "0.1.0"
 source = { editable = "workstation/namespace" }
@@ -971,6 +981,7 @@ name = "realized-workstation-app-cli"
 version = "0.1.0"
 source = { editable = "workstation/app_cli" }
 dependencies = [
+    { name = "realized-host-interaction" },
     { name = "realized-workstation" },
     { name = "realized-workstation-foundation-host" },
     { name = "realized-workstation-grpc-implementation" },
@@ -981,6 +992,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
+    { name = "realized-host-interaction", editable = "host_interaction" },
     { name = "realized-workstation", editable = "workstation/namespace" },
     { name = "realized-workstation-foundation-host", editable = "workstation/foundation_host" },
     { name = "realized-workstation-grpc-implementation", editable = "workstation/grpc_implementation" },
@@ -999,12 +1011,14 @@ name = "realized-workstation-foundation-events"
 version = "0.1.0"
 source = { editable = "workstation/foundation_events" }
 dependencies = [
+    { name = "realized-host-interaction" },
     { name = "realized-workstation" },
     { name = "realized-workstation-contracts" },
 ]
 
 [package.metadata]
 requires-dist = [
+    { name = "realized-host-interaction", editable = "host_interaction" },
     { name = "realized-workstation", editable = "workstation/namespace" },
     { name = "realized-workstation-contracts", editable = "workstation/contracts_api" },
 ]
@@ -1014,6 +1028,7 @@ name = "realized-workstation-foundation-host"
 version = "0.1.0"
 source = { editable = "workstation/foundation_host" }
 dependencies = [
+    { name = "realized-host-interaction" },
     { name = "realized-workstation" },
     { name = "realized-workstation-contracts" },
     { name = "realized-workstation-foundation-models" },
@@ -1021,6 +1036,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
+    { name = "realized-host-interaction", editable = "host_interaction" },
     { name = "realized-workstation", editable = "workstation/namespace" },
     { name = "realized-workstation-contracts", editable = "workstation/contracts_api" },
     { name = "realized-workstation-foundation-models", editable = "workstation/foundation_models" },
@@ -1105,6 +1121,7 @@ name = "realized-workstation-runtime-core"
 version = "0.1.0"
 source = { editable = "workstation/runtime_core" }
 dependencies = [
+    { name = "realized-host-interaction" },
     { name = "realized-workstation" },
     { name = "realized-workstation-contracts" },
     { name = "realized-workstation-foundation-events" },
@@ -1117,6 +1134,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
+    { name = "realized-host-interaction", editable = "host_interaction" },
     { name = "realized-workstation", editable = "workstation/namespace" },
     { name = "realized-workstation-contracts", editable = "workstation/contracts_api" },
     { name = "realized-workstation-foundation-events", editable = "workstation/foundation_events" },
@@ -1178,6 +1196,7 @@ name = "realized-workstation-skills-core"
 version = "0.1.0"
 source = { editable = "workstation/skills_core" }
 dependencies = [
+    { name = "realized-host-interaction" },
     { name = "realized-workstation" },
     { name = "realized-workstation-contracts" },
     { name = "realized-workstation-foundation-host" },
@@ -1187,6 +1206,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
+    { name = "realized-host-interaction", editable = "host_interaction" },
     { name = "realized-workstation", editable = "workstation/namespace" },
     { name = "realized-workstation-contracts", editable = "workstation/contracts_api" },
     { name = "realized-workstation-foundation-host", editable = "workstation/foundation_host" },
@@ -1273,12 +1293,14 @@ name = "realized-workstation-ui-shared"
 version = "0.1.0"
 source = { editable = "workstation/ui_shared" }
 dependencies = [
+    { name = "realized-host-interaction" },
     { name = "realized-workstation" },
     { name = "realized-workstation-foundation-projections" },
 ]
 
 [package.metadata]
 requires-dist = [
+    { name = "realized-host-interaction", editable = "host_interaction" },
     { name = "realized-workstation", editable = "workstation/namespace" },
     { name = "realized-workstation-foundation-projections", editable = "workstation/foundation_projections" },
 ]

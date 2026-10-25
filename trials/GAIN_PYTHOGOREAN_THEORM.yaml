@@ -25,7 +25,7 @@ Pythagorean Theorem:
     created_at: '2026-03-25T11:22:36+00:00'
     provenance:
     - not_learn-from-markdown-gain-pythogorean-theorm-md_eb1362
-    - /Users/ravindranathakila/service/realized/GAIN_PYTHOGOREAN_THEORM.md
+    - trials/GAIN_PYTHOGOREAN_THEORM.md
     justification: The markdown document states the overall topic directly in its
       introduction.
     question: What is the length of the hypotenuse `c` given side lengths `a` and
@@ -158,7 +158,7 @@ Pythagorean Theorem:
             - "[ Reused Non Achievedness ]"
             - "[ Composed Reuse ]"
     content:
-      source_path: /Users/ravindranathakila/service/realized/GAIN_PYTHOGOREAN_THEORM.md
+      source_path: trials/GAIN_PYTHOGOREAN_THEORM.md
       source_document: GAIN_PYTHOGOREAN_THEORM.md
       source_kind: markdown
       source_title: Pythagorean Theorem
@@ -327,7 +327,7 @@ Pythagorean Theorem:
     created_at: '2026-03-25T11:22:37+00:00'
     provenance:
     - not_learn-from-markdown-gain-pythogorean-theorm-md_eb1362
-    - /Users/ravindranathakila/service/realized/GAIN_PYTHOGOREAN_THEORM.md
+    - trials/GAIN_PYTHOGOREAN_THEORM.md
     related_artifact_ids:
     - artifact_knowledge-pythagorean-theorem_1c6616
     justification: The markdown document contains a bounded section that directly
@@ -459,7 +459,7 @@ Pythagorean Theorem:
             - "[ Reused Non Achievedness ]"
             - "[ Composed Reuse ]"
     content:
-      source_path: /Users/ravindranathakila/service/realized/GAIN_PYTHOGOREAN_THEORM.md
+      source_path: trials/GAIN_PYTHOGOREAN_THEORM.md
       source_document: GAIN_PYTHOGOREAN_THEORM.md
       source_kind: markdown
       source_title: Pythagorean Theorem
@@ -626,7 +626,7 @@ Pythagorean Theorem:
     created_at: '2026-03-25T11:22:37+00:00'
     provenance:
     - not_learn-from-markdown-gain-pythogorean-theorm-md_eb1362
-    - /Users/ravindranathakila/service/realized/GAIN_PYTHOGOREAN_THEORM.md
+    - trials/GAIN_PYTHOGOREAN_THEORM.md
     related_artifact_ids:
     - artifact_knowledge-pythagorean-theorem_1c6616
     - artifact_knowledge-1-the-triangle-and-the-side-roles_da99fc
@@ -758,7 +758,7 @@ Pythagorean Theorem:
             - "[ Reused Non Achievedness ]"
             - "[ Composed Reuse ]"
     content:
-      source_path: /Users/ravindranathakila/service/realized/GAIN_PYTHOGOREAN_THEORM.md
+      source_path: trials/GAIN_PYTHOGOREAN_THEORM.md
       source_document: GAIN_PYTHOGOREAN_THEORM.md
       source_kind: markdown
       source_title: Pythagorean Theorem
@@ -924,7 +924,7 @@ Pythagorean Theorem:
     created_at: '2026-03-25T11:22:37+00:00'
     provenance:
     - not_learn-from-markdown-gain-pythogorean-theorm-md_eb1362
-    - /Users/ravindranathakila/service/realized/GAIN_PYTHOGOREAN_THEORM.md
+    - trials/GAIN_PYTHOGOREAN_THEORM.md
     related_artifact_ids:
     - artifact_knowledge-pythagorean-theorem_1c6616
     - artifact_knowledge-1-the-triangle-and-the-side-roles_da99fc
@@ -1058,7 +1058,7 @@ Pythagorean Theorem:
             - "[ Reused Non Achievedness ]"
             - "[ Composed Reuse ]"
     content:
-      source_path: /Users/ravindranathakila/service/realized/GAIN_PYTHOGOREAN_THEORM.md
+      source_path: trials/GAIN_PYTHOGOREAN_THEORM.md
       source_document: GAIN_PYTHOGOREAN_THEORM.md
       source_kind: markdown
       source_title: Pythagorean Theorem
@@ -1221,7 +1221,7 @@ Pythagorean Theorem:
     created_at: '2026-03-25T11:22:38+00:00'
     provenance:
     - not_learn-from-markdown-gain-pythogorean-theorm-md_eb1362
-    - /Users/ravindranathakila/service/realized/GAIN_PYTHOGOREAN_THEORM.md
+    - trials/GAIN_PYTHOGOREAN_THEORM.md
     related_artifact_ids:
     - artifact_knowledge-pythagorean-theorem_1c6616
     - artifact_knowledge-1-the-triangle-and-the-side-roles_da99fc
@@ -1346,7 +1346,7 @@ Pythagorean Theorem:
             - "[ Reused Non Achievedness ]"
             - "[ Composed Reuse ]"
     content:
-      source_path: /Users/ravindranathakila/service/realized/GAIN_PYTHOGOREAN_THEORM.md
+      source_path: trials/GAIN_PYTHOGOREAN_THEORM.md
       source_document: GAIN_PYTHOGOREAN_THEORM.md
       source_kind: markdown
       source_title: Pythagorean Theorem
@@ -1501,7 +1501,7 @@ Pythagorean Theorem:
     created_at: '2026-03-25T11:22:38+00:00'
     provenance:
     - not_learn-from-markdown-gain-pythogorean-theorm-md_eb1362
-    - /Users/ravindranathakila/service/realized/GAIN_PYTHOGOREAN_THEORM.md
+    - trials/GAIN_PYTHOGOREAN_THEORM.md
     related_artifact_ids:
     - artifact_knowledge-pythagorean-theorem_1c6616
     - artifact_knowledge-1-the-triangle-and-the-side-roles_da99fc
@@ -1645,7 +1645,7 @@ Pythagorean Theorem:
             - "[ Reused Non Achievedness ]"
             - "[ Composed Reuse ]"
     content:
-      source_path: /Users/ravindranathakila/service/realized/GAIN_PYTHOGOREAN_THEORM.md
+      source_path: trials/GAIN_PYTHOGOREAN_THEORM.md
       source_document: GAIN_PYTHOGOREAN_THEORM.md
       source_kind: markdown
       source_title: Pythagorean Theorem
@@ -1811,7 +1811,7 @@ Pythagorean Theorem:
     created_at: '2026-03-25T11:22:38+00:00'
     provenance:
     - not_learn-from-markdown-gain-pythogorean-theorm-md_eb1362
-    - /Users/ravindranathakila/service/realized/GAIN_PYTHOGOREAN_THEORM.md
+    - trials/GAIN_PYTHOGOREAN_THEORM.md
     related_artifact_ids:
     - artifact_knowledge-pythagorean-theorem_1c6616
     - artifact_knowledge-1-the-triangle-and-the-side-roles_da99fc
@@ -1931,7 +1931,7 @@ Pythagorean Theorem:
             - "[ Reused Non Achievedness ]"
             - "[ Composed Reuse ]"
     content:
-      source_path: /Users/ravindranathakila/service/realized/GAIN_PYTHOGOREAN_THEORM.md
+      source_path: trials/GAIN_PYTHOGOREAN_THEORM.md
       source_document: GAIN_PYTHOGOREAN_THEORM.md
       source_kind: markdown
       source_title: Pythagorean Theorem
@@ -2073,7 +2073,7 @@ Pythagorean Theorem:
     created_at: '2026-03-25T11:22:39+00:00'
     provenance:
     - not_learn-from-markdown-gain-pythogorean-theorm-md_eb1362
-    - /Users/ravindranathakila/service/realized/GAIN_PYTHOGOREAN_THEORM.md
+    - trials/GAIN_PYTHOGOREAN_THEORM.md
     constraints:
     - derive only from the supplied encounter
     template_schema:
@@ -2344,7 +2344,7 @@ Pythagorean Theorem:
           main()
     script_language: python
     content:
-      source_path: /Users/ravindranathakila/service/realized/GAIN_PYTHOGOREAN_THEORM.md
+      source_path: trials/GAIN_PYTHOGOREAN_THEORM.md
       source_document: GAIN_PYTHOGOREAN_THEORM.md
       output_field: c
       compute_expression: (a**2 + b**2)**0.5
@@ -2538,7 +2538,7 @@ Pythagorean Theorem:
     created_at: '2026-03-25T11:22:39+00:00'
     provenance:
     - not_learn-from-markdown-gain-pythogorean-theorm-md_eb1362
-    - /Users/ravindranathakila/service/realized/GAIN_PYTHOGOREAN_THEORM.md
+    - trials/GAIN_PYTHOGOREAN_THEORM.md
     related_artifact_ids:
     - artifact_ability-2-the-core-rule_1cec7f
     constraints:
@@ -2814,7 +2814,7 @@ Pythagorean Theorem:
           main()
     script_language: python
     content:
-      source_path: /Users/ravindranathakila/service/realized/GAIN_PYTHOGOREAN_THEORM.md
+      source_path: trials/GAIN_PYTHOGOREAN_THEORM.md
       source_document: GAIN_PYTHOGOREAN_THEORM.md
       output_field: c
       compute_expression: (a**2 + b**2) ** 0.5
@@ -2978,7 +2978,7 @@ Pythagorean Theorem:
     created_at: '2026-03-25T11:22:40+00:00'
     provenance:
     - not_learn-from-markdown-gain-pythogorean-theorm-md_eb1362
-    - /Users/ravindranathakila/service/realized/GAIN_PYTHOGOREAN_THEORM.md
+    - trials/GAIN_PYTHOGOREAN_THEORM.md
     related_artifact_ids:
     - artifact_ability-2-the-core-rule_1cec7f
     - artifact_ability-4-standard-example_fda911
@@ -3253,7 +3253,7 @@ Pythagorean Theorem:
           main()
     script_language: python
     content:
-      source_path: /Users/ravindranathakila/service/realized/GAIN_PYTHOGOREAN_THEORM.md
+      source_path: trials/GAIN_PYTHOGOREAN_THEORM.md
       source_document: GAIN_PYTHOGOREAN_THEORM.md
       output_field: c
       compute_expression: s * 2**0.5

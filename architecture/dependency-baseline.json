@@ -10,6 +10,10 @@
     },
     {
       "source": "app_cli",
+      "target": "host_interaction"
+    },
+    {
+      "source": "app_cli",
       "target": "shell_core"
     },
     {
@@ -49,12 +53,20 @@
       "target": "contracts"
     },
     {
+      "source": "foundation_events",
+      "target": "host_interaction"
+    },
+    {
       "source": "foundation_host",
       "target": "contracts"
     },
     {
       "source": "foundation_host",
       "target": "foundation_models"
+    },
+    {
+      "source": "foundation_host",
+      "target": "host_interaction"
     },
     {
       "source": "foundation_projections",
@@ -111,6 +123,10 @@
     {
       "source": "runtime_core",
       "target": "foundation_projections"
+    },
+    {
+      "source": "runtime_core",
+      "target": "host_interaction"
     },
     {
       "source": "runtime_core",
@@ -174,6 +190,10 @@
     },
     {
       "source": "skills_core",
+      "target": "host_interaction"
+    },
+    {
+      "source": "skills_core",
       "target": "skills_builtin"
     },
     {
@@ -229,6 +249,10 @@
       "target": "foundation_projections"
     },
     {
+      "source": "ui_shared",
+      "target": "host_interaction"
+    },
+    {
       "source": "ui_textual",
       "target": "contracts"
     },
@@ -254,9 +278,9 @@
     "cyclic_internal_edge_count": 0,
     "cyclic_node_count": 0,
     "cyclic_scc_count": 0,
-    "edge_count": 641,
+    "edge_count": 629,
     "largest_cyclic_scc_node_count": 0,
-    "node_count": 150
+    "node_count": 151
   },
   "compatibility_edges": [
     {
@@ -279,12 +303,6 @@
   "cycles": [],
   "forbidden_edges": [],
   "root_boundary_classifications": [
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "app_cli",
-      "target": "host_interaction_receipts"
-    },
     {
       "category": "pure_helper",
       "direction": "component_to_root",
@@ -322,12 +340,6 @@
       "target": "title_semantics"
     },
     {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "foundation_events",
-      "target": "host_interaction_receipts"
-    },
-    {
       "category": "pure_helper",
       "direction": "component_to_root",
       "source": "foundation_events",
@@ -356,24 +368,6 @@
       "direction": "component_to_root",
       "source": "foundation_host",
       "target": "governance_inventory"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "foundation_host",
-      "target": "host_interaction_context"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "foundation_host",
-      "target": "host_interaction_delegation"
-    },
-    {
-      "category": "dto_constants",
-      "direction": "component_to_root",
-      "source": "foundation_host",
-      "target": "host_interaction_models"
     },
     {
       "category": "orchestration",
@@ -493,36 +487,6 @@
       "category": "orchestration",
       "direction": "component_to_root",
       "source": "runtime_core",
-      "target": "host_interaction_action_dispatch"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "runtime_core",
-      "target": "host_interaction_delegation"
-    },
-    {
-      "category": "dto_constants",
-      "direction": "component_to_root",
-      "source": "runtime_core",
-      "target": "host_interaction_models"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "runtime_core",
-      "target": "host_interaction_receipts"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "runtime_core",
-      "target": "host_interaction_resolution"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "runtime_core",
       "target": "learning_context"
     },
     {
@@ -602,12 +566,6 @@
       "direction": "component_to_root",
       "source": "skills_core",
       "target": "execution_frameworks"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "skills_core",
-      "target": "host_interaction_delegation"
     },
     {
       "category": "pure_helper",
@@ -778,12 +736,6 @@
       "target": "semantic_text"
     },
     {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "ui_shared",
-      "target": "host_interaction_receipts"
-    },
-    {
       "category": "pure_helper",
       "direction": "component_to_root",
       "source": "ui_shared",
@@ -806,6 +758,12 @@
       "direction": "root_to_component",
       "source": "blend_session",
       "target": "foundation_models"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "blend_workflow_execution",
+      "target": "host_interaction"
     },
     {
       "category": "orchestration",
@@ -846,6 +804,12 @@
     {
       "category": "orchestration",
       "direction": "root_to_component",
+      "source": "controller_runtime",
+      "target": "host_interaction"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
       "source": "execution_frameworks",
       "target": "governed_core"
     },
@@ -856,6 +820,60 @@
       "target": "governed_core"
     },
     {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "governed_semantic_reduction_runtime",
+      "target": "host_interaction"
+    },
+    {
+      "category": "compatibility",
+      "direction": "root_to_component",
+      "source": "host_interaction_action_dispatch",
+      "target": "host_interaction"
+    },
+    {
+      "category": "compatibility",
+      "direction": "root_to_component",
+      "source": "host_interaction_actions",
+      "target": "host_interaction"
+    },
+    {
+      "category": "compatibility",
+      "direction": "root_to_component",
+      "source": "host_interaction_context",
+      "target": "host_interaction"
+    },
+    {
+      "category": "compatibility",
+      "direction": "root_to_component",
+      "source": "host_interaction_delegation",
+      "target": "host_interaction"
+    },
+    {
+      "category": "compatibility",
+      "direction": "root_to_component",
+      "source": "host_interaction_models",
+      "target": "host_interaction"
+    },
+    {
+      "category": "compatibility",
+      "direction": "root_to_component",
+      "source": "host_interaction_receipts",
+      "target": "host_interaction"
+    },
+    {
+      "category": "compatibility",
+      "direction": "root_to_component",
+      "source": "host_interaction_resolution",
+      "target": "host_interaction"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "host_mediation",
+      "target": "host_interaction"
+    },
+    {
       "category": "compatibility",
       "direction": "root_to_component",
       "source": "skill_invocation_contract",
@@ -863,10 +881,6 @@
     }
   ],
   "root_module_dependencies": [
-    {
-      "module": "host_interaction_receipts",
-      "source": "app_cli"
-    },
     {
       "module": "semantic_text",
       "source": "app_cli"
@@ -892,10 +906,6 @@
       "source": "core_engine"
     },
     {
-      "module": "host_interaction_receipts",
-      "source": "foundation_events"
-    },
-    {
       "module": "semantic_text",
       "source": "foundation_events"
     },
@@ -913,18 +923,6 @@
     },
     {
       "module": "governance_inventory",
-      "source": "foundation_host"
-    },
-    {
-      "module": "host_interaction_context",
-      "source": "foundation_host"
-    },
-    {
-      "module": "host_interaction_delegation",
-      "source": "foundation_host"
-    },
-    {
-      "module": "host_interaction_models",
       "source": "foundation_host"
     },
     {
@@ -1004,26 +1002,6 @@
       "source": "runtime_core"
     },
     {
-      "module": "host_interaction_action_dispatch",
-      "source": "runtime_core"
-    },
-    {
-      "module": "host_interaction_delegation",
-      "source": "runtime_core"
-    },
-    {
-      "module": "host_interaction_models",
-      "source": "runtime_core"
-    },
-    {
-      "module": "host_interaction_receipts",
-      "source": "runtime_core"
-    },
-    {
-      "module": "host_interaction_resolution",
-      "source": "runtime_core"
-    },
-    {
       "module": "learning_context",
       "source": "runtime_core"
     },
@@ -1077,10 +1055,6 @@
     },
     {
       "module": "execution_frameworks",
-      "source": "skills_core"
-    },
-    {
-      "module": "host_interaction_delegation",
       "source": "skills_core"
     },
     {
@@ -1196,10 +1170,6 @@
       "source": "subject_service"
     },
     {
-      "module": "host_interaction_receipts",
-      "source": "ui_shared"
-    },
-    {
       "module": "semantic_text",
       "source": "ui_shared"
     },
@@ -1216,6 +1186,10 @@
     {
       "source": "blend_session",
       "target": "foundation_models"
+    },
+    {
+      "source": "blend_workflow_execution",
+      "target": "host_interaction"
     },
     {
       "source": "controller_entrypoints",
@@ -1242,12 +1216,52 @@
       "target": "governed_core"
     },
     {
+      "source": "controller_runtime",
+      "target": "host_interaction"
+    },
+    {
       "source": "execution_frameworks",
       "target": "governed_core"
     },
     {
       "source": "governed_semantic_reduction_runtime",
       "target": "governed_core"
+    },
+    {
+      "source": "governed_semantic_reduction_runtime",
+      "target": "host_interaction"
+    },
+    {
+      "source": "host_interaction_action_dispatch",
+      "target": "host_interaction"
+    },
+    {
+      "source": "host_interaction_actions",
+      "target": "host_interaction"
+    },
+    {
+      "source": "host_interaction_context",
+      "target": "host_interaction"
+    },
+    {
+      "source": "host_interaction_delegation",
+      "target": "host_interaction"
+    },
+    {
+      "source": "host_interaction_models",
+      "target": "host_interaction"
+    },
+    {
+      "source": "host_interaction_receipts",
+      "target": "host_interaction"
+    },
+    {
+      "source": "host_interaction_resolution",
+      "target": "host_interaction"
+    },
+    {
+      "source": "host_mediation",
+      "target": "host_interaction"
     },
     {
       "source": "skill_invocation_contract",
@@ -1393,10 +1407,6 @@
     },
     {
       "module": "blend_workflow_store",
-      "source": "blend_workflow_execution"
-    },
-    {
-      "module": "host_interaction_delegation",
       "source": "blend_workflow_execution"
     },
     {
@@ -1597,10 +1607,6 @@
     },
     {
       "module": "governed_semantic_reduction_runtime",
-      "source": "controller_runtime"
-    },
-    {
-      "module": "host_interaction_context",
       "source": "controller_runtime"
     },
     {
@@ -1960,10 +1966,6 @@
       "source": "governed_semantic_reduction_runtime"
     },
     {
-      "module": "host_interaction_context",
-      "source": "governed_semantic_reduction_runtime"
-    },
-    {
       "module": "normalize",
       "source": "governed_semantic_reduction_runtime"
     },
@@ -2080,58 +2082,6 @@
       "source": "host_brokers"
     },
     {
-      "module": "host_interaction_actions",
-      "source": "host_interaction_action_dispatch"
-    },
-    {
-      "module": "host_interaction_models",
-      "source": "host_interaction_action_dispatch"
-    },
-    {
-      "module": "host_interaction_models",
-      "source": "host_interaction_actions"
-    },
-    {
-      "module": "host_interaction_resolution",
-      "source": "host_interaction_actions"
-    },
-    {
-      "module": "host_interaction_models",
-      "source": "host_interaction_context"
-    },
-    {
-      "module": "host_interaction_resolution",
-      "source": "host_interaction_context"
-    },
-    {
-      "module": "semantic_text",
-      "source": "host_interaction_context"
-    },
-    {
-      "module": "applied_theory_types",
-      "source": "host_interaction_delegation"
-    },
-    {
-      "module": "host_interaction_models",
-      "source": "host_interaction_delegation"
-    },
-    {
-      "module": "semantic_text",
-      "source": "host_interaction_delegation"
-    },
-    {
-      "module": "applied_theory_primitives",
-      "source": "host_interaction_receipts"
-    },
-    {
-      "module": "host_interaction_models",
-      "source": "host_interaction_resolution"
-    },
-    {
-      "module": "semantic_text",
-      "source": "host_interaction_resolution"
-    },
-    {
       "module": "applied_theory_types",
       "source": "host_mediation"
     },
@@ -2149,10 +2099,6 @@
     },
     {
       "module": "host_brokers",
-      "source": "host_mediation"
-    },
-    {
-      "module": "host_interaction_context",
       "source": "host_mediation"
     },
     {

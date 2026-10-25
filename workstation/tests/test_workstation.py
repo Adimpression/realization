@@ -1179,13 +1179,13 @@ class WorkstationTests(unittest.TestCase):
         """
         payload = derive_workstation_invocation_payload_from_prompt(
             inputs={"symbol": "required input value", "root": "required input value"},
-            prompt="Find every occurrence of the symbol `BSSCController` under `/Users/ravindranathakila/service/realized`.",
+            prompt="Find every occurrence of the symbol `BSSCController` under `/workspace/realized`.",
         )
         self.assertEqual(
             payload,
             {
                 "symbol": "BSSCController",
-                "root": "/Users/ravindranathakila/service/realized",
+                "root": "/workspace/realized",
             },
         )
 
@@ -1209,13 +1209,13 @@ class WorkstationTests(unittest.TestCase):
         """
         payload = derive_workstation_invocation_payload_from_prompt(
             inputs={"symbol": "required input value", "root": "required input value"},
-            prompt="Find every occurrence of the symbol BSSCController under /Users/ravindranathakila/service/realized.",
+            prompt="Find every occurrence of the symbol BSSCController under /workspace/realized.",
         )
         self.assertEqual(
             payload,
             {
                 "symbol": "BSSCController",
-                "root": "/Users/ravindranathakila/service/realized",
+                "root": "/workspace/realized",
             },
         )
 
@@ -1239,13 +1239,13 @@ class WorkstationTests(unittest.TestCase):
         """
         payload = derive_workstation_invocation_payload_from_prompt(
             inputs={"key": "required input value", "root": "required input value"},
-            prompt="Find YAML keys named `artifact_type` under `/Users/ravindranathakila/service/realized`.",
+            prompt="Find YAML keys named `artifact_type` under `/workspace/realized`.",
         )
         self.assertEqual(
             payload,
             {
                 "key": "artifact_type",
-                "root": "/Users/ravindranathakila/service/realized",
+                "root": "/workspace/realized",
             },
         )
 
@@ -1272,14 +1272,14 @@ class WorkstationTests(unittest.TestCase):
                 "name": "required input value",
                 "root": "required input value",
             },
-            prompt="Find files named `README.md` under `/Users/ravindranathakila/service/realized`.",
+            prompt="Find files named `README.md` under `/workspace/realized`.",
             skill_title="Bash Commands 06 — Find Files By Name / Bash Commands 06 Find Files By Name",
         )
         self.assertEqual(
             payload,
             {
                 "name": "README.md",
-                "root": "/Users/ravindranathakila/service/realized",
+                "root": "/workspace/realized",
             },
         )
 
@@ -1303,13 +1303,13 @@ class WorkstationTests(unittest.TestCase):
         """
         payload = derive_workstation_invocation_payload_from_prompt(
             inputs={"tag": "required input value", "root": "required input value"},
-            prompt="Find all TODO lines under `/Users/ravindranathakila/service/realized`.",
+            prompt="Find all TODO lines under `/workspace/realized`.",
         )
         self.assertEqual(
             payload,
             {
                 "tag": "TODO",
-                "root": "/Users/ravindranathakila/service/realized",
+                "root": "/workspace/realized",
             },
         )
 
@@ -1333,13 +1333,13 @@ class WorkstationTests(unittest.TestCase):
         """
         payload = derive_workstation_invocation_payload_from_prompt(
             inputs={"pattern": "required input value", "root": "required input value"},
-            prompt="Find lines containing the method call `.run(` under `/Users/ravindranathakila/service/realized`.",
+            prompt="Find lines containing the method call `.run(` under `/workspace/realized`.",
         )
         self.assertEqual(
             payload,
             {
                 "pattern": r"\.run\(",
-                "root": "/Users/ravindranathakila/service/realized",
+                "root": "/workspace/realized",
             },
         )
 
@@ -1817,7 +1817,7 @@ class WorkstationTests(unittest.TestCase):
         )
         plan = preferred_workstation_skill_invocation_plan(
             session=session,
-            prompt="Find every occurrence of the symbol `BSSCController` under `/Users/ravindranathakila/service/realized`.",
+            prompt="Find every occurrence of the symbol `BSSCController` under `/workspace/realized`.",
         )
         self.assertIsNotNone(plan)
         assert plan is not None
@@ -1829,7 +1829,7 @@ class WorkstationTests(unittest.TestCase):
             plan["invocation_payload"],
             {
                 "symbol": "BSSCController",
-                "root": "/Users/ravindranathakila/service/realized",
+                "root": "/workspace/realized",
             },
         )
 

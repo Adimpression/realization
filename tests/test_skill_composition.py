@@ -17,6 +17,9 @@ from skill_composition import (
 from skill_schema_io import load_skill_yaml_payload_documents
 
 
+REPO_ROOT = Path(__file__).resolve().parents[1]
+
+
 def _ability_document(
     *,
     title: str,
@@ -69,7 +72,7 @@ class SkillCompositionTests(unittest.TestCase):
         return compile_skill_document(payload).canonical_ir
 
     def _trial_ability(self, bundle_path: str, title_prefix: str) -> dict[str, object]:
-        documents = load_skill_yaml_payload_documents(Path("/Users/ravindranathakila/service/realized") / bundle_path)
+        documents = load_skill_yaml_payload_documents(REPO_ROOT / bundle_path)
         for document in documents:
             if document.get("kind") == "ability" and str(document.get("title", "")).startswith(title_prefix):
                 return compile_skill_document(document).canonical_ir

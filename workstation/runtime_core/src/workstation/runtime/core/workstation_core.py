@@ -43,7 +43,7 @@ from gather_sources import (
     staged_source_body_path,
     staged_source_bundle_root,
 )
-from host_interaction_receipts import host_interaction_receipts_path
+from realized_host_interaction.receipts import host_interaction_receipts_path
 from learning_context import load_learning_context, new_learning_context, persist_learning_context
 from semantic_text import collapse_ws
 from skill_schema_io import normalized_skill_bundle_filename_for_source

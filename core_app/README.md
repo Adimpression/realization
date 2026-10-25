@@ -6,9 +6,11 @@ distribution contains only the narrow command-line composition package; it does 
 contain engine modules, workstation code, Flutter/Textual UI, the gRPC host,
 or the publication workflow.
 
-The installable core intentionally separates five cohesive projects:
+The installable core intentionally separates six cohesive projects:
 
 - `realized-core-runtime` owns the dependency-inverted run/resume lifecycle.
+- `realized-host-interaction` owns backend-neutral attachments, bounded host
+  actions, delegated-rights narrowing, and receipt shaping.
 - `realized-core-engine` supplies the canonical domain engine, state model,
   host mediation, and plain SQLite adapter.
 - `realized-core-llm` owns model-facing planning and rendering contracts.
@@ -38,7 +40,7 @@ does not install or implement one.
 
 ## Run
 
-After publishing the five distributions to an index:
+After publishing the six distributions to an index:
 
 ```console
 uvx realized-core run \

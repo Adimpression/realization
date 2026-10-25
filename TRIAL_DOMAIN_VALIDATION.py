@@ -186,7 +186,7 @@ def parse_prompts_markdown(path: Path) -> tuple[ProbeSpec, ...]:
         Supports practical validation of semantic reuse and composition by letting domain prompt corpora live alongside the domain lessons they exercise.
 
     Example Input Output:
-        Input: `parse_prompts_markdown(path=Path('/Users/ravindranathakila/service/realized/trials/biology/PROMPTS.md'))`
+        Input: `parse_prompts_markdown(path=Path('/workspace/realized/trials/biology/PROMPTS.md'))`
         Output: (ProbeSpec(name='what_is_gene_expression', prompt='What is gene expression?', expected_mode='freeform', expected_value=None, expected_substrings=()),)
 
     Args:
@@ -292,8 +292,8 @@ class DomainSpec:
         Supports validation of domain-level semantic reuse by keeping together the learning corpus, probe prompts, and expected reuse behavior for one semantic neighborhood.
 
     Example Input Output:
-        Input: `DomainSpec(name='chemistry', folder=Path('/Users/ravindranathakila/service/realized/trials/chemistry'), probes=(ProbeSpec(name='ideal_gas_pressure', prompt='Calculate P from n=2 and R=0.5 and T=3 and V=1.', expected_mode='numeric', expected_value=3.0),))`
-        Output: `DomainSpec(name='chemistry', folder=Path('/Users/ravindranathakila/service/realized/trials/chemistry'), probes=(ProbeSpec(name='ideal_gas_pressure', prompt='Calculate P from n=2 and R=0.5 and T=3 and V=1.', expected_mode='numeric', expected_value=3.0),))`
+        Input: `DomainSpec(name='chemistry', folder=Path('/workspace/realized/trials/chemistry'), probes=(ProbeSpec(name='ideal_gas_pressure', prompt='Calculate P from n=2 and R=0.5 and T=3 and V=1.', expected_mode='numeric', expected_value=3.0),))`
+        Output: `DomainSpec(name='chemistry', folder=Path('/workspace/realized/trials/chemistry'), probes=(ProbeSpec(name='ideal_gas_pressure', prompt='Calculate P from n=2 and R=0.5 and T=3 and V=1.', expected_mode='numeric', expected_value=3.0),))`
 
     Args:
         name: Value for `name` used by `DomainSpec`. Expected type: `str`.
@@ -408,8 +408,8 @@ def resolve_domain_skill_bundle(folder: Path) -> Path | None:
         Keeps domain validation aligned with the current governance posture by preferring installed governed skills when the corpus has already been exported that way, while still allowing an explicit markdown-learning fallback when needed.
 
     Example Input Output:
-        Input: `resolve_domain_skill_bundle(folder=Path('/Users/ravindranathakila/service/realized/trials/chemistry'))`
-        Output: Path('/Users/ravindranathakila/service/realized/trials/chemistry/skill.yaml')
+        Input: `resolve_domain_skill_bundle(folder=Path('/workspace/realized/trials/chemistry'))`
+        Output: Path('/workspace/realized/trials/chemistry/skill.yaml')
 
     Args:
         folder: Value for `folder` used by `resolve_domain_skill_bundle`. Expected type: `Path`.
@@ -528,8 +528,8 @@ def run_command(
         None.
 
     Example Input Output:
-        Input: `run_command(cmd=[sys.executable, '/Users/ravindranathakila/service/realized/main.py', 'run', '--prompt', 'Calculate F from m=3 and a=4.', '--llm', 'off'], env={'BSSC_TITLE_REPRESENTATION': 'prolog'}, cwd=Path('/Users/ravindranathakila/service/realized'), timeout_seconds=120)`
-        Output: `CompletedProcess(args=[sys.executable, '/Users/ravindranathakila/service/realized/main.py', 'run', '--prompt', 'Calculate F from m=3 and a=4.', '--llm', 'off'], returncode=0, stdout='...', stderr='')`
+        Input: `run_command(cmd=[sys.executable, '/workspace/realized/main.py', 'run', '--prompt', 'Calculate F from m=3 and a=4.', '--llm', 'off'], env={'BSSC_TITLE_REPRESENTATION': 'prolog'}, cwd=Path('/workspace/realized'), timeout_seconds=120)`
+        Output: `CompletedProcess(args=[sys.executable, '/workspace/realized/main.py', 'run', '--prompt', 'Calculate F from m=3 and a=4.', '--llm', 'off'], returncode=0, stdout='...', stderr='')`
 
     Args:
         cmd: Value for `cmd` used by `run_command`. Expected type: `list[str]`.
@@ -960,7 +960,7 @@ def sqlite_metrics(sqlite_path: Path) -> dict[str, int]:
         Supports validation of semantic reuse and decomposition by measuring how much reusable residue and relation structure survived persistence.
 
     Example Input Output:
-        Input: `sqlite_metrics(sqlite_path=Path('/Users/ravindranathakila/service/realized/reports/sample/domain.sqlite3'))`
+        Input: `sqlite_metrics(sqlite_path=Path('/workspace/realized/reports/sample/domain.sqlite3'))`
         Output: {'artifacts': 57, 'abilities': 20, 'knowledge': 37, 'related_items': 48, 'prolog_heads': 57}
 
     Args:
@@ -1062,7 +1062,7 @@ def run_domain(spec: DomainSpec, *, report_root: Path, env: dict[str, str]) -> d
         Supports applied validation of title-depth, semantic reuse, and composition by checking whether one coherent domain corpus can both persist reusable structure and answer later prompts from that structure.
 
     Example Input Output:
-        Input: `run_domain(spec=DomainSpec(name='physics', folder=Path('/Users/ravindranathakila/service/realized/trials/physics'), probes=(ProbeSpec(name='force', prompt='Calculate F from m=3 and a=4.', expected_mode='numeric', expected_value=12.0),)), report_root=Path('/Users/ravindranathakila/service/realized/reports/demo'), env={'BSSC_TITLE_REPRESENTATION': 'prolog'})`
+        Input: `run_domain(spec=DomainSpec(name='physics', folder=Path('/workspace/realized/trials/physics'), probes=(ProbeSpec(name='force', prompt='Calculate F from m=3 and a=4.', expected_mode='numeric', expected_value=12.0),)), report_root=Path('/workspace/realized/reports/demo'), env={'BSSC_TITLE_REPRESENTATION': 'prolog'})`
         Output: {'domain': 'physics', 'status': 'ok', 'learned_files': 10, 'probe_summary': {'passed': 1, 'total': 1}}
 
     Args:
@@ -1257,7 +1257,7 @@ def domain_specs() -> tuple[DomainSpec, ...]:
 
     Example Input Output:
         Input: `domain_specs()`
-        Output: (DomainSpec(name='chemistry', folder=Path('/Users/ravindranathakila/service/realized/trials/chemistry'), probes=(...)), DomainSpec(name='biology', folder=Path('/Users/ravindranathakila/service/realized/trials/biology'), probes=(...)), DomainSpec(name='physics', folder=Path('/Users/ravindranathakila/service/realized/trials/physics'), probes=(...)))
+        Output: (DomainSpec(name='chemistry', folder=Path('/workspace/realized/trials/chemistry'), probes=(...)), DomainSpec(name='biology', folder=Path('/workspace/realized/trials/biology'), probes=(...)), DomainSpec(name='physics', folder=Path('/workspace/realized/trials/physics'), probes=(...)))
 
     Args:
         None.

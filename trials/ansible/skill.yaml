@@ -96,7 +96,7 @@ governance:
   created_at: '2026-03-31T10:26:17+00:00'
   provenance:
   - not_learn-from-markdown-01-learn-ansible-commands-in_bb5686
-  - /Users/ravindranathakila/service/realized/trials/ansible/01_LEARN_ANSIBLE_COMMANDS_INSTALL_PACKAGE.md
+  - trials/ansible/01_LEARN_ANSIBLE_COMMANDS_INSTALL_PACKAGE.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -360,7 +360,7 @@ governance:
   created_at: '2026-03-31T10:26:24+00:00'
   provenance:
   - not_learn-from-markdown-02-learn-ansible-commands-cr_44b682
-  - /Users/ravindranathakila/service/realized/trials/ansible/02_LEARN_ANSIBLE_COMMANDS_CREATE_DIRECTORY.md
+  - trials/ansible/02_LEARN_ANSIBLE_COMMANDS_CREATE_DIRECTORY.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -624,7 +624,7 @@ governance:
   created_at: '2026-03-31T10:26:32+00:00'
   provenance:
   - not_learn-from-markdown-03-learn-ansible-commands-co_a3a05e
-  - /Users/ravindranathakila/service/realized/trials/ansible/03_LEARN_ANSIBLE_COMMANDS_COPY_FILE.md
+  - trials/ansible/03_LEARN_ANSIBLE_COMMANDS_COPY_FILE.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -888,7 +888,7 @@ governance:
   created_at: '2026-03-31T10:26:39+00:00'
   provenance:
   - not_learn-from-markdown-04-learn-ansible-commands-wr_12367d
-  - /Users/ravindranathakila/service/realized/trials/ansible/04_LEARN_ANSIBLE_COMMANDS_WRITE_FILE_CONTENT.md
+  - trials/ansible/04_LEARN_ANSIBLE_COMMANDS_WRITE_FILE_CONTENT.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -1179,7 +1179,7 @@ governance:
   created_at: '2026-03-31T10:26:42+00:00'
   provenance:
   - not_learn-from-markdown-04-learn-ansible-commands-wr_12367d
-  - /Users/ravindranathakila/service/realized/trials/ansible/04_LEARN_ANSIBLE_COMMANDS_WRITE_FILE_CONTENT.md
+  - trials/ansible/04_LEARN_ANSIBLE_COMMANDS_WRITE_FILE_CONTENT.md
   constraints:
   - derive only from the supplied encounter
   template_schema:
@@ -1456,7 +1456,7 @@ governance:
   created_at: '2026-03-31T10:27:07+00:00'
   provenance:
   - not_learn-from-markdown-05-learn-ansible-commands-en_ec21f7
-  - /Users/ravindranathakila/service/realized/trials/ansible/05_LEARN_ANSIBLE_COMMANDS_ENSURE_LINE_PRESENT.md
+  - trials/ansible/05_LEARN_ANSIBLE_COMMANDS_ENSURE_LINE_PRESENT.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -1750,7 +1750,7 @@ governance:
   created_at: '2026-03-31T10:27:14+00:00'
   provenance:
   - not_learn-from-markdown-05-learn-ansible-commands-en_ec21f7
-  - /Users/ravindranathakila/service/realized/trials/ansible/05_LEARN_ANSIBLE_COMMANDS_ENSURE_LINE_PRESENT.md
+  - trials/ansible/05_LEARN_ANSIBLE_COMMANDS_ENSURE_LINE_PRESENT.md
   constraints:
   - derive only from the supplied encounter
   template_schema:
@@ -2040,7 +2040,7 @@ governance:
   created_at: '2026-03-31T10:27:23+00:00'
   provenance:
   - not_learn-from-markdown-06-learn-ansible-commands-do_65ac7f
-  - /Users/ravindranathakila/service/realized/trials/ansible/06_LEARN_ANSIBLE_COMMANDS_DOWNLOAD_URL.md
+  - trials/ansible/06_LEARN_ANSIBLE_COMMANDS_DOWNLOAD_URL.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -2302,7 +2302,7 @@ governance:
   created_at: '2026-03-31T10:27:32+00:00'
   provenance:
   - not_learn-from-markdown-07-learn-ansible-commands-ex_de5384
-  - /Users/ravindranathakila/service/realized/trials/ansible/07_LEARN_ANSIBLE_COMMANDS_EXTRACT_ZIP_ARCHIVE.md
+  - trials/ansible/07_LEARN_ANSIBLE_COMMANDS_EXTRACT_ZIP_ARCHIVE.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -2561,7 +2561,7 @@ governance:
   created_at: '2026-03-31T10:27:41+00:00'
   provenance:
   - not_learn-from-markdown-08-learn-ansible-commands-en_fb36d2
-  - /Users/ravindranathakila/service/realized/trials/ansible/08_LEARN_ANSIBLE_COMMANDS_ENSURE_SERVICE_STATE.md
+  - trials/ansible/08_LEARN_ANSIBLE_COMMANDS_ENSURE_SERVICE_STATE.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -2828,7 +2828,7 @@ governance:
   created_at: '2026-03-31T10:27:50+00:00'
   provenance:
   - not_learn-from-markdown-09-learn-ansible-commands-cl_640066
-  - /Users/ravindranathakila/service/realized/trials/ansible/09_LEARN_ANSIBLE_COMMANDS_CLONE_GIT_REPO.md
+  - trials/ansible/09_LEARN_ANSIBLE_COMMANDS_CLONE_GIT_REPO.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -3090,7 +3090,7 @@ governance:
   created_at: '2026-03-31T10:28:00+00:00'
   provenance:
   - not_learn-from-markdown-10-learn-ansible-commands-se_10ad1a
-  - /Users/ravindranathakila/service/realized/trials/ansible/10_LEARN_ANSIBLE_COMMANDS_SET_FILE_MODE.md
+  - trials/ansible/10_LEARN_ANSIBLE_COMMANDS_SET_FILE_MODE.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -3348,7 +3348,7 @@ governance:
   created_at: '2026-03-31T10:28:09+00:00'
   provenance:
   - not_learn-from-markdown-11-learn-ansible-commands-en_199eb0
-  - /Users/ravindranathakila/service/realized/trials/ansible/11_LEARN_ANSIBLE_COMMANDS_ENSURE_USER_EXISTS.md
+  - trials/ansible/11_LEARN_ANSIBLE_COMMANDS_ENSURE_USER_EXISTS.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -3607,7 +3607,7 @@ governance:
   created_at: '2026-03-31T10:28:19+00:00'
   provenance:
   - not_learn-from-markdown-12-learn-ansible-commands-re_5ab635
-  - /Users/ravindranathakila/service/realized/trials/ansible/12_LEARN_ANSIBLE_COMMANDS_RENDER_TEMPLATE_FILE.md
+  - trials/ansible/12_LEARN_ANSIBLE_COMMANDS_RENDER_TEMPLATE_FILE.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -3891,7 +3891,7 @@ governance:
   created_at: '2026-03-31T10:28:23+00:00'
   provenance:
   - not_learn-from-markdown-12-learn-ansible-commands-re_5ab635
-  - /Users/ravindranathakila/service/realized/trials/ansible/12_LEARN_ANSIBLE_COMMANDS_RENDER_TEMPLATE_FILE.md
+  - trials/ansible/12_LEARN_ANSIBLE_COMMANDS_RENDER_TEMPLATE_FILE.md
   constraints:
   - derive only from the supplied encounter
   template_schema:

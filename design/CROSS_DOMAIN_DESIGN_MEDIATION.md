@@ -403,8 +403,8 @@ It does not by itself specify the type discipline required to preserve that brid
 
 That next layer is addressed in:
 
-* [DESIGN_TYPE_SYSTEM.md](/Users/ravindranathakila/service/realized/design/DESIGN_TYPE_SYSTEM.md)
-* [DESIGN_TYPE_SYSTEM_IMPLEMENTATION.md](/Users/ravindranathakila/service/realized/design/DESIGN_TYPE_SYSTEM_IMPLEMENTATION.md)
+* [DESIGN_TYPE_SYSTEM.md](DESIGN_TYPE_SYSTEM.md)
+* [DESIGN_TYPE_SYSTEM_IMPLEMENTATION.md](DESIGN_TYPE_SYSTEM_IMPLEMENTATION.md)
 
 The why is simple:
 

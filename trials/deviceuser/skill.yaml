@@ -112,7 +112,7 @@ governance:
   created_at: '2026-04-01T00:38:00+00:00'
   provenance:
   - not_learn-from-markdown-01-learn-deviceuser-capabili_48fff2
-  - /Users/ravindranathakila/service/realized/trials/deviceuser/01_LEARN_DEVICEUSER_CAPABILITIES_BROWSER_URL.md
+  - trials/deviceuser/01_LEARN_DEVICEUSER_CAPABILITIES_BROWSER_URL.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -440,7 +440,7 @@ governance:
   created_at: '2026-04-01T00:38:07+00:00'
   provenance:
   - not_learn-from-markdown-01-learn-deviceuser-capabili_48fff2
-  - /Users/ravindranathakila/service/realized/trials/deviceuser/01_LEARN_DEVICEUSER_CAPABILITIES_BROWSER_URL.md
+  - trials/deviceuser/01_LEARN_DEVICEUSER_CAPABILITIES_BROWSER_URL.md
   constraints:
   - derive only from the supplied encounter
   template_schema:
@@ -727,7 +727,7 @@ governance:
   created_at: '2026-04-01T00:38:36+00:00'
   provenance:
   - not_learn-from-markdown-02-learn-deviceuser-capabili_b01c85
-  - /Users/ravindranathakila/service/realized/trials/deviceuser/02_LEARN_DEVICEUSER_CAPABILITIES_APP_LAUNCH.md
+  - trials/deviceuser/02_LEARN_DEVICEUSER_CAPABILITIES_APP_LAUNCH.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -1009,7 +1009,7 @@ governance:
   created_at: '2026-04-01T00:38:42+00:00'
   provenance:
   - not_learn-from-markdown-02-learn-deviceuser-capabili_b01c85
-  - /Users/ravindranathakila/service/realized/trials/deviceuser/02_LEARN_DEVICEUSER_CAPABILITIES_APP_LAUNCH.md
+  - trials/deviceuser/02_LEARN_DEVICEUSER_CAPABILITIES_APP_LAUNCH.md
   constraints:
   - derive only from the supplied encounter
   template_schema:
@@ -1294,7 +1294,7 @@ governance:
   created_at: '2026-04-01T00:39:12+00:00'
   provenance:
   - not_learn-from-markdown-03-learn-deviceuser-capabili_07c1dc
-  - /Users/ravindranathakila/service/realized/trials/deviceuser/03_LEARN_DEVICEUSER_CAPABILITIES_FILE_OPEN.md
+  - trials/deviceuser/03_LEARN_DEVICEUSER_CAPABILITIES_FILE_OPEN.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -1582,7 +1582,7 @@ governance:
   created_at: '2026-04-01T00:39:20+00:00'
   provenance:
   - not_learn-from-markdown-03-learn-deviceuser-capabili_07c1dc
-  - /Users/ravindranathakila/service/realized/trials/deviceuser/03_LEARN_DEVICEUSER_CAPABILITIES_FILE_OPEN.md
+  - trials/deviceuser/03_LEARN_DEVICEUSER_CAPABILITIES_FILE_OPEN.md
   constraints:
   - derive only from the supplied encounter
   template_schema:
@@ -1877,7 +1877,7 @@ governance:
   created_at: '2026-04-01T00:39:54+00:00'
   provenance:
   - not_learn-from-markdown-04-learn-deviceuser-capabili_fef5df
-  - /Users/ravindranathakila/service/realized/trials/deviceuser/04_LEARN_DEVICEUSER_CAPABILITIES_FOLDER_OPEN.md
+  - trials/deviceuser/04_LEARN_DEVICEUSER_CAPABILITIES_FOLDER_OPEN.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -2159,7 +2159,7 @@ governance:
   created_at: '2026-04-01T00:40:05+00:00'
   provenance:
   - not_learn-from-markdown-04-learn-deviceuser-capabili_fef5df
-  - /Users/ravindranathakila/service/realized/trials/deviceuser/04_LEARN_DEVICEUSER_CAPABILITIES_FOLDER_OPEN.md
+  - trials/deviceuser/04_LEARN_DEVICEUSER_CAPABILITIES_FOLDER_OPEN.md
   constraints:
   - derive only from the supplied encounter
   template_schema:
@@ -2451,7 +2451,7 @@ governance:
   created_at: '2026-04-01T00:41:04+00:00'
   provenance:
   - not_learn-from-markdown-05-learn-deviceuser-capabili_c6e9ce
-  - /Users/ravindranathakila/service/realized/trials/deviceuser/05_LEARN_DEVICEUSER_CAPABILITIES_TERMINAL_DIRECTORY.md
+  - trials/deviceuser/05_LEARN_DEVICEUSER_CAPABILITIES_TERMINAL_DIRECTORY.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -2740,7 +2740,7 @@ governance:
   created_at: '2026-04-01T00:41:13+00:00'
   provenance:
   - not_learn-from-markdown-05-learn-deviceuser-capabili_c6e9ce
-  - /Users/ravindranathakila/service/realized/trials/deviceuser/05_LEARN_DEVICEUSER_CAPABILITIES_TERMINAL_DIRECTORY.md
+  - trials/deviceuser/05_LEARN_DEVICEUSER_CAPABILITIES_TERMINAL_DIRECTORY.md
   constraints:
   - derive only from the supplied encounter
   template_schema:
@@ -3043,7 +3043,7 @@ governance:
   created_at: '2026-04-01T00:42:05+00:00'
   provenance:
   - not_learn-from-markdown-06-learn-deviceuser-capabili_be4229
-  - /Users/ravindranathakila/service/realized/trials/deviceuser/06_LEARN_DEVICEUSER_CAPABILITIES_BROWSER_SEARCH.md
+  - trials/deviceuser/06_LEARN_DEVICEUSER_CAPABILITIES_BROWSER_SEARCH.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -3354,7 +3354,7 @@ governance:
   created_at: '2026-04-01T00:42:26+00:00'
   provenance:
   - not_learn-from-markdown-06-learn-deviceuser-capabili_be4229
-  - /Users/ravindranathakila/service/realized/trials/deviceuser/06_LEARN_DEVICEUSER_CAPABILITIES_BROWSER_SEARCH.md
+  - trials/deviceuser/06_LEARN_DEVICEUSER_CAPABILITIES_BROWSER_SEARCH.md
   constraints:
   - derive only from the supplied encounter
   template_schema:
@@ -3650,7 +3650,7 @@ governance:
   created_at: '2026-04-01T00:43:09+00:00'
   provenance:
   - not_learn-from-markdown-07-learn-deviceuser-capabili_f57acd
-  - /Users/ravindranathakila/service/realized/trials/deviceuser/07_LEARN_DEVICEUSER_CAPABILITIES_FILE_REVEAL.md
+  - trials/deviceuser/07_LEARN_DEVICEUSER_CAPABILITIES_FILE_REVEAL.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -3935,7 +3935,7 @@ governance:
   created_at: '2026-04-01T00:43:17+00:00'
   provenance:
   - not_learn-from-markdown-07-learn-deviceuser-capabili_f57acd
-  - /Users/ravindranathakila/service/realized/trials/deviceuser/07_LEARN_DEVICEUSER_CAPABILITIES_FILE_REVEAL.md
+  - trials/deviceuser/07_LEARN_DEVICEUSER_CAPABILITIES_FILE_REVEAL.md
   constraints:
   - derive only from the supplied encounter
   template_schema:
@@ -4223,7 +4223,7 @@ governance:
   created_at: '2026-04-01T00:43:53+00:00'
   provenance:
   - not_learn-from-markdown-08-learn-deviceuser-capabili_80a7ee
-  - /Users/ravindranathakila/service/realized/trials/deviceuser/08_LEARN_DEVICEUSER_CAPABILITIES_SETTINGS_OPEN.md
+  - trials/deviceuser/08_LEARN_DEVICEUSER_CAPABILITIES_SETTINGS_OPEN.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -4507,7 +4507,7 @@ governance:
   created_at: '2026-04-01T00:44:04+00:00'
   provenance:
   - not_learn-from-markdown-08-learn-deviceuser-capabili_80a7ee
-  - /Users/ravindranathakila/service/realized/trials/deviceuser/08_LEARN_DEVICEUSER_CAPABILITIES_SETTINGS_OPEN.md
+  - trials/deviceuser/08_LEARN_DEVICEUSER_CAPABILITIES_SETTINGS_OPEN.md
   constraints:
   - derive only from the supplied encounter
   template_schema:
@@ -4800,7 +4800,7 @@ governance:
   created_at: '2026-04-01T00:44:36+00:00'
   provenance:
   - not_learn-from-markdown-09-learn-deviceuser-capabili_06c99e
-  - /Users/ravindranathakila/service/realized/trials/deviceuser/09_LEARN_DEVICEUSER_CAPABILITIES_CLIPBOARD_COPY.md
+  - trials/deviceuser/09_LEARN_DEVICEUSER_CAPABILITIES_CLIPBOARD_COPY.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -5081,7 +5081,7 @@ governance:
   created_at: '2026-04-01T00:44:45+00:00'
   provenance:
   - not_learn-from-markdown-09-learn-deviceuser-capabili_06c99e
-  - /Users/ravindranathakila/service/realized/trials/deviceuser/09_LEARN_DEVICEUSER_CAPABILITIES_CLIPBOARD_COPY.md
+  - trials/deviceuser/09_LEARN_DEVICEUSER_CAPABILITIES_CLIPBOARD_COPY.md
   constraints:
   - derive only from the supplied encounter
   template_schema:
@@ -5364,7 +5364,7 @@ governance:
   created_at: '2026-04-01T00:45:26+00:00'
   provenance:
   - not_learn-from-markdown-10-learn-deviceuser-capabili_6b19c3
-  - /Users/ravindranathakila/service/realized/trials/deviceuser/10_LEARN_DEVICEUSER_CAPABILITIES_SCREENSHOT.md
+  - trials/deviceuser/10_LEARN_DEVICEUSER_CAPABILITIES_SCREENSHOT.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -5651,7 +5651,7 @@ governance:
   created_at: '2026-04-01T00:45:35+00:00'
   provenance:
   - not_learn-from-markdown-10-learn-deviceuser-capabili_6b19c3
-  - /Users/ravindranathakila/service/realized/trials/deviceuser/10_LEARN_DEVICEUSER_CAPABILITIES_SCREENSHOT.md
+  - trials/deviceuser/10_LEARN_DEVICEUSER_CAPABILITIES_SCREENSHOT.md
   constraints:
   - derive only from the supplied encounter
   template_schema:

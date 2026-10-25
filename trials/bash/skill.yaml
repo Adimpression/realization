@@ -95,7 +95,7 @@ governance:
   created_at: '2026-03-31T10:21:46+00:00'
   provenance:
   - not_learn-from-markdown-01-learn-bash-commands-creat_ad48a6
-  - /Users/ravindranathakila/service/realized/trials/bash/01_LEARN_BASH_COMMANDS_CREATE_DIRECTORY.md
+  - trials/bash/01_LEARN_BASH_COMMANDS_CREATE_DIRECTORY.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -343,7 +343,7 @@ governance:
   created_at: '2026-03-31T10:21:52+00:00'
   provenance:
   - not_learn-from-markdown-02-learn-bash-commands-list-_98fcf0
-  - /Users/ravindranathakila/service/realized/trials/bash/02_LEARN_BASH_COMMANDS_LIST_DIRECTORY.md
+  - trials/bash/02_LEARN_BASH_COMMANDS_LIST_DIRECTORY.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -594,7 +594,7 @@ governance:
   created_at: '2026-03-31T10:21:59+00:00'
   provenance:
   - not_learn-from-markdown-03-learn-bash-commands-print_420930
-  - /Users/ravindranathakila/service/realized/trials/bash/03_LEARN_BASH_COMMANDS_PRINT_FILE.md
+  - trials/bash/03_LEARN_BASH_COMMANDS_PRINT_FILE.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -845,7 +845,7 @@ governance:
   created_at: '2026-03-31T10:22:07+00:00'
   provenance:
   - not_learn-from-markdown-04-learn-bash-commands-searc_e17a78
-  - /Users/ravindranathakila/service/realized/trials/bash/04_LEARN_BASH_COMMANDS_SEARCH_TEXT_IN_FILE.md
+  - trials/bash/04_LEARN_BASH_COMMANDS_SEARCH_TEXT_IN_FILE.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -1095,7 +1095,7 @@ governance:
   created_at: '2026-03-31T10:22:14+00:00'
   provenance:
   - not_learn-from-markdown-05-learn-bash-commands-count_d3bded
-  - /Users/ravindranathakila/service/realized/trials/bash/05_LEARN_BASH_COMMANDS_COUNT_LINES.md
+  - trials/bash/05_LEARN_BASH_COMMANDS_COUNT_LINES.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -1345,7 +1345,7 @@ governance:
   created_at: '2026-03-31T10:22:22+00:00'
   provenance:
   - not_learn-from-markdown-06-learn-bash-commands-find-_4bf4ca
-  - /Users/ravindranathakila/service/realized/trials/bash/06_LEARN_BASH_COMMANDS_FIND_FILES_BY_NAME.md
+  - trials/bash/06_LEARN_BASH_COMMANDS_FIND_FILES_BY_NAME.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -1614,7 +1614,7 @@ governance:
   created_at: '2026-03-31T10:22:31+00:00'
   provenance:
   - not_learn-from-markdown-07-learn-bash-commands-copy-_2bc3c2
-  - /Users/ravindranathakila/service/realized/trials/bash/07_LEARN_BASH_COMMANDS_COPY_FILE.md
+  - trials/bash/07_LEARN_BASH_COMMANDS_COPY_FILE.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -1875,7 +1875,7 @@ governance:
   created_at: '2026-03-31T10:22:48+00:00'
   provenance:
   - not_learn-from-markdown-08-learn-bash-commands-move-_5003be
-  - /Users/ravindranathakila/service/realized/trials/bash/08_LEARN_BASH_COMMANDS_MOVE_FILE.md
+  - trials/bash/08_LEARN_BASH_COMMANDS_MOVE_FILE.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -2133,7 +2133,7 @@ governance:
   created_at: '2026-03-31T10:22:55+00:00'
   provenance:
   - not_learn-from-markdown-09-learn-bash-commands-remov_0943ea
-  - /Users/ravindranathakila/service/realized/trials/bash/09_LEARN_BASH_COMMANDS_REMOVE_FILE.md
+  - trials/bash/09_LEARN_BASH_COMMANDS_REMOVE_FILE.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -2395,7 +2395,7 @@ governance:
   created_at: '2026-03-31T10:23:04+00:00'
   provenance:
   - not_learn-from-markdown-10-learn-bash-commands-creat_7d0fd0
-  - /Users/ravindranathakila/service/realized/trials/bash/10_LEARN_BASH_COMMANDS_CREATE_TAR_ARCHIVE.md
+  - trials/bash/10_LEARN_BASH_COMMANDS_CREATE_TAR_ARCHIVE.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -2657,7 +2657,7 @@ governance:
   created_at: '2026-03-31T10:23:13+00:00'
   provenance:
   - not_learn-from-markdown-11-learn-bash-commands-extra_54ae5d
-  - /Users/ravindranathakila/service/realized/trials/bash/11_LEARN_BASH_COMMANDS_EXTRACT_ZIP_ARCHIVE.md
+  - trials/bash/11_LEARN_BASH_COMMANDS_EXTRACT_ZIP_ARCHIVE.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -2931,7 +2931,7 @@ governance:
   created_at: '2026-03-31T10:23:22+00:00'
   provenance:
   - not_learn-from-markdown-12-learn-bash-commands-downl_44bbd7
-  - /Users/ravindranathakila/service/realized/trials/bash/12_LEARN_BASH_COMMANDS_DOWNLOAD_URL.md
+  - trials/bash/12_LEARN_BASH_COMMANDS_DOWNLOAD_URL.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -3182,7 +3182,7 @@ governance:
   created_at: '2026-03-31T10:23:41+00:00'
   provenance:
   - not_learn-from-markdown-13-learn-bash-commands-sha25_f98e9d
-  - /Users/ravindranathakila/service/realized/trials/bash/13_LEARN_BASH_COMMANDS_SHA256_CHECKSUM.md
+  - trials/bash/13_LEARN_BASH_COMMANDS_SHA256_CHECKSUM.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
@@ -3451,7 +3451,7 @@ governance:
   created_at: '2026-03-31T10:23:52+00:00'
   provenance:
   - not_learn-from-markdown-14-learn-bash-commands-chmod_c6300c
-  - /Users/ravindranathakila/service/realized/trials/bash/14_LEARN_BASH_COMMANDS_CHMOD_EXECUTABLE.md
+  - trials/bash/14_LEARN_BASH_COMMANDS_CHMOD_EXECUTABLE.md
   constraints:
   - derived directly from a supported fenced executable snippet
   template_schema:
