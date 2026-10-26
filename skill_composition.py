@@ -6,16 +6,30 @@ from dataclasses import dataclass
 from typing import Any
 
 from applied_theory_types import Artifact, BoundaryShapeTerm, json_safe
-from semantic_text import collapse_ws
-from skill_boundary_normalization import normalize_skill_region_body, reconstruct_skill_region_body
-from skill_ir import CanonicalSkillIR, canonical_skill_ir_from_artifact
-from skill_leaf_types import (
+from realized_skill_semantics.leaves import (
     SkillLeaf,
     SkillLeafCarrierKind,
     SkillLeafClass,
     normalize_skill_leaf_data_type,
 )
-from skill_path_notation import parse_canonical_skill_path
+from realized_skill_semantics.composition import (
+    SkillBindingDiagnostic,
+    SkillCompositionBinding,
+    SkillCompositionCandidate,
+    SkillCompositionCondition,
+    SkillCompositionMapper,
+    SkillCompositionPlanAnalysis,
+    SkillCompositionStep,
+    SkillConditionDiagnostic,
+)
+from realized_skill_semantics.ir import CanonicalSkillIR
+from realized_skill_semantics.paths import parse_canonical_skill_path
+from realized_skill_semantics.normalization import (
+    normalize_skill_region_body,
+    reconstruct_skill_region_body,
+)
+from semantic_text import collapse_ws
+from skill_ir import canonical_skill_ir_from_artifact
 
 
 _SOURCE_TARGET_REGION_COMPATIBILITY: dict[str, set[str]] = {
@@ -36,170 +50,6 @@ _REPEATED_TO_SINGULAR: dict[str, str] = {
 }
 _SINGULAR_TO_REPEATED = {value: key for key, value in _REPEATED_TO_SINGULAR.items()}
 _CANONICAL_PRIMITIVE_TYPES = set(_REPEATED_TO_SINGULAR.values()) | set(_REPEATED_TO_SINGULAR.keys())
-
-
-@dataclass(frozen=True)
-class SkillCompositionMapper:
-    kind: str = "identity"
-    field: str = ""
-
-    @classmethod
-    def from_dict(cls, payload: Mapping[str, Any]) -> "SkillCompositionMapper":
-        if not isinstance(payload, Mapping):
-            raise TypeError("SkillCompositionMapper.from_dict requires a mapping payload.")
-        return cls(
-            kind=collapse_ws(str(payload.get("kind", "identity"))) or "identity",
-            field=collapse_ws(str(payload.get("field", payload.get("source_key", "")))),
-        )
-
-
-@dataclass(frozen=True)
-class SkillCompositionBinding:
-    target_region: str
-    target_path: str
-    source_step_id: str = ""
-    source_region: str = ""
-    source_path: str = ""
-    source_root_name: str = ""
-    source_root_region: str = ""
-    constant_value: Any = None
-    mapper: SkillCompositionMapper | None = None
-    mapper_kind: str = "identity"
-
-    @classmethod
-    def from_dict(cls, payload: Mapping[str, Any]) -> "SkillCompositionBinding":
-        if not isinstance(payload, Mapping):
-            raise TypeError("SkillCompositionBinding.from_dict requires a mapping payload.")
-        mapper_payload = payload.get("mapper")
-        mapper = (
-            SkillCompositionMapper.from_dict(mapper_payload)
-            if isinstance(mapper_payload, Mapping)
-            else None
-        )
-        return cls(
-            target_region=collapse_ws(str(payload.get("target_region", ""))),
-            target_path=collapse_ws(str(payload.get("target_path", ""))),
-            source_step_id=collapse_ws(str(payload.get("source_step_id", ""))),
-            source_region=collapse_ws(str(payload.get("source_region", ""))),
-            source_path=collapse_ws(str(payload.get("source_path", ""))),
-            source_root_name=collapse_ws(str(payload.get("source_root_name", ""))),
-            source_root_region=collapse_ws(str(payload.get("source_root_region", ""))),
-            constant_value=payload.get("constant_value"),
-            mapper=mapper,
-            mapper_kind=collapse_ws(str(payload.get("mapper_kind", "identity"))) or "identity",
-        )
-
-
-@dataclass(frozen=True)
-class SkillCompositionCondition:
-    source_step_id: str
-    source_region: str
-    source_path: str
-    operator: str = "equals"
-    expected_value: Any = None
-
-    @classmethod
-    def from_dict(cls, payload: Mapping[str, Any]) -> "SkillCompositionCondition":
-        if not isinstance(payload, Mapping):
-            raise TypeError("SkillCompositionCondition.from_dict requires a mapping payload.")
-        return cls(
-            source_step_id=collapse_ws(str(payload.get("source_step_id", ""))),
-            source_region=collapse_ws(str(payload.get("source_region", ""))),
-            source_path=collapse_ws(str(payload.get("source_path", ""))),
-            operator=collapse_ws(str(payload.get("operator", "equals"))) or "equals",
-            expected_value=payload.get("expected_value"),
-        )
-
-
-@dataclass(frozen=True)
-class SkillCompositionStep:
-    step_id: str
-    skill: CanonicalSkillIR | Artifact | Mapping[str, Any]
-    bindings: tuple[SkillCompositionBinding, ...] = ()
-    run_if: tuple[SkillCompositionCondition, ...] = ()
-    iterate_until: tuple[SkillCompositionCondition, ...] = ()
-    branch_label: str = ""
-
-    @classmethod
-    def from_dict(cls, payload: Mapping[str, Any]) -> "SkillCompositionStep":
-        if not isinstance(payload, Mapping):
-            raise TypeError("SkillCompositionStep.from_dict requires a mapping payload.")
-        bindings = tuple(
-            item if isinstance(item, SkillCompositionBinding) else SkillCompositionBinding.from_dict(item)
-            for item in payload.get("bindings", ())
-        )
-        run_if = tuple(
-            item if isinstance(item, SkillCompositionCondition) else SkillCompositionCondition.from_dict(item)
-            for item in payload.get("run_if", ())
-        )
-        iterate_until = tuple(
-            item if isinstance(item, SkillCompositionCondition) else SkillCompositionCondition.from_dict(item)
-            for item in payload.get("iterate_until", ())
-        )
-        return cls(
-            step_id=collapse_ws(str(payload.get("step_id", ""))),
-            skill=payload.get("skill", {}),
-            bindings=bindings,
-            run_if=run_if,
-            iterate_until=iterate_until,
-            branch_label=collapse_ws(str(payload.get("branch_label", ""))),
-        )
-
-
-@dataclass(frozen=True)
-class SkillBindingDiagnostic:
-    step_id: str
-    target_region: str
-    target_path: str
-    status: str
-    source_kind: str
-    source_step_id: str = ""
-    source_region: str = ""
-    source_path: str = ""
-    source_root_name: str = ""
-    source_root_region: str = ""
-    mapper_kind: str = "identity"
-    reason: str = ""
-
-
-@dataclass(frozen=True)
-class SkillConditionDiagnostic:
-    step_id: str
-    status: str
-    source_step_id: str
-    source_region: str
-    source_path: str
-    operator: str
-    reason: str = ""
-
-
-@dataclass(frozen=True)
-class SkillCompositionCandidate:
-    source_region: str
-    source_path: str
-    target_region: str
-    target_path: str
-    status: str
-    reason: str
-    mapper_kind: str = "identity"
-
-
-@dataclass(frozen=True)
-class SkillCompositionPlanAnalysis:
-    steps: list[dict[str, Any]]
-    plan_authorities: list[str]
-    blocked: bool
-    unresolved_targets: list[dict[str, Any]]
-
-    def to_dict(self) -> dict[str, Any]:
-        return json_safe(
-            {
-                "steps": self.steps,
-                "plan_authorities": self.plan_authorities,
-                "blocked": self.blocked,
-                "unresolved_targets": self.unresolved_targets,
-            }
-        )
 
 
 @dataclass(frozen=True)

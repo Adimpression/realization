@@ -11,14 +11,14 @@ from typing import Any
 
 import yaml
 
-from execution_frameworks import ability_executor_framework
+from realized_core_governance.lifecycle import skill_lifecycle_from_payload
+from realized_core_governance.records import artifact_skill_declaration
 from semantic_text import collapse_ws
 from skill_export_projection import (
     batch_skill_export_filename,
     export_skill_bundle_text,
     skill_kind_from_artifact,
 )
-from skill_lifecycle import skill_lifecycle_from_payload
 from skill_schema_io import (
     artifact_from_skill_document,
     load_skill_yaml_payload_documents,
@@ -27,12 +27,14 @@ from skill_schema_io import (
 )
 from side import load_artifact_yaml_documents
 from skill_governance import (
-    SKILL_SCHEMA_VERSION_V2,
-    artifact_skill_declaration,
     evaluate_skill_admission,
     normalize_skill_kind,
+)
+from realized_skill_semantics.declaration import (
+    SKILL_SCHEMA_VERSION_V2,
     normalize_skill_schema_version,
 )
+from realized_skill_semantics.execution import ability_executor_framework
 from workstation.foundation.host.governance import (
     workstation_governance_inventory,
     workstation_is_transient_bundle_policy_payload,

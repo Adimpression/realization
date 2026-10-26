@@ -8,36 +8,45 @@ from collections.abc import Iterable, Mapping
 from pathlib import Path
 from typing import Any
 
-from approval_governance import artifact_is_approval_record, artifact_skill_approval
+from realized_core_governance.approval import (
+    artifact_is_approval_record,
+    artifact_skill_approval,
+)
 from applied_theory_types import ABILITY_SCRIPT_DEPENDENCIES, Artifact
-from execution_frameworks import ability_executable_text, ability_executor_framework, normalize_executor_framework_name
 from host_abi import host_abi_version, wasm_skill_abi_version
-from side import artifact_export_description, load_batch_list
-from skill_governance import (
-    SKILL_RISK_TIERS,
-    SKILL_SCHEMA_VERSION_V2,
+from realized_core_governance.lifecycle import artifact_skill_lifecycle
+from realized_core_governance.records import (
     artifact_is_policy_record,
     artifact_skill_admission,
     artifact_skill_declaration,
     artifact_skill_policy,
+)
+from side import artifact_export_description, load_batch_list
+from skill_governance import (
+    SKILL_RISK_TIERS,
     normalize_skill_authorities,
     normalize_skill_kind,
     normalize_skill_risk_tier,
-    normalize_skill_schema_version,
     synthesized_skill_declaration_for_artifact,
 )
-from skill_lifecycle import artifact_skill_lifecycle
-from skill_safety_governance import (
+from realized_core_governance.safety import (
     artifact_is_incident_record,
     artifact_is_revocation_record,
     artifact_skill_incident,
     artifact_skill_revocation,
 )
 from skill_schema_io import _runtime, _yaml_string_list, stable_skill_artifact_id
-from skill_boundary_normalization import (
-    normalized_skill_normalization_payload,
-    synthesized_skill_normalization_for_artifact,
+from realized_skill_semantics.declaration import (
+    SKILL_SCHEMA_VERSION_V2,
+    normalize_skill_schema_version,
 )
+from realized_skill_semantics.execution import (
+    ability_executable_text,
+    ability_executor_framework,
+    normalize_executor_framework_name,
+)
+from realized_skill_semantics.normalization import normalized_skill_normalization_payload
+from skill_boundary_normalization import synthesized_skill_normalization_for_artifact
 from skill_compatibility_import import normalized_skill_compatibility_payload
 from skill_ir import canonical_skill_ir_from_artifact
 

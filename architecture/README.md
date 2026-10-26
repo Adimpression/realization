@@ -8,7 +8,11 @@ here.
 ## Contents
 
 - `boundaries.toml` declares every UV workspace component, its owner layer, its
-  public module prefix, and its permitted project dependencies.
+  public module prefix, and its permitted project dependencies. It also assigns
+  every repository-root Python module and top-level Python package family to one
+  responsibility, records orthogonal entrypoint/validation/compatibility
+  status, and declares the acyclic target direction between those
+  responsibilities.
 - `dependency-baseline.json` is the current machine-readable import-graph
   snapshot used by the architecture ratchet.
 - `DEPENDENCY_REPORT.md` is the deterministic human-readable rendering of that
@@ -26,9 +30,17 @@ surface, not a migration diary.
 
 - Every member of `[tool.uv.workspace].members` is registered in
   `boundaries.toml`.
+- Every repository-root Python module and top-level Python package family has
+  exactly one explicit owner; missing, duplicate, stale, or silently changed
+  ownership fails the ratchet.
+- Root compatibility facades remain attributable to their behavioral owner,
+  and package code may not import those facades even through a refreshed
+  baseline.
+- The responsibility-level target graph is acyclic, while current violations
+  are retained only as a shrinking baseline.
 - Canonical package dependencies are declared and acyclic.
-- The combined root-module and package graph has no cyclic strongly connected
-  components.
+- The combined root-module, top-level package-family, and UV workspace graph has
+  no cyclic strongly connected components.
 - Existing dependency exceptions can only shrink; a removed exception cannot
   be reintroduced without failing the ratchet.
 - Compatibility aliases are explicit, measured separately, and cannot expand

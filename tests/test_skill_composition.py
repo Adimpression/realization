@@ -78,6 +78,40 @@ class SkillCompositionTests(unittest.TestCase):
                 return compile_skill_document(document).canonical_ir
         raise AssertionError(f"Did not find ability starting with {title_prefix!r} in {bundle_path!r}")
 
+    def test_historical_artifact_steps_remain_accepted_by_root_adapter(self) -> None:
+        compiled = compile_skill_document(
+            _ability_document(
+                title="Emit Status",
+                inputs={},
+                outputs={"status": "status output"},
+                normalization={
+                    "regions": {
+                        "d": {
+                            "boundary_term": "d*",
+                            "leaves": [
+                                {
+                                    "region": "d*",
+                                    "path": "/d/status",
+                                    "carrier_kind": "value",
+                                    "data_type": "String",
+                                    "semantic_label": "status",
+                                    "value": "ok",
+                                    "leaf_class": "scalar",
+                                }
+                            ],
+                        }
+                    }
+                },
+            )
+        )
+
+        analysis = analyze_skill_composition_plan(
+            [SkillCompositionStep(step_id="emit", skill=compiled.artifact)]
+        )
+
+        self.assertFalse(analysis.blocked)
+        self.assertEqual("emit", analysis.steps[0]["step_id"])
+
     def test_propose_skill_leaf_bindings_finds_exact_value_mapping(self) -> None:
         source = self._compiled_ir(
             _ability_document(

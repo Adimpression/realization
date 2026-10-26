@@ -19,8 +19,6 @@ from applied_theory_types import (
     SupplementMode,
 )
 from execution_frameworks import (
-    ability_executor_framework,
-    executor_framework_content_key,
     executor_framework_representation,
     supported_executor_framework_prompt_block,
 )
@@ -38,13 +36,17 @@ from markdown_ir import (
     markdown_encounter_question,
     markdown_learning_encounter_view,
 )
-from normalize import (
+from non_achievedness_normalization import normalize_not_elaboration_payload
+from normalization_primitives import (
     normalize_artifact_admission,
     normalize_artifact_representation,
     normalize_artifact_reuse,
     normalize_artifact_type,
     normalize_learning_relation,
-    normalize_not_elaboration_payload,
+)
+from realized_skill_semantics.execution import (
+    ability_executor_framework,
+    executor_framework_content_key,
 )
 from prolog import (
     looks_like_prolog_title_identity,

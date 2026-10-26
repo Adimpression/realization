@@ -1,6 +1,7 @@
 # See MODULES.md for the repository module map before editing.
 from __future__ import annotations
 
+import importlib.util
 import json
 import os
 import re
@@ -14,16 +15,18 @@ from applied_theory_types import CrossBoundaryResult
 from realized_core_runtime import measured_performance
 from execution_framework_primitives import (
     DEFAULT_SUPPORTED_EXECUTOR_FRAMEWORKS,
+    SUPPORTED_EXECUTOR_FRAMEWORKS_ENV,
+    normalize_supported_executor_frameworks,
+)
+from realized_skill_semantics.execution import (
     EXECUTOR_FRAMEWORK_ALIASES,
     EXECUTOR_FRAMEWORK_CONTENT_KEYS,
     EXECUTOR_FRAMEWORK_REPRESENTATIONS,
     SUPPORTED_EXECUTOR_FRAMEWORK_CHOICES,
-    SUPPORTED_EXECUTOR_FRAMEWORKS_ENV,
     ability_executable_text,
     ability_executor_framework,
     executor_framework_content_key,
     normalize_executor_framework_name,
-    normalize_supported_executor_frameworks,
 )
 from fence_extraction_strategy import extract_markdown_fences, fence_strategy_for_record
 from host_abi import wasm_skill_abi_version
@@ -52,6 +55,23 @@ GENERIC_FENCE_HEADING_PHRASES = {
     "examples",
     "example",
 }
+
+PYTHON_SKILL_HOST_PACKAGE_DEPENDENCIES = (
+    "realized_core_governance",
+    "realized_core_semantics",
+    "realized_skill_semantics",
+)
+
+
+def _python_skill_host_import_roots() -> list[str]:
+    """Return only the import roots required by the child host bridge."""
+    roots = [str(Path(__file__).resolve().parent)]
+    for package_name in PYTHON_SKILL_HOST_PACKAGE_DEPENDENCIES:
+        spec = importlib.util.find_spec(package_name)
+        locations = list(spec.submodule_search_locations or []) if spec else []
+        if locations:
+            roots.append(str(Path(locations[0]).resolve().parent))
+    return ordered_unique(roots)
 
 
 def executor_framework_representation(framework: str) -> str:
@@ -625,9 +645,11 @@ def _python_cross_boundary(
         host_trace_path = Path(temp_dir) / "host_trace.jsonl"
         command = ["uv", "run", "--no-project", str(script_path)]
         env = os.environ.copy()
-        repo_root = str(Path(__file__).resolve().parent)
         existing_pythonpath = env.get("PYTHONPATH", "").strip()
-        env["PYTHONPATH"] = repo_root if not existing_pythonpath else f"{repo_root}:{existing_pythonpath}"
+        pythonpath = _python_skill_host_import_roots()
+        if existing_pythonpath:
+            pythonpath.extend(existing_pythonpath.split(os.pathsep))
+        env["PYTHONPATH"] = os.pathsep.join(ordered_unique(pythonpath))
         env["BSSC_PYTHON_SKILL_HOST_CONTEXT"] = json.dumps(dict(host_runtime_context or {}), sort_keys=True)
         env["BSSC_PYTHON_SKILL_HOST_TRACE_PATH"] = str(host_trace_path)
         try:

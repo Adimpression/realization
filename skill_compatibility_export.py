@@ -4,7 +4,7 @@ from __future__ import annotations
 from collections.abc import Mapping
 from typing import Any
 
-from normalize import normalize_notation_key
+from normalization_primitives import normalize_notation_key
 from semantic_text import collapse_ws
 from skill_export_projection import skill_export_document
 

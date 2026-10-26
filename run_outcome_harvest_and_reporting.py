@@ -14,7 +14,11 @@ from applied_theory_types import (
     SupplementMode,
     json_safe,
 )
-from normalize import normalize_artifact_type, normalize_gain_class, normalize_pain_class
+from normalization_primitives import (
+    normalize_artifact_type,
+    normalize_gain_class,
+    normalize_pain_class,
+)
 
 
 def perform_discovery_harvest(self, node) -> DiscoveryAudit:

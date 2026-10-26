@@ -14,9 +14,20 @@ import unittest
 REPO_ROOT = Path(__file__).resolve().parents[2]
 CORE_ENGINE_ROOT = REPO_ROOT / "core_engine"
 COMPATIBILITY_MODULES = {
+    "approval_governance",
+    "artifact_contracts",
+    "data_governance",
+    "fallback_not_semantics",
     "host_interaction_context",
     "host_interaction_models",
     "host_interaction_resolution",
+    "normalize",
+    "pure_theory_types",
+    "skill_governance_primitives",
+    "skill_leaf_types",
+    "skill_lifecycle",
+    "skill_path_notation",
+    "skill_safety_governance",
 }
 
 
@@ -83,7 +94,10 @@ class CoreEngineDistributionTests(unittest.TestCase):
         allowed_external = {
             "openai",
             "pydantic",
+            "realized_core_governance",
+            "realized_core_semantics",
             "realized_core_runtime",
+            "realized_skill_semantics",
             "realized_host_interaction",
             "wasmtime",
             "yaml",
@@ -110,7 +124,10 @@ class CoreEngineDistributionTests(unittest.TestCase):
                 "openai==2.29.0",
                 "pydantic==2.12.5",
                 "pyyaml==6.0.3",
+                "realized-core-governance==0.1.0",
+                "realized-core-semantics==0.1.0",
                 "realized-core-runtime==0.1.0",
+                "realized-skill-semantics==0.1.0",
                 "realized-host-interaction==0.1.0",
             },
             set(metadata["dependencies"]),
@@ -194,16 +211,28 @@ class CoreEngineDistributionTests(unittest.TestCase):
         cloud_build = (REPO_ROOT / "cloudbuild.yaml").read_text(encoding="utf-8")
 
         self.assertIn("core_engine", workspace["tool"]["uv"]["workspace"]["members"])
+        self.assertIn("core_governance", workspace["tool"]["uv"]["workspace"]["members"])
+        self.assertIn("core_semantics", workspace["tool"]["uv"]["workspace"]["members"])
+        self.assertIn("skill_semantics", workspace["tool"]["uv"]["workspace"]["members"])
         self.assertIn("host_interaction", workspace["tool"]["uv"]["workspace"]["members"])
         self.assertEqual(
             {"workspace": True},
             workspace["tool"]["uv"]["sources"]["realized-core-engine"],
         )
         self.assertIn("uv build --wheel core_engine", cloud_build)
+        self.assertIn("uv build core_governance", cloud_build)
+        self.assertIn("uv build core_semantics", cloud_build)
+        self.assertIn("uv build skill_semantics", cloud_build)
         self.assertIn("uv build --wheel host_interaction", cloud_build)
         self.assertIn("core_engine.tests.test_api", cloud_build)
         self.assertIn("core_engine.tests.test_distribution", cloud_build)
         self.assertIn("--engine-wheel", cloud_build)
+        self.assertIn("--governance-wheel", cloud_build)
+        self.assertIn("--governance-sdist", cloud_build)
+        self.assertIn("--semantics-wheel", cloud_build)
+        self.assertIn("--semantics-sdist", cloud_build)
+        self.assertIn("--skill-semantics-wheel", cloud_build)
+        self.assertIn("--skill-semantics-sdist", cloud_build)
         self.assertIn("--host-interaction-wheel", cloud_build)
 
 

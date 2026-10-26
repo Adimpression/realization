@@ -7,7 +7,7 @@ from typing import Any
 
 from applied_theory_types import Artifact, Evidence, SemanticNode, ThreeLevel, json_safe
 from learn import LEARNING_MATCH_KINDS
-from normalize import (
+from normalization_primitives import (
     normalize_artifact_representation,
     normalize_artifact_type,
     normalize_learning_relation,

@@ -2,27 +2,28 @@
 from __future__ import annotations
 
 import hashlib
-import re
 from collections.abc import Mapping
-from dataclasses import dataclass
 from typing import Any
 
-from applied_theory_types import Artifact, json_safe
-from execution_frameworks import ability_executor_framework
-from normalize import normalize_notation_key
-from semantic_text import collapse_ws
-from skill_boundary_normalization import (
-    normalized_skill_normalization_payload,
-    synthesized_skill_normalization_for_artifact,
+from applied_theory_types import Artifact
+from realized_core_governance.lifecycle import artifact_skill_lifecycle
+from realized_core_governance.records import artifact_skill_declaration
+from realized_skill_semantics.ir import (
+    CanonicalSkillIR,
+    derived_skill_family_metadata_from_title,
+    normalized_skill_aliases,
+    normalized_skill_family_metadata,
 )
+from realized_skill_semantics.normalization import normalized_skill_normalization_payload
+from semantic_text import collapse_ws
+from skill_boundary_normalization import synthesized_skill_normalization_for_artifact
 from skill_compatibility_import import normalized_skill_compatibility_payload
 from skill_governance import (
-    artifact_skill_declaration,
     normalize_skill_kind,
-    normalize_skill_schema_version,
     synthesized_skill_declaration_for_artifact,
 )
-from skill_lifecycle import artifact_skill_lifecycle
+from realized_skill_semantics.declaration import normalize_skill_schema_version
+from realized_skill_semantics.execution import ability_executor_framework
 
 
 def _normalized_string_list(values: Any) -> list[str]:
@@ -36,120 +37,6 @@ def _normalized_string_list(values: Any) -> list[str]:
             continue
         seen.add(text)
         normalized.append(text)
-    return normalized
-
-
-def _derived_title_aliases(title: str) -> list[str]:
-    parts = [
-        collapse_ws(part)
-        for part in str(title).split(" / ")
-        if collapse_ws(part)
-    ]
-    if len(parts) <= 1:
-        return []
-    return parts[1:]
-
-
-def normalized_skill_aliases(value: Any, *, title: str = "") -> list[str]:
-    """
-    High Level Purpose:
-        In circumstances like canonical skill IR projection, helps with collapsing explicit and title-derived aliases into one stable ordered list.
-
-    Reference to Theory:
-        Supports canonical hosted skill identity by making alternate invocation surfaces explicit without changing the persisted artifact envelope.
-
-    Example Input Output:
-        Input: `normalized_skill_aliases(['Read Text File'], title='Python Commands 02 — Read Text File / Python Commands 02 Read Text File')`
-        Output: ['Read Text File', 'Python Commands 02 Read Text File']
-
-    Args:
-        value: Value for `value` used by `normalized_skill_aliases`. Expected type: `Any`.
-        title: Value for `title` used by `normalized_skill_aliases`. Expected type: `str`. Defaults to `''`.
-
-    Returns:
-        list[str]: Result produced by `normalized_skill_aliases`.
-    """
-    aliases: list[str] = []
-    seen: set[str] = set()
-    for candidate in _normalized_string_list(value) + _derived_title_aliases(title):
-        if candidate == collapse_ws(str(title)) or candidate in seen:
-            continue
-        seen.add(candidate)
-        aliases.append(candidate)
-    return aliases
-
-
-def derived_skill_family_metadata_from_title(title: str) -> dict[str, str]:
-    """
-    High Level Purpose:
-        In circumstances like canonical skill IR projection for numbered command bundles, helps with recovering one family label, ordinal, and variant from the title when that structure is present.
-
-    Reference to Theory:
-        Supports canonical hosted skill identity by making reusable family membership explicit even when legacy skills only encoded it in title text.
-
-    Example Input Output:
-        Input: `derived_skill_family_metadata_from_title('Python Commands 02 — Read Text File / Python Commands 02 Read Text File')`
-        Output: {'label': 'Python Commands', 'key': 'python commands', 'ordinal': '02', 'variant': 'Read Text File'}
-
-    Args:
-        title: Value for `title` used by `derived_skill_family_metadata_from_title`. Expected type: `str`.
-
-    Returns:
-        dict[str, str]: Result produced by `derived_skill_family_metadata_from_title`.
-    """
-    canonical_title = collapse_ws(str(title).split(" / ", 1)[0])
-    match = re.match(
-        r"^(?P<label>.+?)\s+(?P<ordinal>\d{1,3})\s+[—-]\s+(?P<variant>.+)$",
-        canonical_title,
-    )
-    if not match:
-        return {}
-    label = collapse_ws(str(match.group("label")))
-    ordinal = collapse_ws(str(match.group("ordinal")))
-    variant = collapse_ws(str(match.group("variant")))
-    if not label:
-        return {}
-    return {
-        "label": label,
-        "key": normalize_notation_key(label),
-        "ordinal": ordinal,
-        "variant": variant,
-    }
-
-
-def normalized_skill_family_metadata(value: Any, *, title: str = "") -> dict[str, str]:
-    """
-    High Level Purpose:
-        In circumstances like canonical skill IR projection and import/export bridging, helps with recovering one normalized family description from explicit metadata or conservative title derivation.
-
-    Reference to Theory:
-        Supports canonical hosted skills by preserving reusable family identity as explicit metadata instead of forcing later composition to recover it from prompt heuristics alone.
-
-    Example Input Output:
-        Input: `normalized_skill_family_metadata({'label': 'Python Commands'}, title='Python Commands 02 — Read Text File')`
-        Output: {'label': 'Python Commands', 'key': 'python commands'}
-
-    Args:
-        value: Value for `value` used by `normalized_skill_family_metadata`. Expected type: `Any`.
-        title: Value for `title` used by `normalized_skill_family_metadata`. Expected type: `str`. Defaults to `''`.
-
-    Returns:
-        dict[str, str]: Result produced by `normalized_skill_family_metadata`.
-    """
-    metadata = dict(value) if isinstance(value, Mapping) else {}
-    label = collapse_ws(str(metadata.get("label", metadata.get("family", ""))))
-    key = collapse_ws(str(metadata.get("key", "")))
-    ordinal = collapse_ws(str(metadata.get("ordinal", "")))
-    variant = collapse_ws(str(metadata.get("variant", "")))
-    if not label and isinstance(value, str):
-        label = collapse_ws(str(value))
-    if not label:
-        return derived_skill_family_metadata_from_title(title)
-    normalized = {"label": label, "key": key or normalize_notation_key(label)}
-    if ordinal:
-        normalized["ordinal"] = ordinal
-    if variant:
-        normalized["variant"] = variant
     return normalized
 
 
@@ -233,42 +120,6 @@ def skill_hosting_metadata_for_artifact(artifact: Artifact) -> dict[str, Any]:
             if collapse_ws(str(name))
         )
     return hosting
-
-
-@dataclass(frozen=True)
-class CanonicalSkillIR:
-    artifact_id: str
-    title: str
-    schema: str
-    kind: str
-    declaration: dict[str, Any]
-    lifecycle: dict[str, Any]
-    runtime_package_reference: dict[str, Any]
-    normalization: dict[str, Any]
-    aliases: list[str]
-    family: dict[str, str]
-    compatibility: dict[str, Any]
-    hosting_metadata: dict[str, Any]
-
-    def to_dict(self) -> dict[str, Any]:
-        """
-        High Level Purpose:
-            In circumstances like export, testing, and observability, helps with projecting the canonical skill IR dataclass into stable JSON-safe dictionary form.
-
-        Reference to Theory:
-            Supports the canonical skill layer by making the artifact-centered projection inspectable without changing the persisted store object.
-
-        Example Input Output:
-            Input: `ir.to_dict()`
-            Output: {'artifact_id': 'artifact-skill-123', 'title': 'Example Skill'}
-
-        Args:
-            self: Bound instance that owns the runtime state used by this method.
-
-        Returns:
-            dict[str, Any]: Result produced by `to_dict`.
-        """
-        return json_safe(self)
 
 
 def canonical_skill_ir_from_artifact(artifact: Artifact) -> CanonicalSkillIR:

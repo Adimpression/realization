@@ -8,7 +8,7 @@ from typing import Any
 from capability_runtime import runtime_skill_declaration_for_artifact
 from blend_context import BlendContext
 from blend_operator import BlendOperator
-from execution_frameworks import ability_executor_framework
+from realized_skill_semantics.execution import ability_executor_framework
 from semantic_text import collapse_ws
 
 DEFAULT_BLEND_OPERATOR_ACTOR_VISIBILITY = (

@@ -11,7 +11,9 @@ This report is generated deterministically by `scripts/check_architecture_bounda
 | `core_app` | `entry` | `realized-core` | `realized_core` |
 | `core_conversation` | `workstation` | `realized-core-conversation` | `realized_core_conversation` |
 | `core_engine` | `controller` | `realized-core-engine` | `realized_core_engine` |
+| `core_governance` | `governance` | `realized-core-governance` | `realized_core_governance` |
 | `core_llm` | `llm` | `realized-core-llm` | `realized_core_llm` |
+| `core_semantics` | `semantic_contracts` | `realized-core-semantics` | `realized_core_semantics` |
 | `foundation_events` | `foundation` | `realized-workstation-foundation-events` | `workstation.foundation.events` |
 | `foundation_host` | `foundation` | `realized-workstation-foundation-host` | `workstation.foundation.host` |
 | `foundation_models` | `foundation` | `realized-workstation-foundation-models` | `workstation.foundation.models` |
@@ -23,6 +25,7 @@ This report is generated deterministically by `scripts/check_architecture_bounda
 | `namespace` | `namespace` | `realized-workstation` | `workstation` |
 | `runtime_core` | `controller` | `realized-workstation-runtime-core` | `workstation.runtime.core` |
 | `shell_core` | `workstation` | `realized-workstation-shell-core` | `workstation.shell.core` |
+| `skill_semantics` | `skill_contracts` | `realized-skill-semantics` | `realized_skill_semantics` |
 | `skills_builtin` | `skills` | `realized-workstation-skills-builtin` | `workstation.skills.builtin` |
 | `skills_core` | `skills` | `realized-workstation-skills-core` | `workstation.skills.core` |
 | `skills_planning` | `skills` | `realized-workstation-skills-planning` | `workstation.skills.planning` |
@@ -31,6 +34,229 @@ This report is generated deterministically by `scripts/check_architecture_bounda
 | `subject_textual` | `workstation_adapter` | `realized-workstation-subject-textual` | `workstation.subject.textual` |
 | `ui_shared` | `workstation` | `realized-workstation-ui-shared` | `workstation.ui.shared` |
 | `ui_textual` | `workstation_adapter` | `realized-workstation-ui-textual` | `workstation.ui.textual` |
+
+## Root Module Ownership
+
+Every repository-root Python module has one explicit responsibility. Status is orthogonal: an entrypoint or compatibility facade retains the owner of the behavior it exposes.
+
+| Module | Owner | Status |
+| --- | --- | --- |
+| `SEMANTIC_RELATION_VALIDATION` | `validation_trial` | `validation` |
+| `TRIAL_DOMAIN_VALIDATION` | `validation_trial` | `validation` |
+| `applied_theory_primitives` | `semantic_model` | canonical |
+| `applied_theory_types` | `semantic_model` | canonical |
+| `approval_governance` | `governance` | `compatibility_facade` |
+| `args` | `entry_exchange` | canonical |
+| `artifact` | `semantic_model` | canonical |
+| `artifact_answer_resolution` | `controller` | canonical |
+| `artifact_contracts` | `semantic_model` | `compatibility_facade` |
+| `blend_context` | `blend` | canonical |
+| `blend_operator` | `blend` | canonical |
+| `blend_operator_store` | `blend` | canonical |
+| `blend_session` | `blend` | canonical |
+| `blend_workflow` | `blend` | canonical |
+| `blend_workflow_execution` | `blend` | canonical |
+| `blend_workflow_models` | `blend` | canonical |
+| `blend_workflow_store` | `blend` | canonical |
+| `blend_world` | `blend` | canonical |
+| `blend_world_models` | `blend` | canonical |
+| `blend_world_store` | `blend` | canonical |
+| `boundary` | `semantic_model` | canonical |
+| `capability_runtime` | `runtime_execution` | canonical |
+| `constitutional_trace` | `governance` | canonical |
+| `controller_entrypoint_binding` | `entry_exchange` | canonical |
+| `controller_entrypoints` | `entry_exchange` | canonical |
+| `controller_governance_bridge` | `controller` | canonical |
+| `controller_runtime` | `controller` | canonical |
+| `controller_runtime_binding` | `entry_exchange` | canonical |
+| `data_governance` | `governance` | `compatibility_facade` |
+| `decision_review` | `subject_domain` | canonical |
+| `decision_review_constructs` | `subject_domain` | canonical |
+| `decision_review_models` | `subject_domain` | canonical |
+| `decision_review_policy` | `subject_domain` | canonical |
+| `decision_review_projection` | `subject_domain` | canonical |
+| `direct_knowledge_reuse` | `controller` | canonical |
+| `execution_framework_primitives` | `runtime_execution` | canonical |
+| `execution_frameworks` | `runtime_execution` | canonical |
+| `external_markdown_learning_pipeline` | `subject_domain` | canonical |
+| `fallback_not_generation` | `controller` | canonical |
+| `fallback_not_semantics` | `controller` | `compatibility_facade` |
+| `fence_extraction_strategy` | `portable_skills` | canonical |
+| `gather_sources` | `subject_domain` | canonical |
+| `governance_inventory` | `governance` | canonical |
+| `governed_closure_and_commitment` | `controller` | canonical |
+| `governed_prior_learning_reuse` | `controller` | canonical |
+| `governed_semantic_reduction_runtime` | `controller` | canonical |
+| `governed_skill_access` | `governance` | canonical |
+| `governed_skill_installation` | `governance` | canonical |
+| `host_abi` | `runtime_execution` | canonical |
+| `host_brokers` | `runtime_execution` | canonical |
+| `host_interaction_action_dispatch` | `runtime_execution` | `compatibility_facade` |
+| `host_interaction_actions` | `runtime_execution` | `compatibility_facade` |
+| `host_interaction_context` | `runtime_execution` | `compatibility_facade` |
+| `host_interaction_delegation` | `runtime_execution` | `compatibility_facade` |
+| `host_interaction_models` | `runtime_execution` | `compatibility_facade` |
+| `host_interaction_receipts` | `runtime_execution` | `compatibility_facade` |
+| `host_interaction_resolution` | `runtime_execution` | `compatibility_facade` |
+| `host_mediation` | `runtime_execution` | canonical |
+| `id_generation` | `semantic_model` | canonical |
+| `itemize` | `subject_domain` | canonical |
+| `itemize_models` | `subject_domain` | canonical |
+| `itemize_validation` | `subject_domain` | canonical |
+| `learn` | `controller` | canonical |
+| `learning_context` | `subject_domain` | canonical |
+| `learning_context_markdown` | `subject_domain` | canonical |
+| `learning_context_paths` | `subject_domain` | canonical |
+| `learning_context_projection` | `subject_domain` | canonical |
+| `learning_context_skill_projection` | `subject_domain` | canonical |
+| `macos_host_brokers` | `runtime_execution` | canonical |
+| `main` | `entry_exchange` | `compatibility_facade`, `entrypoint` |
+| `markdown_ir` | `subject_domain` | canonical |
+| `markdown_learning_artifact_semantics` | `subject_domain` | canonical |
+| `non_achievedness_normalization` | `controller` | canonical |
+| `normalization_primitives` | `semantic_model` | canonical |
+| `normalization_runtime_dependencies` | `controller` | canonical |
+| `normalize` | `compatibility` | `compatibility_facade` |
+| `not_elaboration_ranking` | `controller` | canonical |
+| `prolog` | `semantic_model` | canonical |
+| `prompt_directives` | `controller` | canonical |
+| `publication` | `subject_domain` | canonical |
+| `publication_projection` | `subject_domain` | canonical |
+| `publication_render` | `subject_domain` | canonical |
+| `publication_validation` | `subject_domain` | canonical |
+| `pure_theory_types` | `semantic_model` | `compatibility_facade` |
+| `python_skill_brokerization` | `runtime_execution` | canonical |
+| `python_skill_host` | `runtime_execution` | canonical |
+| `replay_verifier` | `governance` | canonical |
+| `retrieval_ranking` | `controller` | canonical |
+| `review_composition` | `subject_domain` | canonical |
+| `run_bundle_io` | `entry_exchange` | canonical |
+| `run_outcome_harvest_and_reporting` | `controller` | canonical |
+| `runtime_controller_api` | `entry_exchange` | canonical |
+| `runtime_governance_context` | `governance` | canonical |
+| `runtime_temp` | `runtime_execution` | canonical |
+| `semantic_prompt_posture` | `controller` | canonical |
+| `semantic_text` | `semantic_model` | canonical |
+| `side` | `entry_exchange` | canonical |
+| `side_runtime_dependencies` | `entry_exchange` | canonical |
+| `skill_boundary_normalization` | `portable_skills` | canonical |
+| `skill_compatibility_export` | `entry_exchange` | canonical |
+| `skill_compatibility_import` | `entry_exchange` | canonical |
+| `skill_compiler` | `portable_skills` | canonical |
+| `skill_composition` | `portable_skills` | canonical |
+| `skill_export_projection` | `entry_exchange` | canonical |
+| `skill_governance` | `governance` | canonical |
+| `skill_governance_primitives` | `governance` | `compatibility_facade` |
+| `skill_invocation_contract` | `portable_skills` | `compatibility_facade` |
+| `skill_ir` | `portable_skills` | canonical |
+| `skill_leaf_types` | `portable_skills` | `compatibility_facade` |
+| `skill_lifecycle` | `governance` | `compatibility_facade` |
+| `skill_path_notation` | `portable_skills` | `compatibility_facade` |
+| `skill_registry` | `portable_skills` | canonical |
+| `skill_safety_governance` | `governance` | `compatibility_facade` |
+| `skill_schema_io` | `entry_exchange` | canonical |
+| `store` | `persistence_adapter` | canonical |
+| `structured_learning_yaml` | `subject_domain` | canonical |
+| `supplement` | `llm` | canonical |
+| `system_state` | `controller` | canonical |
+| `tablet_safety_validation` | `validation_trial` | `validation` |
+| `title_depth_learning_validation` | `validation_trial` | `validation` |
+| `title_semantics` | `semantic_model` | canonical |
+| `url_learning_capture` | `subject_domain` | canonical |
+| `validation_ladder` | `validation_trial` | `validation` |
+| `validation_sqlite` | `validation_trial` | `validation` |
+| `virtual_mounts` | `runtime_execution` | canonical |
+| `wasm_skill_runtime` | `runtime_execution` | canonical |
+
+## Root Package Family Ownership
+
+Top-level Python package families that are not UV workspace projects are measured by the same responsibility policy as root modules.
+
+| Package family | Owner | Status |
+| --- | --- | --- |
+| `coordinated_transformation` | `subject_domain` | canonical |
+| `design` | `validation_trial` | `validation` |
+| `dst` | `subject_domain` | canonical |
+
+## Target Root-Owner Dependency Policy
+
+This policy describes the intended acyclic responsibility graph. Current violations are measured separately and may only shrink.
+
+| Owner | May depend on |
+| --- | --- |
+| `blend` | `governance`, `portable_skills`, `runtime_execution`, `semantic_model` |
+| `compatibility` | `blend`, `controller`, `governance`, `llm`, `persistence_adapter`, `portable_skills`, `runtime_execution`, `semantic_model`, `subject_domain` |
+| `controller` | `blend`, `governance`, `llm`, `portable_skills`, `runtime_execution`, `semantic_model` |
+| `entry_exchange` | `blend`, `controller`, `governance`, `llm`, `persistence_adapter`, `portable_skills`, `runtime_execution`, `semantic_model`, `subject_domain` |
+| `governance` | `portable_skills`, `semantic_model` |
+| `llm` | `semantic_model` |
+| `persistence_adapter` | `blend`, `governance`, `portable_skills`, `semantic_model`, `subject_domain` |
+| `portable_skills` | `semantic_model` |
+| `runtime_execution` | `governance`, `portable_skills`, `semantic_model` |
+| `semantic_model` | none |
+| `subject_domain` | `governance`, `llm`, `portable_skills`, `runtime_execution`, `semantic_model` |
+| `validation_trial` | `blend`, `compatibility`, `controller`, `entry_exchange`, `governance`, `llm`, `persistence_adapter`, `portable_skills`, `runtime_execution`, `semantic_model`, `subject_domain` |
+
+## Current Root-Owner Dependency Edges
+
+| Source | Target | Allowed by target policy |
+| --- | --- | --- |
+| `blend` | `portable_skills` | yes |
+| `blend` | `runtime_execution` | yes |
+| `blend` | `semantic_model` | yes |
+| `compatibility` | `controller` | yes |
+| `compatibility` | `semantic_model` | yes |
+| `controller` | `entry_exchange` | no |
+| `controller` | `governance` | yes |
+| `controller` | `llm` | yes |
+| `controller` | `persistence_adapter` | no |
+| `controller` | `runtime_execution` | yes |
+| `controller` | `semantic_model` | yes |
+| `controller` | `subject_domain` | no |
+| `entry_exchange` | `controller` | yes |
+| `entry_exchange` | `governance` | yes |
+| `entry_exchange` | `persistence_adapter` | yes |
+| `entry_exchange` | `portable_skills` | yes |
+| `entry_exchange` | `runtime_execution` | yes |
+| `entry_exchange` | `semantic_model` | yes |
+| `entry_exchange` | `subject_domain` | yes |
+| `entry_exchange` | `validation_trial` | no |
+| `governance` | `controller` | no |
+| `governance` | `entry_exchange` | no |
+| `governance` | `persistence_adapter` | no |
+| `governance` | `portable_skills` | yes |
+| `governance` | `runtime_execution` | no |
+| `governance` | `semantic_model` | yes |
+| `llm` | `semantic_model` | yes |
+| `persistence_adapter` | `controller` | no |
+| `persistence_adapter` | `semantic_model` | yes |
+| `persistence_adapter` | `subject_domain` | yes |
+| `portable_skills` | `entry_exchange` | no |
+| `portable_skills` | `governance` | no |
+| `portable_skills` | `persistence_adapter` | no |
+| `portable_skills` | `runtime_execution` | no |
+| `portable_skills` | `semantic_model` | yes |
+| `runtime_execution` | `entry_exchange` | no |
+| `runtime_execution` | `governance` | yes |
+| `runtime_execution` | `persistence_adapter` | no |
+| `runtime_execution` | `portable_skills` | yes |
+| `runtime_execution` | `semantic_model` | yes |
+| `semantic_model` | `controller` | no |
+| `semantic_model` | `runtime_execution` | no |
+| `subject_domain` | `controller` | no |
+| `subject_domain` | `entry_exchange` | no |
+| `subject_domain` | `portable_skills` | yes |
+| `subject_domain` | `runtime_execution` | yes |
+| `subject_domain` | `semantic_model` | yes |
+| `validation_trial` | `persistence_adapter` | yes |
+
+## Package Imports Of Root Compatibility Facades
+
+No workspace package imports a root compatibility facade.
+
+## Canonical Root Imports Of Compatibility Facades
+
+No canonical root module imports a compatibility facade.
 
 ## Dependency Edges
 
@@ -48,9 +274,12 @@ This report is generated deterministically by `scripts/check_architecture_bounda
 | `core_conversation` | `core_engine` | yes | yes | `core_conversation/src/realized_core_conversation/contracts.py`, `core_conversation/src/realized_core_conversation/ports.py`, `core_conversation/src/realized_core_conversation/service.py` |
 | `core_conversation` | `core_llm` | yes | yes | `core_conversation/src/realized_core_conversation/service.py` |
 | `core_engine` | `governed_core` | yes | yes | `core_engine/src/realized_core_engine/__init__.py`, `core_engine/src/realized_core_engine/api.py`, `core_engine/src/realized_core_engine/canonical_reduction.py` (+3 more) |
+| `core_governance` | `core_semantics` | yes | yes | `core_governance/src/realized_core_governance/admission.py`, `core_governance/src/realized_core_governance/approval.py`, `core_governance/src/realized_core_governance/inventory.py` (+3 more) |
+| `core_governance` | `skill_semantics` | yes | yes | `core_governance/src/realized_core_governance/admission.py`, `core_governance/src/realized_core_governance/declarations.py` |
 | `foundation_events` | `contracts` | yes | yes | `workstation/foundation_events/src/workstation/foundation/events/event_bus.py` |
 | `foundation_events` | `host_interaction` | yes | yes | `workstation/foundation_events/src/workstation/foundation/events/event_bus.py` |
 | `foundation_host` | `contracts` | yes | yes | `workstation/foundation_host/src/workstation/foundation/host/controller_runtime.py`, `workstation/foundation_host/src/workstation/foundation/host/subject_workflow.py` |
+| `foundation_host` | `core_governance` | yes | yes | `workstation/foundation_host/src/workstation/foundation/host/governance.py` |
 | `foundation_host` | `foundation_models` | yes | yes | `workstation/foundation_host/src/workstation/foundation/host/delegation.py`, `workstation/foundation_host/src/workstation/foundation/host/host_interaction.py`, `workstation/foundation_host/src/workstation/foundation/host/learning_capture.py` (+1 more) |
 | `foundation_host` | `host_interaction` | yes | yes | `workstation/foundation_host/src/workstation/foundation/host/delegation.py`, `workstation/foundation_host/src/workstation/foundation/host/host_interaction.py` |
 | `foundation_projections` | `contracts` | yes | yes | `workstation/foundation_projections/src/workstation/foundation/projections/projection_models.py` |
@@ -63,11 +292,14 @@ This report is generated deterministically by `scripts/check_architecture_bounda
 | `grpc_implementation` | `subject_core` | yes | yes | `workstation/grpc_implementation/src/workstation/grpc/implementation/subject_workflow_grpc.py` |
 | `grpc_implementation` | `subject_service` | yes | yes | `workstation/grpc_implementation/src/workstation/grpc/implementation/subject_workflow_grpc.py`, `workstation/grpc_implementation/src/workstation/grpc/implementation/workstation_grpc_host.py` |
 | `runtime_core` | `contracts` | yes | yes | `workstation/runtime_core/src/workstation/runtime/core/chat_commands.py`, `workstation/runtime_core/src/workstation/runtime/core/projection_subscriber_controller.py`, `workstation/runtime_core/src/workstation/runtime/core/session.py` |
+| `runtime_core` | `core_governance` | yes | yes | `workstation/runtime_core/src/workstation/runtime/core/capabilities.py` |
+| `runtime_core` | `core_semantics` | yes | yes | `workstation/runtime_core/src/workstation/runtime/core/capabilities.py`, `workstation/runtime_core/src/workstation/runtime/core/session.py`, `workstation/runtime_core/src/workstation/runtime/core/workstation_core.py` |
 | `runtime_core` | `foundation_events` | yes | yes | `workstation/runtime_core/src/workstation/runtime/core/capabilities.py`, `workstation/runtime_core/src/workstation/runtime/core/chat_commands.py`, `workstation/runtime_core/src/workstation/runtime/core/projection_subscriber_controller.py` (+2 more) |
 | `runtime_core` | `foundation_host` | yes | yes | `workstation/runtime_core/src/workstation/runtime/core/capabilities.py`, `workstation/runtime_core/src/workstation/runtime/core/session.py`, `workstation/runtime_core/src/workstation/runtime/core/workstation_core.py` |
 | `runtime_core` | `foundation_models` | yes | yes | `workstation/runtime_core/src/workstation/runtime/core/capabilities.py`, `workstation/runtime_core/src/workstation/runtime/core/chat_commands.py`, `workstation/runtime_core/src/workstation/runtime/core/llm_driver.py` (+2 more) |
 | `runtime_core` | `foundation_projections` | yes | yes | `workstation/runtime_core/src/workstation/runtime/core/capabilities.py`, `workstation/runtime_core/src/workstation/runtime/core/chat_commands.py`, `workstation/runtime_core/src/workstation/runtime/core/projection_subscriber_controller.py` (+1 more) |
 | `runtime_core` | `host_interaction` | yes | yes | `workstation/runtime_core/src/workstation/runtime/core/capabilities.py`, `workstation/runtime_core/src/workstation/runtime/core/chat_commands.py`, `workstation/runtime_core/src/workstation/runtime/core/session.py` (+1 more) |
+| `runtime_core` | `skill_semantics` | yes | yes | `workstation/runtime_core/src/workstation/runtime/core/capabilities.py`, `workstation/runtime_core/src/workstation/runtime/core/workstation_core.py` |
 | `runtime_core` | `skills_core` | yes | yes | `workstation/runtime_core/src/workstation/runtime/core/capabilities.py`, `workstation/runtime_core/src/workstation/runtime/core/chat_commands.py`, `workstation/runtime_core/src/workstation/runtime/core/llm_driver.py` (+2 more) |
 | `runtime_core` | `skills_planning` | yes | yes | `workstation/runtime_core/src/workstation/runtime/core/session.py` |
 | `shell_core` | `contracts` | yes | yes | `workstation/shell_core/src/workstation/shell/core/chat_shell.py`, `workstation/shell_core/src/workstation/shell/core/workstation_shell_api.py`, `workstation/shell_core/src/workstation/shell/core/workstation_shell_client.py` |
@@ -80,14 +312,18 @@ This report is generated deterministically by `scripts/check_architecture_bounda
 | `shell_core` | `runtime_core` | yes | yes | `workstation/shell_core/src/workstation/shell/core/application_facade.py`, `workstation/shell_core/src/workstation/shell/core/chat_shell.py`, `workstation/shell_core/src/workstation/shell/core/trial_validation.py` (+2 more) |
 | `shell_core` | `skills_core` | yes | yes | `workstation/shell_core/src/workstation/shell/core/trial_validation.py` |
 | `shell_core` | `subject_service` | yes | yes | `workstation/shell_core/src/workstation/shell/core/chat_shell.py`, `workstation/shell_core/src/workstation/shell/core/workstation_shell_api.py` |
+| `skill_semantics` | `core_semantics` | yes | yes | `skill_semantics/src/realized_skill_semantics/composition.py`, `skill_semantics/src/realized_skill_semantics/invocation.py`, `skill_semantics/src/realized_skill_semantics/ir.py` (+2 more) |
 | `skills_core` | `contracts` | yes | yes | `workstation/skills_core/src/workstation/skills/core/direct_composition.py` |
+| `skills_core` | `core_governance` | yes | yes | `workstation/skills_core/src/workstation/skills/core/skill_management.py` |
 | `skills_core` | `foundation_host` | yes | yes | `workstation/skills_core/src/workstation/skills/core/skill_invocation.py`, `workstation/skills_core/src/workstation/skills/core/skill_management.py` |
 | `skills_core` | `foundation_models` | yes | yes | `workstation/skills_core/src/workstation/skills/core/direct_composition.py`, `workstation/skills_core/src/workstation/skills/core/skill_management.py` |
 | `skills_core` | `host_interaction` | yes | yes | `workstation/skills_core/src/workstation/skills/core/skill_invocation.py` |
+| `skills_core` | `skill_semantics` | yes | yes | `workstation/skills_core/src/workstation/skills/core/invocation_contract.py`, `workstation/skills_core/src/workstation/skills/core/skill_invocation.py`, `workstation/skills_core/src/workstation/skills/core/skill_management.py` |
 | `skills_core` | `skills_builtin` | yes | yes | `workstation/skills_core/src/workstation/skills/core/skill_invocation.py` |
 | `skills_planning` | `contracts` | yes | yes | `workstation/skills_planning/src/workstation/skills/planning/skill_composition_planning.py` |
 | `skills_planning` | `foundation_host` | yes | yes | `workstation/skills_planning/src/workstation/skills/planning/skill_home.py` |
 | `skills_planning` | `foundation_models` | yes | yes | `workstation/skills_planning/src/workstation/skills/planning/skill_composition_planning.py` |
+| `skills_planning` | `skill_semantics` | yes | yes | `workstation/skills_planning/src/workstation/skills/planning/skill_composition_planning.py` |
 | `skills_planning` | `skills_core` | yes | yes | `workstation/skills_planning/src/workstation/skills/planning/skill_composition_planning.py` |
 | `subject_core` | `contracts` | yes | yes | `workstation/subject_core/src/workstation/subject/core/subject_workflow.py` |
 | `subject_core` | `foundation_host` | yes | yes | `workstation/subject_core/src/workstation/subject/core/subject_workflow.py` |
@@ -124,8 +360,8 @@ These edges exist only to preserve historical import paths. They are excluded fr
 
 | Metric | Count |
 | --- | ---: |
-| Nodes | 151 |
-| Edges | 629 |
+| Nodes | 157 |
+| Edges | 631 |
 | Cyclic SCCs | 0 |
 | Nodes in cyclic SCCs | 0 |
 | Edges internal to cyclic SCCs | 0 |
@@ -152,7 +388,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `component_to_root` | `foundation_host` | `applied_theory_types` | `dto_constants` |
 | `component_to_root` | `foundation_host` | `boundary` | `orchestration` |
 | `component_to_root` | `foundation_host` | `gather_sources` | `orchestration` |
-| `component_to_root` | `foundation_host` | `governance_inventory` | `orchestration` |
 | `component_to_root` | `foundation_host` | `learning_context` | `orchestration` |
 | `component_to_root` | `foundation_host` | `markdown_ir` | `orchestration` |
 | `component_to_root` | `foundation_host` | `semantic_text` | `pure_helper` |
@@ -160,7 +395,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `component_to_root` | `foundation_projections` | `blend_workflow` | `orchestration` |
 | `component_to_root` | `foundation_projections` | `semantic_text` | `pure_helper` |
 | `component_to_root` | `grpc_implementation` | `semantic_text` | `pure_helper` |
-| `component_to_root` | `runtime_core` | `applied_theory_types` | `dto_constants` |
 | `component_to_root` | `runtime_core` | `blend_context` | `orchestration` |
 | `component_to_root` | `runtime_core` | `blend_operator_store` | `persistence` |
 | `component_to_root` | `runtime_core` | `blend_session` | `orchestration` |
@@ -177,28 +411,22 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `component_to_root` | `runtime_core` | `skill_export_projection` | `orchestration` |
 | `component_to_root` | `runtime_core` | `skill_governance` | `orchestration` |
 | `component_to_root` | `runtime_core` | `skill_ir` | `dto_constants` |
-| `component_to_root` | `runtime_core` | `skill_lifecycle` | `orchestration` |
 | `component_to_root` | `runtime_core` | `skill_schema_io` | `orchestration` |
 | `component_to_root` | `runtime_core` | `url_learning_capture` | `orchestration` |
 | `component_to_root` | `shell_core` | `semantic_text` | `pure_helper` |
 | `component_to_root` | `skills_builtin` | `applied_theory_types` | `dto_constants` |
 | `component_to_root` | `skills_builtin` | `skill_schema_io` | `orchestration` |
-| `component_to_root` | `skills_core` | `applied_theory_types` | `dto_constants` |
 | `component_to_root` | `skills_core` | `capability_runtime` | `orchestration` |
-| `component_to_root` | `skills_core` | `execution_frameworks` | `orchestration` |
 | `component_to_root` | `skills_core` | `semantic_text` | `pure_helper` |
 | `component_to_root` | `skills_core` | `side` | `orchestration` |
 | `component_to_root` | `skills_core` | `skill_export_projection` | `orchestration` |
 | `component_to_root` | `skills_core` | `skill_governance` | `orchestration` |
-| `component_to_root` | `skills_core` | `skill_lifecycle` | `orchestration` |
 | `component_to_root` | `skills_core` | `skill_schema_io` | `orchestration` |
 | `component_to_root` | `skills_core` | `store` | `persistence` |
 | `component_to_root` | `skills_planning` | `capability_runtime` | `orchestration` |
 | `component_to_root` | `skills_planning` | `semantic_text` | `pure_helper` |
 | `component_to_root` | `skills_planning` | `skill_composition` | `orchestration` |
 | `component_to_root` | `skills_planning` | `skill_ir` | `dto_constants` |
-| `component_to_root` | `skills_planning` | `skill_leaf_types` | `dto_constants` |
-| `component_to_root` | `skills_planning` | `skill_path_notation` | `orchestration` |
 | `component_to_root` | `skills_planning` | `store` | `persistence` |
 | `component_to_root` | `subject_core` | `decision_review` | `orchestration` |
 | `component_to_root` | `subject_core` | `decision_review_constructs` | `orchestration` |
@@ -216,9 +444,17 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `component_to_root` | `subject_service` | `semantic_text` | `pure_helper` |
 | `component_to_root` | `ui_shared` | `semantic_text` | `pure_helper` |
 | `component_to_root` | `ui_textual` | `semantic_text` | `pure_helper` |
+| `root_to_component` | `applied_theory_primitives` | `core_semantics` | `dto_constants` |
+| `root_to_component` | `approval_governance` | `core_governance` | `compatibility` |
+| `root_to_component` | `approval_governance` | `core_semantics` | `compatibility` |
+| `root_to_component` | `args` | `skill_semantics` | `orchestration` |
+| `root_to_component` | `artifact_contracts` | `core_semantics` | `compatibility` |
 | `root_to_component` | `blend_context` | `foundation_models` | `orchestration` |
+| `root_to_component` | `blend_operator_store` | `skill_semantics` | `persistence` |
 | `root_to_component` | `blend_session` | `foundation_models` | `orchestration` |
 | `root_to_component` | `blend_workflow_execution` | `host_interaction` | `orchestration` |
+| `root_to_component` | `capability_runtime` | `core_governance` | `orchestration` |
+| `root_to_component` | `capability_runtime` | `skill_semantics` | `orchestration` |
 | `root_to_component` | `controller_entrypoints` | `app_cli` | `orchestration` |
 | `root_to_component` | `controller_entrypoints` | `contracts` | `orchestration` |
 | `root_to_component` | `controller_entrypoints` | `core_engine` | `orchestration` |
@@ -226,9 +462,20 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `root_to_component` | `controller_entrypoints` | `subject_service` | `orchestration` |
 | `root_to_component` | `controller_runtime` | `governed_core` | `orchestration` |
 | `root_to_component` | `controller_runtime` | `host_interaction` | `orchestration` |
+| `root_to_component` | `controller_runtime` | `skill_semantics` | `orchestration` |
+| `root_to_component` | `data_governance` | `core_governance` | `compatibility` |
+| `root_to_component` | `execution_framework_primitives` | `skill_semantics` | `orchestration` |
 | `root_to_component` | `execution_frameworks` | `governed_core` | `orchestration` |
+| `root_to_component` | `execution_frameworks` | `skill_semantics` | `orchestration` |
+| `root_to_component` | `governance_inventory` | `core_governance` | `orchestration` |
 | `root_to_component` | `governed_semantic_reduction_runtime` | `governed_core` | `orchestration` |
 | `root_to_component` | `governed_semantic_reduction_runtime` | `host_interaction` | `orchestration` |
+| `root_to_component` | `governed_skill_access` | `core_governance` | `orchestration` |
+| `root_to_component` | `governed_skill_access` | `skill_semantics` | `orchestration` |
+| `root_to_component` | `governed_skill_installation` | `core_governance` | `orchestration` |
+| `root_to_component` | `governed_skill_installation` | `skill_semantics` | `orchestration` |
+| `root_to_component` | `host_brokers` | `core_governance` | `orchestration` |
+| `root_to_component` | `host_brokers` | `skill_semantics` | `orchestration` |
 | `root_to_component` | `host_interaction_action_dispatch` | `host_interaction` | `compatibility` |
 | `root_to_component` | `host_interaction_actions` | `host_interaction` | `compatibility` |
 | `root_to_component` | `host_interaction_context` | `host_interaction` | `compatibility` |
@@ -237,7 +484,36 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `root_to_component` | `host_interaction_receipts` | `host_interaction` | `compatibility` |
 | `root_to_component` | `host_interaction_resolution` | `host_interaction` | `compatibility` |
 | `root_to_component` | `host_mediation` | `host_interaction` | `orchestration` |
+| `root_to_component` | `host_mediation` | `skill_semantics` | `orchestration` |
+| `root_to_component` | `markdown_learning_artifact_semantics` | `skill_semantics` | `orchestration` |
+| `root_to_component` | `pure_theory_types` | `core_semantics` | `compatibility` |
+| `root_to_component` | `replay_verifier` | `core_governance` | `orchestration` |
+| `root_to_component` | `replay_verifier` | `skill_semantics` | `orchestration` |
+| `root_to_component` | `run_bundle_io` | `core_governance` | `orchestration` |
+| `root_to_component` | `run_bundle_io` | `skill_semantics` | `orchestration` |
+| `root_to_component` | `runtime_governance_context` | `core_governance` | `orchestration` |
+| `root_to_component` | `side` | `skill_semantics` | `orchestration` |
+| `root_to_component` | `skill_boundary_normalization` | `core_governance` | `orchestration` |
+| `root_to_component` | `skill_boundary_normalization` | `skill_semantics` | `orchestration` |
+| `root_to_component` | `skill_composition` | `skill_semantics` | `orchestration` |
+| `root_to_component` | `skill_export_projection` | `core_governance` | `orchestration` |
+| `root_to_component` | `skill_export_projection` | `skill_semantics` | `orchestration` |
+| `root_to_component` | `skill_governance` | `core_governance` | `orchestration` |
+| `root_to_component` | `skill_governance` | `skill_semantics` | `orchestration` |
+| `root_to_component` | `skill_governance_primitives` | `core_governance` | `compatibility` |
+| `root_to_component` | `skill_invocation_contract` | `skill_semantics` | `compatibility` |
 | `root_to_component` | `skill_invocation_contract` | `skills_core` | `compatibility` |
+| `root_to_component` | `skill_ir` | `core_governance` | `dto_constants` |
+| `root_to_component` | `skill_ir` | `skill_semantics` | `dto_constants` |
+| `root_to_component` | `skill_leaf_types` | `skill_semantics` | `compatibility` |
+| `root_to_component` | `skill_lifecycle` | `core_governance` | `compatibility` |
+| `root_to_component` | `skill_path_notation` | `skill_semantics` | `compatibility` |
+| `root_to_component` | `skill_registry` | `core_governance` | `orchestration` |
+| `root_to_component` | `skill_safety_governance` | `core_governance` | `compatibility` |
+| `root_to_component` | `skill_safety_governance` | `core_semantics` | `compatibility` |
+| `root_to_component` | `skill_schema_io` | `core_governance` | `orchestration` |
+| `root_to_component` | `skill_schema_io` | `skill_semantics` | `orchestration` |
+| `root_to_component` | `virtual_mounts` | `core_governance` | `orchestration` |
 
 ## Root-Module Dependencies
 
@@ -251,7 +527,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 - `foundation_host` -> `applied_theory_types` (`workstation/foundation_host/src/workstation/foundation/host/delegation.py`)
 - `foundation_host` -> `boundary` (`workstation/foundation_host/src/workstation/foundation/host/task_contract.py`)
 - `foundation_host` -> `gather_sources` (`workstation/foundation_host/src/workstation/foundation/host/learning_capture.py`)
-- `foundation_host` -> `governance_inventory` (`workstation/foundation_host/src/workstation/foundation/host/governance.py`)
 - `foundation_host` -> `learning_context` (`workstation/foundation_host/src/workstation/foundation/host/learning_capture.py`)
 - `foundation_host` -> `markdown_ir` (`workstation/foundation_host/src/workstation/foundation/host/learning_capture.py`)
 - `foundation_host` -> `semantic_text` (`workstation/foundation_host/src/workstation/foundation/host/governance.py`, `workstation/foundation_host/src/workstation/foundation/host/learning_capture.py`)
@@ -259,7 +534,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 - `foundation_projections` -> `blend_workflow` (`workstation/foundation_projections/src/workstation/foundation/projections/projection_models.py`)
 - `foundation_projections` -> `semantic_text` (`workstation/foundation_projections/src/workstation/foundation/projections/activity_receipts.py`, `workstation/foundation_projections/src/workstation/foundation/projections/projection_models.py`)
 - `grpc_implementation` -> `semantic_text` (`workstation/grpc_implementation/src/workstation/grpc/implementation/subject_workflow_grpc.py`, `workstation/grpc_implementation/src/workstation/grpc/implementation/workstation_assets_grpc.py`, `workstation/grpc_implementation/src/workstation/grpc/implementation/workstation_bootstrap_grpc.py`)
-- `runtime_core` -> `applied_theory_types` (`workstation/runtime_core/src/workstation/runtime/core/capabilities.py`, `workstation/runtime_core/src/workstation/runtime/core/session.py`, `workstation/runtime_core/src/workstation/runtime/core/workstation_core.py`)
 - `runtime_core` -> `blend_context` (`workstation/runtime_core/src/workstation/runtime/core/capabilities.py`, `workstation/runtime_core/src/workstation/runtime/core/session.py`, `workstation/runtime_core/src/workstation/runtime/core/workstation_core.py`)
 - `runtime_core` -> `blend_operator_store` (`workstation/runtime_core/src/workstation/runtime/core/capabilities.py`, `workstation/runtime_core/src/workstation/runtime/core/workstation_core.py`)
 - `runtime_core` -> `blend_session` (`workstation/runtime_core/src/workstation/runtime/core/session.py`)
@@ -269,35 +543,29 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 - `runtime_core` -> `blend_world` (`workstation/runtime_core/src/workstation/runtime/core/session.py`)
 - `runtime_core` -> `blend_world_store` (`workstation/runtime_core/src/workstation/runtime/core/session.py`)
 - `runtime_core` -> `capability_runtime` (`workstation/runtime_core/src/workstation/runtime/core/capabilities.py`, `workstation/runtime_core/src/workstation/runtime/core/chat_commands.py`)
-- `runtime_core` -> `execution_frameworks` (`workstation/runtime_core/src/workstation/runtime/core/capabilities.py`, `workstation/runtime_core/src/workstation/runtime/core/chat_commands.py`, `workstation/runtime_core/src/workstation/runtime/core/workstation_core.py`)
+- `runtime_core` -> `execution_frameworks` (`workstation/runtime_core/src/workstation/runtime/core/capabilities.py`)
 - `runtime_core` -> `gather_sources` (`workstation/runtime_core/src/workstation/runtime/core/workstation_core.py`)
 - `runtime_core` -> `learning_context` (`workstation/runtime_core/src/workstation/runtime/core/workstation_core.py`)
 - `runtime_core` -> `semantic_text` (`workstation/runtime_core/src/workstation/runtime/core/capabilities.py`, `workstation/runtime_core/src/workstation/runtime/core/chat_commands.py`, `workstation/runtime_core/src/workstation/runtime/core/llm_driver.py`, `workstation/runtime_core/src/workstation/runtime/core/projection_subscriber_controller.py`, `workstation/runtime_core/src/workstation/runtime/core/session.py`, `workstation/runtime_core/src/workstation/runtime/core/workstation_core.py`)
 - `runtime_core` -> `skill_export_projection` (`workstation/runtime_core/src/workstation/runtime/core/capabilities.py`, `workstation/runtime_core/src/workstation/runtime/core/chat_commands.py`)
 - `runtime_core` -> `skill_governance` (`workstation/runtime_core/src/workstation/runtime/core/capabilities.py`)
 - `runtime_core` -> `skill_ir` (`workstation/runtime_core/src/workstation/runtime/core/workstation_core.py`)
-- `runtime_core` -> `skill_lifecycle` (`workstation/runtime_core/src/workstation/runtime/core/capabilities.py`)
 - `runtime_core` -> `skill_schema_io` (`workstation/runtime_core/src/workstation/runtime/core/capabilities.py`, `workstation/runtime_core/src/workstation/runtime/core/workstation_core.py`)
 - `runtime_core` -> `url_learning_capture` (`workstation/runtime_core/src/workstation/runtime/core/workstation_core.py`)
 - `shell_core` -> `semantic_text` (`workstation/shell_core/src/workstation/shell/core/chat_shell.py`, `workstation/shell_core/src/workstation/shell/core/workstation_shell_api.py`, `workstation/shell_core/src/workstation/shell/core/workstation_shell_client.py`)
 - `skills_builtin` -> `applied_theory_types` (`workstation/skills_builtin/src/workstation/skills/builtin/builtin_skills.py`)
 - `skills_builtin` -> `skill_schema_io` (`workstation/skills_builtin/src/workstation/skills/builtin/builtin_skills.py`)
-- `skills_core` -> `applied_theory_types` (`workstation/skills_core/src/workstation/skills/core/invocation_contract.py`)
 - `skills_core` -> `capability_runtime` (`workstation/skills_core/src/workstation/skills/core/invocation_contract.py`, `workstation/skills_core/src/workstation/skills/core/skill_invocation.py`)
-- `skills_core` -> `execution_frameworks` (`workstation/skills_core/src/workstation/skills/core/invocation_contract.py`, `workstation/skills_core/src/workstation/skills/core/skill_invocation.py`, `workstation/skills_core/src/workstation/skills/core/skill_management.py`)
 - `skills_core` -> `semantic_text` (`workstation/skills_core/src/workstation/skills/core/direct_composition.py`, `workstation/skills_core/src/workstation/skills/core/invocation_contract.py`, `workstation/skills_core/src/workstation/skills/core/skill_invocation.py`, `workstation/skills_core/src/workstation/skills/core/skill_management.py`)
 - `skills_core` -> `side` (`workstation/skills_core/src/workstation/skills/core/skill_management.py`)
 - `skills_core` -> `skill_export_projection` (`workstation/skills_core/src/workstation/skills/core/invocation_contract.py`, `workstation/skills_core/src/workstation/skills/core/skill_invocation.py`, `workstation/skills_core/src/workstation/skills/core/skill_management.py`)
 - `skills_core` -> `skill_governance` (`workstation/skills_core/src/workstation/skills/core/skill_management.py`)
-- `skills_core` -> `skill_lifecycle` (`workstation/skills_core/src/workstation/skills/core/skill_management.py`)
 - `skills_core` -> `skill_schema_io` (`workstation/skills_core/src/workstation/skills/core/skill_management.py`)
 - `skills_core` -> `store` (`workstation/skills_core/src/workstation/skills/core/skill_invocation.py`)
 - `skills_planning` -> `capability_runtime` (`workstation/skills_planning/src/workstation/skills/planning/skill_composition_planning.py`)
 - `skills_planning` -> `semantic_text` (`workstation/skills_planning/src/workstation/skills/planning/skill_composition_planning.py`)
 - `skills_planning` -> `skill_composition` (`workstation/skills_planning/src/workstation/skills/planning/skill_composition_planning.py`)
 - `skills_planning` -> `skill_ir` (`workstation/skills_planning/src/workstation/skills/planning/skill_composition_planning.py`)
-- `skills_planning` -> `skill_leaf_types` (`workstation/skills_planning/src/workstation/skills/planning/skill_composition_planning.py`)
-- `skills_planning` -> `skill_path_notation` (`workstation/skills_planning/src/workstation/skills/planning/skill_composition_planning.py`)
 - `skills_planning` -> `store` (`workstation/skills_planning/src/workstation/skills/planning/skill_home.py`)
 - `subject_core` -> `decision_review` (`workstation/subject_core/src/workstation/subject/core/subject_workflow.py`)
 - `subject_core` -> `decision_review_constructs` (`workstation/subject_core/src/workstation/subject/core/subject_workflow.py`)
@@ -318,9 +586,17 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 
 ## Root-to-Component Dependencies
 
+- `applied_theory_primitives` -> `core_semantics` (`applied_theory_primitives.py`)
+- `approval_governance` -> `core_governance` (`approval_governance.py`)
+- `approval_governance` -> `core_semantics` (`approval_governance.py`)
+- `args` -> `skill_semantics` (`args.py`)
+- `artifact_contracts` -> `core_semantics` (`artifact_contracts.py`)
 - `blend_context` -> `foundation_models` (`blend_context.py`)
+- `blend_operator_store` -> `skill_semantics` (`blend_operator_store.py`)
 - `blend_session` -> `foundation_models` (`blend_session.py`)
 - `blend_workflow_execution` -> `host_interaction` (`blend_workflow_execution.py`)
+- `capability_runtime` -> `core_governance` (`capability_runtime.py`)
+- `capability_runtime` -> `skill_semantics` (`capability_runtime.py`)
 - `controller_entrypoints` -> `app_cli` (`controller_entrypoints.py`)
 - `controller_entrypoints` -> `contracts` (`controller_entrypoints.py`)
 - `controller_entrypoints` -> `core_engine` (`controller_entrypoints.py`)
@@ -328,9 +604,20 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 - `controller_entrypoints` -> `subject_service` (`controller_entrypoints.py`)
 - `controller_runtime` -> `governed_core` (`controller_runtime.py`)
 - `controller_runtime` -> `host_interaction` (`controller_runtime.py`)
+- `controller_runtime` -> `skill_semantics` (`controller_runtime.py`)
+- `data_governance` -> `core_governance` (`data_governance.py`)
+- `execution_framework_primitives` -> `skill_semantics` (`execution_framework_primitives.py`)
 - `execution_frameworks` -> `governed_core` (`execution_frameworks.py`)
+- `execution_frameworks` -> `skill_semantics` (`execution_frameworks.py`)
+- `governance_inventory` -> `core_governance` (`governance_inventory.py`)
 - `governed_semantic_reduction_runtime` -> `governed_core` (`governed_semantic_reduction_runtime.py`)
 - `governed_semantic_reduction_runtime` -> `host_interaction` (`governed_semantic_reduction_runtime.py`)
+- `governed_skill_access` -> `core_governance` (`governed_skill_access.py`)
+- `governed_skill_access` -> `skill_semantics` (`governed_skill_access.py`)
+- `governed_skill_installation` -> `core_governance` (`governed_skill_installation.py`)
+- `governed_skill_installation` -> `skill_semantics` (`governed_skill_installation.py`)
+- `host_brokers` -> `core_governance` (`host_brokers.py`)
+- `host_brokers` -> `skill_semantics` (`host_brokers.py`)
 - `host_interaction_action_dispatch` -> `host_interaction` (`host_interaction_action_dispatch.py`)
 - `host_interaction_actions` -> `host_interaction` (`host_interaction_actions.py`)
 - `host_interaction_context` -> `host_interaction` (`host_interaction_context.py`)
@@ -339,25 +626,51 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 - `host_interaction_receipts` -> `host_interaction` (`host_interaction_receipts.py`)
 - `host_interaction_resolution` -> `host_interaction` (`host_interaction_resolution.py`)
 - `host_mediation` -> `host_interaction` (`host_mediation.py`)
+- `host_mediation` -> `skill_semantics` (`host_mediation.py`)
+- `markdown_learning_artifact_semantics` -> `skill_semantics` (`markdown_learning_artifact_semantics.py`)
+- `pure_theory_types` -> `core_semantics` (`pure_theory_types.py`)
+- `replay_verifier` -> `core_governance` (`replay_verifier.py`)
+- `replay_verifier` -> `skill_semantics` (`replay_verifier.py`)
+- `run_bundle_io` -> `core_governance` (`run_bundle_io.py`)
+- `run_bundle_io` -> `skill_semantics` (`run_bundle_io.py`)
+- `runtime_governance_context` -> `core_governance` (`runtime_governance_context.py`)
+- `side` -> `skill_semantics` (`side.py`)
+- `skill_boundary_normalization` -> `core_governance` (`skill_boundary_normalization.py`)
+- `skill_boundary_normalization` -> `skill_semantics` (`skill_boundary_normalization.py`)
+- `skill_composition` -> `skill_semantics` (`skill_composition.py`)
+- `skill_export_projection` -> `core_governance` (`skill_export_projection.py`)
+- `skill_export_projection` -> `skill_semantics` (`skill_export_projection.py`)
+- `skill_governance` -> `core_governance` (`skill_governance.py`)
+- `skill_governance` -> `skill_semantics` (`skill_governance.py`)
+- `skill_governance_primitives` -> `core_governance` (`skill_governance_primitives.py`)
+- `skill_invocation_contract` -> `skill_semantics` (`skill_invocation_contract.py`)
 - `skill_invocation_contract` -> `skills_core` (`skill_invocation_contract.py`)
+- `skill_ir` -> `core_governance` (`skill_ir.py`)
+- `skill_ir` -> `skill_semantics` (`skill_ir.py`)
+- `skill_leaf_types` -> `skill_semantics` (`skill_leaf_types.py`)
+- `skill_lifecycle` -> `core_governance` (`skill_lifecycle.py`)
+- `skill_path_notation` -> `skill_semantics` (`skill_path_notation.py`)
+- `skill_registry` -> `core_governance` (`skill_registry.py`)
+- `skill_safety_governance` -> `core_governance` (`skill_safety_governance.py`)
+- `skill_safety_governance` -> `core_semantics` (`skill_safety_governance.py`)
+- `skill_schema_io` -> `core_governance` (`skill_schema_io.py`)
+- `skill_schema_io` -> `skill_semantics` (`skill_schema_io.py`)
+- `virtual_mounts` -> `core_governance` (`virtual_mounts.py`)
 
 ## Root-to-Root Dependencies
 
 - `SEMANTIC_RELATION_VALIDATION` -> `store` (`SEMANTIC_RELATION_VALIDATION.py`)
 - `TRIAL_DOMAIN_VALIDATION` -> `validation_sqlite` (`TRIAL_DOMAIN_VALIDATION.py`)
-- `applied_theory_primitives` -> `pure_theory_types` (`applied_theory_primitives.py`)
 - `applied_theory_types` -> `applied_theory_primitives` (`applied_theory_types.py`)
 - `applied_theory_types` -> `execution_framework_primitives` (`applied_theory_types.py`)
 - `applied_theory_types` -> `normalization_primitives` (`applied_theory_types.py`)
-- `approval_governance` -> `artifact_contracts` (`approval_governance.py`)
-- `approval_governance` -> `semantic_text` (`approval_governance.py`)
-- `approval_governance` -> `skill_governance_primitives` (`approval_governance.py`)
 - `args` -> `execution_frameworks` (`args.py`)
-- `args` -> `normalize` (`args.py`)
+- `args` -> `normalization_primitives` (`args.py`)
 - `artifact` -> `applied_theory_types` (`artifact.py`)
 - `artifact` -> `boundary` (`artifact.py`)
 - `artifact` -> `fallback_not_generation` (`artifact.py`)
-- `artifact` -> `normalize` (`artifact.py`)
+- `artifact` -> `non_achievedness_normalization` (`artifact.py`)
+- `artifact` -> `normalization_primitives` (`artifact.py`)
 - `artifact` -> `semantic_text` (`artifact.py`)
 - `artifact_answer_resolution` -> `applied_theory_types` (`artifact_answer_resolution.py`)
 - `artifact_answer_resolution` -> `prompt_directives` (`artifact_answer_resolution.py`)
@@ -366,7 +679,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 - `blend_operator_store` -> `blend_context` (`blend_operator_store.py`)
 - `blend_operator_store` -> `blend_operator` (`blend_operator_store.py`)
 - `blend_operator_store` -> `capability_runtime` (`blend_operator_store.py`)
-- `blend_operator_store` -> `execution_frameworks` (`blend_operator_store.py`)
 - `blend_operator_store` -> `semantic_text` (`blend_operator_store.py`)
 - `blend_session` -> `blend_context` (`blend_session.py`)
 - `blend_workflow` -> `blend_workflow_models` (`blend_workflow.py`)
@@ -391,7 +703,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 - `boundary` -> `applied_theory_types` (`boundary.py`)
 - `boundary` -> `normalization_primitives` (`boundary.py`)
 - `capability_runtime` -> `applied_theory_types` (`capability_runtime.py`)
-- `capability_runtime` -> `execution_framework_primitives` (`capability_runtime.py`)
 - `capability_runtime` -> `host_abi` (`capability_runtime.py`)
 - `capability_runtime` -> `semantic_text` (`capability_runtime.py`)
 - `capability_runtime` -> `skill_governance` (`capability_runtime.py`)
@@ -424,7 +735,7 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 - `controller_runtime` -> `direct_knowledge_reuse` (`controller_runtime.py`)
 - `controller_runtime` -> `execution_frameworks` (`controller_runtime.py`)
 - `controller_runtime` -> `external_markdown_learning_pipeline` (`controller_runtime.py`)
-- `controller_runtime` -> `fallback_not_semantics` (`controller_runtime.py`)
+- `controller_runtime` -> `fallback_not_generation` (`controller_runtime.py`)
 - `controller_runtime` -> `governed_closure_and_commitment` (`controller_runtime.py`)
 - `controller_runtime` -> `governed_prior_learning_reuse` (`controller_runtime.py`)
 - `controller_runtime` -> `governed_semantic_reduction_runtime` (`controller_runtime.py`)
@@ -433,7 +744,9 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 - `controller_runtime` -> `learn` (`controller_runtime.py`)
 - `controller_runtime` -> `markdown_ir` (`controller_runtime.py`)
 - `controller_runtime` -> `markdown_learning_artifact_semantics` (`controller_runtime.py`)
-- `controller_runtime` -> `normalize` (`controller_runtime.py`)
+- `controller_runtime` -> `non_achievedness_normalization` (`controller_runtime.py`)
+- `controller_runtime` -> `normalization_primitives` (`controller_runtime.py`)
+- `controller_runtime` -> `not_elaboration_ranking` (`controller_runtime.py`)
 - `controller_runtime` -> `prolog` (`controller_runtime.py`)
 - `controller_runtime` -> `prompt_directives` (`controller_runtime.py`)
 - `controller_runtime` -> `retrieval_ranking` (`controller_runtime.py`)
@@ -447,7 +760,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 - `controller_runtime` -> `system_state` (`controller_runtime.py`)
 - `controller_runtime` -> `title_semantics` (`controller_runtime.py`)
 - `controller_runtime_binding` -> `system_state` (`controller_runtime_binding.py`)
-- `data_governance` -> `semantic_text` (`data_governance.py`)
 - `decision_review` -> `decision_review_models` (`decision_review.py`)
 - `decision_review` -> `id_generation` (`decision_review.py`)
 - `decision_review` -> `learning_context` (`decision_review.py`)
@@ -501,49 +813,37 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 - `gather_sources` -> `learning_context_paths` (`gather_sources.py`)
 - `gather_sources` -> `semantic_text` (`gather_sources.py`)
 - `governance_inventory` -> `applied_theory_types` (`governance_inventory.py`)
-- `governance_inventory` -> `approval_governance` (`governance_inventory.py`)
-- `governance_inventory` -> `skill_governance` (`governance_inventory.py`)
-- `governance_inventory` -> `skill_safety_governance` (`governance_inventory.py`)
 - `governed_closure_and_commitment` -> `applied_theory_types` (`governed_closure_and_commitment.py`)
-- `governed_closure_and_commitment` -> `normalize` (`governed_closure_and_commitment.py`)
+- `governed_closure_and_commitment` -> `normalization_primitives` (`governed_closure_and_commitment.py`)
 - `governed_closure_and_commitment` -> `semantic_text` (`governed_closure_and_commitment.py`)
 - `governed_closure_and_commitment` -> `title_semantics` (`governed_closure_and_commitment.py`)
 - `governed_prior_learning_reuse` -> `applied_theory_types` (`governed_prior_learning_reuse.py`)
 - `governed_prior_learning_reuse` -> `learn` (`governed_prior_learning_reuse.py`)
-- `governed_prior_learning_reuse` -> `normalize` (`governed_prior_learning_reuse.py`)
+- `governed_prior_learning_reuse` -> `normalization_primitives` (`governed_prior_learning_reuse.py`)
 - `governed_prior_learning_reuse` -> `prompt_directives` (`governed_prior_learning_reuse.py`)
 - `governed_prior_learning_reuse` -> `retrieval_ranking` (`governed_prior_learning_reuse.py`)
 - `governed_prior_learning_reuse` -> `semantic_prompt_posture` (`governed_prior_learning_reuse.py`)
 - `governed_prior_learning_reuse` -> `semantic_text` (`governed_prior_learning_reuse.py`)
 - `governed_prior_learning_reuse` -> `title_semantics` (`governed_prior_learning_reuse.py`)
 - `governed_semantic_reduction_runtime` -> `applied_theory_types` (`governed_semantic_reduction_runtime.py`)
-- `governed_semantic_reduction_runtime` -> `normalize` (`governed_semantic_reduction_runtime.py`)
+- `governed_semantic_reduction_runtime` -> `normalization_primitives` (`governed_semantic_reduction_runtime.py`)
 - `governed_semantic_reduction_runtime` -> `semantic_prompt_posture` (`governed_semantic_reduction_runtime.py`)
 - `governed_semantic_reduction_runtime` -> `semantic_text` (`governed_semantic_reduction_runtime.py`)
 - `governed_semantic_reduction_runtime` -> `system_state` (`governed_semantic_reduction_runtime.py`)
 - `governed_semantic_reduction_runtime` -> `title_semantics` (`governed_semantic_reduction_runtime.py`)
 - `governed_skill_access` -> `applied_theory_types` (`governed_skill_access.py`)
-- `governed_skill_access` -> `approval_governance` (`governed_skill_access.py`)
-- `governed_skill_access` -> `execution_frameworks` (`governed_skill_access.py`)
 - `governed_skill_access` -> `governance_inventory` (`governed_skill_access.py`)
 - `governed_skill_access` -> `skill_governance` (`governed_skill_access.py`)
-- `governed_skill_access` -> `skill_lifecycle` (`governed_skill_access.py`)
-- `governed_skill_access` -> `skill_safety_governance` (`governed_skill_access.py`)
-- `governed_skill_installation` -> `execution_frameworks` (`governed_skill_installation.py`)
-- `governed_skill_installation` -> `governance_inventory` (`governed_skill_installation.py`)
 - `governed_skill_installation` -> `skill_compiler` (`governed_skill_installation.py`)
 - `governed_skill_installation` -> `skill_export_projection` (`governed_skill_installation.py`)
 - `governed_skill_installation` -> `skill_governance` (`governed_skill_installation.py`)
-- `governed_skill_installation` -> `skill_lifecycle` (`governed_skill_installation.py`)
 - `governed_skill_installation` -> `skill_schema_io` (`governed_skill_installation.py`)
 - `host_abi` -> `semantic_text` (`host_abi.py`)
 - `host_brokers` -> `applied_theory_types` (`host_brokers.py`)
 - `host_brokers` -> `controller_runtime_binding` (`host_brokers.py`)
-- `host_brokers` -> `data_governance` (`host_brokers.py`)
 - `host_brokers` -> `host_abi` (`host_brokers.py`)
 - `host_brokers` -> `macos_host_brokers` (`host_brokers.py`)
 - `host_brokers` -> `semantic_text` (`host_brokers.py`)
-- `host_brokers` -> `skill_governance` (`host_brokers.py`)
 - `host_brokers` -> `store` (`host_brokers.py`)
 - `host_brokers` -> `virtual_mounts` (`host_brokers.py`)
 - `host_mediation` -> `applied_theory_types` (`host_mediation.py`)
@@ -565,6 +865,7 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 - `itemize_models` -> `semantic_text` (`itemize_models.py`)
 - `itemize_validation` -> `itemize_models` (`itemize_validation.py`)
 - `itemize_validation` -> `semantic_text` (`itemize_validation.py`)
+- `learn` -> `semantic_text` (`learn.py`)
 - `learning_context` -> `id_generation` (`learning_context.py`)
 - `learning_context` -> `learning_context_paths` (`learning_context.py`)
 - `learning_context` -> `learning_context_projection` (`learning_context.py`)
@@ -587,7 +888,8 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 - `markdown_learning_artifact_semantics` -> `applied_theory_types` (`markdown_learning_artifact_semantics.py`)
 - `markdown_learning_artifact_semantics` -> `execution_frameworks` (`markdown_learning_artifact_semantics.py`)
 - `markdown_learning_artifact_semantics` -> `markdown_ir` (`markdown_learning_artifact_semantics.py`)
-- `markdown_learning_artifact_semantics` -> `normalize` (`markdown_learning_artifact_semantics.py`)
+- `markdown_learning_artifact_semantics` -> `non_achievedness_normalization` (`markdown_learning_artifact_semantics.py`)
+- `markdown_learning_artifact_semantics` -> `normalization_primitives` (`markdown_learning_artifact_semantics.py`)
 - `markdown_learning_artifact_semantics` -> `prolog` (`markdown_learning_artifact_semantics.py`)
 - `markdown_learning_artifact_semantics` -> `retrieval_ranking` (`markdown_learning_artifact_semantics.py`)
 - `markdown_learning_artifact_semantics` -> `semantic_text` (`markdown_learning_artifact_semantics.py`)
@@ -639,13 +941,10 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 - `python_skill_host` -> `skill_governance` (`python_skill_host.py`)
 - `replay_verifier` -> `applied_theory_types` (`replay_verifier.py`)
 - `replay_verifier` -> `constitutional_trace` (`replay_verifier.py`)
-- `replay_verifier` -> `execution_frameworks` (`replay_verifier.py`)
-- `replay_verifier` -> `governance_inventory` (`replay_verifier.py`)
 - `replay_verifier` -> `run_bundle_io` (`replay_verifier.py`)
 - `replay_verifier` -> `runtime_controller_api` (`replay_verifier.py`)
 - `replay_verifier` -> `runtime_temp` (`replay_verifier.py`)
 - `replay_verifier` -> `skill_governance` (`replay_verifier.py`)
-- `replay_verifier` -> `skill_lifecycle` (`replay_verifier.py`)
 - `replay_verifier` -> `skill_schema_io` (`replay_verifier.py`)
 - `replay_verifier` -> `store` (`replay_verifier.py`)
 - `replay_verifier` -> `system_state` (`replay_verifier.py`)
@@ -659,18 +958,16 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 - `review_composition` -> `learning_context` (`review_composition.py`)
 - `review_composition` -> `semantic_text` (`review_composition.py`)
 - `run_bundle_io` -> `applied_theory_types` (`run_bundle_io.py`)
-- `run_bundle_io` -> `approval_governance` (`run_bundle_io.py`)
 - `run_bundle_io` -> `artifact` (`run_bundle_io.py`)
 - `run_bundle_io` -> `constitutional_trace` (`run_bundle_io.py`)
 - `run_bundle_io` -> `host_abi` (`run_bundle_io.py`)
 - `run_bundle_io` -> `skill_export_projection` (`run_bundle_io.py`)
 - `run_bundle_io` -> `skill_governance` (`run_bundle_io.py`)
 - `run_bundle_io` -> `skill_registry` (`run_bundle_io.py`)
-- `run_bundle_io` -> `skill_safety_governance` (`run_bundle_io.py`)
 - `run_bundle_io` -> `skill_schema_io` (`run_bundle_io.py`)
 - `run_bundle_io` -> `system_state` (`run_bundle_io.py`)
 - `run_outcome_harvest_and_reporting` -> `applied_theory_types` (`run_outcome_harvest_and_reporting.py`)
-- `run_outcome_harvest_and_reporting` -> `normalize` (`run_outcome_harvest_and_reporting.py`)
+- `run_outcome_harvest_and_reporting` -> `normalization_primitives` (`run_outcome_harvest_and_reporting.py`)
 - `runtime_controller_api` -> `controller_runtime` (`runtime_controller_api.py`)
 - `runtime_controller_api` -> `learning_context` (`runtime_controller_api.py`)
 - `runtime_controller_api` -> `learning_context_skill_projection` (`runtime_controller_api.py`)
@@ -680,32 +977,26 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 - `runtime_governance_context` -> `applied_theory_types` (`runtime_governance_context.py`)
 - `runtime_governance_context` -> `capability_runtime` (`runtime_governance_context.py`)
 - `runtime_governance_context` -> `governed_skill_access` (`runtime_governance_context.py`)
-- `runtime_governance_context` -> `skill_governance` (`runtime_governance_context.py`)
-- `runtime_governance_context` -> `skill_lifecycle` (`runtime_governance_context.py`)
 - `semantic_prompt_posture` -> `prompt_directives` (`semantic_prompt_posture.py`)
 - `semantic_prompt_posture` -> `semantic_text` (`semantic_prompt_posture.py`)
-- `semantic_text` -> `learn` (`semantic_text.py`)
 - `semantic_text` -> `title_semantics` (`semantic_text.py`)
 - `side` -> `applied_theory_types` (`side.py`)
 - `side` -> `artifact` (`side.py`)
 - `side` -> `boundary` (`side.py`)
-- `side` -> `execution_framework_primitives` (`side.py`)
 - `side` -> `side_runtime_dependencies` (`side.py`)
 - `side_runtime_dependencies` -> `applied_theory_primitives` (`side_runtime_dependencies.py`)
 - `side_runtime_dependencies` -> `applied_theory_types` (`side_runtime_dependencies.py`)
 - `side_runtime_dependencies` -> `artifact` (`side_runtime_dependencies.py`)
 - `side_runtime_dependencies` -> `fallback_not_generation` (`side_runtime_dependencies.py`)
 - `side_runtime_dependencies` -> `id_generation` (`side_runtime_dependencies.py`)
-- `side_runtime_dependencies` -> `normalize` (`side_runtime_dependencies.py`)
+- `side_runtime_dependencies` -> `non_achievedness_normalization` (`side_runtime_dependencies.py`)
+- `side_runtime_dependencies` -> `normalization_primitives` (`side_runtime_dependencies.py`)
 - `side_runtime_dependencies` -> `semantic_text` (`side_runtime_dependencies.py`)
 - `side_runtime_dependencies` -> `store` (`side_runtime_dependencies.py`)
 - `side_runtime_dependencies` -> `structured_learning_yaml` (`side_runtime_dependencies.py`)
 - `skill_boundary_normalization` -> `applied_theory_types` (`skill_boundary_normalization.py`)
-- `skill_boundary_normalization` -> `semantic_text` (`skill_boundary_normalization.py`)
 - `skill_boundary_normalization` -> `skill_governance` (`skill_boundary_normalization.py`)
-- `skill_boundary_normalization` -> `skill_leaf_types` (`skill_boundary_normalization.py`)
-- `skill_boundary_normalization` -> `skill_path_notation` (`skill_boundary_normalization.py`)
-- `skill_compatibility_export` -> `normalize` (`skill_compatibility_export.py`)
+- `skill_compatibility_export` -> `normalization_primitives` (`skill_compatibility_export.py`)
 - `skill_compatibility_export` -> `semantic_text` (`skill_compatibility_export.py`)
 - `skill_compatibility_export` -> `skill_export_projection` (`skill_compatibility_export.py`)
 - `skill_compatibility_import` -> `semantic_text` (`skill_compatibility_import.py`)
@@ -714,79 +1005,47 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 - `skill_compiler` -> `skill_schema_io` (`skill_compiler.py`)
 - `skill_composition` -> `applied_theory_types` (`skill_composition.py`)
 - `skill_composition` -> `semantic_text` (`skill_composition.py`)
-- `skill_composition` -> `skill_boundary_normalization` (`skill_composition.py`)
 - `skill_composition` -> `skill_ir` (`skill_composition.py`)
-- `skill_composition` -> `skill_leaf_types` (`skill_composition.py`)
-- `skill_composition` -> `skill_path_notation` (`skill_composition.py`)
 - `skill_export_projection` -> `applied_theory_types` (`skill_export_projection.py`)
-- `skill_export_projection` -> `approval_governance` (`skill_export_projection.py`)
-- `skill_export_projection` -> `execution_frameworks` (`skill_export_projection.py`)
 - `skill_export_projection` -> `host_abi` (`skill_export_projection.py`)
 - `skill_export_projection` -> `side` (`skill_export_projection.py`)
 - `skill_export_projection` -> `skill_boundary_normalization` (`skill_export_projection.py`)
 - `skill_export_projection` -> `skill_compatibility_import` (`skill_export_projection.py`)
 - `skill_export_projection` -> `skill_governance` (`skill_export_projection.py`)
 - `skill_export_projection` -> `skill_ir` (`skill_export_projection.py`)
-- `skill_export_projection` -> `skill_lifecycle` (`skill_export_projection.py`)
-- `skill_export_projection` -> `skill_safety_governance` (`skill_export_projection.py`)
 - `skill_export_projection` -> `skill_schema_io` (`skill_export_projection.py`)
 - `skill_governance` -> `applied_theory_types` (`skill_governance.py`)
-- `skill_governance` -> `approval_governance` (`skill_governance.py`)
-- `skill_governance` -> `execution_framework_primitives` (`skill_governance.py`)
 - `skill_governance` -> `host_abi` (`skill_governance.py`)
 - `skill_governance` -> `python_skill_brokerization` (`skill_governance.py`)
 - `skill_governance` -> `semantic_text` (`skill_governance.py`)
-- `skill_governance` -> `skill_governance_primitives` (`skill_governance.py`)
-- `skill_governance` -> `skill_lifecycle` (`skill_governance.py`)
-- `skill_governance` -> `skill_safety_governance` (`skill_governance.py`)
 - `skill_governance` -> `virtual_mounts` (`skill_governance.py`)
-- `skill_governance_primitives` -> `semantic_text` (`skill_governance_primitives.py`)
 - `skill_ir` -> `applied_theory_types` (`skill_ir.py`)
-- `skill_ir` -> `execution_frameworks` (`skill_ir.py`)
-- `skill_ir` -> `normalize` (`skill_ir.py`)
 - `skill_ir` -> `semantic_text` (`skill_ir.py`)
 - `skill_ir` -> `skill_boundary_normalization` (`skill_ir.py`)
 - `skill_ir` -> `skill_compatibility_import` (`skill_ir.py`)
 - `skill_ir` -> `skill_governance` (`skill_ir.py`)
-- `skill_ir` -> `skill_lifecycle` (`skill_ir.py`)
-- `skill_leaf_types` -> `applied_theory_primitives` (`skill_leaf_types.py`)
-- `skill_lifecycle` -> `applied_theory_primitives` (`skill_lifecycle.py`)
-- `skill_lifecycle` -> `artifact_contracts` (`skill_lifecycle.py`)
-- `skill_lifecycle` -> `semantic_text` (`skill_lifecycle.py`)
-- `skill_path_notation` -> `applied_theory_primitives` (`skill_path_notation.py`)
-- `skill_path_notation` -> `skill_leaf_types` (`skill_path_notation.py`)
 - `skill_registry` -> `applied_theory_types` (`skill_registry.py`)
 - `skill_registry` -> `artifact` (`skill_registry.py`)
 - `skill_registry` -> `host_abi` (`skill_registry.py`)
 - `skill_registry` -> `skill_compiler` (`skill_registry.py`)
 - `skill_registry` -> `skill_export_projection` (`skill_registry.py`)
-- `skill_registry` -> `skill_governance` (`skill_registry.py`)
 - `skill_registry` -> `skill_ir` (`skill_registry.py`)
-- `skill_registry` -> `skill_lifecycle` (`skill_registry.py`)
-- `skill_registry` -> `skill_safety_governance` (`skill_registry.py`)
 - `skill_registry` -> `store` (`skill_registry.py`)
-- `skill_safety_governance` -> `artifact_contracts` (`skill_safety_governance.py`)
-- `skill_safety_governance` -> `semantic_text` (`skill_safety_governance.py`)
-- `skill_safety_governance` -> `skill_lifecycle` (`skill_safety_governance.py`)
 - `skill_schema_io` -> `applied_theory_types` (`skill_schema_io.py`)
-- `skill_schema_io` -> `approval_governance` (`skill_schema_io.py`)
 - `skill_schema_io` -> `artifact` (`skill_schema_io.py`)
 - `skill_schema_io` -> `execution_frameworks` (`skill_schema_io.py`)
 - `skill_schema_io` -> `host_abi` (`skill_schema_io.py`)
-- `skill_schema_io` -> `normalize` (`skill_schema_io.py`)
+- `skill_schema_io` -> `normalization_primitives` (`skill_schema_io.py`)
 - `skill_schema_io` -> `semantic_text` (`skill_schema_io.py`)
 - `skill_schema_io` -> `side` (`skill_schema_io.py`)
 - `skill_schema_io` -> `skill_boundary_normalization` (`skill_schema_io.py`)
 - `skill_schema_io` -> `skill_compatibility_import` (`skill_schema_io.py`)
-- `skill_schema_io` -> `skill_governance` (`skill_schema_io.py`)
-- `skill_schema_io` -> `skill_ir` (`skill_schema_io.py`)
-- `skill_schema_io` -> `skill_lifecycle` (`skill_schema_io.py`)
-- `skill_schema_io` -> `skill_safety_governance` (`skill_schema_io.py`)
 - `skill_schema_io` -> `store` (`skill_schema_io.py`)
 - `store` -> `applied_theory_types` (`store.py`)
 - `store` -> `artifact` (`store.py`)
 - `store` -> `boundary` (`store.py`)
-- `store` -> `normalize` (`store.py`)
+- `store` -> `non_achievedness_normalization` (`store.py`)
+- `store` -> `normalization_primitives` (`store.py`)
 - `store` -> `semantic_text` (`store.py`)
 - `store` -> `structured_learning_yaml` (`store.py`)
 - `structured_learning_yaml` -> `semantic_text` (`structured_learning_yaml.py`)
@@ -796,12 +1055,11 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 - `system_state` -> `artifact` (`system_state.py`)
 - `system_state` -> `boundary` (`system_state.py`)
 - `system_state` -> `id_generation` (`system_state.py`)
-- `system_state` -> `normalize` (`system_state.py`)
+- `system_state` -> `normalization_primitives` (`system_state.py`)
 - `tablet_safety_validation` -> `validation_sqlite` (`tablet_safety_validation.py`)
 - `title_depth_learning_validation` -> `validation_sqlite` (`title_depth_learning_validation.py`)
 - `title_semantics` -> `prolog` (`title_semantics.py`)
 - `url_learning_capture` -> `semantic_text` (`url_learning_capture.py`)
-- `virtual_mounts` -> `data_governance` (`virtual_mounts.py`)
 - `virtual_mounts` -> `runtime_temp` (`virtual_mounts.py`)
 - `virtual_mounts` -> `semantic_text` (`virtual_mounts.py`)
 - `wasm_skill_runtime` -> `applied_theory_types` (`wasm_skill_runtime.py`)
@@ -809,12 +1067,46 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 - `wasm_skill_runtime` -> `host_brokers` (`wasm_skill_runtime.py`)
 - `wasm_skill_runtime` -> `semantic_text` (`wasm_skill_runtime.py`)
 
+## Component-to-Root-Package Dependencies
+
+- `subject_core` -> `dst` (`workstation/subject_core/src/workstation/subject/core/subject_workflow.py`)
+
+## Root-Module-to-Package Dependencies
+
+- `decision_review_projection` -> `coordinated_transformation` (`decision_review_projection.py`)
+
+## Root-Package-to-Component Dependencies
+
+No top-level package family imports a workspace component.
+
+## Root-Package-to-Module Dependencies
+
+- `dst` -> `applied_theory_types` (`dst/orchestration.py`)
+- `dst` -> `decision_review` (`dst/projection.py`)
+- `dst` -> `decision_review_constructs` (`dst/orchestration.py`, `dst/projection.py`)
+- `dst` -> `id_generation` (`dst/orchestration.py`, `dst/projection.py`, `dst/revision.py`)
+- `dst` -> `itemize` (`dst/orchestration.py`)
+- `dst` -> `runtime_controller_api` (`dst/orchestration.py`)
+- `dst` -> `semantic_text` (`dst/discovery.py`, `dst/normalization.py`, `dst/orchestration.py`, `dst/projection.py`, `dst/revision.py`)
+
+## Root-Package-to-Package Dependencies
+
+- `dst` -> `coordinated_transformation` (`dst/normalization.py`, `dst/orchestration.py`, `dst/projection.py`, `dst/revision.py`)
+
 ## Combined Root/Package Cycles
 
-No cycles span root modules and workspace packages.
+No cycles span root modules, top-level package families, and workspace packages.
 
 ## Wildcard Exports
 
+- `coordinated_transformation/__init__.py` imports `*` from `coordinated_transformation.core` (line 1)
+- `data_governance.py` imports `*` from `realized_core_governance.data` (line 10)
+- `dst/__init__.py` imports `*` from `dst.core` (line 1)
+- `dst/__init__.py` imports `*` from `dst.discovery` (line 2)
+- `dst/__init__.py` imports `*` from `dst.normalization` (line 3)
+- `dst/__init__.py` imports `*` from `dst.orchestration` (line 4)
+- `dst/__init__.py` imports `*` from `dst.projection` (line 5)
+- `dst/__init__.py` imports `*` from `dst.revision` (line 6)
 - `workstation/app_cli/src/workstation/app/cli/__init__.py` imports `*` from `workstation.app.cli.cli` (line 1)
 - `workstation/foundation_models/src/workstation/foundation/models/__init__.py` imports `*` from `workstation.foundation.models.models` (line 1)
 - `workstation/foundation_projections/src/workstation/foundation/projections/__init__.py` imports `*` from `workstation.foundation.projections.projection_models` (line 1)
@@ -824,4 +1116,4 @@ No cycles span root modules and workspace packages.
 
 ## Ratchet Rules
 
-The checked-in baseline records the facts above. Declared compatibility aliases preserve historical ABI; every measured category remains closed to expansion. The checker fails for new dependency edges, undeclared or forbidden edges, package-to-root, root-to-package, or root-to-root dependencies, new compatibility-alias edges, new wildcard exports, unregistered packages, and new or enlarged package or combined strongly connected components. Removing a violation and refreshing the baseline makes that improvement permanent.
+The checked-in baseline records the facts above. Declared compatibility aliases preserve historical ABI; every measured category remains closed to expansion. The checker fails for unowned, multiply owned, or stale root modules or package families; changed root ownership; package or canonical-root imports of compatibility facades; new dependency edges; undeclared or forbidden edges; package-to-root, root-to-package, root-to-root, or top-level package-family dependencies; new compatibility-alias edges; new wildcard exports, unregistered packages, and new or enlarged package or combined strongly connected components. Removing a violation and refreshing the baseline makes that improvement permanent.

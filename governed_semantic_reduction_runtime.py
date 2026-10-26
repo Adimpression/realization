@@ -18,7 +18,7 @@ from applied_theory_types import (
     Result,
     SemanticNode,
 )
-from normalize import (
+from normalization_primitives import (
     normalize_boundary_shape,
     normalize_closure_rule,
     normalize_decomposition_mode,

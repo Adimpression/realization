@@ -19,6 +19,9 @@ steps:
         python -m pip install --disable-pip-version-check --no-cache-dir uv==0.10.10 &&
         uv sync --frozen &&
         uv build --wheel host_interaction --out-dir /workspace/host-interaction-dist &&
+        uv build core_governance --out-dir /workspace/core-governance-dist &&
+        uv build core_semantics --out-dir /workspace/core-semantics-dist &&
+        uv build skill_semantics --out-dir /workspace/skill-semantics-dist &&
         uv build core_runtime --out-dir /workspace/core-runtime-dist &&
         uv build --wheel core_engine --out-dir /workspace/core-engine-dist &&
         uv build --wheel core_llm --out-dir /workspace/core-llm-dist &&
@@ -29,6 +32,26 @@ steps:
         core_runtime.tests.test_attempts
         core_runtime.tests.test_reduction
         core_runtime.tests.test_telemetry
+        core_governance.tests.test_admission
+        core_governance.tests.test_api
+        core_governance.tests.test_approval
+        core_governance.tests.test_data
+        core_governance.tests.test_declarations
+        core_governance.tests.test_distribution
+        core_governance.tests.test_inventory
+        core_governance.tests.test_lifecycle
+        core_governance.tests.test_records
+        core_governance.tests.test_safety
+        core_governance.tests.test_vocabulary
+        core_semantics.tests.test_api
+        core_semantics.tests.test_distribution
+        skill_semantics.tests.test_api
+        skill_semantics.tests.test_composition
+        skill_semantics.tests.test_declaration
+        skill_semantics.tests.test_distribution
+        skill_semantics.tests.test_execution
+        skill_semantics.tests.test_invocation
+        skill_semantics.tests.test_ir
         core_engine.tests.test_api
         core_engine.tests.test_canonical_reduction
         core_engine.tests.test_distribution
@@ -63,6 +86,7 @@ steps:
         tests.test_controller_layer_hygiene
         tests.test_llm_layer_hygiene
         tests.test_exchange_layer_hygiene
+        skill_semantics.tests.test_normalization
         tests.test_skill_boundary_normalization
         workstation.tests.test_workstation_proto_documentation
         workstation.tests.test_six_layer_workstation_boundary_hygiene &&
@@ -70,8 +94,14 @@ steps:
         --app-wheel /workspace/core-app-dist/realized_core-0.1.0-py3-none-any.whl
         --conversation-wheel /workspace/core-conversation-dist/realized_core_conversation-0.1.0-py3-none-any.whl
         --engine-wheel /workspace/core-engine-dist/realized_core_engine-0.1.0-py3-none-any.whl
+        --governance-wheel /workspace/core-governance-dist/realized_core_governance-0.1.0-py3-none-any.whl
+        --governance-sdist /workspace/core-governance-dist/realized_core_governance-0.1.0.tar.gz
         --host-interaction-wheel /workspace/host-interaction-dist/realized_host_interaction-0.1.0-py3-none-any.whl
         --llm-wheel /workspace/core-llm-dist/realized_core_llm-0.1.0-py3-none-any.whl
+        --semantics-wheel /workspace/core-semantics-dist/realized_core_semantics-0.1.0-py3-none-any.whl
+        --semantics-sdist /workspace/core-semantics-dist/realized_core_semantics-0.1.0.tar.gz
+        --skill-semantics-wheel /workspace/skill-semantics-dist/realized_skill_semantics-0.1.0-py3-none-any.whl
+        --skill-semantics-sdist /workspace/skill-semantics-dist/realized_skill_semantics-0.1.0.tar.gz
         --runtime-wheel /workspace/core-runtime-dist/realized_core_runtime-0.1.0-py3-none-any.whl
 
   - name: 'python:3.14-slim'

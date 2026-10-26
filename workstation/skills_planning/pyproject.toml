@@ -4,12 +4,16 @@ version = "0.1.0"
 description = "Workstation skill planning package for Realized."
 requires-python = ">=3.14"
 dependencies = [
+    "realized-skill-semantics",
     "realized-workstation",
     "realized-workstation-contracts",
     "realized-workstation-foundation-host",
     "realized-workstation-foundation-models",
     "realized-workstation-skills-core",
 ]
+
+[tool.uv.sources]
+realized-skill-semantics = { workspace = true }
 
 [build-system]
 requires = ["setuptools>=69", "wheel"]

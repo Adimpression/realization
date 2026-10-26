@@ -11,12 +11,12 @@ from typing import Any
 from applied_theory_types import Artifact, enum_text, utc_now
 from artifact import yaml_dump_human
 from host_abi import host_abi_version
+from realized_core_governance.lifecycle import artifact_skill_lifecycle
+from realized_core_governance.records import artifact_skill_admission
 from skill_compiler import compiled_skill_summary_from_artifact
 from skill_ir import canonical_skill_ir_from_artifact
-from skill_governance import artifact_skill_admission
 from skill_export_projection import skill_export_document
-from skill_lifecycle import artifact_skill_lifecycle
-from skill_safety_governance import (
+from realized_core_governance.safety import (
     artifact_is_incident_record,
     artifact_is_revocation_record,
     governed_safety_lifecycle_overlay,

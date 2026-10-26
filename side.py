@@ -12,7 +12,7 @@ import yaml
 from applied_theory_types import Artifact, ControllerFeatureToggles
 from artifact import artifact_export_in_entries, artifact_export_out_entries
 from boundary import infer_artifact_boundary_shape, infer_function_bit
-from execution_framework_primitives import (
+from realized_skill_semantics.execution import (
     ability_executable_text,
     ability_executor_framework,
     executor_framework_content_key,

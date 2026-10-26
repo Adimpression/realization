@@ -41,6 +41,9 @@ dependencies = [
     "protobuf>=6.33.6",
     "grpcio-tools>=1.80.0",
     "realized-host-interaction",
+    "realized-core-governance",
+    "realized-core-semantics",
+    "realized-skill-semantics",
     "realized-core-runtime",
     "realized-core-engine",
     "realized-core-conversation",
@@ -81,8 +84,11 @@ members = [
     "core_app",
     "core_conversation",
     "core_engine",
+    "core_governance",
     "core_llm",
     "core_runtime",
+    "core_semantics",
+    "skill_semantics",
     "workstation/app_cli",
     "workstation/contracts_api",
     "workstation/foundation_events",
@@ -106,6 +112,9 @@ members = [
 
 [tool.uv.sources]
 realized-host-interaction = { workspace = true }
+realized-core-governance = { workspace = true }
+realized-core-semantics = { workspace = true }
+realized-skill-semantics = { workspace = true }
 realized-core = { workspace = true }
 realized-core-conversation = { workspace = true }
 realized-core-engine = { workspace = true }

@@ -5,7 +5,9 @@ import unittest
 
 import applied_theory_primitives
 import applied_theory_types
+import approval_governance
 import artifact
+import artifact_contracts
 import side
 from artifact_contracts import ArtifactContentView, TitledArtifactContentView
 import blend_workflow
@@ -13,12 +15,14 @@ import blend_workflow_models
 import blend_world
 import blend_world_models
 import controller_runtime
+import data_governance
 import decision_review
 import decision_review_models
 import execution_framework_primitives
 import execution_frameworks
 import fallback_not_generation
 import fallback_not_semantics
+import governance_inventory
 import host_interaction_action_dispatch
 import host_interaction_actions
 import host_interaction_context
@@ -28,15 +32,24 @@ import host_interaction_receipts
 import host_interaction_resolution
 import itemize
 import itemize_models
+import learn
 import learning_context
 import learning_context_paths
 import normalize
 import normalization_primitives
 import not_elaboration_ranking
+import pure_theory_types
 import semantic_text
 import skill_governance
 import skill_governance_primitives
+import skill_composition
+import skill_ir
 import skill_invocation_contract
+import skill_boundary_normalization
+import skill_leaf_types
+import skill_lifecycle
+import skill_path_notation
+import skill_safety_governance
 from realized_host_interaction import (
     action_dispatch as packaged_host_action_dispatch,
     actions as packaged_host_actions,
@@ -50,10 +63,137 @@ from realized_host_interaction._normalization import (
     collapse_ws as host_interaction_collapse_ws,
     json_safe as host_interaction_json_safe,
 )
+from realized_core_semantics import artifacts as packaged_artifact_contracts
+from realized_core_semantics import theory as packaged_theory
+from realized_core_semantics import values as packaged_values
+from realized_core_governance import approval as packaged_approval_governance
+from realized_core_governance import admission as packaged_governance_admission
+from realized_core_governance import data as packaged_data_governance
+from realized_core_governance import declarations as packaged_governance_declarations
+from realized_core_governance import inventory as packaged_governance_inventory
+from realized_core_governance import lifecycle as packaged_skill_lifecycle
+from realized_core_governance import records as packaged_governance_records
+from realized_core_governance import safety as packaged_skill_safety
+from realized_core_governance import vocabulary as packaged_governance_vocabulary
+from realized_skill_semantics import composition as packaged_skill_composition
+from realized_skill_semantics import declaration as packaged_skill_declaration
+from realized_skill_semantics import execution as packaged_skill_execution
+from realized_skill_semantics import leaves as packaged_skill_leaves
+from realized_skill_semantics import ir as packaged_skill_ir
+from realized_skill_semantics import invocation as packaged_skill_invocation
+from realized_skill_semantics import normalization as packaged_skill_normalization
+from realized_skill_semantics import paths as packaged_skill_paths
 from workstation.skills.core import invocation_contract
 
 
 class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
+    def test_formal_semantic_facades_keep_packaged_identities(self) -> None:
+        for name in pure_theory_types.__all__:
+            with self.subTest(module="pure_theory_types", name=name):
+                self.assertIs(
+                    getattr(pure_theory_types, name),
+                    getattr(packaged_theory, name),
+                )
+        for name in artifact_contracts.__all__:
+            with self.subTest(module="artifact_contracts", name=name):
+                self.assertIs(
+                    getattr(artifact_contracts, name),
+                    getattr(packaged_artifact_contracts, name),
+                )
+
+    def test_legacy_formal_theory_pickle_global_still_resolves(self) -> None:
+        self.assertIs(
+            pickle.loads(b"cpure_theory_types\nNonAchievedness\n."),
+            packaged_theory.NonAchievedness,
+        )
+
+    def test_skill_semantic_facades_keep_packaged_identities(self) -> None:
+        for facade, implementation in (
+            (skill_leaf_types, packaged_skill_leaves),
+            (skill_path_notation, packaged_skill_paths),
+        ):
+            for name in facade.__all__:
+                with self.subTest(module=facade.__name__, name=name):
+                    self.assertIs(
+                        getattr(facade, name),
+                        getattr(implementation, name),
+                    )
+
+    def test_legacy_skill_semantic_pickle_globals_still_resolve(self) -> None:
+        self.assertIs(
+            pickle.loads(b"cskill_leaf_types\nSkillLeaf\n."),
+            packaged_skill_leaves.SkillLeaf,
+        )
+        self.assertIs(
+            pickle.loads(b"cskill_leaf_types\nSkillLeafClass\n."),
+            packaged_skill_leaves.SkillLeafClass,
+        )
+        self.assertIs(
+            pickle.loads(b"cskill_path_notation\ncanonical_skill_path\n."),
+            packaged_skill_paths.canonical_skill_path,
+        )
+
+    def test_skill_normalization_compatibility_aliases_keep_packaged_identities(self) -> None:
+        for name in (
+            "normalize_skill_region_body",
+            "normalized_skill_normalization_payload",
+            "reconstruct_skill_region_body",
+            "synthesized_skill_normalization",
+        ):
+            with self.subTest(name=name):
+                self.assertIs(
+                    getattr(skill_boundary_normalization, name),
+                    getattr(packaged_skill_normalization, name),
+                )
+
+    def test_legacy_skill_normalization_pickle_global_still_resolves(self) -> None:
+        self.assertIs(
+            pickle.loads(
+                b"cskill_boundary_normalization\nnormalize_skill_region_body\n."
+            ),
+            packaged_skill_normalization.normalize_skill_region_body,
+        )
+
+    def test_skill_ir_compatibility_aliases_keep_packaged_identities(self) -> None:
+        for name in packaged_skill_ir.__all__:
+            with self.subTest(name=name):
+                self.assertIs(
+                    getattr(skill_ir, name),
+                    getattr(packaged_skill_ir, name),
+                )
+
+    def test_legacy_skill_ir_pickle_global_still_resolves(self) -> None:
+        self.assertIs(
+            pickle.loads(b"cskill_ir\nCanonicalSkillIR\n."),
+            packaged_skill_ir.CanonicalSkillIR,
+        )
+
+    def test_skill_composition_value_aliases_keep_packaged_identities(self) -> None:
+        for name in packaged_skill_composition.__all__:
+            with self.subTest(name=name):
+                self.assertIs(
+                    getattr(skill_composition, name),
+                    getattr(packaged_skill_composition, name),
+                )
+
+    def test_legacy_skill_composition_pickle_globals_still_resolve(self) -> None:
+        for name in packaged_skill_composition.__all__:
+            with self.subTest(name=name):
+                self.assertIs(
+                    pickle.loads(f"cskill_composition\n{name}\n.".encode("ascii")),
+                    getattr(packaged_skill_composition, name),
+                )
+
+    def test_learning_token_constants_keep_their_historical_identity(self) -> None:
+        self.assertIs(
+            learn.LEARNING_STOP_TOKENS,
+            semantic_text.LEARNING_STOP_TOKENS,
+        )
+        self.assertIs(
+            learn.LEARNING_COMPONENT_BREAKS,
+            semantic_text.LEARNING_COMPONENT_BREAKS,
+        )
+
     def test_host_interaction_facades_keep_packaged_identities(self) -> None:
         facade_pairs = (
             (host_interaction_action_dispatch, packaged_host_action_dispatch),
@@ -167,6 +307,19 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
                     getattr(applied_theory_primitives, name),
                 )
 
+    def test_semantic_value_facades_keep_packaged_identities(self) -> None:
+        for name in ("json_safe", "utc_now"):
+            with self.subTest(name=name):
+                packaged_value = getattr(packaged_values, name)
+                self.assertIs(
+                    getattr(applied_theory_primitives, name),
+                    packaged_value,
+                )
+                self.assertIs(
+                    getattr(applied_theory_types, name),
+                    packaged_value,
+                )
+
     def test_artifact_content_contract_accepts_the_concrete_record(self) -> None:
         artifact = applied_theory_types.Artifact.from_dict(
             {
@@ -211,11 +364,21 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
     def test_executor_normalizers_keep_their_legacy_identity(self) -> None:
         self.assertIs(
             execution_frameworks.normalize_executor_framework_name,
+            packaged_skill_execution.normalize_executor_framework_name,
+        )
+        self.assertIs(
             execution_framework_primitives.normalize_executor_framework_name,
+            packaged_skill_execution.normalize_executor_framework_name,
         )
         self.assertIs(
             execution_frameworks.normalize_supported_executor_frameworks,
             execution_framework_primitives.normalize_supported_executor_frameworks,
+        )
+        self.assertFalse(
+            hasattr(
+                packaged_skill_execution,
+                "normalize_supported_executor_frameworks",
+            )
         )
 
     def test_learning_context_paths_keep_their_legacy_identity(self) -> None:
@@ -332,6 +495,10 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
                     getattr(skill_governance, name),
                     getattr(skill_governance_primitives, name),
                 )
+                self.assertIs(
+                    getattr(skill_governance_primitives, name),
+                    getattr(packaged_governance_vocabulary, name),
+                )
         cases = (
             ("normalize_skill_kind", "ABILITY"),
             ("normalize_skill_risk_tier", "tier3_sensitive"),
@@ -340,22 +507,232 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
         )
         for name, value in cases:
             with self.subTest(name=name):
+                self.assertIs(
+                    getattr(skill_governance_primitives, name),
+                    getattr(packaged_governance_vocabulary, name),
+                )
                 self.assertEqual(
                     getattr(skill_governance, name)(value),
                     getattr(skill_governance_primitives, name)(value),
                 )
 
-    def test_execution_descriptor_helpers_keep_their_legacy_identity(self) -> None:
-        for name in (
-            "ability_executable_text",
-            "ability_executor_framework",
-            "executor_framework_content_key",
+    def test_skill_lifecycle_keeps_packaged_identities(self) -> None:
+        for name in skill_lifecycle.__all__:
+            with self.subTest(name=name):
+                self.assertIs(
+                    getattr(skill_lifecycle, name),
+                    getattr(packaged_skill_lifecycle, name),
+                )
+
+    def test_approval_governance_keeps_packaged_identities(self) -> None:
+        for name in approval_governance.__all__:
+            with self.subTest(name=name):
+                self.assertIs(
+                    getattr(approval_governance, name),
+                    getattr(packaged_approval_governance, name),
+                )
+
+    def test_data_governance_keeps_packaged_identities(self) -> None:
+        for name in data_governance.__all__:
+            with self.subTest(name=name):
+                self.assertIs(
+                    getattr(data_governance, name),
+                    getattr(packaged_data_governance, name),
+                )
+
+    def test_skill_safety_governance_keeps_packaged_identities(self) -> None:
+        for name in skill_safety_governance.__all__:
+            with self.subTest(name=name):
+                self.assertIs(
+                    getattr(skill_safety_governance, name),
+                    getattr(packaged_skill_safety, name),
+                )
+
+    def test_skill_governance_record_projections_keep_packaged_identities(self) -> None:
+        for name in packaged_governance_records.__all__:
+            with self.subTest(name=name):
+                self.assertIs(
+                    getattr(skill_governance, name),
+                    getattr(packaged_governance_records, name),
+                )
+
+    def test_governance_inventory_loader_keeps_packaged_identity(self) -> None:
+        self.assertIs(
+            governance_inventory.load_governance_inventory,
+            packaged_governance_inventory.load_governance_inventory,
+        )
+
+    def test_governance_declaration_helpers_keep_packaged_identities(self) -> None:
+        for name in packaged_governance_declarations.__all__:
+            with self.subTest(name=name):
+                self.assertIs(
+                    getattr(skill_governance, name),
+                    getattr(packaged_governance_declarations, name),
+                )
+
+    def test_skill_admission_keeps_root_orchestration_and_package_policy_owner(self) -> None:
+        self.assertEqual(
+            "realized_core_governance.admission",
+            packaged_governance_admission.evaluate_skill_policy_admission.__module__,
+        )
+        self.assertEqual(
+            "skill_governance",
+            skill_governance.evaluate_skill_admission.__module__,
+        )
+        self.assertIs(
+            pickle.loads(b"cskill_governance\nevaluate_skill_admission\n."),
+            skill_governance.evaluate_skill_admission,
+        )
+
+    def test_skill_declaration_semantics_keep_packaged_identities(self) -> None:
+        for name in packaged_skill_declaration.__all__:
+            with self.subTest(name=name):
+                self.assertIs(
+                    getattr(skill_governance, name),
+                    getattr(packaged_skill_declaration, name),
+                )
+
+    def test_historical_governance_function_pickle_globals_still_resolve(self) -> None:
+        for module_name, implementation, names in (
+            (
+                "governance_inventory",
+                packaged_governance_inventory,
+                ("load_governance_inventory",),
+            ),
+            (
+                "skill_governance",
+                packaged_governance_declarations,
+                (
+                    "policy_answer_summary",
+                    "skill_declaration_from_payload",
+                    "skill_policy_from_payload",
+                ),
+            ),
+            (
+                "skill_governance",
+                packaged_governance_records,
+                (
+                    "artifact_is_policy_record",
+                    "artifact_skill_admission",
+                    "artifact_skill_declaration",
+                    "artifact_skill_policy",
+                ),
+            ),
+            (
+                "skill_governance",
+                packaged_skill_declaration,
+                (
+                    "composition_binding_targets",
+                    "normalize_skill_schema_version",
+                ),
+            ),
+            (
+                "data_governance",
+                packaged_data_governance,
+                (
+                    "allowed_data_classes_from_governance_context",
+                    "ensure_governed_data_access",
+                    "normalize_data_class",
+                    "normalize_data_class_list",
+                    "normalize_named_query_registry",
+                    "query_is_read_only",
+                ),
+            ),
+            (
+                "approval_governance",
+                packaged_approval_governance,
+                (
+                    "approval_answer_summary",
+                    "approval_matches_skill",
+                    "artifact_is_approval_record",
+                    "artifact_skill_approval",
+                    "matching_approval_artifacts",
+                    "normalize_approval_record_status",
+                    "skill_approval_from_payload",
+                ),
+            ),
+            (
+                "skill_governance_primitives",
+                packaged_governance_vocabulary,
+                (
+                    "normalize_skill_approval_class",
+                    "normalize_skill_authorities",
+                    "normalize_skill_kind",
+                    "normalize_skill_risk_tier",
+                ),
+            ),
+            (
+                "skill_lifecycle",
+                packaged_skill_lifecycle,
+                (
+                    "artifact_effective_skill_lifecycle",
+                    "artifact_skill_lifecycle",
+                    "skill_lifecycle_allows_invocation",
+                    "skill_lifecycle_from_payload",
+                    "synthesized_skill_lifecycle",
+                ),
+            ),
+            (
+                "skill_safety_governance",
+                packaged_skill_safety,
+                (
+                    "artifact_is_incident_record",
+                    "artifact_is_revocation_record",
+                    "artifact_skill_incident",
+                    "artifact_skill_revocation",
+                    "governed_safety_lifecycle_overlay",
+                    "incident_answer_summary",
+                    "incident_matches_skill",
+                    "matching_incident_artifacts",
+                    "matching_revocation_artifacts",
+                    "normalize_incident_enforcement_action",
+                    "normalize_incident_record_status",
+                    "normalize_incident_severity",
+                    "normalize_revocation_record_status",
+                    "revocation_answer_summary",
+                    "revocation_matches_skill",
+                    "skill_incident_from_payload",
+                    "skill_revocation_from_payload",
+                ),
+            ),
         ):
+            for name in names:
+                with self.subTest(module=module_name, name=name):
+                    self.assertIs(
+                        pickle.loads(f"c{module_name}\n{name}\n.".encode("ascii")),
+                        getattr(implementation, name),
+                    )
+
+    def test_execution_descriptor_helpers_keep_their_legacy_identity(self) -> None:
+        for name in packaged_skill_execution.__all__:
             with self.subTest(name=name):
                 self.assertIs(
                     getattr(execution_frameworks, name),
-                    getattr(execution_framework_primitives, name),
+                    getattr(packaged_skill_execution, name),
                 )
+                self.assertIs(
+                    getattr(execution_framework_primitives, name),
+                    getattr(packaged_skill_execution, name),
+                )
+
+    def test_historical_execution_descriptor_pickle_globals_still_resolve(self) -> None:
+        for module_name in (
+            "execution_framework_primitives",
+            "execution_frameworks",
+        ):
+            for name in (
+                "normalize_executor_framework_name",
+                "executor_framework_content_key",
+                "ability_executor_framework",
+                "ability_executable_text",
+            ):
+                with self.subTest(module=module_name, name=name):
+                    self.assertIs(
+                        pickle.loads(
+                            f"c{module_name}\n{name}\n.".encode("ascii")
+                        ),
+                        getattr(packaged_skill_execution, name),
+                    )
 
     def test_learning_token_normalizer_keeps_the_legacy_identity(self) -> None:
         self.assertIs(
@@ -368,7 +745,7 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
             "SkillInvocationBinding",
             "SkillInvocationRequest",
             "SkillInvocationResult",
-            "skill_invocation_request_from_artifact",
+            "required_skill_input_names",
             "skill_invocation_result_from_mapping",
         ):
             with self.subTest(name=name):
@@ -376,12 +753,28 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
                     getattr(skill_invocation_contract, name),
                     getattr(invocation_contract, name),
                 )
+                self.assertIs(
+                    getattr(skill_invocation_contract, name),
+                    getattr(packaged_skill_invocation, name),
+                )
+        self.assertIs(
+            skill_invocation_contract.skill_invocation_request_from_artifact,
+            invocation_contract.skill_invocation_request_from_artifact,
+        )
 
     def test_legacy_skill_invocation_pickle_global_still_resolves(self) -> None:
-        self.assertIs(
-            pickle.loads(b"cskill_invocation_contract\nSkillInvocationBinding\n."),
-            invocation_contract.SkillInvocationBinding,
-        )
+        for name in (
+            "SkillInvocationBinding",
+            "SkillInvocationRequest",
+            "SkillInvocationResult",
+        ):
+            with self.subTest(name=name):
+                self.assertIs(
+                    pickle.loads(
+                        f"cskill_invocation_contract\n{name}\n.".encode("ascii")
+                    ),
+                    getattr(packaged_skill_invocation, name),
+                )
 
 
 if __name__ == "__main__":

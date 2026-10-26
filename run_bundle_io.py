@@ -8,22 +8,25 @@ from typing import Any
 import yaml
 
 from applied_theory_types import Artifact, json_safe, utc_now
-from approval_governance import artifact_is_approval_record
+from realized_core_governance.approval import artifact_is_approval_record
 from artifact import yaml_dump_human
 from constitutional_trace import constitutional_trace_snapshot
 from host_abi import host_abi_version
+from realized_core_governance.records import artifact_is_policy_record
 from skill_registry import skill_registry_document
 from skill_export_projection import skill_export_document
 from skill_schema_io import artifact_from_skill_document
 from skill_governance import (
-    SKILL_SCHEMA_VERSION_V2,
     SKILL_RISK_TIERS,
-    artifact_is_policy_record,
     normalize_skill_authorities,
     normalize_skill_kind,
     normalize_skill_risk_tier,
 )
-from skill_safety_governance import artifact_is_incident_record, artifact_is_revocation_record
+from realized_skill_semantics.declaration import SKILL_SCHEMA_VERSION_V2
+from realized_core_governance.safety import (
+    artifact_is_incident_record,
+    artifact_is_revocation_record,
+)
 from system_state import SystemState, load_state
 
 RUN_BUNDLE_SCHEMA_VERSION = "bssc_run_bundle.v1"

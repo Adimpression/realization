@@ -13,7 +13,8 @@ from artifact import (
 )
 from fallback_not_generation import fallback_not_elaboration_for_text
 from id_generation import make_id
-from normalize import (
+from non_achievedness_normalization import normalize_not_elaboration_payload
+from normalization_primitives import (
     normalize_artifact_admission,
     normalize_artifact_representation,
     normalize_artifact_reuse,
@@ -21,7 +22,6 @@ from normalize import (
     normalize_boundary_shape,
     normalize_function_bit,
     normalize_learning_relation,
-    normalize_not_elaboration_payload,
 )
 from semantic_text import learning_lookup_keys, ordered_unique, titleize_semantic_unit
 from store import build_artifact_store

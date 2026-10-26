@@ -2,11 +2,13 @@ schema_version = 1
 workspace_globs = [
   "core_*/pyproject.toml",
   "host_interaction/pyproject.toml",
+  "skill_semantics/pyproject.toml",
   "workstation/*/pyproject.toml",
 ]
 baseline_path = "architecture/dependency-baseline.json"
 report_path = "architecture/DEPENDENCY_REPORT.md"
 root_module_glob = "*.py"
+root_package_excludes = ["tests", "workstation"]
 exclude_globs = [
   ".venv/**",
   ".uv-cache/**",
@@ -40,11 +42,9 @@ pure_helper_modules = [
 dto_constant_modules = [
   "applied_theory_primitives",
   "applied_theory_types",
-  "artifact_contracts",
   "decision_review_models",
   "itemize_models",
   "skill_ir",
-  "skill_leaf_types",
 ]
 persistence_modules = [
   "blend_operator_store",
@@ -53,6 +53,9 @@ persistence_modules = [
   "store",
 ]
 compatibility_modules = [
+  "approval_governance",
+  "artifact_contracts",
+  "data_governance",
   "host_interaction_action_dispatch",
   "host_interaction_actions",
   "host_interaction_context",
@@ -60,7 +63,318 @@ compatibility_modules = [
   "host_interaction_models",
   "host_interaction_receipts",
   "host_interaction_resolution",
+  "pure_theory_types",
+  "skill_governance_primitives",
   "skill_invocation_contract",
+  "skill_leaf_types",
+  "skill_lifecycle",
+  "skill_path_notation",
+  "skill_safety_governance",
+]
+
+# Every repository-root Python module has one explicit architectural
+# responsibility. This is a target ownership ledger, not permission for the
+# module to remain at the root. Orthogonal lifecycle/status metadata follows in
+# root_module_status so compatibility facades are still attributed to the
+# responsibility whose API they preserve.
+[root_module_ownership]
+semantic_model = [
+  "applied_theory_primitives",
+  "applied_theory_types",
+  "artifact",
+  "artifact_contracts",
+  "boundary",
+  "id_generation",
+  "normalization_primitives",
+  "prolog",
+  "pure_theory_types",
+  "semantic_text",
+  "title_semantics",
+]
+portable_skills = [
+  "fence_extraction_strategy",
+  "skill_boundary_normalization",
+  "skill_compiler",
+  "skill_composition",
+  "skill_invocation_contract",
+  "skill_ir",
+  "skill_leaf_types",
+  "skill_path_notation",
+  "skill_registry",
+]
+governance = [
+  "approval_governance",
+  "constitutional_trace",
+  "data_governance",
+  "governance_inventory",
+  "governed_skill_access",
+  "governed_skill_installation",
+  "replay_verifier",
+  "runtime_governance_context",
+  "skill_governance",
+  "skill_governance_primitives",
+  "skill_lifecycle",
+  "skill_safety_governance",
+]
+runtime_execution = [
+  "capability_runtime",
+  "execution_framework_primitives",
+  "execution_frameworks",
+  "host_abi",
+  "host_brokers",
+  "host_interaction_action_dispatch",
+  "host_interaction_actions",
+  "host_interaction_context",
+  "host_interaction_delegation",
+  "host_interaction_models",
+  "host_interaction_receipts",
+  "host_interaction_resolution",
+  "host_mediation",
+  "macos_host_brokers",
+  "python_skill_brokerization",
+  "python_skill_host",
+  "runtime_temp",
+  "virtual_mounts",
+  "wasm_skill_runtime",
+]
+controller = [
+  "artifact_answer_resolution",
+  "controller_governance_bridge",
+  "controller_runtime",
+  "direct_knowledge_reuse",
+  "fallback_not_generation",
+  "fallback_not_semantics",
+  "governed_closure_and_commitment",
+  "governed_prior_learning_reuse",
+  "governed_semantic_reduction_runtime",
+  "learn",
+  "non_achievedness_normalization",
+  "normalization_runtime_dependencies",
+  "not_elaboration_ranking",
+  "prompt_directives",
+  "retrieval_ranking",
+  "run_outcome_harvest_and_reporting",
+  "semantic_prompt_posture",
+  "system_state",
+]
+llm = [
+  "supplement",
+]
+subject_domain = [
+  "decision_review",
+  "decision_review_constructs",
+  "decision_review_models",
+  "decision_review_policy",
+  "decision_review_projection",
+  "external_markdown_learning_pipeline",
+  "gather_sources",
+  "itemize",
+  "itemize_models",
+  "itemize_validation",
+  "learning_context",
+  "learning_context_markdown",
+  "learning_context_paths",
+  "learning_context_projection",
+  "learning_context_skill_projection",
+  "markdown_ir",
+  "markdown_learning_artifact_semantics",
+  "publication",
+  "publication_projection",
+  "publication_render",
+  "publication_validation",
+  "review_composition",
+  "structured_learning_yaml",
+  "url_learning_capture",
+]
+blend = [
+  "blend_context",
+  "blend_operator",
+  "blend_operator_store",
+  "blend_session",
+  "blend_workflow",
+  "blend_workflow_execution",
+  "blend_workflow_models",
+  "blend_workflow_store",
+  "blend_world",
+  "blend_world_models",
+  "blend_world_store",
+]
+entry_exchange = [
+  "args",
+  "controller_entrypoint_binding",
+  "controller_entrypoints",
+  "controller_runtime_binding",
+  "main",
+  "run_bundle_io",
+  "runtime_controller_api",
+  "side",
+  "side_runtime_dependencies",
+  "skill_compatibility_export",
+  "skill_compatibility_import",
+  "skill_export_projection",
+  "skill_schema_io",
+]
+persistence_adapter = [
+  "store",
+]
+compatibility = [
+  "normalize",
+]
+validation_trial = [
+  "SEMANTIC_RELATION_VALIDATION",
+  "TRIAL_DOMAIN_VALIDATION",
+  "tablet_safety_validation",
+  "title_depth_learning_validation",
+  "validation_ladder",
+  "validation_sqlite",
+]
+
+# Status is independent of ownership. A module may have more than one status;
+# main.py is both the historical import facade and an executable entrypoint.
+[root_module_status]
+entrypoint_modules = [
+  "main",
+]
+validation_modules = [
+  "SEMANTIC_RELATION_VALIDATION",
+  "TRIAL_DOMAIN_VALIDATION",
+  "tablet_safety_validation",
+  "title_depth_learning_validation",
+  "validation_ladder",
+  "validation_sqlite",
+]
+compatibility_facade_modules = [
+  "approval_governance",
+  "artifact_contracts",
+  "data_governance",
+  "fallback_not_semantics",
+  "host_interaction_action_dispatch",
+  "host_interaction_actions",
+  "host_interaction_context",
+  "host_interaction_delegation",
+  "host_interaction_models",
+  "host_interaction_receipts",
+  "host_interaction_resolution",
+  "main",
+  "normalize",
+  "pure_theory_types",
+  "skill_governance_primitives",
+  "skill_invocation_contract",
+  "skill_leaf_types",
+  "skill_lifecycle",
+  "skill_path_notation",
+  "skill_safety_governance",
+]
+
+# Top-level Python package families that are not yet UV projects remain part of
+# the same ownership and target-direction ratchet as root modules.
+[root_package_ownership]
+subject_domain = [
+  "coordinated_transformation",
+  "dst",
+]
+validation_trial = [
+  "design",
+]
+
+[root_package_status]
+validation_packages = [
+  "design",
+]
+
+# Target responsibility-level dependency direction. Current violations remain
+# visible in the generated baseline and may only shrink. The target graph itself
+# must remain acyclic.
+[root_owner_policy.semantic_model]
+allowed_dependencies = []
+
+[root_owner_policy.portable_skills]
+allowed_dependencies = ["semantic_model"]
+
+[root_owner_policy.governance]
+allowed_dependencies = ["portable_skills", "semantic_model"]
+
+[root_owner_policy.runtime_execution]
+allowed_dependencies = ["governance", "portable_skills", "semantic_model"]
+
+[root_owner_policy.llm]
+allowed_dependencies = ["semantic_model"]
+
+[root_owner_policy.subject_domain]
+allowed_dependencies = [
+  "governance",
+  "llm",
+  "portable_skills",
+  "runtime_execution",
+  "semantic_model",
+]
+
+[root_owner_policy.blend]
+allowed_dependencies = [
+  "governance",
+  "portable_skills",
+  "runtime_execution",
+  "semantic_model",
+]
+
+[root_owner_policy.controller]
+allowed_dependencies = [
+  "blend",
+  "governance",
+  "llm",
+  "portable_skills",
+  "runtime_execution",
+  "semantic_model",
+]
+
+[root_owner_policy.persistence_adapter]
+allowed_dependencies = [
+  "blend",
+  "governance",
+  "portable_skills",
+  "semantic_model",
+  "subject_domain",
+]
+
+[root_owner_policy.entry_exchange]
+allowed_dependencies = [
+  "blend",
+  "controller",
+  "governance",
+  "llm",
+  "persistence_adapter",
+  "portable_skills",
+  "runtime_execution",
+  "semantic_model",
+  "subject_domain",
+]
+
+[root_owner_policy.compatibility]
+allowed_dependencies = [
+  "blend",
+  "controller",
+  "governance",
+  "llm",
+  "persistence_adapter",
+  "portable_skills",
+  "runtime_execution",
+  "semantic_model",
+  "subject_domain",
+]
+
+[root_owner_policy.validation_trial]
+allowed_dependencies = [
+  "blend",
+  "compatibility",
+  "controller",
+  "entry_exchange",
+  "governance",
+  "llm",
+  "persistence_adapter",
+  "portable_skills",
+  "runtime_execution",
+  "semantic_model",
+  "subject_domain",
 ]
 
 # This is the target dependency policy, not a claim that the repository already
@@ -81,12 +395,39 @@ module_prefix = "realized_host_interaction"
 layer = "host_substrate"
 allowed_dependencies = []
 
+[components.core_semantics]
+project_dir = "core_semantics"
+distribution = "realized-core-semantics"
+module_prefix = "realized_core_semantics"
+layer = "semantic_contracts"
+allowed_dependencies = []
+
+[components.core_governance]
+project_dir = "core_governance"
+distribution = "realized-core-governance"
+module_prefix = "realized_core_governance"
+layer = "governance"
+allowed_dependencies = ["core_semantics", "skill_semantics"]
+
+[components.skill_semantics]
+project_dir = "skill_semantics"
+distribution = "realized-skill-semantics"
+module_prefix = "realized_skill_semantics"
+layer = "skill_contracts"
+allowed_dependencies = ["core_semantics"]
+
 [components.core_engine]
 project_dir = "core_engine"
 distribution = "realized-core-engine"
 module_prefix = "realized_core_engine"
 layer = "controller"
-allowed_dependencies = ["governed_core", "host_interaction"]
+allowed_dependencies = [
+  "core_governance",
+  "core_semantics",
+  "governed_core",
+  "host_interaction",
+  "skill_semantics",
+]
 
 [components.core_llm]
 project_dir = "core_llm"
@@ -143,6 +484,7 @@ distribution = "realized-workstation-foundation-host"
 module_prefix = "workstation.foundation.host"
 layer = "foundation"
 allowed_dependencies = [
+  "core_governance",
   "contracts",
   "foundation_events",
   "foundation_models",
@@ -185,12 +527,15 @@ distribution = "realized-workstation-runtime-core"
 module_prefix = "workstation.runtime.core"
 layer = "controller"
 allowed_dependencies = [
+  "core_governance",
+  "core_semantics",
   "contracts",
   "foundation_events",
   "foundation_host",
   "foundation_models",
   "foundation_projections",
   "host_interaction",
+  "skill_semantics",
   "skills_core",
   "skills_planning",
 ]
@@ -226,11 +571,13 @@ distribution = "realized-workstation-skills-core"
 module_prefix = "workstation.skills.core"
 layer = "skills"
 allowed_dependencies = [
+  "core_governance",
   "contracts",
   "foundation_events",
   "foundation_host",
   "foundation_models",
   "host_interaction",
+  "skill_semantics",
   "skills_builtin",
 ]
 
@@ -244,6 +591,7 @@ allowed_dependencies = [
   "foundation_events",
   "foundation_host",
   "foundation_models",
+  "skill_semantics",
   "skills_core",
 ]
 

@@ -43,6 +43,56 @@ cycle. Canonical imports should use the owners above; do not add new consumers t
 legacy aliases.
 
 ## Core Runtime, Theory, Governance, and Exchange
+- `core_semantics/`: Independently buildable `realized-core-semantics` UV
+  project. It owns the Pydantic formal-theory value model and narrow read-only
+  artifact protocols, plus dependency-light timestamp and JSON value
+  projection helpers. It contains no governance decisions, persistence,
+  controller orchestration, model calls, host execution, or workstation code.
+  `pure_theory_types.py` and `artifact_contracts.py` are historical facades.
+- `core_governance/`: Independently buildable `realized-core-governance` UV
+  project. Its first package-native cut owns governed-skill vocabulary,
+  deterministic normalization, lifecycle states, conservative lifecycle
+  synthesis, read-only artifact lifecycle projection, lifecycle-only
+  current-use eligibility, approval-record normalization/projection/matching,
+  and revocation/incident normalization, matching, and supplied-record safety
+  overlays, stored declaration/policy/admission projection, governed v2 skill
+  declaration and admission-policy normalization, reviewable policy summaries,
+  read-only inventory loading and independent governance-record classification
+  through a structural port, policy-and-approval admission evaluation over
+  supplied records and an injected clock, plus data-class normalization and
+  supplied-context data-access rules. It depends only on
+  `realized-core-semantics` and
+  `realized-skill-semantics`; it does not parse YAML, synthesize declarations
+  from artifacts or host code, inspect broker availability or executable
+  source, complete current-use authorization, issue authority, persist records,
+  manage inventory cache lifetime, open virtual mounts, connect to SQLite,
+  execute queries, invoke host brokers, execute skills, invoke models, or own
+  controller/workstation behavior. The root admission orchestrator retains host
+  preflight and delegates only its policy-and-approval decision.
+  `skill_governance_primitives.py`, `skill_lifecycle.py`,
+  `approval_governance.py`, `skill_safety_governance.py`, and
+  `data_governance.py` are historical identity-preserving facades.
+- `skill_semantics/`: Independently buildable `realized-skill-semantics` UV
+  project. It owns the portable canonical skill IR value, alias/family identity
+  metadata, immutable invocation request/result values, immutable composition
+  plan and static-analysis result values, deterministic invocation mapping
+  normalization, supported declaration schema versions, deterministic
+  schema-version normalization, explicit composition-right target projection,
+  portable executor descriptor vocabulary, descriptor alias normalization,
+  deterministic descriptor inference, executable-content field selection,
+  typed-leaf ledger, boundary-region polarity, reconstructible canonical path
+  notation, and normalization of explicit boundary values
+  shared by skill projection, composition, and planning. It
+  depends only on `realized-core-semantics` and contains no admission,
+  authority, lifecycle, persistence, host-availability, provider,
+  prerequisite, execution, effect, model, or workstation behavior.
+  `skill_leaf_types.py` and `skill_path_notation.py` are historical facades;
+  `skill_boundary_normalization.py` retains compatibility aliases plus the
+  artifact/governance adapter; `skill_ir.py` retains compatibility aliases plus
+  artifact, governance, lifecycle, compatibility, and runtime projection;
+  `skill_composition.py` retains exact value aliases plus artifact projection,
+  plan analysis, mapper execution, iterative orchestration, runtime events, and
+  invoker calls.
 - `core_app/`: Independently buildable `realized-core` UV project. Its wheel
   contains the narrow CLI/composition surface and compatibility imports; it
   owns no engine, conversational application, or provider implementation.
@@ -76,10 +126,14 @@ legacy aliases.
   and does not select abilities, grant authority, or register concrete host
   realizers. The historical root `host_interaction_*.py` paths are explicit
   compatibility facades over this package.
-- `applied_theory_primitives.py`: Dependency-light applied-theory enums, pure-theory aliases, derived value sets, canonical UTC timestamp helper, and recursive `json_safe` projection used by normalization and typed runtime models.
-- `artifact_contracts.py`: Dependency-light structural interfaces for consumers that inspect narrow, read-only artifact surfaces without depending on the concrete applied-theory record.
+- `applied_theory_primitives.py`: Applied-theory enums, pure-theory aliases,
+  derived value sets, and compatibility re-exports of the canonical timestamp
+  and JSON projection helpers in `realized_core_semantics.values`.
+- `artifact_contracts.py`: Compatibility facade for the canonical read-only
+  artifact protocols in `realized_core_semantics.artifacts`.
 - `applied_theory_types.py`: Applied dataclasses and compatibility re-exports for artifacts, proposals, abilities, controller payloads, and the historical `json_safe` import path.
-- `approval_governance.py`: Approval record parsing, normalization, matching, and summaries.
+- `approval_governance.py`: Compatibility facade for approval rules owned by
+  `realized_core_governance.approval`.
 - `args.py`: CLI argument parsing, feature toggles, and SQLite override handling.
 - `artifact_answer_resolution.py`: Artifact answer extraction and direct formula/explanation resolution helpers.
 - `artifact.py`: Artifact serialization and YAML-facing helper utilities.
@@ -102,17 +156,20 @@ legacy aliases.
 - `controller_governance_bridge.py`: Controller-facing governance bridge methods rebound onto `BSSCController`.
 - `controller_runtime.py`: Canonical `BSSCController` implementation and historical public runtime surface.
 - `controller_runtime_binding.py`: Dependency-inversion seam used by nested host brokers to construct the application-registered controller without importing its implementation.
-- `data_governance.py`: Data-class governance, named query normalization, and data-access checks.
+- `data_governance.py`: Compatibility facade for data-class and access rules
+  owned by `realized_core_governance.data`.
 - `decision_review_models.py`: Dependency-light decision-frame and review-item records, value sets, normalization, and stable identifiers; `decision_review.py` preserves the historical import surface while owning persistence and review-item projection.
 - `direct_knowledge_reuse.py`: Direct knowledge reuse matching and lookup helpers.
 - `example.py`: Small Wasmtime/example surface used as a runtime proof-of-life.
-- `execution_framework_primitives.py`: Dependency-light executor aliases, choices, and supported-framework normalization shared by DTO restoration and execution dispatch.
-- `execution_frameworks.py`: Python, bash, ansible, and Wasm execution surfaces plus compatibility re-exports for executor normalization.
+- `execution_framework_primitives.py`: Host-advertised supported-framework environment/default normalization plus exact compatibility aliases for portable descriptors now owned by `realized_skill_semantics.execution`.
+- `execution_frameworks.py`: Python, bash, ansible, and Wasm learning and execution surfaces plus exact compatibility re-exports for portable executor descriptors and host-support normalization.
 - `external_markdown_learning_pipeline.py`: `markdown-learn` document-to-artifact pipeline.
 - `fallback_not_generation.py`: Canonical fallback non-achievedness elaboration generation.
 - `fallback_not_semantics.py`: Compatibility facade retaining historical fallback generation and ranking identities.
 - `fence_extraction_strategy.py`: Fenced-code extraction and executor-aware fence learning helpers.
-- `governance_inventory.py`: Installed governance inventory loading from the store.
+- `governance_inventory.py`: Controller inventory-cache adapter plus the
+  historical exact alias to package-owned read-only inventory loading and
+  classification in `realized_core_governance.inventory`.
 - `governed_closure_and_commitment.py`: Closure, pause, incompletion, and commitment logic.
 - `governed_prior_learning_reuse.py`: Governed prior-learning reuse and candidate recovery.
 - `governed_semantic_reduction_runtime.py`: Compatibility adapter from `BSSCController` into `realized-core-runtime`, plus the existing domain-specific recursive `reduce_not` semantics.
@@ -147,7 +204,8 @@ legacy aliases.
 - `publication_projection.py`: Deterministic `LearningContext`-to-`Publication` report projection, including admitted-unit claim extraction, section assignment, source loading, validation/build/render orchestration, and separate publication-tree materialization.
 - `publication_render.py`: Deterministic Typst and markdown renderers plus reproducible publication build and render-artifact projection.
 - `publication_validation.py`: First publication validation rules over unique section ids, claim/source references, and source-backed descriptive claims.
-- `pure_theory_types.py`: Pure theory terms, enums, and foundational semantic structures.
+- `pure_theory_types.py`: Compatibility facade for the canonical formal theory
+  terms in `realized_core_semantics.theory`.
 - `python_skill_brokerization.py`: Python skill inspection and brokerization heuristics.
 - `python_skill_host.py`: Child Python runtime host API for governed broker calls.
 - `replay_verifier.py`: Run-bundle replay verification and governance receipt checks.
@@ -165,17 +223,25 @@ legacy aliases.
 - `skill_compiler.py`: Initial portable-skill compiler seam that emits artifact-centered canonical IR analysis for governed installation.
 - `skill_compatibility_export.py`: Compatibility-tier export adapters that project canonical skills into representative foreign tool and instruction-bundle surfaces.
 - `skill_compatibility_import.py`: Compatibility-tier import adapters plus normalized `compatibility.adapters` payload shaping for foreign tool and instruction-bundle sources.
-- `skill_boundary_normalization.py`: Canonical boundary-region normalization, reconstruction, and synthesized normalization metadata for skills.
+- `skill_boundary_normalization.py`: Compatibility aliases for package-owned boundary normalization plus the thin artifact/governance adapter used to preserve legacy synthesis precedence.
 - `skill_composition.py`: Canonical leaf-level binding analysis, explicit mapper-backed composition execution, sequence-plan validation, and plan-wide permission aggregation for skill composition.
-- `skill_governance.py`: Skill declaration, policy, authority, risk-tier, and admission logic.
-- `skill_governance_primitives.py`: Dependency-light governed-skill vocabulary and normalization contract shared by policy and approval evaluation.
-- `skill_ir.py`: Artifact-centered canonical skill IR projection, including aliases, family metadata, runtime package references, and hosting metadata.
-- `skill_invocation_contract.py`: Compatibility facade preserving the historical skill-invocation contract import path and object identities.
-- `skill_leaf_types.py`: Canonical skill leaf datatypes, carrier classes, and boundary-region helpers for theory-backed normalization.
-- `skill_lifecycle.py`: Skill lifecycle normalization and effective invocation-state helpers.
-- `skill_path_notation.py`: Canonical `/a/...`-style path notation formatting, escaping, and parsing for normalized skill ledgers.
+- `skill_governance.py`: Historical governed-skill adapter and admission
+  orchestrator. It retains declaration synthesis, host-broker and Python-source
+  preflight, current-use composition, and compatibility entry points; delegates
+  policy-and-approval evaluation to `realized_core_governance.admission`; and
+  preserves exact aliases for package-owned portable declaration schema and
+  composition-right semantics.
+- `skill_governance_primitives.py`: Compatibility facade for package-owned
+  governed-skill vocabulary and normalization.
+- `skill_ir.py`: Compatibility aliases for package-owned canonical IR and skill identity values plus the artifact-centered projection adapter for declaration, lifecycle, compatibility, runtime package, and hosting metadata.
+- `skill_invocation_contract.py`: Compatibility facade preserving historical aliases to package-owned invocation values and normalization while re-exporting the workstation artifact-projection adapter.
+- `skill_leaf_types.py`: Compatibility facade for canonical portable skill leaf values in `realized_skill_semantics.leaves`.
+- `skill_lifecycle.py`: Compatibility facade for package-owned lifecycle
+  normalization, projection, and lifecycle-only invocation-state rules.
+- `skill_path_notation.py`: Compatibility facade for canonical portable skill paths in `realized_skill_semantics.paths`.
 - `skill_registry.py`: Local skill registry projection and `export-skill-registry` support.
-- `skill_safety_governance.py`: Revocation and incident governance records plus safety overlays.
+- `skill_safety_governance.py`: Compatibility facade for revocation and
+  incident rules owned by `realized_core_governance.safety`.
 - `skill_schema_io.py`: Portable skill schema hydration and import-file resolution.
 - `store.py`: SQLite artifact store, indexing, persistence, and batch import support.
 - `structured_learning_yaml.py`: Structured-learning YAML rendering helpers.

@@ -28,6 +28,14 @@ def _canonical_json(value: Any) -> str:
     return json.dumps(value, indent=2, sort_keys=True) + "\n"
 
 
+def _normalize_log(path: Path) -> None:
+    """Remove terminal progress padding while preserving exact line endings."""
+    content = path.read_bytes()
+    normalized = re.sub(rb"[ \t]+(?=\r?$)", b"", content, flags=re.MULTILINE)
+    if normalized != content:
+        path.write_bytes(normalized)
+
+
 def _sha256(path: Path) -> str:
     digest = hashlib.sha256()
     with path.open("rb") as handle:
@@ -42,6 +50,21 @@ def _percentile_95(values: list[float]) -> float:
     ordered = sorted(values)
     index = max(0, math.ceil(len(ordered) * 0.95) - 1)
     return ordered[index]
+
+
+def _runtime_command(configured_command: list[str]) -> list[str]:
+    if configured_command and configured_command[0] in {"python", "python3"}:
+        return [sys.executable, *configured_command[1:]]
+    return configured_command
+
+
+def _source_roots(repo_root: Path) -> list[Path]:
+    """Return deterministic import roots for every in-repository UV project."""
+    package_roots = {
+        *repo_root.glob("*/src"),
+        *repo_root.glob("workstation/*/src"),
+    }
+    return [repo_root, *sorted(package_roots)]
 
 
 def _artifact_records(repo_root: Path, patterns: list[str]) -> list[dict[str, Any]]:
@@ -124,10 +147,10 @@ def _run_once(
 ) -> dict[str, Any]:
     gate_id = str(gate["id"])
     cwd = repo_root / str(gate.get("cwd", "."))
-    command = [str(value) for value in gate["command"]]
+    command = _runtime_command([str(value) for value in gate["command"]])
     env = os.environ.copy()
     env.update({str(key): str(value) for key, value in gate.get("env", {}).items()})
-    source_roots = [repo_root, *sorted(repo_root.glob("workstation/*/src"))]
+    source_roots = _source_roots(repo_root)
     existing_pythonpath = env.get("PYTHONPATH", "")
     pythonpath_parts = [str(path) for path in source_roots]
     if existing_pythonpath:
@@ -160,6 +183,7 @@ def _run_once(
                 process.terminate()
                 process.wait()
                 raise
+        _normalize_log(log_path)
         duration = round(time.perf_counter() - started, 3)
         status = "passed" if returncode == 0 else "failed"
     except FileNotFoundError as exc:

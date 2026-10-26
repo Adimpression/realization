@@ -15,7 +15,7 @@ from applied_theory_types import (
     SupportView,
     ThreeLevel,
 )
-from normalize import normalize_pause_boundary
+from normalization_primitives import normalize_pause_boundary
 from semantic_text import collapse_ws
 from title_semantics import derive_semantic_title_depth_view
 

@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Any
 
 from capability_runtime import runtime_skill_declaration_for_artifact
-from execution_frameworks import ability_executor_framework
+from realized_skill_semantics.execution import ability_executor_framework
 from realized_host_interaction.delegation import (
     host_interaction_delegation_requires_escalation as requested_delegation_requires_escalation,
     normalized_requested_delegation,

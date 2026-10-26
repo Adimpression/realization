@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import sys
 import tempfile
 import tomllib
 import unittest
@@ -48,6 +49,44 @@ def _baseline(gate: dict[str, object]) -> dict[str, object]:
 
 
 class QualificationLogTest(unittest.TestCase):
+    def test_log_normalization_removes_only_line_ending_padding(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            log_path = Path(temporary_directory) / "progress.log"
+            log_path.write_bytes(b"first  \n second value \t\r\nthird\t")
+
+            qualification._normalize_log(log_path)
+
+            self.assertEqual(
+                b"first\n second value\r\nthird",
+                log_path.read_bytes(),
+            )
+
+    def test_python_gate_uses_the_invoking_interpreter(self) -> None:
+        self.assertEqual(
+            [sys.executable, "-m", "unittest"],
+            qualification._runtime_command(["python", "-m", "unittest"]),
+        )
+        self.assertEqual(
+            ["flutter", "test"],
+            qualification._runtime_command(["flutter", "test"]),
+        )
+
+    def test_source_roots_cover_top_level_and_workstation_projects(self) -> None:
+        roots = qualification._source_roots(REPO_ROOT)
+
+        self.assertEqual(REPO_ROOT, roots[0])
+        self.assertEqual(len(roots), len(set(roots)))
+        for expected in (
+            REPO_ROOT / "core_governance" / "src",
+            REPO_ROOT / "core_runtime" / "src",
+            REPO_ROOT / "core_semantics" / "src",
+            REPO_ROOT / "host_interaction" / "src",
+            REPO_ROOT / "skill_semantics" / "src",
+            REPO_ROOT / "workstation" / "skills_core" / "src",
+        ):
+            with self.subTest(expected=expected):
+                self.assertIn(expected, roots)
+
     def test_unittest_summary_preserves_failure_identities(self) -> None:
         with tempfile.TemporaryDirectory() as temporary_directory:
             log_path = Path(temporary_directory) / "unittest.log"

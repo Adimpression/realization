@@ -35,10 +35,10 @@ from boundary import (
     infer_function_bit as infer_function_bit_runtime,
     is_template_bearing_artifact_type as is_template_bearing_artifact_type_runtime,
 )
-from normalize import (
+from non_achievedness_normalization import normalize_not_elaboration_payload
+from normalization_primitives import (
     normalize_boundary_shape,
     normalize_not_degree,
-    normalize_not_elaboration_payload,
     normalize_not_misalignment_list,
     normalize_not_origin_list,
     normalize_remainder_shape_list,

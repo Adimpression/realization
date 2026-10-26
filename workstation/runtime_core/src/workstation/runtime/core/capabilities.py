@@ -29,8 +29,10 @@ from blend_workflow_store import (
     load_blend_workflow_run,
 )
 from capability_runtime import runtime_skill_declaration_for_artifact
-from execution_frameworks import ability_executor_framework, normalize_ability_runtime_content
-from applied_theory_types import json_safe
+from execution_frameworks import normalize_ability_runtime_content
+from realized_core_governance.lifecycle import synthesized_skill_lifecycle
+from realized_core_semantics.values import json_safe
+from realized_skill_semantics.execution import ability_executor_framework
 from realized_host_interaction.action_dispatch import (
     execute_shared_host_interaction_action,
     is_shared_host_interaction_action_capability,
@@ -50,7 +52,6 @@ from realized_host_interaction.resolution import (
     safe_join_within_attachment_root,
 )
 from semantic_text import collapse_ws
-from skill_lifecycle import synthesized_skill_lifecycle
 from skill_schema_io import normalized_skill_bundle_filename_for_source
 from skill_export_projection import batch_skill_export_filename, skill_kind_from_artifact
 from skill_governance import evaluate_skill_admission

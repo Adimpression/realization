@@ -4,7 +4,7 @@ from __future__ import annotations
 from collections.abc import Mapping
 from typing import Any
 
-from governance_inventory import load_governance_inventory
+from realized_core_governance.inventory import load_governance_inventory
 from semantic_text import collapse_ws
 from skill_schema_io import artifact_from_skill_document
 
