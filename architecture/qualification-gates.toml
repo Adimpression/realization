@@ -24,7 +24,7 @@ timeout_seconds = 3600
 required = true
 run_by_default = true
 artifacts = []
-env = { OPENAI_API_KEY = "" }
+env = { OPENAI_API_KEY = "", UV_CACHE_DIR = ".uv-cache" }
 
 [[gates]]
 id = "workstation_tests"
@@ -37,7 +37,7 @@ timeout_seconds = 14400
 required = true
 run_by_default = true
 artifacts = []
-env = { OPENAI_API_KEY = "" }
+env = { OPENAI_API_KEY = "", UV_CACHE_DIR = ".uv-cache" }
 
 [[gates]]
 id = "trial_skill_routing_bdd"

@@ -7,7 +7,7 @@ from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
-from data_governance import normalize_data_class
+from realized_core_governance.data import normalize_data_class
 from runtime_temp import preferred_runtime_temp_root
 from semantic_text import collapse_ws
 

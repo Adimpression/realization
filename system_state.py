@@ -48,7 +48,7 @@ from applied_theory_types import (
 from artifact import build_pure_theory_artifact_projection
 from boundary import default_boundary_shape_for_node, is_template_bearing_artifact_type
 from id_generation import make_id
-from normalize import (
+from normalization_primitives import (
     normalize_evidence_polarity,
     normalize_run_outcome,
     normalize_three_level,

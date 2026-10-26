@@ -10,9 +10,12 @@ PUBLIC_PACKAGES = {
     "core_app": "realized-core",
     "core_conversation": "realized-core-conversation",
     "core_engine": "realized-core-engine",
+    "core_governance": "realized-core-governance",
     "core_llm": "realized-core-llm",
     "core_runtime": "realized-core-runtime",
+    "core_semantics": "realized-core-semantics",
     "host_interaction": "realized-host-interaction",
+    "skill_semantics": "realized-skill-semantics",
 }
 
 

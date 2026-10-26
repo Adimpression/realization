@@ -9,9 +9,14 @@ from typing import Any
 
 import yaml
 
-from approval_governance import (
+from realized_core_governance.approval import (
     approval_answer_summary,
     skill_approval_from_payload,
+)
+from realized_core_governance.declarations import (
+    policy_answer_summary,
+    skill_declaration_from_payload,
+    skill_policy_from_payload,
 )
 from applied_theory_types import Artifact, enum_text
 from artifact import (
@@ -19,30 +24,29 @@ from artifact import (
     yaml_dump_human,
     yaml_string_list,
 )
-from execution_frameworks import normalize_ability_runtime_content, normalize_executor_framework_name
+from execution_frameworks import normalize_ability_runtime_content
 from host_abi import wasm_skill_abi_version
-from normalize import normalize_notation_key
+from normalization_primitives import normalize_notation_key
+from realized_core_governance.lifecycle import skill_lifecycle_from_payload
+from realized_core_governance.vocabulary import normalize_skill_kind
 from semantic_text import ordered_unique
 from side import artifact_from_yaml_document, load_batch_list
-from skill_lifecycle import skill_lifecycle_from_payload
-from skill_governance import (
+from realized_skill_semantics.declaration import (
     SKILL_SCHEMA_VERSION_V1,
-    normalize_skill_kind,
     normalize_skill_schema_version,
-    policy_answer_summary,
-    skill_declaration_from_payload,
-    skill_policy_from_payload,
 )
-from skill_boundary_normalization import (
-    normalized_skill_normalization_payload,
-    synthesized_skill_normalization_for_artifact,
+from realized_skill_semantics.execution import normalize_executor_framework_name
+from realized_skill_semantics.normalization import normalized_skill_normalization_payload
+from realized_skill_semantics.ir import (
+    normalized_skill_aliases,
+    normalized_skill_family_metadata,
 )
+from skill_boundary_normalization import synthesized_skill_normalization_for_artifact
 from skill_compatibility_import import normalized_skill_compatibility_payload
-from skill_ir import normalized_skill_aliases, normalized_skill_family_metadata
 from store import build_artifact_store
 
 SKILL_IMPORT_SCHEMA_VERSION = SKILL_SCHEMA_VERSION_V1
-from skill_safety_governance import (
+from realized_core_governance.safety import (
     incident_answer_summary,
     revocation_answer_summary,
     skill_incident_from_payload,

@@ -327,6 +327,51 @@ class RepositoryArchitectureBoundaryTest(unittest.TestCase):
                 if row["target"] == "store"
             },
         )
+        root_ownership = {
+            row["module"]: (row["owner"], tuple(row["statuses"]))
+            for row in measured["baseline"]["root_module_ownership"]
+        }
+        self.assertEqual(
+            {path.stem for path in REPO_ROOT.glob("*.py") if path.is_file()},
+            set(root_ownership),
+        )
+        self.assertEqual(("llm", ()), root_ownership["supplement"])
+        self.assertEqual(("blend", ()), root_ownership["blend_workflow"])
+        self.assertEqual(("subject_domain", ()), root_ownership["publication"])
+        self.assertEqual(("portable_skills", ()), root_ownership["skill_ir"])
+        self.assertEqual(
+            ("persistence_adapter", ()), root_ownership["store"]
+        )
+        self.assertEqual(
+            ("entry_exchange", ("compatibility_facade", "entrypoint")),
+            root_ownership["main"],
+        )
+        root_package_ownership = {
+            row["package"]: (row["owner"], tuple(row["statuses"]))
+            for row in measured["baseline"]["root_package_ownership"]
+        }
+        self.assertEqual(
+            {"coordinated_transformation", "design", "dst"},
+            set(root_package_ownership),
+        )
+        self.assertEqual(
+            ("subject_domain", ()),
+            root_package_ownership["coordinated_transformation"],
+        )
+        self.assertEqual(("subject_domain", ()), root_package_ownership["dst"])
+        self.assertEqual(
+            ("validation_trial", ("validation",)),
+            root_package_ownership["design"],
+        )
+        self.assertEqual(
+            [], measured["baseline"]["compatibility_facade_imports"]
+        )
+        self.assertEqual(
+            [], measured["baseline"]["canonical_root_facade_imports"]
+        )
+        self.assertTrue(
+            measured["baseline"]["forbidden_root_owner_dependencies"]
+        )
         self.assertEqual(
             {
                 ("foundation_events", "runtime_core"),
@@ -354,6 +399,15 @@ class RepositoryArchitectureBoundaryTest(unittest.TestCase):
         self.assertEqual(
             [],
             measured["components"]["host_interaction"]["project"]["project"].get(
+                "dependencies", []
+            ),
+        )
+        self.assertEqual(
+            [
+                "realized-core-semantics==0.1.0",
+                "realized-skill-semantics==0.1.0",
+            ],
+            measured["components"]["core_governance"]["project"]["project"].get(
                 "dependencies", []
             ),
         )
@@ -395,6 +449,12 @@ class RepositoryArchitectureBoundaryTest(unittest.TestCase):
         )
         self.assertIn(
             "realized-core-runtime==0.1.0",
+            measured["components"]["core_engine"]["project"]["project"].get(
+                "dependencies", []
+            ),
+        )
+        self.assertIn(
+            "realized-core-governance==0.1.0",
             measured["components"]["core_engine"]["project"]["project"].get(
                 "dependencies", []
             ),
@@ -455,7 +515,22 @@ class RepositoryArchitectureBoundaryTest(unittest.TestCase):
         )
         self.assertIn("## Combined Graph Metrics", report)
         self.assertIn("## Single-Edge SCC Sensitivity", report)
+        self.assertIn("## Root Module Ownership", report)
+        self.assertIn("## Root Package Family Ownership", report)
+        self.assertIn("## Target Root-Owner Dependency Policy", report)
+        self.assertIn("## Current Root-Owner Dependency Edges", report)
+        self.assertIn(
+            "## Package Imports Of Root Compatibility Facades", report
+        )
+        self.assertIn(
+            "## Canonical Root Imports Of Compatibility Facades", report
+        )
         self.assertIn("## Root-Boundary Classification Ledger", report)
+        self.assertIn("## Component-to-Root-Package Dependencies", report)
+        self.assertIn("## Root-Module-to-Package Dependencies", report)
+        self.assertIn("## Root-Package-to-Component Dependencies", report)
+        self.assertIn("## Root-Package-to-Module Dependencies", report)
+        self.assertIn("## Root-Package-to-Package Dependencies", report)
 
 
 class ArchitectureBoundaryRatchetTest(unittest.TestCase):
@@ -475,6 +550,15 @@ class ArchitectureBoundaryRatchetTest(unittest.TestCase):
                 report_path = "architecture/DEPENDENCY_REPORT.md"
                 root_module_glob = "*.py"
                 exclude_globs = ["**/tests/**"]
+
+                [root_module_ownership]
+                semantic_model = []
+
+                [root_package_ownership]
+                semantic_model = []
+
+                [root_owner_policy.semantic_model]
+                allowed_dependencies = []
 
                 [components.a]
                 project_dir = "workstation/a"
@@ -527,6 +611,52 @@ class ArchitectureBoundaryRatchetTest(unittest.TestCase):
             / Path(*module_prefix.split("."))
             / "__init__.py"
         )
+
+    def _root_package_file(self, package: str) -> Path:
+        package_dir = self.root / package
+        package_dir.mkdir(exist_ok=True)
+        path = package_dir / "__init__.py"
+        if not path.exists():
+            path.write_text("", encoding="utf-8")
+        return path
+
+    def _own_root_module(
+        self,
+        module: str,
+        *,
+        owner: str = "entry_exchange",
+        statuses: tuple[str, ...] = (),
+    ) -> None:
+        ownership = self.manifest.setdefault("root_module_ownership", {})
+        ownership.setdefault(owner, []).append(module)
+        self.manifest.setdefault("root_owner_policy", {}).setdefault(
+            owner, {"allowed_dependencies": []}
+        )
+        status_fields = {
+            "compatibility_facade": "compatibility_facade_modules",
+            "entrypoint": "entrypoint_modules",
+            "validation": "validation_modules",
+        }
+        status_table = self.manifest.setdefault("root_module_status", {})
+        for status in statuses:
+            status_table.setdefault(status_fields[status], []).append(module)
+
+    def _own_root_package(
+        self,
+        package: str,
+        *,
+        owner: str = "subject_domain",
+        statuses: tuple[str, ...] = (),
+    ) -> None:
+        ownership = self.manifest.setdefault("root_package_ownership", {})
+        ownership.setdefault(owner, []).append(package)
+        self.manifest.setdefault("root_owner_policy", {}).setdefault(
+            owner, {"allowed_dependencies": []}
+        )
+        status_fields = {"validation": "validation_packages"}
+        status_table = self.manifest.setdefault("root_package_status", {})
+        for status in statuses:
+            status_table.setdefault(status_fields[status], []).append(package)
 
     def test_new_edge_is_rejected_even_when_it_is_not_a_cycle(self) -> None:
         baseline = architecture.analyze(self.root, self.manifest)["baseline"]
@@ -683,6 +813,7 @@ class ArchitectureBoundaryRatchetTest(unittest.TestCase):
         (self.root / "entrypoint.py").write_text(
             "from example.a import VALUE\n", encoding="utf-8"
         )
+        self._own_root_module("entrypoint", statuses=("entrypoint",))
 
         current = architecture.analyze(self.root, self.manifest)["baseline"]
         regressions = architecture.compare(current, baseline)
@@ -698,10 +829,12 @@ class ArchitectureBoundaryRatchetTest(unittest.TestCase):
 
     def test_new_root_to_root_dependency_is_rejected(self) -> None:
         (self.root / "shared.py").write_text("VALUE = 'shared'\n", encoding="utf-8")
+        self._own_root_module("shared", owner="semantic_model")
         baseline = architecture.analyze(self.root, self.manifest)["baseline"]
         (self.root / "entrypoint.py").write_text(
             "from shared import VALUE\n", encoding="utf-8"
         )
+        self._own_root_module("entrypoint", statuses=("entrypoint",))
 
         current = architecture.analyze(self.root, self.manifest)["baseline"]
         regressions = architecture.compare(current, baseline)
@@ -714,11 +847,20 @@ class ArchitectureBoundaryRatchetTest(unittest.TestCase):
             "new root-to-root dependency: entrypoint -> shared",
             regressions,
         )
+        self.assertIn(
+            "new root-owner dependency: entry_exchange -> semantic_model",
+            regressions,
+        )
+        self.assertIn(
+            "new forbidden root-owner dependency: entry_exchange -> semantic_model",
+            regressions,
+        )
 
     def test_new_cycle_spanning_root_and_component_is_rejected(self) -> None:
         (self.root / "entrypoint.py").write_text(
             "from example.a import VALUE\n", encoding="utf-8"
         )
+        self._own_root_module("entrypoint", statuses=("entrypoint",))
         baseline = architecture.analyze(self.root, self.manifest)["baseline"]
         self._package_file("a", "example.a").write_text(
             "from entrypoint import VALUE\n", encoding="utf-8"
@@ -822,6 +964,275 @@ class ArchitectureBoundaryRatchetTest(unittest.TestCase):
             "(pure_helper -> orchestration)",
             architecture.compare(current, baseline),
         )
+
+    def test_unowned_root_module_is_rejected(self) -> None:
+        (self.root / "orphan.py").write_text("VALUE = 1\n", encoding="utf-8")
+
+        with self.assertRaisesRegex(
+            architecture.ArchitectureConfigurationError,
+            "root modules without explicit owners: orphan",
+        ):
+            architecture.analyze(self.root, self.manifest)
+
+    def test_multiply_owned_root_module_is_rejected(self) -> None:
+        (self.root / "shared.py").write_text("VALUE = 1\n", encoding="utf-8")
+        self._own_root_module("shared", owner="semantic_model")
+        self._own_root_module("shared", owner="controller")
+
+        with self.assertRaisesRegex(
+            architecture.ArchitectureConfigurationError,
+            "root module 'shared' has multiple owners",
+        ):
+            architecture.analyze(self.root, self.manifest)
+
+    def test_stale_root_ownership_and_status_are_rejected(self) -> None:
+        self._own_root_module(
+            "missing", owner="semantic_model", statuses=("validation",)
+        )
+
+        with self.assertRaisesRegex(
+            architecture.ArchitectureConfigurationError,
+            "root-module ownership entries do not resolve: missing",
+        ):
+            architecture.analyze(self.root, self.manifest)
+
+        self.manifest["root_module_ownership"]["semantic_model"].remove("missing")
+        with self.assertRaisesRegex(
+            architecture.ArchitectureConfigurationError,
+            "root-module status entries do not resolve: missing",
+        ):
+            architecture.analyze(self.root, self.manifest)
+
+    def test_root_module_owner_or_status_change_requires_baseline_refresh(self) -> None:
+        (self.root / "entrypoint.py").write_text("VALUE = 1\n", encoding="utf-8")
+        self._own_root_module("entrypoint", statuses=("entrypoint",))
+        baseline = architecture.analyze(self.root, self.manifest)["baseline"]
+
+        self.manifest["root_module_ownership"]["entry_exchange"].remove(
+            "entrypoint"
+        )
+        self.manifest["root_module_ownership"].setdefault("controller", []).append(
+            "entrypoint"
+        )
+        self.manifest["root_owner_policy"]["controller"] = {
+            "allowed_dependencies": []
+        }
+        self.manifest["root_module_status"]["entrypoint_modules"].remove(
+            "entrypoint"
+        )
+        self.manifest["root_module_status"].setdefault(
+            "compatibility_facade_modules", []
+        ).append("entrypoint")
+
+        current = architecture.analyze(self.root, self.manifest)["baseline"]
+
+        self.assertIn(
+            "root-module ownership changed: entrypoint "
+            "(entry_exchange ['entrypoint'] -> controller ['compatibility_facade'])",
+            architecture.compare(current, baseline),
+        )
+
+    def test_unowned_root_package_is_rejected(self) -> None:
+        self._root_package_file("orphan")
+
+        with self.assertRaisesRegex(
+            architecture.ArchitectureConfigurationError,
+            "root packages without explicit owners: orphan",
+        ):
+            architecture.analyze(self.root, self.manifest)
+
+    def test_multiply_owned_root_package_is_rejected(self) -> None:
+        self._root_package_file("shared")
+        self._own_root_package("shared", owner="semantic_model")
+        self._own_root_package("shared", owner="subject_domain")
+
+        with self.assertRaisesRegex(
+            architecture.ArchitectureConfigurationError,
+            "root package 'shared' has multiple owners",
+        ):
+            architecture.analyze(self.root, self.manifest)
+
+    def test_stale_root_package_ownership_and_status_are_rejected(self) -> None:
+        self._own_root_package(
+            "missing", owner="validation_trial", statuses=("validation",)
+        )
+
+        with self.assertRaisesRegex(
+            architecture.ArchitectureConfigurationError,
+            "root-package ownership entries do not resolve: missing",
+        ):
+            architecture.analyze(self.root, self.manifest)
+
+        self.manifest["root_package_ownership"]["validation_trial"].remove(
+            "missing"
+        )
+        with self.assertRaisesRegex(
+            architecture.ArchitectureConfigurationError,
+            "root-package status entries do not resolve: missing",
+        ):
+            architecture.analyze(self.root, self.manifest)
+
+    def test_root_package_owner_or_status_change_requires_baseline_refresh(
+        self,
+    ) -> None:
+        self._root_package_file("domain")
+        self._own_root_package("domain")
+        baseline = architecture.analyze(self.root, self.manifest)["baseline"]
+
+        self.manifest["root_package_ownership"]["subject_domain"].remove("domain")
+        self.manifest["root_package_ownership"].setdefault(
+            "validation_trial", []
+        ).append("domain")
+        self.manifest["root_owner_policy"]["validation_trial"] = {
+            "allowed_dependencies": []
+        }
+        self.manifest.setdefault("root_package_status", {}).setdefault(
+            "validation_packages", []
+        ).append("domain")
+
+        current = architecture.analyze(self.root, self.manifest)["baseline"]
+
+        self.assertIn(
+            "root-package ownership changed: domain "
+            "(subject_domain [] -> validation_trial ['validation'])",
+            architecture.compare(current, baseline),
+        )
+
+    def test_new_root_package_dependency_families_are_rejected(self) -> None:
+        domain = self._root_package_file("domain")
+        shared = self._root_package_file("shared")
+        self._own_root_package("domain", owner="subject_domain")
+        self._own_root_package("shared", owner="semantic_model")
+        (self.root / "entrypoint.py").write_text("VALUE = 1\n", encoding="utf-8")
+        self._own_root_module("entrypoint", statuses=("entrypoint",))
+        (self.root / "helper.py").write_text("VALUE = 1\n", encoding="utf-8")
+        self._own_root_module("helper", owner="semantic_model")
+        baseline = architecture.analyze(self.root, self.manifest)["baseline"]
+
+        self._package_file("a", "example.a").write_text(
+            "from domain import VALUE\n", encoding="utf-8"
+        )
+        (self.root / "entrypoint.py").write_text(
+            "from domain import VALUE\n", encoding="utf-8"
+        )
+        domain.write_text(
+            "from example.a import VALUE\n"
+            "from helper import VALUE as HELPER_VALUE\n"
+            "from shared import VALUE as SHARED_VALUE\n",
+            encoding="utf-8",
+        )
+        shared.write_text("VALUE = 1\n", encoding="utf-8")
+
+        current = architecture.analyze(self.root, self.manifest)["baseline"]
+        regressions = architecture.compare(current, baseline)
+
+        self.assertIn(
+            "new component-to-root-package dependency: a -> domain", regressions
+        )
+        self.assertIn(
+            "new root-module-to-package dependency: entrypoint -> domain",
+            regressions,
+        )
+        self.assertIn(
+            "new root-package-to-component dependency: domain -> a", regressions
+        )
+        self.assertIn(
+            "new root-package-to-module dependency: domain -> helper", regressions
+        )
+        self.assertIn(
+            "new root-package-to-package dependency: domain -> shared", regressions
+        )
+        self.assertIn(
+            ["component:a", "root-package:domain"],
+            current["combined_cycles"],
+        )
+        self.assertIn(
+            "new or enlarged combined cycle: component:a -> root-package:domain",
+            regressions,
+        )
+
+    def test_root_package_cannot_import_root_compatibility_facade_even_in_baseline(
+        self,
+    ) -> None:
+        (self.root / "compat.py").write_text("VALUE = 1\n", encoding="utf-8")
+        self._own_root_module(
+            "compat", owner="controller", statuses=("compatibility_facade",)
+        )
+        package = self._root_package_file("domain")
+        self._own_root_package("domain")
+        package.write_text("from compat import VALUE\n", encoding="utf-8")
+
+        measured = architecture.analyze(self.root, self.manifest)["baseline"]
+
+        self.assertEqual(
+            [{"source": "domain", "module": "compat"}],
+            measured["canonical_root_facade_imports"],
+        )
+        self.assertIn(
+            "canonical root module imports compatibility facade: domain -> compat",
+            architecture.compare(measured, measured),
+        )
+
+    def test_package_cannot_import_root_compatibility_facade_even_in_baseline(self) -> None:
+        (self.root / "compat.py").write_text("VALUE = 1\n", encoding="utf-8")
+        self._own_root_module(
+            "compat", owner="controller", statuses=("compatibility_facade",)
+        )
+        self._package_file("a", "example.a").write_text(
+            "from compat import VALUE\n", encoding="utf-8"
+        )
+
+        measured = architecture.analyze(self.root, self.manifest)["baseline"]
+
+        self.assertEqual(
+            [{"source": "a", "module": "compat"}],
+            measured["compatibility_facade_imports"],
+        )
+        self.assertIn(
+            "package imports root compatibility facade: a -> compat",
+            architecture.compare(measured, measured),
+        )
+
+    def test_canonical_root_cannot_import_compatibility_facade_even_in_baseline(
+        self,
+    ) -> None:
+        (self.root / "compat.py").write_text("VALUE = 1\n", encoding="utf-8")
+        self._own_root_module(
+            "compat", owner="controller", statuses=("compatibility_facade",)
+        )
+        (self.root / "canonical.py").write_text(
+            "from compat import VALUE\n", encoding="utf-8"
+        )
+        self._own_root_module("canonical", owner="controller")
+
+        measured = architecture.analyze(self.root, self.manifest)["baseline"]
+
+        self.assertEqual(
+            [{"source": "canonical", "module": "compat"}],
+            measured["canonical_root_facade_imports"],
+        )
+        self.assertIn(
+            "canonical root module imports compatibility facade: "
+            "canonical -> compat",
+            architecture.compare(measured, measured),
+        )
+
+    def test_root_owner_target_policy_must_be_acyclic(self) -> None:
+        (self.root / "entrypoint.py").write_text("VALUE = 1\n", encoding="utf-8")
+        self._own_root_module("entrypoint", statuses=("entrypoint",))
+        self.manifest["root_owner_policy"]["semantic_model"][
+            "allowed_dependencies"
+        ] = ["entry_exchange"]
+        self.manifest["root_owner_policy"]["entry_exchange"][
+            "allowed_dependencies"
+        ] = ["semantic_model"]
+
+        with self.assertRaisesRegex(
+            architecture.ArchitectureConfigurationError,
+            "root-owner target policy contains cycles: "
+            "entry_exchange -> semantic_model",
+        ):
+            architecture.analyze(self.root, self.manifest)
 
 
 if __name__ == "__main__":

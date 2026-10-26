@@ -7,8 +7,8 @@ from typing import Any
 from applied_theory_types import Artifact
 from capability_runtime import runtime_skill_declaration_for_artifact
 from governed_skill_access import artifact_governed_use_state
-from skill_lifecycle import artifact_effective_skill_lifecycle
-from skill_governance import artifact_skill_admission
+from realized_core_governance.lifecycle import artifact_effective_skill_lifecycle
+from realized_core_governance.records import artifact_skill_admission
 
 
 def runtime_artifact_governance_context(owner: Any, artifact: Artifact) -> dict[str, Any]:

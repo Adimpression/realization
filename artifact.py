@@ -33,7 +33,8 @@ from applied_theory_types import (
 )
 from boundary import infer_function_bit
 from fallback_not_generation import fallback_not_elaboration_for_text
-from normalize import (
+from non_achievedness_normalization import normalize_not_elaboration_payload
+from normalization_primitives import (
     boundary_shape_values,
     normalize_artifact_admission,
     normalize_artifact_representation,
@@ -41,7 +42,6 @@ from normalize import (
     normalize_artifact_type,
     normalize_boundary_shape,
     normalize_learning_relation,
-    normalize_not_elaboration_payload,
     normalize_notation_entries,
     normalize_notation_key,
     normalize_notation_text,

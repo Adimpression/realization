@@ -4,62 +4,14 @@ from __future__ import annotations
 import re
 from typing import Any
 
+from semantic_text import LEARNING_COMPONENT_BREAKS, LEARNING_STOP_TOKENS
+
 
 LEARNING_MATCH_KINDS = (
     "encountered_before",
     "decomposition_related",
     "composition_related",
 )
-
-LEARNING_STOP_TOKENS = {
-    "a",
-    "an",
-    "and",
-    "are",
-    "as",
-    "at",
-    "be",
-    "by",
-    "convert",
-    "create",
-    "define",
-    "did",
-    "do",
-    "does",
-    "explain",
-    "for",
-    "from",
-    "how",
-    "i",
-    "if",
-    "in",
-    "into",
-    "is",
-    "it",
-    "make",
-    "name",
-    "of",
-    "on",
-    "put",
-    "sort",
-    "that",
-    "the",
-    "to",
-    "turn",
-    "use",
-    "using",
-    "via",
-    "what",
-    "when",
-    "where",
-    "which",
-    "who",
-    "why",
-    "write",
-    "you",
-}
-
-LEARNING_COMPONENT_BREAKS = {"and", "for", "then", "using", "via", "with"}
 
 LEARNING_DISCRIMINATOR_TOKENS = {
     "first",

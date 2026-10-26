@@ -6,12 +6,28 @@ import re
 from typing import Any
 
 from applied_theory_types import Artifact, utc_now
-from execution_framework_primitives import ability_executor_framework, normalize_executor_framework_name
 from host_abi import host_broker_stability, known_host_broker_names, required_authority_for_host_broker
 from python_skill_brokerization import python_skill_data_surface_assessment
-from semantic_text import collapse_ws
-from skill_lifecycle import artifact_effective_skill_lifecycle, artifact_skill_lifecycle, skill_lifecycle_allows_invocation
-from skill_governance_primitives import (
+from realized_core_governance.admission import evaluate_skill_policy_admission
+from realized_core_governance.declarations import (
+    SKILL_AUTHORITY_BOUND_FIELDS,
+    SKILL_DECLARATION_REQUIRED_FIELDS,
+    policy_answer_summary,
+    skill_declaration_from_payload,
+    skill_policy_from_payload,
+)
+from realized_core_governance.lifecycle import (
+    artifact_effective_skill_lifecycle,
+    artifact_skill_lifecycle,
+    skill_lifecycle_allows_invocation,
+)
+from realized_core_governance.records import (
+    artifact_is_policy_record,
+    artifact_skill_admission,
+    artifact_skill_declaration,
+    artifact_skill_policy,
+)
+from realized_core_governance.vocabulary import (
     SKILL_APPROVAL_CLASSES,
     SKILL_AUTHORITIES,
     SKILL_KIND_CHOICES,
@@ -21,53 +37,27 @@ from skill_governance_primitives import (
     normalize_skill_kind as _normalize_skill_kind,
     normalize_skill_risk_tier as _normalize_skill_risk_tier,
 )
-from skill_safety_governance import (
+from semantic_text import collapse_ws
+from realized_core_governance.safety import (
     artifact_is_incident_record,
     artifact_is_revocation_record,
     governed_safety_lifecycle_overlay,
 )
+from realized_skill_semantics.declaration import (
+    SKILL_SCHEMA_VERSION_V1,
+    SKILL_SCHEMA_VERSION_V2,
+    SKILL_SCHEMA_VERSIONS,
+    composition_binding_targets,
+    normalize_skill_schema_version,
+)
+from realized_skill_semantics.execution import (
+    ability_executor_framework,
+    normalize_executor_framework_name,
+)
 from virtual_mounts import default_virtual_mount_table
-
-SKILL_SCHEMA_VERSION_V1 = "bssc_skill.v1"
-SKILL_SCHEMA_VERSION_V2 = "bssc_skill.v2"
-SKILL_SCHEMA_VERSIONS = {SKILL_SCHEMA_VERSION_V1, SKILL_SCHEMA_VERSION_V2}
-
-SKILL_DECLARATION_REQUIRED_FIELDS = (
-    "intent",
-    "inputs",
-    "outputs",
-    "authorities_requested",
-    "data_classes_touched",
-    "side_effects",
-    "persistence_behavior",
-    "invocation_rights",
-    "composition_rights",
-    "escalation_rights",
-    "approval_requirements",
-    "risk_tier",
-)
-SKILL_AUTHORITY_BOUND_FIELDS = (
-    "scope",
-    "target",
-    "context",
-    "duration",
-    "triggering_conditions",
-    "approval_class",
-)
 
 _RISK_INDEX = {tier: index for index, tier in enumerate(SKILL_RISK_TIERS)}
 _APPROVAL_INDEX = {level: index for index, level in enumerate(SKILL_APPROVAL_CLASSES)}
-_DECLARATION_COLLECTION_FIELDS = {
-    "inputs",
-    "outputs",
-    "authorities_requested",
-    "data_classes_touched",
-    "side_effects",
-    "invocation_rights",
-    "composition_rights",
-    "escalation_rights",
-    "approval_requirements",
-}
 
 
 def _governed_broker_hints_from_content(content: Mapping[str, Any]) -> list[str]:
@@ -154,16 +144,6 @@ def _inferred_data_classes_from_brokers(content: Mapping[str, Any]) -> list[str]
     return inferred
 
 
-def _field_declared(
-    declaration: Mapping[str, Any],
-    payload: Mapping[str, Any],
-    field_name: str,
-) -> bool:
-    if field_name in declaration:
-        return True
-    return field_name in payload
-
-
 def _string_list(value: Any) -> list[str]:
     if value in (None, "", [], {}):
         return []
@@ -182,32 +162,6 @@ def _string_mapping(value: Any) -> dict[str, str]:
         if not key_text or not value_text:
             continue
         normalized[key_text] = value_text
-    return normalized
-
-
-def normalize_skill_schema_version(value: Any) -> str:
-    """
-    High Level Purpose:
-        In circumstances like importing or exporting externally governed skills, helps with selecting one supported skill schema version and rejecting unsupported declaration formats early.
-
-    Reference to Theory:
-        Supports open governance by separating older compact skill bundles from the newer declaration-first governed skill form.
-
-    Example Input Output:
-        Input: `normalize_skill_schema_version(value='bssc_skill.v2')`
-        Output: 'bssc_skill.v2'
-
-    Args:
-        value: Value for `value` used by `normalize_skill_schema_version`. Expected type: `Any`.
-
-    Returns:
-        str: Result produced by `normalize_skill_schema_version`.
-    """
-    normalized = collapse_ws(str(value or SKILL_SCHEMA_VERSION_V1))
-    if not normalized:
-        return SKILL_SCHEMA_VERSION_V1
-    if normalized not in SKILL_SCHEMA_VERSIONS:
-        raise ValueError(f"Unsupported skill schema version: {normalized}")
     return normalized
 
 
@@ -231,43 +185,6 @@ def normalize_skill_kind(value: Any, *, default: str = "knowledge") -> str:
         str: Result produced by `normalize_skill_kind`.
     """
     return _normalize_skill_kind(value, default=default)
-
-
-def composition_binding_targets(declaration: Mapping[str, Any] | None) -> list[str]:
-    """
-    High Level Purpose:
-        In circumstances like governed nested skill invocation, helps with deriving the explicit target titles that a skill is allowed to compose with.
-
-    Reference to Theory:
-        Supports composition governance by turning declaration-level composition rights into explicit invokable bindings.
-
-    Example Input Output:
-        Input: `composition_binding_targets({'composition_rights': ['skill:Hi Responder', 'invoke:CSV Reader']})`
-        Output: ['Hi Responder', 'CSV Reader']
-
-    Args:
-        declaration: Value for `declaration` used by `composition_binding_targets`. Expected type: `Mapping[str, Any] | None`.
-
-    Returns:
-        list[str]: Result produced by `composition_binding_targets`.
-    """
-    if not isinstance(declaration, Mapping):
-        return []
-    targets: list[str] = []
-    for item in _string_list(declaration.get("composition_rights", [])):
-        raw = collapse_ws(str(item))
-        if not raw:
-            continue
-        if raw == "*":
-            return ["*"]
-        if ":" in raw:
-            prefix, target = raw.split(":", 1)
-            if collapse_ws(prefix).lower() not in {"skill", "invoke", "title"}:
-                continue
-            raw = collapse_ws(target)
-        if raw and raw not in targets:
-            targets.append(raw)
-    return targets
 
 
 def normalize_skill_risk_tier(value: Any, *, default: str = "tier1_bounded_transform") -> str:
@@ -333,252 +250,6 @@ def normalize_skill_authorities(value: Any) -> list[str]:
         list[str]: Result produced by `normalize_skill_authorities`.
     """
     return _normalize_skill_authorities(value)
-
-
-def skill_declaration_from_payload(
-    payload: Mapping[str, Any],
-    *,
-    kind: str,
-    fallback_inputs: Mapping[str, Any] | None = None,
-    fallback_outputs: Mapping[str, Any] | None = None,
-    executor_framework: str = "",
-) -> dict[str, Any]:
-    """
-    High Level Purpose:
-        In circumstances like importing declaration-first governed skills, helps with normalizing and validating the skill declaration required by the v2 schema.
-
-    Reference to Theory:
-        Supports open governance section 7 by turning the declarative skill contract into one machine-checkable structure before admission.
-
-    Example Input Output:
-        Input: `skill_declaration_from_payload(payload={'schema': 'bssc_skill.v2', 'declaration': {'intent': 'Open a browser URL.', 'inputs': {'url': 'target URL'}, 'outputs': {'status': 'open status'}, 'authorities_requested': ['execute'], 'authority_bounds': {'execute': {'scope': 'local_desktop', 'target': 'browser_application', 'context': 'explicit_user_prompt', 'duration': 'single_invocation', 'triggering_conditions': ['user invokes skill'], 'approval_class': 'automatic'}}, 'data_classes_touched': ['public'], 'side_effects': ['launch browser'], 'persistence_behavior': 'none', 'invocation_rights': ['direct_user_invocation'], 'composition_rights': [], 'escalation_rights': [], 'approval_requirements': ['automatic'], 'risk_tier': 'tier1_bounded_transform'}}, kind='ability', fallback_inputs={}, fallback_outputs={}, executor_framework='python3')`
-        Output: {'intent': 'Open a browser URL.', 'inputs': {'url': 'target URL'}, 'outputs': {'status': 'open status'}, 'authorities_requested': ['execute'], 'authority_bounds': {'execute': {'scope': 'local_desktop', 'target': 'browser_application', 'context': 'explicit_user_prompt', 'duration': 'single_invocation', 'triggering_conditions': ['user invokes skill'], 'approval_class': 'automatic'}}, 'data_classes_touched': ['public'], 'side_effects': ['launch browser'], 'persistence_behavior': 'none', 'invocation_rights': ['direct_user_invocation'], 'composition_rights': [], 'escalation_rights': [], 'approval_requirements': ['automatic'], 'risk_tier': 'tier1_bounded_transform', 'executor_framework': 'python3'}
-
-    Args:
-        payload: Value for `payload` used by `skill_declaration_from_payload`. Expected type: `Mapping[str, Any]`.
-        kind: Value for `kind` used by `skill_declaration_from_payload`. Expected type: `str`.
-        fallback_inputs: Value for `fallback_inputs` used by `skill_declaration_from_payload`. Expected type: `Mapping[str, Any] | None`. Defaults to `None`.
-        fallback_outputs: Value for `fallback_outputs` used by `skill_declaration_from_payload`. Expected type: `Mapping[str, Any] | None`. Defaults to `None`.
-        executor_framework: Value for `executor_framework` used by `skill_declaration_from_payload`. Expected type: `str`. Defaults to `''`.
-
-    Returns:
-        dict[str, Any]: Result produced by `skill_declaration_from_payload`.
-    """
-    schema = normalize_skill_schema_version(payload.get("schema", SKILL_SCHEMA_VERSION_V1))
-    if schema != SKILL_SCHEMA_VERSION_V2 or kind in {"policy", "approval", "revocation", "incident"}:
-        return {}
-
-    declaration = dict(payload.get("declaration", {})) if isinstance(payload.get("declaration", {}), Mapping) else {}
-    normalized_inputs = _string_mapping(declaration.get("inputs", fallback_inputs or {}))
-    normalized_outputs = _string_mapping(declaration.get("outputs", fallback_outputs or {}))
-    authority_bounds_raw = (
-        dict(declaration.get("authority_bounds", {}))
-        if isinstance(declaration.get("authority_bounds", {}), Mapping)
-        else {}
-    )
-    authority_bounds: dict[str, dict[str, Any]] = {}
-    for authority, raw_bounds in authority_bounds_raw.items():
-        authority_name = collapse_ws(str(authority)).lower().replace("-", "_").replace(" ", "_")
-        if authority_name not in SKILL_AUTHORITIES or not isinstance(raw_bounds, Mapping):
-            continue
-        triggering_conditions = _string_list(raw_bounds.get("triggering_conditions", []))
-        authority_bounds[authority_name] = {
-            "scope": collapse_ws(str(raw_bounds.get("scope", ""))),
-            "target": collapse_ws(str(raw_bounds.get("target", ""))),
-            "context": collapse_ws(str(raw_bounds.get("context", ""))),
-            "duration": collapse_ws(str(raw_bounds.get("duration", ""))),
-            "triggering_conditions": triggering_conditions,
-            "approval_class": normalize_skill_approval_class(raw_bounds.get("approval_class", "automatic")),
-        }
-
-    normalized = {
-        "intent": collapse_ws(str(declaration.get("intent", payload.get("intent", "")))),
-        "inputs": normalized_inputs,
-        "outputs": normalized_outputs,
-        "authorities_requested": normalize_skill_authorities(
-            declaration.get("authorities_requested", payload.get("authorities_requested", []))
-        ),
-        "authority_bounds": authority_bounds,
-        "data_classes_touched": _string_list(
-            declaration.get("data_classes_touched", payload.get("data_classes_touched", []))
-        ),
-        "side_effects": _string_list(declaration.get("side_effects", payload.get("side_effects", []))),
-        "persistence_behavior": collapse_ws(
-            str(declaration.get("persistence_behavior", payload.get("persistence_behavior", "")))
-        ),
-        "invocation_rights": _string_list(
-            declaration.get("invocation_rights", payload.get("invocation_rights", []))
-        ),
-        "composition_rights": _string_list(
-            declaration.get("composition_rights", payload.get("composition_rights", []))
-        ),
-        "escalation_rights": _string_list(
-            declaration.get("escalation_rights", payload.get("escalation_rights", []))
-        ),
-        "approval_requirements": [
-            normalize_skill_approval_class(item)
-            for item in _string_list(declaration.get("approval_requirements", payload.get("approval_requirements", [])))
-        ],
-        "risk_tier": normalize_skill_risk_tier(
-            declaration.get("risk_tier", payload.get("risk_tier", "tier1_bounded_transform"))
-        ),
-    }
-    if executor_framework:
-        normalized["executor_framework"] = normalize_executor_framework_name(executor_framework)
-
-    missing_fields: list[str] = []
-    for field_name in SKILL_DECLARATION_REQUIRED_FIELDS:
-        if field_name in _DECLARATION_COLLECTION_FIELDS:
-            if not _field_declared(declaration, payload, field_name):
-                missing_fields.append(field_name)
-            continue
-        if normalized.get(field_name) in (None, "", [], {}):
-            missing_fields.append(field_name)
-    if missing_fields:
-        raise ValueError(
-            "Skill declaration v2 requires declared fields: "
-            + ", ".join(missing_fields)
-        )
-    missing_bounds = [
-        authority
-        for authority in normalized["authorities_requested"]
-        if authority not in normalized["authority_bounds"]
-    ]
-    if missing_bounds:
-        raise ValueError(
-            "Skill declaration v2 requires authority_bounds for every requested authority: "
-            + ", ".join(missing_bounds)
-        )
-    for authority, bounds in normalized["authority_bounds"].items():
-        missing_bound_fields = [
-            field_name
-            for field_name in SKILL_AUTHORITY_BOUND_FIELDS
-            if bounds.get(field_name) in (None, "", [], {})
-        ]
-        if missing_bound_fields:
-            raise ValueError(
-                f"Skill declaration v2 authority {authority!r} is missing bounds: "
-                + ", ".join(missing_bound_fields)
-            )
-    return normalized
-
-
-def skill_policy_from_payload(payload: Mapping[str, Any]) -> dict[str, Any]:
-    """
-    High Level Purpose:
-        In circumstances like importing policy artifacts that govern later skill admission, helps with normalizing the policy document into one machine-checkable policy specification.
-
-    Reference to Theory:
-        Supports open governance sections 8, 9, and 13 by making policy explicit before skill admission or invocation.
-
-    Example Input Output:
-        Input: `skill_policy_from_payload(payload={'schema': 'bssc_skill.v2', 'kind': 'policy', 'policy': {'intent': 'Admit only bounded local abilities.', 'target_kinds': ['ability'], 'max_risk_tier': 'tier2_connected', 'allowed_authorities': ['read', 'write', 'execute'], 'denied_authorities': ['approve', 'modify', 'escalate'], 'allowed_executors': ['python3'], 'required_approval_for_risk_tiers': {'tier3_sensitive': 'operator_approved'}}})`
-        Output: {'intent': 'Admit only bounded local abilities.', 'target_kinds': ['ability'], 'max_risk_tier': 'tier2_connected', 'allowed_authorities': ['read', 'write', 'execute'], 'denied_authorities': ['approve', 'modify', 'escalate'], 'allowed_executors': ['python3'], 'required_approval_for_risk_tiers': {'tier3_sensitive': 'operator_approved'}}
-
-    Args:
-        payload: Value for `payload` used by `skill_policy_from_payload`. Expected type: `Mapping[str, Any]`.
-
-    Returns:
-        dict[str, Any]: Result produced by `skill_policy_from_payload`.
-    """
-    schema = normalize_skill_schema_version(payload.get("schema", SKILL_SCHEMA_VERSION_V1))
-    kind = normalize_skill_kind(payload.get("kind", "knowledge"))
-    if schema != SKILL_SCHEMA_VERSION_V2 or kind != "policy":
-        return {}
-    policy = dict(payload.get("policy", {})) if isinstance(payload.get("policy", {}), Mapping) else {}
-    normalized_required_approval = {}
-    raw_required = (
-        dict(policy.get("required_approval_for_risk_tiers", {}))
-        if isinstance(policy.get("required_approval_for_risk_tiers", {}), Mapping)
-        else {}
-    )
-    for tier, approval in raw_required.items():
-        normalized_required_approval[normalize_skill_risk_tier(tier)] = normalize_skill_approval_class(approval)
-    normalized = {
-        "intent": collapse_ws(str(policy.get("intent", ""))),
-        "target_kinds": [
-            normalize_skill_kind(item)
-            for item in _string_list(policy.get("target_kinds", ["knowledge", "ability"]))
-        ],
-        "max_risk_tier": normalize_skill_risk_tier(policy.get("max_risk_tier", "tier1_bounded_transform")),
-        "allowed_authorities": normalize_skill_authorities(policy.get("allowed_authorities", [])),
-        "denied_authorities": normalize_skill_authorities(policy.get("denied_authorities", [])),
-        "allowed_executors": [
-            normalize_executor_framework_name(item)
-            for item in _string_list(policy.get("allowed_executors", []))
-            if normalize_executor_framework_name(item)
-        ],
-        "allowed_data_classes": _string_list(policy.get("allowed_data_classes", [])),
-        "denied_side_effects": _string_list(policy.get("denied_side_effects", [])),
-        "required_approval_for_risk_tiers": normalized_required_approval,
-    }
-    missing_fields = [
-        field_name
-        for field_name in ("intent", "target_kinds", "max_risk_tier")
-        if normalized.get(field_name) in (None, "", [], {})
-    ]
-    if missing_fields:
-        raise ValueError(
-            "Policy artifact v2 requires non-empty fields: "
-            + ", ".join(missing_fields)
-        )
-    return normalized
-
-
-def policy_answer_summary(policy: Mapping[str, Any]) -> str:
-    """
-    High Level Purpose:
-        In circumstances like storing policy artifacts inside the existing artifact substrate, helps with producing a readable summary answer that states what the policy admits and constrains.
-
-    Reference to Theory:
-        Supports open governance by keeping policy artifacts reviewable in human-readable form even when they are stored in the general artifact substrate.
-
-    Example Input Output:
-        Input: `policy_answer_summary(policy={'intent': 'Admit only bounded local abilities.', 'target_kinds': ['ability'], 'max_risk_tier': 'tier2_connected', 'allowed_authorities': ['read', 'execute']})`
-        Output: 'Policy intent: Admit only bounded local abilities. Targets: ability. Max risk tier: tier2_connected. Allowed authorities: read, execute.'
-
-    Args:
-        policy: Value for `policy` used by `policy_answer_summary`. Expected type: `Mapping[str, Any]`.
-
-    Returns:
-        str: Result produced by `policy_answer_summary`.
-    """
-    intent = collapse_ws(str(policy.get("intent", "")))
-    target_kinds = ", ".join(_string_list(policy.get("target_kinds", [])))
-    max_risk_tier = normalize_skill_risk_tier(policy.get("max_risk_tier", "tier1_bounded_transform"))
-    allowed_authorities = ", ".join(normalize_skill_authorities(policy.get("allowed_authorities", [])))
-    denied_authorities = ", ".join(normalize_skill_authorities(policy.get("denied_authorities", [])))
-    segments = [
-        f"Policy intent: {intent}.",
-        f"Targets: {target_kinds}.",
-        f"Max risk tier: {max_risk_tier}.",
-        f"Allowed authorities: {allowed_authorities}.",
-    ]
-    if denied_authorities:
-        segments.append(f"Denied authorities: {denied_authorities}.")
-    return " ".join(segment for segment in segments if collapse_ws(segment))
-
-
-def artifact_skill_declaration(artifact: Artifact) -> dict[str, Any]:
-    """
-    High Level Purpose:
-        In circumstances like admission checks and governed export, helps with reading the normalized skill declaration that was stored on an artifact at import time.
-
-    Reference to Theory:
-        Supports open governance by keeping the admitted declaration available for later policy, review, and replay checks.
-
-    Example Input Output:
-        Input: `artifact_skill_declaration(artifact=Artifact(id='artifact-skill-abc', title='Open Browser URL', artifact_type='ability', representation='python_script'))`
-        Output: {'intent': 'Open a browser URL.', 'risk_tier': 'tier1_bounded_transform'}
-
-    Args:
-        artifact: Value for `artifact` used by `artifact_skill_declaration`. Expected type: `Artifact`.
-
-    Returns:
-        dict[str, Any]: Result produced by `artifact_skill_declaration`.
-    """
-    content = dict(artifact.content) if isinstance(artifact.content, Mapping) else {}
-    return dict(content.get("skill_declaration", {})) if isinstance(content.get("skill_declaration", {}), Mapping) else {}
 
 
 def synthesized_skill_declaration_for_artifact(artifact: Artifact) -> dict[str, Any]:
@@ -790,71 +461,6 @@ def synthesized_skill_declaration_for_artifact(artifact: Artifact) -> dict[str, 
     )
 
 
-def artifact_skill_policy(artifact: Artifact) -> dict[str, Any]:
-    """
-    High Level Purpose:
-        In circumstances like admission checks and governed export, helps with reading the normalized policy specification stored on a policy artifact.
-
-    Reference to Theory:
-        Supports open governance by making policy artifacts machine-readable during admission and review.
-
-    Example Input Output:
-        Input: `artifact_skill_policy(artifact=Artifact(id='artifact-skill-policy', title='Local Admission Policy', artifact_type='knowledge', representation='yaml'))`
-        Output: {'intent': 'Admit bounded local skills.', 'max_risk_tier': 'tier2_connected'}
-
-    Args:
-        artifact: Value for `artifact` used by `artifact_skill_policy`. Expected type: `Artifact`.
-
-    Returns:
-        dict[str, Any]: Result produced by `artifact_skill_policy`.
-    """
-    content = dict(artifact.content) if isinstance(artifact.content, Mapping) else {}
-    return dict(content.get("skill_policy", {})) if isinstance(content.get("skill_policy", {}), Mapping) else {}
-
-
-def artifact_skill_admission(artifact: Artifact) -> dict[str, Any]:
-    """
-    High Level Purpose:
-        In circumstances like execution gating and governed export, helps with reading the stored admission decision attached to a governed skill artifact.
-
-    Reference to Theory:
-        Supports open governance sections 9 and 10 by preserving the admission result that must hold before activation or invocation.
-
-    Example Input Output:
-        Input: `artifact_skill_admission(artifact=Artifact(id='artifact-skill-abc', title='Open Browser URL', artifact_type='ability', representation='python_script'))`
-        Output: {'status': 'admitted', 'admitted': True}
-
-    Args:
-        artifact: Value for `artifact` used by `artifact_skill_admission`. Expected type: `Artifact`.
-
-    Returns:
-        dict[str, Any]: Result produced by `artifact_skill_admission`.
-    """
-    content = dict(artifact.content) if isinstance(artifact.content, Mapping) else {}
-    return dict(content.get("skill_admission", {})) if isinstance(content.get("skill_admission", {}), Mapping) else {}
-
-
-def artifact_is_policy_record(artifact: Artifact) -> bool:
-    """
-    High Level Purpose:
-        In circumstances like answer selection and execution gating, helps with detecting that an artifact is a policy record rather than an invokable or explanatory end-user skill.
-
-    Reference to Theory:
-        Supports open governance by keeping policy artifacts reviewable without letting them masquerade as ordinary user-facing abilities.
-
-    Example Input Output:
-        Input: `artifact_is_policy_record(artifact=Artifact(id='artifact-skill-policy', title='Local Admission Policy', artifact_type='knowledge', representation='yaml'))`
-        Output: True
-
-    Args:
-        artifact: Value for `artifact` used by `artifact_is_policy_record`. Expected type: `Artifact`.
-
-    Returns:
-        bool: Result produced by `artifact_is_policy_record`.
-    """
-    return bool(artifact_skill_policy(artifact))
-
-
 def artifact_current_use_admission(
     artifact: Artifact,
     *,
@@ -903,7 +509,7 @@ def artifact_current_use_admission(
             "required_approval_class": "automatic",
             "evaluated_at": utc_now(),
         }
-    from approval_governance import artifact_is_approval_record
+    from realized_core_governance.approval import artifact_is_approval_record
 
     if artifact_is_approval_record(artifact):
         return {
@@ -1192,130 +798,12 @@ def evaluate_skill_admission(
                 "evaluated_at": utc_now(),
             }
 
-    blocking_reasons: list[str] = []
-    required_approval_class = "automatic"
-    policy_titles: list[str] = []
-    for artifact in policies:
-        policy = artifact_skill_policy(artifact)
-        policy_titles.append(artifact.title)
-        if normalized_kind not in policy.get("target_kinds", []):
-            blocking_reasons.append(f"policy {artifact.title!r} does not admit kind {normalized_kind!r}")
-            continue
-        if _RISK_INDEX[risk_tier] > _RISK_INDEX[normalize_skill_risk_tier(policy.get("max_risk_tier", risk_tier))]:
-            blocking_reasons.append(
-                f"policy {artifact.title!r} limits risk to {policy.get('max_risk_tier')}, but declaration requests {risk_tier}"
-            )
-        allowed_authorities = normalize_skill_authorities(policy.get("allowed_authorities", []))
-        denied_authorities = normalize_skill_authorities(policy.get("denied_authorities", []))
-        disallowed_requested = sorted(set(requested_authorities) & set(denied_authorities))
-        if disallowed_requested:
-            blocking_reasons.append(
-                f"policy {artifact.title!r} denies authorities: {', '.join(disallowed_requested)}"
-            )
-        missing_allowed = sorted(set(requested_authorities) - set(allowed_authorities))
-        if missing_allowed:
-            blocking_reasons.append(
-                f"policy {artifact.title!r} does not allow authorities: {', '.join(missing_allowed)}"
-            )
-        allowed_executors = [
-            normalize_executor_framework_name(item)
-            for item in _string_list(policy.get("allowed_executors", []))
-        ]
-        if normalized_kind == "ability" and allowed_executors and normalized_executor not in allowed_executors:
-            blocking_reasons.append(
-                f"policy {artifact.title!r} does not allow executor {normalized_executor or 'unknown'}"
-            )
-        allowed_data_classes = _string_list(policy.get("allowed_data_classes", []))
-        if allowed_data_classes:
-            undeclared_data = sorted(
-                set(_string_list(declaration.get("data_classes_touched", []))) - set(allowed_data_classes)
-            )
-            if undeclared_data:
-                blocking_reasons.append(
-                    f"policy {artifact.title!r} does not allow data classes: {', '.join(undeclared_data)}"
-                )
-        denied_side_effects = set(_string_list(policy.get("denied_side_effects", [])))
-        forbidden_side_effects = sorted(
-            set(_string_list(declaration.get("side_effects", []))) & denied_side_effects
-        )
-        if forbidden_side_effects:
-            blocking_reasons.append(
-                f"policy {artifact.title!r} denies side effects: {', '.join(forbidden_side_effects)}"
-            )
-        policy_required_approval = normalize_skill_approval_class(
-            dict(policy.get("required_approval_for_risk_tiers", {})).get(risk_tier, "automatic")
-        )
-        if _APPROVAL_INDEX[policy_required_approval] > _APPROVAL_INDEX[required_approval_class]:
-            required_approval_class = policy_required_approval
-
-    if blocking_reasons:
-        return {
-            "status": "rejected",
-            "admitted": False,
-            "rationale": "; ".join(blocking_reasons),
-            "policy_titles": policy_titles,
-            "approval_titles": [],
-            "required_approval_class": required_approval_class,
-            "evaluated_at": utc_now(),
-        }
-
-    strongest_declared_approval = max(
-        approval_requirements,
-        key=lambda item: _APPROVAL_INDEX[normalize_skill_approval_class(item)],
+    return evaluate_skill_policy_admission(
+        declaration,
+        skill_title=skill_title,
+        kind=normalized_kind,
+        executor_framework=normalized_executor,
+        policy_artifacts=policies,
+        approval_artifacts=approval_artifacts,
+        evaluated_at=utc_now,
     )
-    if _APPROVAL_INDEX[required_approval_class] > _APPROVAL_INDEX[strongest_declared_approval]:
-        return {
-            "status": "held",
-            "admitted": False,
-            "rationale": (
-                f"Policy requires approval class {required_approval_class}, "
-                f"but declaration only provides {strongest_declared_approval}."
-            ),
-            "policy_titles": policy_titles,
-            "approval_titles": [],
-            "required_approval_class": required_approval_class,
-            "evaluated_at": utc_now(),
-        }
-    if required_approval_class != "automatic":
-        from approval_governance import matching_approval_artifacts
-
-        matching_approvals = matching_approval_artifacts(
-            approval_artifacts,
-            skill_title=skill_title,
-            kind=normalized_kind,
-            requested_authorities=requested_authorities,
-            risk_tier=risk_tier,
-            required_approval_class=required_approval_class,
-        )
-        approval_titles = [artifact.title for artifact in matching_approvals]
-        if matching_approvals:
-            return {
-                "status": "admitted",
-                "admitted": True,
-                "rationale": (
-                    f"Declaration satisfied installed policy constraints and matched approval class "
-                    f"{required_approval_class}."
-                ),
-                "policy_titles": policy_titles,
-                "approval_titles": approval_titles,
-                "required_approval_class": required_approval_class,
-                "evaluated_at": utc_now(),
-            }
-        return {
-            "status": "held",
-            "admitted": False,
-            "rationale": f"Policy requires explicit approval class {required_approval_class} before admission.",
-            "policy_titles": policy_titles,
-            "approval_titles": [],
-            "required_approval_class": required_approval_class,
-            "evaluated_at": utc_now(),
-        }
-    return {
-        "status": "admitted",
-        "admitted": True,
-        "rationale": "Declaration satisfied installed policy constraints and required no additional approval.",
-        "policy_titles": policy_titles,
-        "approval_titles": [],
-        "required_approval_class": required_approval_class,
-        "evaluated_at": utc_now(),
-    }

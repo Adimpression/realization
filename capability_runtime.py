@@ -7,13 +7,15 @@ from dataclasses import dataclass, field
 from typing import Any
 
 from applied_theory_types import Artifact, json_safe, utc_now
-from execution_framework_primitives import normalize_executor_framework_name
 from host_abi import known_host_broker_names, required_authority_for_host_broker
-from semantic_text import collapse_ws
-from skill_governance import (
+from realized_core_governance.records import (
     artifact_is_policy_record,
     artifact_skill_admission,
     artifact_skill_declaration,
+)
+from realized_skill_semantics.execution import normalize_executor_framework_name
+from semantic_text import collapse_ws
+from skill_governance import (
     normalize_skill_kind,
     synthesized_skill_declaration_for_artifact,
 )

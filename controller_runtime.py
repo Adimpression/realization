@@ -49,17 +49,12 @@ from external_markdown_learning_pipeline import (
     markdown_expression_artifact_payload as build_markdown_expression_artifact_payload,
 )
 from execution_frameworks import (
-    ability_executable_text,
-    ability_executor_framework,
     brokerize_python_main_for_host_brokers,
     executor_framework_representation,
     execute_cross_boundary,
     normalize_supported_executor_frameworks,
 )
-from fallback_not_semantics import (
-    fallback_not_elaboration_for_text,
-    not_elaboration_alignment_rank,
-)
+from fallback_not_generation import fallback_not_elaboration_for_text
 from host_mediation import (
     execute_mediated_artifact_effect as execute_governed_mediated_artifact_effect,
     execute_mediated_host_broker_request as execute_governed_mediated_host_broker_request,
@@ -73,6 +68,10 @@ from realized_host_interaction.context import (
     normalize_host_interaction_attachment_path,
     primary_host_interaction_workspace,
     resolve_host_interaction_attachment,
+)
+from realized_skill_semantics.execution import (
+    ability_executable_text,
+    ability_executor_framework,
 )
 from id_generation import make_id, slugify
 from markdown_learning_artifact_semantics import (
@@ -228,7 +227,8 @@ from applied_theory_types import (
     json_safe,
     utc_now,
 )
-from normalize import (
+from non_achievedness_normalization import normalize_not_elaboration_payload
+from normalization_primitives import (
     boundary_shape_values,
     normalize_artifact_admission,
     normalize_artifact_representation,
@@ -245,7 +245,6 @@ from normalize import (
     normalize_learning_relation,
     normalize_node_origin,
     normalize_not_degree,
-    normalize_not_elaboration_payload,
     normalize_not_misalignment_kind,
     normalize_not_misalignment_list,
     normalize_not_origin_kind,
@@ -262,6 +261,7 @@ from normalize import (
     normalize_support_score,
     normalize_three_level,
 )
+from not_elaboration_ranking import not_elaboration_alignment_rank
 from markdown_ir import (
     MarkdownDocumentIR,
     MarkdownSectionIR,

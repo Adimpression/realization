@@ -3,9 +3,25 @@ from __future__ import annotations
 
 import unittest
 
-from applied_theory_types import BoundaryShapeTerm
-from skill_boundary_normalization import normalize_skill_region_body, reconstruct_skill_region_body
-from skill_leaf_types import SkillLeaf, SkillLeafCarrierKind
+from applied_theory_types import Artifact, BoundaryShapeTerm
+from realized_skill_semantics.leaves import SkillLeaf, SkillLeafCarrierKind
+from realized_skill_semantics.normalization import (
+    normalize_skill_region_body,
+    reconstruct_skill_region_body,
+)
+from skill_boundary_normalization import synthesized_skill_normalization_for_artifact
+
+
+def _artifact(*, name: str, content: dict[str, object], kind: str = "ability") -> Artifact:
+    return Artifact.from_dict(
+        {
+            "id": f"artifact-{name}",
+            "title": name.replace("_", " ").title(),
+            "artifact_type": kind,
+            "representation": "yaml",
+            "content": content,
+        }
+    )
 
 
 class SkillBoundaryNormalizationTests(unittest.TestCase):
@@ -114,6 +130,180 @@ class SkillBoundaryNormalizationTests(unittest.TestCase):
         self.assertEqual(strings_leaf.data_type, "Strings")
         self.assertEqual(bools_leaf.data_type, "Bools")
         self.assertEqual(bytess_leaf.data_type, "Bytess")
+
+    def test_artifact_adapter_preserves_explicit_contract_precedence(self) -> None:
+        artifact = _artifact(
+            name="explicit_contracts",
+            content={
+                "input_contract": {"explicit_in": "E"},
+                "output_contract": {"explicit_out": "O"},
+                "skill_declaration": {
+                    "inputs": {"declared_in": "D"},
+                    "outputs": {"declared_out": "D"},
+                },
+                "answer": "fallback",
+            },
+        )
+
+        document = synthesized_skill_normalization_for_artifact(artifact)
+
+        self.assertEqual(
+            {
+                "normalization_version": "bssc.skill.normalization.v1",
+                "path_notation_version": "bssc.skill.path.v1",
+                "regions": {
+                    "a": {
+                        "boundary_term": "a*",
+                        "carrier_kind": "value",
+                        "reconstructible": True,
+                        "leaves": [
+                            {
+                                "region": "a*",
+                                "path": "/a/explicit_in",
+                                "carrier_kind": "value",
+                                "data_type": "String",
+                                "semantic_label": "explicit_in",
+                                "value": "E",
+                                "leaf_class": "scalar",
+                            }
+                        ],
+                    },
+                    "a'": {
+                        "boundary_term": "a'*",
+                        "carrier_kind": "reference",
+                        "reconstructible": True,
+                        "leaves": [],
+                    },
+                    "b": {
+                        "boundary_term": "b*",
+                        "carrier_kind": "value",
+                        "reconstructible": True,
+                        "leaves": [],
+                    },
+                    "b'": {
+                        "boundary_term": "b'*",
+                        "carrier_kind": "reference",
+                        "reconstructible": True,
+                        "leaves": [],
+                    },
+                    "c": {
+                        "boundary_term": "c*",
+                        "carrier_kind": "value",
+                        "reconstructible": True,
+                        "leaves": [],
+                    },
+                    "c'": {
+                        "boundary_term": "c'*",
+                        "carrier_kind": "reference",
+                        "reconstructible": True,
+                        "leaves": [],
+                    },
+                    "d": {
+                        "boundary_term": "d*",
+                        "carrier_kind": "value",
+                        "reconstructible": True,
+                        "leaves": [
+                            {
+                                "region": "d*",
+                                "path": "/d/explicit_out",
+                                "carrier_kind": "value",
+                                "data_type": "String",
+                                "semantic_label": "explicit_out",
+                                "value": "O",
+                                "leaf_class": "scalar",
+                            }
+                        ],
+                    },
+                    "d'": {
+                        "boundary_term": "d'*",
+                        "carrier_kind": "reference",
+                        "reconstructible": True,
+                        "leaves": [],
+                    },
+                },
+            },
+            document,
+        )
+
+    def test_artifact_adapter_preserves_declaration_fallback(self) -> None:
+        artifact = _artifact(
+            name="declaration_fallback",
+            content={
+                "skill_declaration": {
+                    "inputs": {"declared_in": "D"},
+                    "outputs": {"declared_out": "D"},
+                }
+            },
+        )
+
+        document = synthesized_skill_normalization_for_artifact(artifact)
+
+        self.assertEqual(
+            ("/a/declared_in", "D"),
+            (
+                document["regions"]["a"]["leaves"][0]["path"],
+                document["regions"]["a"]["leaves"][0]["value"],
+            ),
+        )
+        self.assertEqual(
+            ("/d/declared_out", "D"),
+            (
+                document["regions"]["d"]["leaves"][0]["path"],
+                document["regions"]["d"]["leaves"][0]["value"],
+            ),
+        )
+
+    def test_artifact_adapter_preserves_answer_fallback(self) -> None:
+        artifact = _artifact(
+            name="answer_fallback",
+            kind="knowledge",
+            content={
+                "answer": "F = m * a",
+                "skill_declaration": {
+                    "intent": "Answer",
+                    "inputs": {},
+                    "outputs": {},
+                },
+            },
+        )
+
+        document = synthesized_skill_normalization_for_artifact(artifact)
+
+        self.assertEqual([], document["regions"]["a"]["leaves"])
+        self.assertEqual(
+            [
+                {
+                    "region": "d*",
+                    "path": "/d/answer",
+                    "carrier_kind": "value",
+                    "data_type": "String",
+                    "semantic_label": "answer",
+                    "value": "F = m * a",
+                    "leaf_class": "scalar",
+                }
+            ],
+            document["regions"]["d"]["leaves"],
+        )
+
+    def test_artifact_adapter_preserves_legacy_default_declaration(self) -> None:
+        artifact = _artifact(name="empty", content={})
+
+        document = synthesized_skill_normalization_for_artifact(artifact)
+
+        self.assertEqual(
+            ("/a/payload", "execution input"),
+            (
+                document["regions"]["a"]["leaves"][0]["path"],
+                document["regions"]["a"]["leaves"][0]["value"],
+            ),
+        )
+        self.assertEqual(
+            ("/d/result", "execution result"),
+            (
+                document["regions"]["d"]["leaves"][0]["path"],
+                document["regions"]["d"]["leaves"][0]["value"],
+            ),
+        )
 
 
 if __name__ == "__main__":

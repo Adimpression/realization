@@ -5,17 +5,20 @@ from collections.abc import Mapping
 from typing import Any
 
 from applied_theory_types import Artifact
-from approval_governance import artifact_is_approval_record
-from execution_frameworks import ability_executable_text, ability_executor_framework
+from realized_core_governance.approval import artifact_is_approval_record
 from governance_inventory import controller_governance_snapshot
-from skill_lifecycle import artifact_effective_skill_lifecycle
+from realized_core_governance.lifecycle import artifact_effective_skill_lifecycle
+from realized_core_governance.records import artifact_is_policy_record
+from realized_skill_semantics.execution import (
+    ability_executable_text,
+    ability_executor_framework,
+)
 from skill_governance import (
     artifact_admitted_for_use_with_governance,
     artifact_current_use_admission,
-    artifact_is_policy_record,
     normalize_skill_kind,
 )
-from skill_safety_governance import governed_safety_lifecycle_overlay
+from realized_core_governance.safety import governed_safety_lifecycle_overlay
 
 
 def _artifact_kind_text(artifact: Artifact) -> str:

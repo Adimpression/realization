@@ -13,7 +13,7 @@ from pathlib import Path
 from collections.abc import Callable
 from typing import Any
 
-from applied_theory_types import json_safe
+from realized_core_semantics.values import json_safe
 from blend_context import BlendContext
 from blend_operator_store import (
     BlendOperatorProvider,
@@ -27,7 +27,6 @@ from blend_workflow_store import (
     load_blend_workflow_plan,
     load_blend_workflow_run,
 )
-from execution_frameworks import ability_executor_framework
 from gather_sources import (
     SourceCollection,
     StagedSource,
@@ -44,6 +43,7 @@ from gather_sources import (
     staged_source_bundle_root,
 )
 from realized_host_interaction.receipts import host_interaction_receipts_path
+from realized_skill_semantics.execution import ability_executor_framework
 from learning_context import load_learning_context, new_learning_context, persist_learning_context
 from semantic_text import collapse_ws
 from skill_schema_io import normalized_skill_bundle_filename_for_source

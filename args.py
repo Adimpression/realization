@@ -7,11 +7,11 @@ from pathlib import Path
 from typing import Any
 
 from execution_frameworks import (
-    SUPPORTED_EXECUTOR_FRAMEWORK_CHOICES,
     SUPPORTED_EXECUTOR_FRAMEWORKS_ENV,
     normalize_supported_executor_frameworks,
 )
-from normalize import normalize_controller_feature_toggle_enabled
+from realized_skill_semantics.execution import SUPPORTED_EXECUTOR_FRAMEWORK_CHOICES
+from normalization_primitives import normalize_controller_feature_toggle_enabled
 
 STATE_SQLITE_PATH_ENV = "STATE_SQLITE_PATH"
 

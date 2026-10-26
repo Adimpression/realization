@@ -1,0 +1,46 @@
+[project]
+name = "realized-core-governance"
+version = "0.1.0"
+description = "Dependency-light governance vocabulary, lifecycle, approval, safety, stored-record, and data-access rules for Realized."
+readme = "README.md"
+requires-python = ">=3.14"
+authors = [{ name = "Ravindranath Akila" }]
+maintainers = [{ name = "Adimpression", email = "talktome@adimpression.mobi" }]
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+keywords = ["governance", "lifecycle", "approval", "safety", "data", "records", "policy", "authority"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "realized-core-semantics==0.1.0",
+    "realized-skill-semantics==0.1.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/Adimpression/realization"
+Repository = "https://github.com/Adimpression/realization"
+Issues = "https://github.com/Adimpression/realization/issues"
+
+[build-system]
+requires = ["setuptools>=77.0.3", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["realized_core_governance"]
+
+[tool.setuptools.package-data]
+realized_core_governance = ["py.typed"]
+
+[tool.uv.sources]
+realized-core-semantics = { workspace = true }
+realized-skill-semantics = { workspace = true }

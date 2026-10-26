@@ -13,8 +13,9 @@ from applied_theory_types import (
     json_safe,
 )
 from constitutional_trace import canonical_trace_answer, compare_bundle_trace_to_state
-from execution_frameworks import ability_executor_framework
-from governance_inventory import load_governance_inventory
+from realized_core_governance.inventory import load_governance_inventory
+from realized_core_governance.lifecycle import skill_lifecycle_from_payload
+from realized_core_governance.records import artifact_skill_declaration
 from runtime_temp import runtime_mkdtemp
 from runtime_controller_api import new_runtime_controller
 from run_bundle_io import (
@@ -22,14 +23,15 @@ from run_bundle_io import (
     governance_snapshot_for_artifacts,
 )
 from skill_schema_io import artifact_from_skill_document
-from skill_lifecycle import skill_lifecycle_from_payload
 from skill_governance import (
-    SKILL_SCHEMA_VERSION_V2,
-    artifact_skill_declaration,
     evaluate_skill_admission,
     normalize_skill_kind,
+)
+from realized_skill_semantics.declaration import (
+    SKILL_SCHEMA_VERSION_V2,
     normalize_skill_schema_version,
 )
+from realized_skill_semantics.execution import ability_executor_framework
 from store import build_artifact_store
 from system_state import SystemState, save_state
 

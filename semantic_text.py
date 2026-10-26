@@ -5,8 +5,58 @@ import re
 from collections.abc import Iterable, Mapping
 from typing import Any
 
-from learn import LEARNING_COMPONENT_BREAKS, LEARNING_STOP_TOKENS
 from title_semantics import normalize_semantic_title_identity
+
+
+LEARNING_STOP_TOKENS = {
+    "a",
+    "an",
+    "and",
+    "are",
+    "as",
+    "at",
+    "be",
+    "by",
+    "convert",
+    "create",
+    "define",
+    "did",
+    "do",
+    "does",
+    "explain",
+    "for",
+    "from",
+    "how",
+    "i",
+    "if",
+    "in",
+    "into",
+    "is",
+    "it",
+    "make",
+    "name",
+    "of",
+    "on",
+    "put",
+    "sort",
+    "that",
+    "the",
+    "to",
+    "turn",
+    "use",
+    "using",
+    "via",
+    "what",
+    "when",
+    "where",
+    "which",
+    "who",
+    "why",
+    "write",
+    "you",
+}
+
+LEARNING_COMPONENT_BREAKS = {"and", "for", "then", "using", "via", "with"}
 
 
 def normalize_learning_token(token: str) -> str:

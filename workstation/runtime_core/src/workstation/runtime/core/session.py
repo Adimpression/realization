@@ -10,7 +10,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from applied_theory_types import json_safe
+from realized_core_semantics.values import json_safe
 from blend_context import blend_context_from_workstation_session
 from blend_session import blend_session_from_workstation_session
 from blend_world import BlendWorld

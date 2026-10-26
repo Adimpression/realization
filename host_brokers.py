@@ -13,7 +13,7 @@ from pathlib import Path
 from typing import Any
 
 from applied_theory_types import utc_now
-from data_governance import (
+from realized_core_governance.data import (
     ensure_governed_data_access,
     normalize_data_class,
     normalize_named_query_registry,
@@ -31,7 +31,7 @@ from macos_host_brokers import (
     reveal_in_finder,
 )
 from semantic_text import collapse_ws
-from skill_governance import composition_binding_targets
+from realized_skill_semantics.declaration import composition_binding_targets
 from virtual_mounts import normalize_virtual_mount_table, resolve_virtual_mount_path
 
 

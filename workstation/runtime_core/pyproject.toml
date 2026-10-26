@@ -4,6 +4,9 @@ version = "0.1.0"
 description = "Workstation runtime core package for Realized."
 requires-python = ">=3.14"
 dependencies = [
+    "realized-core-governance==0.1.0",
+    "realized-core-semantics==0.1.0",
+    "realized-skill-semantics==0.1.0",
     "realized-host-interaction",
     "realized-workstation",
     "realized-workstation-contracts",
@@ -14,6 +17,11 @@ dependencies = [
     "realized-workstation-skills-core",
     "realized-workstation-skills-planning",
 ]
+
+[tool.uv.sources]
+realized-core-governance = { workspace = true }
+realized-core-semantics = { workspace = true }
+realized-skill-semantics = { workspace = true }
 
 [build-system]
 requires = ["setuptools>=69", "wheel"]

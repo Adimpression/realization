@@ -44,6 +44,38 @@ class SkillInvocationContractTests(unittest.TestCase):
         self.assertEqual(request.required_inputs, ["symbol"])
         self.assertEqual(request.bindings[0].status, "provided")
         self.assertEqual(request.bindings[1].status, "missing")
+        self.assertEqual(
+            {
+                "skill_title": "Repo Search",
+                "skill_kind": "ability",
+                "executor_framework": "python3",
+                "invocation_mode": "llm_routed",
+                "semantic_unit": "Find BSSCController in the repo.",
+                "payload": {"symbol": "BSSCController"},
+                "declared_inputs": {
+                    "symbol": "required symbol to find",
+                    "root": "workspace root",
+                },
+                "declared_outputs": {"result": "JSON result"},
+                "required_inputs": ["symbol"],
+                "missing_required_inputs": [],
+                "bindings": [
+                    {
+                        "name": "symbol",
+                        "contract_description": "required symbol to find",
+                        "status": "provided",
+                        "value": "BSSCController",
+                    },
+                    {
+                        "name": "root",
+                        "contract_description": "workspace root",
+                        "status": "missing",
+                        "value": None,
+                    },
+                ],
+            },
+            request.to_dict(),
+        )
 
     def test_invocation_result_prefers_result_payload(self) -> None:
         result = skill_invocation_result_from_mapping(

@@ -1,50 +1,11 @@
 # See MODULES.md for the repository module map before editing.
 from __future__ import annotations
 
-import time
 from collections.abc import Mapping
 from typing import Any
 
 from applied_theory_types import Artifact
-from approval_governance import artifact_is_approval_record
-from skill_governance import artifact_is_policy_record
-from skill_safety_governance import artifact_is_incident_record, artifact_is_revocation_record
-
-
-def _elapsed_seconds(started_at: float) -> float:
-    return round(time.perf_counter() - started_at, 6)
-
-
-def load_governance_inventory(store: Any) -> dict[str, Any]:
-    """
-    High Level Purpose:
-        In circumstances like repeated governed skill admission and runtime effect checks, helps with loading the installed governance records once and expressing them as one reusable snapshot.
-
-    Reference to Theory:
-        Supports open governance by separating policy, approval, revocation, and incident inventory loading from controller/runtime orchestration.
-
-    Example Input Output:
-        Input: `load_governance_inventory(store=artifact_store)`
-        Output: {'policies': [Artifact(id='artifact-policy', title='Local Admission Policy', artifact_type='knowledge', representation='yaml')], 'approvals': [], 'revocations': [], 'incidents': [], 'timings': {'load_seconds': 0.010421}}
-
-    Args:
-        store: Value for `store` used by `load_governance_inventory`. Expected type: `Any`.
-
-    Returns:
-        dict[str, Any]: Result produced by `load_governance_inventory`.
-    """
-    started_at = time.perf_counter()
-    artifacts = store.load_all_artifacts()
-    return {
-        "artifacts": artifacts,
-        "policies": [artifact for artifact in artifacts if artifact_is_policy_record(artifact)],
-        "approvals": [artifact for artifact in artifacts if artifact_is_approval_record(artifact)],
-        "revocations": [artifact for artifact in artifacts if artifact_is_revocation_record(artifact)],
-        "incidents": [artifact for artifact in artifacts if artifact_is_incident_record(artifact)],
-        "timings": {
-            "load_seconds": _elapsed_seconds(started_at),
-        },
-    }
+from realized_core_governance.inventory import load_governance_inventory
 
 
 def controller_governance_snapshot(controller: Any) -> dict[str, Any]:

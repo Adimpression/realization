@@ -7,11 +7,11 @@ from dataclasses import dataclass
 from typing import Any
 
 from capability_runtime import runtime_skill_declaration_for_artifact
+from realized_skill_semantics.leaves import SkillLeaf
+from realized_skill_semantics.paths import parse_canonical_skill_path
 from semantic_text import collapse_ws
 from skill_composition import analyze_skill_composition_plan, propose_skill_leaf_bindings
 from skill_ir import canonical_skill_ir_from_artifact
-from skill_leaf_types import SkillLeaf
-from skill_path_notation import parse_canonical_skill_path
 from workstation.skills.core.direct_composition import (
     _skill_action_bonus,
     derive_workstation_invocation_payload_from_prompt,

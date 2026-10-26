@@ -16,9 +16,9 @@ from capability_runtime import (
 from execution_frameworks import (
     execute_cross_boundary,
     normalize_ability_runtime_content,
-    normalize_executor_framework_name,
 )
 from realized_host_interaction.context import host_interaction_virtual_mounts, host_interaction_workspace_root
+from realized_skill_semantics.execution import normalize_executor_framework_name
 from host_abi import host_abi_version
 from host_brokers import invoke_host_broker
 from runtime_governance_context import (
