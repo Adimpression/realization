@@ -15,7 +15,16 @@ _REPO_ROOT = Path(__file__).resolve().parents[3]
 _LADDER_SPEC_PATH = (
     _REPO_ROOT / "workstation" / "tests" / "fixtures" / "report_creation" / "smart_city_travel_incremental_ladder.json"
 )
-_DST_FIXTURE_PATH = _REPO_ROOT / "dst" / "tests" / "fixtures" / "dst" / "smart-city-travel-incremental.json"
+_DST_FIXTURE_PATH = (
+    _REPO_ROOT
+    / "dst"
+    / "src"
+    / "dst"
+    / "tests"
+    / "fixtures"
+    / "dst"
+    / "smart-city-travel-incremental.json"
+)
 
 
 @dataclass(frozen=True)

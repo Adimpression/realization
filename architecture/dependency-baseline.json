@@ -2,7 +2,27 @@
   "actual_edges": [
     {
       "source": "app_cli",
+      "target": "contracts"
+    },
+    {
+      "source": "app_cli",
+      "target": "core_engine"
+    },
+    {
+      "source": "app_cli",
+      "target": "core_semantics"
+    },
+    {
+      "source": "app_cli",
+      "target": "exchange"
+    },
+    {
+      "source": "app_cli",
       "target": "foundation_host"
+    },
+    {
+      "source": "app_cli",
+      "target": "governed_core"
     },
     {
       "source": "app_cli",
@@ -14,7 +34,19 @@
     },
     {
       "source": "app_cli",
+      "target": "runtime_core"
+    },
+    {
+      "source": "app_cli",
       "target": "shell_core"
+    },
+    {
+      "source": "app_cli",
+      "target": "subject_core"
+    },
+    {
+      "source": "app_cli",
+      "target": "subject_service"
     },
     {
       "source": "app_cli",
@@ -23,6 +55,30 @@
     {
       "source": "app_cli",
       "target": "ui_textual"
+    },
+    {
+      "source": "blend",
+      "target": "core_semantics"
+    },
+    {
+      "source": "blend_application",
+      "target": "blend"
+    },
+    {
+      "source": "blend_application",
+      "target": "core_semantics"
+    },
+    {
+      "source": "blend_application",
+      "target": "governed_core"
+    },
+    {
+      "source": "blend_application",
+      "target": "skill_application"
+    },
+    {
+      "source": "blend_application",
+      "target": "skill_semantics"
     },
     {
       "source": "core_app",
@@ -46,7 +102,27 @@
     },
     {
       "source": "core_engine",
+      "target": "core_governance"
+    },
+    {
+      "source": "core_engine",
+      "target": "core_llm"
+    },
+    {
+      "source": "core_engine",
+      "target": "core_semantics"
+    },
+    {
+      "source": "core_engine",
       "target": "governed_core"
+    },
+    {
+      "source": "core_engine",
+      "target": "host_interaction"
+    },
+    {
+      "source": "core_engine",
+      "target": "skill_semantics"
     },
     {
       "source": "core_governance",
@@ -57,8 +133,52 @@
       "target": "skill_semantics"
     },
     {
+      "source": "dst",
+      "target": "coordinated_transformation"
+    },
+    {
+      "source": "dst",
+      "target": "core_semantics"
+    },
+    {
+      "source": "exchange",
+      "target": "core_engine"
+    },
+    {
+      "source": "exchange",
+      "target": "core_governance"
+    },
+    {
+      "source": "exchange",
+      "target": "core_semantics"
+    },
+    {
+      "source": "exchange",
+      "target": "governed_core"
+    },
+    {
+      "source": "exchange",
+      "target": "skill_application"
+    },
+    {
+      "source": "exchange",
+      "target": "skill_semantics"
+    },
+    {
+      "source": "exchange",
+      "target": "subject_core"
+    },
+    {
+      "source": "exchange",
+      "target": "subject_service"
+    },
+    {
       "source": "foundation_events",
       "target": "contracts"
+    },
+    {
+      "source": "foundation_events",
+      "target": "core_semantics"
     },
     {
       "source": "foundation_events",
@@ -74,6 +194,10 @@
     },
     {
       "source": "foundation_host",
+      "target": "core_semantics"
+    },
+    {
+      "source": "foundation_host",
       "target": "foundation_models"
     },
     {
@@ -82,15 +206,43 @@
     },
     {
       "source": "foundation_projections",
+      "target": "blend"
+    },
+    {
+      "source": "foundation_projections",
       "target": "contracts"
+    },
+    {
+      "source": "foundation_projections",
+      "target": "core_semantics"
     },
     {
       "source": "foundation_projections",
       "target": "foundation_models"
     },
     {
+      "source": "governed_core",
+      "target": "core_governance"
+    },
+    {
+      "source": "governed_core",
+      "target": "core_semantics"
+    },
+    {
+      "source": "governed_core",
+      "target": "host_interaction"
+    },
+    {
+      "source": "governed_core",
+      "target": "skill_semantics"
+    },
+    {
       "source": "grpc_implementation",
       "target": "contracts"
+    },
+    {
+      "source": "grpc_implementation",
+      "target": "core_semantics"
     },
     {
       "source": "grpc_implementation",
@@ -118,11 +270,23 @@
     },
     {
       "source": "runtime_core",
+      "target": "blend"
+    },
+    {
+      "source": "runtime_core",
+      "target": "blend_application"
+    },
+    {
+      "source": "runtime_core",
       "target": "contracts"
     },
     {
       "source": "runtime_core",
       "target": "core_governance"
+    },
+    {
+      "source": "runtime_core",
+      "target": "core_llm"
     },
     {
       "source": "runtime_core",
@@ -146,7 +310,15 @@
     },
     {
       "source": "runtime_core",
+      "target": "governed_core"
+    },
+    {
+      "source": "runtime_core",
       "target": "host_interaction"
+    },
+    {
+      "source": "runtime_core",
+      "target": "skill_application"
     },
     {
       "source": "runtime_core",
@@ -161,6 +333,14 @@
       "target": "skills_planning"
     },
     {
+      "source": "runtime_core",
+      "target": "subject_core"
+    },
+    {
+      "source": "runtime_core",
+      "target": "subject_service"
+    },
+    {
       "source": "shell_core",
       "target": "contracts"
     },
@@ -171,6 +351,10 @@
     {
       "source": "shell_core",
       "target": "core_llm"
+    },
+    {
+      "source": "shell_core",
+      "target": "core_semantics"
     },
     {
       "source": "shell_core",
@@ -201,7 +385,27 @@
       "target": "subject_service"
     },
     {
+      "source": "skill_application",
+      "target": "core_governance"
+    },
+    {
+      "source": "skill_application",
+      "target": "core_semantics"
+    },
+    {
+      "source": "skill_application",
+      "target": "governed_core"
+    },
+    {
+      "source": "skill_application",
+      "target": "skill_semantics"
+    },
+    {
       "source": "skill_semantics",
+      "target": "core_semantics"
+    },
+    {
+      "source": "skills_builtin",
       "target": "core_semantics"
     },
     {
@@ -214,6 +418,10 @@
     },
     {
       "source": "skills_core",
+      "target": "core_semantics"
+    },
+    {
+      "source": "skills_core",
       "target": "foundation_host"
     },
     {
@@ -222,7 +430,15 @@
     },
     {
       "source": "skills_core",
+      "target": "governed_core"
+    },
+    {
+      "source": "skills_core",
       "target": "host_interaction"
+    },
+    {
+      "source": "skills_core",
+      "target": "skill_application"
     },
     {
       "source": "skills_core",
@@ -238,11 +454,23 @@
     },
     {
       "source": "skills_planning",
+      "target": "core_semantics"
+    },
+    {
+      "source": "skills_planning",
       "target": "foundation_host"
     },
     {
       "source": "skills_planning",
       "target": "foundation_models"
+    },
+    {
+      "source": "skills_planning",
+      "target": "governed_core"
+    },
+    {
+      "source": "skills_planning",
+      "target": "skill_application"
     },
     {
       "source": "skills_planning",
@@ -258,11 +486,19 @@
     },
     {
       "source": "subject_core",
-      "target": "foundation_host"
+      "target": "coordinated_transformation"
     },
     {
       "source": "subject_core",
-      "target": "runtime_core"
+      "target": "core_semantics"
+    },
+    {
+      "source": "subject_core",
+      "target": "dst"
+    },
+    {
+      "source": "subject_core",
+      "target": "governed_core"
     },
     {
       "source": "subject_service",
@@ -270,7 +506,15 @@
     },
     {
       "source": "subject_service",
+      "target": "core_semantics"
+    },
+    {
+      "source": "subject_service",
       "target": "foundation_events"
+    },
+    {
+      "source": "subject_service",
+      "target": "foundation_models"
     },
     {
       "source": "subject_service",
@@ -286,6 +530,10 @@
     },
     {
       "source": "ui_shared",
+      "target": "core_semantics"
+    },
+    {
+      "source": "ui_shared",
       "target": "foundation_projections"
     },
     {
@@ -295,6 +543,10 @@
     {
       "source": "ui_textual",
       "target": "contracts"
+    },
+    {
+      "source": "ui_textual",
+      "target": "core_semantics"
     },
     {
       "source": "ui_textual",
@@ -319,9 +571,9 @@
     "cyclic_internal_edge_count": 0,
     "cyclic_node_count": 0,
     "cyclic_scc_count": 0,
-    "edge_count": 631,
+    "edge_count": 300,
     "largest_cyclic_scc_node_count": 0,
-    "node_count": 157
+    "node_count": 164
   },
   "compatibility_edges": [
     {
@@ -342,12 +594,7 @@
     }
   ],
   "compatibility_facade_imports": [],
-  "component_to_root_package_dependencies": [
-    {
-      "source": "subject_core",
-      "target": "dst"
-    }
-  ],
+  "component_to_root_package_dependencies": [],
   "cycles": [],
   "forbidden_edges": [],
   "forbidden_root_owner_dependencies": [
@@ -356,479 +603,33 @@
       "target": "entry_exchange"
     },
     {
-      "source": "controller",
-      "target": "persistence_adapter"
-    },
-    {
-      "source": "controller",
-      "target": "subject_domain"
-    },
-    {
-      "source": "entry_exchange",
-      "target": "validation_trial"
-    },
-    {
-      "source": "governance",
-      "target": "controller"
-    },
-    {
-      "source": "governance",
-      "target": "entry_exchange"
-    },
-    {
-      "source": "governance",
-      "target": "persistence_adapter"
-    },
-    {
-      "source": "governance",
-      "target": "runtime_execution"
-    },
-    {
-      "source": "persistence_adapter",
-      "target": "controller"
-    },
-    {
-      "source": "portable_skills",
-      "target": "entry_exchange"
-    },
-    {
-      "source": "portable_skills",
-      "target": "governance"
-    },
-    {
-      "source": "portable_skills",
-      "target": "persistence_adapter"
-    },
-    {
-      "source": "portable_skills",
-      "target": "runtime_execution"
-    },
-    {
-      "source": "runtime_execution",
-      "target": "entry_exchange"
-    },
-    {
-      "source": "runtime_execution",
-      "target": "persistence_adapter"
-    },
-    {
-      "source": "semantic_model",
-      "target": "controller"
-    },
-    {
-      "source": "semantic_model",
-      "target": "runtime_execution"
-    },
-    {
-      "source": "subject_domain",
-      "target": "controller"
-    },
-    {
       "source": "subject_domain",
       "target": "entry_exchange"
     }
   ],
   "root_boundary_classifications": [
     {
-      "category": "pure_helper",
-      "direction": "component_to_root",
-      "source": "app_cli",
-      "target": "semantic_text"
-    },
-    {
-      "category": "dto_constants",
-      "direction": "component_to_root",
-      "source": "core_engine",
-      "target": "applied_theory_types"
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "SEMANTIC_RELATION_VALIDATION",
+      "target": "core_engine"
     },
     {
       "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "core_engine",
-      "target": "args"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "core_engine",
-      "target": "controller_runtime"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "core_engine",
-      "target": "system_state"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "core_engine",
-      "target": "title_semantics"
-    },
-    {
-      "category": "pure_helper",
-      "direction": "component_to_root",
-      "source": "foundation_events",
-      "target": "semantic_text"
-    },
-    {
-      "category": "dto_constants",
-      "direction": "component_to_root",
-      "source": "foundation_host",
-      "target": "applied_theory_types"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "foundation_host",
-      "target": "boundary"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "foundation_host",
-      "target": "gather_sources"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "foundation_host",
-      "target": "learning_context"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "foundation_host",
-      "target": "markdown_ir"
-    },
-    {
-      "category": "pure_helper",
-      "direction": "component_to_root",
-      "source": "foundation_host",
-      "target": "semantic_text"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "foundation_host",
-      "target": "skill_schema_io"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "foundation_projections",
-      "target": "blend_workflow"
-    },
-    {
-      "category": "pure_helper",
-      "direction": "component_to_root",
-      "source": "foundation_projections",
-      "target": "semantic_text"
-    },
-    {
-      "category": "pure_helper",
-      "direction": "component_to_root",
-      "source": "grpc_implementation",
-      "target": "semantic_text"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "runtime_core",
-      "target": "blend_context"
-    },
-    {
-      "category": "persistence",
-      "direction": "component_to_root",
-      "source": "runtime_core",
-      "target": "blend_operator_store"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "runtime_core",
-      "target": "blend_session"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "runtime_core",
-      "target": "blend_workflow"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "runtime_core",
-      "target": "blend_workflow_execution"
-    },
-    {
-      "category": "persistence",
-      "direction": "component_to_root",
-      "source": "runtime_core",
-      "target": "blend_workflow_store"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "runtime_core",
-      "target": "blend_world"
-    },
-    {
-      "category": "persistence",
-      "direction": "component_to_root",
-      "source": "runtime_core",
-      "target": "blend_world_store"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "runtime_core",
-      "target": "capability_runtime"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "runtime_core",
-      "target": "execution_frameworks"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "runtime_core",
-      "target": "gather_sources"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "runtime_core",
-      "target": "learning_context"
-    },
-    {
-      "category": "pure_helper",
-      "direction": "component_to_root",
-      "source": "runtime_core",
-      "target": "semantic_text"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "runtime_core",
-      "target": "skill_export_projection"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "runtime_core",
-      "target": "skill_governance"
-    },
-    {
-      "category": "dto_constants",
-      "direction": "component_to_root",
-      "source": "runtime_core",
-      "target": "skill_ir"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "runtime_core",
-      "target": "skill_schema_io"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "runtime_core",
-      "target": "url_learning_capture"
-    },
-    {
-      "category": "pure_helper",
-      "direction": "component_to_root",
-      "source": "shell_core",
-      "target": "semantic_text"
-    },
-    {
-      "category": "dto_constants",
-      "direction": "component_to_root",
-      "source": "skills_builtin",
-      "target": "applied_theory_types"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "skills_builtin",
-      "target": "skill_schema_io"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "skills_core",
-      "target": "capability_runtime"
-    },
-    {
-      "category": "pure_helper",
-      "direction": "component_to_root",
-      "source": "skills_core",
-      "target": "semantic_text"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "skills_core",
-      "target": "side"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "skills_core",
-      "target": "skill_export_projection"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "skills_core",
-      "target": "skill_governance"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "skills_core",
-      "target": "skill_schema_io"
-    },
-    {
-      "category": "persistence",
-      "direction": "component_to_root",
-      "source": "skills_core",
-      "target": "store"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "skills_planning",
-      "target": "capability_runtime"
-    },
-    {
-      "category": "pure_helper",
-      "direction": "component_to_root",
-      "source": "skills_planning",
-      "target": "semantic_text"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "skills_planning",
-      "target": "skill_composition"
-    },
-    {
-      "category": "dto_constants",
-      "direction": "component_to_root",
-      "source": "skills_planning",
-      "target": "skill_ir"
-    },
-    {
-      "category": "persistence",
-      "direction": "component_to_root",
-      "source": "skills_planning",
-      "target": "store"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "subject_core",
-      "target": "decision_review"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "subject_core",
-      "target": "decision_review_constructs"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "subject_core",
-      "target": "decision_review_policy"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "subject_core",
-      "target": "decision_review_projection"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "subject_core",
-      "target": "gather_sources"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "subject_core",
-      "target": "itemize"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "subject_core",
-      "target": "itemize_validation"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "subject_core",
-      "target": "learning_context"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "subject_core",
-      "target": "publication"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "subject_core",
-      "target": "publication_projection"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "subject_core",
-      "target": "review_composition"
-    },
-    {
-      "category": "orchestration",
-      "direction": "component_to_root",
-      "source": "subject_core",
-      "target": "runtime_temp"
-    },
-    {
-      "category": "pure_helper",
-      "direction": "component_to_root",
-      "source": "subject_core",
-      "target": "semantic_text"
-    },
-    {
-      "category": "pure_helper",
-      "direction": "component_to_root",
-      "source": "subject_service",
-      "target": "semantic_text"
-    },
-    {
-      "category": "pure_helper",
-      "direction": "component_to_root",
-      "source": "ui_shared",
-      "target": "semantic_text"
-    },
-    {
-      "category": "pure_helper",
-      "direction": "component_to_root",
-      "source": "ui_textual",
-      "target": "semantic_text"
+      "direction": "root_to_component",
+      "source": "TRIAL_DOMAIN_VALIDATION",
+      "target": "validation"
     },
     {
       "category": "dto_constants",
       "direction": "root_to_component",
       "source": "applied_theory_primitives",
+      "target": "core_semantics"
+    },
+    {
+      "category": "dto_constants",
+      "direction": "root_to_component",
+      "source": "applied_theory_types",
       "target": "core_semantics"
     },
     {
@@ -847,7 +648,25 @@
       "category": "orchestration",
       "direction": "root_to_component",
       "source": "args",
-      "target": "skill_semantics"
+      "target": "app_cli"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "args",
+      "target": "core_engine"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "artifact",
+      "target": "core_engine"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "artifact_answer_resolution",
+      "target": "core_engine"
     },
     {
       "category": "compatibility",
@@ -856,40 +675,106 @@
       "target": "core_semantics"
     },
     {
-      "category": "orchestration",
+      "category": "compatibility",
       "direction": "root_to_component",
       "source": "blend_context",
-      "target": "foundation_models"
+      "target": "blend"
     },
     {
-      "category": "persistence",
+      "category": "compatibility",
+      "direction": "root_to_component",
+      "source": "blend_context",
+      "target": "runtime_core"
+    },
+    {
+      "category": "compatibility",
+      "direction": "root_to_component",
+      "source": "blend_operator",
+      "target": "blend"
+    },
+    {
+      "category": "compatibility",
       "direction": "root_to_component",
       "source": "blend_operator_store",
-      "target": "skill_semantics"
+      "target": "blend_application"
     },
     {
-      "category": "orchestration",
+      "category": "compatibility",
       "direction": "root_to_component",
       "source": "blend_session",
-      "target": "foundation_models"
+      "target": "blend"
     },
     {
-      "category": "orchestration",
+      "category": "compatibility",
+      "direction": "root_to_component",
+      "source": "blend_session",
+      "target": "runtime_core"
+    },
+    {
+      "category": "compatibility",
+      "direction": "root_to_component",
+      "source": "blend_workflow",
+      "target": "blend_application"
+    },
+    {
+      "category": "compatibility",
       "direction": "root_to_component",
       "source": "blend_workflow_execution",
-      "target": "host_interaction"
+      "target": "blend_application"
+    },
+    {
+      "category": "compatibility",
+      "direction": "root_to_component",
+      "source": "blend_workflow_models",
+      "target": "blend"
+    },
+    {
+      "category": "compatibility",
+      "direction": "root_to_component",
+      "source": "blend_workflow_store",
+      "target": "blend_application"
+    },
+    {
+      "category": "compatibility",
+      "direction": "root_to_component",
+      "source": "blend_world",
+      "target": "blend_application"
+    },
+    {
+      "category": "compatibility",
+      "direction": "root_to_component",
+      "source": "blend_world_models",
+      "target": "blend"
+    },
+    {
+      "category": "compatibility",
+      "direction": "root_to_component",
+      "source": "blend_world_store",
+      "target": "blend_application"
     },
     {
       "category": "orchestration",
       "direction": "root_to_component",
+      "source": "boundary",
+      "target": "core_semantics"
+    },
+    {
+      "category": "compatibility",
+      "direction": "root_to_component",
       "source": "capability_runtime",
-      "target": "core_governance"
+      "target": "governed_core"
     },
     {
       "category": "orchestration",
       "direction": "root_to_component",
-      "source": "capability_runtime",
-      "target": "skill_semantics"
+      "source": "constitutional_trace",
+      "target": "core_engine"
+    },
+    {
+      "category": "compatibility",
+      "direction": "root_to_component",
+      "source": "controller_entrypoint_binding",
+      "target": "core_engine"
     },
     {
       "category": "orchestration",
@@ -901,43 +786,61 @@
       "category": "orchestration",
       "direction": "root_to_component",
       "source": "controller_entrypoints",
-      "target": "contracts"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "controller_entrypoints",
       "target": "core_engine"
     },
     {
       "category": "orchestration",
       "direction": "root_to_component",
       "source": "controller_entrypoints",
-      "target": "foundation_host"
+      "target": "core_semantics"
     },
     {
       "category": "orchestration",
       "direction": "root_to_component",
       "source": "controller_entrypoints",
-      "target": "subject_service"
+      "target": "exchange"
     },
     {
       "category": "orchestration",
       "direction": "root_to_component",
-      "source": "controller_runtime",
+      "source": "controller_entrypoints",
       "target": "governed_core"
     },
     {
       "category": "orchestration",
       "direction": "root_to_component",
-      "source": "controller_runtime",
+      "source": "controller_entrypoints",
       "target": "host_interaction"
     },
     {
       "category": "orchestration",
       "direction": "root_to_component",
+      "source": "controller_entrypoints",
+      "target": "validation"
+    },
+    {
+      "category": "compatibility",
+      "direction": "root_to_component",
+      "source": "controller_governance_bridge",
+      "target": "core_engine"
+    },
+    {
+      "category": "compatibility",
+      "direction": "root_to_component",
       "source": "controller_runtime",
-      "target": "skill_semantics"
+      "target": "core_engine"
+    },
+    {
+      "category": "compatibility",
+      "direction": "root_to_component",
+      "source": "controller_runtime",
+      "target": "exchange"
+    },
+    {
+      "category": "compatibility",
+      "direction": "root_to_component",
+      "source": "controller_runtime_binding",
+      "target": "core_engine"
     },
     {
       "category": "compatibility",
@@ -948,8 +851,44 @@
     {
       "category": "orchestration",
       "direction": "root_to_component",
+      "source": "decision_review",
+      "target": "subject_core"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "decision_review_constructs",
+      "target": "subject_core"
+    },
+    {
+      "category": "dto_constants",
+      "direction": "root_to_component",
+      "source": "decision_review_models",
+      "target": "core_semantics"
+    },
+    {
+      "category": "compatibility",
+      "direction": "root_to_component",
+      "source": "decision_review_policy",
+      "target": "subject_core"
+    },
+    {
+      "category": "compatibility",
+      "direction": "root_to_component",
+      "source": "decision_review_projection",
+      "target": "subject_core"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "direct_knowledge_reuse",
+      "target": "core_engine"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
       "source": "execution_framework_primitives",
-      "target": "skill_semantics"
+      "target": "governed_core"
     },
     {
       "category": "orchestration",
@@ -958,64 +897,106 @@
       "target": "governed_core"
     },
     {
+      "category": "compatibility",
+      "direction": "root_to_component",
+      "source": "external_markdown_learning_pipeline",
+      "target": "exchange"
+    },
+    {
       "category": "orchestration",
       "direction": "root_to_component",
-      "source": "execution_frameworks",
-      "target": "skill_semantics"
+      "source": "fallback_not_generation",
+      "target": "core_engine"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "fallback_not_semantics",
+      "target": "core_engine"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "fence_extraction_strategy",
+      "target": "governed_core"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "gather_sources",
+      "target": "subject_core"
     },
     {
       "category": "orchestration",
       "direction": "root_to_component",
       "source": "governance_inventory",
-      "target": "core_governance"
+      "target": "core_engine"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "governed_closure_and_commitment",
+      "target": "core_engine"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "governed_prior_learning_reuse",
+      "target": "core_engine"
     },
     {
       "category": "orchestration",
       "direction": "root_to_component",
       "source": "governed_semantic_reduction_runtime",
+      "target": "core_engine"
+    },
+    {
+      "category": "compatibility",
+      "direction": "root_to_component",
+      "source": "governed_skill_access",
+      "target": "core_engine"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "governed_skill_installation",
+      "target": "core_engine"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "governed_skill_installation",
+      "target": "core_governance"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "governed_skill_installation",
+      "target": "exchange"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "governed_skill_installation",
+      "target": "skill_application"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "governed_skill_installation",
+      "target": "skill_semantics"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "host_abi",
       "target": "governed_core"
     },
     {
       "category": "orchestration",
       "direction": "root_to_component",
-      "source": "governed_semantic_reduction_runtime",
-      "target": "host_interaction"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "governed_skill_access",
-      "target": "core_governance"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "governed_skill_access",
-      "target": "skill_semantics"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "governed_skill_installation",
-      "target": "core_governance"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "governed_skill_installation",
-      "target": "skill_semantics"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
       "source": "host_brokers",
-      "target": "core_governance"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "host_brokers",
-      "target": "skill_semantics"
+      "target": "governed_core"
     },
     {
       "category": "compatibility",
@@ -1060,22 +1041,172 @@
       "target": "host_interaction"
     },
     {
-      "category": "orchestration",
+      "category": "compatibility",
       "direction": "root_to_component",
       "source": "host_mediation",
-      "target": "host_interaction"
+      "target": "core_engine"
     },
     {
       "category": "orchestration",
       "direction": "root_to_component",
-      "source": "host_mediation",
-      "target": "skill_semantics"
+      "source": "host_realizers",
+      "target": "governed_core"
+    },
+    {
+      "category": "compatibility",
+      "direction": "root_to_component",
+      "source": "id_generation",
+      "target": "core_semantics"
     },
     {
       "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "itemize",
+      "target": "core_semantics"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "itemize",
+      "target": "subject_core"
+    },
+    {
+      "category": "dto_constants",
+      "direction": "root_to_component",
+      "source": "itemize_models",
+      "target": "core_semantics"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "itemize_validation",
+      "target": "subject_core"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "learn",
+      "target": "core_engine"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "learning_context",
+      "target": "exchange"
+    },
+    {
+      "category": "compatibility",
+      "direction": "root_to_component",
+      "source": "learning_context_markdown",
+      "target": "subject_core"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "learning_context_paths",
+      "target": "subject_core"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "learning_context_projection",
+      "target": "subject_core"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "learning_context_skill_projection",
+      "target": "exchange"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "macos_host_brokers",
+      "target": "governed_core"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "markdown_ir",
+      "target": "core_semantics"
+    },
+    {
+      "category": "compatibility",
       "direction": "root_to_component",
       "source": "markdown_learning_artifact_semantics",
-      "target": "skill_semantics"
+      "target": "core_engine"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "non_achievedness_normalization",
+      "target": "core_engine"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "normalization_primitives",
+      "target": "core_semantics"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "normalization_runtime_dependencies",
+      "target": "core_engine"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "normalize",
+      "target": "core_engine"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "normalize",
+      "target": "core_semantics"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "not_elaboration_ranking",
+      "target": "core_engine"
+    },
+    {
+      "category": "compatibility",
+      "direction": "root_to_component",
+      "source": "prolog",
+      "target": "core_semantics"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "prompt_directives",
+      "target": "core_engine"
+    },
+    {
+      "category": "compatibility",
+      "direction": "root_to_component",
+      "source": "publication",
+      "target": "subject_core"
+    },
+    {
+      "category": "compatibility",
+      "direction": "root_to_component",
+      "source": "publication_projection",
+      "target": "subject_core"
+    },
+    {
+      "category": "compatibility",
+      "direction": "root_to_component",
+      "source": "publication_render",
+      "target": "subject_core"
+    },
+    {
+      "category": "compatibility",
+      "direction": "root_to_component",
+      "source": "publication_validation",
+      "target": "subject_core"
     },
     {
       "category": "compatibility",
@@ -1086,8 +1217,50 @@
     {
       "category": "orchestration",
       "direction": "root_to_component",
+      "source": "python_skill_brokerization",
+      "target": "governed_core"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "python_skill_host",
+      "target": "governed_core"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "python_skill_host_transport",
+      "target": "governed_core"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "replay_verifier",
+      "target": "core_engine"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
       "source": "replay_verifier",
       "target": "core_governance"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "replay_verifier",
+      "target": "core_semantics"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "replay_verifier",
+      "target": "exchange"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "replay_verifier",
+      "target": "governed_core"
     },
     {
       "category": "orchestration",
@@ -1098,68 +1271,110 @@
     {
       "category": "orchestration",
       "direction": "root_to_component",
-      "source": "run_bundle_io",
-      "target": "core_governance"
+      "source": "retrieval_ranking",
+      "target": "core_engine"
+    },
+    {
+      "category": "compatibility",
+      "direction": "root_to_component",
+      "source": "review_composition",
+      "target": "subject_core"
     },
     {
       "category": "orchestration",
       "direction": "root_to_component",
       "source": "run_bundle_io",
-      "target": "skill_semantics"
+      "target": "exchange"
     },
     {
       "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "run_outcome_harvest_and_reporting",
+      "target": "core_engine"
+    },
+    {
+      "category": "compatibility",
+      "direction": "root_to_component",
+      "source": "runtime_controller_api",
+      "target": "app_cli"
+    },
+    {
+      "category": "compatibility",
       "direction": "root_to_component",
       "source": "runtime_governance_context",
-      "target": "core_governance"
+      "target": "core_engine"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "runtime_temp",
+      "target": "governed_core"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "semantic_prompt_posture",
+      "target": "core_engine"
+    },
+    {
+      "category": "compatibility",
+      "direction": "root_to_component",
+      "source": "semantic_text",
+      "target": "core_semantics"
     },
     {
       "category": "orchestration",
       "direction": "root_to_component",
       "source": "side",
-      "target": "skill_semantics"
+      "target": "exchange"
     },
     {
       "category": "orchestration",
       "direction": "root_to_component",
+      "source": "side_runtime_dependencies",
+      "target": "exchange"
+    },
+    {
+      "category": "compatibility",
+      "direction": "root_to_component",
       "source": "skill_boundary_normalization",
-      "target": "core_governance"
+      "target": "skill_application"
     },
     {
       "category": "orchestration",
       "direction": "root_to_component",
-      "source": "skill_boundary_normalization",
-      "target": "skill_semantics"
+      "source": "skill_compatibility_export",
+      "target": "exchange"
     },
     {
       "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "skill_compatibility_import",
+      "target": "exchange"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "skill_compiler",
+      "target": "exchange"
+    },
+    {
+      "category": "compatibility",
       "direction": "root_to_component",
       "source": "skill_composition",
-      "target": "skill_semantics"
+      "target": "skill_application"
     },
     {
       "category": "orchestration",
       "direction": "root_to_component",
       "source": "skill_export_projection",
-      "target": "core_governance"
+      "target": "exchange"
     },
     {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "skill_export_projection",
-      "target": "skill_semantics"
-    },
-    {
-      "category": "orchestration",
+      "category": "compatibility",
       "direction": "root_to_component",
       "source": "skill_governance",
-      "target": "core_governance"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "skill_governance",
-      "target": "skill_semantics"
+      "target": "core_engine"
     },
     {
       "category": "compatibility",
@@ -1180,16 +1395,10 @@
       "target": "skills_core"
     },
     {
-      "category": "dto_constants",
+      "category": "compatibility",
       "direction": "root_to_component",
       "source": "skill_ir",
-      "target": "core_governance"
-    },
-    {
-      "category": "dto_constants",
-      "direction": "root_to_component",
-      "source": "skill_ir",
-      "target": "skill_semantics"
+      "target": "skill_application"
     },
     {
       "category": "compatibility",
@@ -1213,7 +1422,7 @@
       "category": "orchestration",
       "direction": "root_to_component",
       "source": "skill_registry",
-      "target": "core_governance"
+      "target": "exchange"
     },
     {
       "category": "compatibility",
@@ -1231,287 +1440,82 @@
       "category": "orchestration",
       "direction": "root_to_component",
       "source": "skill_schema_io",
-      "target": "core_governance"
+      "target": "exchange"
+    },
+    {
+      "category": "persistence",
+      "direction": "root_to_component",
+      "source": "store",
+      "target": "core_engine"
     },
     {
       "category": "orchestration",
       "direction": "root_to_component",
-      "source": "skill_schema_io",
-      "target": "skill_semantics"
+      "source": "structured_learning_yaml",
+      "target": "core_engine"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "supplement",
+      "target": "core_engine"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "system_state",
+      "target": "core_engine"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "tablet_safety_validation",
+      "target": "validation"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "title_depth_learning_validation",
+      "target": "validation"
+    },
+    {
+      "category": "compatibility",
+      "direction": "root_to_component",
+      "source": "title_semantics",
+      "target": "core_semantics"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "url_learning_capture",
+      "target": "subject_service"
+    },
+    {
+      "category": "compatibility",
+      "direction": "root_to_component",
+      "source": "validation_ladder",
+      "target": "validation"
+    },
+    {
+      "category": "compatibility",
+      "direction": "root_to_component",
+      "source": "validation_sqlite",
+      "target": "validation"
     },
     {
       "category": "orchestration",
       "direction": "root_to_component",
       "source": "virtual_mounts",
-      "target": "core_governance"
+      "target": "governed_core"
+    },
+    {
+      "category": "orchestration",
+      "direction": "root_to_component",
+      "source": "wasm_skill_runtime",
+      "target": "governed_core"
     }
   ],
-  "root_module_dependencies": [
-    {
-      "module": "semantic_text",
-      "source": "app_cli"
-    },
-    {
-      "module": "applied_theory_types",
-      "source": "core_engine"
-    },
-    {
-      "module": "args",
-      "source": "core_engine"
-    },
-    {
-      "module": "controller_runtime",
-      "source": "core_engine"
-    },
-    {
-      "module": "system_state",
-      "source": "core_engine"
-    },
-    {
-      "module": "title_semantics",
-      "source": "core_engine"
-    },
-    {
-      "module": "semantic_text",
-      "source": "foundation_events"
-    },
-    {
-      "module": "applied_theory_types",
-      "source": "foundation_host"
-    },
-    {
-      "module": "boundary",
-      "source": "foundation_host"
-    },
-    {
-      "module": "gather_sources",
-      "source": "foundation_host"
-    },
-    {
-      "module": "learning_context",
-      "source": "foundation_host"
-    },
-    {
-      "module": "markdown_ir",
-      "source": "foundation_host"
-    },
-    {
-      "module": "semantic_text",
-      "source": "foundation_host"
-    },
-    {
-      "module": "skill_schema_io",
-      "source": "foundation_host"
-    },
-    {
-      "module": "blend_workflow",
-      "source": "foundation_projections"
-    },
-    {
-      "module": "semantic_text",
-      "source": "foundation_projections"
-    },
-    {
-      "module": "semantic_text",
-      "source": "grpc_implementation"
-    },
-    {
-      "module": "blend_context",
-      "source": "runtime_core"
-    },
-    {
-      "module": "blend_operator_store",
-      "source": "runtime_core"
-    },
-    {
-      "module": "blend_session",
-      "source": "runtime_core"
-    },
-    {
-      "module": "blend_workflow",
-      "source": "runtime_core"
-    },
-    {
-      "module": "blend_workflow_execution",
-      "source": "runtime_core"
-    },
-    {
-      "module": "blend_workflow_store",
-      "source": "runtime_core"
-    },
-    {
-      "module": "blend_world",
-      "source": "runtime_core"
-    },
-    {
-      "module": "blend_world_store",
-      "source": "runtime_core"
-    },
-    {
-      "module": "capability_runtime",
-      "source": "runtime_core"
-    },
-    {
-      "module": "execution_frameworks",
-      "source": "runtime_core"
-    },
-    {
-      "module": "gather_sources",
-      "source": "runtime_core"
-    },
-    {
-      "module": "learning_context",
-      "source": "runtime_core"
-    },
-    {
-      "module": "semantic_text",
-      "source": "runtime_core"
-    },
-    {
-      "module": "skill_export_projection",
-      "source": "runtime_core"
-    },
-    {
-      "module": "skill_governance",
-      "source": "runtime_core"
-    },
-    {
-      "module": "skill_ir",
-      "source": "runtime_core"
-    },
-    {
-      "module": "skill_schema_io",
-      "source": "runtime_core"
-    },
-    {
-      "module": "url_learning_capture",
-      "source": "runtime_core"
-    },
-    {
-      "module": "semantic_text",
-      "source": "shell_core"
-    },
-    {
-      "module": "applied_theory_types",
-      "source": "skills_builtin"
-    },
-    {
-      "module": "skill_schema_io",
-      "source": "skills_builtin"
-    },
-    {
-      "module": "capability_runtime",
-      "source": "skills_core"
-    },
-    {
-      "module": "semantic_text",
-      "source": "skills_core"
-    },
-    {
-      "module": "side",
-      "source": "skills_core"
-    },
-    {
-      "module": "skill_export_projection",
-      "source": "skills_core"
-    },
-    {
-      "module": "skill_governance",
-      "source": "skills_core"
-    },
-    {
-      "module": "skill_schema_io",
-      "source": "skills_core"
-    },
-    {
-      "module": "store",
-      "source": "skills_core"
-    },
-    {
-      "module": "capability_runtime",
-      "source": "skills_planning"
-    },
-    {
-      "module": "semantic_text",
-      "source": "skills_planning"
-    },
-    {
-      "module": "skill_composition",
-      "source": "skills_planning"
-    },
-    {
-      "module": "skill_ir",
-      "source": "skills_planning"
-    },
-    {
-      "module": "store",
-      "source": "skills_planning"
-    },
-    {
-      "module": "decision_review",
-      "source": "subject_core"
-    },
-    {
-      "module": "decision_review_constructs",
-      "source": "subject_core"
-    },
-    {
-      "module": "decision_review_policy",
-      "source": "subject_core"
-    },
-    {
-      "module": "decision_review_projection",
-      "source": "subject_core"
-    },
-    {
-      "module": "gather_sources",
-      "source": "subject_core"
-    },
-    {
-      "module": "itemize",
-      "source": "subject_core"
-    },
-    {
-      "module": "itemize_validation",
-      "source": "subject_core"
-    },
-    {
-      "module": "learning_context",
-      "source": "subject_core"
-    },
-    {
-      "module": "publication",
-      "source": "subject_core"
-    },
-    {
-      "module": "publication_projection",
-      "source": "subject_core"
-    },
-    {
-      "module": "review_composition",
-      "source": "subject_core"
-    },
-    {
-      "module": "runtime_temp",
-      "source": "subject_core"
-    },
-    {
-      "module": "semantic_text",
-      "source": "subject_core"
-    },
-    {
-      "module": "semantic_text",
-      "source": "subject_service"
-    },
-    {
-      "module": "semantic_text",
-      "source": "ui_shared"
-    },
-    {
-      "module": "semantic_text",
-      "source": "ui_textual"
-    }
-  ],
+  "root_module_dependencies": [],
   "root_module_ownership": [
     {
       "module": "SEMANTIC_RELATION_VALIDATION",
@@ -1530,12 +1534,16 @@
     {
       "module": "applied_theory_primitives",
       "owner": "semantic_model",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "applied_theory_types",
       "owner": "semantic_model",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "approval_governance",
@@ -1547,17 +1555,23 @@
     {
       "module": "args",
       "owner": "entry_exchange",
-      "statuses": []
+      "statuses": [
+        "entrypoint"
+      ]
     },
     {
       "module": "artifact",
-      "owner": "semantic_model",
-      "statuses": []
+      "owner": "controller",
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "artifact_answer_resolution",
       "owner": "controller",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "artifact_contracts",
@@ -1569,97 +1583,135 @@
     {
       "module": "blend_context",
       "owner": "blend",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "blend_operator",
       "owner": "blend",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "blend_operator_store",
       "owner": "blend",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "blend_session",
       "owner": "blend",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "blend_workflow",
       "owner": "blend",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "blend_workflow_execution",
       "owner": "blend",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "blend_workflow_models",
       "owner": "blend",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "blend_workflow_store",
       "owner": "blend",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "blend_world",
       "owner": "blend",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "blend_world_models",
       "owner": "blend",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "blend_world_store",
       "owner": "blend",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "boundary",
       "owner": "semantic_model",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "capability_runtime",
       "owner": "runtime_execution",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "constitutional_trace",
-      "owner": "governance",
-      "statuses": []
+      "owner": "controller",
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "controller_entrypoint_binding",
       "owner": "entry_exchange",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "controller_entrypoints",
       "owner": "entry_exchange",
-      "statuses": []
+      "statuses": [
+        "entrypoint"
+      ]
     },
     {
       "module": "controller_governance_bridge",
       "owner": "controller",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "controller_runtime",
       "owner": "controller",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "controller_runtime_binding",
       "owner": "entry_exchange",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "data_governance",
@@ -1671,52 +1723,72 @@
     {
       "module": "decision_review",
       "owner": "subject_domain",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "decision_review_constructs",
       "owner": "subject_domain",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "decision_review_models",
       "owner": "subject_domain",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "decision_review_policy",
       "owner": "subject_domain",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "decision_review_projection",
       "owner": "subject_domain",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "direct_knowledge_reuse",
       "owner": "controller",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "execution_framework_primitives",
       "owner": "runtime_execution",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "execution_frameworks",
       "owner": "runtime_execution",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "external_markdown_learning_pipeline",
-      "owner": "subject_domain",
-      "statuses": []
+      "owner": "entry_exchange",
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "fallback_not_generation",
       "owner": "controller",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "fallback_not_semantics",
@@ -1727,53 +1799,73 @@
     },
     {
       "module": "fence_extraction_strategy",
-      "owner": "portable_skills",
-      "statuses": []
+      "owner": "runtime_execution",
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "gather_sources",
       "owner": "subject_domain",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "governance_inventory",
-      "owner": "governance",
-      "statuses": []
+      "owner": "controller",
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "governed_closure_and_commitment",
       "owner": "controller",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "governed_prior_learning_reuse",
       "owner": "controller",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "governed_semantic_reduction_runtime",
       "owner": "controller",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "governed_skill_access",
       "owner": "governance",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "governed_skill_installation",
       "owner": "governance",
-      "statuses": []
+      "statuses": [
+        "entrypoint"
+      ]
     },
     {
       "module": "host_abi",
       "owner": "runtime_execution",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "host_brokers",
       "owner": "runtime_execution",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "host_interaction_action_dispatch",
@@ -1827,62 +1919,93 @@
     {
       "module": "host_mediation",
       "owner": "runtime_execution",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
+    },
+    {
+      "module": "host_realizers",
+      "owner": "runtime_execution",
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "id_generation",
       "owner": "semantic_model",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "itemize",
       "owner": "subject_domain",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "itemize_models",
       "owner": "subject_domain",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "itemize_validation",
       "owner": "subject_domain",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "learn",
       "owner": "controller",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "learning_context",
-      "owner": "subject_domain",
-      "statuses": []
+      "owner": "entry_exchange",
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "learning_context_markdown",
       "owner": "subject_domain",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "learning_context_paths",
       "owner": "subject_domain",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "learning_context_projection",
       "owner": "subject_domain",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "learning_context_skill_projection",
-      "owner": "subject_domain",
-      "statuses": []
+      "owner": "entry_exchange",
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "macos_host_brokers",
       "owner": "runtime_execution",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "main",
@@ -1895,27 +2018,37 @@
     {
       "module": "markdown_ir",
       "owner": "subject_domain",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "markdown_learning_artifact_semantics",
-      "owner": "subject_domain",
-      "statuses": []
+      "owner": "controller",
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "non_achievedness_normalization",
       "owner": "controller",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "normalization_primitives",
       "owner": "semantic_model",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "normalization_runtime_dependencies",
       "owner": "controller",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "normalize",
@@ -1927,37 +2060,51 @@
     {
       "module": "not_elaboration_ranking",
       "owner": "controller",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "prolog",
       "owner": "semantic_model",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "prompt_directives",
       "owner": "controller",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "publication",
       "owner": "subject_domain",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "publication_projection",
       "owner": "subject_domain",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "publication_render",
       "owner": "subject_domain",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "publication_validation",
       "owner": "subject_domain",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "pure_theory_types",
@@ -1969,107 +2116,156 @@
     {
       "module": "python_skill_brokerization",
       "owner": "runtime_execution",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "python_skill_host",
       "owner": "runtime_execution",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
+    },
+    {
+      "module": "python_skill_host_transport",
+      "owner": "runtime_execution",
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "replay_verifier",
       "owner": "governance",
-      "statuses": []
+      "statuses": [
+        "entrypoint"
+      ]
     },
     {
       "module": "retrieval_ranking",
       "owner": "controller",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "review_composition",
       "owner": "subject_domain",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "run_bundle_io",
       "owner": "entry_exchange",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "run_outcome_harvest_and_reporting",
       "owner": "controller",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "runtime_controller_api",
       "owner": "entry_exchange",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "runtime_governance_context",
       "owner": "governance",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "runtime_temp",
       "owner": "runtime_execution",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "semantic_prompt_posture",
       "owner": "controller",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "semantic_text",
       "owner": "semantic_model",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "side",
       "owner": "entry_exchange",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "side_runtime_dependencies",
       "owner": "entry_exchange",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "skill_boundary_normalization",
       "owner": "portable_skills",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "skill_compatibility_export",
       "owner": "entry_exchange",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "skill_compatibility_import",
       "owner": "entry_exchange",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "skill_compiler",
-      "owner": "portable_skills",
-      "statuses": []
+      "owner": "entry_exchange",
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "skill_composition",
       "owner": "portable_skills",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "skill_export_projection",
       "owner": "entry_exchange",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "skill_governance",
       "owner": "governance",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "skill_governance_primitives",
@@ -2088,7 +2284,9 @@
     {
       "module": "skill_ir",
       "owner": "portable_skills",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "skill_leaf_types",
@@ -2113,8 +2311,10 @@
     },
     {
       "module": "skill_registry",
-      "owner": "portable_skills",
-      "statuses": []
+      "owner": "entry_exchange",
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "skill_safety_governance",
@@ -2126,27 +2326,37 @@
     {
       "module": "skill_schema_io",
       "owner": "entry_exchange",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "store",
       "owner": "persistence_adapter",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "structured_learning_yaml",
-      "owner": "subject_domain",
-      "statuses": []
+      "owner": "controller",
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "supplement",
-      "owner": "llm",
-      "statuses": []
+      "owner": "controller",
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "system_state",
       "owner": "controller",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "tablet_safety_validation",
@@ -2165,17 +2375,22 @@
     {
       "module": "title_semantics",
       "owner": "semantic_model",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "url_learning_capture",
       "owner": "subject_domain",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "validation_ladder",
       "owner": "validation_trial",
       "statuses": [
+        "compatibility_facade",
         "validation"
       ]
     },
@@ -2183,74 +2398,30 @@
       "module": "validation_sqlite",
       "owner": "validation_trial",
       "statuses": [
+        "compatibility_facade",
         "validation"
       ]
     },
     {
       "module": "virtual_mounts",
       "owner": "runtime_execution",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     },
     {
       "module": "wasm_skill_runtime",
       "owner": "runtime_execution",
-      "statuses": []
+      "statuses": [
+        "compatibility_facade"
+      ]
     }
   ],
-  "root_module_to_package_dependencies": [
-    {
-      "source": "decision_review_projection",
-      "target": "coordinated_transformation"
-    }
-  ],
+  "root_module_to_package_dependencies": [],
   "root_owner_dependencies": [
     {
-      "source": "blend",
-      "target": "portable_skills"
-    },
-    {
-      "source": "blend",
-      "target": "runtime_execution"
-    },
-    {
-      "source": "blend",
-      "target": "semantic_model"
-    },
-    {
-      "source": "compatibility",
-      "target": "controller"
-    },
-    {
-      "source": "compatibility",
-      "target": "semantic_model"
-    },
-    {
       "source": "controller",
       "target": "entry_exchange"
-    },
-    {
-      "source": "controller",
-      "target": "governance"
-    },
-    {
-      "source": "controller",
-      "target": "llm"
-    },
-    {
-      "source": "controller",
-      "target": "persistence_adapter"
-    },
-    {
-      "source": "controller",
-      "target": "runtime_execution"
-    },
-    {
-      "source": "controller",
-      "target": "semantic_model"
-    },
-    {
-      "source": "controller",
-      "target": "subject_domain"
     },
     {
       "source": "entry_exchange",
@@ -2261,201 +2432,37 @@
       "target": "governance"
     },
     {
-      "source": "entry_exchange",
-      "target": "persistence_adapter"
-    },
-    {
-      "source": "entry_exchange",
-      "target": "portable_skills"
-    },
-    {
-      "source": "entry_exchange",
-      "target": "runtime_execution"
-    },
-    {
-      "source": "entry_exchange",
-      "target": "semantic_model"
-    },
-    {
-      "source": "entry_exchange",
-      "target": "subject_domain"
-    },
-    {
-      "source": "entry_exchange",
-      "target": "validation_trial"
-    },
-    {
-      "source": "governance",
-      "target": "controller"
-    },
-    {
-      "source": "governance",
-      "target": "entry_exchange"
-    },
-    {
-      "source": "governance",
-      "target": "persistence_adapter"
-    },
-    {
-      "source": "governance",
-      "target": "portable_skills"
-    },
-    {
-      "source": "governance",
-      "target": "runtime_execution"
-    },
-    {
-      "source": "governance",
-      "target": "semantic_model"
-    },
-    {
-      "source": "llm",
-      "target": "semantic_model"
-    },
-    {
-      "source": "persistence_adapter",
-      "target": "controller"
-    },
-    {
-      "source": "persistence_adapter",
-      "target": "semantic_model"
-    },
-    {
-      "source": "persistence_adapter",
-      "target": "subject_domain"
-    },
-    {
-      "source": "portable_skills",
-      "target": "entry_exchange"
-    },
-    {
-      "source": "portable_skills",
-      "target": "governance"
-    },
-    {
-      "source": "portable_skills",
-      "target": "persistence_adapter"
-    },
-    {
-      "source": "portable_skills",
-      "target": "runtime_execution"
-    },
-    {
-      "source": "portable_skills",
-      "target": "semantic_model"
-    },
-    {
-      "source": "runtime_execution",
-      "target": "entry_exchange"
-    },
-    {
-      "source": "runtime_execution",
-      "target": "governance"
-    },
-    {
-      "source": "runtime_execution",
-      "target": "persistence_adapter"
-    },
-    {
-      "source": "runtime_execution",
-      "target": "portable_skills"
-    },
-    {
-      "source": "runtime_execution",
-      "target": "semantic_model"
-    },
-    {
-      "source": "semantic_model",
-      "target": "controller"
-    },
-    {
-      "source": "semantic_model",
-      "target": "runtime_execution"
-    },
-    {
-      "source": "subject_domain",
-      "target": "controller"
-    },
-    {
       "source": "subject_domain",
       "target": "entry_exchange"
-    },
-    {
-      "source": "subject_domain",
-      "target": "portable_skills"
-    },
-    {
-      "source": "subject_domain",
-      "target": "runtime_execution"
-    },
-    {
-      "source": "subject_domain",
-      "target": "semantic_model"
-    },
-    {
-      "source": "validation_trial",
-      "target": "persistence_adapter"
     }
   ],
   "root_package_ownership": [
-    {
-      "owner": "subject_domain",
-      "package": "coordinated_transformation",
-      "statuses": []
-    },
     {
       "owner": "validation_trial",
       "package": "design",
       "statuses": [
         "validation"
       ]
-    },
-    {
-      "owner": "subject_domain",
-      "package": "dst",
-      "statuses": []
     }
   ],
   "root_package_to_component_dependencies": [],
-  "root_package_to_module_dependencies": [
-    {
-      "module": "applied_theory_types",
-      "source": "dst"
-    },
-    {
-      "module": "decision_review",
-      "source": "dst"
-    },
-    {
-      "module": "decision_review_constructs",
-      "source": "dst"
-    },
-    {
-      "module": "id_generation",
-      "source": "dst"
-    },
-    {
-      "module": "itemize",
-      "source": "dst"
-    },
-    {
-      "module": "runtime_controller_api",
-      "source": "dst"
-    },
-    {
-      "module": "semantic_text",
-      "source": "dst"
-    }
-  ],
-  "root_package_to_package_dependencies": [
-    {
-      "source": "dst",
-      "target": "coordinated_transformation"
-    }
-  ],
+  "root_package_to_module_dependencies": [],
+  "root_package_to_package_dependencies": [],
   "root_to_component_dependencies": [
     {
+      "source": "SEMANTIC_RELATION_VALIDATION",
+      "target": "core_engine"
+    },
+    {
+      "source": "TRIAL_DOMAIN_VALIDATION",
+      "target": "validation"
+    },
+    {
       "source": "applied_theory_primitives",
+      "target": "core_semantics"
+    },
+    {
+      "source": "applied_theory_types",
       "target": "core_semantics"
     },
     {
@@ -2468,7 +2475,19 @@
     },
     {
       "source": "args",
-      "target": "skill_semantics"
+      "target": "app_cli"
+    },
+    {
+      "source": "args",
+      "target": "core_engine"
+    },
+    {
+      "source": "artifact",
+      "target": "core_engine"
+    },
+    {
+      "source": "artifact_answer_resolution",
+      "target": "core_engine"
     },
     {
       "source": "artifact_contracts",
@@ -2476,27 +2495,71 @@
     },
     {
       "source": "blend_context",
-      "target": "foundation_models"
+      "target": "blend"
+    },
+    {
+      "source": "blend_context",
+      "target": "runtime_core"
+    },
+    {
+      "source": "blend_operator",
+      "target": "blend"
     },
     {
       "source": "blend_operator_store",
-      "target": "skill_semantics"
+      "target": "blend_application"
     },
     {
       "source": "blend_session",
-      "target": "foundation_models"
+      "target": "blend"
+    },
+    {
+      "source": "blend_session",
+      "target": "runtime_core"
+    },
+    {
+      "source": "blend_workflow",
+      "target": "blend_application"
     },
     {
       "source": "blend_workflow_execution",
-      "target": "host_interaction"
+      "target": "blend_application"
+    },
+    {
+      "source": "blend_workflow_models",
+      "target": "blend"
+    },
+    {
+      "source": "blend_workflow_store",
+      "target": "blend_application"
+    },
+    {
+      "source": "blend_world",
+      "target": "blend_application"
+    },
+    {
+      "source": "blend_world_models",
+      "target": "blend"
+    },
+    {
+      "source": "blend_world_store",
+      "target": "blend_application"
+    },
+    {
+      "source": "boundary",
+      "target": "core_semantics"
     },
     {
       "source": "capability_runtime",
-      "target": "core_governance"
+      "target": "governed_core"
     },
     {
-      "source": "capability_runtime",
-      "target": "skill_semantics"
+      "source": "constitutional_trace",
+      "target": "core_engine"
+    },
+    {
+      "source": "controller_entrypoint_binding",
+      "target": "core_engine"
     },
     {
       "source": "controller_entrypoints",
@@ -2504,83 +2567,147 @@
     },
     {
       "source": "controller_entrypoints",
-      "target": "contracts"
-    },
-    {
-      "source": "controller_entrypoints",
       "target": "core_engine"
     },
     {
       "source": "controller_entrypoints",
-      "target": "foundation_host"
+      "target": "core_semantics"
     },
     {
       "source": "controller_entrypoints",
-      "target": "subject_service"
+      "target": "exchange"
     },
     {
-      "source": "controller_runtime",
+      "source": "controller_entrypoints",
       "target": "governed_core"
     },
     {
-      "source": "controller_runtime",
+      "source": "controller_entrypoints",
       "target": "host_interaction"
     },
     {
+      "source": "controller_entrypoints",
+      "target": "validation"
+    },
+    {
+      "source": "controller_governance_bridge",
+      "target": "core_engine"
+    },
+    {
       "source": "controller_runtime",
-      "target": "skill_semantics"
+      "target": "core_engine"
+    },
+    {
+      "source": "controller_runtime",
+      "target": "exchange"
+    },
+    {
+      "source": "controller_runtime_binding",
+      "target": "core_engine"
     },
     {
       "source": "data_governance",
       "target": "core_governance"
     },
     {
+      "source": "decision_review",
+      "target": "subject_core"
+    },
+    {
+      "source": "decision_review_constructs",
+      "target": "subject_core"
+    },
+    {
+      "source": "decision_review_models",
+      "target": "core_semantics"
+    },
+    {
+      "source": "decision_review_policy",
+      "target": "subject_core"
+    },
+    {
+      "source": "decision_review_projection",
+      "target": "subject_core"
+    },
+    {
+      "source": "direct_knowledge_reuse",
+      "target": "core_engine"
+    },
+    {
       "source": "execution_framework_primitives",
-      "target": "skill_semantics"
+      "target": "governed_core"
     },
     {
       "source": "execution_frameworks",
       "target": "governed_core"
     },
     {
-      "source": "execution_frameworks",
-      "target": "skill_semantics"
+      "source": "external_markdown_learning_pipeline",
+      "target": "exchange"
+    },
+    {
+      "source": "fallback_not_generation",
+      "target": "core_engine"
+    },
+    {
+      "source": "fallback_not_semantics",
+      "target": "core_engine"
+    },
+    {
+      "source": "fence_extraction_strategy",
+      "target": "governed_core"
+    },
+    {
+      "source": "gather_sources",
+      "target": "subject_core"
     },
     {
       "source": "governance_inventory",
-      "target": "core_governance"
+      "target": "core_engine"
+    },
+    {
+      "source": "governed_closure_and_commitment",
+      "target": "core_engine"
+    },
+    {
+      "source": "governed_prior_learning_reuse",
+      "target": "core_engine"
     },
     {
       "source": "governed_semantic_reduction_runtime",
+      "target": "core_engine"
+    },
+    {
+      "source": "governed_skill_access",
+      "target": "core_engine"
+    },
+    {
+      "source": "governed_skill_installation",
+      "target": "core_engine"
+    },
+    {
+      "source": "governed_skill_installation",
+      "target": "core_governance"
+    },
+    {
+      "source": "governed_skill_installation",
+      "target": "exchange"
+    },
+    {
+      "source": "governed_skill_installation",
+      "target": "skill_application"
+    },
+    {
+      "source": "governed_skill_installation",
+      "target": "skill_semantics"
+    },
+    {
+      "source": "host_abi",
       "target": "governed_core"
     },
     {
-      "source": "governed_semantic_reduction_runtime",
-      "target": "host_interaction"
-    },
-    {
-      "source": "governed_skill_access",
-      "target": "core_governance"
-    },
-    {
-      "source": "governed_skill_access",
-      "target": "skill_semantics"
-    },
-    {
-      "source": "governed_skill_installation",
-      "target": "core_governance"
-    },
-    {
-      "source": "governed_skill_installation",
-      "target": "skill_semantics"
-    },
-    {
       "source": "host_brokers",
-      "target": "core_governance"
-    },
-    {
-      "source": "host_brokers",
-      "target": "skill_semantics"
+      "target": "governed_core"
     },
     {
       "source": "host_interaction_action_dispatch",
@@ -2612,71 +2739,227 @@
     },
     {
       "source": "host_mediation",
-      "target": "host_interaction"
+      "target": "core_engine"
     },
     {
-      "source": "host_mediation",
-      "target": "skill_semantics"
+      "source": "host_realizers",
+      "target": "governed_core"
+    },
+    {
+      "source": "id_generation",
+      "target": "core_semantics"
+    },
+    {
+      "source": "itemize",
+      "target": "core_semantics"
+    },
+    {
+      "source": "itemize",
+      "target": "subject_core"
+    },
+    {
+      "source": "itemize_models",
+      "target": "core_semantics"
+    },
+    {
+      "source": "itemize_validation",
+      "target": "subject_core"
+    },
+    {
+      "source": "learn",
+      "target": "core_engine"
+    },
+    {
+      "source": "learning_context",
+      "target": "exchange"
+    },
+    {
+      "source": "learning_context_markdown",
+      "target": "subject_core"
+    },
+    {
+      "source": "learning_context_paths",
+      "target": "subject_core"
+    },
+    {
+      "source": "learning_context_projection",
+      "target": "subject_core"
+    },
+    {
+      "source": "learning_context_skill_projection",
+      "target": "exchange"
+    },
+    {
+      "source": "macos_host_brokers",
+      "target": "governed_core"
+    },
+    {
+      "source": "markdown_ir",
+      "target": "core_semantics"
     },
     {
       "source": "markdown_learning_artifact_semantics",
-      "target": "skill_semantics"
+      "target": "core_engine"
+    },
+    {
+      "source": "non_achievedness_normalization",
+      "target": "core_engine"
+    },
+    {
+      "source": "normalization_primitives",
+      "target": "core_semantics"
+    },
+    {
+      "source": "normalization_runtime_dependencies",
+      "target": "core_engine"
+    },
+    {
+      "source": "normalize",
+      "target": "core_engine"
+    },
+    {
+      "source": "normalize",
+      "target": "core_semantics"
+    },
+    {
+      "source": "not_elaboration_ranking",
+      "target": "core_engine"
+    },
+    {
+      "source": "prolog",
+      "target": "core_semantics"
+    },
+    {
+      "source": "prompt_directives",
+      "target": "core_engine"
+    },
+    {
+      "source": "publication",
+      "target": "subject_core"
+    },
+    {
+      "source": "publication_projection",
+      "target": "subject_core"
+    },
+    {
+      "source": "publication_render",
+      "target": "subject_core"
+    },
+    {
+      "source": "publication_validation",
+      "target": "subject_core"
     },
     {
       "source": "pure_theory_types",
       "target": "core_semantics"
     },
     {
+      "source": "python_skill_brokerization",
+      "target": "governed_core"
+    },
+    {
+      "source": "python_skill_host",
+      "target": "governed_core"
+    },
+    {
+      "source": "python_skill_host_transport",
+      "target": "governed_core"
+    },
+    {
+      "source": "replay_verifier",
+      "target": "core_engine"
+    },
+    {
       "source": "replay_verifier",
       "target": "core_governance"
+    },
+    {
+      "source": "replay_verifier",
+      "target": "core_semantics"
+    },
+    {
+      "source": "replay_verifier",
+      "target": "exchange"
+    },
+    {
+      "source": "replay_verifier",
+      "target": "governed_core"
     },
     {
       "source": "replay_verifier",
       "target": "skill_semantics"
     },
     {
-      "source": "run_bundle_io",
-      "target": "core_governance"
+      "source": "retrieval_ranking",
+      "target": "core_engine"
+    },
+    {
+      "source": "review_composition",
+      "target": "subject_core"
     },
     {
       "source": "run_bundle_io",
-      "target": "skill_semantics"
+      "target": "exchange"
+    },
+    {
+      "source": "run_outcome_harvest_and_reporting",
+      "target": "core_engine"
+    },
+    {
+      "source": "runtime_controller_api",
+      "target": "app_cli"
     },
     {
       "source": "runtime_governance_context",
-      "target": "core_governance"
+      "target": "core_engine"
+    },
+    {
+      "source": "runtime_temp",
+      "target": "governed_core"
+    },
+    {
+      "source": "semantic_prompt_posture",
+      "target": "core_engine"
+    },
+    {
+      "source": "semantic_text",
+      "target": "core_semantics"
     },
     {
       "source": "side",
-      "target": "skill_semantics"
+      "target": "exchange"
+    },
+    {
+      "source": "side_runtime_dependencies",
+      "target": "exchange"
     },
     {
       "source": "skill_boundary_normalization",
-      "target": "core_governance"
+      "target": "skill_application"
     },
     {
-      "source": "skill_boundary_normalization",
-      "target": "skill_semantics"
+      "source": "skill_compatibility_export",
+      "target": "exchange"
+    },
+    {
+      "source": "skill_compatibility_import",
+      "target": "exchange"
+    },
+    {
+      "source": "skill_compiler",
+      "target": "exchange"
     },
     {
       "source": "skill_composition",
-      "target": "skill_semantics"
+      "target": "skill_application"
     },
     {
       "source": "skill_export_projection",
-      "target": "core_governance"
-    },
-    {
-      "source": "skill_export_projection",
-      "target": "skill_semantics"
+      "target": "exchange"
     },
     {
       "source": "skill_governance",
-      "target": "core_governance"
-    },
-    {
-      "source": "skill_governance",
-      "target": "skill_semantics"
+      "target": "core_engine"
     },
     {
       "source": "skill_governance_primitives",
@@ -2692,11 +2975,7 @@
     },
     {
       "source": "skill_ir",
-      "target": "core_governance"
-    },
-    {
-      "source": "skill_ir",
-      "target": "skill_semantics"
+      "target": "skill_application"
     },
     {
       "source": "skill_leaf_types",
@@ -2712,7 +2991,7 @@
     },
     {
       "source": "skill_registry",
-      "target": "core_governance"
+      "target": "exchange"
     },
     {
       "source": "skill_safety_governance",
@@ -2724,224 +3003,60 @@
     },
     {
       "source": "skill_schema_io",
-      "target": "core_governance"
+      "target": "exchange"
     },
     {
-      "source": "skill_schema_io",
-      "target": "skill_semantics"
+      "source": "store",
+      "target": "core_engine"
+    },
+    {
+      "source": "structured_learning_yaml",
+      "target": "core_engine"
+    },
+    {
+      "source": "supplement",
+      "target": "core_engine"
+    },
+    {
+      "source": "system_state",
+      "target": "core_engine"
+    },
+    {
+      "source": "tablet_safety_validation",
+      "target": "validation"
+    },
+    {
+      "source": "title_depth_learning_validation",
+      "target": "validation"
+    },
+    {
+      "source": "title_semantics",
+      "target": "core_semantics"
+    },
+    {
+      "source": "url_learning_capture",
+      "target": "subject_service"
+    },
+    {
+      "source": "validation_ladder",
+      "target": "validation"
+    },
+    {
+      "source": "validation_sqlite",
+      "target": "validation"
     },
     {
       "source": "virtual_mounts",
-      "target": "core_governance"
+      "target": "governed_core"
+    },
+    {
+      "source": "wasm_skill_runtime",
+      "target": "governed_core"
     }
   ],
   "root_to_root_dependencies": [
     {
-      "module": "store",
-      "source": "SEMANTIC_RELATION_VALIDATION"
-    },
-    {
-      "module": "validation_sqlite",
-      "source": "TRIAL_DOMAIN_VALIDATION"
-    },
-    {
-      "module": "applied_theory_primitives",
-      "source": "applied_theory_types"
-    },
-    {
-      "module": "execution_framework_primitives",
-      "source": "applied_theory_types"
-    },
-    {
-      "module": "normalization_primitives",
-      "source": "applied_theory_types"
-    },
-    {
-      "module": "execution_frameworks",
-      "source": "args"
-    },
-    {
-      "module": "normalization_primitives",
-      "source": "args"
-    },
-    {
-      "module": "applied_theory_types",
-      "source": "artifact"
-    },
-    {
-      "module": "boundary",
-      "source": "artifact"
-    },
-    {
-      "module": "fallback_not_generation",
-      "source": "artifact"
-    },
-    {
-      "module": "non_achievedness_normalization",
-      "source": "artifact"
-    },
-    {
-      "module": "normalization_primitives",
-      "source": "artifact"
-    },
-    {
-      "module": "semantic_text",
-      "source": "artifact"
-    },
-    {
-      "module": "applied_theory_types",
-      "source": "artifact_answer_resolution"
-    },
-    {
-      "module": "prompt_directives",
-      "source": "artifact_answer_resolution"
-    },
-    {
-      "module": "blend_context",
-      "source": "blend_operator"
-    },
-    {
-      "module": "semantic_text",
-      "source": "blend_operator"
-    },
-    {
-      "module": "blend_context",
-      "source": "blend_operator_store"
-    },
-    {
-      "module": "blend_operator",
-      "source": "blend_operator_store"
-    },
-    {
-      "module": "capability_runtime",
-      "source": "blend_operator_store"
-    },
-    {
-      "module": "semantic_text",
-      "source": "blend_operator_store"
-    },
-    {
-      "module": "blend_context",
-      "source": "blend_session"
-    },
-    {
-      "module": "blend_workflow_models",
-      "source": "blend_workflow"
-    },
-    {
-      "module": "blend_workflow_store",
-      "source": "blend_workflow"
-    },
-    {
-      "module": "semantic_text",
-      "source": "blend_workflow"
-    },
-    {
-      "module": "applied_theory_types",
-      "source": "blend_workflow_execution"
-    },
-    {
-      "module": "blend_context",
-      "source": "blend_workflow_execution"
-    },
-    {
-      "module": "blend_operator",
-      "source": "blend_workflow_execution"
-    },
-    {
-      "module": "blend_operator_store",
-      "source": "blend_workflow_execution"
-    },
-    {
-      "module": "blend_workflow",
-      "source": "blend_workflow_execution"
-    },
-    {
-      "module": "blend_workflow_store",
-      "source": "blend_workflow_execution"
-    },
-    {
-      "module": "semantic_text",
-      "source": "blend_workflow_execution"
-    },
-    {
-      "module": "skill_composition",
-      "source": "blend_workflow_execution"
-    },
-    {
-      "module": "semantic_text",
-      "source": "blend_workflow_models"
-    },
-    {
-      "module": "applied_theory_primitives",
-      "source": "blend_workflow_store"
-    },
-    {
-      "module": "blend_workflow_models",
-      "source": "blend_workflow_store"
-    },
-    {
-      "module": "semantic_text",
-      "source": "blend_workflow_store"
-    },
-    {
-      "module": "blend_world_models",
-      "source": "blend_world"
-    },
-    {
-      "module": "blend_world_store",
-      "source": "blend_world"
-    },
-    {
-      "module": "blend_world_models",
-      "source": "blend_world_store"
-    },
-    {
-      "module": "semantic_text",
-      "source": "blend_world_store"
-    },
-    {
-      "module": "applied_theory_types",
-      "source": "boundary"
-    },
-    {
-      "module": "normalization_primitives",
-      "source": "boundary"
-    },
-    {
-      "module": "applied_theory_types",
-      "source": "capability_runtime"
-    },
-    {
-      "module": "host_abi",
-      "source": "capability_runtime"
-    },
-    {
-      "module": "semantic_text",
-      "source": "capability_runtime"
-    },
-    {
-      "module": "skill_governance",
-      "source": "capability_runtime"
-    },
-    {
-      "module": "applied_theory_types",
-      "source": "constitutional_trace"
-    },
-    {
-      "module": "host_abi",
-      "source": "constitutional_trace"
-    },
-    {
-      "module": "system_state",
-      "source": "constitutional_trace"
-    },
-    {
       "module": "args",
-      "source": "controller_entrypoints"
-    },
-    {
-      "module": "controller_runtime",
       "source": "controller_entrypoints"
     },
     {
@@ -2953,680 +3068,12 @@
       "source": "controller_entrypoints"
     },
     {
-      "module": "run_bundle_io",
-      "source": "controller_entrypoints"
-    },
-    {
-      "module": "runtime_temp",
-      "source": "controller_entrypoints"
-    },
-    {
-      "module": "side",
-      "source": "controller_entrypoints"
-    },
-    {
-      "module": "skill_export_projection",
-      "source": "controller_entrypoints"
-    },
-    {
-      "module": "skill_registry",
-      "source": "controller_entrypoints"
-    },
-    {
-      "module": "system_state",
-      "source": "controller_entrypoints"
-    },
-    {
-      "module": "title_semantics",
-      "source": "controller_entrypoints"
-    },
-    {
-      "module": "validation_ladder",
-      "source": "controller_entrypoints"
-    },
-    {
-      "module": "applied_theory_types",
-      "source": "controller_governance_bridge"
-    },
-    {
-      "module": "governance_inventory",
-      "source": "controller_governance_bridge"
-    },
-    {
-      "module": "governed_skill_access",
-      "source": "controller_governance_bridge"
-    },
-    {
-      "module": "applied_theory_types",
-      "source": "controller_runtime"
-    },
-    {
       "module": "args",
       "source": "controller_runtime"
     },
     {
-      "module": "artifact",
-      "source": "controller_runtime"
-    },
-    {
-      "module": "artifact_answer_resolution",
-      "source": "controller_runtime"
-    },
-    {
-      "module": "boundary",
-      "source": "controller_runtime"
-    },
-    {
-      "module": "controller_entrypoint_binding",
-      "source": "controller_runtime"
-    },
-    {
-      "module": "controller_governance_bridge",
-      "source": "controller_runtime"
-    },
-    {
-      "module": "controller_runtime_binding",
-      "source": "controller_runtime"
-    },
-    {
-      "module": "direct_knowledge_reuse",
-      "source": "controller_runtime"
-    },
-    {
-      "module": "execution_frameworks",
-      "source": "controller_runtime"
-    },
-    {
-      "module": "external_markdown_learning_pipeline",
-      "source": "controller_runtime"
-    },
-    {
-      "module": "fallback_not_generation",
-      "source": "controller_runtime"
-    },
-    {
-      "module": "governed_closure_and_commitment",
-      "source": "controller_runtime"
-    },
-    {
-      "module": "governed_prior_learning_reuse",
-      "source": "controller_runtime"
-    },
-    {
-      "module": "governed_semantic_reduction_runtime",
-      "source": "controller_runtime"
-    },
-    {
-      "module": "host_mediation",
-      "source": "controller_runtime"
-    },
-    {
-      "module": "id_generation",
-      "source": "controller_runtime"
-    },
-    {
-      "module": "learn",
-      "source": "controller_runtime"
-    },
-    {
-      "module": "markdown_ir",
-      "source": "controller_runtime"
-    },
-    {
-      "module": "markdown_learning_artifact_semantics",
-      "source": "controller_runtime"
-    },
-    {
-      "module": "non_achievedness_normalization",
-      "source": "controller_runtime"
-    },
-    {
-      "module": "normalization_primitives",
-      "source": "controller_runtime"
-    },
-    {
-      "module": "not_elaboration_ranking",
-      "source": "controller_runtime"
-    },
-    {
-      "module": "prolog",
-      "source": "controller_runtime"
-    },
-    {
-      "module": "prompt_directives",
-      "source": "controller_runtime"
-    },
-    {
-      "module": "retrieval_ranking",
-      "source": "controller_runtime"
-    },
-    {
-      "module": "run_outcome_harvest_and_reporting",
-      "source": "controller_runtime"
-    },
-    {
-      "module": "semantic_prompt_posture",
-      "source": "controller_runtime"
-    },
-    {
-      "module": "semantic_text",
-      "source": "controller_runtime"
-    },
-    {
-      "module": "side",
-      "source": "controller_runtime"
-    },
-    {
-      "module": "store",
-      "source": "controller_runtime"
-    },
-    {
-      "module": "structured_learning_yaml",
-      "source": "controller_runtime"
-    },
-    {
-      "module": "supplement",
-      "source": "controller_runtime"
-    },
-    {
-      "module": "system_state",
-      "source": "controller_runtime"
-    },
-    {
-      "module": "title_semantics",
-      "source": "controller_runtime"
-    },
-    {
-      "module": "system_state",
-      "source": "controller_runtime_binding"
-    },
-    {
-      "module": "decision_review_models",
-      "source": "decision_review"
-    },
-    {
-      "module": "id_generation",
-      "source": "decision_review"
-    },
-    {
-      "module": "learning_context",
-      "source": "decision_review"
-    },
-    {
-      "module": "learning_context_paths",
-      "source": "decision_review"
-    },
-    {
-      "module": "review_composition",
-      "source": "decision_review"
-    },
-    {
-      "module": "semantic_text",
-      "source": "decision_review"
-    },
-    {
-      "module": "id_generation",
-      "source": "decision_review_constructs"
-    },
-    {
-      "module": "itemize",
-      "source": "decision_review_constructs"
-    },
-    {
-      "module": "learning_context",
-      "source": "decision_review_constructs"
-    },
-    {
-      "module": "semantic_text",
-      "source": "decision_review_constructs"
-    },
-    {
-      "module": "id_generation",
-      "source": "decision_review_models"
-    },
-    {
-      "module": "learning_context_paths",
-      "source": "decision_review_models"
-    },
-    {
-      "module": "semantic_text",
-      "source": "decision_review_models"
-    },
-    {
-      "module": "learning_context_paths",
-      "source": "decision_review_policy"
-    },
-    {
-      "module": "semantic_text",
-      "source": "decision_review_policy"
-    },
-    {
-      "module": "decision_review_models",
-      "source": "decision_review_projection"
-    },
-    {
-      "module": "decision_review_policy",
-      "source": "decision_review_projection"
-    },
-    {
-      "module": "learning_context_paths",
-      "source": "decision_review_projection"
-    },
-    {
-      "module": "semantic_text",
-      "source": "decision_review_projection"
-    },
-    {
-      "module": "applied_theory_types",
-      "source": "direct_knowledge_reuse"
-    },
-    {
-      "module": "prompt_directives",
-      "source": "direct_knowledge_reuse"
-    },
-    {
-      "module": "retrieval_ranking",
-      "source": "direct_knowledge_reuse"
-    },
-    {
-      "module": "semantic_prompt_posture",
-      "source": "direct_knowledge_reuse"
-    },
-    {
-      "module": "semantic_text",
-      "source": "direct_knowledge_reuse"
-    },
-    {
-      "module": "title_semantics",
-      "source": "direct_knowledge_reuse"
-    },
-    {
-      "module": "applied_theory_types",
-      "source": "execution_frameworks"
-    },
-    {
-      "module": "execution_framework_primitives",
-      "source": "execution_frameworks"
-    },
-    {
-      "module": "fence_extraction_strategy",
-      "source": "execution_frameworks"
-    },
-    {
-      "module": "host_abi",
-      "source": "execution_frameworks"
-    },
-    {
-      "module": "python_skill_brokerization",
-      "source": "execution_frameworks"
-    },
-    {
-      "module": "runtime_temp",
-      "source": "execution_frameworks"
-    },
-    {
-      "module": "semantic_text",
-      "source": "execution_frameworks"
-    },
-    {
-      "module": "wasm_skill_runtime",
-      "source": "execution_frameworks"
-    },
-    {
-      "module": "applied_theory_types",
-      "source": "external_markdown_learning_pipeline"
-    },
-    {
-      "module": "artifact",
-      "source": "external_markdown_learning_pipeline"
-    },
-    {
-      "module": "execution_frameworks",
-      "source": "external_markdown_learning_pipeline"
-    },
-    {
-      "module": "learning_context",
-      "source": "external_markdown_learning_pipeline"
-    },
-    {
-      "module": "markdown_ir",
-      "source": "external_markdown_learning_pipeline"
-    },
-    {
-      "module": "semantic_text",
-      "source": "external_markdown_learning_pipeline"
-    },
-    {
-      "module": "applied_theory_primitives",
-      "source": "fallback_not_generation"
-    },
-    {
-      "module": "boundary",
-      "source": "fallback_not_generation"
-    },
-    {
-      "module": "normalization_primitives",
-      "source": "fallback_not_generation"
-    },
-    {
-      "module": "prolog",
-      "source": "fallback_not_generation"
-    },
-    {
-      "module": "prompt_directives",
-      "source": "fallback_not_generation"
-    },
-    {
-      "module": "semantic_prompt_posture",
-      "source": "fallback_not_generation"
-    },
-    {
-      "module": "semantic_text",
-      "source": "fallback_not_generation"
-    },
-    {
-      "module": "structured_learning_yaml",
-      "source": "fallback_not_generation"
-    },
-    {
-      "module": "title_semantics",
-      "source": "fallback_not_generation"
-    },
-    {
-      "module": "fallback_not_generation",
-      "source": "fallback_not_semantics"
-    },
-    {
-      "module": "not_elaboration_ranking",
-      "source": "fallback_not_semantics"
-    },
-    {
-      "module": "learning_context_paths",
-      "source": "gather_sources"
-    },
-    {
-      "module": "semantic_text",
-      "source": "gather_sources"
-    },
-    {
-      "module": "applied_theory_types",
-      "source": "governance_inventory"
-    },
-    {
-      "module": "applied_theory_types",
-      "source": "governed_closure_and_commitment"
-    },
-    {
-      "module": "normalization_primitives",
-      "source": "governed_closure_and_commitment"
-    },
-    {
-      "module": "semantic_text",
-      "source": "governed_closure_and_commitment"
-    },
-    {
-      "module": "title_semantics",
-      "source": "governed_closure_and_commitment"
-    },
-    {
-      "module": "applied_theory_types",
-      "source": "governed_prior_learning_reuse"
-    },
-    {
-      "module": "learn",
-      "source": "governed_prior_learning_reuse"
-    },
-    {
-      "module": "normalization_primitives",
-      "source": "governed_prior_learning_reuse"
-    },
-    {
-      "module": "prompt_directives",
-      "source": "governed_prior_learning_reuse"
-    },
-    {
-      "module": "retrieval_ranking",
-      "source": "governed_prior_learning_reuse"
-    },
-    {
-      "module": "semantic_prompt_posture",
-      "source": "governed_prior_learning_reuse"
-    },
-    {
-      "module": "semantic_text",
-      "source": "governed_prior_learning_reuse"
-    },
-    {
-      "module": "title_semantics",
-      "source": "governed_prior_learning_reuse"
-    },
-    {
-      "module": "applied_theory_types",
-      "source": "governed_semantic_reduction_runtime"
-    },
-    {
-      "module": "normalization_primitives",
-      "source": "governed_semantic_reduction_runtime"
-    },
-    {
-      "module": "semantic_prompt_posture",
-      "source": "governed_semantic_reduction_runtime"
-    },
-    {
-      "module": "semantic_text",
-      "source": "governed_semantic_reduction_runtime"
-    },
-    {
-      "module": "system_state",
-      "source": "governed_semantic_reduction_runtime"
-    },
-    {
-      "module": "title_semantics",
-      "source": "governed_semantic_reduction_runtime"
-    },
-    {
-      "module": "applied_theory_types",
-      "source": "governed_skill_access"
-    },
-    {
-      "module": "governance_inventory",
-      "source": "governed_skill_access"
-    },
-    {
-      "module": "skill_governance",
-      "source": "governed_skill_access"
-    },
-    {
-      "module": "skill_compiler",
-      "source": "governed_skill_installation"
-    },
-    {
-      "module": "skill_export_projection",
-      "source": "governed_skill_installation"
-    },
-    {
-      "module": "skill_governance",
-      "source": "governed_skill_installation"
-    },
-    {
-      "module": "skill_schema_io",
-      "source": "governed_skill_installation"
-    },
-    {
-      "module": "semantic_text",
-      "source": "host_abi"
-    },
-    {
-      "module": "applied_theory_types",
-      "source": "host_brokers"
-    },
-    {
-      "module": "controller_runtime_binding",
-      "source": "host_brokers"
-    },
-    {
-      "module": "host_abi",
-      "source": "host_brokers"
-    },
-    {
-      "module": "macos_host_brokers",
-      "source": "host_brokers"
-    },
-    {
-      "module": "semantic_text",
-      "source": "host_brokers"
-    },
-    {
-      "module": "store",
-      "source": "host_brokers"
-    },
-    {
-      "module": "virtual_mounts",
-      "source": "host_brokers"
-    },
-    {
-      "module": "applied_theory_types",
-      "source": "host_mediation"
-    },
-    {
-      "module": "capability_runtime",
-      "source": "host_mediation"
-    },
-    {
-      "module": "execution_frameworks",
-      "source": "host_mediation"
-    },
-    {
-      "module": "host_abi",
-      "source": "host_mediation"
-    },
-    {
-      "module": "host_brokers",
-      "source": "host_mediation"
-    },
-    {
-      "module": "runtime_governance_context",
-      "source": "host_mediation"
-    },
-    {
-      "module": "semantic_text",
-      "source": "host_mediation"
-    },
-    {
-      "module": "applied_theory_types",
-      "source": "itemize"
-    },
-    {
-      "module": "id_generation",
-      "source": "itemize"
-    },
-    {
-      "module": "itemize_models",
-      "source": "itemize"
-    },
-    {
-      "module": "learning_context",
-      "source": "itemize"
-    },
-    {
-      "module": "markdown_ir",
-      "source": "itemize"
-    },
-    {
       "module": "runtime_controller_api",
       "source": "itemize"
-    },
-    {
-      "module": "semantic_text",
-      "source": "itemize"
-    },
-    {
-      "module": "title_semantics",
-      "source": "itemize"
-    },
-    {
-      "module": "learning_context_paths",
-      "source": "itemize_models"
-    },
-    {
-      "module": "semantic_text",
-      "source": "itemize_models"
-    },
-    {
-      "module": "itemize_models",
-      "source": "itemize_validation"
-    },
-    {
-      "module": "semantic_text",
-      "source": "itemize_validation"
-    },
-    {
-      "module": "semantic_text",
-      "source": "learn"
-    },
-    {
-      "module": "id_generation",
-      "source": "learning_context"
-    },
-    {
-      "module": "learning_context_paths",
-      "source": "learning_context"
-    },
-    {
-      "module": "learning_context_projection",
-      "source": "learning_context"
-    },
-    {
-      "module": "learning_context_skill_projection",
-      "source": "learning_context"
-    },
-    {
-      "module": "semantic_text",
-      "source": "learning_context"
-    },
-    {
-      "module": "learning_context",
-      "source": "learning_context_markdown"
-    },
-    {
-      "module": "markdown_ir",
-      "source": "learning_context_markdown"
-    },
-    {
-      "module": "semantic_text",
-      "source": "learning_context_markdown"
-    },
-    {
-      "module": "id_generation",
-      "source": "learning_context_paths"
-    },
-    {
-      "module": "semantic_text",
-      "source": "learning_context_paths"
-    },
-    {
-      "module": "learning_context_skill_projection",
-      "source": "learning_context_projection"
-    },
-    {
-      "module": "semantic_text",
-      "source": "learning_context_projection"
-    },
-    {
-      "module": "learning_context_paths",
-      "source": "learning_context_skill_projection"
-    },
-    {
-      "module": "semantic_text",
-      "source": "learning_context_skill_projection"
-    },
-    {
-      "module": "skill_compiler",
-      "source": "learning_context_skill_projection"
-    },
-    {
-      "module": "skill_export_projection",
-      "source": "learning_context_skill_projection"
     },
     {
       "module": "controller_entrypoint_binding",
@@ -3639,730 +3086,6 @@
     {
       "module": "controller_runtime",
       "source": "main"
-    },
-    {
-      "module": "applied_theory_types",
-      "source": "markdown_learning_artifact_semantics"
-    },
-    {
-      "module": "execution_frameworks",
-      "source": "markdown_learning_artifact_semantics"
-    },
-    {
-      "module": "markdown_ir",
-      "source": "markdown_learning_artifact_semantics"
-    },
-    {
-      "module": "non_achievedness_normalization",
-      "source": "markdown_learning_artifact_semantics"
-    },
-    {
-      "module": "normalization_primitives",
-      "source": "markdown_learning_artifact_semantics"
-    },
-    {
-      "module": "prolog",
-      "source": "markdown_learning_artifact_semantics"
-    },
-    {
-      "module": "retrieval_ranking",
-      "source": "markdown_learning_artifact_semantics"
-    },
-    {
-      "module": "semantic_text",
-      "source": "markdown_learning_artifact_semantics"
-    },
-    {
-      "module": "structured_learning_yaml",
-      "source": "markdown_learning_artifact_semantics"
-    },
-    {
-      "module": "title_semantics",
-      "source": "markdown_learning_artifact_semantics"
-    },
-    {
-      "module": "applied_theory_primitives",
-      "source": "non_achievedness_normalization"
-    },
-    {
-      "module": "boundary",
-      "source": "non_achievedness_normalization"
-    },
-    {
-      "module": "normalization_primitives",
-      "source": "non_achievedness_normalization"
-    },
-    {
-      "module": "normalization_runtime_dependencies",
-      "source": "non_achievedness_normalization"
-    },
-    {
-      "module": "applied_theory_primitives",
-      "source": "normalization_primitives"
-    },
-    {
-      "module": "semantic_text",
-      "source": "normalization_primitives"
-    },
-    {
-      "module": "fallback_not_generation",
-      "source": "normalization_runtime_dependencies"
-    },
-    {
-      "module": "prolog",
-      "source": "normalization_runtime_dependencies"
-    },
-    {
-      "module": "semantic_text",
-      "source": "normalization_runtime_dependencies"
-    },
-    {
-      "module": "structured_learning_yaml",
-      "source": "normalization_runtime_dependencies"
-    },
-    {
-      "module": "title_semantics",
-      "source": "normalization_runtime_dependencies"
-    },
-    {
-      "module": "non_achievedness_normalization",
-      "source": "normalize"
-    },
-    {
-      "module": "normalization_primitives",
-      "source": "normalize"
-    },
-    {
-      "module": "semantic_text",
-      "source": "normalize"
-    },
-    {
-      "module": "applied_theory_primitives",
-      "source": "not_elaboration_ranking"
-    },
-    {
-      "module": "artifact",
-      "source": "not_elaboration_ranking"
-    },
-    {
-      "module": "fallback_not_generation",
-      "source": "not_elaboration_ranking"
-    },
-    {
-      "module": "normalization_primitives",
-      "source": "not_elaboration_ranking"
-    },
-    {
-      "module": "retrieval_ranking",
-      "source": "not_elaboration_ranking"
-    },
-    {
-      "module": "semantic_text",
-      "source": "not_elaboration_ranking"
-    },
-    {
-      "module": "title_semantics",
-      "source": "not_elaboration_ranking"
-    },
-    {
-      "module": "learn",
-      "source": "prompt_directives"
-    },
-    {
-      "module": "id_generation",
-      "source": "publication"
-    },
-    {
-      "module": "semantic_text",
-      "source": "publication"
-    },
-    {
-      "module": "decision_review",
-      "source": "publication_projection"
-    },
-    {
-      "module": "decision_review_policy",
-      "source": "publication_projection"
-    },
-    {
-      "module": "decision_review_projection",
-      "source": "publication_projection"
-    },
-    {
-      "module": "learning_context",
-      "source": "publication_projection"
-    },
-    {
-      "module": "publication",
-      "source": "publication_projection"
-    },
-    {
-      "module": "publication_render",
-      "source": "publication_projection"
-    },
-    {
-      "module": "publication_validation",
-      "source": "publication_projection"
-    },
-    {
-      "module": "review_composition",
-      "source": "publication_projection"
-    },
-    {
-      "module": "semantic_text",
-      "source": "publication_projection"
-    },
-    {
-      "module": "publication",
-      "source": "publication_render"
-    },
-    {
-      "module": "runtime_temp",
-      "source": "publication_render"
-    },
-    {
-      "module": "semantic_text",
-      "source": "publication_render"
-    },
-    {
-      "module": "publication",
-      "source": "publication_validation"
-    },
-    {
-      "module": "semantic_text",
-      "source": "publication_validation"
-    },
-    {
-      "module": "semantic_text",
-      "source": "python_skill_brokerization"
-    },
-    {
-      "module": "capability_runtime",
-      "source": "python_skill_host"
-    },
-    {
-      "module": "host_abi",
-      "source": "python_skill_host"
-    },
-    {
-      "module": "host_brokers",
-      "source": "python_skill_host"
-    },
-    {
-      "module": "semantic_text",
-      "source": "python_skill_host"
-    },
-    {
-      "module": "skill_governance",
-      "source": "python_skill_host"
-    },
-    {
-      "module": "applied_theory_types",
-      "source": "replay_verifier"
-    },
-    {
-      "module": "constitutional_trace",
-      "source": "replay_verifier"
-    },
-    {
-      "module": "run_bundle_io",
-      "source": "replay_verifier"
-    },
-    {
-      "module": "runtime_controller_api",
-      "source": "replay_verifier"
-    },
-    {
-      "module": "runtime_temp",
-      "source": "replay_verifier"
-    },
-    {
-      "module": "skill_governance",
-      "source": "replay_verifier"
-    },
-    {
-      "module": "skill_schema_io",
-      "source": "replay_verifier"
-    },
-    {
-      "module": "store",
-      "source": "replay_verifier"
-    },
-    {
-      "module": "system_state",
-      "source": "replay_verifier"
-    },
-    {
-      "module": "learn",
-      "source": "retrieval_ranking"
-    },
-    {
-      "module": "prolog",
-      "source": "retrieval_ranking"
-    },
-    {
-      "module": "prompt_directives",
-      "source": "retrieval_ranking"
-    },
-    {
-      "module": "semantic_text",
-      "source": "retrieval_ranking"
-    },
-    {
-      "module": "title_semantics",
-      "source": "retrieval_ranking"
-    },
-    {
-      "module": "id_generation",
-      "source": "review_composition"
-    },
-    {
-      "module": "itemize",
-      "source": "review_composition"
-    },
-    {
-      "module": "learning_context",
-      "source": "review_composition"
-    },
-    {
-      "module": "semantic_text",
-      "source": "review_composition"
-    },
-    {
-      "module": "applied_theory_types",
-      "source": "run_bundle_io"
-    },
-    {
-      "module": "artifact",
-      "source": "run_bundle_io"
-    },
-    {
-      "module": "constitutional_trace",
-      "source": "run_bundle_io"
-    },
-    {
-      "module": "host_abi",
-      "source": "run_bundle_io"
-    },
-    {
-      "module": "skill_export_projection",
-      "source": "run_bundle_io"
-    },
-    {
-      "module": "skill_governance",
-      "source": "run_bundle_io"
-    },
-    {
-      "module": "skill_registry",
-      "source": "run_bundle_io"
-    },
-    {
-      "module": "skill_schema_io",
-      "source": "run_bundle_io"
-    },
-    {
-      "module": "system_state",
-      "source": "run_bundle_io"
-    },
-    {
-      "module": "applied_theory_types",
-      "source": "run_outcome_harvest_and_reporting"
-    },
-    {
-      "module": "normalization_primitives",
-      "source": "run_outcome_harvest_and_reporting"
-    },
-    {
-      "module": "controller_runtime",
-      "source": "runtime_controller_api"
-    },
-    {
-      "module": "learning_context",
-      "source": "runtime_controller_api"
-    },
-    {
-      "module": "learning_context_skill_projection",
-      "source": "runtime_controller_api"
-    },
-    {
-      "module": "semantic_text",
-      "source": "runtime_controller_api"
-    },
-    {
-      "module": "skill_schema_io",
-      "source": "runtime_controller_api"
-    },
-    {
-      "module": "system_state",
-      "source": "runtime_controller_api"
-    },
-    {
-      "module": "applied_theory_types",
-      "source": "runtime_governance_context"
-    },
-    {
-      "module": "capability_runtime",
-      "source": "runtime_governance_context"
-    },
-    {
-      "module": "governed_skill_access",
-      "source": "runtime_governance_context"
-    },
-    {
-      "module": "prompt_directives",
-      "source": "semantic_prompt_posture"
-    },
-    {
-      "module": "semantic_text",
-      "source": "semantic_prompt_posture"
-    },
-    {
-      "module": "title_semantics",
-      "source": "semantic_text"
-    },
-    {
-      "module": "applied_theory_types",
-      "source": "side"
-    },
-    {
-      "module": "artifact",
-      "source": "side"
-    },
-    {
-      "module": "boundary",
-      "source": "side"
-    },
-    {
-      "module": "side_runtime_dependencies",
-      "source": "side"
-    },
-    {
-      "module": "applied_theory_primitives",
-      "source": "side_runtime_dependencies"
-    },
-    {
-      "module": "applied_theory_types",
-      "source": "side_runtime_dependencies"
-    },
-    {
-      "module": "artifact",
-      "source": "side_runtime_dependencies"
-    },
-    {
-      "module": "fallback_not_generation",
-      "source": "side_runtime_dependencies"
-    },
-    {
-      "module": "id_generation",
-      "source": "side_runtime_dependencies"
-    },
-    {
-      "module": "non_achievedness_normalization",
-      "source": "side_runtime_dependencies"
-    },
-    {
-      "module": "normalization_primitives",
-      "source": "side_runtime_dependencies"
-    },
-    {
-      "module": "semantic_text",
-      "source": "side_runtime_dependencies"
-    },
-    {
-      "module": "store",
-      "source": "side_runtime_dependencies"
-    },
-    {
-      "module": "structured_learning_yaml",
-      "source": "side_runtime_dependencies"
-    },
-    {
-      "module": "applied_theory_types",
-      "source": "skill_boundary_normalization"
-    },
-    {
-      "module": "skill_governance",
-      "source": "skill_boundary_normalization"
-    },
-    {
-      "module": "normalization_primitives",
-      "source": "skill_compatibility_export"
-    },
-    {
-      "module": "semantic_text",
-      "source": "skill_compatibility_export"
-    },
-    {
-      "module": "skill_export_projection",
-      "source": "skill_compatibility_export"
-    },
-    {
-      "module": "semantic_text",
-      "source": "skill_compatibility_import"
-    },
-    {
-      "module": "applied_theory_types",
-      "source": "skill_compiler"
-    },
-    {
-      "module": "skill_ir",
-      "source": "skill_compiler"
-    },
-    {
-      "module": "skill_schema_io",
-      "source": "skill_compiler"
-    },
-    {
-      "module": "applied_theory_types",
-      "source": "skill_composition"
-    },
-    {
-      "module": "semantic_text",
-      "source": "skill_composition"
-    },
-    {
-      "module": "skill_ir",
-      "source": "skill_composition"
-    },
-    {
-      "module": "applied_theory_types",
-      "source": "skill_export_projection"
-    },
-    {
-      "module": "host_abi",
-      "source": "skill_export_projection"
-    },
-    {
-      "module": "side",
-      "source": "skill_export_projection"
-    },
-    {
-      "module": "skill_boundary_normalization",
-      "source": "skill_export_projection"
-    },
-    {
-      "module": "skill_compatibility_import",
-      "source": "skill_export_projection"
-    },
-    {
-      "module": "skill_governance",
-      "source": "skill_export_projection"
-    },
-    {
-      "module": "skill_ir",
-      "source": "skill_export_projection"
-    },
-    {
-      "module": "skill_schema_io",
-      "source": "skill_export_projection"
-    },
-    {
-      "module": "applied_theory_types",
-      "source": "skill_governance"
-    },
-    {
-      "module": "host_abi",
-      "source": "skill_governance"
-    },
-    {
-      "module": "python_skill_brokerization",
-      "source": "skill_governance"
-    },
-    {
-      "module": "semantic_text",
-      "source": "skill_governance"
-    },
-    {
-      "module": "virtual_mounts",
-      "source": "skill_governance"
-    },
-    {
-      "module": "applied_theory_types",
-      "source": "skill_ir"
-    },
-    {
-      "module": "semantic_text",
-      "source": "skill_ir"
-    },
-    {
-      "module": "skill_boundary_normalization",
-      "source": "skill_ir"
-    },
-    {
-      "module": "skill_compatibility_import",
-      "source": "skill_ir"
-    },
-    {
-      "module": "skill_governance",
-      "source": "skill_ir"
-    },
-    {
-      "module": "applied_theory_types",
-      "source": "skill_registry"
-    },
-    {
-      "module": "artifact",
-      "source": "skill_registry"
-    },
-    {
-      "module": "host_abi",
-      "source": "skill_registry"
-    },
-    {
-      "module": "skill_compiler",
-      "source": "skill_registry"
-    },
-    {
-      "module": "skill_export_projection",
-      "source": "skill_registry"
-    },
-    {
-      "module": "skill_ir",
-      "source": "skill_registry"
-    },
-    {
-      "module": "store",
-      "source": "skill_registry"
-    },
-    {
-      "module": "applied_theory_types",
-      "source": "skill_schema_io"
-    },
-    {
-      "module": "artifact",
-      "source": "skill_schema_io"
-    },
-    {
-      "module": "execution_frameworks",
-      "source": "skill_schema_io"
-    },
-    {
-      "module": "host_abi",
-      "source": "skill_schema_io"
-    },
-    {
-      "module": "normalization_primitives",
-      "source": "skill_schema_io"
-    },
-    {
-      "module": "semantic_text",
-      "source": "skill_schema_io"
-    },
-    {
-      "module": "side",
-      "source": "skill_schema_io"
-    },
-    {
-      "module": "skill_boundary_normalization",
-      "source": "skill_schema_io"
-    },
-    {
-      "module": "skill_compatibility_import",
-      "source": "skill_schema_io"
-    },
-    {
-      "module": "store",
-      "source": "skill_schema_io"
-    },
-    {
-      "module": "applied_theory_types",
-      "source": "store"
-    },
-    {
-      "module": "artifact",
-      "source": "store"
-    },
-    {
-      "module": "boundary",
-      "source": "store"
-    },
-    {
-      "module": "non_achievedness_normalization",
-      "source": "store"
-    },
-    {
-      "module": "normalization_primitives",
-      "source": "store"
-    },
-    {
-      "module": "semantic_text",
-      "source": "store"
-    },
-    {
-      "module": "structured_learning_yaml",
-      "source": "store"
-    },
-    {
-      "module": "semantic_text",
-      "source": "structured_learning_yaml"
-    },
-    {
-      "module": "title_semantics",
-      "source": "structured_learning_yaml"
-    },
-    {
-      "module": "applied_theory_types",
-      "source": "supplement"
-    },
-    {
-      "module": "applied_theory_types",
-      "source": "system_state"
-    },
-    {
-      "module": "artifact",
-      "source": "system_state"
-    },
-    {
-      "module": "boundary",
-      "source": "system_state"
-    },
-    {
-      "module": "id_generation",
-      "source": "system_state"
-    },
-    {
-      "module": "normalization_primitives",
-      "source": "system_state"
-    },
-    {
-      "module": "validation_sqlite",
-      "source": "tablet_safety_validation"
-    },
-    {
-      "module": "validation_sqlite",
-      "source": "title_depth_learning_validation"
-    },
-    {
-      "module": "prolog",
-      "source": "title_semantics"
-    },
-    {
-      "module": "semantic_text",
-      "source": "url_learning_capture"
-    },
-    {
-      "module": "runtime_temp",
-      "source": "virtual_mounts"
-    },
-    {
-      "module": "semantic_text",
-      "source": "virtual_mounts"
-    },
-    {
-      "module": "applied_theory_types",
-      "source": "wasm_skill_runtime"
-    },
-    {
-      "module": "host_abi",
-      "source": "wasm_skill_runtime"
-    },
-    {
-      "module": "host_brokers",
-      "source": "wasm_skill_runtime"
-    },
-    {
-      "module": "semantic_text",
-      "source": "wasm_skill_runtime"
     }
   ],
   "schema_version": 1,
@@ -4371,36 +3094,8 @@
   "unregistered_components": [],
   "wildcard_exports": [
     {
-      "module": "coordinated_transformation.core",
-      "path": "coordinated_transformation/__init__.py"
-    },
-    {
       "module": "realized_core_governance.data",
       "path": "data_governance.py"
-    },
-    {
-      "module": "dst.core",
-      "path": "dst/__init__.py"
-    },
-    {
-      "module": "dst.discovery",
-      "path": "dst/__init__.py"
-    },
-    {
-      "module": "dst.normalization",
-      "path": "dst/__init__.py"
-    },
-    {
-      "module": "dst.orchestration",
-      "path": "dst/__init__.py"
-    },
-    {
-      "module": "dst.projection",
-      "path": "dst/__init__.py"
-    },
-    {
-      "module": "dst.revision",
-      "path": "dst/__init__.py"
     },
     {
       "module": "workstation.app.cli.cli",

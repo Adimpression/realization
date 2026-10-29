@@ -3,10 +3,20 @@ import tempfile
 import unittest
 from dataclasses import replace
 from pathlib import Path
+from unittest.mock import patch
 
 from blend_session import BlendSession, blend_session_from_workstation_session
+from realized_core_engine.persistence import open_sqlite_artifact_repository
 from workstation.foundation.models import WorkstationAttachment, WorkstationSession
 from workstation.runtime.core.session import launch_workstation_session, persist_workstation_session
+
+
+class _TestArtifactRepositoryProvider:
+    def open_artifact_repository(self, *, sqlite_path, vector_mode=None):
+        return open_sqlite_artifact_repository(
+            sqlite_path,
+            vector_mode=vector_mode,
+        )
 
 
 class BlendSessionTests(unittest.TestCase):
@@ -82,11 +92,15 @@ class BlendSessionTests(unittest.TestCase):
             root = Path(tmpdir) / "ws-root"
             workspace = Path(tmpdir) / "workspace"
             workspace.mkdir(parents=True, exist_ok=True)
-            report = launch_workstation_session(
-                root_path=root,
-                workspace_path=workspace,
-                initial_task="Blend projection smoke test.",
-            )
+            with patch(
+                "workstation.foundation.host.artifact_repository._provider",
+                _TestArtifactRepositoryProvider(),
+            ):
+                report = launch_workstation_session(
+                    root_path=root,
+                    workspace_path=workspace,
+                    initial_task="Blend projection smoke test.",
+                )
             blend_context_path = root / "BLEND_CONTEXT.json"
             blend_session_path = root / "BLEND_SESSION.json"
             blend_workflows_path = root / "BLEND_WORKFLOWS.json"
@@ -102,7 +116,11 @@ class BlendSessionTests(unittest.TestCase):
 
             session = WorkstationSession.from_dict(report)
             updated = replace(session, allowed_capabilities=tuple([*session.allowed_capabilities, "ws.repo.search"]))
-            persist_workstation_session(root, updated)
+            with patch(
+                "workstation.foundation.host.artifact_repository._provider",
+                _TestArtifactRepositoryProvider(),
+            ):
+                persist_workstation_session(root, updated)
 
             refreshed_context = json.loads(blend_context_path.read_text())
             refreshed_session = json.loads(blend_session_path.read_text())
@@ -119,12 +137,16 @@ class BlendSessionTests(unittest.TestCase):
             workspace = tmp / "workspace"
             world = tmp / "world"
             workspace.mkdir(parents=True, exist_ok=True)
-            report = launch_workstation_session(
-                root_path=root,
-                workspace_path=workspace,
-                blend_world_path=world,
-                initial_task="Shared world projection test.",
-            )
+            with patch(
+                "workstation.foundation.host.artifact_repository._provider",
+                _TestArtifactRepositoryProvider(),
+            ):
+                report = launch_workstation_session(
+                    root_path=root,
+                    workspace_path=workspace,
+                    blend_world_path=world,
+                    initial_task="Shared world projection test.",
+                )
             blend_context_payload = json.loads((root / "BLEND_CONTEXT.json").read_text())
             blend_session_payload = json.loads((root / "BLEND_SESSION.json").read_text())
             self.assertTrue(str(blend_context_payload["world_id"]).startswith("bworld_"))

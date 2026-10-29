@@ -6,12 +6,16 @@ from collections.abc import Mapping
 from dataclasses import dataclass
 from typing import Any
 
-from capability_runtime import runtime_skill_declaration_for_artifact
+from realized_core_runtime.capabilities import runtime_skill_declaration_for_artifact
 from realized_skill_semantics.leaves import SkillLeaf
 from realized_skill_semantics.paths import parse_canonical_skill_path
-from semantic_text import collapse_ws
-from skill_composition import analyze_skill_composition_plan, propose_skill_leaf_bindings
-from skill_ir import canonical_skill_ir_from_artifact
+from realized_core_semantics.semantic_text import collapse_ws
+from realized_skill_application.composition import (
+    analyze_skill_composition_plan,
+    execute_skill_composition_plan as execute_workstation_skill_composition_plan,
+    propose_skill_leaf_bindings,
+)
+from realized_skill_application.ir import canonical_skill_ir_from_artifact
 from workstation.skills.core.direct_composition import (
     _skill_action_bonus,
     derive_workstation_invocation_payload_from_prompt,

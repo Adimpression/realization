@@ -2,12 +2,13 @@
 from __future__ import annotations
 
 from collections.abc import Sequence
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Protocol, runtime_checkable
 
 from ._normalization import collapse_ws
 from .models import HostInteractionAttachment, HostInteractionDescriptor
+from .realizers import HostRealizerProvider
 from .resolution import (
     normalize_host_interaction_attachment_relative_path,
     primary_workspace_attachment,
@@ -55,6 +56,11 @@ class HostInteractionContext(Protocol):
 @dataclass(frozen=True)
 class StaticHostInteractionContext:
     descriptor: HostInteractionDescriptor
+    realizer_provider: HostRealizerProvider | None = field(
+        default=None,
+        repr=False,
+        compare=False,
+    )
 
     def describe_host_interaction(self) -> HostInteractionDescriptor:
         """
@@ -77,7 +83,11 @@ class StaticHostInteractionContext:
         return self.descriptor
 
 
-def host_native_interaction_context(*, metadata: dict[str, Any] | None = None) -> StaticHostInteractionContext:
+def host_native_interaction_context(
+    *,
+    metadata: dict[str, Any] | None = None,
+    realizer_provider: HostRealizerProvider | None = None,
+) -> StaticHostInteractionContext:
     """
     High Level Purpose:
         In circumstances like governed runtime execution outside any workstation session, helps with materializing the default host-native backend descriptor.
@@ -101,7 +111,30 @@ def host_native_interaction_context(*, metadata: dict[str, Any] | None = None) -
             attachments=(),
             allowed_capabilities=(),
             metadata=dict(metadata or {}),
-        )
+        ),
+        realizer_provider=realizer_provider,
+    )
+
+
+def host_realizer_provider(
+    context: HostInteractionContext | None,
+) -> HostRealizerProvider | None:
+    """Return the callable provider explicitly attached to a host context."""
+
+    candidate = getattr(context, "realizer_provider", None)
+    return candidate if isinstance(candidate, HostRealizerProvider) else None
+
+
+def with_host_realizer_provider(
+    context: HostInteractionContext | None,
+    provider: HostRealizerProvider,
+) -> StaticHostInteractionContext:
+    """Attach an immutable provider without changing the host descriptor."""
+
+    active_context = context or host_native_interaction_context()
+    return StaticHostInteractionContext(
+        descriptor=active_context.describe_host_interaction(),
+        realizer_provider=provider,
     )
 
 

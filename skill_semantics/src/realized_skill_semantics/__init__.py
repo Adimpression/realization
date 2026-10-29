@@ -5,6 +5,7 @@ from types import ModuleType
 
 __all__ = [
     "composition",
+    "compatibility",
     "declaration",
     "execution",
     "invocation",

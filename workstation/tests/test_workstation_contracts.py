@@ -4,11 +4,17 @@ import importlib
 import pickle
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 import grpc
 
 import workstation.contracts as contracts
 from workstation.contracts.events import WorkstationEvent
+from workstation.contracts.runtime import (
+    ArtifactRepository,
+    ArtifactRepositoryProvider,
+    SkillExchangeProvider,
+)
 from workstation.contracts.shell import (
     WorkstationChatContext,
     WorkstationChatMessageView,
@@ -37,8 +43,12 @@ from workstation.subject.service.subject_workflow_client import (
 class WorkstationContractSurfaceTest(unittest.TestCase):
     def test_root_contract_surface_is_explicit_and_importable(self) -> None:
         expected = {
+            "ArtifactRepository",
+            "ArtifactRepositoryProvider",
             "ControllerRuntimeProvider",
             "GovernedTurnRuntimeProvider",
+            "HostAwareControllerRuntimeProvider",
+            "SkillExchangeProvider",
             "GovernedTurnLlmPolicy",
             "GovernedTurnRequest",
             "GovernedTurnResult",
@@ -83,6 +93,76 @@ class WorkstationContractSurfaceTest(unittest.TestCase):
         self.assertEqual(expected, set(contracts.__all__))
         for name in contracts.__all__:
             self.assertTrue(hasattr(contracts, name), name)
+
+    def test_artifact_repository_provider_is_an_explicit_composition_port(self) -> None:
+        from workstation.foundation.host import artifact_repository as binding
+
+        class Repository:
+            def describe(self):
+                return {}
+
+            def persist(self, state):
+                return {}
+
+            def persist_artifact(self, artifact, *, run_id="artifact_import"):
+                return {}
+
+            def persist_artifacts(self, artifacts, *, run_id="artifact_import"):
+                return {}
+
+            def load_all_artifacts(self):
+                return []
+
+            def load_relevant_artifacts(self, query_text, *, limit=8):
+                return []
+
+            def load_recent_artifacts(self, *, limit=512):
+                return []
+
+        repository = Repository()
+
+        class Provider:
+            def open_artifact_repository(self, *, sqlite_path, vector_mode=None):
+                return repository
+
+        provider = Provider()
+        self.assertIsInstance(repository, ArtifactRepository)
+        self.assertIsInstance(provider, ArtifactRepositoryProvider)
+        with patch.object(binding, "_provider", None):
+            with self.assertRaisesRegex(RuntimeError, "not configured"):
+                binding.artifact_repository_provider()
+            binding.register_artifact_repository_provider(provider)
+            self.assertIs(binding.artifact_repository_provider(), provider)
+
+    def test_skill_exchange_provider_is_an_explicit_composition_port(self) -> None:
+        from workstation.foundation.host import skill_exchange as binding
+
+        class Provider:
+            def artifact_from_skill_document(self, document):
+                return document
+
+            def load_import_payload_documents(self, source_file):
+                return []
+
+            def export_skill_bundle_text(self, artifacts):
+                return ""
+
+            def normalized_skill_bundle_filename_for_source(self, path):
+                return "skill.yaml"
+
+            def batch_skill_export_filename(self, artifact):
+                return "skill.yaml"
+
+            def materialize_learning_context_skills(self, root_path, context):
+                return ()
+
+        provider = Provider()
+        self.assertIsInstance(provider, SkillExchangeProvider)
+        with patch.object(binding, "_provider", None):
+            with self.assertRaisesRegex(RuntimeError, "not configured"):
+                binding.skill_exchange_provider()
+            binding.register_skill_exchange_provider(provider)
+            self.assertIs(binding.skill_exchange_provider(), provider)
 
     def test_legacy_event_and_subject_symbols_are_identical(self) -> None:
         legacy_event = importlib.import_module(
@@ -216,6 +296,10 @@ class WorkstationCompatibilityAdapterTest(unittest.TestCase):
             (
                 "workstation.foundation.host.client_sessions",
                 "workstation.subject.service.client_sessions",
+            ),
+            (
+                "workstation.foundation.host.learning_capture",
+                "workstation.subject.service.learning_capture",
             ),
             (
                 "workstation.foundation.host.llm_driver",

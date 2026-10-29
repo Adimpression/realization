@@ -6,19 +6,24 @@ build-backend = "setuptools.build_meta"
 name = "dst"
 version = "0.1.0"
 description = "Decision Support Tool layer"
+readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
-    "coordinated-transformation",
+    "coordinated-transformation==0.1.0",
+    "realized-core-semantics==0.1.0",
 ]
 
 [tool.uv.sources]
-coordinated-transformation = { path = "../coordinated_transformation", editable = true }
+coordinated-transformation = { workspace = true }
+realized-core-semantics = { workspace = true }
 
 [tool.setuptools]
-packages = ["dst"]
+include-package-data = false
+package-dir = {"" = "src"}
 
-[tool.setuptools.package-dir]
-"" = ".."
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["dst"]
 
 [tool.setuptools.package-data]
 dst = [

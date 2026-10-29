@@ -6,12 +6,16 @@ from types import ModuleType
 __all__ = [
     "admission",
     "approval",
+    "authority",
+    "current_use",
     "data",
     "declarations",
     "inventory",
     "lifecycle",
+    "persistence",
     "records",
     "safety",
+    "trace",
     "vocabulary",
 ]
 

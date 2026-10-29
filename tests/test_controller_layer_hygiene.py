@@ -8,7 +8,11 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 CONTROLLER_LAYER_MODULES = (
-    REPO_ROOT / "controller_runtime.py",
+    REPO_ROOT
+    / "core_engine"
+    / "src"
+    / "realized_core_engine"
+    / "controller_runtime.py",
 )
 FORBIDDEN_CONTROLLER_IMPORTS = {
     "approval_governance",
@@ -77,8 +81,9 @@ class ControllerLayerHygieneTests(unittest.TestCase):
                     [],
                     msg=f"{module_path.name} imports forbidden low-level governance modules: {', '.join(forbidden)}",
                 )
+                source = module_path.read_text(encoding="utf-8")
                 self.assertIn(
-                    "controller_governance_bridge",
-                    imported,
-                    msg=f"{module_path.name} should depend on controller_governance_bridge for controller/governance separation",
+                    "from realized_core_engine.controller_governance_bridge import",
+                    source,
+                    msg=f"{module_path.name} should depend on the canonical controller governance bridge",
                 )

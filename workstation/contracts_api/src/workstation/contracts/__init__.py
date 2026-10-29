@@ -2,12 +2,16 @@
 
 from workstation.contracts.events import WorkstationEvent
 from workstation.contracts.runtime import (
+    ArtifactRepository,
+    ArtifactRepositoryProvider,
     ControllerRuntimeProvider,
     GovernedTurnRuntimeProvider,
+    HostAwareControllerRuntimeProvider,
     GovernedTurnLlmPolicy,
     GovernedTurnRequest,
     GovernedTurnResult,
     GovernedTurnTreatment,
+    SkillExchangeProvider,
 )
 from workstation.contracts.shell import (
     WorkstationChatContext,
@@ -51,12 +55,16 @@ from workstation.contracts.subject import (
 )
 
 __all__ = [
+    "ArtifactRepository",
+    "ArtifactRepositoryProvider",
     "ControllerRuntimeProvider",
     "GovernedTurnRuntimeProvider",
+    "HostAwareControllerRuntimeProvider",
     "GovernedTurnLlmPolicy",
     "GovernedTurnRequest",
     "GovernedTurnResult",
     "GovernedTurnTreatment",
+    "SkillExchangeProvider",
     "SubjectImportStaging",
     "SubjectWorkflowActionOutcomeView",
     "SubjectWorkflowActionSpecView",

@@ -6,6 +6,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Literal
 
+from realized_host_interaction.context import HostInteractionContext
+
 
 type EngineLlmPolicy = Literal["off", "auto", "required"]
 type EngineFeatureToggle = Literal["on", "off"]
@@ -66,6 +68,11 @@ class EngineConfiguration:
     prolog_query_priming: EnginePrologQueryPriming | None = None
     supported_executors: tuple[EngineExecutor, ...] | None = None
     inlets: tuple[EngineInlet, ...] = ()
+    host_interaction_context: HostInteractionContext | None = field(
+        default=None,
+        repr=False,
+        compare=False,
+    )
 
 
 @dataclass(frozen=True, slots=True)

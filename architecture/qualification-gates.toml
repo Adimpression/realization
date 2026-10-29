@@ -16,6 +16,26 @@ run_by_default = true
 artifacts = []
 
 [[gates]]
+id = "compatibility_facade_inventory"
+category = "architecture"
+cwd = "."
+command = ["python", "scripts/check_compatibility_facades.py"]
+timeout_seconds = 120
+required = true
+run_by_default = true
+artifacts = ["architecture/compatibility-facades.json"]
+
+[[gates]]
+id = "workspace_distribution_isolation"
+category = "packaging"
+cwd = "."
+command = ["python", "scripts/verify_workspace_distributions.py"]
+timeout_seconds = 900
+required = true
+run_by_default = true
+artifacts = []
+
+[[gates]]
 id = "root_unit_tests"
 category = "unit"
 cwd = "."

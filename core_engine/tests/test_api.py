@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import os
 from pathlib import Path
+import sqlite3
 import sys
 import tempfile
 import unittest
@@ -24,16 +25,154 @@ from realized_core_engine import (
     InspectionRequest,
     InspectionTargetKind,
     InspectionView,
+    ArtifactRepository,
     StartRequest,
     inspect,
     inspect_resumption,
     resume,
     run,
     start_objective,
+    open_sqlite_artifact_repository,
+)
+from realized_core_engine.api import ResumptionEngine
+from realized_core_engine.controller_runtime import BSSCController
+from realized_core_engine.persistence import build_artifact_store
+from realized_core_engine.state import SystemState
+from realized_host_interaction import (
+    HostBrokerBinding,
+    HostRealizerDescriptor,
+    StaticHostRealizerProvider,
+    host_native_interaction_context,
 )
 
 
 class CoreEngineApiTests(unittest.TestCase):
+    def test_controller_obtains_its_default_repository_through_the_persistence_port(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_dir:
+            sqlite_path = Path(temporary_dir) / "controller.sqlite3"
+            with (
+                patch.dict(os.environ, {"STATE_SQLITE_PATH": str(sqlite_path)}, clear=False),
+                patch(
+                    "realized_core_engine.controller_runtime._build_artifact_store",
+                    wraps=build_artifact_store,
+                ) as repository_factory,
+            ):
+                controller = BSSCController(
+                    SystemState.bootstrap("Use the repository composition port."),
+                    llm_policy="off",
+                )
+
+            repository_factory.assert_called_once_with()
+            self.assertIsInstance(controller.artifact_store, ArtifactRepository)
+            self.assertEqual(controller.artifact_store.sqlite_path.resolve(), sqlite_path.resolve())
+
+    def test_public_sqlite_repository_factory_binds_explicit_path_and_vector_mode(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_dir:
+            sqlite_path = Path(temporary_dir) / "artifacts.sqlite3"
+            repository = open_sqlite_artifact_repository(
+                sqlite_path,
+                vector_mode="off",
+            )
+
+            self.assertIsInstance(repository, ArtifactRepository)
+            self.assertEqual(repository.sqlite_path, sqlite_path.resolve())
+            self.assertEqual(repository.vector_mode_override, "off")
+            self.assertEqual(repository.load_all_artifacts(), [])
+            self.assertTrue(sqlite_path.is_file())
+
+    def test_direct_engine_run_forwards_injected_host_context(self) -> None:
+        provider = StaticHostRealizerProvider(
+            brokers=(
+                HostBrokerBinding(
+                    descriptor=HostRealizerDescriptor(
+                        kind="broker",
+                        identity="fs.read_text",
+                    ),
+                    callback=lambda invocation, active: {"status": "ok"},
+                ),
+            ),
+        )
+        context = host_native_interaction_context(realizer_provider=provider)
+        observed: dict[str, object] = {}
+
+        class Controller:
+            def __init__(self, state) -> None:
+                self.state = state
+
+            def run(self, *, max_steps: int) -> None:
+                observed["max_steps"] = max_steps
+
+        def build_controller(*, state, llm_policy, host_interaction_context):
+            observed["llm_policy"] = llm_policy
+            observed["host_interaction_context"] = host_interaction_context
+            return Controller(state)
+
+        with tempfile.TemporaryDirectory() as temporary_dir:
+            configuration = EngineConfiguration(
+                sqlite_path=Path(temporary_dir) / "state.sqlite3",
+                max_steps=0,
+                llm_policy="off",
+                host_interaction_context=context,
+            )
+            with patch("realized_core_engine.api.build_controller", build_controller):
+                result = run("Forward the provider.", configuration=configuration)
+
+        self.assertIs(observed["host_interaction_context"], context)
+        self.assertEqual(observed["llm_policy"], "off")
+        self.assertEqual(observed["max_steps"], 0)
+        self.assertEqual(result.summary["root"]["semantic_unit"], "Forward the provider.")
+
+    def test_resumption_keeps_provider_out_of_persisted_execution_policy(self) -> None:
+        provider = StaticHostRealizerProvider()
+        context = host_native_interaction_context(realizer_provider=provider)
+        with tempfile.TemporaryDirectory() as temporary_dir:
+            sqlite_path = Path(temporary_dir) / "resumption.sqlite3"
+            engine = ResumptionEngine(
+                configuration=EngineConfiguration(
+                    sqlite_path=sqlite_path,
+                    max_steps=0,
+                    llm_policy="off",
+                    host_interaction_context=context,
+                )
+            )
+            request = StartRequest(
+                scope_id="scope-provider",
+                objective_id="objective-provider",
+                branch_id="main",
+                initial_inlet=ContinuationInlet(
+                    inlet_id="inlet-provider",
+                    kind="prompt",
+                    payload={"prompt": "Keep callables outside durable policy."},
+                    target="root",
+                    relationship=InletRelationship.CONTINUATION,
+                    source="human",
+                    provenance=("message-provider",),
+                    correlation={},
+                    authority_context={"principal": "tester"},
+                ),
+                governing_direction=GoverningDirection(
+                    objective="Keep callables outside durable policy.",
+                    scope="scope-provider",
+                ),
+            )
+
+            engine.start(request)
+
+            connection = sqlite3.connect(sqlite_path)
+            try:
+                persisted_policy = json.loads(
+                    connection.execute(
+                        "SELECT execution_policy_json FROM resumption_attempts LIMIT 1"
+                    ).fetchone()[0]
+                )
+            finally:
+                connection.close()
+
+        adapter = engine._service.reduction_controller
+        self.assertIs(adapter._host_interaction_context, context)
+        self.assertNotIn("host_interaction_context", persisted_policy)
+        json.dumps(persisted_policy, sort_keys=True)
+
     def test_typed_resumption_abi_round_trips_through_plain_sqlite(self) -> None:
         with tempfile.TemporaryDirectory() as temporary_dir:
             sqlite_path = Path(temporary_dir) / "resumption.sqlite3"

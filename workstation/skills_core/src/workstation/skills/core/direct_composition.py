@@ -5,7 +5,7 @@ import re
 from collections.abc import Mapping
 from typing import Any
 
-from semantic_text import collapse_ws
+from realized_core_semantics.semantic_text import collapse_ws
 from workstation.foundation.models import WorkstationSession
 from workstation.contracts.shell_prompt_routing import match_workstation_shell_utility_prompt
 from workstation.skills.core.skill_management import workstation_prompt_skill_shortlist_payload

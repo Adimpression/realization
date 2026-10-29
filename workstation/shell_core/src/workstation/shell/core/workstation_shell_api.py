@@ -7,7 +7,7 @@ from pathlib import Path
 from queue import Empty, Queue
 from typing import Any, Callable, Iterator
 
-from semantic_text import collapse_ws
+from realized_core_semantics.semantic_text import collapse_ws
 from workstation.contracts.shell import (
     WorkstationChatContext,
     WorkstationChatMessageView,

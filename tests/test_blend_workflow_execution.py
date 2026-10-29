@@ -1,3 +1,4 @@
+from dataclasses import replace
 import tempfile
 import unittest
 from pathlib import Path
@@ -370,6 +371,161 @@ class BlendWorkflowExecutionTests(unittest.TestCase):
             self.assertEqual(seen_invocations[0].context.granted_capabilities, ("ws.skill.invoke",))
             self.assertEqual(result["steps"][0]["operator"]["display_name"], "Emit Text")
             self.assertEqual(result["steps"][0]["context_applicability"]["status"], "applicable")
+
+    def test_observer_rejection_cannot_change_authoritative_result_or_persistence(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir) / "blend-root"
+            plan = blend_workflow_plan_from_skill_compose_arguments(
+                {
+                    "steps": [
+                        {
+                            "step_id": "emit",
+                            "skill_title": "Emit Text",
+                            "bindings": [
+                                {
+                                    "target_region": "a",
+                                    "target_path": "/a/text",
+                                    "source_root_name": "text",
+                                    "source_root_region": "a",
+                                }
+                            ],
+                        }
+                    ],
+                    "root_inputs": {"text": "observer-independent"},
+                    "final_output_step": "emit",
+                }
+            )
+            resolved_steps, _ = resolve_blend_skill_workflow_steps(
+                plan,
+                context=self._context(),
+                resolve_operator=lambda step, _context: (
+                    _canonical_skill(
+                        step.operator_name,
+                        input_path="/a/text",
+                        output_path="/d/text",
+                    ),
+                    {"source_kind": "test"},
+                    self._operator(step.operator_name),
+                ),
+            )
+
+            def reject_observation(_event) -> None:
+                raise RuntimeError("observation consumer unavailable")
+
+            result = execute_blend_skill_workflow(
+                root_path=root,
+                session_id="ws_demo",
+                context=self._context(),
+                workflow_plan=plan,
+                resolved_steps=resolved_steps,
+                capability_name="ws.workflow.run",
+                target_name="skills",
+                invoke_step=lambda _resolved_step, invocation: {
+                    "status": "ok",
+                    "answer": str(invocation.inputs["text"]),
+                    "result_payload": {"text": str(invocation.inputs["text"])},
+                    "parsed_output": {"text": str(invocation.inputs["text"])},
+                },
+                execution_observer=reject_observation,
+            )
+
+            self.assertEqual("ok", result["status"])
+            self.assertEqual(
+                {"text": "observer-independent"},
+                result["final_output"],
+            )
+            persisted = load_blend_workflow_run(root, result["workflow_run_id"])
+            self.assertEqual("ok", persisted.status)
+            self.assertEqual(result["final_output"], persisted.final_output)
+
+    def test_execution_accepts_an_injected_workflow_repository(self) -> None:
+        class MemoryRepository:
+            def __init__(self) -> None:
+                self.persisted = []
+
+            def persist(self, *, plan, run, session_id=""):
+                effective_plan = replace(
+                    plan,
+                    workflow_id=plan.workflow_id or "workflow-memory",
+                    session_id=plan.session_id or session_id,
+                    created_at=plan.created_at or "2026-10-27T00:00:00+00:00",
+                )
+                effective_run = replace(
+                    run,
+                    workflow_run_id=run.workflow_run_id or "run-memory",
+                    workflow_id=run.workflow_id or effective_plan.workflow_id,
+                    plan=effective_plan,
+                    session_id=run.session_id or effective_plan.session_id,
+                    started_at=run.started_at or "2026-10-27T00:00:00+00:00",
+                    finished_at=run.finished_at or "2026-10-27T00:00:01+00:00",
+                )
+                self.persisted.append((effective_plan, effective_run))
+                return (
+                    effective_plan,
+                    effective_run,
+                    {"repository": "memory"},
+                )
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir) / "unused-json-root"
+            plan = blend_workflow_plan_from_skill_compose_arguments(
+                {
+                    "steps": [
+                        {
+                            "step_id": "emit",
+                            "skill_title": "Emit Text",
+                            "bindings": [
+                                {
+                                    "target_region": "a",
+                                    "target_path": "/a/text",
+                                    "source_root_name": "text",
+                                    "source_root_region": "a",
+                                }
+                            ],
+                        }
+                    ],
+                    "root_inputs": {"text": "repository-independent"},
+                    "final_output_step": "emit",
+                }
+            )
+            resolved_steps, _ = resolve_blend_skill_workflow_steps(
+                plan,
+                context=self._context(),
+                resolve_operator=lambda step, _context: (
+                    _canonical_skill(
+                        step.operator_name,
+                        input_path="/a/text",
+                        output_path="/d/text",
+                    ),
+                    {"source_kind": "test"},
+                    self._operator(step.operator_name),
+                ),
+            )
+            repository = MemoryRepository()
+
+            result = execute_blend_skill_workflow(
+                root_path=root,
+                session_id="session-memory",
+                context=self._context(),
+                workflow_plan=plan,
+                resolved_steps=resolved_steps,
+                capability_name="ws.workflow.run",
+                target_name="skills",
+                invoke_step=lambda _resolved_step, invocation: {
+                    "status": "ok",
+                    "answer": str(invocation.inputs["text"]),
+                    "result_payload": {"text": str(invocation.inputs["text"])},
+                    "parsed_output": {"text": str(invocation.inputs["text"])},
+                },
+                workflow_repository=repository,
+            )
+
+            self.assertEqual("workflow-memory", result["workflow_id"])
+            self.assertEqual("run-memory", result["workflow_run_id"])
+            self.assertEqual({"repository": "memory"}, result["workflow_store"])
+            self.assertEqual(1, len(repository.persisted))
+            self.assertEqual(result["final_output"], repository.persisted[0][1].final_output)
+            self.assertFalse(root.exists())
 
     def test_execute_blend_skill_workflow_persists_approval_required_halt(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:

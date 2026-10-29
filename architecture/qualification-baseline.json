@@ -11,17 +11,79 @@
       "environment_overrides": {},
       "id": "architecture_ratchet",
       "performance": {
-        "median_seconds": 1.42,
-        "p95_seconds": 1.42,
+        "median_seconds": 1.455,
+        "p95_seconds": 1.455,
         "runs": 1
       },
       "required": true,
       "runs": [
         {
-          "duration_seconds": 1.42,
+          "duration_seconds": 1.455,
           "failure": "",
           "log_path": "reports/architecture_qualification/logs/architecture_ratchet-run-1.log",
-          "output_sha256": "80094eff1be9e107a3166edcf3e27d597b9f591cff108316cfade9e4525d2979",
+          "output_sha256": "ae6bb85d204e3a9725a42a77def02c5569df127e71fcc6d0f85c0d37dc6d4454",
+          "returncode": 0,
+          "status": "passed"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "artifacts": [
+        {
+          "path": "architecture/compatibility-facades.json",
+          "sha256": "ee61af5de1d09546b73fd86f1bebb150fedd6878bbbed6445e3be2366f74af1c",
+          "size_bytes": 123232
+        }
+      ],
+      "category": "architecture",
+      "command": [
+        "python",
+        "scripts/check_compatibility_facades.py"
+      ],
+      "cwd": ".",
+      "environment_overrides": {},
+      "id": "compatibility_facade_inventory",
+      "performance": {
+        "median_seconds": 6.833,
+        "p95_seconds": 6.833,
+        "runs": 1
+      },
+      "required": true,
+      "runs": [
+        {
+          "duration_seconds": 6.833,
+          "failure": "",
+          "log_path": "reports/architecture_qualification/logs/compatibility_facade_inventory-run-1.log",
+          "output_sha256": "3bf7c7776968da9335afc017ab4c30cca1dc3d5b21275f08bdf2215c8b6e6624",
+          "returncode": 0,
+          "status": "passed"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "artifacts": [],
+      "category": "packaging",
+      "command": [
+        "python",
+        "scripts/verify_workspace_distributions.py"
+      ],
+      "cwd": ".",
+      "environment_overrides": {},
+      "id": "workspace_distribution_isolation",
+      "performance": {
+        "median_seconds": 22.682,
+        "p95_seconds": 22.682,
+        "runs": 1
+      },
+      "required": true,
+      "runs": [
+        {
+          "duration_seconds": 22.682,
+          "failure": "",
+          "log_path": "reports/architecture_qualification/logs/workspace_distribution_isolation-run-1.log",
+          "output_sha256": "533f3297cf8e386b1d4b1dd8b786ec2a58e32b6f5127c386d184d9af2224ecbc",
           "returncode": 0,
           "status": "passed"
         }
@@ -46,17 +108,17 @@
       },
       "id": "root_unit_tests",
       "performance": {
-        "median_seconds": 690.741,
-        "p95_seconds": 690.741,
+        "median_seconds": 546.734,
+        "p95_seconds": 546.734,
         "runs": 1
       },
       "required": true,
       "runs": [
         {
-          "duration_seconds": 690.741,
+          "duration_seconds": 546.734,
           "failure": "",
           "log_path": "reports/architecture_qualification/logs/root_unit_tests-run-1.log",
-          "output_sha256": "a5708235d7e3a6cd57737d6f7bc394b8d21daf8454b5288cea5552074715c157",
+          "output_sha256": "8b84cca88054885a0a2cbdc261b6b9d2052f6303e741026d3c9c9f0181922891",
           "returncode": 0,
           "status": "passed"
         }
@@ -65,7 +127,7 @@
       "unittest": {
         "errors": [],
         "failures": [],
-        "tests_run": 779
+        "tests_run": 873
       }
     },
     {
@@ -90,17 +152,17 @@
       },
       "id": "workstation_tests",
       "performance": {
-        "median_seconds": 1158.926,
-        "p95_seconds": 1158.926,
+        "median_seconds": 888.496,
+        "p95_seconds": 888.496,
         "runs": 1
       },
       "required": true,
       "runs": [
         {
-          "duration_seconds": 1158.926,
+          "duration_seconds": 888.496,
           "failure": "",
           "log_path": "reports/architecture_qualification/logs/workstation_tests-run-1.log",
-          "output_sha256": "25da55ab25896125138f55f42e0d03827785cfb5c45bf536034fbc648adc317b",
+          "output_sha256": "235e14339065e9c47b1f1a61c704b41a83996069b87e1d1b89748ea59a48b387",
           "returncode": 0,
           "status": "passed"
         }
@@ -109,7 +171,7 @@
       "unittest": {
         "errors": [],
         "failures": [],
-        "tests_run": 603
+        "tests_run": 633
       }
     },
     {
@@ -127,17 +189,17 @@
       },
       "id": "trial_skill_routing_bdd",
       "performance": {
-        "median_seconds": 17.859,
-        "p95_seconds": 17.859,
+        "median_seconds": 17.838,
+        "p95_seconds": 17.838,
         "runs": 1
       },
       "required": true,
       "runs": [
         {
-          "duration_seconds": 17.859,
+          "duration_seconds": 17.838,
           "failure": "",
           "log_path": "reports/architecture_qualification/logs/trial_skill_routing_bdd-run-1.log",
-          "output_sha256": "e8949e6d31700682612d4639a03e36be6164c1c30c42d705387d20b0b2b28a5c",
+          "output_sha256": "7a9f2acc806aed5b8ff18de597b1ba5d86fa98d65eb06076517d3163c1c29785",
           "returncode": 0,
           "status": "passed"
         }
@@ -164,17 +226,17 @@
       },
       "id": "publication_bdd",
       "performance": {
-        "median_seconds": 76.975,
-        "p95_seconds": 76.975,
+        "median_seconds": 69.671,
+        "p95_seconds": 69.671,
         "runs": 1
       },
       "required": true,
       "runs": [
         {
-          "duration_seconds": 76.975,
+          "duration_seconds": 69.671,
           "failure": "",
           "log_path": "reports/architecture_qualification/logs/publication_bdd-run-1.log",
-          "output_sha256": "674740bf22a3fc3a45bb3f56115d11b903aad3ec43a50d556026b1cb1909844a",
+          "output_sha256": "b93b411f5b548a5fb2fc179cef08e83dba24cc12df4410d528026807808d9d4b",
           "returncode": 0,
           "status": "passed"
         }
@@ -215,14 +277,14 @@
       },
       "id": "publication_reference",
       "performance": {
-        "median_seconds": 2.587,
-        "p95_seconds": 2.587,
+        "median_seconds": 3.023,
+        "p95_seconds": 3.023,
         "runs": 1
       },
       "required": true,
       "runs": [
         {
-          "duration_seconds": 2.587,
+          "duration_seconds": 3.023,
           "failure": "",
           "log_path": "reports/architecture_qualification/logs/publication_reference-run-1.log",
           "output_sha256": "6fb6fc65e2ede1961ef9667a423933188cd7af3e9a14ff0978af3235e460d5ad",
@@ -247,17 +309,17 @@
       },
       "id": "incremental_publication_bdd",
       "performance": {
-        "median_seconds": 10.255,
-        "p95_seconds": 10.255,
+        "median_seconds": 10.572,
+        "p95_seconds": 10.572,
         "runs": 1
       },
       "required": true,
       "runs": [
         {
-          "duration_seconds": 10.255,
+          "duration_seconds": 10.572,
           "failure": "",
           "log_path": "reports/architecture_qualification/logs/incremental_publication_bdd-run-1.log",
-          "output_sha256": "7205474876053d0880ce80c10abc6886b553bd7a4dcb77addd0f7a3dd6aa76b9",
+          "output_sha256": "f310eb5884317d770686e7924db5b84aaf99f3b837bdaded2628f83b14e9f1ab",
           "returncode": 0,
           "status": "passed"
         }
@@ -280,17 +342,17 @@
       "environment_overrides": {},
       "id": "flutter_analyze",
       "performance": {
-        "median_seconds": 3.031,
-        "p95_seconds": 3.031,
+        "median_seconds": 7.496,
+        "p95_seconds": 7.496,
         "runs": 1
       },
       "required": true,
       "runs": [
         {
-          "duration_seconds": 3.031,
+          "duration_seconds": 7.496,
           "failure": "",
           "log_path": "reports/architecture_qualification/logs/flutter_analyze-run-1.log",
-          "output_sha256": "ddc13efcba52c30f3529082129b6dff2d4aa494f0999fda397727efff9113a09",
+          "output_sha256": "4c1761272ae287ffea8ff123dff684c4cba94f02d922651c26f04a0f178592a2",
           "returncode": 0,
           "status": "passed"
         }
@@ -343,17 +405,17 @@
       "environment_overrides": {},
       "id": "flutter_widget_tests",
       "performance": {
-        "median_seconds": 6.401,
-        "p95_seconds": 6.401,
+        "median_seconds": 6.213,
+        "p95_seconds": 6.213,
         "runs": 1
       },
       "required": true,
       "runs": [
         {
-          "duration_seconds": 6.401,
+          "duration_seconds": 6.213,
           "failure": "",
           "log_path": "reports/architecture_qualification/logs/flutter_widget_tests-run-1.log",
-          "output_sha256": "052d14deac5921575b6ad6216bb7889d5f888cbe9890cea4b175536d79937f28",
+          "output_sha256": "0bf560854c6120ef1dccbffb28bb680326ae156844bca10f979ba8f6911c72b6",
           "returncode": 0,
           "status": "passed"
         }
@@ -619,6 +681,6 @@
     "blocked": 0,
     "failed": 0,
     "not_run": 0,
-    "passed": 15
+    "passed": 17
   }
 }

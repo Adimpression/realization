@@ -1,14 +1,14 @@
 [project]
 name = "realized-core-governance"
 version = "0.1.0"
-description = "Dependency-light governance vocabulary, lifecycle, approval, safety, stored-record, and data-access rules for Realized."
+description = "Dependency-light governance vocabulary, admission, current-use, authority, lifecycle, approval, safety, evidence receipts, effect replay signatures, persistence ports, stored-record, and data-access rules for Realized."
 readme = "README.md"
 requires-python = ">=3.14"
 authors = [{ name = "Ravindranath Akila" }]
 maintainers = [{ name = "Adimpression", email = "talktome@adimpression.mobi" }]
 license = "Apache-2.0"
 license-files = ["LICENSE"]
-keywords = ["governance", "lifecycle", "approval", "safety", "data", "records", "policy", "authority"]
+keywords = ["governance", "admission", "current-use", "lifecycle", "approval", "safety", "trace", "receipts", "replay", "persistence", "data", "records", "policy", "authority"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Science/Research",

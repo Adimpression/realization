@@ -17,7 +17,12 @@ classifiers = [
     "Programming Language :: Python :: 3.14",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
 ]
-dependencies = []
+dependencies = [
+    "realized-core-governance==0.1.0",
+    "realized-core-semantics==0.1.0",
+    "realized-host-interaction==0.1.0",
+    "realized-skill-semantics==0.1.0",
+]
 
 [project.urls]
 Homepage = "https://github.com/Adimpression/realization"
@@ -28,8 +33,15 @@ Issues = "https://github.com/Adimpression/realization/issues"
 requires = ["setuptools>=77.0.3", "wheel"]
 build-backend = "setuptools.build_meta"
 
+[tool.uv.sources]
+realized-core-governance = { workspace = true }
+realized-core-semantics = { workspace = true }
+realized-host-interaction = { workspace = true }
+realized-skill-semantics = { workspace = true }
+
 [tool.setuptools]
 package-dir = {"" = "src"}
+py-modules = ["python_skill_host"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

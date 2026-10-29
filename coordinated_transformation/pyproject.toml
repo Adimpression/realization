@@ -6,15 +6,13 @@ build-backend = "setuptools.build_meta"
 name = "coordinated-transformation"
 version = "0.1.0"
 description = "Coordinated transformation in federated systems theory"
+readme = "README.md"
 requires-python = ">=3.14"
+dependencies = []
 
 [tool.setuptools]
-packages = ["coordinated_transformation"]
+package-dir = {"" = "src"}
 
-[tool.setuptools.package-dir]
-"" = ".."
-
-[tool.setuptools.package-data]
-coordinated_transformation = [
-    "*.md",
-]
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["coordinated_transformation"]

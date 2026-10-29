@@ -266,9 +266,14 @@ Why:
 
 ### Fetch And Acquisition Layer
 
-Likely new module:
+Canonical module:
 
-- `url_learning_capture.py`
+- `workstation/subject_service/src/workstation/subject/service/url_learning_capture.py`
+
+Compatibility path:
+
+- `url_learning_capture.py` remains an exact module alias while historical
+  consumers are qualified and migrated.
 
 Suggested role:
 

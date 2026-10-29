@@ -444,10 +444,10 @@ class WorkstationShellApiTests(unittest.TestCase):
                 "workstation.ui.textual.chat_ui.desktop_select_markdown_files",
                 return_value=(markdown_path,),
             ), mock.patch(
-                "workstation.subject.core.subject_workflow.workstation_stage_markdown_source_action",
+                "workstation.runtime.core.subject_host_actions.workstation_stage_markdown_source_action",
                 side_effect=_fake_result,
             ) as stage_markdown_mock, mock.patch(
-                "workstation.subject.core.subject_workflow.workstation_import_staged_source_action",
+                "workstation.runtime.core.subject_host_actions.workstation_import_staged_source_action",
                 side_effect=_fake_import_result,
             ) as import_markdown_mock:
                 async with app.run_test(size=(180, 60)) as pilot:
@@ -523,7 +523,7 @@ class WorkstationShellApiTests(unittest.TestCase):
                 "workstation.ui.textual.chat_ui.desktop_prompt_url",
                 return_value=source_url,
             ), mock.patch(
-                "workstation.subject.core.subject_workflow.workstation_learn_url_action",
+                "workstation.runtime.core.subject_host_actions.workstation_learn_url_action",
                 side_effect=_fake_result,
             ) as learn_url_mock:
                 async with app.run_test(size=(180, 60)) as pilot:

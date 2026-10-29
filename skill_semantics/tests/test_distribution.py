@@ -51,6 +51,7 @@ class SkillSemanticsDistributionTests(unittest.TestCase):
     def test_typed_package_files_are_present(self) -> None:
         self.assertTrue((PACKAGE_ROOT / "__init__.py").is_file())
         self.assertTrue((PACKAGE_ROOT / "composition.py").is_file())
+        self.assertTrue((PACKAGE_ROOT / "compatibility.py").is_file())
         self.assertTrue((PACKAGE_ROOT / "declaration.py").is_file())
         self.assertTrue((PACKAGE_ROOT / "execution.py").is_file())
         self.assertTrue((PACKAGE_ROOT / "invocation.py").is_file())

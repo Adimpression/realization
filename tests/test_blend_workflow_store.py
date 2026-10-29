@@ -1,12 +1,20 @@
+import json
 import tempfile
 import unittest
 from pathlib import Path
 
+from realized_blend.ports import BlendWorkflowRepository
+from realized_blend.workflows import (
+    BlendWorkflowPlan,
+    BlendWorkflowRun,
+    BlendWorkflowStep,
+)
 from blend_workflow import (
     blend_workflow_plan_from_skill_compose_arguments,
     blend_workflow_run_from_skill_compose_result,
 )
 from blend_workflow_store import (
+    JsonBlendWorkflowRepository,
     ensure_blend_workflow_store,
     list_blend_workflow_runs_for_plan,
     list_blend_workflow_summaries,
@@ -16,6 +24,54 @@ from blend_workflow_store import (
 
 
 class BlendWorkflowStoreTests(unittest.TestCase):
+    @staticmethod
+    def _tree(root: Path) -> dict[str, bytes]:
+        return {
+            path.relative_to(root).as_posix(): path.read_bytes()
+            for path in root.rglob("*")
+            if path.is_file()
+        }
+
+    @staticmethod
+    def _fixed_objects() -> tuple[BlendWorkflowPlan, BlendWorkflowRun]:
+        plan = BlendWorkflowPlan(
+            workflow_id="workflow-fixed",
+            workflow_kind="workflow",
+            steps=(
+                BlendWorkflowStep(
+                    step_id="emit",
+                    operator_kind="skill",
+                    operator_name="Emit Text",
+                ),
+            ),
+            session_id="session-fixed",
+            created_at="2026-10-27T00:00:00+00:00",
+            root_inputs={"text": "stable"},
+            final_output_step="emit",
+        )
+        run = BlendWorkflowRun(
+            workflow_run_id="run-fixed",
+            workflow_id=plan.workflow_id,
+            plan=plan,
+            status="ok",
+            final_output_step="emit",
+            final_output={"text": "stable"},
+            final_outputs_by_step={"emit": {"text": "stable"}},
+            steps=[{"step_id": "emit", "status": "ok"}],
+            plan_authorities=["invoke"],
+            session_id=plan.session_id,
+            started_at="2026-10-27T00:00:00+00:00",
+            finished_at="2026-10-27T00:00:01+00:00",
+        )
+        return plan, run
+
+    def test_json_repository_satisfies_neutral_port(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            self.assertIsInstance(
+                JsonBlendWorkflowRepository(Path(tmpdir)),
+                BlendWorkflowRepository,
+            )
+
     def test_ensure_blend_workflow_store_bootstraps_empty_index(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
             root = Path(tmpdir) / "blend-root"
@@ -101,6 +157,75 @@ class BlendWorkflowStoreTests(unittest.TestCase):
             index_payload = load_blend_workflow_index(root)
             self.assertEqual(index_payload["latest_plan_id"], persisted_plan.workflow_id)
             self.assertEqual(index_payload["latest_run_id"], second_run.workflow_run_id)
+
+    def test_compatibility_functions_and_repository_preserve_bytes_and_queries(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir) / "blend-root"
+            plan, run = self._fixed_objects()
+            wrapper_result = persist_blend_workflow_objects(
+                root_path=root,
+                plan=plan,
+                run=run,
+                session_id=plan.session_id,
+            )
+            wrapper_tree = self._tree(root)
+            wrapper_index = load_blend_workflow_index(root)
+            wrapper_summaries = list_blend_workflow_summaries(root)
+            wrapper_related = list_blend_workflow_runs_for_plan(root, plan.workflow_id)
+
+            repository = JsonBlendWorkflowRepository(root)
+            repository_result = repository.persist(
+                plan=plan,
+                run=run,
+                session_id=plan.session_id,
+            )
+
+            self.assertEqual(wrapper_result, repository_result)
+            self.assertEqual(wrapper_tree, self._tree(root))
+            self.assertEqual(wrapper_index, repository.load_index())
+            self.assertEqual(wrapper_summaries, repository.list_summaries())
+            self.assertEqual(
+                wrapper_related,
+                repository.list_runs_for_plan(plan.workflow_id),
+            )
+            self.assertEqual(
+                wrapper_result[0],
+                repository.load_plan(plan.workflow_id),
+            )
+            self.assertEqual(
+                wrapper_result[1],
+                repository.load_run(run.workflow_run_id),
+            )
+
+    def test_missing_and_malformed_files_preserve_historical_errors(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir) / "blend-root"
+            repository = JsonBlendWorkflowRepository(root)
+
+            with self.assertRaises(FileNotFoundError):
+                repository.load_plan("missing-plan")
+            with self.assertRaises(FileNotFoundError):
+                repository.load_run("missing-run")
+
+            paths = repository.ensure()
+            paths["index"].write_text("{not-json", encoding="utf-8")
+            with self.assertRaises(json.JSONDecodeError):
+                repository.load_index()
+            with self.assertRaises(json.JSONDecodeError):
+                repository.list_summaries()
+
+            paths["plans"].joinpath("bad-plan.json").write_text(
+                "{not-json",
+                encoding="utf-8",
+            )
+            paths["runs"].joinpath("bad-run.json").write_text(
+                "{not-json",
+                encoding="utf-8",
+            )
+            with self.assertRaises(json.JSONDecodeError):
+                repository.load_plan("bad-plan")
+            with self.assertRaises(json.JSONDecodeError):
+                repository.load_run("bad-run")
 
 
 if __name__ == "__main__":

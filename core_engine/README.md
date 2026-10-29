@@ -2,14 +2,17 @@
 
 `realized-core-engine` is the independently installable distribution of the
 canonical governed realization engine, its state model, host mediation, and
-plain SQLite persistence implementation. It contains no workstation, UI,
-gRPC, publication workflow, or executable entry point.
+plain SQLite persistence implementation. It also owns constitutional state,
+composition-chain, decision-flow, transcript, and replay-comparison projection
+over its concrete controller state, together with deterministic
+encounter-to-artifact semantics used by optional external Markdown ingestion.
+It contains no workstation, UI, gRPC, publication workflow, document-fetching
+adapter, or executable entry point.
 
-The engine remains single-source in the repository root during the strangler
-migration. `module_manifest.txt` declares the exact transitive root-module
-closure assembled into this wheel; it is not a second source tree. Tests
-recompute the closure and reject undeclared dependencies or outer application
-surfaces.
+The engine is source-native under `src/realized_core_engine`. Repository-root
+modules that retain historical import paths are compatibility facades and are
+not assembled into this distribution. Distribution tests reject undeclared
+dependencies, root-level Python modules, and outer application surfaces.
 
 The package depends on `realized-core-runtime` for the dependency-inverted
 run/resume lifecycle and on `realized-host-interaction` for the shared,
@@ -18,19 +21,24 @@ command-line composition package that consumes this engine distribution.
 
 ## Boundary Of This Distribution
 
-This first strangler slice packages execution, state, built-in host mediation,
-and plain SQLite behind the public `run`, `resume`, and `inspect` ABI. It is not
-the complete ability-delivery boundary:
+This strangler slice packages execution, state, host mediation, and plain
+SQLite behind the public `run`, `resume`, and `inspect` ABI. It is not the
+complete ability-delivery boundary:
 
 - governed skill installation remains on the repository entry/exchange surface
 - subject scope is not an argument of this public ABI
-- host realizers are the packaged executor and broker set, not
-  caller-registered providers
-- `supported_executors` permits those packaged frameworks; it does not install
-  an ability, register an executor, or prove that an external binary exists
+- `EngineConfiguration.host_interaction_context` may carry an immutable,
+  caller-supplied `HostRealizerProvider`; the default composition supplies the
+  packaged executor and broker set
+- each provider advertises exact executor and broker identities and exposes
+  prerequisite inspection before invocation
+- `supported_executors` permits frameworks for controller planning; it does not
+  install an ability, supply a realizer, admit an ability, or issue authority
 
-An ability document, its admission, its subject visibility, and its host
-realizer remain separate architectural facts.
+An ability document, its admission, its subject visibility, its invocation
+grant, and its host realizer remain separate architectural facts. Runtime
+dispatch requires an exact declaration-to-realizer identity match; semantic
+similarity cannot select an implementation.
 
 ## Python API
 
@@ -66,9 +74,7 @@ turn-to-run routing remain outside this engine package.
 uv build core_engine --out-dir dist/core-engine
 ```
 
-The source distribution embeds the exact canonical module closure declared by
-`module_manifest.txt`, so a wheel can be rebuilt from the archive without the
-repository beside it. In a repository checkout, those modules remain
-single-source at the root. Assembly clears generated Python build output before
-copying the manifest closure so removed modules cannot leak from a stale build
-directory.
+The source distribution contains the package-owned implementation and can
+rebuild the wheel without the repository beside it. The build uses ordinary
+setuptools `src` discovery; no custom copy or manifest assembly step is
+required.

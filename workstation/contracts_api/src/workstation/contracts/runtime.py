@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
+from collections.abc import Iterable
 from typing import Any, Literal, Protocol, runtime_checkable
 
 
@@ -68,6 +69,8 @@ class ControllerRuntimeProvider(Protocol):
         *,
         semantic_unit: str,
         llm_policy: str,
+        subject_scope: Any | None = None,
+        subject_scope_root_path: Path | None = None,
     ) -> tuple[Any, Any]: ...
 
     def learn_markdown_bundle(
@@ -92,9 +95,96 @@ class GovernedTurnRuntimeProvider(Protocol):
     ) -> GovernedTurnResult: ...
 
 
+@runtime_checkable
+class HostAwareControllerRuntimeProvider(Protocol):
+    """Optional extension for host-context injection at controller bootstrap."""
+
+    def bootstrap_controller_with_host_interaction(
+        self,
+        *,
+        semantic_unit: str,
+        llm_policy: str,
+        host_interaction_context: Any,
+    ) -> tuple[Any, Any]: ...
+
+
+@runtime_checkable
+class ArtifactRepository(Protocol):
+    """Persistence behavior required by workstation skill operations."""
+
+    def describe(self) -> dict[str, Any]: ...
+
+    def persist(self, state: Any) -> dict[str, Any]: ...
+
+    def persist_artifact(
+        self,
+        artifact: Any,
+        *,
+        run_id: str = "artifact_import",
+    ) -> dict[str, Any]: ...
+
+    def persist_artifacts(
+        self,
+        artifacts: Any,
+        *,
+        run_id: str = "artifact_import",
+    ) -> dict[str, Any]: ...
+
+    def load_all_artifacts(self) -> list[Any]: ...
+
+    def load_relevant_artifacts(
+        self,
+        query_text: str,
+        *,
+        limit: int = 8,
+    ) -> list[Any]: ...
+
+    def load_recent_artifacts(self, *, limit: int = 512) -> list[Any]: ...
+
+
+@runtime_checkable
+class ArtifactRepositoryProvider(Protocol):
+    """Application-supplied constructor for an explicitly addressed store."""
+
+    def open_artifact_repository(
+        self,
+        *,
+        sqlite_path: Path,
+        vector_mode: str | None = None,
+    ) -> ArtifactRepository: ...
+
+
+@runtime_checkable
+class SkillExchangeProvider(Protocol):
+    """Representation translation supplied by the entry/exchange layer."""
+
+    def artifact_from_skill_document(self, document: Any) -> Any: ...
+
+    def load_import_payload_documents(
+        self,
+        source_file: Path,
+    ) -> list[dict[str, Any]]: ...
+
+    def export_skill_bundle_text(self, artifacts: Iterable[Any]) -> str: ...
+
+    def normalized_skill_bundle_filename_for_source(self, path: Path) -> str: ...
+
+    def batch_skill_export_filename(self, artifact: Any) -> str: ...
+
+    def materialize_learning_context_skills(
+        self,
+        root_path: Path,
+        context: Any,
+    ) -> tuple[dict[str, Any], ...]: ...
+
+
 __all__ = [
+    "ArtifactRepository",
+    "ArtifactRepositoryProvider",
     "ControllerRuntimeProvider",
     "GovernedTurnRuntimeProvider",
+    "HostAwareControllerRuntimeProvider",
+    "SkillExchangeProvider",
     "GovernedTurnLlmPolicy",
     "GovernedTurnRequest",
     "GovernedTurnResult",

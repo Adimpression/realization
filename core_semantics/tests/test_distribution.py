@@ -47,8 +47,22 @@ class CoreSemanticsDistributionTests(unittest.TestCase):
 
     def test_typed_package_files_are_present(self) -> None:
         self.assertTrue((PACKAGE_ROOT / "__init__.py").is_file())
+        self.assertTrue((PACKAGE_ROOT / "applied_model.py").is_file())
+        self.assertTrue((PACKAGE_ROOT / "applied_primitives.py").is_file())
         self.assertTrue((PACKAGE_ROOT / "artifacts.py").is_file())
+        self.assertTrue((PACKAGE_ROOT / "boundary.py").is_file())
+        self.assertTrue((PACKAGE_ROOT / "decision_review.py").is_file())
+        self.assertTrue((PACKAGE_ROOT / "executors.py").is_file())
+        self.assertTrue((PACKAGE_ROOT / "identifiers.py").is_file())
+        self.assertTrue((PACKAGE_ROOT / "itemization.py").is_file())
+        self.assertTrue((PACKAGE_ROOT / "markdown.py").is_file())
+        self.assertTrue((PACKAGE_ROOT / "normalization.py").is_file())
+        self.assertTrue((PACKAGE_ROOT / "prolog.py").is_file())
+        self.assertTrue((PACKAGE_ROOT / "proposals.py").is_file())
+        self.assertTrue((PACKAGE_ROOT / "semantic_text.py").is_file())
         self.assertTrue((PACKAGE_ROOT / "theory.py").is_file())
+        self.assertTrue((PACKAGE_ROOT / "title_semantics.py").is_file())
+        self.assertTrue((PACKAGE_ROOT / "transformation_constructs.py").is_file())
         self.assertTrue((PACKAGE_ROOT / "values.py").is_file())
         self.assertTrue((PACKAGE_ROOT / "py.typed").is_file())
 

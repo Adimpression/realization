@@ -13,12 +13,13 @@ from applied_theory_types import ProposalType
 from controller_entrypoints import ensure_application_controller_runtime
 from decision_review import list_decision_review_items
 from decision_review_constructs import list_transformation_construct_candidates
-from dst import discovery_result_from_fixture, normalized_case_from_fixture, run_dst_pipeline_from_fixture
+from dst import DST_SOURCE_ROOT, discovery_result_from_fixture, normalized_case_from_fixture, run_dst_pipeline_from_fixture
 from itemize import ItemizedSubjectItem, list_itemized_subject_items, stable_itemized_item_id
 from review_composition import list_review_items
 from semantic_text import collapse_ws
 
 from workstation.runtime.core.session import launch_workstation_session
+from workstation.runtime.core.subject_host_actions import RuntimeSubjectWorkflowHostActions
 from workstation.subject.core.subject_workflow import (
     apply_subject_action,
     default_subject_scenarios,
@@ -37,6 +38,12 @@ from workstation.subject.core.subject_workflow import (
 from workstation.runtime.core.workstation_core import workstation_learn_markdown_action
 
 
+def _itemization_runtime_provider(controller: object) -> SimpleNamespace:
+    return SimpleNamespace(
+        bootstrap_controller=lambda **_kwargs: (SimpleNamespace(), controller)
+    )
+
+
 @dataclass(frozen=True)
 class ReportCreationArtifacts:
     subject_id: str
@@ -52,6 +59,7 @@ class WorkflowSubjectStory:
         self.subject_id = subject_id
         self.progress = load_subject_progress(root, subject_id)
         self.phase = "research"
+        self.host_actions = RuntimeSubjectWorkflowHostActions()
 
     @property
     def scenario(self):
@@ -192,6 +200,7 @@ class WorkflowSubjectStory:
             progress=self.progress,
             action_key=action_key,
             import_staging=import_staging,
+            host_actions=self.host_actions,
         )
         if result.next_phase:
             self.phase = str(result.next_phase)
@@ -230,7 +239,7 @@ class ReportCreationBDDTests(unittest.TestCase):
         self.root = Path(self.tempdir.name) / "workstation-root"
         self.workspace = Path(__file__).resolve().parents[3]
         self.fixture_root = Path(__file__).resolve().parents[1] / "fixtures" / "report_creation"
-        self.dst_root = self.workspace / "dst"
+        self.dst_root = DST_SOURCE_ROOT
         launch_workstation_session(
             root_path=self.root,
             workspace_path=self.workspace,
@@ -812,8 +821,8 @@ class ReportCreationBDDTests(unittest.TestCase):
 
         story.when_user_uses_workflow_action("open_context", expected_status="Subject context opened.")
         with patch(
-            "itemize.bootstrap_runtime_controller",
-            return_value=(SimpleNamespace(), FakeController()),
+            "workstation.runtime.core.subject_host_actions.controller_runtime_provider",
+            return_value=_itemization_runtime_provider(FakeController()),
         ):
             story.when_user_uses_workflow_action("generate_itemization", expected_status="Itemization generated.")
 
@@ -850,7 +859,7 @@ class ReportCreationBDDTests(unittest.TestCase):
 
         story.when_user_uses_workflow_action("open_context", expected_status="Subject context opened.")
         with patch(
-            "itemize.bootstrap_runtime_controller",
+            "workstation.runtime.core.subject_host_actions.controller_runtime_provider",
             side_effect=AssertionError("direct llm decomposition should be disabled"),
         ):
             story.when_user_uses_workflow_action("generate_itemization", expected_status="Itemization generated.")
@@ -871,8 +880,8 @@ class ReportCreationBDDTests(unittest.TestCase):
 
         story.when_user_uses_workflow_action("open_context", expected_status="Subject context opened.")
         with patch(
-            "itemize.bootstrap_runtime_controller",
-            return_value=(SimpleNamespace(), FakeController()),
+            "workstation.runtime.core.subject_host_actions.controller_runtime_provider",
+            return_value=_itemization_runtime_provider(FakeController()),
         ):
             story.when_user_uses_workflow_action("generate_itemization", expected_status="Itemization generated.")
 
@@ -927,8 +936,8 @@ class ReportCreationBDDTests(unittest.TestCase):
 
         story.when_user_uses_workflow_action("open_context", expected_status="Subject context opened.")
         with patch(
-            "itemize.bootstrap_runtime_controller",
-            return_value=(SimpleNamespace(), FakeController()),
+            "workstation.runtime.core.subject_host_actions.controller_runtime_provider",
+            return_value=_itemization_runtime_provider(FakeController()),
         ):
             story.when_user_uses_workflow_action("generate_itemization", expected_status="Itemization generated.")
 
@@ -968,8 +977,8 @@ class ReportCreationBDDTests(unittest.TestCase):
         story.when_user_uses_workflow_action("open_context", expected_status="Subject context opened.")
         story.when_user_uses_workflow_action("compare_projections", expected_status="Projection comparison aligned.")
         with patch(
-            "itemize.bootstrap_runtime_controller",
-            return_value=(SimpleNamespace(), EmptyController()),
+            "workstation.runtime.core.subject_host_actions.controller_runtime_provider",
+            return_value=_itemization_runtime_provider(EmptyController()),
         ):
             story.when_user_uses_workflow_action("generate_itemization", expected_status="Itemization generated.")
 
@@ -1015,8 +1024,8 @@ class ReportCreationBDDTests(unittest.TestCase):
         story.when_user_uses_workflow_action("open_context", expected_status="Subject context opened.")
         story.when_user_uses_workflow_action("compare_projections", expected_status="Projection comparison aligned.")
         with patch(
-            "itemize.bootstrap_runtime_controller",
-            return_value=(SimpleNamespace(), EmptyController()),
+            "workstation.runtime.core.subject_host_actions.controller_runtime_provider",
+            return_value=_itemization_runtime_provider(EmptyController()),
         ):
             story.when_user_uses_workflow_action("generate_itemization", expected_status="Itemization generated.")
 

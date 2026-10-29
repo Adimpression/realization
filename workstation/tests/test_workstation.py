@@ -51,6 +51,7 @@ from workstation.skills.planning.skill_composition_planning import preferred_wor
 from workstation.skills.core.skill_invocation import resolve_workstation_skill, workstation_missing_required_inputs, workstation_skill_store
 from workstation.skills.core.skill_invocation import bounded_nested_effect_traces
 from workstation.skills.core.skill_invocation import workstation_nested_skill_answer_text
+from workstation.skills.core.skill_invocation import workstation_nested_skill_terminal_error
 from workstation.runtime.core.session import launch_workstation_session, load_workstation_session, prompt_workstation_session
 from workstation.foundation.models import WorkstationDelegationEscalationRequest, WorkstationSession
 from workstation.foundation.host.task_contract import normalize_prompt_to_task_boundary_contract
@@ -6869,6 +6870,48 @@ class WorkstationTests(unittest.TestCase):
         self.assertIn("... [truncated]", answer)
         self.assertLessEqual(len(answer), 4500)
         self.assertNotIn("src/file_34.py:34:match", answer)
+
+    def test_nested_skill_terminal_error_follows_only_the_bounded_result_envelope(self) -> None:
+        """
+        High Level Purpose:
+            In circumstances like generated Python workers whose broker result is wrapped by both the declared output and cross-boundary envelopes, helps with preserving the terminal broker status without recursively interpreting unrelated payload data.
+
+        Reference to Theory:
+            Supports receipt integrity by distinguishing a successful transport from the terminal result of the governed operation carried by that transport.
+
+        Example Input Output:
+            Input: `{'status': 'ok', 'result': {'result': {'status': 'error'}}}`
+            Output: `True`
+
+        Returns:
+            None: Assertions verify bounded result-envelope traversal.
+        """
+        self.assertTrue(
+            workstation_nested_skill_terminal_error(
+                _NestedSkillResult(
+                    parsed_output={
+                        "status": "ok",
+                        "result": {"result": {"status": "error", "error": "missing"}},
+                    }
+                )
+            )
+        )
+        self.assertTrue(
+            workstation_nested_skill_terminal_error(
+                _NestedSkillResult(result={"result": {"status": "approval_required"}})
+            )
+        )
+        self.assertFalse(
+            workstation_nested_skill_terminal_error(
+                _NestedSkillResult(
+                    parsed_output={
+                        "status": "ok",
+                        "result": {"result": {"status": "ok"}},
+                        "metadata": {"status": "error"},
+                    }
+                )
+            )
+        )
 
     def test_bounded_nested_effect_traces_trims_large_match_lists(self) -> None:
         """

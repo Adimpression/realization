@@ -7,7 +7,7 @@ from pathlib import Path
 import threading
 import uuid
 
-from semantic_text import collapse_ws
+from realized_core_semantics.semantic_text import collapse_ws
 from workstation.subject.core.subject_workflow import (
     SubjectProgress,
     apply_subject_progress_client_view_payload,

@@ -13,7 +13,7 @@ from applied_theory_types import (
     Product,
     SemanticNode,
 )
-from system_state import SystemState
+from realized_core_engine.state import SystemState
 
 from realized_core_engine.canonical_reduction import (
     CanonicalReductionAdapter,

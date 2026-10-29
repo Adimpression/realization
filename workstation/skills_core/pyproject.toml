@@ -5,6 +5,9 @@ description = "Workstation core skill execution package for Realized."
 requires-python = ">=3.14"
 dependencies = [
     "realized-core-governance==0.1.0",
+    "realized-core-runtime==0.1.0",
+    "realized-core-semantics==0.1.0",
+    "realized-skill-application==0.1.0",
     "realized-skill-semantics==0.1.0",
     "realized-host-interaction",
     "realized-workstation",
@@ -16,6 +19,10 @@ dependencies = [
 
 [tool.uv.sources]
 realized-core-governance = { workspace = true }
+realized-core-engine = { workspace = true }
+realized-core-runtime = { workspace = true }
+realized-core-semantics = { workspace = true }
+realized-skill-application = { workspace = true }
 realized-skill-semantics = { workspace = true }
 
 [build-system]

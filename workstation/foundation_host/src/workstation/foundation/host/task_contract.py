@@ -4,7 +4,7 @@ from __future__ import annotations
 import re
 from typing import Iterable
 
-from boundary import infer_not_boundary_shape_from_semantic_text
+from realized_core_semantics.boundary import infer_not_boundary_shape_from_semantic_text
 
 from workstation.foundation.models import TaskBoundaryContract
 

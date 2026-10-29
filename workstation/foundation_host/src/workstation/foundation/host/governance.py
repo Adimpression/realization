@@ -5,8 +5,8 @@ from collections.abc import Mapping
 from typing import Any
 
 from realized_core_governance.inventory import load_governance_inventory
-from semantic_text import collapse_ws
-from skill_schema_io import artifact_from_skill_document
+from realized_core_semantics.semantic_text import collapse_ws
+from workstation.foundation.host.skill_exchange import skill_exchange_provider
 
 
 WORKSTATION_DEFAULT_POLICY_TITLE = "Workstation Skill Home Policy"
@@ -65,7 +65,9 @@ def workstation_default_policy_artifact() -> Any:
     Returns:
         Any: Result produced by `workstation_default_policy_artifact`.
     """
-    return artifact_from_skill_document(workstation_default_policy_payload())
+    return skill_exchange_provider().artifact_from_skill_document(
+        workstation_default_policy_payload()
+    )
 
 
 def workstation_is_transient_bundle_policy_payload(payload: Mapping[str, Any]) -> bool:

@@ -1,0 +1,4456 @@
+{
+  "facades": [
+    {
+      "canonical_targets": [
+        {
+          "component": "core_semantics",
+          "module": "realized_core_semantics"
+        }
+      ],
+      "module": "applied_theory_primitives",
+      "owner": "semantic_model",
+      "path": "applied_theory_primitives.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 6,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_semantics",
+          "module": "realized_core_semantics"
+        }
+      ],
+      "module": "applied_theory_types",
+      "owner": "semantic_model",
+      "path": "applied_theory_types.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "from_import",
+          "line": 8,
+          "path": "core_engine/tests/test_canonical_reduction.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 6,
+          "path": "dst/tests/test_dst_orchestration.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "import",
+          "line": 7,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 3,
+          "path": "tests/test_blend_operator_store.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 6,
+          "path": "tests/test_blend_workflow_execution.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 10,
+          "path": "tests/test_controller_determinism_replay_pack.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 11,
+          "path": "tests/test_core_runtime_determinism_replay.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 7,
+          "path": "tests/test_core_runtime_package_adapter.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 13,
+          "path": "tests/test_host_mediation.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 16,
+          "path": "tests/test_import_batching.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 10,
+          "path": "tests/test_runtime_controller_api.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 8,
+          "path": "tests/test_side_boundary_extraction.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 6,
+          "path": "tests/test_skill_boundary_normalization.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 6,
+          "path": "tests/test_skill_ir.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 6,
+          "path": "tests/test_skill_path_notation.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 12,
+          "path": "workstation/tests/bdd/test_report_creation_bdd.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 26,
+          "path": "workstation/tests/test_workstation_core.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_governance",
+          "module": "realized_core_governance"
+        },
+        {
+          "component": "core_governance",
+          "module": "realized_core_governance._normalization"
+        },
+        {
+          "component": "core_governance",
+          "module": "realized_core_governance.approval"
+        },
+        {
+          "component": "core_governance",
+          "module": "realized_core_governance.vocabulary"
+        },
+        {
+          "component": "core_semantics",
+          "module": "realized_core_semantics.artifacts"
+        }
+      ],
+      "module": "approval_governance",
+      "owner": "governance",
+      "path": "approval_governance.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 8,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_engine",
+          "module": "realized_core_engine"
+        }
+      ],
+      "module": "artifact",
+      "owner": "controller",
+      "path": "artifact.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 10,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_engine",
+          "module": "realized_core_engine"
+        }
+      ],
+      "module": "artifact_answer_resolution",
+      "owner": "controller",
+      "path": "artifact_answer_resolution.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 11,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_semantics",
+          "module": "realized_core_semantics.artifacts"
+        }
+      ],
+      "module": "artifact_contracts",
+      "owner": "semantic_model",
+      "path": "artifact_contracts.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 12,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 17,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "blend",
+          "module": "realized_blend.context"
+        },
+        {
+          "component": "runtime_core",
+          "module": "workstation.runtime.core.blend_adapters"
+        }
+      ],
+      "module": "blend_context",
+      "owner": "blend",
+      "path": "blend_context.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 18,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 3,
+          "path": "tests/test_blend_operator.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 4,
+          "path": "tests/test_blend_operator_store.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 7,
+          "path": "tests/test_blend_workflow_execution.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "blend",
+          "module": "realized_blend"
+        }
+      ],
+      "module": "blend_operator",
+      "owner": "blend",
+      "path": "blend_operator.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 19,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 4,
+          "path": "tests/test_blend_operator.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 5,
+          "path": "tests/test_blend_operator_store.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 8,
+          "path": "tests/test_blend_workflow_execution.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "blend_application",
+          "module": "realized_blend_application"
+        }
+      ],
+      "module": "blend_operator_store",
+      "owner": "blend",
+      "path": "blend_operator_store.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 20,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 6,
+          "path": "tests/test_blend_operator_store.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 9,
+          "path": "tests/test_blend_workflow_execution.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "blend",
+          "module": "realized_blend.sessions"
+        },
+        {
+          "component": "runtime_core",
+          "module": "workstation.runtime.core.blend_adapters"
+        }
+      ],
+      "module": "blend_session",
+      "owner": "blend",
+      "path": "blend_session.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 21,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 8,
+          "path": "tests/test_blend_session.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "blend_application",
+          "module": "realized_blend_application"
+        }
+      ],
+      "module": "blend_workflow",
+      "owner": "blend",
+      "path": "blend_workflow.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 22,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 6,
+          "path": "tests/test_blend_workflow.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 10,
+          "path": "tests/test_blend_workflow_execution.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 12,
+          "path": "tests/test_blend_workflow_store.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 21,
+          "path": "workstation/tests/test_workstation_core.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 6,
+          "path": "workstation/tests/test_workstation_projection_models.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "blend_application",
+          "module": "realized_blend_application"
+        }
+      ],
+      "module": "blend_workflow_execution",
+      "owner": "blend",
+      "path": "blend_workflow_execution.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 23,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 11,
+          "path": "tests/test_blend_workflow_execution.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "blend",
+          "module": "realized_blend"
+        }
+      ],
+      "module": "blend_workflow_models",
+      "owner": "blend",
+      "path": "blend_workflow_models.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 24,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "blend_application",
+          "module": "realized_blend_application"
+        }
+      ],
+      "module": "blend_workflow_store",
+      "owner": "blend",
+      "path": "blend_workflow_store.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 25,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 16,
+          "path": "tests/test_blend_workflow_store.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 22,
+          "path": "workstation/tests/test_workstation_core.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "blend_application",
+          "module": "realized_blend_application"
+        }
+      ],
+      "module": "blend_world",
+      "owner": "blend",
+      "path": "blend_world.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 26,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 6,
+          "path": "tests/test_blend_world.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "blend",
+          "module": "realized_blend"
+        }
+      ],
+      "module": "blend_world_models",
+      "owner": "blend",
+      "path": "blend_world_models.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 27,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "blend_application",
+          "module": "realized_blend_application"
+        }
+      ],
+      "module": "blend_world_store",
+      "owner": "blend",
+      "path": "blend_world_store.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 28,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 8,
+          "path": "tests/test_blend_world_store.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_semantics",
+          "module": "realized_core_semantics"
+        }
+      ],
+      "module": "boundary",
+      "owner": "semantic_model",
+      "path": "boundary.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 13,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "governed_core",
+          "module": "realized_core_runtime"
+        }
+      ],
+      "module": "capability_runtime",
+      "owner": "runtime_execution",
+      "path": "capability_runtime.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 14,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_engine",
+          "module": "realized_core_engine"
+        }
+      ],
+      "module": "constitutional_trace",
+      "owner": "controller",
+      "path": "constitutional_trace.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 33,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 11,
+          "path": "tests/test_controller_determinism_replay_pack.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_engine",
+          "module": "realized_core_engine"
+        }
+      ],
+      "module": "controller_entrypoint_binding",
+      "owner": "entry_exchange",
+      "path": "controller_entrypoint_binding.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "from_import",
+          "line": 8,
+          "path": "main.py",
+          "scope": "compatibility_facade"
+        },
+        {
+          "import_kind": "import",
+          "line": 30,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_engine",
+          "module": "realized_core_engine"
+        }
+      ],
+      "module": "controller_governance_bridge",
+      "owner": "controller",
+      "path": "controller_governance_bridge.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 31,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_engine",
+          "module": "realized_core_engine"
+        },
+        {
+          "component": "exchange",
+          "module": "realized_exchange"
+        },
+        {
+          "component": "exchange",
+          "module": "realized_exchange.markdown_learning_pipeline"
+        }
+      ],
+      "module": "controller_runtime",
+      "owner": "controller",
+      "path": "controller_runtime.py",
+      "removal_state": "retained",
+      "root_dependencies": [
+        "args"
+      ],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 7,
+          "path": "main.py",
+          "scope": "compatibility_facade"
+        },
+        {
+          "import_kind": "import",
+          "line": 29,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 8,
+          "path": "tests/test_core_runtime_package_adapter.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_engine",
+          "module": "realized_core_engine"
+        }
+      ],
+      "module": "controller_runtime_binding",
+      "owner": "entry_exchange",
+      "path": "controller_runtime_binding.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 32,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_governance",
+          "module": "realized_core_governance"
+        },
+        {
+          "component": "core_governance",
+          "module": "realized_core_governance.data"
+        }
+      ],
+      "module": "data_governance",
+      "owner": "governance",
+      "path": "data_governance.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 34,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "subject_core",
+          "module": "workstation.subject.core"
+        }
+      ],
+      "module": "decision_review",
+      "owner": "subject_domain",
+      "path": "decision_review.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 35,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 10,
+          "path": "tests/test_decision_review.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 12,
+          "path": "tests/test_publication.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 8,
+          "path": "workstation/tests/bdd/smart_city_travel_incremental_support.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 14,
+          "path": "workstation/tests/bdd/test_report_creation_bdd.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 10,
+          "path": "workstation/tests/bdd/test_smart_city_travel_incremental_report_ladder_bdd.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 10,
+          "path": "workstation/tests/bdd/test_smart_city_travel_incremental_report_ladder_live.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 15,
+          "path": "workstation/tests/test_subject_workflow.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 15,
+          "path": "workstation/tests/test_workstation_chat_ui.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "subject_core",
+          "module": "workstation.subject.core"
+        }
+      ],
+      "module": "decision_review_constructs",
+      "owner": "subject_domain",
+      "path": "decision_review_constructs.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 36,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 15,
+          "path": "workstation/tests/bdd/test_report_creation_bdd.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 16,
+          "path": "workstation/tests/test_subject_workflow.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 16,
+          "path": "workstation/tests/test_workstation_chat_ui.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_semantics",
+          "module": "realized_core_semantics"
+        }
+      ],
+      "module": "decision_review_models",
+      "owner": "subject_domain",
+      "path": "decision_review_models.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 37,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "subject_core",
+          "module": "workstation.subject.core"
+        }
+      ],
+      "module": "decision_review_policy",
+      "owner": "subject_domain",
+      "path": "decision_review_policy.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 38,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 25,
+          "path": "tests/test_decision_review.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 13,
+          "path": "tests/test_publication.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 24,
+          "path": "workstation/tests/test_subject_workflow.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "subject_core",
+          "module": "workstation.subject.core"
+        }
+      ],
+      "module": "decision_review_projection",
+      "owner": "subject_domain",
+      "path": "decision_review_projection.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 39,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 19,
+          "path": "tests/test_decision_review.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 14,
+          "path": "tests/test_publication.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 25,
+          "path": "workstation/tests/test_subject_workflow.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_engine",
+          "module": "realized_core_engine"
+        }
+      ],
+      "module": "direct_knowledge_reuse",
+      "owner": "controller",
+      "path": "direct_knowledge_reuse.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 40,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "governed_core",
+          "module": "realized_core_runtime"
+        }
+      ],
+      "module": "execution_framework_primitives",
+      "owner": "runtime_execution",
+      "path": "execution_framework_primitives.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 41,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "governed_core",
+          "module": "realized_core_runtime"
+        }
+      ],
+      "module": "execution_frameworks",
+      "owner": "runtime_execution",
+      "path": "execution_frameworks.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 42,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 10,
+          "path": "tests/test_executor_framework_learning.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 16,
+          "path": "workstation/tests/test_workstation.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "exchange",
+          "module": "realized_exchange"
+        }
+      ],
+      "module": "external_markdown_learning_pipeline",
+      "owner": "entry_exchange",
+      "path": "external_markdown_learning_pipeline.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 75,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_engine",
+          "module": "realized_core_engine"
+        }
+      ],
+      "module": "fallback_not_generation",
+      "owner": "controller",
+      "path": "fallback_not_generation.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 44,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_engine",
+          "module": "realized_core_engine.fallback_not_generation"
+        },
+        {
+          "component": "core_engine",
+          "module": "realized_core_engine.not_elaboration_ranking"
+        }
+      ],
+      "module": "fallback_not_semantics",
+      "owner": "controller",
+      "path": "fallback_not_semantics.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 45,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "governed_core",
+          "module": "realized_core_runtime"
+        }
+      ],
+      "module": "fence_extraction_strategy",
+      "owner": "runtime_execution",
+      "path": "fence_extraction_strategy.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 43,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 8,
+          "path": "tests/test_fence_extraction_strategy.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 9,
+          "path": "tests/test_fence_extraction_strategy.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 10,
+          "path": "tests/test_fence_extraction_strategy.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "subject_core",
+          "module": "workstation.subject.core"
+        }
+      ],
+      "module": "gather_sources",
+      "owner": "subject_domain",
+      "path": "gather_sources.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 14,
+          "path": "tests/test_architecture_boundaries.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "import",
+          "line": 46,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 33,
+          "path": "workstation/tests/test_subject_workflow.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 39,
+          "path": "workstation/tests/test_workstation_chat_ui.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 23,
+          "path": "workstation/tests/test_workstation_core.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 15,
+          "path": "workstation/tests/test_workstation_learning_capture.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 15,
+          "path": "workstation/tests/test_workstation_subject_workflow_api.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_engine",
+          "module": "realized_core_engine"
+        }
+      ],
+      "module": "governance_inventory",
+      "owner": "controller",
+      "path": "governance_inventory.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 47,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_engine",
+          "module": "realized_core_engine"
+        }
+      ],
+      "module": "governed_closure_and_commitment",
+      "owner": "controller",
+      "path": "governed_closure_and_commitment.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 48,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_engine",
+          "module": "realized_core_engine"
+        }
+      ],
+      "module": "governed_prior_learning_reuse",
+      "owner": "controller",
+      "path": "governed_prior_learning_reuse.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 49,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_engine",
+          "module": "realized_core_engine"
+        }
+      ],
+      "module": "governed_semantic_reduction_runtime",
+      "owner": "controller",
+      "path": "governed_semantic_reduction_runtime.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 50,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "import",
+          "line": 6,
+          "path": "tests/test_core_runtime_package_adapter.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_engine",
+          "module": "realized_core_engine"
+        }
+      ],
+      "module": "governed_skill_access",
+      "owner": "governance",
+      "path": "governed_skill_access.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 51,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "governed_core",
+          "module": "realized_core_runtime"
+        }
+      ],
+      "module": "host_abi",
+      "owner": "runtime_execution",
+      "path": "host_abi.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 52,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 14,
+          "path": "tests/test_host_mediation.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 16,
+          "path": "tests/test_skill_io.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "governed_core",
+          "module": "realized_core_runtime"
+        }
+      ],
+      "module": "host_brokers",
+      "owner": "runtime_execution",
+      "path": "host_brokers.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 53,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "import",
+          "line": 12,
+          "path": "tests/test_host_mediation.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 15,
+          "path": "tests/test_host_mediation.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 7,
+          "path": "tests/test_host_realizer_adapters.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "host_interaction",
+          "module": "realized_host_interaction.action_dispatch"
+        }
+      ],
+      "module": "host_interaction_action_dispatch",
+      "owner": "runtime_execution",
+      "path": "host_interaction_action_dispatch.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 56,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 8,
+          "path": "tests/test_host_interaction_action_dispatch.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "host_interaction",
+          "module": "realized_host_interaction.actions"
+        }
+      ],
+      "module": "host_interaction_actions",
+      "owner": "runtime_execution",
+      "path": "host_interaction_actions.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 57,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 8,
+          "path": "tests/test_host_interaction_actions.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "host_interaction",
+          "module": "realized_host_interaction.context"
+        }
+      ],
+      "module": "host_interaction_context",
+      "owner": "runtime_execution",
+      "path": "host_interaction_context.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 58,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 8,
+          "path": "tests/test_host_interaction_context.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "host_interaction",
+          "module": "realized_host_interaction.delegation"
+        }
+      ],
+      "module": "host_interaction_delegation",
+      "owner": "runtime_execution",
+      "path": "host_interaction_delegation.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 59,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 6,
+          "path": "tests/test_host_interaction_delegation.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "host_interaction",
+          "module": "realized_host_interaction.models"
+        }
+      ],
+      "module": "host_interaction_models",
+      "owner": "runtime_execution",
+      "path": "host_interaction_models.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 60,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 12,
+          "path": "tests/test_host_interaction_action_dispatch.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 14,
+          "path": "tests/test_host_interaction_actions.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 12,
+          "path": "tests/test_host_interaction_delegation.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "host_interaction",
+          "module": "realized_host_interaction.receipts"
+        }
+      ],
+      "module": "host_interaction_receipts",
+      "owner": "runtime_execution",
+      "path": "host_interaction_receipts.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 61,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 9,
+          "path": "tests/test_host_interaction_receipts.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 17,
+          "path": "workstation/tests/test_workstation.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 9,
+          "path": "workstation/tests/test_workstation_activity_view.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 24,
+          "path": "workstation/tests/test_workstation_core.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 8,
+          "path": "workstation/tests/test_workstation_event_bus.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "host_interaction",
+          "module": "realized_host_interaction.resolution"
+        }
+      ],
+      "module": "host_interaction_resolution",
+      "owner": "runtime_execution",
+      "path": "host_interaction_resolution.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 62,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 13,
+          "path": "tests/test_host_interaction_context.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_engine",
+          "module": "realized_core_engine"
+        }
+      ],
+      "module": "host_mediation",
+      "owner": "runtime_execution",
+      "path": "host_mediation.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 55,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "governed_core",
+          "module": "realized_core_runtime"
+        }
+      ],
+      "module": "host_realizers",
+      "owner": "runtime_execution",
+      "path": "host_realizers.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 54,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 16,
+          "path": "tests/test_host_mediation.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 8,
+          "path": "tests/test_host_realizer_adapters.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_semantics",
+          "module": "realized_core_semantics"
+        }
+      ],
+      "module": "id_generation",
+      "owner": "semantic_model",
+      "path": "id_generation.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "from_import",
+          "line": 8,
+          "path": "tests/learning_xref_test_support.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "import",
+          "line": 63,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_semantics",
+          "module": "realized_core_semantics.proposals"
+        },
+        {
+          "component": "subject_core",
+          "module": "workstation.subject.core"
+        }
+      ],
+      "module": "itemize",
+      "owner": "subject_domain",
+      "path": "itemize.py",
+      "removal_state": "retained",
+      "root_dependencies": [
+        "runtime_controller_api"
+      ],
+      "static_consumers": [
+        {
+          "import_kind": "from_import",
+          "line": 16,
+          "path": "dst/tests/dst_bdd_support.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 17,
+          "path": "dst/tests/test_dst_client_compatibility.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 23,
+          "path": "dst/tests/test_dst_orchestration.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "import",
+          "line": 64,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 41,
+          "path": "tests/test_decision_review.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 12,
+          "path": "tests/test_itemize.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 6,
+          "path": "tests/test_itemize_validation.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 9,
+          "path": "tests/test_review_composition.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 17,
+          "path": "workstation/tests/bdd/test_report_creation_bdd.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 59,
+          "path": "workstation/tests/test_subject_workflow.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 22,
+          "path": "workstation/tests/test_workstation_chat_ui.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_semantics",
+          "module": "realized_core_semantics"
+        }
+      ],
+      "module": "itemize_models",
+      "owner": "subject_domain",
+      "path": "itemize_models.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 65,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "subject_core",
+          "module": "workstation.subject.core.itemize_validation"
+        }
+      ],
+      "module": "itemize_validation",
+      "owner": "subject_domain",
+      "path": "itemize_validation.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 66,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 7,
+          "path": "tests/test_itemize_validation.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_engine",
+          "module": "realized_core_engine"
+        }
+      ],
+      "module": "learn",
+      "owner": "controller",
+      "path": "learn.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 67,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "exchange",
+          "module": "realized_exchange"
+        }
+      ],
+      "module": "learning_context",
+      "owner": "entry_exchange",
+      "path": "learning_context.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "from_import",
+          "line": 9,
+          "path": "tests/learning_xref_test_support.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "import",
+          "line": 68,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 31,
+          "path": "tests/test_decision_review.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 146,
+          "path": "tests/test_decision_review.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 773,
+          "path": "tests/test_decision_review.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 24,
+          "path": "tests/test_itemize.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 8,
+          "path": "tests/test_large_markdown_learning.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 9,
+          "path": "tests/test_learning_context.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 6,
+          "path": "tests/test_learning_context_projection.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 8,
+          "path": "tests/test_learning_context_skill_projection.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 8,
+          "path": "tests/test_learning_delta_operations.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 8,
+          "path": "tests/test_learning_xref_preparation.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 9,
+          "path": "tests/test_markdown_artifact_generation.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 15,
+          "path": "tests/test_publication.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 10,
+          "path": "tests/test_review_composition.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 18,
+          "path": "tests/test_runtime_controller_api.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 12,
+          "path": "tests/test_url_learning_capture.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 12,
+          "path": "workstation/tests/test_subject_host_actions.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 44,
+          "path": "workstation/tests/test_subject_workflow.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 18,
+          "path": "workstation/tests/test_workstation.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 13,
+          "path": "workstation/tests/test_workstation_bootstrap_assets.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 23,
+          "path": "workstation/tests/test_workstation_chat_ui.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 25,
+          "path": "workstation/tests/test_workstation_core.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 8,
+          "path": "workstation/tests/test_workstation_learning_capture.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 16,
+          "path": "workstation/tests/test_workstation_shell_api.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 16,
+          "path": "workstation/tests/test_workstation_subject_workflow_api.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "subject_core",
+          "module": "workstation.subject.core"
+        }
+      ],
+      "module": "learning_context_markdown",
+      "owner": "subject_domain",
+      "path": "learning_context_markdown.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 69,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "subject_core",
+          "module": "workstation.subject.core"
+        }
+      ],
+      "module": "learning_context_paths",
+      "owner": "subject_domain",
+      "path": "learning_context_paths.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 70,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "subject_core",
+          "module": "workstation.subject.core"
+        }
+      ],
+      "module": "learning_context_projection",
+      "owner": "subject_domain",
+      "path": "learning_context_projection.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 71,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 7,
+          "path": "tests/test_learning_context_projection.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "exchange",
+          "module": "realized_exchange"
+        }
+      ],
+      "module": "learning_context_skill_projection",
+      "owner": "entry_exchange",
+      "path": "learning_context_skill_projection.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 72,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 9,
+          "path": "tests/test_learning_context_skill_projection.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "governed_core",
+          "module": "realized_core_runtime"
+        }
+      ],
+      "module": "macos_host_brokers",
+      "owner": "runtime_execution",
+      "path": "macos_host_brokers.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 76,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [],
+      "module": "main",
+      "owner": "entry_exchange",
+      "path": "main.py",
+      "removal_state": "retained",
+      "root_dependencies": [
+        "controller_entrypoint_binding",
+        "controller_entrypoints",
+        "controller_runtime"
+      ],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 757,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "import",
+          "line": 774,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 9,
+          "path": "tests/test_artifact_answer_selection.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 11,
+          "path": "tests/test_artifact_boundary_shape.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 8,
+          "path": "tests/test_artifact_bundle_io.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 12,
+          "path": "tests/test_artifact_search_hybrid.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 6,
+          "path": "tests/test_boundary_shape_typing.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 12,
+          "path": "tests/test_controller_determinism_replay_pack.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "import",
+          "line": 13,
+          "path": "tests/test_controller_feature_toggles.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 15,
+          "path": "tests/test_controller_feature_toggles.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 12,
+          "path": "tests/test_core_runtime_determinism_replay.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 6,
+          "path": "tests/test_decomposition_prompt_context.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 18,
+          "path": "tests/test_executor_framework_learning.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 12,
+          "path": "tests/test_function_boundary.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 8,
+          "path": "tests/test_governance_selection_precedence.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 17,
+          "path": "tests/test_host_interaction_context.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 13,
+          "path": "tests/test_host_interaction_delegation.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 17,
+          "path": "tests/test_host_mediation.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "import",
+          "line": 13,
+          "path": "tests/test_import_batching.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 18,
+          "path": "tests/test_large_markdown_learning.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 16,
+          "path": "tests/test_markdown_artifact_generation.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 6,
+          "path": "tests/test_not_elaboration_schema.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "import",
+          "line": 8,
+          "path": "tests/test_prolog_title_representation.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 9,
+          "path": "tests/test_prolog_title_representation.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 9,
+          "path": "tests/test_run_bundle_io.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 15,
+          "path": "tests/test_skill_io.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 6,
+          "path": "tests/test_title_depth.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 13,
+          "path": "tests/test_url_learning_capture.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 10,
+          "path": "workstation/tests/test_workstation_core.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_semantics",
+          "module": "realized_core_semantics"
+        }
+      ],
+      "module": "markdown_ir",
+      "owner": "subject_domain",
+      "path": "markdown_ir.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "from_import",
+          "line": 25,
+          "path": "tests/learning_xref_test_support.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "import",
+          "line": 73,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 26,
+          "path": "tests/test_markdown_artifact_generation.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 7,
+          "path": "tests/test_markdown_ir.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_engine",
+          "module": "realized_core_engine"
+        }
+      ],
+      "module": "markdown_learning_artifact_semantics",
+      "owner": "controller",
+      "path": "markdown_learning_artifact_semantics.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 74,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_engine",
+          "module": "realized_core_engine"
+        }
+      ],
+      "module": "non_achievedness_normalization",
+      "owner": "controller",
+      "path": "non_achievedness_normalization.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 77,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_semantics",
+          "module": "realized_core_semantics"
+        }
+      ],
+      "module": "normalization_primitives",
+      "owner": "semantic_model",
+      "path": "normalization_primitives.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 79,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_engine",
+          "module": "realized_core_engine"
+        }
+      ],
+      "module": "normalization_runtime_dependencies",
+      "owner": "controller",
+      "path": "normalization_runtime_dependencies.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 80,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_engine",
+          "module": "realized_core_engine.non_achievedness_normalization"
+        },
+        {
+          "component": "core_semantics",
+          "module": "realized_core_semantics.normalization"
+        },
+        {
+          "component": "core_semantics",
+          "module": "realized_core_semantics.semantic_text"
+        }
+      ],
+      "module": "normalize",
+      "owner": "compatibility",
+      "path": "normalize.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 78,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_engine",
+          "module": "realized_core_engine"
+        }
+      ],
+      "module": "not_elaboration_ranking",
+      "owner": "controller",
+      "path": "not_elaboration_ranking.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 81,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_semantics",
+          "module": "realized_core_semantics"
+        }
+      ],
+      "module": "prolog",
+      "owner": "semantic_model",
+      "path": "prolog.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 89,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_engine",
+          "module": "realized_core_engine"
+        }
+      ],
+      "module": "prompt_directives",
+      "owner": "controller",
+      "path": "prompt_directives.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 90,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 34,
+          "path": "tests/test_title_depth.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "subject_core",
+          "module": "workstation.subject.core"
+        }
+      ],
+      "module": "publication",
+      "owner": "subject_domain",
+      "path": "publication.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 83,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 25,
+          "path": "tests/test_publication.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 67,
+          "path": "workstation/tests/test_subject_workflow.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "subject_core",
+          "module": "workstation.subject.core"
+        }
+      ],
+      "module": "publication_projection",
+      "owner": "subject_domain",
+      "path": "publication_projection.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 84,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 46,
+          "path": "tests/test_publication.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 35,
+          "path": "workstation/tests/test_workstation_chat_ui.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "subject_core",
+          "module": "workstation.subject.core"
+        }
+      ],
+      "module": "publication_render",
+      "owner": "subject_domain",
+      "path": "publication_render.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 85,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 11,
+          "path": "tests/test_learning_context_projection.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 51,
+          "path": "tests/test_publication.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "subject_core",
+          "module": "workstation.subject.core"
+        }
+      ],
+      "module": "publication_validation",
+      "owner": "subject_domain",
+      "path": "publication_validation.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 86,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 52,
+          "path": "tests/test_publication.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_semantics",
+          "module": "realized_core_semantics"
+        }
+      ],
+      "module": "pure_theory_types",
+      "owner": "semantic_model",
+      "path": "pure_theory_types.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 82,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "governed_core",
+          "module": "realized_core_runtime"
+        }
+      ],
+      "module": "python_skill_brokerization",
+      "owner": "runtime_execution",
+      "path": "python_skill_brokerization.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 87,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "governed_core",
+          "module": "realized_core_runtime"
+        }
+      ],
+      "module": "python_skill_host",
+      "owner": "runtime_execution",
+      "path": "python_skill_host.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 98,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "governed_core",
+          "module": "realized_core_runtime"
+        }
+      ],
+      "module": "python_skill_host_transport",
+      "owner": "runtime_execution",
+      "path": "python_skill_host_transport.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 88,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 5,
+          "path": "tests/test_python_skill_host_transport.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_engine",
+          "module": "realized_core_engine"
+        }
+      ],
+      "module": "retrieval_ranking",
+      "owner": "controller",
+      "path": "retrieval_ranking.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 91,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 28,
+          "path": "tests/test_artifact_answer_selection.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 10,
+          "path": "tests/test_function_boundary.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "subject_core",
+          "module": "workstation.subject.core"
+        }
+      ],
+      "module": "review_composition",
+      "owner": "subject_domain",
+      "path": "review_composition.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 92,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 42,
+          "path": "tests/test_decision_review.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 53,
+          "path": "tests/test_publication.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 21,
+          "path": "tests/test_review_composition.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 18,
+          "path": "workstation/tests/bdd/test_report_creation_bdd.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 68,
+          "path": "workstation/tests/test_subject_workflow.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 36,
+          "path": "workstation/tests/test_workstation_chat_ui.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "exchange",
+          "module": "realized_exchange"
+        }
+      ],
+      "module": "run_bundle_io",
+      "owner": "entry_exchange",
+      "path": "run_bundle_io.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 93,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 14,
+          "path": "tests/test_core_runtime_determinism_replay.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 11,
+          "path": "tests/test_run_bundle_io.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_engine",
+          "module": "realized_core_engine"
+        }
+      ],
+      "module": "run_outcome_harvest_and_reporting",
+      "owner": "controller",
+      "path": "run_outcome_harvest_and_reporting.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 94,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "app_cli",
+          "module": "workstation.app.cli"
+        }
+      ],
+      "module": "runtime_controller_api",
+      "owner": "entry_exchange",
+      "path": "runtime_controller_api.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "from_import",
+          "line": 10,
+          "path": "itemize.py",
+          "scope": "compatibility_facade"
+        },
+        {
+          "import_kind": "import",
+          "line": 95,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 28,
+          "path": "tests/test_runtime_controller_api.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_engine",
+          "module": "realized_core_engine"
+        }
+      ],
+      "module": "runtime_governance_context",
+      "owner": "governance",
+      "path": "runtime_governance_context.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 96,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "governed_core",
+          "module": "realized_core_runtime"
+        }
+      ],
+      "module": "runtime_temp",
+      "owner": "runtime_execution",
+      "path": "runtime_temp.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 97,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "import",
+          "line": 10,
+          "path": "tests/test_runtime_temp.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_engine",
+          "module": "realized_core_engine"
+        }
+      ],
+      "module": "semantic_prompt_posture",
+      "owner": "controller",
+      "path": "semantic_prompt_posture.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 99,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_semantics",
+          "module": "realized_core_semantics"
+        }
+      ],
+      "module": "semantic_text",
+      "owner": "semantic_model",
+      "path": "semantic_text.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "from_import",
+          "line": 26,
+          "path": "tests/learning_xref_test_support.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "import",
+          "line": 100,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 19,
+          "path": "tests/test_executor_framework_learning.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 27,
+          "path": "tests/test_markdown_artifact_generation.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 9,
+          "path": "tests/test_side_boundary_extraction.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 35,
+          "path": "tests/test_title_depth.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 19,
+          "path": "workstation/tests/bdd/test_report_creation_bdd.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 12,
+          "path": "workstation/tests/bdd/test_smart_city_travel_incremental_report_ladder_bdd.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 12,
+          "path": "workstation/tests/bdd/test_smart_city_travel_incremental_report_ladder_live.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 74,
+          "path": "workstation/tests/test_subject_workflow.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 38,
+          "path": "workstation/tests/test_workstation_chat_ui.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "exchange",
+          "module": "realized_exchange"
+        }
+      ],
+      "module": "side",
+      "owner": "entry_exchange",
+      "path": "side.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 15,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "import",
+          "line": 15,
+          "path": "tests/test_import_batching.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "import",
+          "line": 7,
+          "path": "tests/test_side_boundary_extraction.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "exchange",
+          "module": "realized_exchange"
+        }
+      ],
+      "module": "side_runtime_dependencies",
+      "owner": "entry_exchange",
+      "path": "side_runtime_dependencies.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 16,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "skill_application",
+          "module": "realized_skill_application"
+        }
+      ],
+      "module": "skill_boundary_normalization",
+      "owner": "portable_skills",
+      "path": "skill_boundary_normalization.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 110,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 12,
+          "path": "tests/test_skill_boundary_normalization.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "exchange",
+          "module": "realized_exchange"
+        }
+      ],
+      "module": "skill_compatibility_export",
+      "owner": "entry_exchange",
+      "path": "skill_compatibility_export.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 104,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 6,
+          "path": "tests/test_skill_compatibility_export.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "exchange",
+          "module": "realized_exchange"
+        }
+      ],
+      "module": "skill_compatibility_import",
+      "owner": "entry_exchange",
+      "path": "skill_compatibility_import.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 105,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 6,
+          "path": "tests/test_skill_compatibility_import.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "exchange",
+          "module": "realized_exchange"
+        }
+      ],
+      "module": "skill_compiler",
+      "owner": "entry_exchange",
+      "path": "skill_compiler.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 106,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 6,
+          "path": "tests/test_skill_compiler.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 7,
+          "path": "tests/test_skill_composition.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "skill_application",
+          "module": "realized_skill_application"
+        }
+      ],
+      "module": "skill_composition",
+      "owner": "portable_skills",
+      "path": "skill_composition.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 103,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 8,
+          "path": "tests/test_skill_composition.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "exchange",
+          "module": "realized_exchange"
+        }
+      ],
+      "module": "skill_export_projection",
+      "owner": "entry_exchange",
+      "path": "skill_export_projection.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 107,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 18,
+          "path": "tests/test_skill_io.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 7,
+          "path": "tests/test_skill_ir.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_engine",
+          "module": "realized_core_engine"
+        }
+      ],
+      "module": "skill_governance",
+      "owner": "governance",
+      "path": "skill_governance.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 101,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 27,
+          "path": "tests/test_skill_io.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_governance",
+          "module": "realized_core_governance.vocabulary"
+        }
+      ],
+      "module": "skill_governance_primitives",
+      "owner": "governance",
+      "path": "skill_governance_primitives.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 102,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "skill_semantics",
+          "module": "realized_skill_semantics.invocation"
+        },
+        {
+          "component": "skills_core",
+          "module": "workstation.skills.core.invocation_contract"
+        }
+      ],
+      "module": "skill_invocation_contract",
+      "owner": "portable_skills",
+      "path": "skill_invocation_contract.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 109,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 6,
+          "path": "tests/test_skill_invocation_contract.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "skill_application",
+          "module": "realized_skill_application"
+        }
+      ],
+      "module": "skill_ir",
+      "owner": "portable_skills",
+      "path": "skill_ir.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 108,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 8,
+          "path": "tests/test_skill_ir.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "skill_semantics",
+          "module": "realized_skill_semantics.leaves"
+        }
+      ],
+      "module": "skill_leaf_types",
+      "owner": "portable_skills",
+      "path": "skill_leaf_types.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 111,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_governance",
+          "module": "realized_core_governance.lifecycle"
+        }
+      ],
+      "module": "skill_lifecycle",
+      "owner": "governance",
+      "path": "skill_lifecycle.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 112,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "skill_semantics",
+          "module": "realized_skill_semantics.paths"
+        }
+      ],
+      "module": "skill_path_notation",
+      "owner": "portable_skills",
+      "path": "skill_path_notation.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 113,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 7,
+          "path": "tests/test_skill_path_notation.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "exchange",
+          "module": "realized_exchange"
+        }
+      ],
+      "module": "skill_registry",
+      "owner": "entry_exchange",
+      "path": "skill_registry.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 114,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 32,
+          "path": "tests/test_skill_io.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_governance",
+          "module": "realized_core_governance"
+        },
+        {
+          "component": "core_governance",
+          "module": "realized_core_governance._normalization"
+        },
+        {
+          "component": "core_governance",
+          "module": "realized_core_governance.lifecycle"
+        },
+        {
+          "component": "core_governance",
+          "module": "realized_core_governance.safety"
+        },
+        {
+          "component": "core_governance",
+          "module": "realized_core_governance.vocabulary"
+        },
+        {
+          "component": "core_semantics",
+          "module": "realized_core_semantics.artifacts"
+        }
+      ],
+      "module": "skill_safety_governance",
+      "owner": "governance",
+      "path": "skill_safety_governance.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 115,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "exchange",
+          "module": "realized_exchange"
+        }
+      ],
+      "module": "skill_schema_io",
+      "owner": "entry_exchange",
+      "path": "skill_schema_io.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 116,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 17,
+          "path": "tests/test_executor_framework_learning.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 18,
+          "path": "tests/test_governance_selection_precedence.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 29,
+          "path": "tests/test_host_mediation.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 10,
+          "path": "tests/test_learning_context_skill_projection.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 16,
+          "path": "tests/test_run_bundle_io.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 11,
+          "path": "tests/test_skill_compatibility_export.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 11,
+          "path": "tests/test_skill_compatibility_import.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 17,
+          "path": "tests/test_skill_composition.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 12,
+          "path": "tests/test_skill_invocation_contract.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 31,
+          "path": "tests/test_skill_io.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 14,
+          "path": "tests/test_skill_ir.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 19,
+          "path": "workstation/tests/test_workstation.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_engine",
+          "module": "realized_core_engine"
+        }
+      ],
+      "module": "store",
+      "owner": "persistence_adapter",
+      "path": "store.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 118,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 235,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 29,
+          "path": "tests/test_artifact_answer_selection.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 22,
+          "path": "tests/test_artifact_search_hybrid.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 23,
+          "path": "tests/test_artifact_search_hybrid.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 15,
+          "path": "tests/test_core_runtime_determinism_replay.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 18,
+          "path": "trials/PROBABILITY_INFORMATION_RELATION_VALIDATION.py",
+          "scope": "trial"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 20,
+          "path": "workstation/tests/test_workstation.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_engine",
+          "module": "realized_core_engine"
+        }
+      ],
+      "module": "structured_learning_yaml",
+      "owner": "controller",
+      "path": "structured_learning_yaml.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 117,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_engine",
+          "module": "realized_core_engine"
+        }
+      ],
+      "module": "supplement",
+      "owner": "controller",
+      "path": "supplement.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 119,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 8,
+          "path": "tests/test_supplement_provider_compatibility.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_engine",
+          "module": "realized_core_engine"
+        }
+      ],
+      "module": "system_state",
+      "owner": "controller",
+      "path": "system_state.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 120,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 13,
+          "path": "tests/test_controller_determinism_replay_pack.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 16,
+          "path": "tests/test_core_runtime_determinism_replay.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 10,
+          "path": "tests/test_core_runtime_package_adapter.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 18,
+          "path": "tests/test_host_interaction_context.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 17,
+          "path": "tests/test_run_bundle_io.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "core_semantics",
+          "module": "realized_core_semantics"
+        }
+      ],
+      "module": "title_semantics",
+      "owner": "semantic_model",
+      "path": "title_semantics.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 121,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "subject_service",
+          "module": "workstation.subject.service"
+        }
+      ],
+      "module": "url_learning_capture",
+      "owner": "subject_domain",
+      "path": "url_learning_capture.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 122,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 14,
+          "path": "tests/test_url_learning_capture.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 5972,
+          "path": "workstation/tests/test_subject_workflow.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 6030,
+          "path": "workstation/tests/test_subject_workflow.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 6074,
+          "path": "workstation/tests/test_subject_workflow.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 6162,
+          "path": "workstation/tests/test_subject_workflow.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 6215,
+          "path": "workstation/tests/test_subject_workflow.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 6324,
+          "path": "workstation/tests/test_subject_workflow.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 6396,
+          "path": "workstation/tests/test_subject_workflow.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 6468,
+          "path": "workstation/tests/test_subject_workflow.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 6582,
+          "path": "workstation/tests/test_subject_workflow.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 6699,
+          "path": "workstation/tests/test_subject_workflow.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 6811,
+          "path": "workstation/tests/test_subject_workflow.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 6892,
+          "path": "workstation/tests/test_subject_workflow.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 6995,
+          "path": "workstation/tests/test_subject_workflow.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 7116,
+          "path": "workstation/tests/test_subject_workflow.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 7277,
+          "path": "workstation/tests/test_subject_workflow.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 7450,
+          "path": "workstation/tests/test_subject_workflow.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 7621,
+          "path": "workstation/tests/test_subject_workflow.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 7768,
+          "path": "workstation/tests/test_subject_workflow.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 7840,
+          "path": "workstation/tests/test_subject_workflow.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 7973,
+          "path": "workstation/tests/test_subject_workflow.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 3066,
+          "path": "workstation/tests/test_workstation_chat_ui.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 3122,
+          "path": "workstation/tests/test_workstation_chat_ui.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 3186,
+          "path": "workstation/tests/test_workstation_chat_ui.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 3263,
+          "path": "workstation/tests/test_workstation_chat_ui.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 3410,
+          "path": "workstation/tests/test_workstation_chat_ui.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 3553,
+          "path": "workstation/tests/test_workstation_chat_ui.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 3683,
+          "path": "workstation/tests/test_workstation_chat_ui.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 3830,
+          "path": "workstation/tests/test_workstation_chat_ui.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 3973,
+          "path": "workstation/tests/test_workstation_chat_ui.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 4103,
+          "path": "workstation/tests/test_workstation_chat_ui.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 4273,
+          "path": "workstation/tests/test_workstation_chat_ui.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 4353,
+          "path": "workstation/tests/test_workstation_chat_ui.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 4401,
+          "path": "workstation/tests/test_workstation_chat_ui.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 4471,
+          "path": "workstation/tests/test_workstation_chat_ui.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 4551,
+          "path": "workstation/tests/test_workstation_chat_ui.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 4629,
+          "path": "workstation/tests/test_workstation_chat_ui.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 4691,
+          "path": "workstation/tests/test_workstation_chat_ui.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 4759,
+          "path": "workstation/tests/test_workstation_chat_ui.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 4817,
+          "path": "workstation/tests/test_workstation_chat_ui.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 4875,
+          "path": "workstation/tests/test_workstation_chat_ui.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 4958,
+          "path": "workstation/tests/test_workstation_chat_ui.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 5030,
+          "path": "workstation/tests/test_workstation_chat_ui.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 5108,
+          "path": "workstation/tests/test_workstation_chat_ui.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 5191,
+          "path": "workstation/tests/test_workstation_chat_ui.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 5309,
+          "path": "workstation/tests/test_workstation_chat_ui.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 5414,
+          "path": "workstation/tests/test_workstation_chat_ui.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 5543,
+          "path": "workstation/tests/test_workstation_chat_ui.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 5672,
+          "path": "workstation/tests/test_workstation_chat_ui.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 48,
+          "path": "workstation/tests/test_workstation_core.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "validation",
+          "module": "realized_validation"
+        }
+      ],
+      "module": "validation_ladder",
+      "owner": "validation_trial",
+      "path": "validation_ladder.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 11,
+          "path": "tests/test_validation_ladder.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 12,
+          "path": "tests/test_validation_ladder.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "validation",
+          "module": "realized_validation"
+        }
+      ],
+      "module": "validation_sqlite",
+      "owner": "validation_trial",
+      "path": "validation_sqlite.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 11,
+          "path": "tests/test_validation_sqlite.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 12,
+          "path": "tests/test_validation_sqlite.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "governed_core",
+          "module": "realized_core_runtime"
+        }
+      ],
+      "module": "virtual_mounts",
+      "owner": "runtime_execution",
+      "path": "virtual_mounts.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 123,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 38,
+          "path": "tests/test_host_mediation.py",
+          "scope": "test"
+        },
+        {
+          "import_kind": "from_import",
+          "line": 11,
+          "path": "tests/test_runtime_temp.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    },
+    {
+      "canonical_targets": [
+        {
+          "component": "governed_core",
+          "module": "realized_core_runtime"
+        }
+      ],
+      "module": "wasm_skill_runtime",
+      "owner": "runtime_execution",
+      "path": "wasm_skill_runtime.py",
+      "removal_state": "retained",
+      "root_dependencies": [],
+      "static_consumers": [
+        {
+          "import_kind": "import",
+          "line": 124,
+          "path": "tests/test_architecture_compatibility_facades.py",
+          "scope": "test"
+        }
+      ],
+      "support_status": "supported_historical_import"
+    }
+  ],
+  "parse_errors": [],
+  "policy": {
+    "canonical_package_imports_are_forbidden": true,
+    "facade_removal_requires_a_separate_change": true,
+    "public_examples_must_use_canonical_apis": true,
+    "supported_import_removal_requires_documented_notice": true
+  },
+  "public_documentation_facade_references": [],
+  "public_example_facade_consumers": [],
+  "qualification": {
+    "completed_stable_cycles": 1,
+    "evidence": "architecture/qualification-baseline.json",
+    "minimum_stable_cycles": 1,
+    "retirement_hold": false
+  },
+  "schema_version": 1,
+  "summary": {
+    "canonical_package_consumer_count": 0,
+    "facade_count": 120,
+    "public_documentation_reference_count": 0,
+    "public_example_consumer_count": 0,
+    "static_consumer_count": 405
+  }
+}

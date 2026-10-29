@@ -6,7 +6,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Callable
 
-from semantic_text import collapse_ws
+from realized_core_semantics.semantic_text import collapse_ws
 from workstation.contracts.events import WorkstationEvent
 from workstation.foundation.events.event_bus import workstation_event_bus
 from workstation.foundation.projections import WorkstationActivityEventView, render_workstation_activity_event

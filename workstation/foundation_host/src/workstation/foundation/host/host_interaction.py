@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from realized_host_interaction.context import StaticHostInteractionContext
 from realized_host_interaction.models import HostInteractionAttachment, HostInteractionDescriptor
+from realized_host_interaction.realizers import HostRealizerProvider
 from workstation.foundation.models import WorkstationSession
 
 
@@ -37,7 +38,11 @@ def workstation_host_interaction_attachments(session: WorkstationSession) -> tup
     )
 
 
-def workstation_host_interaction_context(session: WorkstationSession) -> StaticHostInteractionContext:
+def workstation_host_interaction_context(
+    session: WorkstationSession,
+    *,
+    realizer_provider: HostRealizerProvider | None = None,
+) -> StaticHostInteractionContext:
     """
     High Level Purpose:
         In circumstances like letting the governed runtime execute against workstation-style host interactions, helps with projecting one workstation session into the shared host-interaction contract.
@@ -67,4 +72,7 @@ def workstation_host_interaction_context(session: WorkstationSession) -> StaticH
             "initial_task": session.initial_task,
         },
     )
-    return StaticHostInteractionContext(descriptor=descriptor)
+    return StaticHostInteractionContext(
+        descriptor=descriptor,
+        realizer_provider=realizer_provider,
+    )

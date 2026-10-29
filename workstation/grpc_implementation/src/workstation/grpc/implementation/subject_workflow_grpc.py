@@ -8,7 +8,7 @@ from typing import Callable
 
 import grpc
 
-from semantic_text import collapse_ws
+from realized_core_semantics.semantic_text import collapse_ws
 from workstation.contracts.subject import (
     SubjectImportStaging,
     SubjectWorkflowActionSpecView,

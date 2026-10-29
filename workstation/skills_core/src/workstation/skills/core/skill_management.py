@@ -9,26 +9,13 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-import yaml
-
 from realized_core_governance.lifecycle import skill_lifecycle_from_payload
 from realized_core_governance.records import artifact_skill_declaration
-from semantic_text import collapse_ws
-from skill_export_projection import (
-    batch_skill_export_filename,
-    export_skill_bundle_text,
-    skill_kind_from_artifact,
-)
-from skill_schema_io import (
-    artifact_from_skill_document,
-    load_skill_yaml_payload_documents,
-    normalized_skill_bundle_filename_for_source,
-    yaml_skill_top_level_document,
-)
-from side import load_artifact_yaml_documents
-from skill_governance import (
-    evaluate_skill_admission,
-    normalize_skill_kind,
+from realized_core_governance.vocabulary import normalize_skill_kind
+from realized_core_semantics.semantic_text import collapse_ws
+from realized_skill_application.projection import skill_kind_from_artifact
+from workstation.skills.core.governance import (
+    evaluate_workstation_skill_admission as evaluate_skill_admission,
 )
 from realized_skill_semantics.declaration import (
     SKILL_SCHEMA_VERSION_V2,
@@ -39,6 +26,7 @@ from workstation.foundation.host.governance import (
     workstation_governance_inventory,
     workstation_is_transient_bundle_policy_payload,
 )
+from workstation.foundation.host.skill_exchange import skill_exchange_provider
 from workstation.foundation.models import WorkstationSession
 from workstation.skills.core.skill_invocation import (
     list_available_workstation_skills,
@@ -92,28 +80,7 @@ def _load_workstation_import_payload_documents(source_file: Path) -> list[dict[s
     Returns:
         list[dict[str, Any]]: Result produced by `_load_workstation_import_payload_documents`.
     """
-    try:
-        return load_skill_yaml_payload_documents(Path(source_file))
-    except ValueError as skill_error:
-        try:
-            artifacts = load_artifact_yaml_documents(Path(source_file))
-        except Exception:
-            raise skill_error
-        projected_bundle = export_skill_bundle_text(artifacts)
-        if not projected_bundle.strip():
-            raise ValueError(
-                "The source file is an artifact bundle, but it does not contain any exportable skills."
-            ) from skill_error
-        payloads: list[dict[str, Any]] = []
-        for document in yaml.safe_load_all(projected_bundle):
-            if document in (None, "", [], {}):
-                continue
-            payloads.append(yaml_skill_top_level_document(document))
-        if not payloads:
-            raise ValueError(
-                "The source file did not yield any portable skill payloads after artifact projection."
-            ) from skill_error
-        return payloads
+    return skill_exchange_provider().load_import_payload_documents(Path(source_file))
 
 
 def _skill_semantic_bonus(*, prompt_text_casefold: str, prompt_tokens: set[str], title_casefold: str) -> int:
@@ -416,6 +383,7 @@ def import_workstation_skill_file(
         dict[str, Any]: Result produced by `import_workstation_skill_file`.
     """
     started = time.perf_counter()
+    exchange = skill_exchange_provider()
     store = workstation_skill_store(skill_store_path)
     payloads = _load_workstation_import_payload_documents(Path(source_file))
     policy_payloads: list[dict[str, Any]] = []
@@ -452,7 +420,7 @@ def import_workstation_skill_file(
             return
         artifacts: list[Any] = []
         for payload in payload_batch:
-            artifact = artifact_from_skill_document(payload)
+            artifact = exchange.artifact_from_skill_document(payload)
             content = dict(artifact.content) if isinstance(artifact.content, Mapping) else {}
             admission = admission_factory(payload, artifact, content)
             if admission:
@@ -552,12 +520,14 @@ def import_workstation_skill_file(
     )
 
     canonical_export_path.parent.mkdir(parents=True, exist_ok=True)
-    canonical_export_path.write_text(export_skill_bundle_text(imported_artifacts))
+    canonical_export_path.write_text(exchange.export_skill_bundle_text(imported_artifacts))
     return {
         "status": "ok",
         "source_file": str(Path(source_file).resolve()),
         "canonical_export_path": str(canonical_export_path.resolve()),
-        "canonical_export_filename": normalized_skill_bundle_filename_for_source(Path(source_file)),
+        "canonical_export_filename": exchange.normalized_skill_bundle_filename_for_source(
+            Path(source_file)
+        ),
         "imported_count": len(imported_records),
         "skipped_transient_policy_count": len(skipped_transient_policy_payloads),
         "imported": imported_records,
@@ -606,11 +576,12 @@ def export_workstation_skill(
     canonical_title = str(getattr(artifact, "title", "")).strip() or normalized_title
     destination = Path(destination_path).expanduser().resolve()
     destination.parent.mkdir(parents=True, exist_ok=True)
-    destination.write_text(export_skill_bundle_text([artifact]))
+    exchange = skill_exchange_provider()
+    destination.write_text(exchange.export_skill_bundle_text([artifact]))
     return {
         "status": "ok",
         "skill_title": canonical_title,
         "destination_path": str(destination),
-        "filename": batch_skill_export_filename(artifact),
+        "filename": exchange.batch_skill_export_filename(artifact),
         "exported_at": datetime.now(timezone.utc).isoformat(),
     }

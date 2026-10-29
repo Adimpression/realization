@@ -26,6 +26,7 @@ from workstation.grpc.implementation.workstation_bootstrap_grpc import (
 )
 from workstation.grpc.implementation.workstation_shell_grpc import WorkstationShellGrpcService
 from workstation.runtime.core.session import launch_workstation_session
+from workstation.runtime.core.subject_host_actions import RuntimeSubjectWorkflowHostActions
 from workstation.shell.core.workstation_shell_api import WorkstationShellApiService
 from workstation.subject.service.subject_workflow_api import SubjectWorkflowApiService
 from workstation.subject.service.client_sessions import WorkstationClientSessionRegistry
@@ -67,7 +68,10 @@ def build_workstation_grpc_server(
     root_initializer = lambda root_path: _ensure_hosted_workstation_root(root_path, root_registry=root_registry)
     subject_workflow_pb2_grpc.add_SubjectWorkflowServiceServicer_to_server(
         SubjectWorkflowGrpcService(
-            service=SubjectWorkflowApiService(client_sessions=shared_sessions),
+            service=SubjectWorkflowApiService(
+                client_sessions=shared_sessions,
+                host_actions=RuntimeSubjectWorkflowHostActions(),
+            ),
             artifact_ref_resolver=lambda root_path, client_session_id, server_paths: resolve_artifact_ref_views(
                 root_path,
                 client_session_id,

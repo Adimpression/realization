@@ -13,7 +13,10 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
-from validation_sqlite import archive_validation_sqlite, validation_sqlite_paths
+from realized_validation.sqlite_runtime import (
+    archive_validation_sqlite,
+    validation_sqlite_paths,
+)
 
 
 ROOT = Path(__file__).resolve().parent

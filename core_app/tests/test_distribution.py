@@ -43,11 +43,11 @@ def _root_imports(path: Path) -> set[str]:
 
 def _engine_modules() -> set[str]:
     return {
-        line
-        for raw_line in (CORE_ENGINE_ROOT / "module_manifest.txt").read_text(
-            encoding="utf-8"
-        ).splitlines()
-        if (line := raw_line.strip()) and not line.startswith("#")
+        path.stem
+        for path in (
+            CORE_ENGINE_ROOT / "src" / "realized_core_engine"
+        ).glob("*.py")
+        if path.stem != "__init__"
     }
 
 

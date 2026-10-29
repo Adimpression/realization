@@ -5,8 +5,8 @@ import os
 from pathlib import Path
 from typing import Any
 
-from store import SQLiteVectorArtifactStore
 from workstation.foundation.host.governance import ensure_workstation_skill_home_policy
+from workstation.skills.core.skill_invocation import workstation_skill_store
 
 
 def workstation_codex_home() -> Path:
@@ -68,8 +68,7 @@ def resolve_workstation_skill_home(
         home_path.mkdir(parents=True, exist_ok=True)
         exports_path.mkdir(parents=True, exist_ok=True)
         imports_path.mkdir(parents=True, exist_ok=True)
-        store = SQLiteVectorArtifactStore()
-        store.sqlite_path = store_path
+        store = workstation_skill_store(store_path)
         store.load_all_artifacts()
         ensure_workstation_skill_home_policy(store)
     return {

@@ -4,10 +4,16 @@ version = "0.1.0"
 description = "Workstation projection models package for Realized."
 requires-python = ">=3.14"
 dependencies = [
+    "realized-blend==0.1.0",
+    "realized-core-semantics==0.1.0",
     "realized-workstation",
     "realized-workstation-contracts",
     "realized-workstation-foundation-models",
 ]
+
+[tool.uv.sources]
+realized-blend = { workspace = true }
+realized-core-semantics = { workspace = true }
 
 [build-system]
 requires = ["setuptools>=69", "wheel"]

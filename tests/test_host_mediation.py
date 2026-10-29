@@ -10,8 +10,10 @@ from pathlib import Path
 from unittest.mock import patch
 
 import host_brokers
+from applied_theory_types import CrossBoundaryResult
 from host_abi import host_abi_version, wasm_skill_abi_version
 from host_brokers import invoke_host_broker
+from host_realizers import packaged_host_realizer_provider
 from main import (
     Artifact,
     ArtifactAdmission,
@@ -25,6 +27,14 @@ from main import (
     load_artifact_yaml_documents,
 )
 from skill_schema_io import artifact_from_skill_document
+from realized_host_interaction.context import host_native_interaction_context
+from realized_host_interaction.realizers import (
+    HostBrokerBinding,
+    HostExecutorBinding,
+    HostRealizerDescriptor,
+    HostRealizerInspection,
+    StaticHostRealizerProvider,
+)
 from virtual_mounts import default_virtual_mount_table
 from workstation.foundation.host.host_interaction import workstation_host_interaction_context
 from workstation.runtime.core.session import launch_workstation_session, load_workstation_session
@@ -144,6 +154,7 @@ class HostMediationTests(unittest.TestCase):
         *,
         title: str,
         authority: str,
+        broker_names: tuple[str, ...],
         approval_class: str = "automatic",
         admitted: bool = True,
     ) -> Artifact:
@@ -207,6 +218,7 @@ class HostMediationTests(unittest.TestCase):
             content={
                 "skill_schema": "bssc_skill.v2",
                 "skill_kind": "ability",
+                "governed_host_brokers": list(broker_names),
                 "skill_declaration": {
                     "intent": f"Perform {title.lower()} through the mediated host broker.",
                     "inputs": {"path": "target path"},
@@ -235,6 +247,321 @@ class HostMediationTests(unittest.TestCase):
             constraints=["use only through mediated broker execution"],
         )
 
+    def test_missing_broker_realizer_issues_no_grant_or_invocation(self) -> None:
+        state = SystemState.bootstrap("missing broker realizer")
+        controller = BSSCController(
+            state,
+            llm_policy="off",
+            host_interaction_context=host_native_interaction_context(
+                realizer_provider=StaticHostRealizerProvider(),
+            ),
+        )
+
+        result = controller.execute_mediated_host_broker_request(
+            self.make_governed_broker_artifact(
+                title="Read Missing Broker",
+                authority="read",
+                broker_names=("fs.read_text",),
+            ),
+            broker_name="fs.read_text",
+            broker_arguments={"path": str(Path(self.tempdir.name) / "missing.txt")},
+            semantic_unit="Read through an unavailable broker.",
+        )
+
+        self.assertEqual(result["status"], "error")
+        self.assertIn("No broker realizer is registered", result["error"])
+        self.assertEqual(state.capability_grants, [])
+        self.assertEqual(state.effect_traces[-1]["grants"], [])
+        self.assertEqual(
+            state.effect_traces[-1]["realizer"]["binding_status"],
+            "unavailable",
+        )
+
+    def test_unavailable_broker_prerequisite_blocks_grant_and_callback(self) -> None:
+        calls: list[str] = []
+
+        def unavailable(descriptor: HostRealizerDescriptor) -> HostRealizerInspection:
+            return HostRealizerInspection(
+                kind=descriptor.kind,
+                identity=descriptor.identity,
+                registered=True,
+                available=False,
+                rationale="Required runtime is unavailable.",
+            )
+
+        provider = StaticHostRealizerProvider(
+            brokers=(
+                HostBrokerBinding(
+                    descriptor=HostRealizerDescriptor(
+                        kind="broker",
+                        identity="fs.read_text",
+                    ),
+                    callback=lambda invocation, active: calls.append(invocation.identity),
+                    inspector=unavailable,
+                ),
+            ),
+        )
+        state = SystemState.bootstrap("unavailable broker prerequisite")
+        controller = BSSCController(
+            state,
+            llm_policy="off",
+            host_interaction_context=host_native_interaction_context(
+                realizer_provider=provider,
+            ),
+        )
+
+        result = controller.execute_mediated_host_broker_request(
+            self.make_governed_broker_artifact(
+                title="Read Unavailable Broker",
+                authority="read",
+                broker_names=("fs.read_text",),
+            ),
+            broker_name="fs.read_text",
+            broker_arguments={"path": str(Path(self.tempdir.name) / "missing.txt")},
+        )
+
+        self.assertEqual(result["status"], "error")
+        self.assertIn("Required runtime is unavailable", result["error"])
+        self.assertEqual(calls, [])
+        self.assertEqual(state.capability_grants, [])
+
+    def test_undeclared_v2_broker_issues_no_grant_or_invocation(self) -> None:
+        calls: list[str] = []
+        provider = StaticHostRealizerProvider(
+            brokers=(
+                HostBrokerBinding(
+                    descriptor=HostRealizerDescriptor(
+                        kind="broker",
+                        identity="fs.write_text",
+                    ),
+                    callback=lambda invocation, active: calls.append(invocation.identity)
+                    or {"status": "ok"},
+                ),
+            ),
+        )
+        state = SystemState.bootstrap("undeclared broker")
+        controller = BSSCController(
+            state,
+            llm_policy="off",
+            host_interaction_context=host_native_interaction_context(
+                realizer_provider=provider,
+            ),
+        )
+
+        result = controller.execute_mediated_host_broker_request(
+            self.make_governed_broker_artifact(
+                title="Narrow Broker Declaration",
+                authority="write",
+                broker_names=("fs.read_text",),
+            ),
+            broker_name="fs.write_text",
+            broker_arguments={"path": "ignored", "text": "ignored"},
+        )
+
+        self.assertEqual(result["status"], "error")
+        self.assertIn("does not bind the exact host broker", result["error"])
+        self.assertEqual(calls, [])
+        self.assertEqual(state.capability_grants, [])
+
+    def test_denied_authority_does_not_invoke_available_broker(self) -> None:
+        calls: list[str] = []
+        provider = StaticHostRealizerProvider(
+            brokers=(
+                HostBrokerBinding(
+                    descriptor=HostRealizerDescriptor(
+                        kind="broker",
+                        identity="fs.read_text",
+                    ),
+                    callback=lambda invocation, active: calls.append(invocation.identity)
+                    or {"status": "ok"},
+                ),
+            ),
+        )
+        state = SystemState.bootstrap("denied authority")
+        controller = BSSCController(
+            state,
+            llm_policy="off",
+            host_interaction_context=host_native_interaction_context(
+                realizer_provider=provider,
+            ),
+        )
+
+        result = controller.execute_mediated_host_broker_request(
+            self.make_governed_broker_artifact(
+                title="Held Read Broker",
+                authority="read",
+                broker_names=("fs.read_text",),
+                admitted=False,
+            ),
+            broker_name="fs.read_text",
+            broker_arguments={"path": "ignored"},
+        )
+
+        self.assertEqual(result["status"], "error")
+        self.assertEqual(calls, [])
+        self.assertEqual(state.capability_grants, [])
+        self.assertEqual(
+            state.effect_traces[-1]["realizer"]["binding_status"],
+            "available",
+        )
+
+    def test_executor_declaration_mismatch_issues_no_grant_or_invocation(self) -> None:
+        calls: list[str] = []
+        provider = StaticHostRealizerProvider(
+            executors=(
+                HostExecutorBinding(
+                    descriptor=HostRealizerDescriptor(
+                        kind="executor",
+                        identity="python3",
+                    ),
+                    callback=lambda invocation, active: calls.append(invocation.identity),
+                ),
+            ),
+        )
+        artifact = self.make_governed_broker_artifact(
+            title="Mismatched Executor",
+            authority="execute",
+            broker_names=(),
+        )
+        artifact.content["skill_declaration"]["executor_framework"] = "bash"
+        state = SystemState.bootstrap("mismatched executor")
+        controller = BSSCController(
+            state,
+            llm_policy="off",
+            host_interaction_context=host_native_interaction_context(
+                realizer_provider=provider,
+            ),
+        )
+
+        result = controller.execute_mediated_artifact_effect(
+            artifact,
+            semantic_unit="Run the mismatched executor.",
+            executor_framework="python3",
+            executable_text="print('not reached')",
+            invocation_payload={},
+        )
+
+        self.assertFalse(result.ok)
+        self.assertIn("does not match", result.stderr)
+        self.assertEqual(calls, [])
+        self.assertEqual(state.capability_grants, [])
+
+    def test_declared_nested_broker_is_bound_before_executor_grant(self) -> None:
+        calls: list[str] = []
+        provider = StaticHostRealizerProvider(
+            executors=(
+                HostExecutorBinding(
+                    descriptor=HostRealizerDescriptor(
+                        kind="executor",
+                        identity="python3",
+                    ),
+                    callback=lambda invocation, active: calls.append(invocation.identity),
+                ),
+            ),
+        )
+        artifact = self.make_governed_broker_artifact(
+            title="Nested Missing Broker",
+            authority="read",
+            broker_names=("fs.read_text",),
+        )
+        artifact.content["skill_declaration"]["executor_framework"] = "python3"
+        state = SystemState.bootstrap("nested missing broker")
+        controller = BSSCController(
+            state,
+            llm_policy="off",
+            host_interaction_context=host_native_interaction_context(
+                realizer_provider=provider,
+            ),
+        )
+
+        result = controller.execute_mediated_artifact_effect(
+            artifact,
+            semantic_unit="Run a child with a missing broker.",
+            executor_framework="python3",
+            executable_text="print('not reached')",
+            invocation_payload={},
+        )
+
+        self.assertFalse(result.ok)
+        self.assertIn("Declared nested broker", result.stderr)
+        self.assertEqual(calls, [])
+        self.assertEqual(state.capability_grants, [])
+
+    def test_injected_exact_broker_and_executor_are_used_on_allowed_paths(self) -> None:
+        calls: list[str] = []
+
+        def execute(invocation, active):
+            calls.append(f"executor:{invocation.identity}")
+            return CrossBoundaryResult(
+                ok=True,
+                command=[invocation.identity],
+                exit_code=0,
+                stdout="",
+                stderr="",
+                answer="injected execution",
+            )
+
+        provider = StaticHostRealizerProvider(
+            executors=(
+                HostExecutorBinding(
+                    descriptor=HostRealizerDescriptor(
+                        kind="executor",
+                        identity="python3",
+                    ),
+                    callback=execute,
+                ),
+            ),
+            brokers=(
+                HostBrokerBinding(
+                    descriptor=HostRealizerDescriptor(
+                        kind="broker",
+                        identity="fs.read_text",
+                    ),
+                    callback=lambda invocation, active: calls.append(
+                        f"broker:{invocation.identity}"
+                    )
+                    or {"status": "ok", "text": "injected read"},
+                ),
+            ),
+        )
+        context = host_native_interaction_context(realizer_provider=provider)
+        state = SystemState.bootstrap("injected realizers")
+        controller = BSSCController(
+            state,
+            llm_policy="off",
+            host_interaction_context=context,
+        )
+        broker_artifact = self.make_governed_broker_artifact(
+            title="Injected Read Broker",
+            authority="read",
+            broker_names=("fs.read_text",),
+        )
+
+        broker_result = controller.execute_mediated_host_broker_request(
+            broker_artifact,
+            broker_name="fs.read_text",
+            broker_arguments={"path": "ignored"},
+        )
+
+        executor_artifact = self.make_governed_broker_artifact(
+            title="Injected Python Executor",
+            authority="execute",
+            broker_names=(),
+        )
+        executor_artifact.content["skill_declaration"]["executor_framework"] = "python3"
+        executor_result = controller.execute_mediated_artifact_effect(
+            executor_artifact,
+            semantic_unit="Use the injected executor.",
+            executor_framework="python3",
+            executable_text="print('ignored')",
+            invocation_payload={},
+        )
+
+        self.assertEqual(broker_result["text"], "injected read")
+        self.assertTrue(executor_result.ok)
+        self.assertEqual(executor_result.answer, "injected execution")
+        self.assertEqual(calls, ["broker:fs.read_text", "executor:python3"])
+
     def test_mediated_host_broker_can_write_and_read_text(self) -> None:
         """
         High Level Purpose:
@@ -258,7 +585,11 @@ class HostMediationTests(unittest.TestCase):
         target = Path(self.tempdir.name) / "demo.txt"
 
         write_result = controller.execute_mediated_host_broker_request(
-            self.make_governed_broker_artifact(title="Write Text File", authority="write"),
+            self.make_governed_broker_artifact(
+                title="Write Text File",
+                authority="write",
+                broker_names=("fs.write_text",),
+            ),
             broker_name="fs.write_text",
             broker_arguments={"path": str(target), "text": "hello"},
             semantic_unit="Write hello to a file.",
@@ -268,7 +599,11 @@ class HostMediationTests(unittest.TestCase):
         self.assertEqual(target.read_text(), "hello")
 
         read_result = controller.execute_mediated_host_broker_request(
-            self.make_governed_broker_artifact(title="Read Text File", authority="read"),
+            self.make_governed_broker_artifact(
+                title="Read Text File",
+                authority="read",
+                broker_names=("fs.read_text",),
+            ),
             broker_name="fs.read_text",
             broker_arguments={"path": str(target)},
             semantic_unit="Read hello from a file.",
@@ -286,7 +621,7 @@ class HostMediationTests(unittest.TestCase):
         receipts = state.effect_traces[0].get("receipts", {})
         self.assertEqual(
             sorted(receipts),
-            ["approval", "declaration", "grants", "lifecycle", "policy", "request"],
+            ["approval", "declaration", "grants", "lifecycle", "policy", "realizer", "request"],
         )
         self.assertTrue(all(str(item.get("digest", "")).strip() for item in receipts.values()))
 
@@ -321,7 +656,11 @@ class HostMediationTests(unittest.TestCase):
         state = SystemState.bootstrap("query sqlite")
         controller = BSSCController(state, llm_policy="off")
         result = controller.execute_mediated_host_broker_request(
-            self.make_governed_broker_artifact(title="Query SQLite Store", authority="read"),
+            self.make_governed_broker_artifact(
+                title="Query SQLite Store",
+                authority="read",
+                broker_names=("store.sqlite_query",),
+            ),
             broker_name="store.sqlite_query",
             broker_arguments={
                 "sqlite_path": str(db_path),
@@ -331,7 +670,7 @@ class HostMediationTests(unittest.TestCase):
             semantic_unit="Read a value from sqlite.",
         )
 
-        self.assertEqual(result["status"], "ok")
+        self.assertEqual(result["status"], "ok", result)
         self.assertEqual(result["row_count"], 1)
         self.assertEqual(result["rows"][0]["value"], 7)
         self.assertEqual(len(state.effect_traces), 1)
@@ -373,7 +712,11 @@ class HostMediationTests(unittest.TestCase):
             host_interaction_context=workstation_host_interaction_context(session),
         )
         result = controller.execute_mediated_host_broker_request(
-            self.make_governed_broker_artifact(title="Read Mounted Workstation File", authority="read"),
+            self.make_governed_broker_artifact(
+                title="Read Mounted Workstation File",
+                authority="read",
+                broker_names=("fs.read_mount",),
+            ),
             broker_name="fs.read_mount",
             broker_arguments={"mount": "skill_input", "relative_path": "mounted_note.txt"},
             semantic_unit="Read the mounted workstation file.",
@@ -468,7 +811,7 @@ class HostMediationTests(unittest.TestCase):
         self.assertTrue(result.ok)
         self.assertEqual(result.exit_code, 0)
         self.assertIsInstance(result.result, dict)
-        self.assertEqual(result.result.get("status"), "ok")
+        self.assertEqual(result.result.get("status"), "ok", result.result)
         self.assertEqual(result.result.get("operation"), "get")
         self.assertTrue(result.result.get("found"))
         self.assertEqual(result.result.get("value"), "hi")
@@ -583,7 +926,7 @@ class HostMediationTests(unittest.TestCase):
         self.assertTrue(result.ok)
         self.assertEqual(result.exit_code, 0)
         self.assertIsInstance(result.result, dict)
-        self.assertEqual(result.result.get("status"), "ok")
+        self.assertEqual(result.result.get("status"), "ok", result.result)
         self.assertEqual(result.result.get("skill_title"), "Hi Responder")
         self.assertEqual(result.result.get("answer"), "hi")
         wasm_broker_traces = [
@@ -605,7 +948,21 @@ class HostMediationTests(unittest.TestCase):
     def test_wasm_skill_can_invoke_named_tool_through_hostcall(self) -> None:
         state = SystemState.bootstrap("wasm named tool invoke")
         state.controller_features.supported_executors = ["wasm_wasi"]
-        controller = BSSCController(state, llm_policy="off")
+        provider = packaged_host_realizer_provider(
+            broker_overrides={
+                "macos.open_browser": lambda invocation, active: {
+                    "status": "ok",
+                    "url": invocation.arguments.get("url", ""),
+                },
+            }
+        )
+        controller = BSSCController(
+            state,
+            llm_policy="off",
+            host_interaction_context=host_native_interaction_context(
+                realizer_provider=provider,
+            ),
+        )
         artifact = Artifact(
             id="artifact-wasm-tool-invoke",
             artifact_type=ArtifactType.ABILITY,
@@ -677,16 +1034,11 @@ class HostMediationTests(unittest.TestCase):
             constraints=["use only through mediated wasm execution"],
         )
 
-        with patch.dict(
-            host_brokers.HOST_BROKER_REGISTRY,
-            {"macos.open_browser": lambda **kwargs: {"status": "ok", "url": kwargs.get("url", "")}},
-            clear=False,
-        ):
-            result = controller.execute_function_artifact(
-                artifact,
-                semantic_unit="Open the example site from wasm via a named tool.",
-                explicit_payload={},
-            )
+        result = controller.execute_function_artifact(
+            artifact,
+            semantic_unit="Open the example site from wasm via a named tool.",
+            explicit_payload={},
+        )
 
         self.assertTrue(result.ok)
         self.assertEqual(result.exit_code, 0)
@@ -731,7 +1083,11 @@ class HostMediationTests(unittest.TestCase):
         state = SystemState.bootstrap("virtual mount read write")
         controller = BSSCController(state, llm_policy="off")
 
-        writer = self.make_governed_broker_artifact(title="Write Mounted File", authority="write")
+        writer = self.make_governed_broker_artifact(
+            title="Write Mounted File",
+            authority="write",
+            broker_names=("fs.write_mount",),
+        )
         writer.content["virtual_mounts"] = {
             "skill_output": {
                 "root": str(mount_root),
@@ -754,7 +1110,11 @@ class HostMediationTests(unittest.TestCase):
         self.assertTrue((mount_root / "results" / "demo.txt").exists())
         self.assertEqual((mount_root / "results" / "demo.txt").read_text(), "hello")
 
-        reader = self.make_governed_broker_artifact(title="Read Mounted File", authority="read")
+        reader = self.make_governed_broker_artifact(
+            title="Read Mounted File",
+            authority="read",
+            broker_names=("fs.read_mount",),
+        )
         reader.content["virtual_mounts"] = dict(writer.content["virtual_mounts"])
         read_result = controller.execute_mediated_host_broker_request(
             reader,
@@ -798,7 +1158,11 @@ class HostMediationTests(unittest.TestCase):
 
         state = SystemState.bootstrap("virtual mount list")
         controller = BSSCController(state, llm_policy="off")
-        artifact = self.make_governed_broker_artifact(title="List Mounted Directory", authority="read")
+        artifact = self.make_governed_broker_artifact(
+            title="List Mounted Directory",
+            authority="read",
+            broker_names=("fs.list_mount",),
+        )
         artifact.content["virtual_mounts"] = {
             "skill_input": {
                 "root": str(mount_root),
@@ -829,7 +1193,11 @@ class HostMediationTests(unittest.TestCase):
 
         state = SystemState.bootstrap("virtual mount find")
         controller = BSSCController(state, llm_policy="off")
-        artifact = self.make_governed_broker_artifact(title="Find Mounted Files", authority="read")
+        artifact = self.make_governed_broker_artifact(
+            title="Find Mounted Files",
+            authority="read",
+            broker_names=("fs.find_mount",),
+        )
         artifact.content["virtual_mounts"] = {
             "skill_input": {
                 "root": str(mount_root),
@@ -864,7 +1232,11 @@ class HostMediationTests(unittest.TestCase):
 
         state = SystemState.bootstrap("virtual mount copy move delete")
         controller = BSSCController(state, llm_policy="off")
-        artifact = self.make_governed_broker_artifact(title="Copy Move Delete Mounted File", authority="write")
+        artifact = self.make_governed_broker_artifact(
+            title="Copy Move Delete Mounted File",
+            authority="write",
+            broker_names=("fs.copy_mount", "fs.move_mount", "fs.delete_mount"),
+        )
         artifact.content["virtual_mounts"] = {
             "skill_input": {
                 "root": str(source_root),
@@ -939,7 +1311,11 @@ class HostMediationTests(unittest.TestCase):
 
         state = SystemState.bootstrap("virtual mount zip")
         controller = BSSCController(state, llm_policy="off")
-        artifact = self.make_governed_broker_artifact(title="Zip Mounted Directory", authority="write")
+        artifact = self.make_governed_broker_artifact(
+            title="Zip Mounted Directory",
+            authority="write",
+            broker_names=("fs.create_zip_mount", "fs.extract_zip_mount"),
+        )
         artifact.content["virtual_mounts"] = {
             "skill_input": {
                 "root": str(source_root),
@@ -997,7 +1373,11 @@ class HostMediationTests(unittest.TestCase):
         controller = BSSCController(state, llm_policy="off")
 
         result = controller.execute_mediated_host_broker_request(
-            self.make_governed_broker_artifact(title="Fetch Text Resource", authority="communicate"),
+            self.make_governed_broker_artifact(
+                title="Fetch Text Resource",
+                authority="communicate",
+                broker_names=("net.http_get_text",),
+            ),
             broker_name="net.http_get_text",
             broker_arguments={"url": "data:text/plain,hello%20world"},
             semantic_unit="Fetch text through the governed network broker.",
@@ -1031,7 +1411,11 @@ class HostMediationTests(unittest.TestCase):
 
         state = SystemState.bootstrap("virtual mount denied data class")
         controller = BSSCController(state, llm_policy="off")
-        artifact = self.make_governed_broker_artifact(title="Read Secret Mounted File", authority="read")
+        artifact = self.make_governed_broker_artifact(
+            title="Read Secret Mounted File",
+            authority="read",
+            broker_names=("fs.read_mount",),
+        )
         artifact.content["virtual_mounts"] = {
             "user_selected": {
                 "root": str(mount_root),
@@ -1085,7 +1469,11 @@ class HostMediationTests(unittest.TestCase):
 
         state = SystemState.bootstrap("named query")
         controller = BSSCController(state, llm_policy="off")
-        artifact = self.make_governed_broker_artifact(title="Named Query Reader", authority="read")
+        artifact = self.make_governed_broker_artifact(
+            title="Named Query Reader",
+            authority="read",
+            broker_names=("store.named_query",),
+        )
         artifact.content["skill_declaration"]["data_classes_touched"] = ["internal"]
         artifact.content["named_queries"] = {
             "demo_value": {
@@ -1132,7 +1520,11 @@ class HostMediationTests(unittest.TestCase):
         """
         state = SystemState.bootstrap("skill state")
         controller = BSSCController(state, llm_policy="off")
-        artifact = self.make_governed_broker_artifact(title="Persist Skill State", authority="persist")
+        artifact = self.make_governed_broker_artifact(
+            title="Persist Skill State",
+            authority="persist",
+            broker_names=("store.skill_state",),
+        )
         artifact.content["skill_declaration"]["data_classes_touched"] = ["derived"]
 
         put_result = controller.execute_mediated_host_broker_request(
@@ -1193,7 +1585,12 @@ class HostMediationTests(unittest.TestCase):
         target = Path(self.tempdir.name) / "blocked.txt"
 
         result = controller.execute_mediated_host_broker_request(
-            self.make_governed_broker_artifact(title="Blocked Write", authority="write", admitted=False),
+            self.make_governed_broker_artifact(
+                title="Blocked Write",
+                authority="write",
+                broker_names=("fs.write_text",),
+                admitted=False,
+            ),
             broker_name="fs.write_text",
             broker_arguments={"path": str(target), "text": "blocked"},
             semantic_unit="Try to write blocked text.",
@@ -1227,7 +1624,12 @@ class HostMediationTests(unittest.TestCase):
         state = SystemState.bootstrap("inactive host broker")
         controller = BSSCController(state, llm_policy="off")
         target = Path(self.tempdir.name) / "inactive.txt"
-        artifact = self.make_governed_broker_artifact(title="Inactive Write", authority="write", admitted=True)
+        artifact = self.make_governed_broker_artifact(
+            title="Inactive Write",
+            authority="write",
+            broker_names=("fs.write_text",),
+            admitted=True,
+        )
         artifact.content["skill_lifecycle"] = {
             "review_status": "pending_review",
             "admission_status": "admitted",
@@ -1276,11 +1678,19 @@ class HostMediationTests(unittest.TestCase):
         artifact = self.make_governed_broker_artifact(
             title="Approval Gated Write",
             authority="write",
+            broker_names=("fs.write_mount",),
             approval_class="operator_approved",
             admitted=True,
         )
         artifact.content["skill_declaration"]["risk_tier"] = "tier3_sensitive"
         artifact.content["skill_declaration"]["approval_requirements"] = ["operator_approved"]
+        artifact.content["virtual_mounts"] = {
+            "output": {
+                "root": self.tempdir.name,
+                "permissions": ["read", "write", "list"],
+                "data_class": "public",
+            }
+        }
         artifact.content["skill_admission"]["status"] = "admitted"
         artifact.content["skill_admission"]["admitted"] = True
 
@@ -1324,8 +1734,8 @@ class HostMediationTests(unittest.TestCase):
 
         result = controller.execute_mediated_host_broker_request(
             artifact,
-            broker_name="fs.write_text",
-            broker_arguments={"path": str(target), "text": "blocked"},
+            broker_name="fs.write_mount",
+            broker_arguments={"mount": "output", "relative_path": target.name, "text": "blocked"},
             semantic_unit="Try to write with revoked approval.",
         )
 
@@ -1360,6 +1770,7 @@ class HostMediationTests(unittest.TestCase):
         artifact = self.make_governed_broker_artifact(
             title="Later Approved Write",
             authority="write",
+            broker_names=("fs.write_mount",),
             approval_class="operator_approved",
             admitted=False,
         )
@@ -1368,6 +1779,13 @@ class HostMediationTests(unittest.TestCase):
         artifact.content["skill_admission"]["status"] = "held"
         artifact.content["skill_admission"]["admitted"] = False
         artifact.content["skill_admission"]["rationale"] = "Policy requires explicit approval class operator_approved before admission."
+        artifact.content["virtual_mounts"] = {
+            "output": {
+                "root": self.tempdir.name,
+                "permissions": ["read", "write", "list"],
+                "data_class": "public",
+            }
+        }
 
         policy_artifact = artifact_from_skill_document(
             {
@@ -1409,8 +1827,8 @@ class HostMediationTests(unittest.TestCase):
 
         result = controller.execute_mediated_host_broker_request(
             artifact,
-            broker_name="fs.write_text",
-            broker_arguments={"path": str(target), "text": "allowed"},
+            broker_name="fs.write_mount",
+            broker_arguments={"mount": "output", "relative_path": target.name, "text": "allowed"},
             semantic_unit="Write after later approval.",
         )
 
@@ -1429,7 +1847,12 @@ class HostMediationTests(unittest.TestCase):
         state = SystemState.bootstrap("revoked broker")
         controller = BSSCController(state, llm_policy="off")
         target = Path(self.tempdir.name) / "revoked-by-record.txt"
-        artifact = self.make_governed_broker_artifact(title="Revoked Write", authority="write", admitted=True)
+        artifact = self.make_governed_broker_artifact(
+            title="Revoked Write",
+            authority="write",
+            broker_names=("fs.write_text",),
+            admitted=True,
+        )
         revocation = artifact_from_skill_document(
             {
                 "schema": "bssc_skill.v2",
@@ -1469,7 +1892,12 @@ class HostMediationTests(unittest.TestCase):
         state = SystemState.bootstrap("incident quarantined broker")
         controller = BSSCController(state, llm_policy="off")
         target = Path(self.tempdir.name) / "incident-quarantined.txt"
-        artifact = self.make_governed_broker_artifact(title="Incident Write", authority="write", admitted=True)
+        artifact = self.make_governed_broker_artifact(
+            title="Incident Write",
+            authority="write",
+            broker_names=("fs.write_text",),
+            admitted=True,
+        )
         incident = artifact_from_skill_document(
             {
                 "schema": "bssc_skill.v2",
@@ -1537,7 +1965,11 @@ def main(path: str, text: str, __dependencies__: tuple[str, ...] = ()) -> dict[s
             function_name="main",
             argument_names=["path", "text"],
         )
-        artifact = self.make_governed_broker_artifact(title="Brokered File Write", authority="write")
+        artifact = self.make_governed_broker_artifact(
+            title="Brokered File Write",
+            authority="write",
+            broker_names=("fs.write_text",),
+        )
         artifact.content.update(
             {
                 "python_script": python_script,
@@ -1554,7 +1986,7 @@ def main(path: str, text: str, __dependencies__: tuple[str, ...] = ()) -> dict[s
             semantic_unit="Write governed text to a file.",
         )
 
-        self.assertTrue(execution.ok)
+        self.assertTrue(execution.ok, execution.stderr)
         self.assertTrue(target.exists())
         self.assertEqual(target.read_text(), "governed")
         self.assertGreaterEqual(len(state.effect_traces), 2)
@@ -1625,7 +2057,7 @@ def main(path: str, text: str, __dependencies__: tuple[str, ...] = ()) -> dict[s
             semantic_unit="Write legacy governed text to a file.",
         )
 
-        self.assertTrue(execution.ok)
+        self.assertTrue(execution.ok, execution.stderr)
         self.assertTrue(target.exists())
         self.assertEqual(target.read_text(), "legacy governed")
         child_traces = [trace for trace in state.effect_traces if trace.get("kind") == "python_skill_broker"]
@@ -1635,23 +2067,36 @@ def main(path: str, text: str, __dependencies__: tuple[str, ...] = ()) -> dict[s
 
     def test_named_tool_invoke_dispatches_through_registered_tool_surface(self) -> None:
         state = SystemState.bootstrap("invoke a named tool")
-        controller = BSSCController(state, llm_policy="off")
-        artifact = self.make_governed_broker_artifact(title="Open Browser Tool", authority="execute")
-
-        with patch.dict(
-            host_brokers.HOST_BROKER_REGISTRY,
-            {"macos.open_browser": lambda **kwargs: {"status": "ok", "url": kwargs.get("url", "")}},
-            clear=False,
-        ):
-            result = controller.execute_mediated_host_broker_request(
-                artifact,
-                broker_name="tool.invoke",
-                broker_arguments={
-                    "tool_name": "open_browser",
-                    "arguments": {"url": "https://example.com"},
+        provider = packaged_host_realizer_provider(
+            broker_overrides={
+                "macos.open_browser": lambda invocation, active: {
+                    "status": "ok",
+                    "url": invocation.arguments.get("url", ""),
                 },
-                semantic_unit="Open the example site in a browser.",
-            )
+            }
+        )
+        controller = BSSCController(
+            state,
+            llm_policy="off",
+            host_interaction_context=host_native_interaction_context(
+                realizer_provider=provider,
+            ),
+        )
+        artifact = self.make_governed_broker_artifact(
+            title="Open Browser Tool",
+            authority="execute",
+            broker_names=("tool.invoke",),
+        )
+
+        result = controller.execute_mediated_host_broker_request(
+            artifact,
+            broker_name="tool.invoke",
+            broker_arguments={
+                "tool_name": "open_browser",
+                "arguments": {"url": "https://example.com"},
+            },
+            semantic_unit="Open the example site in a browser.",
+        )
 
         self.assertEqual(result["status"], "ok")
         self.assertEqual(result["tool_name"], "open_browser")
@@ -1674,7 +2119,11 @@ def main(path: str, text: str, __dependencies__: tuple[str, ...] = ()) -> dict[s
         artifact = load_artifact_yaml_documents(fixture_path)[0]
         store.persist_artifact(artifact, run_id="test_skill_invoke")
 
-        caller = self.make_governed_broker_artifact(title="Invoke Nested Skill", authority="invoke")
+        caller = self.make_governed_broker_artifact(
+            title="Invoke Nested Skill",
+            authority="invoke",
+            broker_names=("skill.invoke",),
+        )
         caller.content["skill_declaration"]["composition_rights"] = ["skill:Hi Responder"]
         result = controller.execute_mediated_host_broker_request(
             caller,
@@ -1683,7 +2132,7 @@ def main(path: str, text: str, __dependencies__: tuple[str, ...] = ()) -> dict[s
             semantic_unit="Invoke the hi responder skill.",
         )
 
-        self.assertEqual(result["status"], "ok")
+        self.assertEqual(result["status"], "ok", result)
         self.assertEqual(result["skill_title"], "Hi Responder")
         self.assertEqual(result["answer"], "hi")
         self.assertGreaterEqual(len(state.effect_traces), 2)
@@ -1705,7 +2154,11 @@ def main(path: str, text: str, __dependencies__: tuple[str, ...] = ()) -> dict[s
         artifact = load_artifact_yaml_documents(fixture_path)[0]
         store.persist_artifact(artifact, run_id="test_skill_invoke_denied")
 
-        caller = self.make_governed_broker_artifact(title="Invoke Nested Skill", authority="invoke")
+        caller = self.make_governed_broker_artifact(
+            title="Invoke Nested Skill",
+            authority="invoke",
+            broker_names=("skill.invoke",),
+        )
         caller.content["skill_declaration"]["composition_rights"] = ["skill:Different Skill"]
         result = controller.execute_mediated_host_broker_request(
             caller,

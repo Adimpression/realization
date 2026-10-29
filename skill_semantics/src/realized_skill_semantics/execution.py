@@ -5,44 +5,14 @@ from __future__ import annotations
 from collections.abc import Mapping
 from typing import Any
 
-
-SUPPORTED_EXECUTOR_FRAMEWORK_CHOICES = (
-    "python3",
-    "bash",
-    "ansible",
-    "wasm_wasi",
+from realized_core_semantics.executors import (
+    EXECUTOR_FRAMEWORK_ALIASES,
+    EXECUTOR_FRAMEWORK_CONTENT_KEYS,
+    EXECUTOR_FRAMEWORK_REPRESENTATIONS,
+    SUPPORTED_EXECUTOR_FRAMEWORK_CHOICES,
+    executor_framework_content_key,
+    normalize_executor_framework_name,
 )
-
-EXECUTOR_FRAMEWORK_ALIASES = {
-    "python": "python3",
-    "py": "python3",
-    "python3": "python3",
-    "bash": "bash",
-    "sh": "bash",
-    "shell": "bash",
-    "zsh": "bash",
-    "ansible": "ansible",
-    "ansible-playbook": "ansible",
-    "wasm": "wasm_wasi",
-    "wat": "wasm_wasi",
-    "wasi": "wasm_wasi",
-    "wasmtime": "wasm_wasi",
-    "wasm_wasi": "wasm_wasi",
-}
-
-EXECUTOR_FRAMEWORK_CONTENT_KEYS = {
-    "python3": "python_script",
-    "bash": "shell_script",
-    "ansible": "ansible_playbook",
-    "wasm_wasi": "wasm_module",
-}
-
-EXECUTOR_FRAMEWORK_REPRESENTATIONS = {
-    "python3": "python_script",
-    "bash": "shell_script",
-    "ansible": "ansible_playbook",
-    "wasm_wasi": "wasm_module",
-}
 
 __all__ = [
     "EXECUTOR_FRAMEWORK_ALIASES",
@@ -54,20 +24,6 @@ __all__ = [
     "executor_framework_content_key",
     "normalize_executor_framework_name",
 ]
-
-
-def normalize_executor_framework_name(value: Any) -> str:
-    """Normalize one portable executor-framework name or alias."""
-    normalized = str(value or "").strip().lower()
-    if not normalized:
-        return ""
-    return EXECUTOR_FRAMEWORK_ALIASES.get(normalized, normalized)
-
-
-def executor_framework_content_key(framework: str) -> str:
-    """Return the ability content field for one executor descriptor."""
-    normalized = normalize_executor_framework_name(framework)
-    return EXECUTOR_FRAMEWORK_CONTENT_KEYS.get(normalized, "executable_body")
 
 
 def ability_executor_framework(

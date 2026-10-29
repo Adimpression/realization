@@ -17,6 +17,14 @@ from realized_core_llm.planning import (
     JsonConversationPlanner,
     JsonConversationRenderer,
 )
+from realized_core_llm.transport import (
+    ChatCompletionResponseError,
+    ChatContentPolicy,
+    ChatProviderDependencyError,
+    ChatRequestFallback,
+    OpenAICompatibleChatTransport,
+    build_openai_compatible_client,
+)
 
 
 class ConversationProviderConfigurationError(RuntimeError):
@@ -89,9 +97,26 @@ class OpenAICompatibleJsonProvider:
             request_kwargs["reasoning_effort"] = self.reasoning_effort
 
         started = time.perf_counter()
-        response = _create_completion(self.client, request_kwargs)
+        try:
+            response = OpenAICompatibleChatTransport(
+                client=self.client,
+                fallbacks=_CONVERSATION_REQUEST_FALLBACKS,
+                content_policy=ChatContentPolicy(
+                    mapping_requires_text_type=False,
+                    include_object_text=True,
+                    strip_string_content=True,
+                ),
+            ).complete(request_kwargs)
+        except ChatCompletionResponseError as exc:
+            raise ConversationProviderResponseError(
+                "The conversation provider returned an invalid response."
+            ) from exc
         elapsed_seconds = round(time.perf_counter() - started, 6)
-        raw_text = _response_text(response)
+        raw_text = response.text
+        if not raw_text:
+            raise ConversationProviderResponseError(
+                "The conversation provider returned no text."
+            )
         try:
             payload = json.loads(raw_text)
         except json.JSONDecodeError as exc:
@@ -105,11 +130,9 @@ class OpenAICompatibleJsonProvider:
         receipt = {
             "source": "llm",
             "provider": self.provider,
-            "model": str(getattr(response, "model", None) or self.model),
-            "response_id": str(getattr(response, "id", None) or ""),
-            "system_fingerprint": str(
-                getattr(response, "system_fingerprint", None) or ""
-            ),
+            "model": str(response.model or self.model),
+            "response_id": str(response.response_id or ""),
+            "system_fingerprint": str(response.system_fingerprint or ""),
             "request_digest": _digest(request_payload),
             "response_digest": _digest(
                 {"raw_text": raw_text, "payload": dict(payload)}
@@ -173,13 +196,6 @@ def build_environment_conversation_advisors(
 
 
 def _build_client(provider: str, *, timeout_seconds: float | None) -> Any:
-    try:
-        from openai import OpenAI
-    except ImportError as exc:
-        raise ConversationProviderConfigurationError(
-            "The 'openai' package is required for conversation providers."
-        ) from exc
-
     if provider == "openai":
         api_key = os.getenv("OPENAI_API_KEY", "").strip()
         if not api_key:
@@ -203,51 +219,16 @@ def _build_client(provider: str, *, timeout_seconds: float | None) -> Any:
             timeout = float(os.getenv("LLM_TIMEOUT_SECONDS", default_timeout))
         except ValueError:
             timeout = default_timeout
-    arguments: dict[str, Any] = {
-        "api_key": api_key,
-        "timeout": max(0.5, float(timeout)),
-        "max_retries": 0,
-    }
-    if base_url:
-        arguments["base_url"] = base_url
-    return OpenAI(**arguments)
-
-
-def _create_completion(client: Any, request: dict[str, Any]) -> Any:
-    arguments = dict(request)
-    while True:
-        try:
-            return client.chat.completions.create(**arguments)
-        except Exception as exc:
-            message = str(exc).casefold()
-            if (
-                "max_tokens" in arguments
-                and "max_tokens" in message
-                and "max_completion_tokens" in message
-            ):
-                arguments["max_completion_tokens"] = arguments.pop(
-                    "max_tokens"
-                )
-                continue
-            removed = False
-            for name in ("reasoning_effort", "temperature", "response_format"):
-                unsupported_markers = (
-                    "unsupported",
-                    "unrecognized",
-                    "unknown parameter",
-                    "not supported",
-                )
-                invalid_markers = () if name == "response_format" else ("invalid",)
-                if name in arguments and name in message and any(
-                    marker in message
-                    for marker in (*unsupported_markers, *invalid_markers)
-                ):
-                    arguments.pop(name, None)
-                    removed = True
-                    break
-            if removed:
-                continue
-            raise
+    try:
+        return build_openai_compatible_client(
+            api_key=api_key,
+            timeout_seconds=max(0.5, float(timeout)),
+            base_url=base_url or None,
+        )
+    except ChatProviderDependencyError as exc:
+        raise ConversationProviderConfigurationError(
+            "The 'openai' package is required for conversation providers."
+        ) from exc
 
 
 def _json_schema_response_format(schema: Mapping[str, Any]) -> dict[str, Any]:
@@ -266,31 +247,35 @@ def _json_schema_response_format(schema: Mapping[str, Any]) -> dict[str, Any]:
     }
 
 
-def _response_text(response: Any) -> str:
-    choices = getattr(response, "choices", None)
-    if not choices:
-        raise ConversationProviderResponseError(
-            "The conversation provider returned no choices."
-        )
-    content = getattr(getattr(choices[0], "message", None), "content", None)
-    if isinstance(content, str):
-        text = content.strip()
-    elif isinstance(content, list):
-        text = "\n".join(
-            str(
-                item.get("text", "")
-                if isinstance(item, Mapping)
-                else getattr(item, "text", "")
-            )
-            for item in content
-        ).strip()
-    else:
-        text = ""
-    if not text:
-        raise ConversationProviderResponseError(
-            "The conversation provider returned no text."
-        )
-    return text
+_UNSUPPORTED_PARAMETER_MARKERS = (
+    "unsupported",
+    "unrecognized",
+    "unknown parameter",
+    "not supported",
+)
+
+_CONVERSATION_REQUEST_FALLBACKS = (
+    ChatRequestFallback(
+        parameter="max_tokens",
+        required_error_markers=("max_tokens", "max_completion_tokens"),
+        replacement_parameter="max_completion_tokens",
+    ),
+    ChatRequestFallback(
+        parameter="reasoning_effort",
+        required_error_markers=("reasoning_effort",),
+        any_error_markers=(*_UNSUPPORTED_PARAMETER_MARKERS, "invalid"),
+    ),
+    ChatRequestFallback(
+        parameter="temperature",
+        required_error_markers=("temperature",),
+        any_error_markers=(*_UNSUPPORTED_PARAMETER_MARKERS, "invalid"),
+    ),
+    ChatRequestFallback(
+        parameter="response_format",
+        required_error_markers=("response_format",),
+        any_error_markers=_UNSUPPORTED_PARAMETER_MARKERS,
+    ),
+)
 
 
 def _digest(value: Mapping[str, Any]) -> str:

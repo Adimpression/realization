@@ -17,6 +17,7 @@ from main import (
     artifact_export_bundle_text,
     normalize_boundary_shape,
 )
+from controller_entrypoints import ensure_application_controller_runtime
 from blend_workflow import BlendWorkflowBinding, BlendWorkflowPlan, BlendWorkflowRun, BlendWorkflowStep
 from blend_workflow_store import persist_blend_workflow_objects
 from gather_sources import latest_source_revision, list_staged_sources, new_source_collection, persist_source_collection
@@ -49,6 +50,7 @@ from url_learning_capture import CapturedUrlLearningBundle
 
 class WorkstationCoreTests(unittest.TestCase):
     def setUp(self) -> None:
+        ensure_application_controller_runtime()
         self.tempdir = tempfile.TemporaryDirectory()
         self.root = Path(self.tempdir.name) / "root"
         self.workspace = Path(self.tempdir.name) / "workspace"

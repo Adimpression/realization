@@ -19,7 +19,6 @@ dependencies = [
     "markdown-it-py==4.0.0",
     "mdit-py-plugins==0.5.0",
     "mdurl==0.1.2",
-    "openai==2.29.0",
     "playwright==1.58.0",
     "platformdirs==4.9.4",
     "pydantic==2.12.5",
@@ -43,11 +42,18 @@ dependencies = [
     "realized-host-interaction",
     "realized-core-governance",
     "realized-core-semantics",
+    "realized-blend",
+    "realized-blend-application",
+    "realized-exchange",
+    "realized-skill-application",
     "realized-skill-semantics",
     "realized-core-runtime",
     "realized-core-engine",
     "realized-core-conversation",
     "realized-core-llm",
+    "realized-validation",
+    "coordinated-transformation==0.1.0",
+    "dst==0.1.0",
     "realized-core",
     "realized-workstation",
     "realized-workstation-contracts",
@@ -80,6 +86,11 @@ package = false
 
 [tool.uv.workspace]
 members = [
+    "blend",
+    "blend_application",
+    "coordinated_transformation",
+    "dst",
+    "exchange",
     "host_interaction",
     "core_app",
     "core_conversation",
@@ -88,7 +99,9 @@ members = [
     "core_llm",
     "core_runtime",
     "core_semantics",
+    "skill_application",
     "skill_semantics",
+    "validation",
     "workstation/app_cli",
     "workstation/contracts_api",
     "workstation/foundation_events",
@@ -111,15 +124,22 @@ members = [
 ]
 
 [tool.uv.sources]
+realized-blend = { workspace = true }
+realized-blend-application = { workspace = true }
+realized-exchange = { workspace = true }
+coordinated-transformation = { workspace = true }
+dst = { workspace = true }
 realized-host-interaction = { workspace = true }
 realized-core-governance = { workspace = true }
 realized-core-semantics = { workspace = true }
+realized-skill-application = { workspace = true }
 realized-skill-semantics = { workspace = true }
 realized-core = { workspace = true }
 realized-core-conversation = { workspace = true }
 realized-core-engine = { workspace = true }
 realized-core-llm = { workspace = true }
 realized-core-runtime = { workspace = true }
+realized-validation = { workspace = true }
 realized-workstation = { workspace = true }
 realized-workstation-contracts = { workspace = true }
 realized-workstation-foundation-models = { workspace = true }

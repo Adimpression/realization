@@ -15,11 +15,11 @@ def module_import_map(path: Path) -> dict[str, set[str]]:
         In circumstances like architectural regression testing over the entry/exchange layer, helps with extracting imported names by source module so layer boundaries can be asserted without executing the module.
 
     Reference to Theory:
-        Verifies the five-layer architecture by checking that governed installation depends on the exchange/schema surface for portable skill documents rather than on mixed exchange-export internals.
+        Verifies the six-layer architecture by checking that governed installation depends on the canonical exchange/schema surface for portable skill documents rather than on compatibility facades.
 
     Example Input Output:
         Input: `module_import_map(path=Path('/workspace/realized/governed_skill_installation.py'))`
-        Output: {'skill_schema_io': {'artifact_from_skill_document', 'resolve_import_skill_files'}, 'skill_export_projection': {'export_skill_bundle_text'}}
+        Output: {'realized_exchange.skill_schema': {'artifact_from_skill_document', 'resolve_import_skill_files'}, 'realized_exchange.skill_export': {'export_skill_bundle_text'}}
 
     Args:
         path: Value for `path` used by `module_import_map`. Expected type: `Path`.
@@ -71,7 +71,7 @@ class ExchangeLayerHygieneTests(unittest.TestCase):
             In circumstances like maintaining entry/exchange separation over time, helps with verifying that governed skill installation pulls portable skill schema hydration helpers from the dedicated exchange/schema module instead of from the broader skill export surface.
 
         Reference to Theory:
-            Verifies the five-layer architecture boundary that keeps installation dependent on exchange/schema hydration for document loading while allowing artifact construction to pass through the dedicated compiler surface.
+            Verifies the six-layer architecture boundary that keeps installation dependent on canonical exchange/schema hydration for document loading while allowing artifact construction to pass through the dedicated compiler surface.
 
         Example Input Output:
             Input: `test_governed_skill_installation_uses_skill_schema_io_for_schema_hydration()`
@@ -84,7 +84,7 @@ class ExchangeLayerHygieneTests(unittest.TestCase):
             None: This function mutates state or performs side effects without returning a value.
         """
         imports = module_import_map(REPO_ROOT / "governed_skill_installation.py")
-        schema_imports = imports.get("skill_schema_io", set())
+        schema_imports = imports.get("realized_exchange.skill_schema", set())
         self.assertTrue(
             {
                 "_runtime",
@@ -93,22 +93,26 @@ class ExchangeLayerHygieneTests(unittest.TestCase):
                 "resolve_import_skill_files",
             }.issubset(schema_imports)
         )
-        compiler_imports = imports.get("skill_compiler", set())
+        compiler_imports = imports.get("realized_exchange.compiler", set())
         self.assertTrue(
             {
                 "compile_skill_document",
                 "compiled_skill_summary_from_artifact",
             }.issubset(compiler_imports)
         )
-        skill_io_imports = imports.get("skill_io", set())
         self.assertFalse(
             {
                 "_runtime",
                 "load_skill_yaml_payload_documents",
                 "normalized_skill_bundle_filename_for_source",
                 "resolve_import_skill_files",
-            } & skill_io_imports,
-            msg="governed_skill_installation should no longer source schema hydration helpers from skill_io",
+            } & imports.get("skill_schema_io", set()),
+            msg="governed_skill_installation must not source schema hydration through the compatibility facade",
+        )
+        self.assertNotIn(
+            "skill_compiler",
+            imports,
+            msg="governed_skill_installation must not import the compiler compatibility facade",
         )
 
     def test_governed_skill_installation_uses_skill_export_projection_for_export_projection(self) -> None:
@@ -117,7 +121,7 @@ class ExchangeLayerHygieneTests(unittest.TestCase):
             In circumstances like maintaining exchange-layer separation over time, helps with verifying that governed skill installation sources portable export projection from the dedicated export module instead of from the compatibility shell.
 
         Reference to Theory:
-            Verifies the five-layer architecture boundary that keeps installation dependent on the narrower exchange/export surface rather than on mixed compatibility glue.
+            Verifies the six-layer architecture boundary that keeps installation dependent on the canonical exchange/export surface rather than on compatibility glue.
 
         Example Input Output:
             Input: `test_governed_skill_installation_uses_skill_export_projection_for_export_projection()`
@@ -130,20 +134,21 @@ class ExchangeLayerHygieneTests(unittest.TestCase):
             None: This function mutates state or performs side effects without returning a value.
         """
         imports = module_import_map(REPO_ROOT / "governed_skill_installation.py")
-        projection_imports = imports.get("skill_export_projection", set())
+        projection_imports = imports.get("realized_exchange.skill_export", set())
         self.assertTrue(
-            {
-                "export_skill_bundle_text",
-                "skill_kind_from_artifact",
-            }.issubset(projection_imports)
+            {"export_skill_bundle_text"}.issubset(projection_imports)
+        )
+        self.assertIn(
+            "skill_kind_from_artifact",
+            imports.get("realized_skill_application.projection", set()),
         )
         self.assertFalse(
             {
                 "_skill_kind_from_artifact",
                 "export_skill_bundle_text",
                 "skill_kind_from_artifact",
-            } & imports.get("skill_io", set()),
-            msg="governed_skill_installation should no longer source export projection from skill_io",
+            } & imports.get("skill_export_projection", set()),
+            msg="governed_skill_installation must not source projection through the compatibility facade",
         )
 
     def test_exchange_entrypoints_and_replay_paths_use_skill_export_projection(self) -> None:
@@ -152,7 +157,7 @@ class ExchangeLayerHygieneTests(unittest.TestCase):
             In circumstances like preventing the exchange layer from drifting back toward the compatibility shell, helps with verifying that entrypoints, replay export, and registry projection all depend on the dedicated export module.
 
         Reference to Theory:
-            Verifies the five-layer architecture boundary that keeps core exchange/export paths on the narrower projection surface instead of the broad compatibility facade.
+            Verifies the six-layer architecture boundary that keeps core exchange/export paths on the canonical exchange package instead of the historical compatibility facade.
 
         Example Input Output:
             Input: `test_exchange_entrypoints_and_replay_paths_use_skill_export_projection()`
@@ -166,21 +171,29 @@ class ExchangeLayerHygieneTests(unittest.TestCase):
         """
         module_expectations = {
             REPO_ROOT / "controller_entrypoints.py": {"handle_export_skill_command"},
-            REPO_ROOT / "run_bundle_io.py": {"skill_export_document"},
-            REPO_ROOT / "skill_registry.py": {"skill_export_document"},
+            REPO_ROOT
+            / "exchange"
+            / "src"
+            / "realized_exchange"
+            / "run_bundle.py": {"skill_export_document"},
+            REPO_ROOT
+            / "exchange"
+            / "src"
+            / "realized_exchange"
+            / "registry.py": {"skill_export_document"},
         }
         for path, expected_names in module_expectations.items():
             imports = module_import_map(path)
             self.assertTrue(
-                expected_names.issubset(imports.get("skill_export_projection", set())),
-                msg=f"{path.name} should import {sorted(expected_names)} from skill_export_projection",
+                expected_names.issubset(imports.get("realized_exchange.skill_export", set())),
+                msg=f"{path.name} should import {sorted(expected_names)} from realized_exchange.skill_export",
             )
             self.assertFalse(
-                expected_names & imports.get("skill_io", set()),
-                msg=f"{path.name} should no longer import {sorted(expected_names)} from skill_io",
+                expected_names & imports.get("skill_export_projection", set()),
+                msg=f"{path.name} must not import {sorted(expected_names)} through the compatibility facade",
             )
 
-    def test_skill_registry_uses_root_helpers_not_main_for_registry_export(self) -> None:
+    def test_skill_registry_uses_package_apis_not_main_for_registry_export(self) -> None:
         """
         High Level Purpose:
             In circumstances like continuing exchange-layer extraction, helps with verifying that skill registry export depends on narrower root helpers instead of importing controller/runtime composition from `main.py`.
@@ -198,21 +211,25 @@ class ExchangeLayerHygieneTests(unittest.TestCase):
         Returns:
             None: This function mutates state or performs side effects without returning a value.
         """
-        imports = module_import_roots(REPO_ROOT / "skill_registry.py")
+        imports = module_import_roots(
+            REPO_ROOT / "exchange" / "src" / "realized_exchange" / "registry.py"
+        )
         self.assertNotIn("main", imports)
-        self.assertIn("artifact", imports)
-        self.assertIn("store", imports)
+        self.assertNotIn("artifact", imports)
+        self.assertNotIn("store", imports)
+        self.assertIn("realized_core_semantics", imports)
+        self.assertIn("realized_core_engine", imports)
 
-    def test_skill_schema_io_uses_root_helpers_not_main_for_schema_hydration(self) -> None:
+    def test_skill_schema_io_uses_canonical_semantics_not_main_for_schema_hydration(self) -> None:
         """
         High Level Purpose:
-            In circumstances like continuing exchange-layer extraction, helps with verifying that skill schema hydration depends on narrower root helpers instead of importing controller/runtime composition from `main.py`.
+            In circumstances like continuing exchange-layer extraction, helps with verifying that skill schema hydration depends on canonical semantic helpers instead of importing controller/runtime composition from `main.py`.
 
         Reference to Theory:
-            Verifies that exchange-facing schema hydration stays on root helper modules and semantic normalization surfaces rather than reaching into controller/runtime composition directly.
+            Verifies that exchange-facing schema hydration stays on the semantic package rather than reaching into controller/runtime composition directly.
 
         Example Input Output:
-            Input: `test_skill_schema_io_uses_root_helpers_not_main_for_schema_hydration()`
+            Input: `test_skill_schema_io_uses_canonical_semantics_not_main_for_schema_hydration()`
             Output: None
 
         Args:
@@ -221,21 +238,26 @@ class ExchangeLayerHygieneTests(unittest.TestCase):
         Returns:
             None: This function mutates state or performs side effects without returning a value.
         """
-        imports = module_import_roots(REPO_ROOT / "skill_schema_io.py")
+        imports = module_import_roots(
+            REPO_ROOT / "exchange" / "src" / "realized_exchange" / "skill_schema.py"
+        )
         self.assertNotIn("main", imports)
-        self.assertIn("artifact", imports)
-        self.assertIn("semantic_text", imports)
+        self.assertNotIn("artifact", imports)
+        self.assertNotIn("store", imports)
+        self.assertNotIn("semantic_text", imports)
+        self.assertIn("realized_core_semantics", imports)
+        self.assertIn("realized_core_engine", imports)
 
-    def test_replay_verifier_uses_runtime_facade_not_main_for_replay_bootstrap(self) -> None:
+    def test_replay_verifier_uses_engine_controller_not_entry_composition(self) -> None:
         """
         High Level Purpose:
-            In circumstances like continuing replay-path extraction, helps with verifying that run-bundle replay depends on the runtime facade and root helpers instead of importing controller/runtime composition from `main.py`.
+            In circumstances like continuing replay-path extraction, helps with verifying that run-bundle replay constructs the controller from the engine boundary instead of importing executable workstation or `main.py` composition.
 
         Reference to Theory:
-            Verifies that replay verification stays on a narrower runtime contract boundary while using root helpers for store construction.
+            Verifies that replay verification stays on the engine boundary for an already reconstructed state and does not depend upward on entry composition.
 
         Example Input Output:
-            Input: `test_replay_verifier_uses_runtime_facade_not_main_for_replay_bootstrap()`
+            Input: `test_replay_verifier_uses_engine_controller_not_entry_composition()`
             Output: None
 
         Args:
@@ -246,5 +268,10 @@ class ExchangeLayerHygieneTests(unittest.TestCase):
         """
         imports = module_import_roots(REPO_ROOT / "replay_verifier.py")
         self.assertNotIn("main", imports)
-        self.assertIn("runtime_controller_api", imports)
-        self.assertIn("store", imports)
+        self.assertNotIn("constitutional_trace", imports)
+        self.assertNotIn("run_bundle_io", imports)
+        self.assertNotIn("runtime_controller_api", imports)
+        self.assertNotIn("workstation", imports)
+        self.assertNotIn("store", imports)
+        self.assertIn("realized_core_engine", imports)
+        self.assertIn("realized_exchange", imports)

@@ -14,7 +14,10 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from validation_sqlite import archive_validation_sqlite, validation_sqlite_paths
+from realized_validation.sqlite_runtime import (
+    archive_validation_sqlite,
+    validation_sqlite_paths,
+)
 
 REPO_ROOT = Path(__file__).resolve().parent
 TRIALS_ROOT = REPO_ROOT / "trials"

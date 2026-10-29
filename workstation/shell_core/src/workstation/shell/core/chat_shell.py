@@ -8,7 +8,7 @@ from collections import deque
 from pathlib import Path
 from typing import Any
 
-from semantic_text import collapse_ws
+from realized_core_semantics.semantic_text import collapse_ws
 from workstation.contracts.shell import WorkstationChatContext, WorkstationChatPromptTargetPlan
 from workstation.runtime.core.chat_commands import (
     canonical_workstation_chat_slash_command_text,

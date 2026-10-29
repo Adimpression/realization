@@ -5,8 +5,8 @@ import re
 from dataclasses import dataclass, field, replace
 from typing import Any
 
-from blend_workflow import BlendWorkflowPlan, BlendWorkflowRun
-from semantic_text import collapse_ws
+from realized_blend.workflows import BlendWorkflowPlan, BlendWorkflowRun
+from realized_core_semantics.semantic_text import collapse_ws
 from workstation.contracts.shell import WorkstationChatMessageView
 from workstation.foundation.models import WorkstationSession
 

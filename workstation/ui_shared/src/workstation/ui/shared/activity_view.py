@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import Any
 
 from realized_host_interaction.receipts import host_interaction_receipts_path
-from semantic_text import collapse_ws
+from realized_core_semantics.semantic_text import collapse_ws
 from workstation.foundation.projections import render_workstation_activity_line
 
 

@@ -8,7 +8,7 @@ from queue import Empty, Queue
 from dataclasses import dataclass, field
 from typing import Callable, Iterator
 
-from semantic_text import collapse_ws
+from realized_core_semantics.semantic_text import collapse_ws
 from workstation.contracts.subject import (
     SubjectImportStaging,
     SubjectWorkflowActionOutcomeView,
@@ -143,6 +143,10 @@ from workstation.subject.core.subject_workflow import (
     _stable_json_hash,
 )
 from workstation.subject.core.subject_workflow_repository import SubjectWorkflowRepository
+from workstation.subject.core.host_actions import (
+    SubjectWorkflowHostActions,
+    UnavailableSubjectWorkflowHostActions,
+)
 from workstation.subject.service.client_sessions import WorkstationClientSessionRegistry
 
 
@@ -890,6 +894,7 @@ def _research_sources_title(*, scenario: SubjectScenario, progress: SubjectProgr
 class SubjectWorkflowApiService:
     repository: SubjectWorkflowRepository = field(default_factory=SubjectWorkflowRepository)
     client_sessions: WorkstationClientSessionRegistry = field(default_factory=WorkstationClientSessionRegistry)
+    host_actions: SubjectWorkflowHostActions = field(default_factory=UnavailableSubjectWorkflowHostActions)
 
     def _ensure_client_session(
         self,
@@ -1985,6 +1990,7 @@ class SubjectWorkflowApiService:
             markdown_selected_path=markdown_selected_path,
             markdown_status_text=markdown_status_text,
             markdown_busy=markdown_busy,
+            host_actions=self.host_actions,
         )
         if collapse_ws(scenario.subject_id):
             self.repository.persist_progress(

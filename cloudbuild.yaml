@@ -9,6 +9,11 @@ steps:
     args: ['scripts/check_architecture_boundaries.py']
 
   - name: 'python:3.14-slim'
+    id: 'compatibility-facade-inventory'
+    entrypoint: 'python'
+    args: ['scripts/check_compatibility_facades.py']
+
+  - name: 'python:3.14-slim'
     id: 'architecture-ratchet-tests'
     entrypoint: 'bash'
     env:
@@ -18,33 +23,63 @@ steps:
       - >-
         python -m pip install --disable-pip-version-check --no-cache-dir uv==0.10.10 &&
         uv sync --frozen &&
+        uv build coordinated_transformation --out-dir /workspace/coordinated-transformation-dist &&
+        uv build dst --out-dir /workspace/dst-dist &&
+        uv build exchange --out-dir /workspace/exchange-dist &&
         uv build --wheel host_interaction --out-dir /workspace/host-interaction-dist &&
         uv build core_governance --out-dir /workspace/core-governance-dist &&
         uv build core_semantics --out-dir /workspace/core-semantics-dist &&
+        uv build blend --out-dir /workspace/blend-dist &&
+        uv build blend_application --out-dir /workspace/blend-application-dist &&
+        uv build skill_application --out-dir /workspace/skill-application-dist &&
         uv build skill_semantics --out-dir /workspace/skill-semantics-dist &&
+        uv build validation --out-dir /workspace/validation-dist &&
         uv build core_runtime --out-dir /workspace/core-runtime-dist &&
-        uv build --wheel core_engine --out-dir /workspace/core-engine-dist &&
+        uv build core_engine --out-dir /workspace/core-engine-dist &&
         uv build --wheel core_llm --out-dir /workspace/core-llm-dist &&
         uv build --wheel core_conversation --out-dir /workspace/core-conversation-dist &&
         uv build --wheel core_app --out-dir /workspace/core-app-dist &&
+        uv build workstation/app_cli --out-dir /workspace/workstation-app-cli-dist &&
+        python scripts/verify_workspace_distributions.py &&
+        uv run --frozen python -m unittest discover
+        -s coordinated_transformation/tests -p 'test_*.py' &&
+        uv run --frozen python -m unittest discover
+        -s dst/tests -p 'test_*.py' &&
         uv run --frozen python -m unittest
         tests.test_architecture_boundaries
+        tests.test_compatibility_facade_inventory
         core_runtime.tests.test_attempts
+        core_runtime.tests.test_distribution
         core_runtime.tests.test_reduction
         core_runtime.tests.test_telemetry
         core_governance.tests.test_admission
         core_governance.tests.test_api
         core_governance.tests.test_approval
+        core_governance.tests.test_authority
+        core_governance.tests.test_current_use
         core_governance.tests.test_data
         core_governance.tests.test_declarations
         core_governance.tests.test_distribution
         core_governance.tests.test_inventory
         core_governance.tests.test_lifecycle
+        core_governance.tests.test_persistence
         core_governance.tests.test_records
         core_governance.tests.test_safety
+        core_governance.tests.test_trace
         core_governance.tests.test_vocabulary
         core_semantics.tests.test_api
         core_semantics.tests.test_distribution
+        blend.tests.test_api
+        blend.tests.test_distribution
+        blend.tests.test_execution
+        blend.tests.test_operator_catalog
+        blend_application.tests.test_api
+        blend_application.tests.test_distribution
+        skill_application.tests.test_api
+        skill_application.tests.test_distribution
+        exchange.tests.test_distribution
+        exchange.tests.test_workstation
+        tests.test_run_bundle_io
         skill_semantics.tests.test_api
         skill_semantics.tests.test_composition
         skill_semantics.tests.test_declaration
@@ -52,13 +87,18 @@ steps:
         skill_semantics.tests.test_execution
         skill_semantics.tests.test_invocation
         skill_semantics.tests.test_ir
+        validation.tests.test_distribution
+        tests.test_validation_ladder
+        tests.test_validation_sqlite
         core_engine.tests.test_api
         core_engine.tests.test_canonical_reduction
         core_engine.tests.test_distribution
         core_engine.tests.test_resumption_repository
         core_engine.tests.test_resumption_service
+        core_llm.tests.test_distribution
         core_llm.tests.test_planning_contract
         core_llm.tests.test_provider
+        core_llm.tests.test_transport
         core_conversation.tests.test_journal
         core_conversation.tests.test_pipeline
         core_conversation.tests.test_schemas
@@ -75,31 +115,52 @@ steps:
         tests.test_supplement_provider_compatibility
         tests.test_core_runtime_package_adapter
         tests.test_core_app_cli_equivalence
+        workstation.app_cli.tests.test_entrypoint
+        tests.test_workstation_app_cli_equivalence
         tests.test_governed_turn_provider
+        tests.test_llm_advisory_boundary
         tests.test_side_boundary_extraction
         tests.test_skill_invocation_contract
         tests.test_artifact_boundary_shape
         tests.test_boundary_shape_typing
         tests.test_function_boundary
+        tests.test_host_realizer_adapters
+        tests.test_host_realizer_contracts
+        tests.test_python_skill_host_transport
+        workstation.tests.test_workstation_blend_adapters
+        workstation.tests.test_subject_core_distribution
+        workstation.tests.test_learning_context_persistence
+        workstation.tests.test_subject_service_distribution
         workstation.tests.test_workstation_package_import_hygiene
         tests.test_runtime_layer_hygiene
         tests.test_controller_layer_hygiene
+        tests.test_governance_layer_hygiene
         tests.test_llm_layer_hygiene
         tests.test_exchange_layer_hygiene
+        tests.test_governance_selection_precedence
         skill_semantics.tests.test_normalization
         tests.test_skill_boundary_normalization
+        workstation.tests.test_workstation_host_realizers
         workstation.tests.test_workstation_proto_documentation
         workstation.tests.test_six_layer_workstation_boundary_hygiene &&
         uv run --frozen python scripts/verify_core_distribution.py
         --app-wheel /workspace/core-app-dist/realized_core-0.1.0-py3-none-any.whl
         --conversation-wheel /workspace/core-conversation-dist/realized_core_conversation-0.1.0-py3-none-any.whl
         --engine-wheel /workspace/core-engine-dist/realized_core_engine-0.1.0-py3-none-any.whl
+        --engine-sdist /workspace/core-engine-dist/realized_core_engine-0.1.0.tar.gz
         --governance-wheel /workspace/core-governance-dist/realized_core_governance-0.1.0-py3-none-any.whl
         --governance-sdist /workspace/core-governance-dist/realized_core_governance-0.1.0.tar.gz
         --host-interaction-wheel /workspace/host-interaction-dist/realized_host_interaction-0.1.0-py3-none-any.whl
         --llm-wheel /workspace/core-llm-dist/realized_core_llm-0.1.0-py3-none-any.whl
         --semantics-wheel /workspace/core-semantics-dist/realized_core_semantics-0.1.0-py3-none-any.whl
         --semantics-sdist /workspace/core-semantics-dist/realized_core_semantics-0.1.0.tar.gz
+        --exchange-wheel /workspace/exchange-dist/realized_exchange-0.1.0-py3-none-any.whl
+        --exchange-sdist /workspace/exchange-dist/realized_exchange-0.1.0.tar.gz
+        --blend-wheel /workspace/blend-dist/realized_blend-0.1.0-py3-none-any.whl
+        --blend-application-wheel /workspace/blend-application-dist/realized_blend_application-0.1.0-py3-none-any.whl
+        --blend-application-sdist /workspace/blend-application-dist/realized_blend_application-0.1.0.tar.gz
+        --skill-application-wheel /workspace/skill-application-dist/realized_skill_application-0.1.0-py3-none-any.whl
+        --skill-application-sdist /workspace/skill-application-dist/realized_skill_application-0.1.0.tar.gz
         --skill-semantics-wheel /workspace/skill-semantics-dist/realized_skill_semantics-0.1.0-py3-none-any.whl
         --skill-semantics-sdist /workspace/skill-semantics-dist/realized_skill_semantics-0.1.0.tar.gz
         --runtime-wheel /workspace/core-runtime-dist/realized_core_runtime-0.1.0-py3-none-any.whl

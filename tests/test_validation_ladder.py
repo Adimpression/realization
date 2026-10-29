@@ -7,6 +7,8 @@ import unittest
 from pathlib import Path
 
 from args import parse_args
+from realized_validation import ladder as packaged_validation_ladder
+import validation_ladder
 from validation_ladder import run_validation_ladder
 
 
@@ -28,6 +30,9 @@ class ValidationLadderTests(unittest.TestCase):
     Returns:
         None: This function mutates state or performs side effects without returning a value.
     """
+
+    def test_historical_module_is_exact_package_alias(self) -> None:
+        self.assertIs(validation_ladder, packaged_validation_ladder)
 
     def test_run_validation_ladder_runs_all_stages_and_loads_nested_reports(self) -> None:
         """

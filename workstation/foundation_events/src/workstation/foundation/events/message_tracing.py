@@ -8,7 +8,7 @@ import json
 import uuid
 from typing import Any, Iterable
 
-from semantic_text import collapse_ws
+from realized_core_semantics.semantic_text import collapse_ws
 
 
 class DuplicateWorkstationMessageError(RuntimeError):
