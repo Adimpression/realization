@@ -7,25 +7,19 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from retrieval_ranking import artifact_action_alignment_penalty, primary_action_surface_marker
+from realized_core_engine.retrieval_ranking import artifact_action_alignment_penalty, primary_action_surface_marker
 
-from main import (
-    Artifact,
+from realized_core_engine.controller_runtime import BSSCController, cross_boundary
+from realized_core_engine.state import SystemState
+from realized_core_semantics.applied_model import Artifact, ArtifactType, Product, ProposalObject
+from realized_core_semantics.applied_primitives import (
     ArtifactAdmission,
     ArtifactRepresentation,
     ArtifactReuse,
-    ArtifactType,
-    BSSCController,
     LearningRelation,
-    ProposalGovernanceStatus,
-    ProposalObject,
-    ProposalType,
-    Product,
     RunOutcome,
-    SupplementMode,
-    SystemState,
-    cross_boundary,
 )
+from realized_core_semantics.proposals import ProposalGovernanceStatus, ProposalType, SupplementMode
 
 
 FORCE_SCRIPT = """

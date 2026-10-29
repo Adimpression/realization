@@ -7,16 +7,21 @@ from unittest.mock import patch
 import os
 from pathlib import Path
 
-from execution_frameworks import (
+from realized_core_engine import controller_runtime
+from realized_core_engine.controller_runtime import BSSCController
+from realized_core_engine.state import SystemState
+from realized_core_runtime.execution import (
     execute_cross_boundary,
     fence_encounter_ability_payload,
     normalize_ability_runtime_content,
     normalize_supported_executor_frameworks,
     supported_fence_learning_records,
 )
-from skill_schema_io import artifact_from_skill_document
-from main import BSSCController, SystemState
-from semantic_text import titleize_semantic_unit
+from realized_exchange.markdown_learning_pipeline import install_markdown_learning_extensions
+from realized_exchange.skill_schema import artifact_from_skill_document
+
+install_markdown_learning_extensions(controller_runtime)
+from realized_core_semantics.semantic_text import titleize_semantic_unit
 
 
 class ExecutorFrameworkLearningTests(unittest.TestCase):

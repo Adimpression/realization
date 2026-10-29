@@ -4,8 +4,8 @@ from __future__ import annotations
 from pathlib import Path
 import unittest
 
-from skill_compiler import compile_skill_document
-from skill_composition import (
+from realized_exchange.compiler import compile_skill_document
+from realized_skill_application.composition import (
     SkillCompositionBinding,
     SkillCompositionCondition,
     SkillCompositionMapper,
@@ -14,7 +14,7 @@ from skill_composition import (
     analyze_skill_composition_plan,
     propose_skill_leaf_bindings,
 )
-from skill_schema_io import load_skill_yaml_payload_documents
+from realized_exchange.skill_schema import load_skill_yaml_payload_documents
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]

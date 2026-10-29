@@ -5,9 +5,9 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from learning_context import LearningContext, LearningUnit, persist_learning_context
-from learning_context_skill_projection import learning_context_projected_skill_ids
-from skill_schema_io import load_skill_yaml_payload_documents
+from realized_exchange.learning_context import LearningContext, LearningUnit, persist_learning_context
+from realized_exchange.learning_context_skills import learning_context_projected_skill_ids
+from realized_exchange.skill_schema import load_skill_yaml_payload_documents
 
 
 class LearningContextSkillProjectionTests(unittest.TestCase):

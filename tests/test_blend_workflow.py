@@ -3,7 +3,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from blend_workflow import (
+from realized_blend_application.workflows import (
     BlendWorkflowPlan,
     blend_workflow_plan_from_skill_compose_arguments,
     blend_workflow_run_from_skill_compose_result,

@@ -5282,6 +5282,11 @@ Exit condition:
 
 ### Phase 11 - Retire Compatibility Paths Deliberately
 
+The detailed, assumption-led execution plan for the deferred retirement work
+is [COMPATIBILITY_FACADE_RETIREMENT_IMPLEMENTATION.md](COMPATIBILITY_FACADE_RETIREMENT_IMPLEMENTATION.md).
+It treats consumer migration, support/deprecation policy, qualification, and
+physical deletion as separate transitions.
+
 - [x] Produce a machine-readable inventory of every remaining compatibility
   facade and its consumers.
 - [x] Confirm that canonical production code never imports a compatibility

@@ -11,7 +11,7 @@ import unittest
 from email.parser import Parser
 from pathlib import Path
 
-import gather_sources
+import workstation.subject.core.gather_sources as gather_sources
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]

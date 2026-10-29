@@ -3,8 +3,8 @@ from __future__ import annotations
 
 import unittest
 
-from applied_theory_types import BoundaryShapeTerm
-from skill_path_notation import canonical_skill_path, parse_canonical_skill_path
+from realized_core_semantics.applied_model import BoundaryShapeTerm
+from realized_skill_semantics.paths import canonical_skill_path, parse_canonical_skill_path
 
 
 class SkillPathNotationTests(unittest.TestCase):

@@ -9,14 +9,18 @@ from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
 
-from applied_theory_types import ProposalType
+from realized_core_semantics.applied_model import ProposalType
 from controller_entrypoints import ensure_application_controller_runtime
-from decision_review import list_decision_review_items
-from decision_review_constructs import list_transformation_construct_candidates
+from workstation.subject.core.decision_review import list_decision_review_items
+from workstation.subject.core.decision_review_constructs import list_transformation_construct_candidates
 from dst import DST_SOURCE_ROOT, discovery_result_from_fixture, normalized_case_from_fixture, run_dst_pipeline_from_fixture
-from itemize import ItemizedSubjectItem, list_itemized_subject_items, stable_itemized_item_id
-from review_composition import list_review_items
-from semantic_text import collapse_ws
+from realized_core_semantics.itemization import ItemizedSubjectItem
+from workstation.subject.core.itemization import (
+    list_itemized_subject_items,
+    stable_itemized_item_id,
+)
+from workstation.subject.core.review_composition import list_review_items
+from realized_core_semantics.semantic_text import collapse_ws
 
 from workstation.runtime.core.session import launch_workstation_session
 from workstation.runtime.core.subject_host_actions import RuntimeSubjectWorkflowHostActions

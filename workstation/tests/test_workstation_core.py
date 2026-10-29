@@ -7,23 +7,22 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from main import (
-    Artifact,
+from realized_core_semantics.applied_model import Artifact, ArtifactType
+from realized_core_semantics.applied_primitives import (
     ArtifactAdmission,
     ArtifactRepresentation,
     ArtifactReuse,
-    ArtifactType,
     LearningRelation,
-    artifact_export_bundle_text,
-    normalize_boundary_shape,
 )
+from realized_core_semantics.normalization import normalize_boundary_shape
+from realized_exchange.artifact_yaml import artifact_export_bundle_text
 from controller_entrypoints import ensure_application_controller_runtime
-from blend_workflow import BlendWorkflowBinding, BlendWorkflowPlan, BlendWorkflowRun, BlendWorkflowStep
-from blend_workflow_store import persist_blend_workflow_objects
-from gather_sources import latest_source_revision, list_staged_sources, new_source_collection, persist_source_collection
-from host_interaction_receipts import append_host_interaction_receipt
-from learning_context import load_learning_context
-from applied_theory_types import BoundaryShapeTerm
+from realized_blend_application.workflows import BlendWorkflowBinding, BlendWorkflowPlan, BlendWorkflowRun, BlendWorkflowStep
+from realized_blend_application.workflow_store import persist_blend_workflow_objects
+from workstation.subject.core.gather_sources import latest_source_revision, list_staged_sources, new_source_collection, persist_source_collection
+from realized_host_interaction.receipts import append_host_interaction_receipt
+from realized_exchange.learning_context import load_learning_context
+from realized_core_semantics.applied_model import BoundaryShapeTerm
 from workstation.foundation.projections import WorkstationActivityEventView, render_workstation_activity_event
 from workstation.runtime.core.session import launch_workstation_session, load_workstation_session
 from workstation.runtime.core.workstation_core import (
@@ -45,7 +44,7 @@ from workstation.runtime.core.workstation_core import (
     workstation_workflow_summary_list_view,
     workstation_workflow_query_view,
 )
-from url_learning_capture import CapturedUrlLearningBundle
+from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
 
 
 class WorkstationCoreTests(unittest.TestCase):
@@ -464,7 +463,7 @@ class WorkstationCoreTests(unittest.TestCase):
             asset_manifest=(),
         )
 
-        with patch("url_learning_capture.capture_url_learning_bundle", return_value=capture):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", return_value=capture):
             result = workstation_learn_url_action(
                 root_path=self.root,
                 source_url="https://example.test/article",
@@ -510,7 +509,7 @@ class WorkstationCoreTests(unittest.TestCase):
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", return_value=capture):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", return_value=capture):
             staged = workstation_learn_url_action(root_path=self.root, source_url="https://example.test/article")
 
         progress_messages: list[str] = []
@@ -595,11 +594,11 @@ class WorkstationCoreTests(unittest.TestCase):
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", return_value=initial_capture):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", return_value=initial_capture):
             staged = workstation_learn_url_action(root_path=self.root, source_url="https://example.test/article")
 
         progress_messages: list[str] = []
-        with patch("url_learning_capture.capture_url_learning_bundle", return_value=refreshed_capture):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", return_value=refreshed_capture):
             result = workstation_refresh_staged_source_action(
                 root_path=self.root,
                 subject_id="example-article",
@@ -697,7 +696,7 @@ class WorkstationCoreTests(unittest.TestCase):
             asset_manifest=(),
         )
 
-        with patch("url_learning_capture.capture_url_learning_bundle", side_effect=[capture_one, capture_two]):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", side_effect=[capture_one, capture_two]):
             staged_one = workstation_learn_url_action(
                 root_path=self.root,
                 source_url="https://example.test/article-one",
@@ -724,7 +723,7 @@ class WorkstationCoreTests(unittest.TestCase):
         persist_source_collection(self.root, collection)
 
         progress_messages: list[str] = []
-        with patch("url_learning_capture.capture_url_learning_bundle", side_effect=[refreshed_one, refreshed_two]):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", side_effect=[refreshed_one, refreshed_two]):
             result = workstation_sync_source_collection_action(
                 root_path=self.root,
                 subject_id="energy-exports",

@@ -12,8 +12,8 @@ from types import SimpleNamespace
 from unittest.mock import patch
 
 from controller_entrypoints import ensure_application_controller_runtime
-from decision_review import list_decision_review_items, load_decision_frame
-from decision_review_constructs import (
+from workstation.subject.core.decision_review import list_decision_review_items, load_decision_frame
+from workstation.subject.core.decision_review_constructs import (
     TransformationConstructCandidate,
     deterministic_transformation_construct_candidates_from_itemized_item,
     list_transformation_construct_candidates,
@@ -21,8 +21,8 @@ from decision_review_constructs import (
     persist_transformation_construct_candidates,
     stable_transformation_construct_candidate_id,
 )
-from decision_review_policy import load_decision_policy_profile
-from decision_review_projection import list_decision_analysis_receipts
+from workstation.subject.core.decision_review_policy import load_decision_policy_profile
+from workstation.subject.core.decision_review_projection import list_decision_analysis_receipts
 from dst import (
     DST_SOURCE_ROOT,
     discovery_result_from_fixture,
@@ -30,7 +30,7 @@ from dst import (
     normalized_case_from_fixture,
     run_dst_pipeline_from_fixture,
 )
-from gather_sources import (
+from workstation.subject.core.gather_sources import (
     latest_source_revision,
     list_source_collections,
     list_staged_sources,
@@ -41,7 +41,7 @@ from gather_sources import (
     persist_source_revision,
     persist_staged_source,
 )
-from learning_context import (
+from realized_exchange.learning_context import (
     LearningContext,
     LearningUnit,
     list_subject_imports,
@@ -56,7 +56,7 @@ from learning_context import (
     persist_subject_import,
     stable_learning_unit_id,
 )
-from itemize import (
+from workstation.subject.core.itemization import (
     ItemizedSubjectItem,
     canonical_learning_subject_id,
     itemization_paths,
@@ -64,14 +64,14 @@ from itemize import (
     load_itemization_session,
     normalize_itemized_decision_role,
 )
-from publication import PublicationComposition, list_publication_compositions, publication_subject_root
-from review_composition import (
+from workstation.subject.core.publication import PublicationComposition, list_publication_compositions, publication_subject_root
+from workstation.subject.core.review_composition import (
     list_review_items,
     list_review_transform_receipts,
     load_review_composition,
     review_composition_paths,
 )
-from semantic_text import collapse_ws
+from realized_core_semantics.semantic_text import collapse_ws
 from workstation.runtime.core.subject_host_actions import RuntimeSubjectWorkflowHostActions
 from workstation.subject.core.subject_workflow import (
     _decision_review_state,
@@ -5969,7 +5969,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
         self.assertIn("Dynamics Support [definition_support]", "\n".join(scenario.import_preview_lines))
 
     def test_subject_workflow_research_sources_surface_staged_sources_before_import(self) -> None:
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture = CapturedUrlLearningBundle(
@@ -5989,7 +5989,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", return_value=capture):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", return_value=capture):
             workstation_learn_url_action(root_path=self.root, source_url="https://example.test/article")
 
         scenario = next(item for item in default_subject_scenarios(self.root) if item.subject_id == "example-article")
@@ -6027,7 +6027,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
         self.assertEqual(current_actions[0].label, "Activate Subject")
 
     def test_subject_workflow_research_sources_surface_default_source_collection_context(self) -> None:
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture = CapturedUrlLearningBundle(
@@ -6047,7 +6047,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", return_value=capture):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", return_value=capture):
             workstation_learn_url_action(root_path=self.root, source_url="https://example.test/article")
 
         scenario = next(item for item in default_subject_scenarios(self.root) if item.subject_id == "example-article")
@@ -6071,7 +6071,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
         self.assertIn("- current source set: All Gather Sources", target_text)
 
     def test_subject_workflow_research_source_sets_can_be_created_and_filtered(self) -> None:
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture = CapturedUrlLearningBundle(
@@ -6091,7 +6091,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", return_value=capture):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", return_value=capture):
             workstation_learn_url_action(root_path=self.root, source_url="https://example.test/article")
 
         second_source = new_staged_source(
@@ -6159,7 +6159,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
         self.assertIn("Sources (2)", cycled_sources_text)
 
     def test_subject_workflow_can_create_source_collection_from_query(self) -> None:
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture = CapturedUrlLearningBundle(
@@ -6179,7 +6179,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", return_value=capture):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", return_value=capture):
             workstation_learn_url_action(root_path=self.root, source_url="https://example.test/article")
 
         scenario = next(item for item in default_subject_scenarios(self.root) if item.subject_id == "example-article")
@@ -6212,7 +6212,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
         self.assertIn("Saved query/topic: energy exports transport routes", target_text)
 
     def test_subject_workflow_can_apply_source_collection_synthesis_without_importing(self) -> None:
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture = CapturedUrlLearningBundle(
@@ -6232,7 +6232,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", return_value=capture):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", return_value=capture):
             staged_result = workstation_learn_url_action(root_path=self.root, source_url="https://example.test/article")
 
         scenario = next(item for item in default_subject_scenarios(self.root) if item.subject_id == "example-article")
@@ -6321,7 +6321,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
         self.assertFalse(context.linked_source_ids)
 
     def test_subject_workflow_can_apply_manual_curation_to_selected_staged_source_without_importing(self) -> None:
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture = CapturedUrlLearningBundle(
@@ -6341,7 +6341,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", return_value=capture):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", return_value=capture):
             workstation_learn_url_action(root_path=self.root, source_url="https://example.test/article")
 
         scenario = next(item for item in default_subject_scenarios(self.root) if item.subject_id == "example-article")
@@ -6393,7 +6393,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
         self.assertEqual(len(learning_context.linked_source_ids), 0)
 
     def test_subject_workflow_can_apply_llm_curation_to_selected_staged_source_without_importing(self) -> None:
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture = CapturedUrlLearningBundle(
@@ -6413,7 +6413,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", return_value=capture):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", return_value=capture):
             workstation_learn_url_action(root_path=self.root, source_url="https://example.test/article")
 
         scenario = next(item for item in default_subject_scenarios(self.root) if item.subject_id == "example-article")
@@ -6465,7 +6465,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
         self.assertEqual(len(learning_context.linked_source_ids), 0)
 
     def test_subject_workflow_can_apply_merge_back_to_selected_staged_source_without_importing(self) -> None:
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture = CapturedUrlLearningBundle(
@@ -6485,7 +6485,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", return_value=capture):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", return_value=capture):
             workstation_learn_url_action(root_path=self.root, source_url="https://example.test/article")
 
         unit = LearningUnit(
@@ -6579,7 +6579,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
         self.assertEqual(len(learning_context.linked_source_ids), 0)
 
     def test_subject_workflow_can_cycle_selected_staged_source_diff_baseline(self) -> None:
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture = CapturedUrlLearningBundle(
@@ -6599,7 +6599,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", return_value=capture):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", return_value=capture):
             workstation_learn_url_action(root_path=self.root, source_url="https://example.test/article")
 
         scenario = next(item for item in default_subject_scenarios(self.root) if item.subject_id == "example-article")
@@ -6696,7 +6696,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
         self.assertIn("Latest revision kind: merge", target_after_cycle)
 
     def test_subject_workflow_can_apply_manual_curation_to_selected_source_collection_without_importing(self) -> None:
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture = CapturedUrlLearningBundle(
@@ -6716,7 +6716,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", return_value=capture):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", return_value=capture):
             workstation_learn_url_action(root_path=self.root, source_url="https://example.test/article")
 
         second_source = new_staged_source(
@@ -6808,7 +6808,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
         self.assertEqual(len(learning_context.linked_source_ids), 0)
 
     def test_subject_workflow_can_apply_llm_curation_to_selected_source_collection_without_importing(self) -> None:
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture = CapturedUrlLearningBundle(
@@ -6828,7 +6828,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", return_value=capture):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", return_value=capture):
             workstation_learn_url_action(root_path=self.root, source_url="https://example.test/article")
 
         scenario = next(item for item in default_subject_scenarios(self.root) if item.subject_id == "example-article")
@@ -6889,7 +6889,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
         self.assertEqual(len(learning_context.linked_source_ids), 0)
 
     def test_subject_workflow_can_apply_discovered_sources_to_selected_source_collection_without_importing(self) -> None:
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture = CapturedUrlLearningBundle(
@@ -6909,7 +6909,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", return_value=capture):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", return_value=capture):
             workstation_learn_url_action(root_path=self.root, source_url="https://example.test/article")
 
         scenario = next(item for item in default_subject_scenarios(self.root) if item.subject_id == "example-article")
@@ -6992,7 +6992,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
         self.assertEqual(len(learning_context.linked_source_ids), 0)
 
     def test_subject_workflow_can_apply_merge_back_to_selected_source_collection_without_importing(self) -> None:
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture = CapturedUrlLearningBundle(
@@ -7012,7 +7012,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", return_value=capture):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", return_value=capture):
             workstation_learn_url_action(root_path=self.root, source_url="https://example.test/article")
 
         scenario = next(item for item in default_subject_scenarios(self.root) if item.subject_id == "example-article")
@@ -7113,7 +7113,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
         self.assertEqual(len(learning_context.linked_source_ids), 0)
 
     def test_subject_workflow_can_apply_set_source_merge_back_without_importing(self) -> None:
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture_one = CapturedUrlLearningBundle(
@@ -7150,7 +7150,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", side_effect=[capture_one, capture_two]):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", side_effect=[capture_one, capture_two]):
             first_result = workstation_learn_url_action(
                 root_path=self.root,
                 source_url="https://example.test/source-one",
@@ -7274,7 +7274,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
         self.assertEqual(len(learning_context.linked_source_ids), 0)
 
     def test_subject_workflow_can_apply_selected_source_collection_export_preview_without_importing(self) -> None:
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture_one = CapturedUrlLearningBundle(
@@ -7311,7 +7311,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", side_effect=[capture_one, capture_two]):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", side_effect=[capture_one, capture_two]):
             first_result = workstation_learn_url_action(
                 root_path=self.root,
                 source_url="https://example.test/source-one",
@@ -7447,7 +7447,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
         self.assertEqual(len(learning_context.linked_source_ids), 0)
 
     def test_subject_workflow_can_apply_selected_staged_source_export_preview_without_importing(self) -> None:
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture_one = CapturedUrlLearningBundle(
@@ -7484,7 +7484,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", side_effect=[capture_one, capture_two]):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", side_effect=[capture_one, capture_two]):
             first_result = workstation_learn_url_action(
                 root_path=self.root,
                 source_url="https://example.test/source-one",
@@ -7618,7 +7618,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
         self.assertEqual(len(learning_context.linked_source_ids), 0)
 
     def test_subject_workflow_source_collection_export_history_marks_changed_targets_after_learning_updates(self) -> None:
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture_one = CapturedUrlLearningBundle(
@@ -7655,7 +7655,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", side_effect=[capture_one, capture_two]):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", side_effect=[capture_one, capture_two]):
             first_result = workstation_learn_url_action(
                 root_path=self.root,
                 source_url="https://example.test/source-one",
@@ -7765,7 +7765,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
         self.assertTrue(all(row[1] == "changed" and row[2] == "2" and row[3] == "2" for row in actionable_export_spec.rows))
 
     def test_subject_workflow_can_refresh_selected_staged_source_without_importing(self) -> None:
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         initial_capture = CapturedUrlLearningBundle(
@@ -7802,14 +7802,14 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", return_value=initial_capture):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", return_value=initial_capture):
             workstation_learn_url_action(root_path=self.root, source_url="https://example.test/article")
 
         scenario = next(item for item in default_subject_scenarios(self.root) if item.subject_id == "example-article")
         progress = new_subject_progress()
         apply_subject_action(root_path=self.root, scenario=scenario, progress=progress, action_key="open_context")
 
-        with patch("url_learning_capture.capture_url_learning_bundle", return_value=refreshed_capture):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", return_value=refreshed_capture):
             apply_result = apply_subject_action(
                 root_path=self.root,
                 scenario=scenario,
@@ -7837,7 +7837,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
         self.assertEqual(len(learning_context.linked_source_ids), 0)
 
     def test_subject_workflow_can_sync_selected_source_collection_without_importing(self) -> None:
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture_one = CapturedUrlLearningBundle(
@@ -7908,7 +7908,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", side_effect=[capture_one, capture_two]):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", side_effect=[capture_one, capture_two]):
             staged_one = workstation_learn_url_action(
                 root_path=self.root,
                 source_url="https://example.test/article-one",
@@ -7939,7 +7939,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
         apply_subject_action(root_path=self.root, scenario=scenario, progress=progress, action_key="open_context")
         progress.research_selected_source_collection_id = collection.collection_id
 
-        with patch("url_learning_capture.capture_url_learning_bundle", side_effect=[refreshed_one, refreshed_two]):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", side_effect=[refreshed_one, refreshed_two]):
             apply_result = apply_subject_action(
                 root_path=self.root,
                 scenario=scenario,
@@ -7970,7 +7970,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
         self.assertEqual(len(learning_context.linked_source_ids), 0)
 
     def test_subject_workflow_can_import_selected_staged_source_explicitly_from_gather(self) -> None:
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture = CapturedUrlLearningBundle(
@@ -7990,7 +7990,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", return_value=capture):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", return_value=capture):
             workstation_learn_url_action(root_path=self.root, source_url="https://example.test/article")
 
         scenario = next(item for item in default_subject_scenarios(self.root) if item.subject_id == "example-article")

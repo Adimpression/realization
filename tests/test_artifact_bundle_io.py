@@ -5,16 +5,17 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from main import (
-    Artifact,
+from realized_core_semantics.applied_model import Artifact, ArtifactType
+from realized_core_semantics.applied_primitives import (
     ArtifactAdmission,
     ArtifactRepresentation,
     ArtifactReuse,
-    ArtifactType,
     LearningRelation,
+)
+from realized_core_semantics.normalization import normalize_boundary_shape
+from realized_exchange.artifact_yaml import (
     artifact_export_bundle_text,
     load_artifact_yaml_documents,
-    normalize_boundary_shape,
 )
 
 

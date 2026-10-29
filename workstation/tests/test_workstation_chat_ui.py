@@ -12,15 +12,18 @@ from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
 
-from decision_review import list_decision_review_items
-from decision_review_constructs import (
+from workstation.subject.core.decision_review import list_decision_review_items
+from workstation.subject.core.decision_review_constructs import (
     TransformationConstructCandidate,
     deterministic_transformation_construct_candidates_from_itemized_item,
     persist_transformation_construct_candidates,
     stable_transformation_construct_candidate_id,
 )
-from itemize import list_itemized_subject_items, materialize_itemization_session
-from learning_context import (
+from workstation.subject.core.itemization import (
+    list_itemized_subject_items,
+    materialize_itemization_session,
+)
+from realized_exchange.learning_context import (
     LearningContext,
     LearningUnit,
     new_subject_import,
@@ -32,11 +35,11 @@ from learning_context import (
     persist_learning_source,
     stable_learning_unit_id,
 )
-from publication_projection import materialize_report_publication_from_learning_context
-from review_composition import list_review_items
+from workstation.subject.core.publication_projection import materialize_report_publication_from_learning_context
+from workstation.subject.core.review_composition import list_review_items
 from dst import DST_SOURCE_ROOT, discovery_result_from_fixture, normalized_case_from_fixture, run_dst_pipeline_from_fixture
-from semantic_text import collapse_ws
-from gather_sources import (
+from realized_core_semantics.semantic_text import collapse_ws
+from workstation.subject.core.gather_sources import (
     list_source_collections,
     list_staged_sources,
     new_source_collection,
@@ -3063,7 +3066,7 @@ class WorkstationChatUiTests(unittest.TestCase):
         if _TextualWorkstationChatApp is None:
             self.skipTest("textual is not installed")
 
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture = CapturedUrlLearningBundle(
@@ -3083,7 +3086,7 @@ class WorkstationChatUiTests(unittest.TestCase):
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", return_value=capture):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", return_value=capture):
             workstation_learn_url_action(root_path=self.root, source_url="https://example.test/source")
 
         worker_prompts: list[str] = []
@@ -3119,7 +3122,7 @@ class WorkstationChatUiTests(unittest.TestCase):
         if _TextualWorkstationChatApp is None:
             self.skipTest("textual is not installed")
 
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture = CapturedUrlLearningBundle(
@@ -3139,7 +3142,7 @@ class WorkstationChatUiTests(unittest.TestCase):
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", return_value=capture):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", return_value=capture):
             workstation_learn_url_action(root_path=self.root, source_url="https://example.test/source")
 
         async def _exercise() -> None:
@@ -3183,7 +3186,7 @@ class WorkstationChatUiTests(unittest.TestCase):
         if _TextualWorkstationChatApp is None:
             self.skipTest("textual is not installed")
 
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture = CapturedUrlLearningBundle(
@@ -3203,7 +3206,7 @@ class WorkstationChatUiTests(unittest.TestCase):
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", return_value=capture):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", return_value=capture):
             workstation_learn_url_action(root_path=self.root, source_url="https://example.test/source")
 
         persist_learning_context(
@@ -3260,7 +3263,7 @@ class WorkstationChatUiTests(unittest.TestCase):
         if _TextualWorkstationChatApp is None:
             self.skipTest("textual is not installed")
 
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture_one = CapturedUrlLearningBundle(
@@ -3297,7 +3300,7 @@ class WorkstationChatUiTests(unittest.TestCase):
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", side_effect=[capture_one, capture_two]):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", side_effect=[capture_one, capture_two]):
             first_result = workstation_learn_url_action(
                 root_path=self.root,
                 source_url="https://example.test/source-one",
@@ -3407,7 +3410,7 @@ class WorkstationChatUiTests(unittest.TestCase):
         if _TextualWorkstationChatApp is None:
             self.skipTest("textual is not installed")
 
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture_one = CapturedUrlLearningBundle(
@@ -3444,7 +3447,7 @@ class WorkstationChatUiTests(unittest.TestCase):
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", side_effect=[capture_one, capture_two]):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", side_effect=[capture_one, capture_two]):
             first_result = workstation_learn_url_action(
                 root_path=self.root,
                 source_url="https://example.test/source-one",
@@ -3550,7 +3553,7 @@ class WorkstationChatUiTests(unittest.TestCase):
         if _TextualWorkstationChatApp is None:
             self.skipTest("textual is not installed")
 
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture = CapturedUrlLearningBundle(
@@ -3570,7 +3573,7 @@ class WorkstationChatUiTests(unittest.TestCase):
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", return_value=capture):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", return_value=capture):
             workstation_learn_url_action(root_path=self.root, source_url="https://example.test/source")
 
         scenario = next(item for item in default_subject_scenarios(self.root) if item.subject_id == "example-source")
@@ -3680,7 +3683,7 @@ class WorkstationChatUiTests(unittest.TestCase):
         if _TextualWorkstationChatApp is None:
             self.skipTest("textual is not installed")
 
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture_one = CapturedUrlLearningBundle(
@@ -3717,7 +3720,7 @@ class WorkstationChatUiTests(unittest.TestCase):
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", side_effect=[capture_one, capture_two]):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", side_effect=[capture_one, capture_two]):
             first_result = workstation_learn_url_action(
                 root_path=self.root,
                 source_url="https://example.test/source-one",
@@ -3827,7 +3830,7 @@ class WorkstationChatUiTests(unittest.TestCase):
         if _TextualWorkstationChatApp is None:
             self.skipTest("textual is not installed")
 
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture_one = CapturedUrlLearningBundle(
@@ -3864,7 +3867,7 @@ class WorkstationChatUiTests(unittest.TestCase):
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", side_effect=[capture_one, capture_two]):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", side_effect=[capture_one, capture_two]):
             first_result = workstation_learn_url_action(
                 root_path=self.root,
                 source_url="https://example.test/source-one",
@@ -3970,7 +3973,7 @@ class WorkstationChatUiTests(unittest.TestCase):
         if _TextualWorkstationChatApp is None:
             self.skipTest("textual is not installed")
 
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture = CapturedUrlLearningBundle(
@@ -3990,7 +3993,7 @@ class WorkstationChatUiTests(unittest.TestCase):
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", return_value=capture):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", return_value=capture):
             workstation_learn_url_action(root_path=self.root, source_url="https://example.test/source")
 
         scenario = next(item for item in default_subject_scenarios(self.root) if item.subject_id == "example-source")
@@ -4100,7 +4103,7 @@ class WorkstationChatUiTests(unittest.TestCase):
         if _TextualWorkstationChatApp is None:
             self.skipTest("textual is not installed")
 
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture_one = CapturedUrlLearningBundle(
@@ -4137,7 +4140,7 @@ class WorkstationChatUiTests(unittest.TestCase):
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", side_effect=[capture_one, capture_two]):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", side_effect=[capture_one, capture_two]):
             first_result = workstation_learn_url_action(
                 root_path=self.root,
                 source_url="https://example.test/source-one",
@@ -4270,7 +4273,7 @@ class WorkstationChatUiTests(unittest.TestCase):
         if _TextualWorkstationChatApp is None:
             self.skipTest("textual is not installed")
 
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture = CapturedUrlLearningBundle(
@@ -4290,7 +4293,7 @@ class WorkstationChatUiTests(unittest.TestCase):
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", return_value=capture):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", return_value=capture):
             workstation_learn_url_action(root_path=self.root, source_url="https://example.test/source")
 
         unit = LearningUnit(
@@ -4350,7 +4353,7 @@ class WorkstationChatUiTests(unittest.TestCase):
         if _TextualWorkstationChatApp is None:
             self.skipTest("textual is not installed")
 
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture = CapturedUrlLearningBundle(
@@ -4370,7 +4373,7 @@ class WorkstationChatUiTests(unittest.TestCase):
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", return_value=capture):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", return_value=capture):
             workstation_learn_url_action(root_path=self.root, source_url="https://example.test/source")
 
         opened_paths: list[Path] = []
@@ -4398,7 +4401,7 @@ class WorkstationChatUiTests(unittest.TestCase):
         if _TextualWorkstationChatApp is None:
             self.skipTest("textual is not installed")
 
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture = CapturedUrlLearningBundle(
@@ -4418,7 +4421,7 @@ class WorkstationChatUiTests(unittest.TestCase):
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", return_value=capture):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", return_value=capture):
             workstation_learn_url_action(root_path=self.root, source_url="https://example.test/source")
 
         scenario = next(item for item in default_subject_scenarios(self.root) if item.subject_id == "example-source")
@@ -4468,7 +4471,7 @@ class WorkstationChatUiTests(unittest.TestCase):
         if _TextualWorkstationChatApp is None:
             self.skipTest("textual is not installed")
 
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture = CapturedUrlLearningBundle(
@@ -4488,7 +4491,7 @@ class WorkstationChatUiTests(unittest.TestCase):
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", return_value=capture):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", return_value=capture):
             workstation_learn_url_action(root_path=self.root, source_url="https://example.test/source")
 
         scenario = next(item for item in default_subject_scenarios(self.root) if item.subject_id == "example-source")
@@ -4548,7 +4551,7 @@ class WorkstationChatUiTests(unittest.TestCase):
         if _TextualWorkstationChatApp is None:
             self.skipTest("textual is not installed")
 
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture = CapturedUrlLearningBundle(
@@ -4568,7 +4571,7 @@ class WorkstationChatUiTests(unittest.TestCase):
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", return_value=capture):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", return_value=capture):
             workstation_learn_url_action(root_path=self.root, source_url="https://example.test/source")
 
         scenario = next(item for item in default_subject_scenarios(self.root) if item.subject_id == "example-source")
@@ -4626,7 +4629,7 @@ class WorkstationChatUiTests(unittest.TestCase):
         if _TextualWorkstationChatApp is None:
             self.skipTest("textual is not installed")
 
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture = CapturedUrlLearningBundle(
@@ -4646,7 +4649,7 @@ class WorkstationChatUiTests(unittest.TestCase):
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", return_value=capture):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", return_value=capture):
             staged_result = workstation_learn_url_action(
                 root_path=self.root,
                 source_url="https://example.test/source",
@@ -4688,7 +4691,7 @@ class WorkstationChatUiTests(unittest.TestCase):
         if _TextualWorkstationChatApp is None:
             self.skipTest("textual is not installed")
 
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture = CapturedUrlLearningBundle(
@@ -4708,7 +4711,7 @@ class WorkstationChatUiTests(unittest.TestCase):
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", return_value=capture):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", return_value=capture):
             workstation_learn_url_action(root_path=self.root, source_url="https://example.test/source")
 
         scenario = next(
@@ -4756,7 +4759,7 @@ class WorkstationChatUiTests(unittest.TestCase):
         if _TextualWorkstationChatApp is None:
             self.skipTest("textual is not installed")
 
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture = CapturedUrlLearningBundle(
@@ -4776,7 +4779,7 @@ class WorkstationChatUiTests(unittest.TestCase):
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", return_value=capture):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", return_value=capture):
             staged_result = workstation_learn_url_action(root_path=self.root, source_url="https://example.test/source")
 
         scenario = next(
@@ -4814,7 +4817,7 @@ class WorkstationChatUiTests(unittest.TestCase):
         if _TextualWorkstationChatApp is None:
             self.skipTest("textual is not installed")
 
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture = CapturedUrlLearningBundle(
@@ -4834,7 +4837,7 @@ class WorkstationChatUiTests(unittest.TestCase):
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", return_value=capture):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", return_value=capture):
             workstation_learn_url_action(root_path=self.root, source_url="https://example.test/source")
 
         scenario = next(
@@ -4872,7 +4875,7 @@ class WorkstationChatUiTests(unittest.TestCase):
         if _TextualWorkstationChatApp is None:
             self.skipTest("textual is not installed")
 
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture = CapturedUrlLearningBundle(
@@ -4892,7 +4895,7 @@ class WorkstationChatUiTests(unittest.TestCase):
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", return_value=capture):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", return_value=capture):
             staged_result = workstation_learn_url_action(root_path=self.root, source_url="https://example.test/source")
 
         scenario = next(
@@ -4955,7 +4958,7 @@ class WorkstationChatUiTests(unittest.TestCase):
         if _TextualWorkstationChatApp is None:
             self.skipTest("textual is not installed")
 
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         initial_capture = CapturedUrlLearningBundle(
@@ -4992,7 +4995,7 @@ class WorkstationChatUiTests(unittest.TestCase):
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", return_value=initial_capture):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", return_value=initial_capture):
             staged_result = workstation_learn_url_action(root_path=self.root, source_url="https://example.test/source")
 
         scenario = next(
@@ -5005,7 +5008,7 @@ class WorkstationChatUiTests(unittest.TestCase):
 
         async def _exercise() -> None:
             app = _TextualWorkstationChatApp(root=self.root, model=None, max_tool_rounds=2)
-            with patch("url_learning_capture.capture_url_learning_bundle", return_value=refreshed_capture):
+            with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", return_value=refreshed_capture):
                 async with app.run_test(size=(180, 60)) as pilot:
                     await pilot.pause()
                     await pilot.click("#input")
@@ -5027,7 +5030,7 @@ class WorkstationChatUiTests(unittest.TestCase):
         if _TextualWorkstationChatApp is None:
             self.skipTest("textual is not installed")
 
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         initial_capture = CapturedUrlLearningBundle(
@@ -5064,7 +5067,7 @@ class WorkstationChatUiTests(unittest.TestCase):
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", return_value=initial_capture):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", return_value=initial_capture):
             staged_result = workstation_learn_url_action(root_path=self.root, source_url="https://example.test/source")
 
         scenario = next(
@@ -5083,7 +5086,7 @@ class WorkstationChatUiTests(unittest.TestCase):
 
         async def _exercise() -> None:
             app = _TextualWorkstationChatApp(root=self.root, model=None, max_tool_rounds=2)
-            with patch("url_learning_capture.capture_url_learning_bundle", return_value=refreshed_capture):
+            with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", return_value=refreshed_capture):
                 async with app.run_test(size=(180, 60)) as pilot:
                     await pilot.pause()
                     await pilot.click("#input")
@@ -5105,7 +5108,7 @@ class WorkstationChatUiTests(unittest.TestCase):
         if _TextualWorkstationChatApp is None:
             self.skipTest("textual is not installed")
 
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture = CapturedUrlLearningBundle(
@@ -5125,7 +5128,7 @@ class WorkstationChatUiTests(unittest.TestCase):
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", return_value=capture):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", return_value=capture):
             staged_result = workstation_learn_url_action(
                 root_path=self.root,
                 source_url="https://example.test/source",
@@ -5188,7 +5191,7 @@ class WorkstationChatUiTests(unittest.TestCase):
         if _TextualWorkstationChatApp is None:
             self.skipTest("textual is not installed")
 
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture_one = CapturedUrlLearningBundle(
@@ -5225,7 +5228,7 @@ class WorkstationChatUiTests(unittest.TestCase):
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", side_effect=[capture_one, capture_two]):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", side_effect=[capture_one, capture_two]):
             first_result = workstation_learn_url_action(
                 root_path=self.root,
                 source_url="https://example.test/source-one",
@@ -5306,7 +5309,7 @@ class WorkstationChatUiTests(unittest.TestCase):
         if _TextualWorkstationChatApp is None:
             self.skipTest("textual is not installed")
 
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture = CapturedUrlLearningBundle(
@@ -5326,7 +5329,7 @@ class WorkstationChatUiTests(unittest.TestCase):
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", return_value=capture):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", return_value=capture):
             workstation_learn_url_action(root_path=self.root, source_url="https://example.test/source")
 
         unit = LearningUnit(
@@ -5411,7 +5414,7 @@ class WorkstationChatUiTests(unittest.TestCase):
         if _TextualWorkstationChatApp is None:
             self.skipTest("textual is not installed")
 
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture_one = CapturedUrlLearningBundle(
@@ -5448,7 +5451,7 @@ class WorkstationChatUiTests(unittest.TestCase):
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", side_effect=[capture_one, capture_two]):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", side_effect=[capture_one, capture_two]):
             first_result = workstation_learn_url_action(
                 root_path=self.root,
                 source_url="https://example.test/source-one",
@@ -5540,7 +5543,7 @@ class WorkstationChatUiTests(unittest.TestCase):
         if _TextualWorkstationChatApp is None:
             self.skipTest("textual is not installed")
 
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture_one = CapturedUrlLearningBundle(
@@ -5611,7 +5614,7 @@ class WorkstationChatUiTests(unittest.TestCase):
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", side_effect=[capture_one, capture_two]):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", side_effect=[capture_one, capture_two]):
             staged_one = workstation_learn_url_action(
                 root_path=self.root,
                 source_url="https://example.test/article-one",
@@ -5644,7 +5647,7 @@ class WorkstationChatUiTests(unittest.TestCase):
 
         async def _exercise() -> None:
             app = _TextualWorkstationChatApp(root=self.root, model=None, max_tool_rounds=2)
-            with patch("url_learning_capture.capture_url_learning_bundle", side_effect=[refreshed_one, refreshed_two]):
+            with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", side_effect=[refreshed_one, refreshed_two]):
                 async with app.run_test(size=(180, 60)) as pilot:
                     await pilot.pause()
                     await pilot.click("#tab_button_learn_tab")
@@ -5669,7 +5672,7 @@ class WorkstationChatUiTests(unittest.TestCase):
         if _TextualWorkstationChatApp is None:
             self.skipTest("textual is not installed")
 
-        from url_learning_capture import CapturedUrlLearningBundle
+        from workstation.subject.service.url_learning_capture import CapturedUrlLearningBundle
         from workstation.runtime.core.workstation_core import workstation_learn_url_action
 
         capture = CapturedUrlLearningBundle(
@@ -5689,7 +5692,7 @@ class WorkstationChatUiTests(unittest.TestCase):
             elements=(),
             asset_manifest=(),
         )
-        with patch("url_learning_capture.capture_url_learning_bundle", return_value=capture):
+        with patch("workstation.subject.service.url_learning_capture.capture_url_learning_bundle", return_value=capture):
             workstation_learn_url_action(root_path=self.root, source_url="https://example.test/source")
 
         scenario = next(item for item in default_subject_scenarios(self.root) if item.subject_id == "example-source")

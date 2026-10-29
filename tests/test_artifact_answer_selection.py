@@ -6,27 +6,31 @@ import unittest
 from unittest import mock
 from pathlib import Path
 
-from main import (
-    Artifact,
+from realized_core_engine.controller_runtime import BSSCController
+from realized_core_engine.prompt_directives import (
+    semantic_prompt_directive_profile,
+    semantic_question_focus_text,
+)
+from realized_core_engine.semantic_prompt_posture import (
+    semantic_prompt_action_posture,
+    semantic_prompt_prefers_direct_knowledge_answer,
+    semantic_unit_allows_default_invocation_payload,
+)
+from realized_core_engine.state import SystemState
+from realized_core_semantics.applied_model import Artifact, ArtifactType, Evidence
+from realized_core_semantics.applied_primitives import (
     ArtifactAdmission,
     ArtifactRepresentation,
     ArtifactReuse,
-    ArtifactType,
-    BSSCController,
-    Evidence,
     LearningRelation,
-    SystemState,
     ThreeLevel,
-    semantic_named_input_keys,
-    semantic_prompt_action_posture,
-    semantic_prompt_directive_profile,
-    semantic_prompt_prefers_direct_knowledge_answer,
-    semantic_question_focus_text,
-    semantic_requested_output_keys,
-    semantic_unit_allows_default_invocation_payload,
 )
-from retrieval_ranking import artifact_focus_alignment_score
-from store import SQLiteVectorArtifactStore
+from realized_core_semantics.semantic_text import (
+    semantic_named_input_keys,
+    semantic_requested_output_keys,
+)
+from realized_core_engine.retrieval_ranking import artifact_focus_alignment_score
+from realized_core_engine.store import SQLiteVectorArtifactStore
 
 
 def make_knowledge_artifact(

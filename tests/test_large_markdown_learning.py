@@ -5,7 +5,10 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from learning_context import (
+from realized_core_engine import controller_runtime
+from realized_core_engine.controller_runtime import BSSCController
+from realized_core_engine.state import SystemState
+from realized_exchange.learning_context import (
     LearningDelta,
     LearningDeltaOperation,
     LearningUnit,
@@ -15,8 +18,11 @@ from learning_context import (
     load_learning_source,
     stable_learning_unit_id,
 )
-from main import BSSCController, SystemState
+from realized_exchange.markdown_learning_pipeline import install_markdown_learning_extensions
 from tests.learning_xref_test_support import generated_large_markdown
+
+
+install_markdown_learning_extensions(controller_runtime)
 
 
 class LargeMarkdownLearningTests(unittest.TestCase):

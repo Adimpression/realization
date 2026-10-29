@@ -9,24 +9,22 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-import host_brokers
-from applied_theory_types import CrossBoundaryResult
-from host_abi import host_abi_version, wasm_skill_abi_version
-from host_brokers import invoke_host_broker
-from host_realizers import packaged_host_realizer_provider
-from main import (
-    Artifact,
+import realized_core_runtime.host_brokers as host_brokers
+from realized_core_semantics.applied_model import CrossBoundaryResult
+from realized_core_runtime.host_abi import host_abi_version, wasm_skill_abi_version
+from realized_core_runtime.host_brokers import invoke_host_broker
+from realized_core_runtime.host_realizers import packaged_host_realizer_provider
+from realized_core_engine.controller_runtime import BSSCController, build_artifact_store
+from realized_core_engine.state import SystemState
+from realized_core_semantics.applied_model import Artifact, ArtifactType
+from realized_core_semantics.applied_primitives import (
     ArtifactAdmission,
     ArtifactRepresentation,
     ArtifactReuse,
-    ArtifactType,
-    BSSCController,
     LearningRelation,
-    SystemState,
-    build_artifact_store,
-    load_artifact_yaml_documents,
 )
-from skill_schema_io import artifact_from_skill_document
+from realized_exchange.artifact_yaml import load_artifact_yaml_documents
+from realized_exchange.skill_schema import artifact_from_skill_document
 from realized_host_interaction.context import host_native_interaction_context
 from realized_host_interaction.realizers import (
     HostBrokerBinding,
@@ -35,7 +33,7 @@ from realized_host_interaction.realizers import (
     HostRealizerInspection,
     StaticHostRealizerProvider,
 )
-from virtual_mounts import default_virtual_mount_table
+from realized_core_runtime.virtual_mounts import default_virtual_mount_table
 from workstation.foundation.host.host_interaction import workstation_host_interaction_context
 from workstation.runtime.core.session import launch_workstation_session, load_workstation_session
 

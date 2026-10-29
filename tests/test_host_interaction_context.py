@@ -5,17 +5,17 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from host_interaction_context import (
+from realized_host_interaction.context import (
     host_interaction_descriptor_payload,
     host_interaction_virtual_mounts,
     host_native_interaction_context,
 )
-from host_interaction_resolution import (
+from realized_host_interaction.resolution import (
     normalize_host_interaction_attachment_relative_path,
     safe_join_within_attachment_root,
 )
-from main import BSSCController
-from system_state import SystemState
+from realized_core_engine.controller_runtime import BSSCController
+from realized_core_engine.state import SystemState
 from workstation.foundation.host.host_interaction import workstation_host_interaction_attachments, workstation_host_interaction_context
 from workstation.runtime.core.session import launch_workstation_session, load_workstation_session
 

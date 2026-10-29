@@ -5,7 +5,7 @@ from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Any
 
-from decision_review import DecisionReviewItem
+from workstation.subject.core.decision_review import DecisionReviewItem
 from dst import discovery_result_from_fixture, normalized_case_from_fixture, run_dst_pipeline_from_fixture
 from dst.core import DstUseCaseFixture
 from dst.orchestration import DstOrchestrationResult

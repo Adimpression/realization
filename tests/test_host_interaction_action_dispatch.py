@@ -5,11 +5,11 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from host_interaction_action_dispatch import (
+from realized_host_interaction.action_dispatch import (
     execute_shared_host_interaction_action,
     is_shared_host_interaction_action_capability,
 )
-from host_interaction_models import HostInteractionAttachment
+from realized_host_interaction.models import HostInteractionAttachment
 
 
 class HostInteractionActionDispatchTests(unittest.TestCase):

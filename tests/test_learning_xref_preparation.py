@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from learning_context import apply_learning_delta
+from realized_exchange.learning_context import apply_learning_delta
 from tests.learning_xref_test_support import (
     generated_large_markdown,
     materialize_learning_fixture,

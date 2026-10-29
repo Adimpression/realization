@@ -3,19 +3,18 @@ from __future__ import annotations
 
 import unittest
 
-from host_interaction_delegation import (
+from realized_host_interaction.delegation import (
     artifact_with_delegated_virtual_mounts,
     build_host_interaction_delegated_mounts,
     host_interaction_delegation_requires_escalation,
     normalized_requested_delegation,
 )
-from host_interaction_models import HostInteractionAttachment
-from main import (
-    Artifact,
+from realized_host_interaction.models import HostInteractionAttachment
+from realized_core_semantics.applied_model import Artifact, ArtifactType
+from realized_core_semantics.applied_primitives import (
     ArtifactAdmission,
     ArtifactRepresentation,
     ArtifactReuse,
-    ArtifactType,
     LearningRelation,
 )
 

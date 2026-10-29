@@ -1,9 +1,9 @@
 import unittest
 
-from applied_theory_types import Artifact
-from blend_context import BlendContext
-from blend_operator import BlendOperator
-from blend_operator_store import (
+from realized_core_semantics.applied_model import Artifact
+from realized_blend.context import BlendContext
+from realized_blend.operators import BlendOperator
+from realized_blend_application.operators import (
     BlendOperatorProvider,
     BlendOperatorRecord,
     blend_capability_operator_record,

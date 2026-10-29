@@ -4,8 +4,8 @@ import unittest
 from types import MappingProxyType
 from unittest.mock import patch
 
-from host_brokers import HOST_BROKER_REGISTRY
-from host_realizers import packaged_host_realizer_provider
+from realized_core_runtime.host_brokers import HOST_BROKER_REGISTRY
+from realized_core_runtime.host_realizers import packaged_host_realizer_provider
 from realized_host_interaction import HostBrokerInvocation
 
 
@@ -18,7 +18,7 @@ class HostRealizerAdapterTests(unittest.TestCase):
         self.assertFalse(provider.inspect_broker("FS.READ_TEXT").registered)
 
     def test_executor_prerequisite_is_inspectable_before_invocation(self) -> None:
-        with patch("host_realizers.shutil.which", return_value=None):
+        with patch("realized_core_runtime.host_realizers.shutil.which", return_value=None):
             inspection = packaged_host_realizer_provider().inspect_executor("python3")
 
         self.assertTrue(inspection.registered)

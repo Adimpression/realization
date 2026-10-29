@@ -5,14 +5,14 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from learning_context import (
+from realized_exchange.learning_context import (
     load_learning_context,
     load_learning_delta,
     load_learning_source,
     persist_learning_context,
     new_learning_context,
 )
-from gather_sources import latest_source_revision, list_staged_sources
+from workstation.subject.core.gather_sources import latest_source_revision, list_staged_sources
 from workstation.foundation.models import WorkstationAttachment, WorkstationSession
 from workstation.subject.service.learning_capture import capture_workstation_chat_learning_from_tool_receipts
 from workstation.subject.service.learning_capture import capture_workstation_assistant_markdown_for_research

@@ -6,28 +6,27 @@ import unittest
 from pathlib import Path
 import tempfile
 
-from learning_context import (
+from realized_core_engine import controller_runtime
+from realized_core_engine.controller_runtime import BSSCController
+from realized_core_engine.state import SystemState
+from realized_core_semantics.applied_model import ProposalObject, SemanticNode
+from realized_core_semantics.markdown import markdown_learning_encounter_view
+from realized_core_semantics.proposals import ProposalGovernanceStatus, ProposalType, SupplementMode
+from realized_exchange.learning_context import (
     LearningContext,
     load_learning_context,
     load_learning_delta,
     load_learning_source,
     persist_learning_context,
 )
-from main import (
-    BSSCController,
-    ProposalGovernanceStatus,
-    ProposalObject,
-    ProposalType,
-    SemanticNode,
-    SupplementMode,
-    SystemState,
-    markdown_learning_encounter_view,
-)
-from markdown_ir import parse_markdown_document_ir
-from semantic_text import titleize_semantic_unit
+from realized_exchange.markdown_learning_pipeline import install_markdown_learning_extensions
+from realized_core_semantics.markdown import parse_markdown_document_ir
+from realized_core_semantics.semantic_text import titleize_semantic_unit
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
+
+install_markdown_learning_extensions(controller_runtime)
 
 
 class MarkdownArtifactGenerationTests(unittest.TestCase):

@@ -3,19 +3,16 @@ from __future__ import annotations
 
 import unittest
 
-from main import (
-    BSSCController,
-    BoundaryShapeTerm,
+from realized_core_engine.controller_runtime import BSSCController
+from realized_core_engine.state import SystemState
+from realized_core_semantics.applied_model import BoundaryShapeTerm, ProposalObject
+from realized_core_semantics.applied_primitives import (
     ClosureRule,
     DecompositionMode,
     PriorityLevel,
-    ProposalGovernanceStatus,
-    ProposalObject,
-    ProposalType,
-    SupplementMode,
-    SystemState,
-    normalize_boundary_shape,
 )
+from realized_core_semantics.normalization import normalize_boundary_shape
+from realized_core_semantics.proposals import ProposalGovernanceStatus, ProposalType, SupplementMode
 
 
 class BoundaryShapeTypingTests(unittest.TestCase):

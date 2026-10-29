@@ -5,9 +5,11 @@ from dataclasses import replace
 from pathlib import Path
 from unittest.mock import patch
 
-from blend_session import BlendSession, blend_session_from_workstation_session
+from realized_blend.sessions import BlendSession
 from realized_core_engine.persistence import open_sqlite_artifact_repository
+from workstation.app.cli.composition import ensure_workstation_application_composition
 from workstation.foundation.models import WorkstationAttachment, WorkstationSession
+from workstation.runtime.core.blend_adapters import blend_session_from_workstation_session
 from workstation.runtime.core.session import launch_workstation_session, persist_workstation_session
 
 
@@ -20,6 +22,10 @@ class _TestArtifactRepositoryProvider:
 
 
 class BlendSessionTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        ensure_workstation_application_composition()
+
     def test_blend_session_projection_from_workstation_session(self) -> None:
         session = WorkstationSession(
             session_id="ws_demo",

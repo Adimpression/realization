@@ -8,8 +8,8 @@ from pathlib import Path
 
 from args import parse_args
 from realized_validation import ladder as packaged_validation_ladder
-import validation_ladder
-from validation_ladder import run_validation_ladder
+import realized_validation.ladder as validation_ladder
+from realized_validation.ladder import run_validation_ladder
 
 
 class ValidationLadderTests(unittest.TestCase):

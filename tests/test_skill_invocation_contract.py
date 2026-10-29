@@ -3,13 +3,13 @@ from __future__ import annotations
 
 import unittest
 
-from skill_invocation_contract import (
+from realized_skill_semantics.invocation import (
     SkillInvocationBinding,
     SkillInvocationRequest,
-    skill_invocation_request_from_artifact,
     skill_invocation_result_from_mapping,
 )
-from skill_schema_io import artifact_from_skill_document
+from realized_exchange.skill_schema import artifact_from_skill_document
+from workstation.skills.core.invocation_contract import skill_invocation_request_from_artifact
 
 
 class SkillInvocationContractTests(unittest.TestCase):

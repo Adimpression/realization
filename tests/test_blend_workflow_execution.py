@@ -3,12 +3,12 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from applied_theory_types import Artifact
-from blend_context import BlendContext
-from blend_operator import BlendOperator
-from blend_operator_store import new_blend_skill_operator_provider
-from blend_workflow import BlendWorkflowPlan, blend_workflow_plan_from_skill_compose_arguments, load_blend_workflow_run
-from blend_workflow_execution import (
+from realized_core_semantics.applied_model import Artifact
+from realized_blend.context import BlendContext
+from realized_blend.operators import BlendOperator
+from realized_blend_application.operators import new_blend_skill_operator_provider
+from realized_blend_application.workflows import BlendWorkflowPlan, blend_workflow_plan_from_skill_compose_arguments, load_blend_workflow_run
+from realized_blend_application.execution import (
     execute_blend_skill_workflow,
     resolve_blend_skill_workflow_steps,
     resolve_blend_workflow_steps_from_providers,

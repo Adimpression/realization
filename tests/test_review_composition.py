@@ -6,8 +6,11 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from itemize import list_itemized_subject_items, materialize_itemization_session
-from learning_context import (
+from workstation.subject.core.itemization import (
+    list_itemized_subject_items,
+    materialize_itemization_session,
+)
+from realized_exchange.learning_context import (
     LearningContext,
     LearningUnit,
     load_learning_context,
@@ -18,7 +21,7 @@ from learning_context import (
     persist_learning_source,
     stable_learning_unit_id,
 )
-from review_composition import (
+from workstation.subject.core.review_composition import (
     ReviewTransformReceipt,
     included_review_composition_unit_ids,
     merge_review_item_with_next_sibling,

@@ -13,7 +13,7 @@ from dst import (
     run_live_dst_construct_discovery_for_itemized_item,
 )
 from dst.core import DstUseCaseFixture, dst_use_cases_from_markdown
-from itemize import ItemizedSubjectItem
+from realized_core_semantics.itemization import ItemizedSubjectItem
 
 
 def embedded_fixture(name: str, markdown: str) -> DstUseCaseFixture:

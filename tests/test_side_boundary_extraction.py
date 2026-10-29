@@ -4,9 +4,9 @@ from __future__ import annotations
 import unittest
 from unittest.mock import patch
 
-import side
-from applied_theory_types import Artifact
-from semantic_text import ordered_unique
+import realized_exchange.artifact_yaml as side
+from realized_core_semantics.applied_model import Artifact
+from realized_core_semantics.semantic_text import ordered_unique
 
 
 class SideBoundaryExtractionTests(unittest.TestCase):

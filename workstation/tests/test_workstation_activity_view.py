@@ -6,7 +6,7 @@ import time
 import unittest
 from pathlib import Path
 
-from host_interaction_receipts import append_host_interaction_receipt
+from realized_host_interaction.receipts import append_host_interaction_receipt
 from workstation.foundation.projections import (
     render_workstation_activity_line as foundation_render_workstation_activity_line,
 )

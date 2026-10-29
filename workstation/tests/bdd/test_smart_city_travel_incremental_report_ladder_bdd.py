@@ -7,9 +7,9 @@ from pathlib import Path
 from unittest.mock import patch
 
 from controller_entrypoints import ensure_application_controller_runtime
-from decision_review import load_decision_frame
+from workstation.subject.core.decision_review import load_decision_frame
 from dst import DST_SOURCE_ROOT
-from semantic_text import collapse_ws
+from realized_core_semantics.semantic_text import collapse_ws
 from workstation.runtime.core.session import launch_workstation_session
 from workstation.subject.core.subject_workflow import (
     _itemization_state,

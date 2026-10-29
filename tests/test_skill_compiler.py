@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import unittest
 
-from skill_compiler import compile_skill_document, compiled_skill_summary_from_artifact
+from realized_exchange.compiler import compile_skill_document, compiled_skill_summary_from_artifact
 
 
 class SkillCompilerTests(unittest.TestCase):

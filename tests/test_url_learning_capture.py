@@ -9,9 +9,15 @@ import unittest
 from types import SimpleNamespace
 from unittest.mock import Mock, patch
 
-from learning_context import learning_source_bundle_root, load_learning_source
-from main import BSSCController, SystemState
-from url_learning_capture import capture_url_learning_bundle
+from realized_core_engine import controller_runtime
+from realized_core_engine.controller_runtime import BSSCController
+from realized_core_engine.state import SystemState
+from realized_exchange.learning_context import learning_source_bundle_root, load_learning_source
+from realized_exchange.markdown_learning_pipeline import install_markdown_learning_extensions
+from workstation.subject.service.url_learning_capture import capture_url_learning_bundle
+
+
+install_markdown_learning_extensions(controller_runtime)
 
 
 class _FakeUrlResponse:
@@ -151,8 +157,8 @@ class UrlLearningCaptureTests(unittest.TestCase):
                 return _FakeUrlResponse(url=image_url, media_type="image/png", body=b"\x89PNG\r\n")
             raise AssertionError(f"unexpected URL: {request_url}")
 
-        with patch("url_learning_capture.sync_playwright", new=None), patch(
-            "url_learning_capture.urlopen",
+        with patch("workstation.subject.service.url_learning_capture.sync_playwright", new=None), patch(
+            "workstation.subject.service.url_learning_capture.urlopen",
             side_effect=_fake_urlopen,
         ):
             capture = capture_url_learning_bundle(url=page_url, max_assets=2)
@@ -210,13 +216,13 @@ class UrlLearningCaptureTests(unittest.TestCase):
             ]
 
         with patch(
-            "url_learning_capture.sync_playwright",
+            "workstation.subject.service.url_learning_capture.sync_playwright",
             return_value=_FakePlaywrightContextManager(browser),
         ), patch(
-            "url_learning_capture.trafilatura_extract",
+            "workstation.subject.service.url_learning_capture.trafilatura_extract",
             extract_mock,
         ), patch(
-            "url_learning_capture._download_image_assets",
+            "workstation.subject.service.url_learning_capture._download_image_assets",
             side_effect=_fake_asset_download,
         ):
             capture = capture_url_learning_bundle(url=page_url, max_assets=2)
@@ -252,9 +258,9 @@ class UrlLearningCaptureTests(unittest.TestCase):
             return _FakeUrlResponse(url=page_url, media_type="text/html; charset=utf-8", body=html)
 
         with patch(
-            "url_learning_capture._fetch_rendered_page_with_playwright",
+            "workstation.subject.service.url_learning_capture._fetch_rendered_page_with_playwright",
             side_effect=ValueError("browser crashed"),
-        ), patch("url_learning_capture.urlopen", side_effect=_fake_urlopen):
+        ), patch("workstation.subject.service.url_learning_capture.urlopen", side_effect=_fake_urlopen):
             capture = capture_url_learning_bundle(url=page_url, max_assets=1)
 
         self.assertEqual(capture.metadata["fetch_method"], "urllib_request")

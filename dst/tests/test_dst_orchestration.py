@@ -3,7 +3,7 @@ from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
 
-from applied_theory_types import ProposalType
+from realized_core_semantics.applied_model import ProposalType
 from coordinated_transformation import executable_decisions, valid_decisions
 from dst import (
     DstControllerBootstrapUnavailable,
@@ -20,7 +20,7 @@ from dst import (
     run_runtime_dst_discovery,
     run_runtime_dst_normalization,
 )
-from itemize import ItemizedSubjectItem
+from realized_core_semantics.itemization import ItemizedSubjectItem
 
 
 class DstOrchestrationTests(unittest.TestCase):

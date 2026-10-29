@@ -5,9 +5,9 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from fence_extraction_strategy import build_fence_strategy_report
-from fence_extraction_strategy import extract_markdown_fences
-from fence_extraction_strategy import fence_strategy_for_record
+from realized_core_runtime.fence_extraction import build_fence_strategy_report
+from realized_core_runtime.fence_extraction import extract_markdown_fences
+from realized_core_runtime.fence_extraction import fence_strategy_for_record
 
 
 class FenceExtractionStrategyTests(unittest.TestCase):

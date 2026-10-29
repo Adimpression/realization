@@ -6,7 +6,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from host_interaction_receipts import (
+from realized_host_interaction.receipts import (
     append_host_interaction_receipt,
     host_interaction_assistant_response_receipt,
     host_interaction_capability_call_receipt,

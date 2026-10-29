@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from host_interaction_receipts import (
+from realized_host_interaction.receipts import (
     host_interaction_assistant_response_receipt,
     host_interaction_delegation_approval_decision_receipt,
     host_interaction_user_prompt_receipt,

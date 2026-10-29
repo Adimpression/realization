@@ -3,8 +3,8 @@ from __future__ import annotations
 
 import unittest
 
-from itemize import ItemizationSession, ItemizedSubjectItem
-from itemize_validation import validate_itemization_session
+from realized_core_semantics.itemization import ItemizationSession, ItemizedSubjectItem
+from workstation.subject.core.itemize_validation import validate_itemization_session
 
 
 class ItemizeValidationTests(unittest.TestCase):
