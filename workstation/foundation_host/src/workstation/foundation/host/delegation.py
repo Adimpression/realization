@@ -4,7 +4,7 @@ from __future__ import annotations
 from collections.abc import Mapping
 from typing import Any
 
-from applied_theory_types import Artifact
+from realized_core_semantics.applied_model import Artifact
 from realized_host_interaction.delegation import (
     artifact_with_delegated_virtual_mounts,
     build_host_interaction_delegated_mounts,

@@ -6,34 +6,35 @@ from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
-from applied_theory_types import (
+from realized_core_semantics.applied_model import (
     ControllerFeatureToggles,
     RuntimeDeterminismPolicy,
     enum_text,
     json_safe,
 )
-from constitutional_trace import canonical_trace_answer, compare_bundle_trace_to_state
+from realized_core_engine.constitutional_trace import (
+    canonical_trace_answer,
+    compare_bundle_trace_to_state,
+)
+from realized_core_engine.controller_runtime import build_controller
 from realized_core_governance.inventory import load_governance_inventory
 from realized_core_governance.lifecycle import skill_lifecycle_from_payload
 from realized_core_governance.records import artifact_skill_declaration
-from runtime_temp import runtime_mkdtemp
-from runtime_controller_api import new_runtime_controller
-from run_bundle_io import (
+from realized_core_runtime.temporary import runtime_mkdtemp
+from realized_exchange.run_bundle import (
     RUN_BUNDLE_SCHEMA_VERSION,
     governance_snapshot_for_artifacts,
 )
-from skill_schema_io import artifact_from_skill_document
-from skill_governance import (
-    evaluate_skill_admission,
-    normalize_skill_kind,
-)
+from realized_exchange.skill_schema import artifact_from_skill_document
+from realized_core_governance.vocabulary import normalize_skill_kind
+from realized_core_engine.skill_governance import evaluate_skill_admission
 from realized_skill_semantics.declaration import (
     SKILL_SCHEMA_VERSION_V2,
     normalize_skill_schema_version,
 )
 from realized_skill_semantics.execution import ability_executor_framework
-from store import build_artifact_store
-from system_state import SystemState, save_state
+from realized_core_engine.persistence import build_artifact_store
+from realized_core_engine.state import SystemState, save_state
 
 STATE_SQLITE_PATH_ENV = "STATE_SQLITE_PATH"
 
@@ -208,8 +209,8 @@ def replay_run_bundle_document(
         # Deterministic runs are captured under `record` but verified under `replay`.
         if determinism_mode in {"deterministic", "replay"} and state.llm_transcript and llm_strategy in {"record", "live"}:
             state.determinism_policy.llm_strategy = "replay"
-        controller = new_runtime_controller(
-            state,
+        controller = build_controller(
+            state=state,
             llm_policy=str(llm_policy or run.get("llm_policy", "off") or "off"),
         )
         controller.run(max_steps=int(max_steps if max_steps is not None else run.get("max_steps", 256) or 256))

@@ -1,12 +1,17 @@
 schema_version = 1
 workspace_globs = [
+  "blend/pyproject.toml",
+  "blend_application/pyproject.toml",
+  "coordinated_transformation/pyproject.toml",
   "core_*/pyproject.toml",
   "host_interaction/pyproject.toml",
   "skill_semantics/pyproject.toml",
+  "validation/pyproject.toml",
   "workstation/*/pyproject.toml",
 ]
 baseline_path = "architecture/dependency-baseline.json"
 report_path = "architecture/DEPENDENCY_REPORT.md"
+compatibility_inventory_path = "architecture/compatibility-facades.json"
 root_module_glob = "*.py"
 root_package_excludes = ["tests", "workstation"]
 exclude_globs = [
@@ -26,9 +31,15 @@ exclude_globs = [
 compatibility_alias_globs = [
   "workstation/foundation_events/src/workstation/foundation/events/subscriber_controllers.py",
   "workstation/foundation_host/src/workstation/foundation/host/client_sessions.py",
+  "workstation/foundation_host/src/workstation/foundation/host/learning_capture.py",
   "workstation/foundation_host/src/workstation/foundation/host/llm_driver.py",
   "workstation/shell_core/src/workstation/shell/core/shell_prompt_routing.py",
 ]
+
+[compatibility_retirement]
+minimum_stable_qualification_cycles = 1
+completed_stable_qualification_cycles = 1
+qualification_evidence = "architecture/qualification-baseline.json"
 
 # Root/package boundary classifications are deliberately conservative. Modules
 # not listed here are reported as orchestration rather than guessed from their
@@ -36,26 +47,39 @@ compatibility_alias_globs = [
 # root graph (or vice versa); it does not declare the edge desirable.
 [root_boundary_classification]
 default = "orchestration"
-pure_helper_modules = [
-  "semantic_text",
-]
+pure_helper_modules = []
 dto_constant_modules = [
   "applied_theory_primitives",
   "applied_theory_types",
   "decision_review_models",
   "itemize_models",
-  "skill_ir",
 ]
 persistence_modules = [
-  "blend_operator_store",
-  "blend_workflow_store",
-  "blend_world_store",
   "store",
 ]
 compatibility_modules = [
   "approval_governance",
+  "capability_runtime",
+  "blend_context",
+  "blend_operator",
+  "blend_operator_store",
+  "blend_session",
+  "blend_workflow",
+  "blend_workflow_execution",
+  "blend_workflow_models",
+  "blend_workflow_store",
+  "blend_world",
+  "blend_world_models",
+  "blend_world_store",
   "artifact_contracts",
   "data_governance",
+  "controller_entrypoint_binding",
+  "controller_governance_bridge",
+  "controller_runtime",
+  "controller_runtime_binding",
+  "decision_review_policy",
+  "decision_review_projection",
+  "external_markdown_learning_pipeline",
   "host_interaction_action_dispatch",
   "host_interaction_actions",
   "host_interaction_context",
@@ -63,13 +87,34 @@ compatibility_modules = [
   "host_interaction_models",
   "host_interaction_receipts",
   "host_interaction_resolution",
+  "host_mediation",
+  "id_generation",
+  "learning_context_markdown",
+  "markdown_learning_artifact_semantics",
   "pure_theory_types",
+  "publication",
+  "publication_projection",
+  "publication_render",
+  "publication_validation",
+  "prolog",
+  "review_composition",
+  "governed_skill_access",
+  "runtime_governance_context",
+  "runtime_controller_api",
+  "semantic_text",
   "skill_governance_primitives",
+  "skill_governance",
+  "skill_boundary_normalization",
+  "skill_composition",
+  "skill_ir",
   "skill_invocation_contract",
   "skill_leaf_types",
   "skill_lifecycle",
   "skill_path_notation",
   "skill_safety_governance",
+  "title_semantics",
+  "validation_ladder",
+  "validation_sqlite",
 ]
 
 # Every repository-root Python module has one explicit architectural
@@ -81,7 +126,6 @@ compatibility_modules = [
 semantic_model = [
   "applied_theory_primitives",
   "applied_theory_types",
-  "artifact",
   "artifact_contracts",
   "boundary",
   "id_generation",
@@ -92,21 +136,16 @@ semantic_model = [
   "title_semantics",
 ]
 portable_skills = [
-  "fence_extraction_strategy",
   "skill_boundary_normalization",
-  "skill_compiler",
   "skill_composition",
   "skill_invocation_contract",
   "skill_ir",
   "skill_leaf_types",
   "skill_path_notation",
-  "skill_registry",
 ]
 governance = [
   "approval_governance",
-  "constitutional_trace",
   "data_governance",
-  "governance_inventory",
   "governed_skill_access",
   "governed_skill_installation",
   "replay_verifier",
@@ -120,8 +159,10 @@ runtime_execution = [
   "capability_runtime",
   "execution_framework_primitives",
   "execution_frameworks",
+  "fence_extraction_strategy",
   "host_abi",
   "host_brokers",
+  "host_realizers",
   "host_interaction_action_dispatch",
   "host_interaction_actions",
   "host_interaction_context",
@@ -133,12 +174,15 @@ runtime_execution = [
   "macos_host_brokers",
   "python_skill_brokerization",
   "python_skill_host",
+  "python_skill_host_transport",
   "runtime_temp",
   "virtual_mounts",
   "wasm_skill_runtime",
 ]
 controller = [
+  "artifact",
   "artifact_answer_resolution",
+  "constitutional_trace",
   "controller_governance_bridge",
   "controller_runtime",
   "direct_knowledge_reuse",
@@ -147,7 +191,9 @@ controller = [
   "governed_closure_and_commitment",
   "governed_prior_learning_reuse",
   "governed_semantic_reduction_runtime",
+  "governance_inventory",
   "learn",
+  "markdown_learning_artifact_semantics",
   "non_achievedness_normalization",
   "normalization_runtime_dependencies",
   "not_elaboration_ranking",
@@ -155,35 +201,30 @@ controller = [
   "retrieval_ranking",
   "run_outcome_harvest_and_reporting",
   "semantic_prompt_posture",
+  "structured_learning_yaml",
+  "supplement",
   "system_state",
 ]
-llm = [
-  "supplement",
-]
+llm = []
 subject_domain = [
   "decision_review",
   "decision_review_constructs",
   "decision_review_models",
   "decision_review_policy",
   "decision_review_projection",
-  "external_markdown_learning_pipeline",
   "gather_sources",
   "itemize",
   "itemize_models",
   "itemize_validation",
-  "learning_context",
   "learning_context_markdown",
   "learning_context_paths",
   "learning_context_projection",
-  "learning_context_skill_projection",
   "markdown_ir",
-  "markdown_learning_artifact_semantics",
   "publication",
   "publication_projection",
   "publication_render",
   "publication_validation",
   "review_composition",
-  "structured_learning_yaml",
   "url_learning_capture",
 ]
 blend = [
@@ -204,6 +245,9 @@ entry_exchange = [
   "controller_entrypoint_binding",
   "controller_entrypoints",
   "controller_runtime_binding",
+  "external_markdown_learning_pipeline",
+  "learning_context",
+  "learning_context_skill_projection",
   "main",
   "run_bundle_io",
   "runtime_controller_api",
@@ -211,7 +255,9 @@ entry_exchange = [
   "side_runtime_dependencies",
   "skill_compatibility_export",
   "skill_compatibility_import",
+  "skill_compiler",
   "skill_export_projection",
+  "skill_registry",
   "skill_schema_io",
 ]
 persistence_adapter = [
@@ -233,7 +279,11 @@ validation_trial = [
 # main.py is both the historical import facade and an executable entrypoint.
 [root_module_status]
 entrypoint_modules = [
+  "args",
+  "controller_entrypoints",
+  "governed_skill_installation",
   "main",
+  "replay_verifier",
 ]
 validation_modules = [
   "SEMANTIC_RELATION_VALIDATION",
@@ -244,10 +294,49 @@ validation_modules = [
   "validation_sqlite",
 ]
 compatibility_facade_modules = [
+  "applied_theory_primitives",
+  "applied_theory_types",
   "approval_governance",
+  "artifact",
+  "artifact_answer_resolution",
+  "blend_context",
+  "blend_operator",
+  "blend_operator_store",
+  "blend_session",
+  "blend_workflow",
+  "blend_workflow_execution",
+  "blend_workflow_models",
+  "blend_workflow_store",
+  "blend_world",
+  "blend_world_models",
+  "blend_world_store",
   "artifact_contracts",
+  "boundary",
+  "capability_runtime",
+  "controller_entrypoint_binding",
+  "controller_governance_bridge",
+  "controller_runtime",
+  "controller_runtime_binding",
+  "constitutional_trace",
   "data_governance",
+  "decision_review",
+  "decision_review_constructs",
+  "decision_review_models",
+  "decision_review_policy",
+  "decision_review_projection",
+  "direct_knowledge_reuse",
+  "execution_framework_primitives",
+  "execution_frameworks",
+  "external_markdown_learning_pipeline",
+  "fallback_not_generation",
   "fallback_not_semantics",
+  "fence_extraction_strategy",
+  "gather_sources",
+  "governance_inventory",
+  "governed_closure_and_commitment",
+  "governed_prior_learning_reuse",
+  "governed_semantic_reduction_runtime",
+  "governed_skill_access",
   "host_interaction_action_dispatch",
   "host_interaction_actions",
   "host_interaction_context",
@@ -255,24 +344,81 @@ compatibility_facade_modules = [
   "host_interaction_models",
   "host_interaction_receipts",
   "host_interaction_resolution",
+  "host_abi",
+  "host_brokers",
+  "host_mediation",
+  "host_realizers",
+  "id_generation",
+  "itemize",
+  "itemize_models",
+  "itemize_validation",
+  "learning_context",
+  "learning_context_markdown",
+  "learning_context_projection",
+  "learning_context_skill_projection",
+  "learning_context_paths",
+  "learn",
   "main",
+  "markdown_ir",
+  "markdown_learning_artifact_semantics",
+  "macos_host_brokers",
   "normalize",
+  "non_achievedness_normalization",
+  "normalization_primitives",
+  "normalization_runtime_dependencies",
+  "not_elaboration_ranking",
   "pure_theory_types",
+  "publication",
+  "publication_projection",
+  "publication_render",
+  "publication_validation",
+  "python_skill_brokerization",
+  "python_skill_host",
+  "python_skill_host_transport",
+  "prolog",
+  "prompt_directives",
+  "review_composition",
+  "retrieval_ranking",
+  "run_bundle_io",
+  "run_outcome_harvest_and_reporting",
+  "runtime_governance_context",
+  "runtime_controller_api",
+  "runtime_temp",
+  "semantic_prompt_posture",
+  "semantic_text",
+  "side",
+  "side_runtime_dependencies",
+  "skill_compatibility_export",
+  "skill_compatibility_import",
+  "skill_compiler",
   "skill_governance_primitives",
+  "skill_governance",
+  "skill_boundary_normalization",
+  "skill_composition",
+  "skill_export_projection",
+  "skill_ir",
   "skill_invocation_contract",
   "skill_leaf_types",
   "skill_lifecycle",
   "skill_path_notation",
+  "skill_registry",
   "skill_safety_governance",
+  "skill_schema_io",
+  "structured_learning_yaml",
+  "store",
+  "supplement",
+  "system_state",
+  "title_semantics",
+  "url_learning_capture",
+  "validation_ladder",
+  "validation_sqlite",
+  "virtual_mounts",
+  "wasm_skill_runtime",
 ]
 
 # Top-level Python package families that are not yet UV projects remain part of
 # the same ownership and target-direction ratchet as root modules.
 [root_package_ownership]
-subject_domain = [
-  "coordinated_transformation",
-  "dst",
-]
 validation_trial = [
   "design",
 ]
@@ -386,7 +532,13 @@ project_dir = "core_runtime"
 distribution = "realized-core-runtime"
 module_prefix = "realized_core_runtime"
 layer = "core"
-allowed_dependencies = []
+allowed_dependencies = [
+  "core_governance",
+  "core_engine",
+  "core_semantics",
+  "host_interaction",
+  "skill_semantics",
+]
 
 [components.host_interaction]
 project_dir = "host_interaction"
@@ -402,6 +554,42 @@ module_prefix = "realized_core_semantics"
 layer = "semantic_contracts"
 allowed_dependencies = []
 
+[components.blend]
+project_dir = "blend"
+distribution = "realized-blend"
+module_prefix = "realized_blend"
+layer = "domain"
+allowed_dependencies = ["core_semantics"]
+
+[components.blend_application]
+project_dir = "blend_application"
+distribution = "realized-blend-application"
+module_prefix = "realized_blend_application"
+layer = "runtime_execution"
+allowed_dependencies = [
+  "blend",
+  "core_semantics",
+  "governed_core",
+  "skill_application",
+  "skill_semantics",
+  "subject_core",
+  "subject_service",
+]
+
+[components.coordinated_transformation]
+project_dir = "coordinated_transformation"
+distribution = "coordinated-transformation"
+module_prefix = "coordinated_transformation"
+layer = "subject_domain"
+allowed_dependencies = []
+
+[components.dst]
+project_dir = "dst"
+distribution = "dst"
+module_prefix = "dst"
+layer = "subject_domain"
+allowed_dependencies = ["coordinated_transformation", "core_semantics"]
+
 [components.core_governance]
 project_dir = "core_governance"
 distribution = "realized-core-governance"
@@ -416,6 +604,34 @@ module_prefix = "realized_skill_semantics"
 layer = "skill_contracts"
 allowed_dependencies = ["core_semantics"]
 
+[components.exchange]
+project_dir = "exchange"
+distribution = "realized-exchange"
+module_prefix = "realized_exchange"
+layer = "exchange_adapters"
+allowed_dependencies = [
+  "core_engine",
+  "core_governance",
+  "core_semantics",
+  "governed_core",
+  "skill_application",
+  "skill_semantics",
+  "subject_core",
+  "subject_service",
+]
+
+[components.skill_application]
+project_dir = "skill_application"
+distribution = "realized-skill-application"
+module_prefix = "realized_skill_application"
+layer = "skills"
+allowed_dependencies = [
+  "core_governance",
+  "core_semantics",
+  "governed_core",
+  "skill_semantics",
+]
+
 [components.core_engine]
 project_dir = "core_engine"
 distribution = "realized-core-engine"
@@ -423,6 +639,7 @@ module_prefix = "realized_core_engine"
 layer = "controller"
 allowed_dependencies = [
   "core_governance",
+  "core_llm",
   "core_semantics",
   "governed_core",
   "host_interaction",
@@ -476,7 +693,12 @@ project_dir = "workstation/foundation_events"
 distribution = "realized-workstation-foundation-events"
 module_prefix = "workstation.foundation.events"
 layer = "foundation"
-allowed_dependencies = ["contracts", "foundation_models", "host_interaction"]
+allowed_dependencies = [
+  "contracts",
+  "core_semantics",
+  "foundation_models",
+  "host_interaction",
+]
 
 [components.foundation_host]
 project_dir = "workstation/foundation_host"
@@ -485,6 +707,7 @@ module_prefix = "workstation.foundation.host"
 layer = "foundation"
 allowed_dependencies = [
   "core_governance",
+  "core_semantics",
   "contracts",
   "foundation_events",
   "foundation_models",
@@ -496,7 +719,13 @@ project_dir = "workstation/foundation_projections"
 distribution = "realized-workstation-foundation-projections"
 module_prefix = "workstation.foundation.projections"
 layer = "foundation"
-allowed_dependencies = ["contracts", "foundation_events", "foundation_models"]
+allowed_dependencies = [
+  "blend",
+  "contracts",
+  "core_semantics",
+  "foundation_events",
+  "foundation_models",
+]
 
 [components.grpc_definitions]
 project_dir = "workstation/grpc_definitions"
@@ -512,6 +741,7 @@ module_prefix = "workstation.grpc.implementation"
 layer = "exchange_adapters"
 allowed_dependencies = [
   "contracts",
+  "core_semantics",
   "foundation_events",
   "foundation_models",
   "grpc_definitions",
@@ -527,7 +757,11 @@ distribution = "realized-workstation-runtime-core"
 module_prefix = "workstation.runtime.core"
 layer = "controller"
 allowed_dependencies = [
+  "blend",
+  "blend_application",
   "core_governance",
+  "core_llm",
+  "governed_core",
   "core_semantics",
   "contracts",
   "foundation_events",
@@ -535,9 +769,12 @@ allowed_dependencies = [
   "foundation_models",
   "foundation_projections",
   "host_interaction",
+  "skill_application",
   "skill_semantics",
   "skills_core",
   "skills_planning",
+  "subject_core",
+  "subject_service",
 ]
 
 [components.shell_core]
@@ -548,6 +785,7 @@ layer = "workstation"
 allowed_dependencies = [
   "core_conversation",
   "core_llm",
+  "core_semantics",
   "contracts",
   "foundation_events",
   "foundation_models",
@@ -563,7 +801,7 @@ project_dir = "workstation/skills_builtin"
 distribution = "realized-workstation-skills-builtin"
 module_prefix = "workstation.skills.builtin"
 layer = "skills"
-allowed_dependencies = ["foundation_models"]
+allowed_dependencies = ["core_semantics", "foundation_models"]
 
 [components.skills_core]
 project_dir = "workstation/skills_core"
@@ -572,11 +810,14 @@ module_prefix = "workstation.skills.core"
 layer = "skills"
 allowed_dependencies = [
   "core_governance",
+  "core_semantics",
   "contracts",
   "foundation_events",
   "foundation_host",
   "foundation_models",
+  "governed_core",
   "host_interaction",
+  "skill_application",
   "skill_semantics",
   "skills_builtin",
 ]
@@ -588,9 +829,12 @@ module_prefix = "workstation.skills.planning"
 layer = "skills"
 allowed_dependencies = [
   "contracts",
+  "core_semantics",
   "foundation_events",
   "foundation_host",
   "foundation_models",
+  "governed_core",
+  "skill_application",
   "skill_semantics",
   "skills_core",
 ]
@@ -601,11 +845,13 @@ distribution = "realized-workstation-subject-core"
 module_prefix = "workstation.subject.core"
 layer = "governance"
 allowed_dependencies = [
+  "coordinated_transformation",
   "contracts",
+  "core_semantics",
+  "dst",
   "foundation_events",
-  "foundation_host",
   "foundation_models",
-  "runtime_core",
+  "governed_core",
 ]
 
 [components.subject_service]
@@ -615,6 +861,7 @@ module_prefix = "workstation.subject.service"
 layer = "governance"
 allowed_dependencies = [
   "contracts",
+  "core_semantics",
   "foundation_events",
   "foundation_models",
   "grpc_definitions",
@@ -634,6 +881,7 @@ distribution = "realized-workstation-ui-shared"
 module_prefix = "workstation.ui.shared"
 layer = "workstation"
 allowed_dependencies = [
+  "core_semantics",
   "foundation_events",
   "foundation_models",
   "foundation_projections",
@@ -647,6 +895,7 @@ module_prefix = "workstation.ui.textual"
 layer = "workstation_adapter"
 allowed_dependencies = [
   "contracts",
+  "core_semantics",
   "foundation_projections",
   "shell_core",
   "subject_textual",
@@ -659,10 +908,25 @@ distribution = "realized-workstation-app-cli"
 module_prefix = "workstation.app.cli"
 layer = "entry"
 allowed_dependencies = [
+  "contracts",
+  "core_engine",
+  "core_semantics",
+  "exchange",
   "foundation_host",
+  "governed_core",
   "grpc_implementation",
   "host_interaction",
+  "runtime_core",
   "shell_core",
+  "subject_core",
+  "subject_service",
   "ui_shared",
   "ui_textual",
 ]
+
+[components.validation]
+project_dir = "validation"
+distribution = "realized-validation"
+module_prefix = "realized_validation"
+layer = "validation"
+allowed_dependencies = []

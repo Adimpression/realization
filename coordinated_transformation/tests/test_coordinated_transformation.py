@@ -1,5 +1,7 @@
 import unittest
 
+import coordinated_transformation
+from coordinated_transformation import core
 from coordinated_transformation import (
     Actor,
     Boundary,
@@ -83,6 +85,41 @@ def build_example_model() -> tuple[Model, State, State, Decision, Transition, Ca
 
 
 class CoordinatedTransformationTests(unittest.TestCase):
+    def test_package_api_resolves_to_canonical_core_definitions(self) -> None:
+        exported_names = (
+            "Actor",
+            "Boundary",
+            "Capability",
+            "Constraint",
+            "Decision",
+            "Dependency",
+            "Model",
+            "Objective",
+            "State",
+            "TimePoint",
+            "Transition",
+            "TransitionPath",
+            "Violation",
+            "admissible_capabilities",
+            "admissible_transition_paths",
+            "admissible_transitions",
+            "check_axioms",
+            "executable_decision",
+            "executable_decisions",
+            "least_reachable_closure",
+            "valid_decision",
+            "valid_decisions",
+        )
+
+        for name in exported_names:
+            with self.subTest(name=name):
+                self.assertIs(
+                    getattr(coordinated_transformation, name), getattr(core, name)
+                )
+        self.assertEqual(core.__all__, coordinated_transformation.__all__)
+        self.assertEqual(len(core.__all__), len(set(core.__all__)))
+        self.assertTrue(set(exported_names).issubset(core.__all__))
+
     def test_example_model_matches_theory_behavior(self) -> None:
         m, s0, s1, dec1, t1, k_new = build_example_model()
         m.reachable = least_reachable_closure(m)

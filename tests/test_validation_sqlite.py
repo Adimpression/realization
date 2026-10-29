@@ -7,10 +7,15 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
+from realized_validation import sqlite_runtime as packaged_validation_sqlite
+import validation_sqlite
 from validation_sqlite import archive_validation_sqlite, validation_sqlite_paths, validation_sqlite_use_ramdisk
 
 
 class ValidationSQLiteTests(unittest.TestCase):
+    def test_historical_module_is_exact_package_alias(self) -> None:
+        self.assertIs(validation_sqlite, packaged_validation_sqlite)
+
     def test_validation_sqlite_paths_respect_override_root(self) -> None:
         """
         High Level Purpose:

@@ -14,20 +14,20 @@ from collections.abc import Callable
 from typing import Any
 
 from realized_core_semantics.values import json_safe
-from blend_context import BlendContext
-from blend_operator_store import (
+from realized_blend.context import BlendContext
+from realized_blend.operators import (
     BlendOperatorProvider,
     get_blend_operator_summary,
     list_blend_operator_summaries,
 )
-from blend_workflow_store import (
+from realized_blend_application.workflow_store import (
     list_blend_workflow_summaries,
     load_blend_workflow_index,
     list_blend_workflow_runs_for_plan,
     load_blend_workflow_plan,
     load_blend_workflow_run,
 )
-from gather_sources import (
+from workstation.subject.core.gather_sources import (
     SourceCollection,
     StagedSource,
     latest_source_revision,
@@ -44,11 +44,17 @@ from gather_sources import (
 )
 from realized_host_interaction.receipts import host_interaction_receipts_path
 from realized_skill_semantics.execution import ability_executor_framework
-from learning_context import load_learning_context, new_learning_context, persist_learning_context
-from semantic_text import collapse_ws
-from skill_schema_io import normalized_skill_bundle_filename_for_source
-from skill_ir import canonical_skill_ir_from_artifact
+from workstation.subject.service.learning_context_persistence import (
+    persist_learning_context,
+)
+from workstation.subject.core.learning_context import (
+    load_learning_context,
+    new_learning_context,
+)
+from realized_core_semantics.semantic_text import collapse_ws
+from realized_skill_application.ir import canonical_skill_ir_from_artifact
 from workstation.foundation.events.event_bus import publish_workstation_event
+from workstation.foundation.host.skill_exchange import skill_exchange_provider
 from workstation.foundation.models import WorkstationSession
 from workstation.foundation.projections import (
     WorkstationActionResultView,
@@ -123,7 +129,11 @@ def _ensure_gather_subject_workspace(
     normalized_subject_title = collapse_ws(subject_title) or normalized_subject_id or "Gather Source"
     if not normalized_subject_id:
         context = new_learning_context(canonical_title=normalized_subject_title)
-        persist_learning_context(root_path, context)
+        persist_learning_context(
+            root_path,
+            context,
+            skill_materializer=skill_exchange_provider().materialize_learning_context_skills,
+        )
         return (
             context.subject_id,
             context.canonical_title or normalized_subject_title,
@@ -136,7 +146,11 @@ def _ensure_gather_subject_workspace(
             canonical_title=normalized_subject_title,
             subject_id=normalized_subject_id,
         )
-        persist_learning_context(root_path, context)
+        persist_learning_context(
+            root_path,
+            context,
+            skill_materializer=skill_exchange_provider().materialize_learning_context_skills,
+        )
     return (
         context.subject_id,
         context.canonical_title or normalized_subject_title,
@@ -896,7 +910,12 @@ def workstation_learn_markdown_action(
     learning_context_root = str(root)
     with tempfile.TemporaryDirectory(prefix="workstation-markdown-learn-") as tempdir_text:
         tempdir = Path(tempdir_text)
-        learned_bundle_path = tempdir / normalized_skill_bundle_filename_for_source(source_markdown_path)
+        learned_bundle_path = (
+            tempdir
+            / skill_exchange_provider().normalized_skill_bundle_filename_for_source(
+                source_markdown_path
+            )
+        )
         report_path = tempdir / "report.json"
         _emit_progress("Converting markdown to a portable skill bundle...")
         command = _runtime_cli_command(
@@ -1199,7 +1218,7 @@ def workstation_learn_url_action(
     max_assets: int = 8,
     progress_callback: Callable[[str], None] | None = None,
 ) -> WorkstationActionResultView:
-    from url_learning_capture import capture_url_learning_bundle
+    from workstation.subject.service.url_learning_capture import capture_url_learning_bundle
 
     root = Path(root_path).expanduser().resolve()
     normalized_url = collapse_ws(source_url or url)
@@ -1363,7 +1382,7 @@ def workstation_refresh_staged_source_action(
     max_assets: int = 8,
     progress_callback: Callable[[str], None] | None = None,
 ) -> WorkstationActionResultView:
-    from url_learning_capture import capture_url_learning_bundle
+    from workstation.subject.service.url_learning_capture import capture_url_learning_bundle
 
     root = Path(root_path).expanduser().resolve()
     normalized_subject_id = collapse_ws(subject_id)
@@ -1819,7 +1838,12 @@ def workstation_import_staged_source_action(
     _emit_progress(f"Importing staged source: {selected.title or selected.staged_source_id}")
     with tempfile.TemporaryDirectory(prefix="workstation-staged-source-import-") as tempdir_text:
         tempdir = Path(tempdir_text)
-        learned_bundle_path = tempdir / normalized_skill_bundle_filename_for_source(markdown_path)
+        learned_bundle_path = (
+            tempdir
+            / skill_exchange_provider().normalized_skill_bundle_filename_for_source(
+                markdown_path
+            )
+        )
         _emit_progress("Learning reusable artifacts from staged source markdown...")
         try:
             report = _learn_markdown_bundle_in_process(

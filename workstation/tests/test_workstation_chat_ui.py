@@ -34,7 +34,7 @@ from learning_context import (
 )
 from publication_projection import materialize_report_publication_from_learning_context
 from review_composition import list_review_items
-from dst import discovery_result_from_fixture, normalized_case_from_fixture, run_dst_pipeline_from_fixture
+from dst import DST_SOURCE_ROOT, discovery_result_from_fixture, normalized_case_from_fixture, run_dst_pipeline_from_fixture
 from semantic_text import collapse_ws
 from gather_sources import (
     list_source_collections,
@@ -160,11 +160,19 @@ from workstation.ui.textual.chat_ui import (
 )
 from workstation.foundation.models import WorkstationDelegationEscalationRequest
 from workstation.runtime.core.session import launch_workstation_session
+from workstation.runtime.core.subject_host_actions import RuntimeSubjectWorkflowHostActions
 from workstation.runtime.core.workstation_core import workstation_learn_markdown_action
 from workstation.shell.core.workstation_shell_client import InProcessWorkstationShellClient
 from workstation.skills.core.skill_management import import_workstation_skill_file
 from workstation.skills.planning.skill_home import resolve_workstation_skill_home
 from workstation.subject.service.subject_workflow_client import InProcessSubjectWorkflowClient
+from workstation.subject.service.subject_workflow_api import SubjectWorkflowApiService
+
+
+def _itemization_runtime_provider(controller: object) -> SimpleNamespace:
+    return SimpleNamespace(
+        bootstrap_controller=lambda **_kwargs: (SimpleNamespace(), controller)
+    )
 
 
 def _table_rows(table: object) -> list[tuple[str, ...]]:
@@ -190,7 +198,13 @@ def _tree_text(tree: object) -> str:
 
 class WorkstationChatUiTests(unittest.TestCase):
     def setUp(self) -> None:
-        configure_textual_subject_workflow_client_factory(InProcessSubjectWorkflowClient)
+        configure_textual_subject_workflow_client_factory(
+            lambda: InProcessSubjectWorkflowClient(
+                service=SubjectWorkflowApiService(
+                    host_actions=RuntimeSubjectWorkflowHostActions(),
+                )
+            )
+        )
         self.tempdir = tempfile.TemporaryDirectory()
         self.enterContext(
             patch.dict(
@@ -1956,7 +1970,7 @@ class WorkstationChatUiTests(unittest.TestCase):
     def test_textual_subject_tabs_start_and_stop_subject_workflow_watch(self) -> None:
         if _TextualWorkstationChatApp is None:
             self.skipTest("textual is not installed")
-        markdown_path = Path(__file__).resolve().parents[2] / "dst" / "City bus prose v2.md"
+        markdown_path = DST_SOURCE_ROOT / "City bus prose v2.md"
         result = workstation_learn_markdown_action(
             root_path=self.root,
             markdown_path=markdown_path,
@@ -2544,10 +2558,10 @@ class WorkstationChatUiTests(unittest.TestCase):
                 max_tool_rounds=2,
             )
             with patch("workstation.ui.textual.chat_ui.desktop_select_markdown_files", return_value=(markdown_path,)), patch(
-                "workstation.subject.core.subject_workflow.workstation_stage_markdown_source_action",
+                "workstation.runtime.core.subject_host_actions.workstation_stage_markdown_source_action",
                 side_effect=_fake_result,
             ), patch(
-                "workstation.subject.core.subject_workflow.workstation_import_staged_source_action",
+                "workstation.runtime.core.subject_host_actions.workstation_import_staged_source_action",
                 side_effect=_fake_import_result,
             ), patch(
                 "workstation.ui.textual.chat_ui.desktop_select_skill_export_path",
@@ -2654,10 +2668,10 @@ class WorkstationChatUiTests(unittest.TestCase):
                 max_tool_rounds=2,
             )
             with patch("workstation.ui.textual.chat_ui.desktop_select_markdown_files", return_value=(markdown_path,)) as select_mock, patch(
-                "workstation.subject.core.subject_workflow.workstation_stage_markdown_source_action",
+                "workstation.runtime.core.subject_host_actions.workstation_stage_markdown_source_action",
                 side_effect=_fake_result,
             ), patch(
-                "workstation.subject.core.subject_workflow.workstation_import_staged_source_action",
+                "workstation.runtime.core.subject_host_actions.workstation_import_staged_source_action",
                 side_effect=_fake_import_result,
             ), patch(
                 "workstation.ui.textual.chat_ui.desktop_select_skill_export_path",
@@ -2767,7 +2781,7 @@ class WorkstationChatUiTests(unittest.TestCase):
                 max_tool_rounds=2,
             )
             with patch("workstation.ui.textual.chat_ui.desktop_prompt_url", return_value=source_url), patch(
-                "workstation.subject.core.subject_workflow.workstation_learn_url_action",
+                "workstation.runtime.core.subject_host_actions.workstation_learn_url_action",
                 side_effect=_fake_result,
             ), patch(
                 "workstation.ui.textual.chat_ui.desktop_select_skill_export_path",
@@ -9162,7 +9176,7 @@ class WorkstationChatUiTests(unittest.TestCase):
         if _TextualWorkstationChatApp is None:
             self.skipTest("textual is not installed")
 
-        markdown_path = Path(__file__).resolve().parents[2] / "dst" / "City bus ticketing modernization.md"
+        markdown_path = DST_SOURCE_ROOT / "City bus ticketing modernization.md"
         learn_result = workstation_learn_markdown_action(
             root_path=self.root,
             markdown_path=markdown_path,
@@ -9290,7 +9304,7 @@ class WorkstationChatUiTests(unittest.TestCase):
         if _TextualWorkstationChatApp is None:
             self.skipTest("textual is not installed")
 
-        markdown_path = Path(__file__).resolve().parents[2] / "dst" / "City bus ticketing modernization.md"
+        markdown_path = DST_SOURCE_ROOT / "City bus ticketing modernization.md"
         learn_result = workstation_learn_markdown_action(
             root_path=self.root,
             markdown_path=markdown_path,
@@ -9414,7 +9428,7 @@ class WorkstationChatUiTests(unittest.TestCase):
         if _TextualWorkstationChatApp is None:
             self.skipTest("textual is not installed")
 
-        markdown_path = Path(__file__).resolve().parents[2] / "dst" / "City bus ticketing modernization.md"
+        markdown_path = DST_SOURCE_ROOT / "City bus ticketing modernization.md"
         learn_result = workstation_learn_markdown_action(
             root_path=self.root,
             markdown_path=markdown_path,
@@ -9553,7 +9567,7 @@ class WorkstationChatUiTests(unittest.TestCase):
             persist_subject_progress,
         )
 
-        markdown_path = Path(__file__).resolve().parents[2] / "dst" / "City bus prose v2.md"
+        markdown_path = DST_SOURCE_ROOT / "City bus prose v2.md"
         learn_result = workstation_learn_markdown_action(
             root_path=self.root,
             markdown_path=markdown_path,
@@ -9640,7 +9654,7 @@ class WorkstationChatUiTests(unittest.TestCase):
             persist_subject_progress,
         )
 
-        markdown_path = Path(__file__).resolve().parents[2] / "dst" / "City bus prose v2.md"
+        markdown_path = DST_SOURCE_ROOT / "City bus prose v2.md"
         learn_result = workstation_learn_markdown_action(
             root_path=self.root,
             markdown_path=markdown_path,
@@ -9658,23 +9672,38 @@ class WorkstationChatUiTests(unittest.TestCase):
 
         scenario = default_subject_scenarios(self.root)[0]
         progress = new_subject_progress()
-        apply_subject_action(root_path=self.root, scenario=scenario, progress=progress, action_key="open_context")
-        apply_subject_action(root_path=self.root, scenario=scenario, progress=progress, action_key="compare_projections")
+        host_actions = RuntimeSubjectWorkflowHostActions()
+        apply_subject_action(
+            root_path=self.root,
+            scenario=scenario,
+            progress=progress,
+            action_key="open_context",
+            host_actions=host_actions,
+        )
+        apply_subject_action(
+            root_path=self.root,
+            scenario=scenario,
+            progress=progress,
+            action_key="compare_projections",
+            host_actions=host_actions,
+        )
         with patch(
-            "itemize.bootstrap_runtime_controller",
-            return_value=(SimpleNamespace(), EmptyController()),
+            "workstation.runtime.core.subject_host_actions.controller_runtime_provider",
+            return_value=_itemization_runtime_provider(EmptyController()),
         ):
             apply_subject_action(
                 root_path=self.root,
                 scenario=scenario,
                 progress=progress,
                 action_key="generate_itemization",
+                host_actions=host_actions,
             )
         apply_subject_action(
             root_path=self.root,
             scenario=scenario,
             progress=progress,
             action_key="refresh_review_composition",
+            host_actions=host_actions,
         )
         persist_subject_progress(self.root, scenario.subject_id, progress)
 
@@ -9777,7 +9806,7 @@ class WorkstationChatUiTests(unittest.TestCase):
             persist_subject_progress,
         )
 
-        markdown_path = Path(__file__).resolve().parents[2] / "dst" / "City bus prose v2.md"
+        markdown_path = DST_SOURCE_ROOT / "City bus prose v2.md"
         learn_result = workstation_learn_markdown_action(
             root_path=self.root,
             markdown_path=markdown_path,
@@ -9798,8 +9827,8 @@ class WorkstationChatUiTests(unittest.TestCase):
         apply_subject_action(root_path=self.root, scenario=scenario, progress=progress, action_key="open_context")
         apply_subject_action(root_path=self.root, scenario=scenario, progress=progress, action_key="compare_projections")
         with patch(
-            "itemize.bootstrap_runtime_controller",
-            return_value=(SimpleNamespace(), EmptyController()),
+            "workstation.runtime.core.subject_host_actions.controller_runtime_provider",
+            return_value=_itemization_runtime_provider(EmptyController()),
         ):
             apply_subject_action(
                 root_path=self.root,
@@ -9875,7 +9904,7 @@ class WorkstationChatUiTests(unittest.TestCase):
             persist_subject_progress,
         )
 
-        markdown_path = Path(__file__).resolve().parents[2] / "dst" / "City bus prose v10.md"
+        markdown_path = DST_SOURCE_ROOT / "City bus prose v10.md"
         learn_result = workstation_learn_markdown_action(
             root_path=self.root,
             markdown_path=markdown_path,
@@ -9956,7 +9985,7 @@ class WorkstationChatUiTests(unittest.TestCase):
 
         workstation_learn_markdown_action(
             root_path=self.root,
-            markdown_path=Path(__file__).resolve().parents[2] / "dst" / "City bus prose v2.md",
+            markdown_path=DST_SOURCE_ROOT / "City bus prose v2.md",
             testing_lightweight=False,
         )
         scenario = default_subject_scenarios(self.root)[0]
@@ -9978,7 +10007,7 @@ class WorkstationChatUiTests(unittest.TestCase):
 
         workstation_learn_markdown_action(
             root_path=self.root,
-            markdown_path=Path(__file__).resolve().parents[2] / "dst" / "City bus prose v10.md",
+            markdown_path=DST_SOURCE_ROOT / "City bus prose v10.md",
             testing_lightweight=False,
         )
         scenario = default_subject_scenarios(self.root)[0]
@@ -10064,7 +10093,7 @@ class WorkstationChatUiTests(unittest.TestCase):
 
         workstation_learn_markdown_action(
             root_path=self.root,
-            markdown_path=Path(__file__).resolve().parents[2] / "dst" / "City bus prose v2.md",
+            markdown_path=DST_SOURCE_ROOT / "City bus prose v2.md",
             testing_lightweight=False,
         )
         scenario = default_subject_scenarios(self.root)[0]
@@ -10081,7 +10110,7 @@ class WorkstationChatUiTests(unittest.TestCase):
 
         workstation_learn_markdown_action(
             root_path=self.root,
-            markdown_path=Path(__file__).resolve().parents[2] / "dst" / "City bus prose v10.md",
+            markdown_path=DST_SOURCE_ROOT / "City bus prose v10.md",
             testing_lightweight=False,
         )
         scenario = default_subject_scenarios(self.root)[0]
@@ -10156,7 +10185,7 @@ class WorkstationChatUiTests(unittest.TestCase):
 
         workstation_learn_markdown_action(
             root_path=self.root,
-            markdown_path=Path(__file__).resolve().parents[2] / "dst" / "City bus prose v2.md",
+            markdown_path=DST_SOURCE_ROOT / "City bus prose v2.md",
             testing_lightweight=False,
         )
         scenario = default_subject_scenarios(self.root)[0]
@@ -10232,11 +10261,12 @@ class WorkstationChatUiTests(unittest.TestCase):
 
         workstation_learn_markdown_action(
             root_path=self.root,
-            markdown_path=Path(__file__).resolve().parents[2] / "dst" / "City bus prose v2.md",
+            markdown_path=DST_SOURCE_ROOT / "City bus prose v2.md",
             testing_lightweight=False,
         )
         scenario = default_subject_scenarios(self.root)[0]
         progress = load_subject_progress(self.root, scenario.subject_id)
+        host_actions = RuntimeSubjectWorkflowHostActions()
         for action_key in (
             "open_context",
             "compare_projections",
@@ -10250,11 +10280,12 @@ class WorkstationChatUiTests(unittest.TestCase):
                 scenario=scenario,
                 progress=progress,
                 action_key=action_key,
+                host_actions=host_actions,
             )
 
         workstation_learn_markdown_action(
             root_path=self.root,
-            markdown_path=Path(__file__).resolve().parents[2] / "dst" / "City bus prose v10.md",
+            markdown_path=DST_SOURCE_ROOT / "City bus prose v10.md",
             testing_lightweight=False,
         )
         scenario = default_subject_scenarios(self.root)[0]
@@ -10269,6 +10300,7 @@ class WorkstationChatUiTests(unittest.TestCase):
                 scenario=scenario,
                 progress=progress,
                 action_key=action_key,
+                host_actions=host_actions,
             )
         persist_subject_progress(self.root, scenario.subject_id, progress)
 
@@ -10351,7 +10383,7 @@ class WorkstationChatUiTests(unittest.TestCase):
         if _TextualWorkstationChatApp is None:
             self.skipTest("textual is not installed")
 
-        markdown_path = Path(__file__).resolve().parents[2] / "dst" / "Regional emergency alerting system.md"
+        markdown_path = DST_SOURCE_ROOT / "Regional emergency alerting system.md"
         learn_result = workstation_learn_markdown_action(
             root_path=self.root,
             markdown_path=markdown_path,
@@ -10474,7 +10506,7 @@ class WorkstationChatUiTests(unittest.TestCase):
         if _TextualWorkstationChatApp is None:
             self.skipTest("textual is not installed")
 
-        markdown_path = Path(__file__).resolve().parents[2] / "dst" / "City bus ticketing modernization.md"
+        markdown_path = DST_SOURCE_ROOT / "City bus ticketing modernization.md"
         learn_result = workstation_learn_markdown_action(
             root_path=self.root,
             markdown_path=markdown_path,
@@ -10620,7 +10652,7 @@ class WorkstationChatUiTests(unittest.TestCase):
         if _TextualWorkstationChatApp is None:
             self.skipTest("textual is not installed")
 
-        markdown_path = Path(__file__).resolve().parents[2] / "dst" / "City bus ticketing modernization.md"
+        markdown_path = DST_SOURCE_ROOT / "City bus ticketing modernization.md"
         learn_result = workstation_learn_markdown_action(
             root_path=self.root,
             markdown_path=markdown_path,
@@ -10747,7 +10779,7 @@ class WorkstationChatUiTests(unittest.TestCase):
         if _TextualWorkstationChatApp is None:
             self.skipTest("textual is not installed")
 
-        markdown_path = Path(__file__).resolve().parents[2] / "dst" / "City bus ticketing modernization.md"
+        markdown_path = DST_SOURCE_ROOT / "City bus ticketing modernization.md"
         learn_result = workstation_learn_markdown_action(
             root_path=self.root,
             markdown_path=markdown_path,
@@ -10879,7 +10911,7 @@ class WorkstationChatUiTests(unittest.TestCase):
         if _TextualWorkstationChatApp is None:
             self.skipTest("textual is not installed")
 
-        markdown_path = Path(__file__).resolve().parents[2] / "dst" / "City bus ticketing modernization.md"
+        markdown_path = DST_SOURCE_ROOT / "City bus ticketing modernization.md"
         learn_result = workstation_learn_markdown_action(
             root_path=self.root,
             markdown_path=markdown_path,
@@ -10979,7 +11011,7 @@ class WorkstationChatUiTests(unittest.TestCase):
         if _TextualWorkstationChatApp is None:
             self.skipTest("textual is not installed")
 
-        markdown_path = Path(__file__).resolve().parents[2] / "dst" / "Regional emergency alerting system.md"
+        markdown_path = DST_SOURCE_ROOT / "Regional emergency alerting system.md"
         learn_result = workstation_learn_markdown_action(
             root_path=self.root,
             markdown_path=markdown_path,
@@ -12543,7 +12575,7 @@ class WorkstationChatUiTests(unittest.TestCase):
         if _TextualWorkstationChatApp is None:
             self.skipTest("textual is not installed")
 
-        markdown_path = Path(__file__).resolve().parents[2] / "dst" / "Regional emergency alerting system.md"
+        markdown_path = DST_SOURCE_ROOT / "Regional emergency alerting system.md"
         learn_result = workstation_learn_markdown_action(
             root_path=self.root,
             markdown_path=markdown_path,

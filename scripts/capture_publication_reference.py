@@ -19,6 +19,8 @@ if str(REPO_ROOT) not in sys.path:
 
 from workstation.runtime.core.session import launch_workstation_session
 from workstation.runtime.core.workstation_core import workstation_learn_markdown_action
+from workstation.app.cli.composition import ensure_workstation_application_composition
+from workstation.runtime.core.subject_host_actions import RuntimeSubjectWorkflowHostActions
 from workstation.subject.core.subject_workflow import (
     apply_subject_action,
     default_subject_scenarios,
@@ -84,6 +86,8 @@ def capture_publication_reference(*, fixture: Path, output: Path) -> dict[str, A
     if not fixture.is_file():
         raise FileNotFoundError(f"publication fixture does not exist: {fixture}")
 
+    ensure_workstation_application_composition()
+
     with tempfile.TemporaryDirectory(prefix="realized-publication-reference-") as temp_dir:
         root = (Path(temp_dir) / "workstation-root").resolve()
         launch_workstation_session(
@@ -101,6 +105,7 @@ def capture_publication_reference(*, fixture: Path, output: Path) -> dict[str, A
             raise RuntimeError(f"fixture intake failed: {learned.status}")
         subject_id = str(learned.payload["report"]["learning_context"]["subject_id"])
         progress = load_subject_progress(root, subject_id)
+        host_actions = RuntimeSubjectWorkflowHostActions()
 
         def scenario():
             return next(
@@ -116,6 +121,7 @@ def capture_publication_reference(*, fixture: Path, output: Path) -> dict[str, A
                 scenario=scenario(),
                 progress=progress,
                 action_key=action_key,
+                host_actions=host_actions,
             )
             actions.append(
                 {

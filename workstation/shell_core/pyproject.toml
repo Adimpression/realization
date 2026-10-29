@@ -6,6 +6,7 @@ requires-python = ">=3.14"
 dependencies = [
     "realized-core-conversation==0.1.0",
     "realized-core-llm==0.1.0",
+    "realized-core-semantics==0.1.0",
     "realized-workstation",
     "realized-workstation-contracts",
     "realized-workstation-foundation-events",
@@ -21,6 +22,7 @@ dependencies = [
 [tool.uv.sources]
 realized-core-conversation = { workspace = true }
 realized-core-llm = { workspace = true }
+realized-core-semantics = { workspace = true }
 
 [build-system]
 requires = ["setuptools>=69", "wheel"]

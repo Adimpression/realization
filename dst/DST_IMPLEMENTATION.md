@@ -94,27 +94,28 @@ The implementation should therefore be staged.
 
 The first DST code slice is now in place:
 
-- markdown use-case source lives in [dst](dst)
-- checked-in typed fixtures live in the DST test-fixture area
-- [dst/core.py](dst/core.py) treats typed fixtures as authoritative and uses markdown parsing only for reconciliation
-- [dst/discovery.py](dst/discovery.py) provides the first governed discovery seam:
+- markdown use-case source lives in [src/dst](src/dst)
+- checked-in typed fixtures live in the packaged DST fixture area
+- [src/dst/core.py](src/dst/core.py) treats typed fixtures as authoritative and uses markdown parsing only for reconciliation
+- [src/dst/discovery.py](src/dst/discovery.py) provides the first governed discovery seam:
   - typed discovery fixtures
   - `reduce_not`-oriented candidate-path discovery prompt shaping
   - structured DST-lexicon-governed discovery framing
   - governed discovery -> typed normalization input shaping
-- [dst/normalization.py](dst/normalization.py) provides the first typed normalization seam:
+- [src/dst/normalization.py](src/dst/normalization.py) provides the first typed normalization seam:
   - strict typed loading and validation of the normalized DST JSON contract
   - normalized-case -> `coordinated_transformation.Model`
-- [dst/projection.py](dst/projection.py) provides the first bridge from typed DST fixtures into:
+- [src/dst/projection.py](src/dst/projection.py) provides the first bridge from typed DST fixtures into:
   - `DecisionFrame`
   - `DecisionReviewItem`
   - a first `coordinated_transformation.Model`
-- [dst/orchestration.py](dst/orchestration.py) now provides the first execution seam:
+- [src/dst/orchestration.py](src/dst/orchestration.py) now provides the first execution seam:
   - build the structured `reduce_not` discovery prompt packet
   - run discovery then normalization through injected runners
   - project the normalized case into `DecisionFrame`
   - build the normalized-case `coordinated_transformation.Model`
-  - bootstrap a real controller and execute runtime-backed DST discovery and normalization proposals over the root non-achievedness
+  - execute runtime-backed DST discovery and normalization proposals over root non-achievedness through an explicit caller-provided `DstControllerBootstrap`
+  - fail closed when the caller has not supplied that controller realization
 
 That bridge is intentionally conservative:
 
@@ -395,7 +396,7 @@ The normalized intermediate layer is what must remain durable, reviewable, and r
 
 ## Immediate Next Execution Order
 
-The first publication-industrialization hardening pass over [dst](dst) is now in place:
+The first publication-industrialization hardening pass over [src/dst](src/dst) is now in place:
 
 1. `dst/*.md` is being used as source-only information, not publication text
 2. source cleanup is still intentionally narrow:
@@ -535,7 +536,7 @@ So the current code now provides:
 - the structured prompt
 - the typed seams
 - the orchestration seam around that path
-- a runtime-backed controller proposal binding for discovery and normalization
+- an explicit controller-bootstrap port for runtime-backed discovery and normalization
 
 but not the full persisted workstation binding or deeper frontier-native `reduce_not` execution yet.
 
@@ -1072,7 +1073,7 @@ DST should adopt this rule:
 That is the cleanest way to stay faithful to:
 
 - governed refinement in `THEORY.md`
-- strict normalization in `DST_PROMPT.md`
+- strict normalization in `src/dst/DST_PROMPT.md`
 - formal analysis in [COORDINATED_TRANSFORMATION_IN_FEDERATED_SYSTEMS_THEORY.md](../coordinated_transformation/COORDINATED_TRANSFORMATION_IN_FEDERATED_SYSTEMS_THEORY.md)
 
 ## External References
@@ -1082,5 +1083,5 @@ These are repo-wide references that sit outside `dst` and `coordinated_transform
 - `THEORY.md`
 - `DECISION_REVIEW.md`
 - `PUBLICATION.md`
-- `DST_PROMPT.md`
-- `dst/tests/fixtures/dst`
+- `src/dst/DST_PROMPT.md`
+- `src/dst/tests/fixtures/dst`

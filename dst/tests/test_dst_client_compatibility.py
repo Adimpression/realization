@@ -38,6 +38,8 @@ class DstClientCompatibilityTests(unittest.TestCase):
 
     def test_package_root_exports_all_current_external_entrypoints(self) -> None:
         expected_names = {
+            "DstControllerBootstrap",
+            "DstControllerBootstrapUnavailable",
             "discovery_result_from_fixture",
             "load_dst_normalized_case",
             "load_dst_use_cases",

@@ -16,7 +16,10 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from store import SQLiteVectorArtifactStore
-from validation_sqlite import archive_validation_sqlite, validation_sqlite_paths
+from realized_validation.sqlite_runtime import (
+    archive_validation_sqlite,
+    validation_sqlite_paths,
+)
 
 MAIN = ROOT / "main.py"
 LOCAL_ENV = ROOT / "local.env"

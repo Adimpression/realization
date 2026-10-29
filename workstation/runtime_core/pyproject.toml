@@ -4,8 +4,13 @@ version = "0.1.0"
 description = "Workstation runtime core package for Realized."
 requires-python = ">=3.14"
 dependencies = [
+    "realized-blend==0.1.0",
+    "realized-blend-application==0.1.0",
     "realized-core-governance==0.1.0",
+    "realized-core-llm==0.1.0",
+    "realized-core-runtime==0.1.0",
     "realized-core-semantics==0.1.0",
+    "realized-skill-application==0.1.0",
     "realized-skill-semantics==0.1.0",
     "realized-host-interaction",
     "realized-workstation",
@@ -16,11 +21,18 @@ dependencies = [
     "realized-workstation-foundation-projections",
     "realized-workstation-skills-core",
     "realized-workstation-skills-planning",
+    "realized-workstation-subject-core",
+    "realized-workstation-subject-service",
 ]
 
 [tool.uv.sources]
+realized-blend = { workspace = true }
+realized-blend-application = { workspace = true }
 realized-core-governance = { workspace = true }
+realized-core-llm = { workspace = true }
+realized-core-runtime = { workspace = true }
 realized-core-semantics = { workspace = true }
+realized-skill-application = { workspace = true }
 realized-skill-semantics = { workspace = true }
 
 [build-system]

@@ -19,6 +19,10 @@ from skill_export_projection import (
     batch_skill_export_filename,
     export_skill_bundle_text,
     skill_export_document,
+    skill_kind_from_artifact,
+)
+from realized_skill_application.projection import (
+    skill_kind_from_artifact as packaged_skill_kind_from_artifact,
 )
 from skill_governance import (
     artifact_admitted_for_use,
@@ -29,6 +33,27 @@ from skill_registry import skill_registry_document
 
 
 class SkillIOTests(unittest.TestCase):
+    def test_skill_kind_projection_has_one_application_owner(self) -> None:
+        self.assertIs(skill_kind_from_artifact, packaged_skill_kind_from_artifact)
+        for kind in ("knowledge", "ability"):
+            payload: dict[str, object] = {
+                "schema": "bssc_skill.v1",
+                "kind": kind,
+                "title": f"Projection {kind}",
+            }
+            if kind == "knowledge":
+                payload["answer"] = "A deterministic answer."
+            elif kind == "ability":
+                payload.update(
+                    {
+                        "executor": "python3",
+                        "python": "def main(): return {'status': 'ok'}\n",
+                    }
+                )
+            artifact = artifact_from_skill_document(payload)
+            with self.subTest(kind=kind):
+                self.assertEqual(kind, packaged_skill_kind_from_artifact(artifact))
+
     def setUp(self) -> None:
         """
         High Level Purpose:
@@ -752,6 +777,14 @@ class SkillIOTests(unittest.TestCase):
 
         self.assertEqual(exported["schema"], "bssc_skill.v2")
         self.assertIn("derived", exported["declaration"]["data_classes_touched"])
+        self.assertEqual(
+            artifact.content["governed_host_brokers"],
+            ["fs.write_mount"],
+        )
+        self.assertEqual(
+            exported["governance"]["governed_host_brokers"],
+            ["fs.write_mount"],
+        )
 
     def test_legacy_multiline_mount_brokerized_ability_export_infers_write_authority(self) -> None:
         artifact = artifact_from_skill_document(

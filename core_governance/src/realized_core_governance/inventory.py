@@ -23,7 +23,7 @@ def _elapsed_seconds(started_at: float) -> float:
     return round(time.perf_counter() - started_at, 6)
 
 
-def load_governance_inventory(store: Any) -> dict[str, Any]:
+def load_governance_inventory(store: GovernanceInventoryReader) -> dict[str, Any]:
     """Load and independently classify the supplied artifact inventory."""
     started_at = time.perf_counter()
     artifacts = store.load_all_artifacts()

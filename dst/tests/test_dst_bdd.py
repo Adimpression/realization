@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import unittest
 
-from dst.tests.dst_bdd_support import DstEmbeddedStory
+from dst_bdd_support import DstEmbeddedStory
 
 
 class DstBehaviorBDDTests(unittest.TestCase):

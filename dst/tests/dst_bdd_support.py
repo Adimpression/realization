@@ -1,11 +1,11 @@
 from __future__ import annotations
 
 import unittest
-from pathlib import Path
 from unittest.mock import patch
 
 from coordinated_transformation import admissible_transitions, executable_decisions, valid_decisions
 from dst import (
+    DST_SOURCE_ROOT,
     discovery_result_from_fixture,
     normalized_case_from_fixture,
     project_normalized_case_to_transformation_construct_candidates,
@@ -16,13 +16,10 @@ from dst.core import DstUseCaseFixture, dst_use_cases_from_markdown
 from itemize import ItemizedSubjectItem
 
 
-_REPO_ROOT = Path(__file__).resolve().parents[2]
-
-
 def embedded_fixture(name: str, markdown: str) -> DstUseCaseFixture:
     fixtures = dst_use_cases_from_markdown(
         markdown,
-        source_path=_REPO_ROOT / "dst" / f"{name}.md",
+        source_path=DST_SOURCE_ROOT / f"{name}.md",
     )
     if len(fixtures) != 1:
         raise AssertionError(f"expected exactly one embedded fixture for {name}, got {len(fixtures)}")

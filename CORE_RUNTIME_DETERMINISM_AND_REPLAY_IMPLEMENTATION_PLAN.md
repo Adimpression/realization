@@ -92,10 +92,10 @@ Existing regression surface:
 
 DST discovery/normalization uses the same governed proposal boundary:
 
-- [dst/orchestration.py](dst/orchestration.py)
+- [dst/src/dst/orchestration.py](dst/src/dst/orchestration.py)
   - emits `ProposalType.DST_DISCOVERY` and `ProposalType.DST_NORMALIZATION`
-- [dst/discovery.py](dst/discovery.py)
-- [dst/normalization.py](dst/normalization.py)
+- [dst/src/dst/discovery.py](dst/src/dst/discovery.py)
+- [dst/src/dst/normalization.py](dst/src/dst/normalization.py)
 
 This is important for determinism because:
 
@@ -462,4 +462,3 @@ To claim deterministic compliance for a run, we require:
 4. Add deterministic regression pack tests (LLM off) and transcript-backed replay tests.
 5. Apply the determinism audit checklist to eliminate incidental nondeterminism.
 6. Validate DST discovery/normalization under transcript-backed deterministic replay.
-

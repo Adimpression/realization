@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import ast
-from collections import deque
+import os
 from pathlib import Path
 import subprocess
 import sys
@@ -13,32 +13,7 @@ import unittest
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 CORE_ENGINE_ROOT = REPO_ROOT / "core_engine"
-COMPATIBILITY_MODULES = {
-    "approval_governance",
-    "artifact_contracts",
-    "data_governance",
-    "fallback_not_semantics",
-    "host_interaction_context",
-    "host_interaction_models",
-    "host_interaction_resolution",
-    "normalize",
-    "pure_theory_types",
-    "skill_governance_primitives",
-    "skill_leaf_types",
-    "skill_lifecycle",
-    "skill_path_notation",
-    "skill_safety_governance",
-}
-
-
-def _manifest_modules() -> list[str]:
-    return [
-        line
-        for raw_line in (CORE_ENGINE_ROOT / "module_manifest.txt").read_text(
-            encoding="utf-8"
-        ).splitlines()
-        if (line := raw_line.strip()) and not line.startswith("#")
-    ]
+PACKAGE_ROOT = CORE_ENGINE_ROOT / "src" / "realized_core_engine"
 
 
 def _root_imports(path: Path) -> set[str]:
@@ -52,49 +27,33 @@ def _root_imports(path: Path) -> set[str]:
     return imports
 
 
-def _canonical_engine_closure() -> set[str]:
-    local_modules = {
-        path.stem: path
-        for path in REPO_ROOT.glob("*.py")
-        if path.name != "__init__.py"
-    }
-    pending = deque(["controller_runtime", "system_state", "args"])
-    closure: set[str] = set()
-    while pending:
-        module_name = pending.popleft()
-        if module_name in closure or module_name not in local_modules:
-            continue
-        closure.add(module_name)
-        for imported in sorted(_root_imports(local_modules[module_name])):
-            if imported in local_modules and imported not in closure:
-                pending.append(imported)
-    return closure
-
-
 class CoreEngineDistributionTests(unittest.TestCase):
-    def test_manifest_is_sorted_unique_and_matches_engine_closure(self) -> None:
-        modules = _manifest_modules()
-
-        self.assertEqual(sorted(set(modules)), modules)
-        self.assertEqual(
-            _canonical_engine_closure() | COMPATIBILITY_MODULES,
-            set(modules),
+    def test_dependency_light_submodule_import_does_not_eagerly_load_api(self) -> None:
+        completed = subprocess.run(
+            [
+                sys.executable,
+                "-c",
+                (
+                    "import sys; "
+                    "import realized_core_engine.learning; "
+                    "assert 'realized_core_engine.api' not in sys.modules; "
+                    "assert 'controller_runtime' not in sys.modules"
+                ),
+            ],
+            cwd=REPO_ROOT,
+            check=False,
+            capture_output=True,
+            text=True,
         )
 
-    def test_manifest_excludes_outer_application_surfaces(self) -> None:
-        modules = set(_manifest_modules())
+        self.assertEqual(0, completed.returncode, completed.stderr)
 
-        self.assertNotIn("main", modules)
-        self.assertNotIn("controller_entrypoints", modules)
-        self.assertFalse(any(module.startswith("workstation") for module in modules))
-        self.assertFalse(any("publication" in module for module in modules))
-
-    def test_manifest_imports_only_declared_or_supported_dependencies(self) -> None:
-        modules = set(_manifest_modules())
+    def test_source_native_package_imports_only_declared_dependencies(self) -> None:
         allowed_external = {
-            "openai",
             "pydantic",
             "realized_core_governance",
+            "realized_core_engine",
+            "realized_core_llm",
             "realized_core_semantics",
             "realized_core_runtime",
             "realized_skill_semantics",
@@ -104,13 +63,15 @@ class CoreEngineDistributionTests(unittest.TestCase):
         }
         imported = {
             imported
-            for module in modules
-            for imported in _root_imports(REPO_ROOT / f"{module}.py")
+            for path in PACKAGE_ROOT.glob("*.py")
+            for imported in _root_imports(path)
         }
-        unexpected = imported - modules - sys.stdlib_module_names - allowed_external
+        unexpected = imported - sys.stdlib_module_names - allowed_external
 
         self.assertEqual(set(), unexpected)
         self.assertNotIn("workstation", imported)
+        self.assertFalse((CORE_ENGINE_ROOT / "setup.py").exists())
+        self.assertFalse((CORE_ENGINE_ROOT / "module_manifest.txt").exists())
 
     def test_project_declares_engine_dependencies_without_an_executable(self) -> None:
         project = tomllib.loads(
@@ -121,10 +82,10 @@ class CoreEngineDistributionTests(unittest.TestCase):
         self.assertNotIn("scripts", metadata)
         self.assertEqual(
             {
-                "openai==2.29.0",
                 "pydantic==2.12.5",
                 "pyyaml==6.0.3",
                 "realized-core-governance==0.1.0",
+                "realized-core-llm==0.1.0",
                 "realized-core-semantics==0.1.0",
                 "realized-core-runtime==0.1.0",
                 "realized-skill-semantics==0.1.0",
@@ -137,55 +98,53 @@ class CoreEngineDistributionTests(unittest.TestCase):
             metadata["optional-dependencies"]["wasm"],
         )
 
+    def test_runtime_configuration_does_not_own_entry_parser_vocabulary(self) -> None:
+        configuration = (
+            PACKAGE_ROOT / "configuration.py"
+        ).read_text(encoding="utf-8")
+
+        self.assertNotIn("def parse_args", configuration)
+        self.assertNotIn("workstation-", configuration)
+        self.assertNotIn("artifact-export", configuration)
+        self.assertNotIn("run-bundle", configuration)
+        self.assertNotIn("validation-ladder", configuration)
+
     def test_public_abi_is_owned_by_the_engine_package(self) -> None:
-        package_root = CORE_ENGINE_ROOT / "src" / "realized_core_engine"
-        setup_source = (CORE_ENGINE_ROOT / "setup.py").read_text(encoding="utf-8")
-
-        self.assertTrue((package_root / "__init__.py").is_file())
-        self.assertTrue((package_root / "api.py").is_file())
-        self.assertTrue((package_root / "contracts.py").is_file())
-        self.assertTrue((package_root / "cli_support.py").is_file())
-        self.assertIn('packages=["realized_core_engine"]', setup_source)
-
-    def test_build_py_removes_stale_modules_before_assembly(self) -> None:
-        with tempfile.TemporaryDirectory() as temporary_directory:
-            build_lib = Path(temporary_directory) / "lib"
-            build_lib.mkdir()
-            stale_module = build_lib / "removed_manifest_module.py"
-            stale_module.write_text("SHOULD_NOT_SHIP = True\n", encoding="utf-8")
-
-            subprocess.run(
-                [
-                    sys.executable,
-                    "setup.py",
-                    "build_py",
-                    "--build-lib",
-                    str(build_lib),
-                ],
-                cwd=CORE_ENGINE_ROOT,
-                check=True,
-                capture_output=True,
-                text=True,
-            )
-
-            self.assertFalse(stale_module.exists())
-            self.assertTrue((build_lib / "controller_runtime.py").is_file())
-            self.assertTrue(
-                (build_lib / "realized_core_engine" / "api.py").is_file()
-            )
+        self.assertTrue((PACKAGE_ROOT / "__init__.py").is_file())
+        self.assertTrue((PACKAGE_ROOT / "api.py").is_file())
+        self.assertTrue((PACKAGE_ROOT / "contracts.py").is_file())
+        self.assertTrue((PACKAGE_ROOT / "constitutional_trace.py").is_file())
+        self.assertTrue((PACKAGE_ROOT / "controller_runtime.py").is_file())
+        self.assertTrue(
+            (PACKAGE_ROOT / "markdown_learning_artifact_semantics.py").is_file()
+        )
+        self.assertTrue((PACKAGE_ROOT / "persistence.py").is_file())
+        self.assertTrue((PACKAGE_ROOT / "store.py").is_file())
+        project = tomllib.loads(
+            (CORE_ENGINE_ROOT / "pyproject.toml").read_text(encoding="utf-8")
+        )
+        self.assertEqual({"": "src"}, project["tool"]["setuptools"]["package-dir"])
+        self.assertEqual(
+            ["realized_core_engine"],
+            project["tool"]["setuptools"]["packages"]["find"]["include"],
+        )
 
     def test_source_distribution_is_self_contained(self) -> None:
         with tempfile.TemporaryDirectory() as temporary_directory:
+            environment = dict(os.environ)
+            environment["UV_CACHE_DIR"] = "/tmp/realized-uv-cache"
             subprocess.run(
                 [
-                    sys.executable,
-                    "setup.py",
-                    "sdist",
-                    "--formats=gztar",
-                    "--dist-dir",
+                    "uv",
+                    "build",
+                    "--no-build-isolation",
+                    "--sdist",
+                    "--out-dir",
                     temporary_directory,
+                    "core_engine",
                 ],
-                cwd=CORE_ENGINE_ROOT,
+                cwd=REPO_ROOT,
+                env=environment,
                 check=True,
                 capture_output=True,
                 text=True,
@@ -197,12 +156,22 @@ class CoreEngineDistributionTests(unittest.TestCase):
                 names = set(archive.getnames())
 
             prefix = "realized_core_engine-0.1.0"
-            self.assertIn(f"{prefix}/module_manifest.txt", names)
-            for module in _manifest_modules():
-                self.assertIn(
-                    f"{prefix}/_canonical_modules/{module}.py",
-                    names,
-                )
+            self.assertIn(
+                f"{prefix}/src/realized_core_engine/controller_runtime.py",
+                names,
+            )
+            self.assertIn(
+                f"{prefix}/src/realized_core_engine/constitutional_trace.py",
+                names,
+            )
+            self.assertIn(
+                f"{prefix}/src/realized_core_engine/markdown_learning_artifact_semantics.py",
+                names,
+            )
+            self.assertIn(f"{prefix}/src/realized_core_engine/store.py", names)
+            self.assertIn(f"{prefix}/src/realized_core_engine/persistence.py", names)
+            self.assertNotIn(f"{prefix}/module_manifest.txt", names)
+            self.assertNotIn(f"{prefix}/setup.py", names)
 
     def test_workspace_and_cloud_build_qualify_the_engine_distribution(self) -> None:
         workspace = tomllib.loads(
@@ -212,6 +181,7 @@ class CoreEngineDistributionTests(unittest.TestCase):
 
         self.assertIn("core_engine", workspace["tool"]["uv"]["workspace"]["members"])
         self.assertIn("core_governance", workspace["tool"]["uv"]["workspace"]["members"])
+        self.assertIn("core_llm", workspace["tool"]["uv"]["workspace"]["members"])
         self.assertIn("core_semantics", workspace["tool"]["uv"]["workspace"]["members"])
         self.assertIn("skill_semantics", workspace["tool"]["uv"]["workspace"]["members"])
         self.assertIn("host_interaction", workspace["tool"]["uv"]["workspace"]["members"])
@@ -219,15 +189,18 @@ class CoreEngineDistributionTests(unittest.TestCase):
             {"workspace": True},
             workspace["tool"]["uv"]["sources"]["realized-core-engine"],
         )
-        self.assertIn("uv build --wheel core_engine", cloud_build)
+        self.assertIn("uv build core_engine", cloud_build)
         self.assertIn("uv build core_governance", cloud_build)
+        self.assertIn("uv build --wheel core_llm", cloud_build)
         self.assertIn("uv build core_semantics", cloud_build)
         self.assertIn("uv build skill_semantics", cloud_build)
         self.assertIn("uv build --wheel host_interaction", cloud_build)
         self.assertIn("core_engine.tests.test_api", cloud_build)
         self.assertIn("core_engine.tests.test_distribution", cloud_build)
         self.assertIn("--engine-wheel", cloud_build)
+        self.assertIn("--engine-sdist", cloud_build)
         self.assertIn("--governance-wheel", cloud_build)
+        self.assertIn("--llm-wheel", cloud_build)
         self.assertIn("--governance-sdist", cloud_build)
         self.assertIn("--semantics-wheel", cloud_build)
         self.assertIn("--semantics-sdist", cloud_build)

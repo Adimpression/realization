@@ -134,6 +134,24 @@ class RunBundleIOTests(unittest.TestCase):
                 },
             }
         )
+        artifact.content["skill_admission"] = {
+            "status": "admitted",
+            "admitted": True,
+            "rationale": "Admitted for the knowledge-only replay fixture.",
+            "policy_titles": ["Knowledge Replay Fixture Policy"],
+            "approval_titles": [],
+            "required_approval_class": "automatic",
+            "evaluated_at": "2026-04-02T00:00:00Z",
+        }
+        artifact.content["skill_lifecycle"] = {
+            "admission_status": "admitted",
+            "installation_status": "installed",
+            "activation_status": "active",
+            "trust_status": "trusted",
+            "quarantine_status": "clear",
+            "review_status": "approved",
+            "updated_at": "2026-04-02T00:00:00Z",
+        }
         store.persist_artifact(artifact, run_id="test_run_bundle_io")
 
         state = SystemState.bootstrap("What is force?")

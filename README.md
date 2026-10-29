@@ -781,7 +781,7 @@ Create a workstation session rooted in local state and attach the current
 checkout as its workspace:
 
 ```console
-uv run --frozen python3 controller_entrypoints.py workstation-launch \
+uv run --frozen --package realized-workstation-app-cli realized-workstation launch \
   --root ./state/workstation \
   --workspace "$PWD" \
   --task "Build a reviewed report from the supplied source material."
@@ -790,9 +790,13 @@ uv run --frozen python3 controller_entrypoints.py workstation-launch \
 Open the terminal workstation for that session:
 
 ```console
-uv run --frozen python3 controller_entrypoints.py workstation-chat \
+uv run --frozen --package realized-workstation-app-cli realized-workstation chat \
   --root ./state/workstation
 ```
+
+The historical `controller_entrypoints.py workstation-*` aggregate command
+remains available during the compatibility qualification cycle, but new usage
+should use the installable workstation entry package.
 
 Interactive natural-language chat requires the configured provider named by
 the workstation session. The governed subject workflow and its deterministic

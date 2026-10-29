@@ -1,11 +1,12 @@
 import unittest
-import importlib.util
+from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
 
 from applied_theory_types import ProposalType
 from coordinated_transformation import executable_decisions, valid_decisions
 from dst import (
+    DstControllerBootstrapUnavailable,
     bootstrap_dst_discovery_controller,
     build_live_dst_fixture_for_itemized_item,
     build_reduce_not_discovery_prompt_packet,
@@ -122,18 +123,32 @@ class DstOrchestrationTests(unittest.TestCase):
         self.assertEqual([decision.name for decision in executable_decisions(result.coordinated_model, current_state)], ["Start with closed-loop upgrade"])
 
     def test_bootstrap_dst_discovery_controller_uses_root_non_achievedness_as_runtime_semantic_unit(self) -> None:
-        if importlib.util.find_spec("grpc") is None:
-            self.skipTest("grpc is not installed in this environment")
         fixture = next(
             item for item in load_dst_use_cases()
             if item.fixture_id == "city-bus-ticketing-modernization"
         )
+        state = SimpleNamespace(supplement_profile={})
+        controller = object()
+        captured: dict[str, object] = {}
 
-        state, _controller, packet = bootstrap_dst_discovery_controller(
+        def _bootstrap(**kwargs):
+            captured.update(kwargs)
+            return state, controller
+
+        result_state, result_controller, packet = bootstrap_dst_discovery_controller(
             fixture,
             llm_policy="off",
+            subject_scope={"subject_id": "city-bus"},
+            subject_scope_root_path=Path("/tmp/city-bus"),
+            controller_bootstrap=_bootstrap,
         )
 
+        self.assertIs(result_state, state)
+        self.assertIs(result_controller, controller)
+        self.assertEqual(captured["semantic_unit"], packet.root_non_achievedness)
+        self.assertEqual(captured["llm_policy"], "off")
+        self.assertEqual(captured["subject_scope"], {"subject_id": "city-bus"})
+        self.assertEqual(captured["subject_scope_root_path"], Path("/tmp/city-bus"))
         self.assertEqual(
             state.supplement_profile["dst_discovery_root_non_achievedness"],
             packet.root_non_achievedness,
@@ -143,6 +158,18 @@ class DstOrchestrationTests(unittest.TestCase):
             fixture.fixture_id,
         )
         self.assertIn("candidate_path_families", packet.prompt)
+
+    def test_bootstrap_dst_discovery_controller_fails_closed_without_runtime_realization(self) -> None:
+        fixture = next(
+            item for item in load_dst_use_cases()
+            if item.fixture_id == "city-bus-ticketing-modernization"
+        )
+
+        with self.assertRaisesRegex(
+            DstControllerBootstrapUnavailable,
+            "explicit controller bootstrap realization",
+        ):
+            bootstrap_dst_discovery_controller(fixture, llm_policy="off")
 
     def test_run_runtime_dst_discovery_uses_explicit_dst_discovery_proposal_type(self) -> None:
         fixture = next(
@@ -216,7 +243,6 @@ class DstOrchestrationTests(unittest.TestCase):
             item for item in load_dst_use_cases()
             if item.fixture_id == "hospital-medication-system-upgrade"
         )
-        prompt_packet = build_reduce_not_discovery_prompt_packet(fixture)
         discovery = discovery_result_from_fixture(fixture)
         normalized = normalized_case_from_fixture(fixture, discovery)
         node = SimpleNamespace(metadata={})
@@ -242,12 +268,21 @@ class DstOrchestrationTests(unittest.TestCase):
                 return proposal
 
         fake_state = FakeState()
-        with patch(
-            "dst.orchestration.bootstrap_dst_discovery_controller",
-            return_value=(fake_state, FakeController(), prompt_packet),
-        ):
-            result = run_live_dst_pipeline_from_fixture(fixture, build_epoch_ms=11)
+        bootstrap_calls: list[dict[str, object]] = []
 
+        def _bootstrap(**kwargs):
+            bootstrap_calls.append(dict(kwargs))
+            return fake_state, FakeController()
+
+        result = run_live_dst_pipeline_from_fixture(
+            fixture,
+            build_epoch_ms=11,
+            controller_bootstrap=_bootstrap,
+        )
+
+        self.assertEqual(len(bootstrap_calls), 1)
+        self.assertEqual(bootstrap_calls[0]["llm_policy"], "required")
+        self.assertIn("transformation", str(bootstrap_calls[0]["semantic_unit"]).lower())
         self.assertEqual(call_types, [ProposalType.DST_DISCOVERY, ProposalType.DST_NORMALIZATION])
         self.assertEqual(result.discovery_proposal_id, "proposal-discovery")
         self.assertEqual(result.normalization_proposal_id, "proposal-normalization")

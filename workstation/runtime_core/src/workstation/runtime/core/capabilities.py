@@ -8,28 +8,26 @@ from dataclasses import replace
 from pathlib import Path
 from typing import Any
 
-from blend_context import blend_context_from_workstation_session
-from blend_operator_store import (
+from realized_blend.observations import BlendWorkflowExecutionEvent
+from realized_blend.execution import resolve_blend_workflow_steps_from_providers
+from realized_blend.operators import (
     BlendOperatorProvider,
     BlendOperatorRecord,
-    blend_capability_operator_record,
     new_blend_capability_operator_provider,
+)
+from realized_blend_application.operators import (
+    blend_capability_operator_record,
     new_blend_skill_operator_provider,
 )
-from blend_workflow import (
+from realized_blend_application.workflows import (
     blend_workflow_plan_from_skill_compose_arguments,
 )
-from blend_workflow_execution import (
-    BlendWorkflowExecutionEvent,
-    execute_blend_workflow,
-    resolve_blend_workflow_steps_from_providers,
-)
-from blend_workflow_store import (
+from realized_blend_application.workflow_store import (
     load_blend_workflow_plan,
     load_blend_workflow_run,
 )
-from capability_runtime import runtime_skill_declaration_for_artifact
-from execution_frameworks import normalize_ability_runtime_content
+from realized_core_runtime.capabilities import runtime_skill_declaration_for_artifact
+from realized_core_runtime.execution import normalize_ability_runtime_content
 from realized_core_governance.lifecycle import synthesized_skill_lifecycle
 from realized_core_semantics.values import json_safe
 from realized_skill_semantics.execution import ability_executor_framework
@@ -44,6 +42,13 @@ from realized_host_interaction.delegation import (
     normalized_requested_delegation,
 )
 from realized_host_interaction.models import HostInteractionAttachment
+from realized_host_interaction.realizers import (
+    HostBrokerBinding,
+    HostBrokerInvocation,
+    HostRealizerDescriptor,
+    HostRealizerProvider,
+    StaticHostRealizerProvider,
+)
 from realized_host_interaction.resolution import (
     normalize_host_interaction_attachment_relative_path,
     normalize_host_interaction_delegation_targets,
@@ -51,14 +56,20 @@ from realized_host_interaction.resolution import (
     resolve_host_interaction_attachment_reference,
     safe_join_within_attachment_root,
 )
-from semantic_text import collapse_ws
-from skill_schema_io import normalized_skill_bundle_filename_for_source
-from skill_export_projection import batch_skill_export_filename, skill_kind_from_artifact
-from skill_governance import evaluate_skill_admission
+from realized_core_semantics.semantic_text import collapse_ws
+from realized_skill_application.projection import skill_kind_from_artifact
+from workstation.skills.core.governance import (
+    evaluate_workstation_skill_admission as evaluate_skill_admission,
+)
+from workstation.contracts.runtime import HostAwareControllerRuntimeProvider
+from workstation.foundation.host.skill_exchange import skill_exchange_provider
 from workstation.foundation.host.governance import workstation_governance_inventory
 from workstation.foundation.host.controller_runtime import controller_runtime_provider
 from workstation.foundation.events.event_bus import publish_workstation_event
-from workstation.foundation.host.host_interaction import workstation_host_interaction_attachments
+from workstation.foundation.host.host_interaction import (
+    workstation_host_interaction_attachments,
+    workstation_host_interaction_context,
+)
 from workstation.foundation.models import WorkstationAttachment, WorkstationSession
 from workstation.foundation.projections import workstation_workflow_graph_view
 from workstation.skills.core.skill_management import (
@@ -90,6 +101,10 @@ from workstation.runtime.core.workstation_core import (
     workstation_operator_detail_view,
     workstation_operator_summary_list_view,
     workstation_workflow_summary_list_view,
+)
+from workstation.runtime.core.blend_adapters import (
+    blend_context_from_workstation_session,
+    execute_workstation_blend_workflow,
 )
 
 
@@ -1061,10 +1076,58 @@ def list_workstation_tool_definitions(session: WorkstationSession) -> list[dict[
     return definitions
 
 
+def workstation_session_realizer_provider(
+    session: WorkstationSession,
+) -> StaticHostRealizerProvider:
+    """Build immutable shared-action bindings for one workstation session."""
+
+    bindings: list[HostBrokerBinding] = []
+    for capability in session.allowed_capabilities:
+        if not is_shared_host_interaction_action_capability(capability):
+            continue
+
+        def invoke(
+            invocation: HostBrokerInvocation,
+            active_provider: HostRealizerProvider,
+            *,
+            bound_capability: str = capability,
+        ) -> dict[str, Any]:
+            normalized = _normalize_workstation_capability_arguments(
+                session,
+                bound_capability,
+                dict(invocation.arguments),
+            )
+            attachment = None
+            if bound_capability != "ws.net.http":
+                attachment = _attachment_by_name(
+                    session,
+                    str(normalized.get("target", "")).strip(),
+                )
+            return _execute_shared_host_interaction_action(
+                session=session,
+                capability=bound_capability,
+                attachment=attachment,
+                arguments=normalized,
+            )
+
+        bindings.append(
+            HostBrokerBinding(
+                descriptor=HostRealizerDescriptor(
+                    kind="broker",
+                    identity=capability,
+                ),
+                callback=invoke,
+            )
+        )
+    return StaticHostRealizerProvider(brokers=tuple(bindings))
+
+
 def execute_workstation_capability(
     session: WorkstationSession,
     capability: str,
     arguments: dict[str, Any],
+    *,
+    realizer_provider: HostRealizerProvider | None = None,
 ) -> dict[str, Any]:
     """
     High Level Purpose:
@@ -1089,14 +1152,16 @@ def execute_workstation_capability(
         raise ValueError(f"Capability {capability} is not allowed in this workstation session.")
     normalized_arguments = _normalize_workstation_capability_arguments(session, capability, arguments)
     if is_shared_host_interaction_action_capability(capability):
-        attachment = None
-        if capability != "ws.net.http":
-            attachment = _attachment_by_name(session, str(normalized_arguments.get("target", "")).strip())
-        return _execute_shared_host_interaction_action(
-            session=session,
-            capability=capability,
-            attachment=attachment,
-            arguments=normalized_arguments,
+        provider = realizer_provider or workstation_session_realizer_provider(session)
+        return provider.invoke_broker(
+            HostBrokerInvocation(
+                identity=capability,
+                arguments=normalized_arguments,
+                governance_context={
+                    "session_id": session.session_id,
+                    "backend_kind": "workstation",
+                },
+            )
         )
     if capability == "ws.markdown.create":
         return _markdown_create(session, normalized_arguments)
@@ -2180,11 +2245,13 @@ def _skill_import(
         raise ValueError("The workstation session does not expose the persistent skills import/export attachments.")
     staged_source_path = _safe_join(
         Path(imports_attachment.source),
-        normalized_skill_bundle_filename_for_source(source_path),
+        skill_exchange_provider().normalized_skill_bundle_filename_for_source(source_path),
     )
     staged_source_path.parent.mkdir(parents=True, exist_ok=True)
     staged_source_path.write_text(source_path.read_text())
-    canonical_export_name = collapse_ws(str(arguments.get("canonical_export_path", ""))) or normalized_skill_bundle_filename_for_source(source_path)
+    canonical_export_name = collapse_ws(
+        str(arguments.get("canonical_export_path", ""))
+    ) or skill_exchange_provider().normalized_skill_bundle_filename_for_source(source_path)
     canonical_export_path = _safe_join(Path(exports_attachment.source), canonical_export_name)
     report = import_workstation_skill_file(
         skill_store_path=Path(attachment.source),
@@ -2270,7 +2337,9 @@ def _skill_export(
         raise ValueError(f"Attachment {destination_attachment.name!r} cannot be used as a skill export destination.")
     destination_path_text = collapse_ws(str(arguments.get("destination_path", "")))
     if not destination_path_text:
-        destination_path_text = batch_skill_export_filename(resolved_artifact)
+        destination_path_text = skill_exchange_provider().batch_skill_export_filename(
+            resolved_artifact
+        )
     destination_path = _safe_join(Path(destination_attachment.source), destination_path_text)
     report = export_workstation_skill(
         skill_store_path=Path(attachment.source),
@@ -2374,7 +2443,7 @@ def _execute_workflow(
             "steps": [],
         }
     approved = normalized_requested_delegation(approved_delegation or [])
-    return execute_blend_workflow(
+    return execute_workstation_blend_workflow(
         root_path=Path(session.root_path),
         session_id=session.session_id,
         context=blend_context,
@@ -2942,10 +3011,21 @@ def _skill_invoke(
             "nested_run_outcome": "ongoing",
             "delegated_virtual_mounts": delegated_mounts,
         }, invocation_request=invocation_request)
-    nested_state, nested_controller = controller_runtime_provider().bootstrap_controller(
-        semantic_unit=semantic_unit,
-        llm_policy="off",
-    )
+    runtime_provider = controller_runtime_provider()
+    if isinstance(runtime_provider, HostAwareControllerRuntimeProvider):
+        nested_state, nested_controller = runtime_provider.bootstrap_controller_with_host_interaction(
+            semantic_unit=semantic_unit,
+            llm_policy="off",
+            host_interaction_context=workstation_host_interaction_context(
+                session,
+                realizer_provider=workstation_session_realizer_provider(session),
+            ),
+        )
+    else:
+        nested_state, nested_controller = runtime_provider.bootstrap_controller(
+            semantic_unit=semantic_unit,
+            llm_policy="off",
+        )
     if executor_framework:
         nested_state.controller_features.supported_executors = list(
             dict.fromkeys(

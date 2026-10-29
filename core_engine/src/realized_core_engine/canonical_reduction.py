@@ -8,11 +8,12 @@ from dataclasses import replace
 from types import SimpleNamespace
 from typing import Any
 
-from args import STATE_SQLITE_PATH_ENV, apply_controller_feature_toggle_overrides
-from applied_theory_types import RuntimeDeterminismPolicy
-from controller_runtime import build_controller
-from system_state import SystemState, attach_evidence_specs
-from title_semantics import PROLOG_QUERY_PRIMING_MODE_ENV
+from realized_core_engine.configuration import STATE_SQLITE_PATH_ENV, apply_controller_feature_toggle_overrides
+from realized_core_semantics.applied_model import NodeStatus, RuntimeDeterminismPolicy
+from realized_core_engine.controller_runtime import build_controller
+from realized_host_interaction.context import HostInteractionContext
+from realized_core_engine.state import SystemState, attach_evidence_specs
+from realized_core_semantics.title_semantics import PROLOG_QUERY_PRIMING_MODE_ENV
 
 from realized_core_runtime import PerformanceRecorder, performance_scope
 
@@ -39,6 +40,13 @@ _SUBJECT_SCOPE_IMPORT_KIND = "subject_reasoning_scope"
 
 class CanonicalReductionAdapter:
     """Advance typed resumption context through the established controller."""
+
+    def __init__(
+        self,
+        *,
+        host_interaction_context: HostInteractionContext | None = None,
+    ) -> None:
+        self._host_interaction_context = host_interaction_context
 
     def reduce(
         self,
@@ -67,6 +75,7 @@ class CanonicalReductionAdapter:
         controller = build_controller(
             state=state,
             llm_policy=str(context.execution_policy.get("llm_policy", "auto")),
+            host_interaction_context=self._host_interaction_context,
         )
         controller.attempt_stop_requested = should_stop
         performance = PerformanceRecorder()
@@ -993,8 +1002,6 @@ def _open_status(state: SystemState, node_id: str) -> Any:
             return status_type("open")
         except ValueError:
             pass
-    from applied_theory_types import NodeStatus
-
     return NodeStatus.OPEN
 
 

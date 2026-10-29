@@ -7,12 +7,14 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
+LLM_PACKAGE_ROOT = REPO_ROOT / "core_llm" / "src" / "realized_core_llm"
+LLM_TRANSPORT = LLM_PACKAGE_ROOT / "transport.py"
 LLM_LAYER_MODULES = (
-    REPO_ROOT / "prompt_directives.py",
-    REPO_ROOT / "supplement.py",
+    REPO_ROOT / "core_engine" / "src" / "realized_core_engine" / "prompt_directives.py",
+    REPO_ROOT / "core_engine" / "src" / "realized_core_engine" / "supplement.py",
     REPO_ROOT / "external_markdown_learning_pipeline.py",
     REPO_ROOT / "markdown_learning_artifact_semantics.py",
-    REPO_ROOT / "semantic_prompt_posture.py",
+    REPO_ROOT / "core_engine" / "src" / "realized_core_engine" / "semantic_prompt_posture.py",
 )
 FORBIDDEN_LAYER_IMPORTS = {
     "approval_governance",
@@ -62,6 +64,28 @@ def module_import_roots(path: Path) -> set[str]:
     return imported
 
 
+def production_python_paths() -> tuple[Path, ...]:
+    package_roots = (
+        *REPO_ROOT.glob("*/src"),
+        *REPO_ROOT.glob("workstation/*/src"),
+    )
+    paths = set(REPO_ROOT.glob("*.py"))
+    for package_root in package_roots:
+        paths.update(package_root.rglob("*.py"))
+    return tuple(sorted(paths))
+
+
+def dotted_name(node: ast.AST) -> str:
+    names: list[str] = []
+    current = node
+    while isinstance(current, ast.Attribute):
+        names.append(current.attr)
+        current = current.value
+    if isinstance(current, ast.Name):
+        names.append(current.id)
+    return ".".join(reversed(names))
+
+
 class LLMLayerHygieneTests(unittest.TestCase):
     def test_llm_layer_modules_do_not_import_governance_or_runtime_layers(self) -> None:
         """
@@ -90,3 +114,45 @@ class LLMLayerHygieneTests(unittest.TestCase):
                     [],
                     msg=f"{module_path.name} imports forbidden layer modules: {', '.join(forbidden)}",
                 )
+
+    def test_only_llm_transport_imports_or_invokes_provider_sdk(self) -> None:
+        sdk_importers: set[Path] = set()
+        completion_callers: set[Path] = set()
+        for path in production_python_paths():
+            syntax = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+            if "openai" in module_import_roots(path):
+                sdk_importers.add(path)
+            for node in ast.walk(syntax):
+                if isinstance(node, ast.Call) and dotted_name(node.func).endswith(
+                    ".chat.completions.create"
+                ):
+                    completion_callers.add(path)
+
+        self.assertEqual({LLM_TRANSPORT}, sdk_importers)
+        self.assertEqual({LLM_TRANSPORT}, completion_callers)
+
+    def test_llm_transport_consumers_use_the_package_abi(self) -> None:
+        consumers = (
+            REPO_ROOT / "core_engine" / "src" / "realized_core_engine" / "supplement.py",
+            REPO_ROOT
+            / "workstation"
+            / "runtime_core"
+            / "src"
+            / "workstation"
+            / "runtime"
+            / "core"
+            / "llm_driver.py",
+        )
+        for path in consumers:
+            with self.subTest(path=str(path.relative_to(REPO_ROOT))):
+                syntax = ast.parse(
+                    path.read_text(encoding="utf-8"),
+                    filename=str(path),
+                )
+                imported_modules = {
+                    node.module
+                    for node in ast.walk(syntax)
+                    if isinstance(node, ast.ImportFrom) and node.module
+                }
+                self.assertIn("realized_core_llm", imported_modules)
+                self.assertNotIn("realized_core_llm.transport", imported_modules)

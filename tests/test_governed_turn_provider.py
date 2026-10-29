@@ -5,8 +5,10 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-from controller_entrypoints import _ApplicationControllerRuntimeProvider
 from realized_core_engine import EngineResult
+from workstation.app.cli.composition import (
+    ApplicationControllerRuntimeProvider as _ApplicationControllerRuntimeProvider,
+)
 from workstation.contracts.runtime import GovernedTurnRequest
 
 
@@ -51,7 +53,7 @@ class ApplicationGovernedTurnProviderTests(unittest.TestCase):
 
     def test_independent_request_starts_without_inlets(self) -> None:
         with patch(
-            "controller_entrypoints.start_core_run",
+            "workstation.app.cli.composition.start_core_run",
             return_value=EngineResult(
                 summary=_summary("run-independent", "completed", "answer")
             ),
@@ -65,11 +67,11 @@ class ApplicationGovernedTurnProviderTests(unittest.TestCase):
     def test_human_contribution_is_provenance_bearing_and_resumes_same_run(self) -> None:
         with (
             patch(
-                "controller_entrypoints.inspect_core_state",
+                "workstation.app.cli.composition.inspect_core_state",
                 return_value=EngineResult(summary=_summary("run-paused", "paused")),
             ),
             patch(
-                "controller_entrypoints.resume_core_run",
+                "workstation.app.cli.composition.resume_core_run",
                 return_value=EngineResult(
                     summary=_summary("run-paused", "completed", "continued")
                 ),
@@ -87,7 +89,7 @@ class ApplicationGovernedTurnProviderTests(unittest.TestCase):
 
     def test_closed_run_rejects_ordinary_resume(self) -> None:
         with patch(
-            "controller_entrypoints.inspect_core_state",
+            "workstation.app.cli.composition.inspect_core_state",
             return_value=EngineResult(
                 summary=_summary("run-closed", "completed", "closed answer")
             ),
@@ -100,13 +102,13 @@ class ApplicationGovernedTurnProviderTests(unittest.TestCase):
     def test_follow_up_starts_new_run_with_only_committed_parent_answer(self) -> None:
         with (
             patch(
-                "controller_entrypoints.inspect_core_state",
+                "workstation.app.cli.composition.inspect_core_state",
                 return_value=EngineResult(
                     summary=_summary("run-parent", "completed", "committed answer")
                 ),
             ),
             patch(
-                "controller_entrypoints.start_core_run",
+                "workstation.app.cli.composition.start_core_run",
                 return_value=EngineResult(
                     summary=_summary("run-child", "completed", "child answer")
                 ),
@@ -125,18 +127,18 @@ class ApplicationGovernedTurnProviderTests(unittest.TestCase):
     def test_correction_of_closed_run_starts_new_run_instead_of_resuming(self) -> None:
         with (
             patch(
-                "controller_entrypoints.inspect_core_state",
+                "workstation.app.cli.composition.inspect_core_state",
                 return_value=EngineResult(
                     summary=_summary("run-parent", "completed", "committed answer")
                 ),
             ),
             patch(
-                "controller_entrypoints.start_core_run",
+                "workstation.app.cli.composition.start_core_run",
                 return_value=EngineResult(
                     summary=_summary("run-correction", "completed", "corrected")
                 ),
             ) as start_mock,
-            patch("controller_entrypoints.resume_core_run") as resume_mock,
+            patch("workstation.app.cli.composition.resume_core_run") as resume_mock,
         ):
             result = self.provider.perform_governed_turn(
                 self.request("correction", parent_run_id="run-parent")

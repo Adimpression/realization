@@ -292,4 +292,56 @@ def evaluate_skill_policy_admission(
     )
 
 
-__all__ = ["evaluate_skill_policy_admission"]
+def evaluate_skill_admission_with_compatibility(
+    declaration: Mapping[str, Any],
+    *,
+    skill_title: str = "",
+    kind: str,
+    executor_framework: str = "",
+    compatibility_issue: str = "",
+    policy_artifacts: list[TitledArtifactContentView] | None = None,
+    approval_artifacts: list[TitledArtifactContentView] | None = None,
+    evaluated_at: Callable[[], str],
+) -> dict[str, Any]:
+    """Evaluate admission after accepting precomputed runtime evidence."""
+    normalized_kind = normalize_skill_kind(kind)
+    normalized_executor = normalize_executor_framework_name(executor_framework)
+    policies = [
+        artifact
+        for artifact in (policy_artifacts or [])
+        if artifact_skill_policy(artifact)
+    ]
+    requested_authorities = normalize_skill_authorities(
+        declaration.get("authorities_requested", [])
+    )
+    if (
+        policies
+        and normalized_kind == "ability"
+        and normalized_executor
+        and "execute" in requested_authorities
+        and collapse_ws(compatibility_issue)
+    ):
+        return _decision(
+            status="held",
+            admitted=False,
+            rationale=collapse_ws(compatibility_issue),
+            policy_titles=[],
+            approval_titles=[],
+            required_approval_class="automatic",
+            evaluated_at=evaluated_at,
+        )
+    return evaluate_skill_policy_admission(
+        declaration,
+        skill_title=skill_title,
+        kind=normalized_kind,
+        executor_framework=normalized_executor,
+        policy_artifacts=policies,
+        approval_artifacts=approval_artifacts,
+        evaluated_at=evaluated_at,
+    )
+
+
+__all__ = [
+    "evaluate_skill_admission_with_compatibility",
+    "evaluate_skill_policy_admission",
+]

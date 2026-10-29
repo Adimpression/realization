@@ -22,19 +22,21 @@ import textwrap
 import time
 
 from workstation.contracts.subject import SubjectImportStaging
-from itemize import (
-    ItemizationSession,
-    ItemizedSubjectItem,
+from workstation.subject.core.itemization import (
     itemization_paths,
     list_itemized_subject_items,
     load_itemization_session,
     materialize_itemization_session,
-    normalize_itemized_decision_role,
     persist_itemization_session,
     stable_itemized_item_id,
 )
-from itemize_validation import validate_itemization_session
-from learning_context import (
+from realized_core_semantics.itemization import (
+    ItemizationSession,
+    ItemizedSubjectItem,
+    normalize_itemized_decision_role,
+)
+from workstation.subject.core.itemize_validation import validate_itemization_session
+from workstation.subject.core.learning_context import (
     LearningContext,
     SubjectImport,
     ensure_learning_context_home,
@@ -48,7 +50,7 @@ from learning_context import (
     new_subject_import,
     persist_subject_import,
 )
-from publication import (
+from workstation.subject.core.publication import (
     PublicationComposition,
     list_publication_compositions,
     list_publication_composition_revisions,
@@ -57,14 +59,12 @@ from publication import (
     persist_publication_composition,
     stable_publication_id,
 )
-from publication_projection import (
+from workstation.subject.core.publication_projection import (
     materialize_report_publication_from_learning_context,
     publication_composition_from_learning_context,
     report_section_specs,
 )
-from decision_review import (
-    DecisionFrame,
-    DecisionReviewItem,
+from workstation.subject.core.decision_review import (
     decision_review_item_from_review_item,
     decision_review_paths,
     list_decision_review_items,
@@ -74,27 +74,33 @@ from decision_review import (
     stable_decision_frame_id,
     stable_decision_review_item_id,
 )
-from decision_review_constructs import (
+from realized_core_semantics.decision_review import DecisionFrame, DecisionReviewItem
+from workstation.subject.core.decision_review_constructs import (
+    list_transformation_construct_candidates,
+    load_transformation_construct_candidate,
+    persist_transformation_construct_candidates,
+)
+from realized_core_semantics.transformation_constructs import (
     TRANSFORMATION_CONSTRUCT_SORT_ORDER,
     TransformationConstructCandidate,
     deterministic_transformation_construct_candidates_from_itemized_item,
-    list_transformation_construct_candidates,
-    load_transformation_construct_candidate,
     next_transformation_construct_sort_kind,
     normalize_transformation_construct_sort_kind,
-    persist_transformation_construct_candidates,
     stable_transformation_construct_candidate_id,
 )
-from decision_review_projection import analyze_decision_frame
-from decision_review_projection import list_decision_analysis_receipts, persist_decision_analysis_receipt
-from decision_review_policy import (
+from workstation.subject.core.decision_review_projection import (
+    analyze_decision_frame,
+    list_decision_analysis_receipts,
+    persist_decision_analysis_receipt,
+)
+from workstation.subject.core.decision_review_policy import (
     DECISION_POLICY_PROFILE_KIND_ORDER,
     default_decision_policy_profile,
     load_decision_policy_profile,
     next_decision_policy_profile_kind,
     persist_decision_policy_profile,
 )
-from review_composition import (
+from workstation.subject.core.review_composition import (
     ReviewComposition,
     ReviewItem,
     ReviewTransformReceipt,
@@ -120,10 +126,9 @@ from review_composition import (
     stable_review_transform_receipt_id,
     split_review_item_into_children,
 )
-from runtime_temp import runtime_mkdtemp, runtime_temporary_directory
-from semantic_text import collapse_ws, semantic_chain_decomposition_components
-from workstation.runtime.core.session import load_workstation_session
-from gather_sources import (
+from realized_core_runtime.temporary import runtime_mkdtemp, runtime_temporary_directory
+from realized_core_semantics.semantic_text import collapse_ws, semantic_chain_decomposition_components
+from workstation.subject.core.gather_sources import (
     SourceCollection,
     SourceRevision,
     StagedSource,
@@ -158,16 +163,9 @@ from workstation.subject.core.subject_workflow_state_transitions import (
     resolve_subject_workflow_current_step,
     resolve_subject_workflow_journey,
 )
-from workstation.foundation.host.learning_capture import (
-    capture_workstation_assistant_markdown_for_research,
-    preview_workstation_assistant_markdown_for_research,
-)
-from workstation.runtime.core.workstation_core import (
-    workstation_stage_markdown_source_action,
-    workstation_learn_url_action,
-    workstation_import_staged_source_action,
-    workstation_refresh_staged_source_action,
-    workstation_sync_source_collection_action,
+from workstation.subject.core.host_actions import (
+    SubjectWorkflowHostActions,
+    UnavailableSubjectWorkflowHostActions,
 )
 
 
@@ -1428,9 +1426,12 @@ def _itemization_items(root_path: Path, scenario: SubjectScenario) -> tuple[obje
     return _subject_workflow_cached_read(("_itemization_items", root_path, scenario), _load)
 
 
-def _subject_workflow_allows_direct_llm_decomposition(root_path: Path) -> bool:
+def _subject_workflow_allows_direct_llm_decomposition(
+    root_path: Path,
+    host_actions: SubjectWorkflowHostActions,
+) -> bool:
     try:
-        return bool(load_workstation_session(root_path).allow_direct_llm_decomposition)
+        return bool(host_actions.allows_direct_llm_decomposition(root_path=root_path))
     except Exception:
         return False
 
@@ -1736,6 +1737,7 @@ def _upsert_dst_decision_analysis_for_subject(
     selected_item: ReviewItem | None,
     build_epoch_ms: int,
     require_existing_frame: bool,
+    host_actions: SubjectWorkflowHostActions,
 ) -> SubjectActionResult:
     dst_fixture = _dst_fixture_for_subject(root_path, scenario)
     if dst_fixture is None:
@@ -1773,6 +1775,7 @@ def _upsert_dst_decision_analysis_for_subject(
             subject_scope_root_path=root_path,
             subject_id=scenario.subject_id,
             build_epoch_ms=build_epoch_ms,
+            controller_bootstrap=host_actions.bootstrap_decision_support_controller,
         )
     except Exception as exc:
         action_label = "refresh" if require_existing_frame else "start"
@@ -6083,6 +6086,7 @@ def _run_live_dst_construct_discovery_with_timeout(
     subject_scope: dict[str, object],
     subject_scope_root_path: Path,
     build_epoch_ms: int,
+    host_actions: SubjectWorkflowHostActions,
     timeout_seconds: float | None = None,
 ):
     result_queue: Queue[tuple[str, object]] = Queue(maxsize=1)
@@ -6099,6 +6103,7 @@ def _run_live_dst_construct_discovery_with_timeout(
                 subject_scope=subject_scope,
                 subject_scope_root_path=subject_scope_root_path,
                 build_epoch_ms=build_epoch_ms,
+                controller_bootstrap=host_actions.bootstrap_decision_support_controller,
             )
             result_queue.put_nowait(("ok", result))
         except Exception as exc:  # pragma: no cover - exercised through caller fallback
@@ -10207,7 +10212,9 @@ def apply_subject_action(
     markdown_selected_path: str = "",
     markdown_status_text: str = "",
     markdown_busy: bool = False,
+    host_actions: SubjectWorkflowHostActions | None = None,
 ) -> SubjectActionResult:
+    effective_host_actions = host_actions or UnavailableSubjectWorkflowHostActions()
     refreshed_scenario = _refreshed_subject_scenario(root_path, scenario)
     scenario = refreshed_scenario
     normalized = str(action_key or "")
@@ -10247,7 +10254,7 @@ def apply_subject_action(
                 collapse_ws(subject_title_override)
                 or ("" if scenario.is_placeholder else collapse_ws(scenario.title))
             )
-            stage_result = workstation_stage_markdown_source_action(
+            stage_result = effective_host_actions.stage_markdown_source(
                 root_path=resolved_root,
                 markdown_path=Path(selected_markdown_path),
                 subject_id=scenario.subject_id,
@@ -10285,7 +10292,7 @@ def apply_subject_action(
                     reload_subjects=bool(resolved_subject_key),
                     preferred_subject_key=resolved_subject_key,
                 )
-            import_result = workstation_import_staged_source_action(
+            import_result = effective_host_actions.import_staged_source(
                 root_path=resolved_root,
                 subject_id=resolved_subject_key or collapse_ws(str(stage_payload.get("subject_id", ""))),
                 staged_source_id=staged_source_id,
@@ -10366,7 +10373,7 @@ def apply_subject_action(
                 collapse_ws(subject_title_override)
                 or ("" if scenario.is_placeholder else collapse_ws(scenario.title))
             )
-            result = workstation_learn_url_action(
+            result = effective_host_actions.learn_url(
                 root_path=resolved_root,
                 source_url=selected_url,
                 subject_id=scenario.subject_id,
@@ -10579,7 +10586,7 @@ def apply_subject_action(
                 "No assistant message is available yet. Ask the assistant for research-ready markdown first."
             )
         try:
-            preview_report = preview_workstation_assistant_markdown_for_research(
+            preview_report = effective_host_actions.preview_assistant_markdown(
                 root_path=Path(root_path).expanduser().resolve(),
                 markdown_text=latest_assistant,
                 command_text="/start-research-into" if collapse_ws(subject_title_override) else "/start-research",
@@ -10610,7 +10617,7 @@ def apply_subject_action(
     # Sync note: update workstation/subject_workflow_state_transitions.py first, then update this method.
             return SubjectActionResult("No staged source capture is pending.")
         try:
-            report = capture_workstation_assistant_markdown_for_research(
+            report = effective_host_actions.capture_assistant_markdown(
                 root_path=Path(root_path).expanduser().resolve(),
                 markdown_text=progress.pending_research_capture_markdown_text,
                 command_text=progress.pending_research_capture_command_text or "/start-research",
@@ -10665,7 +10672,7 @@ def apply_subject_action(
         )
         if target_staged_source is None:
             return SubjectActionResult("No staged source is available for this subject.")
-        result = workstation_import_staged_source_action(
+        result = effective_host_actions.import_staged_source(
             root_path=Path(root_path).expanduser().resolve(),
             subject_id=scenario.subject_id,
             staged_source_id=target_staged_source.staged_source_id,
@@ -10706,7 +10713,7 @@ def apply_subject_action(
         )
         if target_staged_source is None:
             return SubjectActionResult("Select a staged source before refreshing it.")
-        result = workstation_refresh_staged_source_action(
+        result = effective_host_actions.refresh_staged_source(
             root_path=root,
             subject_id=scenario.subject_id,
             staged_source_id=target_staged_source.staged_source_id,
@@ -10742,7 +10749,7 @@ def apply_subject_action(
         )
         if selected_collection is None:
             return SubjectActionResult("Select a source set before syncing it.")
-        result = workstation_sync_source_collection_action(
+        result = effective_host_actions.sync_source_collection(
             root_path=root,
             subject_id=scenario.subject_id,
             collection_id=selected_collection.collection_id,
@@ -12937,12 +12944,14 @@ def apply_subject_action(
         return SubjectActionResult("Subject context opened.", entry)
     if normalized == "generate_itemization":
         direct_llm_decomposition_allowed = _subject_workflow_allows_direct_llm_decomposition(
-            Path(root_path).expanduser().resolve()
+            Path(root_path).expanduser().resolve(),
+            effective_host_actions,
         )
         session, items = materialize_itemization_session(
             Path(root_path).expanduser().resolve(),
             scenario.subject_id,
             allow_direct_llm_decomposition=direct_llm_decomposition_allowed,
+            proposal_port=effective_host_actions,
         )
         if items:
             progress.itemize_cursor = 0
@@ -13960,6 +13969,7 @@ def apply_subject_action(
                         subject_scope=subject_scope,
                         subject_scope_root_path=root,
                         build_epoch_ms=now_epoch_ms,
+                        host_actions=effective_host_actions,
                     )
                     if discovery_result is not None:
                         suggested_candidates = discovery_result.construct_candidates
@@ -16255,6 +16265,7 @@ def apply_subject_action(
                     selected_item=selected_item,
                     build_epoch_ms=build_epoch_ms,
                     require_existing_frame=False,
+                    host_actions=effective_host_actions,
                 )
             if collapse_ws(frame.decision_frame_id):
                 return SubjectActionResult("A decision frame already exists for this subject.")
@@ -16346,6 +16357,7 @@ def apply_subject_action(
                 selected_item=selected_item,
                 build_epoch_ms=build_epoch_ms,
                 require_existing_frame=True,
+                host_actions=effective_host_actions,
             )
         if normalized == "toggle_selected_draft_review_item_in_decision_frame" and not collapse_ws(frame.decision_frame_id):
             create_result = apply_subject_action(
@@ -16354,6 +16366,7 @@ def apply_subject_action(
                 progress=progress,
                 action_key="create_decision_frame_from_selected_draft_item",
                 assistant_message_text=assistant_message_text,
+                host_actions=effective_host_actions,
             )
             frame = load_decision_frame(root, scenario.subject_id)
             decision_items = list_decision_review_items(root, scenario.subject_id)
@@ -16382,6 +16395,7 @@ def apply_subject_action(
                 progress=progress,
                 action_key="refresh_dst_decision_analysis",
                 assistant_message_text=assistant_message_text,
+                host_actions=effective_host_actions,
             )
             frame = load_decision_frame(root, scenario.subject_id)
             decision_items = list_decision_review_items(root, scenario.subject_id)

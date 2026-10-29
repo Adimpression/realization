@@ -11,10 +11,12 @@ from unittest import mock
 import grpc
 
 from controller_entrypoints import ensure_application_controller_runtime
+from dst import DST_SOURCE_ROOT
 from gather_sources import new_source_collection, persist_source_collection
 from learning_context import new_learning_context, persist_learning_context
 from workstation.grpc.definitions import subject_workflow_pb2, subject_workflow_pb2_grpc
 from workstation.runtime.core.session import launch_workstation_session
+from workstation.runtime.core.subject_host_actions import RuntimeSubjectWorkflowHostActions
 from workstation.subject.core.subject_workflow import (
     SubjectActionResult,
     new_subject_progress,
@@ -253,7 +255,7 @@ class WorkstationSubjectWorkflowApiTests(unittest.TestCase):
         self.assertTrue(any(action.key == "use_markdown_ingress" for action in snapshot.phase_view.current_step.actions))
 
     def test_subject_workflow_api_apply_markdown_ingress_uses_staged_path_and_selects_created_subject(self) -> None:
-        service = SubjectWorkflowApiService()
+        service = SubjectWorkflowApiService(host_actions=RuntimeSubjectWorkflowHostActions())
         empty_root = Path(self.tempdir.name) / "markdown-root"
         empty_workspace = Path(self.tempdir.name) / "markdown-workspace"
         launch_workstation_session(
@@ -289,7 +291,7 @@ class WorkstationSubjectWorkflowApiTests(unittest.TestCase):
         self.assertTrue(any(subject.subject_id == outcome.preferred_subject_key for subject in subjects))
 
     def test_subject_workflow_api_uploaded_dst_markdown_keeps_the_build_report_path_visible(self) -> None:
-        service = SubjectWorkflowApiService()
+        service = SubjectWorkflowApiService(host_actions=RuntimeSubjectWorkflowHostActions())
         root = Path(self.tempdir.name) / "uploaded-dst-root"
         workspace = Path(__file__).resolve().parents[2]
         launch_workstation_session(
@@ -301,7 +303,7 @@ class WorkstationSubjectWorkflowApiTests(unittest.TestCase):
         )
         staged_upload = root / "uploads" / "flutter-shell-a" / "City bus prose v10.md"
         staged_upload.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(workspace / "dst" / "City bus prose v10.md", staged_upload)
+        shutil.copyfile(DST_SOURCE_ROOT / "City bus prose v10.md", staged_upload)
         placeholder = service.list_subjects(root_path=root)[0]
 
         ingress = service.apply_action(

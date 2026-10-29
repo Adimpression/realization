@@ -20,6 +20,62 @@ from semantic_text import titleize_semantic_unit
 
 
 class ExecutorFrameworkLearningTests(unittest.TestCase):
+    def test_python_runtime_normalization_extracts_only_literal_broker_bindings(self) -> None:
+        normalized = normalize_ability_runtime_content(
+            {
+                "executor_framework": "python3",
+                "python_script": "\n".join(
+                    [
+                        "from python_skill_host import broker_request",
+                        "def main(name: str):",
+                        '    first = broker_request("fs.read_mount", mount="skill_input", relative_path="a.txt")',
+                        '    second = broker_request("fs.write_mount", mount="skill_tmp", relative_path="b.txt", text="ok")',
+                        '    repeated = broker_request("fs.read_mount", mount="skill_input", relative_path="c.txt")',
+                        "    dynamic = broker_request(name)",
+                        "    return first, second, repeated, dynamic",
+                    ]
+                ),
+            }
+        )
+
+        self.assertEqual(
+            normalized["governed_host_brokers"],
+            ["fs.read_mount", "fs.write_mount"],
+        )
+
+    def test_python_runtime_normalization_preserves_explicit_empty_broker_binding(self) -> None:
+        normalized = normalize_ability_runtime_content(
+            {
+                "executor_framework": "python3",
+                "python_script": "\n".join(
+                    [
+                        "from python_skill_host import broker_request",
+                        "def main():",
+                        '    return broker_request("fs.read_mount", mount="skill_input", relative_path="a.txt")',
+                    ]
+                ),
+                "governed_host_brokers": [],
+            }
+        )
+
+        self.assertEqual(normalized["governed_host_brokers"], [])
+
+    def test_python_runtime_normalization_does_not_infer_dynamic_broker_binding(self) -> None:
+        normalized = normalize_ability_runtime_content(
+            {
+                "executor_framework": "python3",
+                "python_script": "\n".join(
+                    [
+                        "from python_skill_host import broker_request",
+                        "def main(name: str):",
+                        "    return broker_request(name)",
+                    ]
+                ),
+            }
+        )
+
+        self.assertNotIn("governed_host_brokers", normalized)
+
     def test_normalize_supported_executor_frameworks_collapses_aliases(self) -> None:
         """
         High Level Purpose:

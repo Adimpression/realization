@@ -5,10 +5,10 @@ import json
 import shutil
 import sys
 from pathlib import Path
-from typing import TextIO
+from typing import Sequence, TextIO
 
 from realized_host_interaction.receipts import host_interaction_capability_call_receipt
-from semantic_text import collapse_ws
+from realized_core_semantics.semantic_text import collapse_ws
 from workstation.foundation.host.subject_workflow import create_subject_workflow_client
 from workstation.ui.shared.activity_view import start_workstation_activity_tail, workstation_activity_log_offset
 from workstation.shell.core.application_facade import (
@@ -32,6 +32,32 @@ from workstation.ui.textual.chat_ui import (
     workstation_chat_help_text,
     workstation_chat_ui_supported,
 )
+from workstation.app.cli.arguments import build_workstation_parser
+from workstation.app.cli.composition import (
+    ensure_workstation_application_composition,
+)
+
+
+ensure_workstation_application_composition()
+
+
+def main(argv: Sequence[str] | None = None) -> int:
+    """Dispatch the installable workstation command without changing handlers."""
+
+    args = build_workstation_parser().parse_args(
+        list(argv) if argv is not None else None
+    )
+    handlers = {
+        "launch": handle_workstation_launch_command,
+        "prompt": handle_workstation_prompt_command,
+        "chat": handle_workstation_chat_command,
+        "grpc-host": handle_workstation_grpc_host_command,
+        "skill-catalog": handle_workstation_skill_catalog_command,
+        "skill-import": handle_workstation_skill_import_command,
+        "skill-export": handle_workstation_skill_export_command,
+        "trial-validate": handle_workstation_trial_validate_command,
+    }
+    return handlers[args.workstation_action](args)
 
 
 def handle_workstation_launch_command(args) -> int:

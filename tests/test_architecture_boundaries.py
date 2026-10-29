@@ -48,10 +48,16 @@ class RepositoryArchitectureBoundaryTest(unittest.TestCase):
 
         self.assertIn("id: 'architecture-ratchet'", build)
         self.assertIn("args: ['scripts/check_architecture_boundaries.py']", build)
+        self.assertIn("id: 'compatibility-facade-inventory'", build)
+        self.assertIn("args: ['scripts/check_compatibility_facades.py']", build)
         self.assertIn("id: 'architecture-ratchet-tests'", build)
         self.assertIn("uv sync --frozen", architecture_test_step)
         self.assertIn("uv build --wheel host_interaction", architecture_test_step)
         self.assertIn("uv build core_runtime", architecture_test_step)
+        self.assertIn(
+            "python scripts/verify_workspace_distributions.py",
+            architecture_test_step,
+        )
         self.assertIn(
             "uv run --frozen python -m unittest",
             architecture_test_step,
@@ -126,7 +132,9 @@ class RepositoryArchitectureBoundaryTest(unittest.TestCase):
             listed_modules = {
                 line.strip()
                 for line in sources_path.read_text(encoding="utf-8").splitlines()
-                if line.strip().endswith(".py") and ".egg-info/" not in line
+                if line.strip().startswith("src/")
+                and line.strip().endswith(".py")
+                and ".egg-info/" not in line
             }
             project = tomllib.loads(
                 (project_root / "pyproject.toml").read_text(encoding="utf-8")
@@ -152,10 +160,19 @@ class RepositoryArchitectureBoundaryTest(unittest.TestCase):
                 self.assertEqual(expected_dependencies, requirements)
 
     def test_gather_sources_uses_path_notation_without_loading_learning_orchestration(self) -> None:
-        source = (REPO_ROOT / "gather_sources.py").read_text(encoding="utf-8")
+        source = (
+            REPO_ROOT
+            / "workstation"
+            / "subject_core"
+            / "src"
+            / "workstation"
+            / "subject"
+            / "core"
+            / "gather_sources.py"
+        ).read_text(encoding="utf-8")
 
         self.assertIn(
-            "from learning_context_paths import canonical_learning_subject_id, learning_context_home",
+            "from workstation.subject.core.learning_context_paths import canonical_learning_subject_id, learning_context_home",
             source,
         )
         self.assertNotIn("from learning_context import", source)
@@ -311,16 +328,12 @@ class RepositoryArchitectureBoundaryTest(unittest.TestCase):
             + len(measured["baseline"]["root_to_component_dependencies"]),
             len(classifications),
         )
-        self.assertEqual(
-            {"pure_helper"},
-            {
-                row["category"]
-                for row in classifications
-                if row["target"] == "semantic_text"
-            },
+        self.assertNotIn(
+            "semantic_text",
+            {row["target"] for row in classifications},
         )
         self.assertEqual(
-            {"persistence"},
+            set(),
             {
                 row["category"]
                 for row in classifications
@@ -335,12 +348,60 @@ class RepositoryArchitectureBoundaryTest(unittest.TestCase):
             {path.stem for path in REPO_ROOT.glob("*.py") if path.is_file()},
             set(root_ownership),
         )
-        self.assertEqual(("llm", ()), root_ownership["supplement"])
-        self.assertEqual(("blend", ()), root_ownership["blend_workflow"])
-        self.assertEqual(("subject_domain", ()), root_ownership["publication"])
-        self.assertEqual(("portable_skills", ()), root_ownership["skill_ir"])
         self.assertEqual(
-            ("persistence_adapter", ()), root_ownership["store"]
+            ("controller", ("compatibility_facade",)),
+            root_ownership["supplement"],
+        )
+        for module in (
+            "blend_operator_store",
+            "blend_workflow",
+            "blend_workflow_execution",
+            "blend_workflow_store",
+            "blend_world",
+            "blend_world_store",
+        ):
+            with self.subTest(module=module):
+                self.assertEqual(
+                    ("blend", ("compatibility_facade",)),
+                    root_ownership[module],
+                )
+        for module in (
+            "decision_review_policy",
+            "decision_review_projection",
+            "publication",
+            "publication_projection",
+            "publication_render",
+            "publication_validation",
+            "url_learning_capture",
+        ):
+            with self.subTest(module=module):
+                self.assertEqual(
+                    ("subject_domain", ("compatibility_facade",)),
+                    root_ownership[module],
+                )
+        self.assertEqual(
+            ("semantic_model", ("compatibility_facade",)),
+            root_ownership["id_generation"],
+        )
+        for module in ("prolog", "semantic_text", "title_semantics"):
+            with self.subTest(module=module):
+                self.assertEqual(
+                    ("semantic_model", ("compatibility_facade",)),
+                    root_ownership[module],
+                )
+        for module in (
+            "skill_boundary_normalization",
+            "skill_composition",
+            "skill_ir",
+        ):
+            with self.subTest(module=module):
+                self.assertEqual(
+                    ("portable_skills", ("compatibility_facade",)),
+                    root_ownership[module],
+                )
+        self.assertEqual(
+            ("persistence_adapter", ("compatibility_facade",)),
+            root_ownership["store"],
         )
         self.assertEqual(
             ("entry_exchange", ("compatibility_facade", "entrypoint")),
@@ -351,17 +412,16 @@ class RepositoryArchitectureBoundaryTest(unittest.TestCase):
             for row in measured["baseline"]["root_package_ownership"]
         }
         self.assertEqual(
-            {"coordinated_transformation", "design", "dst"},
+            {"design"},
             set(root_package_ownership),
         )
         self.assertEqual(
-            ("subject_domain", ()),
-            root_package_ownership["coordinated_transformation"],
-        )
-        self.assertEqual(("subject_domain", ()), root_package_ownership["dst"])
-        self.assertEqual(
             ("validation_trial", ("validation",)),
             root_package_ownership["design"],
+        )
+        self.assertEqual(
+            "dst",
+            measured["components"]["dst"]["project"]["project"]["name"],
         )
         self.assertEqual(
             [], measured["baseline"]["compatibility_facade_imports"]
@@ -391,7 +451,12 @@ class RepositoryArchitectureBoundaryTest(unittest.TestCase):
             ),
         )
         self.assertEqual(
-            [],
+            [
+                "realized-core-governance==0.1.0",
+                "realized-core-semantics==0.1.0",
+                "realized-host-interaction==0.1.0",
+                "realized-skill-semantics==0.1.0",
+            ],
             measured["components"]["governed_core"]["project"]["project"].get(
                 "dependencies", []
             ),
@@ -433,6 +498,7 @@ class RepositoryArchitectureBoundaryTest(unittest.TestCase):
                 ("core_app", "core_llm"),
                 ("core_conversation", "core_engine"),
                 ("core_conversation", "core_llm"),
+                ("runtime_core", "core_llm"),
                 ("shell_core", "core_conversation"),
                 ("shell_core", "core_llm"),
             }.issubset(actual_edges)
@@ -460,6 +526,12 @@ class RepositoryArchitectureBoundaryTest(unittest.TestCase):
             ),
         )
         self.assertIn(
+            "realized-core-llm==0.1.0",
+            measured["components"]["core_engine"]["project"]["project"].get(
+                "dependencies", []
+            ),
+        )
+        self.assertIn(
             "realized-host-interaction==0.1.0",
             measured["components"]["core_engine"]["project"]["project"].get(
                 "dependencies", []
@@ -467,7 +539,7 @@ class RepositoryArchitectureBoundaryTest(unittest.TestCase):
         )
         self.assertFalse(
             any(
-                row["source"] in {"contracts", "governed_core", "host_interaction"}
+                row["source"] in {"contracts", "host_interaction"}
                 for row in measured["baseline"]["actual_edges"]
             )
         )
@@ -493,14 +565,23 @@ class RepositoryArchitectureBoundaryTest(unittest.TestCase):
                     [alias.name for alias in node.names]
                     if isinstance(node, ast.Import)
                     else [node.module or ""]
-                    if isinstance(node, ast.ImportFrom)
+                    if isinstance(node, ast.ImportFrom) and node.level == 0
                     else []
                 )
                 if imported
             }
             with self.subTest(source=source_path.name):
                 self.assertTrue(
-                    imported_roots <= sys.stdlib_module_names | {"realized_core_runtime"},
+                    imported_roots
+                    <= sys.stdlib_module_names
+                    | {
+                        "realized_core_governance",
+                        "realized_core_runtime",
+                        "realized_core_semantics",
+                        "realized_host_interaction",
+                        "realized_skill_semantics",
+                        "wasmtime",
+                    },
                     imported_roots,
                 )
         self.assertEqual([], architecture.compare(measured["baseline"], baseline))

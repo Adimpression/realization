@@ -201,6 +201,7 @@ class GovernanceApprovalTests(unittest.TestCase):
         }
         denied = (
             _record(status="revoked"),
+            _record(status="expired"),
             _record(valid_from="2999-01-01T00:00:00Z"),
             _record(valid_until="2000-01-01T00:00:00Z"),
             _record(subject_titles=["Other Skill"]),

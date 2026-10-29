@@ -13,10 +13,10 @@ from learning_context import (
     new_learning_context,
 )
 from gather_sources import latest_source_revision, list_staged_sources
-from workstation.foundation.host.learning_capture import capture_workstation_chat_learning_from_tool_receipts
-from workstation.foundation.host.learning_capture import capture_workstation_assistant_markdown_for_research
-from workstation.foundation.host.learning_capture import preview_workstation_assistant_markdown_for_research
 from workstation.foundation.models import WorkstationAttachment, WorkstationSession
+from workstation.subject.service.learning_capture import capture_workstation_chat_learning_from_tool_receipts
+from workstation.subject.service.learning_capture import capture_workstation_assistant_markdown_for_research
+from workstation.subject.service.learning_capture import preview_workstation_assistant_markdown_for_research
 
 
 class WorkstationLearningCaptureTests(unittest.TestCase):

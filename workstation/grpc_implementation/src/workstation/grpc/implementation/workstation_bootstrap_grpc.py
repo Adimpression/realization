@@ -7,7 +7,7 @@ from typing import Iterable
 
 import grpc
 
-from semantic_text import collapse_ws
+from realized_core_semantics.semantic_text import collapse_ws
 from workstation.foundation.events.message_tracing import derived_trace_id, new_trace_id, register_message_trace
 from workstation.grpc.definitions import workstation_bootstrap_pb2, workstation_bootstrap_pb2_grpc
 

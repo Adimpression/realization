@@ -194,7 +194,7 @@ provenance = "dependency-metadata"
 reason = "The Flutter lock supports repeatable dependency resolution."
 
 [[rules]]
-pattern = "dst/tests/fixtures/**"
+pattern = "dst/src/dst/tests/fixtures/**"
 include = true
 category = "deterministic-fixture"
 provenance = "reviewed-fixture"

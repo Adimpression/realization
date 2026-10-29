@@ -7,7 +7,7 @@ import os
 from pathlib import Path
 from typing import cast
 
-from args import (
+from realized_core_engine.configuration import (
     add_controller_feature_toggle_arguments,
     add_prolog_query_priming_argument,
     add_supported_executor_arguments,

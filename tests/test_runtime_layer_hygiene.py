@@ -9,6 +9,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 FORBIDDEN_RUNTIME_GOVERNANCE_IMPORTS = {
     "governed_skill_access",
+    "realized_core_governance",
     "skill_governance",
     "skill_lifecycle",
 }
@@ -44,6 +45,31 @@ def module_import_roots(path: Path) -> set[str]:
 
 
 class RuntimeLayerHygieneTests(unittest.TestCase):
+    def test_constitutional_trace_delegates_only_pure_effect_requirements_to_governance(self) -> None:
+        path = (
+            REPO_ROOT
+            / "core_engine"
+            / "src"
+            / "realized_core_engine"
+            / "constitutional_trace.py"
+        )
+        imported = module_import_roots(path)
+
+        self.assertIn("realized_core_governance", imported)
+        self.assertIn("realized_core_engine", imported)
+        self.assertIn("realized_core_runtime", imported)
+        source = path.read_text(encoding="utf-8")
+        syntax = ast.parse(source)
+        locally_defined = {
+            node.name
+            for node in syntax.body
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef))
+        }
+        self.assertNotIn("canonical_trace_answer", locally_defined)
+        self.assertNotIn("effect_trace_signature", locally_defined)
+        self.assertIn("constitutional_trace_snapshot", locally_defined)
+        self.assertIn("compare_bundle_trace_to_state", locally_defined)
+
     def test_host_mediation_uses_runtime_governance_facade(self) -> None:
         """
         High Level Purpose:
@@ -62,7 +88,14 @@ class RuntimeLayerHygieneTests(unittest.TestCase):
         Returns:
             None: This function mutates state or performs side effects without returning a value.
         """
-        imported = module_import_roots(REPO_ROOT / "host_mediation.py")
+        path = (
+            REPO_ROOT
+            / "core_engine"
+            / "src"
+            / "realized_core_engine"
+            / "host_mediation.py"
+        )
+        imported = module_import_roots(path)
         forbidden = sorted(imported & FORBIDDEN_RUNTIME_GOVERNANCE_IMPORTS)
         self.assertEqual(
             forbidden,
@@ -70,21 +103,21 @@ class RuntimeLayerHygieneTests(unittest.TestCase):
             msg=f"host_mediation.py imports forbidden low-level governance modules: {', '.join(forbidden)}",
         )
         self.assertIn(
-            "runtime_governance_context",
-            imported,
-            msg="host_mediation.py should depend on runtime_governance_context for current-use governance resolution",
+            "from realized_core_engine.runtime_governance_context import",
+            path.read_text(encoding="utf-8"),
+            msg="host mediation should depend on the canonical runtime-governance facade",
         )
 
-    def test_system_state_uses_id_generation_not_main_for_runtime_ids(self) -> None:
+    def test_system_state_uses_semantic_identifiers_not_main_for_runtime_ids(self) -> None:
         """
         High Level Purpose:
-            In circumstances like continuing runtime-layer extraction, helps with verifying that runtime state id generation depends on a root helper module instead of importing controller composition from `main.py`.
+            In circumstances like continuing runtime-layer extraction, helps with verifying that runtime state id generation depends on the semantic-contract package instead of importing controller composition from `main.py`.
 
         Reference to Theory:
             Verifies that runtime state construction stays below controller composition by sourcing generic identifier helpers from a lower shared module.
 
         Example Input Output:
-            Input: `test_system_state_uses_id_generation_not_main_for_runtime_ids()`
+            Input: `test_system_state_uses_semantic_identifiers_not_main_for_runtime_ids()`
             Output: None
 
         Args:
@@ -93,17 +126,24 @@ class RuntimeLayerHygieneTests(unittest.TestCase):
         Returns:
             None: This function mutates state or performs side effects without returning a value.
         """
-        imported = module_import_roots(REPO_ROOT / "system_state.py")
+        imported = module_import_roots(
+            REPO_ROOT
+            / "core_engine"
+            / "src"
+            / "realized_core_engine"
+            / "state.py"
+        )
         self.assertNotIn("main", imported)
-        self.assertIn("id_generation", imported)
+        self.assertIn("realized_core_semantics", imported)
+        self.assertNotIn("id_generation", imported)
 
-    def test_host_brokers_use_registered_runtime_binding_not_main_for_nested_skill_invoke(self) -> None:
+    def test_runtime_host_brokers_do_not_construct_controller_or_store_for_nested_skill_invoke(self) -> None:
         """
         High Level Purpose:
-            In circumstances like continuing runtime-layer extraction, helps with verifying that nested governed skill invocation in host brokers depends on the registered controller constructor and root store helper instead of importing controller composition from `main.py`.
+            In circumstances like continuing runtime-layer extraction, helps with verifying that the runtime advertises nested skill invocation without constructing controller or persistence implementations.
 
         Reference to Theory:
-            Verifies that runtime broker execution stays on a narrow dependency-inversion boundary while using lower shared helpers for store access.
+            Verifies that nested reduction is supplied from the controller composition boundary rather than violating runtime-to-controller dependency direction.
 
         Example Input Output:
             Input: `test_host_brokers_use_registered_runtime_binding_not_main_for_nested_skill_invoke()`
@@ -115,8 +155,18 @@ class RuntimeLayerHygieneTests(unittest.TestCase):
         Returns:
             None: This function mutates state or performs side effects without returning a value.
         """
-        imported = module_import_roots(REPO_ROOT / "host_brokers.py")
+        path = (
+            REPO_ROOT
+            / "core_runtime"
+            / "src"
+            / "realized_core_runtime"
+            / "host_brokers.py"
+        )
+        imported = module_import_roots(path)
         self.assertNotIn("main", imported)
-        self.assertIn("controller_runtime_binding", imported)
+        self.assertNotIn("controller_runtime", imported)
+        self.assertNotIn("controller_runtime_binding", imported)
         self.assertNotIn("runtime_controller_api", imported)
-        self.assertIn("store", imported)
+        self.assertNotIn("store", imported)
+        source = path.read_text(encoding="utf-8")
+        self.assertIn("no controller-owned", source.lower())

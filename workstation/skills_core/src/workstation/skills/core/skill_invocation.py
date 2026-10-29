@@ -6,21 +6,26 @@ from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
-from capability_runtime import runtime_skill_declaration_for_artifact
-from realized_skill_semantics.execution import ability_executor_framework
+from realized_core_runtime.capabilities import runtime_skill_declaration_for_artifact
+from realized_core_semantics.semantic_text import collapse_ws
 from realized_host_interaction.delegation import (
     host_interaction_delegation_requires_escalation as requested_delegation_requires_escalation,
     normalized_requested_delegation,
 )
-from semantic_text import collapse_ws
+from realized_skill_application.projection import skill_kind_from_artifact
+from realized_skill_semantics.execution import ability_executor_framework
+from workstation.contracts.runtime import ArtifactRepository
+from workstation.foundation.host.artifact_repository import artifact_repository_provider
+from workstation.foundation.host.governance import workstation_governance_inventory
+from workstation.foundation.host.skill_exchange import skill_exchange_provider
+from workstation.skills.builtin import (
+    builtin_workstation_skill_artifacts,
+    resolve_builtin_workstation_skill,
+)
 from workstation.skills.core.invocation_contract import (
     skill_invocation_request_from_artifact,
     skill_invocation_result_from_mapping,
 )
-from skill_export_projection import skill_kind_from_artifact
-from store import SQLiteVectorArtifactStore
-from workstation.skills.builtin import builtin_workstation_skill_artifacts, resolve_builtin_workstation_skill
-from workstation.foundation.host.governance import workstation_governance_inventory
 
 
 _GENERIC_NESTED_ANSWER_TEXTS = {"executed", "ok", "completed", "success"}
@@ -29,6 +34,12 @@ _NESTED_ANSWER_MAX_CHARS = 4000
 _NESTED_TRACE_MAX_ITEMS = 20
 _NESTED_LIST_MAX_ITEMS = 25
 _NESTED_STRING_MAX_CHARS = 2000
+
+
+def _builtin_skill_artifacts() -> tuple[Any, ...]:
+    return builtin_workstation_skill_artifacts(
+        skill_exchange_provider().artifact_from_skill_document
+    )
 
 
 def _normalized_skill_title_key(title: str) -> str:
@@ -122,7 +133,7 @@ def list_available_workstation_skills(skill_store_path: Path) -> list[dict[str, 
         list[dict[str, Any]]: Result produced by `list_available_workstation_skills`.
     """
     by_title: dict[str, dict[str, Any]] = {}
-    for artifact in builtin_workstation_skill_artifacts():
+    for artifact in _builtin_skill_artifacts():
         entry = _workstation_skill_catalog_entry(artifact, source_kind="builtin_workstation")
         by_title[str(entry.get("title", ""))] = entry
     store = workstation_skill_store(skill_store_path)
@@ -142,7 +153,7 @@ def list_available_workstation_skills(skill_store_path: Path) -> list[dict[str, 
     return catalog
 
 
-def workstation_skill_store(skill_store_path: Path) -> SQLiteVectorArtifactStore:
+def workstation_skill_store(skill_store_path: Path) -> ArtifactRepository:
     """
     High Level Purpose:
         In circumstances like workstation-side governed skill discovery and invocation, helps with binding a SQLite-backed artifact store instance to one explicit workstation skill-store path.
@@ -160,10 +171,10 @@ def workstation_skill_store(skill_store_path: Path) -> SQLiteVectorArtifactStore
     Returns:
         SQLiteVectorArtifactStore: Result produced by `workstation_skill_store`.
     """
-    store = SQLiteVectorArtifactStore()
-    store.sqlite_path = Path(skill_store_path).expanduser().resolve()
-    store.vector_mode_override = "off"
-    return store
+    return artifact_repository_provider().open_artifact_repository(
+        sqlite_path=Path(skill_store_path),
+        vector_mode="off",
+    )
 
 
 def resolve_workstation_skill(
@@ -217,13 +228,16 @@ def resolve_workstation_skill(
         ]
         if len(prefix_installed) == 1:
             return prefix_installed[0], {"source_kind": "attached_skill_store", "source_target": "skills"}
-    builtin = resolve_builtin_workstation_skill(normalized_title)
+    builtin = resolve_builtin_workstation_skill(
+        normalized_title,
+        skill_exchange_provider().artifact_from_skill_document,
+    )
     if builtin is not None:
         return builtin, {"source_kind": "builtin_workstation", "source_target": ""}
     if normalized_title_key:
         builtin_candidates = [
             artifact
-            for artifact in builtin_workstation_skill_artifacts()
+            for artifact in _builtin_skill_artifacts()
             if (
                 _normalized_skill_title_key(str(getattr(artifact, "title", ""))) == normalized_title_key
                 or _normalized_skill_title_key(str(getattr(artifact, "title", ""))).startswith(normalized_title_key)
@@ -745,12 +759,21 @@ def workstation_nested_skill_terminal_error(result: Any) -> bool:
     Returns:
         bool: Result produced by `workstation_nested_skill_terminal_error`.
     """
+    terminal_statuses = {"error", "unsupported", "approval_required"}
     for candidate in (getattr(result, "parsed_output", None), getattr(result, "result", None)):
-        if not isinstance(candidate, Mapping):
-            continue
-        status = collapse_ws(str(candidate.get("status", ""))).casefold()
-        if status in {"error", "unsupported", "approval_required"}:
-            return True
+        # Generated workers wrap their declared output under `result`; the
+        # cross-boundary envelope may add one additional `result` layer.
+        current = candidate
+        for _ in range(3):
+            if not isinstance(current, Mapping):
+                break
+            status = collapse_ws(str(current.get("status", ""))).casefold()
+            if status in terminal_statuses:
+                return True
+            nested = current.get("result")
+            if not isinstance(nested, Mapping) or nested is current:
+                break
+            current = nested
     return False
 
 

@@ -8,6 +8,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from decision_review import load_decision_frame
+from dst import DST_SOURCE_ROOT
 from semantic_text import collapse_ws
 from workstation.runtime.core.session import launch_workstation_session
 from workstation.subject.core.subject_workflow import (
@@ -72,9 +73,15 @@ class SmartCityTravelIncrementalReportLadderLiveTests(unittest.TestCase):
                 )
 
     def _learn_markdown(self, markdown_relpath: str) -> str:
+        source_path = Path(markdown_relpath)
+        markdown_path = (
+            DST_SOURCE_ROOT / source_path.name
+            if source_path.parts[:1] == ("dst",)
+            else self.workspace / source_path
+        )
         result = workstation_learn_markdown_action(
             root_path=self.root,
-            markdown_path=self.workspace / markdown_relpath,
+            markdown_path=markdown_path,
             testing_lightweight=True,
         )
         self.assertEqual(result.status, "ok")

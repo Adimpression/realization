@@ -18,7 +18,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
-from semantic_text import collapse_ws
+from realized_core_semantics.semantic_text import collapse_ws
 from workstation.contracts.shell import (
     WorkstationChatContext,
     WorkstationChatPromptTargetPlan,

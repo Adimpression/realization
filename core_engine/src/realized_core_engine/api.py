@@ -8,16 +8,16 @@ from dataclasses import replace
 from pathlib import Path
 from types import SimpleNamespace
 
-from args import STATE_SQLITE_PATH_ENV, apply_controller_feature_toggle_overrides
-from controller_runtime import build_controller
-from system_state import (
+from realized_core_engine.configuration import STATE_SQLITE_PATH_ENV, apply_controller_feature_toggle_overrides
+from realized_core_engine.controller_runtime import build_controller
+from realized_core_engine.state import (
     SystemState,
     attach_evidence_specs,
     load_evidence_specs,
     load_state,
     save_state,
 )
-from title_semantics import PROLOG_QUERY_PRIMING_MODE_ENV
+from realized_core_semantics.title_semantics import PROLOG_QUERY_PRIMING_MODE_ENV
 
 from realized_core_engine.contracts import EngineConfiguration, EngineResult
 from realized_core_engine.canonical_reduction import CanonicalReductionAdapter
@@ -82,6 +82,7 @@ def _execute(
     controller = build_controller(
         state=state,
         llm_policy=configuration.llm_policy,
+        host_interaction_context=configuration.host_interaction_context,
     )
     if resume_existing:
         controller.resume(max_steps=configuration.max_steps)
@@ -140,7 +141,9 @@ class ResumptionEngine:
         repository = SQLiteResumptionRepository(self.sqlite_path)
         self._service = ResumptionService(
             repository,
-            reduction_controller=CanonicalReductionAdapter(),
+            reduction_controller=CanonicalReductionAdapter(
+                host_interaction_context=self.configuration.host_interaction_context,
+            ),
         )
 
     def start(

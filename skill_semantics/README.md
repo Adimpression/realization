@@ -16,10 +16,13 @@ parse or validate declaration payloads, admit or approve skills, grant
 authority, bind host realizers, execute effects, persist state, or plan a
 workstation interaction.
 
-The public surface is intentionally split into eight explicit modules:
+The public surface is intentionally split into nine explicit modules:
 
 - `realized_skill_semantics.composition` contains immutable mapper, binding,
   condition, step, candidate, diagnostic, and plan-analysis records.
+- `realized_skill_semantics.compatibility` normalizes optional compatibility
+  lineage into a deterministic portable adapter envelope without parsing any
+  foreign exchange format.
 - `realized_skill_semantics.declaration` contains supported portable skill
   schema versions, schema-version normalization, and explicit
   composition-right target projection.

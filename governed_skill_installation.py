@@ -10,19 +10,22 @@ from typing import Any
 
 from realized_core_governance.inventory import load_governance_inventory
 from realized_core_governance.lifecycle import skill_lifecycle_from_payload
+from realized_core_governance.persistence import persist_governed_artifacts
 from realized_core_governance.records import artifact_skill_declaration
-from skill_export_projection import export_skill_bundle_text, skill_kind_from_artifact
-from skill_compiler import compile_skill_document, compiled_skill_summary_from_artifact
-from skill_governance import (
-    evaluate_skill_admission,
-    normalize_skill_kind,
+from realized_exchange.skill_export import export_skill_bundle_text
+from realized_skill_application.projection import skill_kind_from_artifact
+from realized_exchange.compiler import (
+    compile_skill_document,
+    compiled_skill_summary_from_artifact,
 )
+from realized_core_governance.vocabulary import normalize_skill_kind
+from realized_core_engine.skill_governance import evaluate_skill_admission
 from realized_skill_semantics.declaration import (
     SKILL_SCHEMA_VERSION_V2,
     normalize_skill_schema_version,
 )
 from realized_skill_semantics.execution import ability_executor_framework
-from skill_schema_io import (
+from realized_exchange.skill_schema import (
     _runtime,
     load_skill_yaml_payload_documents,
     normalized_skill_bundle_filename_for_source,
@@ -227,7 +230,11 @@ def handle_import_skill_command(args: argparse.Namespace) -> int:
         policy_skill_files.append(skill_file)
         policy_admissions.append(admission)
     if policy_artifacts:
-        summary = store.persist_artifacts(policy_artifacts, run_id="skill_import:policy_batch")
+        summary = persist_governed_artifacts(
+            store,
+            policy_artifacts,
+            run_id="skill_import:policy_batch",
+        )
         persist_summaries["policy"] = summary
         record_import_batch(
             imported=imported,
@@ -266,7 +273,11 @@ def handle_import_skill_command(args: argparse.Namespace) -> int:
         approval_skill_files.append(skill_file)
         approval_admissions.append(admission)
     if approval_artifacts:
-        summary = store.persist_artifacts(approval_artifacts, run_id="skill_import:approval_batch")
+        summary = persist_governed_artifacts(
+            store,
+            approval_artifacts,
+            run_id="skill_import:approval_batch",
+        )
         persist_summaries["approval"] = summary
         record_import_batch(
             imported=imported,
@@ -306,7 +317,11 @@ def handle_import_skill_command(args: argparse.Namespace) -> int:
             safety_skill_files.append(skill_file)
             safety_admissions.append(admission)
     if safety_artifacts:
-        summary = store.persist_artifacts(safety_artifacts, run_id="skill_import:safety_batch")
+        summary = persist_governed_artifacts(
+            store,
+            safety_artifacts,
+            run_id="skill_import:safety_batch",
+        )
         persist_summaries["safety"] = summary
         record_import_batch(
             imported=imported,
@@ -363,7 +378,11 @@ def handle_import_skill_command(args: argparse.Namespace) -> int:
 
     skill_persist_started = time.perf_counter()
     if skill_artifacts:
-        summary = store.persist_artifacts(skill_artifacts, run_id="skill_import:skill_batch")
+        summary = persist_governed_artifacts(
+            store,
+            skill_artifacts,
+            run_id="skill_import:skill_batch",
+        )
         persist_summaries["skill"] = summary
         record_import_batch(
             imported=imported,

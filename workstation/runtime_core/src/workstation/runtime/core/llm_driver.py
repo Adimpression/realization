@@ -6,7 +6,15 @@ import os
 import time
 from typing import Any, Callable
 
-from semantic_text import collapse_ws
+from realized_core_llm import (
+    ChatContentPolicy,
+    ChatProviderDependencyError,
+    ChatRequestFallback,
+    ChatRetryPolicy,
+    OpenAICompatibleChatTransport,
+    build_openai_compatible_client,
+)
+from realized_core_semantics.semantic_text import collapse_ws
 from workstation.skills.core.direct_composition import prompt_explicitly_requests_skill
 from workstation.foundation.models import TaskBoundaryContract, WorkstationSession
 from workstation.skills.core.skill_invocation import workstation_skill_invocation_status_answer
@@ -109,23 +117,25 @@ def build_workstation_openai_client(*, api_key_env_var: str) -> Any:
     Returns:
         Any: Result produced by `build_workstation_openai_client`.
     """
-    try:
-        from openai import OpenAI
-    except ImportError as exc:
-        raise RuntimeError("The 'openai' package is required for workstation LLM prompting.") from exc
-
     api_key = os.getenv(api_key_env_var)
     if not api_key:
         raise RuntimeError(f"{api_key_env_var} environment variable not set.")
-    client_kwargs: dict[str, Any] = {
-        "api_key": api_key,
-        "timeout": float(os.getenv("WORKSTATION_OPENAI_TIMEOUT_SECONDS", os.getenv("LLM_TIMEOUT_SECONDS", "60"))),
-        "max_retries": 0,
-    }
     base_url = os.getenv("OPENAI_BASE_URL")
-    if base_url:
-        client_kwargs["base_url"] = base_url
-    return OpenAI(**client_kwargs)
+    try:
+        return build_openai_compatible_client(
+            api_key=api_key,
+            timeout_seconds=float(
+                os.getenv(
+                    "WORKSTATION_OPENAI_TIMEOUT_SECONDS",
+                    os.getenv("LLM_TIMEOUT_SECONDS", "60"),
+                )
+            ),
+            base_url=base_url,
+        )
+    except ChatProviderDependencyError as exc:
+        raise RuntimeError(
+            "The 'openai' package is required for workstation LLM prompting."
+        ) from exc
 
 
 def resolve_workstation_openai_model(model: str | None = None) -> str:
@@ -336,9 +346,8 @@ def run_workstation_openai_turn(
             "temperature": 0.0,
         }
         response = _create_workstation_chat_completion(client=client, request_kwargs=request_kwargs)
-        message = response.choices[0].message
-        tool_calls = _extract_tool_calls(message)
-        content = _extract_message_content(message)
+        tool_calls = [tool_call.to_dict() for tool_call in response.tool_calls]
+        content = response.text
         if tool_calls:
             messages.append(
                 {
@@ -465,154 +474,44 @@ def _create_workstation_chat_completion(
     Returns:
         Any: Result produced by `_create_workstation_chat_completion`.
     """
-    attempts = 0
-    while True:
-        attempts += 1
-        try:
-            return client.chat.completions.create(**request_kwargs)
-        except Exception as exc:
-            error_text = str(exc).lower()
-            unsupported_temperature = (
-                "temperature" in request_kwargs
-                and "temperature" in error_text
-                and ("unsupported" in error_text or "default (1)" in error_text)
-            )
-            if unsupported_temperature:
-                request_kwargs.pop("temperature", None)
-                continue
-            if attempts < max(1, int(max_attempts)) and _is_retryable_workstation_provider_error(exc):
-                time.sleep(max(0.0, float(retry_delay_seconds)))
-                continue
-            raise
-
-
-def _is_retryable_workstation_provider_error(exc: Exception) -> bool:
-    """
-    High Level Purpose:
-        In circumstances like workstation provider-call hardening, helps with classifying whether one raised provider exception looks transient enough for a bounded retry.
-
-    Reference to Theory:
-        Supports the host-owned workstation driver by keeping retry policy explicit and bounded at the provider boundary.
-
-    Example Input Output:
-        Input: `_is_retryable_workstation_provider_error(RuntimeError('Error code: 500'))`
-        Output: True
-
-    Args:
-        exc: Value for `exc` used by `_is_retryable_workstation_provider_error`. Expected type: `Exception`.
-
-    Returns:
-        bool: Result produced by `_is_retryable_workstation_provider_error`.
-    """
-    status_code = getattr(exc, "status_code", None)
-    if isinstance(status_code, int) and (status_code >= 500 or status_code == 429):
-        return True
-    response = getattr(exc, "response", None)
-    response_status = getattr(response, "status_code", None)
-    if isinstance(response_status, int) and (response_status >= 500 or response_status == 429):
-        return True
-    error_text = str(exc).lower()
-    retryable_markers = (
-        "error code: 500",
-        "error code: 502",
-        "error code: 503",
-        "error code: 504",
-        "error code: 429",
-        "internalservererror",
-        "rate limit",
-        "temporarily unavailable",
-        "timed out",
-        "timeout",
-        "connection reset",
-        "server error",
-    )
-    return any(marker in error_text for marker in retryable_markers)
-
-
-def _extract_message_content(message: Any) -> str:
-    """
-    High Level Purpose:
-        In circumstances like workstation chat/tool-loop handling, helps with normalizing one provider message content payload into plain text.
-
-    Reference to Theory:
-        Supports the workstation host-owned driver by keeping provider response parsing stable across object and dict-like payloads.
-
-    Example Input Output:
-        Input: `_extract_message_content(message={'content': 'done'})`
-        Output: 'done'
-
-    Args:
-        message: Value for `message` used by `_extract_message_content`. Expected type: `Any`.
-
-    Returns:
-        str: Result produced by `_extract_message_content`.
-    """
-    content = getattr(message, "content", None)
-    if content is None and isinstance(message, dict):
-        content = message.get("content")
-    if isinstance(content, str):
-        return content
-    if isinstance(content, list):
-        parts: list[str] = []
-        for item in content:
-            if isinstance(item, dict):
-                if item.get("type") == "text":
-                    parts.append(str(item.get("text", "")))
-            else:
-                text = getattr(item, "text", None)
-                if text:
-                    parts.append(str(text))
-        return "\n".join(part for part in parts if part).strip()
-    return ""
-
-
-def _extract_tool_calls(message: Any) -> list[dict[str, Any]]:
-    """
-    High Level Purpose:
-        In circumstances like workstation tool-loop handling, helps with normalizing provider tool-call objects into stable dictionary payloads for execution.
-
-    Reference to Theory:
-        Supports the workstation capability contract by making tool-call mediation independent of the provider object's concrete Python shape.
-
-    Example Input Output:
-        Input: `_extract_tool_calls(message={'tool_calls': [{'id': 'call_1', 'function': {'name': 'ws.repo.tree', 'arguments': '{}'}}]})`
-        Output: [{'id': 'call_1', 'type': 'function', 'function': {'name': 'ws.repo.tree', 'arguments': '{}'}}]
-
-    Args:
-        message: Value for `message` used by `_extract_tool_calls`. Expected type: `Any`.
-
-    Returns:
-        list[dict[str, Any]]: Result produced by `_extract_tool_calls`.
-    """
-    raw_tool_calls = getattr(message, "tool_calls", None)
-    if raw_tool_calls is None and isinstance(message, dict):
-        raw_tool_calls = message.get("tool_calls")
-    normalized: list[dict[str, Any]] = []
-    for item in raw_tool_calls or []:
-        if isinstance(item, dict):
-            normalized.append(
-                {
-                    "id": str(item["id"]),
-                    "type": str(item.get("type", "function")),
-                    "function": {
-                        "name": str(item["function"]["name"]),
-                        "arguments": str(item["function"].get("arguments", "{}")),
-                    },
-                }
-            )
-            continue
-        function = getattr(item, "function", None)
-        normalized.append(
-            {
-                "id": str(getattr(item, "id")),
-                "type": str(getattr(item, "type", "function")),
-                "function": {
-                    "name": str(getattr(function, "name")),
-                    "arguments": str(getattr(function, "arguments", "{}")),
-                },
-            }
-        )
-    return normalized
+    attempts = max(1, int(max_attempts))
+    return OpenAICompatibleChatTransport(
+        client=client,
+        fallbacks=(
+            ChatRequestFallback(
+                parameter="temperature",
+                required_error_markers=("temperature",),
+                any_error_markers=("unsupported", "default (1)"),
+            ),
+        ),
+        retry_policy=ChatRetryPolicy(
+            max_transient_retries=max(0, attempts - 1),
+            max_provider_attempts=attempts,
+            retry_delays_seconds=(max(0.0, float(retry_delay_seconds)),),
+            retry_status_codes=frozenset({429}),
+            retry_server_errors=True,
+            retry_error_markers=(
+                "error code: 500",
+                "error code: 502",
+                "error code: 503",
+                "error code: 504",
+                "error code: 429",
+                "internalservererror",
+                "rate limit",
+                "temporarily unavailable",
+                "timed out",
+                "timeout",
+                "connection reset",
+                "server error",
+            ),
+        ),
+        content_policy=ChatContentPolicy(
+            mapping_requires_text_type=True,
+            include_object_text=True,
+            strip_string_content=False,
+        ),
+        sleep=time.sleep,
+    ).complete(request_kwargs)
 
 
 _LEGACY_MODULE = "workstation.foundation.host.llm_driver"

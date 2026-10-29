@@ -11,6 +11,7 @@ from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
 
+from controller_entrypoints import ensure_application_controller_runtime
 from decision_review import list_decision_review_items, load_decision_frame
 from decision_review_constructs import (
     TransformationConstructCandidate,
@@ -23,6 +24,7 @@ from decision_review_constructs import (
 from decision_review_policy import load_decision_policy_profile
 from decision_review_projection import list_decision_analysis_receipts
 from dst import (
+    DST_SOURCE_ROOT,
     discovery_result_from_fixture,
     load_dst_use_cases,
     normalized_case_from_fixture,
@@ -70,6 +72,7 @@ from review_composition import (
     review_composition_paths,
 )
 from semantic_text import collapse_ws
+from workstation.runtime.core.subject_host_actions import RuntimeSubjectWorkflowHostActions
 from workstation.subject.core.subject_workflow import (
     _decision_review_state,
     _prune_same_label_construct_clones_for_explicit_item_role,
@@ -153,6 +156,12 @@ from workstation.subject.core.subject_workflow import (
 )
 from workstation.runtime.core.session import launch_workstation_session
 from workstation.runtime.core.workstation_core import workstation_learn_markdown_action
+
+
+def _itemization_runtime_provider(controller: object) -> SimpleNamespace:
+    return SimpleNamespace(
+        bootstrap_controller=lambda **_kwargs: (SimpleNamespace(), controller)
+    )
 
 
 class SubjectWorkflowTests(unittest.TestCase):
@@ -771,6 +780,7 @@ class SubjectWorkflowTests(unittest.TestCase):
             scenario=scenario,
             progress=progress,
             action_key="generate_itemization",
+            host_actions=RuntimeSubjectWorkflowHostActions(),
         )
 
         inventory_text = render_subject_itemize_inventory(scenario=scenario, progress=progress)
@@ -2797,6 +2807,7 @@ class SubjectWorkflowTests(unittest.TestCase):
         )
 
     def test_subject_workflow_requires_dst_refresh_when_same_subject_later_matches_dst_fixture(self) -> None:
+        ensure_application_controller_runtime()
         launch_workstation_session(
             root_path=self.root,
             workspace_path=Path(__file__).resolve().parents[2],
@@ -2810,10 +2821,11 @@ class SubjectWorkflowTests(unittest.TestCase):
 
         workstation_learn_markdown_action(
             root_path=self.root,
-            markdown_path=Path(__file__).resolve().parents[2] / "dst" / "City bus prose v2.md",
+            markdown_path=DST_SOURCE_ROOT / "City bus prose v2.md",
             testing_lightweight=False,
         )
         progress = load_subject_progress(self.root, subject_id)
+        host_actions = RuntimeSubjectWorkflowHostActions()
         for action_key in (
             "open_context",
             "compare_projections",
@@ -2827,6 +2839,7 @@ class SubjectWorkflowTests(unittest.TestCase):
                 scenario=_scenario(),
                 progress=progress,
                 action_key=action_key,
+                host_actions=host_actions,
             )
 
         initial_decision_state = _decision_review_state(self.root, _scenario())
@@ -2836,7 +2849,7 @@ class SubjectWorkflowTests(unittest.TestCase):
 
         workstation_learn_markdown_action(
             root_path=self.root,
-            markdown_path=Path(__file__).resolve().parents[2] / "dst" / "City bus prose v10.md",
+            markdown_path=DST_SOURCE_ROOT / "City bus prose v10.md",
             testing_lightweight=False,
         )
         for action_key in (
@@ -2850,6 +2863,7 @@ class SubjectWorkflowTests(unittest.TestCase):
                 scenario=_scenario(),
                 progress=progress,
                 action_key=action_key,
+                host_actions=host_actions,
             )
 
         refreshed_scenario = _scenario()
@@ -2886,6 +2900,7 @@ class SubjectWorkflowTests(unittest.TestCase):
             scenario=refreshed_scenario,
             progress=progress,
             action_key="cycle_decision_policy_profile",
+            host_actions=host_actions,
         )
         self.assertEqual(rerun_result.status_text, "Decision analysis rerun under the selected policy. Report plan updated.")
 
@@ -2909,10 +2924,11 @@ class SubjectWorkflowTests(unittest.TestCase):
 
         workstation_learn_markdown_action(
             root_path=self.root,
-            markdown_path=Path(__file__).resolve().parents[2] / "dst" / "City bus prose v10.md",
+            markdown_path=DST_SOURCE_ROOT / "City bus prose v10.md",
             testing_lightweight=False,
         )
         progress = load_subject_progress(self.root, subject_id)
+        host_actions = RuntimeSubjectWorkflowHostActions()
         for action_key in (
             "open_context",
             "compare_projections",
@@ -2924,6 +2940,7 @@ class SubjectWorkflowTests(unittest.TestCase):
                 scenario=_scenario(),
                 progress=progress,
                 action_key=action_key,
+                host_actions=host_actions,
             )
 
         review_step = subject_current_step_view(scenario=_scenario(), progress=progress, phase="review")
@@ -2969,10 +2986,11 @@ class SubjectWorkflowTests(unittest.TestCase):
 
         workstation_learn_markdown_action(
             root_path=self.root,
-            markdown_path=Path(__file__).resolve().parents[2] / "dst" / "City bus prose v2.md",
+            markdown_path=DST_SOURCE_ROOT / "City bus prose v2.md",
             testing_lightweight=False,
         )
         progress = load_subject_progress(self.root, subject_id)
+        host_actions = RuntimeSubjectWorkflowHostActions()
         for action_key in (
             "open_context",
             "compare_projections",
@@ -2986,11 +3004,12 @@ class SubjectWorkflowTests(unittest.TestCase):
                 scenario=_scenario(),
                 progress=progress,
                 action_key=action_key,
+                host_actions=host_actions,
             )
 
         workstation_learn_markdown_action(
             root_path=self.root,
-            markdown_path=Path(__file__).resolve().parents[2] / "dst" / "City bus prose v10.md",
+            markdown_path=DST_SOURCE_ROOT / "City bus prose v10.md",
             testing_lightweight=False,
         )
         for action_key in (
@@ -3004,6 +3023,7 @@ class SubjectWorkflowTests(unittest.TestCase):
                 scenario=_scenario(),
                 progress=progress,
                 action_key=action_key,
+                host_actions=host_actions,
             )
 
         review_step = subject_current_step_view(scenario=_scenario(), progress=progress, phase="review")
@@ -3439,7 +3459,7 @@ class SubjectWorkflowTests(unittest.TestCase):
         )
         learn_result = workstation_learn_markdown_action(
             root_path=self.root,
-            markdown_path=Path(__file__).resolve().parents[2] / "dst" / "City bus prose v2.md",
+            markdown_path=DST_SOURCE_ROOT / "City bus prose v2.md",
             testing_lightweight=True,
         )
         self.assertEqual(learn_result.status, "ok")
@@ -3447,6 +3467,7 @@ class SubjectWorkflowTests(unittest.TestCase):
         subject_id = canonical_learning_subject_id("Smart City Travel")
         scenario = next(item for item in default_subject_scenarios(self.root) if item.subject_id == subject_id)
         progress = load_subject_progress(self.root, subject_id)
+        host_actions = RuntimeSubjectWorkflowHostActions()
 
         class EmptyController:
             def request_proposal(self, **kwargs):
@@ -3459,14 +3480,15 @@ class SubjectWorkflowTests(unittest.TestCase):
         apply_subject_action(root_path=self.root, scenario=scenario, progress=progress, action_key="open_context")
         apply_subject_action(root_path=self.root, scenario=scenario, progress=progress, action_key="compare_projections")
         with patch(
-            "itemize.bootstrap_runtime_controller",
-            return_value=(SimpleNamespace(), EmptyController()),
+            "workstation.runtime.core.subject_host_actions.controller_runtime_provider",
+            return_value=_itemization_runtime_provider(EmptyController()),
         ):
             apply_subject_action(
                 root_path=self.root,
                 scenario=scenario,
                 progress=progress,
                 action_key="generate_itemization",
+                host_actions=host_actions,
             )
         with patch(
             "workstation.subject.core.subject_workflow.run_live_dst_construct_discovery_for_itemized_item",
@@ -3917,11 +3939,13 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
         )
         scenario = next(item for item in default_subject_scenarios(self.root) if item.subject_id == subject_id)
         progress = new_subject_progress()
+        host_actions = RuntimeSubjectWorkflowHostActions()
         apply_subject_action(
             root_path=self.root,
             scenario=scenario,
             progress=progress,
             action_key="generate_itemization",
+            host_actions=host_actions,
         )
 
         items = list_itemized_subject_items(self.root, subject_id)
@@ -3943,6 +3967,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
             scenario=scenario,
             progress=progress,
             action_key="suggest_transformation_constructs",
+            host_actions=host_actions,
         )
         progress.itemize_selected_item_id = collapse_ws(city_regulator_item.itemized_item_id)
         apply_subject_action(
@@ -3950,6 +3975,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
             scenario=scenario,
             progress=progress,
             action_key="suggest_transformation_constructs",
+            host_actions=host_actions,
         )
 
         candidates = list_transformation_construct_candidates(self.root, subject_id)
@@ -4021,17 +4047,20 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
         )
         scenario = next(item for item in default_subject_scenarios(self.root) if item.subject_id == subject_id)
         progress = new_subject_progress()
+        host_actions = RuntimeSubjectWorkflowHostActions()
         apply_subject_action(
             root_path=self.root,
             scenario=scenario,
             progress=progress,
             action_key="open_context",
+            host_actions=host_actions,
         )
         apply_subject_action(
             root_path=self.root,
             scenario=scenario,
             progress=progress,
             action_key="compare_projections",
+            host_actions=host_actions,
         )
 
         class EmptyController:
@@ -4043,14 +4072,15 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
                 )
 
         with patch(
-            "itemize.bootstrap_runtime_controller",
-            return_value=(SimpleNamespace(), EmptyController()),
+            "workstation.runtime.core.subject_host_actions.controller_runtime_provider",
+            return_value=_itemization_runtime_provider(EmptyController()),
         ):
             apply_subject_action(
                 root_path=self.root,
                 scenario=scenario,
                 progress=progress,
                 action_key="generate_itemization",
+                host_actions=host_actions,
             )
 
         claim_item = next(
@@ -4069,6 +4099,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
                 scenario=scenario,
                 progress=progress,
                 action_key="suggest_transformation_constructs",
+                host_actions=host_actions,
             )
 
         candidate_pairs = {
@@ -7784,6 +7815,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
                 scenario=scenario,
                 progress=progress,
                 action_key="refresh_selected_staged_source",
+                host_actions=RuntimeSubjectWorkflowHostActions(),
             )
 
         staged_source = list_staged_sources(self.root, "example-article")[0]
@@ -7913,6 +7945,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
                 scenario=scenario,
                 progress=progress,
                 action_key="sync_selected_source_collection",
+                host_actions=RuntimeSubjectWorkflowHostActions(),
             )
 
         staged_sources = list_staged_sources(self.root, "energy-exports")
@@ -7965,7 +7998,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
         apply_subject_action(root_path=self.root, scenario=scenario, progress=progress, action_key="open_context")
         with (
             patch(
-                "workstation.subject.core.subject_workflow.workstation_import_staged_source_action",
+                "workstation.runtime.core.subject_host_actions.workstation_import_staged_source_action",
                 return_value=type(
                     "_ImportResult",
                     (),
@@ -7976,6 +8009,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
                             "Subject id: example-article",
                             "Staged source id: staged_source_example_123",
                         ),
+                        "payload": {},
                     },
                 )(),
             ) as import_mock,
@@ -7985,6 +8019,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
                 scenario=scenario,
                 progress=progress,
                 action_key="import_selected_staged_source",
+                host_actions=RuntimeSubjectWorkflowHostActions(),
             )
 
         self.assertEqual(result.status_text, "Imported the selected staged source.")
@@ -9160,6 +9195,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
         subject_id = self._persist_demo_context()
         scenario = next(item for item in default_subject_scenarios(self.root) if item.subject_id == subject_id)
         progress = new_subject_progress()
+        host_actions = RuntimeSubjectWorkflowHostActions()
         assistant_markdown = "\n".join(
             [
                 "# Velocity Notes",
@@ -9176,6 +9212,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
             action_key="stage_assistant_capture",
             assistant_message_text=assistant_markdown,
             subject_title_override="Kinematics Demo",
+            host_actions=host_actions,
         )
         self.assertEqual(stage_result.status_text, "Gather source staging preview ready.")
         self.assertTrue(subject_has_pending_research_capture(progress))
@@ -9187,6 +9224,7 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
             scenario=scenario,
             progress=progress,
             action_key="cancel_assistant_capture",
+            host_actions=host_actions,
         )
         self.assertEqual(cancel_result.status_text, "Gather source staging canceled.")
         self.assertFalse(subject_has_pending_research_capture(progress))
@@ -9204,12 +9242,14 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
             action_key="stage_assistant_capture",
             assistant_message_text=assistant_markdown,
             subject_title_override="Kinematics Demo",
+            host_actions=host_actions,
         )
         confirm_result = apply_subject_action(
             root_path=self.root,
             scenario=scenario,
             progress=progress,
             action_key="confirm_assistant_capture",
+            host_actions=host_actions,
         )
         self.assertEqual(confirm_result.status_text, "Gather source staged.")
         self.assertTrue(confirm_result.reload_subjects)

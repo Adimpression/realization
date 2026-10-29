@@ -22,8 +22,8 @@ SHARED_HOST_INTERACTION_MODULES = tuple(
     )
 )
 RUNTIME_HOST_BACKEND_MODULES = (
-    REPO_ROOT / "host_mediation.py",
-    REPO_ROOT / "governed_semantic_reduction_runtime.py",
+    REPO_ROOT / "core_engine" / "src" / "realized_core_engine" / "host_mediation.py",
+    REPO_ROOT / "core_engine" / "src" / "realized_core_engine" / "reduction_runtime.py",
 )
 WORKSTATION_RUNTIME_BOUNDARY_MODULES = (
     REPO_ROOT / "workstation" / "runtime_core" / "src" / "workstation" / "runtime" / "core" / "capabilities.py",

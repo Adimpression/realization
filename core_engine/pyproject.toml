@@ -18,10 +18,10 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
 ]
 dependencies = [
-    "openai==2.29.0",
     "pydantic==2.12.5",
     "pyyaml==6.0.3",
     "realized-core-governance==0.1.0",
+    "realized-core-llm==0.1.0",
     "realized-core-semantics==0.1.0",
     "realized-skill-semantics==0.1.0",
     "realized-host-interaction==0.1.0",
@@ -40,8 +40,19 @@ wasm = ["wasmtime==43.0.0"]
 requires = ["setuptools>=77.0.3", "wheel"]
 build-backend = "setuptools.build_meta"
 
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["realized_core_engine"]
+
+[tool.setuptools.package-data]
+realized_core_engine = ["py.typed"]
+
 [tool.uv.sources]
 realized-core-governance = { workspace = true }
+realized-core-llm = { workspace = true }
 realized-core-semantics = { workspace = true }
 realized-skill-semantics = { workspace = true }
 realized-host-interaction = { workspace = true }

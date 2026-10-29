@@ -2,11 +2,11 @@
 """Compatibility facade for canonical normalization owners."""
 from __future__ import annotations
 
-from non_achievedness_normalization import (
+from realized_core_engine.non_achievedness_normalization import (
     normalize_not_elaboration_payload,
     normalize_structured_non_achievedness_payload,
 )
-from normalization_primitives import (
+from realized_core_semantics.normalization import (
     boundary_shape_values,
     extract_boundary_shape_term_values,
     normalize_artifact_admission,
@@ -73,7 +73,7 @@ from normalization_primitives import (
     normalize_support_score,
     normalize_three_level,
 )
-from semantic_text import normalize_learning_token
+from realized_core_semantics.semantic_text import normalize_learning_token
 
 __all__ = [name for name in globals() if name.startswith("normalize_")] + [
     "boundary_shape_values",

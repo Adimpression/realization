@@ -15,6 +15,10 @@ here.
   responsibilities.
 - `dependency-baseline.json` is the current machine-readable import-graph
   snapshot used by the architecture ratchet.
+- `compatibility-facades.json` is the deterministic ledger of every retained
+  repository-root compatibility facade, its canonical targets, and every
+  static repository consumer. It also records public README/example references
+  and the qualification hold that applies before retirement.
 - `DEPENDENCY_REPORT.md` is the deterministic human-readable rendering of that
   snapshot. Tests require it to match the measured graph.
 - `qualification-gates.toml` declares the behavioral, packaging, UI, and
@@ -45,6 +49,12 @@ surface, not a migration diary.
   be reintroduced without failing the ratchet.
 - Compatibility aliases are explicit, measured separately, and cannot expand
   silently.
+- Canonical package code, public README examples, and repository examples may
+  not import a root compatibility facade.
+- A compatibility facade is treated as a supported historical import until it
+  is explicitly classified otherwise. Removal requires a separate change,
+  documented notice where externally supported, and at least one complete
+  stable qualification cycle after the final consumer migration.
 - Contract packages remain dependency-light, the shared `workstation`
   namespace remains inert, and UI adapters depend on supported contracts rather
   than runtime implementation details.
@@ -55,6 +65,8 @@ Run the read-only check with:
 
 ```sh
 python3 scripts/check_architecture_boundaries.py
+python3 scripts/check_compatibility_facades.py
+python3 scripts/verify_workspace_distributions.py
 ```
 
 After an intentional, reviewed architecture change, refresh both current graph
@@ -62,10 +74,12 @@ artifacts explicitly:
 
 ```sh
 python3 scripts/check_architecture_boundaries.py --update-baseline --write-report
+python3 scripts/check_compatibility_facades.py --update
 ```
 
-A normal check never rewrites the baseline. Both generated files must be
-reviewed with the code change.
+A normal check never rewrites either baseline. All generated files must be
+reviewed with the code change. Updating the compatibility inventory records
+observed consumers; it does not authorize a facade removal.
 
 ## Behavioral Qualification
 

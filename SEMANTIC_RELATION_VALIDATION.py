@@ -12,7 +12,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
-from store import SQLiteVectorArtifactStore
+from realized_core_engine import open_sqlite_artifact_repository
 
 
 ROOT = Path(__file__).resolve().parent
@@ -344,7 +344,7 @@ def main() -> int:
     )
 
     os.environ["STATE_SQLITE_PATH"] = str(sqlite_path)
-    store = SQLiteVectorArtifactStore()
+    store = open_sqlite_artifact_repository()
     artifacts = store.load_recent_artifacts(limit=64)
 
     force = find_artifact(artifacts, contains="force", prefer_ability=True)

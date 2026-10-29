@@ -7,6 +7,8 @@ import unittest
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 PUBLIC_PACKAGES = {
+    "blend": "realized-blend",
+    "blend_application": "realized-blend-application",
     "core_app": "realized-core",
     "core_conversation": "realized-core-conversation",
     "core_engine": "realized-core-engine",
@@ -14,7 +16,9 @@ PUBLIC_PACKAGES = {
     "core_llm": "realized-core-llm",
     "core_runtime": "realized-core-runtime",
     "core_semantics": "realized-core-semantics",
+    "exchange": "realized-exchange",
     "host_interaction": "realized-host-interaction",
+    "skill_application": "realized-skill-application",
     "skill_semantics": "realized-skill-semantics",
 }
 

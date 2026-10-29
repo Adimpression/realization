@@ -11,10 +11,10 @@ from realized_skill_semantics.invocation import (
     required_skill_input_names,
     skill_invocation_result_from_mapping,
 )
-from capability_runtime import runtime_skill_declaration_for_artifact
+from realized_core_runtime.capabilities import runtime_skill_declaration_for_artifact
 from realized_skill_semantics.execution import ability_executor_framework
-from semantic_text import collapse_ws
-from skill_export_projection import skill_kind_from_artifact
+from realized_core_semantics.semantic_text import collapse_ws
+from realized_skill_application.projection import skill_kind_from_artifact
 
 
 __all__ = [

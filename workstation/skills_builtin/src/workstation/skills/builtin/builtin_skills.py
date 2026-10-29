@@ -1,12 +1,12 @@
 # See MODULES.md for the repository module map before editing.
 from __future__ import annotations
 
-import json
+from collections.abc import Callable
 from functools import lru_cache
+import json
 from typing import Any
 
-from applied_theory_types import Artifact
-from skill_schema_io import artifact_from_skill_document
+from realized_core_semantics.applied_model import Artifact
 
 
 def _wat_bytes(text: str) -> str:
@@ -453,8 +453,10 @@ def builtin_workstation_skill_documents() -> tuple[dict[str, Any], ...]:
     )
 
 
-@lru_cache(maxsize=1)
-def builtin_workstation_skill_artifacts() -> tuple[Artifact, ...]:
+@lru_cache(maxsize=4)
+def builtin_workstation_skill_artifacts(
+    artifact_factory: Callable[[Any], Artifact],
+) -> tuple[Artifact, ...]:
     """
     High Level Purpose:
         In circumstances like workstation skill discovery and invocation, helps with hydrating the builtin workstation skill documents into reusable in-memory artifact records.
@@ -463,22 +465,25 @@ def builtin_workstation_skill_artifacts() -> tuple[Artifact, ...]:
         Supports the workstation shell / pluggable-worker model by letting builtin workers use the same governed artifact interface as store-backed skills.
 
     Example Input Output:
-        Input: `builtin_workstation_skill_artifacts()`
+        Input: `builtin_workstation_skill_artifacts(artifact_factory)`
         Output: (Artifact(id='artifact-skill-...', title='Workstation Repo Search', artifact_type='ability', representation='python_script'),)
 
     Args:
-        None.
+        artifact_factory: Entry-composed translator from a portable skill document to an artifact.
 
     Returns:
         tuple[Artifact, ...]: Result produced by `builtin_workstation_skill_artifacts`.
     """
     return tuple(
-        artifact_from_skill_document(document)
+        artifact_factory(document)
         for document in builtin_workstation_skill_documents()
     )
 
 
-def resolve_builtin_workstation_skill(title: str) -> Artifact | None:
+def resolve_builtin_workstation_skill(
+    title: str,
+    artifact_factory: Callable[[Any], Artifact],
+) -> Artifact | None:
     """
     High Level Purpose:
         In circumstances like workstation skill invocation, helps with resolving one builtin workstation worker by immutable title.
@@ -487,17 +492,18 @@ def resolve_builtin_workstation_skill(title: str) -> Artifact | None:
         Supports the pluggable-worker model by making builtin workers discoverable and invokable through the same skill title surface as store-backed skills.
 
     Example Input Output:
-        Input: `resolve_builtin_workstation_skill(title='Workstation Repo Search')`
+        Input: `resolve_builtin_workstation_skill(title='Workstation Repo Search', artifact_factory=artifact_factory)`
         Output: Artifact(id='artifact-skill-...', title='Workstation Repo Search', artifact_type='ability', representation='python_script')
 
     Args:
         title: Value for `title` used by `resolve_builtin_workstation_skill`. Expected type: `str`.
+        artifact_factory: Entry-composed translator from a portable skill document to an artifact.
 
     Returns:
         Artifact | None: Result produced by `resolve_builtin_workstation_skill`.
     """
     normalized_title = str(title).strip()
-    for artifact in builtin_workstation_skill_artifacts():
+    for artifact in builtin_workstation_skill_artifacts(artifact_factory):
         if str(getattr(artifact, "title", "")).strip() == normalized_title:
             return artifact
     return None

@@ -11,11 +11,20 @@ from pathlib import Path
 from typing import Any
 
 from realized_core_semantics.values import json_safe
-from blend_context import blend_context_from_workstation_session
-from blend_session import blend_session_from_workstation_session
-from blend_world import BlendWorld
-from blend_world_store import blend_world_mount_source, ensure_persisted_blend_workstation_world, load_blend_world
-from blend_workflow import blend_workflow_plan_from_skill_compose_arguments, ensure_blend_workflow_store
+from realized_blend.worlds import BlendWorld
+from realized_blend_application.world_store import (
+    blend_world_mount_source,
+    ensure_persisted_blend_workstation_world,
+    load_blend_world,
+)
+from realized_blend_application.workflows import (
+    blend_workflow_plan_from_skill_compose_arguments,
+    ensure_blend_workflow_store,
+)
+from workstation.runtime.core.blend_adapters import (
+    blend_context_from_workstation_session,
+    blend_session_from_workstation_session,
+)
 from realized_host_interaction.receipts import (
     host_interaction_assistant_response_receipt,
     host_interaction_capability_call_receipt,
@@ -24,7 +33,7 @@ from realized_host_interaction.receipts import (
     host_interaction_user_prompt_receipt,
 )
 from realized_host_interaction.delegation import normalized_requested_delegation
-from semantic_text import collapse_ws
+from realized_core_semantics.semantic_text import collapse_ws
 from workstation.runtime.core.capabilities import (
     DEFAULT_WORKSTATION_CAPABILITIES,
     execute_workstation_capability,
@@ -33,8 +42,9 @@ from workstation.runtime.core.capabilities import (
 from workstation.runtime.core.chat_commands import run_workstation_natural_language_shell_command
 from workstation.skills.core.direct_composition import preferred_workstation_skill_invocation_plan
 from workstation.foundation.events.event_bus import append_workstation_receipt_and_publish, publish_workstation_event
-from workstation.foundation.host.learning_capture import capture_workstation_chat_learning_from_tool_receipts
+from workstation.subject.service.learning_capture import capture_workstation_chat_learning_from_tool_receipts
 from workstation.foundation.host.controller_runtime import controller_runtime_provider
+from workstation.foundation.host.skill_exchange import skill_exchange_provider
 from workstation.foundation.models import (
     WorkstationAttachment,
     WorkstationDelegationEscalationDecision,
@@ -945,6 +955,7 @@ def prompt_workstation_session(
         session=session,
         prompt=prompt,
         tool_receipts=list(turn_report.get("tool_receipts", [])),
+        skill_materializer=skill_exchange_provider().materialize_learning_context_skills,
     )
     if learning_context_update is not None:
         turn_report["learning_context_updates"] = [learning_context_update]

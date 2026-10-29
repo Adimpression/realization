@@ -5,14 +5,17 @@ description = "Workstation host-facing foundation package for Realized."
 requires-python = ">=3.14"
 dependencies = [
     "realized-core-governance==0.1.0",
+    "realized-core-semantics==0.1.0",
     "realized-host-interaction",
     "realized-workstation",
     "realized-workstation-contracts",
     "realized-workstation-foundation-models",
+    "realized-workstation-subject-service",
 ]
 
 [tool.uv.sources]
 realized-core-governance = { workspace = true }
+realized-core-semantics = { workspace = true }
 
 [build-system]
 requires = ["setuptools>=69", "wheel"]

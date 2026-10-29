@@ -2,6 +2,20 @@
 
 Formal position for the workstation as it exists today.
 
+The supported command surface is the installable workstation application:
+
+```console
+uv run --frozen --package realized-workstation-app-cli realized-workstation launch \
+  --root ./state/workstation \
+  --workspace "$PWD"
+uv run --frozen --package realized-workstation-app-cli realized-workstation chat \
+  --root ./state/workstation
+```
+
+`workstation.app.cli` owns executable syntax and concrete application
+composition. The historical root controller command remains a compatibility
+surface, not the canonical launch path.
+
 The workstation is no longer one terminal shell.
 
 It is:
@@ -274,7 +288,7 @@ At present, this is the intended full workstation-integrated DST path. The repos
 This means:
 
 - `reduce_not` is used as a governed discovery layer for materially distinct candidate paths and missing distinctions
-- [DST_PROMPT.md](DST_PROMPT.md) is used as a typed normalization layer after that discovery
+- [DST_PROMPT.md](../dst/src/dst/DST_PROMPT.md) is used as a typed normalization layer after that discovery
 - [coordinated_transformation/core.py](coordinated_transformation/core.py) evaluates the explicit curated candidates
 - `Publication` consumes approved typed decision outputs, not prose-time inference
 
@@ -520,7 +534,7 @@ These should come from:
 
 - deterministic itemization where possible
 - bounded `reduce_not`-driven decomposition over selected raw prose chunks or source snapshots when the source is weakly structured or materially under-determined
-- typed projection through [DST_PROMPT.md](DST_PROMPT.md)
+- typed projection through [DST_PROMPT.md](../dst/src/dst/DST_PROMPT.md)
 
 The output of `Itemize` should therefore be a candidate field, not a final frame.
 

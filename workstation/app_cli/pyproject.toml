@@ -2,16 +2,46 @@
 name = "realized-workstation-app-cli"
 version = "0.1.0"
 description = "Workstation CLI package for Realized."
+readme = "README.md"
 requires-python = ">=3.14"
+authors = [{ name = "Ravindranath Akila" }]
+maintainers = [{ name = "Adimpression", email = "talktome@adimpression.mobi" }]
+license = "Apache-2.0"
 dependencies = [
+    "realized-exchange==0.1.0",
     "realized-host-interaction",
+    "realized-core-engine==0.1.0",
+    "realized-core-runtime==0.1.0",
+    "realized-core-semantics==0.1.0",
     "realized-workstation",
+    "realized-workstation-contracts",
     "realized-workstation-foundation-host",
     "realized-workstation-grpc-implementation",
+    "realized-workstation-runtime-core",
     "realized-workstation-shell-core",
+    "realized-workstation-subject-core",
+    "realized-workstation-subject-service",
     "realized-workstation-ui-shared",
     "realized-workstation-ui-textual",
 ]
+
+[project.scripts]
+realized-workstation = "workstation.app.cli.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/Adimpression/realization"
+Repository = "https://github.com/Adimpression/realization"
+Issues = "https://github.com/Adimpression/realization/issues"
+
+[tool.uv.sources]
+realized-exchange = { workspace = true }
+realized-core-engine = { workspace = true }
+realized-core-runtime = { workspace = true }
+realized-core-semantics = { workspace = true }
+realized-workstation-contracts = { workspace = true }
+realized-workstation-runtime-core = { workspace = true }
+realized-workstation-subject-core = { workspace = true }
+realized-workstation-subject-service = { workspace = true }
 
 [build-system]
 requires = ["setuptools>=69", "wheel"]

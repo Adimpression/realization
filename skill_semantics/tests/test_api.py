@@ -5,6 +5,7 @@ import unittest
 from realized_core_semantics.theory import BoundaryShapeTermKind
 from realized_skill_semantics import (
     composition,
+    compatibility,
     declaration,
     execution,
     invocation,
@@ -22,6 +23,7 @@ class SkillSemanticsApiTests(unittest.TestCase):
         self.assertEqual(
             [
                 "composition",
+                "compatibility",
                 "declaration",
                 "execution",
                 "invocation",
@@ -33,6 +35,7 @@ class SkillSemanticsApiTests(unittest.TestCase):
             realized_skill_semantics.__all__,
         )
         self.assertIs(realized_skill_semantics.composition, composition)
+        self.assertIs(realized_skill_semantics.compatibility, compatibility)
         self.assertIs(realized_skill_semantics.declaration, declaration)
         self.assertIs(realized_skill_semantics.execution, execution)
         self.assertIs(realized_skill_semantics.invocation, invocation)
@@ -44,6 +47,7 @@ class SkillSemanticsApiTests(unittest.TestCase):
     def test_module_exports_are_explicit_unique_and_resolvable(self) -> None:
         for module in (
             composition,
+            compatibility,
             declaration,
             execution,
             invocation,
@@ -60,6 +64,26 @@ class SkillSemanticsApiTests(unittest.TestCase):
     def test_boundary_term_is_the_canonical_theory_enum(self) -> None:
         self.assertIs(BoundaryShapeTermKind, leaves.BoundaryShapeTerm)
         self.assertIs(BoundaryShapeTermKind, paths.BoundaryShapeTerm)
+
+    def test_compatibility_envelope_normalization_is_deterministic(self) -> None:
+        self.assertEqual(
+            {
+                "adapters": [
+                    {
+                        "format": "mcp_tool",
+                        "direction": "import",
+                        "name": "repo_search",
+                    }
+                ]
+            },
+            compatibility.normalized_skill_compatibility_payload(
+                {
+                    "format": " mcp_tool ",
+                    "direction": " import ",
+                    "name": " repo_search ",
+                }
+            ),
+        )
 
     def test_region_normalization_preserves_value_reference_polarity(self) -> None:
         expected = {

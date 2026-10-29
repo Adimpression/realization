@@ -4,11 +4,19 @@ version = "0.1.0"
 description = "Workstation subject workflow core package for Realized."
 requires-python = ">=3.14"
 dependencies = [
+    "coordinated-transformation==0.1.0",
+    "dst==0.1.0",
+    "realized-core-runtime==0.1.0",
+    "realized-core-semantics==0.1.0",
     "realized-workstation",
     "realized-workstation-contracts",
-    "realized-workstation-foundation-host",
-    "realized-workstation-runtime-core",
 ]
+
+[tool.uv.sources]
+coordinated-transformation = { workspace = true }
+dst = { workspace = true }
+realized-core-runtime = { workspace = true }
+realized-core-semantics = { workspace = true }
 
 [build-system]
 requires = ["setuptools>=69", "wheel"]
