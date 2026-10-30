@@ -333,7 +333,6 @@ legacy aliases.
 - `governed_closure_and_commitment.py`: Closure, pause, incompletion, and commitment logic.
 - `governed_prior_learning_reuse.py`: Governed prior-learning reuse and candidate recovery.
 - `governed_semantic_reduction_runtime.py`: Compatibility adapter from `BSSCController` into `realized-core-runtime`, plus the existing domain-specific recursive `reduce_not` semantics.
-- `governed_skill_access.py`: Current-use governed access checks for skills and artifacts.
 - `governed_skill_installation.py`: Deliberate historical command adapter for
   governed `import-skill` installation. It coordinates canonical exchange,
   governance, persistence, and normalization APIs at the entry boundary.
@@ -432,7 +431,6 @@ legacy aliases.
 - `run_outcome_harvest_and_reporting.py`: Run finalization, discovery harvest, and report emission.
 - `runtime_controller_api.py`: Exact module-identity compatibility alias for
   `workstation.app.cli.runtime_controller`.
-- `runtime_governance_context.py`: Runtime-facing governance resolution facade.
 - `semantic_prompt_posture.py`: Prompt-posture classification and direct-answer preference helpers.
 - `SEMANTIC_RELATION_VALIDATION.py`: Standalone semantic relation validation script.
 - `side.py`: Exact module-identity compatibility alias for artifact-bundle YAML exchange owned by `realized_exchange.artifact_yaml`.

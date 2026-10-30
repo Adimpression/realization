@@ -91,7 +91,6 @@ Every repository-root Python module has one explicit responsibility. Status is o
 | `governed_closure_and_commitment` | `controller` | `compatibility_facade` |
 | `governed_prior_learning_reuse` | `controller` | `compatibility_facade` |
 | `governed_semantic_reduction_runtime` | `controller` | `compatibility_facade` |
-| `governed_skill_access` | `governance` | `compatibility_facade` |
 | `governed_skill_installation` | `governance` | `entrypoint` |
 | `host_interaction_action_dispatch` | `runtime_execution` | `compatibility_facade` |
 | `host_interaction_actions` | `runtime_execution` | `compatibility_facade` |
@@ -130,7 +129,6 @@ Every repository-root Python module has one explicit responsibility. Status is o
 | `run_bundle_io` | `entry_exchange` | `compatibility_facade` |
 | `run_outcome_harvest_and_reporting` | `controller` | `compatibility_facade` |
 | `runtime_controller_api` | `entry_exchange` | `compatibility_facade` |
-| `runtime_governance_context` | `governance` | `compatibility_facade` |
 | `semantic_prompt_posture` | `controller` | `compatibility_facade` |
 | `side` | `entry_exchange` | `compatibility_facade` |
 | `side_runtime_dependencies` | `entry_exchange` | `compatibility_facade` |
@@ -369,8 +367,8 @@ These edges exist only to preserve historical import paths. They are excluded fr
 
 | Metric | Count |
 | --- | ---: |
-| Nodes | 147 |
-| Edges | 283 |
+| Nodes | 145 |
+| Edges | 281 |
 | Cyclic SCCs | 0 |
 | Nodes in cyclic SCCs | 0 |
 | Edges internal to cyclic SCCs | 0 |
@@ -441,7 +439,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `root_to_component` | `governed_closure_and_commitment` | `core_engine` | `orchestration` |
 | `root_to_component` | `governed_prior_learning_reuse` | `core_engine` | `orchestration` |
 | `root_to_component` | `governed_semantic_reduction_runtime` | `core_engine` | `orchestration` |
-| `root_to_component` | `governed_skill_access` | `core_engine` | `compatibility` |
 | `root_to_component` | `governed_skill_installation` | `core_engine` | `orchestration` |
 | `root_to_component` | `governed_skill_installation` | `core_governance` | `orchestration` |
 | `root_to_component` | `governed_skill_installation` | `exchange` | `orchestration` |
@@ -490,7 +487,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `root_to_component` | `run_bundle_io` | `exchange` | `orchestration` |
 | `root_to_component` | `run_outcome_harvest_and_reporting` | `core_engine` | `orchestration` |
 | `root_to_component` | `runtime_controller_api` | `app_cli` | `compatibility` |
-| `root_to_component` | `runtime_governance_context` | `core_engine` | `compatibility` |
 | `root_to_component` | `semantic_prompt_posture` | `core_engine` | `orchestration` |
 | `root_to_component` | `side` | `exchange` | `orchestration` |
 | `root_to_component` | `side_runtime_dependencies` | `exchange` | `orchestration` |
@@ -582,7 +578,6 @@ No workspace package imports a root application module.
 - `governed_closure_and_commitment` -> `core_engine` (`governed_closure_and_commitment.py`)
 - `governed_prior_learning_reuse` -> `core_engine` (`governed_prior_learning_reuse.py`)
 - `governed_semantic_reduction_runtime` -> `core_engine` (`governed_semantic_reduction_runtime.py`)
-- `governed_skill_access` -> `core_engine` (`governed_skill_access.py`)
 - `governed_skill_installation` -> `core_engine` (`governed_skill_installation.py`)
 - `governed_skill_installation` -> `core_governance` (`governed_skill_installation.py`)
 - `governed_skill_installation` -> `exchange` (`governed_skill_installation.py`)
@@ -631,7 +626,6 @@ No workspace package imports a root application module.
 - `run_bundle_io` -> `exchange` (`run_bundle_io.py`)
 - `run_outcome_harvest_and_reporting` -> `core_engine` (`run_outcome_harvest_and_reporting.py`)
 - `runtime_controller_api` -> `app_cli` (`runtime_controller_api.py`)
-- `runtime_governance_context` -> `core_engine` (`runtime_governance_context.py`)
 - `semantic_prompt_posture` -> `core_engine` (`semantic_prompt_posture.py`)
 - `side` -> `exchange` (`side.py`)
 - `side_runtime_dependencies` -> `exchange` (`side_runtime_dependencies.py`)

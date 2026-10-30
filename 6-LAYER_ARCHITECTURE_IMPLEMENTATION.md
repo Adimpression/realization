@@ -5377,6 +5377,21 @@ Completed deletion cut - runtime exact-alias cohort (2026-10-30):
   51 widget tests. One unrelated Textual timing assertion failed once, passed
   four immediate isolated reruns, and passed in the complete clean rerun.
 
+Completed deletion cut - governance exact-alias cohort (2026-10-30):
+
+- [x] Remove the repository-internal `governed_skill_access` and
+  `runtime_governance_context` aliases without moving or changing their
+  canonical `realized_core_engine` implementations.
+- [x] Accept only the sequential shrinking delta: owned roots `111 -> 109`,
+  combined graph nodes `147 -> 145`, combined edges `283 -> 281`, retained
+  facades `103 -> 101`, and exact aliases `78 -> 76`, with no new dependency
+  or cycle.
+- [x] Qualify current-use and governance resolution with 153 focused
+  architecture/compatibility tests, 103 canonical governance tests, 80
+  composed selection/function/mediation tests, 899 root tests, 633 workstation
+  tests, 38 targeted BDD cases, all distribution builds, deterministic
+  publication capture, Flutter analysis, and 51 widget tests.
+
 Exit condition:
 
 - [x] The root-boundary ledger contains no canonical package-to-root

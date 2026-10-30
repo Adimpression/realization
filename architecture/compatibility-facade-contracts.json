@@ -3927,71 +3927,6 @@
       "support_status": "repository_internal"
     },
     {
-      "canonical_module_identity": "realized_core_engine.governed_skill_access",
-      "canonical_targets": [
-        {
-          "component": "core_engine",
-          "module": "realized_core_engine"
-        }
-      ],
-      "command_replacements": [],
-      "contract_evidence": "tests.test_architecture_compatibility_facades",
-      "durable_pickle_globals": [],
-      "exact_module_identity_observed": true,
-      "executable_surface": false,
-      "export_surface": {
-        "constant_types": {
-          "annotations": "_Feature"
-        },
-        "explicit_all": [],
-        "public_names": [
-          "Any",
-          "Artifact",
-          "Mapping",
-          "ability_executable_text",
-          "ability_executor_framework",
-          "annotations",
-          "artifact_admitted_for_use_with_governance",
-          "artifact_current_use_admission",
-          "artifact_effective_skill_lifecycle",
-          "artifact_governed_use_state",
-          "artifact_has_governed_answer_capability",
-          "artifact_is_approval_record",
-          "artifact_is_governed_executable",
-          "artifact_is_policy_record",
-          "controller_governance_snapshot",
-          "governed_safety_lifecycle_overlay",
-          "normalize_skill_kind"
-        ],
-        "signatures": {
-          "Any": "(*args, **kwargs)",
-          "Artifact": "(id: 'str', artifact_type: 'ArtifactType', title: 'str', representation: 'ArtifactRepresentation', function_bit: 'int', scope: 'str', provenance: 'list[str]', reusability: 'ArtifactReuse', admissibility: 'ArtifactAdmission', template_schema: 'dict[str, Any]', learning_relation: 'LearningRelation', related_artifact_ids: 'list[str]', content: 'dict[str, Any]', justification: 'str', boundary_shape: 'tuple[BoundaryShapeTerm, ...]' = <factory>, constraints: 'list[str]' = <factory>, created_at: 'str' = <factory>) -> None",
-          "Mapping": "()",
-          "ability_executable_text": "(*, representation: 'str' = '', content: 'Mapping[str, Any] | None' = None) -> 'str'",
-          "ability_executor_framework": "(*, representation: 'str' = '', content: 'Mapping[str, Any] | None' = None) -> 'str'",
-          "artifact_admitted_for_use_with_governance": "(artifact: 'Artifact', *, policy_artifacts: 'list[Artifact] | None', approval_artifacts: 'list[Artifact] | None', revocation_artifacts: 'list[Artifact] | None' = None, incident_artifacts: 'list[Artifact] | None' = None) -> 'tuple[bool, str]'",
-          "artifact_current_use_admission": "(artifact: 'Artifact', *, policy_artifacts: 'list[Artifact] | None' = None, approval_artifacts: 'list[Artifact] | None' = None) -> 'dict[str, Any]'",
-          "artifact_effective_skill_lifecycle": "(artifact: 'ArtifactContentView', *, current_admission_status: 'str' = '') -> 'dict[str, Any]'",
-          "artifact_governed_use_state": "(owner: 'Any', artifact: 'Artifact') -> 'dict[str, Any]'",
-          "artifact_has_governed_answer_capability": "(owner: 'Any', artifact: 'Artifact', *, semantic_unit: 'str' = '') -> 'bool'",
-          "artifact_is_approval_record": "(artifact: 'ArtifactContentView') -> 'bool'",
-          "artifact_is_governed_executable": "(owner: 'Any', artifact: 'Artifact') -> 'bool'",
-          "artifact_is_policy_record": "(artifact: 'ArtifactContentView') -> 'bool'",
-          "controller_governance_snapshot": "(controller: 'Any') -> 'dict[str, Any]'",
-          "governed_safety_lifecycle_overlay": "(*, skill_title: 'str', kind: 'str', revocation_artifacts: 'list[TitledArtifactContentView] | None' = None, incident_artifacts: 'list[TitledArtifactContentView] | None' = None) -> 'dict[str, Any]'",
-          "normalize_skill_kind": "(value: 'Any', *, default: 'str' = 'knowledge') -> 'str'"
-        }
-      },
-      "import_effect_class": "module_alias_only",
-      "module": "governed_skill_access",
-      "owner": "governance",
-      "path": "governed_skill_access.py",
-      "proof_strategy": "exact_module_object_identity",
-      "rollback_operation": "restore governed_skill_access.py and its compatibility contract assertions without reverting the canonical owner",
-      "shape": "exact_module_alias",
-      "support_status": "repository_internal"
-    },
-    {
       "canonical_module_identity": "",
       "canonical_targets": [
         {
@@ -7940,63 +7875,6 @@
       "support_status": "repository_internal"
     },
     {
-      "canonical_module_identity": "realized_core_engine.runtime_governance_context",
-      "canonical_targets": [
-        {
-          "component": "core_engine",
-          "module": "realized_core_engine"
-        }
-      ],
-      "command_replacements": [],
-      "contract_evidence": "tests.test_architecture_compatibility_facades",
-      "durable_pickle_globals": [],
-      "exact_module_identity_observed": true,
-      "executable_surface": false,
-      "export_surface": {
-        "constant_types": {
-          "EFFECT_TRACE_RECEIPT_SCHEMA_VERSION": "str",
-          "annotations": "_Feature"
-        },
-        "explicit_all": [],
-        "public_names": [
-          "Any",
-          "Artifact",
-          "EFFECT_TRACE_RECEIPT_SCHEMA_VERSION",
-          "Mapping",
-          "annotations",
-          "artifact_effective_skill_lifecycle",
-          "artifact_governed_use_state",
-          "artifact_skill_admission",
-          "evaluate_runtime_authority_grants",
-          "runtime_artifact_governance_context",
-          "runtime_artifact_trace_context",
-          "runtime_effect_trace_receipt",
-          "runtime_skill_declaration_for_artifact"
-        ],
-        "signatures": {
-          "Any": "(*args, **kwargs)",
-          "Artifact": "(id: 'str', artifact_type: 'ArtifactType', title: 'str', representation: 'ArtifactRepresentation', function_bit: 'int', scope: 'str', provenance: 'list[str]', reusability: 'ArtifactReuse', admissibility: 'ArtifactAdmission', template_schema: 'dict[str, Any]', learning_relation: 'LearningRelation', related_artifact_ids: 'list[str]', content: 'dict[str, Any]', justification: 'str', boundary_shape: 'tuple[BoundaryShapeTerm, ...]' = <factory>, constraints: 'list[str]' = <factory>, created_at: 'str' = <factory>) -> None",
-          "Mapping": "()",
-          "artifact_effective_skill_lifecycle": "(artifact: 'ArtifactContentView', *, current_admission_status: 'str' = '') -> 'dict[str, Any]'",
-          "artifact_governed_use_state": "(owner: 'Any', artifact: 'Artifact') -> 'dict[str, Any]'",
-          "artifact_skill_admission": "(artifact: 'ArtifactContentView') -> 'dict[str, Any]'",
-          "evaluate_runtime_authority_grants": "(*, effect_kind: 'Any', required_authority: 'Any', admitted: 'bool', admission_reason: 'Any', grants: 'list[Mapping[str, Any]]') -> 'AuthorityEvaluation'",
-          "runtime_artifact_governance_context": "(owner: 'Any', artifact: 'Artifact') -> 'dict[str, Any]'",
-          "runtime_artifact_trace_context": "(artifact: 'Artifact', *, admission_snapshot: 'Mapping[str, Any] | None' = None, lifecycle_snapshot: 'Mapping[str, Any] | None' = None) -> 'dict[str, Any]'",
-          "runtime_effect_trace_receipt": "(kind: 'str', payload: 'Any') -> 'dict[str, Any]'",
-          "runtime_skill_declaration_for_artifact": "(artifact: 'Artifact') -> 'dict[str, Any]'"
-        }
-      },
-      "import_effect_class": "module_alias_only",
-      "module": "runtime_governance_context",
-      "owner": "governance",
-      "path": "runtime_governance_context.py",
-      "proof_strategy": "exact_module_object_identity",
-      "rollback_operation": "restore runtime_governance_context.py and its compatibility contract assertions without reverting the canonical owner",
-      "shape": "exact_module_alias",
-      "support_status": "repository_internal"
-    },
-    {
       "canonical_module_identity": "realized_core_engine.semantic_prompt_posture",
       "canonical_targets": [
         {
@@ -10242,12 +10120,12 @@
   },
   "schema_version": 1,
   "summary": {
-    "card_count": 103,
-    "exact_module_identity_count": 80,
+    "card_count": 101,
+    "exact_module_identity_count": 78,
     "facades_with_durable_pickle_globals": 35,
     "pickle_global_count": 133,
     "proof_strategy_counts": {
-      "exact_module_object_identity": 78,
+      "exact_module_object_identity": 76,
       "exported_symbol_object_identity": 19,
       "manual_behavior_equivalence": 5,
       "manual_multi_owner_export_mapping": 1

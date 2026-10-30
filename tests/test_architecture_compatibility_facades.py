@@ -45,7 +45,6 @@ import governance_inventory
 import governed_closure_and_commitment
 import governed_prior_learning_reuse
 import governed_semantic_reduction_runtime
-import governed_skill_access
 import host_mediation
 import host_interaction_action_dispatch
 import host_interaction_actions
@@ -81,7 +80,6 @@ import review_composition
 import run_bundle_io
 import run_outcome_harvest_and_reporting
 import runtime_controller_api
-import runtime_governance_context
 import python_skill_host
 import semantic_prompt_posture
 import skill_governance
@@ -181,8 +179,6 @@ from realized_core_engine import controller_entrypoint_binding as packaged_contr
 from realized_core_engine import controller_governance_bridge as packaged_controller_governance_bridge
 from realized_core_engine import controller_runtime as packaged_controller_runtime
 from realized_core_engine import controller_runtime_binding as packaged_controller_runtime_binding
-from realized_core_engine import governed_skill_access as packaged_governed_skill_access
-from realized_core_engine import runtime_governance_context as packaged_runtime_governance_context
 from realized_core_engine import skill_governance as packaged_engine_skill_governance
 from realized_core_engine import structured_learning as packaged_structured_learning
 from realized_core_engine import supplement as packaged_engine_supplement
@@ -288,9 +284,7 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
             (controller_governance_bridge, packaged_controller_governance_bridge),
             (controller_runtime, packaged_controller_runtime),
             (controller_runtime_binding, packaged_controller_runtime_binding),
-            (governed_skill_access, packaged_governed_skill_access),
             (host_mediation, packaged_host_mediation),
-            (runtime_governance_context, packaged_runtime_governance_context),
             (skill_governance, packaged_engine_skill_governance),
             (store, packaged_engine_store),
         ):

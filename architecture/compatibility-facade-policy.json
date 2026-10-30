@@ -139,6 +139,11 @@
       "removed_at": "2026-10-30",
       "replacement": "realized_core_runtime.host_realizers"
     },
+    "governed_skill_access": {
+      "removal_change_reference": "governance-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.governed_skill_access"
+    },
     "id_generation": {
       "removal_change_reference": "semantic-alias-cohort-1",
       "removed_at": "2026-10-30",
@@ -173,6 +178,11 @@
       "removal_change_reference": "runtime-leaf-cohort-1",
       "removed_at": "2026-10-30",
       "replacement": "realized_core_runtime.temporary"
+    },
+    "runtime_governance_context": {
+      "removal_change_reference": "governance-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.runtime_governance_context"
     },
     "semantic_text": {
       "removal_change_reference": "semantic-alias-cohort-1",
