@@ -197,9 +197,7 @@ entry_exchange = [
   "main",
   "runtime_controller_api",
 ]
-persistence_adapter = [
-  "store",
-]
+persistence_adapter = []
 compatibility = [
   "normalize",
 ]
@@ -298,7 +296,6 @@ compatibility_facade_modules = [
   "skill_path_notation",
   "skill_safety_governance",
   "structured_learning_yaml",
-  "store",
   "supplement",
   "system_state",
 ]

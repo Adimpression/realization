@@ -309,6 +309,11 @@
       "removed_at": "2026-10-30",
       "replacement": "realized_exchange.skill_schema"
     },
+    "store": {
+      "removal_change_reference": "persistence-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.store"
+    },
     "title_semantics": {
       "removal_change_reference": "semantic-alias-cohort-1",
       "removed_at": "2026-10-30",

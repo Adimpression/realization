@@ -75,7 +75,6 @@ import skill_lifecycle
 import skill_path_notation
 import skill_safety_governance
 import structured_learning_yaml
-import store
 import supplement
 import system_state
 from realized_host_interaction import (
@@ -155,7 +154,7 @@ from realized_core_engine import skill_governance as packaged_engine_skill_gover
 from realized_core_engine import structured_learning as packaged_structured_learning
 from realized_core_engine import supplement as packaged_engine_supplement
 from realized_core_engine import state as packaged_state
-from realized_core_engine import store as packaged_engine_store
+from realized_core_engine.store import ArtifactStore, SQLiteVectorArtifactStore
 from realized_core_runtime import execution as packaged_runtime_execution
 from realized_core_runtime import executor_support as packaged_executor_support
 from realized_core_runtime import fence_extraction as packaged_fence_extraction
@@ -169,7 +168,6 @@ from realized_skill_semantics import ir as packaged_skill_ir
 from realized_skill_semantics import invocation as packaged_skill_invocation
 from realized_skill_semantics import normalization as packaged_skill_normalization
 from realized_skill_semantics import paths as packaged_skill_paths
-from store import ArtifactStore, SQLiteVectorArtifactStore
 from workstation.skills.core import invocation_contract
 from realized_skill_application import composition as packaged_skill_application_composition
 from realized_skill_application import ir as packaged_skill_application_ir
@@ -206,7 +204,6 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
             (controller_runtime, packaged_controller_runtime),
             (host_mediation, packaged_host_mediation),
             (skill_governance, packaged_engine_skill_governance),
-            (store, packaged_engine_store),
         ):
             with self.subTest(module=facade.__name__):
                 self.assertIs(facade, canonical)

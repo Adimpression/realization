@@ -124,7 +124,6 @@ Every repository-root Python module has one explicit responsibility. Status is o
 | `skill_lifecycle` | `governance` | `compatibility_facade` |
 | `skill_path_notation` | `portable_skills` | `compatibility_facade` |
 | `skill_safety_governance` | `governance` | `compatibility_facade` |
-| `store` | `persistence_adapter` | `compatibility_facade` |
 | `structured_learning_yaml` | `controller` | `compatibility_facade` |
 | `supplement` | `controller` | `compatibility_facade` |
 | `system_state` | `controller` | `compatibility_facade` |
@@ -340,8 +339,8 @@ These edges exist only to preserve historical import paths. They are excluded fr
 
 | Metric | Count |
 | --- | ---: |
-| Nodes | 118 |
-| Edges | 254 |
+| Nodes | 117 |
+| Edges | 253 |
 | Cyclic SCCs | 0 |
 | Nodes in cyclic SCCs | 0 |
 | Edges internal to cyclic SCCs | 0 |
@@ -457,7 +456,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `root_to_component` | `skill_path_notation` | `skill_semantics` | `compatibility` |
 | `root_to_component` | `skill_safety_governance` | `core_governance` | `compatibility` |
 | `root_to_component` | `skill_safety_governance` | `core_semantics` | `compatibility` |
-| `root_to_component` | `store` | `core_engine` | `persistence` |
 | `root_to_component` | `structured_learning_yaml` | `core_engine` | `orchestration` |
 | `root_to_component` | `supplement` | `core_engine` | `orchestration` |
 | `root_to_component` | `system_state` | `core_engine` | `orchestration` |
@@ -569,7 +567,6 @@ No workspace package imports a root application module.
 - `skill_path_notation` -> `skill_semantics` (`skill_path_notation.py`)
 - `skill_safety_governance` -> `core_governance` (`skill_safety_governance.py`)
 - `skill_safety_governance` -> `core_semantics` (`skill_safety_governance.py`)
-- `store` -> `core_engine` (`store.py`)
 - `structured_learning_yaml` -> `core_engine` (`structured_learning_yaml.py`)
 - `supplement` -> `core_engine` (`supplement.py`)
 - `system_state` -> `core_engine` (`system_state.py`)

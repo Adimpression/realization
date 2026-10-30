@@ -5506,6 +5506,26 @@ Completed deletion cut - controller binding exact-alias cohort (2026-10-30):
   Seven unrelated provider-backed cases remain explicitly outside this
   cohort's evidence pending external-data authorization.
 
+Completed deletion cut - persistence exact-alias cohort (2026-10-30):
+
+- [x] Remove the repository-internal `store` alias without moving or changing
+  the canonical core-engine artifact-store and SQLite implementation.
+- [x] Preserve canonical class identity, SQLite schema, persisted values,
+  selection semantics, and the already-migrated trial import; remove only the
+  identity shell and its ledger/test entries, tombstone the path, and correct
+  module documentation.
+- [x] Accept only the sequential shrinking delta: owned roots `82 -> 81`,
+  root-boundary classifications `105 -> 104`, combined graph nodes `118 ->
+  117`, combined edges `254 -> 253`, grandfathered observations `124 -> 123`,
+  retained facades `74 -> 73`, and exact aliases `49 -> 48`, with no new
+  dependency or cycle.
+- [x] Qualify the non-model cut with 314 focused architecture/persistence
+  tests, 882 applicable root tests, 632 applicable workstation tests, 38
+  deterministic BDD cases, all distribution builds and isolated imports,
+  deterministic publication capture, Flutter analysis, and 51 widget tests.
+  Seven unrelated provider-backed cases remain explicitly outside this
+  cohort's evidence pending external-data authorization.
+
 Exit condition:
 
 - [x] The root-boundary ledger contains no canonical package-to-root

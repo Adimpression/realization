@@ -372,10 +372,6 @@ class RepositoryArchitectureBoundaryTest(unittest.TestCase):
                     root_ownership[module],
                 )
         self.assertEqual(
-            ("persistence_adapter", ("compatibility_facade",)),
-            root_ownership["store"],
-        )
-        self.assertEqual(
             ("entry_exchange", ("compatibility_facade", "entrypoint")),
             root_ownership["main"],
         )

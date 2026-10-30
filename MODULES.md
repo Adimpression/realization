@@ -428,7 +428,6 @@ legacy aliases.
 - `skill_path_notation.py`: Compatibility facade for canonical portable skill paths in `realized_skill_semantics.paths`.
 - `skill_safety_governance.py`: Compatibility facade for revocation and
   incident rules owned by `realized_core_governance.safety`.
-- `store.py`: SQLite artifact store, indexing, persistence, and batch import support.
 - `structured_learning_yaml.py`: Structured-learning YAML rendering helpers.
 - `supplement.py`: Controller-owned LLM supplement adapter, proposal-type
   labeling, prompt policy, JSON repair, and supplement receipts. Provider SDK
