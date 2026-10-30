@@ -180,7 +180,6 @@ subject_domain = [
   "learning_context_paths",
   "markdown_ir",
   "review_composition",
-  "url_learning_capture",
 ]
 blend = [
   "blend_context",
@@ -330,7 +329,6 @@ compatibility_facade_modules = [
   "store",
   "supplement",
   "system_state",
-  "url_learning_capture",
   "validation_ladder",
   "validation_sqlite",
 ]

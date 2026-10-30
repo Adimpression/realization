@@ -259,6 +259,11 @@
       "removed_at": "2026-10-30",
       "replacement": "realized_core_semantics.title_semantics"
     },
+    "url_learning_capture": {
+      "removal_change_reference": "subject-service-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "workstation.subject.service.url_learning_capture"
+    },
     "virtual_mounts": {
       "removal_change_reference": "runtime-leaf-cohort-1",
       "removed_at": "2026-10-30",

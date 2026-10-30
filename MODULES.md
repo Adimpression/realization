@@ -38,8 +38,7 @@ Top-line rule used in Python files:
   document construction, external URL acquisition adapter, and subject
   in-process/gRPC client adapters. Exchange materialization is supplied through
   a caller-composed callback; this package does not import YAML or compiler
-  adapters. The historical root `url_learning_capture` path is an exact module
-  alias to this package-owned adapter.
+  adapters.
 - `workstation/shell_core/` owns shell application services, chat orchestration,
   and shell in-process/gRPC client adapters. Its additive governed-conversation
   mode composes the public `realized-core-conversation` application surface and

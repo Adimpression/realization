@@ -89,7 +89,6 @@ import structured_learning_yaml
 import store
 import supplement
 import system_state
-import url_learning_capture
 from realized_host_interaction import (
     action_dispatch as packaged_host_action_dispatch,
     actions as packaged_host_actions,
@@ -207,7 +206,6 @@ from workstation.subject.core import itemization as packaged_subject_itemization
 from workstation.subject.core import learning_context as packaged_subject_learning_context
 from workstation.subject.core import learning_context_paths as packaged_subject_learning_context_paths
 from workstation.subject.core import review_composition as packaged_review_composition
-from workstation.subject.service import url_learning_capture as packaged_url_learning_capture
 
 
 class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
@@ -230,9 +228,6 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
         ):
             with self.subTest(module=facade.__name__):
                 self.assertIs(facade, canonical)
-
-    def test_subject_url_capture_keeps_legacy_module_identity(self) -> None:
-        self.assertIs(url_learning_capture, packaged_url_learning_capture)
 
     def test_markdown_learning_facades_keep_exact_module_identity(self) -> None:
         self.assertIs(

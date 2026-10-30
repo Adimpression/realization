@@ -362,14 +362,6 @@ class RepositoryArchitectureBoundaryTest(unittest.TestCase):
                     root_ownership[module],
                 )
         for module in (
-            "url_learning_capture",
-        ):
-            with self.subTest(module=module):
-                self.assertEqual(
-                    ("subject_domain", ("compatibility_facade",)),
-                    root_ownership[module],
-                )
-        for module in (
             "skill_boundary_normalization",
             "skill_composition",
             "skill_ir",

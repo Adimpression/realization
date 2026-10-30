@@ -5428,6 +5428,24 @@ Completed deletion cut - subject-core exact-alias cohort (2026-10-30):
   targeted BDD cases, all distribution builds and isolated imports,
   deterministic publication capture, Flutter analysis, and 51 widget tests.
 
+Completed deletion cut - subject-service exact-alias cohort (2026-10-30):
+
+- [x] Remove the repository-internal `url_learning_capture` alias without
+  moving or changing the canonical
+  `workstation.subject.service.url_learning_capture` implementation.
+- [x] Preserve canonical browser acquisition, urllib fallback, extraction,
+  source-bundle persistence, patch targets, and service packaging; remove only
+  the obsolete root identity assertion and ledger entries, then tombstone the
+  retired path.
+- [x] Accept only the sequential shrinking delta: owned roots `96 -> 95`,
+  combined graph nodes `132 -> 131`, combined edges `268 -> 267`, retained
+  facades `88 -> 87`, and exact aliases `63 -> 62`, with no new dependency or
+  cycle.
+- [x] Qualify the cut with 144 focused architecture/compatibility tests, seven
+  URL-capture/service-distribution tests, 890 root tests, 633 workstation tests,
+  38 targeted BDD cases, all distribution builds and isolated imports,
+  deterministic publication capture, Flutter analysis, and 51 widget tests.
+
 Exit condition:
 
 - [x] The root-boundary ledger contains no canonical package-to-root

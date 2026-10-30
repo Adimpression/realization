@@ -34,8 +34,8 @@ class CompatibilityFacadeContractTests(unittest.TestCase):
         self.assertEqual(self.expected, self.current)
 
     def test_every_facade_has_one_retirement_card(self) -> None:
-        self.assertEqual(88, self.current["summary"]["card_count"])
-        self.assertEqual(88, len(self.cards))
+        self.assertEqual(87, self.current["summary"]["card_count"])
+        self.assertEqual(87, len(self.cards))
 
     def test_exact_alias_contracts_prove_module_object_identity(self) -> None:
         exact_aliases = [
@@ -43,7 +43,7 @@ class CompatibilityFacadeContractTests(unittest.TestCase):
             for card in self.current["cards"]
             if card["shape"] == "exact_module_alias"
         ]
-        self.assertEqual(63, len(exact_aliases))
+        self.assertEqual(62, len(exact_aliases))
         self.assertTrue(
             all(card["exact_module_identity_observed"] is True for card in exact_aliases)
         )

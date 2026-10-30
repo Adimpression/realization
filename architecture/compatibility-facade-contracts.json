@@ -8905,82 +8905,6 @@
       "support_status": "repository_internal"
     },
     {
-      "canonical_module_identity": "workstation.subject.service.url_learning_capture",
-      "canonical_targets": [
-        {
-          "component": "subject_service",
-          "module": "workstation.subject.service"
-        }
-      ],
-      "command_replacements": [],
-      "contract_evidence": "tests.test_architecture_compatibility_facades",
-      "durable_pickle_globals": [],
-      "exact_module_identity_observed": true,
-      "executable_surface": false,
-      "export_surface": {
-        "constant_types": {
-          "annotations": "_Feature"
-        },
-        "explicit_all": [],
-        "public_names": [
-          "Any",
-          "CapturedUrlLearningBundle",
-          "HTMLParser",
-          "HTTPError",
-          "Message",
-          "Path",
-          "PlaywrightError",
-          "PlaywrightTimeoutError",
-          "Request",
-          "URLError",
-          "annotations",
-          "capture_url_learning_bundle",
-          "collapse_ws",
-          "dataclass",
-          "hashlib",
-          "json",
-          "mimetypes",
-          "re",
-          "sync_playwright",
-          "time",
-          "trafilatura_bare_extraction",
-          "trafilatura_extract",
-          "urljoin",
-          "urlopen",
-          "urlparse"
-        ],
-        "signatures": {
-          "Any": "(*args, **kwargs)",
-          "CapturedUrlLearningBundle": "(requested_url: 'str', final_url: 'str', title: 'str', media_type: 'str', status_code: 'int', fetched_at_epoch_ms: 'int', markdown_text: 'str', bundle_files: 'dict[str, bytes | str]', metadata: 'dict[str, Any]', elements: 'tuple[dict[str, Any], ...]', asset_manifest: 'tuple[dict[str, Any], ...]') -> None",
-          "HTMLParser": "(*, convert_charrefs=True, scripting=False)",
-          "HTTPError": "(url, code, msg, hdrs, fp)",
-          "Message": "(policy=Compat32())",
-          "Path": "(*args, **kwargs)",
-          "PlaywrightError": "(message: str) -> None",
-          "PlaywrightTimeoutError": "(message: str) -> None",
-          "Request": "(url, data=None, headers={}, origin_req_host=None, unverifiable=False, method=None)",
-          "URLError": "(reason, filename=None)",
-          "capture_url_learning_bundle": "(*, url: 'str', max_assets: 'int' = 8, timeout_seconds: 'float' = 15.0) -> 'CapturedUrlLearningBundle'",
-          "collapse_ws": "(text: 'str') -> 'str'",
-          "dataclass": "(cls=None, /, *, init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False, match_args=True, kw_only=False, slots=False, weakref_slot=False)",
-          "sync_playwright": "() -> playwright.sync_api._context_manager.PlaywrightContextManager",
-          "trafilatura_bare_extraction": "(filecontent: Any, url: str | None = None, fast: bool = False, no_fallback: bool = False, favor_precision: bool = False, favor_recall: bool = False, include_comments: bool = True, output_format: str = 'python', target_language: str | None = None, include_tables: bool = True, include_images: bool = False, include_formatting: bool = False, include_links: bool = False, deduplicate: bool = False, date_extraction_params: Dict[str, Any] | None = None, with_metadata: bool = False, only_with_metadata: bool = False, max_tree_size: int | None = None, url_blacklist: Set[str] | None = None, author_blacklist: Set[str] | None = None, as_dict: bool = False, prune_xpath: Any | None = None, config: Any = <configparser.ConfigParser object at 0x...>, options: trafilatura.settings.Extractor | None = None) -> trafilatura.settings.Document | Dict[str, Any] | None",
-          "trafilatura_extract": "(filecontent: Any, url: str | None = None, record_id: str | None = None, fast: bool = False, no_fallback: bool = False, favor_precision: bool = False, favor_recall: bool = False, include_comments: bool = True, output_format: str = 'txt', tei_validation: bool = False, target_language: str | None = None, include_tables: bool = True, include_images: bool = False, include_formatting: bool = False, include_links: bool = False, deduplicate: bool = False, date_extraction_params: Dict[str, Any] | None = None, with_metadata: bool = False, only_with_metadata: bool = False, max_tree_size: int | None = None, url_blacklist: Set[str] | None = None, author_blacklist: Set[str] | None = None, settingsfile: str | None = None, prune_xpath: Any | None = None, config: Any = <configparser.ConfigParser object at 0x...>, options: trafilatura.settings.Extractor | None = None) -> str | None",
-          "urljoin": "(base, url, allow_fragments=True)",
-          "urlopen": "(url, data=None, timeout=<object object at 0x...>, *, context=None)",
-          "urlparse": "(url, scheme='', allow_fragments=True)"
-        }
-      },
-      "import_effect_class": "module_alias_only",
-      "module": "url_learning_capture",
-      "owner": "subject_domain",
-      "path": "url_learning_capture.py",
-      "proof_strategy": "exact_module_object_identity",
-      "rollback_operation": "restore url_learning_capture.py and its compatibility contract assertions without reverting the canonical owner",
-      "shape": "exact_module_alias",
-      "support_status": "repository_internal"
-    },
-    {
       "canonical_module_identity": "realized_validation.ladder",
       "canonical_targets": [
         {
@@ -9115,16 +9039,16 @@
     "errors": 0,
     "failures": 0,
     "module": "tests.test_architecture_compatibility_facades",
-    "tests_run": 82
+    "tests_run": 81
   },
   "schema_version": 1,
   "summary": {
-    "card_count": 88,
-    "exact_module_identity_count": 65,
+    "card_count": 87,
+    "exact_module_identity_count": 64,
     "facades_with_durable_pickle_globals": 35,
     "pickle_global_count": 133,
     "proof_strategy_counts": {
-      "exact_module_object_identity": 63,
+      "exact_module_object_identity": 62,
       "exported_symbol_object_identity": 19,
       "manual_behavior_equivalence": 5,
       "manual_multi_owner_export_mapping": 1
