@@ -932,75 +932,6 @@
       "support_status": "repository_internal"
     },
     {
-      "canonical_module_identity": "realized_blend_application.workflows",
-      "canonical_targets": [
-        {
-          "component": "blend_application",
-          "module": "realized_blend_application"
-        }
-      ],
-      "command_replacements": [],
-      "contract_evidence": "tests.test_architecture_compatibility_facades",
-      "durable_pickle_globals": [],
-      "exact_module_identity_observed": true,
-      "executable_surface": false,
-      "export_surface": {
-        "constant_types": {
-          "annotations": "_Feature"
-        },
-        "explicit_all": [],
-        "public_names": [
-          "Any",
-          "BlendWorkflowBinding",
-          "BlendWorkflowCondition",
-          "BlendWorkflowPlan",
-          "BlendWorkflowRun",
-          "BlendWorkflowStep",
-          "Path",
-          "annotations",
-          "blend_workflow_plan_from_skill_compose_arguments",
-          "blend_workflow_run_from_execution_result",
-          "blend_workflow_run_from_skill_compose_result",
-          "collapse_ws",
-          "ensure_blend_workflow_store",
-          "list_blend_workflow_summaries",
-          "load_blend_workflow_index",
-          "load_blend_workflow_plan",
-          "load_blend_workflow_run",
-          "persist_blend_workflow_objects",
-          "skill_compose_arguments_from_blend_workflow_plan"
-        ],
-        "signatures": {
-          "Any": "(*args, **kwargs)",
-          "BlendWorkflowBinding": "(payload: 'dict[str, Any]') -> None",
-          "BlendWorkflowCondition": "(payload: 'dict[str, Any]') -> None",
-          "BlendWorkflowPlan": "(workflow_id: 'str', workflow_kind: 'str', steps: 'tuple[BlendWorkflowStep, ...]', session_id: 'str' = '', created_at: 'str' = '', root_inputs: 'dict[str, Any]' = <factory>, root_references: 'dict[str, Any]' = <factory>, final_output_step: 'str' = '', metadata: 'dict[str, Any]' = <factory>) -> None",
-          "BlendWorkflowRun": "(workflow_run_id: 'str', workflow_id: 'str', plan: 'BlendWorkflowPlan', status: 'str', final_output_step: 'str', final_output: 'Any', final_outputs_by_step: 'dict[str, Any]', steps: 'list[dict[str, Any]]', plan_authorities: 'list[str]', session_id: 'str' = '', started_at: 'str' = '', finished_at: 'str' = '', metadata: 'dict[str, Any]' = <factory>) -> None",
-          "BlendWorkflowStep": "(step_id: 'str', operator_kind: 'str', operator_name: 'str', semantic_unit: 'str' = '', bindings: 'tuple[BlendWorkflowBinding, ...]' = (), run_if: 'tuple[BlendWorkflowCondition, ...]' = (), iterate_until: 'tuple[BlendWorkflowCondition, ...]' = (), branch_label: 'str' = '', requested_delegation: 'tuple[dict[str, Any], ...]' = (), rationale: 'str' = '', metadata: 'dict[str, Any]' = <factory>) -> None",
-          "Path": "(*args, **kwargs)",
-          "blend_workflow_plan_from_skill_compose_arguments": "(arguments: 'dict[str, Any]') -> 'BlendWorkflowPlan'",
-          "blend_workflow_run_from_execution_result": "(*, plan: 'BlendWorkflowPlan', result: 'dict[str, Any]') -> 'BlendWorkflowRun'",
-          "blend_workflow_run_from_skill_compose_result": "(*, plan: 'BlendWorkflowPlan', result: 'dict[str, Any]') -> 'BlendWorkflowRun'",
-          "collapse_ws": "(text: 'str') -> 'str'",
-          "ensure_blend_workflow_store": "(root_path: 'Path') -> 'dict[str, Path]'",
-          "list_blend_workflow_summaries": "(root_path: 'Path', *, kind: 'str' = 'runs', status: 'str' = '', limit: 'int' = 20) -> 'list[dict[str, Any]]'",
-          "load_blend_workflow_index": "(root_path: 'Path') -> 'dict[str, Any]'",
-          "load_blend_workflow_plan": "(root_path: 'Path', workflow_id: 'str') -> 'BlendWorkflowPlan'",
-          "load_blend_workflow_run": "(root_path: 'Path', workflow_run_id: 'str') -> 'BlendWorkflowRun'",
-          "persist_blend_workflow_objects": "(*, root_path: 'Path', plan: 'BlendWorkflowPlan', run: 'BlendWorkflowRun', session_id: 'str' = '') -> 'tuple[BlendWorkflowPlan, BlendWorkflowRun, dict[str, Any]]'",
-          "skill_compose_arguments_from_blend_workflow_plan": "(plan: 'BlendWorkflowPlan') -> 'dict[str, Any]'"
-        }
-      },
-      "import_effect_class": "module_alias_only",
-      "module": "blend_workflow",
-      "owner": "blend",
-      "path": "blend_workflow.py",
-      "proof_strategy": "exact_module_object_identity",
-      "rollback_operation": "restore blend_workflow.py and its compatibility contract assertions without reverting the canonical owner",
-      "shape": "exact_module_alias",
-      "support_status": "repository_internal"
-    },
-    {
       "canonical_module_identity": "realized_blend_application.execution",
       "canonical_targets": [
         {
@@ -1149,116 +1080,6 @@
       "support_status": "repository_internal"
     },
     {
-      "canonical_module_identity": "realized_blend_application.workflow_store",
-      "canonical_targets": [
-        {
-          "component": "blend_application",
-          "module": "realized_blend_application"
-        }
-      ],
-      "command_replacements": [],
-      "contract_evidence": "tests.test_architecture_compatibility_facades",
-      "durable_pickle_globals": [],
-      "exact_module_identity_observed": true,
-      "executable_surface": false,
-      "export_surface": {
-        "constant_types": {
-          "annotations": "_Feature"
-        },
-        "explicit_all": [],
-        "public_names": [
-          "Any",
-          "BlendWorkflowPlan",
-          "BlendWorkflowRun",
-          "JsonBlendWorkflowRepository",
-          "Path",
-          "annotations",
-          "collapse_ws",
-          "datetime",
-          "ensure_blend_workflow_store",
-          "json",
-          "json_safe",
-          "list_blend_workflow_runs_for_plan",
-          "list_blend_workflow_summaries",
-          "load_blend_workflow_index",
-          "load_blend_workflow_plan",
-          "load_blend_workflow_run",
-          "persist_blend_workflow_objects",
-          "replace",
-          "timezone",
-          "uuid"
-        ],
-        "signatures": {
-          "Any": "(*args, **kwargs)",
-          "BlendWorkflowPlan": "(workflow_id: 'str', workflow_kind: 'str', steps: 'tuple[BlendWorkflowStep, ...]', session_id: 'str' = '', created_at: 'str' = '', root_inputs: 'dict[str, Any]' = <factory>, root_references: 'dict[str, Any]' = <factory>, final_output_step: 'str' = '', metadata: 'dict[str, Any]' = <factory>) -> None",
-          "BlendWorkflowRun": "(workflow_run_id: 'str', workflow_id: 'str', plan: 'BlendWorkflowPlan', status: 'str', final_output_step: 'str', final_output: 'Any', final_outputs_by_step: 'dict[str, Any]', steps: 'list[dict[str, Any]]', plan_authorities: 'list[str]', session_id: 'str' = '', started_at: 'str' = '', finished_at: 'str' = '', metadata: 'dict[str, Any]' = <factory>) -> None",
-          "JsonBlendWorkflowRepository": "(root_path: 'Path') -> 'None'",
-          "Path": "(*args, **kwargs)",
-          "collapse_ws": "(text: 'str') -> 'str'",
-          "datetime": "<unavailable>",
-          "ensure_blend_workflow_store": "(root_path: 'Path') -> 'dict[str, Path]'",
-          "json_safe": "(value: 'Any') -> 'Any'",
-          "list_blend_workflow_runs_for_plan": "(root_path: 'Path', workflow_id: 'str', *, status: 'str' = '', limit: 'int' = 20) -> 'list[dict[str, Any]]'",
-          "list_blend_workflow_summaries": "(root_path: 'Path', *, kind: 'str' = 'runs', status: 'str' = '', limit: 'int' = 20) -> 'list[dict[str, Any]]'",
-          "load_blend_workflow_index": "(root_path: 'Path') -> 'dict[str, Any]'",
-          "load_blend_workflow_plan": "(root_path: 'Path', workflow_id: 'str') -> 'BlendWorkflowPlan'",
-          "load_blend_workflow_run": "(root_path: 'Path', workflow_run_id: 'str') -> 'BlendWorkflowRun'",
-          "persist_blend_workflow_objects": "(*, root_path: 'Path', plan: 'BlendWorkflowPlan', run: 'BlendWorkflowRun', session_id: 'str' = '') -> 'tuple[BlendWorkflowPlan, BlendWorkflowRun, dict[str, Any]]'",
-          "replace": "(obj, /, **changes)",
-          "timezone": "<unavailable>"
-        }
-      },
-      "import_effect_class": "module_alias_only",
-      "module": "blend_workflow_store",
-      "owner": "blend",
-      "path": "blend_workflow_store.py",
-      "proof_strategy": "exact_module_object_identity",
-      "rollback_operation": "restore blend_workflow_store.py and its compatibility contract assertions without reverting the canonical owner",
-      "shape": "exact_module_alias",
-      "support_status": "repository_internal"
-    },
-    {
-      "canonical_module_identity": "realized_blend_application.worlds",
-      "canonical_targets": [
-        {
-          "component": "blend_application",
-          "module": "realized_blend_application"
-        }
-      ],
-      "command_replacements": [],
-      "contract_evidence": "tests.test_architecture_compatibility_facades",
-      "durable_pickle_globals": [],
-      "exact_module_identity_observed": true,
-      "executable_surface": false,
-      "export_surface": {
-        "constant_types": {
-          "annotations": "_Feature"
-        },
-        "explicit_all": [],
-        "public_names": [
-          "BlendWorld",
-          "BlendWorldMount",
-          "Path",
-          "annotations",
-          "ensure_blend_workstation_world"
-        ],
-        "signatures": {
-          "BlendWorld": "(world_id: 'str', root_path: 'str', created_at: 'str', mounts: 'tuple[BlendWorldMount, ...]', metadata: 'dict[str, Any]' = <factory>) -> None",
-          "BlendWorldMount": "(name: 'str', kind: 'str', source: 'str', access_mode: 'str', mount_path: 'str', metadata: 'dict[str, Any]' = <factory>) -> None",
-          "Path": "(*args, **kwargs)",
-          "ensure_blend_workstation_world": "(*, root_path: 'Path', workspace_path: 'Path', workspace_name: 'str' = 'main') -> 'BlendWorld'"
-        }
-      },
-      "import_effect_class": "module_alias_only",
-      "module": "blend_world",
-      "owner": "blend",
-      "path": "blend_world.py",
-      "proof_strategy": "exact_module_object_identity",
-      "rollback_operation": "restore blend_world.py and its compatibility contract assertions without reverting the canonical owner",
-      "shape": "exact_module_alias",
-      "support_status": "repository_internal"
-    },
-    {
       "canonical_module_identity": "realized_blend.worlds",
       "canonical_targets": [
         {
@@ -1299,73 +1120,6 @@
       "path": "blend_world_models.py",
       "proof_strategy": "exact_module_object_identity",
       "rollback_operation": "restore blend_world_models.py and its compatibility contract assertions without reverting the canonical owner",
-      "shape": "exact_module_alias",
-      "support_status": "repository_internal"
-    },
-    {
-      "canonical_module_identity": "realized_blend_application.world_store",
-      "canonical_targets": [
-        {
-          "component": "blend_application",
-          "module": "realized_blend_application"
-        }
-      ],
-      "command_replacements": [],
-      "contract_evidence": "tests.test_architecture_compatibility_facades",
-      "durable_pickle_globals": [],
-      "exact_module_identity_observed": true,
-      "executable_surface": false,
-      "export_surface": {
-        "constant_types": {
-          "annotations": "_Feature"
-        },
-        "explicit_all": [],
-        "public_names": [
-          "Any",
-          "BlendWorld",
-          "BlendWorldMount",
-          "BlendWorldRepository",
-          "JsonBlendWorldRepository",
-          "Path",
-          "annotations",
-          "blend_world_mount_source",
-          "blend_world_mounts_by_name",
-          "collapse_ws",
-          "datetime",
-          "ensure_blend_world_store",
-          "ensure_persisted_blend_workstation_world",
-          "json",
-          "load_blend_world",
-          "persist_blend_world",
-          "summarize_blend_world",
-          "timezone",
-          "uuid"
-        ],
-        "signatures": {
-          "Any": "(*args, **kwargs)",
-          "BlendWorld": "(world_id: 'str', root_path: 'str', created_at: 'str', mounts: 'tuple[BlendWorldMount, ...]', metadata: 'dict[str, Any]' = <factory>) -> None",
-          "BlendWorldMount": "(name: 'str', kind: 'str', source: 'str', access_mode: 'str', mount_path: 'str', metadata: 'dict[str, Any]' = <factory>) -> None",
-          "BlendWorldRepository": "(*args, **kwargs)",
-          "JsonBlendWorldRepository": "(root_path: 'Path') -> 'None'",
-          "Path": "(*args, **kwargs)",
-          "blend_world_mount_source": "(world: 'BlendWorld | None', mount_name: 'str') -> 'Path | None'",
-          "blend_world_mounts_by_name": "(world: 'BlendWorld') -> 'dict[str, BlendWorldMount]'",
-          "collapse_ws": "(text: 'str') -> 'str'",
-          "datetime": "<unavailable>",
-          "ensure_blend_world_store": "(root_path: 'Path') -> 'dict[str, Path]'",
-          "ensure_persisted_blend_workstation_world": "(*, root_path: 'Path', workspace_path: 'Path', workspace_name: 'str' = 'main', repository: 'BlendWorldRepository | None' = None) -> 'BlendWorld'",
-          "load_blend_world": "(root_path: 'Path') -> 'BlendWorld'",
-          "persist_blend_world": "(world: 'BlendWorld') -> 'Path'",
-          "summarize_blend_world": "(world: 'BlendWorld') -> 'dict[str, Any]'",
-          "timezone": "<unavailable>"
-        }
-      },
-      "import_effect_class": "module_alias_only",
-      "module": "blend_world_store",
-      "owner": "blend",
-      "path": "blend_world_store.py",
-      "proof_strategy": "exact_module_object_identity",
-      "rollback_operation": "restore blend_world_store.py and its compatibility contract assertions without reverting the canonical owner",
       "shape": "exact_module_alias",
       "support_status": "repository_internal"
     },
@@ -10120,12 +9874,12 @@
   },
   "schema_version": 1,
   "summary": {
-    "card_count": 101,
-    "exact_module_identity_count": 78,
+    "card_count": 97,
+    "exact_module_identity_count": 74,
     "facades_with_durable_pickle_globals": 35,
     "pickle_global_count": 133,
     "proof_strategy_counts": {
-      "exact_module_object_identity": 76,
+      "exact_module_object_identity": 72,
       "exported_symbol_object_identity": 19,
       "manual_behavior_equivalence": 5,
       "manual_multi_owner_export_mapping": 1

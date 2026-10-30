@@ -5392,6 +5392,24 @@ Completed deletion cut - governance exact-alias cohort (2026-10-30):
   tests, 38 targeted BDD cases, all distribution builds, deterministic
   publication capture, Flutter analysis, and 51 widget tests.
 
+Completed deletion cut - Blend application exact-alias cohort (2026-10-30):
+
+- [x] Remove the repository-internal `blend_workflow`,
+  `blend_workflow_store`, `blend_world`, and `blend_world_store` aliases
+  without moving or changing their canonical `realized_blend_application`
+  implementations.
+- [x] Retain canonical workflow/world behavior comparisons while removing only
+  obsolete root-module identity assertions, ownership/classification entries,
+  and compatibility-ledger cards; tombstone all four removed paths.
+- [x] Accept only the sequential shrinking delta: owned roots `109 -> 105`,
+  combined graph nodes `145 -> 141`, combined edges `281 -> 277`, retained
+  facades `101 -> 97`, and exact aliases `76 -> 72`, with no new dependency or
+  cycle.
+- [x] Qualify the cut with 153 focused architecture/compatibility tests, 40
+  Blend tests, 899 root tests, 633 workstation tests, 38 targeted BDD cases,
+  all distribution builds and isolated imports, deterministic publication
+  capture, Flutter analysis, and 51 widget tests.
+
 Exit condition:
 
 - [x] The root-boundary ledger contains no canonical package-to-root

@@ -16,13 +16,9 @@ import blend_context
 import blend_operator
 import blend_operator_store
 import blend_session
-import blend_workflow
 import blend_workflow_execution
 import blend_workflow_models
-import blend_workflow_store
-import blend_world
 import blend_world_models
-import blend_world_store
 import controller_runtime
 import controller_entrypoint_binding
 import controller_governance_bridge
@@ -138,9 +134,7 @@ from realized_blend import workflows as packaged_blend_workflows
 from realized_blend import worlds as packaged_blend_worlds
 from realized_blend_application import execution as packaged_blend_application_execution
 from realized_blend_application import operators as packaged_blend_application_operators
-from realized_blend_application import workflow_store as packaged_blend_application_workflow_store
 from realized_blend_application import workflows as packaged_blend_application_workflows
-from realized_blend_application import world_store as packaged_blend_application_world_store
 from realized_blend_application import worlds as packaged_blend_application_worlds
 from realized_core_governance import admission as packaged_governance_admission
 from realized_core_governance import approval as packaged_approval_governance
@@ -982,13 +976,13 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
         ):
             with self.subTest(name=name):
                 self.assertIs(
-                    getattr(blend_workflow, name),
+                    getattr(packaged_blend_application_workflows, name),
                     getattr(packaged_blend_workflows, name),
                 )
         for name in ("BlendWorld", "BlendWorldMount"):
             with self.subTest(name=name):
                 self.assertIs(
-                    getattr(blend_world, name),
+                    getattr(packaged_blend_application_worlds, name),
                     getattr(packaged_blend_worlds, name),
                 )
         self.assertIs(
@@ -1025,11 +1019,7 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
     def test_blend_application_modules_keep_their_legacy_identity(self) -> None:
         expected = (
             (blend_operator_store, packaged_blend_application_operators),
-            (blend_workflow, packaged_blend_application_workflows),
             (blend_workflow_execution, packaged_blend_application_execution),
-            (blend_workflow_store, packaged_blend_application_workflow_store),
-            (blend_world, packaged_blend_application_worlds),
-            (blend_world_store, packaged_blend_application_world_store),
         )
         for compatibility_module, canonical_module in expected:
             with self.subTest(module=compatibility_module.__name__):

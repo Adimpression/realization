@@ -120,8 +120,9 @@ legacy aliases.
   domain. It depends only on Blend plus core runtime/semantic and skill
   application/semantic contracts. It does not own Blend values, workstation
   sessions, request-to-ability selection, governance decisions, host-realizer
-  provision, model invocation, or exchange parsing. The six historical root
-  Blend adapter paths preserve exact module identity as compatibility aliases.
+  provision, model invocation, or exchange parsing. The two remaining
+  historical root Blend application adapter paths retain exact module identity
+  under the compatibility policy.
 - `core_governance/`: Independently buildable `realized-core-governance` UV
   project. Its first package-native cut owns governed-skill vocabulary,
   deterministic normalization, lifecycle states, conservative lifecycle
@@ -267,21 +268,12 @@ legacy aliases.
 - `blend_session.py`: Compatibility surface for the canonical Blend session
   value and the historical workstation projection entrypoint, which delegates
   to the runtime adapter.
-- `blend_world.py`: Identity-preserving compatibility alias for world
-  materialization owned by `realized_blend_application.worlds`.
 - `blend_world_models.py`: Exact module-identity compatibility alias for
   canonical `realized_blend.worlds` values.
-- `blend_world_store.py`: Identity-preserving compatibility alias for the JSON
-  world repository adapter owned by `realized_blend_application.world_store`.
-- `blend_workflow.py`: Identity-preserving compatibility alias for workflow
-  translation owned by `realized_blend_application.workflows`.
 - `blend_workflow_models.py`: Exact module-identity compatibility alias for
   canonical `realized_blend.workflows` values.
 - `blend_workflow_execution.py`: Identity-preserving compatibility alias for
   execution adapters owned by `realized_blend_application.execution`.
-- `blend_workflow_store.py`: Identity-preserving compatibility alias for the
-  JSON workflow repository owned by
-  `realized_blend_application.workflow_store`.
 - `constitutional_trace.py`: Exact module-identity compatibility alias for
   engine-owned constitutional state snapshots, composition/decision/transcript
   signatures, and replay comparison. The canonical engine implementation

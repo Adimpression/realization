@@ -60,13 +60,9 @@ Every repository-root Python module has one explicit responsibility. Status is o
 | `blend_operator` | `blend` | `compatibility_facade` |
 | `blend_operator_store` | `blend` | `compatibility_facade` |
 | `blend_session` | `blend` | `compatibility_facade` |
-| `blend_workflow` | `blend` | `compatibility_facade` |
 | `blend_workflow_execution` | `blend` | `compatibility_facade` |
 | `blend_workflow_models` | `blend` | `compatibility_facade` |
-| `blend_workflow_store` | `blend` | `compatibility_facade` |
-| `blend_world` | `blend` | `compatibility_facade` |
 | `blend_world_models` | `blend` | `compatibility_facade` |
-| `blend_world_store` | `blend` | `compatibility_facade` |
 | `constitutional_trace` | `controller` | `compatibility_facade` |
 | `controller_entrypoint_binding` | `entry_exchange` | `compatibility_facade` |
 | `controller_entrypoints` | `entry_exchange` | `entrypoint` |
@@ -367,8 +363,8 @@ These edges exist only to preserve historical import paths. They are excluded fr
 
 | Metric | Count |
 | --- | ---: |
-| Nodes | 145 |
-| Edges | 281 |
+| Nodes | 141 |
+| Edges | 277 |
 | Cyclic SCCs | 0 |
 | Nodes in cyclic SCCs | 0 |
 | Edges internal to cyclic SCCs | 0 |
@@ -401,13 +397,9 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `root_to_component` | `blend_operator_store` | `blend_application` | `compatibility` |
 | `root_to_component` | `blend_session` | `blend` | `compatibility` |
 | `root_to_component` | `blend_session` | `runtime_core` | `compatibility` |
-| `root_to_component` | `blend_workflow` | `blend_application` | `compatibility` |
 | `root_to_component` | `blend_workflow_execution` | `blend_application` | `compatibility` |
 | `root_to_component` | `blend_workflow_models` | `blend` | `compatibility` |
-| `root_to_component` | `blend_workflow_store` | `blend_application` | `compatibility` |
-| `root_to_component` | `blend_world` | `blend_application` | `compatibility` |
 | `root_to_component` | `blend_world_models` | `blend` | `compatibility` |
-| `root_to_component` | `blend_world_store` | `blend_application` | `compatibility` |
 | `root_to_component` | `constitutional_trace` | `core_engine` | `orchestration` |
 | `root_to_component` | `controller_entrypoint_binding` | `core_engine` | `compatibility` |
 | `root_to_component` | `controller_entrypoints` | `app_cli` | `orchestration` |
@@ -540,13 +532,9 @@ No workspace package imports a root application module.
 - `blend_operator_store` -> `blend_application` (`blend_operator_store.py`)
 - `blend_session` -> `blend` (`blend_session.py`)
 - `blend_session` -> `runtime_core` (`blend_session.py`)
-- `blend_workflow` -> `blend_application` (`blend_workflow.py`)
 - `blend_workflow_execution` -> `blend_application` (`blend_workflow_execution.py`)
 - `blend_workflow_models` -> `blend` (`blend_workflow_models.py`)
-- `blend_workflow_store` -> `blend_application` (`blend_workflow_store.py`)
-- `blend_world` -> `blend_application` (`blend_world.py`)
 - `blend_world_models` -> `blend` (`blend_world_models.py`)
-- `blend_world_store` -> `blend_application` (`blend_world_store.py`)
 - `constitutional_trace` -> `core_engine` (`constitutional_trace.py`)
 - `controller_entrypoint_binding` -> `core_engine` (`controller_entrypoint_binding.py`)
 - `controller_entrypoints` -> `app_cli` (`controller_entrypoints.py`)

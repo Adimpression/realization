@@ -354,11 +354,7 @@ class RepositoryArchitectureBoundaryTest(unittest.TestCase):
         )
         for module in (
             "blend_operator_store",
-            "blend_workflow",
             "blend_workflow_execution",
-            "blend_workflow_store",
-            "blend_world",
-            "blend_world_store",
         ):
             with self.subTest(module=module):
                 self.assertEqual(

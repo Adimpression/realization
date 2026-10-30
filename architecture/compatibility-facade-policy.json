@@ -119,6 +119,26 @@
       "removed_at": "2026-10-30",
       "replacement": "realized_core_semantics.boundary"
     },
+    "blend_workflow": {
+      "removal_change_reference": "blend-application-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_blend_application.workflows"
+    },
+    "blend_workflow_store": {
+      "removal_change_reference": "blend-application-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_blend_application.workflow_store"
+    },
+    "blend_world": {
+      "removal_change_reference": "blend-application-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_blend_application.worlds"
+    },
+    "blend_world_store": {
+      "removal_change_reference": "blend-application-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_blend_application.world_store"
+    },
     "capability_runtime": {
       "removal_change_reference": "runtime-leaf-cohort-1",
       "removed_at": "2026-10-30",
