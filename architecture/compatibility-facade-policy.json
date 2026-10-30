@@ -264,6 +264,16 @@
       "removed_at": "2026-10-30",
       "replacement": "workstation.subject.service.url_learning_capture"
     },
+    "validation_ladder": {
+      "removal_change_reference": "validation-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_validation.ladder"
+    },
+    "validation_sqlite": {
+      "removal_change_reference": "validation-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_validation.sqlite_runtime"
+    },
     "virtual_mounts": {
       "removal_change_reference": "runtime-leaf-cohort-1",
       "removed_at": "2026-10-30",

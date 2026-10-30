@@ -96,8 +96,6 @@ compatibility_modules = [
   "skill_lifecycle",
   "skill_path_notation",
   "skill_safety_governance",
-  "validation_ladder",
-  "validation_sqlite",
 ]
 
 # Every repository-root Python module has one explicit architectural
@@ -221,8 +219,6 @@ validation_trial = [
   "TRIAL_DOMAIN_VALIDATION",
   "tablet_safety_validation",
   "title_depth_learning_validation",
-  "validation_ladder",
-  "validation_sqlite",
 ]
 
 # Status is independent of ownership. A module may have more than one status;
@@ -240,8 +236,6 @@ validation_modules = [
   "TRIAL_DOMAIN_VALIDATION",
   "tablet_safety_validation",
   "title_depth_learning_validation",
-  "validation_ladder",
-  "validation_sqlite",
 ]
 compatibility_facade_modules = [
   "applied_theory_types",
@@ -329,8 +323,6 @@ compatibility_facade_modules = [
   "store",
   "supplement",
   "system_state",
-  "validation_ladder",
-  "validation_sqlite",
 ]
 
 # Top-level Python package families that are not yet UV projects remain part of

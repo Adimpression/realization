@@ -157,13 +157,13 @@ Snapshot date: 2026-10-30.
 - [x] Generated observations and human policy are separated between
   `architecture/compatibility-facades.json` and
   `architecture/compatibility-facade-policy.json`.
-- [x] The current policy classifies 46 source-checkout-only facades as
+- [x] The current policy classifies 44 source-checkout-only facades as
   repository-internal, contract-qualified candidates, keeps 41 facades on
-  explicit holds, and permanently tombstones 33 retired aliases.
+  explicit holds, and permanently tombstones 35 retired aliases.
   Qualification makes a retained facade eligible for a later isolated deletion
   review; it does not itself delete or deprecate it.
-- [x] The executable contract ledger contains all 87 retained-facade cards:
-  - 62 exact-module-object identity proofs
+- [x] The executable contract ledger contains all 85 retained-facade cards:
+  - 60 exact-module-object identity proofs
   - 19 exported-symbol identity proofs
   - one manual multi-owner aggregate mapping
   - five manual behavior-equivalence surfaces
@@ -174,8 +174,8 @@ Snapshot date: 2026-10-30.
   - three facade-to-facade links in the held behavior-adapter chain
 - [x] No canonical package, public README example, or repository example
   imports a root facade.
-- [x] The current scanner records 795 non-AST references with dispositions:
-  - 482 historical narrative references
+- [x] The current scanner records 791 non-AST references with dispositions:
+  - 478 historical narrative references
   - 135 durable provenance references from checked-in receipts
   - 62 compatibility-test evidence references
   - five architecture evidence references
@@ -191,7 +191,7 @@ Snapshot date: 2026-10-30.
 - [x] Ordinary Python consumers of retained qualified aliases and all 19 symbol
   re-export facades use canonical package owners; the two remaining exact
   alias consumers belong to the held behavior-adapter dependency chain.
-- [x] Every one of the 46 retained qualified candidates has no non-contract consumer,
+- [x] Every one of the 44 retained qualified candidates has no non-contract consumer,
   no blocking runtime reference, no known durable-qualified-name obligation,
   and one unambiguous canonical replacement.
 - [x] The 41 holds preserve the proven pickle-qualified-name obligations and
@@ -202,9 +202,9 @@ Snapshot date: 2026-10-30.
   rejects deletion eligibility whenever an executable facade has no explicit
   executable-obligation classification.
 - [x] The first seven `core_semantics`, ten `core_runtime`, two governance,
-  four Blend application, nine subject-core, and one subject-service exact
-  alias are removed, their canonical replacements remain unchanged, and
-  tombstones reject accidental reintroduction.
+  four Blend application, nine subject-core, one subject-service, and two
+  validation exact aliases are removed, their canonical replacements remain
+  unchanged, and tombstones reject accidental reintroduction.
 
 ## Known Measurement Gap
 
@@ -947,6 +947,46 @@ Reviewed and accepted evidence, captured on 2026-10-30:
   active root-ledger entries, and tombstone; canonical browser acquisition,
   fallback extraction, source-bundle persistence, and service behavior remain
   unchanged.
+
+### Validation Alias Deletion Cohort Review
+
+The seventh deletion cohort contains two exact aliases for development-tooling
+validation orchestration and disposable/durable SQLite report handling. The
+canonical `realized-validation` project is dependency-free and already owns
+all callers and tests.
+
+| Historical import | Canonical replacement |
+| --- | --- |
+| `validation_ladder` | `realized_validation.ladder` |
+| `validation_sqlite` | `realized_validation.sqlite_runtime` |
+
+Reviewed and accepted evidence, captured on 2026-10-30:
+
+- [x] Both files were pure exact `sys.modules` aliases with no executable
+  surface, static consumer, blocking reference, or known durable pickle
+  global, and each had one unambiguous canonical replacement.
+- [x] Validation tests, CLI integration, and package distribution already used
+  `realized_validation`; package documentation was updated to stop advertising
+  the retired root imports.
+- [x] The sequential architecture delta only shrank the graph: owned roots
+  `95 -> 93`, combined nodes `131 -> 129`, combined edges `267 -> 265`, and
+  grandfathered observations `137 -> 135`, with no addition or cycle.
+- [x] The retained inventory contains `85` facades, `93` static consumers,
+  `44` qualified candidates, `41` holds, and `35` total tombstones, with no
+  canonical-package or public-example consumer.
+- [x] The retained contract ledger contains `85` cards, `60` exact aliases,
+  `35` facades with `133` durable pickle globals, and `81` facade contract
+  tests.
+- [x] Qualification passed `144` focused architecture/compatibility tests, ten
+  validation ladder/SQLite/distribution tests, all `890` root tests, `633`
+  workstation tests with one expected skip, and `38` targeted
+  skill-routing/report/publication BDD cases.
+- [x] All `35` wheels and source distributions built and imported in
+  isolation; publication capture reproduced eight actions and two artifacts;
+  Flutter analysis and all `51` widget tests passed.
+- [x] Rollback remains local to the two aliases, active root-ledger entries,
+  tombstones, and package documentation; canonical validation command ordering,
+  report capture, SQLite allocation, and archival behavior remain unchanged.
 
 ## Phase 5 - Retire Low-Risk Alias Cohorts
 

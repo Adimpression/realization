@@ -5446,6 +5446,25 @@ Completed deletion cut - subject-service exact-alias cohort (2026-10-30):
   38 targeted BDD cases, all distribution builds and isolated imports,
   deterministic publication capture, Flutter analysis, and 51 widget tests.
 
+Completed deletion cut - validation exact-alias cohort (2026-10-30):
+
+- [x] Remove the repository-internal `validation_ladder` and
+  `validation_sqlite` aliases without moving or changing the canonical
+  `realized_validation.ladder` and `realized_validation.sqlite_runtime`
+  implementations.
+- [x] Preserve validation command ordering, nested-report capture, CLI
+  integration, SQLite runtime allocation, and durable archival; remove only the
+  root aliases and ledger entries, tombstone the paths, and correct package
+  documentation.
+- [x] Accept only the sequential shrinking delta: owned roots `95 -> 93`,
+  combined graph nodes `131 -> 129`, combined edges `267 -> 265`, retained
+  facades `87 -> 85`, and exact aliases `62 -> 60`, with no new dependency or
+  cycle.
+- [x] Qualify the cut with 144 focused architecture/compatibility tests, ten
+  validation tests, 890 root tests, 633 workstation tests, 38 targeted BDD
+  cases, all distribution builds and isolated imports, deterministic
+  publication capture, Flutter analysis, and 51 widget tests.
+
 Exit condition:
 
 - [x] The root-boundary ledger contains no canonical package-to-root

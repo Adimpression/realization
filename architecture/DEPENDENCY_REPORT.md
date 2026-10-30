@@ -141,8 +141,6 @@ Every repository-root Python module has one explicit responsibility. Status is o
 | `system_state` | `controller` | `compatibility_facade` |
 | `tablet_safety_validation` | `validation_trial` | `validation` |
 | `title_depth_learning_validation` | `validation_trial` | `validation` |
-| `validation_ladder` | `validation_trial` | `compatibility_facade`, `validation` |
-| `validation_sqlite` | `validation_trial` | `compatibility_facade`, `validation` |
 
 ## Root Package Family Ownership
 
@@ -353,8 +351,8 @@ These edges exist only to preserve historical import paths. They are excluded fr
 
 | Metric | Count |
 | --- | ---: |
-| Nodes | 131 |
-| Edges | 267 |
+| Nodes | 129 |
+| Edges | 265 |
 | Cyclic SCCs | 0 |
 | Nodes in cyclic SCCs | 0 |
 | Edges internal to cyclic SCCs | 0 |
@@ -487,8 +485,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `root_to_component` | `system_state` | `core_engine` | `orchestration` |
 | `root_to_component` | `tablet_safety_validation` | `validation` | `orchestration` |
 | `root_to_component` | `title_depth_learning_validation` | `validation` | `orchestration` |
-| `root_to_component` | `validation_ladder` | `validation` | `compatibility` |
-| `root_to_component` | `validation_sqlite` | `validation` | `compatibility` |
 
 ## Root-Module Dependencies
 
@@ -612,8 +608,6 @@ No workspace package imports a root application module.
 - `system_state` -> `core_engine` (`system_state.py`)
 - `tablet_safety_validation` -> `validation` (`tablet_safety_validation.py`)
 - `title_depth_learning_validation` -> `validation` (`title_depth_learning_validation.py`)
-- `validation_ladder` -> `validation` (`validation_ladder.py`)
-- `validation_sqlite` -> `validation` (`validation_sqlite.py`)
 
 ## Root-to-Root Dependencies
 

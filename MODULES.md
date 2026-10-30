@@ -232,8 +232,7 @@ legacy aliases.
   validation orchestration, structured validation reports, disposable or
   RAM-backed SQLite allocation, and durable SQLite report archival. It does
   not own domain trial semantics, curricula, corpora, or production runtime
-  behavior. `validation_ladder.py` and `validation_sqlite.py` are exact
-  module-identity compatibility aliases.
+  behavior.
 - `host_interaction/`: Independently buildable `realized-host-interaction` UV
   project. It owns the backend-neutral attachment models, bounded resolution
   and actions, delegated-rights narrowing, receipt shaping, and immutable
@@ -458,11 +457,6 @@ legacy aliases.
 - `tablet_safety_validation.py`: Standalone tablet-safety validation script.
 - `title_depth_learning_validation.py`: Standalone title-depth learning validation script.
 - `TRIAL_DOMAIN_VALIDATION.py`: Multi-domain trial runner for fresh-db curriculum validation.
-- `validation_ladder.py`: Compatibility alias for
-  `realized_validation.ladder`, the package-owned layered acceptance runner.
-- `validation_sqlite.py`: Compatibility alias for
-  `realized_validation.sqlite_runtime`, the package-owned validation SQLite
-  allocation and archival support.
 - `workstation/__init__.py`: Inert namespace initializer for independently packaged workstation components.
 - `workstation/builtin_skills.py`: Builtin workstation worker-skill catalog, including repo-search and Wasm demo workers.
 - `workstation/capabilities.py`: Workstation capability schemas plus attachment-scoped capability execution, installed-skill invocation, workstation-backed shared Blend operator provider assembly for dynamic skill/capability operators, shared Blend operator/workflow store and execution adapters for `ws.skill.compose`, `ws.workflow.*`, and `ws.operator.*`, workstation publication of Blend workflow/step lifecycle events, and workstation-to-skill delegation shaping.

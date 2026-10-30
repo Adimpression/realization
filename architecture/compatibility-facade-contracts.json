@@ -8903,136 +8903,6 @@
       "rollback_operation": "restore system_state.py and its compatibility contract assertions without reverting the canonical owner",
       "shape": "exact_module_alias",
       "support_status": "repository_internal"
-    },
-    {
-      "canonical_module_identity": "realized_validation.ladder",
-      "canonical_targets": [
-        {
-          "component": "validation",
-          "module": "realized_validation"
-        }
-      ],
-      "command_replacements": [],
-      "contract_evidence": "tests.test_architecture_compatibility_facades",
-      "durable_pickle_globals": [],
-      "exact_module_identity_observed": true,
-      "executable_surface": false,
-      "export_surface": {
-        "constant_types": {
-          "REPORTS_ROOT": "PosixPath",
-          "REPO_ROOT": "PosixPath",
-          "annotations": "_Feature"
-        },
-        "explicit_all": [],
-        "public_names": [
-          "Any",
-          "Callable",
-          "Path",
-          "REPORTS_ROOT",
-          "REPO_ROOT",
-          "annotations",
-          "datetime",
-          "handle_validation_ladder_command",
-          "iso_now",
-          "json",
-          "load_json_if_exists",
-          "os",
-          "run_stage_command",
-          "run_validation_ladder",
-          "subprocess",
-          "sys",
-          "time",
-          "timezone",
-          "validation_repository_root",
-          "write_report",
-          "write_running_report"
-        ],
-        "signatures": {
-          "Any": "(*args, **kwargs)",
-          "Callable": "(*args, **kwargs)",
-          "Path": "(*args, **kwargs)",
-          "datetime": "<unavailable>",
-          "handle_validation_ladder_command": "(args) -> 'int'",
-          "iso_now": "() -> 'str'",
-          "load_json_if_exists": "(path: 'Path') -> 'Any'",
-          "run_stage_command": "(*, name: 'str', cmd: 'list[str]', cwd: 'Path', env: 'dict[str, str]') -> 'dict[str, Any]'",
-          "run_validation_ladder": "(*, workspace: 'Path', report_root: 'Path', model: 'str' = '', runner: 'Callable[..., dict[str, Any]]' = <function run_stage_command at 0x...>) -> 'dict[str, Any]'",
-          "timezone": "<unavailable>",
-          "validation_repository_root": "() -> 'Path'",
-          "write_report": "(report_root: 'Path', report: 'dict[str, Any]') -> 'None'",
-          "write_running_report": "(report_root: 'Path') -> 'None'"
-        }
-      },
-      "import_effect_class": "module_alias_only",
-      "module": "validation_ladder",
-      "owner": "validation_trial",
-      "path": "validation_ladder.py",
-      "proof_strategy": "exact_module_object_identity",
-      "rollback_operation": "restore validation_ladder.py and its compatibility contract assertions without reverting the canonical owner",
-      "shape": "exact_module_alias",
-      "support_status": "repository_internal"
-    },
-    {
-      "canonical_module_identity": "realized_validation.sqlite_runtime",
-      "canonical_targets": [
-        {
-          "component": "validation",
-          "module": "realized_validation"
-        }
-      ],
-      "command_replacements": [],
-      "contract_evidence": "tests.test_architecture_compatibility_facades",
-      "durable_pickle_globals": [],
-      "exact_module_identity_observed": true,
-      "executable_surface": false,
-      "export_surface": {
-        "constant_types": {
-          "DEFAULT_VOLUME_NAME": "str",
-          "FALLBACK_ROOT": "PosixPath",
-          "RAM_LINK": "PosixPath",
-          "REPO_ROOT": "PosixPath",
-          "annotations": "_Feature"
-        },
-        "explicit_all": [],
-        "public_names": [
-          "DEFAULT_VOLUME_NAME",
-          "FALLBACK_ROOT",
-          "Path",
-          "RAM_LINK",
-          "REPO_ROOT",
-          "annotations",
-          "archive_validation_sqlite",
-          "ensure_validation_ram_root",
-          "os",
-          "platform",
-          "sqlite3",
-          "subprocess",
-          "time",
-          "validation_repository_root",
-          "validation_sqlite_paths",
-          "validation_sqlite_ramdisk_size_mb",
-          "validation_sqlite_use_ramdisk",
-          "validation_sqlite_volume_name"
-        ],
-        "signatures": {
-          "Path": "(*args, **kwargs)",
-          "archive_validation_sqlite": "(runtime_path: 'Path', archived_path: 'Path') -> 'Path'",
-          "ensure_validation_ram_root": "() -> 'Path'",
-          "validation_repository_root": "() -> 'Path'",
-          "validation_sqlite_paths": "(*, report_dir: 'Path', basename: 'str') -> 'tuple[Path, Path]'",
-          "validation_sqlite_ramdisk_size_mb": "() -> 'int'",
-          "validation_sqlite_use_ramdisk": "() -> 'bool'",
-          "validation_sqlite_volume_name": "() -> 'str'"
-        }
-      },
-      "import_effect_class": "module_alias_only",
-      "module": "validation_sqlite",
-      "owner": "validation_trial",
-      "path": "validation_sqlite.py",
-      "proof_strategy": "exact_module_object_identity",
-      "rollback_operation": "restore validation_sqlite.py and its compatibility contract assertions without reverting the canonical owner",
-      "shape": "exact_module_alias",
-      "support_status": "repository_internal"
     }
   ],
   "contract_suite": {
@@ -9043,12 +8913,12 @@
   },
   "schema_version": 1,
   "summary": {
-    "card_count": 87,
-    "exact_module_identity_count": 64,
+    "card_count": 85,
+    "exact_module_identity_count": 62,
     "facades_with_durable_pickle_globals": 35,
     "pickle_global_count": 133,
     "proof_strategy_counts": {
-      "exact_module_object_identity": 62,
+      "exact_module_object_identity": 60,
       "exported_symbol_object_identity": 19,
       "manual_behavior_equivalence": 5,
       "manual_multi_owner_export_mapping": 1

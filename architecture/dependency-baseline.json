@@ -571,9 +571,9 @@
     "cyclic_internal_edge_count": 0,
     "cyclic_node_count": 0,
     "cyclic_scc_count": 0,
-    "edge_count": 267,
+    "edge_count": 265,
     "largest_cyclic_scc_node_count": 0,
-    "node_count": 131
+    "node_count": 129
   },
   "compatibility_edges": [
     {
@@ -1303,18 +1303,6 @@
       "direction": "root_to_component",
       "source": "title_depth_learning_validation",
       "target": "validation"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "validation_ladder",
-      "target": "validation"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "validation_sqlite",
-      "target": "validation"
     }
   ],
   "root_module_dependencies": [],
@@ -1970,22 +1958,6 @@
       "statuses": [
         "validation"
       ]
-    },
-    {
-      "module": "validation_ladder",
-      "owner": "validation_trial",
-      "statuses": [
-        "compatibility_facade",
-        "validation"
-      ]
-    },
-    {
-      "module": "validation_sqlite",
-      "owner": "validation_trial",
-      "statuses": [
-        "compatibility_facade",
-        "validation"
-      ]
     }
   ],
   "root_module_to_package_dependencies": [],
@@ -2482,14 +2454,6 @@
     },
     {
       "source": "title_depth_learning_validation",
-      "target": "validation"
-    },
-    {
-      "source": "validation_ladder",
-      "target": "validation"
-    },
-    {
-      "source": "validation_sqlite",
       "target": "validation"
     }
   ],
