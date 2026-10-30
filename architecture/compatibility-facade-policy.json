@@ -214,15 +214,35 @@
       "removed_at": "2026-10-30",
       "replacement": "realized_exchange.learning_context_skills"
     },
+    "learn": {
+      "removal_change_reference": "controller-normalization-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.learning"
+    },
     "macos_host_brokers": {
       "removal_change_reference": "runtime-leaf-cohort-1",
       "removed_at": "2026-10-30",
       "replacement": "realized_core_runtime.macos_brokers"
     },
+    "markdown_learning_artifact_semantics": {
+      "removal_change_reference": "controller-normalization-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.markdown_learning_artifact_semantics"
+    },
+    "non_achievedness_normalization": {
+      "removal_change_reference": "controller-normalization-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.non_achievedness_normalization"
+    },
     "normalization_primitives": {
       "removal_change_reference": "semantic-alias-cohort-1",
       "removed_at": "2026-10-30",
       "replacement": "realized_core_semantics.normalization"
+    },
+    "normalization_runtime_dependencies": {
+      "removal_change_reference": "controller-normalization-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.normalization_runtime_dependencies"
     },
     "not_elaboration_ranking": {
       "removal_change_reference": "controller-selection-alias-cohort-1",
@@ -343,6 +363,11 @@
       "removal_change_reference": "persistence-alias-cohort-1",
       "removed_at": "2026-10-30",
       "replacement": "realized_core_engine.store"
+    },
+    "structured_learning_yaml": {
+      "removal_change_reference": "controller-normalization-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.structured_learning"
     },
     "title_semantics": {
       "removal_change_reference": "semantic-alias-cohort-1",

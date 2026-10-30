@@ -44,15 +44,11 @@ import host_interaction_resolution
 import itemize
 import itemize_models
 import itemize_validation
-import learn
 import learning_context
 import learning_context_paths
 import markdown_ir
-import markdown_learning_artifact_semantics
 import external_markdown_learning_pipeline
-import non_achievedness_normalization
 import normalize
-import normalization_runtime_dependencies
 import pure_theory_types
 import review_composition
 import run_outcome_harvest_and_reporting
@@ -68,7 +64,6 @@ import skill_leaf_types
 import skill_lifecycle
 import skill_path_notation
 import skill_safety_governance
-import structured_learning_yaml
 import supplement
 import system_state
 from realized_host_interaction import (
@@ -121,8 +116,6 @@ from realized_core_governance import records as packaged_governance_records
 from realized_core_governance import safety as packaged_skill_safety
 from realized_core_governance import trace as packaged_governance_trace
 from realized_core_governance import vocabulary as packaged_governance_vocabulary
-from realized_core_engine import learning as packaged_engine_learning
-from realized_core_engine import markdown_learning_artifact_semantics as packaged_markdown_learning_artifact_semantics
 from realized_core_engine import constitutional_trace as packaged_constitutional_trace
 from realized_core_engine import configuration as packaged_engine_configuration
 from realized_core_engine import artifact_answer_resolution as packaged_artifact_answer_resolution
@@ -132,8 +125,6 @@ from realized_core_engine import governed_closure_and_commitment as packaged_gov
 from realized_core_engine import governed_prior_learning_reuse as packaged_governed_prior_learning_reuse
 from realized_core_engine import governance_inventory as packaged_engine_governance_inventory
 from realized_core_engine import reduction_runtime as packaged_reduction_runtime
-from realized_core_engine import non_achievedness_normalization as packaged_non_achievedness_normalization
-from realized_core_engine import normalization_runtime_dependencies as packaged_normalization_runtime_dependencies
 from realized_core_engine import not_elaboration_ranking as packaged_not_elaboration_ranking
 from realized_core_engine import run_outcome_harvest_and_reporting as packaged_run_outcome_harvest_and_reporting
 from realized_core_engine import host_mediation as packaged_host_mediation
@@ -141,7 +132,6 @@ from realized_core_engine import controller_entrypoint_binding as packaged_contr
 from realized_core_engine import controller_governance_bridge as packaged_controller_governance_bridge
 from realized_core_engine import controller_runtime as packaged_controller_runtime
 from realized_core_engine import skill_governance as packaged_engine_skill_governance
-from realized_core_engine import structured_learning as packaged_structured_learning
 from realized_core_engine import supplement as packaged_engine_supplement
 from realized_core_engine import state as packaged_state
 from realized_core_engine.store import ArtifactStore, SQLiteVectorArtifactStore
@@ -177,14 +167,10 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
     def test_learning_context_root_facade_keeps_exact_module_identity(self) -> None:
         self.assertIs(learning_context, packaged_learning_context)
 
-    def test_markdown_learning_facades_keep_exact_module_identity(self) -> None:
+    def test_external_markdown_learning_facade_keeps_exact_module_identity(self) -> None:
         self.assertIs(
             external_markdown_learning_pipeline,
             packaged_markdown_learning_pipeline,
-        )
-        self.assertIs(
-            markdown_learning_artifact_semantics,
-            packaged_markdown_learning_artifact_semantics,
         )
 
     def test_controller_and_runtime_root_aliases_keep_module_identity(self) -> None:
@@ -229,17 +215,8 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
         self.assertIs(system_state, packaged_state)
         self.assertIs(governed_semantic_reduction_runtime, packaged_reduction_runtime)
 
-    def test_controller_artifact_and_non_achievedness_modules_keep_identity(self) -> None:
+    def test_controller_artifact_module_keeps_identity(self) -> None:
         self.assertIs(artifact, packaged_artifact_semantics)
-        self.assertIs(
-            non_achievedness_normalization,
-            packaged_non_achievedness_normalization,
-        )
-        self.assertIs(
-            normalization_runtime_dependencies,
-            packaged_normalization_runtime_dependencies,
-        )
-        self.assertIs(structured_learning_yaml, packaged_structured_learning)
 
     def test_controller_policy_helpers_keep_their_historical_module_identity(self) -> None:
         self.assertIs(artifact_answer_resolution, packaged_artifact_answer_resolution)
@@ -509,23 +486,6 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
                     pickle.loads(f"cskill_composition\n{name}\n.".encode("ascii")),
                     getattr(packaged_skill_composition, name),
                 )
-
-    def test_learning_token_constants_keep_their_historical_identity(self) -> None:
-        self.assertIs(learn, packaged_engine_learning)
-        for name in packaged_engine_learning.__all__:
-            with self.subTest(name=name):
-                self.assertIs(
-                    getattr(learn, name),
-                    getattr(packaged_engine_learning, name),
-                )
-        self.assertIs(
-            learn.LEARNING_STOP_TOKENS,
-            packaged_semantic_text.LEARNING_STOP_TOKENS,
-        )
-        self.assertIs(
-            learn.LEARNING_COMPONENT_BREAKS,
-            packaged_semantic_text.LEARNING_COMPONENT_BREAKS,
-        )
 
     def test_host_interaction_facades_keep_packaged_identities(self) -> None:
         facade_pairs = (

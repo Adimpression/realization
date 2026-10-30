@@ -157,27 +157,27 @@ Snapshot date: 2026-10-30.
 - [x] Generated observations and human policy are separated between
   `architecture/compatibility-facades.json` and
   `architecture/compatibility-facade-policy.json`.
-- [x] The current policy classifies 26 source-checkout-only facades as
+- [x] The current policy classifies 21 source-checkout-only facades as
   repository-internal, contract-qualified candidates, keeps 41 facades on
-  explicit holds, and permanently tombstones 53 retired aliases.
+  explicit holds, and permanently tombstones 58 retired aliases.
   Qualification makes a retained facade eligible for a later isolated deletion
   review; it does not itself delete or deprecate it.
-- [x] The executable contract ledger contains all 67 retained-facade cards:
-  - 42 exact-module-object identity proofs
+- [x] The executable contract ledger contains all 62 retained-facade cards:
+  - 37 exact-module-object identity proofs
   - 19 exported-symbol identity proofs
   - one manual multi-owner aggregate mapping
   - five manual behavior-equivalence surfaces
   - 35 facades carrying 133 exercised protocol-zero pickle globals
-- [x] Static consumers were reduced from the measured v2 baseline to 74:
-  - 69 imports in the designated compatibility-contract suite
+- [x] Static consumers were reduced from the measured v2 baseline to 69:
+  - 64 imports in the designated compatibility-contract suite
   - two imports in the dedicated `main` executable/CLI contract test
   - three facade-to-facade links in the held behavior-adapter chain
 - [x] No canonical package, public README example, or repository example
   imports a root facade.
-- [x] The current scanner records 603 non-AST references with dispositions:
-  - 376 historical narrative references
+- [x] The current scanner records 593 non-AST references with dispositions:
+  - 368 historical narrative references
   - 54 durable provenance references from checked-in receipts
-  - 57 compatibility-test evidence references
+  - 55 compatibility-test evidence references
   - five architecture evidence references
   - 111 runtime, durable-runtime, or runnable-guidance references
 - [x] All 111 blocking references belong to supported held surfaces:
@@ -191,7 +191,7 @@ Snapshot date: 2026-10-30.
 - [x] Ordinary Python consumers of retained qualified aliases and all 19 symbol
   re-export facades use canonical package owners; the two remaining exact
   alias consumers belong to the held behavior-adapter dependency chain.
-- [x] Every one of the 26 retained qualified candidates has no non-contract consumer,
+- [x] Every one of the 21 retained qualified candidates has no non-contract consumer,
   no blocking runtime reference, no known durable-qualified-name obligation,
   and one unambiguous canonical replacement.
 - [x] The 41 holds preserve the proven pickle-qualified-name obligations and
@@ -204,8 +204,9 @@ Snapshot date: 2026-10-30.
 - [x] The first seven `core_semantics`, ten `core_runtime`, two governance,
   four Blend application, nine subject-core, one subject-service, two
   validation, ten exchange, one controller-binding, one persistence, and six
-  controller-selection exact aliases are removed, their canonical replacements
-  remain unchanged, and tombstones reject accidental reintroduction.
+  controller-selection and five controller normalization/learning exact aliases
+  are removed, their canonical replacements remain unchanged, and tombstones
+  reject accidental reintroduction.
 
 ## Known Measurement Gap
 
@@ -1185,6 +1186,61 @@ Reviewed and accepted evidence, captured on 2026-10-30:
   identity assertions, active root-ledger entries, tombstones, and module
   documentation; canonical request posture, direct reuse, fallback generation,
   retrieval ranking, and answer-selection behavior remain unchanged.
+
+### Controller Normalization And Learning Alias Deletion Cohort Review
+
+The twelfth deletion cohort contains five exact aliases for deterministic
+learning vocabulary, Markdown encounter shaping, structured non-achievedness
+normalization, its explicit dependency surface, and structured-learning YAML.
+
+| Historical import | Canonical replacement |
+| --- | --- |
+| `learn` | `realized_core_engine.learning` |
+| `markdown_learning_artifact_semantics` | `realized_core_engine.markdown_learning_artifact_semantics` |
+| `non_achievedness_normalization` | `realized_core_engine.non_achievedness_normalization` |
+| `normalization_runtime_dependencies` | `realized_core_engine.normalization_runtime_dependencies` |
+| `structured_learning_yaml` | `realized_core_engine.structured_learning` |
+
+Reviewed and accepted evidence, captured on 2026-10-30:
+
+- [x] All five files were pure exact `sys.modules` aliases with no executable
+  surface, non-contract consumer, blocking reference, facade-owned pickle
+  global, or distinct import effect, and each had one canonical engine target.
+- [x] The provider/composition-bearing `external_markdown_learning_pipeline`
+  facade remains untouched; this cohort removes only deterministic engine
+  identity shells and does not change provider transport or external ingestion.
+- [x] The LLM-layer hygiene assertion was preserved and redirected from the
+  removed root Markdown-semantics path to its canonical engine source; the
+  corrected hygiene module passed all three tests.
+- [x] The sequential architecture delta only shrank the graph: owned roots
+  `75 -> 70`, root-boundary classifications `98 -> 93`, combined nodes
+  `111 -> 106`, combined edges `247 -> 242`, and grandfathered observations
+  `117 -> 112`, with 35 components, 141 package edges, no addition, and no
+  cycle.
+- [x] The retained inventory contains `62` facades, `69` static consumers,
+  `21` qualified candidates, `41` holds, and `58` total tombstones, with no
+  canonical-package, public README, or public-example consumer.
+- [x] The retained contract ledger contains `62` cards, `37` exact aliases,
+  `35` facades with `133` durable pickle globals, and `77` facade contract
+  tests.
+- [x] Qualification passed `234` focused architecture, Markdown-artifact,
+  large-input learning, cross-reference preparation, structured-normalization,
+  title-representation, replay, and distribution tests, all `880` applicable
+  non-provider root tests, and all `632` applicable non-provider workstation
+  tests.
+- [x] Provider-backed Markdown-learning and live-publication tests are outside
+  this deterministic normalization/learning cohort and are not claimed as
+  passing; their seven cases remain separately gated on explicit external-data
+  authorization.
+- [x] All `38` deterministic skill-routing/report/publication BDD cases passed;
+  all `35` wheels and source distributions built and imported in isolation;
+  publication capture reproduced eight actions and two artifacts; Flutter
+  analysis found no issues and all `51` widget tests passed.
+- [x] Rollback remains local to the five historical aliases, facade-only
+  identity assertions, active root-ledger entries, tombstones, module
+  documentation, and canonicalized hygiene-test path; canonical learning,
+  normalization, YAML rendering, and Markdown artifact semantics remain
+  unchanged.
 
 ## Phase 5 - Retire Low-Risk Alias Cohorts
 

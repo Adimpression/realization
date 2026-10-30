@@ -13,7 +13,11 @@ LLM_LAYER_MODULES = (
     REPO_ROOT / "core_engine" / "src" / "realized_core_engine" / "prompt_directives.py",
     REPO_ROOT / "core_engine" / "src" / "realized_core_engine" / "supplement.py",
     REPO_ROOT / "external_markdown_learning_pipeline.py",
-    REPO_ROOT / "markdown_learning_artifact_semantics.py",
+    REPO_ROOT
+    / "core_engine"
+    / "src"
+    / "realized_core_engine"
+    / "markdown_learning_artifact_semantics.py",
     REPO_ROOT / "core_engine" / "src" / "realized_core_engine" / "semantic_prompt_posture.py",
 )
 FORBIDDEN_LAYER_IMPORTS = {

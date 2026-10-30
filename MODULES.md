@@ -329,7 +329,6 @@ legacy aliases.
   pre-package host-interaction import paths and object identities. New code
   imports `realized_host_interaction`.
 - `core_semantics/src/realized_core_semantics/identifiers.py`: Canonical dependency-free slug and identifier construction helpers for semantic and runtime values.
-- `learn.py`: Learning-token, discriminator, and selection-signal helpers.
 - `workstation/subject/core/learning_context.py`: Canonical LearningContext
   aggregate for learning units, deltas and operations, sources, subject
   imports, reasoning scope, deterministic delta application, and authoritative
@@ -380,11 +379,6 @@ legacy aliases.
 - `markdown_ir.py`: Module-identity compatibility alias for dependency-free
   Markdown IR values, parsing, bounded semantic views, symbolic mappings, and
   normalization owned by `realized_core_semantics.markdown`.
-- `markdown_learning_artifact_semantics.py`: Exact module-identity compatibility
-  alias for deterministic Markdown encounter-to-artifact shaping owned by
-  `realized_core_engine.markdown_learning_artifact_semantics`.
-- `non_achievedness_normalization.py`: Structured non-achievedness normalization orchestration over explicit runtime dependencies.
-- `normalization_runtime_dependencies.py`: Explicit dependency surface used by structured non-achievedness normalization.
 - `normalize.py`: Compatibility facade preserving historical normalization imports and object identities.
 - `workstation/subject/core/publication.py`: Canonical publication substrate for claim-centered governed report publication, including typed publication/section/claim/source/build/render-artifact records, deterministic snapshot hashing, and explicit on-disk publication persistence under the subject corpus home.
 - `workstation/subject/core/publication_projection.py`: Canonical deterministic `LearningContext`-to-`Publication` report projection, including admitted-unit claim extraction, section assignment, source loading, validation/build/render orchestration, and separate publication-tree materialization.
@@ -422,7 +416,6 @@ legacy aliases.
 - `skill_path_notation.py`: Compatibility facade for canonical portable skill paths in `realized_skill_semantics.paths`.
 - `skill_safety_governance.py`: Compatibility facade for revocation and
   incident rules owned by `realized_core_governance.safety`.
-- `structured_learning_yaml.py`: Structured-learning YAML rendering helpers.
 - `supplement.py`: Controller-owned LLM supplement adapter, proposal-type
   labeling, prompt policy, JSON repair, and supplement receipts. Provider SDK
   construction, request fallback mechanics, retries, and typed response

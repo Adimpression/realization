@@ -93,14 +93,10 @@ Every repository-root Python module has one explicit responsibility. Status is o
 | `itemize` | `subject_domain` | `compatibility_facade` |
 | `itemize_models` | `subject_domain` | `compatibility_facade` |
 | `itemize_validation` | `subject_domain` | `compatibility_facade` |
-| `learn` | `controller` | `compatibility_facade` |
 | `learning_context` | `entry_exchange` | `compatibility_facade` |
 | `learning_context_paths` | `subject_domain` | `compatibility_facade` |
 | `main` | `entry_exchange` | `compatibility_facade`, `entrypoint` |
 | `markdown_ir` | `subject_domain` | `compatibility_facade` |
-| `markdown_learning_artifact_semantics` | `controller` | `compatibility_facade` |
-| `non_achievedness_normalization` | `controller` | `compatibility_facade` |
-| `normalization_runtime_dependencies` | `controller` | `compatibility_facade` |
 | `normalize` | `compatibility` | `compatibility_facade` |
 | `pure_theory_types` | `semantic_model` | `compatibility_facade` |
 | `python_skill_host` | `runtime_execution` | `compatibility_facade` |
@@ -118,7 +114,6 @@ Every repository-root Python module has one explicit responsibility. Status is o
 | `skill_lifecycle` | `governance` | `compatibility_facade` |
 | `skill_path_notation` | `portable_skills` | `compatibility_facade` |
 | `skill_safety_governance` | `governance` | `compatibility_facade` |
-| `structured_learning_yaml` | `controller` | `compatibility_facade` |
 | `supplement` | `controller` | `compatibility_facade` |
 | `system_state` | `controller` | `compatibility_facade` |
 | `tablet_safety_validation` | `validation_trial` | `validation` |
@@ -333,8 +328,8 @@ These edges exist only to preserve historical import paths. They are excluded fr
 
 | Metric | Count |
 | --- | ---: |
-| Nodes | 111 |
-| Edges | 247 |
+| Nodes | 106 |
+| Edges | 242 |
 | Cyclic SCCs | 0 |
 | Nodes in cyclic SCCs | 0 |
 | Edges internal to cyclic SCCs | 0 |
@@ -412,13 +407,9 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `root_to_component` | `itemize` | `subject_core` | `orchestration` |
 | `root_to_component` | `itemize_models` | `core_semantics` | `dto_constants` |
 | `root_to_component` | `itemize_validation` | `subject_core` | `orchestration` |
-| `root_to_component` | `learn` | `core_engine` | `orchestration` |
 | `root_to_component` | `learning_context` | `exchange` | `orchestration` |
 | `root_to_component` | `learning_context_paths` | `subject_core` | `orchestration` |
 | `root_to_component` | `markdown_ir` | `core_semantics` | `orchestration` |
-| `root_to_component` | `markdown_learning_artifact_semantics` | `core_engine` | `compatibility` |
-| `root_to_component` | `non_achievedness_normalization` | `core_engine` | `orchestration` |
-| `root_to_component` | `normalization_runtime_dependencies` | `core_engine` | `orchestration` |
 | `root_to_component` | `normalize` | `core_engine` | `orchestration` |
 | `root_to_component` | `normalize` | `core_semantics` | `orchestration` |
 | `root_to_component` | `pure_theory_types` | `core_semantics` | `compatibility` |
@@ -444,7 +435,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `root_to_component` | `skill_path_notation` | `skill_semantics` | `compatibility` |
 | `root_to_component` | `skill_safety_governance` | `core_governance` | `compatibility` |
 | `root_to_component` | `skill_safety_governance` | `core_semantics` | `compatibility` |
-| `root_to_component` | `structured_learning_yaml` | `core_engine` | `orchestration` |
 | `root_to_component` | `supplement` | `core_engine` | `orchestration` |
 | `root_to_component` | `system_state` | `core_engine` | `orchestration` |
 | `root_to_component` | `tablet_safety_validation` | `validation` | `orchestration` |
@@ -517,13 +507,9 @@ No workspace package imports a root application module.
 - `itemize` -> `subject_core` (`itemize.py`)
 - `itemize_models` -> `core_semantics` (`itemize_models.py`)
 - `itemize_validation` -> `subject_core` (`itemize_validation.py`)
-- `learn` -> `core_engine` (`learn.py`)
 - `learning_context` -> `exchange` (`learning_context.py`)
 - `learning_context_paths` -> `subject_core` (`learning_context_paths.py`)
 - `markdown_ir` -> `core_semantics` (`markdown_ir.py`)
-- `markdown_learning_artifact_semantics` -> `core_engine` (`markdown_learning_artifact_semantics.py`)
-- `non_achievedness_normalization` -> `core_engine` (`non_achievedness_normalization.py`)
-- `normalization_runtime_dependencies` -> `core_engine` (`normalization_runtime_dependencies.py`)
 - `normalize` -> `core_engine` (`normalize.py`)
 - `normalize` -> `core_semantics` (`normalize.py`)
 - `pure_theory_types` -> `core_semantics` (`pure_theory_types.py`)
@@ -549,7 +535,6 @@ No workspace package imports a root application module.
 - `skill_path_notation` -> `skill_semantics` (`skill_path_notation.py`)
 - `skill_safety_governance` -> `core_governance` (`skill_safety_governance.py`)
 - `skill_safety_governance` -> `core_semantics` (`skill_safety_governance.py`)
-- `structured_learning_yaml` -> `core_engine` (`structured_learning_yaml.py`)
 - `supplement` -> `core_engine` (`supplement.py`)
 - `system_state` -> `core_engine` (`system_state.py`)
 - `tablet_safety_validation` -> `validation` (`tablet_safety_validation.py`)
