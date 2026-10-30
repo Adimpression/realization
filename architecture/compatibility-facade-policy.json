@@ -119,10 +119,35 @@
       "removed_at": "2026-10-30",
       "replacement": "realized_core_semantics.boundary"
     },
+    "capability_runtime": {
+      "removal_change_reference": "runtime-leaf-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_runtime.capabilities"
+    },
+    "host_abi": {
+      "removal_change_reference": "runtime-leaf-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_runtime.host_abi"
+    },
+    "host_brokers": {
+      "removal_change_reference": "runtime-leaf-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_runtime.host_brokers"
+    },
+    "host_realizers": {
+      "removal_change_reference": "runtime-leaf-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_runtime.host_realizers"
+    },
     "id_generation": {
       "removal_change_reference": "semantic-alias-cohort-1",
       "removed_at": "2026-10-30",
       "replacement": "realized_core_semantics.identifiers"
+    },
+    "macos_host_brokers": {
+      "removal_change_reference": "runtime-leaf-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_runtime.macos_brokers"
     },
     "normalization_primitives": {
       "removal_change_reference": "semantic-alias-cohort-1",
@@ -134,6 +159,21 @@
       "removed_at": "2026-10-30",
       "replacement": "realized_core_semantics.prolog"
     },
+    "python_skill_brokerization": {
+      "removal_change_reference": "runtime-leaf-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_runtime.python_brokerization"
+    },
+    "python_skill_host_transport": {
+      "removal_change_reference": "runtime-leaf-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_runtime.python_transport"
+    },
+    "runtime_temp": {
+      "removal_change_reference": "runtime-leaf-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_runtime.temporary"
+    },
     "semantic_text": {
       "removal_change_reference": "semantic-alias-cohort-1",
       "removed_at": "2026-10-30",
@@ -143,6 +183,16 @@
       "removal_change_reference": "semantic-alias-cohort-1",
       "removed_at": "2026-10-30",
       "replacement": "realized_core_semantics.title_semantics"
+    },
+    "virtual_mounts": {
+      "removal_change_reference": "runtime-leaf-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_runtime.virtual_mounts"
+    },
+    "wasm_skill_runtime": {
+      "removal_change_reference": "runtime-leaf-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_runtime.wasm"
     }
   }
 }

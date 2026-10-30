@@ -9,7 +9,6 @@ import args
 import artifact
 import artifact_answer_resolution
 import artifact_contracts
-import capability_runtime
 import side
 import side_runtime_dependencies
 from artifact_contracts import ArtifactContentView, TitledArtifactContentView
@@ -47,9 +46,6 @@ import governed_closure_and_commitment
 import governed_prior_learning_reuse
 import governed_semantic_reduction_runtime
 import governed_skill_access
-import host_abi
-import host_brokers
-import host_realizers
 import host_mediation
 import host_interaction_action_dispatch
 import host_interaction_actions
@@ -70,7 +66,6 @@ import learning_context_skill_projection
 import markdown_ir
 import markdown_learning_artifact_semantics
 import external_markdown_learning_pipeline
-import macos_host_brokers
 import non_achievedness_normalization
 import normalize
 import normalization_runtime_dependencies
@@ -80,8 +75,6 @@ import publication
 import publication_projection
 import publication_render
 import publication_validation
-import python_skill_brokerization
-import python_skill_host_transport
 import prompt_directives
 import retrieval_ranking
 import review_composition
@@ -89,7 +82,6 @@ import run_bundle_io
 import run_outcome_harvest_and_reporting
 import runtime_controller_api
 import runtime_governance_context
-import runtime_temp
 import python_skill_host
 import semantic_prompt_posture
 import skill_governance
@@ -113,8 +105,6 @@ import store
 import supplement
 import system_state
 import url_learning_capture
-import virtual_mounts
-import wasm_skill_runtime
 from realized_host_interaction import (
     action_dispatch as packaged_host_action_dispatch,
     actions as packaged_host_actions,
@@ -198,20 +188,10 @@ from realized_core_engine import structured_learning as packaged_structured_lear
 from realized_core_engine import supplement as packaged_engine_supplement
 from realized_core_engine import state as packaged_state
 from realized_core_engine import store as packaged_engine_store
-from realized_core_runtime import capabilities as packaged_runtime_capabilities
-from realized_core_runtime import host_abi as packaged_runtime_host_abi
-from realized_core_runtime import host_brokers as packaged_runtime_host_brokers
-from realized_core_runtime import host_realizers as packaged_runtime_host_realizers
 from realized_core_runtime import execution as packaged_runtime_execution
 from realized_core_runtime import executor_support as packaged_executor_support
 from realized_core_runtime import fence_extraction as packaged_fence_extraction
-from realized_core_runtime import macos_brokers as packaged_macos_brokers
-from realized_core_runtime import python_brokerization as packaged_python_brokerization
-from realized_core_runtime import python_transport as packaged_python_transport
 from realized_core_runtime import python_host as packaged_python_host
-from realized_core_runtime import temporary as packaged_runtime_temporary
-from realized_core_runtime import virtual_mounts as packaged_virtual_mounts
-from realized_core_runtime import wasm as packaged_runtime_wasm
 from workstation.app.cli import runtime_controller as packaged_runtime_controller_api
 from realized_skill_semantics import composition as packaged_skill_composition
 from realized_skill_semantics import compatibility as packaged_skill_compatibility
@@ -304,7 +284,6 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
 
     def test_controller_and_runtime_root_aliases_keep_module_identity(self) -> None:
         for facade, canonical in (
-            (capability_runtime, packaged_runtime_capabilities),
             (controller_entrypoint_binding, packaged_controller_entrypoint_binding),
             (controller_governance_bridge, packaged_controller_governance_bridge),
             (controller_runtime, packaged_controller_runtime),
@@ -338,17 +317,8 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
         self.assertIs(execution_frameworks, packaged_runtime_execution)
         self.assertIs(fence_extraction_strategy, packaged_fence_extraction)
 
-    def test_runtime_leaf_modules_keep_identity(self) -> None:
-        self.assertIs(host_abi, packaged_runtime_host_abi)
-        self.assertIs(host_brokers, packaged_runtime_host_brokers)
-        self.assertIs(host_realizers, packaged_runtime_host_realizers)
-        self.assertIs(macos_host_brokers, packaged_macos_brokers)
-        self.assertIs(python_skill_brokerization, packaged_python_brokerization)
-        self.assertIs(python_skill_host_transport, packaged_python_transport)
+    def test_python_skill_host_keeps_identity(self) -> None:
         self.assertIs(python_skill_host, packaged_python_host)
-        self.assertIs(runtime_temp, packaged_runtime_temporary)
-        self.assertIs(virtual_mounts, packaged_virtual_mounts)
-        self.assertIs(wasm_skill_runtime, packaged_runtime_wasm)
 
     def test_controller_adapter_modules_keep_identity(self) -> None:
         self.assertIs(governance_inventory, packaged_engine_governance_inventory)

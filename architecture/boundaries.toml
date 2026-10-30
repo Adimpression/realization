@@ -60,7 +60,6 @@ persistence_modules = [
 ]
 compatibility_modules = [
   "approval_governance",
-  "capability_runtime",
   "blend_context",
   "blend_operator",
   "blend_operator_store",
@@ -146,13 +145,9 @@ governance = [
   "skill_safety_governance",
 ]
 runtime_execution = [
-  "capability_runtime",
   "execution_framework_primitives",
   "execution_frameworks",
   "fence_extraction_strategy",
-  "host_abi",
-  "host_brokers",
-  "host_realizers",
   "host_interaction_action_dispatch",
   "host_interaction_actions",
   "host_interaction_context",
@@ -161,13 +156,7 @@ runtime_execution = [
   "host_interaction_receipts",
   "host_interaction_resolution",
   "host_mediation",
-  "macos_host_brokers",
-  "python_skill_brokerization",
   "python_skill_host",
-  "python_skill_host_transport",
-  "runtime_temp",
-  "virtual_mounts",
-  "wasm_skill_runtime",
 ]
 controller = [
   "artifact",
@@ -300,7 +289,6 @@ compatibility_facade_modules = [
   "blend_world_models",
   "blend_world_store",
   "artifact_contracts",
-  "capability_runtime",
   "controller_entrypoint_binding",
   "controller_governance_bridge",
   "controller_runtime",
@@ -332,10 +320,7 @@ compatibility_facade_modules = [
   "host_interaction_models",
   "host_interaction_receipts",
   "host_interaction_resolution",
-  "host_abi",
-  "host_brokers",
   "host_mediation",
-  "host_realizers",
   "itemize",
   "itemize_models",
   "itemize_validation",
@@ -348,7 +333,6 @@ compatibility_facade_modules = [
   "main",
   "markdown_ir",
   "markdown_learning_artifact_semantics",
-  "macos_host_brokers",
   "normalize",
   "non_achievedness_normalization",
   "normalization_runtime_dependencies",
@@ -358,9 +342,7 @@ compatibility_facade_modules = [
   "publication_projection",
   "publication_render",
   "publication_validation",
-  "python_skill_brokerization",
   "python_skill_host",
-  "python_skill_host_transport",
   "prompt_directives",
   "review_composition",
   "retrieval_ranking",
@@ -368,7 +350,6 @@ compatibility_facade_modules = [
   "run_outcome_harvest_and_reporting",
   "runtime_governance_context",
   "runtime_controller_api",
-  "runtime_temp",
   "semantic_prompt_posture",
   "side",
   "side_runtime_dependencies",
@@ -395,8 +376,6 @@ compatibility_facade_modules = [
   "url_learning_capture",
   "validation_ladder",
   "validation_sqlite",
-  "virtual_mounts",
-  "wasm_skill_runtime",
 ]
 
 # Top-level Python package families that are not yet UV projects remain part of

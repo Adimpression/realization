@@ -282,10 +282,6 @@ legacy aliases.
 - `blend_workflow_store.py`: Identity-preserving compatibility alias for the
   JSON workflow repository owned by
   `realized_blend_application.workflow_store`.
-- `capability_runtime.py`: Runtime capability-grant issuance and
-  capability-to-broker/executor mapping. Governance evaluates a supplied
-  required authority against supplied grants; runtime still maps concrete
-  effects, creates invocation grants, and binds realizers.
 - `constitutional_trace.py`: Exact module-identity compatibility alias for
   engine-owned constitutional state snapshots, composition/decision/transcript
   signatures, and replay comparison. The canonical engine implementation
@@ -350,13 +346,6 @@ legacy aliases.
 - `host_interaction_*.py`: Historical compatibility facades preserving the
   pre-package host-interaction import paths and object identities. New code
   imports `realized_host_interaction`.
-- `host_abi.py`: Stable host ABI, broker stability rules, and Wasm ABI definitions.
-- `host_brokers.py`: Concrete host adapters for fs, store, net, tool, and nested
-  skill invocation. Its historical broker table is immutable; application
-  composition projects those adapters into an injected exact-identity provider.
-- `host_realizers.py`: Application composition adapter that advertises concrete
-  executor and broker bindings, inspects runtime prerequisites, and builds one
-  immutable provider per composition request.
 - `core_semantics/src/realized_core_semantics/identifiers.py`: Canonical dependency-free slug and identifier construction helpers for semantic and runtime values.
 - `learn.py`: Learning-token, discriminator, and selection-signal helpers.
 - `workstation/subject/core/learning_context.py`: Canonical LearningContext
@@ -408,7 +397,6 @@ legacy aliases.
 - `learning_context_skill_projection.py`: Exact module-identity compatibility alias for exchange-owned learning-context skill compilation and YAML materialization. Projection establishes subject scope and provenance; it does not perform governed skill installation or admission.
 - `workstation/subject/service/learning_capture.py`: Prompt-scoped subject application service that turns successful workstation chat “save learnings” markdown writes into chat `LearningSource`, `LearningDelta`, and merged `LearningContext` records without making raw markdown tools semantic by default.
 - `workstation/foundation/host/learning_capture.py`: Compatibility alias for the canonical subject-service learning-capture module.
-- `macos_host_brokers.py`: macOS-specific broker implementations for device actions.
 - `main.py`: Historical executable/import facade that preserves `import main` module identity while delegating to `controller_runtime.py` and lazily registering `controller_entrypoints.py`.
 - `markdown_ir.py`: Module-identity compatibility alias for dependency-free
   Markdown IR values, parsing, bounded semantic views, symbolic mappings, and
@@ -431,16 +419,9 @@ legacy aliases.
 - `publication_validation.py`: Module-identity compatibility alias for canonical subject-core publication validation.
 - `pure_theory_types.py`: Compatibility facade for the canonical formal theory
   terms in `realized_core_semantics.theory`.
-- `python_skill_brokerization.py`: Python skill inspection and brokerization
-  heuristics, including conservative source-ordered extraction of literal
-  `broker_request(...)` identities. It never guesses dynamic broker names.
 - `python_skill_host.py`: Child Python runtime host API for governed broker
   calls. Under injected execution it uses the invocation-scoped parent bridge;
   its static dispatch path remains a compatibility fallback only.
-- `python_skill_host_transport.py`: Authenticated invocation-scoped loopback
-  bridge that carries child Python broker requests to the parent-injected
-  provider while rechecking the authoritative declaration, admission, ABI, and
-  grants before dispatch.
 - `replay_verifier.py`: Deliberate historical replay command adapter. It
   coordinates package-owned run-bundle exchange, replay execution, and
   governance receipt verification without becoming their implementation owner.
@@ -499,8 +480,6 @@ legacy aliases.
 - `validation_sqlite.py`: Compatibility alias for
   `realized_validation.sqlite_runtime`, the package-owned validation SQLite
   allocation and archival support.
-- `virtual_mounts.py`: Virtual mount definitions, safe path resolution, and mount policies.
-- `wasm_skill_runtime.py`: Embedded Wasmtime runtime for governed Wasm skill execution.
 - `workstation/__init__.py`: Inert namespace initializer for independently packaged workstation components.
 - `workstation/builtin_skills.py`: Builtin workstation worker-skill catalog, including repo-search and Wasm demo workers.
 - `workstation/capabilities.py`: Workstation capability schemas plus attachment-scoped capability execution, installed-skill invocation, workstation-backed shared Blend operator provider assembly for dynamic skill/capability operators, shared Blend operator/workflow store and execution adapters for `ws.skill.compose`, `ws.workflow.*`, and `ws.operator.*`, workstation publication of Blend workflow/step lifecycle events, and workstation-to-skill delegation shaping.

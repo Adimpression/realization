@@ -5361,6 +5361,22 @@ Completed deletion cut - first semantic exact-alias cohort (2026-10-30):
   wheel/sdist builds, deterministic publication capture, Flutter analysis, and
   51 widget tests.
 
+Completed deletion cut - runtime exact-alias cohort (2026-10-30):
+
+- [x] Remove ten repository-internal aliases for canonical runtime capability,
+  host ABI, broker, realizer, transport, temporary-path, virtual-mount, and
+  Wasm modules while retaining the separately supported `python_skill_host`
+  import and the executable `fence_extraction_strategy` path.
+- [x] Accept only the sequential shrinking delta: owned roots `121 -> 111`,
+  combined graph nodes `157 -> 147`, combined edges `293 -> 283`, retained
+  facades `113 -> 103`, and exact aliases `88 -> 78`, with no new dependency
+  or cycle.
+- [x] Qualify runtime and host behavior with 153 focused tests, 899 root tests,
+  a clean 633-test workstation cycle, 38 targeted BDD cases, 35 isolated
+  wheel/sdist builds, deterministic publication capture, Flutter analysis, and
+  51 widget tests. One unrelated Textual timing assertion failed once, passed
+  four immediate isolated reruns, and passed in the complete clean rerun.
+
 Exit condition:
 
 - [x] The root-boundary ledger contains no canonical package-to-root

@@ -571,9 +571,9 @@
     "cyclic_internal_edge_count": 0,
     "cyclic_node_count": 0,
     "cyclic_scc_count": 0,
-    "edge_count": 293,
+    "edge_count": 283,
     "largest_cyclic_scc_node_count": 0,
-    "node_count": 157
+    "node_count": 147
   },
   "compatibility_edges": [
     {
@@ -745,12 +745,6 @@
       "direction": "root_to_component",
       "source": "blend_world_store",
       "target": "blend_application"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "capability_runtime",
-      "target": "governed_core"
     },
     {
       "category": "orchestration",
@@ -975,18 +969,6 @@
       "target": "skill_semantics"
     },
     {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "host_abi",
-      "target": "governed_core"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "host_brokers",
-      "target": "governed_core"
-    },
-    {
       "category": "compatibility",
       "direction": "root_to_component",
       "source": "host_interaction_action_dispatch",
@@ -1033,12 +1015,6 @@
       "direction": "root_to_component",
       "source": "host_mediation",
       "target": "core_engine"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "host_realizers",
-      "target": "governed_core"
     },
     {
       "category": "orchestration",
@@ -1099,12 +1075,6 @@
       "direction": "root_to_component",
       "source": "learning_context_skill_projection",
       "target": "exchange"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "macos_host_brokers",
-      "target": "governed_core"
     },
     {
       "category": "orchestration",
@@ -1187,19 +1157,7 @@
     {
       "category": "orchestration",
       "direction": "root_to_component",
-      "source": "python_skill_brokerization",
-      "target": "governed_core"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
       "source": "python_skill_host",
-      "target": "governed_core"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "python_skill_host_transport",
       "target": "governed_core"
     },
     {
@@ -1273,12 +1231,6 @@
       "direction": "root_to_component",
       "source": "runtime_governance_context",
       "target": "core_engine"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "runtime_temp",
-      "target": "governed_core"
     },
     {
       "category": "orchestration",
@@ -1459,18 +1411,6 @@
       "direction": "root_to_component",
       "source": "validation_sqlite",
       "target": "validation"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "virtual_mounts",
-      "target": "governed_core"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "wasm_skill_runtime",
-      "target": "governed_core"
     }
   ],
   "root_module_dependencies": [],
@@ -1604,13 +1544,6 @@
     {
       "module": "blend_world_store",
       "owner": "blend",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "capability_runtime",
-      "owner": "runtime_execution",
       "statuses": [
         "compatibility_facade"
       ]
@@ -1798,20 +1731,6 @@
       ]
     },
     {
-      "module": "host_abi",
-      "owner": "runtime_execution",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "host_brokers",
-      "owner": "runtime_execution",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
       "module": "host_interaction_action_dispatch",
       "owner": "runtime_execution",
       "statuses": [
@@ -1862,13 +1781,6 @@
     },
     {
       "module": "host_mediation",
-      "owner": "runtime_execution",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "host_realizers",
       "owner": "runtime_execution",
       "statuses": [
         "compatibility_facade"
@@ -1933,13 +1845,6 @@
     {
       "module": "learning_context_skill_projection",
       "owner": "entry_exchange",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "macos_host_brokers",
-      "owner": "runtime_execution",
       "statuses": [
         "compatibility_facade"
       ]
@@ -2037,21 +1942,7 @@
       ]
     },
     {
-      "module": "python_skill_brokerization",
-      "owner": "runtime_execution",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
       "module": "python_skill_host",
-      "owner": "runtime_execution",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "python_skill_host_transport",
       "owner": "runtime_execution",
       "statuses": [
         "compatibility_facade"
@@ -2102,13 +1993,6 @@
     {
       "module": "runtime_governance_context",
       "owner": "governance",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "runtime_temp",
-      "owner": "runtime_execution",
       "statuses": [
         "compatibility_facade"
       ]
@@ -2310,20 +2194,6 @@
         "compatibility_facade",
         "validation"
       ]
-    },
-    {
-      "module": "virtual_mounts",
-      "owner": "runtime_execution",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "wasm_skill_runtime",
-      "owner": "runtime_execution",
-      "statuses": [
-        "compatibility_facade"
-      ]
     }
   ],
   "root_module_to_package_dependencies": [],
@@ -2449,10 +2319,6 @@
     {
       "source": "blend_world_store",
       "target": "blend_application"
-    },
-    {
-      "source": "capability_runtime",
-      "target": "governed_core"
     },
     {
       "source": "constitutional_trace",
@@ -2603,14 +2469,6 @@
       "target": "skill_semantics"
     },
     {
-      "source": "host_abi",
-      "target": "governed_core"
-    },
-    {
-      "source": "host_brokers",
-      "target": "governed_core"
-    },
-    {
       "source": "host_interaction_action_dispatch",
       "target": "host_interaction"
     },
@@ -2641,10 +2499,6 @@
     {
       "source": "host_mediation",
       "target": "core_engine"
-    },
-    {
-      "source": "host_realizers",
-      "target": "governed_core"
     },
     {
       "source": "itemize",
@@ -2685,10 +2539,6 @@
     {
       "source": "learning_context_skill_projection",
       "target": "exchange"
-    },
-    {
-      "source": "macos_host_brokers",
-      "target": "governed_core"
     },
     {
       "source": "markdown_ir",
@@ -2743,15 +2593,7 @@
       "target": "core_semantics"
     },
     {
-      "source": "python_skill_brokerization",
-      "target": "governed_core"
-    },
-    {
       "source": "python_skill_host",
-      "target": "governed_core"
-    },
-    {
-      "source": "python_skill_host_transport",
       "target": "governed_core"
     },
     {
@@ -2801,10 +2643,6 @@
     {
       "source": "runtime_governance_context",
       "target": "core_engine"
-    },
-    {
-      "source": "runtime_temp",
-      "target": "governed_core"
     },
     {
       "source": "semantic_prompt_posture",
@@ -2925,14 +2763,6 @@
     {
       "source": "validation_sqlite",
       "target": "validation"
-    },
-    {
-      "source": "virtual_mounts",
-      "target": "governed_core"
-    },
-    {
-      "source": "wasm_skill_runtime",
-      "target": "governed_core"
     }
   ],
   "root_to_root_dependencies": [
