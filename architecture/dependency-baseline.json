@@ -571,9 +571,9 @@
     "cyclic_internal_edge_count": 0,
     "cyclic_node_count": 0,
     "cyclic_scc_count": 0,
-    "edge_count": 236,
+    "edge_count": 233,
     "largest_cyclic_scc_node_count": 0,
-    "node_count": 100
+    "node_count": 97
   },
   "compatibility_edges": [
     {
@@ -648,12 +648,6 @@
       "category": "orchestration",
       "direction": "root_to_component",
       "source": "args",
-      "target": "core_engine"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "artifact",
       "target": "core_engine"
     },
     {
@@ -763,12 +757,6 @@
       "direction": "root_to_component",
       "source": "controller_entrypoints",
       "target": "validation"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "controller_governance_bridge",
-      "target": "core_engine"
     },
     {
       "category": "compatibility",
@@ -1115,12 +1103,6 @@
     {
       "category": "orchestration",
       "direction": "root_to_component",
-      "source": "system_state",
-      "target": "core_engine"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
       "source": "tablet_safety_validation",
       "target": "validation"
     },
@@ -1166,13 +1148,6 @@
       "owner": "entry_exchange",
       "statuses": [
         "entrypoint"
-      ]
-    },
-    {
-      "module": "artifact",
-      "owner": "controller",
-      "statuses": [
-        "compatibility_facade"
       ]
     },
     {
@@ -1243,13 +1218,6 @@
       "owner": "entry_exchange",
       "statuses": [
         "entrypoint"
-      ]
-    },
-    {
-      "module": "controller_governance_bridge",
-      "owner": "controller",
-      "statuses": [
-        "compatibility_facade"
       ]
     },
     {
@@ -1562,13 +1530,6 @@
       ]
     },
     {
-      "module": "system_state",
-      "owner": "controller",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
       "module": "tablet_safety_validation",
       "owner": "validation_trial",
       "statuses": [
@@ -1644,10 +1605,6 @@
       "target": "core_engine"
     },
     {
-      "source": "artifact",
-      "target": "core_engine"
-    },
-    {
       "source": "artifact_contracts",
       "target": "core_semantics"
     },
@@ -1718,10 +1675,6 @@
     {
       "source": "controller_entrypoints",
       "target": "validation"
-    },
-    {
-      "source": "controller_governance_bridge",
-      "target": "core_engine"
     },
     {
       "source": "controller_runtime",
@@ -1949,10 +1902,6 @@
     },
     {
       "source": "supplement",
-      "target": "core_engine"
-    },
-    {
-      "source": "system_state",
       "target": "core_engine"
     },
     {

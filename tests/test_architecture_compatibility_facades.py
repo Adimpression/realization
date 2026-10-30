@@ -6,7 +6,6 @@ import unittest
 import applied_theory_types
 import approval_governance
 import args
-import artifact
 import artifact_contracts
 from artifact_contracts import ArtifactContentView, TitledArtifactContentView
 import blend_context
@@ -18,7 +17,6 @@ import blend_workflow_models
 import blend_world_models
 import controller_runtime
 import controller_entrypoint_binding
-import controller_governance_bridge
 import data_governance
 import decision_review
 import decision_review_constructs
@@ -59,7 +57,6 @@ import skill_lifecycle
 import skill_path_notation
 import skill_safety_governance
 import supplement
-import system_state
 from realized_host_interaction import (
     action_dispatch as packaged_host_action_dispatch,
     actions as packaged_host_actions,
@@ -118,11 +115,9 @@ from realized_core_engine import governance_inventory as packaged_engine_governa
 from realized_core_engine import not_elaboration_ranking as packaged_not_elaboration_ranking
 from realized_core_engine import host_mediation as packaged_host_mediation
 from realized_core_engine import controller_entrypoint_binding as packaged_controller_entrypoint_binding
-from realized_core_engine import controller_governance_bridge as packaged_controller_governance_bridge
 from realized_core_engine import controller_runtime as packaged_controller_runtime
 from realized_core_engine import skill_governance as packaged_engine_skill_governance
 from realized_core_engine import supplement as packaged_engine_supplement
-from realized_core_engine import state as packaged_state
 from realized_core_engine.store import ArtifactStore, SQLiteVectorArtifactStore
 from realized_core_runtime import execution as packaged_runtime_execution
 from realized_core_runtime import executor_support as packaged_executor_support
@@ -165,7 +160,6 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
     def test_controller_and_runtime_root_aliases_keep_module_identity(self) -> None:
         for facade, canonical in (
             (controller_entrypoint_binding, packaged_controller_entrypoint_binding),
-            (controller_governance_bridge, packaged_controller_governance_bridge),
             (controller_runtime, packaged_controller_runtime),
             (host_mediation, packaged_host_mediation),
             (skill_governance, packaged_engine_skill_governance),
@@ -199,12 +193,6 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
     def test_controller_adapter_modules_keep_identity(self) -> None:
         self.assertIs(governance_inventory, packaged_engine_governance_inventory)
         self.assertIs(supplement, packaged_engine_supplement)
-
-    def test_controller_state_module_keeps_identity(self) -> None:
-        self.assertIs(system_state, packaged_state)
-
-    def test_controller_artifact_module_keeps_identity(self) -> None:
-        self.assertIs(artifact, packaged_artifact_semantics)
 
     def test_applied_theory_types_keeps_its_historical_identity(self) -> None:
         self.assertIs(applied_theory_types, packaged_applied_theory_types)
@@ -517,12 +505,12 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
             controller_runtime.BSSCController,
         )
 
-    def test_controller_pure_helpers_keep_their_legacy_identity(self) -> None:
+    def test_controller_pure_helpers_keep_their_canonical_identity(self) -> None:
         import main
 
         self.assertIs(
             main.pure_theory_template_schema_from_runtime,
-            artifact.pure_theory_template_schema_from_runtime,
+            packaged_artifact_semantics.pure_theory_template_schema_from_runtime,
         )
         self.assertIs(
             main.normalize_semantic_component_title,

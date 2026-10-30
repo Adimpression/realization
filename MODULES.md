@@ -250,7 +250,6 @@ legacy aliases.
   workstation command registration with core/exchange/validation syntax while
   reusing engine-owned runtime-configuration adapters; it is not an engine
   compatibility alias.
-- `artifact.py`: Artifact serialization and YAML-facing helper utilities.
 - `blend_context.py`: Compatibility surface for canonical
   `realized_blend.context` values and the historical workstation projection
   entrypoint, which delegates to the runtime adapter.
@@ -271,7 +270,6 @@ legacy aliases.
 - `controller_entrypoints.py`: Historical aggregate command adapter. It
   preserves the root command surface while delegating package-native
   workstation parsing, composition, and dispatch to `workstation.app.cli`.
-- `controller_governance_bridge.py`: Controller-facing governance bridge methods rebound onto `BSSCController`.
 - `controller_runtime.py`: Canonical `BSSCController` implementation and historical public runtime surface.
 - `data_governance.py`: Compatibility facade for data-class and access rules
   owned by `realized_core_governance.data`.
@@ -410,7 +408,6 @@ legacy aliases.
   labeling, prompt policy, JSON repair, and supplement receipts. Provider SDK
   construction, request fallback mechanics, retries, and typed response
   parsing are delegated through the public `realized-core-llm` ABI.
-- `system_state.py`: System state model, persistence, effect traces, and capability grant storage.
 - `tablet_safety_validation.py`: Standalone tablet-safety validation script.
 - `title_depth_learning_validation.py`: Standalone title-depth learning validation script.
 - `TRIAL_DOMAIN_VALIDATION.py`: Multi-domain trial runner for fresh-db curriculum validation.

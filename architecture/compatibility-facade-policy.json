@@ -114,6 +114,11 @@
       "removed_at": "2026-10-30",
       "replacement": "realized_core_semantics.applied_primitives"
     },
+    "artifact": {
+      "removal_change_reference": "controller-integration-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.artifact_semantics"
+    },
     "artifact_answer_resolution": {
       "removal_change_reference": "controller-reduction-alias-cohort-1",
       "removed_at": "2026-10-30",
@@ -158,6 +163,11 @@
       "removal_change_reference": "controller-reduction-alias-cohort-1",
       "removed_at": "2026-10-30",
       "replacement": "realized_core_engine.constitutional_trace"
+    },
+    "controller_governance_bridge": {
+      "removal_change_reference": "controller-integration-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.controller_governance_bridge"
     },
     "decision_review_policy": {
       "removal_change_reference": "subject-core-alias-cohort-1",
@@ -398,6 +408,11 @@
       "removal_change_reference": "controller-normalization-alias-cohort-1",
       "removed_at": "2026-10-30",
       "replacement": "realized_core_engine.structured_learning"
+    },
+    "system_state": {
+      "removal_change_reference": "controller-integration-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.state"
     },
     "title_semantics": {
       "removal_change_reference": "semantic-alias-cohort-1",

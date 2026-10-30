@@ -142,13 +142,10 @@ runtime_execution = [
   "python_skill_host",
 ]
 controller = [
-  "artifact",
-  "controller_governance_bridge",
   "controller_runtime",
   "fallback_not_semantics",
   "governance_inventory",
   "supplement",
-  "system_state",
 ]
 llm = []
 subject_domain = [
@@ -210,7 +207,6 @@ validation_modules = [
 compatibility_facade_modules = [
   "applied_theory_types",
   "approval_governance",
-  "artifact",
   "blend_context",
   "blend_operator",
   "blend_operator_store",
@@ -220,7 +216,6 @@ compatibility_facade_modules = [
   "blend_world_models",
   "artifact_contracts",
   "controller_entrypoint_binding",
-  "controller_governance_bridge",
   "controller_runtime",
   "data_governance",
   "decision_review",
@@ -263,7 +258,6 @@ compatibility_facade_modules = [
   "skill_path_notation",
   "skill_safety_governance",
   "supplement",
-  "system_state",
 ]
 
 # Top-level Python package families that are not yet UV projects remain part of

@@ -64,7 +64,7 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
             qualification["minimum_stable_cycles"],
         )
         self.assertFalse(qualification["retirement_hold"])
-        self.assertEqual(15, len(self.inventory["retirement_candidates"]))
+        self.assertEqual(12, len(self.inventory["retirement_candidates"]))
         self.assertEqual(41, len(self.inventory["retirement_holds"]))
 
     def test_facade_shapes_match_reviewed_compatibility_cohorts(self) -> None:
@@ -72,7 +72,7 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
             {
                 "aggregate_reexport": 1,
                 "behavior_adapter": 5,
-                "exact_module_alias": 31,
+                "exact_module_alias": 28,
                 "symbol_reexport": 19,
             },
             self.inventory["summary"]["shape_counts"],
@@ -97,7 +97,10 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
         by_module = {
             row["module"]: row for row in self.inventory["facades"]
         }
-        self.assertEqual("default", by_module["artifact"]["policy_source"])
+        self.assertEqual(
+            "default",
+            by_module["artifact_contracts"]["policy_source"],
+        )
         self.assertEqual("override", by_module["main"]["policy_source"])
         self.assertEqual(
             ["realized-core", "realized-workstation"],
@@ -105,7 +108,7 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
         )
         self.assertEqual(
             "repository_internal",
-            by_module["artifact"]["support_status"],
+            by_module["artifact_contracts"]["support_status"],
         )
         self.assertEqual(
             "supported_executable_path",
@@ -180,7 +183,7 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
             for row in self.inventory["facades"]
             if row["module"] in self.inventory["retirement_candidates"]
         }
-        self.assertEqual(15, len(candidates))
+        self.assertEqual(12, len(candidates))
         self.assertTrue(
             all(
                 row["retirement_state"] == "qualified"
@@ -196,6 +199,7 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
         self.assertEqual(
             {
                 "applied_theory_primitives",
+                "artifact",
                 "artifact_answer_resolution",
                 "boundary",
                 "blend_workflow",
@@ -205,6 +209,7 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
                 "capability_runtime",
                 "controller_runtime_binding",
                 "constitutional_trace",
+                "controller_governance_bridge",
                 "decision_review_policy",
                 "decision_review_projection",
                 "direct_knowledge_reuse",
@@ -253,6 +258,7 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
                 "skill_schema_io",
                 "store",
                 "structured_learning_yaml",
+                "system_state",
                 "title_semantics",
                 "url_learning_capture",
                 "validation_ladder",

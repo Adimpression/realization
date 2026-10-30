@@ -5594,6 +5594,28 @@ Completed deletion cut - controller reduction/closure exact-alias cohort
   provider-backed cases remain explicitly outside this cohort's evidence
   pending external-data authorization.
 
+Completed deletion cut - controller integration exact-alias cohort
+(2026-10-30):
+
+- [x] Remove the three repository-internal `artifact`,
+  `controller_governance_bridge`, and `system_state` aliases without moving or
+  changing their canonical engine implementations.
+- [x] Preserve canonical artifact-helper, governance-selection, state, replay,
+  determinism, layer-hygiene, and host-boundary assertions; remove only root
+  identity shells and their facade-only evidence, tombstone every path, and
+  correct module documentation.
+- [x] Accept only the sequential shrinking delta: owned roots `64 -> 61`,
+  root-boundary classifications `87 -> 84`, combined graph nodes `100 -> 97`,
+  combined edges `236 -> 233`, grandfathered observations `106 -> 103`,
+  retained facades `56 -> 53`, and exact aliases `31 -> 28`, with no new
+  dependency or cycle.
+- [x] Qualify the non-model cut with 325 focused architecture/controller tests,
+  877 applicable root tests, 632 applicable workstation tests, 46 deterministic
+  BDD cases, all distribution builds and isolated imports, deterministic
+  publication capture, Flutter analysis, and 51 widget tests. Seven unrelated
+  provider-backed cases remain explicitly outside this cohort's evidence
+  pending external-data authorization.
+
 Exit condition:
 
 - [x] The root-boundary ledger contains no canonical package-to-root

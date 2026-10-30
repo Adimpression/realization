@@ -1294,6 +1294,53 @@ Reviewed and accepted evidence, captured on 2026-10-30:
   documentation; canonical reduction, closure, trace, reuse, answer-selection,
   and run-finalization behavior remain unchanged.
 
+### Controller Integration Alias Deletion Cohort Review
+
+The fourteenth deletion cohort contains three exact aliases for controller
+artifact semantics, governance integration, and system state.
+
+| Historical import | Canonical replacement |
+| --- | --- |
+| `artifact` | `realized_core_engine.artifact_semantics` |
+| `controller_governance_bridge` | `realized_core_engine.controller_governance_bridge` |
+| `system_state` | `realized_core_engine.state` |
+
+Reviewed and accepted evidence, captured on 2026-10-30:
+
+- [x] All three files were pure exact `sys.modules` aliases with no executable
+  surface, non-contract consumer, blocking reference, facade-owned pickle
+  global, distinct import effect, or ambiguous canonical owner.
+- [x] The canonical artifact helper assertion remains active against
+  `realized_core_engine.artifact_semantics`; only root-module identity and
+  facade-only identity assertions were removed. Canonical artifact, governance,
+  state, replay, determinism, and layer-hygiene tests remain unchanged.
+- [x] The sequential architecture delta only shrank the graph: owned roots
+  `64 -> 61`, root-boundary classifications `87 -> 84`, combined graph nodes
+  `100 -> 97`, combined edges `236 -> 233`, and grandfathered observations
+  `106 -> 103`, with 35 components, 141 package edges, no addition, and no
+  cycle.
+- [x] The retained inventory contains `53` facades, `60` static consumers,
+  `12` qualified candidates, `41` holds, and `67` total tombstones, with no
+  canonical-package, public README, or public-example consumer.
+- [x] The retained contract ledger contains `53` cards, `28` exact aliases,
+  `35` facades with `133` durable pickle globals, and `74` facade contract
+  tests.
+- [x] Qualification passed `325` focused architecture, canonical artifact,
+  governance-selection, replay, determinism, layer-hygiene, and host-boundary
+  tests; all `877` applicable non-provider root tests; and all `632` applicable
+  non-provider workstation tests under normal application composition.
+- [x] Provider-backed Markdown-learning and live-publication tests are outside
+  this deterministic facade deletion and are not claimed as passing; their
+  seven cases remain separately gated on explicit external-data authorization.
+- [x] All `46` deterministic workstation BDD cases passed; all `35` wheels and
+  source distributions built and imported in isolation; publication capture
+  reproduced eight actions and two artifacts; Flutter analysis found no issues
+  and all `51` widget tests passed.
+- [x] Rollback remains local to the three historical aliases, facade-only
+  identity assertions, active root-ledger entries, tombstones, and module
+  documentation; canonical artifact semantics, governance integration, and
+  system-state behavior remain unchanged.
+
 ## Phase 5 - Retire Low-Risk Alias Cohorts
 
 Start with exact aliases that have no non-test consumers, no import-time

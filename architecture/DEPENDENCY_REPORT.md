@@ -53,7 +53,6 @@ Every repository-root Python module has one explicit responsibility. Status is o
 | `applied_theory_types` | `semantic_model` | `compatibility_facade` |
 | `approval_governance` | `governance` | `compatibility_facade` |
 | `args` | `entry_exchange` | `entrypoint` |
-| `artifact` | `controller` | `compatibility_facade` |
 | `artifact_contracts` | `semantic_model` | `compatibility_facade` |
 | `blend_context` | `blend` | `compatibility_facade` |
 | `blend_operator` | `blend` | `compatibility_facade` |
@@ -64,7 +63,6 @@ Every repository-root Python module has one explicit responsibility. Status is o
 | `blend_world_models` | `blend` | `compatibility_facade` |
 | `controller_entrypoint_binding` | `entry_exchange` | `compatibility_facade` |
 | `controller_entrypoints` | `entry_exchange` | `entrypoint` |
-| `controller_governance_bridge` | `controller` | `compatibility_facade` |
 | `controller_runtime` | `controller` | `compatibility_facade` |
 | `data_governance` | `governance` | `compatibility_facade` |
 | `decision_review` | `subject_domain` | `compatibility_facade` |
@@ -109,7 +107,6 @@ Every repository-root Python module has one explicit responsibility. Status is o
 | `skill_path_notation` | `portable_skills` | `compatibility_facade` |
 | `skill_safety_governance` | `governance` | `compatibility_facade` |
 | `supplement` | `controller` | `compatibility_facade` |
-| `system_state` | `controller` | `compatibility_facade` |
 | `tablet_safety_validation` | `validation_trial` | `validation` |
 | `title_depth_learning_validation` | `validation_trial` | `validation` |
 
@@ -322,8 +319,8 @@ These edges exist only to preserve historical import paths. They are excluded fr
 
 | Metric | Count |
 | --- | ---: |
-| Nodes | 100 |
-| Edges | 236 |
+| Nodes | 97 |
+| Edges | 233 |
 | Cyclic SCCs | 0 |
 | Nodes in cyclic SCCs | 0 |
 | Edges internal to cyclic SCCs | 0 |
@@ -347,7 +344,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `root_to_component` | `approval_governance` | `core_semantics` | `compatibility` |
 | `root_to_component` | `args` | `app_cli` | `orchestration` |
 | `root_to_component` | `args` | `core_engine` | `orchestration` |
-| `root_to_component` | `artifact` | `core_engine` | `orchestration` |
 | `root_to_component` | `artifact_contracts` | `core_semantics` | `compatibility` |
 | `root_to_component` | `blend_context` | `blend` | `compatibility` |
 | `root_to_component` | `blend_context` | `runtime_core` | `compatibility` |
@@ -366,7 +362,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `root_to_component` | `controller_entrypoints` | `governed_core` | `orchestration` |
 | `root_to_component` | `controller_entrypoints` | `host_interaction` | `orchestration` |
 | `root_to_component` | `controller_entrypoints` | `validation` | `orchestration` |
-| `root_to_component` | `controller_governance_bridge` | `core_engine` | `compatibility` |
 | `root_to_component` | `controller_runtime` | `core_engine` | `compatibility` |
 | `root_to_component` | `controller_runtime` | `exchange` | `compatibility` |
 | `root_to_component` | `data_governance` | `core_governance` | `compatibility` |
@@ -424,7 +419,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `root_to_component` | `skill_safety_governance` | `core_governance` | `compatibility` |
 | `root_to_component` | `skill_safety_governance` | `core_semantics` | `compatibility` |
 | `root_to_component` | `supplement` | `core_engine` | `orchestration` |
-| `root_to_component` | `system_state` | `core_engine` | `orchestration` |
 | `root_to_component` | `tablet_safety_validation` | `validation` | `orchestration` |
 | `root_to_component` | `title_depth_learning_validation` | `validation` | `orchestration` |
 
@@ -441,7 +435,6 @@ No workspace package imports a root application module.
 - `approval_governance` -> `core_semantics` (`approval_governance.py`)
 - `args` -> `app_cli` (`args.py`)
 - `args` -> `core_engine` (`args.py`)
-- `artifact` -> `core_engine` (`artifact.py`)
 - `artifact_contracts` -> `core_semantics` (`artifact_contracts.py`)
 - `blend_context` -> `blend` (`blend_context.py`)
 - `blend_context` -> `runtime_core` (`blend_context.py`)
@@ -460,7 +453,6 @@ No workspace package imports a root application module.
 - `controller_entrypoints` -> `governed_core` (`controller_entrypoints.py`)
 - `controller_entrypoints` -> `host_interaction` (`controller_entrypoints.py`)
 - `controller_entrypoints` -> `validation` (`controller_entrypoints.py`)
-- `controller_governance_bridge` -> `core_engine` (`controller_governance_bridge.py`)
 - `controller_runtime` -> `core_engine` (`controller_runtime.py`)
 - `controller_runtime` -> `exchange` (`controller_runtime.py`)
 - `data_governance` -> `core_governance` (`data_governance.py`)
@@ -518,7 +510,6 @@ No workspace package imports a root application module.
 - `skill_safety_governance` -> `core_governance` (`skill_safety_governance.py`)
 - `skill_safety_governance` -> `core_semantics` (`skill_safety_governance.py`)
 - `supplement` -> `core_engine` (`supplement.py`)
-- `system_state` -> `core_engine` (`system_state.py`)
 - `tablet_safety_validation` -> `validation` (`tablet_safety_validation.py`)
 - `title_depth_learning_validation` -> `validation` (`title_depth_learning_validation.py`)
 
