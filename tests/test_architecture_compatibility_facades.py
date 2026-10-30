@@ -3,14 +3,12 @@ from __future__ import annotations
 import pickle
 import unittest
 
-import applied_theory_primitives
 import applied_theory_types
 import approval_governance
 import args
 import artifact
 import artifact_answer_resolution
 import artifact_contracts
-import boundary
 import capability_runtime
 import side
 import side_runtime_dependencies
@@ -60,7 +58,6 @@ import host_interaction_delegation
 import host_interaction_models
 import host_interaction_receipts
 import host_interaction_resolution
-import id_generation
 import itemize
 import itemize_models
 import itemize_validation
@@ -76,7 +73,6 @@ import external_markdown_learning_pipeline
 import macos_host_brokers
 import non_achievedness_normalization
 import normalize
-import normalization_primitives
 import normalization_runtime_dependencies
 import not_elaboration_ranking
 import pure_theory_types
@@ -86,7 +82,6 @@ import publication_render
 import publication_validation
 import python_skill_brokerization
 import python_skill_host_transport
-import prolog
 import prompt_directives
 import retrieval_ranking
 import review_composition
@@ -97,7 +92,6 @@ import runtime_governance_context
 import runtime_temp
 import python_skill_host
 import semantic_prompt_posture
-import semantic_text
 import skill_governance
 import skill_governance_primitives
 import skill_composition
@@ -118,7 +112,6 @@ import structured_learning_yaml
 import store
 import supplement
 import system_state
-import title_semantics
 import url_learning_capture
 import virtual_mounts
 import wasm_skill_runtime
@@ -138,17 +131,14 @@ from realized_host_interaction._normalization import (
 from realized_core_semantics import artifacts as packaged_artifact_contracts
 from realized_core_semantics import applied_model as packaged_applied_theory_types
 from realized_core_semantics import applied_primitives as packaged_applied_theory_primitives
-from realized_core_semantics import boundary as packaged_boundary
 from realized_core_semantics import decision_review as packaged_decision_review
 from realized_core_semantics import identifiers as packaged_identifiers
 from realized_core_semantics import itemization as packaged_itemization
 from realized_core_semantics import markdown as packaged_markdown
 from realized_core_semantics import normalization as packaged_normalization_primitives
-from realized_core_semantics import prolog as packaged_prolog
 from realized_core_semantics import proposals as packaged_proposals
 from realized_core_semantics import semantic_text as packaged_semantic_text
 from realized_core_semantics import theory as packaged_theory
-from realized_core_semantics import title_semantics as packaged_title_semantics
 from realized_core_semantics import transformation_constructs as packaged_transformation_constructs
 from realized_core_semantics import values as packaged_values
 from realized_blend import context as packaged_blend_context
@@ -395,11 +385,8 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
             packaged_run_outcome_harvest_and_reporting,
         )
 
-    def test_applied_semantic_modules_keep_their_historical_identity(self) -> None:
-        self.assertIs(applied_theory_primitives, packaged_applied_theory_primitives)
+    def test_applied_theory_types_keeps_its_historical_identity(self) -> None:
         self.assertIs(applied_theory_types, packaged_applied_theory_types)
-        self.assertIs(boundary, packaged_boundary)
-        self.assertIs(normalization_primitives, packaged_normalization_primitives)
 
     def test_controller_query_helpers_keep_their_historical_module_identity(self) -> None:
         self.assertIs(prompt_directives, packaged_prompt_directives)
@@ -518,11 +505,6 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
                     getattr(packaged_proposals, name),
                 )
 
-    def test_semantic_helper_facades_keep_packaged_module_identity(self) -> None:
-        self.assertIs(prolog, packaged_prolog)
-        self.assertIs(semantic_text, packaged_semantic_text)
-        self.assertIs(title_semantics, packaged_title_semantics)
-
     def test_subject_decision_policy_facade_keeps_packaged_module_identity(self) -> None:
         self.assertIs(decision_review_policy, packaged_decision_review_policy)
 
@@ -561,9 +543,6 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
 
     def test_subject_decision_projection_facade_keeps_packaged_module_identity(self) -> None:
         self.assertIs(decision_review_projection, packaged_decision_review_projection)
-
-    def test_identifier_facade_keeps_packaged_module_identity(self) -> None:
-        self.assertIs(id_generation, packaged_identifiers)
 
     def test_subject_publication_facade_keeps_packaged_module_identity(self) -> None:
         self.assertIs(publication, packaged_publication)
@@ -705,11 +684,11 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
                 )
         self.assertIs(
             learn.LEARNING_STOP_TOKENS,
-            semantic_text.LEARNING_STOP_TOKENS,
+            packaged_semantic_text.LEARNING_STOP_TOKENS,
         )
         self.assertIs(
             learn.LEARNING_COMPONENT_BREAKS,
-            semantic_text.LEARNING_COMPONENT_BREAKS,
+            packaged_semantic_text.LEARNING_COMPONENT_BREAKS,
         )
 
     def test_host_interaction_facades_keep_packaged_identities(self) -> None:
@@ -731,7 +710,7 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
         for value in (" alpha\tbeta\n", "alpha\x00beta", "alpha\u2003beta"):
             with self.subTest(value=value):
                 self.assertEqual(
-                    semantic_text.collapse_ws(value),
+                    packaged_semantic_text.collapse_ws(value),
                     host_interaction_collapse_ws(value),
                 )
 
@@ -749,7 +728,7 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
             "nested": (b"first", {"second"}),
         }
         self.assertEqual(
-            applied_theory_primitives.json_safe(value),
+            packaged_applied_theory_primitives.json_safe(value),
             host_interaction_json_safe(value),
         )
 
@@ -779,7 +758,7 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
         )
         self.assertIs(
             main.normalize_semantic_component_title,
-            semantic_text.normalize_semantic_component_title,
+            packaged_semantic_text.normalize_semantic_component_title,
         )
 
     def test_normalization_facade_keeps_canonical_identities(self) -> None:
@@ -796,7 +775,7 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
             with self.subTest(name=name):
                 self.assertIs(
                     getattr(normalize, name),
-                    getattr(normalization_primitives, name),
+                    getattr(packaged_normalization_primitives, name),
                 )
 
     def test_fallback_facade_keeps_canonical_identities(self) -> None:
@@ -822,7 +801,7 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
             with self.subTest(name=name):
                 self.assertIs(
                     getattr(applied_theory_types, name),
-                    getattr(applied_theory_primitives, name),
+                    getattr(packaged_applied_theory_primitives, name),
                 )
 
     def test_semantic_value_facades_keep_packaged_identities(self) -> None:
@@ -830,7 +809,7 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
             with self.subTest(name=name):
                 packaged_value = getattr(packaged_values, name)
                 self.assertIs(
-                    getattr(applied_theory_primitives, name),
+                    getattr(packaged_applied_theory_primitives, name),
                     packaged_value,
                 )
                 self.assertIs(
@@ -854,7 +833,7 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
     def test_legacy_utc_now_pickle_global_still_resolves(self) -> None:
         self.assertIs(
             pickle.loads(b"capplied_theory_types\nutc_now\n."),
-            applied_theory_primitives.utc_now,
+            packaged_applied_theory_primitives.utc_now,
         )
 
     def test_json_safe_projection_remains_behaviorally_compatible(self) -> None:
@@ -876,7 +855,7 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
     def test_legacy_json_safe_pickle_global_still_resolves(self) -> None:
         self.assertIs(
             pickle.loads(b"capplied_theory_types\njson_safe\n."),
-            applied_theory_primitives.json_safe,
+            packaged_applied_theory_primitives.json_safe,
         )
 
     def test_executor_normalizers_keep_their_legacy_identity(self) -> None:
@@ -1496,7 +1475,7 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
     def test_learning_token_normalizer_keeps_the_legacy_identity(self) -> None:
         self.assertIs(
             normalize.normalize_learning_lookup_token,
-            semantic_text.normalize_learning_token,
+            packaged_semantic_text.normalize_learning_token,
         )
 
     def test_skill_invocation_contract_keeps_legacy_identity(self) -> None:

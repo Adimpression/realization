@@ -571,9 +571,9 @@
     "cyclic_internal_edge_count": 0,
     "cyclic_node_count": 0,
     "cyclic_scc_count": 0,
-    "edge_count": 300,
+    "edge_count": 293,
     "largest_cyclic_scc_node_count": 0,
-    "node_count": 164
+    "node_count": 157
   },
   "compatibility_edges": [
     {
@@ -619,12 +619,6 @@
       "direction": "root_to_component",
       "source": "TRIAL_DOMAIN_VALIDATION",
       "target": "validation"
-    },
-    {
-      "category": "dto_constants",
-      "direction": "root_to_component",
-      "source": "applied_theory_primitives",
-      "target": "core_semantics"
     },
     {
       "category": "dto_constants",
@@ -751,12 +745,6 @@
       "direction": "root_to_component",
       "source": "blend_world_store",
       "target": "blend_application"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "boundary",
-      "target": "core_semantics"
     },
     {
       "category": "compatibility",
@@ -1053,12 +1041,6 @@
       "target": "governed_core"
     },
     {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "id_generation",
-      "target": "core_semantics"
-    },
-    {
       "category": "orchestration",
       "direction": "root_to_component",
       "source": "itemize",
@@ -1145,12 +1127,6 @@
     {
       "category": "orchestration",
       "direction": "root_to_component",
-      "source": "normalization_primitives",
-      "target": "core_semantics"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
       "source": "normalization_runtime_dependencies",
       "target": "core_engine"
     },
@@ -1171,12 +1147,6 @@
       "direction": "root_to_component",
       "source": "not_elaboration_ranking",
       "target": "core_engine"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "prolog",
-      "target": "core_semantics"
     },
     {
       "category": "orchestration",
@@ -1315,12 +1285,6 @@
       "direction": "root_to_component",
       "source": "semantic_prompt_posture",
       "target": "core_engine"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "semantic_text",
-      "target": "core_semantics"
     },
     {
       "category": "orchestration",
@@ -1479,12 +1443,6 @@
       "target": "validation"
     },
     {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "title_semantics",
-      "target": "core_semantics"
-    },
-    {
       "category": "orchestration",
       "direction": "root_to_component",
       "source": "url_learning_capture",
@@ -1529,13 +1487,6 @@
       "owner": "validation_trial",
       "statuses": [
         "validation"
-      ]
-    },
-    {
-      "module": "applied_theory_primitives",
-      "owner": "semantic_model",
-      "statuses": [
-        "compatibility_facade"
       ]
     },
     {
@@ -1653,13 +1604,6 @@
     {
       "module": "blend_world_store",
       "owner": "blend",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "boundary",
-      "owner": "semantic_model",
       "statuses": [
         "compatibility_facade"
       ]
@@ -1931,13 +1875,6 @@
       ]
     },
     {
-      "module": "id_generation",
-      "owner": "semantic_model",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
       "module": "itemize",
       "owner": "subject_domain",
       "statuses": [
@@ -2037,13 +1974,6 @@
       ]
     },
     {
-      "module": "normalization_primitives",
-      "owner": "semantic_model",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
       "module": "normalization_runtime_dependencies",
       "owner": "controller",
       "statuses": [
@@ -2060,13 +1990,6 @@
     {
       "module": "not_elaboration_ranking",
       "owner": "controller",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "prolog",
-      "owner": "semantic_model",
       "statuses": [
         "compatibility_facade"
       ]
@@ -2193,13 +2116,6 @@
     {
       "module": "semantic_prompt_posture",
       "owner": "controller",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "semantic_text",
-      "owner": "semantic_model",
       "statuses": [
         "compatibility_facade"
       ]
@@ -2373,13 +2289,6 @@
       ]
     },
     {
-      "module": "title_semantics",
-      "owner": "semantic_model",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
       "module": "url_learning_capture",
       "owner": "subject_domain",
       "statuses": [
@@ -2456,10 +2365,6 @@
     {
       "source": "TRIAL_DOMAIN_VALIDATION",
       "target": "validation"
-    },
-    {
-      "source": "applied_theory_primitives",
-      "target": "core_semantics"
     },
     {
       "source": "applied_theory_types",
@@ -2544,10 +2449,6 @@
     {
       "source": "blend_world_store",
       "target": "blend_application"
-    },
-    {
-      "source": "boundary",
-      "target": "core_semantics"
     },
     {
       "source": "capability_runtime",
@@ -2746,10 +2647,6 @@
       "target": "governed_core"
     },
     {
-      "source": "id_generation",
-      "target": "core_semantics"
-    },
-    {
       "source": "itemize",
       "target": "core_semantics"
     },
@@ -2806,10 +2703,6 @@
       "target": "core_engine"
     },
     {
-      "source": "normalization_primitives",
-      "target": "core_semantics"
-    },
-    {
       "source": "normalization_runtime_dependencies",
       "target": "core_engine"
     },
@@ -2824,10 +2717,6 @@
     {
       "source": "not_elaboration_ranking",
       "target": "core_engine"
-    },
-    {
-      "source": "prolog",
-      "target": "core_semantics"
     },
     {
       "source": "prompt_directives",
@@ -2920,10 +2809,6 @@
     {
       "source": "semantic_prompt_posture",
       "target": "core_engine"
-    },
-    {
-      "source": "semantic_text",
-      "target": "core_semantics"
     },
     {
       "source": "side",
@@ -3028,10 +2913,6 @@
     {
       "source": "title_depth_learning_validation",
       "target": "validation"
-    },
-    {
-      "source": "title_semantics",
-      "target": "core_semantics"
     },
     {
       "source": "url_learning_capture",

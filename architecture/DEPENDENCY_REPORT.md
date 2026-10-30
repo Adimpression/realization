@@ -50,7 +50,6 @@ Every repository-root Python module has one explicit responsibility. Status is o
 | --- | --- | --- |
 | `SEMANTIC_RELATION_VALIDATION` | `validation_trial` | `validation` |
 | `TRIAL_DOMAIN_VALIDATION` | `validation_trial` | `validation` |
-| `applied_theory_primitives` | `semantic_model` | `compatibility_facade` |
 | `applied_theory_types` | `semantic_model` | `compatibility_facade` |
 | `approval_governance` | `governance` | `compatibility_facade` |
 | `args` | `entry_exchange` | `entrypoint` |
@@ -68,7 +67,6 @@ Every repository-root Python module has one explicit responsibility. Status is o
 | `blend_world` | `blend` | `compatibility_facade` |
 | `blend_world_models` | `blend` | `compatibility_facade` |
 | `blend_world_store` | `blend` | `compatibility_facade` |
-| `boundary` | `semantic_model` | `compatibility_facade` |
 | `capability_runtime` | `runtime_execution` | `compatibility_facade` |
 | `constitutional_trace` | `controller` | `compatibility_facade` |
 | `controller_entrypoint_binding` | `entry_exchange` | `compatibility_facade` |
@@ -107,7 +105,6 @@ Every repository-root Python module has one explicit responsibility. Status is o
 | `host_interaction_resolution` | `runtime_execution` | `compatibility_facade` |
 | `host_mediation` | `runtime_execution` | `compatibility_facade` |
 | `host_realizers` | `runtime_execution` | `compatibility_facade` |
-| `id_generation` | `semantic_model` | `compatibility_facade` |
 | `itemize` | `subject_domain` | `compatibility_facade` |
 | `itemize_models` | `subject_domain` | `compatibility_facade` |
 | `itemize_validation` | `subject_domain` | `compatibility_facade` |
@@ -122,11 +119,9 @@ Every repository-root Python module has one explicit responsibility. Status is o
 | `markdown_ir` | `subject_domain` | `compatibility_facade` |
 | `markdown_learning_artifact_semantics` | `controller` | `compatibility_facade` |
 | `non_achievedness_normalization` | `controller` | `compatibility_facade` |
-| `normalization_primitives` | `semantic_model` | `compatibility_facade` |
 | `normalization_runtime_dependencies` | `controller` | `compatibility_facade` |
 | `normalize` | `compatibility` | `compatibility_facade` |
 | `not_elaboration_ranking` | `controller` | `compatibility_facade` |
-| `prolog` | `semantic_model` | `compatibility_facade` |
 | `prompt_directives` | `controller` | `compatibility_facade` |
 | `publication` | `subject_domain` | `compatibility_facade` |
 | `publication_projection` | `subject_domain` | `compatibility_facade` |
@@ -145,7 +140,6 @@ Every repository-root Python module has one explicit responsibility. Status is o
 | `runtime_governance_context` | `governance` | `compatibility_facade` |
 | `runtime_temp` | `runtime_execution` | `compatibility_facade` |
 | `semantic_prompt_posture` | `controller` | `compatibility_facade` |
-| `semantic_text` | `semantic_model` | `compatibility_facade` |
 | `side` | `entry_exchange` | `compatibility_facade` |
 | `side_runtime_dependencies` | `entry_exchange` | `compatibility_facade` |
 | `skill_boundary_normalization` | `portable_skills` | `compatibility_facade` |
@@ -170,7 +164,6 @@ Every repository-root Python module has one explicit responsibility. Status is o
 | `system_state` | `controller` | `compatibility_facade` |
 | `tablet_safety_validation` | `validation_trial` | `validation` |
 | `title_depth_learning_validation` | `validation_trial` | `validation` |
-| `title_semantics` | `semantic_model` | `compatibility_facade` |
 | `url_learning_capture` | `subject_domain` | `compatibility_facade` |
 | `validation_ladder` | `validation_trial` | `compatibility_facade`, `validation` |
 | `validation_sqlite` | `validation_trial` | `compatibility_facade`, `validation` |
@@ -386,8 +379,8 @@ These edges exist only to preserve historical import paths. They are excluded fr
 
 | Metric | Count |
 | --- | ---: |
-| Nodes | 164 |
-| Edges | 300 |
+| Nodes | 157 |
+| Edges | 293 |
 | Cyclic SCCs | 0 |
 | Nodes in cyclic SCCs | 0 |
 | Edges internal to cyclic SCCs | 0 |
@@ -406,7 +399,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | --- | --- | --- | --- |
 | `root_to_component` | `SEMANTIC_RELATION_VALIDATION` | `core_engine` | `orchestration` |
 | `root_to_component` | `TRIAL_DOMAIN_VALIDATION` | `validation` | `orchestration` |
-| `root_to_component` | `applied_theory_primitives` | `core_semantics` | `dto_constants` |
 | `root_to_component` | `applied_theory_types` | `core_semantics` | `dto_constants` |
 | `root_to_component` | `approval_governance` | `core_governance` | `compatibility` |
 | `root_to_component` | `approval_governance` | `core_semantics` | `compatibility` |
@@ -428,7 +420,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `root_to_component` | `blend_world` | `blend_application` | `compatibility` |
 | `root_to_component` | `blend_world_models` | `blend` | `compatibility` |
 | `root_to_component` | `blend_world_store` | `blend_application` | `compatibility` |
-| `root_to_component` | `boundary` | `core_semantics` | `orchestration` |
 | `root_to_component` | `capability_runtime` | `governed_core` | `compatibility` |
 | `root_to_component` | `constitutional_trace` | `core_engine` | `orchestration` |
 | `root_to_component` | `controller_entrypoint_binding` | `core_engine` | `compatibility` |
@@ -478,7 +469,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `root_to_component` | `host_interaction_resolution` | `host_interaction` | `compatibility` |
 | `root_to_component` | `host_mediation` | `core_engine` | `compatibility` |
 | `root_to_component` | `host_realizers` | `governed_core` | `orchestration` |
-| `root_to_component` | `id_generation` | `core_semantics` | `compatibility` |
 | `root_to_component` | `itemize` | `core_semantics` | `orchestration` |
 | `root_to_component` | `itemize` | `subject_core` | `orchestration` |
 | `root_to_component` | `itemize_models` | `core_semantics` | `dto_constants` |
@@ -493,12 +483,10 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `root_to_component` | `markdown_ir` | `core_semantics` | `orchestration` |
 | `root_to_component` | `markdown_learning_artifact_semantics` | `core_engine` | `compatibility` |
 | `root_to_component` | `non_achievedness_normalization` | `core_engine` | `orchestration` |
-| `root_to_component` | `normalization_primitives` | `core_semantics` | `orchestration` |
 | `root_to_component` | `normalization_runtime_dependencies` | `core_engine` | `orchestration` |
 | `root_to_component` | `normalize` | `core_engine` | `orchestration` |
 | `root_to_component` | `normalize` | `core_semantics` | `orchestration` |
 | `root_to_component` | `not_elaboration_ranking` | `core_engine` | `orchestration` |
-| `root_to_component` | `prolog` | `core_semantics` | `compatibility` |
 | `root_to_component` | `prompt_directives` | `core_engine` | `orchestration` |
 | `root_to_component` | `publication` | `subject_core` | `compatibility` |
 | `root_to_component` | `publication_projection` | `subject_core` | `compatibility` |
@@ -522,7 +510,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `root_to_component` | `runtime_governance_context` | `core_engine` | `compatibility` |
 | `root_to_component` | `runtime_temp` | `governed_core` | `orchestration` |
 | `root_to_component` | `semantic_prompt_posture` | `core_engine` | `orchestration` |
-| `root_to_component` | `semantic_text` | `core_semantics` | `compatibility` |
 | `root_to_component` | `side` | `exchange` | `orchestration` |
 | `root_to_component` | `side_runtime_dependencies` | `exchange` | `orchestration` |
 | `root_to_component` | `skill_boundary_normalization` | `skill_application` | `compatibility` |
@@ -549,7 +536,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `root_to_component` | `system_state` | `core_engine` | `orchestration` |
 | `root_to_component` | `tablet_safety_validation` | `validation` | `orchestration` |
 | `root_to_component` | `title_depth_learning_validation` | `validation` | `orchestration` |
-| `root_to_component` | `title_semantics` | `core_semantics` | `compatibility` |
 | `root_to_component` | `url_learning_capture` | `subject_service` | `orchestration` |
 | `root_to_component` | `validation_ladder` | `validation` | `compatibility` |
 | `root_to_component` | `validation_sqlite` | `validation` | `compatibility` |
@@ -564,7 +550,6 @@ No workspace package imports a root application module.
 
 - `SEMANTIC_RELATION_VALIDATION` -> `core_engine` (`SEMANTIC_RELATION_VALIDATION.py`)
 - `TRIAL_DOMAIN_VALIDATION` -> `validation` (`TRIAL_DOMAIN_VALIDATION.py`)
-- `applied_theory_primitives` -> `core_semantics` (`applied_theory_primitives.py`)
 - `applied_theory_types` -> `core_semantics` (`applied_theory_types.py`)
 - `approval_governance` -> `core_governance` (`approval_governance.py`)
 - `approval_governance` -> `core_semantics` (`approval_governance.py`)
@@ -586,7 +571,6 @@ No workspace package imports a root application module.
 - `blend_world` -> `blend_application` (`blend_world.py`)
 - `blend_world_models` -> `blend` (`blend_world_models.py`)
 - `blend_world_store` -> `blend_application` (`blend_world_store.py`)
-- `boundary` -> `core_semantics` (`boundary.py`)
 - `capability_runtime` -> `governed_core` (`capability_runtime.py`)
 - `constitutional_trace` -> `core_engine` (`constitutional_trace.py`)
 - `controller_entrypoint_binding` -> `core_engine` (`controller_entrypoint_binding.py`)
@@ -636,7 +620,6 @@ No workspace package imports a root application module.
 - `host_interaction_resolution` -> `host_interaction` (`host_interaction_resolution.py`)
 - `host_mediation` -> `core_engine` (`host_mediation.py`)
 - `host_realizers` -> `governed_core` (`host_realizers.py`)
-- `id_generation` -> `core_semantics` (`id_generation.py`)
 - `itemize` -> `core_semantics` (`itemize.py`)
 - `itemize` -> `subject_core` (`itemize.py`)
 - `itemize_models` -> `core_semantics` (`itemize_models.py`)
@@ -651,12 +634,10 @@ No workspace package imports a root application module.
 - `markdown_ir` -> `core_semantics` (`markdown_ir.py`)
 - `markdown_learning_artifact_semantics` -> `core_engine` (`markdown_learning_artifact_semantics.py`)
 - `non_achievedness_normalization` -> `core_engine` (`non_achievedness_normalization.py`)
-- `normalization_primitives` -> `core_semantics` (`normalization_primitives.py`)
 - `normalization_runtime_dependencies` -> `core_engine` (`normalization_runtime_dependencies.py`)
 - `normalize` -> `core_engine` (`normalize.py`)
 - `normalize` -> `core_semantics` (`normalize.py`)
 - `not_elaboration_ranking` -> `core_engine` (`not_elaboration_ranking.py`)
-- `prolog` -> `core_semantics` (`prolog.py`)
 - `prompt_directives` -> `core_engine` (`prompt_directives.py`)
 - `publication` -> `subject_core` (`publication.py`)
 - `publication_projection` -> `subject_core` (`publication_projection.py`)
@@ -680,7 +661,6 @@ No workspace package imports a root application module.
 - `runtime_governance_context` -> `core_engine` (`runtime_governance_context.py`)
 - `runtime_temp` -> `governed_core` (`runtime_temp.py`)
 - `semantic_prompt_posture` -> `core_engine` (`semantic_prompt_posture.py`)
-- `semantic_text` -> `core_semantics` (`semantic_text.py`)
 - `side` -> `exchange` (`side.py`)
 - `side_runtime_dependencies` -> `exchange` (`side_runtime_dependencies.py`)
 - `skill_boundary_normalization` -> `skill_application` (`skill_boundary_normalization.py`)
@@ -707,7 +687,6 @@ No workspace package imports a root application module.
 - `system_state` -> `core_engine` (`system_state.py`)
 - `tablet_safety_validation` -> `validation` (`tablet_safety_validation.py`)
 - `title_depth_learning_validation` -> `validation` (`title_depth_learning_validation.py`)
-- `title_semantics` -> `core_semantics` (`title_semantics.py`)
 - `url_learning_capture` -> `subject_service` (`url_learning_capture.py`)
 - `validation_ladder` -> `validation` (`validation_ladder.py`)
 - `validation_sqlite` -> `validation` (`validation_sqlite.py`)

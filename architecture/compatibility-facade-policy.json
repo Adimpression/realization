@@ -108,5 +108,41 @@
     }
   },
   "schema_version": 2,
-  "tombstones": {}
+  "tombstones": {
+    "applied_theory_primitives": {
+      "removal_change_reference": "semantic-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_semantics.applied_primitives"
+    },
+    "boundary": {
+      "removal_change_reference": "semantic-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_semantics.boundary"
+    },
+    "id_generation": {
+      "removal_change_reference": "semantic-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_semantics.identifiers"
+    },
+    "normalization_primitives": {
+      "removal_change_reference": "semantic-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_semantics.normalization"
+    },
+    "prolog": {
+      "removal_change_reference": "semantic-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_semantics.prolog"
+    },
+    "semantic_text": {
+      "removal_change_reference": "semantic-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_semantics.semantic_text"
+    },
+    "title_semantics": {
+      "removal_change_reference": "semantic-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_semantics.title_semantics"
+    }
+  }
 }

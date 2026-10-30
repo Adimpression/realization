@@ -244,9 +244,6 @@ legacy aliases.
   is no mutable global provider registry. The historical root
   `host_interaction_*.py` paths are explicit compatibility facades over this
   package.
-- `applied_theory_primitives.py`: Applied-theory enums, pure-theory aliases,
-  derived value sets, and compatibility re-exports of the canonical timestamp
-  and JSON projection helpers in `realized_core_semantics.values`.
 - `artifact_contracts.py`: Compatibility facade for the canonical read-only
   artifact protocols in `realized_core_semantics.artifacts`.
 - `applied_theory_types.py`: Applied dataclasses and compatibility re-exports
@@ -285,7 +282,6 @@ legacy aliases.
 - `blend_workflow_store.py`: Identity-preserving compatibility alias for the
   JSON workflow repository owned by
   `realized_blend_application.workflow_store`.
-- `boundary.py`: Boundary-shape typing and boundary reasoning helpers.
 - `capability_runtime.py`: Runtime capability-grant issuance and
   capability-to-broker/executor mapping. Governance evaluates a supplied
   required authority against supplied grants; runtime still maps concrete
@@ -362,7 +358,6 @@ legacy aliases.
   executor and broker bindings, inspects runtime prerequisites, and builds one
   immutable provider per composition request.
 - `core_semantics/src/realized_core_semantics/identifiers.py`: Canonical dependency-free slug and identifier construction helpers for semantic and runtime values.
-- `id_generation.py`: Module-identity compatibility alias for canonical semantic identifier helpers.
 - `learn.py`: Learning-token, discriminator, and selection-signal helpers.
 - `workstation/subject/core/learning_context.py`: Canonical LearningContext
   aggregate for learning units, deltas and operations, sources, subject
@@ -422,11 +417,9 @@ legacy aliases.
   alias for deterministic Markdown encounter-to-artifact shaping owned by
   `realized_core_engine.markdown_learning_artifact_semantics`.
 - `non_achievedness_normalization.py`: Structured non-achievedness normalization orchestration over explicit runtime dependencies.
-- `normalization_primitives.py`: Canonical dependency-light normalization helpers for schema, representations, boundary values, and runtime enums.
 - `normalization_runtime_dependencies.py`: Explicit dependency surface used by structured non-achievedness normalization.
 - `normalize.py`: Compatibility facade preserving historical normalization imports and object identities.
 - `not_elaboration_ranking.py`: Canonical non-achievedness elaboration ranking.
-- `prolog.py`: Prolog/title representation helpers and query support.
 - `prompt_directives.py`: Prompt directive classification and intent-shaping helpers.
 - `workstation/subject/core/publication.py`: Canonical publication substrate for claim-centered governed report publication, including typed publication/section/claim/source/build/render-artifact records, deterministic snapshot hashing, and explicit on-disk publication persistence under the subject corpus home.
 - `publication.py`: Module-identity compatibility alias for the canonical subject-core publication substrate.
@@ -461,7 +454,6 @@ legacy aliases.
 - `runtime_governance_context.py`: Runtime-facing governance resolution facade.
 - `semantic_prompt_posture.py`: Prompt-posture classification and direct-answer preference helpers.
 - `SEMANTIC_RELATION_VALIDATION.py`: Standalone semantic relation validation script.
-- `semantic_text.py`: Semantic text normalization, literal decoding, and title/text helpers.
 - `side.py`: Exact module-identity compatibility alias for artifact-bundle YAML exchange owned by `realized_exchange.artifact_yaml`.
 - `side_runtime_dependencies.py`: Exact module-identity compatibility alias for artifact-exchange dependencies owned by `realized_exchange.dependencies`.
 - `skill_export_projection.py`: Exact module-identity compatibility alias for canonical portable-skill bundle export owned by `realized_exchange.skill_export`.
@@ -501,7 +493,6 @@ legacy aliases.
 - `system_state.py`: System state model, persistence, effect traces, and capability grant storage.
 - `tablet_safety_validation.py`: Standalone tablet-safety validation script.
 - `title_depth_learning_validation.py`: Standalone title-depth learning validation script.
-- `title_semantics.py`: Title semantics, title-depth, and Prolog-title helpers.
 - `TRIAL_DOMAIN_VALIDATION.py`: Multi-domain trial runner for fresh-db curriculum validation.
 - `validation_ladder.py`: Compatibility alias for
   `realized_validation.ladder`, the package-owned layered acceptance runner.

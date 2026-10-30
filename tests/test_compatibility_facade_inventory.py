@@ -64,7 +64,7 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
             qualification["minimum_stable_cycles"],
         )
         self.assertFalse(qualification["retirement_hold"])
-        self.assertEqual(79, len(self.inventory["retirement_candidates"]))
+        self.assertEqual(72, len(self.inventory["retirement_candidates"]))
         self.assertEqual(41, len(self.inventory["retirement_holds"]))
 
     def test_facade_shapes_match_reviewed_compatibility_cohorts(self) -> None:
@@ -72,7 +72,7 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
             {
                 "aggregate_reexport": 1,
                 "behavior_adapter": 5,
-                "exact_module_alias": 95,
+                "exact_module_alias": 88,
                 "symbol_reexport": 19,
             },
             self.inventory["summary"]["shape_counts"],
@@ -180,7 +180,7 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
             for row in self.inventory["facades"]
             if row["module"] in self.inventory["retirement_candidates"]
         }
-        self.assertEqual(79, len(candidates))
+        self.assertEqual(72, len(candidates))
         self.assertTrue(
             all(
                 row["retirement_state"] == "qualified"
@@ -190,6 +190,20 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
                 and not row["retirement_assessment"]["hold_reasons"]
                 for row in candidates.values()
             )
+        )
+
+    def test_removed_semantic_aliases_are_tombstoned(self) -> None:
+        self.assertEqual(
+            {
+                "applied_theory_primitives",
+                "boundary",
+                "id_generation",
+                "normalization_primitives",
+                "prolog",
+                "semantic_text",
+                "title_semantics",
+            },
+            set(self.inventory["retirement_policy"]["tombstones"]),
         )
 
     def test_patch_target_is_discovered_as_a_consumer(self) -> None:

@@ -4,8 +4,9 @@
 
 This document governs the staged retirement of repository-root historical
 import facades. Its control plane and internal-consumer migration are now
-implemented; it does not authorize immediate deletion and introduces no
-runtime behavior change.
+implemented, and its first qualified exact-alias cohort has been retired.
+Further deletion remains cohort-specific and requires the same isolated review
+and qualification; no retirement change may introduce runtime behavior change.
 
 In this document, **compatibility facade** means a root Python module retained
 to preserve a historical import, module identity, aggregate API, patch target,
@@ -156,26 +157,27 @@ Snapshot date: 2026-10-30.
 - [x] Generated observations and human policy are separated between
   `architecture/compatibility-facades.json` and
   `architecture/compatibility-facade-policy.json`.
-- [x] The current policy classifies 79 source-checkout-only facades as
-  repository-internal, contract-qualified candidates and keeps 41 facades on
-  explicit holds. Qualification makes a facade eligible for a later isolated
-  deletion review; it does not delete or deprecate it.
-- [x] The executable contract ledger contains all 120 retirement cards:
-  - 95 exact-module-object identity proofs
+- [x] The current policy classifies 72 source-checkout-only facades as
+  repository-internal, contract-qualified candidates, keeps 41 facades on
+  explicit holds, and permanently tombstones seven retired semantic aliases.
+  Qualification makes a retained facade eligible for a later isolated deletion
+  review; it does not itself delete or deprecate it.
+- [x] The executable contract ledger contains all 113 retained-facade cards:
+  - 88 exact-module-object identity proofs
   - 19 exported-symbol identity proofs
   - one manual multi-owner aggregate mapping
   - five manual behavior-equivalence surfaces
   - 35 facades carrying 133 exercised protocol-zero pickle globals
-- [x] Static consumers were reduced from the measured v2 baseline to 126:
-  - 121 imports in the designated compatibility-contract suite
+- [x] Static consumers were reduced from the measured v2 baseline to 119:
+  - 114 imports in the designated compatibility-contract suite
   - two imports in the dedicated `main` executable/CLI contract test
   - three facade-to-facade links in the held behavior-adapter chain
 - [x] No canonical package, public README example, or repository example
   imports a root facade.
-- [x] The current scanner records 968 non-AST references with dispositions:
-  - 615 historical narrative references
+- [x] The current scanner records 936 non-AST references with dispositions:
+  - 587 historical narrative references
   - 162 durable provenance references from checked-in receipts
-  - 75 compatibility-test evidence references
+  - 71 compatibility-test evidence references
   - five architecture evidence references
   - 111 runtime, durable-runtime, or runnable-guidance references
 - [x] All 111 blocking references belong to supported held surfaces:
@@ -186,10 +188,10 @@ Snapshot date: 2026-10-30.
   source imports `python_skill_host`; the runtime distribution deliberately
   ships that top-level module. It is therefore a durable compatibility
   obligation, not a low-risk alias candidate.
-- [x] Ordinary Python consumers of 93 exact aliases and all 19 symbol
-  re-export facades now use canonical package owners; the two remaining exact
+- [x] Ordinary Python consumers of retained qualified aliases and all 19 symbol
+  re-export facades use canonical package owners; the two remaining exact
   alias consumers belong to the held behavior-adapter dependency chain.
-- [x] Every one of the 79 qualified candidates has no non-contract consumer,
+- [x] Every one of the 72 retained qualified candidates has no non-contract consumer,
   no blocking runtime reference, no known durable-qualified-name obligation,
   and one unambiguous canonical replacement.
 - [x] The 41 holds preserve the proven pickle-qualified-name obligations and
@@ -199,6 +201,9 @@ Snapshot date: 2026-10-30.
   aliases because it preserves a historical `__main__` path. The scanner now
   rejects deletion eligibility whenever an executable facade has no explicit
   executable-obligation classification.
+- [x] The first seven `core_semantics` exact aliases are removed, their
+  canonical replacements remain unchanged, and tombstones reject accidental
+  reintroduction.
 
 ## Known Measurement Gap
 
@@ -610,9 +615,34 @@ Reviewed evidence:
   reverted.
 - [x] Checkpoint the completed consumer-migration and stable-qualification
   slice before starting this deletion change.
-- [ ] Delete the seven aliases, transition them to tombstones, remove their
+- [x] Delete the seven aliases, transition them to tombstones, remove their
   root ownership records and facade-only assertions, regenerate architecture
   artifacts, and qualify the resulting shrinking-only delta.
+
+Accepted deletion evidence, captured on 2026-10-30:
+
+- [x] The accepted graph is strictly smaller: owned roots `128 -> 121`,
+  root-to-component edges and boundary classifications `151 -> 144`, combined
+  nodes `164 -> 157`, and combined edges `300 -> 293`, with zero cyclic nodes
+  and no added dependency observation.
+- [x] The retained inventory contains `113` facades, `119` static consumers,
+  zero canonical-package consumers, zero public README references, and zero
+  public example consumers; seven semantic aliases are tombstoned.
+- [x] The retained contract ledger contains `113` cards, `88` exact aliases,
+  `35` facades with `133` durable pickle globals, and `90` facade contract
+  tests.
+- [x] Architecture, inventory, and compatibility qualification passed `153`
+  focused tests; the root suite passed `899` tests and the workstation suite
+  passed `633` tests with one expected skip.
+- [x] Skill-routing, report-creation, and incremental-publication BDD passed
+  `38` cases; publication reference capture reproduced eight actions and two
+  artifacts without a tracked artifact change.
+- [x] All `35` projects built wheels and source distributions and imported
+  their declared public modules in isolation; Flutter analysis found no issue
+  and all `51` widget tests passed.
+- [x] Rollback remains local: restore the seven alias files, their identity
+  assertions, and their active ledger records; no canonical implementation,
+  persisted state, workflow, or artifact must be reverted.
 
 Isolated pre-deletion rehearsal evidence, captured on 2026-10-30:
 

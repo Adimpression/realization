@@ -5342,19 +5342,38 @@ Qualification evidence (2026-10-29):
   `reference.json`, `report.md`, and `report.typ`; no behavioral artifact delta
   was accepted to complete the architecture migration.
 
+Completed deletion cut - first semantic exact-alias cohort (2026-10-30):
+
+- [x] Remove the seven repository-internal exact aliases
+  `applied_theory_primitives`, `boundary`, `id_generation`,
+  `normalization_primitives`, `prolog`, `semantic_text`, and
+  `title_semantics` without moving or changing their canonical
+  `realized_core_semantics` implementations.
+- [x] Remove only facade-identity assertions and root ownership/classification
+  entries, retain canonical behavior comparisons, and tombstone every removed
+  import with its explicit replacement.
+- [x] Accept only the shrinking architecture delta: owned roots `128 -> 121`,
+  combined graph nodes `164 -> 157`, combined edges `300 -> 293`, retained
+  facades `120 -> 113`, and exact aliases `95 -> 88`, with no new dependency
+  or cycle.
+- [x] Qualify the deletion with 153 focused architecture/compatibility tests,
+  899 root tests, 633 workstation tests, 38 targeted BDD cases, 35 isolated
+  wheel/sdist builds, deterministic publication capture, Flutter analysis, and
+  51 widget tests.
+
 Exit condition:
 
 - [x] The root-boundary ledger contains no canonical package-to-root
   implementation edges and only approved entry or compatibility edges remain.
 
-Deferred retirement work:
+Further retirement work:
 
-- Facade deletion is intentionally not part of this implementation change.
-  Each candidate must be selected from the machine-readable ledger, receive any
-  required external deprecation notice, be removed in a separate change, pass
-  the complete qualification ladder, and reduce the checked-in architecture
-  baseline. The two unchecked items above therefore remain the entry criteria
-  for those future deletion changes rather than unperformed canonical migration.
+- The first qualified cohort is retired. Each further candidate must still be
+  selected from the machine-readable ledger, receive any required external
+  deprecation notice, be removed in a separate change, pass the complete
+  qualification ladder, and reduce the checked-in architecture baseline. The
+  two unchecked program-level items above remain open until every approved
+  cohort has completed that process.
 
 ### Required Gates For Every Slice
 

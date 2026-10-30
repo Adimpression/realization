@@ -51,7 +51,6 @@ qualification_evidence = "architecture/qualification-baseline.json"
 default = "orchestration"
 pure_helper_modules = []
 dto_constant_modules = [
-  "applied_theory_primitives",
   "applied_theory_types",
   "decision_review_models",
   "itemize_models",
@@ -90,7 +89,6 @@ compatibility_modules = [
   "host_interaction_receipts",
   "host_interaction_resolution",
   "host_mediation",
-  "id_generation",
   "learning_context_markdown",
   "markdown_learning_artifact_semantics",
   "pure_theory_types",
@@ -98,12 +96,10 @@ compatibility_modules = [
   "publication_projection",
   "publication_render",
   "publication_validation",
-  "prolog",
   "review_composition",
   "governed_skill_access",
   "runtime_governance_context",
   "runtime_controller_api",
-  "semantic_text",
   "skill_governance_primitives",
   "skill_governance",
   "skill_boundary_normalization",
@@ -114,7 +110,6 @@ compatibility_modules = [
   "skill_lifecycle",
   "skill_path_notation",
   "skill_safety_governance",
-  "title_semantics",
   "validation_ladder",
   "validation_sqlite",
 ]
@@ -126,16 +121,9 @@ compatibility_modules = [
 # responsibility whose API they preserve.
 [root_module_ownership]
 semantic_model = [
-  "applied_theory_primitives",
   "applied_theory_types",
   "artifact_contracts",
-  "boundary",
-  "id_generation",
-  "normalization_primitives",
-  "prolog",
   "pure_theory_types",
-  "semantic_text",
-  "title_semantics",
 ]
 portable_skills = [
   "skill_boundary_normalization",
@@ -296,7 +284,6 @@ validation_modules = [
   "validation_sqlite",
 ]
 compatibility_facade_modules = [
-  "applied_theory_primitives",
   "applied_theory_types",
   "approval_governance",
   "artifact",
@@ -313,7 +300,6 @@ compatibility_facade_modules = [
   "blend_world_models",
   "blend_world_store",
   "artifact_contracts",
-  "boundary",
   "capability_runtime",
   "controller_entrypoint_binding",
   "controller_governance_bridge",
@@ -350,7 +336,6 @@ compatibility_facade_modules = [
   "host_brokers",
   "host_mediation",
   "host_realizers",
-  "id_generation",
   "itemize",
   "itemize_models",
   "itemize_validation",
@@ -366,7 +351,6 @@ compatibility_facade_modules = [
   "macos_host_brokers",
   "normalize",
   "non_achievedness_normalization",
-  "normalization_primitives",
   "normalization_runtime_dependencies",
   "not_elaboration_ranking",
   "pure_theory_types",
@@ -377,7 +361,6 @@ compatibility_facade_modules = [
   "python_skill_brokerization",
   "python_skill_host",
   "python_skill_host_transport",
-  "prolog",
   "prompt_directives",
   "review_composition",
   "retrieval_ranking",
@@ -387,7 +370,6 @@ compatibility_facade_modules = [
   "runtime_controller_api",
   "runtime_temp",
   "semantic_prompt_posture",
-  "semantic_text",
   "side",
   "side_runtime_dependencies",
   "skill_compatibility_export",
@@ -410,7 +392,6 @@ compatibility_facade_modules = [
   "store",
   "supplement",
   "system_state",
-  "title_semantics",
   "url_learning_capture",
   "validation_ladder",
   "validation_sqlite",

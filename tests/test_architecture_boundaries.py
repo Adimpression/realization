@@ -379,16 +379,6 @@ class RepositoryArchitectureBoundaryTest(unittest.TestCase):
                     ("subject_domain", ("compatibility_facade",)),
                     root_ownership[module],
                 )
-        self.assertEqual(
-            ("semantic_model", ("compatibility_facade",)),
-            root_ownership["id_generation"],
-        )
-        for module in ("prolog", "semantic_text", "title_semantics"):
-            with self.subTest(module=module):
-                self.assertEqual(
-                    ("semantic_model", ("compatibility_facade",)),
-                    root_ownership[module],
-                )
         for module in (
             "skill_boundary_normalization",
             "skill_composition",
