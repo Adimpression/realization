@@ -1391,6 +1391,35 @@ Reviewed and accepted evidence, captured on 2026-10-31:
   single facade-only identity test, active root-ledger entries, and tombstones;
   the canonical host-interaction package and its behavior remain unchanged.
 
+### Artifact Contract Re-Export Consumer Migration Review
+
+The first remaining semantic re-export had one facade-only import and one
+historical `from artifact_contracts import ...` consumer inside a canonical
+artifact protocol behavior test. The behavior test now obtains both protocol
+types from `realized_core_semantics.artifacts`; the compatibility facade and
+its symbol-identity contract remain unchanged for a later deletion change.
+
+Reviewed and accepted evidence, captured on 2026-10-31:
+
+- [x] The retained facade's static consumers shrink from two to one; its only
+  remaining consumer is the designated symbol-identity contract test.
+- [x] Canonical protocol conformance remains covered directly by
+  `core_semantics.tests.test_api` and by the migrated architecture behavior
+  assertion; no production import or package edge changed.
+- [x] Qualification passed `241` focused compatibility, canonical semantic,
+  artifact-boundary, and artifact-selection tests; all `876` applicable
+  non-provider root tests; and all `632` applicable non-provider workstation
+  tests under normal application composition.
+- [x] Provider-backed Markdown-learning and live-publication tests are outside
+  this test-consumer migration and are not claimed as passing; their seven
+  cases remain separately gated on explicit external-data authorization.
+- [x] All `46` deterministic workstation BDD cases passed; all `35` wheels and
+  source distributions built and imported in source isolation; publication
+  capture reproduced eight actions and two artifacts; Flutter analysis found
+  no issues and all `51` widget tests passed.
+- [x] Rollback restores only the historical test import and generated consumer
+  metadata; the retained facade and canonical semantic package are unchanged.
+
 ## Phase 5 - Retire Low-Risk Alias Cohorts
 
 Start with exact aliases that have no non-test consumers, no import-time

@@ -5639,6 +5639,22 @@ Completed deletion cut - host-interaction symbol re-export cohort
   Seven unrelated provider-backed cases remain explicitly outside this
   cohort's evidence pending external-data authorization.
 
+Completed migration cut - artifact contract re-export consumer
+(2026-10-31):
+
+- [x] Migrate the canonical artifact protocol behavior assertion from the
+  historical `artifact_contracts` projection to
+  `realized_core_semantics.artifacts` without deleting or changing the facade.
+- [x] Reduce the retained facade to its single designated symbol-identity
+  contract consumer, with no production import, dependency-edge, or behavior
+  change.
+- [x] Qualify the migration with 241 focused semantic/artifact/compatibility
+  tests, 876 applicable root tests, 632 applicable workstation tests, 46
+  deterministic BDD cases, all distribution builds and isolated imports,
+  deterministic publication capture, Flutter analysis, and 51 widget tests.
+  Seven unrelated provider-backed cases remain explicitly outside this
+  migration's evidence pending external-data authorization.
+
 Exit condition:
 
 - [x] The root-boundary ledger contains no canonical package-to-root

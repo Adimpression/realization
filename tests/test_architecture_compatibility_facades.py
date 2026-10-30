@@ -7,7 +7,6 @@ import applied_theory_types
 import approval_governance
 import args
 import artifact_contracts
-from artifact_contracts import ArtifactContentView, TitledArtifactContentView
 import blend_context
 import blend_operator
 import blend_operator_store
@@ -552,8 +551,11 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
             }
         )
 
-        self.assertIsInstance(artifact, ArtifactContentView)
-        self.assertIsInstance(artifact, TitledArtifactContentView)
+        self.assertIsInstance(artifact, packaged_artifact_contracts.ArtifactContentView)
+        self.assertIsInstance(
+            artifact,
+            packaged_artifact_contracts.TitledArtifactContentView,
+        )
         self.assertEqual(artifact.content, {"answer": "stable"})
 
     def test_legacy_utc_now_pickle_global_still_resolves(self) -> None:

@@ -387,12 +387,6 @@
           "line": 9,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
-        },
-        {
-          "import_kind": "from_import",
-          "line": 10,
-          "path": "tests/test_architecture_compatibility_facades.py",
-          "scope": "test"
         }
       ],
       "support_status": "repository_internal",
@@ -490,7 +484,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 11,
+          "line": 10,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -595,7 +589,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 12,
+          "line": 11,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -700,7 +694,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 13,
+          "line": 12,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -794,7 +788,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 14,
+          "line": 13,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -883,7 +877,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 15,
+          "line": 14,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -1028,7 +1022,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 16,
+          "line": 15,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -1093,7 +1087,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 17,
+          "line": 16,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -1164,7 +1158,7 @@
         },
         {
           "import_kind": "import",
-          "line": 19,
+          "line": 18,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -1246,7 +1240,7 @@
         },
         {
           "import_kind": "import",
-          "line": 18,
+          "line": 17,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -1355,7 +1349,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 20,
+          "line": 19,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -1452,7 +1446,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 21,
+          "line": 20,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -1613,7 +1607,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 22,
+          "line": 21,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -1710,7 +1704,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 23,
+          "line": 22,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -1791,7 +1785,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 24,
+          "line": 23,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -1880,7 +1874,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 25,
+          "line": 24,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -2021,7 +2015,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 36,
+          "line": 35,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -2180,7 +2174,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 27,
+          "line": 26,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -2284,7 +2278,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 26,
+          "line": 25,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -2349,7 +2343,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 28,
+          "line": 27,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -2438,7 +2432,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 29,
+          "line": 28,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -2554,7 +2548,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 30,
+          "line": 29,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -2675,7 +2669,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 31,
+          "line": 30,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -2752,7 +2746,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 32,
+          "line": 31,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -2833,7 +2827,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 33,
+          "line": 32,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -3018,7 +3012,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 34,
+          "line": 33,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -3106,13 +3100,13 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 466,
+          "line": 465,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         },
         {
           "import_kind": "import",
-          "line": 479,
+          "line": 478,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         },
@@ -4557,7 +4551,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 35,
+          "line": 34,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -5048,7 +5042,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 37,
+          "line": 36,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -5121,7 +5115,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 38,
+          "line": 37,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -5252,7 +5246,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 41,
+          "line": 40,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -5813,7 +5807,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 39,
+          "line": 38,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -5940,7 +5934,7 @@
         },
         {
           "import_kind": "import",
-          "line": 40,
+          "line": 39,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -6277,7 +6271,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 47,
+          "line": 46,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -6398,7 +6392,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 44,
+          "line": 43,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -6559,7 +6553,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 42,
+          "line": 41,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -6802,7 +6796,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 43,
+          "line": 42,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -6923,7 +6917,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 46,
+          "line": 45,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -7028,7 +7022,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 45,
+          "line": 44,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -7221,7 +7215,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 48,
+          "line": 47,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -7442,7 +7436,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 49,
+          "line": 48,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -7569,7 +7563,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 50,
+          "line": 49,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -7876,7 +7870,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 51,
+          "line": 50,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -7977,7 +7971,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 52,
+          "line": 51,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -8772,7 +8766,7 @@
   "summary": {
     "canonical_package_consumer_count": 0,
     "eligible_retirement_candidate_count": 5,
-    "facade_contract_consumer_count": 48,
+    "facade_contract_consumer_count": 47,
     "facade_count": 46,
     "public_documentation_reference_count": 0,
     "public_example_consumer_count": 0,
@@ -8782,14 +8776,14 @@
       "exact_module_alias": 28,
       "symbol_reexport": 12
     },
-    "static_consumer_count": 53,
+    "static_consumer_count": 52,
     "static_consumer_kind_counts": {
-      "from_import": 4,
+      "from_import": 3,
       "import": 49
     },
     "static_consumer_scope_counts": {
       "compatibility_facade": 3,
-      "test": 50
+      "test": 49
     },
     "text_reference_count": 537,
     "text_reference_disposition_counts": {
