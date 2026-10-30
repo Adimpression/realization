@@ -1397,7 +1397,7 @@
         {
           "disposition": "architecture_evidence",
           "inside_code_fence": false,
-          "line": 1957,
+          "line": 1838,
           "path": "architecture/dependency-baseline.json",
           "reference_kind": "module_file_path",
           "scope": "architecture_documentation"
@@ -2021,7 +2021,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 43,
+          "line": 36,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -2393,657 +2393,6 @@
     {
       "canonical_exports": [
         {
-          "component": "host_interaction",
-          "exported_name": "SHARED_HOST_INTERACTION_ACTION_CAPABILITIES",
-          "module": "realized_host_interaction.action_dispatch",
-          "source_name": "SHARED_HOST_INTERACTION_ACTION_CAPABILITIES"
-        },
-        {
-          "component": "host_interaction",
-          "exported_name": "execute_shared_host_interaction_action",
-          "module": "realized_host_interaction.action_dispatch",
-          "source_name": "execute_shared_host_interaction_action"
-        },
-        {
-          "component": "host_interaction",
-          "exported_name": "is_shared_host_interaction_action_capability",
-          "module": "realized_host_interaction.action_dispatch",
-          "source_name": "is_shared_host_interaction_action_capability"
-        }
-      ],
-      "canonical_module_identity": "",
-      "canonical_targets": [
-        {
-          "component": "host_interaction",
-          "module": "realized_host_interaction.action_dispatch"
-        }
-      ],
-      "durable_qualified_name_status": "clear",
-      "earliest_removal_condition": "one_stable_qualification_cycle_after_final_consumer_migration",
-      "executable_obligation": "none",
-      "executable_surface": false,
-      "hold_reason": "No active policy hold; the repository-internal facade is qualified only for an isolated deletion change with tombstone and rollback evidence.",
-      "import_obligation": "repository_only",
-      "last_consumer_scan_evidence": "architecture/compatibility-facades.json",
-      "last_qualification_evidence": "architecture/qualification-baseline.json",
-      "module": "host_interaction_action_dispatch",
-      "notice_reference": "",
-      "owner": "runtime_execution",
-      "path": "host_interaction_action_dispatch.py",
-      "policy_source": "default",
-      "replacement_commands": [],
-      "retirement_assessment": {
-        "blocking_text_reference_count": 0,
-        "eligible_for_deletion": true,
-        "hold_reasons": [],
-        "non_contract_consumer_count": 0,
-        "text_reference_count": 2
-      },
-      "retirement_state": "qualified",
-      "review_condition": "Delete only in an owner-cohesive cohort after the contract ledger, consumer inventory, stable qualification evidence, tombstone, and facade-only rollback have been reviewed.",
-      "root_dependencies": [],
-      "shape": "symbol_reexport",
-      "static_consumers": [
-        {
-          "import_kind": "import",
-          "line": 30,
-          "path": "tests/test_architecture_compatibility_facades.py",
-          "scope": "test"
-        }
-      ],
-      "support_status": "repository_internal",
-      "text_references": [
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 639,
-          "path": "BLEND_IMPLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 107,
-          "path": "PERMISSIONS.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        }
-      ]
-    },
-    {
-      "canonical_exports": [
-        {
-          "component": "host_interaction",
-          "exported_name": "host_interaction_fs_read",
-          "module": "realized_host_interaction.actions",
-          "source_name": "host_interaction_fs_read"
-        },
-        {
-          "component": "host_interaction",
-          "exported_name": "host_interaction_net_http",
-          "module": "realized_host_interaction.actions",
-          "source_name": "host_interaction_net_http"
-        },
-        {
-          "component": "host_interaction",
-          "exported_name": "host_interaction_process_run",
-          "module": "realized_host_interaction.actions",
-          "source_name": "host_interaction_process_run"
-        },
-        {
-          "component": "host_interaction",
-          "exported_name": "host_interaction_repo_search",
-          "module": "realized_host_interaction.actions",
-          "source_name": "host_interaction_repo_search"
-        },
-        {
-          "component": "host_interaction",
-          "exported_name": "host_interaction_repo_tree",
-          "module": "realized_host_interaction.actions",
-          "source_name": "host_interaction_repo_tree"
-        }
-      ],
-      "canonical_module_identity": "",
-      "canonical_targets": [
-        {
-          "component": "host_interaction",
-          "module": "realized_host_interaction.actions"
-        }
-      ],
-      "durable_qualified_name_status": "clear",
-      "earliest_removal_condition": "one_stable_qualification_cycle_after_final_consumer_migration",
-      "executable_obligation": "none",
-      "executable_surface": false,
-      "hold_reason": "No active policy hold; the repository-internal facade is qualified only for an isolated deletion change with tombstone and rollback evidence.",
-      "import_obligation": "repository_only",
-      "last_consumer_scan_evidence": "architecture/compatibility-facades.json",
-      "last_qualification_evidence": "architecture/qualification-baseline.json",
-      "module": "host_interaction_actions",
-      "notice_reference": "",
-      "owner": "runtime_execution",
-      "path": "host_interaction_actions.py",
-      "policy_source": "default",
-      "replacement_commands": [],
-      "retirement_assessment": {
-        "blocking_text_reference_count": 0,
-        "eligible_for_deletion": true,
-        "hold_reasons": [],
-        "non_contract_consumer_count": 0,
-        "text_reference_count": 3
-      },
-      "retirement_state": "qualified",
-      "review_condition": "Delete only in an owner-cohesive cohort after the contract ledger, consumer inventory, stable qualification evidence, tombstone, and facade-only rollback have been reviewed.",
-      "root_dependencies": [],
-      "shape": "symbol_reexport",
-      "static_consumers": [
-        {
-          "import_kind": "import",
-          "line": 31,
-          "path": "tests/test_architecture_compatibility_facades.py",
-          "scope": "test"
-        }
-      ],
-      "support_status": "repository_internal",
-      "text_references": [
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 147,
-          "path": "BLEND_IMPLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 638,
-          "path": "BLEND_IMPLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 108,
-          "path": "PERMISSIONS.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        }
-      ]
-    },
-    {
-      "canonical_exports": [
-        {
-          "component": "host_interaction",
-          "exported_name": "HostInteractionContext",
-          "module": "realized_host_interaction.context",
-          "source_name": "HostInteractionContext"
-        },
-        {
-          "component": "host_interaction",
-          "exported_name": "StaticHostInteractionContext",
-          "module": "realized_host_interaction.context",
-          "source_name": "StaticHostInteractionContext"
-        },
-        {
-          "component": "host_interaction",
-          "exported_name": "host_interaction_attachments",
-          "module": "realized_host_interaction.context",
-          "source_name": "host_interaction_attachments"
-        },
-        {
-          "component": "host_interaction",
-          "exported_name": "host_interaction_descriptor_payload",
-          "module": "realized_host_interaction.context",
-          "source_name": "host_interaction_descriptor_payload"
-        },
-        {
-          "component": "host_interaction",
-          "exported_name": "host_interaction_virtual_mounts",
-          "module": "realized_host_interaction.context",
-          "source_name": "host_interaction_virtual_mounts"
-        },
-        {
-          "component": "host_interaction",
-          "exported_name": "host_interaction_workspace_root",
-          "module": "realized_host_interaction.context",
-          "source_name": "host_interaction_workspace_root"
-        },
-        {
-          "component": "host_interaction",
-          "exported_name": "host_native_interaction_context",
-          "module": "realized_host_interaction.context",
-          "source_name": "host_native_interaction_context"
-        },
-        {
-          "component": "host_interaction",
-          "exported_name": "normalize_host_interaction_attachment_path",
-          "module": "realized_host_interaction.context",
-          "source_name": "normalize_host_interaction_attachment_path"
-        },
-        {
-          "component": "host_interaction",
-          "exported_name": "primary_host_interaction_workspace",
-          "module": "realized_host_interaction.context",
-          "source_name": "primary_host_interaction_workspace"
-        },
-        {
-          "component": "host_interaction",
-          "exported_name": "resolve_host_interaction_attachment",
-          "module": "realized_host_interaction.context",
-          "source_name": "resolve_host_interaction_attachment"
-        }
-      ],
-      "canonical_module_identity": "",
-      "canonical_targets": [
-        {
-          "component": "host_interaction",
-          "module": "realized_host_interaction.context"
-        }
-      ],
-      "durable_qualified_name_status": "clear",
-      "earliest_removal_condition": "one_stable_qualification_cycle_after_final_consumer_migration",
-      "executable_obligation": "none",
-      "executable_surface": false,
-      "hold_reason": "No active policy hold; the repository-internal facade is qualified only for an isolated deletion change with tombstone and rollback evidence.",
-      "import_obligation": "repository_only",
-      "last_consumer_scan_evidence": "architecture/compatibility-facades.json",
-      "last_qualification_evidence": "architecture/qualification-baseline.json",
-      "module": "host_interaction_context",
-      "notice_reference": "",
-      "owner": "runtime_execution",
-      "path": "host_interaction_context.py",
-      "policy_source": "default",
-      "replacement_commands": [],
-      "retirement_assessment": {
-        "blocking_text_reference_count": 0,
-        "eligible_for_deletion": true,
-        "hold_reasons": [],
-        "non_contract_consumer_count": 0,
-        "text_reference_count": 2
-      },
-      "retirement_state": "qualified",
-      "review_condition": "Delete only in an owner-cohesive cohort after the contract ledger, consumer inventory, stable qualification evidence, tombstone, and facade-only rollback have been reviewed.",
-      "root_dependencies": [],
-      "shape": "symbol_reexport",
-      "static_consumers": [
-        {
-          "import_kind": "import",
-          "line": 32,
-          "path": "tests/test_architecture_compatibility_facades.py",
-          "scope": "test"
-        }
-      ],
-      "support_status": "repository_internal",
-      "text_references": [
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 165,
-          "path": "BLEND_IMPLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 622,
-          "path": "BLEND_IMPLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        }
-      ]
-    },
-    {
-      "canonical_exports": [
-        {
-          "component": "host_interaction",
-          "exported_name": "artifact_with_delegated_virtual_mounts",
-          "module": "realized_host_interaction.delegation",
-          "source_name": "artifact_with_delegated_virtual_mounts"
-        },
-        {
-          "component": "host_interaction",
-          "exported_name": "build_host_interaction_delegated_mounts",
-          "module": "realized_host_interaction.delegation",
-          "source_name": "build_host_interaction_delegated_mounts"
-        },
-        {
-          "component": "host_interaction",
-          "exported_name": "host_interaction_delegation_requires_escalation",
-          "module": "realized_host_interaction.delegation",
-          "source_name": "host_interaction_delegation_requires_escalation"
-        },
-        {
-          "component": "host_interaction",
-          "exported_name": "normalized_requested_delegation",
-          "module": "realized_host_interaction.delegation",
-          "source_name": "normalized_requested_delegation"
-        }
-      ],
-      "canonical_module_identity": "",
-      "canonical_targets": [
-        {
-          "component": "host_interaction",
-          "module": "realized_host_interaction.delegation"
-        }
-      ],
-      "durable_qualified_name_status": "clear",
-      "earliest_removal_condition": "one_stable_qualification_cycle_after_final_consumer_migration",
-      "executable_obligation": "none",
-      "executable_surface": false,
-      "hold_reason": "No active policy hold; the repository-internal facade is qualified only for an isolated deletion change with tombstone and rollback evidence.",
-      "import_obligation": "repository_only",
-      "last_consumer_scan_evidence": "architecture/compatibility-facades.json",
-      "last_qualification_evidence": "architecture/qualification-baseline.json",
-      "module": "host_interaction_delegation",
-      "notice_reference": "",
-      "owner": "runtime_execution",
-      "path": "host_interaction_delegation.py",
-      "policy_source": "default",
-      "replacement_commands": [],
-      "retirement_assessment": {
-        "blocking_text_reference_count": 0,
-        "eligible_for_deletion": true,
-        "hold_reasons": [],
-        "non_contract_consumer_count": 0,
-        "text_reference_count": 1
-      },
-      "retirement_state": "qualified",
-      "review_condition": "Delete only in an owner-cohesive cohort after the contract ledger, consumer inventory, stable qualification evidence, tombstone, and facade-only rollback have been reviewed.",
-      "root_dependencies": [],
-      "shape": "symbol_reexport",
-      "static_consumers": [
-        {
-          "import_kind": "import",
-          "line": 33,
-          "path": "tests/test_architecture_compatibility_facades.py",
-          "scope": "test"
-        }
-      ],
-      "support_status": "repository_internal",
-      "text_references": [
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 166,
-          "path": "BLEND_IMPLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        }
-      ]
-    },
-    {
-      "canonical_exports": [
-        {
-          "component": "host_interaction",
-          "exported_name": "HostInteractionAttachment",
-          "module": "realized_host_interaction.models",
-          "source_name": "HostInteractionAttachment"
-        },
-        {
-          "component": "host_interaction",
-          "exported_name": "HostInteractionDescriptor",
-          "module": "realized_host_interaction.models",
-          "source_name": "HostInteractionDescriptor"
-        }
-      ],
-      "canonical_module_identity": "",
-      "canonical_targets": [
-        {
-          "component": "host_interaction",
-          "module": "realized_host_interaction.models"
-        }
-      ],
-      "durable_qualified_name_status": "clear",
-      "earliest_removal_condition": "one_stable_qualification_cycle_after_final_consumer_migration",
-      "executable_obligation": "none",
-      "executable_surface": false,
-      "hold_reason": "No active policy hold; the repository-internal facade is qualified only for an isolated deletion change with tombstone and rollback evidence.",
-      "import_obligation": "repository_only",
-      "last_consumer_scan_evidence": "architecture/compatibility-facades.json",
-      "last_qualification_evidence": "architecture/qualification-baseline.json",
-      "module": "host_interaction_models",
-      "notice_reference": "",
-      "owner": "runtime_execution",
-      "path": "host_interaction_models.py",
-      "policy_source": "default",
-      "replacement_commands": [],
-      "retirement_assessment": {
-        "blocking_text_reference_count": 0,
-        "eligible_for_deletion": true,
-        "hold_reasons": [],
-        "non_contract_consumer_count": 0,
-        "text_reference_count": 0
-      },
-      "retirement_state": "qualified",
-      "review_condition": "Delete only in an owner-cohesive cohort after the contract ledger, consumer inventory, stable qualification evidence, tombstone, and facade-only rollback have been reviewed.",
-      "root_dependencies": [],
-      "shape": "symbol_reexport",
-      "static_consumers": [
-        {
-          "import_kind": "import",
-          "line": 34,
-          "path": "tests/test_architecture_compatibility_facades.py",
-          "scope": "test"
-        }
-      ],
-      "support_status": "repository_internal",
-      "text_references": []
-    },
-    {
-      "canonical_exports": [
-        {
-          "component": "host_interaction",
-          "exported_name": "append_host_interaction_receipt",
-          "module": "realized_host_interaction.receipts",
-          "source_name": "append_host_interaction_receipt"
-        },
-        {
-          "component": "host_interaction",
-          "exported_name": "host_interaction_assistant_response_receipt",
-          "module": "realized_host_interaction.receipts",
-          "source_name": "host_interaction_assistant_response_receipt"
-        },
-        {
-          "component": "host_interaction",
-          "exported_name": "host_interaction_capability_call_receipt",
-          "module": "realized_host_interaction.receipts",
-          "source_name": "host_interaction_capability_call_receipt"
-        },
-        {
-          "component": "host_interaction",
-          "exported_name": "host_interaction_delegation_approval_decision_receipt",
-          "module": "realized_host_interaction.receipts",
-          "source_name": "host_interaction_delegation_approval_decision_receipt"
-        },
-        {
-          "component": "host_interaction",
-          "exported_name": "host_interaction_delegation_approval_requested_receipt",
-          "module": "realized_host_interaction.receipts",
-          "source_name": "host_interaction_delegation_approval_requested_receipt"
-        },
-        {
-          "component": "host_interaction",
-          "exported_name": "host_interaction_receipts_path",
-          "module": "realized_host_interaction.receipts",
-          "source_name": "host_interaction_receipts_path"
-        },
-        {
-          "component": "host_interaction",
-          "exported_name": "host_interaction_user_prompt_receipt",
-          "module": "realized_host_interaction.receipts",
-          "source_name": "host_interaction_user_prompt_receipt"
-        }
-      ],
-      "canonical_module_identity": "",
-      "canonical_targets": [
-        {
-          "component": "host_interaction",
-          "module": "realized_host_interaction.receipts"
-        }
-      ],
-      "durable_qualified_name_status": "clear",
-      "earliest_removal_condition": "one_stable_qualification_cycle_after_final_consumer_migration",
-      "executable_obligation": "none",
-      "executable_surface": false,
-      "hold_reason": "No active policy hold; the repository-internal facade is qualified only for an isolated deletion change with tombstone and rollback evidence.",
-      "import_obligation": "repository_only",
-      "last_consumer_scan_evidence": "architecture/compatibility-facades.json",
-      "last_qualification_evidence": "architecture/qualification-baseline.json",
-      "module": "host_interaction_receipts",
-      "notice_reference": "",
-      "owner": "runtime_execution",
-      "path": "host_interaction_receipts.py",
-      "policy_source": "default",
-      "replacement_commands": [],
-      "retirement_assessment": {
-        "blocking_text_reference_count": 0,
-        "eligible_for_deletion": true,
-        "hold_reasons": [],
-        "non_contract_consumer_count": 0,
-        "text_reference_count": 4
-      },
-      "retirement_state": "qualified",
-      "review_condition": "Delete only in an owner-cohesive cohort after the contract ledger, consumer inventory, stable qualification evidence, tombstone, and facade-only rollback have been reviewed.",
-      "root_dependencies": [],
-      "shape": "symbol_reexport",
-      "static_consumers": [
-        {
-          "import_kind": "import",
-          "line": 35,
-          "path": "tests/test_architecture_compatibility_facades.py",
-          "scope": "test"
-        }
-      ],
-      "support_status": "repository_internal",
-      "text_references": [
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 196,
-          "path": "BLEND_IMPLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 259,
-          "path": "BLEND_IMPLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 640,
-          "path": "SKILLS_IMPLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 659,
-          "path": "SKILLS_IMPLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        }
-      ]
-    },
-    {
-      "canonical_exports": [
-        {
-          "component": "host_interaction",
-          "exported_name": "DEFAULT_HOST_INTERACTION_ROOT_LIKE_TARGETS",
-          "module": "realized_host_interaction.resolution",
-          "source_name": "DEFAULT_HOST_INTERACTION_ROOT_LIKE_TARGETS"
-        },
-        {
-          "component": "host_interaction",
-          "exported_name": "DEFAULT_HOST_INTERACTION_RUNTIME_ALIAS_TARGETS",
-          "module": "realized_host_interaction.resolution",
-          "source_name": "DEFAULT_HOST_INTERACTION_RUNTIME_ALIAS_TARGETS"
-        },
-        {
-          "component": "host_interaction",
-          "exported_name": "normalize_host_interaction_attachment_relative_path",
-          "module": "realized_host_interaction.resolution",
-          "source_name": "normalize_host_interaction_attachment_relative_path"
-        },
-        {
-          "component": "host_interaction",
-          "exported_name": "normalize_host_interaction_delegation_targets",
-          "module": "realized_host_interaction.resolution",
-          "source_name": "normalize_host_interaction_delegation_targets"
-        },
-        {
-          "component": "host_interaction",
-          "exported_name": "primary_workspace_attachment",
-          "module": "realized_host_interaction.resolution",
-          "source_name": "primary_workspace_attachment"
-        },
-        {
-          "component": "host_interaction",
-          "exported_name": "resolve_host_interaction_attachment_reference",
-          "module": "realized_host_interaction.resolution",
-          "source_name": "resolve_host_interaction_attachment_reference"
-        },
-        {
-          "component": "host_interaction",
-          "exported_name": "safe_join_within_attachment_root",
-          "module": "realized_host_interaction.resolution",
-          "source_name": "safe_join_within_attachment_root"
-        }
-      ],
-      "canonical_module_identity": "",
-      "canonical_targets": [
-        {
-          "component": "host_interaction",
-          "module": "realized_host_interaction.resolution"
-        }
-      ],
-      "durable_qualified_name_status": "clear",
-      "earliest_removal_condition": "one_stable_qualification_cycle_after_final_consumer_migration",
-      "executable_obligation": "none",
-      "executable_surface": false,
-      "hold_reason": "No active policy hold; the repository-internal facade is qualified only for an isolated deletion change with tombstone and rollback evidence.",
-      "import_obligation": "repository_only",
-      "last_consumer_scan_evidence": "architecture/compatibility-facades.json",
-      "last_qualification_evidence": "architecture/qualification-baseline.json",
-      "module": "host_interaction_resolution",
-      "notice_reference": "",
-      "owner": "runtime_execution",
-      "path": "host_interaction_resolution.py",
-      "policy_source": "default",
-      "replacement_commands": [],
-      "retirement_assessment": {
-        "blocking_text_reference_count": 0,
-        "eligible_for_deletion": true,
-        "hold_reasons": [],
-        "non_contract_consumer_count": 0,
-        "text_reference_count": 0
-      },
-      "retirement_state": "qualified",
-      "review_condition": "Delete only in an owner-cohesive cohort after the contract ledger, consumer inventory, stable qualification evidence, tombstone, and facade-only rollback have been reviewed.",
-      "root_dependencies": [],
-      "shape": "symbol_reexport",
-      "static_consumers": [
-        {
-          "import_kind": "import",
-          "line": 36,
-          "path": "tests/test_architecture_compatibility_facades.py",
-          "scope": "test"
-        }
-      ],
-      "support_status": "repository_internal",
-      "text_references": []
-    },
-    {
-      "canonical_exports": [
-        {
           "component": "core_engine",
           "exported_name": "_canonical",
           "module": "realized_core_engine",
@@ -3205,7 +2554,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 37,
+          "line": 30,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -3326,7 +2675,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 38,
+          "line": 31,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -3403,7 +2752,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 39,
+          "line": 32,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -3484,7 +2833,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 40,
+          "line": 33,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -3669,7 +3018,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 41,
+          "line": 34,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -3757,13 +3106,13 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 496,
+          "line": 466,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         },
         {
           "import_kind": "import",
-          "line": 509,
+          "line": 479,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         },
@@ -4129,7 +3478,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 192,
+          "line": 178,
           "path": "architecture/boundaries.toml",
           "reference_kind": "module_file_path",
           "scope": "architecture_documentation"
@@ -4321,7 +3670,7 @@
         {
           "disposition": "compatibility_evidence",
           "inside_code_fence": false,
-          "line": 302,
+          "line": 309,
           "path": "tests/test_compatibility_facade_inventory.py",
           "reference_kind": "module_invocation",
           "scope": "test"
@@ -4329,7 +3678,7 @@
         {
           "disposition": "compatibility_evidence",
           "inside_code_fence": false,
-          "line": 335,
+          "line": 342,
           "path": "tests/test_compatibility_facade_inventory.py",
           "reference_kind": "module_file_path",
           "scope": "test"
@@ -4337,7 +3686,7 @@
         {
           "disposition": "compatibility_evidence",
           "inside_code_fence": false,
-          "line": 336,
+          "line": 343,
           "path": "tests/test_compatibility_facade_inventory.py",
           "reference_kind": "module_file_path",
           "scope": "test"
@@ -4345,7 +3694,7 @@
         {
           "disposition": "compatibility_evidence",
           "inside_code_fence": false,
-          "line": 356,
+          "line": 363,
           "path": "tests/test_compatibility_facade_inventory.py",
           "reference_kind": "module_file_path",
           "scope": "test"
@@ -4353,7 +3702,7 @@
         {
           "disposition": "compatibility_evidence",
           "inside_code_fence": false,
-          "line": 357,
+          "line": 364,
           "path": "tests/test_compatibility_facade_inventory.py",
           "reference_kind": "module_file_path",
           "scope": "test"
@@ -4361,7 +3710,7 @@
         {
           "disposition": "compatibility_evidence",
           "inside_code_fence": false,
-          "line": 358,
+          "line": 365,
           "path": "tests/test_compatibility_facade_inventory.py",
           "reference_kind": "module_file_path",
           "scope": "test"
@@ -4369,7 +3718,7 @@
         {
           "disposition": "compatibility_evidence",
           "inside_code_fence": false,
-          "line": 384,
+          "line": 391,
           "path": "tests/test_compatibility_facade_inventory.py",
           "reference_kind": "module_file_path",
           "scope": "test"
@@ -5208,7 +4557,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 42,
+          "line": 35,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -5699,7 +5048,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 44,
+          "line": 37,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -5772,7 +5121,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 45,
+          "line": 38,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -5903,7 +5252,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 48,
+          "line": 41,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -6464,7 +5813,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 46,
+          "line": 39,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -6591,7 +5940,7 @@
         },
         {
           "import_kind": "import",
-          "line": 47,
+          "line": 40,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -6928,7 +6277,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 54,
+          "line": 47,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -7049,7 +6398,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 51,
+          "line": 44,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -7210,7 +6559,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 49,
+          "line": 42,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -7453,7 +6802,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 50,
+          "line": 43,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -7574,7 +6923,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 53,
+          "line": 46,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -7679,7 +7028,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 52,
+          "line": 45,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -7872,7 +7221,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 55,
+          "line": 48,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -8093,7 +7442,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 56,
+          "line": 49,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -8220,7 +7569,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 57,
+          "line": 50,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -8527,7 +7876,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 58,
+          "line": 51,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -8628,7 +7977,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 59,
+          "line": 52,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -8697,13 +8046,6 @@
     "artifact_contracts",
     "external_markdown_learning_pipeline",
     "fallback_not_semantics",
-    "host_interaction_action_dispatch",
-    "host_interaction_actions",
-    "host_interaction_context",
-    "host_interaction_delegation",
-    "host_interaction_models",
-    "host_interaction_receipts",
-    "host_interaction_resolution",
     "itemize_validation",
     "supplement"
   ],
@@ -9052,7 +8394,7 @@
       "tests/test_compatibility_facade_contracts.py"
     ],
     "path": "architecture/compatibility-facade-policy.json",
-    "tombstone_count": 67,
+    "tombstone_count": 74,
     "tombstones": {
       "applied_theory_primitives": {
         "removal_change_reference": "semantic-alias-cohort-1",
@@ -9168,6 +8510,41 @@
         "removal_change_reference": "runtime-leaf-cohort-1",
         "removed_at": "2026-10-30",
         "replacement": "realized_core_runtime.host_brokers"
+      },
+      "host_interaction_action_dispatch": {
+        "removal_change_reference": "host-interaction-reexport-cohort-1",
+        "removed_at": "2026-10-31",
+        "replacement": "realized_host_interaction.action_dispatch"
+      },
+      "host_interaction_actions": {
+        "removal_change_reference": "host-interaction-reexport-cohort-1",
+        "removed_at": "2026-10-31",
+        "replacement": "realized_host_interaction.actions"
+      },
+      "host_interaction_context": {
+        "removal_change_reference": "host-interaction-reexport-cohort-1",
+        "removed_at": "2026-10-31",
+        "replacement": "realized_host_interaction.context"
+      },
+      "host_interaction_delegation": {
+        "removal_change_reference": "host-interaction-reexport-cohort-1",
+        "removed_at": "2026-10-31",
+        "replacement": "realized_host_interaction.delegation"
+      },
+      "host_interaction_models": {
+        "removal_change_reference": "host-interaction-reexport-cohort-1",
+        "removed_at": "2026-10-31",
+        "replacement": "realized_host_interaction.models"
+      },
+      "host_interaction_receipts": {
+        "removal_change_reference": "host-interaction-reexport-cohort-1",
+        "removed_at": "2026-10-31",
+        "replacement": "realized_host_interaction.receipts"
+      },
+      "host_interaction_resolution": {
+        "removal_change_reference": "host-interaction-reexport-cohort-1",
+        "removed_at": "2026-10-31",
+        "replacement": "realized_host_interaction.resolution"
       },
       "host_realizers": {
         "removal_change_reference": "runtime-leaf-cohort-1",
@@ -9394,38 +8771,38 @@
   "schema_version": 2,
   "summary": {
     "canonical_package_consumer_count": 0,
-    "eligible_retirement_candidate_count": 12,
-    "facade_contract_consumer_count": 55,
-    "facade_count": 53,
+    "eligible_retirement_candidate_count": 5,
+    "facade_contract_consumer_count": 48,
+    "facade_count": 46,
     "public_documentation_reference_count": 0,
     "public_example_consumer_count": 0,
     "shape_counts": {
       "aggregate_reexport": 1,
       "behavior_adapter": 5,
       "exact_module_alias": 28,
-      "symbol_reexport": 19
+      "symbol_reexport": 12
     },
-    "static_consumer_count": 60,
+    "static_consumer_count": 53,
     "static_consumer_kind_counts": {
       "from_import": 4,
-      "import": 56
+      "import": 49
     },
     "static_consumer_scope_counts": {
       "compatibility_facade": 3,
-      "test": 57
+      "test": 50
     },
-    "text_reference_count": 549,
+    "text_reference_count": 537,
     "text_reference_disposition_counts": {
       "architecture_evidence": 5,
       "compatibility_evidence": 53,
       "durable_provenance_evidence": 54,
       "durable_runtime_reference": 16,
-      "historical_narrative": 326,
+      "historical_narrative": 314,
       "runnable_guidance": 59,
       "runtime_reference": 36
     },
     "text_reference_kind_counts": {
-      "module_file_path": 405,
+      "module_file_path": 393,
       "module_invocation": 1,
       "python_file_invocation": 57,
       "textual_import": 86
@@ -9433,7 +8810,7 @@
     "text_reference_scope_counts": {
       "architecture_documentation": 6,
       "configuration_or_fixture": 1,
-      "documentation": 307,
+      "documentation": 295,
       "durable_material": 54,
       "other_repository_reference": 40,
       "test": 60,

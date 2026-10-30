@@ -75,13 +75,6 @@ Every repository-root Python module has one explicit responsibility. Status is o
 | `fence_extraction_strategy` | `runtime_execution` | `compatibility_facade` |
 | `governance_inventory` | `controller` | `compatibility_facade` |
 | `governed_skill_installation` | `governance` | `entrypoint` |
-| `host_interaction_action_dispatch` | `runtime_execution` | `compatibility_facade` |
-| `host_interaction_actions` | `runtime_execution` | `compatibility_facade` |
-| `host_interaction_context` | `runtime_execution` | `compatibility_facade` |
-| `host_interaction_delegation` | `runtime_execution` | `compatibility_facade` |
-| `host_interaction_models` | `runtime_execution` | `compatibility_facade` |
-| `host_interaction_receipts` | `runtime_execution` | `compatibility_facade` |
-| `host_interaction_resolution` | `runtime_execution` | `compatibility_facade` |
 | `host_mediation` | `runtime_execution` | `compatibility_facade` |
 | `itemize` | `subject_domain` | `compatibility_facade` |
 | `itemize_models` | `subject_domain` | `compatibility_facade` |
@@ -319,8 +312,8 @@ These edges exist only to preserve historical import paths. They are excluded fr
 
 | Metric | Count |
 | --- | ---: |
-| Nodes | 97 |
-| Edges | 233 |
+| Nodes | 90 |
+| Edges | 226 |
 | Cyclic SCCs | 0 |
 | Nodes in cyclic SCCs | 0 |
 | Edges internal to cyclic SCCs | 0 |
@@ -379,13 +372,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `root_to_component` | `governed_skill_installation` | `exchange` | `orchestration` |
 | `root_to_component` | `governed_skill_installation` | `skill_application` | `orchestration` |
 | `root_to_component` | `governed_skill_installation` | `skill_semantics` | `orchestration` |
-| `root_to_component` | `host_interaction_action_dispatch` | `host_interaction` | `compatibility` |
-| `root_to_component` | `host_interaction_actions` | `host_interaction` | `compatibility` |
-| `root_to_component` | `host_interaction_context` | `host_interaction` | `compatibility` |
-| `root_to_component` | `host_interaction_delegation` | `host_interaction` | `compatibility` |
-| `root_to_component` | `host_interaction_models` | `host_interaction` | `compatibility` |
-| `root_to_component` | `host_interaction_receipts` | `host_interaction` | `compatibility` |
-| `root_to_component` | `host_interaction_resolution` | `host_interaction` | `compatibility` |
 | `root_to_component` | `host_mediation` | `core_engine` | `compatibility` |
 | `root_to_component` | `itemize` | `core_semantics` | `orchestration` |
 | `root_to_component` | `itemize` | `subject_core` | `orchestration` |
@@ -470,13 +456,6 @@ No workspace package imports a root application module.
 - `governed_skill_installation` -> `exchange` (`governed_skill_installation.py`)
 - `governed_skill_installation` -> `skill_application` (`governed_skill_installation.py`)
 - `governed_skill_installation` -> `skill_semantics` (`governed_skill_installation.py`)
-- `host_interaction_action_dispatch` -> `host_interaction` (`host_interaction_action_dispatch.py`)
-- `host_interaction_actions` -> `host_interaction` (`host_interaction_actions.py`)
-- `host_interaction_context` -> `host_interaction` (`host_interaction_context.py`)
-- `host_interaction_delegation` -> `host_interaction` (`host_interaction_delegation.py`)
-- `host_interaction_models` -> `host_interaction` (`host_interaction_models.py`)
-- `host_interaction_receipts` -> `host_interaction` (`host_interaction_receipts.py`)
-- `host_interaction_resolution` -> `host_interaction` (`host_interaction_resolution.py`)
 - `host_mediation` -> `core_engine` (`host_mediation.py`)
 - `itemize` -> `core_semantics` (`itemize.py`)
 - `itemize` -> `subject_core` (`itemize.py`)

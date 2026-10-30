@@ -1341,6 +1341,56 @@ Reviewed and accepted evidence, captured on 2026-10-30:
   documentation; canonical artifact semantics, governance integration, and
   system-state behavior remain unchanged.
 
+### Host-Interaction Re-Export Deletion Cohort Review
+
+The fifteenth deletion cohort contains seven symbol re-export facades for the
+shared host-interaction package.
+
+| Historical import | Canonical replacement |
+| --- | --- |
+| `host_interaction_action_dispatch` | `realized_host_interaction.action_dispatch` |
+| `host_interaction_actions` | `realized_host_interaction.actions` |
+| `host_interaction_context` | `realized_host_interaction.context` |
+| `host_interaction_delegation` | `realized_host_interaction.delegation` |
+| `host_interaction_models` | `realized_host_interaction.models` |
+| `host_interaction_receipts` | `realized_host_interaction.receipts` |
+| `host_interaction_resolution` | `realized_host_interaction.resolution` |
+
+Reviewed and accepted evidence, captured on 2026-10-31:
+
+- [x] Every exported name had one deliberate canonical target and preserved
+  object identity; none of the seven facades had a wildcard consumer,
+  non-contract consumer, blocking reference, executable surface, distinct
+  import effect, durable pickle global, or ambiguous owner.
+- [x] The single facade-only symbol-identity loop was removed while canonical
+  action dispatch, action execution, context, delegation, receipt, mediation,
+  resolution, and function-boundary tests remain active unchanged.
+- [x] The sequential architecture delta only shrank the graph: owned roots
+  `61 -> 54`, root-boundary classifications `84 -> 77`, combined graph nodes
+  `97 -> 90`, combined edges `233 -> 226`, and grandfathered observations
+  `103 -> 96`, with 35 components, 141 package edges, no addition, and no
+  cycle.
+- [x] The retained inventory contains `46` facades, `53` static consumers,
+  `5` qualified candidates, `41` holds, and `74` total tombstones, with no
+  canonical-package, public README, or public-example consumer.
+- [x] The retained contract ledger contains `46` cards, `28` exact aliases,
+  `12` symbol re-exports, `35` facades with `133` durable pickle globals, and
+  `73` facade contract tests.
+- [x] Qualification passed `247` focused architecture, canonical
+  host-interaction, mediation, executor-learning, and function-boundary tests;
+  all `876` applicable non-provider root tests; and all `632` applicable
+  non-provider workstation tests under normal application composition.
+- [x] Provider-backed Markdown-learning and live-publication tests are outside
+  this deterministic facade deletion and are not claimed as passing; their
+  seven cases remain separately gated on explicit external-data authorization.
+- [x] All `46` deterministic workstation BDD cases passed; all `35` wheels and
+  source distributions built and imported in source isolation using the locked
+  project interpreter; publication capture reproduced eight actions and two
+  artifacts; Flutter analysis found no issues and all `51` widget tests passed.
+- [x] Rollback remains local to the seven historical re-export files, their
+  single facade-only identity test, active root-ledger entries, and tombstones;
+  the canonical host-interaction package and its behavior remain unchanged.
+
 ## Phase 5 - Retire Low-Risk Alias Cohorts
 
 Start with exact aliases that have no non-test consumers, no import-time

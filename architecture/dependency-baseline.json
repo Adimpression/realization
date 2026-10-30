@@ -571,9 +571,9 @@
     "cyclic_internal_edge_count": 0,
     "cyclic_node_count": 0,
     "cyclic_scc_count": 0,
-    "edge_count": 233,
+    "edge_count": 226,
     "largest_cyclic_scc_node_count": 0,
-    "node_count": 97
+    "node_count": 90
   },
   "compatibility_edges": [
     {
@@ -859,48 +859,6 @@
       "direction": "root_to_component",
       "source": "governed_skill_installation",
       "target": "skill_semantics"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "host_interaction_action_dispatch",
-      "target": "host_interaction"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "host_interaction_actions",
-      "target": "host_interaction"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "host_interaction_context",
-      "target": "host_interaction"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "host_interaction_delegation",
-      "target": "host_interaction"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "host_interaction_models",
-      "target": "host_interaction"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "host_interaction_receipts",
-      "target": "host_interaction"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "host_interaction_resolution",
-      "target": "host_interaction"
     },
     {
       "category": "compatibility",
@@ -1305,55 +1263,6 @@
       ]
     },
     {
-      "module": "host_interaction_action_dispatch",
-      "owner": "runtime_execution",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "host_interaction_actions",
-      "owner": "runtime_execution",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "host_interaction_context",
-      "owner": "runtime_execution",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "host_interaction_delegation",
-      "owner": "runtime_execution",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "host_interaction_models",
-      "owner": "runtime_execution",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "host_interaction_receipts",
-      "owner": "runtime_execution",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "host_interaction_resolution",
-      "owner": "runtime_execution",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
       "module": "host_mediation",
       "owner": "runtime_execution",
       "statuses": [
@@ -1743,34 +1652,6 @@
     {
       "source": "governed_skill_installation",
       "target": "skill_semantics"
-    },
-    {
-      "source": "host_interaction_action_dispatch",
-      "target": "host_interaction"
-    },
-    {
-      "source": "host_interaction_actions",
-      "target": "host_interaction"
-    },
-    {
-      "source": "host_interaction_context",
-      "target": "host_interaction"
-    },
-    {
-      "source": "host_interaction_delegation",
-      "target": "host_interaction"
-    },
-    {
-      "source": "host_interaction_models",
-      "target": "host_interaction"
-    },
-    {
-      "source": "host_interaction_receipts",
-      "target": "host_interaction"
-    },
-    {
-      "source": "host_interaction_resolution",
-      "target": "host_interaction"
     },
     {
       "source": "host_mediation",

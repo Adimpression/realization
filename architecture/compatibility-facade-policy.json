@@ -224,6 +224,41 @@
       "removed_at": "2026-10-30",
       "replacement": "realized_core_runtime.host_realizers"
     },
+    "host_interaction_action_dispatch": {
+      "removal_change_reference": "host-interaction-reexport-cohort-1",
+      "removed_at": "2026-10-31",
+      "replacement": "realized_host_interaction.action_dispatch"
+    },
+    "host_interaction_actions": {
+      "removal_change_reference": "host-interaction-reexport-cohort-1",
+      "removed_at": "2026-10-31",
+      "replacement": "realized_host_interaction.actions"
+    },
+    "host_interaction_context": {
+      "removal_change_reference": "host-interaction-reexport-cohort-1",
+      "removed_at": "2026-10-31",
+      "replacement": "realized_host_interaction.context"
+    },
+    "host_interaction_delegation": {
+      "removal_change_reference": "host-interaction-reexport-cohort-1",
+      "removed_at": "2026-10-31",
+      "replacement": "realized_host_interaction.delegation"
+    },
+    "host_interaction_models": {
+      "removal_change_reference": "host-interaction-reexport-cohort-1",
+      "removed_at": "2026-10-31",
+      "replacement": "realized_host_interaction.models"
+    },
+    "host_interaction_receipts": {
+      "removal_change_reference": "host-interaction-reexport-cohort-1",
+      "removed_at": "2026-10-31",
+      "replacement": "realized_host_interaction.receipts"
+    },
+    "host_interaction_resolution": {
+      "removal_change_reference": "host-interaction-reexport-cohort-1",
+      "removed_at": "2026-10-31",
+      "replacement": "realized_host_interaction.resolution"
+    },
     "governed_skill_access": {
       "removal_change_reference": "governance-alias-cohort-1",
       "removed_at": "2026-10-30",

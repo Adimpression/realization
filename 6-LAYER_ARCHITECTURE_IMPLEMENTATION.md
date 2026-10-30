@@ -5616,6 +5616,29 @@ Completed deletion cut - controller integration exact-alias cohort
   provider-backed cases remain explicitly outside this cohort's evidence
   pending external-data authorization.
 
+Completed deletion cut - host-interaction symbol re-export cohort
+(2026-10-31):
+
+- [x] Remove seven repository-internal symbol projections for canonical host
+  action dispatch, actions, context, delegation, models, receipts, and
+  resolution without moving or changing the `realized-host-interaction`
+  implementation.
+- [x] Verify every exported symbol's canonical object identity, the absence of
+  wildcard and non-contract consumers, and the absence of facade-owned durable
+  pickle globals before deleting only the projections and their single
+  facade-only identity loop.
+- [x] Accept only the sequential shrinking delta: owned roots `61 -> 54`,
+  root-boundary classifications `84 -> 77`, combined graph nodes `97 -> 90`,
+  combined edges `233 -> 226`, grandfathered observations `103 -> 96`,
+  retained facades `53 -> 46`, and symbol re-exports `19 -> 12`, with no new
+  dependency or cycle.
+- [x] Qualify the non-model cut with 247 focused architecture/host-interaction
+  tests, 876 applicable root tests, 632 applicable workstation tests, 46
+  deterministic BDD cases, all distribution builds and isolated imports,
+  deterministic publication capture, Flutter analysis, and 51 widget tests.
+  Seven unrelated provider-backed cases remain explicitly outside this
+  cohort's evidence pending external-data authorization.
+
 Exit condition:
 
 - [x] The root-boundary ledger contains no canonical package-to-root

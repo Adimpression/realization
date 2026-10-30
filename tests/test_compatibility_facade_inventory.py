@@ -64,7 +64,7 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
             qualification["minimum_stable_cycles"],
         )
         self.assertFalse(qualification["retirement_hold"])
-        self.assertEqual(12, len(self.inventory["retirement_candidates"]))
+        self.assertEqual(5, len(self.inventory["retirement_candidates"]))
         self.assertEqual(41, len(self.inventory["retirement_holds"]))
 
     def test_facade_shapes_match_reviewed_compatibility_cohorts(self) -> None:
@@ -73,7 +73,7 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
                 "aggregate_reexport": 1,
                 "behavior_adapter": 5,
                 "exact_module_alias": 28,
-                "symbol_reexport": 19,
+                "symbol_reexport": 12,
             },
             self.inventory["summary"]["shape_counts"],
         )
@@ -183,7 +183,7 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
             for row in self.inventory["facades"]
             if row["module"] in self.inventory["retirement_candidates"]
         }
-        self.assertEqual(12, len(candidates))
+        self.assertEqual(5, len(candidates))
         self.assertTrue(
             all(
                 row["retirement_state"] == "qualified"
@@ -220,6 +220,13 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
                 "governed_semantic_reduction_runtime",
                 "host_abi",
                 "host_brokers",
+                "host_interaction_action_dispatch",
+                "host_interaction_actions",
+                "host_interaction_context",
+                "host_interaction_delegation",
+                "host_interaction_models",
+                "host_interaction_receipts",
+                "host_interaction_resolution",
                 "host_realizers",
                 "governed_skill_access",
                 "id_generation",

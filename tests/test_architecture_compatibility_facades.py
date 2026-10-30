@@ -27,13 +27,6 @@ import fence_extraction_strategy
 import fallback_not_semantics
 import governance_inventory
 import host_mediation
-import host_interaction_action_dispatch
-import host_interaction_actions
-import host_interaction_context
-import host_interaction_delegation
-import host_interaction_models
-import host_interaction_receipts
-import host_interaction_resolution
 import itemize
 import itemize_models
 import itemize_validation
@@ -57,15 +50,7 @@ import skill_lifecycle
 import skill_path_notation
 import skill_safety_governance
 import supplement
-from realized_host_interaction import (
-    action_dispatch as packaged_host_action_dispatch,
-    actions as packaged_host_actions,
-    context as packaged_host_context,
-    delegation as packaged_host_delegation,
-    models as packaged_host_models,
-    receipts as packaged_host_receipts,
-    resolution as packaged_host_resolution,
-)
+from realized_host_interaction import models as packaged_host_models
 from realized_host_interaction._normalization import (
     collapse_ws as host_interaction_collapse_ws,
     json_safe as host_interaction_json_safe,
@@ -450,21 +435,6 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
                     pickle.loads(f"cskill_composition\n{name}\n.".encode("ascii")),
                     getattr(packaged_skill_composition, name),
                 )
-
-    def test_host_interaction_facades_keep_packaged_identities(self) -> None:
-        facade_pairs = (
-            (host_interaction_action_dispatch, packaged_host_action_dispatch),
-            (host_interaction_actions, packaged_host_actions),
-            (host_interaction_context, packaged_host_context),
-            (host_interaction_delegation, packaged_host_delegation),
-            (host_interaction_models, packaged_host_models),
-            (host_interaction_receipts, packaged_host_receipts),
-            (host_interaction_resolution, packaged_host_resolution),
-        )
-        for facade, implementation in facade_pairs:
-            for name in facade.__all__:
-                with self.subTest(module=facade.__name__, name=name):
-                    self.assertIs(getattr(facade, name), getattr(implementation, name))
 
     def test_host_interaction_private_normalization_preserves_existing_behavior(self) -> None:
         for value in (" alpha\tbeta\n", "alpha\x00beta", "alpha\u2003beta"):
