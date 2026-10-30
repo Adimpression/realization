@@ -194,6 +194,11 @@
       "removed_at": "2026-10-30",
       "replacement": "workstation.subject.core.learning_context_projection"
     },
+    "learning_context_skill_projection": {
+      "removal_change_reference": "exchange-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_exchange.learning_context_skills"
+    },
     "macos_host_brokers": {
       "removal_change_reference": "runtime-leaf-cohort-1",
       "removed_at": "2026-10-30",
@@ -249,10 +254,55 @@
       "removed_at": "2026-10-30",
       "replacement": "realized_core_engine.runtime_governance_context"
     },
+    "run_bundle_io": {
+      "removal_change_reference": "exchange-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_exchange.run_bundle"
+    },
     "semantic_text": {
       "removal_change_reference": "semantic-alias-cohort-1",
       "removed_at": "2026-10-30",
       "replacement": "realized_core_semantics.semantic_text"
+    },
+    "side": {
+      "removal_change_reference": "exchange-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_exchange.artifact_yaml"
+    },
+    "side_runtime_dependencies": {
+      "removal_change_reference": "exchange-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_exchange.dependencies"
+    },
+    "skill_compatibility_export": {
+      "removal_change_reference": "exchange-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_exchange.compatibility_export"
+    },
+    "skill_compatibility_import": {
+      "removal_change_reference": "exchange-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_exchange.compatibility_import"
+    },
+    "skill_compiler": {
+      "removal_change_reference": "exchange-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_exchange.compiler"
+    },
+    "skill_export_projection": {
+      "removal_change_reference": "exchange-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_exchange.skill_export"
+    },
+    "skill_registry": {
+      "removal_change_reference": "exchange-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_exchange.registry"
+    },
+    "skill_schema_io": {
+      "removal_change_reference": "exchange-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_exchange.skill_schema"
     },
     "title_semantics": {
       "removal_change_reference": "semantic-alias-cohort-1",

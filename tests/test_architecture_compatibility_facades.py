@@ -9,8 +9,6 @@ import args
 import artifact
 import artifact_answer_resolution
 import artifact_contracts
-import side
-import side_runtime_dependencies
 from artifact_contracts import ArtifactContentView, TitledArtifactContentView
 import blend_context
 import blend_operator
@@ -52,7 +50,6 @@ import itemize_validation
 import learn
 import learning_context
 import learning_context_paths
-import learning_context_skill_projection
 import markdown_ir
 import markdown_learning_artifact_semantics
 import external_markdown_learning_pipeline
@@ -64,7 +61,6 @@ import pure_theory_types
 import prompt_directives
 import retrieval_ranking
 import review_composition
-import run_bundle_io
 import run_outcome_harvest_and_reporting
 import runtime_controller_api
 import python_skill_host
@@ -72,19 +68,13 @@ import semantic_prompt_posture
 import skill_governance
 import skill_governance_primitives
 import skill_composition
-import skill_compatibility_export
-import skill_compatibility_import
-import skill_compiler
-import skill_export_projection
 import skill_ir
 import skill_invocation_contract
 import skill_boundary_normalization
 import skill_leaf_types
 import skill_lifecycle
 import skill_path_notation
-import skill_registry
 import skill_safety_governance
-import skill_schema_io
 import structured_learning_yaml
 import store
 import supplement
@@ -174,7 +164,6 @@ from realized_core_runtime import fence_extraction as packaged_fence_extraction
 from realized_core_runtime import python_host as packaged_python_host
 from workstation.app.cli import runtime_controller as packaged_runtime_controller_api
 from realized_skill_semantics import composition as packaged_skill_composition
-from realized_skill_semantics import compatibility as packaged_skill_compatibility
 from realized_skill_semantics import declaration as packaged_skill_declaration
 from realized_skill_semantics import execution as packaged_skill_execution
 from realized_skill_semantics import leaves as packaged_skill_leaves
@@ -187,18 +176,8 @@ from workstation.skills.core import invocation_contract
 from realized_skill_application import composition as packaged_skill_application_composition
 from realized_skill_application import ir as packaged_skill_application_ir
 from realized_skill_application import normalization as packaged_skill_application_normalization
-from realized_exchange import artifact_yaml as packaged_artifact_yaml
-from realized_exchange import compatibility_export as packaged_skill_compatibility_export
-from realized_exchange import compatibility_import as packaged_skill_compatibility_import
-from realized_exchange import compiler as packaged_skill_compiler
-from realized_exchange import dependencies as packaged_exchange_dependencies
 from realized_exchange import learning_context as packaged_learning_context
-from realized_exchange import learning_context_skills as packaged_learning_context_skills
 from realized_exchange import markdown_learning_pipeline as packaged_markdown_learning_pipeline
-from realized_exchange import registry as packaged_skill_registry
-from realized_exchange import run_bundle as packaged_run_bundle
-from realized_exchange import skill_export as packaged_skill_export
-from realized_exchange import skill_schema as packaged_skill_schema
 from workstation.subject.core import itemize_validation as packaged_itemize_validation
 from workstation.subject.core import decision_review as packaged_subject_decision_review
 from workstation.subject.core import decision_review_constructs as packaged_subject_decision_review_constructs
@@ -209,25 +188,8 @@ from workstation.subject.core import review_composition as packaged_review_compo
 
 
 class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
-    def test_exchange_root_facades_keep_exact_module_identity(self) -> None:
-        for facade, canonical in (
-            (side, packaged_artifact_yaml),
-            (side_runtime_dependencies, packaged_exchange_dependencies),
-            (skill_compatibility_export, packaged_skill_compatibility_export),
-            (skill_compatibility_import, packaged_skill_compatibility_import),
-            (skill_compiler, packaged_skill_compiler),
-            (skill_export_projection, packaged_skill_export),
-            (skill_schema_io, packaged_skill_schema),
-            (learning_context, packaged_learning_context),
-            (
-                learning_context_skill_projection,
-                packaged_learning_context_skills,
-            ),
-            (run_bundle_io, packaged_run_bundle),
-            (skill_registry, packaged_skill_registry),
-        ):
-            with self.subTest(module=facade.__name__):
-                self.assertIs(facade, canonical)
+    def test_learning_context_root_facade_keeps_exact_module_identity(self) -> None:
+        self.assertIs(learning_context, packaged_learning_context)
 
     def test_markdown_learning_facades_keep_exact_module_identity(self) -> None:
         self.assertIs(
@@ -564,12 +526,6 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
                     getattr(packaged_skill_composition, name),
                 )
 
-    def test_skill_import_reexports_portable_compatibility_normalization(self) -> None:
-        self.assertIs(
-            skill_compatibility_import.normalized_skill_compatibility_payload,
-            packaged_skill_compatibility.normalized_skill_compatibility_payload,
-        )
-
     def test_legacy_skill_composition_pickle_globals_still_resolve(self) -> None:
         for name in packaged_skill_composition.__all__:
             with self.subTest(name=name):
@@ -648,10 +604,6 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
             pickle.loads(b"cmain\nBSSCController\n."),
             controller_runtime.BSSCController,
         )
-
-    def test_side_export_entry_helpers_keep_their_legacy_identity(self) -> None:
-        self.assertIs(side.artifact_export_in_entries, artifact.artifact_export_in_entries)
-        self.assertIs(side.artifact_export_out_entries, artifact.artifact_export_out_entries)
 
     def test_controller_pure_helpers_keep_their_legacy_identity(self) -> None:
         import main

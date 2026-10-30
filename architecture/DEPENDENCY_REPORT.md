@@ -99,7 +99,6 @@ Every repository-root Python module has one explicit responsibility. Status is o
 | `learn` | `controller` | `compatibility_facade` |
 | `learning_context` | `entry_exchange` | `compatibility_facade` |
 | `learning_context_paths` | `subject_domain` | `compatibility_facade` |
-| `learning_context_skill_projection` | `entry_exchange` | `compatibility_facade` |
 | `main` | `entry_exchange` | `compatibility_facade`, `entrypoint` |
 | `markdown_ir` | `subject_domain` | `compatibility_facade` |
 | `markdown_learning_artifact_semantics` | `controller` | `compatibility_facade` |
@@ -113,18 +112,11 @@ Every repository-root Python module has one explicit responsibility. Status is o
 | `replay_verifier` | `governance` | `entrypoint` |
 | `retrieval_ranking` | `controller` | `compatibility_facade` |
 | `review_composition` | `subject_domain` | `compatibility_facade` |
-| `run_bundle_io` | `entry_exchange` | `compatibility_facade` |
 | `run_outcome_harvest_and_reporting` | `controller` | `compatibility_facade` |
 | `runtime_controller_api` | `entry_exchange` | `compatibility_facade` |
 | `semantic_prompt_posture` | `controller` | `compatibility_facade` |
-| `side` | `entry_exchange` | `compatibility_facade` |
-| `side_runtime_dependencies` | `entry_exchange` | `compatibility_facade` |
 | `skill_boundary_normalization` | `portable_skills` | `compatibility_facade` |
-| `skill_compatibility_export` | `entry_exchange` | `compatibility_facade` |
-| `skill_compatibility_import` | `entry_exchange` | `compatibility_facade` |
-| `skill_compiler` | `entry_exchange` | `compatibility_facade` |
 | `skill_composition` | `portable_skills` | `compatibility_facade` |
-| `skill_export_projection` | `entry_exchange` | `compatibility_facade` |
 | `skill_governance` | `governance` | `compatibility_facade` |
 | `skill_governance_primitives` | `governance` | `compatibility_facade` |
 | `skill_invocation_contract` | `portable_skills` | `compatibility_facade` |
@@ -132,9 +124,7 @@ Every repository-root Python module has one explicit responsibility. Status is o
 | `skill_leaf_types` | `portable_skills` | `compatibility_facade` |
 | `skill_lifecycle` | `governance` | `compatibility_facade` |
 | `skill_path_notation` | `portable_skills` | `compatibility_facade` |
-| `skill_registry` | `entry_exchange` | `compatibility_facade` |
 | `skill_safety_governance` | `governance` | `compatibility_facade` |
-| `skill_schema_io` | `entry_exchange` | `compatibility_facade` |
 | `store` | `persistence_adapter` | `compatibility_facade` |
 | `structured_learning_yaml` | `controller` | `compatibility_facade` |
 | `supplement` | `controller` | `compatibility_facade` |
@@ -351,8 +341,8 @@ These edges exist only to preserve historical import paths. They are excluded fr
 
 | Metric | Count |
 | --- | ---: |
-| Nodes | 129 |
-| Edges | 265 |
+| Nodes | 119 |
+| Edges | 255 |
 | Cyclic SCCs | 0 |
 | Nodes in cyclic SCCs | 0 |
 | Edges internal to cyclic SCCs | 0 |
@@ -436,7 +426,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `root_to_component` | `learn` | `core_engine` | `orchestration` |
 | `root_to_component` | `learning_context` | `exchange` | `orchestration` |
 | `root_to_component` | `learning_context_paths` | `subject_core` | `orchestration` |
-| `root_to_component` | `learning_context_skill_projection` | `exchange` | `orchestration` |
 | `root_to_component` | `markdown_ir` | `core_semantics` | `orchestration` |
 | `root_to_component` | `markdown_learning_artifact_semantics` | `core_engine` | `compatibility` |
 | `root_to_component` | `non_achievedness_normalization` | `core_engine` | `orchestration` |
@@ -455,18 +444,11 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `root_to_component` | `replay_verifier` | `skill_semantics` | `orchestration` |
 | `root_to_component` | `retrieval_ranking` | `core_engine` | `orchestration` |
 | `root_to_component` | `review_composition` | `subject_core` | `compatibility` |
-| `root_to_component` | `run_bundle_io` | `exchange` | `orchestration` |
 | `root_to_component` | `run_outcome_harvest_and_reporting` | `core_engine` | `orchestration` |
 | `root_to_component` | `runtime_controller_api` | `app_cli` | `compatibility` |
 | `root_to_component` | `semantic_prompt_posture` | `core_engine` | `orchestration` |
-| `root_to_component` | `side` | `exchange` | `orchestration` |
-| `root_to_component` | `side_runtime_dependencies` | `exchange` | `orchestration` |
 | `root_to_component` | `skill_boundary_normalization` | `skill_application` | `compatibility` |
-| `root_to_component` | `skill_compatibility_export` | `exchange` | `orchestration` |
-| `root_to_component` | `skill_compatibility_import` | `exchange` | `orchestration` |
-| `root_to_component` | `skill_compiler` | `exchange` | `orchestration` |
 | `root_to_component` | `skill_composition` | `skill_application` | `compatibility` |
-| `root_to_component` | `skill_export_projection` | `exchange` | `orchestration` |
 | `root_to_component` | `skill_governance` | `core_engine` | `compatibility` |
 | `root_to_component` | `skill_governance_primitives` | `core_governance` | `compatibility` |
 | `root_to_component` | `skill_invocation_contract` | `skill_semantics` | `compatibility` |
@@ -475,10 +457,8 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `root_to_component` | `skill_leaf_types` | `skill_semantics` | `compatibility` |
 | `root_to_component` | `skill_lifecycle` | `core_governance` | `compatibility` |
 | `root_to_component` | `skill_path_notation` | `skill_semantics` | `compatibility` |
-| `root_to_component` | `skill_registry` | `exchange` | `orchestration` |
 | `root_to_component` | `skill_safety_governance` | `core_governance` | `compatibility` |
 | `root_to_component` | `skill_safety_governance` | `core_semantics` | `compatibility` |
-| `root_to_component` | `skill_schema_io` | `exchange` | `orchestration` |
 | `root_to_component` | `store` | `core_engine` | `persistence` |
 | `root_to_component` | `structured_learning_yaml` | `core_engine` | `orchestration` |
 | `root_to_component` | `supplement` | `core_engine` | `orchestration` |
@@ -559,7 +539,6 @@ No workspace package imports a root application module.
 - `learn` -> `core_engine` (`learn.py`)
 - `learning_context` -> `exchange` (`learning_context.py`)
 - `learning_context_paths` -> `subject_core` (`learning_context_paths.py`)
-- `learning_context_skill_projection` -> `exchange` (`learning_context_skill_projection.py`)
 - `markdown_ir` -> `core_semantics` (`markdown_ir.py`)
 - `markdown_learning_artifact_semantics` -> `core_engine` (`markdown_learning_artifact_semantics.py`)
 - `non_achievedness_normalization` -> `core_engine` (`non_achievedness_normalization.py`)
@@ -578,18 +557,11 @@ No workspace package imports a root application module.
 - `replay_verifier` -> `skill_semantics` (`replay_verifier.py`)
 - `retrieval_ranking` -> `core_engine` (`retrieval_ranking.py`)
 - `review_composition` -> `subject_core` (`review_composition.py`)
-- `run_bundle_io` -> `exchange` (`run_bundle_io.py`)
 - `run_outcome_harvest_and_reporting` -> `core_engine` (`run_outcome_harvest_and_reporting.py`)
 - `runtime_controller_api` -> `app_cli` (`runtime_controller_api.py`)
 - `semantic_prompt_posture` -> `core_engine` (`semantic_prompt_posture.py`)
-- `side` -> `exchange` (`side.py`)
-- `side_runtime_dependencies` -> `exchange` (`side_runtime_dependencies.py`)
 - `skill_boundary_normalization` -> `skill_application` (`skill_boundary_normalization.py`)
-- `skill_compatibility_export` -> `exchange` (`skill_compatibility_export.py`)
-- `skill_compatibility_import` -> `exchange` (`skill_compatibility_import.py`)
-- `skill_compiler` -> `exchange` (`skill_compiler.py`)
 - `skill_composition` -> `skill_application` (`skill_composition.py`)
-- `skill_export_projection` -> `exchange` (`skill_export_projection.py`)
 - `skill_governance` -> `core_engine` (`skill_governance.py`)
 - `skill_governance_primitives` -> `core_governance` (`skill_governance_primitives.py`)
 - `skill_invocation_contract` -> `skill_semantics` (`skill_invocation_contract.py`)
@@ -598,10 +570,8 @@ No workspace package imports a root application module.
 - `skill_leaf_types` -> `skill_semantics` (`skill_leaf_types.py`)
 - `skill_lifecycle` -> `core_governance` (`skill_lifecycle.py`)
 - `skill_path_notation` -> `skill_semantics` (`skill_path_notation.py`)
-- `skill_registry` -> `exchange` (`skill_registry.py`)
 - `skill_safety_governance` -> `core_governance` (`skill_safety_governance.py`)
 - `skill_safety_governance` -> `core_semantics` (`skill_safety_governance.py`)
-- `skill_schema_io` -> `exchange` (`skill_schema_io.py`)
 - `store` -> `core_engine` (`store.py`)
 - `structured_learning_yaml` -> `core_engine` (`structured_learning_yaml.py`)
 - `supplement` -> `core_engine` (`supplement.py`)

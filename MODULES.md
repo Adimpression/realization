@@ -187,11 +187,7 @@ legacy aliases.
   `SkillExchangeProvider` composed at the CLI entrypoint. It translates
   representations but does not decide admission,
   current use, authority, semantic commitment, request-to-ability selection,
-  host realization, or execution. `side.py`, `side_runtime_dependencies.py`,
-  `skill_schema_io.py`, `skill_export_projection.py`,
-  `skill_compatibility_import.py`, `skill_compatibility_export.py`,
-  `skill_registry.py`, and `run_bundle_io.py` are exact module-identity
-  compatibility aliases.
+  host realization, or execution.
 - `core_app/`: Independently buildable `realized-core` UV project. Its wheel
   contains the narrow CLI/composition surface and compatibility imports; it
   owns no engine, conversational application, or provider implementation.
@@ -381,7 +377,6 @@ legacy aliases.
   controller bootstrap for direct root callers.
 - `workstation/subject/core/itemize_validation.py`: Canonical itemization-session validation invariants consumed by the subject workflow.
 - `itemize_validation.py`: Identity-preserving compatibility facade for the canonical subject-core itemization validation surface.
-- `learning_context_skill_projection.py`: Exact module-identity compatibility alias for exchange-owned learning-context skill compilation and YAML materialization. Projection establishes subject scope and provenance; it does not perform governed skill installation or admission.
 - `workstation/subject/service/learning_capture.py`: Prompt-scoped subject application service that turns successful workstation chat “save learnings” markdown writes into chat `LearningSource`, `LearningDelta`, and merged `LearningContext` records without making raw markdown tools semantic by default.
 - `workstation/foundation/host/learning_capture.py`: Compatibility alias for the canonical subject-service learning-capture module.
 - `main.py`: Historical executable/import facade that preserves `import main` module identity while delegating to `controller_runtime.py` and lazily registering `controller_entrypoints.py`.
@@ -409,20 +404,11 @@ legacy aliases.
   coordinates package-owned run-bundle exchange, replay execution, and
   governance receipt verification without becoming their implementation owner.
 - `retrieval_ranking.py`: Retrieval scoring and ranking for artifact reuse and prompt matching.
-- `run_bundle_io.py`: Exact module-identity compatibility alias for governed
-  run-bundle construction, YAML loading/rendering, and governance snapshot
-  packaging owned by `realized_exchange.run_bundle`.
 - `run_outcome_harvest_and_reporting.py`: Run finalization, discovery harvest, and report emission.
 - `runtime_controller_api.py`: Exact module-identity compatibility alias for
   `workstation.app.cli.runtime_controller`.
 - `semantic_prompt_posture.py`: Prompt-posture classification and direct-answer preference helpers.
 - `SEMANTIC_RELATION_VALIDATION.py`: Standalone semantic relation validation script.
-- `side.py`: Exact module-identity compatibility alias for artifact-bundle YAML exchange owned by `realized_exchange.artifact_yaml`.
-- `side_runtime_dependencies.py`: Exact module-identity compatibility alias for artifact-exchange dependencies owned by `realized_exchange.dependencies`.
-- `skill_export_projection.py`: Exact module-identity compatibility alias for canonical portable-skill bundle export owned by `realized_exchange.skill_export`.
-- `skill_compiler.py`: Exact module-identity compatibility alias for the portable-skill compiler owned by `realized_exchange.compiler`.
-- `skill_compatibility_export.py`: Exact module-identity compatibility alias for foreign-format export adapters owned by `realized_exchange.compatibility_export`.
-- `skill_compatibility_import.py`: Exact module-identity compatibility alias for foreign-format import adapters owned by `realized_exchange.compatibility_import`.
 - `skill_boundary_normalization.py`: Identity-preserving compatibility alias for artifact-to-skill normalization owned by `realized_skill_application.normalization`.
 - `skill_composition.py`: Identity-preserving compatibility alias for composition analysis and execution owned by `realized_skill_application.composition`.
 - `skill_governance.py`: Historical governed-skill adapter and admission
@@ -441,12 +427,8 @@ legacy aliases.
 - `skill_lifecycle.py`: Compatibility facade for package-owned lifecycle
   normalization, projection, and lifecycle-only invocation-state rules.
 - `skill_path_notation.py`: Compatibility facade for canonical portable skill paths in `realized_skill_semantics.paths`.
-- `skill_registry.py`: Exact module-identity compatibility alias for portable
-  skill-registry projection and `export-skill-registry` support owned by
-  `realized_exchange.registry`.
 - `skill_safety_governance.py`: Compatibility facade for revocation and
   incident rules owned by `realized_core_governance.safety`.
-- `skill_schema_io.py`: Exact module-identity compatibility alias for portable-skill schema hydration and import-file resolution owned by `realized_exchange.skill_schema`.
 - `store.py`: SQLite artifact store, indexing, persistence, and batch import support.
 - `structured_learning_yaml.py`: Structured-learning YAML rendering helpers.
 - `supplement.py`: Controller-owned LLM supplement adapter, proposal-type

@@ -5465,6 +5465,27 @@ Completed deletion cut - validation exact-alias cohort (2026-10-30):
   cases, all distribution builds and isolated imports, deterministic
   publication capture, Flutter analysis, and 51 widget tests.
 
+Completed deletion cut - exchange exact-alias cohort (2026-10-30):
+
+- [x] Remove ten repository-internal exact aliases for artifact exchange,
+  portable-skill schema/compilation/translation, registry and run-bundle
+  projection, and learning-context skill materialization without moving or
+  changing their canonical `realized_exchange` implementations.
+- [x] Preserve the held `learning_context` facade and the separately reviewed
+  Markdown/controller aliases; remove only the ten identity shells and their
+  ledger entries, tombstone every retired path, and correct exchange and module
+  documentation.
+- [x] Accept only the sequential shrinking delta: owned roots `93 -> 83`,
+  root-boundary classifications `116 -> 106`, combined graph nodes `129 ->
+  119`, combined edges `265 -> 255`, grandfathered observations `135 -> 125`,
+  retained facades `85 -> 75`, and exact aliases `60 -> 50`, with no new
+  dependency or cycle.
+- [x] Qualify the cut with 142 focused architecture/compatibility tests, 65
+  canonical exchange behavior tests, five isolated exchange package tests,
+  888 root tests, 633 workstation tests, 38 targeted BDD cases, all
+  distribution builds and isolated imports, deterministic publication capture,
+  Flutter analysis, and 51 widget tests.
+
 Exit condition:
 
 - [x] The root-boundary ledger contains no canonical package-to-root

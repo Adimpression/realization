@@ -64,7 +64,7 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
             qualification["minimum_stable_cycles"],
         )
         self.assertFalse(qualification["retirement_hold"])
-        self.assertEqual(44, len(self.inventory["retirement_candidates"]))
+        self.assertEqual(34, len(self.inventory["retirement_candidates"]))
         self.assertEqual(41, len(self.inventory["retirement_holds"]))
 
     def test_facade_shapes_match_reviewed_compatibility_cohorts(self) -> None:
@@ -72,7 +72,7 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
             {
                 "aggregate_reexport": 1,
                 "behavior_adapter": 5,
-                "exact_module_alias": 60,
+                "exact_module_alias": 50,
                 "symbol_reexport": 19,
             },
             self.inventory["summary"]["shape_counts"],
@@ -180,7 +180,7 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
             for row in self.inventory["facades"]
             if row["module"] in self.inventory["retirement_candidates"]
         }
-        self.assertEqual(44, len(candidates))
+        self.assertEqual(34, len(candidates))
         self.assertTrue(
             all(
                 row["retirement_state"] == "qualified"
@@ -212,6 +212,7 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
                 "id_generation",
                 "learning_context_markdown",
                 "learning_context_projection",
+                "learning_context_skill_projection",
                 "macos_host_brokers",
                 "normalization_primitives",
                 "prolog",
@@ -223,7 +224,16 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
                 "python_skill_host_transport",
                 "runtime_temp",
                 "runtime_governance_context",
+                "run_bundle_io",
                 "semantic_text",
+                "side",
+                "side_runtime_dependencies",
+                "skill_compatibility_export",
+                "skill_compatibility_import",
+                "skill_compiler",
+                "skill_export_projection",
+                "skill_registry",
+                "skill_schema_io",
                 "title_semantics",
                 "url_learning_capture",
                 "validation_ladder",

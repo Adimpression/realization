@@ -571,9 +571,9 @@
     "cyclic_internal_edge_count": 0,
     "cyclic_node_count": 0,
     "cyclic_scc_count": 0,
-    "edge_count": 265,
+    "edge_count": 255,
     "largest_cyclic_scc_node_count": 0,
-    "node_count": 129
+    "node_count": 119
   },
   "compatibility_edges": [
     {
@@ -1013,12 +1013,6 @@
     {
       "category": "orchestration",
       "direction": "root_to_component",
-      "source": "learning_context_skill_projection",
-      "target": "exchange"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
       "source": "markdown_ir",
       "target": "core_semantics"
     },
@@ -1127,12 +1121,6 @@
     {
       "category": "orchestration",
       "direction": "root_to_component",
-      "source": "run_bundle_io",
-      "target": "exchange"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
       "source": "run_outcome_harvest_and_reporting",
       "target": "core_engine"
     },
@@ -1149,52 +1137,16 @@
       "target": "core_engine"
     },
     {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "side",
-      "target": "exchange"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "side_runtime_dependencies",
-      "target": "exchange"
-    },
-    {
       "category": "compatibility",
       "direction": "root_to_component",
       "source": "skill_boundary_normalization",
       "target": "skill_application"
     },
     {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "skill_compatibility_export",
-      "target": "exchange"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "skill_compatibility_import",
-      "target": "exchange"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "skill_compiler",
-      "target": "exchange"
-    },
-    {
       "category": "compatibility",
       "direction": "root_to_component",
       "source": "skill_composition",
       "target": "skill_application"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "skill_export_projection",
-      "target": "exchange"
     },
     {
       "category": "compatibility",
@@ -1245,12 +1197,6 @@
       "target": "skill_semantics"
     },
     {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "skill_registry",
-      "target": "exchange"
-    },
-    {
       "category": "compatibility",
       "direction": "root_to_component",
       "source": "skill_safety_governance",
@@ -1261,12 +1207,6 @@
       "direction": "root_to_component",
       "source": "skill_safety_governance",
       "target": "core_semantics"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "skill_schema_io",
-      "target": "exchange"
     },
     {
       "category": "persistence",
@@ -1665,13 +1605,6 @@
       ]
     },
     {
-      "module": "learning_context_skill_projection",
-      "owner": "entry_exchange",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
       "module": "main",
       "owner": "entry_exchange",
       "statuses": [
@@ -1764,13 +1697,6 @@
       ]
     },
     {
-      "module": "run_bundle_io",
-      "owner": "entry_exchange",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
       "module": "run_outcome_harvest_and_reporting",
       "owner": "controller",
       "statuses": [
@@ -1792,20 +1718,6 @@
       ]
     },
     {
-      "module": "side",
-      "owner": "entry_exchange",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "side_runtime_dependencies",
-      "owner": "entry_exchange",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
       "module": "skill_boundary_normalization",
       "owner": "portable_skills",
       "statuses": [
@@ -1813,36 +1725,8 @@
       ]
     },
     {
-      "module": "skill_compatibility_export",
-      "owner": "entry_exchange",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "skill_compatibility_import",
-      "owner": "entry_exchange",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "skill_compiler",
-      "owner": "entry_exchange",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
       "module": "skill_composition",
       "owner": "portable_skills",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "skill_export_projection",
-      "owner": "entry_exchange",
       "statuses": [
         "compatibility_facade"
       ]
@@ -1897,22 +1781,8 @@
       ]
     },
     {
-      "module": "skill_registry",
-      "owner": "entry_exchange",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
       "module": "skill_safety_governance",
       "owner": "governance",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "skill_schema_io",
-      "owner": "entry_exchange",
       "statuses": [
         "compatibility_facade"
       ]
@@ -2261,10 +2131,6 @@
       "target": "subject_core"
     },
     {
-      "source": "learning_context_skill_projection",
-      "target": "exchange"
-    },
-    {
       "source": "markdown_ir",
       "target": "core_semantics"
     },
@@ -2337,10 +2203,6 @@
       "target": "subject_core"
     },
     {
-      "source": "run_bundle_io",
-      "target": "exchange"
-    },
-    {
       "source": "run_outcome_harvest_and_reporting",
       "target": "core_engine"
     },
@@ -2353,36 +2215,12 @@
       "target": "core_engine"
     },
     {
-      "source": "side",
-      "target": "exchange"
-    },
-    {
-      "source": "side_runtime_dependencies",
-      "target": "exchange"
-    },
-    {
       "source": "skill_boundary_normalization",
       "target": "skill_application"
     },
     {
-      "source": "skill_compatibility_export",
-      "target": "exchange"
-    },
-    {
-      "source": "skill_compatibility_import",
-      "target": "exchange"
-    },
-    {
-      "source": "skill_compiler",
-      "target": "exchange"
-    },
-    {
       "source": "skill_composition",
       "target": "skill_application"
-    },
-    {
-      "source": "skill_export_projection",
-      "target": "exchange"
     },
     {
       "source": "skill_governance",
@@ -2417,20 +2255,12 @@
       "target": "skill_semantics"
     },
     {
-      "source": "skill_registry",
-      "target": "exchange"
-    },
-    {
       "source": "skill_safety_governance",
       "target": "core_governance"
     },
     {
       "source": "skill_safety_governance",
       "target": "core_semantics"
-    },
-    {
-      "source": "skill_schema_io",
-      "target": "exchange"
     },
     {
       "source": "store",
