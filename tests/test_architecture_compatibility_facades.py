@@ -25,11 +25,9 @@ import data_governance
 import decision_review
 import decision_review_constructs
 import decision_review_models
-import direct_knowledge_reuse
 import execution_framework_primitives
 import execution_frameworks
 import fence_extraction_strategy
-import fallback_not_generation
 import fallback_not_semantics
 import governance_inventory
 import governed_closure_and_commitment
@@ -55,15 +53,11 @@ import external_markdown_learning_pipeline
 import non_achievedness_normalization
 import normalize
 import normalization_runtime_dependencies
-import not_elaboration_ranking
 import pure_theory_types
-import prompt_directives
-import retrieval_ranking
 import review_composition
 import run_outcome_harvest_and_reporting
 import runtime_controller_api
 import python_skill_host
-import semantic_prompt_posture
 import skill_governance
 import skill_governance_primitives
 import skill_composition
@@ -133,7 +127,6 @@ from realized_core_engine import constitutional_trace as packaged_constitutional
 from realized_core_engine import configuration as packaged_engine_configuration
 from realized_core_engine import artifact_answer_resolution as packaged_artifact_answer_resolution
 from realized_core_engine import artifact_semantics as packaged_artifact_semantics
-from realized_core_engine import direct_knowledge_reuse as packaged_direct_knowledge_reuse
 from realized_core_engine import fallback_not_generation as packaged_fallback_not_generation
 from realized_core_engine import governed_closure_and_commitment as packaged_governed_closure_and_commitment
 from realized_core_engine import governed_prior_learning_reuse as packaged_governed_prior_learning_reuse
@@ -143,9 +136,6 @@ from realized_core_engine import non_achievedness_normalization as packaged_non_
 from realized_core_engine import normalization_runtime_dependencies as packaged_normalization_runtime_dependencies
 from realized_core_engine import not_elaboration_ranking as packaged_not_elaboration_ranking
 from realized_core_engine import run_outcome_harvest_and_reporting as packaged_run_outcome_harvest_and_reporting
-from realized_core_engine import prompt_directives as packaged_prompt_directives
-from realized_core_engine import retrieval_ranking as packaged_retrieval_ranking
-from realized_core_engine import semantic_prompt_posture as packaged_semantic_prompt_posture
 from realized_core_engine import host_mediation as packaged_host_mediation
 from realized_core_engine import controller_entrypoint_binding as packaged_controller_entrypoint_binding
 from realized_core_engine import controller_governance_bridge as packaged_controller_governance_bridge
@@ -241,7 +231,6 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
 
     def test_controller_artifact_and_non_achievedness_modules_keep_identity(self) -> None:
         self.assertIs(artifact, packaged_artifact_semantics)
-        self.assertIs(fallback_not_generation, packaged_fallback_not_generation)
         self.assertIs(
             non_achievedness_normalization,
             packaged_non_achievedness_normalization,
@@ -250,12 +239,10 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
             normalization_runtime_dependencies,
             packaged_normalization_runtime_dependencies,
         )
-        self.assertIs(not_elaboration_ranking, packaged_not_elaboration_ranking)
         self.assertIs(structured_learning_yaml, packaged_structured_learning)
 
     def test_controller_policy_helpers_keep_their_historical_module_identity(self) -> None:
         self.assertIs(artifact_answer_resolution, packaged_artifact_answer_resolution)
-        self.assertIs(direct_knowledge_reuse, packaged_direct_knowledge_reuse)
         self.assertIs(
             governed_closure_and_commitment,
             packaged_governed_closure_and_commitment,
@@ -268,11 +255,6 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
 
     def test_applied_theory_types_keeps_its_historical_identity(self) -> None:
         self.assertIs(applied_theory_types, packaged_applied_theory_types)
-
-    def test_controller_query_helpers_keep_their_historical_module_identity(self) -> None:
-        self.assertIs(prompt_directives, packaged_prompt_directives)
-        self.assertIs(retrieval_ranking, packaged_retrieval_ranking)
-        self.assertIs(semantic_prompt_posture, packaged_semantic_prompt_posture)
 
     def test_learning_context_adapter_keeps_packaged_value_identity(self) -> None:
         self.assertIs(learning_context, packaged_learning_context)
@@ -631,11 +613,11 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
     def test_fallback_facade_keeps_canonical_identities(self) -> None:
         self.assertIs(
             fallback_not_semantics.fallback_not_elaboration_for_text,
-            fallback_not_generation.fallback_not_elaboration_for_text,
+            packaged_fallback_not_generation.fallback_not_elaboration_for_text,
         )
         self.assertIs(
             fallback_not_semantics.not_elaboration_alignment_rank,
-            not_elaboration_ranking.not_elaboration_alignment_rank,
+            packaged_not_elaboration_ranking.not_elaboration_alignment_rank,
         )
 
     def test_applied_theory_public_types_keep_their_legacy_identity(self) -> None:

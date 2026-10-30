@@ -72,11 +72,9 @@ Every repository-root Python module has one explicit responsibility. Status is o
 | `decision_review` | `subject_domain` | `compatibility_facade` |
 | `decision_review_constructs` | `subject_domain` | `compatibility_facade` |
 | `decision_review_models` | `subject_domain` | `compatibility_facade` |
-| `direct_knowledge_reuse` | `controller` | `compatibility_facade` |
 | `execution_framework_primitives` | `runtime_execution` | `compatibility_facade` |
 | `execution_frameworks` | `runtime_execution` | `compatibility_facade` |
 | `external_markdown_learning_pipeline` | `entry_exchange` | `compatibility_facade` |
-| `fallback_not_generation` | `controller` | `compatibility_facade` |
 | `fallback_not_semantics` | `controller` | `compatibility_facade` |
 | `fence_extraction_strategy` | `runtime_execution` | `compatibility_facade` |
 | `governance_inventory` | `controller` | `compatibility_facade` |
@@ -104,16 +102,12 @@ Every repository-root Python module has one explicit responsibility. Status is o
 | `non_achievedness_normalization` | `controller` | `compatibility_facade` |
 | `normalization_runtime_dependencies` | `controller` | `compatibility_facade` |
 | `normalize` | `compatibility` | `compatibility_facade` |
-| `not_elaboration_ranking` | `controller` | `compatibility_facade` |
-| `prompt_directives` | `controller` | `compatibility_facade` |
 | `pure_theory_types` | `semantic_model` | `compatibility_facade` |
 | `python_skill_host` | `runtime_execution` | `compatibility_facade` |
 | `replay_verifier` | `governance` | `entrypoint` |
-| `retrieval_ranking` | `controller` | `compatibility_facade` |
 | `review_composition` | `subject_domain` | `compatibility_facade` |
 | `run_outcome_harvest_and_reporting` | `controller` | `compatibility_facade` |
 | `runtime_controller_api` | `entry_exchange` | `compatibility_facade` |
-| `semantic_prompt_posture` | `controller` | `compatibility_facade` |
 | `skill_boundary_normalization` | `portable_skills` | `compatibility_facade` |
 | `skill_composition` | `portable_skills` | `compatibility_facade` |
 | `skill_governance` | `governance` | `compatibility_facade` |
@@ -339,8 +333,8 @@ These edges exist only to preserve historical import paths. They are excluded fr
 
 | Metric | Count |
 | --- | ---: |
-| Nodes | 117 |
-| Edges | 253 |
+| Nodes | 111 |
+| Edges | 247 |
 | Cyclic SCCs | 0 |
 | Nodes in cyclic SCCs | 0 |
 | Edges internal to cyclic SCCs | 0 |
@@ -392,11 +386,9 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `root_to_component` | `decision_review` | `subject_core` | `orchestration` |
 | `root_to_component` | `decision_review_constructs` | `subject_core` | `orchestration` |
 | `root_to_component` | `decision_review_models` | `core_semantics` | `dto_constants` |
-| `root_to_component` | `direct_knowledge_reuse` | `core_engine` | `orchestration` |
 | `root_to_component` | `execution_framework_primitives` | `governed_core` | `orchestration` |
 | `root_to_component` | `execution_frameworks` | `governed_core` | `orchestration` |
 | `root_to_component` | `external_markdown_learning_pipeline` | `exchange` | `compatibility` |
-| `root_to_component` | `fallback_not_generation` | `core_engine` | `orchestration` |
 | `root_to_component` | `fallback_not_semantics` | `core_engine` | `orchestration` |
 | `root_to_component` | `fence_extraction_strategy` | `governed_core` | `orchestration` |
 | `root_to_component` | `governance_inventory` | `core_engine` | `orchestration` |
@@ -429,8 +421,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `root_to_component` | `normalization_runtime_dependencies` | `core_engine` | `orchestration` |
 | `root_to_component` | `normalize` | `core_engine` | `orchestration` |
 | `root_to_component` | `normalize` | `core_semantics` | `orchestration` |
-| `root_to_component` | `not_elaboration_ranking` | `core_engine` | `orchestration` |
-| `root_to_component` | `prompt_directives` | `core_engine` | `orchestration` |
 | `root_to_component` | `pure_theory_types` | `core_semantics` | `compatibility` |
 | `root_to_component` | `python_skill_host` | `governed_core` | `orchestration` |
 | `root_to_component` | `replay_verifier` | `core_engine` | `orchestration` |
@@ -439,11 +429,9 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `root_to_component` | `replay_verifier` | `exchange` | `orchestration` |
 | `root_to_component` | `replay_verifier` | `governed_core` | `orchestration` |
 | `root_to_component` | `replay_verifier` | `skill_semantics` | `orchestration` |
-| `root_to_component` | `retrieval_ranking` | `core_engine` | `orchestration` |
 | `root_to_component` | `review_composition` | `subject_core` | `compatibility` |
 | `root_to_component` | `run_outcome_harvest_and_reporting` | `core_engine` | `orchestration` |
 | `root_to_component` | `runtime_controller_api` | `app_cli` | `compatibility` |
-| `root_to_component` | `semantic_prompt_posture` | `core_engine` | `orchestration` |
 | `root_to_component` | `skill_boundary_normalization` | `skill_application` | `compatibility` |
 | `root_to_component` | `skill_composition` | `skill_application` | `compatibility` |
 | `root_to_component` | `skill_governance` | `core_engine` | `compatibility` |
@@ -503,11 +491,9 @@ No workspace package imports a root application module.
 - `decision_review` -> `subject_core` (`decision_review.py`)
 - `decision_review_constructs` -> `subject_core` (`decision_review_constructs.py`)
 - `decision_review_models` -> `core_semantics` (`decision_review_models.py`)
-- `direct_knowledge_reuse` -> `core_engine` (`direct_knowledge_reuse.py`)
 - `execution_framework_primitives` -> `governed_core` (`execution_framework_primitives.py`)
 - `execution_frameworks` -> `governed_core` (`execution_frameworks.py`)
 - `external_markdown_learning_pipeline` -> `exchange` (`external_markdown_learning_pipeline.py`)
-- `fallback_not_generation` -> `core_engine` (`fallback_not_generation.py`)
 - `fallback_not_semantics` -> `core_engine` (`fallback_not_semantics.py`)
 - `fence_extraction_strategy` -> `governed_core` (`fence_extraction_strategy.py`)
 - `governance_inventory` -> `core_engine` (`governance_inventory.py`)
@@ -540,8 +526,6 @@ No workspace package imports a root application module.
 - `normalization_runtime_dependencies` -> `core_engine` (`normalization_runtime_dependencies.py`)
 - `normalize` -> `core_engine` (`normalize.py`)
 - `normalize` -> `core_semantics` (`normalize.py`)
-- `not_elaboration_ranking` -> `core_engine` (`not_elaboration_ranking.py`)
-- `prompt_directives` -> `core_engine` (`prompt_directives.py`)
 - `pure_theory_types` -> `core_semantics` (`pure_theory_types.py`)
 - `python_skill_host` -> `governed_core` (`python_skill_host.py`)
 - `replay_verifier` -> `core_engine` (`replay_verifier.py`)
@@ -550,11 +534,9 @@ No workspace package imports a root application module.
 - `replay_verifier` -> `exchange` (`replay_verifier.py`)
 - `replay_verifier` -> `governed_core` (`replay_verifier.py`)
 - `replay_verifier` -> `skill_semantics` (`replay_verifier.py`)
-- `retrieval_ranking` -> `core_engine` (`retrieval_ranking.py`)
 - `review_composition` -> `subject_core` (`review_composition.py`)
 - `run_outcome_harvest_and_reporting` -> `core_engine` (`run_outcome_harvest_and_reporting.py`)
 - `runtime_controller_api` -> `app_cli` (`runtime_controller_api.py`)
-- `semantic_prompt_posture` -> `core_engine` (`semantic_prompt_posture.py`)
 - `skill_boundary_normalization` -> `skill_application` (`skill_boundary_normalization.py`)
 - `skill_composition` -> `skill_application` (`skill_composition.py`)
 - `skill_governance` -> `core_engine` (`skill_governance.py`)

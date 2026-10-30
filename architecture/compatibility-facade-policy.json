@@ -159,6 +159,16 @@
       "removed_at": "2026-10-30",
       "replacement": "workstation.subject.core.decision_review_projection"
     },
+    "direct_knowledge_reuse": {
+      "removal_change_reference": "controller-selection-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.direct_knowledge_reuse"
+    },
+    "fallback_not_generation": {
+      "removal_change_reference": "controller-selection-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.fallback_not_generation"
+    },
     "gather_sources": {
       "removal_change_reference": "subject-core-alias-cohort-1",
       "removed_at": "2026-10-30",
@@ -214,6 +224,16 @@
       "removed_at": "2026-10-30",
       "replacement": "realized_core_semantics.normalization"
     },
+    "not_elaboration_ranking": {
+      "removal_change_reference": "controller-selection-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.not_elaboration_ranking"
+    },
+    "prompt_directives": {
+      "removal_change_reference": "controller-selection-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.prompt_directives"
+    },
     "prolog": {
       "removal_change_reference": "semantic-alias-cohort-1",
       "removed_at": "2026-10-30",
@@ -259,6 +279,11 @@
       "removed_at": "2026-10-30",
       "replacement": "realized_core_engine.runtime_governance_context"
     },
+    "retrieval_ranking": {
+      "removal_change_reference": "controller-selection-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.retrieval_ranking"
+    },
     "run_bundle_io": {
       "removal_change_reference": "exchange-alias-cohort-1",
       "removed_at": "2026-10-30",
@@ -268,6 +293,11 @@
       "removal_change_reference": "semantic-alias-cohort-1",
       "removed_at": "2026-10-30",
       "replacement": "realized_core_semantics.semantic_text"
+    },
+    "semantic_prompt_posture": {
+      "removal_change_reference": "controller-selection-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.semantic_prompt_posture"
     },
     "side": {
       "removal_change_reference": "exchange-alias-cohort-1",

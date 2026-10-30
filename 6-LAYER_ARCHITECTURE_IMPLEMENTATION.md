@@ -5526,6 +5526,28 @@ Completed deletion cut - persistence exact-alias cohort (2026-10-30):
   Seven unrelated provider-backed cases remain explicitly outside this
   cohort's evidence pending external-data authorization.
 
+Completed deletion cut - controller selection exact-alias cohort (2026-10-30):
+
+- [x] Remove six repository-internal aliases for request posture,
+  direct-knowledge reuse, fallback elaboration, and retrieval ranking without
+  moving or changing their canonical core-engine implementations.
+- [x] Preserve canonical behavior and point the retained
+  `fallback_not_semantics` symbol-identity checks directly at canonical
+  modules; remove only identity shells and their ledger/test entries,
+  tombstone every path, and correct module documentation.
+- [x] Accept only the sequential shrinking delta: owned roots `81 -> 75`,
+  root-boundary classifications `104 -> 98`, combined graph nodes `117 ->
+  111`, combined edges `253 -> 247`, grandfathered observations `123 -> 117`,
+  retained facades `73 -> 67`, and exact aliases `48 -> 42`, with no new
+  dependency or cycle.
+- [x] Qualify the non-model cut with 362 focused architecture/controller tests,
+  881 applicable root tests, a clean 632-test workstation rerun after one
+  isolated Textual timing failure passed four exact normal-composition reruns,
+  38 deterministic BDD cases, all distribution builds and isolated imports,
+  deterministic publication capture, Flutter analysis, and 51 widget tests.
+  Seven unrelated provider-backed cases remain explicitly outside this
+  cohort's evidence pending external-data authorization.
+
 Exit condition:
 
 - [x] The root-boundary ledger contains no canonical package-to-root

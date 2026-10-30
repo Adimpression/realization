@@ -64,7 +64,7 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
             qualification["minimum_stable_cycles"],
         )
         self.assertFalse(qualification["retirement_hold"])
-        self.assertEqual(32, len(self.inventory["retirement_candidates"]))
+        self.assertEqual(26, len(self.inventory["retirement_candidates"]))
         self.assertEqual(41, len(self.inventory["retirement_holds"]))
 
     def test_facade_shapes_match_reviewed_compatibility_cohorts(self) -> None:
@@ -72,7 +72,7 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
             {
                 "aggregate_reexport": 1,
                 "behavior_adapter": 5,
-                "exact_module_alias": 48,
+                "exact_module_alias": 42,
                 "symbol_reexport": 19,
             },
             self.inventory["summary"]["shape_counts"],
@@ -180,7 +180,7 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
             for row in self.inventory["facades"]
             if row["module"] in self.inventory["retirement_candidates"]
         }
-        self.assertEqual(32, len(candidates))
+        self.assertEqual(26, len(candidates))
         self.assertTrue(
             all(
                 row["retirement_state"] == "qualified"
@@ -205,6 +205,8 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
                 "controller_runtime_binding",
                 "decision_review_policy",
                 "decision_review_projection",
+                "direct_knowledge_reuse",
+                "fallback_not_generation",
                 "gather_sources",
                 "host_abi",
                 "host_brokers",
@@ -216,7 +218,9 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
                 "learning_context_skill_projection",
                 "macos_host_brokers",
                 "normalization_primitives",
+                "not_elaboration_ranking",
                 "prolog",
+                "prompt_directives",
                 "publication",
                 "publication_projection",
                 "publication_render",
@@ -225,7 +229,9 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
                 "python_skill_host_transport",
                 "runtime_temp",
                 "runtime_governance_context",
+                "retrieval_ranking",
                 "run_bundle_io",
+                "semantic_prompt_posture",
                 "semantic_text",
                 "side",
                 "side_runtime_dependencies",

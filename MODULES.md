@@ -297,7 +297,6 @@ legacy aliases.
   subject review-composition values, deterministic item/tree transformations,
   transform receipts, and corpus persistence owned by
   `workstation.subject.core.review_composition`.
-- `direct_knowledge_reuse.py`: Direct knowledge reuse matching and lookup helpers.
 - `example.py`: Small Wasmtime/example surface used as a runtime proof-of-life.
 - `execution_framework_primitives.py`: Host-advertised supported-framework environment/default normalization plus exact compatibility aliases for portable descriptors now owned by `realized_skill_semantics.execution`.
 - `execution_frameworks.py`: Python, Bash, Ansible, and Wasm learning and
@@ -309,7 +308,6 @@ legacy aliases.
 - `external_markdown_learning_pipeline.py`: Exact module-identity compatibility
   alias for the external Markdown ingestion adapter owned by
   `realized_exchange.markdown_learning_pipeline`.
-- `fallback_not_generation.py`: Canonical fallback non-achievedness elaboration generation.
 - `fallback_not_semantics.py`: Compatibility facade retaining historical fallback generation and ranking identities.
 - `fence_extraction_strategy.py`: Fenced-code extraction and executor-aware fence learning helpers.
 - `governance_inventory.py`: Controller inventory-cache adapter plus the
@@ -388,8 +386,6 @@ legacy aliases.
 - `non_achievedness_normalization.py`: Structured non-achievedness normalization orchestration over explicit runtime dependencies.
 - `normalization_runtime_dependencies.py`: Explicit dependency surface used by structured non-achievedness normalization.
 - `normalize.py`: Compatibility facade preserving historical normalization imports and object identities.
-- `not_elaboration_ranking.py`: Canonical non-achievedness elaboration ranking.
-- `prompt_directives.py`: Prompt directive classification and intent-shaping helpers.
 - `workstation/subject/core/publication.py`: Canonical publication substrate for claim-centered governed report publication, including typed publication/section/claim/source/build/render-artifact records, deterministic snapshot hashing, and explicit on-disk publication persistence under the subject corpus home.
 - `workstation/subject/core/publication_projection.py`: Canonical deterministic `LearningContext`-to-`Publication` report projection, including admitted-unit claim extraction, section assignment, source loading, validation/build/render orchestration, and separate publication-tree materialization.
 - `workstation/subject/core/publication_render.py`: Canonical deterministic Typst and markdown renderers plus reproducible publication build and render-artifact projection.
@@ -402,11 +398,9 @@ legacy aliases.
 - `replay_verifier.py`: Deliberate historical replay command adapter. It
   coordinates package-owned run-bundle exchange, replay execution, and
   governance receipt verification without becoming their implementation owner.
-- `retrieval_ranking.py`: Retrieval scoring and ranking for artifact reuse and prompt matching.
 - `run_outcome_harvest_and_reporting.py`: Run finalization, discovery harvest, and report emission.
 - `runtime_controller_api.py`: Exact module-identity compatibility alias for
   `workstation.app.cli.runtime_controller`.
-- `semantic_prompt_posture.py`: Prompt-posture classification and direct-answer preference helpers.
 - `SEMANTIC_RELATION_VALIDATION.py`: Standalone semantic relation validation script.
 - `skill_boundary_normalization.py`: Identity-preserving compatibility alias for artifact-to-skill normalization owned by `realized_skill_application.normalization`.
 - `skill_composition.py`: Identity-preserving compatibility alias for composition analysis and execution owned by `realized_skill_application.composition`.

@@ -2441,84 +2441,6 @@
       "support_status": "repository_internal"
     },
     {
-      "canonical_module_identity": "realized_core_engine.direct_knowledge_reuse",
-      "canonical_targets": [
-        {
-          "component": "core_engine",
-          "module": "realized_core_engine"
-        }
-      ],
-      "command_replacements": [],
-      "contract_evidence": "tests.test_architecture_compatibility_facades",
-      "durable_pickle_globals": [],
-      "exact_module_identity_observed": true,
-      "executable_surface": false,
-      "export_surface": {
-        "constant_types": {
-          "annotations": "_Feature"
-        },
-        "explicit_all": [],
-        "public_names": [
-          "Any",
-          "Artifact",
-          "BoundaryShapeTerm",
-          "Iterable",
-          "Mapping",
-          "annotations",
-          "artifact_focus_alignment_score",
-          "artifact_is_structured_learning_record",
-          "artifact_selection_text",
-          "collapse_ws",
-          "compose_direct_knowledge_answer",
-          "display_title_leaf_text",
-          "focused_direct_knowledge_candidates",
-          "learning_core_tokens",
-          "persisted_direct_knowledge_candidates",
-          "prompt_directive_support_markers",
-          "re",
-          "selection_signal_tokens",
-          "semantic_prompt_action_posture",
-          "semantic_prompt_directive_profile",
-          "semantic_question_focus_text",
-          "structured_text_list",
-          "text_alignment_rank",
-          "titleize_semantic_unit"
-        ],
-        "signatures": {
-          "Any": "(*args, **kwargs)",
-          "Artifact": "(id: 'str', artifact_type: 'ArtifactType', title: 'str', representation: 'ArtifactRepresentation', function_bit: 'int', scope: 'str', provenance: 'list[str]', reusability: 'ArtifactReuse', admissibility: 'ArtifactAdmission', template_schema: 'dict[str, Any]', learning_relation: 'LearningRelation', related_artifact_ids: 'list[str]', content: 'dict[str, Any]', justification: 'str', boundary_shape: 'tuple[BoundaryShapeTerm, ...]' = <factory>, constraints: 'list[str]' = <factory>, created_at: 'str' = <factory>) -> None",
-          "BoundaryShapeTerm": "(*values)",
-          "Iterable": "()",
-          "Mapping": "()",
-          "artifact_focus_alignment_score": "(artifact: 'Any', focus_text: 'str') -> 'int'",
-          "artifact_is_structured_learning_record": "(artifact: 'Any') -> 'bool'",
-          "artifact_selection_text": "(artifact: 'Any') -> 'str'",
-          "collapse_ws": "(text: 'str') -> 'str'",
-          "compose_direct_knowledge_answer": "(self, *, semantic_unit: 'str', primary_artifact: 'Artifact', primary_answer: 'str', focus_candidates: 'Iterable[Artifact] | None' = None) -> 'str'",
-          "display_title_leaf_text": "(title: 'str') -> 'str'",
-          "focused_direct_knowledge_candidates": "(self, *, semantic_unit: 'str', current_boundary_shape: 'Iterable[BoundaryShapeTerm | str] | None' = None, candidate_pairs: 'Iterable[tuple[str, Artifact]] | None' = None, include_unmatched_pool: 'bool' = False) -> 'list[tuple[str, Artifact]]'",
-          "learning_core_tokens": "(text: 'str') -> 'list[str]'",
-          "persisted_direct_knowledge_candidates": "(self, *, semantic_unit: 'str') -> 'list[Artifact]'",
-          "prompt_directive_support_markers": "(kind: 'str') -> 'tuple[tuple[str, ...], tuple[str, ...]]'",
-          "selection_signal_tokens": "(text: 'str') -> 'set[str]'",
-          "semantic_prompt_action_posture": "(text: 'str') -> 'str'",
-          "semantic_prompt_directive_profile": "(text: 'str') -> 'dict[str, Any]'",
-          "semantic_question_focus_text": "(text: 'str') -> 'str'",
-          "structured_text_list": "(values: 'Iterable[Any]') -> 'list[str]'",
-          "text_alignment_rank": "(prompt_text: 'str', candidate_text: 'str') -> 'tuple[int, int, int, int]'",
-          "titleize_semantic_unit": "(text: 'str') -> 'str'"
-        }
-      },
-      "import_effect_class": "module_alias_only",
-      "module": "direct_knowledge_reuse",
-      "owner": "controller",
-      "path": "direct_knowledge_reuse.py",
-      "proof_strategy": "exact_module_object_identity",
-      "rollback_operation": "restore direct_knowledge_reuse.py and its compatibility contract assertions without reverting the canonical owner",
-      "shape": "exact_module_alias",
-      "support_status": "repository_internal"
-    },
-    {
       "canonical_module_identity": "realized_core_runtime.executor_support",
       "canonical_targets": [
         {
@@ -2792,108 +2714,6 @@
       "path": "external_markdown_learning_pipeline.py",
       "proof_strategy": "exact_module_object_identity",
       "rollback_operation": "restore external_markdown_learning_pipeline.py and its compatibility contract assertions without reverting the canonical owner",
-      "shape": "exact_module_alias",
-      "support_status": "repository_internal"
-    },
-    {
-      "canonical_module_identity": "realized_core_engine.fallback_not_generation",
-      "canonical_targets": [
-        {
-          "component": "core_engine",
-          "module": "realized_core_engine"
-        }
-      ],
-      "command_replacements": [],
-      "contract_evidence": "tests.test_architecture_compatibility_facades",
-      "durable_pickle_globals": [],
-      "exact_module_identity_observed": true,
-      "executable_surface": false,
-      "export_surface": {
-        "constant_types": {
-          "TITLE_REPRESENTATION_MODE_PROLOG": "str",
-          "TITLE_REPRESENTATION_MODE_SLASH": "str",
-          "annotations": "_Feature"
-        },
-        "explicit_all": [],
-        "public_names": [
-          "Any",
-          "BoundaryShapeTerm",
-          "Iterable",
-          "NotDegreeKind",
-          "NotMisalignmentKind",
-          "NotOriginKind",
-          "NotRemainderShapeKind",
-          "TITLE_REPRESENTATION_MODE_PROLOG",
-          "TITLE_REPRESENTATION_MODE_SLASH",
-          "annotations",
-          "boundary_shape_values",
-          "collapse_ws",
-          "default_boundary_shape_for_node",
-          "derive_semantic_title_depth_view",
-          "fallback_not_elaboration_for_text",
-          "learning_component_units",
-          "learning_core_tokens",
-          "learning_lookup_keys",
-          "looks_like_prolog_title_identity",
-          "normalize_not_degree",
-          "normalize_not_misalignment_list",
-          "normalize_not_origin_list",
-          "normalize_remainder_shape_list",
-          "normalize_semantic_title_identity",
-          "ordered_unique",
-          "prolog_title_view",
-          "prompt_has_absence_signal",
-          "prompt_has_confirmation_signal",
-          "prompt_has_unresolved_uncertainty",
-          "re",
-          "render_structured_learning_yaml",
-          "semantic_named_input_keys",
-          "semantic_prompt_action_posture",
-          "semantic_prompt_directive_profile",
-          "structured_text_list",
-          "titleize_semantic_unit"
-        ],
-        "signatures": {
-          "Any": "(*args, **kwargs)",
-          "BoundaryShapeTerm": "(*values)",
-          "Iterable": "()",
-          "NotDegreeKind": "(*values)",
-          "NotMisalignmentKind": "(*values)",
-          "NotOriginKind": "(*values)",
-          "NotRemainderShapeKind": "(*values)",
-          "boundary_shape_values": "(value: 'Iterable[BoundaryShapeTerm | str] | None', *, default: 'Iterable[BoundaryShapeTerm | str] | None' = None) -> 'tuple[str, ...]'",
-          "collapse_ws": "(text: 'str') -> 'str'",
-          "default_boundary_shape_for_node": "(*, semantic_unit: 'str' = '', parent_boundary_shape: 'Iterable[BoundaryShapeTerm | str] | None' = None) -> 'tuple[BoundaryShapeTerm, ...]'",
-          "derive_semantic_title_depth_view": "(title_identity: 'str', *, minimal_sufficient_depth: 'Any' = None, assessment: 'str' = '') -> 'dict[str, Any]'",
-          "fallback_not_elaboration_for_text": "(semantic_unit: 'str', *, boundary_shape: 'Iterable[BoundaryShapeTerm | str] | None' = None, title_identity: 'str | None' = None) -> 'dict[str, Any]'",
-          "learning_component_units": "(text: 'str') -> 'list[str]'",
-          "learning_core_tokens": "(text: 'str') -> 'list[str]'",
-          "learning_lookup_keys": "(text: 'str') -> 'list[str]'",
-          "looks_like_prolog_title_identity": "(text: 'str') -> 'bool'",
-          "normalize_not_degree": "(value: 'Any', *, default: 'NotDegreeKind | str | None' = None) -> 'str'",
-          "normalize_not_misalignment_list": "(values: 'Any') -> 'list[str]'",
-          "normalize_not_origin_list": "(values: 'Any') -> 'list[str]'",
-          "normalize_remainder_shape_list": "(values: 'Any') -> 'list[str]'",
-          "normalize_semantic_title_identity": "(text: 'str') -> 'str'",
-          "ordered_unique": "(values: 'Iterable[str]') -> 'list[str]'",
-          "prolog_title_view": "(title_identity: 'str') -> 'dict[str, Any]'",
-          "prompt_has_absence_signal": "(text: 'str') -> 'bool'",
-          "prompt_has_confirmation_signal": "(text: 'str') -> 'bool'",
-          "prompt_has_unresolved_uncertainty": "(text: 'str') -> 'bool'",
-          "render_structured_learning_yaml": "(semantic_unit: 'str', *, encountered_not: 'str', component_nots: 'list[str]', composed_not: 'str', related_artifact_titles: 'list[str]', title_identity: 'str' = '', title_depth_segments: 'list[str] | None' = None, title_depth_prefixes: 'list[str] | None' = None, title_depth_exposed_depth: 'int | None' = None, title_depth_minimal_sufficient_depth: 'int | None' = None, title_depth_assessment: 'str' = '', title_depth_hidden_depth_note: 'str' = '', title_depth_body_split_needed: 'bool | None' = None, title_depth_body_split_reason: 'str' = '', title_depth_reuse_bias: 'str' = '', title_similar_identities: 'list[str] | None' = None, intended_object: 'str' = '', success_criteria: 'list[str] | None' = None, actual_realization: 'str' = '', givens: 'list[str] | None' = None, unknowns: 'list[str] | None' = None, missing_components: 'list[str] | None' = None, distorted_components: 'list[str] | None' = None, differentiators: 'list[str] | None' = None, contrastive_cases: 'list[str] | None' = None, risk_of_wrong_closure: 'list[str] | None' = None, disallowed_assumptions: 'list[str] | None' = None, misalignment_types: 'list[str] | None' = None, origin_layers: 'list[str] | None' = None, degree: 'str' = '', remainder_shapes: 'list[str] | None' = None, why_it_matters: 'list[str] | None' = None, minimal_repair: 'list[str] | None' = None, full_repair: 'list[str] | None' = None, action_posture: 'str' = '') -> 'str'",
-          "semantic_named_input_keys": "(text: 'str') -> 'list[str]'",
-          "semantic_prompt_action_posture": "(text: 'str') -> 'str'",
-          "semantic_prompt_directive_profile": "(text: 'str') -> 'dict[str, Any]'",
-          "structured_text_list": "(values: 'Iterable[Any]') -> 'list[str]'",
-          "titleize_semantic_unit": "(text: 'str') -> 'str'"
-        }
-      },
-      "import_effect_class": "module_alias_only",
-      "module": "fallback_not_generation",
-      "owner": "controller",
-      "path": "fallback_not_generation.py",
-      "proof_strategy": "exact_module_object_identity",
-      "rollback_operation": "restore fallback_not_generation.py and its compatibility contract assertions without reverting the canonical owner",
       "shape": "exact_module_alias",
       "support_status": "repository_internal"
     },
@@ -5875,117 +5695,6 @@
       "support_status": "repository_internal"
     },
     {
-      "canonical_module_identity": "realized_core_engine.not_elaboration_ranking",
-      "canonical_targets": [
-        {
-          "component": "core_engine",
-          "module": "realized_core_engine"
-        }
-      ],
-      "command_replacements": [],
-      "contract_evidence": "tests.test_architecture_compatibility_facades",
-      "durable_pickle_globals": [],
-      "exact_module_identity_observed": true,
-      "executable_surface": false,
-      "export_surface": {
-        "constant_types": {
-          "annotations": "_Feature"
-        },
-        "explicit_all": [],
-        "public_names": [
-          "Any",
-          "BoundaryShapeTerm",
-          "Iterable",
-          "annotations",
-          "artifact_selection_text",
-          "artifact_structured_learning_from_content",
-          "classify_title_depth_relation",
-          "collapse_ws",
-          "fallback_not_elaboration_for_text",
-          "learning_lookup_keys",
-          "normalize_not_misalignment_list",
-          "not_elaboration_alignment_rank",
-          "structured_title_identity_text"
-        ],
-        "signatures": {
-          "Any": "(*args, **kwargs)",
-          "BoundaryShapeTerm": "(*values)",
-          "Iterable": "()",
-          "artifact_selection_text": "(artifact: 'Any') -> 'str'",
-          "artifact_structured_learning_from_content": "(artifact: 'Artifact') -> 'dict[str, Any]'",
-          "classify_title_depth_relation": "(current_title_identity: 'str', prior_title_identity: 'str') -> 'tuple[str, int]'",
-          "collapse_ws": "(text: 'str') -> 'str'",
-          "fallback_not_elaboration_for_text": "(semantic_unit: 'str', *, boundary_shape: 'Iterable[BoundaryShapeTerm | str] | None' = None, title_identity: 'str | None' = None) -> 'dict[str, Any]'",
-          "learning_lookup_keys": "(text: 'str') -> 'list[str]'",
-          "normalize_not_misalignment_list": "(values: 'Any') -> 'list[str]'",
-          "not_elaboration_alignment_rank": "(artifact: 'Any', semantic_unit: 'str', *, current_boundary_shape: 'Iterable[BoundaryShapeTerm | str] | None' = None) -> 'tuple[int, int, int, int, int, int, int]'",
-          "structured_title_identity_text": "(structured: 'Mapping[str, Any]') -> 'str'"
-        }
-      },
-      "import_effect_class": "module_alias_only",
-      "module": "not_elaboration_ranking",
-      "owner": "controller",
-      "path": "not_elaboration_ranking.py",
-      "proof_strategy": "exact_module_object_identity",
-      "rollback_operation": "restore not_elaboration_ranking.py and its compatibility contract assertions without reverting the canonical owner",
-      "shape": "exact_module_alias",
-      "support_status": "repository_internal"
-    },
-    {
-      "canonical_module_identity": "realized_core_engine.prompt_directives",
-      "canonical_targets": [
-        {
-          "component": "core_engine",
-          "module": "realized_core_engine"
-        }
-      ],
-      "command_replacements": [],
-      "contract_evidence": "tests.test_architecture_compatibility_facades",
-      "durable_pickle_globals": [],
-      "exact_module_identity_observed": true,
-      "executable_surface": false,
-      "export_surface": {
-        "constant_types": {
-          "DECISION_ABSENCE_MARKERS": "tuple",
-          "DECISION_CONFIRMATION_MARKERS": "tuple",
-          "DECISION_UNCERTAINTY_MARKERS": "tuple",
-          "annotations": "_Feature"
-        },
-        "explicit_all": [],
-        "public_names": [
-          "Any",
-          "DECISION_ABSENCE_MARKERS",
-          "DECISION_CONFIRMATION_MARKERS",
-          "DECISION_UNCERTAINTY_MARKERS",
-          "annotations",
-          "prompt_directive_support_markers",
-          "prompt_has_absence_signal",
-          "prompt_has_confirmation_signal",
-          "prompt_has_unresolved_uncertainty",
-          "re",
-          "semantic_prompt_directive_profile",
-          "semantic_question_focus_text"
-        ],
-        "signatures": {
-          "Any": "(*args, **kwargs)",
-          "prompt_directive_support_markers": "(kind: 'str') -> 'tuple[tuple[str, ...], tuple[str, ...]]'",
-          "prompt_has_absence_signal": "(text: 'str') -> 'bool'",
-          "prompt_has_confirmation_signal": "(text: 'str') -> 'bool'",
-          "prompt_has_unresolved_uncertainty": "(text: 'str') -> 'bool'",
-          "semantic_prompt_directive_profile": "(text: 'str') -> 'dict[str, Any]'",
-          "semantic_question_focus_text": "(text: 'str') -> 'str'"
-        }
-      },
-      "import_effect_class": "module_alias_only",
-      "module": "prompt_directives",
-      "owner": "controller",
-      "path": "prompt_directives.py",
-      "proof_strategy": "exact_module_object_identity",
-      "rollback_operation": "restore prompt_directives.py and its compatibility contract assertions without reverting the canonical owner",
-      "shape": "exact_module_alias",
-      "support_status": "repository_internal"
-    },
-    {
       "canonical_module_identity": "",
       "canonical_targets": [
         {
@@ -6311,110 +6020,6 @@
       "support_status": "supported_historical_import"
     },
     {
-      "canonical_module_identity": "realized_core_engine.retrieval_ranking",
-      "canonical_targets": [
-        {
-          "component": "core_engine",
-          "module": "realized_core_engine"
-        }
-      ],
-      "command_replacements": [],
-      "contract_evidence": "tests.test_architecture_compatibility_facades",
-      "durable_pickle_globals": [],
-      "exact_module_identity_observed": true,
-      "executable_surface": false,
-      "export_surface": {
-        "constant_types": {
-          "ACTION_SURFACE_MARKERS": "dict",
-          "DECISION_ACT_MARKERS": "tuple",
-          "DECISION_CONDITIONAL_MARKERS": "tuple",
-          "DECISION_HOLD_MARKERS": "tuple",
-          "EMERGENCY_ACTION_MARKERS": "tuple",
-          "SELECTION_SIGNAL_STOP_TOKENS": "set",
-          "URGENT_SYMPTOM_MARKERS": "tuple",
-          "annotations": "_Feature"
-        },
-        "explicit_all": [],
-        "public_names": [
-          "ACTION_SURFACE_MARKERS",
-          "Any",
-          "DECISION_ACT_MARKERS",
-          "DECISION_CONDITIONAL_MARKERS",
-          "DECISION_HOLD_MARKERS",
-          "EMERGENCY_ACTION_MARKERS",
-          "Mapping",
-          "SELECTION_SIGNAL_STOP_TOKENS",
-          "URGENT_SYMPTOM_MARKERS",
-          "action_surface_markers",
-          "annotations",
-          "artifact_action_alignment_penalty",
-          "artifact_focus_alignment_score",
-          "artifact_is_structured_learning_record",
-          "artifact_output_lookup_keys",
-          "artifact_prompt_decision_mismatch_penalty",
-          "artifact_selection_text",
-          "artifact_surface_alignment_rank",
-          "artifact_text_alignment_rank",
-          "collapse_ws",
-          "display_title_leaf_text",
-          "learning_core_tokens",
-          "learning_lookup_keys",
-          "learning_overlap",
-          "ordered_unique",
-          "ordinal_focus_markers",
-          "output_lookup_compatible",
-          "primary_action_surface_marker",
-          "prolog_surface_alignment_rank",
-          "prolog_title_match_score",
-          "prolog_title_view",
-          "prompt_has_unresolved_uncertainty",
-          "re",
-          "selection_signal_phrases",
-          "selection_signal_tokens",
-          "semantic_requested_output_keys",
-          "text_alignment_rank"
-        ],
-        "signatures": {
-          "Any": "(*args, **kwargs)",
-          "Mapping": "()",
-          "action_surface_markers": "(text: 'str') -> 'set[str]'",
-          "artifact_action_alignment_penalty": "(artifact: 'Any', semantic_unit: 'str') -> 'int'",
-          "artifact_focus_alignment_score": "(artifact: 'Any', focus_text: 'str') -> 'int'",
-          "artifact_is_structured_learning_record": "(artifact: 'Any') -> 'bool'",
-          "artifact_output_lookup_keys": "(artifact: 'Any') -> 'list[str]'",
-          "artifact_prompt_decision_mismatch_penalty": "(artifact: 'Any', semantic_unit: 'str') -> 'int'",
-          "artifact_selection_text": "(artifact: 'Any') -> 'str'",
-          "artifact_surface_alignment_rank": "(artifact: 'Any', semantic_unit: 'str') -> 'tuple[int, int, int, int]'",
-          "artifact_text_alignment_rank": "(artifact: 'Any', semantic_unit: 'str') -> 'tuple[int, int, int, int]'",
-          "collapse_ws": "(text: 'str') -> 'str'",
-          "display_title_leaf_text": "(title: 'str') -> 'str'",
-          "learning_core_tokens": "(text: 'str') -> 'list[str]'",
-          "learning_lookup_keys": "(text: 'str') -> 'list[str]'",
-          "learning_overlap": "(left: 'str', right: 'str') -> 'bool'",
-          "ordered_unique": "(values: 'Iterable[str]') -> 'list[str]'",
-          "ordinal_focus_markers": "(text: 'str') -> 'set[str]'",
-          "output_lookup_compatible": "(requested_key: 'str', artifact_key: 'str') -> 'bool'",
-          "primary_action_surface_marker": "(text: 'str') -> 'str'",
-          "prolog_surface_alignment_rank": "(prompt_text: 'str', candidate_text: 'str') -> 'tuple[int, int, int, int] | None'",
-          "prolog_title_match_score": "(query_title: 'str', candidate_title: 'str') -> 'int'",
-          "prolog_title_view": "(title_identity: 'str') -> 'dict[str, Any]'",
-          "prompt_has_unresolved_uncertainty": "(text: 'str') -> 'bool'",
-          "selection_signal_phrases": "(text: 'str', *, size: 'int' = 2) -> 'set[str]'",
-          "selection_signal_tokens": "(text: 'str') -> 'set[str]'",
-          "semantic_requested_output_keys": "(text: 'str') -> 'list[str]'",
-          "text_alignment_rank": "(prompt_text: 'str', candidate_text: 'str') -> 'tuple[int, int, int, int]'"
-        }
-      },
-      "import_effect_class": "module_alias_only",
-      "module": "retrieval_ranking",
-      "owner": "controller",
-      "path": "retrieval_ranking.py",
-      "proof_strategy": "exact_module_object_identity",
-      "rollback_operation": "restore retrieval_ranking.py and its compatibility contract assertions without reverting the canonical owner",
-      "shape": "exact_module_alias",
-      "support_status": "repository_internal"
-    },
-    {
       "canonical_module_identity": "workstation.subject.core.review_composition",
       "canonical_targets": [
         {
@@ -6689,56 +6294,6 @@
       "path": "runtime_controller_api.py",
       "proof_strategy": "exact_module_object_identity",
       "rollback_operation": "restore runtime_controller_api.py and its compatibility contract assertions without reverting the canonical owner",
-      "shape": "exact_module_alias",
-      "support_status": "repository_internal"
-    },
-    {
-      "canonical_module_identity": "realized_core_engine.semantic_prompt_posture",
-      "canonical_targets": [
-        {
-          "component": "core_engine",
-          "module": "realized_core_engine"
-        }
-      ],
-      "command_replacements": [],
-      "contract_evidence": "tests.test_architecture_compatibility_facades",
-      "durable_pickle_globals": [],
-      "exact_module_identity_observed": true,
-      "executable_surface": false,
-      "export_surface": {
-        "constant_types": {
-          "annotations": "_Feature"
-        },
-        "explicit_all": [],
-        "public_names": [
-          "annotations",
-          "collapse_ws",
-          "prompt_has_unresolved_uncertainty",
-          "re",
-          "semantic_named_input_keys",
-          "semantic_prompt_action_posture",
-          "semantic_prompt_directive_profile",
-          "semantic_prompt_prefers_direct_knowledge_answer",
-          "semantic_question_focus_text",
-          "semantic_unit_allows_default_invocation_payload"
-        ],
-        "signatures": {
-          "collapse_ws": "(text: 'str') -> 'str'",
-          "prompt_has_unresolved_uncertainty": "(text: 'str') -> 'bool'",
-          "semantic_named_input_keys": "(text: 'str') -> 'list[str]'",
-          "semantic_prompt_action_posture": "(text: 'str') -> 'str'",
-          "semantic_prompt_directive_profile": "(text: 'str') -> 'dict[str, Any]'",
-          "semantic_prompt_prefers_direct_knowledge_answer": "(text: 'str') -> 'bool'",
-          "semantic_question_focus_text": "(text: 'str') -> 'str'",
-          "semantic_unit_allows_default_invocation_payload": "(text: 'str') -> 'bool'"
-        }
-      },
-      "import_effect_class": "module_alias_only",
-      "module": "semantic_prompt_posture",
-      "owner": "controller",
-      "path": "semantic_prompt_posture.py",
-      "proof_strategy": "exact_module_object_identity",
-      "rollback_operation": "restore semantic_prompt_posture.py and its compatibility contract assertions without reverting the canonical owner",
       "shape": "exact_module_alias",
       "support_status": "repository_internal"
     },
@@ -7875,16 +7430,16 @@
     "errors": 0,
     "failures": 0,
     "module": "tests.test_architecture_compatibility_facades",
-    "tests_run": 79
+    "tests_run": 78
   },
   "schema_version": 1,
   "summary": {
-    "card_count": 73,
-    "exact_module_identity_count": 50,
+    "card_count": 67,
+    "exact_module_identity_count": 44,
     "facades_with_durable_pickle_globals": 35,
     "pickle_global_count": 133,
     "proof_strategy_counts": {
-      "exact_module_object_identity": 48,
+      "exact_module_object_identity": 42,
       "exported_symbol_object_identity": 19,
       "manual_behavior_equivalence": 5,
       "manual_multi_owner_export_mapping": 1

@@ -571,9 +571,9 @@
     "cyclic_internal_edge_count": 0,
     "cyclic_node_count": 0,
     "cyclic_scc_count": 0,
-    "edge_count": 253,
+    "edge_count": 247,
     "largest_cyclic_scc_node_count": 0,
-    "node_count": 117
+    "node_count": 111
   },
   "compatibility_edges": [
     {
@@ -821,12 +821,6 @@
     {
       "category": "orchestration",
       "direction": "root_to_component",
-      "source": "direct_knowledge_reuse",
-      "target": "core_engine"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
       "source": "execution_framework_primitives",
       "target": "governed_core"
     },
@@ -841,12 +835,6 @@
       "direction": "root_to_component",
       "source": "external_markdown_learning_pipeline",
       "target": "exchange"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "fallback_not_generation",
-      "target": "core_engine"
     },
     {
       "category": "orchestration",
@@ -1041,18 +1029,6 @@
       "target": "core_semantics"
     },
     {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "not_elaboration_ranking",
-      "target": "core_engine"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "prompt_directives",
-      "target": "core_engine"
-    },
-    {
       "category": "compatibility",
       "direction": "root_to_component",
       "source": "pure_theory_types",
@@ -1101,12 +1077,6 @@
       "target": "skill_semantics"
     },
     {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "retrieval_ranking",
-      "target": "core_engine"
-    },
-    {
       "category": "compatibility",
       "direction": "root_to_component",
       "source": "review_composition",
@@ -1123,12 +1093,6 @@
       "direction": "root_to_component",
       "source": "runtime_controller_api",
       "target": "app_cli"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "semantic_prompt_posture",
-      "target": "core_engine"
     },
     {
       "category": "compatibility",
@@ -1404,13 +1368,6 @@
       ]
     },
     {
-      "module": "direct_knowledge_reuse",
-      "owner": "controller",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
       "module": "execution_framework_primitives",
       "owner": "runtime_execution",
       "statuses": [
@@ -1427,13 +1384,6 @@
     {
       "module": "external_markdown_learning_pipeline",
       "owner": "entry_exchange",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "fallback_not_generation",
-      "owner": "controller",
       "statuses": [
         "compatibility_facade"
       ]
@@ -1629,20 +1579,6 @@
       ]
     },
     {
-      "module": "not_elaboration_ranking",
-      "owner": "controller",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "prompt_directives",
-      "owner": "controller",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
       "module": "pure_theory_types",
       "owner": "semantic_model",
       "statuses": [
@@ -1664,13 +1600,6 @@
       ]
     },
     {
-      "module": "retrieval_ranking",
-      "owner": "controller",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
       "module": "review_composition",
       "owner": "subject_domain",
       "statuses": [
@@ -1687,13 +1616,6 @@
     {
       "module": "runtime_controller_api",
       "owner": "entry_exchange",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "semantic_prompt_posture",
-      "owner": "controller",
       "statuses": [
         "compatibility_facade"
       ]
@@ -1977,10 +1899,6 @@
       "target": "core_semantics"
     },
     {
-      "source": "direct_knowledge_reuse",
-      "target": "core_engine"
-    },
-    {
       "source": "execution_framework_primitives",
       "target": "governed_core"
     },
@@ -1991,10 +1909,6 @@
     {
       "source": "external_markdown_learning_pipeline",
       "target": "exchange"
-    },
-    {
-      "source": "fallback_not_generation",
-      "target": "core_engine"
     },
     {
       "source": "fallback_not_semantics",
@@ -2125,14 +2039,6 @@
       "target": "core_semantics"
     },
     {
-      "source": "not_elaboration_ranking",
-      "target": "core_engine"
-    },
-    {
-      "source": "prompt_directives",
-      "target": "core_engine"
-    },
-    {
       "source": "pure_theory_types",
       "target": "core_semantics"
     },
@@ -2165,10 +2071,6 @@
       "target": "skill_semantics"
     },
     {
-      "source": "retrieval_ranking",
-      "target": "core_engine"
-    },
-    {
       "source": "review_composition",
       "target": "subject_core"
     },
@@ -2179,10 +2081,6 @@
     {
       "source": "runtime_controller_api",
       "target": "app_cli"
-    },
-    {
-      "source": "semantic_prompt_posture",
-      "target": "core_engine"
     },
     {
       "source": "skill_boundary_normalization",
