@@ -250,7 +250,6 @@ legacy aliases.
   workstation command registration with core/exchange/validation syntax while
   reusing engine-owned runtime-configuration adapters; it is not an engine
   compatibility alias.
-- `artifact_answer_resolution.py`: Artifact answer extraction and direct formula/explanation resolution helpers.
 - `artifact.py`: Artifact serialization and YAML-facing helper utilities.
 - `blend_context.py`: Compatibility surface for canonical
   `realized_blend.context` values and the historical workstation projection
@@ -268,11 +267,6 @@ legacy aliases.
   canonical `realized_blend.workflows` values.
 - `blend_workflow_execution.py`: Identity-preserving compatibility alias for
   execution adapters owned by `realized_blend_application.execution`.
-- `constitutional_trace.py`: Exact module-identity compatibility alias for
-  engine-owned constitutional state snapshots, composition/decision/transcript
-  signatures, and replay comparison. The canonical engine implementation
-  preserves exact aliases for the dependency-light effect-answer and
-  effect-signature requirements owned by `realized_core_governance.trace`.
 - `controller_entrypoint_binding.py`: Dependency-light registration seam between the historical executable facade and outer CLI composition.
 - `controller_entrypoints.py`: Historical aggregate command adapter. It
   preserves the root command surface while delegating package-native
@@ -313,9 +307,6 @@ legacy aliases.
 - `governance_inventory.py`: Controller inventory-cache adapter plus the
   historical exact alias to package-owned read-only inventory loading and
   classification in `realized_core_governance.inventory`.
-- `governed_closure_and_commitment.py`: Closure, pause, incompletion, and commitment logic.
-- `governed_prior_learning_reuse.py`: Governed prior-learning reuse and candidate recovery.
-- `governed_semantic_reduction_runtime.py`: Compatibility adapter from `BSSCController` into `realized-core-runtime`, plus the existing domain-specific recursive `reduce_not` semantics.
 - `governed_skill_installation.py`: Deliberate historical command adapter for
   governed `import-skill` installation. It coordinates canonical exchange,
   governance, persistence, and normalization APIs at the entry boundary.
@@ -392,7 +383,6 @@ legacy aliases.
 - `replay_verifier.py`: Deliberate historical replay command adapter. It
   coordinates package-owned run-bundle exchange, replay execution, and
   governance receipt verification without becoming their implementation owner.
-- `run_outcome_harvest_and_reporting.py`: Run finalization, discovery harvest, and report emission.
 - `runtime_controller_api.py`: Exact module-identity compatibility alias for
   `workstation.app.cli.runtime_controller`.
 - `SEMANTIC_RELATION_VALIDATION.py`: Standalone semantic relation validation script.

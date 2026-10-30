@@ -114,6 +114,11 @@
       "removed_at": "2026-10-30",
       "replacement": "realized_core_semantics.applied_primitives"
     },
+    "artifact_answer_resolution": {
+      "removal_change_reference": "controller-reduction-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.artifact_answer_resolution"
+    },
     "boundary": {
       "removal_change_reference": "semantic-alias-cohort-1",
       "removed_at": "2026-10-30",
@@ -149,6 +154,11 @@
       "removed_at": "2026-10-30",
       "replacement": "realized_core_engine.controller_runtime_binding"
     },
+    "constitutional_trace": {
+      "removal_change_reference": "controller-reduction-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.constitutional_trace"
+    },
     "decision_review_policy": {
       "removal_change_reference": "subject-core-alias-cohort-1",
       "removed_at": "2026-10-30",
@@ -173,6 +183,21 @@
       "removal_change_reference": "subject-core-alias-cohort-1",
       "removed_at": "2026-10-30",
       "replacement": "workstation.subject.core.gather_sources"
+    },
+    "governed_closure_and_commitment": {
+      "removal_change_reference": "controller-reduction-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.governed_closure_and_commitment"
+    },
+    "governed_prior_learning_reuse": {
+      "removal_change_reference": "controller-reduction-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.governed_prior_learning_reuse"
+    },
+    "governed_semantic_reduction_runtime": {
+      "removal_change_reference": "controller-reduction-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.reduction_runtime"
     },
     "host_abi": {
       "removal_change_reference": "runtime-leaf-cohort-1",
@@ -303,6 +328,11 @@
       "removal_change_reference": "controller-selection-alias-cohort-1",
       "removed_at": "2026-10-30",
       "replacement": "realized_core_engine.retrieval_ranking"
+    },
+    "run_outcome_harvest_and_reporting": {
+      "removal_change_reference": "controller-reduction-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.run_outcome_harvest_and_reporting"
     },
     "run_bundle_io": {
       "removal_change_reference": "exchange-alias-cohort-1",

@@ -571,9 +571,9 @@
     "cyclic_internal_edge_count": 0,
     "cyclic_node_count": 0,
     "cyclic_scc_count": 0,
-    "edge_count": 242,
+    "edge_count": 236,
     "largest_cyclic_scc_node_count": 0,
-    "node_count": 106
+    "node_count": 100
   },
   "compatibility_edges": [
     {
@@ -657,12 +657,6 @@
       "target": "core_engine"
     },
     {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "artifact_answer_resolution",
-      "target": "core_engine"
-    },
-    {
       "category": "compatibility",
       "direction": "root_to_component",
       "source": "artifact_contracts",
@@ -721,12 +715,6 @@
       "direction": "root_to_component",
       "source": "blend_world_models",
       "target": "blend"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "constitutional_trace",
-      "target": "core_engine"
     },
     {
       "category": "compatibility",
@@ -852,24 +840,6 @@
       "category": "orchestration",
       "direction": "root_to_component",
       "source": "governance_inventory",
-      "target": "core_engine"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "governed_closure_and_commitment",
-      "target": "core_engine"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "governed_prior_learning_reuse",
-      "target": "core_engine"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "governed_semantic_reduction_runtime",
       "target": "core_engine"
     },
     {
@@ -1059,12 +1029,6 @@
       "target": "subject_core"
     },
     {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "run_outcome_harvest_and_reporting",
-      "target": "core_engine"
-    },
-    {
       "category": "compatibility",
       "direction": "root_to_component",
       "source": "runtime_controller_api",
@@ -1212,13 +1176,6 @@
       ]
     },
     {
-      "module": "artifact_answer_resolution",
-      "owner": "controller",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
       "module": "artifact_contracts",
       "owner": "semantic_model",
       "statuses": [
@@ -1270,13 +1227,6 @@
     {
       "module": "blend_world_models",
       "owner": "blend",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "constitutional_trace",
-      "owner": "controller",
       "statuses": [
         "compatibility_facade"
       ]
@@ -1374,27 +1324,6 @@
     },
     {
       "module": "governance_inventory",
-      "owner": "controller",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "governed_closure_and_commitment",
-      "owner": "controller",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "governed_prior_learning_reuse",
-      "owner": "controller",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "governed_semantic_reduction_runtime",
       "owner": "controller",
       "statuses": [
         "compatibility_facade"
@@ -1544,13 +1473,6 @@
     {
       "module": "review_composition",
       "owner": "subject_domain",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "run_outcome_harvest_and_reporting",
-      "owner": "controller",
       "statuses": [
         "compatibility_facade"
       ]
@@ -1726,10 +1648,6 @@
       "target": "core_engine"
     },
     {
-      "source": "artifact_answer_resolution",
-      "target": "core_engine"
-    },
-    {
       "source": "artifact_contracts",
       "target": "core_semantics"
     },
@@ -1768,10 +1686,6 @@
     {
       "source": "blend_world_models",
       "target": "blend"
-    },
-    {
-      "source": "constitutional_trace",
-      "target": "core_engine"
     },
     {
       "source": "controller_entrypoint_binding",
@@ -1855,18 +1769,6 @@
     },
     {
       "source": "governance_inventory",
-      "target": "core_engine"
-    },
-    {
-      "source": "governed_closure_and_commitment",
-      "target": "core_engine"
-    },
-    {
-      "source": "governed_prior_learning_reuse",
-      "target": "core_engine"
-    },
-    {
-      "source": "governed_semantic_reduction_runtime",
       "target": "core_engine"
     },
     {
@@ -1992,10 +1894,6 @@
     {
       "source": "review_composition",
       "target": "subject_core"
-    },
-    {
-      "source": "run_outcome_harvest_and_reporting",
-      "target": "core_engine"
     },
     {
       "source": "runtime_controller_api",

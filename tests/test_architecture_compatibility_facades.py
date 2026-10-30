@@ -7,7 +7,6 @@ import applied_theory_types
 import approval_governance
 import args
 import artifact
-import artifact_answer_resolution
 import artifact_contracts
 from artifact_contracts import ArtifactContentView, TitledArtifactContentView
 import blend_context
@@ -20,7 +19,6 @@ import blend_world_models
 import controller_runtime
 import controller_entrypoint_binding
 import controller_governance_bridge
-import constitutional_trace
 import data_governance
 import decision_review
 import decision_review_constructs
@@ -30,9 +28,6 @@ import execution_frameworks
 import fence_extraction_strategy
 import fallback_not_semantics
 import governance_inventory
-import governed_closure_and_commitment
-import governed_prior_learning_reuse
-import governed_semantic_reduction_runtime
 import host_mediation
 import host_interaction_action_dispatch
 import host_interaction_actions
@@ -51,7 +46,6 @@ import external_markdown_learning_pipeline
 import normalize
 import pure_theory_types
 import review_composition
-import run_outcome_harvest_and_reporting
 import runtime_controller_api
 import python_skill_host
 import skill_governance
@@ -118,15 +112,10 @@ from realized_core_governance import trace as packaged_governance_trace
 from realized_core_governance import vocabulary as packaged_governance_vocabulary
 from realized_core_engine import constitutional_trace as packaged_constitutional_trace
 from realized_core_engine import configuration as packaged_engine_configuration
-from realized_core_engine import artifact_answer_resolution as packaged_artifact_answer_resolution
 from realized_core_engine import artifact_semantics as packaged_artifact_semantics
 from realized_core_engine import fallback_not_generation as packaged_fallback_not_generation
-from realized_core_engine import governed_closure_and_commitment as packaged_governed_closure_and_commitment
-from realized_core_engine import governed_prior_learning_reuse as packaged_governed_prior_learning_reuse
 from realized_core_engine import governance_inventory as packaged_engine_governance_inventory
-from realized_core_engine import reduction_runtime as packaged_reduction_runtime
 from realized_core_engine import not_elaboration_ranking as packaged_not_elaboration_ranking
-from realized_core_engine import run_outcome_harvest_and_reporting as packaged_run_outcome_harvest_and_reporting
 from realized_core_engine import host_mediation as packaged_host_mediation
 from realized_core_engine import controller_entrypoint_binding as packaged_controller_entrypoint_binding
 from realized_core_engine import controller_governance_bridge as packaged_controller_governance_bridge
@@ -211,24 +200,11 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
         self.assertIs(governance_inventory, packaged_engine_governance_inventory)
         self.assertIs(supplement, packaged_engine_supplement)
 
-    def test_controller_state_and_reduction_modules_keep_identity(self) -> None:
+    def test_controller_state_module_keeps_identity(self) -> None:
         self.assertIs(system_state, packaged_state)
-        self.assertIs(governed_semantic_reduction_runtime, packaged_reduction_runtime)
 
     def test_controller_artifact_module_keeps_identity(self) -> None:
         self.assertIs(artifact, packaged_artifact_semantics)
-
-    def test_controller_policy_helpers_keep_their_historical_module_identity(self) -> None:
-        self.assertIs(artifact_answer_resolution, packaged_artifact_answer_resolution)
-        self.assertIs(
-            governed_closure_and_commitment,
-            packaged_governed_closure_and_commitment,
-        )
-        self.assertIs(governed_prior_learning_reuse, packaged_governed_prior_learning_reuse)
-        self.assertIs(
-            run_outcome_harvest_and_reporting,
-            packaged_run_outcome_harvest_and_reporting,
-        )
 
     def test_applied_theory_types_keeps_its_historical_identity(self) -> None:
         self.assertIs(applied_theory_types, packaged_applied_theory_types)
@@ -1040,14 +1016,13 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
             host_mediation.record_effect_trace.__module__,
         )
 
-    def test_constitutional_trace_keeps_exact_packaged_module_identity(self) -> None:
-        self.assertIs(constitutional_trace, packaged_constitutional_trace)
+    def test_constitutional_trace_keeps_canonical_owners(self) -> None:
         self.assertIs(
-            constitutional_trace.canonical_trace_answer,
+            packaged_constitutional_trace.canonical_trace_answer,
             packaged_governance_trace.canonical_trace_answer,
         )
         self.assertIs(
-            constitutional_trace.effect_trace_signature,
+            packaged_constitutional_trace.effect_trace_signature,
             packaged_governance_trace.effect_trace_signature,
         )
         for name in (
@@ -1061,7 +1036,7 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
             with self.subTest(name=name):
                 self.assertEqual(
                     "realized_core_engine.constitutional_trace",
-                    getattr(constitutional_trace, name).__module__,
+                    getattr(packaged_constitutional_trace, name).__module__,
                 )
 
     def test_governance_declaration_helpers_keep_packaged_identities(self) -> None:

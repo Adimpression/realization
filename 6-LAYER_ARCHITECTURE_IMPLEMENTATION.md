@@ -5571,6 +5571,29 @@ Completed deletion cut - controller normalization/learning exact-alias cohort
   provider-backed cases remain explicitly outside this cohort's evidence
   pending external-data authorization.
 
+Completed deletion cut - controller reduction/closure exact-alias cohort
+(2026-10-30):
+
+- [x] Remove six repository-internal aliases for artifact answer resolution,
+  constitutional trace projection, closure and commitment, governed prior-
+  learning reuse, reduction coordination, and run-outcome harvesting without
+  moving or changing their canonical engine implementations.
+- [x] Preserve canonical constitutional-trace ownership, runtime-layer,
+  distribution, replay, determinism, artifact-selection, and resumption
+  assertions; remove only root identity shells and their facade-only evidence,
+  tombstone every path, and correct module documentation.
+- [x] Accept only the sequential shrinking delta: owned roots `70 -> 64`,
+  root-boundary classifications `93 -> 87`, combined graph nodes `106 -> 100`,
+  combined edges `242 -> 236`, grandfathered observations `112 -> 106`,
+  retained facades `62 -> 56`, and exact aliases `37 -> 31`, with no new
+  dependency or cycle.
+- [x] Qualify the non-model cut with 298 focused architecture/reduction tests,
+  879 applicable root tests, 632 applicable workstation tests, 46 deterministic
+  BDD cases, all distribution builds and isolated imports, deterministic
+  publication capture, Flutter analysis, and 51 widget tests. Seven unrelated
+  provider-backed cases remain explicitly outside this cohort's evidence
+  pending external-data authorization.
+
 Exit condition:
 
 - [x] The root-boundary ledger contains no canonical package-to-root

@@ -54,7 +54,6 @@ Every repository-root Python module has one explicit responsibility. Status is o
 | `approval_governance` | `governance` | `compatibility_facade` |
 | `args` | `entry_exchange` | `entrypoint` |
 | `artifact` | `controller` | `compatibility_facade` |
-| `artifact_answer_resolution` | `controller` | `compatibility_facade` |
 | `artifact_contracts` | `semantic_model` | `compatibility_facade` |
 | `blend_context` | `blend` | `compatibility_facade` |
 | `blend_operator` | `blend` | `compatibility_facade` |
@@ -63,7 +62,6 @@ Every repository-root Python module has one explicit responsibility. Status is o
 | `blend_workflow_execution` | `blend` | `compatibility_facade` |
 | `blend_workflow_models` | `blend` | `compatibility_facade` |
 | `blend_world_models` | `blend` | `compatibility_facade` |
-| `constitutional_trace` | `controller` | `compatibility_facade` |
 | `controller_entrypoint_binding` | `entry_exchange` | `compatibility_facade` |
 | `controller_entrypoints` | `entry_exchange` | `entrypoint` |
 | `controller_governance_bridge` | `controller` | `compatibility_facade` |
@@ -78,9 +76,6 @@ Every repository-root Python module has one explicit responsibility. Status is o
 | `fallback_not_semantics` | `controller` | `compatibility_facade` |
 | `fence_extraction_strategy` | `runtime_execution` | `compatibility_facade` |
 | `governance_inventory` | `controller` | `compatibility_facade` |
-| `governed_closure_and_commitment` | `controller` | `compatibility_facade` |
-| `governed_prior_learning_reuse` | `controller` | `compatibility_facade` |
-| `governed_semantic_reduction_runtime` | `controller` | `compatibility_facade` |
 | `governed_skill_installation` | `governance` | `entrypoint` |
 | `host_interaction_action_dispatch` | `runtime_execution` | `compatibility_facade` |
 | `host_interaction_actions` | `runtime_execution` | `compatibility_facade` |
@@ -102,7 +97,6 @@ Every repository-root Python module has one explicit responsibility. Status is o
 | `python_skill_host` | `runtime_execution` | `compatibility_facade` |
 | `replay_verifier` | `governance` | `entrypoint` |
 | `review_composition` | `subject_domain` | `compatibility_facade` |
-| `run_outcome_harvest_and_reporting` | `controller` | `compatibility_facade` |
 | `runtime_controller_api` | `entry_exchange` | `compatibility_facade` |
 | `skill_boundary_normalization` | `portable_skills` | `compatibility_facade` |
 | `skill_composition` | `portable_skills` | `compatibility_facade` |
@@ -328,8 +322,8 @@ These edges exist only to preserve historical import paths. They are excluded fr
 
 | Metric | Count |
 | --- | ---: |
-| Nodes | 106 |
-| Edges | 242 |
+| Nodes | 100 |
+| Edges | 236 |
 | Cyclic SCCs | 0 |
 | Nodes in cyclic SCCs | 0 |
 | Edges internal to cyclic SCCs | 0 |
@@ -354,7 +348,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `root_to_component` | `args` | `app_cli` | `orchestration` |
 | `root_to_component` | `args` | `core_engine` | `orchestration` |
 | `root_to_component` | `artifact` | `core_engine` | `orchestration` |
-| `root_to_component` | `artifact_answer_resolution` | `core_engine` | `orchestration` |
 | `root_to_component` | `artifact_contracts` | `core_semantics` | `compatibility` |
 | `root_to_component` | `blend_context` | `blend` | `compatibility` |
 | `root_to_component` | `blend_context` | `runtime_core` | `compatibility` |
@@ -365,7 +358,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `root_to_component` | `blend_workflow_execution` | `blend_application` | `compatibility` |
 | `root_to_component` | `blend_workflow_models` | `blend` | `compatibility` |
 | `root_to_component` | `blend_world_models` | `blend` | `compatibility` |
-| `root_to_component` | `constitutional_trace` | `core_engine` | `orchestration` |
 | `root_to_component` | `controller_entrypoint_binding` | `core_engine` | `compatibility` |
 | `root_to_component` | `controller_entrypoints` | `app_cli` | `orchestration` |
 | `root_to_component` | `controller_entrypoints` | `core_engine` | `orchestration` |
@@ -387,9 +379,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `root_to_component` | `fallback_not_semantics` | `core_engine` | `orchestration` |
 | `root_to_component` | `fence_extraction_strategy` | `governed_core` | `orchestration` |
 | `root_to_component` | `governance_inventory` | `core_engine` | `orchestration` |
-| `root_to_component` | `governed_closure_and_commitment` | `core_engine` | `orchestration` |
-| `root_to_component` | `governed_prior_learning_reuse` | `core_engine` | `orchestration` |
-| `root_to_component` | `governed_semantic_reduction_runtime` | `core_engine` | `orchestration` |
 | `root_to_component` | `governed_skill_installation` | `core_engine` | `orchestration` |
 | `root_to_component` | `governed_skill_installation` | `core_governance` | `orchestration` |
 | `root_to_component` | `governed_skill_installation` | `exchange` | `orchestration` |
@@ -421,7 +410,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `root_to_component` | `replay_verifier` | `governed_core` | `orchestration` |
 | `root_to_component` | `replay_verifier` | `skill_semantics` | `orchestration` |
 | `root_to_component` | `review_composition` | `subject_core` | `compatibility` |
-| `root_to_component` | `run_outcome_harvest_and_reporting` | `core_engine` | `orchestration` |
 | `root_to_component` | `runtime_controller_api` | `app_cli` | `compatibility` |
 | `root_to_component` | `skill_boundary_normalization` | `skill_application` | `compatibility` |
 | `root_to_component` | `skill_composition` | `skill_application` | `compatibility` |
@@ -454,7 +442,6 @@ No workspace package imports a root application module.
 - `args` -> `app_cli` (`args.py`)
 - `args` -> `core_engine` (`args.py`)
 - `artifact` -> `core_engine` (`artifact.py`)
-- `artifact_answer_resolution` -> `core_engine` (`artifact_answer_resolution.py`)
 - `artifact_contracts` -> `core_semantics` (`artifact_contracts.py`)
 - `blend_context` -> `blend` (`blend_context.py`)
 - `blend_context` -> `runtime_core` (`blend_context.py`)
@@ -465,7 +452,6 @@ No workspace package imports a root application module.
 - `blend_workflow_execution` -> `blend_application` (`blend_workflow_execution.py`)
 - `blend_workflow_models` -> `blend` (`blend_workflow_models.py`)
 - `blend_world_models` -> `blend` (`blend_world_models.py`)
-- `constitutional_trace` -> `core_engine` (`constitutional_trace.py`)
 - `controller_entrypoint_binding` -> `core_engine` (`controller_entrypoint_binding.py`)
 - `controller_entrypoints` -> `app_cli` (`controller_entrypoints.py`)
 - `controller_entrypoints` -> `core_engine` (`controller_entrypoints.py`)
@@ -487,9 +473,6 @@ No workspace package imports a root application module.
 - `fallback_not_semantics` -> `core_engine` (`fallback_not_semantics.py`)
 - `fence_extraction_strategy` -> `governed_core` (`fence_extraction_strategy.py`)
 - `governance_inventory` -> `core_engine` (`governance_inventory.py`)
-- `governed_closure_and_commitment` -> `core_engine` (`governed_closure_and_commitment.py`)
-- `governed_prior_learning_reuse` -> `core_engine` (`governed_prior_learning_reuse.py`)
-- `governed_semantic_reduction_runtime` -> `core_engine` (`governed_semantic_reduction_runtime.py`)
 - `governed_skill_installation` -> `core_engine` (`governed_skill_installation.py`)
 - `governed_skill_installation` -> `core_governance` (`governed_skill_installation.py`)
 - `governed_skill_installation` -> `exchange` (`governed_skill_installation.py`)
@@ -521,7 +504,6 @@ No workspace package imports a root application module.
 - `replay_verifier` -> `governed_core` (`replay_verifier.py`)
 - `replay_verifier` -> `skill_semantics` (`replay_verifier.py`)
 - `review_composition` -> `subject_core` (`review_composition.py`)
-- `run_outcome_harvest_and_reporting` -> `core_engine` (`run_outcome_harvest_and_reporting.py`)
 - `runtime_controller_api` -> `app_cli` (`runtime_controller_api.py`)
 - `skill_boundary_normalization` -> `skill_application` (`skill_boundary_normalization.py`)
 - `skill_composition` -> `skill_application` (`skill_composition.py`)
