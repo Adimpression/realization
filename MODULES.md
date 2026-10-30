@@ -279,7 +279,6 @@ legacy aliases.
   workstation parsing, composition, and dispatch to `workstation.app.cli`.
 - `controller_governance_bridge.py`: Controller-facing governance bridge methods rebound onto `BSSCController`.
 - `controller_runtime.py`: Canonical `BSSCController` implementation and historical public runtime surface.
-- `controller_runtime_binding.py`: Dependency-inversion seam used by nested host brokers to construct the application-registered controller without importing its implementation.
 - `data_governance.py`: Compatibility facade for data-class and access rules
   owned by `realized_core_governance.data`.
 - `decision_review_models.py`: Module-identity compatibility alias for

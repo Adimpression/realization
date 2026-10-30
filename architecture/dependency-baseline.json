@@ -571,9 +571,9 @@
     "cyclic_internal_edge_count": 0,
     "cyclic_node_count": 0,
     "cyclic_scc_count": 0,
-    "edge_count": 255,
+    "edge_count": 254,
     "largest_cyclic_scc_node_count": 0,
-    "node_count": 119
+    "node_count": 118
   },
   "compatibility_edges": [
     {
@@ -793,12 +793,6 @@
       "direction": "root_to_component",
       "source": "controller_runtime",
       "target": "exchange"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "controller_runtime_binding",
-      "target": "core_engine"
     },
     {
       "category": "compatibility",
@@ -1383,13 +1377,6 @@
     {
       "module": "controller_runtime",
       "owner": "controller",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "controller_runtime_binding",
-      "owner": "entry_exchange",
       "statuses": [
         "compatibility_facade"
       ]
@@ -1985,10 +1972,6 @@
     {
       "source": "controller_runtime",
       "target": "exchange"
-    },
-    {
-      "source": "controller_runtime_binding",
-      "target": "core_engine"
     },
     {
       "source": "data_governance",

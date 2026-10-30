@@ -2136,54 +2136,6 @@
       "support_status": "repository_internal"
     },
     {
-      "canonical_module_identity": "realized_core_engine.controller_runtime_binding",
-      "canonical_targets": [
-        {
-          "component": "core_engine",
-          "module": "realized_core_engine"
-        }
-      ],
-      "command_replacements": [],
-      "contract_evidence": "tests.test_architecture_compatibility_facades",
-      "durable_pickle_globals": [],
-      "exact_module_identity_observed": true,
-      "executable_surface": false,
-      "export_surface": {
-        "constant_types": {},
-        "explicit_all": [
-          "ControllerFactory",
-          "bootstrap_registered_controller",
-          "new_registered_controller",
-          "register_controller_factory"
-        ],
-        "public_names": [
-          "Any",
-          "Callable",
-          "ControllerFactory",
-          "HostInteractionContext",
-          "SystemState",
-          "annotations",
-          "bootstrap_registered_controller",
-          "new_registered_controller",
-          "register_controller_factory"
-        ],
-        "signatures": {
-          "ControllerFactory": "(*args, **kwargs)",
-          "bootstrap_registered_controller": "(*, semantic_unit: 'str', llm_policy: 'str' = 'off', host_interaction_context: 'HostInteractionContext | None' = None) -> 'tuple[SystemState, Any]'",
-          "new_registered_controller": "(state: 'SystemState', *, llm_policy: 'str' = 'off', host_interaction_context: 'HostInteractionContext | None' = None) -> 'Any'",
-          "register_controller_factory": "(factory: 'ControllerFactory') -> 'None'"
-        }
-      },
-      "import_effect_class": "module_alias_only",
-      "module": "controller_runtime_binding",
-      "owner": "entry_exchange",
-      "path": "controller_runtime_binding.py",
-      "proof_strategy": "exact_module_object_identity",
-      "rollback_operation": "restore controller_runtime_binding.py and its compatibility contract assertions without reverting the canonical owner",
-      "shape": "exact_module_alias",
-      "support_status": "repository_internal"
-    },
-    {
       "canonical_module_identity": "",
       "canonical_targets": [
         {
@@ -8112,12 +8064,12 @@
   },
   "schema_version": 1,
   "summary": {
-    "card_count": 75,
-    "exact_module_identity_count": 52,
+    "card_count": 74,
+    "exact_module_identity_count": 51,
     "facades_with_durable_pickle_globals": 35,
     "pickle_global_count": 133,
     "proof_strategy_counts": {
-      "exact_module_object_identity": 50,
+      "exact_module_object_identity": 49,
       "exported_symbol_object_identity": 19,
       "manual_behavior_equivalence": 5,
       "manual_multi_owner_export_mapping": 1

@@ -68,7 +68,6 @@ Every repository-root Python module has one explicit responsibility. Status is o
 | `controller_entrypoints` | `entry_exchange` | `entrypoint` |
 | `controller_governance_bridge` | `controller` | `compatibility_facade` |
 | `controller_runtime` | `controller` | `compatibility_facade` |
-| `controller_runtime_binding` | `entry_exchange` | `compatibility_facade` |
 | `data_governance` | `governance` | `compatibility_facade` |
 | `decision_review` | `subject_domain` | `compatibility_facade` |
 | `decision_review_constructs` | `subject_domain` | `compatibility_facade` |
@@ -341,8 +340,8 @@ These edges exist only to preserve historical import paths. They are excluded fr
 
 | Metric | Count |
 | --- | ---: |
-| Nodes | 119 |
-| Edges | 255 |
+| Nodes | 118 |
+| Edges | 254 |
 | Cyclic SCCs | 0 |
 | Nodes in cyclic SCCs | 0 |
 | Edges internal to cyclic SCCs | 0 |
@@ -390,7 +389,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `root_to_component` | `controller_governance_bridge` | `core_engine` | `compatibility` |
 | `root_to_component` | `controller_runtime` | `core_engine` | `compatibility` |
 | `root_to_component` | `controller_runtime` | `exchange` | `compatibility` |
-| `root_to_component` | `controller_runtime_binding` | `core_engine` | `compatibility` |
 | `root_to_component` | `data_governance` | `core_governance` | `compatibility` |
 | `root_to_component` | `decision_review` | `subject_core` | `orchestration` |
 | `root_to_component` | `decision_review_constructs` | `subject_core` | `orchestration` |
@@ -503,7 +501,6 @@ No workspace package imports a root application module.
 - `controller_governance_bridge` -> `core_engine` (`controller_governance_bridge.py`)
 - `controller_runtime` -> `core_engine` (`controller_runtime.py`)
 - `controller_runtime` -> `exchange` (`controller_runtime.py`)
-- `controller_runtime_binding` -> `core_engine` (`controller_runtime_binding.py`)
 - `data_governance` -> `core_governance` (`data_governance.py`)
 - `decision_review` -> `subject_core` (`decision_review.py`)
 - `decision_review_constructs` -> `subject_core` (`decision_review_constructs.py`)

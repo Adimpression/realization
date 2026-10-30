@@ -144,6 +144,11 @@
       "removed_at": "2026-10-30",
       "replacement": "realized_core_runtime.capabilities"
     },
+    "controller_runtime_binding": {
+      "removal_change_reference": "controller-binding-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.controller_runtime_binding"
+    },
     "decision_review_policy": {
       "removal_change_reference": "subject-core-alias-cohort-1",
       "removed_at": "2026-10-30",

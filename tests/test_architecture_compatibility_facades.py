@@ -20,7 +20,6 @@ import blend_world_models
 import controller_runtime
 import controller_entrypoint_binding
 import controller_governance_bridge
-import controller_runtime_binding
 import constitutional_trace
 import data_governance
 import decision_review
@@ -152,7 +151,6 @@ from realized_core_engine import host_mediation as packaged_host_mediation
 from realized_core_engine import controller_entrypoint_binding as packaged_controller_entrypoint_binding
 from realized_core_engine import controller_governance_bridge as packaged_controller_governance_bridge
 from realized_core_engine import controller_runtime as packaged_controller_runtime
-from realized_core_engine import controller_runtime_binding as packaged_controller_runtime_binding
 from realized_core_engine import skill_governance as packaged_engine_skill_governance
 from realized_core_engine import structured_learning as packaged_structured_learning
 from realized_core_engine import supplement as packaged_engine_supplement
@@ -206,7 +204,6 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
             (controller_entrypoint_binding, packaged_controller_entrypoint_binding),
             (controller_governance_bridge, packaged_controller_governance_bridge),
             (controller_runtime, packaged_controller_runtime),
-            (controller_runtime_binding, packaged_controller_runtime_binding),
             (host_mediation, packaged_host_mediation),
             (skill_governance, packaged_engine_skill_governance),
             (store, packaged_engine_store),

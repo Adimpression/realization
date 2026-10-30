@@ -5486,6 +5486,26 @@ Completed deletion cut - exchange exact-alias cohort (2026-10-30):
   distribution builds and isolated imports, deterministic publication capture,
   Flutter analysis, and 51 widget tests.
 
+Completed deletion cut - controller binding exact-alias cohort (2026-10-30):
+
+- [x] Remove the repository-internal `controller_runtime_binding` alias without
+  moving or changing the canonical engine-owned controller factory registration
+  seam.
+- [x] Preserve engine registration and nested controller construction; remove
+  only the identity shell and its ledger/test entries, tombstone the path, and
+  correct module documentation.
+- [x] Accept only the sequential shrinking delta: owned roots `83 -> 82`,
+  root-boundary classifications `106 -> 105`, combined graph nodes `119 ->
+  118`, combined edges `255 -> 254`, grandfathered observations `125 -> 124`,
+  retained facades `75 -> 74`, and exact aliases `50 -> 49`, with no new
+  dependency or cycle.
+- [x] Qualify the non-model cut with 146 focused architecture/runtime-hygiene
+  tests, 882 applicable root tests, 632 applicable workstation tests, 38
+  deterministic BDD cases, all distribution builds and isolated imports,
+  deterministic publication capture, Flutter analysis, and 51 widget tests.
+  Seven unrelated provider-backed cases remain explicitly outside this
+  cohort's evidence pending external-data authorization.
+
 Exit condition:
 
 - [x] The root-boundary ledger contains no canonical package-to-root

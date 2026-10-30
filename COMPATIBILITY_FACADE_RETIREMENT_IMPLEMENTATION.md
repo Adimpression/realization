@@ -157,25 +157,25 @@ Snapshot date: 2026-10-30.
 - [x] Generated observations and human policy are separated between
   `architecture/compatibility-facades.json` and
   `architecture/compatibility-facade-policy.json`.
-- [x] The current policy classifies 34 source-checkout-only facades as
+- [x] The current policy classifies 33 source-checkout-only facades as
   repository-internal, contract-qualified candidates, keeps 41 facades on
-  explicit holds, and permanently tombstones 45 retired aliases.
+  explicit holds, and permanently tombstones 46 retired aliases.
   Qualification makes a retained facade eligible for a later isolated deletion
   review; it does not itself delete or deprecate it.
-- [x] The executable contract ledger contains all 75 retained-facade cards:
-  - 50 exact-module-object identity proofs
+- [x] The executable contract ledger contains all 74 retained-facade cards:
+  - 49 exact-module-object identity proofs
   - 19 exported-symbol identity proofs
   - one manual multi-owner aggregate mapping
   - five manual behavior-equivalence surfaces
   - 35 facades carrying 133 exercised protocol-zero pickle globals
-- [x] Static consumers were reduced from the measured v2 baseline to 83:
-  - 78 imports in the designated compatibility-contract suite
+- [x] Static consumers were reduced from the measured v2 baseline to 82:
+  - 77 imports in the designated compatibility-contract suite
   - two imports in the dedicated `main` executable/CLI contract test
   - three facade-to-facade links in the held behavior-adapter chain
 - [x] No canonical package, public README example, or repository example
   imports a root facade.
-- [x] The current scanner records 659 non-AST references with dispositions:
-  - 427 historical narrative references
+- [x] The current scanner records 657 non-AST references with dispositions:
+  - 425 historical narrative references
   - 54 durable provenance references from checked-in receipts
   - 62 compatibility-test evidence references
   - five architecture evidence references
@@ -191,7 +191,7 @@ Snapshot date: 2026-10-30.
 - [x] Ordinary Python consumers of retained qualified aliases and all 19 symbol
   re-export facades use canonical package owners; the two remaining exact
   alias consumers belong to the held behavior-adapter dependency chain.
-- [x] Every one of the 34 retained qualified candidates has no non-contract consumer,
+- [x] Every one of the 33 retained qualified candidates has no non-contract consumer,
   no blocking runtime reference, no known durable-qualified-name obligation,
   and one unambiguous canonical replacement.
 - [x] The 41 holds preserve the proven pickle-qualified-name obligations and
@@ -203,9 +203,9 @@ Snapshot date: 2026-10-30.
   executable-obligation classification.
 - [x] The first seven `core_semantics`, ten `core_runtime`, two governance,
   four Blend application, nine subject-core, one subject-service, two
-  validation, and ten exchange exact aliases are removed, their canonical
-  replacements remain unchanged, and tombstones reject accidental
-  reintroduction.
+  validation, ten exchange, and one controller-binding exact alias are removed,
+  their canonical replacements remain unchanged, and tombstones reject
+  accidental reintroduction.
 
 ## Known Measurement Gap
 
@@ -1041,6 +1041,47 @@ Reviewed and accepted evidence, captured on 2026-10-30:
   root-ledger entries, tombstones, and exchange documentation; canonical
   exchange parsing, translation, compilation, projection, registry,
   run-bundle, and learning-context behavior remain unchanged.
+
+### Controller Binding Alias Deletion Cohort Review
+
+The ninth deletion cohort contains the single exact alias for the engine-owned
+controller factory registration seam.
+
+| Historical import | Canonical replacement |
+| --- | --- |
+| `controller_runtime_binding` | `realized_core_engine.controller_runtime_binding` |
+
+Reviewed and accepted evidence, captured on 2026-10-30:
+
+- [x] The file was a pure exact `sys.modules` alias with no executable surface,
+  non-contract consumer, blocking reference, or known durable pickle global,
+  and it had one unambiguous canonical replacement.
+- [x] Engine controller construction already imports the canonical binding;
+  runtime hygiene rejects root-binding reach-through, and no production caller
+  depended on the historical module identity.
+- [x] The sequential architecture delta only shrank the graph: owned roots
+  `83 -> 82`, root-boundary classifications `106 -> 105`, combined nodes
+  `119 -> 118`, combined edges `255 -> 254`, and grandfathered observations
+  `125 -> 124`, with no addition or cycle.
+- [x] The retained inventory contains `74` facades, `82` static consumers,
+  `33` qualified candidates, `41` holds, and `46` total tombstones, with no
+  canonical-package or public-example consumer.
+- [x] The retained contract ledger contains `74` cards, `49` exact aliases,
+  `35` facades with `133` durable pickle globals, and `79` facade contract
+  tests.
+- [x] Qualification passed `146` focused architecture/runtime-hygiene tests,
+  all `882` applicable non-provider root tests, `632` applicable non-provider
+  workstation tests, and `38` deterministic skill-routing/report/publication
+  BDD cases.
+- [x] Provider-backed markdown and live-publication tests are outside this
+  non-model binding cohort and are not claimed as passing; their seven cases
+  remain separately gated on explicit external-data authorization.
+- [x] All `35` wheels and source distributions built and imported in
+  isolation; publication capture reproduced eight actions and two artifacts;
+  Flutter analysis and all `51` widget tests passed.
+- [x] Rollback remains local to the alias, facade-only identity assertion,
+  active root-ledger entries, tombstone, and module documentation; canonical
+  controller registration and construction behavior remain unchanged.
 
 ## Phase 5 - Retire Low-Risk Alias Cohorts
 
