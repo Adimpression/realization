@@ -144,6 +144,21 @@
       "removed_at": "2026-10-30",
       "replacement": "realized_core_runtime.capabilities"
     },
+    "decision_review_policy": {
+      "removal_change_reference": "subject-core-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "workstation.subject.core.decision_review_policy"
+    },
+    "decision_review_projection": {
+      "removal_change_reference": "subject-core-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "workstation.subject.core.decision_review_projection"
+    },
+    "gather_sources": {
+      "removal_change_reference": "subject-core-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "workstation.subject.core.gather_sources"
+    },
     "host_abi": {
       "removal_change_reference": "runtime-leaf-cohort-1",
       "removed_at": "2026-10-30",
@@ -169,6 +184,16 @@
       "removed_at": "2026-10-30",
       "replacement": "realized_core_semantics.identifiers"
     },
+    "learning_context_markdown": {
+      "removal_change_reference": "subject-core-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "workstation.subject.core.learning_context_markdown"
+    },
+    "learning_context_projection": {
+      "removal_change_reference": "subject-core-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "workstation.subject.core.learning_context_projection"
+    },
     "macos_host_brokers": {
       "removal_change_reference": "runtime-leaf-cohort-1",
       "removed_at": "2026-10-30",
@@ -183,6 +208,26 @@
       "removal_change_reference": "semantic-alias-cohort-1",
       "removed_at": "2026-10-30",
       "replacement": "realized_core_semantics.prolog"
+    },
+    "publication": {
+      "removal_change_reference": "subject-core-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "workstation.subject.core.publication"
+    },
+    "publication_projection": {
+      "removal_change_reference": "subject-core-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "workstation.subject.core.publication_projection"
+    },
+    "publication_render": {
+      "removal_change_reference": "subject-core-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "workstation.subject.core.publication_render"
+    },
+    "publication_validation": {
+      "removal_change_reference": "subject-core-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "workstation.subject.core.publication_validation"
     },
     "python_skill_brokerization": {
       "removal_change_reference": "runtime-leaf-cohort-1",

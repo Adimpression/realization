@@ -571,9 +571,9 @@
     "cyclic_internal_edge_count": 0,
     "cyclic_node_count": 0,
     "cyclic_scc_count": 0,
-    "edge_count": 277,
+    "edge_count": 268,
     "largest_cyclic_scc_node_count": 0,
-    "node_count": 141
+    "node_count": 132
   },
   "compatibility_edges": [
     {
@@ -825,18 +825,6 @@
       "target": "core_semantics"
     },
     {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "decision_review_policy",
-      "target": "subject_core"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "decision_review_projection",
-      "target": "subject_core"
-    },
-    {
       "category": "orchestration",
       "direction": "root_to_component",
       "source": "direct_knowledge_reuse",
@@ -877,12 +865,6 @@
       "direction": "root_to_component",
       "source": "fence_extraction_strategy",
       "target": "governed_core"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "gather_sources",
-      "target": "subject_core"
     },
     {
       "category": "orchestration",
@@ -1023,21 +1005,9 @@
       "target": "exchange"
     },
     {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "learning_context_markdown",
-      "target": "subject_core"
-    },
-    {
       "category": "orchestration",
       "direction": "root_to_component",
       "source": "learning_context_paths",
-      "target": "subject_core"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "learning_context_projection",
       "target": "subject_core"
     },
     {
@@ -1093,30 +1063,6 @@
       "direction": "root_to_component",
       "source": "prompt_directives",
       "target": "core_engine"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "publication",
-      "target": "subject_core"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "publication_projection",
-      "target": "subject_core"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "publication_render",
-      "target": "subject_core"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "publication_validation",
-      "target": "subject_core"
     },
     {
       "category": "compatibility",
@@ -1555,20 +1501,6 @@
       ]
     },
     {
-      "module": "decision_review_policy",
-      "owner": "subject_domain",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "decision_review_projection",
-      "owner": "subject_domain",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
       "module": "direct_knowledge_reuse",
       "owner": "controller",
       "statuses": [
@@ -1613,13 +1545,6 @@
     {
       "module": "fence_extraction_strategy",
       "owner": "runtime_execution",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "gather_sources",
-      "owner": "subject_domain",
       "statuses": [
         "compatibility_facade"
       ]
@@ -1751,21 +1676,7 @@
       ]
     },
     {
-      "module": "learning_context_markdown",
-      "owner": "subject_domain",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
       "module": "learning_context_paths",
-      "owner": "subject_domain",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "learning_context_projection",
       "owner": "subject_domain",
       "statuses": [
         "compatibility_facade"
@@ -1831,34 +1742,6 @@
     {
       "module": "prompt_directives",
       "owner": "controller",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "publication",
-      "owner": "subject_domain",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "publication_projection",
-      "owner": "subject_domain",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "publication_render",
-      "owner": "subject_domain",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "publication_validation",
-      "owner": "subject_domain",
       "statuses": [
         "compatibility_facade"
       ]
@@ -2295,14 +2178,6 @@
       "target": "core_semantics"
     },
     {
-      "source": "decision_review_policy",
-      "target": "subject_core"
-    },
-    {
-      "source": "decision_review_projection",
-      "target": "subject_core"
-    },
-    {
       "source": "direct_knowledge_reuse",
       "target": "core_engine"
     },
@@ -2329,10 +2204,6 @@
     {
       "source": "fence_extraction_strategy",
       "target": "governed_core"
-    },
-    {
-      "source": "gather_sources",
-      "target": "subject_core"
     },
     {
       "source": "governance_inventory",
@@ -2427,15 +2298,7 @@
       "target": "exchange"
     },
     {
-      "source": "learning_context_markdown",
-      "target": "subject_core"
-    },
-    {
       "source": "learning_context_paths",
-      "target": "subject_core"
-    },
-    {
-      "source": "learning_context_projection",
       "target": "subject_core"
     },
     {
@@ -2473,22 +2336,6 @@
     {
       "source": "prompt_directives",
       "target": "core_engine"
-    },
-    {
-      "source": "publication",
-      "target": "subject_core"
-    },
-    {
-      "source": "publication_projection",
-      "target": "subject_core"
-    },
-    {
-      "source": "publication_render",
-      "target": "subject_core"
-    },
-    {
-      "source": "publication_validation",
-      "target": "subject_core"
     },
     {
       "source": "pure_theory_types",

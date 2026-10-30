@@ -28,15 +28,12 @@ import data_governance
 import decision_review
 import decision_review_constructs
 import decision_review_models
-import decision_review_policy
-import decision_review_projection
 import direct_knowledge_reuse
 import execution_framework_primitives
 import execution_frameworks
 import fence_extraction_strategy
 import fallback_not_generation
 import fallback_not_semantics
-import gather_sources
 import governance_inventory
 import governed_closure_and_commitment
 import governed_prior_learning_reuse
@@ -54,9 +51,7 @@ import itemize_models
 import itemize_validation
 import learn
 import learning_context
-import learning_context_markdown
 import learning_context_paths
-import learning_context_projection
 import learning_context_skill_projection
 import markdown_ir
 import markdown_learning_artifact_semantics
@@ -66,10 +61,6 @@ import normalize
 import normalization_runtime_dependencies
 import not_elaboration_ranking
 import pure_theory_types
-import publication
-import publication_projection
-import publication_render
-import publication_validation
 import prompt_directives
 import retrieval_ranking
 import review_composition
@@ -210,20 +201,11 @@ from realized_exchange import run_bundle as packaged_run_bundle
 from realized_exchange import skill_export as packaged_skill_export
 from realized_exchange import skill_schema as packaged_skill_schema
 from workstation.subject.core import itemize_validation as packaged_itemize_validation
-from workstation.subject.core import gather_sources as packaged_gather_sources
-from workstation.subject.core import decision_review_projection as packaged_decision_review_projection
-from workstation.subject.core import decision_review_policy as packaged_decision_review_policy
 from workstation.subject.core import decision_review as packaged_subject_decision_review
 from workstation.subject.core import decision_review_constructs as packaged_subject_decision_review_constructs
 from workstation.subject.core import itemization as packaged_subject_itemization
 from workstation.subject.core import learning_context as packaged_subject_learning_context
-from workstation.subject.core import learning_context_markdown as packaged_learning_context_markdown
 from workstation.subject.core import learning_context_paths as packaged_subject_learning_context_paths
-from workstation.subject.core import learning_context_projection as packaged_learning_context_projection
-from workstation.subject.core import publication as packaged_publication
-from workstation.subject.core import publication_projection as packaged_publication_projection
-from workstation.subject.core import publication_render as packaged_publication_render
-from workstation.subject.core import publication_validation as packaged_publication_validation
 from workstation.subject.core import review_composition as packaged_review_composition
 from workstation.subject.service import url_learning_capture as packaged_url_learning_capture
 
@@ -260,16 +242,6 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
         self.assertIs(
             markdown_learning_artifact_semantics,
             packaged_markdown_learning_artifact_semantics,
-        )
-        self.assertIs(
-            learning_context_markdown,
-            packaged_learning_context_markdown,
-        )
-
-    def test_subject_projection_keeps_legacy_module_identity(self) -> None:
-        self.assertIs(
-            learning_context_projection,
-            packaged_learning_context_projection,
         )
 
     def test_controller_and_runtime_root_aliases_keep_module_identity(self) -> None:
@@ -463,9 +435,6 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
                     getattr(packaged_proposals, name),
                 )
 
-    def test_subject_decision_policy_facade_keeps_packaged_module_identity(self) -> None:
-        self.assertIs(decision_review_policy, packaged_decision_review_policy)
-
     def test_subject_decision_review_facade_keeps_packaged_module_identity(self) -> None:
         self.assertIs(decision_review, packaged_subject_decision_review)
         self.assertIs(
@@ -498,24 +467,6 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
                     pickle.loads(f"creview_composition\n{name}\n.".encode("ascii")),
                     getattr(packaged_review_composition, name),
                 )
-
-    def test_subject_decision_projection_facade_keeps_packaged_module_identity(self) -> None:
-        self.assertIs(decision_review_projection, packaged_decision_review_projection)
-
-    def test_subject_publication_facade_keeps_packaged_module_identity(self) -> None:
-        self.assertIs(publication, packaged_publication)
-
-    def test_subject_publication_render_facade_keeps_packaged_module_identity(self) -> None:
-        self.assertIs(publication_render, packaged_publication_render)
-
-    def test_subject_publication_validation_facade_keeps_packaged_module_identity(self) -> None:
-        self.assertIs(publication_validation, packaged_publication_validation)
-
-    def test_subject_publication_projection_facade_keeps_packaged_module_identity(self) -> None:
-        self.assertIs(publication_projection, packaged_publication_projection)
-
-    def test_subject_gather_sources_facade_keeps_packaged_module_identity(self) -> None:
-        self.assertIs(gather_sources, packaged_gather_sources)
 
     def test_subject_itemization_validation_facade_keeps_packaged_identity(self) -> None:
         self.assertIs(

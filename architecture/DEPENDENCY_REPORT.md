@@ -73,8 +73,6 @@ Every repository-root Python module has one explicit responsibility. Status is o
 | `decision_review` | `subject_domain` | `compatibility_facade` |
 | `decision_review_constructs` | `subject_domain` | `compatibility_facade` |
 | `decision_review_models` | `subject_domain` | `compatibility_facade` |
-| `decision_review_policy` | `subject_domain` | `compatibility_facade` |
-| `decision_review_projection` | `subject_domain` | `compatibility_facade` |
 | `direct_knowledge_reuse` | `controller` | `compatibility_facade` |
 | `execution_framework_primitives` | `runtime_execution` | `compatibility_facade` |
 | `execution_frameworks` | `runtime_execution` | `compatibility_facade` |
@@ -82,7 +80,6 @@ Every repository-root Python module has one explicit responsibility. Status is o
 | `fallback_not_generation` | `controller` | `compatibility_facade` |
 | `fallback_not_semantics` | `controller` | `compatibility_facade` |
 | `fence_extraction_strategy` | `runtime_execution` | `compatibility_facade` |
-| `gather_sources` | `subject_domain` | `compatibility_facade` |
 | `governance_inventory` | `controller` | `compatibility_facade` |
 | `governed_closure_and_commitment` | `controller` | `compatibility_facade` |
 | `governed_prior_learning_reuse` | `controller` | `compatibility_facade` |
@@ -101,9 +98,7 @@ Every repository-root Python module has one explicit responsibility. Status is o
 | `itemize_validation` | `subject_domain` | `compatibility_facade` |
 | `learn` | `controller` | `compatibility_facade` |
 | `learning_context` | `entry_exchange` | `compatibility_facade` |
-| `learning_context_markdown` | `subject_domain` | `compatibility_facade` |
 | `learning_context_paths` | `subject_domain` | `compatibility_facade` |
-| `learning_context_projection` | `subject_domain` | `compatibility_facade` |
 | `learning_context_skill_projection` | `entry_exchange` | `compatibility_facade` |
 | `main` | `entry_exchange` | `compatibility_facade`, `entrypoint` |
 | `markdown_ir` | `subject_domain` | `compatibility_facade` |
@@ -113,10 +108,6 @@ Every repository-root Python module has one explicit responsibility. Status is o
 | `normalize` | `compatibility` | `compatibility_facade` |
 | `not_elaboration_ranking` | `controller` | `compatibility_facade` |
 | `prompt_directives` | `controller` | `compatibility_facade` |
-| `publication` | `subject_domain` | `compatibility_facade` |
-| `publication_projection` | `subject_domain` | `compatibility_facade` |
-| `publication_render` | `subject_domain` | `compatibility_facade` |
-| `publication_validation` | `subject_domain` | `compatibility_facade` |
 | `pure_theory_types` | `semantic_model` | `compatibility_facade` |
 | `python_skill_host` | `runtime_execution` | `compatibility_facade` |
 | `replay_verifier` | `governance` | `entrypoint` |
@@ -363,8 +354,8 @@ These edges exist only to preserve historical import paths. They are excluded fr
 
 | Metric | Count |
 | --- | ---: |
-| Nodes | 141 |
-| Edges | 277 |
+| Nodes | 132 |
+| Edges | 268 |
 | Cyclic SCCs | 0 |
 | Nodes in cyclic SCCs | 0 |
 | Edges internal to cyclic SCCs | 0 |
@@ -417,8 +408,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `root_to_component` | `decision_review` | `subject_core` | `orchestration` |
 | `root_to_component` | `decision_review_constructs` | `subject_core` | `orchestration` |
 | `root_to_component` | `decision_review_models` | `core_semantics` | `dto_constants` |
-| `root_to_component` | `decision_review_policy` | `subject_core` | `compatibility` |
-| `root_to_component` | `decision_review_projection` | `subject_core` | `compatibility` |
 | `root_to_component` | `direct_knowledge_reuse` | `core_engine` | `orchestration` |
 | `root_to_component` | `execution_framework_primitives` | `governed_core` | `orchestration` |
 | `root_to_component` | `execution_frameworks` | `governed_core` | `orchestration` |
@@ -426,7 +415,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `root_to_component` | `fallback_not_generation` | `core_engine` | `orchestration` |
 | `root_to_component` | `fallback_not_semantics` | `core_engine` | `orchestration` |
 | `root_to_component` | `fence_extraction_strategy` | `governed_core` | `orchestration` |
-| `root_to_component` | `gather_sources` | `subject_core` | `orchestration` |
 | `root_to_component` | `governance_inventory` | `core_engine` | `orchestration` |
 | `root_to_component` | `governed_closure_and_commitment` | `core_engine` | `orchestration` |
 | `root_to_component` | `governed_prior_learning_reuse` | `core_engine` | `orchestration` |
@@ -450,9 +438,7 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `root_to_component` | `itemize_validation` | `subject_core` | `orchestration` |
 | `root_to_component` | `learn` | `core_engine` | `orchestration` |
 | `root_to_component` | `learning_context` | `exchange` | `orchestration` |
-| `root_to_component` | `learning_context_markdown` | `subject_core` | `compatibility` |
 | `root_to_component` | `learning_context_paths` | `subject_core` | `orchestration` |
-| `root_to_component` | `learning_context_projection` | `subject_core` | `orchestration` |
 | `root_to_component` | `learning_context_skill_projection` | `exchange` | `orchestration` |
 | `root_to_component` | `markdown_ir` | `core_semantics` | `orchestration` |
 | `root_to_component` | `markdown_learning_artifact_semantics` | `core_engine` | `compatibility` |
@@ -462,10 +448,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `root_to_component` | `normalize` | `core_semantics` | `orchestration` |
 | `root_to_component` | `not_elaboration_ranking` | `core_engine` | `orchestration` |
 | `root_to_component` | `prompt_directives` | `core_engine` | `orchestration` |
-| `root_to_component` | `publication` | `subject_core` | `compatibility` |
-| `root_to_component` | `publication_projection` | `subject_core` | `compatibility` |
-| `root_to_component` | `publication_render` | `subject_core` | `compatibility` |
-| `root_to_component` | `publication_validation` | `subject_core` | `compatibility` |
 | `root_to_component` | `pure_theory_types` | `core_semantics` | `compatibility` |
 | `root_to_component` | `python_skill_host` | `governed_core` | `orchestration` |
 | `root_to_component` | `replay_verifier` | `core_engine` | `orchestration` |
@@ -552,8 +534,6 @@ No workspace package imports a root application module.
 - `decision_review` -> `subject_core` (`decision_review.py`)
 - `decision_review_constructs` -> `subject_core` (`decision_review_constructs.py`)
 - `decision_review_models` -> `core_semantics` (`decision_review_models.py`)
-- `decision_review_policy` -> `subject_core` (`decision_review_policy.py`)
-- `decision_review_projection` -> `subject_core` (`decision_review_projection.py`)
 - `direct_knowledge_reuse` -> `core_engine` (`direct_knowledge_reuse.py`)
 - `execution_framework_primitives` -> `governed_core` (`execution_framework_primitives.py`)
 - `execution_frameworks` -> `governed_core` (`execution_frameworks.py`)
@@ -561,7 +541,6 @@ No workspace package imports a root application module.
 - `fallback_not_generation` -> `core_engine` (`fallback_not_generation.py`)
 - `fallback_not_semantics` -> `core_engine` (`fallback_not_semantics.py`)
 - `fence_extraction_strategy` -> `governed_core` (`fence_extraction_strategy.py`)
-- `gather_sources` -> `subject_core` (`gather_sources.py`)
 - `governance_inventory` -> `core_engine` (`governance_inventory.py`)
 - `governed_closure_and_commitment` -> `core_engine` (`governed_closure_and_commitment.py`)
 - `governed_prior_learning_reuse` -> `core_engine` (`governed_prior_learning_reuse.py`)
@@ -585,9 +564,7 @@ No workspace package imports a root application module.
 - `itemize_validation` -> `subject_core` (`itemize_validation.py`)
 - `learn` -> `core_engine` (`learn.py`)
 - `learning_context` -> `exchange` (`learning_context.py`)
-- `learning_context_markdown` -> `subject_core` (`learning_context_markdown.py`)
 - `learning_context_paths` -> `subject_core` (`learning_context_paths.py`)
-- `learning_context_projection` -> `subject_core` (`learning_context_projection.py`)
 - `learning_context_skill_projection` -> `exchange` (`learning_context_skill_projection.py`)
 - `markdown_ir` -> `core_semantics` (`markdown_ir.py`)
 - `markdown_learning_artifact_semantics` -> `core_engine` (`markdown_learning_artifact_semantics.py`)
@@ -597,10 +574,6 @@ No workspace package imports a root application module.
 - `normalize` -> `core_semantics` (`normalize.py`)
 - `not_elaboration_ranking` -> `core_engine` (`not_elaboration_ranking.py`)
 - `prompt_directives` -> `core_engine` (`prompt_directives.py`)
-- `publication` -> `subject_core` (`publication.py`)
-- `publication_projection` -> `subject_core` (`publication_projection.py`)
-- `publication_render` -> `subject_core` (`publication_render.py`)
-- `publication_validation` -> `subject_core` (`publication_validation.py`)
 - `pure_theory_types` -> `core_semantics` (`pure_theory_types.py`)
 - `python_skill_host` -> `governed_core` (`python_skill_host.py`)
 - `replay_verifier` -> `core_engine` (`replay_verifier.py`)

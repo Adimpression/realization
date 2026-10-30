@@ -64,7 +64,7 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
             qualification["minimum_stable_cycles"],
         )
         self.assertFalse(qualification["retirement_hold"])
-        self.assertEqual(56, len(self.inventory["retirement_candidates"]))
+        self.assertEqual(47, len(self.inventory["retirement_candidates"]))
         self.assertEqual(41, len(self.inventory["retirement_holds"]))
 
     def test_facade_shapes_match_reviewed_compatibility_cohorts(self) -> None:
@@ -72,7 +72,7 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
             {
                 "aggregate_reexport": 1,
                 "behavior_adapter": 5,
-                "exact_module_alias": 72,
+                "exact_module_alias": 63,
                 "symbol_reexport": 19,
             },
             self.inventory["summary"]["shape_counts"],
@@ -180,7 +180,7 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
             for row in self.inventory["facades"]
             if row["module"] in self.inventory["retirement_candidates"]
         }
-        self.assertEqual(56, len(candidates))
+        self.assertEqual(47, len(candidates))
         self.assertTrue(
             all(
                 row["retirement_state"] == "qualified"
@@ -202,14 +202,23 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
                 "blend_world",
                 "blend_world_store",
                 "capability_runtime",
+                "decision_review_policy",
+                "decision_review_projection",
+                "gather_sources",
                 "host_abi",
                 "host_brokers",
                 "host_realizers",
                 "governed_skill_access",
                 "id_generation",
+                "learning_context_markdown",
+                "learning_context_projection",
                 "macos_host_brokers",
                 "normalization_primitives",
                 "prolog",
+                "publication",
+                "publication_projection",
+                "publication_render",
+                "publication_validation",
                 "python_skill_brokerization",
                 "python_skill_host_transport",
                 "runtime_temp",

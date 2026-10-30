@@ -371,7 +371,6 @@ legacy aliases.
 - `learning_context_paths.py`: Exact module-identity compatibility alias for
   the package-owned subject path vocabulary.
 - `workstation/subject/core/gather_sources.py`: Canonical Gather source, revision, collection, path, and JSON persistence model for the subject lifecycle.
-- `gather_sources.py`: Module-identity compatibility alias for canonical subject-core Gather source persistence.
 - `itemize_models.py`: Module-identity compatibility alias for dependency-light
   itemization values and normalization owned by
   `realized_core_semantics.itemization`.
@@ -384,7 +383,6 @@ legacy aliases.
   controller bootstrap for direct root callers.
 - `workstation/subject/core/itemize_validation.py`: Canonical itemization-session validation invariants consumed by the subject workflow.
 - `itemize_validation.py`: Identity-preserving compatibility facade for the canonical subject-core itemization validation surface.
-- `learning_context_projection.py`: Exact module-identity compatibility alias for the subject-core document renderer.
 - `learning_context_skill_projection.py`: Exact module-identity compatibility alias for exchange-owned learning-context skill compilation and YAML materialization. Projection establishes subject scope and provenance; it does not perform governed skill installation or admission.
 - `workstation/subject/service/learning_capture.py`: Prompt-scoped subject application service that turns successful workstation chat “save learnings” markdown writes into chat `LearningSource`, `LearningDelta`, and merged `LearningContext` records without making raw markdown tools semantic by default.
 - `workstation/foundation/host/learning_capture.py`: Compatibility alias for the canonical subject-service learning-capture module.
@@ -401,13 +399,9 @@ legacy aliases.
 - `not_elaboration_ranking.py`: Canonical non-achievedness elaboration ranking.
 - `prompt_directives.py`: Prompt directive classification and intent-shaping helpers.
 - `workstation/subject/core/publication.py`: Canonical publication substrate for claim-centered governed report publication, including typed publication/section/claim/source/build/render-artifact records, deterministic snapshot hashing, and explicit on-disk publication persistence under the subject corpus home.
-- `publication.py`: Module-identity compatibility alias for the canonical subject-core publication substrate.
 - `workstation/subject/core/publication_projection.py`: Canonical deterministic `LearningContext`-to-`Publication` report projection, including admitted-unit claim extraction, section assignment, source loading, validation/build/render orchestration, and separate publication-tree materialization.
-- `publication_projection.py`: Module-identity compatibility alias for canonical subject-core publication projection.
 - `workstation/subject/core/publication_render.py`: Canonical deterministic Typst and markdown renderers plus reproducible publication build and render-artifact projection.
-- `publication_render.py`: Module-identity compatibility alias for canonical subject-core publication rendering.
 - `workstation/subject/core/publication_validation.py`: Canonical publication validation rules over unique section ids, claim/source references, and source-backed descriptive claims.
-- `publication_validation.py`: Module-identity compatibility alias for canonical subject-core publication validation.
 - `pure_theory_types.py`: Compatibility facade for the canonical formal theory
   terms in `realized_core_semantics.theory`.
 - `python_skill_host.py`: Child Python runtime host API for governed broker

@@ -157,27 +157,27 @@ Snapshot date: 2026-10-30.
 - [x] Generated observations and human policy are separated between
   `architecture/compatibility-facades.json` and
   `architecture/compatibility-facade-policy.json`.
-- [x] The current policy classifies 56 source-checkout-only facades as
+- [x] The current policy classifies 47 source-checkout-only facades as
   repository-internal, contract-qualified candidates, keeps 41 facades on
-  explicit holds, and permanently tombstones 23 retired aliases.
+  explicit holds, and permanently tombstones 32 retired aliases.
   Qualification makes a retained facade eligible for a later isolated deletion
   review; it does not itself delete or deprecate it.
-- [x] The executable contract ledger contains all 97 retained-facade cards:
-  - 72 exact-module-object identity proofs
+- [x] The executable contract ledger contains all 88 retained-facade cards:
+  - 63 exact-module-object identity proofs
   - 19 exported-symbol identity proofs
   - one manual multi-owner aggregate mapping
   - five manual behavior-equivalence surfaces
   - 35 facades carrying 133 exercised protocol-zero pickle globals
-- [x] Static consumers were reduced from the measured v2 baseline to 103:
-  - 98 imports in the designated compatibility-contract suite
+- [x] Static consumers were reduced from the measured v2 baseline to 94:
+  - 89 imports in the designated compatibility-contract suite
   - two imports in the dedicated `main` executable/CLI contract test
   - three facade-to-facade links in the held behavior-adapter chain
 - [x] No canonical package, public README example, or repository example
   imports a root facade.
-- [x] The current scanner records 862 non-AST references with dispositions:
-  - 544 historical narrative references
+- [x] The current scanner records 799 non-AST references with dispositions:
+  - 484 historical narrative references
   - 135 durable provenance references from checked-in receipts
-  - 67 compatibility-test evidence references
+  - 64 compatibility-test evidence references
   - five architecture evidence references
   - 111 runtime, durable-runtime, or runnable-guidance references
 - [x] All 111 blocking references belong to supported held surfaces:
@@ -191,7 +191,7 @@ Snapshot date: 2026-10-30.
 - [x] Ordinary Python consumers of retained qualified aliases and all 19 symbol
   re-export facades use canonical package owners; the two remaining exact
   alias consumers belong to the held behavior-adapter dependency chain.
-- [x] Every one of the 56 retained qualified candidates has no non-contract consumer,
+- [x] Every one of the 47 retained qualified candidates has no non-contract consumer,
   no blocking runtime reference, no known durable-qualified-name obligation,
   and one unambiguous canonical replacement.
 - [x] The 41 holds preserve the proven pickle-qualified-name obligations and
@@ -201,10 +201,10 @@ Snapshot date: 2026-10-30.
   aliases because it preserves a historical `__main__` path. The scanner now
   rejects deletion eligibility whenever an executable facade has no explicit
   executable-obligation classification.
-- [x] The first seven `core_semantics`, ten `core_runtime`, two governance, and
-  four Blend application exact aliases are removed, their canonical
-  replacements remain unchanged, and tombstones reject accidental
-  reintroduction.
+- [x] The first seven `core_semantics`, ten `core_runtime`, two governance,
+  four Blend application, and nine subject-core exact aliases are removed,
+  their canonical replacements remain unchanged, and tombstones reject
+  accidental reintroduction.
 
 ## Known Measurement Gap
 
@@ -860,6 +860,54 @@ Reviewed and accepted evidence, captured on 2026-10-30:
 - [x] Rollback remains local to the four historical aliases, identity-test
   entries, active root-ledger entries, and tombstones; canonical Blend domain
   and application behavior remain unchanged.
+
+### Subject-Core Alias Deletion Cohort Review
+
+The fifth deletion cohort contains nine exact aliases for deterministic
+subject-domain policy, projection, Gather persistence, learning-context
+rendering, and publication behavior. The URL learning-capture alias is not in
+this cohort because its canonical owner is `subject_service` and its browser
+and extraction qualification surface is distinct.
+
+| Historical import | Canonical replacement |
+| --- | --- |
+| `decision_review_policy` | `workstation.subject.core.decision_review_policy` |
+| `decision_review_projection` | `workstation.subject.core.decision_review_projection` |
+| `gather_sources` | `workstation.subject.core.gather_sources` |
+| `learning_context_markdown` | `workstation.subject.core.learning_context_markdown` |
+| `learning_context_projection` | `workstation.subject.core.learning_context_projection` |
+| `publication` | `workstation.subject.core.publication` |
+| `publication_projection` | `workstation.subject.core.publication_projection` |
+| `publication_render` | `workstation.subject.core.publication_render` |
+| `publication_validation` | `workstation.subject.core.publication_validation` |
+
+Reviewed and accepted evidence, captured on 2026-10-30:
+
+- [x] All nine files were pure exact `sys.modules` aliases with no executable
+  surface, non-contract consumer, blocking reference, or known durable pickle
+  global, and each had one unambiguous canonical replacement.
+- [x] Production, package, and behavior tests already imported the canonical
+  subject-core modules; only root-module identity assertions were removed.
+- [x] The sequential architecture delta only shrank the graph: owned roots
+  `105 -> 96`, combined nodes `141 -> 132`, combined edges `277 -> 268`, and
+  grandfathered observations `147 -> 138`, with no addition or cycle.
+- [x] The retained inventory contains `88` facades, `94` static consumers,
+  `47` qualified candidates, `41` holds, and `32` total tombstones, with no
+  canonical-package or public-example consumer.
+- [x] The retained contract ledger contains `88` cards, `63` exact aliases,
+  `35` facades with `133` durable pickle globals, and `82` facade contract
+  tests.
+- [x] Qualification passed `145` focused architecture/compatibility tests,
+  `65` subject-domain/distribution tests, all `891` root tests, `633`
+  workstation tests with one expected skip, and `38` targeted
+  skill-routing/report/publication BDD cases.
+- [x] All `35` wheels and source distributions built and imported in
+  isolation; publication capture reproduced eight actions and two artifacts;
+  Flutter analysis and all `51` widget tests passed.
+- [x] Rollback remains local to the nine historical aliases, identity-test
+  entries, active root-ledger entries, and tombstones; canonical subject policy,
+  persistence, projection, rendering, validation, and workflow behavior remain
+  unchanged.
 
 ## Phase 5 - Retire Low-Risk Alias Cohorts
 

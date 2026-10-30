@@ -1548,7 +1548,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 391,
+          "line": 389,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -1750,7 +1750,7 @@
         {
           "disposition": "architecture_evidence",
           "inside_code_fence": false,
-          "line": 2707,
+          "line": 2554,
           "path": "architecture/dependency-baseline.json",
           "reference_kind": "module_file_path",
           "scope": "architecture_documentation"
@@ -2099,184 +2099,6 @@
     {
       "canonical_exports": [
         {
-          "component": "subject_core",
-          "exported_name": "_implementation",
-          "module": "workstation.subject.core",
-          "source_name": "decision_review_policy"
-        }
-      ],
-      "canonical_module_identity": "workstation.subject.core.decision_review_policy",
-      "canonical_targets": [
-        {
-          "component": "subject_core",
-          "module": "workstation.subject.core"
-        }
-      ],
-      "durable_qualified_name_status": "clear",
-      "earliest_removal_condition": "one_stable_qualification_cycle_after_final_consumer_migration",
-      "executable_obligation": "none",
-      "executable_surface": false,
-      "hold_reason": "No active policy hold; the repository-internal facade is qualified only for an isolated deletion change with tombstone and rollback evidence.",
-      "import_obligation": "repository_only",
-      "last_consumer_scan_evidence": "architecture/compatibility-facades.json",
-      "last_qualification_evidence": "architecture/qualification-baseline.json",
-      "module": "decision_review_policy",
-      "notice_reference": "",
-      "owner": "subject_domain",
-      "path": "decision_review_policy.py",
-      "policy_source": "default",
-      "replacement_commands": [],
-      "retirement_assessment": {
-        "blocking_text_reference_count": 0,
-        "eligible_for_deletion": true,
-        "hold_reasons": [],
-        "non_contract_consumer_count": 0,
-        "text_reference_count": 4
-      },
-      "retirement_state": "qualified",
-      "review_condition": "Delete only in an owner-cohesive cohort after the contract ledger, consumer inventory, stable qualification evidence, tombstone, and facade-only rollback have been reviewed.",
-      "root_dependencies": [],
-      "shape": "exact_module_alias",
-      "static_consumers": [
-        {
-          "import_kind": "import",
-          "line": 31,
-          "path": "tests/test_architecture_compatibility_facades.py",
-          "scope": "test"
-        }
-      ],
-      "support_status": "repository_internal",
-      "text_references": [
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 700,
-          "path": "coordinated_transformation/COORDINATED_TRANSFORMATION_IN_FEDERATED_SYSTEMS_THEORY_IMLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 1423,
-          "path": "coordinated_transformation/COORDINATED_TRANSFORMATION_IN_FEDERATED_SYSTEMS_THEORY_IMLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 31,
-          "path": "workstation/DECISION_REVIEW_IMPLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 94,
-          "path": "workstation/DECISION_REVIEW_IMPLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        }
-      ]
-    },
-    {
-      "canonical_exports": [
-        {
-          "component": "subject_core",
-          "exported_name": "_implementation",
-          "module": "workstation.subject.core",
-          "source_name": "decision_review_projection"
-        }
-      ],
-      "canonical_module_identity": "workstation.subject.core.decision_review_projection",
-      "canonical_targets": [
-        {
-          "component": "subject_core",
-          "module": "workstation.subject.core"
-        }
-      ],
-      "durable_qualified_name_status": "clear",
-      "earliest_removal_condition": "one_stable_qualification_cycle_after_final_consumer_migration",
-      "executable_obligation": "none",
-      "executable_surface": false,
-      "hold_reason": "No active policy hold; the repository-internal facade is qualified only for an isolated deletion change with tombstone and rollback evidence.",
-      "import_obligation": "repository_only",
-      "last_consumer_scan_evidence": "architecture/compatibility-facades.json",
-      "last_qualification_evidence": "architecture/qualification-baseline.json",
-      "module": "decision_review_projection",
-      "notice_reference": "",
-      "owner": "subject_domain",
-      "path": "decision_review_projection.py",
-      "policy_source": "default",
-      "replacement_commands": [],
-      "retirement_assessment": {
-        "blocking_text_reference_count": 0,
-        "eligible_for_deletion": true,
-        "hold_reasons": [],
-        "non_contract_consumer_count": 0,
-        "text_reference_count": 5
-      },
-      "retirement_state": "qualified",
-      "review_condition": "Delete only in an owner-cohesive cohort after the contract ledger, consumer inventory, stable qualification evidence, tombstone, and facade-only rollback have been reviewed.",
-      "root_dependencies": [],
-      "shape": "exact_module_alias",
-      "static_consumers": [
-        {
-          "import_kind": "import",
-          "line": 32,
-          "path": "tests/test_architecture_compatibility_facades.py",
-          "scope": "test"
-        }
-      ],
-      "support_status": "repository_internal",
-      "text_references": [
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 699,
-          "path": "coordinated_transformation/COORDINATED_TRANSFORMATION_IN_FEDERATED_SYSTEMS_THEORY_IMLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 1290,
-          "path": "coordinated_transformation/COORDINATED_TRANSFORMATION_IN_FEDERATED_SYSTEMS_THEORY_IMLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 1422,
-          "path": "coordinated_transformation/COORDINATED_TRANSFORMATION_IN_FEDERATED_SYSTEMS_THEORY_IMLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 30,
-          "path": "workstation/DECISION_REVIEW_IMPLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 93,
-          "path": "workstation/DECISION_REVIEW_IMPLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        }
-      ]
-    },
-    {
-      "canonical_exports": [
-        {
           "component": "core_engine",
           "exported_name": "_canonical",
           "module": "realized_core_engine",
@@ -2318,7 +2140,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 33,
+          "line": 31,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -2415,7 +2237,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 34,
+          "line": 32,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -2504,7 +2326,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 35,
+          "line": 33,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -2645,7 +2467,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 63,
+          "line": 58,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -2794,7 +2616,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 37,
+          "line": 35,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -2865,7 +2687,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 38,
+          "line": 36,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -2969,7 +2791,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 36,
+          "line": 34,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -2983,75 +2805,6 @@
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
-        }
-      ]
-    },
-    {
-      "canonical_exports": [
-        {
-          "component": "subject_core",
-          "exported_name": "_implementation",
-          "module": "workstation.subject.core",
-          "source_name": "gather_sources"
-        }
-      ],
-      "canonical_module_identity": "workstation.subject.core.gather_sources",
-      "canonical_targets": [
-        {
-          "component": "subject_core",
-          "module": "workstation.subject.core"
-        }
-      ],
-      "durable_qualified_name_status": "clear",
-      "earliest_removal_condition": "one_stable_qualification_cycle_after_final_consumer_migration",
-      "executable_obligation": "none",
-      "executable_surface": false,
-      "hold_reason": "No active policy hold; the repository-internal facade is qualified only for an isolated deletion change with tombstone and rollback evidence.",
-      "import_obligation": "repository_only",
-      "last_consumer_scan_evidence": "architecture/compatibility-facades.json",
-      "last_qualification_evidence": "architecture/qualification-baseline.json",
-      "module": "gather_sources",
-      "notice_reference": "",
-      "owner": "subject_domain",
-      "path": "gather_sources.py",
-      "policy_source": "default",
-      "replacement_commands": [],
-      "retirement_assessment": {
-        "blocking_text_reference_count": 0,
-        "eligible_for_deletion": true,
-        "hold_reasons": [],
-        "non_contract_consumer_count": 0,
-        "text_reference_count": 2
-      },
-      "retirement_state": "qualified",
-      "review_condition": "Delete only in an owner-cohesive cohort after the contract ledger, consumer inventory, stable qualification evidence, tombstone, and facade-only rollback have been reviewed.",
-      "root_dependencies": [],
-      "shape": "exact_module_alias",
-      "static_consumers": [
-        {
-          "import_kind": "import",
-          "line": 39,
-          "path": "tests/test_architecture_compatibility_facades.py",
-          "scope": "test"
-        }
-      ],
-      "support_status": "repository_internal",
-      "text_references": [
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 374,
-          "path": "MODULES.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "compatibility_evidence",
-          "inside_code_fence": false,
-          "line": 171,
-          "path": "tests/test_architecture_boundaries.py",
-          "reference_kind": "module_file_path",
-          "scope": "test"
         }
       ]
     },
@@ -3103,7 +2856,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 40,
+          "line": 37,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -3188,7 +2941,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 41,
+          "line": 38,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -3249,7 +3002,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 42,
+          "line": 39,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -3350,7 +3103,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 43,
+          "line": 40,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -3591,7 +3344,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 45,
+          "line": 42,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -3684,7 +3437,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 46,
+          "line": 43,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -3815,7 +3568,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 47,
+          "line": 44,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -3902,7 +3655,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 48,
+          "line": 45,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -3969,7 +3722,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 49,
+          "line": 46,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -4057,7 +3810,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 50,
+          "line": 47,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -4178,7 +3931,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 51,
+          "line": 48,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -4234,7 +3987,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 44,
+          "line": 41,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -4350,7 +4103,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 52,
+          "line": 49,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -4368,7 +4121,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 382,
+          "line": 381,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -4471,7 +4224,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 53,
+          "line": 50,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -4497,7 +4250,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 375,
+          "line": 374,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -4548,7 +4301,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 54,
+          "line": 51,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -4558,7 +4311,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 386,
+          "line": 385,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -4625,7 +4378,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 55,
+          "line": 52,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -4690,7 +4443,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 56,
+          "line": 53,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -4833,67 +4586,6 @@
           "component": "subject_core",
           "exported_name": "_canonical",
           "module": "workstation.subject.core",
-          "source_name": "learning_context_markdown"
-        }
-      ],
-      "canonical_module_identity": "workstation.subject.core.learning_context_markdown",
-      "canonical_targets": [
-        {
-          "component": "subject_core",
-          "module": "workstation.subject.core"
-        }
-      ],
-      "durable_qualified_name_status": "clear",
-      "earliest_removal_condition": "one_stable_qualification_cycle_after_final_consumer_migration",
-      "executable_obligation": "none",
-      "executable_surface": false,
-      "hold_reason": "No active policy hold; the repository-internal facade is qualified only for an isolated deletion change with tombstone and rollback evidence.",
-      "import_obligation": "repository_only",
-      "last_consumer_scan_evidence": "architecture/compatibility-facades.json",
-      "last_qualification_evidence": "architecture/qualification-baseline.json",
-      "module": "learning_context_markdown",
-      "notice_reference": "",
-      "owner": "subject_domain",
-      "path": "learning_context_markdown.py",
-      "policy_source": "default",
-      "replacement_commands": [],
-      "retirement_assessment": {
-        "blocking_text_reference_count": 0,
-        "eligible_for_deletion": true,
-        "hold_reasons": [],
-        "non_contract_consumer_count": 0,
-        "text_reference_count": 1
-      },
-      "retirement_state": "qualified",
-      "review_condition": "Delete only in an owner-cohesive cohort after the contract ledger, consumer inventory, stable qualification evidence, tombstone, and facade-only rollback have been reviewed.",
-      "root_dependencies": [],
-      "shape": "exact_module_alias",
-      "static_consumers": [
-        {
-          "import_kind": "import",
-          "line": 57,
-          "path": "tests/test_architecture_compatibility_facades.py",
-          "scope": "test"
-        }
-      ],
-      "support_status": "repository_internal",
-      "text_references": [
-        {
-          "disposition": "compatibility_evidence",
-          "inside_code_fence": false,
-          "line": 43,
-          "path": "workstation/tests/test_subject_core_distribution.py",
-          "reference_kind": "module_file_path",
-          "scope": "test"
-        }
-      ]
-    },
-    {
-      "canonical_exports": [
-        {
-          "component": "subject_core",
-          "exported_name": "_canonical",
-          "module": "workstation.subject.core",
           "source_name": "learning_context_paths"
         }
       ],
@@ -4936,7 +4628,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 58,
+          "line": 54,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -4971,91 +4663,6 @@
           "disposition": "compatibility_evidence",
           "inside_code_fence": false,
           "line": 122,
-          "path": "workstation/tests/test_subject_core_distribution.py",
-          "reference_kind": "module_file_path",
-          "scope": "test"
-        }
-      ]
-    },
-    {
-      "canonical_exports": [
-        {
-          "component": "subject_core",
-          "exported_name": "_canonical",
-          "module": "workstation.subject.core",
-          "source_name": "learning_context_projection"
-        }
-      ],
-      "canonical_module_identity": "workstation.subject.core.learning_context_projection",
-      "canonical_targets": [
-        {
-          "component": "subject_core",
-          "module": "workstation.subject.core"
-        }
-      ],
-      "durable_qualified_name_status": "clear",
-      "earliest_removal_condition": "one_stable_qualification_cycle_after_final_consumer_migration",
-      "executable_obligation": "none",
-      "executable_surface": false,
-      "hold_reason": "No active policy hold; the repository-internal facade is qualified only for an isolated deletion change with tombstone and rollback evidence.",
-      "import_obligation": "repository_only",
-      "last_consumer_scan_evidence": "architecture/compatibility-facades.json",
-      "last_qualification_evidence": "architecture/qualification-baseline.json",
-      "module": "learning_context_projection",
-      "notice_reference": "",
-      "owner": "subject_domain",
-      "path": "learning_context_projection.py",
-      "policy_source": "default",
-      "replacement_commands": [],
-      "retirement_assessment": {
-        "blocking_text_reference_count": 0,
-        "eligible_for_deletion": true,
-        "hold_reasons": [],
-        "non_contract_consumer_count": 0,
-        "text_reference_count": 4
-      },
-      "retirement_state": "qualified",
-      "review_condition": "Delete only in an owner-cohesive cohort after the contract ledger, consumer inventory, stable qualification evidence, tombstone, and facade-only rollback have been reviewed.",
-      "root_dependencies": [],
-      "shape": "exact_module_alias",
-      "static_consumers": [
-        {
-          "import_kind": "import",
-          "line": 59,
-          "path": "tests/test_architecture_compatibility_facades.py",
-          "scope": "test"
-        }
-      ],
-      "support_status": "repository_internal",
-      "text_references": [
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 387,
-          "path": "MODULES.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 29,
-          "path": "workstation/ITEMIZE_IMPLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 487,
-          "path": "workstation/LEARNING_CONTEXT.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "compatibility_evidence",
-          "inside_code_fence": false,
-          "line": 45,
           "path": "workstation/tests/test_subject_core_distribution.py",
           "reference_kind": "module_file_path",
           "scope": "test"
@@ -5106,7 +4713,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 60,
+          "line": 55,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -5116,7 +4723,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 388,
+          "line": 386,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -5394,13 +5001,13 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 694,
+          "line": 645,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         },
         {
           "import_kind": "import",
-          "line": 711,
+          "line": 662,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         },
@@ -5630,7 +5237,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 391,
+          "line": 389,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -5766,7 +5373,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 246,
+          "line": 230,
           "path": "architecture/boundaries.toml",
           "reference_kind": "module_file_path",
           "scope": "architecture_documentation"
@@ -5958,7 +5565,7 @@
         {
           "disposition": "compatibility_evidence",
           "inside_code_fence": false,
-          "line": 255,
+          "line": 264,
           "path": "tests/test_compatibility_facade_inventory.py",
           "reference_kind": "module_invocation",
           "scope": "test"
@@ -5966,7 +5573,7 @@
         {
           "disposition": "compatibility_evidence",
           "inside_code_fence": false,
-          "line": 288,
+          "line": 297,
           "path": "tests/test_compatibility_facade_inventory.py",
           "reference_kind": "module_file_path",
           "scope": "test"
@@ -5974,7 +5581,7 @@
         {
           "disposition": "compatibility_evidence",
           "inside_code_fence": false,
-          "line": 289,
+          "line": 298,
           "path": "tests/test_compatibility_facade_inventory.py",
           "reference_kind": "module_file_path",
           "scope": "test"
@@ -5982,7 +5589,7 @@
         {
           "disposition": "compatibility_evidence",
           "inside_code_fence": false,
-          "line": 309,
+          "line": 318,
           "path": "tests/test_compatibility_facade_inventory.py",
           "reference_kind": "module_file_path",
           "scope": "test"
@@ -5990,7 +5597,7 @@
         {
           "disposition": "compatibility_evidence",
           "inside_code_fence": false,
-          "line": 310,
+          "line": 319,
           "path": "tests/test_compatibility_facade_inventory.py",
           "reference_kind": "module_file_path",
           "scope": "test"
@@ -5998,7 +5605,7 @@
         {
           "disposition": "compatibility_evidence",
           "inside_code_fence": false,
-          "line": 311,
+          "line": 320,
           "path": "tests/test_compatibility_facade_inventory.py",
           "reference_kind": "module_file_path",
           "scope": "test"
@@ -6006,7 +5613,7 @@
         {
           "disposition": "compatibility_evidence",
           "inside_code_fence": false,
-          "line": 337,
+          "line": 346,
           "path": "tests/test_compatibility_facade_inventory.py",
           "reference_kind": "module_file_path",
           "scope": "test"
@@ -6845,7 +6452,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 61,
+          "line": 56,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -6863,7 +6470,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 392,
+          "line": 390,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -6922,7 +6529,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 62,
+          "line": 57,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -6940,7 +6547,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 395,
+          "line": 393,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -7023,7 +6630,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 64,
+          "line": 59,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -7033,7 +6640,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 398,
+          "line": 396,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -7084,7 +6691,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 66,
+          "line": 61,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -7094,7 +6701,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 399,
+          "line": 397,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -7559,7 +7166,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 65,
+          "line": 60,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -7577,7 +7184,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 400,
+          "line": 398,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -7628,7 +7235,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 67,
+          "line": 62,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -7638,7 +7245,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 401,
+          "line": 399,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -7689,7 +7296,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 73,
+          "line": 64,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -7715,7 +7322,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 402,
+          "line": 400,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -7781,594 +7388,6 @@
     {
       "canonical_exports": [
         {
-          "component": "subject_core",
-          "exported_name": "_canonical",
-          "module": "workstation.subject.core",
-          "source_name": "publication"
-        }
-      ],
-      "canonical_module_identity": "workstation.subject.core.publication",
-      "canonical_targets": [
-        {
-          "component": "subject_core",
-          "module": "workstation.subject.core"
-        }
-      ],
-      "durable_qualified_name_status": "clear",
-      "earliest_removal_condition": "one_stable_qualification_cycle_after_final_consumer_migration",
-      "executable_obligation": "none",
-      "executable_surface": false,
-      "hold_reason": "No active policy hold; the repository-internal facade is qualified only for an isolated deletion change with tombstone and rollback evidence.",
-      "import_obligation": "repository_only",
-      "last_consumer_scan_evidence": "architecture/compatibility-facades.json",
-      "last_qualification_evidence": "architecture/qualification-baseline.json",
-      "module": "publication",
-      "notice_reference": "",
-      "owner": "subject_domain",
-      "path": "publication.py",
-      "policy_source": "default",
-      "replacement_commands": [],
-      "retirement_assessment": {
-        "blocking_text_reference_count": 0,
-        "eligible_for_deletion": true,
-        "hold_reasons": [],
-        "non_contract_consumer_count": 0,
-        "text_reference_count": 11
-      },
-      "retirement_state": "qualified",
-      "review_condition": "Delete only in an owner-cohesive cohort after the contract ledger, consumer inventory, stable qualification evidence, tombstone, and facade-only rollback have been reviewed.",
-      "root_dependencies": [],
-      "shape": "exact_module_alias",
-      "static_consumers": [
-        {
-          "import_kind": "import",
-          "line": 69,
-          "path": "tests/test_architecture_compatibility_facades.py",
-          "scope": "test"
-        }
-      ],
-      "support_status": "repository_internal",
-      "text_references": [
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 313,
-          "path": "BUSINESS_CONTINUITY_AND_VERSIONING.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 404,
-          "path": "MODULES.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 230,
-          "path": "SUBJECT_IMPORTS_AND_BOUNDED_CROSS_SUBJECT_REASONING_IMPLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 336,
-          "path": "URL_LEARNING_ARTIFACTS_IMPLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 36,
-          "path": "workstation/PUBLICATION_IMPLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 164,
-          "path": "workstation/PUBLICATION_IMPLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 32,
-          "path": "workstation/RESEARCH_AND_PUBLISH_FLOW.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 39,
-          "path": "workstation/RESEARCH_AND_PUBLISH_FLOW_IMPLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 107,
-          "path": "workstation/RESEARCH_AND_PUBLISH_FLOW_IMPLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 42,
-          "path": "workstation/REVIEW_IMPLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 429,
-          "path": "workstation/WORKSTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        }
-      ]
-    },
-    {
-      "canonical_exports": [
-        {
-          "component": "subject_core",
-          "exported_name": "_implementation",
-          "module": "workstation.subject.core",
-          "source_name": "publication_projection"
-        }
-      ],
-      "canonical_module_identity": "workstation.subject.core.publication_projection",
-      "canonical_targets": [
-        {
-          "component": "subject_core",
-          "module": "workstation.subject.core"
-        }
-      ],
-      "durable_qualified_name_status": "clear",
-      "earliest_removal_condition": "one_stable_qualification_cycle_after_final_consumer_migration",
-      "executable_obligation": "none",
-      "executable_surface": false,
-      "hold_reason": "No active policy hold; the repository-internal facade is qualified only for an isolated deletion change with tombstone and rollback evidence.",
-      "import_obligation": "repository_only",
-      "last_consumer_scan_evidence": "architecture/compatibility-facades.json",
-      "last_qualification_evidence": "architecture/qualification-baseline.json",
-      "module": "publication_projection",
-      "notice_reference": "",
-      "owner": "subject_domain",
-      "path": "publication_projection.py",
-      "policy_source": "default",
-      "replacement_commands": [],
-      "retirement_assessment": {
-        "blocking_text_reference_count": 0,
-        "eligible_for_deletion": true,
-        "hold_reasons": [],
-        "non_contract_consumer_count": 0,
-        "text_reference_count": 19
-      },
-      "retirement_state": "qualified",
-      "review_condition": "Delete only in an owner-cohesive cohort after the contract ledger, consumer inventory, stable qualification evidence, tombstone, and facade-only rollback have been reviewed.",
-      "root_dependencies": [],
-      "shape": "exact_module_alias",
-      "static_consumers": [
-        {
-          "import_kind": "import",
-          "line": 70,
-          "path": "tests/test_architecture_compatibility_facades.py",
-          "scope": "test"
-        }
-      ],
-      "support_status": "repository_internal",
-      "text_references": [
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 314,
-          "path": "BUSINESS_CONTINUITY_AND_VERSIONING.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 130,
-          "path": "HELP.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 406,
-          "path": "MODULES.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 233,
-          "path": "SUBJECT_IMPORTS_AND_BOUNDED_CROSS_SUBJECT_REASONING.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 229,
-          "path": "SUBJECT_IMPORTS_AND_BOUNDED_CROSS_SUBJECT_REASONING_IMPLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 335,
-          "path": "URL_LEARNING_ARTIFACTS_IMPLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 705,
-          "path": "coordinated_transformation/COORDINATED_TRANSFORMATION_IN_FEDERATED_SYSTEMS_THEORY_IMLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 1424,
-          "path": "coordinated_transformation/COORDINATED_TRANSFORMATION_IN_FEDERATED_SYSTEMS_THEORY_IMLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 22,
-          "path": "workstation/DECISION_REVIEW_IMPLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 626,
-          "path": "workstation/PUBLICATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 720,
-          "path": "workstation/PUBLICATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 37,
-          "path": "workstation/PUBLICATION_IMPLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 167,
-          "path": "workstation/PUBLICATION_IMPLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 29,
-          "path": "workstation/RESEARCH_AND_PUBLISH_FLOW.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 36,
-          "path": "workstation/RESEARCH_AND_PUBLISH_FLOW_IMPLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 79,
-          "path": "workstation/RESEARCH_AND_PUBLISH_FLOW_IMPLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 104,
-          "path": "workstation/RESEARCH_AND_PUBLISH_FLOW_IMPLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 43,
-          "path": "workstation/REVIEW_IMPLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 430,
-          "path": "workstation/WORKSTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        }
-      ]
-    },
-    {
-      "canonical_exports": [
-        {
-          "component": "subject_core",
-          "exported_name": "_canonical",
-          "module": "workstation.subject.core",
-          "source_name": "publication_render"
-        }
-      ],
-      "canonical_module_identity": "workstation.subject.core.publication_render",
-      "canonical_targets": [
-        {
-          "component": "subject_core",
-          "module": "workstation.subject.core"
-        }
-      ],
-      "durable_qualified_name_status": "clear",
-      "earliest_removal_condition": "one_stable_qualification_cycle_after_final_consumer_migration",
-      "executable_obligation": "none",
-      "executable_surface": false,
-      "hold_reason": "No active policy hold; the repository-internal facade is qualified only for an isolated deletion change with tombstone and rollback evidence.",
-      "import_obligation": "repository_only",
-      "last_consumer_scan_evidence": "architecture/compatibility-facades.json",
-      "last_qualification_evidence": "architecture/qualification-baseline.json",
-      "module": "publication_render",
-      "notice_reference": "",
-      "owner": "subject_domain",
-      "path": "publication_render.py",
-      "policy_source": "default",
-      "replacement_commands": [],
-      "retirement_assessment": {
-        "blocking_text_reference_count": 0,
-        "eligible_for_deletion": true,
-        "hold_reasons": [],
-        "non_contract_consumer_count": 0,
-        "text_reference_count": 9
-      },
-      "retirement_state": "qualified",
-      "review_condition": "Delete only in an owner-cohesive cohort after the contract ledger, consumer inventory, stable qualification evidence, tombstone, and facade-only rollback have been reviewed.",
-      "root_dependencies": [],
-      "shape": "exact_module_alias",
-      "static_consumers": [
-        {
-          "import_kind": "import",
-          "line": 71,
-          "path": "tests/test_architecture_compatibility_facades.py",
-          "scope": "test"
-        }
-      ],
-      "support_status": "repository_internal",
-      "text_references": [
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 315,
-          "path": "BUSINESS_CONTINUITY_AND_VERSIONING.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 408,
-          "path": "MODULES.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 231,
-          "path": "SUBJECT_IMPORTS_AND_BOUNDED_CROSS_SUBJECT_REASONING_IMPLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 38,
-          "path": "workstation/PUBLICATION_IMPLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 165,
-          "path": "workstation/PUBLICATION_IMPLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 30,
-          "path": "workstation/RESEARCH_AND_PUBLISH_FLOW.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 37,
-          "path": "workstation/RESEARCH_AND_PUBLISH_FLOW_IMPLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 105,
-          "path": "workstation/RESEARCH_AND_PUBLISH_FLOW_IMPLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 431,
-          "path": "workstation/WORKSTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        }
-      ]
-    },
-    {
-      "canonical_exports": [
-        {
-          "component": "subject_core",
-          "exported_name": "_canonical",
-          "module": "workstation.subject.core",
-          "source_name": "publication_validation"
-        }
-      ],
-      "canonical_module_identity": "workstation.subject.core.publication_validation",
-      "canonical_targets": [
-        {
-          "component": "subject_core",
-          "module": "workstation.subject.core"
-        }
-      ],
-      "durable_qualified_name_status": "clear",
-      "earliest_removal_condition": "one_stable_qualification_cycle_after_final_consumer_migration",
-      "executable_obligation": "none",
-      "executable_surface": false,
-      "hold_reason": "No active policy hold; the repository-internal facade is qualified only for an isolated deletion change with tombstone and rollback evidence.",
-      "import_obligation": "repository_only",
-      "last_consumer_scan_evidence": "architecture/compatibility-facades.json",
-      "last_qualification_evidence": "architecture/qualification-baseline.json",
-      "module": "publication_validation",
-      "notice_reference": "",
-      "owner": "subject_domain",
-      "path": "publication_validation.py",
-      "policy_source": "default",
-      "replacement_commands": [],
-      "retirement_assessment": {
-        "blocking_text_reference_count": 0,
-        "eligible_for_deletion": true,
-        "hold_reasons": [],
-        "non_contract_consumer_count": 0,
-        "text_reference_count": 8
-      },
-      "retirement_state": "qualified",
-      "review_condition": "Delete only in an owner-cohesive cohort after the contract ledger, consumer inventory, stable qualification evidence, tombstone, and facade-only rollback have been reviewed.",
-      "root_dependencies": [],
-      "shape": "exact_module_alias",
-      "static_consumers": [
-        {
-          "import_kind": "import",
-          "line": 72,
-          "path": "tests/test_architecture_compatibility_facades.py",
-          "scope": "test"
-        }
-      ],
-      "support_status": "repository_internal",
-      "text_references": [
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 316,
-          "path": "BUSINESS_CONTINUITY_AND_VERSIONING.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 410,
-          "path": "MODULES.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 39,
-          "path": "workstation/PUBLICATION_IMPLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 166,
-          "path": "workstation/PUBLICATION_IMPLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 31,
-          "path": "workstation/RESEARCH_AND_PUBLISH_FLOW.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 38,
-          "path": "workstation/RESEARCH_AND_PUBLISH_FLOW_IMPLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 106,
-          "path": "workstation/RESEARCH_AND_PUBLISH_FLOW_IMPLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 432,
-          "path": "workstation/WORKSTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        }
-      ]
-    },
-    {
-      "canonical_exports": [
-        {
           "component": "core_semantics",
           "exported_name": "_theory",
           "module": "realized_core_semantics",
@@ -8414,7 +7433,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 68,
+          "line": 63,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -8448,7 +7467,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 411,
+          "line": 405,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -8545,7 +7564,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 79,
+          "line": 70,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -8555,7 +7574,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 413,
+          "line": 407,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -9102,7 +8121,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 74,
+          "line": 65,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -9192,7 +8211,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 419,
+          "line": 413,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -9279,7 +8298,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 75,
+          "line": 66,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -9396,7 +8415,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 76,
+          "line": 67,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -9438,7 +8457,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 420,
+          "line": 414,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -9489,7 +8508,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 77,
+          "line": 68,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -9499,7 +8518,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 423,
+          "line": 417,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -9560,7 +8579,7 @@
         },
         {
           "import_kind": "import",
-          "line": 78,
+          "line": 69,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -9594,7 +8613,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 424,
+          "line": 418,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -9893,7 +8912,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 80,
+          "line": 71,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -9919,7 +8938,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 426,
+          "line": 420,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -10036,7 +9055,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 428,
+          "line": 422,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -10121,7 +9140,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 429,
+          "line": 423,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -10176,7 +9195,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 90,
+          "line": 81,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -10218,7 +9237,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 434,
+          "line": 428,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -10293,7 +9312,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 84,
+          "line": 75,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -10311,7 +9330,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 432,
+          "line": 426,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -10386,7 +9405,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 85,
+          "line": 76,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -10404,7 +9423,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 433,
+          "line": 427,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -10479,7 +9498,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 86,
+          "line": 77,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -10489,7 +9508,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 431,
+          "line": 425,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -10784,7 +9803,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 83,
+          "line": 74,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -10850,7 +9869,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 435,
+          "line": 429,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -10941,7 +9960,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 87,
+          "line": 78,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -10967,7 +9986,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 430,
+          "line": 424,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -11070,7 +10089,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 81,
+          "line": 72,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -11168,7 +10187,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 436,
+          "line": 430,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -11313,7 +10332,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 82,
+          "line": 73,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -11339,7 +10358,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 444,
+          "line": 438,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -11434,7 +10453,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 89,
+          "line": 80,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -11460,7 +10479,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 447,
+          "line": 441,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -11539,7 +10558,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 88,
+          "line": 79,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -11581,7 +10600,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 446,
+          "line": 440,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -11732,7 +10751,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 91,
+          "line": 82,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -11766,7 +10785,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 448,
+          "line": 442,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -11953,7 +10972,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 92,
+          "line": 83,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -11987,7 +11006,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 449,
+          "line": 443,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -12080,7 +11099,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 93,
+          "line": 84,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -12114,7 +11133,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 451,
+          "line": 445,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -12189,7 +11208,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 94,
+          "line": 85,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -12207,7 +11226,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 452,
+          "line": 446,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -12472,7 +11491,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 95,
+          "line": 86,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -12514,7 +11533,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 455,
+          "line": 449,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -12573,7 +11592,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 96,
+          "line": 87,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -12615,7 +11634,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 457,
+          "line": 451,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -12922,13 +11941,13 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 98,
+          "line": 89,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         },
         {
           "import_kind": "from_import",
-          "line": 195,
+          "line": 186,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -12946,7 +11965,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 458,
+          "line": 452,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -12970,7 +11989,7 @@
         {
           "disposition": "compatibility_evidence",
           "inside_code_fence": false,
-          "line": 336,
+          "line": 345,
           "path": "tests/test_compatibility_facade_inventory.py",
           "reference_kind": "module_file_path",
           "scope": "test"
@@ -12978,7 +11997,7 @@
         {
           "disposition": "compatibility_evidence",
           "inside_code_fence": false,
-          "line": 377,
+          "line": 386,
           "path": "tests/test_compatibility_facade_inventory.py",
           "reference_kind": "module_file_path",
           "scope": "test"
@@ -13093,7 +12112,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 97,
+          "line": 88,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -13103,7 +12122,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 459,
+          "line": 453,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -13154,7 +12173,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 99,
+          "line": 90,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -13180,7 +12199,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 460,
+          "line": 454,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -13247,7 +12266,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 100,
+          "line": 91,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -13281,7 +12300,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 464,
+          "line": 458,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -13340,7 +12359,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 101,
+          "line": 92,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -13436,7 +12455,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 468,
+          "line": 462,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -13498,7 +12517,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 470,
+          "line": 464,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -13528,13 +12547,10 @@
     "constitutional_trace",
     "controller_governance_bridge",
     "controller_runtime_binding",
-    "decision_review_policy",
-    "decision_review_projection",
     "direct_knowledge_reuse",
     "external_markdown_learning_pipeline",
     "fallback_not_generation",
     "fallback_not_semantics",
-    "gather_sources",
     "governed_closure_and_commitment",
     "governed_prior_learning_reuse",
     "governed_semantic_reduction_runtime",
@@ -13547,18 +12563,12 @@
     "host_interaction_resolution",
     "itemize_validation",
     "learn",
-    "learning_context_markdown",
-    "learning_context_projection",
     "learning_context_skill_projection",
     "markdown_learning_artifact_semantics",
     "non_achievedness_normalization",
     "normalization_runtime_dependencies",
     "not_elaboration_ranking",
     "prompt_directives",
-    "publication",
-    "publication_projection",
-    "publication_render",
-    "publication_validation",
     "retrieval_ranking",
     "run_bundle_io",
     "run_outcome_harvest_and_reporting",
@@ -13924,7 +12934,7 @@
       "tests/test_compatibility_facade_contracts.py"
     ],
     "path": "architecture/compatibility-facade-policy.json",
-    "tombstone_count": 23,
+    "tombstone_count": 32,
     "tombstones": {
       "applied_theory_primitives": {
         "removal_change_reference": "semantic-alias-cohort-1",
@@ -13961,6 +12971,21 @@
         "removed_at": "2026-10-30",
         "replacement": "realized_core_runtime.capabilities"
       },
+      "decision_review_policy": {
+        "removal_change_reference": "subject-core-alias-cohort-1",
+        "removed_at": "2026-10-30",
+        "replacement": "workstation.subject.core.decision_review_policy"
+      },
+      "decision_review_projection": {
+        "removal_change_reference": "subject-core-alias-cohort-1",
+        "removed_at": "2026-10-30",
+        "replacement": "workstation.subject.core.decision_review_projection"
+      },
+      "gather_sources": {
+        "removal_change_reference": "subject-core-alias-cohort-1",
+        "removed_at": "2026-10-30",
+        "replacement": "workstation.subject.core.gather_sources"
+      },
       "governed_skill_access": {
         "removal_change_reference": "governance-alias-cohort-1",
         "removed_at": "2026-10-30",
@@ -13986,6 +13011,16 @@
         "removed_at": "2026-10-30",
         "replacement": "realized_core_semantics.identifiers"
       },
+      "learning_context_markdown": {
+        "removal_change_reference": "subject-core-alias-cohort-1",
+        "removed_at": "2026-10-30",
+        "replacement": "workstation.subject.core.learning_context_markdown"
+      },
+      "learning_context_projection": {
+        "removal_change_reference": "subject-core-alias-cohort-1",
+        "removed_at": "2026-10-30",
+        "replacement": "workstation.subject.core.learning_context_projection"
+      },
       "macos_host_brokers": {
         "removal_change_reference": "runtime-leaf-cohort-1",
         "removed_at": "2026-10-30",
@@ -14000,6 +13035,26 @@
         "removal_change_reference": "semantic-alias-cohort-1",
         "removed_at": "2026-10-30",
         "replacement": "realized_core_semantics.prolog"
+      },
+      "publication": {
+        "removal_change_reference": "subject-core-alias-cohort-1",
+        "removed_at": "2026-10-30",
+        "replacement": "workstation.subject.core.publication"
+      },
+      "publication_projection": {
+        "removal_change_reference": "subject-core-alias-cohort-1",
+        "removed_at": "2026-10-30",
+        "replacement": "workstation.subject.core.publication_projection"
+      },
+      "publication_render": {
+        "removal_change_reference": "subject-core-alias-cohort-1",
+        "removed_at": "2026-10-30",
+        "replacement": "workstation.subject.core.publication_render"
+      },
+      "publication_validation": {
+        "removal_change_reference": "subject-core-alias-cohort-1",
+        "removed_at": "2026-10-30",
+        "replacement": "workstation.subject.core.publication_validation"
       },
       "python_skill_brokerization": {
         "removal_change_reference": "runtime-leaf-cohort-1",
@@ -14046,38 +13101,38 @@
   "schema_version": 2,
   "summary": {
     "canonical_package_consumer_count": 0,
-    "eligible_retirement_candidate_count": 56,
-    "facade_contract_consumer_count": 98,
-    "facade_count": 97,
+    "eligible_retirement_candidate_count": 47,
+    "facade_contract_consumer_count": 89,
+    "facade_count": 88,
     "public_documentation_reference_count": 0,
     "public_example_consumer_count": 0,
     "shape_counts": {
       "aggregate_reexport": 1,
       "behavior_adapter": 5,
-      "exact_module_alias": 72,
+      "exact_module_alias": 63,
       "symbol_reexport": 19
     },
-    "static_consumer_count": 103,
+    "static_consumer_count": 94,
     "static_consumer_kind_counts": {
       "from_import": 5,
-      "import": 98
+      "import": 89
     },
     "static_consumer_scope_counts": {
       "compatibility_facade": 3,
-      "test": 100
+      "test": 91
     },
-    "text_reference_count": 862,
+    "text_reference_count": 799,
     "text_reference_disposition_counts": {
       "architecture_evidence": 5,
-      "compatibility_evidence": 67,
+      "compatibility_evidence": 64,
       "durable_provenance_evidence": 135,
       "durable_runtime_reference": 16,
-      "historical_narrative": 544,
+      "historical_narrative": 484,
       "runnable_guidance": 59,
       "runtime_reference": 36
     },
     "text_reference_kind_counts": {
-      "module_file_path": 637,
+      "module_file_path": 574,
       "module_invocation": 1,
       "python_file_invocation": 57,
       "textual_import": 167
@@ -14085,10 +13140,10 @@
     "text_reference_scope_counts": {
       "architecture_documentation": 6,
       "configuration_or_fixture": 1,
-      "documentation": 516,
+      "documentation": 456,
       "durable_material": 135,
       "other_repository_reference": 40,
-      "test": 74,
+      "test": 71,
       "tooling": 1,
       "trial": 89
     }

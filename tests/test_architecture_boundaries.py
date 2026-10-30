@@ -362,12 +362,6 @@ class RepositoryArchitectureBoundaryTest(unittest.TestCase):
                     root_ownership[module],
                 )
         for module in (
-            "decision_review_policy",
-            "decision_review_projection",
-            "publication",
-            "publication_projection",
-            "publication_render",
-            "publication_validation",
             "url_learning_capture",
         ):
             with self.subTest(module=module):

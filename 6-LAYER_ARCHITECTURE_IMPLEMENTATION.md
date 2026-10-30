@@ -5410,6 +5410,24 @@ Completed deletion cut - Blend application exact-alias cohort (2026-10-30):
   all distribution builds and isolated imports, deterministic publication
   capture, Flutter analysis, and 51 widget tests.
 
+Completed deletion cut - subject-core exact-alias cohort (2026-10-30):
+
+- [x] Remove nine repository-internal root aliases for canonical subject-core
+  decision policy/projection, Gather sources, learning-context rendering, and
+  publication substrate/projection/rendering/validation without changing the
+  package-owned implementations.
+- [x] Keep the service-owned `url_learning_capture` alias in a separate cohort
+  because its browser/extraction behavior and distribution boundary require a
+  different qualification surface.
+- [x] Accept only the sequential shrinking delta: owned roots `105 -> 96`,
+  combined graph nodes `141 -> 132`, combined edges `277 -> 268`, retained
+  facades `97 -> 88`, and exact aliases `72 -> 63`, with no new dependency or
+  cycle.
+- [x] Qualify the cut with 145 focused architecture/compatibility tests, 65
+  subject-domain/distribution tests, 891 root tests, 633 workstation tests, 38
+  targeted BDD cases, all distribution builds and isolated imports,
+  deterministic publication capture, Flutter analysis, and 51 widget tests.
+
 Exit condition:
 
 - [x] The root-boundary ledger contains no canonical package-to-root
