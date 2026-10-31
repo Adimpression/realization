@@ -318,6 +318,55 @@ class WorkstationCompatibilityAdapterTest(unittest.TestCase):
                     importlib.import_module(canonical_name),
                 )
 
+    def test_package_alias_qualified_name_obligations_are_explicit(self) -> None:
+        subscriber = importlib.import_module(
+            "workstation.runtime.core.projection_subscriber_controller"
+        )
+        sessions = importlib.import_module(
+            "workstation.subject.service.client_sessions"
+        )
+        llm_driver = importlib.import_module("workstation.runtime.core.llm_driver")
+        prompt_routing = importlib.import_module(
+            "workstation.contracts.shell_prompt_routing"
+        )
+        learning_capture = importlib.import_module(
+            "workstation.subject.service.learning_capture"
+        )
+
+        historical_identities = (
+            (
+                subscriber.WorkstationProjectionSubscriberController,
+                "workstation.foundation.events.subscriber_controllers",
+            ),
+            (
+                sessions.WorkstationClientSessionRegistry,
+                "workstation.foundation.host.client_sessions",
+            ),
+            (
+                llm_driver.run_workstation_openai_turn,
+                "workstation.foundation.host.llm_driver",
+            ),
+            (
+                prompt_routing.match_workstation_shell_utility_prompt,
+                "workstation.shell.core.shell_prompt_routing",
+            ),
+        )
+        for value, historical_module in historical_identities:
+            with self.subTest(value=value):
+                self.assertEqual(historical_module, value.__module__)
+                self.assertIs(value, pickle.loads(pickle.dumps(value, protocol=0)))
+
+        canonical_learning_module = "workstation.subject.service.learning_capture"
+        for name in (
+            "capture_workstation_assistant_markdown_for_research",
+            "capture_workstation_chat_learning_from_tool_receipts",
+            "preview_workstation_assistant_markdown_for_research",
+        ):
+            with self.subTest(name=name):
+                value = getattr(learning_capture, name)
+                self.assertEqual(canonical_learning_module, value.__module__)
+                self.assertIs(value, pickle.loads(pickle.dumps(value, protocol=0)))
+
     def test_in_process_adapters_satisfy_contracts(self) -> None:
         self.assertIsInstance(InProcessSubjectWorkflowClient(), SubjectWorkflowClient)
         self.assertIsInstance(InProcessWorkstationShellClient(), WorkstationShellClient)

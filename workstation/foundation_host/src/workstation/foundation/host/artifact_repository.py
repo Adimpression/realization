@@ -29,7 +29,7 @@ def artifact_repository_provider() -> ArtifactRepositoryProvider:
     if provider is None:
         raise RuntimeError(
             "The artifact repository provider is not configured. "
-            "Start the application through main.py or register a provider explicitly."
+            "Start the application through realized-workstation or register a provider explicitly."
         )
     return provider
 

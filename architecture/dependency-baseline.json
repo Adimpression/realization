@@ -269,6 +269,66 @@
       "target": "subject_service"
     },
     {
+      "source": "root_compatibility",
+      "target": "app_cli"
+    },
+    {
+      "source": "root_compatibility",
+      "target": "blend"
+    },
+    {
+      "source": "root_compatibility",
+      "target": "blend_application"
+    },
+    {
+      "source": "root_compatibility",
+      "target": "core_engine"
+    },
+    {
+      "source": "root_compatibility",
+      "target": "core_governance"
+    },
+    {
+      "source": "root_compatibility",
+      "target": "core_semantics"
+    },
+    {
+      "source": "root_compatibility",
+      "target": "exchange"
+    },
+    {
+      "source": "root_compatibility",
+      "target": "governed_core"
+    },
+    {
+      "source": "root_compatibility",
+      "target": "host_interaction"
+    },
+    {
+      "source": "root_compatibility",
+      "target": "runtime_core"
+    },
+    {
+      "source": "root_compatibility",
+      "target": "skill_application"
+    },
+    {
+      "source": "root_compatibility",
+      "target": "skill_semantics"
+    },
+    {
+      "source": "root_compatibility",
+      "target": "skills_core"
+    },
+    {
+      "source": "root_compatibility",
+      "target": "subject_core"
+    },
+    {
+      "source": "root_compatibility",
+      "target": "validation"
+    },
+    {
       "source": "runtime_core",
       "target": "blend"
     },
@@ -563,6 +623,18 @@
     {
       "source": "ui_textual",
       "target": "ui_shared"
+    },
+    {
+      "source": "workstation_compatibility",
+      "target": "contracts"
+    },
+    {
+      "source": "workstation_compatibility",
+      "target": "runtime_core"
+    },
+    {
+      "source": "workstation_compatibility",
+      "target": "subject_service"
     }
   ],
   "canonical_root_facade_imports": [],
@@ -571,42 +643,17 @@
     "cyclic_internal_edge_count": 0,
     "cyclic_node_count": 0,
     "cyclic_scc_count": 0,
-    "edge_count": 222,
+    "edge_count": 163,
     "largest_cyclic_scc_node_count": 0,
-    "node_count": 86
+    "node_count": 42
   },
-  "compatibility_edges": [
-    {
-      "source": "foundation_events",
-      "target": "runtime_core"
-    },
-    {
-      "source": "foundation_host",
-      "target": "runtime_core"
-    },
-    {
-      "source": "foundation_host",
-      "target": "subject_service"
-    },
-    {
-      "source": "shell_core",
-      "target": "contracts"
-    }
-  ],
+  "compatibility_edges": [],
   "compatibility_facade_imports": [],
   "component_to_root_package_dependencies": [],
   "cycles": [],
+  "dynamic_dependency_contracts": [],
   "forbidden_edges": [],
-  "forbidden_root_owner_dependencies": [
-    {
-      "source": "controller",
-      "target": "entry_exchange"
-    },
-    {
-      "source": "subject_domain",
-      "target": "entry_exchange"
-    }
-  ],
+  "forbidden_root_owner_dependencies": [],
   "root_boundary_classifications": [
     {
       "category": "orchestration",
@@ -619,420 +666,6 @@
       "direction": "root_to_component",
       "source": "TRIAL_DOMAIN_VALIDATION",
       "target": "validation"
-    },
-    {
-      "category": "dto_constants",
-      "direction": "root_to_component",
-      "source": "applied_theory_types",
-      "target": "core_semantics"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "approval_governance",
-      "target": "core_governance"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "approval_governance",
-      "target": "core_semantics"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "args",
-      "target": "app_cli"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "args",
-      "target": "core_engine"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "blend_context",
-      "target": "blend"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "blend_context",
-      "target": "runtime_core"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "blend_operator",
-      "target": "blend"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "blend_operator_store",
-      "target": "blend_application"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "blend_session",
-      "target": "blend"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "blend_session",
-      "target": "runtime_core"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "blend_workflow_execution",
-      "target": "blend_application"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "blend_workflow_models",
-      "target": "blend"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "blend_world_models",
-      "target": "blend"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "controller_entrypoint_binding",
-      "target": "core_engine"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "controller_entrypoints",
-      "target": "app_cli"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "controller_entrypoints",
-      "target": "core_engine"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "controller_entrypoints",
-      "target": "core_semantics"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "controller_entrypoints",
-      "target": "exchange"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "controller_entrypoints",
-      "target": "governed_core"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "controller_entrypoints",
-      "target": "host_interaction"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "controller_entrypoints",
-      "target": "validation"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "controller_runtime",
-      "target": "core_engine"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "controller_runtime",
-      "target": "exchange"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "data_governance",
-      "target": "core_governance"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "decision_review",
-      "target": "subject_core"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "decision_review_constructs",
-      "target": "subject_core"
-    },
-    {
-      "category": "dto_constants",
-      "direction": "root_to_component",
-      "source": "decision_review_models",
-      "target": "core_semantics"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "execution_framework_primitives",
-      "target": "governed_core"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "execution_frameworks",
-      "target": "governed_core"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "external_markdown_learning_pipeline",
-      "target": "exchange"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "fence_extraction_strategy",
-      "target": "governed_core"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "governance_inventory",
-      "target": "core_engine"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "governed_skill_installation",
-      "target": "core_engine"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "governed_skill_installation",
-      "target": "core_governance"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "governed_skill_installation",
-      "target": "exchange"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "governed_skill_installation",
-      "target": "skill_application"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "governed_skill_installation",
-      "target": "skill_semantics"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "host_mediation",
-      "target": "core_engine"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "itemize",
-      "target": "core_semantics"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "itemize",
-      "target": "subject_core"
-    },
-    {
-      "category": "dto_constants",
-      "direction": "root_to_component",
-      "source": "itemize_models",
-      "target": "core_semantics"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "learning_context",
-      "target": "exchange"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "learning_context_paths",
-      "target": "subject_core"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "markdown_ir",
-      "target": "core_semantics"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "normalize",
-      "target": "core_engine"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "normalize",
-      "target": "core_semantics"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "pure_theory_types",
-      "target": "core_semantics"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "python_skill_host",
-      "target": "governed_core"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "replay_verifier",
-      "target": "core_engine"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "replay_verifier",
-      "target": "core_governance"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "replay_verifier",
-      "target": "core_semantics"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "replay_verifier",
-      "target": "exchange"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "replay_verifier",
-      "target": "governed_core"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "replay_verifier",
-      "target": "skill_semantics"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "review_composition",
-      "target": "subject_core"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "runtime_controller_api",
-      "target": "app_cli"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "skill_boundary_normalization",
-      "target": "skill_application"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "skill_composition",
-      "target": "skill_application"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "skill_governance",
-      "target": "core_engine"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "skill_governance_primitives",
-      "target": "core_governance"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "skill_invocation_contract",
-      "target": "skill_semantics"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "skill_invocation_contract",
-      "target": "skills_core"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "skill_ir",
-      "target": "skill_application"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "skill_leaf_types",
-      "target": "skill_semantics"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "skill_lifecycle",
-      "target": "core_governance"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "skill_path_notation",
-      "target": "skill_semantics"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "skill_safety_governance",
-      "target": "core_governance"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "skill_safety_governance",
-      "target": "core_semantics"
     },
     {
       "category": "orchestration",
@@ -1064,329 +697,6 @@
       ]
     },
     {
-      "module": "applied_theory_types",
-      "owner": "semantic_model",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "approval_governance",
-      "owner": "governance",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "args",
-      "owner": "entry_exchange",
-      "statuses": [
-        "entrypoint"
-      ]
-    },
-    {
-      "module": "blend_context",
-      "owner": "blend",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "blend_operator",
-      "owner": "blend",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "blend_operator_store",
-      "owner": "blend",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "blend_session",
-      "owner": "blend",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "blend_workflow_execution",
-      "owner": "blend",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "blend_workflow_models",
-      "owner": "blend",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "blend_world_models",
-      "owner": "blend",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "controller_entrypoint_binding",
-      "owner": "entry_exchange",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "controller_entrypoints",
-      "owner": "entry_exchange",
-      "statuses": [
-        "entrypoint"
-      ]
-    },
-    {
-      "module": "controller_runtime",
-      "owner": "controller",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "data_governance",
-      "owner": "governance",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "decision_review",
-      "owner": "subject_domain",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "decision_review_constructs",
-      "owner": "subject_domain",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "decision_review_models",
-      "owner": "subject_domain",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "execution_framework_primitives",
-      "owner": "runtime_execution",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "execution_frameworks",
-      "owner": "runtime_execution",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "external_markdown_learning_pipeline",
-      "owner": "entry_exchange",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "fence_extraction_strategy",
-      "owner": "runtime_execution",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "governance_inventory",
-      "owner": "controller",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "governed_skill_installation",
-      "owner": "governance",
-      "statuses": [
-        "entrypoint"
-      ]
-    },
-    {
-      "module": "host_mediation",
-      "owner": "runtime_execution",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "itemize",
-      "owner": "subject_domain",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "itemize_models",
-      "owner": "subject_domain",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "learning_context",
-      "owner": "entry_exchange",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "learning_context_paths",
-      "owner": "subject_domain",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "main",
-      "owner": "entry_exchange",
-      "statuses": [
-        "compatibility_facade",
-        "entrypoint"
-      ]
-    },
-    {
-      "module": "markdown_ir",
-      "owner": "subject_domain",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "normalize",
-      "owner": "compatibility",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "pure_theory_types",
-      "owner": "semantic_model",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "python_skill_host",
-      "owner": "runtime_execution",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "replay_verifier",
-      "owner": "governance",
-      "statuses": [
-        "entrypoint"
-      ]
-    },
-    {
-      "module": "review_composition",
-      "owner": "subject_domain",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "runtime_controller_api",
-      "owner": "entry_exchange",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "skill_boundary_normalization",
-      "owner": "portable_skills",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "skill_composition",
-      "owner": "portable_skills",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "skill_governance",
-      "owner": "governance",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "skill_governance_primitives",
-      "owner": "governance",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "skill_invocation_contract",
-      "owner": "portable_skills",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "skill_ir",
-      "owner": "portable_skills",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "skill_leaf_types",
-      "owner": "portable_skills",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "skill_lifecycle",
-      "owner": "governance",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "skill_path_notation",
-      "owner": "portable_skills",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
-      "module": "skill_safety_governance",
-      "owner": "governance",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
       "module": "tablet_safety_validation",
       "owner": "validation_trial",
       "statuses": [
@@ -1402,24 +712,7 @@
     }
   ],
   "root_module_to_package_dependencies": [],
-  "root_owner_dependencies": [
-    {
-      "source": "controller",
-      "target": "entry_exchange"
-    },
-    {
-      "source": "entry_exchange",
-      "target": "controller"
-    },
-    {
-      "source": "entry_exchange",
-      "target": "governance"
-    },
-    {
-      "source": "subject_domain",
-      "target": "entry_exchange"
-    }
-  ],
+  "root_owner_dependencies": [],
   "root_package_ownership": [
     {
       "owner": "validation_trial",
@@ -1442,282 +735,6 @@
       "target": "validation"
     },
     {
-      "source": "applied_theory_types",
-      "target": "core_semantics"
-    },
-    {
-      "source": "approval_governance",
-      "target": "core_governance"
-    },
-    {
-      "source": "approval_governance",
-      "target": "core_semantics"
-    },
-    {
-      "source": "args",
-      "target": "app_cli"
-    },
-    {
-      "source": "args",
-      "target": "core_engine"
-    },
-    {
-      "source": "blend_context",
-      "target": "blend"
-    },
-    {
-      "source": "blend_context",
-      "target": "runtime_core"
-    },
-    {
-      "source": "blend_operator",
-      "target": "blend"
-    },
-    {
-      "source": "blend_operator_store",
-      "target": "blend_application"
-    },
-    {
-      "source": "blend_session",
-      "target": "blend"
-    },
-    {
-      "source": "blend_session",
-      "target": "runtime_core"
-    },
-    {
-      "source": "blend_workflow_execution",
-      "target": "blend_application"
-    },
-    {
-      "source": "blend_workflow_models",
-      "target": "blend"
-    },
-    {
-      "source": "blend_world_models",
-      "target": "blend"
-    },
-    {
-      "source": "controller_entrypoint_binding",
-      "target": "core_engine"
-    },
-    {
-      "source": "controller_entrypoints",
-      "target": "app_cli"
-    },
-    {
-      "source": "controller_entrypoints",
-      "target": "core_engine"
-    },
-    {
-      "source": "controller_entrypoints",
-      "target": "core_semantics"
-    },
-    {
-      "source": "controller_entrypoints",
-      "target": "exchange"
-    },
-    {
-      "source": "controller_entrypoints",
-      "target": "governed_core"
-    },
-    {
-      "source": "controller_entrypoints",
-      "target": "host_interaction"
-    },
-    {
-      "source": "controller_entrypoints",
-      "target": "validation"
-    },
-    {
-      "source": "controller_runtime",
-      "target": "core_engine"
-    },
-    {
-      "source": "controller_runtime",
-      "target": "exchange"
-    },
-    {
-      "source": "data_governance",
-      "target": "core_governance"
-    },
-    {
-      "source": "decision_review",
-      "target": "subject_core"
-    },
-    {
-      "source": "decision_review_constructs",
-      "target": "subject_core"
-    },
-    {
-      "source": "decision_review_models",
-      "target": "core_semantics"
-    },
-    {
-      "source": "execution_framework_primitives",
-      "target": "governed_core"
-    },
-    {
-      "source": "execution_frameworks",
-      "target": "governed_core"
-    },
-    {
-      "source": "external_markdown_learning_pipeline",
-      "target": "exchange"
-    },
-    {
-      "source": "fence_extraction_strategy",
-      "target": "governed_core"
-    },
-    {
-      "source": "governance_inventory",
-      "target": "core_engine"
-    },
-    {
-      "source": "governed_skill_installation",
-      "target": "core_engine"
-    },
-    {
-      "source": "governed_skill_installation",
-      "target": "core_governance"
-    },
-    {
-      "source": "governed_skill_installation",
-      "target": "exchange"
-    },
-    {
-      "source": "governed_skill_installation",
-      "target": "skill_application"
-    },
-    {
-      "source": "governed_skill_installation",
-      "target": "skill_semantics"
-    },
-    {
-      "source": "host_mediation",
-      "target": "core_engine"
-    },
-    {
-      "source": "itemize",
-      "target": "core_semantics"
-    },
-    {
-      "source": "itemize",
-      "target": "subject_core"
-    },
-    {
-      "source": "itemize_models",
-      "target": "core_semantics"
-    },
-    {
-      "source": "learning_context",
-      "target": "exchange"
-    },
-    {
-      "source": "learning_context_paths",
-      "target": "subject_core"
-    },
-    {
-      "source": "markdown_ir",
-      "target": "core_semantics"
-    },
-    {
-      "source": "normalize",
-      "target": "core_engine"
-    },
-    {
-      "source": "normalize",
-      "target": "core_semantics"
-    },
-    {
-      "source": "pure_theory_types",
-      "target": "core_semantics"
-    },
-    {
-      "source": "python_skill_host",
-      "target": "governed_core"
-    },
-    {
-      "source": "replay_verifier",
-      "target": "core_engine"
-    },
-    {
-      "source": "replay_verifier",
-      "target": "core_governance"
-    },
-    {
-      "source": "replay_verifier",
-      "target": "core_semantics"
-    },
-    {
-      "source": "replay_verifier",
-      "target": "exchange"
-    },
-    {
-      "source": "replay_verifier",
-      "target": "governed_core"
-    },
-    {
-      "source": "replay_verifier",
-      "target": "skill_semantics"
-    },
-    {
-      "source": "review_composition",
-      "target": "subject_core"
-    },
-    {
-      "source": "runtime_controller_api",
-      "target": "app_cli"
-    },
-    {
-      "source": "skill_boundary_normalization",
-      "target": "skill_application"
-    },
-    {
-      "source": "skill_composition",
-      "target": "skill_application"
-    },
-    {
-      "source": "skill_governance",
-      "target": "core_engine"
-    },
-    {
-      "source": "skill_governance_primitives",
-      "target": "core_governance"
-    },
-    {
-      "source": "skill_invocation_contract",
-      "target": "skill_semantics"
-    },
-    {
-      "source": "skill_invocation_contract",
-      "target": "skills_core"
-    },
-    {
-      "source": "skill_ir",
-      "target": "skill_application"
-    },
-    {
-      "source": "skill_leaf_types",
-      "target": "skill_semantics"
-    },
-    {
-      "source": "skill_lifecycle",
-      "target": "core_governance"
-    },
-    {
-      "source": "skill_path_notation",
-      "target": "skill_semantics"
-    },
-    {
-      "source": "skill_safety_governance",
-      "target": "core_governance"
-    },
-    {
-      "source": "skill_safety_governance",
-      "target": "core_semantics"
-    },
-    {
       "source": "tablet_safety_validation",
       "target": "validation"
     },
@@ -1726,72 +743,12 @@
       "target": "validation"
     }
   ],
-  "root_to_root_dependencies": [
-    {
-      "module": "args",
-      "source": "controller_entrypoints"
-    },
-    {
-      "module": "governed_skill_installation",
-      "source": "controller_entrypoints"
-    },
-    {
-      "module": "replay_verifier",
-      "source": "controller_entrypoints"
-    },
-    {
-      "module": "args",
-      "source": "controller_runtime"
-    },
-    {
-      "module": "runtime_controller_api",
-      "source": "itemize"
-    },
-    {
-      "module": "controller_entrypoint_binding",
-      "source": "main"
-    },
-    {
-      "module": "controller_entrypoints",
-      "source": "main"
-    },
-    {
-      "module": "controller_runtime",
-      "source": "main"
-    }
-  ],
+  "root_to_root_dependencies": [],
   "schema_version": 1,
   "single_edge_cut_impacts": [],
+  "stale_dynamic_dependency_contracts": [],
   "undeclared_dependencies": [],
+  "unobserved_allowed_dependencies": [],
   "unregistered_components": [],
-  "wildcard_exports": [
-    {
-      "module": "realized_core_governance.data",
-      "path": "data_governance.py"
-    },
-    {
-      "module": "workstation.app.cli.cli",
-      "path": "workstation/app_cli/src/workstation/app/cli/__init__.py"
-    },
-    {
-      "module": "workstation.foundation.models.models",
-      "path": "workstation/foundation_models/src/workstation/foundation/models/__init__.py"
-    },
-    {
-      "module": "workstation.foundation.projections.projection_models",
-      "path": "workstation/foundation_projections/src/workstation/foundation/projections/__init__.py"
-    },
-    {
-      "module": "workstation.skills.builtin.builtin_skills",
-      "path": "workstation/skills_builtin/src/workstation/skills/builtin/__init__.py"
-    },
-    {
-      "module": "workstation.subject.textual.subject_workflow_textual_backend",
-      "path": "workstation/subject_textual/src/workstation/subject/textual/__init__.py"
-    },
-    {
-      "module": "workstation.ui.textual.chat_ui",
-      "path": "workstation/ui_textual/src/workstation/ui/textual/__init__.py"
-    }
-  ]
+  "wildcard_exports": []
 }

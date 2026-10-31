@@ -14,8 +14,8 @@ from typing import Any
 
 
 TRIALS_ROOT = Path(__file__).resolve().parent
-ROOT = TRIALS_ROOT.parent if (TRIALS_ROOT.parent / "main.py").exists() else TRIALS_ROOT
-MAIN = ROOT / "main.py"
+ROOT = TRIALS_ROOT.parent
+MAIN_COMMAND = (sys.executable, "-m", "main")
 FIXTURE_DIR = ROOT / "tests" / "fixtures" / "boundary_shape_artifacts"
 REPORT_ROOT = ROOT / "reports"
 
@@ -49,7 +49,7 @@ def run_cli(args: list[str], *, env: dict[str, str]) -> dict[str, Any]:
         dict[str, Any]: Result produced by `run_cli`.
     """
     completed = subprocess.run(
-        [sys.executable, str(MAIN), *args],
+        [*MAIN_COMMAND, *args],
         cwd=str(ROOT),
         env=env,
         capture_output=True,

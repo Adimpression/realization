@@ -11,7 +11,7 @@ from urllib.request import urlopen
 import grpc
 
 from realized_exchange.learning_context import new_learning_context, persist_learning_context
-from workstation.foundation.host.client_sessions import WorkstationClientSessionRegistry
+from workstation.subject.service.client_sessions import WorkstationClientSessionRegistry
 from workstation.grpc.definitions import (
     subject_workflow_pb2,
     subject_workflow_pb2_grpc,

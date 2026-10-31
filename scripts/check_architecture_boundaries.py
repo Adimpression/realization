@@ -476,6 +476,20 @@ def _component_inventory(
             )
         if prefix in prefixes:
             raise ArchitectureConfigurationError(f"duplicate module prefix {prefix!r}")
+        distribution_import_modules = configured_component.get(
+            "distribution_import_modules", []
+        )
+        if not isinstance(distribution_import_modules, list) or not all(
+            isinstance(module, str) and module.strip()
+            for module in distribution_import_modules
+        ):
+            raise ArchitectureConfigurationError(
+                f"{name}: distribution_import_modules must be a list of module names"
+            )
+        if len(distribution_import_modules) != len(set(distribution_import_modules)):
+            raise ArchitectureConfigurationError(
+                f"{name}: distribution_import_modules contains duplicates"
+            )
         distributions[distribution_key] = name
         prefixes[prefix] = name
         inventory[name] = {
@@ -485,6 +499,347 @@ def _component_inventory(
         }
 
     return inventory, unregistered
+
+
+def _dynamic_dependency_contracts(
+    repo_root: Path,
+    manifest: dict[str, Any],
+    inventory: dict[str, dict[str, Any]],
+) -> dict[tuple[str, str], dict[str, Any]]:
+    raw_contracts = manifest.get("dynamic_dependency_contracts", [])
+    if not isinstance(raw_contracts, list):
+        raise ArchitectureConfigurationError(
+            "dynamic_dependency_contracts must be a list of tables"
+        )
+    contracts: dict[tuple[str, str], dict[str, Any]] = {}
+    required_fields = {"source", "target", "reason", "evidence"}
+    for index, contract in enumerate(raw_contracts):
+        if not isinstance(contract, dict):
+            raise ArchitectureConfigurationError(
+                f"dynamic dependency contract {index} must be a table"
+            )
+        unknown_fields = sorted(set(contract) - required_fields)
+        missing_fields = sorted(required_fields - set(contract))
+        if unknown_fields or missing_fields:
+            details = []
+            if missing_fields:
+                details.append("missing " + ", ".join(missing_fields))
+            if unknown_fields:
+                details.append("unsupported " + ", ".join(unknown_fields))
+            raise ArchitectureConfigurationError(
+                f"dynamic dependency contract {index} has " + "; ".join(details)
+            )
+        source = contract["source"]
+        target = contract["target"]
+        reason = contract["reason"]
+        evidence = contract["evidence"]
+        if source not in inventory or target not in inventory:
+            raise ArchitectureConfigurationError(
+                f"dynamic dependency contract {source!r} -> {target!r} "
+                "must name registered components"
+            )
+        if source == target:
+            raise ArchitectureConfigurationError(
+                f"dynamic dependency contract {source!r} cannot target itself"
+            )
+        if target not in set(inventory[source].get("allowed_dependencies", [])):
+            raise ArchitectureConfigurationError(
+                f"dynamic dependency contract {source!r} -> {target!r} is not "
+                "present in allowed_dependencies"
+            )
+        if not isinstance(reason, str) or not reason.strip():
+            raise ArchitectureConfigurationError(
+                f"dynamic dependency contract {source!r} -> {target!r} needs a reason"
+            )
+        if not isinstance(evidence, list) or not evidence or not all(
+            isinstance(path, str) and path.strip() for path in evidence
+        ):
+            raise ArchitectureConfigurationError(
+                f"dynamic dependency contract {source!r} -> {target!r} needs "
+                "one or more evidence paths"
+            )
+        missing_evidence = sorted(
+            path for path in evidence if not (repo_root / path).is_file()
+        )
+        if missing_evidence:
+            raise ArchitectureConfigurationError(
+                f"dynamic dependency contract {source!r} -> {target!r} has "
+                "missing evidence: " + ", ".join(missing_evidence)
+            )
+        edge = (source, target)
+        if edge in contracts:
+            raise ArchitectureConfigurationError(
+                f"duplicate dynamic dependency contract: {source} -> {target}"
+            )
+        contracts[edge] = {
+            "source": source,
+            "target": target,
+            "reason": reason.strip(),
+            "evidence": sorted(set(evidence)),
+        }
+    return contracts
+
+
+def _remaining_architecture_obligations(
+    repo_root: Path,
+    manifest: dict[str, Any],
+    inventory: dict[str, dict[str, Any]],
+    *,
+    prefixes: list[tuple[str, str]],
+    root_module_paths: dict[str, Path],
+    root_module_owners: dict[str, str],
+    root_to_root_dependencies: set[tuple[str, str]],
+    root_to_root_evidence: dict[tuple[str, str], set[str]],
+    forbidden_root_owner_dependencies: set[tuple[str, str]],
+    compatibility_edges: set[tuple[str, str]],
+    compatibility_edge_evidence: dict[tuple[str, str], set[str]],
+) -> dict[str, Any]:
+    obligation_value = manifest.get("remaining_obligations_path")
+    if obligation_value is None:
+        return {
+            "forbidden_root_owner_dependencies": [],
+            "package_compatibility_aliases": [],
+        }
+    if not isinstance(obligation_value, str) or not obligation_value:
+        raise ArchitectureConfigurationError(
+            "remaining_obligations_path must be a non-empty repository-relative path"
+        )
+    obligation_path = repo_root / obligation_value
+    if not obligation_path.is_file():
+        raise ArchitectureConfigurationError(
+            f"remaining architecture obligation ledger is missing: {obligation_value}"
+        )
+    with obligation_path.open("rb") as handle:
+        obligations = tomllib.load(handle)
+    if obligations.get("schema_version") != 1:
+        raise ArchitectureConfigurationError(
+            "unsupported remaining architecture obligation schema"
+        )
+
+    root_required = {
+        "id",
+        "source_owner",
+        "target_owner",
+        "source_module",
+        "target_module",
+        "source_path",
+        "behavior_contract",
+        "evidence",
+        "review_condition",
+        "rollback",
+    }
+    root_rows = obligations.get("forbidden_root_owner_dependencies", [])
+    if not isinstance(root_rows, list):
+        raise ArchitectureConfigurationError(
+            "forbidden_root_owner_dependencies obligation ledger must be a list"
+        )
+    root_edges: set[tuple[str, str]] = set()
+    root_ids: set[str] = set()
+    for index, row in enumerate(root_rows):
+        if not isinstance(row, dict) or set(row) != root_required:
+            raise ArchitectureConfigurationError(
+                f"forbidden root-owner obligation {index} must declare exactly: "
+                + ", ".join(sorted(root_required))
+            )
+        for field in root_required - {"evidence"}:
+            if not isinstance(row[field], str) or not row[field].strip():
+                raise ArchitectureConfigurationError(
+                    f"forbidden root-owner obligation {index} has invalid {field}"
+                )
+        if row["id"] in root_ids:
+            raise ArchitectureConfigurationError(
+                f"duplicate remaining architecture obligation id: {row['id']}"
+            )
+        root_ids.add(row["id"])
+        evidence = row["evidence"]
+        if not isinstance(evidence, list) or not evidence or not all(
+            isinstance(path, str) and path for path in evidence
+        ):
+            raise ArchitectureConfigurationError(
+                f"forbidden root-owner obligation {row['id']} needs evidence paths"
+            )
+        missing = sorted(path for path in evidence if not (repo_root / path).is_file())
+        if missing:
+            raise ArchitectureConfigurationError(
+                f"forbidden root-owner obligation {row['id']} has missing evidence: "
+                + ", ".join(missing)
+            )
+        source_module = row["source_module"]
+        target_module = row["target_module"]
+        source_path = row["source_path"]
+        if source_module not in root_module_paths or target_module not in root_module_paths:
+            raise ArchitectureConfigurationError(
+                f"forbidden root-owner obligation {row['id']} must name root modules"
+            )
+        if _relative(root_module_paths[source_module], repo_root) != source_path:
+            raise ArchitectureConfigurationError(
+                f"forbidden root-owner obligation {row['id']} source path is stale"
+            )
+        if root_module_owners[source_module] != row["source_owner"]:
+            raise ArchitectureConfigurationError(
+                f"forbidden root-owner obligation {row['id']} source owner is stale"
+            )
+        if root_module_owners[target_module] != row["target_owner"]:
+            raise ArchitectureConfigurationError(
+                f"forbidden root-owner obligation {row['id']} target owner is stale"
+            )
+        module_edge = (source_module, target_module)
+        if module_edge not in root_to_root_dependencies:
+            raise ArchitectureConfigurationError(
+                f"forbidden root-owner obligation {row['id']} has no measured module edge"
+            )
+        if source_path not in root_to_root_evidence.get(module_edge, set()):
+            raise ArchitectureConfigurationError(
+                f"forbidden root-owner obligation {row['id']} has no source evidence"
+            )
+        root_edges.add((row["source_owner"], row["target_owner"]))
+    if root_edges != forbidden_root_owner_dependencies:
+        raise ArchitectureConfigurationError(
+            "forbidden root-owner obligation ledger does not match measured edges"
+        )
+
+    alias_required = {
+        "id",
+        "path",
+        "legacy_module",
+        "canonical_module",
+        "source_component",
+        "target_component",
+        "exported_identities",
+        "consumer_evidence",
+        "durable_name_exposure",
+        "support_class",
+        "behavior_contract",
+        "review_condition",
+        "rollback",
+    }
+    alias_rows = obligations.get("package_compatibility_aliases", [])
+    if not isinstance(alias_rows, list):
+        raise ArchitectureConfigurationError(
+            "package_compatibility_aliases obligation ledger must be a list"
+        )
+    alias_paths: set[str] = set()
+    alias_ids: set[str] = set()
+    allowed_durable_exposure = {
+        "none",
+        "canonical_class_module",
+        "canonical_function_module",
+    }
+    allowed_support_classes = {"candidate", "held", "supported"}
+    for index, row in enumerate(alias_rows):
+        if not isinstance(row, dict) or set(row) != alias_required:
+            raise ArchitectureConfigurationError(
+                f"package compatibility alias obligation {index} must declare exactly: "
+                + ", ".join(sorted(alias_required))
+            )
+        scalar_fields = alias_required - {"exported_identities", "consumer_evidence"}
+        for field in scalar_fields:
+            if not isinstance(row[field], str) or not row[field].strip():
+                raise ArchitectureConfigurationError(
+                    f"package compatibility alias obligation {index} has invalid {field}"
+                )
+        if row["id"] in root_ids or row["id"] in alias_ids:
+            raise ArchitectureConfigurationError(
+                f"duplicate remaining architecture obligation id: {row['id']}"
+            )
+        alias_ids.add(row["id"])
+        if row["durable_name_exposure"] not in allowed_durable_exposure:
+            raise ArchitectureConfigurationError(
+                f"package compatibility alias obligation {row['id']} has unsupported "
+                "durable_name_exposure"
+            )
+        if row["support_class"] not in allowed_support_classes:
+            raise ArchitectureConfigurationError(
+                f"package compatibility alias obligation {row['id']} has unsupported "
+                "support_class"
+            )
+        for field in ("exported_identities", "consumer_evidence"):
+            values = row[field]
+            if not isinstance(values, list) or not values or not all(
+                isinstance(value, str) and value for value in values
+            ):
+                raise ArchitectureConfigurationError(
+                    f"package compatibility alias obligation {row['id']} needs {field}"
+                )
+        missing = sorted(
+            path
+            for path in row["consumer_evidence"]
+            if not (repo_root / path).is_file()
+        )
+        if missing:
+            raise ArchitectureConfigurationError(
+                f"package compatibility alias obligation {row['id']} has missing "
+                "consumer evidence: " + ", ".join(missing)
+            )
+        relative_path = row["path"]
+        path = repo_root / relative_path
+        if not path.is_file():
+            raise ArchitectureConfigurationError(
+                f"package compatibility alias obligation {row['id']} path is missing"
+            )
+        source_component = row["source_component"]
+        target_component = row["target_component"]
+        if source_component not in inventory or target_component not in inventory:
+            raise ArchitectureConfigurationError(
+                f"package compatibility alias obligation {row['id']} names an "
+                "unregistered component"
+            )
+        source_root = inventory[source_component]["source_root"]
+        try:
+            measured_legacy_module, _ = _module_for_file(path, source_root)
+        except ValueError as exc:
+            raise ArchitectureConfigurationError(
+                f"package compatibility alias obligation {row['id']} source component "
+                "does not own its path"
+            ) from exc
+        if measured_legacy_module != row["legacy_module"]:
+            raise ArchitectureConfigurationError(
+                f"package compatibility alias obligation {row['id']} legacy module is stale"
+            )
+        if _owner_for_module(row["canonical_module"], prefixes) != target_component:
+            raise ArchitectureConfigurationError(
+                f"package compatibility alias obligation {row['id']} canonical owner is stale"
+            )
+        edge = (source_component, target_component)
+        if edge not in compatibility_edges:
+            raise ArchitectureConfigurationError(
+                f"package compatibility alias obligation {row['id']} has no measured edge"
+            )
+        if relative_path not in compatibility_edge_evidence.get(edge, set()):
+            raise ArchitectureConfigurationError(
+                f"package compatibility alias obligation {row['id']} has no path evidence"
+            )
+        alias_paths.add(relative_path)
+    configured_alias_paths = set(manifest.get("compatibility_alias_globs", []))
+    if alias_paths != configured_alias_paths:
+        raise ArchitectureConfigurationError(
+            "package compatibility alias obligation ledger does not match configured paths"
+        )
+
+    supported_modules_by_component: dict[str, set[str]] = defaultdict(set)
+    for row in alias_rows:
+        if row["support_class"] == "supported":
+            supported_modules_by_component[row["source_component"]].add(
+                row["legacy_module"]
+            )
+    for component_name, expected_modules in supported_modules_by_component.items():
+        declared_modules = set(
+            inventory[component_name].get("distribution_import_modules", [])
+        )
+        if declared_modules != expected_modules:
+            raise ArchitectureConfigurationError(
+                f"supported package aliases for {component_name} do not match "
+                "distribution_import_modules"
+            )
+
+    return {
+        "forbidden_root_owner_dependencies": sorted(
+            root_rows, key=lambda row: row["id"]
+        ),
+        "package_compatibility_aliases": sorted(
+            alias_rows, key=lambda row: row["id"]
+        ),
+    }
 
 
 def _module_for_file(path: Path, source_root: Path) -> tuple[str, bool]:
@@ -921,6 +1276,33 @@ def analyze(repo_root: Path, manifest: dict[str, Any]) -> dict[str, Any]:
         if dependency[1] in compatibility_facade_modules
     )
 
+    remaining_obligations = _remaining_architecture_obligations(
+        repo_root,
+        manifest,
+        inventory,
+        prefixes=prefixes,
+        root_module_paths=root_module_paths,
+        root_module_owners=root_module_owners,
+        root_to_root_dependencies=root_to_root_dependencies,
+        root_to_root_evidence=root_to_root_evidence,
+        forbidden_root_owner_dependencies=forbidden_root_owner_dependencies,
+        compatibility_edges=compatibility_edges,
+        compatibility_edge_evidence=compatibility_edge_evidence,
+    )
+
+    # A supported alias in the dedicated compatibility distribution is a
+    # deliberate ABI dependency, not debt between canonical components. Keep
+    # held and candidate aliases in the shrinking compatibility-edge ledger.
+    supported_compatibility_edges = {
+        (row["source_component"], row["target_component"])
+        for row in remaining_obligations["package_compatibility_aliases"]
+        if row["support_class"] == "supported"
+    }
+    for edge in supported_compatibility_edges:
+        actual_edges.add(edge)
+        edge_evidence[edge].update(compatibility_edge_evidence.get(edge, set()))
+    compatibility_edges.difference_update(supported_compatibility_edges)
+
     declared_dependencies: dict[str, set[str]] = {}
     for component_name, component in inventory.items():
         dependencies = component["project"].get("project", {}).get("dependencies", [])
@@ -929,6 +1311,20 @@ def analyze(repo_root: Path, manifest: dict[str, Any]) -> dict[str, Any]:
             for dependency in dependencies
             if (owner := distribution_owners.get(_normalized_distribution(dependency)))
         }
+
+    dynamic_dependency_contracts = _dynamic_dependency_contracts(
+        repo_root, manifest, inventory
+    )
+    dynamic_dependency_edges = set(dynamic_dependency_contracts)
+    allowed_dependency_edges = {
+        (source, target)
+        for source, component in inventory.items()
+        for target in component.get("allowed_dependencies", [])
+    }
+    unobserved_allowed_dependencies = (
+        allowed_dependency_edges - actual_edges - dynamic_dependency_edges
+    )
+    stale_dynamic_dependency_contracts = dynamic_dependency_edges & actual_edges
 
     undeclared = {
         edge for edge in actual_edges if edge[1] not in declared_dependencies[edge[0]]
@@ -993,6 +1389,10 @@ def analyze(repo_root: Path, manifest: dict[str, Any]) -> dict[str, Any]:
     baseline = {
         "schema_version": 1,
         "actual_edges": edge_rows(actual_edges),
+        "dynamic_dependency_contracts": [
+            dynamic_dependency_contracts[edge]
+            for edge in sorted(dynamic_dependency_contracts)
+        ],
         "compatibility_edges": edge_rows(compatibility_edges),
         "combined_cycles": combined_cycles,
         "combined_graph_metrics": combined_graph_metrics,
@@ -1053,7 +1453,13 @@ def analyze(repo_root: Path, manifest: dict[str, Any]) -> dict[str, Any]:
             for source, module in sorted(root_to_root_dependencies)
         ],
         "single_edge_cut_impacts": single_edge_cut_impacts,
+        "stale_dynamic_dependency_contracts": edge_rows(
+            stale_dynamic_dependency_contracts
+        ),
         "undeclared_dependencies": edge_rows(undeclared),
+        "unobserved_allowed_dependencies": edge_rows(
+            unobserved_allowed_dependencies
+        ),
         "unregistered_components": unregistered,
         "wildcard_exports": [
             {"path": path, "module": module}
@@ -1076,6 +1482,7 @@ def analyze(repo_root: Path, manifest: dict[str, Any]) -> dict[str, Any]:
         "root_package_to_package_evidence": root_package_to_package_evidence,
         "wildcard_evidence": wildcard_evidence,
         "parse_errors": parse_errors,
+        "remaining_obligations": remaining_obligations,
     }
 
 
@@ -1125,6 +1532,19 @@ def compare(current: dict[str, Any], baseline: dict[str, Any]) -> list[str]:
         regressions.extend(
             f"{label}: {source} -> {target}" for source, target in sorted(extras)
         )
+
+    regressions.extend(
+        f"unobserved allowed dependency lacks a dynamic contract: {source} -> {target}"
+        for source, target in sorted(
+            _edge_set(current.get("unobserved_allowed_dependencies", []))
+        )
+    )
+    regressions.extend(
+        f"dynamic dependency contract became stale: {source} -> {target}"
+        for source, target in sorted(
+            _edge_set(current.get("stale_dynamic_dependency_contracts", []))
+        )
+    )
 
     current_roots = {
         (row["source"], row["module"])
@@ -1487,6 +1907,33 @@ def render_report(repo_root: Path, manifest: dict[str, Any], result: dict[str, A
             f"{'no' if edge in forbidden else 'yes'} | {display_evidence} |"
         )
 
+    lines.extend(["", "## Dynamic Dependency Contracts", ""])
+    if baseline.get("dynamic_dependency_contracts", []):
+        lines.extend(
+            [
+                "A dynamic contract permits one dependency that cannot be observed as a "
+                "static import. Each contract must retain executable evidence.",
+                "",
+                "| Source | Target | Reason | Evidence |",
+                "| --- | --- | --- | --- |",
+            ]
+        )
+        for row in baseline["dynamic_dependency_contracts"]:
+            evidence = ", ".join(f"`{path}`" for path in row["evidence"])
+            lines.append(
+                f"| `{row['source']}` | `{row['target']}` | "
+                f"{row['reason']} | {evidence} |"
+            )
+    else:
+        lines.append("No dynamic dependency contracts are required.")
+
+    lines.extend(["", "## Unobserved Allowed Dependencies", ""])
+    if baseline.get("unobserved_allowed_dependencies", []):
+        for row in baseline["unobserved_allowed_dependencies"]:
+            lines.append(f"- `{row['source']}` -> `{row['target']}`")
+    else:
+        lines.append("Every allowed dependency is statically observed or dynamically contracted.")
+
     lines.extend(["", "## Cycles", ""])
     if baseline["cycles"]:
         for cycle in baseline["cycles"]:
@@ -1516,6 +1963,49 @@ def render_report(repo_root: Path, manifest: dict[str, Any], result: dict[str, A
             )
     else:
         lines.append("No compatibility-alias dependency edges were found.")
+
+    remaining_obligations = result["remaining_obligations"]
+    lines.extend(["", "## Remaining Architecture Obligations", ""])
+    root_obligations = remaining_obligations[
+        "forbidden_root_owner_dependencies"
+    ]
+    if root_obligations:
+        lines.extend(
+            [
+                "### Forbidden Root-Owner Dependencies",
+                "",
+                "| ID | Owner edge | Module edge | Review condition |",
+                "| --- | --- | --- | --- |",
+            ]
+        )
+        for row in root_obligations:
+            lines.append(
+                f"| `{row['id']}` | `{row['source_owner']}` -> "
+                f"`{row['target_owner']}` | `{row['source_module']}` -> "
+                f"`{row['target_module']}` | {row['review_condition']} |"
+            )
+    else:
+        lines.append("No forbidden root-owner dependency obligation remains.")
+
+    alias_obligations = remaining_obligations["package_compatibility_aliases"]
+    if alias_obligations:
+        lines.extend(
+            [
+                "",
+                "### Package Compatibility Aliases",
+                "",
+                "| ID | Component edge | Support | Durable name | Review condition |",
+                "| --- | --- | --- | --- | --- |",
+            ]
+        )
+        for row in alias_obligations:
+            lines.append(
+                f"| `{row['id']}` | `{row['source_component']}` -> "
+                f"`{row['target_component']}` | `{row['support_class']}` | "
+                f"`{row['durable_name_exposure']}` | {row['review_condition']} |"
+            )
+    else:
+        lines.append("No package compatibility alias obligation remains.")
 
     metrics = baseline["combined_graph_metrics"]
     lines.extend(

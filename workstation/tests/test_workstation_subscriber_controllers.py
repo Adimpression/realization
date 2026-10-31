@@ -5,14 +5,16 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from workstation.app.cli.composition import ensure_workstation_application_composition
 from workstation.foundation.events.event_bus import _reset_workstation_event_bus_registry_for_tests, publish_workstation_event
 from workstation.foundation.projections import WorkstationActivityEventView
-from workstation.foundation.events.subscriber_controllers import WorkstationProjectionSubscriberController
+from workstation.runtime.core.projection_subscriber_controller import WorkstationProjectionSubscriberController
 from workstation.runtime.core.session import launch_workstation_session
 
 
 class WorkstationSubscriberControllersTests(unittest.TestCase):
     def setUp(self) -> None:
+        ensure_workstation_application_composition()
         _reset_workstation_event_bus_registry_for_tests()
         self.tempdir = tempfile.TemporaryDirectory()
         self.root = Path(self.tempdir.name) / "root"

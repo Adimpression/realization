@@ -47,7 +47,7 @@ class WorkstationTrialSkillRoutingBDD(unittest.TestCase):
         trials_root = self._trial_root(domain="bash", prompts=(prompt,))
 
         with patch(
-            "workstation.foundation.host.llm_driver.build_workstation_openai_client",
+            "workstation.runtime.core.llm_driver.build_workstation_openai_client",
             side_effect=AssertionError("the deterministic trial path must not call a provider"),
         ):
             report = validate_workstation_trial_domains(
@@ -73,7 +73,7 @@ class WorkstationTrialSkillRoutingBDD(unittest.TestCase):
         trials_root = self._trial_root(domain="bash", prompts=(prompt,))
 
         with patch(
-            "workstation.foundation.host.llm_driver.build_workstation_openai_client",
+            "workstation.runtime.core.llm_driver.build_workstation_openai_client",
             side_effect=AssertionError("the deterministic trial path must not call a provider"),
         ):
             report = validate_workstation_trial_domains(
@@ -102,7 +102,7 @@ class WorkstationTrialSkillRoutingBDD(unittest.TestCase):
         trials_root = self._trial_root(domain="physics", prompts=prompts)
 
         with patch(
-            "workstation.foundation.host.llm_driver.build_workstation_openai_client",
+            "workstation.runtime.core.llm_driver.build_workstation_openai_client",
             side_effect=AssertionError("the deterministic trial path must not call a provider"),
         ):
             report = validate_workstation_trial_domains(

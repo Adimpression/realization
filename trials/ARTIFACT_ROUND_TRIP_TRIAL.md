@@ -22,9 +22,9 @@ Four bundles are valid reload targets. The statistical bundle was exported, but 
 
 Load commands:
 ```bash
-python3 main.py artifact-import --artifact-file reports/curriculum_bundle_build_20260325_190119/bundles/LEARN_NEWTOWNS_LAWS.yaml
-python3 main.py artifact-import --artifact-file reports/curriculum_bundle_build_20260325_190119/bundles/GAIN_PYTHOGOREAN_THEORM.yaml
-python3 main.py artifact-import --artifact-file reports/curriculum_bundle_build_20260325_190119/bundles/LEARN_TABLET_SAFETY.yaml
+uv run realized-compatibility artifact-import --artifact-file reports/curriculum_bundle_build_20260325_190119/bundles/LEARN_NEWTOWNS_LAWS.yaml
+uv run realized-compatibility artifact-import --artifact-file reports/curriculum_bundle_build_20260325_190119/bundles/GAIN_PYTHOGOREAN_THEORM.yaml
+uv run realized-compatibility artifact-import --artifact-file reports/curriculum_bundle_build_20260325_190119/bundles/LEARN_TABLET_SAFETY.yaml
 ```
 
 Follow-up work should repair statistical curriculum retrieval and generation so its exported bundle is as reliable as the other four.

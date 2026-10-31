@@ -13,8 +13,7 @@ import blend_session
 import blend_workflow_execution
 import blend_workflow_models
 import blend_world_models
-import controller_runtime
-import controller_entrypoint_binding
+from realized_core_engine import controller_runtime
 import data_governance
 import decision_review
 import decision_review_constructs
@@ -30,10 +29,8 @@ import learning_context
 import learning_context_paths
 import markdown_ir
 import external_markdown_learning_pipeline
-import normalize
 import pure_theory_types
 import review_composition
-import runtime_controller_api
 import python_skill_host
 import skill_governance
 import skill_governance_primitives
@@ -57,7 +54,6 @@ from realized_core_semantics import decision_review as packaged_decision_review
 from realized_core_semantics import identifiers as packaged_identifiers
 from realized_core_semantics import itemization as packaged_itemization
 from realized_core_semantics import markdown as packaged_markdown
-from realized_core_semantics import normalization as packaged_normalization_primitives
 from realized_core_semantics import proposals as packaged_proposals
 from realized_core_semantics import semantic_text as packaged_semantic_text
 from realized_core_semantics import theory as packaged_theory
@@ -92,15 +88,12 @@ from realized_core_engine import configuration as packaged_engine_configuration
 from realized_core_engine import artifact_semantics as packaged_artifact_semantics
 from realized_core_engine import governance_inventory as packaged_engine_governance_inventory
 from realized_core_engine import host_mediation as packaged_host_mediation
-from realized_core_engine import controller_entrypoint_binding as packaged_controller_entrypoint_binding
-from realized_core_engine import controller_runtime as packaged_controller_runtime
 from realized_core_engine import skill_governance as packaged_engine_skill_governance
 from realized_core_engine.store import ArtifactStore, SQLiteVectorArtifactStore
 from realized_core_runtime import execution as packaged_runtime_execution
 from realized_core_runtime import executor_support as packaged_executor_support
 from realized_core_runtime import fence_extraction as packaged_fence_extraction
 from realized_core_runtime import python_host as packaged_python_host
-from workstation.app.cli import runtime_controller as packaged_runtime_controller_api
 from realized_skill_semantics import composition as packaged_skill_composition
 from realized_skill_semantics import declaration as packaged_skill_declaration
 from realized_skill_semantics import execution as packaged_skill_execution
@@ -133,18 +126,13 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
             packaged_markdown_learning_pipeline,
         )
 
-    def test_controller_and_runtime_root_aliases_keep_module_identity(self) -> None:
+    def test_retained_controller_and_runtime_root_aliases_keep_module_identity(self) -> None:
         for facade, canonical in (
-            (controller_entrypoint_binding, packaged_controller_entrypoint_binding),
-            (controller_runtime, packaged_controller_runtime),
             (host_mediation, packaged_host_mediation),
             (skill_governance, packaged_engine_skill_governance),
         ):
             with self.subTest(module=facade.__name__):
                 self.assertIs(facade, canonical)
-
-    def test_workstation_runtime_controller_alias_keeps_module_identity(self) -> None:
-        self.assertIs(runtime_controller_api, packaged_runtime_controller_api)
 
     def test_entry_parser_reuses_engine_configuration_without_aliasing_it(self) -> None:
         self.assertIsNot(args, packaged_engine_configuration)
@@ -465,23 +453,6 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
             packaged_semantic_text.normalize_semantic_component_title,
         )
 
-    def test_normalization_facade_keeps_canonical_identities(self) -> None:
-        for name in (
-            "boundary_shape_values",
-            "normalize_artifact_representation",
-            "normalize_artifact_type",
-            "normalize_boundary_shape",
-            "normalize_not_degree",
-            "normalize_not_misalignment_list",
-            "normalize_not_origin_list",
-            "normalize_remainder_shape_list",
-        ):
-            with self.subTest(name=name):
-                self.assertIs(
-                    getattr(normalize, name),
-                    getattr(packaged_normalization_primitives, name),
-                )
-
     def test_applied_theory_public_types_keep_their_legacy_identity(self) -> None:
         for name in (
             "ArtifactType",
@@ -649,6 +620,7 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
                 )
 
     def test_itemization_application_facade_keeps_canonical_identities(self) -> None:
+        self.assertIs(itemize, packaged_subject_itemization)
         for name in (
             "ensure_itemization_home",
             "extract_itemized_candidates_from_markdown_document",
@@ -665,11 +637,11 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
                     getattr(itemize, name),
                     getattr(packaged_subject_itemization, name),
                 )
-        self.assertIsNot(
+        self.assertIs(
             itemize.extract_itemized_candidates_from_learning_context,
             packaged_subject_itemization.extract_itemized_candidates_from_learning_context,
         )
-        self.assertIsNot(
+        self.assertIs(
             itemize.materialize_itemization_session,
             packaged_subject_itemization.materialize_itemization_session,
         )
@@ -1163,12 +1135,6 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
                         ),
                         getattr(packaged_skill_execution, name),
                     )
-
-    def test_learning_token_normalizer_keeps_the_legacy_identity(self) -> None:
-        self.assertIs(
-            normalize.normalize_learning_lookup_token,
-            packaged_semantic_text.normalize_learning_token,
-        )
 
     def test_skill_invocation_contract_keeps_legacy_identity(self) -> None:
         for name in (

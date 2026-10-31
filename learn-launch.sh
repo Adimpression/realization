@@ -3,4 +3,4 @@
 repo_root="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
 cd "$repo_root"
 
-uv run python ./main.py workstation-launch --root ./ram/tmp/workstation-root --workspace ./dst --task "Review learning contexts and build a report."
+uv run realized-workstation launch --root ./ram/tmp/workstation-root --workspace ./dst --task "Review learning contexts and build a report."

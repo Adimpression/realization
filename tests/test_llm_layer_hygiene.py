@@ -12,7 +12,11 @@ LLM_TRANSPORT = LLM_PACKAGE_ROOT / "transport.py"
 LLM_LAYER_MODULES = (
     REPO_ROOT / "core_engine" / "src" / "realized_core_engine" / "prompt_directives.py",
     REPO_ROOT / "core_engine" / "src" / "realized_core_engine" / "supplement.py",
-    REPO_ROOT / "external_markdown_learning_pipeline.py",
+    REPO_ROOT
+    / "exchange"
+    / "src"
+    / "realized_exchange"
+    / "markdown_learning_pipeline.py",
     REPO_ROOT
     / "core_engine"
     / "src"

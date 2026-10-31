@@ -724,7 +724,7 @@ checkout when developing, qualifying, or curating reusable material.
 Learn governed artifacts from a Markdown document into SQLite:
 
 ```console
-uv run --frozen python3 main.py markdown-learn \
+uv run --frozen realized-compatibility markdown-learn \
   --markdown-file ./notes.md \
   --sqlite ./state/realization.sqlite3 \
   --state-out ./state/learning-run.json \
@@ -735,7 +735,7 @@ uv run --frozen python3 main.py markdown-learn \
 Export admitted artifacts as reviewable YAML:
 
 ```console
-uv run --frozen python3 main.py artifact-export \
+uv run --frozen realized-compatibility artifact-export \
   --all \
   --out-dir ./state/exported-artifacts \
   --sqlite ./state/realization.sqlite3
@@ -744,7 +744,7 @@ uv run --frozen python3 main.py artifact-export \
 Import a reviewed artifact directory and run against the resulting store:
 
 ```console
-uv run --frozen python3 main.py load-yaml-and-run \
+uv run --frozen realized-compatibility load-yaml-and-run \
   --artifact-dir ./state/exported-artifacts \
   --prompt "Apply the imported knowledge to this request." \
   --sqlite ./state/imported.sqlite3 \
@@ -794,9 +794,9 @@ uv run --frozen --package realized-workstation-app-cli realized-workstation chat
   --root ./state/workstation
 ```
 
-The historical `controller_entrypoints.py workstation-*` aggregate command
-remains available during the compatibility qualification cycle, but new usage
-should use the installable workstation entry package.
+The supported `realized-compatibility workstation-*` aggregate command remains
+available for historical automation, but new usage should use the installable
+workstation entry package.
 
 Interactive natural-language chat requires the configured provider named by
 the workstation session. The governed subject workflow and its deterministic

@@ -1683,9 +1683,9 @@ class WorkstationChatUiTests(unittest.TestCase):
         self.assertIn("/import-skill", rendered)
         self.assertIn("/revoke-permission", rendered)
         self.assertIn("/export-skill", rendered)
-        self.assertIn("workstation-launch", rendered)
-        self.assertIn("workstation-chat", rendered)
-        self.assertIn("workstation-skill-import", rendered)
+        self.assertIn("realized-workstation launch", rendered)
+        self.assertIn("realized-workstation chat", rendered)
+        self.assertIn("realized-workstation skill-import", rendered)
         self.assertIn("Import the skill file at trials/python.skill.yaml", rendered)
 
     def test_workstation_chat_assistant_block_text_preserves_newlines(self) -> None:

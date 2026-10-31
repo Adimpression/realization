@@ -28,6 +28,7 @@ This report is generated deterministically by `scripts/check_architecture_bounda
 | `grpc_implementation` | `exchange_adapters` | `realized-workstation-grpc-implementation` | `workstation.grpc.implementation` |
 | `host_interaction` | `host_substrate` | `realized-host-interaction` | `realized_host_interaction` |
 | `namespace` | `namespace` | `realized-workstation` | `workstation` |
+| `root_compatibility` | `compatibility` | `realized-compatibility` | `realized_compatibility` |
 | `runtime_core` | `controller` | `realized-workstation-runtime-core` | `workstation.runtime.core` |
 | `shell_core` | `workstation` | `realized-workstation-shell-core` | `workstation.shell.core` |
 | `skill_application` | `skills` | `realized-skill-application` | `realized_skill_application` |
@@ -41,6 +42,7 @@ This report is generated deterministically by `scripts/check_architecture_bounda
 | `ui_shared` | `workstation` | `realized-workstation-ui-shared` | `workstation.ui.shared` |
 | `ui_textual` | `workstation_adapter` | `realized-workstation-ui-textual` | `workstation.ui.textual` |
 | `validation` | `validation` | `realized-validation` | `realized_validation` |
+| `workstation_compatibility` | `compatibility` | `realized-workstation-compatibility` | `workstation.compatibility` |
 
 ## Root Module Ownership
 
@@ -50,52 +52,6 @@ Every repository-root Python module has one explicit responsibility. Status is o
 | --- | --- | --- |
 | `SEMANTIC_RELATION_VALIDATION` | `validation_trial` | `validation` |
 | `TRIAL_DOMAIN_VALIDATION` | `validation_trial` | `validation` |
-| `applied_theory_types` | `semantic_model` | `compatibility_facade` |
-| `approval_governance` | `governance` | `compatibility_facade` |
-| `args` | `entry_exchange` | `entrypoint` |
-| `blend_context` | `blend` | `compatibility_facade` |
-| `blend_operator` | `blend` | `compatibility_facade` |
-| `blend_operator_store` | `blend` | `compatibility_facade` |
-| `blend_session` | `blend` | `compatibility_facade` |
-| `blend_workflow_execution` | `blend` | `compatibility_facade` |
-| `blend_workflow_models` | `blend` | `compatibility_facade` |
-| `blend_world_models` | `blend` | `compatibility_facade` |
-| `controller_entrypoint_binding` | `entry_exchange` | `compatibility_facade` |
-| `controller_entrypoints` | `entry_exchange` | `entrypoint` |
-| `controller_runtime` | `controller` | `compatibility_facade` |
-| `data_governance` | `governance` | `compatibility_facade` |
-| `decision_review` | `subject_domain` | `compatibility_facade` |
-| `decision_review_constructs` | `subject_domain` | `compatibility_facade` |
-| `decision_review_models` | `subject_domain` | `compatibility_facade` |
-| `execution_framework_primitives` | `runtime_execution` | `compatibility_facade` |
-| `execution_frameworks` | `runtime_execution` | `compatibility_facade` |
-| `external_markdown_learning_pipeline` | `entry_exchange` | `compatibility_facade` |
-| `fence_extraction_strategy` | `runtime_execution` | `compatibility_facade` |
-| `governance_inventory` | `controller` | `compatibility_facade` |
-| `governed_skill_installation` | `governance` | `entrypoint` |
-| `host_mediation` | `runtime_execution` | `compatibility_facade` |
-| `itemize` | `subject_domain` | `compatibility_facade` |
-| `itemize_models` | `subject_domain` | `compatibility_facade` |
-| `learning_context` | `entry_exchange` | `compatibility_facade` |
-| `learning_context_paths` | `subject_domain` | `compatibility_facade` |
-| `main` | `entry_exchange` | `compatibility_facade`, `entrypoint` |
-| `markdown_ir` | `subject_domain` | `compatibility_facade` |
-| `normalize` | `compatibility` | `compatibility_facade` |
-| `pure_theory_types` | `semantic_model` | `compatibility_facade` |
-| `python_skill_host` | `runtime_execution` | `compatibility_facade` |
-| `replay_verifier` | `governance` | `entrypoint` |
-| `review_composition` | `subject_domain` | `compatibility_facade` |
-| `runtime_controller_api` | `entry_exchange` | `compatibility_facade` |
-| `skill_boundary_normalization` | `portable_skills` | `compatibility_facade` |
-| `skill_composition` | `portable_skills` | `compatibility_facade` |
-| `skill_governance` | `governance` | `compatibility_facade` |
-| `skill_governance_primitives` | `governance` | `compatibility_facade` |
-| `skill_invocation_contract` | `portable_skills` | `compatibility_facade` |
-| `skill_ir` | `portable_skills` | `compatibility_facade` |
-| `skill_leaf_types` | `portable_skills` | `compatibility_facade` |
-| `skill_lifecycle` | `governance` | `compatibility_facade` |
-| `skill_path_notation` | `portable_skills` | `compatibility_facade` |
-| `skill_safety_governance` | `governance` | `compatibility_facade` |
 | `tablet_safety_validation` | `validation_trial` | `validation` |
 | `title_depth_learning_validation` | `validation_trial` | `validation` |
 
@@ -130,10 +86,6 @@ This policy describes the intended acyclic responsibility graph. Current violati
 
 | Source | Target | Allowed by target policy |
 | --- | --- | --- |
-| `controller` | `entry_exchange` | no |
-| `entry_exchange` | `controller` | yes |
-| `entry_exchange` | `governance` | yes |
-| `subject_domain` | `entry_exchange` | no |
 
 ## Package Imports Of Root Compatibility Facades
 
@@ -214,6 +166,21 @@ No canonical root module imports a compatibility facade.
 | `grpc_implementation` | `shell_core` | yes | yes | `workstation/grpc_implementation/src/workstation/grpc/implementation/workstation_grpc_host.py`, `workstation/grpc_implementation/src/workstation/grpc/implementation/workstation_shell_grpc.py` |
 | `grpc_implementation` | `subject_core` | yes | yes | `workstation/grpc_implementation/src/workstation/grpc/implementation/subject_workflow_grpc.py` |
 | `grpc_implementation` | `subject_service` | yes | yes | `workstation/grpc_implementation/src/workstation/grpc/implementation/subject_workflow_grpc.py`, `workstation/grpc_implementation/src/workstation/grpc/implementation/workstation_grpc_host.py` |
+| `root_compatibility` | `app_cli` | yes | yes | `compatibility_api/src/args.py`, `compatibility_api/src/controller_entrypoints.py` |
+| `root_compatibility` | `blend` | yes | yes | `compatibility_api/src/blend_context.py`, `compatibility_api/src/blend_operator.py`, `compatibility_api/src/blend_session.py` (+2 more) |
+| `root_compatibility` | `blend_application` | yes | yes | `compatibility_api/src/blend_operator_store.py`, `compatibility_api/src/blend_workflow_execution.py` |
+| `root_compatibility` | `core_engine` | yes | yes | `compatibility_api/src/args.py`, `compatibility_api/src/controller_entrypoints.py`, `compatibility_api/src/governance_inventory.py` (+5 more) |
+| `root_compatibility` | `core_governance` | yes | yes | `compatibility_api/src/approval_governance.py`, `compatibility_api/src/data_governance.py`, `compatibility_api/src/governed_skill_installation.py` (+4 more) |
+| `root_compatibility` | `core_semantics` | yes | yes | `compatibility_api/src/applied_theory_types.py`, `compatibility_api/src/approval_governance.py`, `compatibility_api/src/controller_entrypoints.py` (+6 more) |
+| `root_compatibility` | `exchange` | yes | yes | `compatibility_api/src/controller_entrypoints.py`, `compatibility_api/src/external_markdown_learning_pipeline.py`, `compatibility_api/src/governed_skill_installation.py` (+3 more) |
+| `root_compatibility` | `governed_core` | yes | yes | `compatibility_api/src/controller_entrypoints.py`, `compatibility_api/src/execution_framework_primitives.py`, `compatibility_api/src/execution_frameworks.py` (+2 more) |
+| `root_compatibility` | `host_interaction` | yes | yes | `compatibility_api/src/controller_entrypoints.py` |
+| `root_compatibility` | `runtime_core` | yes | yes | `compatibility_api/src/blend_context.py`, `compatibility_api/src/blend_session.py` |
+| `root_compatibility` | `skill_application` | yes | yes | `compatibility_api/src/governed_skill_installation.py`, `compatibility_api/src/skill_boundary_normalization.py`, `compatibility_api/src/skill_composition.py` (+1 more) |
+| `root_compatibility` | `skill_semantics` | yes | yes | `compatibility_api/src/governed_skill_installation.py`, `compatibility_api/src/replay_verifier.py`, `compatibility_api/src/skill_invocation_contract.py` (+2 more) |
+| `root_compatibility` | `skills_core` | yes | yes | `compatibility_api/src/skill_invocation_contract.py` |
+| `root_compatibility` | `subject_core` | yes | yes | `compatibility_api/src/decision_review.py`, `compatibility_api/src/decision_review_constructs.py`, `compatibility_api/src/itemize.py` (+2 more) |
+| `root_compatibility` | `validation` | yes | yes | `compatibility_api/src/controller_entrypoints.py` |
 | `runtime_core` | `blend` | yes | yes | `workstation/runtime_core/src/workstation/runtime/core/blend_adapters.py`, `workstation/runtime_core/src/workstation/runtime/core/capabilities.py`, `workstation/runtime_core/src/workstation/runtime/core/session.py` (+1 more) |
 | `runtime_core` | `blend_application` | yes | yes | `workstation/runtime_core/src/workstation/runtime/core/blend_adapters.py`, `workstation/runtime_core/src/workstation/runtime/core/capabilities.py`, `workstation/runtime_core/src/workstation/runtime/core/session.py` (+1 more) |
 | `runtime_core` | `contracts` | yes | yes | `workstation/runtime_core/src/workstation/runtime/core/capabilities.py`, `workstation/runtime_core/src/workstation/runtime/core/chat_commands.py`, `workstation/runtime_core/src/workstation/runtime/core/projection_subscriber_controller.py` (+1 more) |
@@ -288,6 +255,17 @@ No canonical root module imports a compatibility facade.
 | `ui_textual` | `shell_core` | yes | yes | `workstation/ui_textual/src/workstation/ui/textual/chat_ui.py` |
 | `ui_textual` | `subject_textual` | yes | yes | `workstation/ui_textual/src/workstation/ui/textual/chat_ui.py` |
 | `ui_textual` | `ui_shared` | yes | yes | `workstation/ui_textual/src/workstation/ui/textual/chat_ui.py` |
+| `workstation_compatibility` | `contracts` | yes | yes | `workstation/compatibility_api/src/workstation/shell/core/shell_prompt_routing.py` |
+| `workstation_compatibility` | `runtime_core` | yes | yes | `workstation/compatibility_api/src/workstation/foundation/events/subscriber_controllers.py`, `workstation/compatibility_api/src/workstation/foundation/host/llm_driver.py` |
+| `workstation_compatibility` | `subject_service` | yes | yes | `workstation/compatibility_api/src/workstation/foundation/host/client_sessions.py`, `workstation/compatibility_api/src/workstation/foundation/host/learning_capture.py` |
+
+## Dynamic Dependency Contracts
+
+No dynamic dependency contracts are required.
+
+## Unobserved Allowed Dependencies
+
+Every allowed dependency is statically observed or dynamically contracted.
 
 ## Cycles
 
@@ -295,21 +273,28 @@ No package cycles were found.
 
 ## Compatibility Alias Edges
 
-These edges exist only to preserve historical import paths. They are excluded from the canonical cycle calculation, remain visible here, and are still ratcheted against expansion.
+No compatibility-alias dependency edges were found.
 
-| Source | Target | Evidence |
-| --- | --- | --- |
-| `foundation_events` | `runtime_core` | `workstation/foundation_events/src/workstation/foundation/events/subscriber_controllers.py` |
-| `foundation_host` | `runtime_core` | `workstation/foundation_host/src/workstation/foundation/host/llm_driver.py` |
-| `foundation_host` | `subject_service` | `workstation/foundation_host/src/workstation/foundation/host/client_sessions.py`, `workstation/foundation_host/src/workstation/foundation/host/learning_capture.py` |
-| `shell_core` | `contracts` | `workstation/shell_core/src/workstation/shell/core/shell_prompt_routing.py` |
+## Remaining Architecture Obligations
+
+No forbidden root-owner dependency obligation remains.
+
+### Package Compatibility Aliases
+
+| ID | Component edge | Support | Durable name | Review condition |
+| --- | --- | --- | --- | --- |
+| `foundation-events-projection-subscriber` | `workstation_compatibility` -> `runtime_core` | `supported` | `canonical_class_module` | Review at each minor release while generic historical qualified-name loading remains supported. |
+| `foundation-host-client-sessions` | `workstation_compatibility` -> `subject_service` | `supported` | `canonical_class_module` | Review at each minor release while generic historical qualified-name loading remains supported. |
+| `foundation-host-learning-capture` | `workstation_compatibility` -> `subject_service` | `supported` | `none` | Review at each minor release as an explicitly shipped historical import ABI. |
+| `foundation-host-llm-driver` | `workstation_compatibility` -> `runtime_core` | `supported` | `canonical_function_module` | Review at each minor release while historical function-module and patch-target support remains public. |
+| `shell-prompt-routing-contract` | `workstation_compatibility` -> `contracts` | `supported` | `canonical_function_module` | Review at each minor release while generic historical qualified-name loading remains supported. |
 
 ## Combined Graph Metrics
 
 | Metric | Count |
 | --- | ---: |
-| Nodes | 86 |
-| Edges | 222 |
+| Nodes | 42 |
+| Edges | 163 |
 | Cyclic SCCs | 0 |
 | Nodes in cyclic SCCs | 0 |
 | Edges internal to cyclic SCCs | 0 |
@@ -328,75 +313,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | --- | --- | --- | --- |
 | `root_to_component` | `SEMANTIC_RELATION_VALIDATION` | `core_engine` | `orchestration` |
 | `root_to_component` | `TRIAL_DOMAIN_VALIDATION` | `validation` | `orchestration` |
-| `root_to_component` | `applied_theory_types` | `core_semantics` | `dto_constants` |
-| `root_to_component` | `approval_governance` | `core_governance` | `compatibility` |
-| `root_to_component` | `approval_governance` | `core_semantics` | `compatibility` |
-| `root_to_component` | `args` | `app_cli` | `orchestration` |
-| `root_to_component` | `args` | `core_engine` | `orchestration` |
-| `root_to_component` | `blend_context` | `blend` | `compatibility` |
-| `root_to_component` | `blend_context` | `runtime_core` | `compatibility` |
-| `root_to_component` | `blend_operator` | `blend` | `compatibility` |
-| `root_to_component` | `blend_operator_store` | `blend_application` | `compatibility` |
-| `root_to_component` | `blend_session` | `blend` | `compatibility` |
-| `root_to_component` | `blend_session` | `runtime_core` | `compatibility` |
-| `root_to_component` | `blend_workflow_execution` | `blend_application` | `compatibility` |
-| `root_to_component` | `blend_workflow_models` | `blend` | `compatibility` |
-| `root_to_component` | `blend_world_models` | `blend` | `compatibility` |
-| `root_to_component` | `controller_entrypoint_binding` | `core_engine` | `compatibility` |
-| `root_to_component` | `controller_entrypoints` | `app_cli` | `orchestration` |
-| `root_to_component` | `controller_entrypoints` | `core_engine` | `orchestration` |
-| `root_to_component` | `controller_entrypoints` | `core_semantics` | `orchestration` |
-| `root_to_component` | `controller_entrypoints` | `exchange` | `orchestration` |
-| `root_to_component` | `controller_entrypoints` | `governed_core` | `orchestration` |
-| `root_to_component` | `controller_entrypoints` | `host_interaction` | `orchestration` |
-| `root_to_component` | `controller_entrypoints` | `validation` | `orchestration` |
-| `root_to_component` | `controller_runtime` | `core_engine` | `compatibility` |
-| `root_to_component` | `controller_runtime` | `exchange` | `compatibility` |
-| `root_to_component` | `data_governance` | `core_governance` | `compatibility` |
-| `root_to_component` | `decision_review` | `subject_core` | `orchestration` |
-| `root_to_component` | `decision_review_constructs` | `subject_core` | `orchestration` |
-| `root_to_component` | `decision_review_models` | `core_semantics` | `dto_constants` |
-| `root_to_component` | `execution_framework_primitives` | `governed_core` | `orchestration` |
-| `root_to_component` | `execution_frameworks` | `governed_core` | `orchestration` |
-| `root_to_component` | `external_markdown_learning_pipeline` | `exchange` | `compatibility` |
-| `root_to_component` | `fence_extraction_strategy` | `governed_core` | `orchestration` |
-| `root_to_component` | `governance_inventory` | `core_engine` | `orchestration` |
-| `root_to_component` | `governed_skill_installation` | `core_engine` | `orchestration` |
-| `root_to_component` | `governed_skill_installation` | `core_governance` | `orchestration` |
-| `root_to_component` | `governed_skill_installation` | `exchange` | `orchestration` |
-| `root_to_component` | `governed_skill_installation` | `skill_application` | `orchestration` |
-| `root_to_component` | `governed_skill_installation` | `skill_semantics` | `orchestration` |
-| `root_to_component` | `host_mediation` | `core_engine` | `compatibility` |
-| `root_to_component` | `itemize` | `core_semantics` | `orchestration` |
-| `root_to_component` | `itemize` | `subject_core` | `orchestration` |
-| `root_to_component` | `itemize_models` | `core_semantics` | `dto_constants` |
-| `root_to_component` | `learning_context` | `exchange` | `orchestration` |
-| `root_to_component` | `learning_context_paths` | `subject_core` | `orchestration` |
-| `root_to_component` | `markdown_ir` | `core_semantics` | `orchestration` |
-| `root_to_component` | `normalize` | `core_engine` | `orchestration` |
-| `root_to_component` | `normalize` | `core_semantics` | `orchestration` |
-| `root_to_component` | `pure_theory_types` | `core_semantics` | `compatibility` |
-| `root_to_component` | `python_skill_host` | `governed_core` | `orchestration` |
-| `root_to_component` | `replay_verifier` | `core_engine` | `orchestration` |
-| `root_to_component` | `replay_verifier` | `core_governance` | `orchestration` |
-| `root_to_component` | `replay_verifier` | `core_semantics` | `orchestration` |
-| `root_to_component` | `replay_verifier` | `exchange` | `orchestration` |
-| `root_to_component` | `replay_verifier` | `governed_core` | `orchestration` |
-| `root_to_component` | `replay_verifier` | `skill_semantics` | `orchestration` |
-| `root_to_component` | `review_composition` | `subject_core` | `compatibility` |
-| `root_to_component` | `runtime_controller_api` | `app_cli` | `compatibility` |
-| `root_to_component` | `skill_boundary_normalization` | `skill_application` | `compatibility` |
-| `root_to_component` | `skill_composition` | `skill_application` | `compatibility` |
-| `root_to_component` | `skill_governance` | `core_engine` | `compatibility` |
-| `root_to_component` | `skill_governance_primitives` | `core_governance` | `compatibility` |
-| `root_to_component` | `skill_invocation_contract` | `skill_semantics` | `compatibility` |
-| `root_to_component` | `skill_invocation_contract` | `skills_core` | `compatibility` |
-| `root_to_component` | `skill_ir` | `skill_application` | `compatibility` |
-| `root_to_component` | `skill_leaf_types` | `skill_semantics` | `compatibility` |
-| `root_to_component` | `skill_lifecycle` | `core_governance` | `compatibility` |
-| `root_to_component` | `skill_path_notation` | `skill_semantics` | `compatibility` |
-| `root_to_component` | `skill_safety_governance` | `core_governance` | `compatibility` |
-| `root_to_component` | `skill_safety_governance` | `core_semantics` | `compatibility` |
 | `root_to_component` | `tablet_safety_validation` | `validation` | `orchestration` |
 | `root_to_component` | `title_depth_learning_validation` | `validation` | `orchestration` |
 
@@ -408,88 +324,12 @@ No workspace package imports a root application module.
 
 - `SEMANTIC_RELATION_VALIDATION` -> `core_engine` (`SEMANTIC_RELATION_VALIDATION.py`)
 - `TRIAL_DOMAIN_VALIDATION` -> `validation` (`TRIAL_DOMAIN_VALIDATION.py`)
-- `applied_theory_types` -> `core_semantics` (`applied_theory_types.py`)
-- `approval_governance` -> `core_governance` (`approval_governance.py`)
-- `approval_governance` -> `core_semantics` (`approval_governance.py`)
-- `args` -> `app_cli` (`args.py`)
-- `args` -> `core_engine` (`args.py`)
-- `blend_context` -> `blend` (`blend_context.py`)
-- `blend_context` -> `runtime_core` (`blend_context.py`)
-- `blend_operator` -> `blend` (`blend_operator.py`)
-- `blend_operator_store` -> `blend_application` (`blend_operator_store.py`)
-- `blend_session` -> `blend` (`blend_session.py`)
-- `blend_session` -> `runtime_core` (`blend_session.py`)
-- `blend_workflow_execution` -> `blend_application` (`blend_workflow_execution.py`)
-- `blend_workflow_models` -> `blend` (`blend_workflow_models.py`)
-- `blend_world_models` -> `blend` (`blend_world_models.py`)
-- `controller_entrypoint_binding` -> `core_engine` (`controller_entrypoint_binding.py`)
-- `controller_entrypoints` -> `app_cli` (`controller_entrypoints.py`)
-- `controller_entrypoints` -> `core_engine` (`controller_entrypoints.py`)
-- `controller_entrypoints` -> `core_semantics` (`controller_entrypoints.py`)
-- `controller_entrypoints` -> `exchange` (`controller_entrypoints.py`)
-- `controller_entrypoints` -> `governed_core` (`controller_entrypoints.py`)
-- `controller_entrypoints` -> `host_interaction` (`controller_entrypoints.py`)
-- `controller_entrypoints` -> `validation` (`controller_entrypoints.py`)
-- `controller_runtime` -> `core_engine` (`controller_runtime.py`)
-- `controller_runtime` -> `exchange` (`controller_runtime.py`)
-- `data_governance` -> `core_governance` (`data_governance.py`)
-- `decision_review` -> `subject_core` (`decision_review.py`)
-- `decision_review_constructs` -> `subject_core` (`decision_review_constructs.py`)
-- `decision_review_models` -> `core_semantics` (`decision_review_models.py`)
-- `execution_framework_primitives` -> `governed_core` (`execution_framework_primitives.py`)
-- `execution_frameworks` -> `governed_core` (`execution_frameworks.py`)
-- `external_markdown_learning_pipeline` -> `exchange` (`external_markdown_learning_pipeline.py`)
-- `fence_extraction_strategy` -> `governed_core` (`fence_extraction_strategy.py`)
-- `governance_inventory` -> `core_engine` (`governance_inventory.py`)
-- `governed_skill_installation` -> `core_engine` (`governed_skill_installation.py`)
-- `governed_skill_installation` -> `core_governance` (`governed_skill_installation.py`)
-- `governed_skill_installation` -> `exchange` (`governed_skill_installation.py`)
-- `governed_skill_installation` -> `skill_application` (`governed_skill_installation.py`)
-- `governed_skill_installation` -> `skill_semantics` (`governed_skill_installation.py`)
-- `host_mediation` -> `core_engine` (`host_mediation.py`)
-- `itemize` -> `core_semantics` (`itemize.py`)
-- `itemize` -> `subject_core` (`itemize.py`)
-- `itemize_models` -> `core_semantics` (`itemize_models.py`)
-- `learning_context` -> `exchange` (`learning_context.py`)
-- `learning_context_paths` -> `subject_core` (`learning_context_paths.py`)
-- `markdown_ir` -> `core_semantics` (`markdown_ir.py`)
-- `normalize` -> `core_engine` (`normalize.py`)
-- `normalize` -> `core_semantics` (`normalize.py`)
-- `pure_theory_types` -> `core_semantics` (`pure_theory_types.py`)
-- `python_skill_host` -> `governed_core` (`python_skill_host.py`)
-- `replay_verifier` -> `core_engine` (`replay_verifier.py`)
-- `replay_verifier` -> `core_governance` (`replay_verifier.py`)
-- `replay_verifier` -> `core_semantics` (`replay_verifier.py`)
-- `replay_verifier` -> `exchange` (`replay_verifier.py`)
-- `replay_verifier` -> `governed_core` (`replay_verifier.py`)
-- `replay_verifier` -> `skill_semantics` (`replay_verifier.py`)
-- `review_composition` -> `subject_core` (`review_composition.py`)
-- `runtime_controller_api` -> `app_cli` (`runtime_controller_api.py`)
-- `skill_boundary_normalization` -> `skill_application` (`skill_boundary_normalization.py`)
-- `skill_composition` -> `skill_application` (`skill_composition.py`)
-- `skill_governance` -> `core_engine` (`skill_governance.py`)
-- `skill_governance_primitives` -> `core_governance` (`skill_governance_primitives.py`)
-- `skill_invocation_contract` -> `skill_semantics` (`skill_invocation_contract.py`)
-- `skill_invocation_contract` -> `skills_core` (`skill_invocation_contract.py`)
-- `skill_ir` -> `skill_application` (`skill_ir.py`)
-- `skill_leaf_types` -> `skill_semantics` (`skill_leaf_types.py`)
-- `skill_lifecycle` -> `core_governance` (`skill_lifecycle.py`)
-- `skill_path_notation` -> `skill_semantics` (`skill_path_notation.py`)
-- `skill_safety_governance` -> `core_governance` (`skill_safety_governance.py`)
-- `skill_safety_governance` -> `core_semantics` (`skill_safety_governance.py`)
 - `tablet_safety_validation` -> `validation` (`tablet_safety_validation.py`)
 - `title_depth_learning_validation` -> `validation` (`title_depth_learning_validation.py`)
 
 ## Root-to-Root Dependencies
 
-- `controller_entrypoints` -> `args` (`controller_entrypoints.py`)
-- `controller_entrypoints` -> `governed_skill_installation` (`controller_entrypoints.py`)
-- `controller_entrypoints` -> `replay_verifier` (`controller_entrypoints.py`)
-- `controller_runtime` -> `args` (`controller_runtime.py`)
-- `itemize` -> `runtime_controller_api` (`itemize.py`)
-- `main` -> `controller_entrypoint_binding` (`main.py`)
-- `main` -> `controller_entrypoints` (`main.py`)
-- `main` -> `controller_runtime` (`main.py`)
+No root application module imports another root module.
 
 ## Component-to-Root-Package Dependencies
 
@@ -517,13 +357,7 @@ No cycles span root modules, top-level package families, and workspace packages.
 
 ## Wildcard Exports
 
-- `data_governance.py` imports `*` from `realized_core_governance.data` (line 10)
-- `workstation/app_cli/src/workstation/app/cli/__init__.py` imports `*` from `workstation.app.cli.cli` (line 1)
-- `workstation/foundation_models/src/workstation/foundation/models/__init__.py` imports `*` from `workstation.foundation.models.models` (line 1)
-- `workstation/foundation_projections/src/workstation/foundation/projections/__init__.py` imports `*` from `workstation.foundation.projections.projection_models` (line 1)
-- `workstation/skills_builtin/src/workstation/skills/builtin/__init__.py` imports `*` from `workstation.skills.builtin.builtin_skills` (line 1)
-- `workstation/subject_textual/src/workstation/subject/textual/__init__.py` imports `*` from `workstation.subject.textual.subject_workflow_textual_backend` (line 1)
-- `workstation/ui_textual/src/workstation/ui/textual/__init__.py` imports `*` from `workstation.ui.textual.chat_ui` (line 1)
+No wildcard exports were found in scanned production sources.
 
 ## Ratchet Rules
 

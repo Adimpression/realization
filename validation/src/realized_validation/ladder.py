@@ -225,9 +225,8 @@ def run_validation_ladder(
     workstation_report_root = report_root / "workstation_trial_validation"
     workstation_report_out = report_root / "workstation_trial_validation_report.json"
     workstation_cmd = [
-        sys.executable,
-        str(REPO_ROOT / "main.py"),
-        "workstation-trial-validate",
+        str(Path(sys.executable).with_name("realized-workstation")),
+        "trial-validate",
         "--workspace",
         str(workspace),
         "--report-root",

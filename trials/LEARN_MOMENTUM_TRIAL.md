@@ -11,7 +11,7 @@ export LLM_PROVIDER=openai
 export LLM_TIMEOUT_SECONDS=180
 export STATE_SQLITE_PATH=state/momentum_learning_260323214829.sqlite3
 
-python3 main.py markdown-learn \
+uv run realized-compatibility markdown-learn \
   --markdown-file LEARN_MOMENTUM.md \
   --llm required \
   --max-artifacts 8 \
@@ -23,9 +23,9 @@ That fresh DB is [momentum_learning_260323214829.sqlite3](state/momentum_learnin
 
 Validated CLI prompts on that fresh DB:
 ```bash
-python3 main.py run --prompt 'Calculate momentum for mass=8 and velocity=12.' --llm off --max-steps 24
-python3 main.py run --prompt 'Calculate momentum for mass=10 and velocity=5.' --llm off --max-steps 24
-python3 main.py run --prompt 'What is the momentum when mass is 3 and velocity is 9?' --llm off --max-steps 24
+uv run realized-compatibility run --prompt 'Calculate momentum for mass=8 and velocity=12.' --llm off --max-steps 24
+uv run realized-compatibility run --prompt 'Calculate momentum for mass=10 and velocity=5.' --llm off --max-steps 24
+uv run realized-compatibility run --prompt 'What is the momentum when mass is 3 and velocity is 9?' --llm off --max-steps 24
 ```
 
 Observed results:

@@ -10,6 +10,9 @@
     "notice_reference": "",
     "retirement_state": "qualified",
     "review_condition": "Delete only in an owner-cohesive cohort after the contract ledger, consumer inventory, stable qualification evidence, tombstone, and facade-only rollback have been reviewed.",
+    "support_contract_reference": "",
+    "support_contract_tests": [],
+    "support_distribution": "",
     "support_status": "repository_internal"
   },
   "designated_contract_tests": [
@@ -53,66 +56,186 @@
     "skill_path_notation",
     "skill_safety_governance"
   ],
-  "facades": {
+  "facades": {},
+  "schema_version": 3,
+  "supported_abi_defaults": {
+    "durable_qualified_name_status": "retained",
+    "hold_reason": "This historical import is a supported compatibility ABI with distribution, contract, identity, and review evidence.",
+    "import_obligation": "supported",
+    "retirement_state": "supported",
+    "review_condition": "Review support at each compatibility package release; removal requires an explicit deprecation window and qualified migration.",
+    "support_contract_reference": "architecture/COMPATIBILITY_API.md",
+    "support_contract_tests": [
+      "tests/test_architecture_compatibility_facades.py",
+      "tests/test_compatibility_facade_contracts.py"
+    ],
+    "support_distribution": "realized-compatibility",
+    "support_status": "supported_historical_import"
+  },
+  "supported_abis": {
+    "applied_theory_types": {
+      "owner": "semantic_model",
+      "source_path": "compatibility_api/src/applied_theory_types.py"
+    },
+    "approval_governance": {
+      "owner": "governance",
+      "source_path": "compatibility_api/src/approval_governance.py"
+    },
     "blend_context": {
-      "hold_reason": "Behavior-bearing workstation projection adapter and historical pickle globals require explicit replacement and migration proof.",
-      "retirement_state": "held"
+      "owner": "blend",
+      "source_path": "compatibility_api/src/blend_context.py"
+    },
+    "blend_operator": {
+      "owner": "blend",
+      "source_path": "compatibility_api/src/blend_operator.py"
+    },
+    "blend_operator_store": {
+      "owner": "blend",
+      "source_path": "compatibility_api/src/blend_operator_store.py"
     },
     "blend_session": {
-      "hold_reason": "Behavior-bearing workstation projection adapter and historical pickle globals require explicit replacement and migration proof.",
-      "retirement_state": "held"
+      "owner": "blend",
+      "source_path": "compatibility_api/src/blend_session.py"
     },
-    "controller_runtime": {
-      "hold_reason": "Import-time entry/exchange and Markdown extension composition must be replaced and qualified explicitly.",
-      "retirement_state": "held"
+    "blend_workflow_execution": {
+      "owner": "blend",
+      "source_path": "compatibility_api/src/blend_workflow_execution.py"
     },
-    "controller_entrypoint_binding": {
-      "hold_reason": "The supported main facade imports this binding; retire main and qualify packaged command parity before reviewing this alias.",
-      "retirement_state": "held"
+    "blend_workflow_models": {
+      "owner": "blend",
+      "source_path": "compatibility_api/src/blend_workflow_models.py"
+    },
+    "blend_world_models": {
+      "owner": "blend",
+      "source_path": "compatibility_api/src/blend_world_models.py"
+    },
+    "data_governance": {
+      "owner": "governance",
+      "source_path": "compatibility_api/src/data_governance.py"
+    },
+    "decision_review": {
+      "owner": "subject_domain",
+      "source_path": "compatibility_api/src/decision_review.py"
+    },
+    "decision_review_constructs": {
+      "owner": "subject_domain",
+      "source_path": "compatibility_api/src/decision_review_constructs.py"
+    },
+    "decision_review_models": {
+      "owner": "subject_domain",
+      "source_path": "compatibility_api/src/decision_review_models.py"
+    },
+    "execution_framework_primitives": {
+      "owner": "runtime_execution",
+      "source_path": "compatibility_api/src/execution_framework_primitives.py"
+    },
+    "execution_frameworks": {
+      "owner": "runtime_execution",
+      "source_path": "compatibility_api/src/execution_frameworks.py"
     },
     "external_markdown_learning_pipeline": {
-      "hold_reason": "Deletion qualification requires the six provider-backed Newton Markdown-learning cases because this historical identity fronts external Markdown ingestion and extension composition; external-data execution is not authorized in the current change.",
-      "retirement_state": "held",
-      "review_condition": "Advance only after explicit external-data authorization, successful qualification of all six Newton Markdown-learning provider cases against the unchanged canonical exchange owner, and a separate facade-only deletion review."
+      "owner": "entry_exchange",
+      "source_path": "compatibility_api/src/external_markdown_learning_pipeline.py"
     },
     "fence_extraction_strategy": {
-      "executable_obligation": "repository_only",
-      "hold_reason": "The historical module retains a direct __main__ executable path whose packaged invocation, exit status, and output parity have not yet been qualified.",
-      "retirement_state": "held",
-      "review_condition": "Advance only after the repository executable path has an explicit packaged replacement and command-equivalence qualification."
+      "executable_obligation": "supported",
+      "owner": "runtime_execution",
+      "source_path": "compatibility_api/src/fence_extraction_strategy.py",
+      "support_status": "supported_executable_path"
+    },
+    "governance_inventory": {
+      "owner": "controller",
+      "source_path": "compatibility_api/src/governance_inventory.py"
+    },
+    "host_mediation": {
+      "owner": "runtime_execution",
+      "source_path": "compatibility_api/src/host_mediation.py"
     },
     "itemize": {
-      "hold_reason": "Historical implicit controller bootstrap and pickle globals require explicit replacement and migration proof.",
-      "retirement_state": "held"
+      "owner": "subject_domain",
+      "source_path": "compatibility_api/src/itemize.py"
+    },
+    "itemize_models": {
+      "owner": "subject_domain",
+      "source_path": "compatibility_api/src/itemize_models.py"
+    },
+    "learning_context": {
+      "owner": "entry_exchange",
+      "source_path": "compatibility_api/src/learning_context.py"
+    },
+    "learning_context_paths": {
+      "owner": "subject_domain",
+      "source_path": "compatibility_api/src/learning_context_paths.py"
     },
     "main": {
       "executable_obligation": "supported",
-      "hold_reason": "Executable-path and import-identity obligations remain; packaged command parity and all path consumers must migrate first.",
-      "import_obligation": "repository_only",
+      "owner": "entry_exchange",
       "replacement_commands": [
+        "realized-compatibility",
         "realized-core",
         "realized-workstation"
       ],
+      "source_path": "compatibility_api/src/main.py",
       "support_status": "supported_executable_path"
     },
-    "normalize": {
-      "hold_reason": "Aggregate re-export must be split across its canonical semantic and controller owners at each consumer.",
-      "retirement_state": "held"
+    "markdown_ir": {
+      "owner": "subject_domain",
+      "source_path": "compatibility_api/src/markdown_ir.py"
+    },
+    "pure_theory_types": {
+      "owner": "semantic_model",
+      "source_path": "compatibility_api/src/pure_theory_types.py"
     },
     "python_skill_host": {
-      "durable_qualified_name_status": "retained",
-      "hold_reason": "Persisted executable skill source and shipped runtime distributions import python_skill_host; migrate durable abilities and distribution compatibility before retirement.",
-      "import_obligation": "supported",
-      "retirement_state": "held",
-      "review_condition": "Advance only after trials/python/skill.yaml, representative persisted abilities, generated skill source, and the runtime wheel use a qualified canonical host API.",
-      "support_status": "supported_historical_import"
+      "owner": "runtime_execution",
+      "source_path": "core_runtime/src/python_skill_host.py",
+      "support_distribution": "realized-core-runtime"
     },
-    "runtime_controller_api": {
-      "hold_reason": "The itemize behavior adapter imports this alias; replace and qualify itemize's implicit bootstrap before reviewing this alias.",
-      "retirement_state": "held"
+    "review_composition": {
+      "owner": "subject_domain",
+      "source_path": "compatibility_api/src/review_composition.py"
+    },
+    "skill_boundary_normalization": {
+      "owner": "portable_skills",
+      "source_path": "compatibility_api/src/skill_boundary_normalization.py"
+    },
+    "skill_composition": {
+      "owner": "portable_skills",
+      "source_path": "compatibility_api/src/skill_composition.py"
+    },
+    "skill_governance": {
+      "owner": "governance",
+      "source_path": "compatibility_api/src/skill_governance.py"
+    },
+    "skill_governance_primitives": {
+      "owner": "governance",
+      "source_path": "compatibility_api/src/skill_governance_primitives.py"
+    },
+    "skill_invocation_contract": {
+      "owner": "portable_skills",
+      "source_path": "compatibility_api/src/skill_invocation_contract.py"
+    },
+    "skill_ir": {
+      "owner": "portable_skills",
+      "source_path": "compatibility_api/src/skill_ir.py"
+    },
+    "skill_leaf_types": {
+      "owner": "portable_skills",
+      "source_path": "compatibility_api/src/skill_leaf_types.py"
+    },
+    "skill_lifecycle": {
+      "owner": "governance",
+      "source_path": "compatibility_api/src/skill_lifecycle.py"
+    },
+    "skill_path_notation": {
+      "owner": "portable_skills",
+      "source_path": "compatibility_api/src/skill_path_notation.py"
+    },
+    "skill_safety_governance": {
+      "owner": "governance",
+      "source_path": "compatibility_api/src/skill_safety_governance.py"
     }
   },
-  "schema_version": 2,
   "tombstones": {
     "applied_theory_primitives": {
       "removal_change_reference": "semantic-alias-cohort-1",
@@ -163,6 +286,16 @@
       "removal_change_reference": "runtime-leaf-cohort-1",
       "removed_at": "2026-10-30",
       "replacement": "realized_core_runtime.capabilities"
+    },
+    "controller_entrypoint_binding": {
+      "removal_change_reference": "composition-alias-cohort-1",
+      "removed_at": "2026-10-31",
+      "replacement": "realized_core_engine.controller_entrypoint_binding"
+    },
+    "controller_runtime": {
+      "removal_change_reference": "composition-alias-cohort-1",
+      "removed_at": "2026-10-31",
+      "replacement": "realized_core_engine.controller_runtime"
     },
     "controller_runtime_binding": {
       "removal_change_reference": "controller-binding-alias-cohort-1",
@@ -324,6 +457,11 @@
       "removed_at": "2026-10-30",
       "replacement": "realized_core_engine.non_achievedness_normalization"
     },
+    "normalize": {
+      "removal_change_reference": "normalization-aggregate-cohort-1",
+      "removed_at": "2026-10-31",
+      "replacement": "realized_core_semantics.normalization and realized_core_engine.non_achievedness_normalization"
+    },
     "normalization_primitives": {
       "removal_change_reference": "semantic-alias-cohort-1",
       "removed_at": "2026-10-30",
@@ -383,6 +521,11 @@
       "removal_change_reference": "runtime-leaf-cohort-1",
       "removed_at": "2026-10-30",
       "replacement": "realized_core_runtime.temporary"
+    },
+    "runtime_controller_api": {
+      "removal_change_reference": "composition-alias-cohort-1",
+      "removed_at": "2026-10-31",
+      "replacement": "workstation.app.cli.runtime_controller"
     },
     "runtime_governance_context": {
       "removal_change_reference": "governance-alias-cohort-1",

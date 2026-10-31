@@ -10,10 +10,11 @@ import tempfile
 import time
 import unittest
 from pathlib import Path
+from unittest import mock
 
 
 ROOT = Path(__file__).resolve().parent.parent
-MAIN = ROOT / "main.py"
+MAIN_COMMAND = (sys.executable, "-m", "main")
 MARKDOWN_SOURCE = ROOT / "LEARN_NEWTOWNS_LAWS.md"
 if not MARKDOWN_SOURCE.exists():
     MARKDOWN_SOURCE = ROOT / "trials" / "LEARN_NEWTOWNS_LAWS.md"
@@ -50,6 +51,20 @@ def load_local_env() -> dict[str, str]:
     return result
 
 
+def configured_environment() -> dict[str, str]:
+    """Load local defaults without overriding an explicit process setting."""
+    env = os.environ.copy()
+    for key, value in load_local_env().items():
+        env.setdefault(key, value)
+    return env
+
+
+class MarkdownLearningEnvironmentTests(unittest.TestCase):
+    def test_explicit_provider_off_setting_wins_over_local_defaults(self) -> None:
+        with mock.patch.dict(os.environ, {"OPENAI_API_KEY": ""}, clear=False):
+            self.assertEqual(configured_environment().get("OPENAI_API_KEY"), "")
+
+
 class MarkdownLearningNewtonTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
@@ -70,8 +85,7 @@ class MarkdownLearningNewtonTests(unittest.TestCase):
         Returns:
             None: This function mutates state or performs side effects without returning a value.
         """
-        env = os.environ.copy()
-        env.update(load_local_env())
+        env = configured_environment()
         if not env.get("OPENAI_API_KEY"):
             raise unittest.SkipTest("OPENAI_API_KEY is not configured in the environment or local.env.")
 
@@ -89,8 +103,7 @@ class MarkdownLearningNewtonTests(unittest.TestCase):
         cls.env = env
 
         learn_cmd = [
-            sys.executable,
-            str(MAIN),
+            *MAIN_COMMAND,
             "markdown-learn",
             "--markdown-file",
             str(MARKDOWN_SOURCE),
@@ -165,8 +178,7 @@ class MarkdownLearningNewtonTests(unittest.TestCase):
         """
         completed = subprocess.run(
             [
-                sys.executable,
-                str(MAIN),
+                *MAIN_COMMAND,
                 "run",
                 "--prompt",
                 prompt,
@@ -205,8 +217,7 @@ class MarkdownLearningNewtonTests(unittest.TestCase):
         state_path = Path(self.tempdir.name) / f"state_{abs(hash(prompt))}.json"
         completed = subprocess.run(
             [
-                sys.executable,
-                str(MAIN),
+                *MAIN_COMMAND,
                 "run",
                 "--prompt",
                 prompt,

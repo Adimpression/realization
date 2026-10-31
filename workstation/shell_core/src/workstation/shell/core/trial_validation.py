@@ -19,7 +19,9 @@ from workstation.skills.core.skill_management import import_workstation_skill_fi
 def _repo_root() -> Path:
     resolved = Path(__file__).resolve()
     for parent in resolved.parents:
-        if (parent / "pyproject.toml").exists() and (parent / "main.py").exists():
+        if (parent / "pyproject.toml").exists() and (
+            parent / "architecture" / "boundaries.toml"
+        ).exists():
             return parent
     return resolved.parents[6]
 

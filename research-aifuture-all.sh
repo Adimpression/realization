@@ -7,5 +7,5 @@ cd "$repo_root"
 
 rm -rf ./ram/tmp/
 source local.env
-uv run python ./main.py workstation-launch --root "$workstation_root" --workspace "$research_root" --task "Research"
-uv run python ./main.py workstation-chat --root "$workstation_root"
+uv run realized-workstation launch --root "$workstation_root" --workspace "$research_root" --task "Research"
+uv run realized-workstation chat --root "$workstation_root"

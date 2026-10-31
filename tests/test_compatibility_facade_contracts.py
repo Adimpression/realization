@@ -34,8 +34,8 @@ class CompatibilityFacadeContractTests(unittest.TestCase):
         self.assertEqual(self.expected, self.current)
 
     def test_every_facade_has_one_retirement_card(self) -> None:
-        self.assertEqual(42, self.current["summary"]["card_count"])
-        self.assertEqual(42, len(self.cards))
+        self.assertEqual(38, self.current["summary"]["card_count"])
+        self.assertEqual(38, len(self.cards))
 
     def test_exact_alias_contracts_prove_module_object_identity(self) -> None:
         exact_aliases = [
@@ -43,7 +43,7 @@ class CompatibilityFacadeContractTests(unittest.TestCase):
             for card in self.current["cards"]
             if card["shape"] == "exact_module_alias"
         ]
-        self.assertEqual(27, len(exact_aliases))
+        self.assertEqual(26, len(exact_aliases))
         self.assertTrue(
             all(card["exact_module_identity_observed"] is True for card in exact_aliases)
         )
@@ -86,8 +86,6 @@ class CompatibilityFacadeContractTests(unittest.TestCase):
         for module in (
             "blend_context",
             "blend_session",
-            "controller_runtime",
-            "itemize",
             "main",
         ):
             with self.subTest(module=module):
@@ -95,11 +93,6 @@ class CompatibilityFacadeContractTests(unittest.TestCase):
                     "manual_behavior_equivalence",
                     self.cards[module]["proof_strategy"],
                 )
-        self.assertEqual(
-            "manual_multi_owner_export_mapping",
-            self.cards["normalize"]["proof_strategy"],
-        )
-
     def test_every_card_has_a_reviewable_surface_and_rollback(self) -> None:
         self.assertTrue(
             all(

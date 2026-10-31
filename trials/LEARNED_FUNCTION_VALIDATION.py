@@ -18,8 +18,8 @@ from typing import Any
 
 
 TRIALS_ROOT = Path(__file__).resolve().parent
-ROOT = TRIALS_ROOT.parent if (TRIALS_ROOT.parent / "main.py").exists() else TRIALS_ROOT
-MAIN = ROOT / "main.py"
+ROOT = TRIALS_ROOT.parent
+MAIN_COMMAND = (sys.executable, "-m", "main")
 REPORT_ROOT = ROOT / "reports"
 LOCAL_ENV = ROOT / "local.env"
 
@@ -128,7 +128,7 @@ def run_cli(args: list[str], *, env: dict[str, str]) -> dict[str, Any]:
     timeout_seconds = int(str(env.get("TRIAL_TIMEOUT_SECONDS", "180")).strip() or "180")
     started_at = time.perf_counter()
     completed = subprocess.run(
-        [sys.executable, str(MAIN), *args],
+        [*MAIN_COMMAND, *args],
         cwd=str(ROOT),
         env=env,
         capture_output=True,

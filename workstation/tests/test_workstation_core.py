@@ -292,15 +292,16 @@ class WorkstationCoreTests(unittest.TestCase):
         markdown_path.write_text("# Demo Lesson\n\n```python\nprint('hello')\n```")
         progress_messages: list[str] = []
 
-        def _fake_convert(command: list[str], **kwargs) -> object:
-            out_path = Path(command[command.index("--out") + 1])
-            report_path = Path(command[command.index("--report-out") + 1])
+        def _fake_convert(**kwargs) -> dict[str, object]:
+            out_path = Path(kwargs["bundle_output_path"])
             out_path.write_text("schema: bssc_skill.v2\nkind: ability\ntitle: Learned Demo Skill\n")
-            report_path.write_text(json.dumps({"learned_count": 1}))
-            return type("Result", (), {"returncode": 0, "stdout": "", "stderr": ""})()
+            return {"learned_count": 1}
 
         with (
-            patch("workstation.runtime.core.workstation_core.subprocess.run", side_effect=_fake_convert),
+            patch(
+                "workstation.runtime.core.workstation_core._learn_markdown_bundle_in_process",
+                side_effect=_fake_convert,
+            ),
             patch(
                 "workstation.runtime.core.capabilities.execute_workstation_capability",
                 return_value={
@@ -340,9 +341,8 @@ class WorkstationCoreTests(unittest.TestCase):
         markdown_path.write_text("# Demo Lesson\n\nportable learning")
         progress_messages: list[str] = []
 
-        def _fake_convert(command: list[str], **kwargs) -> object:
-            out_path = Path(command[command.index("--out") + 1])
-            report_path = Path(command[command.index("--report-out") + 1])
+        def _fake_convert(**kwargs) -> dict[str, object]:
+            out_path = Path(kwargs["bundle_output_path"])
             artifact = Artifact(
                 id="artifact-demo-knowledge",
                 artifact_type=ArtifactType.KNOWLEDGE,
@@ -371,10 +371,12 @@ class WorkstationCoreTests(unittest.TestCase):
                 boundary_shape=normalize_boundary_shape((BoundaryShapeTerm.OUTPUT_VALUE.value,), default=()),
             )
             out_path.write_text(artifact_export_bundle_text([artifact]))
-            report_path.write_text(json.dumps({"learned_count": 1}))
-            return type("Result", (), {"returncode": 0, "stdout": "", "stderr": ""})()
+            return {"learned_count": 1}
 
-        with patch("workstation.runtime.core.workstation_core.subprocess.run", side_effect=_fake_convert):
+        with patch(
+            "workstation.runtime.core.workstation_core._learn_markdown_bundle_in_process",
+            side_effect=_fake_convert,
+        ):
             result = workstation_learn_markdown_action(
                 root_path=self.root,
                 markdown_path=markdown_path,
@@ -405,17 +407,17 @@ class WorkstationCoreTests(unittest.TestCase):
         markdown_path.write_text("# Demo Lesson\n\nportable learning")
         captured: dict[str, object] = {}
 
-        def _fake_convert(command: list[str], **kwargs) -> object:
-            captured["command"] = list(command)
-            captured["env"] = dict(kwargs.get("env", {}))
-            out_path = Path(command[command.index("--out") + 1])
-            report_path = Path(command[command.index("--report-out") + 1])
+        def _fake_convert(**kwargs) -> dict[str, object]:
+            captured.update(kwargs)
+            out_path = Path(kwargs["bundle_output_path"])
             out_path.write_text("schema: bssc_skill.v2\nkind: knowledge\ntitle: Lightweight Demo Skill\n")
-            report_path.write_text(json.dumps({"learned_count": 1}))
-            return type("Result", (), {"returncode": 0, "stdout": "", "stderr": ""})()
+            return {"learned_count": 1}
 
         with (
-            patch("workstation.runtime.core.workstation_core.subprocess.run", side_effect=_fake_convert),
+            patch(
+                "workstation.runtime.core.workstation_core._learn_markdown_bundle_in_process",
+                side_effect=_fake_convert,
+            ),
             patch(
                 "workstation.runtime.core.capabilities.execute_workstation_capability",
                 return_value={
@@ -434,14 +436,8 @@ class WorkstationCoreTests(unittest.TestCase):
             )
 
         self.assertEqual(result.status, "ok")
-        command = captured.get("command")
-        env = captured.get("env")
-        self.assertIsInstance(command, list)
-        self.assertIsInstance(env, dict)
-        self.assertIn("--llm", command)
-        self.assertEqual(command[command.index("--llm") + 1], "off")
-        self.assertEqual(env.get("STATE_VECTOR_MODE"), "off")
-        self.assertEqual(env.get("LLM_SUPPLEMENT_POLICY"), "off")
+        self.assertEqual(captured.get("llm_policy"), "off")
+        self.assertEqual(captured.get("vector_mode"), "off")
 
     def test_workstation_learn_url_action_stages_captured_source_in_gather_workspace(self) -> None:
         progress_messages: list[str] = []

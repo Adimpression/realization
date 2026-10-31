@@ -7,6 +7,7 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
+COMPATIBILITY_ROOT = REPO_ROOT / "compatibility_api" / "src"
 
 
 def module_import_map(path: Path) -> dict[str, set[str]]:
@@ -83,7 +84,9 @@ class ExchangeLayerHygieneTests(unittest.TestCase):
         Returns:
             None: This function mutates state or performs side effects without returning a value.
         """
-        imports = module_import_map(REPO_ROOT / "governed_skill_installation.py")
+        imports = module_import_map(
+            COMPATIBILITY_ROOT / "governed_skill_installation.py"
+        )
         schema_imports = imports.get("realized_exchange.skill_schema", set())
         self.assertTrue(
             {
@@ -133,7 +136,9 @@ class ExchangeLayerHygieneTests(unittest.TestCase):
         Returns:
             None: This function mutates state or performs side effects without returning a value.
         """
-        imports = module_import_map(REPO_ROOT / "governed_skill_installation.py")
+        imports = module_import_map(
+            COMPATIBILITY_ROOT / "governed_skill_installation.py"
+        )
         projection_imports = imports.get("realized_exchange.skill_export", set())
         self.assertTrue(
             {"export_skill_bundle_text"}.issubset(projection_imports)
@@ -170,7 +175,9 @@ class ExchangeLayerHygieneTests(unittest.TestCase):
             None: This function mutates state or performs side effects without returning a value.
         """
         module_expectations = {
-            REPO_ROOT / "controller_entrypoints.py": {"handle_export_skill_command"},
+            COMPATIBILITY_ROOT / "controller_entrypoints.py": {
+                "handle_export_skill_command"
+            },
             REPO_ROOT
             / "exchange"
             / "src"
@@ -266,7 +273,7 @@ class ExchangeLayerHygieneTests(unittest.TestCase):
         Returns:
             None: This function mutates state or performs side effects without returning a value.
         """
-        imports = module_import_roots(REPO_ROOT / "replay_verifier.py")
+        imports = module_import_roots(COMPATIBILITY_ROOT / "replay_verifier.py")
         self.assertNotIn("main", imports)
         self.assertNotIn("constitutional_trace", imports)
         self.assertNotIn("run_bundle_io", imports)

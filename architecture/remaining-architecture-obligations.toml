@@ -1,0 +1,100 @@
+schema_version = 1
+
+[[package_compatibility_aliases]]
+id = "foundation-events-projection-subscriber"
+path = "workstation/compatibility_api/src/workstation/foundation/events/subscriber_controllers.py"
+legacy_module = "workstation.foundation.events.subscriber_controllers"
+canonical_module = "workstation.runtime.core.projection_subscriber_controller"
+source_component = "workstation_compatibility"
+target_component = "runtime_core"
+exported_identities = ["WorkstationProjectionSubscriberController"]
+consumer_evidence = [
+  "workstation/runtime_core/src/workstation/runtime/core/projection_subscriber_controller.py",
+  "workstation/tests/test_workstation_contracts.py",
+]
+durable_name_exposure = "canonical_class_module"
+support_class = "supported"
+behavior_contract = "The legacy and canonical imports resolve to the same module object and controller class identity."
+review_condition = "Review at each minor release while generic historical qualified-name loading remains supported."
+rollback = "Restore the exact sys.modules alias."
+
+[[package_compatibility_aliases]]
+id = "foundation-host-client-sessions"
+path = "workstation/compatibility_api/src/workstation/foundation/host/client_sessions.py"
+legacy_module = "workstation.foundation.host.client_sessions"
+canonical_module = "workstation.subject.service.client_sessions"
+source_component = "workstation_compatibility"
+target_component = "subject_service"
+exported_identities = ["WorkstationClientSessionRegistry"]
+consumer_evidence = [
+  "workstation/subject_service/src/workstation/subject/service/client_sessions.py",
+  "workstation/tests/test_workstation_contracts.py",
+]
+durable_name_exposure = "canonical_class_module"
+support_class = "supported"
+behavior_contract = "The legacy and canonical imports resolve to the same module object while persisted registry classes retain the historical module identity."
+review_condition = "Review at each minor release while generic historical qualified-name loading remains supported."
+rollback = "Restore the exact sys.modules alias."
+
+[[package_compatibility_aliases]]
+id = "foundation-host-learning-capture"
+path = "workstation/compatibility_api/src/workstation/foundation/host/learning_capture.py"
+legacy_module = "workstation.foundation.host.learning_capture"
+canonical_module = "workstation.subject.service.learning_capture"
+source_component = "workstation_compatibility"
+target_component = "subject_service"
+exported_identities = [
+  "capture_workstation_assistant_markdown_for_research",
+  "capture_workstation_chat_learning_from_tool_receipts",
+  "preview_workstation_assistant_markdown_for_research",
+]
+consumer_evidence = ["workstation/tests/test_workstation_contracts.py"]
+durable_name_exposure = "none"
+support_class = "supported"
+behavior_contract = "The legacy and canonical imports resolve to the same module object; no production consumer or historical qualified-name assignment is measured."
+review_condition = "Review at each minor release as an explicitly shipped historical import ABI."
+rollback = "Restore the exact sys.modules alias."
+
+[[package_compatibility_aliases]]
+id = "foundation-host-llm-driver"
+path = "workstation/compatibility_api/src/workstation/foundation/host/llm_driver.py"
+legacy_module = "workstation.foundation.host.llm_driver"
+canonical_module = "workstation.runtime.core.llm_driver"
+source_component = "workstation_compatibility"
+target_component = "runtime_core"
+exported_identities = [
+  "build_workstation_openai_client",
+  "build_workstation_system_message",
+  "normalize_workstation_tool_definitions_for_provider",
+  "resolve_workstation_openai_model",
+  "run_workstation_openai_turn",
+  "workstation_tool_capability_name",
+  "workstation_tool_wire_name",
+]
+consumer_evidence = [
+  "workstation/runtime_core/src/workstation/runtime/core/llm_driver.py",
+  "workstation/tests/test_workstation_contracts.py",
+]
+durable_name_exposure = "canonical_function_module"
+support_class = "supported"
+behavior_contract = "The legacy and canonical imports resolve to the same module object and all public provider functions retain their historical module identity and patch target."
+review_condition = "Review at each minor release while historical function-module and patch-target support remains public."
+rollback = "Restore the exact sys.modules alias and historical patch target."
+
+[[package_compatibility_aliases]]
+id = "shell-prompt-routing-contract"
+path = "workstation/compatibility_api/src/workstation/shell/core/shell_prompt_routing.py"
+legacy_module = "workstation.shell.core.shell_prompt_routing"
+canonical_module = "workstation.contracts.shell_prompt_routing"
+source_component = "workstation_compatibility"
+target_component = "contracts"
+exported_identities = ["match_workstation_shell_utility_prompt"]
+consumer_evidence = [
+  "workstation/contracts_api/src/workstation/contracts/shell_prompt_routing.py",
+  "workstation/tests/test_workstation_contracts.py",
+]
+durable_name_exposure = "canonical_function_module"
+support_class = "supported"
+behavior_contract = "The legacy and canonical imports resolve to the same module object and the deterministic routing function retains its historical module identity."
+review_condition = "Review at each minor release while generic historical qualified-name loading remains supported."
+rollback = "Restore the exact sys.modules alias."

@@ -11,7 +11,7 @@ from pathlib import Path
 from typing import Any, Iterable
 
 TRIALS_ROOT = Path(__file__).resolve().parent
-ROOT = TRIALS_ROOT.parent if (TRIALS_ROOT.parent / "main.py").exists() else TRIALS_ROOT
+ROOT = TRIALS_ROOT.parent
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
@@ -21,7 +21,7 @@ from realized_validation.sqlite_runtime import (
     validation_sqlite_paths,
 )
 
-MAIN = ROOT / "main.py"
+MAIN_COMMAND = (sys.executable, "-m", "main")
 LOCAL_ENV = ROOT / "local.env"
 REPORT_ROOT = ROOT / "reports"
 
@@ -205,7 +205,7 @@ def run_cli(args: list[str], *, env: dict[str, str]) -> dict[str, Any]:
         dict[str, Any]: Result produced by `run_cli`.
     """
     completed = subprocess.run(
-        [sys.executable, str(MAIN), *args],
+        [*MAIN_COMMAND, *args],
         cwd=str(ROOT),
         env=env,
         capture_output=True,

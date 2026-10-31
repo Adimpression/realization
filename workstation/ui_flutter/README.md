@@ -40,7 +40,7 @@ rm -rf /tmp/workstation-root
 From the repository root:
 
 ```bash
-uv run python controller_entrypoints.py workstation-grpc-host \
+uv run realized-workstation grpc-host \
   --serve-root /tmp/workstation-root \
   --default-root /tmp/workstation-root \
   --host 127.0.0.1 \

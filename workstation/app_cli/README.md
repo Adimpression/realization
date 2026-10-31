@@ -23,7 +23,6 @@ their policy. Optional exchange extensions, including external Markdown
 learning, are installed here explicitly rather than activated by incidental
 root-module import order.
 
-The historical root `controller_entrypoints.py` and
-`runtime_controller_api.py` paths remain compatibility surfaces during the
-qualification period. New integrations should invoke `realized-workstation` or
-import from `workstation.app.cli`.
+The historical aggregate command is shipped by `realized-compatibility`, while
+the retired `runtime_controller_api` path remains tombstoned. New integrations
+should invoke `realized-workstation` or import from `workstation.app.cli`.

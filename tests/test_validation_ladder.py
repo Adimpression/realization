@@ -53,6 +53,7 @@ class ValidationLadderTests(unittest.TestCase):
             None: This function mutates state or performs side effects without returning a value.
         """
         calls: list[str] = []
+        commands: dict[str, list[str]] = {}
         with tempfile.TemporaryDirectory() as tmp:
             report_root = Path(tmp) / "validation_ladder"
             workstation_report_out = report_root / "workstation_trial_validation_report.json"
@@ -62,6 +63,7 @@ class ValidationLadderTests(unittest.TestCase):
 
             def fake_runner(*, name, cmd, cwd, env):
                 calls.append(name)
+                commands[name] = list(cmd)
                 seen_vector_modes.append(env.get("STATE_VECTOR_MODE", ""))
                 if name == "workstation_trials":
                     workstation_report_out.write_text(json.dumps({"status": "ok", "kind": "workstation"}))
@@ -91,6 +93,12 @@ class ValidationLadderTests(unittest.TestCase):
             self.assertEqual(report["stages"][1]["nested_report"], {"status": "ok", "kind": "workstation"})
             self.assertEqual(report["stages"][2]["nested_report"], {"status": "ok", "kind": "chemistry"})
             self.assertEqual(seen_vector_modes, ["off", "off", "off"])
+            self.assertEqual(
+                Path(commands["workstation_trials"][0]).name,
+                "realized-workstation",
+            )
+            self.assertEqual(commands["workstation_trials"][1], "trial-validate")
+            self.assertNotIn("main" + ".py", commands["workstation_trials"])
 
     def test_run_validation_ladder_stops_after_unit_failure(self) -> None:
         """
