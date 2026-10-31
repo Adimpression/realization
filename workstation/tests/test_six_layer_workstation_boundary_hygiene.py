@@ -9,7 +9,11 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 CONTROLLER_LAYER_MODULES = (
-    REPO_ROOT / "controller_runtime.py",
+    REPO_ROOT
+    / "core_engine"
+    / "src"
+    / "realized_core_engine"
+    / "controller_runtime.py",
 )
 SHARED_HOST_INTERACTION_MODULES = tuple(
     sorted(

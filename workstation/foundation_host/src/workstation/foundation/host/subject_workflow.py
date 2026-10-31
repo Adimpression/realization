@@ -30,7 +30,7 @@ def create_subject_workflow_client() -> SubjectWorkflowClient:
     if factory is None:
         raise RuntimeError(
             "The subject workflow client factory is not configured. "
-            "Start the application through main.py or register a factory explicitly."
+            "Start the application through realized-workstation or register a factory explicitly."
         )
     client = factory()
     if not isinstance(client, SubjectWorkflowClient):

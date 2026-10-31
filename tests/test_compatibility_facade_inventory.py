@@ -56,7 +56,7 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
         )
         self.assertEqual([], self.inventory["public_example_facade_consumers"])
 
-    def test_retirement_policy_distinguishes_qualified_and_held_facades(self) -> None:
+    def test_retirement_policy_distinguishes_terminal_outcomes(self) -> None:
         qualification = self.inventory["qualification"]
         self.assertGreaterEqual(qualification["minimum_stable_cycles"], 1)
         self.assertGreaterEqual(
@@ -65,14 +65,15 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
         )
         self.assertFalse(qualification["retirement_hold"])
         self.assertEqual(0, len(self.inventory["retirement_candidates"]))
-        self.assertEqual(42, len(self.inventory["retirement_holds"]))
+        self.assertEqual(38, len(self.inventory["supported_abis"]))
+        self.assertEqual([], self.inventory["retirement_holds"])
 
     def test_facade_shapes_match_reviewed_compatibility_cohorts(self) -> None:
         self.assertEqual(
             {
-                "aggregate_reexport": 1,
-                "behavior_adapter": 5,
-                "exact_module_alias": 27,
+                "aggregate_reexport": 0,
+                "behavior_adapter": 3,
+                "exact_module_alias": 26,
                 "symbol_reexport": 9,
             },
             self.inventory["summary"]["shape_counts"],
@@ -97,9 +98,13 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
         by_module = {
             row["module"]: row for row in self.inventory["facades"]
         }
-        self.assertEqual("override", by_module["main"]["policy_source"])
+        self.assertEqual("supported_abi", by_module["main"]["policy_source"])
         self.assertEqual(
-            ["realized-core", "realized-workstation"],
+            [
+                "realized-compatibility",
+                "realized-core",
+                "realized-workstation",
+            ],
             by_module["main"]["replacement_commands"],
         )
         self.assertEqual(
@@ -111,7 +116,7 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
             by_module["python_skill_host"]["support_status"],
         )
         self.assertEqual(
-            "repository_only",
+            "supported",
             by_module["main"]["import_obligation"],
         )
         self.assertEqual(
@@ -126,12 +131,20 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
             by_module["python_skill_host"]["durable_qualified_name_status"],
         )
         self.assertEqual(
-            "held",
+            "supported",
             by_module["external_markdown_learning_pipeline"]["retirement_state"],
         )
-        self.assertIn(
-            "explicit external-data authorization",
-            by_module["external_markdown_learning_pipeline"]["review_condition"],
+        self.assertEqual(
+            "realized-compatibility",
+            by_module["external_markdown_learning_pipeline"][
+                "support_distribution"
+            ],
+        )
+        self.assertEqual(
+            "architecture/COMPATIBILITY_API.md",
+            by_module["external_markdown_learning_pipeline"][
+                "support_contract_reference"
+            ],
         )
 
     def test_default_policy_applies_without_a_facade_override(self) -> None:
@@ -174,21 +187,82 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
             assessment["hold_reasons"],
         )
 
-    def test_every_held_facade_has_owner_reason_and_review_condition(self) -> None:
+    def test_supported_abi_requires_distribution_contract_and_tests(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            policy = {
+                "durable_qualified_name_status": "retained",
+                "executable_obligation": "none",
+                "hold_reason": "Historical import remains supported.",
+                "import_obligation": "supported",
+                "retirement_state": "supported",
+                "support_contract_reference": "COMPATIBILITY.md",
+                "support_contract_tests": ["tests/test_compatibility.py"],
+                "support_distribution": "realized-compatibility",
+                "support_status": "supported_historical_import",
+            }
+            incomplete = inventory_checker._supported_abi_assessment(
+                root=root,
+                facade="historical_api",
+                facade_policy=policy,
+                distribution_import_modules={},
+            )
+            self.assertFalse(incomplete["supported_abi"])
+            self.assertGreaterEqual(len(incomplete["issues"]), 3)
+
+            (root / "COMPATIBILITY.md").write_text("contract\n", encoding="utf-8")
+            (root / "tests").mkdir()
+            (root / "tests" / "test_compatibility.py").write_text(
+                "pass\n", encoding="utf-8"
+            )
+            complete = inventory_checker._supported_abi_assessment(
+                root=root,
+                facade="historical_api",
+                facade_policy=policy,
+                distribution_import_modules={
+                    "realized-compatibility": {"historical_api"}
+                },
+            )
+            self.assertTrue(complete["supported_abi"])
+            self.assertEqual([], complete["issues"])
+
+            assessment = inventory_checker._retirement_assessment(
+                facade="historical_api",
+                facade_policy={
+                    **policy,
+                    "notice_reference": "",
+                },
+                executable_surface=False,
+                shape="exact_module_alias",
+                static_consumers=[],
+                text_references=[],
+                designated_contract_tests=set(),
+                qualification={"retirement_hold": False},
+                support_assessment=complete,
+            )
+            self.assertTrue(assessment["supported_abi"])
+            self.assertFalse(assessment["eligible_for_deletion"])
+            self.assertEqual([], assessment["hold_reasons"])
+
+    def test_every_supported_facade_has_terminal_evidence(self) -> None:
         held_modules = {
             row["module"] for row in self.inventory["facades"]
             if row["retirement_assessment"]["hold_reasons"]
         }
-        self.assertEqual(42, len(held_modules))
+        self.assertEqual(set(), held_modules)
         self.assertTrue(
             all(
                 row["owner"]
-                and row["retirement_state"] == "held"
+                and row["retirement_state"] == "supported"
                 and row["hold_reason"]
                 and row["review_condition"]
-                and row["retirement_assessment"]["hold_reasons"]
+                and row["support_distribution"]
+                in {"realized-compatibility", "realized-core-runtime"}
+                and row["support_contract_reference"]
+                and row["support_contract_tests"]
+                and row["retirement_assessment"]["supported_abi"]
+                and not row["retirement_assessment"]["hold_reasons"]
                 for row in self.inventory["facades"]
-                if row["module"] in held_modules
             )
         )
 
@@ -223,6 +297,8 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
                 "blend_world",
                 "blend_world_store",
                 "capability_runtime",
+                "controller_entrypoint_binding",
+                "controller_runtime",
                 "controller_runtime_binding",
                 "constitutional_trace",
                 "controller_governance_bridge",
@@ -255,6 +331,7 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
                 "macos_host_brokers",
                 "markdown_learning_artifact_semantics",
                 "non_achievedness_normalization",
+                "normalize",
                 "normalization_primitives",
                 "normalization_runtime_dependencies",
                 "not_elaboration_ranking",
@@ -267,6 +344,7 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
                 "python_skill_brokerization",
                 "python_skill_host_transport",
                 "runtime_temp",
+                "runtime_controller_api",
                 "runtime_governance_context",
                 "retrieval_ranking",
                 "run_outcome_harvest_and_reporting",
@@ -472,7 +550,9 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
                         "designated_contract_tests": [],
                         "durable_pickle_facades": [],
                         "facades": {},
-                        "schema_version": 2,
+                        "schema_version": 3,
+                        "supported_abi_defaults": {},
+                        "supported_abis": {},
                         "tombstones": {"retired": {"removed_at": "test"}},
                     }
                 ),
@@ -496,7 +576,9 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
                         "designated_contract_tests": [],
                         "durable_pickle_facades": [],
                         "facades": {},
-                        "schema_version": 2,
+                        "schema_version": 3,
+                        "supported_abi_defaults": {},
+                        "supported_abis": {},
                         "tombstones": {"retired": {"removed_at": "test"}},
                     }
                 ),

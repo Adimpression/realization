@@ -58,6 +58,7 @@ RETIREMENT_STATES = {
     "held",
     "qualified",
     "retained",
+    "supported",
 }
 SUPPORT_STATUSES = {
     "repository_internal",
@@ -399,10 +400,12 @@ def _load_retirement_policy(
         policy = json.loads(policy_path.read_text(encoding="utf-8"))
     except json.JSONDecodeError as exc:
         raise ValueError(f"cannot parse compatibility policy: {exc}") from exc
-    if policy.get("schema_version") != 2:
+    if policy.get("schema_version") != 3:
         raise ValueError("unsupported compatibility policy schema version")
     defaults = policy.get("defaults")
     overrides = policy.get("facades")
+    supported_abi_defaults = policy.get("supported_abi_defaults")
+    supported_abis = policy.get("supported_abis")
     tombstones = policy.get("tombstones")
     designated_tests = policy.get("designated_contract_tests")
     durable_pickle_facades = policy.get("durable_pickle_facades")
@@ -410,6 +413,12 @@ def _load_retirement_policy(
         raise ValueError("compatibility policy defaults must be an object")
     if not isinstance(overrides, dict):
         raise ValueError("compatibility policy facades must be an object")
+    if not isinstance(supported_abi_defaults, dict):
+        raise ValueError(
+            "compatibility policy supported_abi_defaults must be an object"
+        )
+    if not isinstance(supported_abis, dict):
+        raise ValueError("compatibility policy supported_abis must be an object")
     if not isinstance(tombstones, dict):
         raise ValueError("compatibility policy tombstones must be an object")
     if not isinstance(designated_tests, list) or not all(
@@ -420,8 +429,16 @@ def _load_retirement_policy(
         isinstance(module, str) for module in durable_pickle_facades
     ):
         raise ValueError("durable pickle facades must be a list of module names")
+    supported_names = set(supported_abis)
+    overlap = sorted(facade_names & supported_names)
+    if overlap:
+        raise ValueError(
+            "compatibility modules cannot be both root facades and supported ABIs: "
+            + ", ".join(overlap)
+        )
+    known_facades = facade_names | supported_names
     unknown_durable_pickle_facades = sorted(
-        set(durable_pickle_facades) - facade_names
+        set(durable_pickle_facades) - known_facades
     )
     if unknown_durable_pickle_facades:
         raise ValueError(
@@ -434,10 +451,28 @@ def _load_retirement_policy(
             "compatibility policy contains unknown active facades: "
             + ", ".join(unknown_overrides)
         )
+    for module, supported in supported_abis.items():
+        if not isinstance(supported, dict):
+            raise ValueError(f"supported ABI policy for {module} must be an object")
+        owner = supported.get("owner")
+        source_path = supported.get("source_path")
+        if not isinstance(owner, str) or not owner.strip():
+            raise ValueError(f"supported ABI {module} requires an owner")
+        if not isinstance(source_path, str) or not source_path.strip():
+            raise ValueError(f"supported ABI {module} requires a source_path")
+        path = root / source_path
+        if not path.is_file():
+            raise ValueError(
+                f"supported ABI {module} source path does not exist: {source_path}"
+            )
+        if path.stem != module:
+            raise ValueError(
+                f"supported ABI {module} source path has a different module name"
+            )
     reintroduced = sorted(
         module
         for module in tombstones
-        if module in facade_names or (root / f"{module}.py").exists()
+        if module in known_facades or (root / f"{module}.py").exists()
     )
     if reintroduced:
         raise ValueError(
@@ -485,7 +520,10 @@ def _effective_facade_policy(
                 ),
             }
         )
-    override = policy["facades"].get(facade, {})
+    supported_override = policy["supported_abis"].get(facade)
+    if supported_override is not None:
+        effective.update(policy["supported_abi_defaults"])
+    override = supported_override or policy["facades"].get(facade, {})
     effective.update(override)
     state = effective.get("retirement_state")
     support = effective.get("support_status")
@@ -519,7 +557,9 @@ def _effective_facade_policy(
             f"compatibility policy requires a review condition for {facade}"
         )
     effective["policy_source"] = (
-        "override"
+        "supported_abi"
+        if supported_override is not None
+        else "override"
         if override
         else "durable_pickle_contract"
         if durable_pickle_contract
@@ -993,6 +1033,7 @@ def _retirement_assessment(
     text_references: list[dict[str, Any]],
     designated_contract_tests: set[str],
     qualification: dict[str, Any],
+    support_assessment: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     non_contract_consumers = [
         consumer
@@ -1007,6 +1048,24 @@ def _retirement_assessment(
     ]
     hold_reasons: list[str] = []
     state = facade_policy["retirement_state"]
+    if state == "supported":
+        support_issues = list(
+            (support_assessment or {}).get(
+                "issues", ["supported ABI evidence was not evaluated"]
+            )
+        )
+        if support_issues:
+            hold_reasons.append(facade_policy["hold_reason"])
+            hold_reasons.extend(support_issues)
+        return {
+            "blocking_text_reference_count": len(blocking_text_references),
+            "eligible_for_deletion": False,
+            "hold_reasons": hold_reasons,
+            "non_contract_consumer_count": len(non_contract_consumers),
+            "supported_abi": not support_issues,
+            "support_issues": support_issues,
+            "text_reference_count": len(text_references),
+        }
     if state != "qualified":
         hold_reasons.append(f"retirement state is {state}, not qualified")
     if facade_policy["durable_qualified_name_status"] != "clear":
@@ -1045,8 +1104,73 @@ def _retirement_assessment(
         "eligible_for_deletion": not hold_reasons,
         "hold_reasons": hold_reasons,
         "non_contract_consumer_count": len(non_contract_consumers),
+        "supported_abi": False,
+        "support_issues": [],
         "text_reference_count": len(text_references),
     }
+
+
+def _supported_abi_assessment(
+    *,
+    root: Path,
+    facade: str,
+    facade_policy: dict[str, Any],
+    distribution_import_modules: dict[str, set[str]],
+) -> dict[str, Any]:
+    if facade_policy["retirement_state"] != "supported":
+        return {"issues": [], "supported_abi": False}
+
+    issues: list[str] = []
+    support_status = facade_policy["support_status"]
+    if not (
+        support_status.startswith("supported_")
+        or support_status == "retained_aggregate_api"
+    ):
+        issues.append("supported ABI has no supported support status")
+    if not any(
+        facade_policy[field] == "supported"
+        for field in ("import_obligation", "executable_obligation")
+    ):
+        issues.append(
+            "supported ABI has no supported import or executable obligation"
+        )
+
+    distribution = facade_policy.get("support_distribution", "")
+    if not isinstance(distribution, str) or not distribution.strip():
+        issues.append("supported ABI has no named distribution")
+    elif distribution not in distribution_import_modules:
+        issues.append(
+            f"supported ABI distribution is not registered: {distribution}"
+        )
+    elif facade not in distribution_import_modules[distribution]:
+        issues.append(
+            "supported ABI distribution does not declare the historical "
+            f"import module: {facade}"
+        )
+
+    contract_reference = facade_policy.get("support_contract_reference", "")
+    if not isinstance(contract_reference, str) or not contract_reference.strip():
+        issues.append("supported ABI has no contract reference")
+    elif not (root / contract_reference).is_file():
+        issues.append(
+            f"supported ABI contract reference does not exist: {contract_reference}"
+        )
+
+    contract_tests = facade_policy.get("support_contract_tests", [])
+    if not isinstance(contract_tests, list) or not contract_tests or not all(
+        isinstance(path, str) and path for path in contract_tests
+    ):
+        issues.append("supported ABI has no contract tests")
+    else:
+        missing_tests = sorted(
+            path for path in contract_tests if not (root / path).is_file()
+        )
+        if missing_tests:
+            issues.append(
+                "supported ABI contract tests do not exist: "
+                + ", ".join(missing_tests)
+            )
+    return {"issues": issues, "supported_abi": not issues}
 
 
 def build_inventory(root: Path, manifest_path: Path) -> dict[str, Any]:
@@ -1056,15 +1180,41 @@ def build_inventory(root: Path, manifest_path: Path) -> dict[str, Any]:
     root_metadata = {
         row["module"]: row for row in baseline["root_module_ownership"]
     }
-    facade_names = {
+    root_facade_names = {
         module
         for module, row in root_metadata.items()
         if "compatibility_facade" in row["statuses"]
     }
-    retirement_policy = _load_retirement_policy(root, manifest, facade_names)
+    retirement_policy = _load_retirement_policy(
+        root, manifest, root_facade_names
+    )
+    supported_abi_rows = retirement_policy["supported_abis"]
+    facade_names = root_facade_names | set(supported_abi_rows)
+    facade_paths = {
+        facade: root / f"{facade}.py" for facade in root_facade_names
+    }
+    facade_paths.update(
+        {
+            facade: root / row["source_path"]
+            for facade, row in supported_abi_rows.items()
+        }
+    )
+    facade_owners = {
+        facade: root_metadata[facade]["owner"]
+        for facade in root_facade_names
+    }
+    facade_owners.update(
+        {facade: row["owner"] for facade, row in supported_abi_rows.items()}
+    )
     designated_contract_tests = set(
         retirement_policy["designated_contract_tests"]
     )
+    distribution_import_modules = {
+        str(component["distribution"]): set(
+            component.get("distribution_import_modules", [])
+        )
+        for component in analysis["components"].values()
+    }
     root_statuses = {
         module: tuple(row["statuses"]) for module, row in root_metadata.items()
     }
@@ -1102,7 +1252,7 @@ def build_inventory(root: Path, manifest_path: Path) -> dict[str, Any]:
         )
         for module, line, import_kind in references:
             facade = module.partition(".")[0]
-            if facade not in facade_names or path == root / f"{facade}.py":
+            if facade not in facade_names or path == facade_paths[facade]:
                 continue
             consumer = {
                 "import_kind": import_kind,
@@ -1129,7 +1279,7 @@ def build_inventory(root: Path, manifest_path: Path) -> dict[str, Any]:
 
     facades: list[dict[str, Any]] = []
     for facade in sorted(facade_names):
-        path = root / f"{facade}.py"
+        path = facade_paths[facade]
         source_observations = _facade_source_observations(path, module_prefixes)
         canonical_targets: set[tuple[str, str]] = set(
             source_observations["canonical_targets"]
@@ -1152,6 +1302,12 @@ def build_inventory(root: Path, manifest_path: Path) -> dict[str, Any]:
         )
         facade_policy = _effective_facade_policy(retirement_policy, facade)
         text_references = text_references_by_facade[facade]
+        support_assessment = _supported_abi_assessment(
+            root=root,
+            facade=facade,
+            facade_policy=facade_policy,
+            distribution_import_modules=distribution_import_modules,
+        )
         retirement_assessment = _retirement_assessment(
             facade=facade,
             facade_policy=facade_policy,
@@ -1161,6 +1317,7 @@ def build_inventory(root: Path, manifest_path: Path) -> dict[str, Any]:
             text_references=text_references,
             designated_contract_tests=designated_contract_tests,
             qualification=qualification,
+            support_assessment=support_assessment,
         )
         facades.append(
             {
@@ -1189,8 +1346,8 @@ def build_inventory(root: Path, manifest_path: Path) -> dict[str, Any]:
                 ],
                 "module": facade,
                 "notice_reference": facade_policy["notice_reference"],
-                "owner": root_metadata[facade]["owner"],
-                "path": f"{facade}.py",
+                "owner": facade_owners[facade],
+                "path": _relative(path, root),
                 "policy_source": facade_policy["policy_source"],
                 "replacement_commands": facade_policy.get(
                     "replacement_commands", []
@@ -1201,6 +1358,15 @@ def build_inventory(root: Path, manifest_path: Path) -> dict[str, Any]:
                 "root_dependencies": sorted(root_dependencies),
                 "shape": source_observations["shape"],
                 "static_consumers": static_consumers,
+                "support_contract_reference": facade_policy.get(
+                    "support_contract_reference", ""
+                ),
+                "support_contract_tests": facade_policy.get(
+                    "support_contract_tests", []
+                ),
+                "support_distribution": facade_policy.get(
+                    "support_distribution", ""
+                ),
                 "support_status": facade_policy["support_status"],
                 "executable_obligation": facade_policy[
                     "executable_obligation"
@@ -1231,6 +1397,11 @@ def build_inventory(root: Path, manifest_path: Path) -> dict[str, Any]:
         for facade in facades
         if facade["retirement_assessment"]["eligible_for_deletion"]
     ]
+    supported_abis = [
+        facade["module"]
+        for facade in facades
+        if facade["retirement_assessment"]["supported_abi"]
+    ]
     retirement_holds = [
         {
             "hold_reasons": facade["retirement_assessment"]["hold_reasons"],
@@ -1238,6 +1409,7 @@ def build_inventory(root: Path, manifest_path: Path) -> dict[str, Any]:
         }
         for facade in facades
         if not facade["retirement_assessment"]["eligible_for_deletion"]
+        and not facade["retirement_assessment"]["supported_abi"]
     ]
     all_static_consumers = [
         consumer
@@ -1269,7 +1441,8 @@ def build_inventory(root: Path, manifest_path: Path) -> dict[str, Any]:
             "tombstone_count": len(retirement_policy["tombstones"]),
             "tombstones": retirement_policy["tombstones"],
         },
-        "schema_version": 2,
+        "schema_version": 3,
+        "supported_abis": supported_abis,
         "summary": {
             "canonical_package_consumer_count": len(canonical_consumers),
             "eligible_retirement_candidate_count": len(retirement_candidates),
@@ -1282,6 +1455,7 @@ def build_inventory(root: Path, manifest_path: Path) -> dict[str, Any]:
             "public_example_consumer_count": len(example_consumers),
             "shape_counts": shape_counts,
             "static_consumer_count": len(all_static_consumers),
+            "supported_abi_count": len(supported_abis),
             "static_consumer_kind_counts": _counts_by(
                 all_static_consumers, "import_kind"
             ),
@@ -1324,6 +1498,17 @@ def compare_inventory(current: dict[str, Any], expected: dict[str, Any]) -> list
         errors.append(
             "facades are marked qualified while deletion holds remain: "
             + ", ".join(invalid_qualified)
+        )
+    invalid_supported = [
+        facade["module"]
+        for facade in current["facades"]
+        if facade["retirement_state"] == "supported"
+        and not facade["retirement_assessment"]["supported_abi"]
+    ]
+    if invalid_supported:
+        errors.append(
+            "facades are marked supported without complete ABI evidence: "
+            + ", ".join(invalid_supported)
         )
     return errors
 

@@ -233,7 +233,16 @@ def verify_workspace_distributions(
     site_root = dist_root / "isolated-site"
     site_root.mkdir(parents=True, exist_ok=True)
     _install_wheels(wheels, site_root)
-    modules = sorted({project["module_prefix"] for project in projects.values()})
+    modules = sorted(
+        {
+            module
+            for project in projects.values()
+            for module in (
+                project["module_prefix"],
+                *project.get("distribution_import_modules", []),
+            )
+        }
+    )
     _import_public_modules(site_root, modules)
     return {
         "components": built,

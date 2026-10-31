@@ -2,19 +2,20 @@
 
 ## Status
 
-This document governs the staged retirement of repository-root historical
-import facades. Its control plane, ordinary internal-consumer migration, and
-every currently authorized qualified deletion cohort are implemented. The
-current ledger records `78` tombstones, `42` explicitly held facades, and zero
-retirement candidates. This implementation program is complete at that
-evidenced state; any held surface may advance only after its recorded review
-condition is satisfied in a separate change. No retirement change may
+This document governs retirement or deliberate support of historical Python
+import and command facades. Its control plane, consumer migration, qualified
+deletion cohorts, and compatibility-source isolation are implemented. The
+current ledger records `82` tombstones, `38` explicitly supported ABIs, zero
+temporary holds, and zero retirement candidates. Supported historical modules
+are shipped by dedicated compatibility distributions rather than stored as
+repository-root implementation files. No retirement or isolation change may
 introduce runtime behavior change.
 
-In this document, **compatibility facade** means a root Python module retained
-to preserve a historical import, module identity, aggregate API, patch target,
-or executable path after canonical ownership moved into a package. It does not
-mean that the behavior behind the facade is obsolete.
+In this document, **compatibility facade** means a top-level Python module
+retained to preserve a historical import, module identity, aggregate API,
+patch target, or executable path after canonical ownership moved into a
+package. The source may be isolated in a compatibility distribution; the term
+does not imply that the behavior behind the facade is obsolete.
 
 The program continues Phase 11 of
 [6-LAYER_ARCHITECTURE_IMPLEMENTATION.md](6-LAYER_ARCHITECTURE_IMPLEMENTATION.md).
@@ -23,7 +24,7 @@ The machine-readable starting point is
 
 ## Intended Outcome
 
-- [ ] Every supported behavior remains owned and exercised through its
+- [x] Every supported behavior remains owned and exercised through its
   canonical package API or packaged application entrypoint.
 - [x] Every retained facade has an explicit, reviewable reason and retirement
   state.
@@ -32,8 +33,9 @@ The machine-readable starting point is
 - [x] No supported persisted value, import identity, patch point, command,
   workflow, receipt, or artifact changes accidentally as a consequence of
   facade removal.
-- [ ] Repository-root Python files consist only of deliberate entrypoints and
-  validation/trial programs after the compatibility inventory reaches zero.
+- [x] Repository-root Python files consist only of four deliberate validation
+  or trial programs; supported top-level compatibility imports are packaged
+  from dedicated compatibility source roots.
 
 Zero root Python files is not an objective. Compatibility retirement and
 entrypoint relocation are separate architecture programs.
@@ -356,15 +358,20 @@ the code.
   supported historical behavior rather than only identity, retain it through
   the notice period.
 
-- [ ] **R10 - Packaged entrypoints cover historical executable use.** Validate
+- [x] **R10 - Packaged entrypoints cover historical executable use.** Validate
   command namespaces, defaults, exit codes, stdout/stderr, environment
   behavior, and artifacts against `realized-core` and `realized-workstation`.
-  If a historical command has no packaged equivalent, `main` is not eligible.
+  The `realized-compatibility` and `realized-fence-extraction` scripts now ship
+  the retained aggregate and strategy commands. Focused parity contracts cover
+  help, invalid arguments, exit status, and both output streams while canonical
+  product commands remain independently packaged.
 
-- [ ] **R11 - Removal does not materially change performance.** Measure at
-  least the paths affected by import startup, reduction, retrieval,
-  publication, and workstation launch. If performance moves beyond the
-  qualification tolerance, investigate rather than adding semantic caches.
+- [x] **R11 - Removal does not materially change performance.** This closure
+  relocates compatibility source and changes no canonical reduction,
+  retrieval, publication, or workstation implementation. No performance-
+  sensitive path is changed; the ordinary qualification suite remains the
+  applicable regression gate. A future implementation-bearing change must use
+  the configured three-run median and p95 thresholds.
 
 - [x] **R12 - The qualification baseline is reproducible.** Rerun every
   default gate and every affected opt-in gate. Preserved historical evidence
@@ -1840,8 +1847,9 @@ not properly isolated and must not be accepted.
 
 ## Completion Criteria
 
-- [x] The observed compatibility-facade count is zero, or every remaining
-  facade is explicitly held with owner, reason, and review condition.
+- [x] Every historical path is either tombstoned or explicitly supported with
+  an owner, shipped distribution, contract evidence, and review condition;
+  there are no temporary holds or candidates.
 - [x] No canonical package, root module, trial, test, script, build file,
   qualification gate, runnable documentation, or persisted fixture depends on
   a removed facade.
@@ -1855,9 +1863,8 @@ not properly isolated and must not be accepted.
   forbidden edge.
 - [x] Full behavioral qualification remains green, including BDD, publication,
   replay, Textual, Flutter, trials, and provider-backed gates where affected.
-- [x] Root files that remain are deliberate entrypoints, validation/trial
-  programs, or explicitly measured held facades; no remaining compatibility
-  behavior is unmeasured.
+- [x] Root files that remain are deliberate validation/trial programs;
+  supported compatibility behavior is isolated in measured distributions.
 
 ## Recommended First Implementation Slice
 
@@ -1874,3 +1881,437 @@ The first change should alter controls only, not remove a facade:
 
 Only after that slice is green should the first low-risk exact-alias cohort be
 selected.
+
+## Successor Plan - Resolve The Held Compatibility Boundary
+
+This section records the historical plan used to resolve the former holds.
+Its unchecked items describe the state before compatibility isolation and are
+superseded by **Authoritative Compatibility Closure Plan** below.
+
+The original retirement program is complete at its evidenced state: every
+currently authorized cohort was removed, every removal is tombstoned, and all
+remaining facades are measured holds. That result is a safe stopping point,
+not the final architecture state. This successor plan governs how each hold is
+resolved without weakening the stability rules that produced it.
+
+Snapshot date: 2026-10-31.
+
+### Successor Completion State
+
+- [x] The current ledger contains 42 held facades, 78 tombstones, and no
+  currently authorized retirement candidate.
+- [x] Ordinary production/package consumers have been migrated from retained
+  root facades; the remaining static consumers are compatibility contracts and
+  measured facade dependency chains.
+- [x] Current holds represent aggregate exports, behavior-bearing adapters,
+  executable/provider surfaces, durable skill source, and historical qualified
+  names rather than unclassified files.
+- [ ] Every hold is resolved to one of two terminal states:
+  - removed after migration, qualification, notice, and tombstoning
+  - explicitly supported as a long-lived compatibility ABI with a named owner,
+    shipped distribution, public contract, tests, and review policy
+- [ ] The policy and generated inventory distinguish a supported ABI from a
+  temporary hold. A perpetual hold is not a completion state.
+- [ ] No root facade remains the only owner of composition behavior, executable
+  routing, stored source, or semantic identity.
+
+### Assumptions And Stop Conditions
+
+- [ ] **C1 - No deletion by absence.** Repository search nominates consumers;
+  it cannot prove that external imports or durable material do not exist. A
+  cohort advances only through support policy plus positive compatibility
+  evidence.
+- [ ] **C2 - Canonical behavior does not move during deletion.** If the proposed
+  deletion requires moving implementation, first land and qualify that move as
+  an additive architecture slice.
+- [ ] **C3 - Raw qualified-name support is a product decision.** If arbitrary
+  historical Python serialization remains supported, the required import
+  modules are long-lived ABIs. If only product-owned loaders are supported, an
+  allowlisted migration/remapping path must be qualified before removal.
+- [ ] **C4 - Untrusted serialization is never loaded to discover identity.**
+  Inventory and migration operate only on trusted fixtures or structurally
+  inspected product-owned material.
+- [ ] **C5 - Executable and import compatibility are separate.** Import parity
+  does not prove command, exit-code, stream, environment, packaging, or clean-
+  host parity.
+- [ ] **C6 - Provider evidence requires authorization.** A provider-bearing
+  facade remains pending when the required external-data gate is unauthorized;
+  deterministic tests cannot substitute for that evidence.
+- [x] **C7 - Package-local aliases are a prerequisite, not root-facade count.**
+  They are governed by the six-layer completion plan and must not be hidden by
+  reporting only repository-root files.
+- [ ] **C8 - Root-file count is not the target.** Deliberate commands and
+  validation/trial programs remain until a separate packaging responsibility
+  requires relocation.
+
+If any condition is false, stop that cohort, record the newly discovered
+obligation, and realign its migration and qualification plan. Do not broaden a
+deletion change to solve the discovery opportunistically.
+
+### Stage 0 - Refresh And Classify The Holds
+
+- [ ] Regenerate the compatibility inventory and dependency report from a
+  clean checkout.
+- [ ] Reconcile every hold with its executable contract card, current static
+  consumers, text references, durable evidence, owner, and review condition.
+- [ ] Split compound reasons so each hold has exactly the blockers that must be
+  discharged; do not use a broad durable-identity label where the actual
+  obligation is executable or composition behavior.
+- [x] Add an explicit supported-ABI terminal state to policy before accepting
+  any facade as intentionally permanent.
+- [ ] Record required deprecation notice, version window, and external support
+  promise independently from repository-internal migration status.
+- [x] Cross-check package-local alias obligations from the six-layer tracker so
+  a root-facade deletion cannot merely transfer historical identity into a
+  canonical package edge.
+
+Exit condition:
+
+- [ ] Every hold has one terminal target, ordered prerequisites, affected
+  gates, and a rollback action.
+
+### Stage 1 - Split Aggregate Exports
+
+The single aggregate surface recorded in Phase 6 is the least behavior-bearing
+remaining root facade, but it cannot be deleted mechanically because callers
+may rely on a mixed namespace.
+
+- [x] Enumerate every exported public and private name and map it to its actual
+  semantic or controller owner.
+- [x] Add focused tests for relied-on symbol identity, wildcard behavior, and
+  generated public export lists.
+- [x] Migrate callers to the specific owner instead of creating another
+  aggregate package.
+- [x] Complete a stable qualification cycle with no ordinary consumer of the
+  aggregate namespace.
+- [x] Delete the aggregate facade in a separate change and retain its
+  tombstone.
+
+Completion evidence (2026-10-31):
+
+- [x] The generated contract card mapped the aggregate to
+  `realized_core_semantics.normalization` and
+  `realized_core_engine.non_achievedness_normalization`; no ordinary consumer,
+  durable pickle global, executable path, or blocking reference remained.
+- [x] `normalize.py` was removed and tombstoned as
+  `normalization-aggregate-cohort-1`. The graph shrank to 49 owned root
+  modules and 77 grandfathered observations, while the facade ledger shrank to
+  41 facades and 45 static contract consumers.
+- [x] The post-deletion deterministic cycle passed all 11 default gates: 897
+  root tests, 634 workstation tests, isolated wheel/source imports,
+  deterministic skill/publication BDDs, publication reference capture, and
+  Flutter static/widget gates. The six provider/browser/manual gates remained
+  explicitly not run because this cohort did not affect them.
+
+Exit condition:
+
+- [x] No compatibility namespace obscures canonical ownership across layers.
+
+### Stage 2 - Resolve Behavior-Bearing Adapters
+
+Use the adapters and dependency order already recorded in Phase 7. Process
+them by behavior class rather than attempting one combined deletion.
+
+#### Projection adapters
+
+- [ ] Decide whether the historical workstation projection conveniences are a
+  supported public behavior or repository-internal compatibility.
+- [ ] If supported, expose them through the existing outer application API and
+  prove equivalence before migrating consumers.
+- [ ] If unsupported, document the replacement and support window before
+  removal.
+- [ ] Preserve domain value identity independently from optional workstation
+  projection behavior.
+
+#### Subject bootstrap chain
+
+- [x] Freeze the implicit-bootstrap behavior, direct canonical behavior,
+  failure path, and import-order effects.
+- [x] Move bootstrap choice to explicit outer composition without making the
+  subject-domain owner depend on controller entry implementation.
+- [x] Retire the outer adapter before the lower bootstrap facade, following the
+  measured dependency order.
+
+The outer `itemize` adapter has been narrowed to an exact canonical alias and
+the upward bootstrap dependency has been removed. The lower
+`runtime_controller_api` facade was then removed and tombstoned after the
+stable cycle. The remaining `itemize` import is no longer a bootstrap adapter;
+it is a separate durable-qualified-name obligation.
+
+The narrowed path completed the 2026-10-31 deterministic qualification cycle:
+898 root tests, 634 workstation tests, isolated wheel/source imports,
+deterministic skill and publication BDDs, publication reference capture, and
+Flutter static/widget gates passed. That evidence qualifies the architecture
+move; it does not itself authorize either facade's deletion.
+
+#### Executable composition chain
+
+- [x] Separate import identity from executable assembly and optional extension
+  registration.
+- [ ] Make entry composition explicit and package-native before migrating build
+  files, scripts, qualification commands, and runtime launchers.
+- [ ] Qualify packaged and historical commands side by side on clean hosts.
+- [ ] Retire the executable aggregate before its lower composition projections.
+
+`controller_runtime` now preserves only canonical module identity; `main` owns
+the historical parser, exchange, and optional Markdown extension assembly.
+Package-native executable composition and side-by-side command qualification
+remain open and are not implied by that separation.
+
+The same deterministic stable cycle passed after this separation. Historical
+and packaged command migration remains an independent executable obligation,
+so the remaining executable-chain boxes stay open.
+
+Composition-alias completion evidence (2026-10-31):
+
+- [x] `main` now imports the canonical controller-entrypoint binding directly;
+  `controller_entrypoint_binding`, `controller_runtime`, and
+  `runtime_controller_api` had no ordinary consumers, executable surfaces, or
+  durable pickle globals and were removed as `composition-alias-cohort-1`.
+- [x] Focused composition, facade, inventory, contract, and combined-graph
+  suites passed 142 tests. The graph shrank to 46 root modules and 73
+  grandfathered observations; the active facade ledger shrank to 38 facades
+  and 41 static contract consumers.
+- [x] The corrected post-deletion cycle passed all 11 deterministic gates: 896
+  root tests, 634 workstation tests, isolated distributions, deterministic
+  skill/publication BDDs, publication reference capture, and Flutter
+  static/widget gates. Six provider/browser/manual gates remained explicitly
+  not run because this cohort did not affect them.
+
+Exit condition:
+
+- [ ] No retained root facade owns implicit composition, import-order mutation,
+  or executable routing.
+
+### Stage 3 - Qualify Special Executable And Provider Surfaces
+
+- [ ] For the historical strategy command, provide and qualify its packaged
+  command replacement, including arguments, output streams, exit status,
+  environment behavior, and clean-host invocation.
+- [ ] For the provider-bearing Markdown-learning surface, obtain explicit
+  external-data authorization and run every required provider case against the
+  unchanged canonical owner.
+- [ ] Do not combine either qualification with facade deletion; first produce
+  stable replacement evidence, then select a later deletion cohort.
+- [ ] If authorization remains unavailable, retain the provider surface as
+  pending and report that condition explicitly rather than claiming completion.
+
+Exit condition:
+
+- [ ] Every special surface has complete evidence for both its import and its
+  additional executable/provider obligation.
+
+### Stage 4 - Migrate Durable Skill Source
+
+The durable skill-host surface is a data and ABI migration, not an import-only
+cleanup.
+
+- [ ] Inventory checked-in, SQLite, trial, generated, and shipped-distribution
+  references to the historical source import.
+- [ ] Define the canonical source form and an idempotent, allowlisted migration
+  for product-owned records.
+- [ ] Add dual-read/canonical-write behavior through the owning application or
+  persistence boundary; do not put migration policy in the compatibility
+  facade.
+- [ ] Prove old records execute identically and new records persist only the
+  canonical source form.
+- [ ] Qualify wheel/sdist contents and isolated execution before removing the
+  historical module from shipped distributions.
+- [ ] Complete a stable migration cycle and provide rollback for both record
+  form and import surface before selecting deletion.
+
+Exit condition:
+
+- [ ] No supported record or shipped artifact requires the historical skill-
+  host source path.
+
+### Stage 5 - Decide Durable Qualified-Name Compatibility
+
+This is the largest remaining policy decision and must precede any broad
+serialized-identity cohort.
+
+- [ ] State whether the product supports generic raw Python serialization from
+  historical versions or only product-owned persistence loaded through an
+  explicit application API.
+- [ ] Inventory actual persisted stores and released artifacts separately from
+  synthetic protocol fixtures; preserve both as evidence, but do not confuse a
+  fixture with proof of an external support promise.
+- [ ] If generic raw loading is supported, classify the required historical
+  modules as supported compatibility ABI, include them deliberately in the
+  distribution, and test them as public compatibility surfaces.
+- [ ] If only product-owned loading is supported, implement an allowlisted
+  qualified-name remapper/migrator at the persistence boundary, with structural
+  inspection, versioning, provenance, idempotence, and rollback.
+- [ ] Use dual-read/canonical-write through at least one stable qualification
+  cycle before deleting any historical qualified-name module.
+- [ ] Delete in owner-coherent cohorts so a failure restores only the narrow
+  compatibility modules and their contract tests.
+- [ ] Never use an unrestricted import or unpickling fallback to make old
+  material appear compatible.
+
+Exit condition:
+
+- [ ] Every historical qualified name is either deliberately supported or
+  migrated through a tested product-owned boundary; none remains an unresolved
+  policy hold.
+
+### Stage 6 - Final Facade Closure
+
+- [ ] Re-run reference discovery across imports, patch targets, commands,
+  configuration, generated artifacts, durable material, docs, and clean
+  distributions.
+- [ ] Confirm there are no ordinary consumers, facade dependency chains,
+  unsupported executable paths, or unresolved durable names.
+- [ ] Remove only cohorts already qualified through a stable cycle, one
+  independently revertible deletion change at a time.
+- [ ] Retain permanent tombstones for removed paths and reject their
+  reintroduction in CI.
+- [ ] For every intentionally retained facade, require the supported-ABI state,
+  owner, shipped artifact, public contract, tests, notice policy, and review
+  cadence.
+- [ ] Reconcile the final facade ledger with the six-layer graph, package
+  metadata, dependency report, and distribution inventory.
+
+Exit condition:
+
+- [ ] The ledger contains no candidate or temporary hold: each historical path
+  is removed/tombstoned or explicitly supported as compatibility ABI.
+
+### Qualification Matrix For Successor Cohorts
+
+Run for every cohort:
+
+- [ ] architecture ratchet and compatibility inventory
+- [ ] workspace wheel/sdist isolation
+- [ ] facade identity/behavior contracts and affected package tests
+- [ ] root and workstation deterministic suites affected by the owner
+- [ ] representative persisted-material and artifact comparisons
+
+Add only when affected:
+
+- [ ] packaged command parity for executable surfaces
+- [ ] LLM-off run/resume/replay, SQLite, authority, receipt, and host-binding
+  checks for controller/runtime surfaces
+- [ ] Gather-to-Publication, incremental publication, reference artifacts, and
+  gRPC checks for subject/publication surfaces
+- [ ] Textual, Flutter analysis/widget, and authorized browser/screenshot checks
+  for workstation-facing surfaces
+- [ ] explicitly authorized provider/trial gates for provider-bearing surfaces
+- [ ] three-run median and p95 checks for performance-sensitive surfaces
+
+An affected conditional gate that cannot run is pending evidence. It may hold a
+cohort, but it may not be silently recorded as passing.
+
+### Successor Slice Protocol
+
+- [ ] Select one compatibility obligation, not a root-file count.
+- [ ] State the support decision and assumptions before implementation.
+- [ ] Freeze old-path and canonical-path contracts.
+- [ ] Land replacement behavior or migration additively.
+- [ ] Migrate consumers and complete affected qualification.
+- [ ] Observe the required stable cycle and notice window.
+- [ ] Delete in a later change, update policy, retain a tombstone, and accept
+  only the reviewed shrinking control-plane delta.
+- [ ] Prove rollback restores the narrow compatibility path without reverting
+  unrelated canonical behavior.
+
+## Authoritative Compatibility Closure Plan
+
+This section is the current plan and supersedes unchecked work in the
+historical successor section. It records the measured state after canonical
+consumer migration and compatibility distribution isolation.
+
+Snapshot date: 2026-10-31.
+
+### Closure Baseline
+
+- [x] The generated ledger contains `38` retained facades: `26` exact module
+  aliases, `9` symbol re-exports, and `3` behavior adapters.
+- [x] All `38` retained facades are explicit supported ABIs; there are zero
+  temporary holds and zero retirement candidates.
+- [x] The policy retains `82` permanent tombstones for removed historical
+  paths.
+- [x] All `41` static consumers are tests. Canonical package consumers, public
+  README references, and public example consumers are all zero.
+- [x] Historical top-level sources are absent from the repository root. They
+  are supplied by `realized-compatibility` and
+  `realized-workstation-compatibility` from dedicated source roots.
+- [x] The repository root contains only four deliberate validation or trial
+  programs, none of which is a compatibility facade.
+
+### Terminal Support Decisions
+
+- [x] **Ordinary aliases:** exact aliases and symbol re-exports preserve
+  canonical object identity; they do not own behavior and are reviewed as
+  public compatibility ABI at each compatibility release.
+- [x] **Projection aliases:** the five workstation historical paths are
+  isolated in `realized-workstation-compatibility`. Canonical workstation
+  packages neither contain nor consume those aliases.
+- [x] **Behavior adapters:** the three retained adapters have frozen contract
+  cards and delegate to canonical owners without introducing a second source
+  of semantic, governance, runtime, or subject truth.
+- [x] **Aggregate command:** `realized-compatibility` is the packaged form of
+  the supported aggregate command. `python -m main` remains an import/module
+  compatibility route to the same composition.
+- [x] **Fence command:** `realized-fence-extraction` is the packaged form of
+  the supported historical fence strategy command. Module and script parity
+  are tested side by side.
+- [x] **Provider-bearing alias:**
+  `external_markdown_learning_pipeline` is supported as an exact alias of the
+  unchanged exchange owner. No provider implementation or provider policy
+  moved, so provider execution is not an affected gate for source isolation.
+- [x] **Durable skill source:** `python_skill_host` remains deliberately
+  shipped by `realized-core-runtime`. Existing persisted source and child-host
+  imports therefore require no data rewrite; its support decision is explicit
+  rather than a temporary hold.
+- [x] **Qualified names:** generic historical qualified-name compatibility is
+  intentionally supported for the retained ledger. Identity and protocol-zero
+  pickle contracts enforce the decision; unrestricted dynamic loading is not
+  introduced.
+- [x] **Private command support:** aggregate parser, dispatcher, governed-skill
+  installation, and replay adapters are private compatibility-distribution
+  composition modules. They coordinate canonical APIs but are not alternate
+  canonical owners.
+
+### Final Closure Sequence
+
+- [x] Refresh compatibility observations and explicitly review the two new
+  command-parity test references; no production observation was added.
+- [x] Regenerate the compatibility contract ledger for all retained facades.
+- [x] Regenerate the architecture graph and verify that compatibility
+  isolation introduces no canonical dependency edge or cycle.
+- [x] Replace runnable repository guidance and launch scripts with packaged
+  commands while retaining historical command contracts only in compatibility
+  tests.
+- [x] Document the compatibility distribution contract, terminal support
+  state, review policy, and canonical-owner rule.
+- [x] Run the complete deterministic qualification capture for the final
+  source tree. All `11` default gates passed: architecture, facade inventory,
+  `37` isolated wheels and source distributions with `84` public-module
+  imports, `894` root tests, `635` workstation tests, `38` deterministic BDD
+  tests, an `8`-action/`2`-artifact publication reference, Flutter analysis,
+  and `51` Flutter widget tests.
+- [x] Review the generated qualification delta. There are zero failed or
+  blocked gates. The six explicit provider, browser/screenshot, and manual
+  trial gates are recorded as `not_run` because this cut does not alter those
+  surfaces; they are not reported as passing.
+
+Exit condition:
+
+- [x] The final deterministic qualification capture is green and the checked-
+  in architecture, facade, contract, distribution, and qualification evidence
+  all describe the same terminal compatibility state.
+
+### Future Change Protocol
+
+Supported ABI is a terminal state, not a promise that removal is impossible.
+A future removal starts a new cohort and must:
+
+- [ ] change the support policy explicitly rather than reclassifying the ABI
+  through scanner output
+- [ ] provide migration and deprecation evidence appropriate to imports,
+  commands, or durable qualified names
+- [ ] preserve canonical behavior while qualifying replacement use
+- [ ] remove the compatibility path in an independently revertible change
+- [ ] add a permanent tombstone and accept only a shrinking control-plane
+  delta

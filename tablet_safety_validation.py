@@ -20,7 +20,7 @@ from realized_validation.sqlite_runtime import (
 
 
 ROOT = Path(__file__).resolve().parent
-MAIN = ROOT / "main.py"
+COMPATIBILITY_CLI = Path(sys.executable).with_name("realized-compatibility")
 LOCAL_ENV = ROOT / "local.env"
 MARKDOWN_SOURCE = ROOT / "LEARN_TABLET_SAFETY.md"
 if not MARKDOWN_SOURCE.exists():
@@ -109,7 +109,7 @@ def run_cli(args: list[str], *, env: dict[str, str]) -> dict[str, Any]:
         dict[str, Any]: Result produced by `run_cli`.
     """
     completed = subprocess.run(
-        [sys.executable, str(MAIN), *args],
+        [str(COMPATIBILITY_CLI), *args],
         cwd=str(ROOT),
         env=env,
         capture_output=True,

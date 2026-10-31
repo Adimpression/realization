@@ -47,16 +47,16 @@ The imported bundle can be exercised with:
 ```bash
 export STATE_SQLITE_PATH=reports/statistical_bundle_from_learned_db_20260325_225632/import_fixed.sqlite3
 
-python3 main.py run --prompt 'Python script?' --llm off --max-steps 24
-python3 main.py run --prompt 'Write a Python script that computes the z-score for x=12, mean=10, std=2.' --llm off --max-steps 24
-python3 main.py run --prompt 'If x=14, mean=11, and std=1.5, what z-score would your script produce?' --llm off --max-steps 24
+uv run realized-compatibility run --prompt 'Python script?' --llm off --max-steps 24
+uv run realized-compatibility run --prompt 'Write a Python script that computes the z-score for x=12, mean=10, std=2.' --llm off --max-steps 24
+uv run realized-compatibility run --prompt 'If x=14, mean=11, and std=1.5, what z-score would your script produce?' --llm off --max-steps 24
 ```
 
 The bundle can be loaded into another database with:
 
 ```bash
 export STATE_SQLITE_PATH=/path/to/new.sqlite3
-python3 main.py artifact-import \
+uv run realized-compatibility artifact-import \
   --artifact-file reports/statistical_bundle_from_learned_db_20260325_225632/GAIN_STATISTICAL_PYTHON_SCRIPT_WRITING_EXPERTISE.yaml \
   --normalized-out-dir reports/statistical_bundle_from_learned_db_20260325_225632/normalized_dir
 ```

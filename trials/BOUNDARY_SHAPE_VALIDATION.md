@@ -58,7 +58,7 @@ unset STATE_DB_URL STATE_DB_HOST STATE_DB_PORT STATE_DB_USER STATE_DB_PASSWORD S
 Import the fixtures:
 
 ```bash
-python3 main.py artifact-import \
+uv run realized-compatibility artifact-import \
   --artifact-dir tests/fixtures/boundary_shape_artifacts \
   --normalized-out-dir reports/boundary_shape_manual_normalized
 ```
@@ -72,10 +72,10 @@ printf 'hi from file\n' > /tmp/boundary_shape_greeting.txt
 Run the prompts:
 
 ```bash
-python3 main.py run --prompt "Say hi." --llm off --max-steps 24
-python3 main.py run --prompt "Say hi to name='Ada'." --llm off --max-steps 24
-python3 main.py run --prompt "Read the greeting from path='/tmp/boundary_shape_greeting.txt'." --llm off --max-steps 24
-python3 main.py run --prompt "Send an email to recipient='alice@example.com' message='hi'." --llm off --max-steps 24
+uv run realized-compatibility run --prompt "Say hi." --llm off --max-steps 24
+uv run realized-compatibility run --prompt "Say hi to name='Ada'." --llm off --max-steps 24
+uv run realized-compatibility run --prompt "Read the greeting from path='/tmp/boundary_shape_greeting.txt'." --llm off --max-steps 24
+uv run realized-compatibility run --prompt "Send an email to recipient='alice@example.com' message='hi'." --llm off --max-steps 24
 ```
 
 Expected top-level `final_answer` values:
@@ -92,7 +92,7 @@ simulated send to alice@example.com: hi
 To prove the correct artifact fired, save state and inspect the evidence context:
 
 ```bash
-python3 main.py run \
+uv run realized-compatibility run \
   --prompt "Send an email to recipient='alice@example.com' message='hi'." \
   --llm off \
   --max-steps 24 \
@@ -102,7 +102,7 @@ python3 main.py run \
 Then inspect:
 
 ```bash
-python3 main.py inspect \
+uv run realized-compatibility inspect \
   --state reports/boundary_shape_manual_email.json
 ```
 

@@ -4,8 +4,6 @@ from __future__ import annotations
 import json
 import os
 import shutil
-import subprocess
-import sys
 import tempfile
 import time
 from datetime import datetime
@@ -84,26 +82,6 @@ from workstation.foundation.projections import (
     workstation_workflow_graph_view,
 )
 from workstation.skills.core.skill_invocation import list_available_workstation_skills, resolve_workstation_skill
-
-
-def _repo_root() -> Path:
-    resolved = Path(__file__).resolve()
-    for parent in resolved.parents:
-        if (parent / "pyproject.toml").exists() and (parent / "main.py").exists():
-            return parent
-    return resolved.parents[6]
-
-
-def _runtime_cli_command(*arguments: str) -> list[str]:
-    if getattr(sys, "frozen", False):
-        return [sys.executable, *arguments]
-    return [sys.executable, str(_repo_root() / "main.py"), *arguments]
-
-
-def _runtime_cli_cwd() -> str:
-    if getattr(sys, "frozen", False):
-        return str(Path.cwd())
-    return str(_repo_root())
 
 
 def _normalized_learning_report(report: dict[str, Any]) -> dict[str, Any]:
@@ -203,6 +181,8 @@ def _learn_markdown_bundle_in_process(
     bundle_output_path: Path,
     max_artifacts: int = 8,
     source_bundle_override: dict[str, Any] | None = None,
+    llm_policy: str = "auto",
+    vector_mode: str | None = None,
 ) -> dict[str, Any]:
     from workstation.foundation.host.controller_runtime import controller_runtime_provider
 
@@ -213,6 +193,8 @@ def _learn_markdown_bundle_in_process(
         bundle_output_path=Path(bundle_output_path).expanduser().resolve(),
         max_artifacts=max(1, int(max_artifacts)),
         source_bundle_override=source_bundle_override,
+        llm_policy=str(llm_policy or "auto"),
+        vector_mode=vector_mode,
     )
     return _normalized_learning_report(report)
 
@@ -916,57 +898,39 @@ def workstation_learn_markdown_action(
                 source_markdown_path
             )
         )
-        report_path = tempdir / "report.json"
         _emit_progress("Converting markdown to a portable skill bundle...")
-        command = _runtime_cli_command(
-            "convert-markdown-to-yaml",
-            "--markdown-file",
-            str(source_markdown_path),
-            "--out",
-            str(learned_bundle_path),
-            "--report-out",
-            str(report_path),
-            "--max-artifacts",
-            str(max(1, int(max_artifacts))),
-        )
-        if testing_lightweight:
-            command.extend(["--llm", "off"])
-        command_env = dict(os.environ)
-        command_env["LEARNING_CONTEXT_ROOT"] = learning_context_root
-        if testing_lightweight:
-            command_env["STATE_VECTOR_MODE"] = "off"
-            command_env["LLM_SUPPLEMENT_POLICY"] = "off"
-        process = subprocess.run(
-            command,
-            capture_output=True,
-            text=True,
-            cwd=_runtime_cli_cwd(),
-            env=command_env,
-        )
-        if process.returncode != 0:
+        try:
+            report = _learn_markdown_bundle_in_process(
+                root_path=root,
+                markdown_path=source_markdown_path,
+                source_label=source_markdown_path.stem,
+                bundle_output_path=learned_bundle_path,
+                max_artifacts=max_artifacts,
+                llm_policy=(
+                    "off"
+                    if testing_lightweight
+                    else os.getenv("LLM_SUPPLEMENT_POLICY", "auto")
+                ),
+                vector_mode="off" if testing_lightweight else None,
+            )
+        except Exception as exc:
             _emit_progress("Markdown conversion failed.")
             return WorkstationActionResultView(
                 action_kind="learn_markdown",
                 status="error",
                 title="Learn Markdown",
                 message=_short_preview(
-                    collapse_ws(process.stderr) or collapse_ws(process.stdout) or "Markdown learning failed.",
+                    collapse_ws(str(exc)) or "Markdown learning failed.",
                     limit=240,
                 ),
                 details=tuple(
                     item
                     for item in (
                         f"Markdown: {source_markdown_path}",
-                        f"Command: {' '.join(command)}",
                         f"LearningContext root: {learning_context_root}",
                     )
                 ),
             )
-        if report_path.exists():
-            try:
-                report = json.loads(report_path.read_text())
-            except Exception:
-                report = {}
         _emit_progress("Staging learned bundle for workstation import...")
         staged_relative_path = Path("learned_markdown") / learned_bundle_path.name
         staged_source_path = root / staged_relative_path

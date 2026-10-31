@@ -52,10 +52,12 @@ dependencies = [
     "realized-core-conversation",
     "realized-core-llm",
     "realized-validation",
+    "realized-compatibility",
     "coordinated-transformation==0.1.0",
     "dst==0.1.0",
     "realized-core",
     "realized-workstation",
+    "realized-workstation-compatibility",
     "realized-workstation-contracts",
     "realized-workstation-foundation-models",
     "realized-workstation-foundation-projections",
@@ -88,6 +90,7 @@ package = false
 members = [
     "blend",
     "blend_application",
+    "compatibility_api",
     "coordinated_transformation",
     "dst",
     "exchange",
@@ -103,6 +106,7 @@ members = [
     "skill_semantics",
     "validation",
     "workstation/app_cli",
+    "workstation/compatibility_api",
     "workstation/contracts_api",
     "workstation/foundation_events",
     "workstation/foundation_host",
@@ -126,6 +130,7 @@ members = [
 [tool.uv.sources]
 realized-blend = { workspace = true }
 realized-blend-application = { workspace = true }
+realized-compatibility = { workspace = true }
 realized-exchange = { workspace = true }
 coordinated-transformation = { workspace = true }
 dst = { workspace = true }
@@ -141,6 +146,7 @@ realized-core-llm = { workspace = true }
 realized-core-runtime = { workspace = true }
 realized-validation = { workspace = true }
 realized-workstation = { workspace = true }
+realized-workstation-compatibility = { workspace = true }
 realized-workstation-contracts = { workspace = true }
 realized-workstation-foundation-models = { workspace = true }
 realized-workstation-foundation-projections = { workspace = true }

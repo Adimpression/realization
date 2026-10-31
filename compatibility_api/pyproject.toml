@@ -1,0 +1,106 @@
+[project]
+name = "realized-compatibility"
+version = "0.1.0"
+description = "Supported historical Python import and command compatibility for Realization."
+readme = "README.md"
+requires-python = ">=3.14"
+authors = [{ name = "Ravindranath Akila" }]
+maintainers = [{ name = "Adimpression", email = "talktome@adimpression.mobi" }]
+license = "Apache-2.0"
+dependencies = [
+    "realized-blend==0.1.0",
+    "realized-blend-application==0.1.0",
+    "realized-core-engine==0.1.0",
+    "realized-core-governance==0.1.0",
+    "realized-core-runtime==0.1.0",
+    "realized-core-semantics==0.1.0",
+    "realized-exchange==0.1.0",
+    "realized-host-interaction==0.1.0",
+    "realized-skill-application==0.1.0",
+    "realized-skill-semantics==0.1.0",
+    "realized-validation==0.1.0",
+    "realized-workstation-app-cli==0.1.0",
+    "realized-workstation-runtime-core==0.1.0",
+    "realized-workstation-skills-core==0.1.0",
+    "realized-workstation-subject-core==0.1.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/Adimpression/realization"
+Repository = "https://github.com/Adimpression/realization"
+Issues = "https://github.com/Adimpression/realization/issues"
+
+[project.scripts]
+realized-compatibility = "controller_entrypoints:main"
+realized-fence-extraction = "fence_extraction_strategy:main"
+
+[build-system]
+requires = ["setuptools>=77.0.3", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+py-modules = [
+    "applied_theory_types",
+    "approval_governance",
+    "args",
+    "blend_context",
+    "blend_operator",
+    "blend_operator_store",
+    "blend_session",
+    "blend_workflow_execution",
+    "blend_workflow_models",
+    "blend_world_models",
+    "controller_entrypoints",
+    "data_governance",
+    "decision_review",
+    "decision_review_constructs",
+    "decision_review_models",
+    "execution_framework_primitives",
+    "execution_frameworks",
+    "external_markdown_learning_pipeline",
+    "fence_extraction_strategy",
+    "governance_inventory",
+    "governed_skill_installation",
+    "host_mediation",
+    "itemize",
+    "itemize_models",
+    "learning_context",
+    "learning_context_paths",
+    "main",
+    "markdown_ir",
+    "pure_theory_types",
+    "replay_verifier",
+    "review_composition",
+    "skill_boundary_normalization",
+    "skill_composition",
+    "skill_governance",
+    "skill_governance_primitives",
+    "skill_invocation_contract",
+    "skill_ir",
+    "skill_leaf_types",
+    "skill_lifecycle",
+    "skill_path_notation",
+    "skill_safety_governance",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["realized_compatibility"]
+
+[tool.uv.sources]
+realized-blend = { workspace = true }
+realized-blend-application = { workspace = true }
+realized-core-engine = { workspace = true }
+realized-core-governance = { workspace = true }
+realized-core-runtime = { workspace = true }
+realized-core-semantics = { workspace = true }
+realized-exchange = { workspace = true }
+realized-host-interaction = { workspace = true }
+realized-skill-application = { workspace = true }
+realized-skill-semantics = { workspace = true }
+realized-validation = { workspace = true }
+realized-workstation-app-cli = { workspace = true }
+realized-workstation-runtime-core = { workspace = true }
+realized-workstation-skills-core = { workspace = true }
+realized-workstation-subject-core = { workspace = true }

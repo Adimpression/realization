@@ -103,25 +103,25 @@ Expected properties:
 Start a fresh run:
 
 ```bash
-python3 main.py run --prompt '<PROMPT>' --max-steps 24 --llm required --state-out /tmp/<NAME>.json
+uv run realized-compatibility run --prompt '<PROMPT>' --max-steps 24 --llm required --state-out /tmp/<NAME>.json
 ```
 
 Resume a saved run:
 
 ```bash
-python3 main.py resume --state-in /tmp/<NAME>.json --evidence-file /tmp/<EVIDENCE>.json --max-steps 24 --llm required --state-out /tmp/<NAME>_resumed.json
+uv run realized-compatibility resume --state-in /tmp/<NAME>.json --evidence-file /tmp/<EVIDENCE>.json --max-steps 24 --llm required --state-out /tmp/<NAME>_resumed.json
 ```
 
 Inspect a saved run:
 
 ```bash
-python3 main.py inspect --state /tmp/<NAME>.json
+uv run realized-compatibility inspect --state /tmp/<NAME>.json
 ```
 
 Static sanity check:
 
 ```bash
-python3 -m py_compile main.py
+uv run python -m py_compile compatibility_api/src/main.py
 ```
 
 Run the five-turn governed conversation characterization trial:
@@ -137,7 +137,7 @@ and logical-LLM-request versus controller timing separately. See
 Layered acceptance ladder:
 
 ```bash
-python3 main.py validation-ladder --workspace .
+uv run realized-compatibility validation-ladder --workspace .
 ```
 
 This command runs the acceptance ladder in order:
@@ -157,7 +157,7 @@ directory. Disable that with `VALIDATION_SQLITE_USE_RAMDISK=0`, or override the
 runtime root with `VALIDATION_SQLITE_ROOT=/absolute/path`.
 
 Repeated direct replays against one archived learned SQLite are diagnostic, not
-acceptance evidence. `main.py run --sqlite ...` mutates that store, so
+acceptance evidence. `realized-compatibility run --sqlite ...` mutates that store, so
 acceptance should come from a fresh runtime store. If a fresh provider-backed
 validator remains unresolved after seam-level replay sentinels are green,
 record the latest completed report and continue to the next planned workstream

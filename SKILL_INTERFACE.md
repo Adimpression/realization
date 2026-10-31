@@ -620,7 +620,7 @@ Those fields are optional on import, but when present they survive import/export
 Export one skill:
 
 ```bash
-python3 main.py export-skill \
+uv run realized-compatibility export-skill \
   --skill-title "What Is Force?" \
   --sqlite state/common.sqlite3
 ```
@@ -628,7 +628,7 @@ python3 main.py export-skill \
 Export the local governed registry index:
 
 ```bash
-python3 main.py export-skill-registry \
+uv run realized-compatibility export-skill-registry \
   --out /tmp/skill-registry.yaml \
   --sqlite state/common.sqlite3
 ```
@@ -636,7 +636,7 @@ python3 main.py export-skill-registry \
 Import one skill:
 
 ```bash
-python3 main.py import-skill \
+uv run realized-compatibility import-skill \
   --skill-file /tmp/force.skill.yaml \
   --sqlite state/common.sqlite3
 ```
@@ -644,7 +644,7 @@ python3 main.py import-skill \
 Batch export:
 
 ```bash
-python3 main.py export-skill \
+uv run realized-compatibility export-skill \
   --skill-titles-file /tmp/skill_titles.json \
   --out-dir /tmp/skills \
   --sqlite state/common.sqlite3
@@ -653,7 +653,7 @@ python3 main.py export-skill \
 Batch import:
 
 ```bash
-python3 main.py import-skill \
+uv run realized-compatibility import-skill \
   --skill-dir /tmp/skills \
   --normalized-out-dir /tmp/normalized_skills \
   --sqlite state/common.sqlite3

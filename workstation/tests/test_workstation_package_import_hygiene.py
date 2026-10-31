@@ -69,8 +69,8 @@ REMOVED_FLET_PATHS = (
 )
 SUPPORTED_CLIENT_DRIFT_PATHS = (
     REPO_ROOT / "pyproject.toml",
-    REPO_ROOT / "args.py",
-    REPO_ROOT / "controller_entrypoints.py",
+    REPO_ROOT / "compatibility_api" / "src" / "args.py",
+    REPO_ROOT / "compatibility_api" / "src" / "controller_entrypoints.py",
     WORKSTATION_ROOT / "WORKSTATION.md",
     WORKSTATION_ROOT / "RESEARCH_AND_PUBLISH_FLOW.md",
     WORKSTATION_ROOT / "RESEARCH_AND_PUBLISH_FLOW_IMPLEMENTATION.md",
@@ -84,7 +84,9 @@ def iter_repo_python_files() -> list[Path]:
     paths: list[Path] = []
     for base in (REPO_ROOT / "workstation", REPO_ROOT / "tests"):
         paths.extend(path for path in base.rglob("*.py") if "__pycache__" not in path.parts)
-    paths.append(REPO_ROOT / "controller_entrypoints.py")
+    paths.append(
+        REPO_ROOT / "compatibility_api" / "src" / "controller_entrypoints.py"
+    )
     paths.append(REPO_ROOT / "tests" / "test_host_interaction_context.py")
     paths.append(REPO_ROOT / "tests" / "test_host_mediation.py")
     return sorted(dict.fromkeys(path for path in paths if path.exists()))

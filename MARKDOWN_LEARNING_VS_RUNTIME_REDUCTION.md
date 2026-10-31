@@ -24,8 +24,8 @@ Main functions:
 - [reduce_not()](governed_semantic_reduction_runtime.py#L216)
 
 When it is used:
-- `main.py run`
-- `main.py resume`
+- `realized-core run`
+- `realized-core resume`
 - any live governed prompt resolution path
 
 Why it exists:
@@ -48,7 +48,7 @@ Main function:
 - [learn_from_markdown_document()](external_markdown_learning_pipeline.py#L277)
 
 When it is used:
-- `main.py markdown-learn`
+- `realized-compatibility markdown-learn`
 - trial corpus learning from `.md` lessons
 
 Why it exists:

@@ -348,28 +348,26 @@ class RepositoryArchitectureBoundaryTest(unittest.TestCase):
             {path.stem for path in REPO_ROOT.glob("*.py") if path.is_file()},
             set(root_ownership),
         )
-        for module in (
-            "blend_operator_store",
-            "blend_workflow_execution",
-        ):
-            with self.subTest(module=module):
-                self.assertEqual(
-                    ("blend", ("compatibility_facade",)),
-                    root_ownership[module],
-                )
-        for module in (
-            "skill_boundary_normalization",
-            "skill_composition",
-            "skill_ir",
-        ):
-            with self.subTest(module=module):
-                self.assertEqual(
-                    ("portable_skills", ("compatibility_facade",)),
-                    root_ownership[module],
-                )
         self.assertEqual(
-            ("entry_exchange", ("compatibility_facade", "entrypoint")),
-            root_ownership["main"],
+            {
+                "SEMANTIC_RELATION_VALIDATION": (
+                    "validation_trial",
+                    ("validation",),
+                ),
+                "TRIAL_DOMAIN_VALIDATION": (
+                    "validation_trial",
+                    ("validation",),
+                ),
+                "tablet_safety_validation": (
+                    "validation_trial",
+                    ("validation",),
+                ),
+                "title_depth_learning_validation": (
+                    "validation_trial",
+                    ("validation",),
+                ),
+            },
+            root_ownership,
         )
         root_package_ownership = {
             row["package"]: (row["owner"], tuple(row["statuses"]))
@@ -393,21 +391,10 @@ class RepositoryArchitectureBoundaryTest(unittest.TestCase):
         self.assertEqual(
             [], measured["baseline"]["canonical_root_facade_imports"]
         )
-        self.assertTrue(
-            measured["baseline"]["forbidden_root_owner_dependencies"]
-        )
         self.assertEqual(
-            {
-                ("foundation_events", "runtime_core"),
-                ("foundation_host", "runtime_core"),
-                ("foundation_host", "subject_service"),
-                ("shell_core", "contracts"),
-            },
-            {
-                (row["source"], row["target"])
-                for row in measured["baseline"]["compatibility_edges"]
-            },
+            [], measured["baseline"]["forbidden_root_owner_dependencies"]
         )
+        self.assertEqual([], measured["baseline"]["compatibility_edges"])
         self.assertEqual(
             [],
             measured["components"]["contracts"]["project"]["project"].get(
@@ -576,6 +563,26 @@ class RepositoryArchitectureBoundaryTest(unittest.TestCase):
         self.assertIn("## Root-Package-to-Component Dependencies", report)
         self.assertIn("## Root-Package-to-Module Dependencies", report)
         self.assertIn("## Root-Package-to-Package Dependencies", report)
+        self.assertIn("## Remaining Architecture Obligations", report)
+        obligations = measured["remaining_obligations"]
+        self.assertEqual(
+            [], obligations["forbidden_root_owner_dependencies"]
+        )
+        self.assertEqual(5, len(obligations["package_compatibility_aliases"]))
+        self.assertEqual(
+            {"supported"},
+            {
+                row["support_class"]
+                for row in obligations["package_compatibility_aliases"]
+            },
+        )
+        self.assertEqual(
+            {"workstation_compatibility"},
+            {
+                row["source_component"]
+                for row in obligations["package_compatibility_aliases"]
+            },
+        )
 
 
 class ArchitectureBoundaryRatchetTest(unittest.TestCase):
@@ -818,6 +825,96 @@ class ArchitectureBoundaryRatchetTest(unittest.TestCase):
             any(regression.startswith("new wildcard export:") for regression in regressions)
         )
 
+    def test_unobserved_allowed_dependency_requires_dynamic_contract(self) -> None:
+        self.manifest["components"]["a"]["allowed_dependencies"] = ["b"]
+
+        current = architecture.analyze(self.root, self.manifest)["baseline"]
+
+        self.assertEqual(
+            [{"source": "a", "target": "b"}],
+            current["unobserved_allowed_dependencies"],
+        )
+        self.assertIn(
+            "unobserved allowed dependency lacks a dynamic contract: a -> b",
+            architecture.compare(current, current),
+        )
+
+    def test_dynamic_dependency_contract_requires_named_existing_evidence(self) -> None:
+        self.manifest["components"]["a"]["allowed_dependencies"] = ["b"]
+        evidence = self.root / "tests" / "test_dynamic_boundary.py"
+        evidence.parent.mkdir()
+        evidence.write_text("# executable contract placeholder\n", encoding="utf-8")
+        self.manifest["dynamic_dependency_contracts"] = [
+            {
+                "source": "a",
+                "target": "b",
+                "reason": "Loaded by the test plugin registry.",
+                "evidence": ["tests/test_dynamic_boundary.py"],
+            }
+        ]
+
+        current = architecture.analyze(self.root, self.manifest)["baseline"]
+
+        self.assertEqual([], current["unobserved_allowed_dependencies"])
+        self.assertEqual([], current["stale_dynamic_dependency_contracts"])
+        self.assertEqual(
+            [
+                {
+                    "source": "a",
+                    "target": "b",
+                    "reason": "Loaded by the test plugin registry.",
+                    "evidence": ["tests/test_dynamic_boundary.py"],
+                }
+            ],
+            current["dynamic_dependency_contracts"],
+        )
+        self.assertEqual([], architecture.compare(current, current))
+
+    def test_static_import_makes_dynamic_dependency_contract_stale(self) -> None:
+        self.manifest["components"]["a"]["allowed_dependencies"] = ["b"]
+        evidence = self.root / "tests" / "test_dynamic_boundary.py"
+        evidence.parent.mkdir()
+        evidence.write_text("# executable contract placeholder\n", encoding="utf-8")
+        self.manifest["dynamic_dependency_contracts"] = [
+            {
+                "source": "a",
+                "target": "b",
+                "reason": "Loaded by the test plugin registry.",
+                "evidence": ["tests/test_dynamic_boundary.py"],
+            }
+        ]
+        self._package_file("a", "example.a").write_text(
+            "from example.b import VALUE\n", encoding="utf-8"
+        )
+
+        current = architecture.analyze(self.root, self.manifest)["baseline"]
+
+        self.assertEqual(
+            [{"source": "a", "target": "b"}],
+            current["stale_dynamic_dependency_contracts"],
+        )
+        self.assertIn(
+            "dynamic dependency contract became stale: a -> b",
+            architecture.compare(current, current),
+        )
+
+    def test_dynamic_dependency_contract_rejects_missing_evidence(self) -> None:
+        self.manifest["components"]["a"]["allowed_dependencies"] = ["b"]
+        self.manifest["dynamic_dependency_contracts"] = [
+            {
+                "source": "a",
+                "target": "b",
+                "reason": "Loaded by the test plugin registry.",
+                "evidence": ["tests/missing.py"],
+            }
+        ]
+
+        with self.assertRaisesRegex(
+            architecture.ArchitectureConfigurationError,
+            "missing evidence: tests/missing.py",
+        ):
+            architecture.analyze(self.root, self.manifest)
+
     def test_smaller_cycle_is_an_improvement_not_a_regression(self) -> None:
         baseline = {
             "schema_version": 1,
@@ -852,6 +949,88 @@ class ArchitectureBoundaryRatchetTest(unittest.TestCase):
             current["compatibility_edges"],
         )
         self.assertIn("new compatibility-alias edge: a -> b", regressions)
+
+    def test_supported_alias_in_compatibility_component_is_a_declared_edge(self) -> None:
+        compatibility_path = self._package_file("a", "example.a")
+        relative_path = compatibility_path.relative_to(self.root).as_posix()
+        compatibility_path.write_text(
+            "from example.b import VALUE\n", encoding="utf-8"
+        )
+        (self.root / "workstation" / "a" / "pyproject.toml").write_text(
+            textwrap.dedent(
+                """
+                [project]
+                name = "example-a"
+                version = "0.0.0"
+                dependencies = ["example-b"]
+                """
+            ).strip()
+            + "\n",
+            encoding="utf-8",
+        )
+        self.manifest["components"]["a"]["layer"] = "compatibility"
+        self.manifest["components"]["a"]["allowed_dependencies"] = ["b"]
+        self.manifest["components"]["a"]["distribution_import_modules"] = [
+            "example.a"
+        ]
+        self.manifest["compatibility_alias_globs"] = [relative_path]
+        self.manifest["remaining_obligations_path"] = (
+            "architecture/remaining-architecture-obligations.toml"
+        )
+        (self.root / self.manifest["remaining_obligations_path"]).write_text(
+            textwrap.dedent(
+                f"""
+                schema_version = 1
+
+                [[package_compatibility_aliases]]
+                id = "supported-example-alias"
+                path = "{relative_path}"
+                legacy_module = "example.a"
+                canonical_module = "example.b"
+                source_component = "a"
+                target_component = "b"
+                exported_identities = ["VALUE"]
+                consumer_evidence = ["{relative_path}"]
+                durable_name_exposure = "none"
+                support_class = "supported"
+                behavior_contract = "The historical import resolves to VALUE."
+                review_condition = "Review at each minor release."
+                rollback = "Restore the supported alias distribution."
+                """
+            ).strip()
+            + "\n",
+            encoding="utf-8",
+        )
+
+        current = architecture.analyze(self.root, self.manifest)["baseline"]
+
+        self.assertEqual([{"source": "a", "target": "b"}], current["actual_edges"])
+        self.assertEqual([], current["compatibility_edges"])
+        self.assertEqual([], current["forbidden_edges"])
+        self.assertEqual([], current["undeclared_dependencies"])
+        self.assertEqual([], current["unobserved_allowed_dependencies"])
+
+    def test_configured_alias_requires_matching_obligation_ledger(self) -> None:
+        compatibility_path = self._package_file("a", "example.a")
+        compatibility_path.write_text(
+            "from example.b import VALUE\n", encoding="utf-8"
+        )
+        self.manifest["compatibility_alias_globs"] = [
+            compatibility_path.relative_to(self.root).as_posix()
+        ]
+        self.manifest["remaining_obligations_path"] = (
+            "architecture/remaining-architecture-obligations.toml"
+        )
+        (self.root / self.manifest["remaining_obligations_path"]).write_text(
+            "schema_version = 1\n",
+            encoding="utf-8",
+        )
+
+        with self.assertRaisesRegex(
+            architecture.ArchitectureConfigurationError,
+            "package compatibility alias obligation ledger does not match",
+        ):
+            architecture.analyze(self.root, self.manifest)
 
     def test_new_root_to_component_dependency_is_rejected(self) -> None:
         baseline = architecture.analyze(self.root, self.manifest)["baseline"]

@@ -10,7 +10,6 @@ dependencies = [
     "realized-workstation",
     "realized-workstation-contracts",
     "realized-workstation-foundation-models",
-    "realized-workstation-subject-service",
 ]
 
 [tool.uv.sources]

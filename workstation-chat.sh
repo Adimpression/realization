@@ -1,5 +1,5 @@
 source local.env
-uv run python ./main.py workstation-chat \
+uv run realized-workstation chat \
   --max-tool-rounds 30 \
   --root ./ram/tmp/workstation-root
 

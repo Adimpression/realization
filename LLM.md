@@ -775,19 +775,19 @@ Persistence failure does not overturn the governed run outcome.
 Run a fresh task:
 
 ```bash
-python main.py run --prompt "..." --llm auto
+uv run realized-core run --prompt "..." --llm auto
 ```
 
 Resume a saved task:
 
 ```bash
-python main.py resume --state-in run_state.json --llm auto
+uv run realized-core resume --state-in run_state.json --llm auto
 ```
 
 Inspect saved state:
 
 ```bash
-python main.py inspect --state run_state.json
+uv run realized-core inspect --state run_state.json
 ```
 
 Useful optional flags:
@@ -796,7 +796,7 @@ Useful optional flags:
 - `--state-out`
 - `--max-steps`
 
-The run summary emitted by `main.py` includes:
+The run summary emitted by `realized-core` includes:
 
 - the supplement profile under `llm`
 - run outcome

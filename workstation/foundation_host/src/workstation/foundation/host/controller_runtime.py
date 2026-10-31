@@ -27,7 +27,7 @@ def controller_runtime_provider() -> ControllerRuntimeProvider:
     if provider is None:
         raise RuntimeError(
             "The controller runtime provider is not configured. "
-            "Start the application through main.py or register a provider explicitly."
+            "Start the application through realized-workstation or register a provider explicitly."
         )
     return provider
 

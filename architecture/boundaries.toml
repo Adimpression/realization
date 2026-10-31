@@ -14,6 +14,7 @@ report_path = "architecture/DEPENDENCY_REPORT.md"
 compatibility_inventory_path = "architecture/compatibility-facades.json"
 compatibility_policy_path = "architecture/compatibility-facade-policy.json"
 compatibility_contract_path = "architecture/compatibility-facade-contracts.json"
+remaining_obligations_path = "architecture/remaining-architecture-obligations.toml"
 root_module_glob = "*.py"
 root_package_excludes = ["tests", "workstation"]
 exclude_globs = [
@@ -31,12 +32,19 @@ exclude_globs = [
   "tests/**",
 ]
 compatibility_alias_globs = [
-  "workstation/foundation_events/src/workstation/foundation/events/subscriber_controllers.py",
-  "workstation/foundation_host/src/workstation/foundation/host/client_sessions.py",
-  "workstation/foundation_host/src/workstation/foundation/host/learning_capture.py",
-  "workstation/foundation_host/src/workstation/foundation/host/llm_driver.py",
-  "workstation/shell_core/src/workstation/shell/core/shell_prompt_routing.py",
+  "workstation/compatibility_api/src/workstation/foundation/events/subscriber_controllers.py",
+  "workstation/compatibility_api/src/workstation/foundation/host/client_sessions.py",
+  "workstation/compatibility_api/src/workstation/foundation/host/learning_capture.py",
+  "workstation/compatibility_api/src/workstation/foundation/host/llm_driver.py",
+  "workstation/compatibility_api/src/workstation/shell/core/shell_prompt_routing.py",
 ]
+
+# A dependency with no static import is not an ambient permission. If a future
+# plugin or generated boundary requires one, record its source, target, reason,
+# and executable evidence here. The checker rejects all other unobserved
+# allowances and rejects contracts that become stale after a static import is
+# introduced.
+dynamic_dependency_contracts = []
 
 [compatibility_retirement]
 minimum_stable_qualification_cycles = 1
@@ -50,45 +58,9 @@ qualification_evidence = "architecture/qualification-baseline.json"
 [root_boundary_classification]
 default = "orchestration"
 pure_helper_modules = []
-dto_constant_modules = [
-  "applied_theory_types",
-  "decision_review_models",
-  "itemize_models",
-]
-persistence_modules = [
-  "store",
-]
-compatibility_modules = [
-  "approval_governance",
-  "blend_context",
-  "blend_operator",
-  "blend_operator_store",
-  "blend_session",
-  "blend_workflow_execution",
-  "blend_workflow_models",
-  "blend_world_models",
-  "data_governance",
-  "controller_entrypoint_binding",
-  "controller_governance_bridge",
-  "controller_runtime",
-  "controller_runtime_binding",
-  "external_markdown_learning_pipeline",
-  "host_mediation",
-  "markdown_learning_artifact_semantics",
-  "pure_theory_types",
-  "review_composition",
-  "runtime_controller_api",
-  "skill_governance_primitives",
-  "skill_governance",
-  "skill_boundary_normalization",
-  "skill_composition",
-  "skill_ir",
-  "skill_invocation_contract",
-  "skill_leaf_types",
-  "skill_lifecycle",
-  "skill_path_notation",
-  "skill_safety_governance",
-]
+dto_constant_modules = []
+persistence_modules = []
+compatibility_modules = []
 
 # Every repository-root Python module has one explicit architectural
 # responsibility. This is a target ownership ledger, not permission for the
@@ -96,72 +68,17 @@ compatibility_modules = [
 # root_module_status so compatibility facades are still attributed to the
 # responsibility whose API they preserve.
 [root_module_ownership]
-semantic_model = [
-  "applied_theory_types",
-  "pure_theory_types",
-]
-portable_skills = [
-  "skill_boundary_normalization",
-  "skill_composition",
-  "skill_invocation_contract",
-  "skill_ir",
-  "skill_leaf_types",
-  "skill_path_notation",
-]
-governance = [
-  "approval_governance",
-  "data_governance",
-  "governed_skill_installation",
-  "replay_verifier",
-  "skill_governance",
-  "skill_governance_primitives",
-  "skill_lifecycle",
-  "skill_safety_governance",
-]
-runtime_execution = [
-  "execution_framework_primitives",
-  "execution_frameworks",
-  "fence_extraction_strategy",
-  "host_mediation",
-  "python_skill_host",
-]
-controller = [
-  "controller_runtime",
-  "governance_inventory",
-]
+semantic_model = []
+portable_skills = []
+governance = []
+runtime_execution = []
+controller = []
 llm = []
-subject_domain = [
-  "decision_review",
-  "decision_review_constructs",
-  "decision_review_models",
-  "itemize",
-  "itemize_models",
-  "learning_context_paths",
-  "markdown_ir",
-  "review_composition",
-]
-blend = [
-  "blend_context",
-  "blend_operator",
-  "blend_operator_store",
-  "blend_session",
-  "blend_workflow_execution",
-  "blend_workflow_models",
-  "blend_world_models",
-]
-entry_exchange = [
-  "args",
-  "controller_entrypoint_binding",
-  "controller_entrypoints",
-  "external_markdown_learning_pipeline",
-  "learning_context",
-  "main",
-  "runtime_controller_api",
-]
+subject_domain = []
+blend = []
+entry_exchange = []
 persistence_adapter = []
-compatibility = [
-  "normalize",
-]
+compatibility = []
 validation_trial = [
   "SEMANTIC_RELATION_VALIDATION",
   "TRIAL_DOMAIN_VALIDATION",
@@ -172,63 +89,14 @@ validation_trial = [
 # Status is independent of ownership. A module may have more than one status;
 # main.py is both the historical import facade and an executable entrypoint.
 [root_module_status]
-entrypoint_modules = [
-  "args",
-  "controller_entrypoints",
-  "governed_skill_installation",
-  "main",
-  "replay_verifier",
-]
+entrypoint_modules = []
 validation_modules = [
   "SEMANTIC_RELATION_VALIDATION",
   "TRIAL_DOMAIN_VALIDATION",
   "tablet_safety_validation",
   "title_depth_learning_validation",
 ]
-compatibility_facade_modules = [
-  "applied_theory_types",
-  "approval_governance",
-  "blend_context",
-  "blend_operator",
-  "blend_operator_store",
-  "blend_session",
-  "blend_workflow_execution",
-  "blend_workflow_models",
-  "blend_world_models",
-  "controller_entrypoint_binding",
-  "controller_runtime",
-  "data_governance",
-  "decision_review",
-  "decision_review_constructs",
-  "decision_review_models",
-  "execution_framework_primitives",
-  "execution_frameworks",
-  "external_markdown_learning_pipeline",
-  "fence_extraction_strategy",
-  "governance_inventory",
-  "host_mediation",
-  "itemize",
-  "itemize_models",
-  "learning_context",
-  "learning_context_paths",
-  "main",
-  "markdown_ir",
-  "normalize",
-  "pure_theory_types",
-  "python_skill_host",
-  "review_composition",
-  "runtime_controller_api",
-  "skill_governance_primitives",
-  "skill_governance",
-  "skill_boundary_normalization",
-  "skill_composition",
-  "skill_ir",
-  "skill_invocation_contract",
-  "skill_leaf_types",
-  "skill_lifecycle",
-  "skill_path_notation",
-  "skill_safety_governance",
-]
+compatibility_facade_modules = []
 
 # Top-level Python package families that are not yet UV projects remain part of
 # the same ownership and target-direction ratchet as root modules.
@@ -341,6 +209,72 @@ allowed_dependencies = [
 # conforms to it. architecture/dependency-baseline.json records the existing
 # exceptions and lets the checker reject only new or reintroduced violations.
 
+[components.root_compatibility]
+project_dir = "compatibility_api"
+distribution = "realized-compatibility"
+module_prefix = "realized_compatibility"
+layer = "compatibility"
+allowed_dependencies = [
+  "app_cli",
+  "blend",
+  "blend_application",
+  "core_engine",
+  "core_governance",
+  "core_semantics",
+  "exchange",
+  "governed_core",
+  "host_interaction",
+  "runtime_core",
+  "skill_application",
+  "skill_semantics",
+  "skills_core",
+  "subject_core",
+  "validation",
+]
+distribution_import_modules = [
+  "applied_theory_types",
+  "approval_governance",
+  "args",
+  "blend_context",
+  "blend_operator",
+  "blend_operator_store",
+  "blend_session",
+  "blend_workflow_execution",
+  "blend_workflow_models",
+  "blend_world_models",
+  "controller_entrypoints",
+  "data_governance",
+  "decision_review",
+  "decision_review_constructs",
+  "decision_review_models",
+  "execution_framework_primitives",
+  "execution_frameworks",
+  "external_markdown_learning_pipeline",
+  "fence_extraction_strategy",
+  "governance_inventory",
+  "governed_skill_installation",
+  "host_mediation",
+  "itemize",
+  "itemize_models",
+  "learning_context",
+  "learning_context_paths",
+  "main",
+  "markdown_ir",
+  "pure_theory_types",
+  "replay_verifier",
+  "review_composition",
+  "skill_boundary_normalization",
+  "skill_composition",
+  "skill_governance",
+  "skill_governance_primitives",
+  "skill_invocation_contract",
+  "skill_ir",
+  "skill_leaf_types",
+  "skill_lifecycle",
+  "skill_path_notation",
+  "skill_safety_governance",
+]
+
 [components.governed_core]
 project_dir = "core_runtime"
 distribution = "realized-core-runtime"
@@ -348,11 +282,11 @@ module_prefix = "realized_core_runtime"
 layer = "core"
 allowed_dependencies = [
   "core_governance",
-  "core_engine",
   "core_semantics",
   "host_interaction",
   "skill_semantics",
 ]
+distribution_import_modules = ["python_skill_host"]
 
 [components.host_interaction]
 project_dir = "host_interaction"
@@ -386,8 +320,6 @@ allowed_dependencies = [
   "governed_core",
   "skill_application",
   "skill_semantics",
-  "subject_core",
-  "subject_service",
 ]
 
 [components.coordinated_transformation]
@@ -488,6 +420,20 @@ module_prefix = "workstation"
 layer = "namespace"
 allowed_dependencies = []
 
+[components.workstation_compatibility]
+project_dir = "workstation/compatibility_api"
+distribution = "realized-workstation-compatibility"
+module_prefix = "workstation.compatibility"
+layer = "compatibility"
+allowed_dependencies = ["contracts", "runtime_core", "subject_service"]
+distribution_import_modules = [
+  "workstation.foundation.events.subscriber_controllers",
+  "workstation.foundation.host.client_sessions",
+  "workstation.foundation.host.learning_capture",
+  "workstation.foundation.host.llm_driver",
+  "workstation.shell.core.shell_prompt_routing",
+]
+
 [components.contracts]
 project_dir = "workstation/contracts_api"
 distribution = "realized-workstation-contracts"
@@ -510,7 +456,6 @@ layer = "foundation"
 allowed_dependencies = [
   "contracts",
   "core_semantics",
-  "foundation_models",
   "host_interaction",
 ]
 
@@ -523,7 +468,6 @@ allowed_dependencies = [
   "core_governance",
   "core_semantics",
   "contracts",
-  "foundation_events",
   "foundation_models",
   "host_interaction",
 ]
@@ -537,7 +481,6 @@ allowed_dependencies = [
   "blend",
   "contracts",
   "core_semantics",
-  "foundation_events",
   "foundation_models",
 ]
 
@@ -546,7 +489,7 @@ project_dir = "workstation/grpc_definitions"
 distribution = "realized-workstation-grpc-definitions"
 module_prefix = "workstation.grpc.definitions"
 layer = "exchange_contracts"
-allowed_dependencies = ["foundation_models"]
+allowed_dependencies = []
 
 [components.grpc_implementation]
 project_dir = "workstation/grpc_implementation"
@@ -557,7 +500,6 @@ allowed_dependencies = [
   "contracts",
   "core_semantics",
   "foundation_events",
-  "foundation_models",
   "grpc_definitions",
   "runtime_core",
   "shell_core",
@@ -615,7 +557,7 @@ project_dir = "workstation/skills_builtin"
 distribution = "realized-workstation-skills-builtin"
 module_prefix = "workstation.skills.builtin"
 layer = "skills"
-allowed_dependencies = ["core_semantics", "foundation_models"]
+allowed_dependencies = ["core_semantics"]
 
 [components.skills_core]
 project_dir = "workstation/skills_core"
@@ -626,7 +568,6 @@ allowed_dependencies = [
   "core_governance",
   "core_semantics",
   "contracts",
-  "foundation_events",
   "foundation_host",
   "foundation_models",
   "governed_core",
@@ -644,7 +585,6 @@ layer = "skills"
 allowed_dependencies = [
   "contracts",
   "core_semantics",
-  "foundation_events",
   "foundation_host",
   "foundation_models",
   "governed_core",
@@ -663,8 +603,6 @@ allowed_dependencies = [
   "contracts",
   "core_semantics",
   "dst",
-  "foundation_events",
-  "foundation_models",
   "governed_core",
 ]
 
@@ -696,8 +634,6 @@ module_prefix = "workstation.ui.shared"
 layer = "workstation"
 allowed_dependencies = [
   "core_semantics",
-  "foundation_events",
-  "foundation_models",
   "foundation_projections",
   "host_interaction",
 ]

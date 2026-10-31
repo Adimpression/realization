@@ -220,7 +220,7 @@ EOF
 
 (
   cd "${REPO_ROOT}"
-  uv run python controller_entrypoints.py workstation-grpc-host \
+  uv run realized-workstation grpc-host \
     --serve-root "${WORK_ROOT}" \
     --default-root "${WORK_ROOT}" \
     --host "${GRPC_HOST}" \

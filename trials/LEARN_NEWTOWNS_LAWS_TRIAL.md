@@ -17,7 +17,7 @@ The local regression suite in [tests/test_function_boundary.py](tests/test_funct
 
 Validation run:
 ```bash
-python3 -m py_compile main.py tests/test_function_boundary.py tests/test_markdown_learning.py
+uv run python -m py_compile compatibility_api/src/main.py tests/test_function_boundary.py tests/test_markdown_learning.py
 python3 -m unittest tests/test_function_boundary.py
 set -a; source local.env >/dev/null 2>&1 || true; python3 -m unittest tests/test_markdown_learning.py
 ```

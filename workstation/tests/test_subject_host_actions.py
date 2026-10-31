@@ -1,6 +1,7 @@
 # See MODULES.md for the repository module map before editing.
 from __future__ import annotations
 
+import os
 import tempfile
 import unittest
 from pathlib import Path
@@ -303,6 +304,62 @@ class SubjectHostActionBoundaryTests(unittest.TestCase):
             subject_scope={"active_subject_id": "subject-a"},
             subject_scope_root_path=Path("/tmp/workstation-root"),
         )
+
+    def test_application_controller_provider_honors_explicit_learning_modes(self) -> None:
+        provider = _ApplicationControllerRuntimeProvider()
+        state = SimpleNamespace(learned_artifacts={})
+        controller = SimpleNamespace(
+            learn_from_markdown_document=mock.Mock(
+                return_value={"learned_count": 0}
+            )
+        )
+        observed: dict[str, object] = {}
+
+        def build_controller(*, state, llm_policy):
+            observed["llm_policy"] = llm_policy
+            observed["vector_mode"] = os.environ.get("STATE_VECTOR_MODE")
+            return controller
+
+        with tempfile.TemporaryDirectory() as tempdir:
+            root = Path(tempdir)
+            markdown_path = root / "lesson.md"
+            markdown_path.write_text("# Lesson\n", encoding="utf-8")
+            bundle_path = root / "lesson.skill.yaml"
+            with (
+                mock.patch(
+                    "workstation.app.cli.composition.SystemState.bootstrap",
+                    return_value=state,
+                ),
+                mock.patch(
+                    "workstation.app.cli.composition.controller_runtime.build_controller",
+                    side_effect=build_controller,
+                ),
+                mock.patch(
+                    "workstation.app.cli.composition.export_artifact_bundle_text",
+                    return_value="schema: bssc_skill.v2\n",
+                ),
+                mock.patch.dict(
+                    os.environ,
+                    {"STATE_VECTOR_MODE": "on"},
+                    clear=False,
+                ),
+            ):
+                result = provider.learn_markdown_bundle(
+                    root_path=root,
+                    markdown_path=markdown_path,
+                    source_label="Lesson",
+                    bundle_output_path=bundle_path,
+                    max_artifacts=4,
+                    source_bundle_override=None,
+                    llm_policy="off",
+                    vector_mode="off",
+                )
+                self.assertEqual(os.environ.get("STATE_VECTOR_MODE"), "on")
+                bundle_text = bundle_path.read_text(encoding="utf-8")
+
+        self.assertEqual(result, {"learned_count": 0})
+        self.assertEqual(observed, {"llm_policy": "off", "vector_mode": "off"})
+        self.assertEqual(bundle_text, "schema: bssc_skill.v2\n")
 
 
 if __name__ == "__main__":

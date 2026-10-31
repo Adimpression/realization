@@ -231,9 +231,12 @@ class ApplicationControllerRuntimeProvider:
         bundle_output_path: Path,
         max_artifacts: int,
         source_bundle_override: dict[str, Any] | None,
+        llm_policy: str,
+        vector_mode: str | None,
     ) -> dict[str, Any]:
         previous_learning_context_root = os.environ.get("LEARNING_CONTEXT_ROOT")
         previous_sqlite_path = os.environ.get(STATE_SQLITE_PATH_ENV)
+        previous_vector_mode = os.environ.get("STATE_VECTOR_MODE")
         with runtime_temporary_directory(
             prefix="workstation-url-learn-state-"
         ) as sqlite_directory:
@@ -243,6 +246,8 @@ class ApplicationControllerRuntimeProvider:
             os.environ[STATE_SQLITE_PATH_ENV] = str(
                 Path(sqlite_directory) / "state.sqlite3"
             )
+            if vector_mode is not None:
+                os.environ["STATE_VECTOR_MODE"] = str(vector_mode)
             try:
                 label = " ".join(str(source_label or "").split()) or markdown_path.name
                 state = SystemState.bootstrap(
@@ -251,7 +256,7 @@ class ApplicationControllerRuntimeProvider:
                 )
                 controller = controller_runtime.build_controller(
                     state=state,
-                    llm_policy=os.getenv("LLM_SUPPLEMENT_POLICY", "auto"),
+                    llm_policy=str(llm_policy or "auto"),
                 )
                 report = controller.learn_from_markdown_document(
                     markdown_path,
@@ -276,6 +281,10 @@ class ApplicationControllerRuntimeProvider:
                     os.environ.pop(STATE_SQLITE_PATH_ENV, None)
                 else:
                     os.environ[STATE_SQLITE_PATH_ENV] = previous_sqlite_path
+                if previous_vector_mode is None:
+                    os.environ.pop("STATE_VECTOR_MODE", None)
+                else:
+                    os.environ["STATE_VECTOR_MODE"] = previous_vector_mode
 
 
 class ApplicationArtifactRepositoryProvider:

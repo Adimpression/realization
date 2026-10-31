@@ -531,8 +531,8 @@ def run_command(
         None.
 
     Example Input Output:
-        Input: `run_command(cmd=[sys.executable, '/workspace/realized/main.py', 'run', '--prompt', 'Calculate F from m=3 and a=4.', '--llm', 'off'], env={'BSSC_TITLE_REPRESENTATION': 'prolog'}, cwd=Path('/workspace/realized'), timeout_seconds=120)`
-        Output: `CompletedProcess(args=[sys.executable, '/workspace/realized/main.py', 'run', '--prompt', 'Calculate F from m=3 and a=4.', '--llm', 'off'], returncode=0, stdout='...', stderr='')`
+        Input: `run_command(cmd=['realized-compatibility', 'run', '--prompt', 'Calculate F from m=3 and a=4.', '--llm', 'off'], env={'BSSC_TITLE_REPRESENTATION': 'prolog'}, cwd=Path('/workspace/realized'), timeout_seconds=120)`
+        Output: `CompletedProcess(args=['realized-compatibility', 'run', '--prompt', 'Calculate F from m=3 and a=4.', '--llm', 'off'], returncode=0, stdout='...', stderr='')`
 
     Args:
         cmd: Value for `cmd` used by `run_command`. Expected type: `list[str]`.
@@ -746,8 +746,7 @@ def run_probe_with_retries(
             probe_started = time.perf_counter()
             completed = runner(
                 cmd=[
-                    sys.executable,
-                    str(REPO_ROOT / "main.py"),
+                    str(Path(sys.executable).with_name("realized-compatibility")),
                     "run",
                     "--prompt",
                     probe.prompt,
@@ -859,8 +858,7 @@ def run_markdown_learn_with_retries(
             learn_started = time.perf_counter()
             completed = runner(
                 cmd=[
-                    sys.executable,
-                    str(REPO_ROOT / "main.py"),
+                    str(Path(sys.executable).with_name("realized-compatibility")),
                     "markdown-learn",
                     "--markdown-file",
                     str(markdown_path),
@@ -1107,8 +1105,7 @@ def run_domain(spec: DomainSpec, *, report_root: Path, env: dict[str, str]) -> d
             import_started = time.perf_counter()
             completed = run_command(
                 cmd=[
-                    sys.executable,
-                    str(REPO_ROOT / "main.py"),
+                    str(Path(sys.executable).with_name("realized-compatibility")),
                     "import-skill",
                     "--skill-file",
                     str(bundle_path),

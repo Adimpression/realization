@@ -19,7 +19,7 @@ from realized_validation.sqlite_runtime import (
 
 
 ROOT = Path(__file__).resolve().parent
-MAIN = ROOT / "main.py"
+COMPATIBILITY_CLI = Path(sys.executable).with_name("realized-compatibility")
 LOCAL_ENV = ROOT / "local.env"
 REPORT_ROOT = ROOT / "reports"
 MARKDOWN_FILE = ROOT / "LEARN_CYLINDER_MEASURES.md"
@@ -84,7 +84,7 @@ def run_cli(
     """
     try:
         completed = subprocess.run(
-            [sys.executable, str(MAIN), *args],
+            [str(COMPATIBILITY_CLI), *args],
             cwd=str(ROOT),
             env=env,
             capture_output=True,

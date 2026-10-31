@@ -1,6 +1,7 @@
 # Six-Layer Architecture Implementation
 
-This filename is legacy. The implementation tracker is now six-layer.
+This document is the authoritative implementation tracker for the six-layer
+architecture.
 
 ## Current Implementation Position
 
@@ -13,7 +14,9 @@ This filename is legacy. The implementation tracker is now six-layer.
   the dependency-free `realized-host-interaction` substrate.
 - [x] The governed runtime can now describe an injected host backend through that contract without importing workstation shell code.
 - [x] The workstation now has a workstation-backed adapter for the shared host-interaction contract.
-- [x] A first lower runtime/controller bootstrap facade now exists in [runtime_controller_api.py](runtime_controller_api.py), so workstation nested skill invocation no longer imports `main.py` directly.
+- [x] Workstation nested skill invocation uses package-native runtime and
+  application contracts; the former repository-root bootstrap facade is
+  tombstoned.
 - [x] Host mediation now derives worker filesystem scope from the shared host-interaction contract instead of ambient cwd.
 - [x] Delegated-rights normalization, escalation splitting, and ephemeral delegated-mount projection now live in the shared host-interaction substrate.
 - [x] Receipt shaping and canonical JSONL receipt appends now live in the shared host-interaction substrate.
@@ -47,20 +50,21 @@ provider registry. Python child execution uses an invocation-scoped,
 authenticated parent bridge so the parent rechecks declaration, admission,
 authority, and ABI arguments before dispatching a broker operation.
 
-## Next Convergence Cut
+## Remaining Architecture Work
 
-Goal:
-- make the subject lifecycle package-native without changing workflow behavior,
-  persisted formats, action labels, or UI contracts
-- first invert the remaining concrete subject-core dependencies on workstation
-  runtime/session and host-capture implementations
-- only then move the root subject-domain implementation into
-  `workstation.subject.core` in dependency-safe slices
+The subject-lifecycle convergence cut that originally occupied this section is
+complete. The current architecture is package-native at its canonical
+boundaries, and the combined graph is acyclic with no package-to-root imports.
 
-The actual combined dependency graph disproves a values-first relocation while
-`subject_core` still imports `runtime_core` and `foundation_host`: converting
-their root subject dependencies into facades at that point would close package
-cycles. Phase 7 therefore begins with dependency inversion, not file movement.
+The closure program has tightened measured permissions and exports, removed
+the forbidden root-owner dependencies, isolated package-local compatibility
+aliases, and resolved every historical facade to either a tombstone or an
+explicitly supported ABI. Canonical production behavior is package-native;
+only final whole-tree deterministic qualification remains open.
+
+The current measured state, final gates, and exit criteria are recorded in the
+[Authoritative Architecture Closure Plan](#authoritative-architecture-closure-plan)
+below.
 
 ## Tracker
 
@@ -5831,3 +5835,442 @@ Further retirement work:
   governance policy.
 - [ ] Do not remove compatibility paths merely to make the tree appear clean.
 - [ ] Do not update the architecture baseline to hide a regression.
+
+## Remaining Architecture Completion Plan
+
+This section records the historical forward plan used to reach the current
+closure state. Its earlier phases remain the evidence trail; its unchecked
+items are superseded by **Authoritative Architecture Closure Plan** below and
+are not an alternative queue.
+
+Snapshot date: 2026-10-31.
+
+### Evidenced Baseline
+
+- [x] The package graph contains 36 registered components and 144 observed
+  package edges, with no package cycle, undeclared edge, unregistered
+  component, or package-to-root implementation import.
+- [x] The combined package/root graph contains 87 nodes and 223 edges, with no
+  cyclic strongly connected component.
+- [x] Fifty root modules and one root package family have explicit owners and
+  boundary classifications.
+- [x] The compatibility ledger contains 78 tombstones, 42 measured holds, and
+  no currently authorized retirement candidate.
+- [x] The forbidden root-owner dependency count is zero. Package-local
+  compatibility debt, wildcard export surfaces, and unobserved component
+  permissions are also reduced to zero; five historical package imports are
+  explicitly supported by the dedicated compatibility distribution.
+- [x] The architecture and compatibility checkers pass at this baseline. A
+  passing ratchet proves non-regression against the measured state; it does not
+  by itself prove that every remaining permission or compatibility surface is
+  architecturally necessary.
+
+### Meaning Of Completion
+
+This program is complete only when all of the following are true:
+
+- [ ] Every operational responsibility has one canonical package owner and a
+  narrow declared public API.
+- [ ] The package and combined graphs have no cycles, undeclared edges,
+  package-to-root implementation edges, or forbidden root-owner dependencies.
+- [x] Package-local historical aliases no longer create compatibility edges
+  between canonical components.
+- [x] Public package initializers export deliberate names explicitly; wildcard
+  exports do not obscure ownership or dependency direction.
+- [x] Every allowed component edge is either observed through a supported
+  static path or justified by a tested dynamic/optional contract.
+- [ ] Every remaining root file is either a deliberate application entrypoint,
+  a validation/trial program, or an explicitly supported compatibility ABI.
+- [ ] No compatibility item remains merely "held": each is either retired
+  through evidence or accepted as a supported ABI with an owner, distribution
+  contract, tests, and review policy.
+- [x] Independently shipped wheels and source distributions remain
+  self-contained and importable without the repository root on `sys.path`.
+
+Completion does not mean zero root Python files, one project per file, or
+movement for cosmetic directory uniformity.
+
+### Assumptions And Invalidation Rules
+
+- [x] **A1 - Behavior is authoritative.** Current workflow states, action
+  labels, persisted formats, receipts, events, reports, command behavior, and
+  UI contracts are preserved. If a slice requires changing one of them, stop
+  and create a separate behavioral design and migration.
+- [x] **A2 - Ownership precedes relocation.** A source move is permitted only
+  after the destination already has the correct dependency direction and
+  public contract. If relocation would close a cycle or create an upward
+  import, invert the dependency first.
+- [x] **A3 - Ratchets are evidence, not authority.** Checked-in baselines may
+  record tolerated history but may never justify a new edge. If measured facts
+  disagree with this plan, update the plan or implementation; do not bless the
+  disagreement as a baseline refresh.
+- [x] **A4 - Dynamic permissions need proof.** A declared but statically
+  unobserved permission may represent plugin loading, type-only use, generated
+  code, or a stale allowance. If no focused test or runtime assembly proves the
+  edge, remove the permission rather than retaining it speculatively.
+- [x] **A5 - Historical identity may be durable.** Package aliases and root
+  facades may be referenced by serialized values, patch targets, generated
+  artifacts, or external users. If durable identity cannot be disproved, the
+  surface remains supported until an explicit compatibility decision and
+  migration exist.
+- [x] **A6 - Root programs are not facade debt.** Entry commands and
+  validation/trial programs move only when independent distribution or layer
+  ownership requires it. Root-file count alone is not sufficient reason.
+- [x] **A7 - Qualification is affected-surface based.** Default deterministic
+  gates run for every slice. Provider and browser-backed gates run only when
+  the affected contract requires them and only with explicit authorization.
+- [x] **A8 - Changes remain separable.** Contract addition, consumer migration,
+  implementation relocation, and compatibility deletion are separate changes.
+  If rollback requires reverting canonical behavior, the slice is too broad.
+
+Any invalidated assumption must be recorded in this section before dependent
+work continues. The discovery is evidence that changes the plan, not a reason
+to force the implementation through the old plan.
+
+### Phase A - Freeze The Closure Baseline
+
+- [ ] Regenerate the dependency report, compatibility inventory, distribution
+  inventory, and current qualification summary from a clean checkout.
+- [x] Record the exact source location and behavioral contract behind each of
+  the two forbidden root-owner dependencies and four package-local alias
+  edges.
+- [x] Classify each unobserved permission as dynamic-required, optional-
+  required, generated-required, or stale, with a focused proof for every
+  non-stale classification.
+- [x] Record the seven wildcard export surfaces and their actual relied-on
+  public names before replacing any export.
+- [x] Confirm the 42 facade holds against the current machine ledger rather
+  than copying historical counts into a new deletion cohort.
+
+Exit condition:
+
+- [x] Every remaining architecture exception has an owner, reason, evidence
+  location, next review condition, and rollback boundary.
+
+### Phase B - Tighten Public APIs And Permissions
+
+This is the lowest-risk production cut because it changes controls and export
+declarations before implementation ownership.
+
+- [x] Replace the governance root projection, application CLI initializer,
+  foundation model/projection initializers, builtin-skill initializer, and both
+  Textual initializers with explicit public export lists.
+- [x] Add import-contract tests for every name intentionally retained through
+  those initializers before removing wildcard exports.
+- [x] Review all 15 currently unobserved component permissions against actual
+  dynamic assembly and focused tests.
+- [x] Remove each stale permission independently and verify that no package
+  metadata dependency or lazy import relies on it.
+- [x] Require every future dynamic permission to name its contract evidence and
+  short justification in the boundary manifest; none is currently required.
+- [x] Reconcile package metadata with the tightened manifest only after actual
+  imports and dynamic contracts agree.
+- [x] Extend the checker with completion assertions for explicit exports and
+  permission justification without weakening the existing baseline ratchet.
+
+Exit condition:
+
+- [x] Wildcard export count is zero, and every allowed component edge is
+  observed or justified by an executable contract.
+
+### Phase C - Retire Package-Local Compatibility Aliases
+
+These aliases are not root facades, but they still make one canonical package
+project another package's implementation identity. Treat them as compatibility
+ABIs rather than ordinary imports.
+
+- [x] Add package-local aliases to a machine-readable compatibility ledger with
+  canonical owner, exported identities, consumers, durable-name exposure,
+  support class, and review condition.
+- [x] Freeze identity and behavior contracts for the event-subscriber
+  projection, host LLM-driver projection, host client-session/learning-capture
+  projections, and shell prompt-routing projection.
+- [x] Migrate ordinary imports and patch targets to the canonical owner while
+  retaining old-path identity tests.
+- [x] Verify whether any persisted value or external package records the old
+  qualified name; protocol-zero round trips prove four historical module-name
+  obligations, while all three learning-capture functions encode only their
+  canonical module. Repository search alone is not treated as compatibility
+  evidence.
+- [x] Complete one stable qualification cycle with canonical consumers before
+  selecting a deletion cohort. The 2026-10-31 deterministic checkpoint passed
+  all 11 default gates: 895 root tests, 634 workstation tests, isolated
+  wheel/sdist imports, skill-routing and publication BDDs, the publication
+  reference capture, Flutter analysis, and Flutter widget tests. Provider and
+  browser/manual gates were intentionally not run because this slice did not
+  alter those contracts.
+- [x] Resolve one alias cohort at a time by either deletion with a tombstone or
+  isolation as a supported ABI. The five workstation aliases are now isolated
+  in `realized-workstation-compatibility`; canonical packages no longer carry
+  their files or dependency edges.
+
+Exit condition:
+
+- [x] Package-local compatibility alias edge count is zero, or a deliberately
+  supported alias is isolated in an explicit compatibility distribution and
+  is no longer represented as a canonical package dependency.
+
+### Phase D - Remove The Two Forbidden Root-Owner Dependencies
+
+The two edges are behavior-bearing composition leaks, not simple import
+cleanup:
+
+- the controller owner reaches upward into entry/exchange argument assembly
+- the subject-domain compatibility path reaches upward into controller entry
+  composition to supply an implicit bootstrap
+
+For each edge:
+
+- [x] Freeze direct-call, packaged-call, error, default, and import-order
+  behavior before changing composition.
+- [x] Introduce the smallest lower-facing port or outer composition function
+  needed to preserve that behavior; do not move entry policy into controller or
+  subject semantics.
+- [x] Make the outer application/entry owner inject the dependency explicitly.
+- [x] Migrate one consumer edge at a time and shadow-compare results where the
+  call is read-only or deterministically reproducible.
+- [x] Prove that direct canonical package use no longer depends on repository-
+  root entry modules.
+- [x] Qualify the narrowed path through a stable cycle before deleting or
+  further retiring either historical compatibility surface.
+- [x] Remove each forbidden allowance only after the observed graph has already
+  stopped using it.
+
+Implementation evidence (2026-10-31):
+
+- [x] `controller_runtime` is now an exact alias of the canonical engine
+  runtime. The historical parser, exchange, and Markdown extension assembly is
+  owned by the outer `main` entry composition instead of being installed by a
+  controller import.
+- [x] `itemize` is now an exact alias of canonical subject itemization. The
+  supported workstation composition injects `RuntimeSubjectWorkflowHostActions`
+  explicitly instead of letting subject semantics reach into controller entry
+  composition for an implicit proposal port.
+- [x] Focused root-composition, facade-identity, controller-feature,
+  itemization, and subject-host-action contracts preserve direct/import-order
+  behavior. Exact alias identity supplies a stronger deterministic comparison
+  for the two narrowed facades than a duplicate read path would.
+- [x] The measured graph shrank from 225 to 223 combined edges, grandfathered
+  observations shrank from 81 to 79, both forbidden obligations were removed,
+  and all 73 focused architecture/facade tests plus all three machine checkers
+  pass.
+- [x] The complete post-change deterministic qualification cycle passed all 11
+  default gates: 898 root tests, 634 workstation tests, 36 wheels, 36 source
+  distributions, 41 isolated public-module imports, deterministic skill and
+  publication BDDs, publication reference capture, Flutter analysis, and
+  Flutter widget tests. Six provider/browser/manual gates were intentionally
+  not run because this slice did not alter their contracts and lacked the
+  separate authorization they require.
+
+Exit condition:
+
+- [x] Forbidden root-owner dependency count is zero, with command and direct-
+  API behavior unchanged.
+
+### Phase E - Resolve Root Compatibility Obligations
+
+Execute the successor program in
+[COMPATIBILITY_FACADE_RETIREMENT_IMPLEMENTATION.md](COMPATIBILITY_FACADE_RETIREMENT_IMPLEMENTATION.md).
+The architecture program supplies ownership and graph constraints; the facade
+program supplies identity, support, migration, notice, and deletion evidence.
+
+- [x] Resolve aggregate exports before behavior-bearing adapters so canonical
+  ownership is not hidden by a convenience namespace.
+- [ ] Resolve projection adapters before subject bootstrap and executable
+  composition chains.
+- [ ] Qualify executable and provider-bearing surfaces under their additional
+  gates rather than borrowing evidence from deterministic aliases.
+- [ ] Decide durable qualified-name support explicitly before any serialized-
+  identity cohort advances.
+- [ ] Migrate persisted skill source through a dedicated data/ABI migration,
+  not a textual source replacement inside a facade deletion.
+- [ ] Convert every remaining hold to either a tombstone or an explicit
+  supported-ABI state; do not call an unresolved hold architecture completion.
+
+Exit condition:
+
+- [ ] The root compatibility ledger contains no unresolved hold and no
+  unauthorized candidate.
+
+### Phase F - Final Distribution And Graph Qualification
+
+- [ ] Run the architecture ratchet and compatibility inventory from a clean
+  checkout and require zero cycles, undeclared edges, package-to-root imports,
+  forbidden root-owner dependencies, package-local alias edges, and wildcard
+  exports.
+- [ ] Build every wheel and source distribution, then import each declared
+  public module with the repository root absent from `sys.path`.
+- [ ] Run root and workstation unit suites plus deterministic skill-routing,
+  publication, incremental-publication, and reference-artifact gates.
+- [ ] Run LLM-off replay, resumption, SQLite, authority, exact realizer-binding,
+  and receipt/event-order tests for affected core boundaries.
+- [ ] Run Textual, Flutter analysis, and Flutter widget gates whenever a
+  workstation-facing contract is touched.
+- [ ] Run browser/screenshot, provider-backed, and trial ladders only when the
+  affected surface requires them and explicit authorization is present; record
+  an unrun required conditional gate as pending, never as passing.
+- [ ] For a performance-sensitive cut, collect three runs and require median
+  and p95 regression to remain within the configured ten-percent tolerance.
+- [ ] Compare representative SQLite values, run bundles, receipts, events,
+  reports, and publication artifacts with the frozen baseline.
+- [ ] Regenerate architecture controls and reports only after the implementation
+  satisfies them; review every baseline delta as shrinking or explicitly
+  justified.
+
+Exit condition:
+
+- [ ] All completion criteria in this section are evidenced by checked-in
+  controls, focused contracts, distribution proof, and affected behavioral
+  gates.
+
+### Per-Slice Execution Protocol
+
+Every implementation slice must use this sequence:
+
+- [ ] State the responsibility or edge being changed and the assumptions it
+  relies on.
+- [ ] Capture focused behavior, identity, persistence, and graph evidence.
+- [ ] Add the canonical contract or composition path without deleting the old
+  path.
+- [ ] Migrate consumers and qualify the canonical path.
+- [ ] Observe at least one stable qualification cycle where required by the
+  compatibility policy.
+- [ ] Delete compatibility separately, retain a tombstone, and verify a
+  shrinking-only control-plane delta.
+- [ ] Document rollback as restoration of the narrow compatibility path, not a
+  reversal of unrelated canonical ownership.
+- [ ] Stop and revise the plan when observed behavior invalidates an assumption.
+
+No slice may combine a semantic redesign, persisted-format change, UI behavior
+change, model-prompt change, and architectural relocation under the label of
+cleanup.
+
+## Authoritative Architecture Closure Plan
+
+This section supersedes unchecked forward work in the historical trackers
+above. It is derived from the theory documents' requirements for one canonical
+truth, explicit boundary identity, mechanical governance, admitted host
+realization, durable causal history, and artifact-mediated verification. It
+does not use root-file count as a proxy for architectural quality.
+
+Snapshot date: 2026-10-31.
+
+### Measured Terminal Topology
+
+- [x] The workspace contains `37` registered architectural components and
+  `159` observed package edges.
+- [x] The combined graph contains `42` nodes and `163` edges, with zero cyclic
+  strongly connected components and zero edges internal to a cycle.
+- [x] Undeclared dependencies, forbidden dependencies, package-to-root
+  implementation imports, forbidden root-owner dependencies, package-local
+  compatibility edges, wildcard exports, unobserved permissions, and stale
+  dynamic contracts are all zero.
+- [x] The repository root contains four explicitly owned validation/trial
+  modules. The only measured root package family is `design`, classified as
+  validation material. No root module or root package family participates in a
+  dependency cycle.
+- [x] Historical compatibility source is isolated in two registered
+  distributions. The ledger contains `82` tombstones, `38` supported ABIs,
+  zero temporary holds, and zero retirement candidates.
+- [x] Canonical package consumers of compatibility modules, public README
+  references to those modules, and public example consumers are all zero.
+
+### Canonical Ownership Closure
+
+- [x] Semantic and portable skill values are dependency-light contracts and
+  do not import governance, runtime realization, provider, workstation, or UI
+  implementations.
+- [x] Governance owns admission, lifecycle, approval, authority, and safety
+  decisions without owning retrieval, model judgment, host execution, or
+  workstation state.
+- [x] Controller and application owners perform selection and orchestration
+  through declared ports; they do not make compatibility modules alternate
+  sources of truth.
+- [x] Runtime owns reduction, resumption, closure, host mediation, execution,
+  and receipts without selecting or admitting abilities.
+- [x] The LLM boundary is stateless with respect to authoritative reduction
+  and resumption state; model output remains advisory where mechanical
+  verification is required.
+- [x] Workstation subject, shell, runtime, host, transport, and UI
+  responsibilities are independently packaged behind explicit contracts and
+  composition roots.
+- [x] Entry and exchange packages compose canonical owners and translate
+  representations without acquiring semantic, governance, or runtime
+  authority.
+- [x] The ability journey keeps admission, subject visibility, semantic
+  matching, exact realizer binding, invocation authority, execution, and
+  receipt projection as separate mechanically enforced stages.
+
+### Compatibility And Distribution Closure
+
+- [x] `realized-compatibility` owns only retained historical import/command
+  support and private command composition; it owns no canonical product
+  behavior.
+- [x] `realized-workstation-compatibility` isolates the five workstation
+  historical module paths from canonical workstation components.
+- [x] Historical command paths have packaged equivalents and focused parity
+  tests for argument handling, exit status, stdout, and stderr.
+- [x] Durable `python_skill_host` support remains explicit in
+  `realized-core-runtime`; no speculative persisted-source rewrite is required.
+- [x] Every registered project declares its dependencies and public modules,
+  and the distribution verifier builds wheels and source distributions for
+  isolated import checks.
+- [x] The compatibility and architecture ratchets reject new canonical
+  consumers, new historical aliases, new undeclared edges, topology
+  expansion, and reintroduction of tombstoned paths.
+
+### Final Completion Sequence
+
+- [x] Regenerate the architecture baseline and dependency report from the
+  final source layout.
+- [x] Regenerate the compatibility inventory and contract ledger after command
+  and documentation migration.
+- [x] Verify focused architecture, facade, export, command-parity, and
+  workstation-boundary contracts.
+- [x] Build every registered wheel and source distribution and import every
+  declared public module outside the repository source path. The isolated
+  verifier passed `37` wheels, `37` source distributions, and `84` public-
+  module imports.
+- [x] Run the complete deterministic qualification capture. All `11` default
+  gates passed, including `894` root tests, `635` workstation tests, `38`
+  deterministic skill-routing/publication BDD tests, an `8`-action and
+  `2`-artifact publication reference, Flutter analysis, and `51` Flutter
+  widget tests.
+- [x] Review every generated baseline and qualification delta. The final
+  graph remains acyclic at `37` components and `159` package edges; the
+  compatibility surface remains `38` supported ABIs with zero holds or
+  candidates. No unexplained topology expansion was accepted.
+- [x] Record provider, browser, screenshot, and manual gates as not affected.
+  The six conditional gates are `not_run`, not passing, because this cut does
+  not alter provider or browser-driven UI behavior.
+- [x] Re-run `git diff --check` and the two machine architecture checkers after
+  generated evidence settles. The diff check is clean; the architecture
+  ratchet and compatibility inventory both pass without baseline mutation.
+
+Exit condition:
+
+- [x] All deterministic default gates pass against one coherent source tree,
+  and the implementation documents, manifest, dependency report,
+  compatibility ledgers, distribution metadata, and qualification artifacts
+  describe the same architecture.
+
+### Post-Closure Ratchet
+
+After the exit condition is met, there is no planned source-movement queue.
+Future architecture changes must be responsibility-driven and use an additive,
+independently revertible slice:
+
+- [ ] name the responsibility and canonical owner before adding a project or
+  dependency
+- [ ] add or narrow the contract before moving implementation
+- [ ] prove behavior, persistence, identity, and affected UI/command surfaces
+  before consumer migration
+- [ ] migrate one dependency edge at a time and qualify the canonical path
+- [ ] alter compatibility only through the separate support/deprecation policy
+- [ ] refresh baselines only after the implementation already satisfies the
+  intended topology
+
+UV workspace membership remains packaging infrastructure, not proof of an
+architectural boundary. A component is complete only when responsibility,
+public API, dependency direction, distribution, compatibility policy, and
+qualification evidence agree.

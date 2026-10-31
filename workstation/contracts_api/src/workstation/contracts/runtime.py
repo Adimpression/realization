@@ -82,6 +82,8 @@ class ControllerRuntimeProvider(Protocol):
         bundle_output_path: Path,
         max_artifacts: int,
         source_bundle_override: dict[str, Any] | None,
+        llm_policy: str,
+        vector_mode: str | None,
     ) -> dict[str, Any]: ...
 
 

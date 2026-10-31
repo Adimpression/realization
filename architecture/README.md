@@ -25,6 +25,9 @@ here.
   compatibility contract suite.
 - `compatibility-facade-policy.json` contains human retirement decisions and
   tombstones separately from generated observations and contracts.
+- `remaining-architecture-obligations.toml` records every unresolved forbidden
+  root-owner edge and every supported package compatibility ABI, including its
+  canonical owner, evidence, review condition, and rollback boundary.
 - `DEPENDENCY_REPORT.md` is the deterministic human-readable rendering of that
   snapshot. Tests require it to match the measured graph.
 - `qualification-gates.toml` declares the behavioral, packaging, UI, and
@@ -54,7 +57,9 @@ surface, not a migration diary.
 - Existing dependency exceptions can only shrink; a removed exception cannot
   be reintroduced without failing the ratchet.
 - Compatibility aliases are explicit, measured separately, and cannot expand
-  silently.
+  silently. Supported package aliases live in the dedicated compatibility
+  distribution and are counted as declared edges of that distribution rather
+  than dependencies between canonical components.
 - Canonical package code, public README examples, and repository examples may
   not import a root compatibility facade.
 - A compatibility facade is treated as a supported historical import until it
@@ -64,6 +69,9 @@ surface, not a migration diary.
 - Contract packages remain dependency-light, the shared `workstation`
   namespace remains inert, and UI adapters depend on supported contracts rather
   than runtime implementation details.
+- Every supported compatibility module is imported from the assembled wheels
+  by the distribution-isolation gate in addition to the component's primary
+  public module.
 
 ## Architecture Check
 

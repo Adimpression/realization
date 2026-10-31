@@ -121,4 +121,4 @@ The saved state JSON is the best place to confirm whether:
 
 ## Manual follow-up
 
-After a successful learn run for a given domain, you can manually reuse the learned DB by exporting its SQLite path into `STATE_SQLITE_PATH` and then invoking `main.py run --llm off` with the same style of prompts.
+After a successful learn run for a given domain, you can manually reuse the learned DB by exporting its SQLite path into `STATE_SQLITE_PATH` and then invoking `realized-compatibility run --llm off` with the same style of prompts.

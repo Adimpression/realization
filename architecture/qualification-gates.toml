@@ -178,7 +178,7 @@ env = { WORKSTATION_SCREENSHOT_ROOT = "/tmp/workstation-screenshot-qualification
 id = "workstation_trial_validation"
 category = "trial"
 cwd = "."
-command = ["python", "main.py", "workstation-trial-validate", "--workspace", ".", "--report-root", "reports/architecture_qualification/workstation_trials", "--report-out", "reports/architecture_qualification/workstation_trials.json"]
+command = ["uv", "run", "--frozen", "realized-workstation", "trial-validate", "--workspace", ".", "--report-root", "reports/architecture_qualification/workstation_trials", "--report-out", "reports/architecture_qualification/workstation_trials.json"]
 timeout_seconds = 7200
 required = true
 run_by_default = false
@@ -194,7 +194,7 @@ accepted_result_statuses = ["ok", "partial"]
 id = "validation_ladder"
 category = "trial"
 cwd = "."
-command = ["python", "main.py", "validation-ladder", "--workspace", ".", "--report-root", "reports/architecture_qualification/validation_ladder", "--report-out", "reports/architecture_qualification/validation_ladder.json"]
+command = ["uv", "run", "--frozen", "realized-compatibility", "validation-ladder", "--workspace", ".", "--report-root", "reports/architecture_qualification/validation_ladder", "--report-out", "reports/architecture_qualification/validation_ladder.json"]
 timeout_seconds = 10800
 required = true
 run_by_default = false

@@ -29,7 +29,7 @@ from workstation.app.cli.cli import (
     handle_workstation_trial_validate_command,
     run_workstation_chat_loop,
 )
-from workstation.foundation.host.llm_driver import (
+from workstation.runtime.core.llm_driver import (
     normalize_workstation_tool_definitions_for_provider,
     run_workstation_openai_turn,
     workstation_tool_capability_name,
@@ -870,14 +870,9 @@ class WorkstationTests(unittest.TestCase):
         markdown_path.write_text("# Kinematics Demo\n\nVelocity is displacement per unit time.\n", encoding="utf-8")
         captured: dict[str, object] = {}
 
-        def _fake_subprocess_run(command: list[str], **kwargs: object) -> subprocess.CompletedProcess[str]:
-            captured["command"] = list(command)
-            captured["cwd"] = kwargs.get("cwd")
-            env = kwargs.get("env")
-            self.assertIsInstance(env, dict)
-            captured["env"] = dict(env)
-            out_path = Path(command[command.index("--out") + 1])
-            report_path = Path(command[command.index("--report-out") + 1])
+        def _fake_learn_markdown_bundle(**kwargs: object) -> dict[str, object]:
+            captured.update(kwargs)
+            out_path = Path(kwargs["bundle_output_path"])
             out_path.write_text(
                 "\n".join(
                     [
@@ -890,26 +885,28 @@ class WorkstationTests(unittest.TestCase):
                 ),
                 encoding="utf-8",
             )
-            report_path.write_text(
-                json.dumps(
-                    {
-                        "subject_id": "kinematics-demo",
-                        "context_path": str(self.root / "corpus" / "kinematics-demo" / "context.json"),
-                        "learned_count": 1,
-                    }
+            return {
+                "subject_id": "kinematics-demo",
+                "context_path": str(
+                    self.root / "corpus" / "kinematics-demo" / "context.json"
                 ),
-                encoding="utf-8",
-            )
-            return subprocess.CompletedProcess(command, 0, stdout="", stderr="")
+                "learned_count": 1,
+            }
 
-        with patch("workstation.runtime.core.workstation_core.subprocess.run", side_effect=_fake_subprocess_run), patch(
-            "workstation.runtime.core.capabilities.execute_workstation_capability",
-            return_value={
-                "status": "ok",
-                "imported_count": 1,
-                "imported": [{"title": "Kinematics Demo"}],
-                "canonical_export_path": "kinematics.skill.yaml",
-            },
+        with (
+            patch(
+                "workstation.runtime.core.workstation_core._learn_markdown_bundle_in_process",
+                side_effect=_fake_learn_markdown_bundle,
+            ),
+            patch(
+                "workstation.runtime.core.capabilities.execute_workstation_capability",
+                return_value={
+                    "status": "ok",
+                    "imported_count": 1,
+                    "imported": [{"title": "Kinematics Demo"}],
+                    "canonical_export_path": "kinematics.skill.yaml",
+                },
+            ),
         ):
             result = workstation_learn_markdown_action(
                 root_path=self.root,
@@ -917,10 +914,7 @@ class WorkstationTests(unittest.TestCase):
             )
 
         self.assertEqual(result.status, "ok")
-        self.assertEqual(captured["cwd"], str(Path(__file__).resolve().parents[2]))
-        command_env = captured["env"]
-        self.assertIsInstance(command_env, dict)
-        self.assertEqual(command_env.get("LEARNING_CONTEXT_ROOT"), str(self.root.resolve()))
+        self.assertEqual(captured["root_path"], self.root.resolve())
         payload = result.payload
         self.assertIsInstance(payload, dict)
         self.assertEqual(payload.get("learning_context_root"), str(self.root.resolve()))
@@ -7246,7 +7240,7 @@ class WorkstationTests(unittest.TestCase):
         prompt_args = parse_args(
             ["workstation-prompt", "--root", str(self.root), "--prompt", "Inspect the workspace."]
         )
-        with patch("workstation.foundation.host.llm_driver.build_workstation_openai_client", return_value=_FakeClient()):
+        with patch("workstation.runtime.core.llm_driver.build_workstation_openai_client", return_value=_FakeClient()):
             with redirect_stdout(io.StringIO()) as buffer:
                 exit_code = handle_workstation_prompt_command(prompt_args)
         self.assertEqual(exit_code, 0)
@@ -8351,7 +8345,7 @@ class WorkstationTests(unittest.TestCase):
         )
         input_stream = io.StringIO("Inspect the workspace.\n/exit\n")
         output_stream = io.StringIO()
-        with patch("workstation.foundation.host.llm_driver.build_workstation_openai_client", return_value=_FakeClient()):
+        with patch("workstation.runtime.core.llm_driver.build_workstation_openai_client", return_value=_FakeClient()):
             exit_code = run_workstation_chat_loop(
                 root=self.root,
                 model=None,
@@ -8396,7 +8390,7 @@ class WorkstationTests(unittest.TestCase):
         self.assertEqual(exit_code, 0)
         rendered = output_stream.getvalue()
         self.assertIn("Workstation chat commands", rendered)
-        self.assertIn("workstation-launch", rendered)
+        self.assertIn("realized-workstation launch", rendered)
         self.assertIn("Session ended.", rendered)
 
     def test_run_workstation_chat_loop_handles_skill_listing_slash_command(self) -> None:
@@ -8493,7 +8487,7 @@ class WorkstationTests(unittest.TestCase):
         )
         input_stream = io.StringIO("Use the installed skill.\nyes\n/exit\n")
         output_stream = io.StringIO()
-        with patch("workstation.foundation.host.llm_driver.build_workstation_openai_client", return_value=_FakeEscalationSkillClient()):
+        with patch("workstation.runtime.core.llm_driver.build_workstation_openai_client", return_value=_FakeEscalationSkillClient()):
             exit_code = run_workstation_chat_loop(
                 root=self.root,
                 model=None,
@@ -8568,7 +8562,7 @@ class WorkstationTests(unittest.TestCase):
         fake_stdin = io.StringIO("Inspect the workspace.\n/quit\n")
         fake_stdout = io.StringIO()
         with patch("sys.stdin", fake_stdin), patch("sys.stdout", fake_stdout):
-            with patch("workstation.foundation.host.llm_driver.build_workstation_openai_client", return_value=_FakeClient()):
+            with patch("workstation.runtime.core.llm_driver.build_workstation_openai_client", return_value=_FakeClient()):
                 exit_code = handle_workstation_chat_command(chat_args)
         self.assertEqual(exit_code, 0)
         rendered = fake_stdout.getvalue()

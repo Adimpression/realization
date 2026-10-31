@@ -9,6 +9,7 @@ members = [
     "realized",
     "realized-blend",
     "realized-blend-application",
+    "realized-compatibility",
     "realized-core",
     "realized-core-conversation",
     "realized-core-engine",
@@ -23,6 +24,7 @@ members = [
     "realized-validation",
     "realized-workstation",
     "realized-workstation-app-cli",
+    "realized-workstation-compatibility",
     "realized-workstation-contracts",
     "realized-workstation-foundation-events",
     "realized-workstation-foundation-host",
@@ -805,6 +807,7 @@ dependencies = [
     { name = "pyyaml" },
     { name = "realized-blend" },
     { name = "realized-blend-application" },
+    { name = "realized-compatibility" },
     { name = "realized-core" },
     { name = "realized-core-conversation" },
     { name = "realized-core-engine" },
@@ -819,6 +822,7 @@ dependencies = [
     { name = "realized-validation" },
     { name = "realized-workstation" },
     { name = "realized-workstation-app-cli" },
+    { name = "realized-workstation-compatibility" },
     { name = "realized-workstation-contracts" },
     { name = "realized-workstation-foundation-events" },
     { name = "realized-workstation-foundation-host" },
@@ -884,6 +888,7 @@ requires-dist = [
     { name = "pyyaml", specifier = "==6.0.3" },
     { name = "realized-blend", editable = "blend" },
     { name = "realized-blend-application", editable = "blend_application" },
+    { name = "realized-compatibility", editable = "compatibility_api" },
     { name = "realized-core", editable = "core_app" },
     { name = "realized-core-conversation", editable = "core_conversation" },
     { name = "realized-core-engine", editable = "core_engine" },
@@ -898,6 +903,7 @@ requires-dist = [
     { name = "realized-validation", editable = "validation" },
     { name = "realized-workstation", editable = "workstation/namespace" },
     { name = "realized-workstation-app-cli", editable = "workstation/app_cli" },
+    { name = "realized-workstation-compatibility", editable = "workstation/compatibility_api" },
     { name = "realized-workstation-contracts", editable = "workstation/contracts_api" },
     { name = "realized-workstation-foundation-events", editable = "workstation/foundation_events" },
     { name = "realized-workstation-foundation-host", editable = "workstation/foundation_host" },
@@ -961,6 +967,47 @@ requires-dist = [
     { name = "realized-core-semantics", editable = "core_semantics" },
     { name = "realized-skill-application", editable = "skill_application" },
     { name = "realized-skill-semantics", editable = "skill_semantics" },
+]
+
+[[package]]
+name = "realized-compatibility"
+version = "0.1.0"
+source = { editable = "compatibility_api" }
+dependencies = [
+    { name = "realized-blend" },
+    { name = "realized-blend-application" },
+    { name = "realized-core-engine" },
+    { name = "realized-core-governance" },
+    { name = "realized-core-runtime" },
+    { name = "realized-core-semantics" },
+    { name = "realized-exchange" },
+    { name = "realized-host-interaction" },
+    { name = "realized-skill-application" },
+    { name = "realized-skill-semantics" },
+    { name = "realized-validation" },
+    { name = "realized-workstation-app-cli" },
+    { name = "realized-workstation-runtime-core" },
+    { name = "realized-workstation-skills-core" },
+    { name = "realized-workstation-subject-core" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "realized-blend", editable = "blend" },
+    { name = "realized-blend-application", editable = "blend_application" },
+    { name = "realized-core-engine", editable = "core_engine" },
+    { name = "realized-core-governance", editable = "core_governance" },
+    { name = "realized-core-runtime", editable = "core_runtime" },
+    { name = "realized-core-semantics", editable = "core_semantics" },
+    { name = "realized-exchange", editable = "exchange" },
+    { name = "realized-host-interaction", editable = "host_interaction" },
+    { name = "realized-skill-application", editable = "skill_application" },
+    { name = "realized-skill-semantics", editable = "skill_semantics" },
+    { name = "realized-validation", editable = "validation" },
+    { name = "realized-workstation-app-cli", editable = "workstation/app_cli" },
+    { name = "realized-workstation-runtime-core", editable = "workstation/runtime_core" },
+    { name = "realized-workstation-skills-core", editable = "workstation/skills_core" },
+    { name = "realized-workstation-subject-core", editable = "workstation/subject_core" },
 ]
 
 [[package]]
@@ -1208,6 +1255,25 @@ requires-dist = [
 ]
 
 [[package]]
+name = "realized-workstation-compatibility"
+version = "0.1.0"
+source = { editable = "workstation/compatibility_api" }
+dependencies = [
+    { name = "realized-workstation" },
+    { name = "realized-workstation-contracts" },
+    { name = "realized-workstation-runtime-core" },
+    { name = "realized-workstation-subject-service" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "realized-workstation", editable = "workstation/namespace" },
+    { name = "realized-workstation-contracts", editable = "workstation/contracts_api" },
+    { name = "realized-workstation-runtime-core", editable = "workstation/runtime_core" },
+    { name = "realized-workstation-subject-service", editable = "workstation/subject_service" },
+]
+
+[[package]]
 name = "realized-workstation-contracts"
 version = "0.1.0"
 source = { editable = "workstation/contracts_api" }
@@ -1242,7 +1308,6 @@ dependencies = [
     { name = "realized-workstation" },
     { name = "realized-workstation-contracts" },
     { name = "realized-workstation-foundation-models" },
-    { name = "realized-workstation-subject-service" },
 ]
 
 [package.metadata]
@@ -1253,7 +1318,6 @@ requires-dist = [
     { name = "realized-workstation", editable = "workstation/namespace" },
     { name = "realized-workstation-contracts", editable = "workstation/contracts_api" },
     { name = "realized-workstation-foundation-models", editable = "workstation/foundation_models" },
-    { name = "realized-workstation-subject-service", editable = "workstation/subject_service" },
 ]
 
 [[package]]
