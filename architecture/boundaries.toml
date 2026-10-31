@@ -67,7 +67,6 @@ compatibility_modules = [
   "blend_workflow_execution",
   "blend_workflow_models",
   "blend_world_models",
-  "artifact_contracts",
   "data_governance",
   "controller_entrypoint_binding",
   "controller_governance_bridge",
@@ -99,7 +98,6 @@ compatibility_modules = [
 [root_module_ownership]
 semantic_model = [
   "applied_theory_types",
-  "artifact_contracts",
   "pure_theory_types",
 ]
 portable_skills = [
@@ -200,7 +198,6 @@ compatibility_facade_modules = [
   "blend_workflow_execution",
   "blend_workflow_models",
   "blend_world_models",
-  "artifact_contracts",
   "controller_entrypoint_binding",
   "controller_runtime",
   "data_governance",

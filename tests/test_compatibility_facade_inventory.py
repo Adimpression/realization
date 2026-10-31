@@ -64,7 +64,7 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
             qualification["minimum_stable_cycles"],
         )
         self.assertFalse(qualification["retirement_hold"])
-        self.assertEqual(5, len(self.inventory["retirement_candidates"]))
+        self.assertEqual(4, len(self.inventory["retirement_candidates"]))
         self.assertEqual(41, len(self.inventory["retirement_holds"]))
 
     def test_facade_shapes_match_reviewed_compatibility_cohorts(self) -> None:
@@ -73,7 +73,7 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
                 "aggregate_reexport": 1,
                 "behavior_adapter": 5,
                 "exact_module_alias": 28,
-                "symbol_reexport": 12,
+                "symbol_reexport": 11,
             },
             self.inventory["summary"]["shape_counts"],
         )
@@ -97,18 +97,10 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
         by_module = {
             row["module"]: row for row in self.inventory["facades"]
         }
-        self.assertEqual(
-            "default",
-            by_module["artifact_contracts"]["policy_source"],
-        )
         self.assertEqual("override", by_module["main"]["policy_source"])
         self.assertEqual(
             ["realized-core", "realized-workstation"],
             by_module["main"]["replacement_commands"],
-        )
-        self.assertEqual(
-            "repository_internal",
-            by_module["artifact_contracts"]["support_status"],
         )
         self.assertEqual(
             "supported_executable_path",
@@ -133,6 +125,21 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
             "retained",
             by_module["python_skill_host"]["durable_qualified_name_status"],
         )
+
+    def test_default_policy_applies_without_a_facade_override(self) -> None:
+        policy = json.loads(
+            (
+                REPO_ROOT
+                / "architecture"
+                / "compatibility-facade-policy.json"
+            ).read_text(encoding="utf-8")
+        )
+        effective = inventory_checker._effective_facade_policy(
+            policy,
+            "synthetic_facade",
+        )
+        self.assertEqual("default", effective["policy_source"])
+        self.assertEqual("repository_internal", effective["support_status"])
 
     def test_executable_facade_requires_an_explicit_obligation(self) -> None:
         assessment = inventory_checker._retirement_assessment(
@@ -183,7 +190,7 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
             for row in self.inventory["facades"]
             if row["module"] in self.inventory["retirement_candidates"]
         }
-        self.assertEqual(5, len(candidates))
+        self.assertEqual(4, len(candidates))
         self.assertTrue(
             all(
                 row["retirement_state"] == "qualified"
@@ -200,6 +207,7 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
             {
                 "applied_theory_primitives",
                 "artifact",
+                "artifact_contracts",
                 "artifact_answer_resolution",
                 "boundary",
                 "blend_workflow",

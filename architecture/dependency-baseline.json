@@ -571,9 +571,9 @@
     "cyclic_internal_edge_count": 0,
     "cyclic_node_count": 0,
     "cyclic_scc_count": 0,
-    "edge_count": 226,
+    "edge_count": 225,
     "largest_cyclic_scc_node_count": 0,
-    "node_count": 90
+    "node_count": 89
   },
   "compatibility_edges": [
     {
@@ -649,12 +649,6 @@
       "direction": "root_to_component",
       "source": "args",
       "target": "core_engine"
-    },
-    {
-      "category": "compatibility",
-      "direction": "root_to_component",
-      "source": "artifact_contracts",
-      "target": "core_semantics"
     },
     {
       "category": "compatibility",
@@ -1109,13 +1103,6 @@
       ]
     },
     {
-      "module": "artifact_contracts",
-      "owner": "semantic_model",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
       "module": "blend_context",
       "owner": "blend",
       "statuses": [
@@ -1512,10 +1499,6 @@
     {
       "source": "args",
       "target": "core_engine"
-    },
-    {
-      "source": "artifact_contracts",
-      "target": "core_semantics"
     },
     {
       "source": "blend_context",

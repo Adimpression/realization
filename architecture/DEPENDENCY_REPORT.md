@@ -53,7 +53,6 @@ Every repository-root Python module has one explicit responsibility. Status is o
 | `applied_theory_types` | `semantic_model` | `compatibility_facade` |
 | `approval_governance` | `governance` | `compatibility_facade` |
 | `args` | `entry_exchange` | `entrypoint` |
-| `artifact_contracts` | `semantic_model` | `compatibility_facade` |
 | `blend_context` | `blend` | `compatibility_facade` |
 | `blend_operator` | `blend` | `compatibility_facade` |
 | `blend_operator_store` | `blend` | `compatibility_facade` |
@@ -312,8 +311,8 @@ These edges exist only to preserve historical import paths. They are excluded fr
 
 | Metric | Count |
 | --- | ---: |
-| Nodes | 90 |
-| Edges | 226 |
+| Nodes | 89 |
+| Edges | 225 |
 | Cyclic SCCs | 0 |
 | Nodes in cyclic SCCs | 0 |
 | Edges internal to cyclic SCCs | 0 |
@@ -337,7 +336,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `root_to_component` | `approval_governance` | `core_semantics` | `compatibility` |
 | `root_to_component` | `args` | `app_cli` | `orchestration` |
 | `root_to_component` | `args` | `core_engine` | `orchestration` |
-| `root_to_component` | `artifact_contracts` | `core_semantics` | `compatibility` |
 | `root_to_component` | `blend_context` | `blend` | `compatibility` |
 | `root_to_component` | `blend_context` | `runtime_core` | `compatibility` |
 | `root_to_component` | `blend_operator` | `blend` | `compatibility` |
@@ -421,7 +419,6 @@ No workspace package imports a root application module.
 - `approval_governance` -> `core_semantics` (`approval_governance.py`)
 - `args` -> `app_cli` (`args.py`)
 - `args` -> `core_engine` (`args.py`)
-- `artifact_contracts` -> `core_semantics` (`artifact_contracts.py`)
 - `blend_context` -> `blend` (`blend_context.py`)
 - `blend_context` -> `runtime_core` (`blend_context.py`)
 - `blend_operator` -> `blend` (`blend_operator.py`)

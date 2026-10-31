@@ -1420,6 +1420,52 @@ Reviewed and accepted evidence, captured on 2026-10-31:
 - [x] Rollback restores only the historical test import and generated consumer
   metadata; the retained facade and canonical semantic package are unchanged.
 
+### Artifact Contract Re-Export Deletion Cohort Review
+
+The sixteenth deletion cohort removes the historical artifact-protocol symbol
+projection after its canonical behavior consumer completed a separate stable
+migration cycle.
+
+| Historical import | Canonical replacement |
+| --- | --- |
+| `artifact_contracts` | `realized_core_semantics.artifacts` |
+
+Reviewed and accepted evidence, captured on 2026-10-31:
+
+- [x] The preceding consumer-migration change `357d021` left only the
+  designated facade identity contract; no production, package, trial, script,
+  build, runnable-documentation, or persisted-fixture consumer remained.
+- [x] The facade was a symbol projection with one unambiguous canonical owner,
+  no wildcard or non-contract consumer, no blocking reference, no executable
+  surface, no distinct import effect, and no facade-owned durable pickle
+  global. Canonical protocol behavior tests remain active unchanged.
+- [x] The sequential architecture delta only shrank the graph: owned roots
+  `54 -> 53`, root-boundary classifications `77 -> 76`, combined graph nodes
+  `90 -> 89`, combined edges `226 -> 225`, and grandfathered observations
+  `96 -> 95`, with `35` components, `141` package edges, no addition, and no
+  cycle.
+- [x] The retained inventory contains `45` facades, `51` static consumers,
+  `4` qualified candidates, `41` holds, and `75` total tombstones, with no
+  canonical-package, public README, or public-example consumer.
+- [x] The retained contract ledger contains `45` cards, `28` exact aliases,
+  `11` symbol re-exports, `35` facades with `133` durable pickle globals, and
+  `73` facade contract tests.
+- [x] Qualification passed `272` focused architecture, semantic, artifact,
+  compatibility, replay, and selection tests; all `877` applicable
+  non-provider root tests; and all `632` applicable non-provider workstation
+  tests under normal application composition.
+- [x] Provider-backed Markdown-learning and live-publication tests are outside
+  this deterministic facade deletion and are not claimed as passing; their
+  seven cases remain separately gated on explicit external-data authorization.
+- [x] All `46` deterministic workstation BDD cases passed; all `35` wheels and
+  source distributions built and imported in source isolation using the locked
+  project interpreter; publication capture reproduced eight actions and two
+  artifacts; Flutter analysis found no issues and all `51` widget tests passed.
+- [x] Rollback remains local to the historical projection, its facade-only
+  identity assertion, active root-ledger entry, tombstone, and module
+  documentation; the canonical semantic package and artifact behavior remain
+  unchanged.
+
 ## Phase 5 - Retire Low-Risk Alias Cohorts
 
 Start with exact aliases that have no non-test consumers, no import-time

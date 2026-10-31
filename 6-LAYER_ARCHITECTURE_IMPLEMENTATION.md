@@ -5655,6 +5655,28 @@ Completed migration cut - artifact contract re-export consumer
   Seven unrelated provider-backed cases remain explicitly outside this
   migration's evidence pending external-data authorization.
 
+Completed deletion cut - artifact contract symbol re-export cohort
+(2026-10-31):
+
+- [x] Remove the repository-internal `artifact_contracts` projection only
+  after its canonical behavior consumer completed the separately committed
+  migration cycle to `realized_core_semantics.artifacts`.
+- [x] Preserve canonical protocol conformance, artifact-boundary, replay,
+  determinism, and selection assertions; remove only the root projection and
+  its remaining facade-only identity evidence, tombstone the path, and correct
+  module documentation.
+- [x] Accept only the sequential shrinking delta: owned roots `54 -> 53`,
+  root-boundary classifications `77 -> 76`, combined graph nodes `90 -> 89`,
+  combined edges `226 -> 225`, grandfathered observations `96 -> 95`, retained
+  facades `46 -> 45`, and symbol re-exports `12 -> 11`, with no new dependency
+  or cycle.
+- [x] Qualify the non-model cut with `272` focused architecture/semantic tests,
+  `877` applicable root tests, `632` applicable workstation tests, `46`
+  deterministic BDD cases, all distribution builds and isolated imports,
+  deterministic publication capture, Flutter analysis, and `51` widget tests.
+  Seven unrelated provider-backed cases remain explicitly outside this
+  cohort's evidence pending external-data authorization.
+
 Exit condition:
 
 - [x] The root-boundary ledger contains no canonical package-to-root

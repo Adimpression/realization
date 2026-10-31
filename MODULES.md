@@ -91,9 +91,11 @@ legacy aliases.
   deterministic semantic views, identifier, timestamp, and JSON value
   projection helpers. It contains no governance decisions,
   persistence, controller orchestration, model calls, host execution, or
-  workstation code. `pure_theory_types.py`, `artifact_contracts.py`,
-  `prolog.py`, `semantic_text.py`, `title_semantics.py`, `itemize_models.py`,
-  `decision_review_models.py`, and `markdown_ir.py` are historical facades.
+  workstation code. `pure_theory_types.py`, `prolog.py`, `semantic_text.py`,
+  `title_semantics.py`, `itemize_models.py`, `decision_review_models.py`, and
+  `markdown_ir.py` are retained historical facades. The former artifact-
+  contract root projection has been retired in favor of the canonical
+  artifacts module.
 - `blend/`: Independently buildable `realized-blend` UV project. It owns the
   dependency-light Blend domain values and pure rules for context, actors,
   operator descriptors, opaque invocation handles, catalog providers,
@@ -236,11 +238,9 @@ legacy aliases.
   It has no third-party or workstation dependency and does not select or admit
   abilities, grant authority, or supply concrete host realizers. Concrete
   providers are attached at application/session composition boundaries; there
-  is no mutable global provider registry. The historical root
-  `host_interaction_*.py` paths are explicit compatibility facades over this
-  package.
-- `artifact_contracts.py`: Compatibility facade for the canonical read-only
-  artifact protocols in `realized_core_semantics.artifacts`.
+  is no mutable global provider registry. Historical root
+  `host_interaction_*.py` projections have been retired in favor of this
+  package's explicit modules.
 - `applied_theory_types.py`: Applied dataclasses and compatibility re-exports
   for the canonical proposal vocabulary, plus root-owned artifacts, abilities,
   controller payloads, and the historical `json_safe` import path.

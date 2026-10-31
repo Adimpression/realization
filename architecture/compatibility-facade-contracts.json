@@ -422,43 +422,6 @@
       "canonical_module_identity": "",
       "canonical_targets": [
         {
-          "component": "core_semantics",
-          "module": "realized_core_semantics.artifacts"
-        }
-      ],
-      "command_replacements": [],
-      "contract_evidence": "tests.test_architecture_compatibility_facades",
-      "durable_pickle_globals": [],
-      "exact_module_identity_observed": null,
-      "executable_surface": false,
-      "export_surface": {
-        "constant_types": {},
-        "explicit_all": [
-          "ArtifactContentView",
-          "TitledArtifactContentView"
-        ],
-        "public_names": [
-          "ArtifactContentView",
-          "TitledArtifactContentView"
-        ],
-        "signatures": {
-          "ArtifactContentView": "(*args, **kwargs)",
-          "TitledArtifactContentView": "(*args, **kwargs)"
-        }
-      },
-      "import_effect_class": "symbol_projection",
-      "module": "artifact_contracts",
-      "owner": "semantic_model",
-      "path": "artifact_contracts.py",
-      "proof_strategy": "exported_symbol_object_identity",
-      "rollback_operation": "restore artifact_contracts.py and its compatibility contract assertions without reverting the canonical owner",
-      "shape": "symbol_reexport",
-      "support_status": "repository_internal"
-    },
-    {
-      "canonical_module_identity": "",
-      "canonical_targets": [
-        {
           "component": "blend",
           "module": "realized_blend.context"
         },
@@ -5882,13 +5845,13 @@
   },
   "schema_version": 1,
   "summary": {
-    "card_count": 46,
+    "card_count": 45,
     "exact_module_identity_count": 30,
     "facades_with_durable_pickle_globals": 35,
     "pickle_global_count": 133,
     "proof_strategy_counts": {
       "exact_module_object_identity": 28,
-      "exported_symbol_object_identity": 12,
+      "exported_symbol_object_identity": 11,
       "manual_behavior_equivalence": 5,
       "manual_multi_owner_export_mapping": 1
     }

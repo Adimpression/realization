@@ -6,7 +6,6 @@ import unittest
 import applied_theory_types
 import approval_governance
 import args
-import artifact_contracts
 import blend_context
 import blend_operator
 import blend_operator_store
@@ -332,18 +331,12 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
             packaged_itemize_validation.validate_itemization_session,
         )
 
-    def test_formal_semantic_facades_keep_packaged_identities(self) -> None:
+    def test_formal_theory_facade_keeps_packaged_identities(self) -> None:
         for name in pure_theory_types.__all__:
             with self.subTest(module="pure_theory_types", name=name):
                 self.assertIs(
                     getattr(pure_theory_types, name),
                     getattr(packaged_theory, name),
-                )
-        for name in artifact_contracts.__all__:
-            with self.subTest(module="artifact_contracts", name=name):
-                self.assertIs(
-                    getattr(artifact_contracts, name),
-                    getattr(packaged_artifact_contracts, name),
                 )
 
     def test_legacy_formal_theory_pickle_global_still_resolves(self) -> None:

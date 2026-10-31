@@ -319,7 +319,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 155,
+          "line": 157,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -328,97 +328,6 @@
           "disposition": "historical_narrative",
           "inside_code_fence": false,
           "line": 247,
-          "path": "MODULES.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        }
-      ]
-    },
-    {
-      "canonical_exports": [
-        {
-          "component": "core_semantics",
-          "exported_name": "ArtifactContentView",
-          "module": "realized_core_semantics.artifacts",
-          "source_name": "ArtifactContentView"
-        },
-        {
-          "component": "core_semantics",
-          "exported_name": "TitledArtifactContentView",
-          "module": "realized_core_semantics.artifacts",
-          "source_name": "TitledArtifactContentView"
-        }
-      ],
-      "canonical_module_identity": "",
-      "canonical_targets": [
-        {
-          "component": "core_semantics",
-          "module": "realized_core_semantics.artifacts"
-        }
-      ],
-      "durable_qualified_name_status": "clear",
-      "earliest_removal_condition": "one_stable_qualification_cycle_after_final_consumer_migration",
-      "executable_obligation": "none",
-      "executable_surface": false,
-      "hold_reason": "No active policy hold; the repository-internal facade is qualified only for an isolated deletion change with tombstone and rollback evidence.",
-      "import_obligation": "repository_only",
-      "last_consumer_scan_evidence": "architecture/compatibility-facades.json",
-      "last_qualification_evidence": "architecture/qualification-baseline.json",
-      "module": "artifact_contracts",
-      "notice_reference": "",
-      "owner": "semantic_model",
-      "path": "artifact_contracts.py",
-      "policy_source": "default",
-      "replacement_commands": [],
-      "retirement_assessment": {
-        "blocking_text_reference_count": 0,
-        "eligible_for_deletion": true,
-        "hold_reasons": [],
-        "non_contract_consumer_count": 0,
-        "text_reference_count": 4
-      },
-      "retirement_state": "qualified",
-      "review_condition": "Delete only in an owner-cohesive cohort after the contract ledger, consumer inventory, stable qualification evidence, tombstone, and facade-only rollback have been reviewed.",
-      "root_dependencies": [],
-      "shape": "symbol_reexport",
-      "static_consumers": [
-        {
-          "import_kind": "import",
-          "line": 9,
-          "path": "tests/test_architecture_compatibility_facades.py",
-          "scope": "test"
-        }
-      ],
-      "support_status": "repository_internal",
-      "text_references": [
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 481,
-          "path": "6-LAYER_ARCHITECTURE_IMPLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 495,
-          "path": "6-LAYER_ARCHITECTURE_IMPLEMENTATION.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 94,
-          "path": "MODULES.md",
-          "reference_kind": "module_file_path",
-          "scope": "documentation"
-        },
-        {
-          "disposition": "historical_narrative",
-          "inside_code_fence": false,
-          "line": 242,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -484,7 +393,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 10,
+          "line": 9,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -589,7 +498,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 11,
+          "line": 10,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -694,7 +603,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 12,
+          "line": 11,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -788,7 +697,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 13,
+          "line": 12,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -877,7 +786,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 14,
+          "line": 13,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -1022,7 +931,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 15,
+          "line": 14,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -1087,7 +996,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 16,
+          "line": 15,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -1158,7 +1067,7 @@
         },
         {
           "import_kind": "import",
-          "line": 18,
+          "line": 17,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -1240,7 +1149,7 @@
         },
         {
           "import_kind": "import",
-          "line": 17,
+          "line": 16,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -1349,7 +1258,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 19,
+          "line": 18,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -1375,7 +1284,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 156,
+          "line": 158,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -1391,7 +1300,7 @@
         {
           "disposition": "architecture_evidence",
           "inside_code_fence": false,
-          "line": 1838,
+          "line": 1821,
           "path": "architecture/dependency-baseline.json",
           "reference_kind": "module_file_path",
           "scope": "architecture_documentation"
@@ -1446,7 +1355,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 20,
+          "line": 19,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -1607,7 +1516,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 21,
+          "line": 20,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -1704,7 +1613,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 22,
+          "line": 21,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -1722,7 +1631,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 96,
+          "line": 95,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -1785,7 +1694,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 23,
+          "line": 22,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -1874,7 +1783,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 24,
+          "line": 23,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -2015,7 +1924,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 35,
+          "line": 34,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -2174,7 +2083,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 26,
+          "line": 25,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -2278,7 +2187,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 25,
+          "line": 24,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -2343,7 +2252,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 27,
+          "line": 26,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -2432,7 +2341,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 28,
+          "line": 27,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -2548,7 +2457,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 29,
+          "line": 28,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -2669,7 +2578,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 30,
+          "line": 29,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -2746,7 +2655,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 31,
+          "line": 30,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -2827,7 +2736,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 32,
+          "line": 31,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -3012,7 +2921,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 33,
+          "line": 32,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -3100,13 +3009,13 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 465,
+          "line": 458,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         },
         {
           "import_kind": "import",
-          "line": 478,
+          "line": 471,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         },
@@ -3472,7 +3381,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 178,
+          "line": 176,
           "path": "architecture/boundaries.toml",
           "reference_kind": "module_file_path",
           "scope": "architecture_documentation"
@@ -3664,7 +3573,7 @@
         {
           "disposition": "compatibility_evidence",
           "inside_code_fence": false,
-          "line": 309,
+          "line": 317,
           "path": "tests/test_compatibility_facade_inventory.py",
           "reference_kind": "module_invocation",
           "scope": "test"
@@ -3672,7 +3581,7 @@
         {
           "disposition": "compatibility_evidence",
           "inside_code_fence": false,
-          "line": 342,
+          "line": 350,
           "path": "tests/test_compatibility_facade_inventory.py",
           "reference_kind": "module_file_path",
           "scope": "test"
@@ -3680,7 +3589,7 @@
         {
           "disposition": "compatibility_evidence",
           "inside_code_fence": false,
-          "line": 343,
+          "line": 351,
           "path": "tests/test_compatibility_facade_inventory.py",
           "reference_kind": "module_file_path",
           "scope": "test"
@@ -3688,7 +3597,7 @@
         {
           "disposition": "compatibility_evidence",
           "inside_code_fence": false,
-          "line": 363,
+          "line": 371,
           "path": "tests/test_compatibility_facade_inventory.py",
           "reference_kind": "module_file_path",
           "scope": "test"
@@ -3696,7 +3605,7 @@
         {
           "disposition": "compatibility_evidence",
           "inside_code_fence": false,
-          "line": 364,
+          "line": 372,
           "path": "tests/test_compatibility_facade_inventory.py",
           "reference_kind": "module_file_path",
           "scope": "test"
@@ -3704,7 +3613,7 @@
         {
           "disposition": "compatibility_evidence",
           "inside_code_fence": false,
-          "line": 365,
+          "line": 373,
           "path": "tests/test_compatibility_facade_inventory.py",
           "reference_kind": "module_file_path",
           "scope": "test"
@@ -3712,7 +3621,7 @@
         {
           "disposition": "compatibility_evidence",
           "inside_code_fence": false,
-          "line": 391,
+          "line": 399,
           "path": "tests/test_compatibility_facade_inventory.py",
           "reference_kind": "module_file_path",
           "scope": "test"
@@ -4551,7 +4460,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 34,
+          "line": 33,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -5042,7 +4951,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 36,
+          "line": 35,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -5115,7 +5024,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 37,
+          "line": 36,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -5246,7 +5155,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 40,
+          "line": 39,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -5807,7 +5716,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 38,
+          "line": 37,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -5934,7 +5843,7 @@
         },
         {
           "import_kind": "import",
-          "line": 39,
+          "line": 38,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -6271,7 +6180,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 46,
+          "line": 45,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -6392,7 +6301,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 43,
+          "line": 42,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -6553,7 +6462,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 41,
+          "line": 40,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -6796,7 +6705,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 42,
+          "line": 41,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -6814,7 +6723,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 154,
+          "line": 156,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -6917,7 +6826,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 45,
+          "line": 44,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -7022,7 +6931,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 44,
+          "line": 43,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -7215,7 +7124,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 47,
+          "line": 46,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -7241,7 +7150,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 171,
+          "line": 173,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -7436,7 +7345,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 48,
+          "line": 47,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -7462,7 +7371,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 154,
+          "line": 156,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -7563,7 +7472,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 49,
+          "line": 48,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -7589,7 +7498,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 171,
+          "line": 173,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -7870,7 +7779,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 50,
+          "line": 49,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -7904,7 +7813,7 @@
         {
           "disposition": "historical_narrative",
           "inside_code_fence": false,
-          "line": 155,
+          "line": 157,
           "path": "MODULES.md",
           "reference_kind": "module_file_path",
           "scope": "documentation"
@@ -7971,7 +7880,7 @@
       "static_consumers": [
         {
           "import_kind": "import",
-          "line": 51,
+          "line": 50,
           "path": "tests/test_architecture_compatibility_facades.py",
           "scope": "test"
         }
@@ -8037,7 +7946,6 @@
     "retirement_hold": false
   },
   "retirement_candidates": [
-    "artifact_contracts",
     "external_markdown_learning_pipeline",
     "fallback_not_semantics",
     "itemize_validation",
@@ -8388,7 +8296,7 @@
       "tests/test_compatibility_facade_contracts.py"
     ],
     "path": "architecture/compatibility-facade-policy.json",
-    "tombstone_count": 74,
+    "tombstone_count": 75,
     "tombstones": {
       "applied_theory_primitives": {
         "removal_change_reference": "semantic-alias-cohort-1",
@@ -8404,6 +8312,11 @@
         "removal_change_reference": "controller-reduction-alias-cohort-1",
         "removed_at": "2026-10-30",
         "replacement": "realized_core_engine.artifact_answer_resolution"
+      },
+      "artifact_contracts": {
+        "removal_change_reference": "semantic-reexport-cohort-1",
+        "removed_at": "2026-10-31",
+        "replacement": "realized_core_semantics.artifacts"
       },
       "blend_workflow": {
         "removal_change_reference": "blend-application-alias-cohort-1",
@@ -8765,38 +8678,38 @@
   "schema_version": 2,
   "summary": {
     "canonical_package_consumer_count": 0,
-    "eligible_retirement_candidate_count": 5,
-    "facade_contract_consumer_count": 47,
-    "facade_count": 46,
+    "eligible_retirement_candidate_count": 4,
+    "facade_contract_consumer_count": 46,
+    "facade_count": 45,
     "public_documentation_reference_count": 0,
     "public_example_consumer_count": 0,
     "shape_counts": {
       "aggregate_reexport": 1,
       "behavior_adapter": 5,
       "exact_module_alias": 28,
-      "symbol_reexport": 12
+      "symbol_reexport": 11
     },
-    "static_consumer_count": 52,
+    "static_consumer_count": 51,
     "static_consumer_kind_counts": {
       "from_import": 3,
-      "import": 49
+      "import": 48
     },
     "static_consumer_scope_counts": {
       "compatibility_facade": 3,
-      "test": 49
+      "test": 48
     },
-    "text_reference_count": 537,
+    "text_reference_count": 533,
     "text_reference_disposition_counts": {
       "architecture_evidence": 5,
       "compatibility_evidence": 53,
       "durable_provenance_evidence": 54,
       "durable_runtime_reference": 16,
-      "historical_narrative": 314,
+      "historical_narrative": 310,
       "runnable_guidance": 59,
       "runtime_reference": 36
     },
     "text_reference_kind_counts": {
-      "module_file_path": 393,
+      "module_file_path": 389,
       "module_invocation": 1,
       "python_file_invocation": 57,
       "textual_import": 86
@@ -8804,7 +8717,7 @@
     "text_reference_scope_counts": {
       "architecture_documentation": 6,
       "configuration_or_fixture": 1,
-      "documentation": 295,
+      "documentation": 291,
       "durable_material": 54,
       "other_repository_reference": 40,
       "test": 60,
