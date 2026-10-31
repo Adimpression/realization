@@ -1570,6 +1570,57 @@ Reviewed and accepted evidence, captured on 2026-10-31:
   documentation; canonical subject-core validation and workflow behavior
   remain unchanged.
 
+### Controller Supplement Exact-Alias Deletion Cohort Review
+
+The nineteenth deletion cohort removes the historical root alias for the
+canonical controller-owned model-supplement module.
+
+| Historical import | Canonical replacement |
+| --- | --- |
+| `supplement` | `realized_core_engine.supplement` |
+
+Reviewed and accepted evidence, captured on 2026-10-31:
+
+- [x] Every repository consumer outside the designated facade contract already
+  used `realized_core_engine.supplement`. The historical alias had no
+  production, package, trial, script, build, runnable-documentation, or
+  persisted-fixture consumer.
+- [x] The facade performed only exact `sys.modules` substitution and had one
+  unambiguous canonical owner. It had no executable surface, import-time
+  provider construction, distinct import effect, durable pickle global,
+  blocking reference, or non-contract patch target.
+- [x] Canonical provider request compatibility remains covered by deterministic
+  fake clients in `tests.test_supplement_provider_compatibility`; the deletion
+  did not alter provider transport, environment resolution, prompts, retry
+  policy, response parsing, or the canonical supplement implementation.
+- [x] The sequential architecture delta only shrank the graph: owned roots
+  `51 -> 50`, root-boundary classifications `74 -> 73`, combined graph nodes
+  `87 -> 86`, combined edges `223 -> 222`, and grandfathered observations
+  `93 -> 92`, with `35` components, `141` package edges, no addition, and no
+  cycle.
+- [x] The retained inventory contains `42` facades, `48` static consumers,
+  `1` qualified candidate, `41` holds, and `78` total tombstones, with no
+  canonical-package, public README, or public-example consumer.
+- [x] The retained contract ledger contains `42` cards, `27` exact aliases,
+  `9` symbol re-exports, `35` facades with `133` durable pickle globals, and
+  `71` facade contract tests.
+- [x] Qualification passed `141` focused architecture, compatibility-contract,
+  LLM-layer, and deterministic fake-provider tests; all `875` applicable
+  non-provider root tests; and all `633` applicable non-provider workstation
+  tests under normal application composition, with one expected skip.
+- [x] All `46` deterministic workstation BDD cases passed with the live
+  publication provider case absent from selection. The six Newton provider
+  cases and that live publication case remain excluded, unclaimed, and gated
+  on explicit external-data authorization.
+- [x] All `35` wheels and source distributions built and imported in source
+  isolation using the locked project interpreter; publication capture
+  reproduced eight actions and two artifacts; Flutter analysis found no
+  issues and all `51` widget tests passed.
+- [x] Rollback remains local to the historical alias, its facade-only identity
+  assertion, active root-ledger entry, tombstone, and module documentation;
+  canonical model-supplement behavior and provider boundaries remain
+  unchanged.
+
 ## Phase 5 - Retire Low-Risk Alias Cohorts
 
 Start with exact aliases that have no non-test consumers, no import-time

@@ -402,10 +402,6 @@ legacy aliases.
 - `skill_path_notation.py`: Compatibility facade for canonical portable skill paths in `realized_skill_semantics.paths`.
 - `skill_safety_governance.py`: Compatibility facade for revocation and
   incident rules owned by `realized_core_governance.safety`.
-- `supplement.py`: Controller-owned LLM supplement adapter, proposal-type
-  labeling, prompt policy, JSON repair, and supplement receipts. Provider SDK
-  construction, request fallback mechanics, retries, and typed response
-  parsing are delegated through the public `realized-core-llm` ABI.
 - `tablet_safety_validation.py`: Standalone tablet-safety validation script.
 - `title_depth_learning_validation.py`: Standalone title-depth learning validation script.
 - `TRIAL_DOMAIN_VALIDATION.py`: Multi-domain trial runner for fresh-db curriculum validation.

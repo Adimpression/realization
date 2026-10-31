@@ -45,7 +45,6 @@ import skill_leaf_types
 import skill_lifecycle
 import skill_path_notation
 import skill_safety_governance
-import supplement
 from realized_host_interaction import models as packaged_host_models
 from realized_host_interaction._normalization import (
     collapse_ws as host_interaction_collapse_ws,
@@ -96,7 +95,6 @@ from realized_core_engine import host_mediation as packaged_host_mediation
 from realized_core_engine import controller_entrypoint_binding as packaged_controller_entrypoint_binding
 from realized_core_engine import controller_runtime as packaged_controller_runtime
 from realized_core_engine import skill_governance as packaged_engine_skill_governance
-from realized_core_engine import supplement as packaged_engine_supplement
 from realized_core_engine.store import ArtifactStore, SQLiteVectorArtifactStore
 from realized_core_runtime import execution as packaged_runtime_execution
 from realized_core_runtime import executor_support as packaged_executor_support
@@ -170,7 +168,6 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
 
     def test_controller_adapter_modules_keep_identity(self) -> None:
         self.assertIs(governance_inventory, packaged_engine_governance_inventory)
-        self.assertIs(supplement, packaged_engine_supplement)
 
     def test_applied_theory_types_keeps_its_historical_identity(self) -> None:
         self.assertIs(applied_theory_types, packaged_applied_theory_types)

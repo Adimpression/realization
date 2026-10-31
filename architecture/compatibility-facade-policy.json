@@ -454,6 +454,11 @@
       "removed_at": "2026-10-30",
       "replacement": "realized_core_engine.store"
     },
+    "supplement": {
+      "removal_change_reference": "controller-supplement-alias-cohort-1",
+      "removed_at": "2026-10-31",
+      "replacement": "realized_core_engine.supplement"
+    },
     "structured_learning_yaml": {
       "removal_change_reference": "controller-normalization-alias-cohort-1",
       "removed_at": "2026-10-30",

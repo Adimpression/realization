@@ -96,7 +96,6 @@ Every repository-root Python module has one explicit responsibility. Status is o
 | `skill_lifecycle` | `governance` | `compatibility_facade` |
 | `skill_path_notation` | `portable_skills` | `compatibility_facade` |
 | `skill_safety_governance` | `governance` | `compatibility_facade` |
-| `supplement` | `controller` | `compatibility_facade` |
 | `tablet_safety_validation` | `validation_trial` | `validation` |
 | `title_depth_learning_validation` | `validation_trial` | `validation` |
 
@@ -309,8 +308,8 @@ These edges exist only to preserve historical import paths. They are excluded fr
 
 | Metric | Count |
 | --- | ---: |
-| Nodes | 87 |
-| Edges | 223 |
+| Nodes | 86 |
+| Edges | 222 |
 | Cyclic SCCs | 0 |
 | Nodes in cyclic SCCs | 0 |
 | Edges internal to cyclic SCCs | 0 |
@@ -398,7 +397,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `root_to_component` | `skill_path_notation` | `skill_semantics` | `compatibility` |
 | `root_to_component` | `skill_safety_governance` | `core_governance` | `compatibility` |
 | `root_to_component` | `skill_safety_governance` | `core_semantics` | `compatibility` |
-| `root_to_component` | `supplement` | `core_engine` | `orchestration` |
 | `root_to_component` | `tablet_safety_validation` | `validation` | `orchestration` |
 | `root_to_component` | `title_depth_learning_validation` | `validation` | `orchestration` |
 
@@ -479,7 +477,6 @@ No workspace package imports a root application module.
 - `skill_path_notation` -> `skill_semantics` (`skill_path_notation.py`)
 - `skill_safety_governance` -> `core_governance` (`skill_safety_governance.py`)
 - `skill_safety_governance` -> `core_semantics` (`skill_safety_governance.py`)
-- `supplement` -> `core_engine` (`supplement.py`)
 - `tablet_safety_validation` -> `validation` (`tablet_safety_validation.py`)
 - `title_depth_learning_validation` -> `validation` (`title_depth_learning_validation.py`)
 

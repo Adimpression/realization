@@ -128,7 +128,6 @@ runtime_execution = [
 controller = [
   "controller_runtime",
   "governance_inventory",
-  "supplement",
 ]
 llm = []
 subject_domain = [
@@ -229,7 +228,6 @@ compatibility_facade_modules = [
   "skill_lifecycle",
   "skill_path_notation",
   "skill_safety_governance",
-  "supplement",
 ]
 
 # Top-level Python package families that are not yet UV projects remain part of

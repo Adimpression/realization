@@ -571,9 +571,9 @@
     "cyclic_internal_edge_count": 0,
     "cyclic_node_count": 0,
     "cyclic_scc_count": 0,
-    "edge_count": 223,
+    "edge_count": 222,
     "largest_cyclic_scc_node_count": 0,
-    "node_count": 87
+    "node_count": 86
   },
   "compatibility_edges": [
     {
@@ -1037,12 +1037,6 @@
     {
       "category": "orchestration",
       "direction": "root_to_component",
-      "source": "supplement",
-      "target": "core_engine"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
       "source": "tablet_safety_validation",
       "target": "validation"
     },
@@ -1393,13 +1387,6 @@
       ]
     },
     {
-      "module": "supplement",
-      "owner": "controller",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
       "module": "tablet_safety_validation",
       "owner": "validation_trial",
       "statuses": [
@@ -1729,10 +1716,6 @@
     {
       "source": "skill_safety_governance",
       "target": "core_semantics"
-    },
-    {
-      "source": "supplement",
-      "target": "core_engine"
     },
     {
       "source": "tablet_safety_validation",

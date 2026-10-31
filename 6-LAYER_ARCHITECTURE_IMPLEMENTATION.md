@@ -5724,6 +5724,27 @@ Completed deletion cut - itemization validation symbol re-export cohort
   All seven provider-backed cases remain excluded and unclaimed pending
   explicit external-data authorization.
 
+Completed deletion cut - controller supplement exact-alias cohort
+(2026-10-31):
+
+- [x] Remove the repository-internal `supplement` alias after all ordinary
+  consumers had used the canonical `realized_core_engine.supplement` owner
+  through stable qualification cycles.
+- [x] Preserve canonical supplement, provider-transport, prompt, retry,
+  response-shaping, replay, and controller behavior; remove only the exact
+  root alias and its facade-only identity evidence, then tombstone the path.
+- [x] Accept only the sequential shrinking delta: owned roots `51 -> 50`,
+  root-boundary classifications `74 -> 73`, combined graph nodes `87 -> 86`,
+  combined edges `223 -> 222`, grandfathered observations `93 -> 92`, retained
+  facades `43 -> 42`, and exact aliases `28 -> 27`, with no new dependency or
+  cycle.
+- [x] Qualify the import-only cut with `141` focused deterministic tests, `875`
+  applicable non-provider root tests, `633` applicable non-provider
+  workstation tests, `46` deterministic BDD cases, all distribution builds
+  and isolated imports, deterministic publication capture, Flutter analysis,
+  and `51` widget tests. All seven provider-backed cases remain excluded and
+  unclaimed pending explicit external-data authorization.
+
 Exit condition:
 
 - [x] The root-boundary ledger contains no canonical package-to-root

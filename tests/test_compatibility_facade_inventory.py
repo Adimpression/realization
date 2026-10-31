@@ -64,7 +64,7 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
             qualification["minimum_stable_cycles"],
         )
         self.assertFalse(qualification["retirement_hold"])
-        self.assertEqual(2, len(self.inventory["retirement_candidates"]))
+        self.assertEqual(1, len(self.inventory["retirement_candidates"]))
         self.assertEqual(41, len(self.inventory["retirement_holds"]))
 
     def test_facade_shapes_match_reviewed_compatibility_cohorts(self) -> None:
@@ -72,7 +72,7 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
             {
                 "aggregate_reexport": 1,
                 "behavior_adapter": 5,
-                "exact_module_alias": 28,
+                "exact_module_alias": 27,
                 "symbol_reexport": 9,
             },
             self.inventory["summary"]["shape_counts"],
@@ -190,7 +190,7 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
             for row in self.inventory["facades"]
             if row["module"] in self.inventory["retirement_candidates"]
         }
-        self.assertEqual(2, len(candidates))
+        self.assertEqual(1, len(candidates))
         self.assertTrue(
             all(
                 row["retirement_state"] == "qualified"
@@ -274,6 +274,7 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
                 "skill_registry",
                 "skill_schema_io",
                 "store",
+                "supplement",
                 "structured_learning_yaml",
                 "system_state",
                 "title_semantics",

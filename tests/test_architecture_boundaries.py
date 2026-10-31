@@ -348,10 +348,6 @@ class RepositoryArchitectureBoundaryTest(unittest.TestCase):
             {path.stem for path in REPO_ROOT.glob("*.py") if path.is_file()},
             set(root_ownership),
         )
-        self.assertEqual(
-            ("controller", ("compatibility_facade",)),
-            root_ownership["supplement"],
-        )
         for module in (
             "blend_operator_store",
             "blend_workflow_execution",
