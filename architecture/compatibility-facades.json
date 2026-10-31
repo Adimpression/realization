@@ -1900,7 +1900,7 @@
       "earliest_removal_condition": "one_stable_qualification_cycle_after_final_consumer_migration",
       "executable_obligation": "none",
       "executable_surface": false,
-      "hold_reason": "No active policy hold; the repository-internal facade is qualified only for an isolated deletion change with tombstone and rollback evidence.",
+      "hold_reason": "Deletion qualification requires the six provider-backed Newton Markdown-learning cases because this historical identity fronts external Markdown ingestion and extension composition; external-data execution is not authorized in the current change.",
       "import_obligation": "repository_only",
       "last_consumer_scan_evidence": "architecture/compatibility-facades.json",
       "last_qualification_evidence": "architecture/qualification-baseline.json",
@@ -1908,17 +1908,20 @@
       "notice_reference": "",
       "owner": "entry_exchange",
       "path": "external_markdown_learning_pipeline.py",
-      "policy_source": "default",
+      "policy_source": "override",
       "replacement_commands": [],
       "retirement_assessment": {
         "blocking_text_reference_count": 0,
-        "eligible_for_deletion": true,
-        "hold_reasons": [],
+        "eligible_for_deletion": false,
+        "hold_reasons": [
+          "Deletion qualification requires the six provider-backed Newton Markdown-learning cases because this historical identity fronts external Markdown ingestion and extension composition; external-data execution is not authorized in the current change.",
+          "retirement state is held, not qualified"
+        ],
         "non_contract_consumer_count": 0,
         "text_reference_count": 12
       },
-      "retirement_state": "qualified",
-      "review_condition": "Delete only in an owner-cohesive cohort after the contract ledger, consumer inventory, stable qualification evidence, tombstone, and facade-only rollback have been reviewed.",
+      "retirement_state": "held",
+      "review_condition": "Advance only after explicit external-data authorization, successful qualification of all six Newton Markdown-learning provider cases against the unchanged canonical exchange owner, and a separate facade-only deletion review.",
       "root_dependencies": [],
       "shape": "exact_module_alias",
       "static_consumers": [
@@ -3385,7 +3388,7 @@
         {
           "disposition": "compatibility_evidence",
           "inside_code_fence": false,
-          "line": 320,
+          "line": 328,
           "path": "tests/test_compatibility_facade_inventory.py",
           "reference_kind": "module_invocation",
           "scope": "test"
@@ -3393,7 +3396,7 @@
         {
           "disposition": "compatibility_evidence",
           "inside_code_fence": false,
-          "line": 353,
+          "line": 361,
           "path": "tests/test_compatibility_facade_inventory.py",
           "reference_kind": "module_file_path",
           "scope": "test"
@@ -3401,7 +3404,7 @@
         {
           "disposition": "compatibility_evidence",
           "inside_code_fence": false,
-          "line": 354,
+          "line": 362,
           "path": "tests/test_compatibility_facade_inventory.py",
           "reference_kind": "module_file_path",
           "scope": "test"
@@ -3409,7 +3412,7 @@
         {
           "disposition": "compatibility_evidence",
           "inside_code_fence": false,
-          "line": 374,
+          "line": 382,
           "path": "tests/test_compatibility_facade_inventory.py",
           "reference_kind": "module_file_path",
           "scope": "test"
@@ -3417,7 +3420,7 @@
         {
           "disposition": "compatibility_evidence",
           "inside_code_fence": false,
-          "line": 375,
+          "line": 383,
           "path": "tests/test_compatibility_facade_inventory.py",
           "reference_kind": "module_file_path",
           "scope": "test"
@@ -3425,7 +3428,7 @@
         {
           "disposition": "compatibility_evidence",
           "inside_code_fence": false,
-          "line": 376,
+          "line": 384,
           "path": "tests/test_compatibility_facade_inventory.py",
           "reference_kind": "module_file_path",
           "scope": "test"
@@ -3433,7 +3436,7 @@
         {
           "disposition": "compatibility_evidence",
           "inside_code_fence": false,
-          "line": 402,
+          "line": 410,
           "path": "tests/test_compatibility_facade_inventory.py",
           "reference_kind": "module_file_path",
           "scope": "test"
@@ -7664,9 +7667,7 @@
     "minimum_stable_cycles": 1,
     "retirement_hold": false
   },
-  "retirement_candidates": [
-    "external_markdown_learning_pipeline"
-  ],
+  "retirement_candidates": [],
   "retirement_holds": [
     {
       "hold_reasons": [
@@ -7806,6 +7807,13 @@
         "durable qualified-name review is retained"
       ],
       "module": "execution_frameworks"
+    },
+    {
+      "hold_reasons": [
+        "Deletion qualification requires the six provider-backed Newton Markdown-learning cases because this historical identity fronts external Markdown ingestion and extension composition; external-data execution is not authorized in the current change.",
+        "retirement state is held, not qualified"
+      ],
+      "module": "external_markdown_learning_pipeline"
     },
     {
       "hold_reasons": [
@@ -8409,7 +8417,7 @@
   "schema_version": 2,
   "summary": {
     "canonical_package_consumer_count": 0,
-    "eligible_retirement_candidate_count": 1,
+    "eligible_retirement_candidate_count": 0,
     "facade_contract_consumer_count": 43,
     "facade_count": 42,
     "public_documentation_reference_count": 0,

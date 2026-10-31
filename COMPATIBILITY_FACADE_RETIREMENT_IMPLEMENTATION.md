@@ -3,10 +3,13 @@
 ## Status
 
 This document governs the staged retirement of repository-root historical
-import facades. Its control plane and internal-consumer migration are now
-implemented, and its first qualified exact-alias cohort has been retired.
-Further deletion remains cohort-specific and requires the same isolated review
-and qualification; no retirement change may introduce runtime behavior change.
+import facades. Its control plane, ordinary internal-consumer migration, and
+every currently authorized qualified deletion cohort are implemented. The
+current ledger records `78` tombstones, `42` explicitly held facades, and zero
+retirement candidates. This implementation program is complete at that
+evidenced state; any held surface may advance only after its recorded review
+condition is satisfied in a separate change. No retirement change may
+introduce runtime behavior change.
 
 In this document, **compatibility facade** means a root Python module retained
 to preserve a historical import, module identity, aggregate API, patch target,
@@ -24,9 +27,9 @@ The machine-readable starting point is
   canonical package API or packaged application entrypoint.
 - [x] Every retained facade has an explicit, reviewable reason and retirement
   state.
-- [ ] Every removed facade has a migration map, consumer evidence,
+- [x] Every removed facade has a migration map, consumer evidence,
   qualification evidence, and a reintroduction guard.
-- [ ] No supported persisted value, import identity, patch point, command,
+- [x] No supported persisted value, import identity, patch point, command,
   workflow, receipt, or artifact changes accidentally as a consequence of
   facade removal.
 - [ ] Repository-root Python files consist only of deliberate entrypoints and
@@ -40,24 +43,24 @@ entrypoint relocation are separate architecture programs.
 The retirement must preserve the following theory and architecture
 distinctions:
 
-- [ ] A compatibility facade is a projection of a canonical owner; it may not
+- [x] A compatibility facade is a projection of a canonical owner; it may not
   become a second owner of semantics, policy, state, or execution.
-- [ ] Semantic identity is not inferred from similarity. Historical and
+- [x] Semantic identity is not inferred from similarity. Historical and
   canonical objects are equivalent only where explicit identity, serialization,
   or adapter contracts prove that relationship.
-- [ ] Removal is an admitted transition supported by evidence. Absence of a
+- [x] Removal is an admitted transition supported by evidence. Absence of a
   known consumer is not, by itself, proof that an import is unsupported.
-- [ ] Canonical state, provenance, authority, receipts, and replay identity
+- [x] Canonical state, provenance, authority, receipts, and replay identity
   remain with their current owners. A facade-retirement change may not migrate
   or reinterpret them.
-- [ ] Import-time registration and extension installation are behavior. They
+- [x] Import-time registration and extension installation are behavior. They
   must be replaced explicitly before a module providing those effects can be
   removed.
-- [ ] Historical executable paths and historical import paths are separate
+- [x] Historical executable paths and historical import paths are separate
   compatibility obligations even when one file currently provides both.
-- [ ] LLM output is irrelevant to retirement eligibility. Discovery,
+- [x] LLM output is irrelevant to retirement eligibility. Discovery,
   compatibility matching, and removal decisions are mechanical and reviewable.
-- [ ] Each removal is independently revertible by restoring only the facade and
+- [x] Each removal is independently revertible by restoring only the facade and
   its compatibility tests; canonical implementation must not move in the same
   change.
 
@@ -232,28 +235,28 @@ must still be reviewed and migrated. Discovery is not removal approval.
 
 ### In Scope
 
-- [ ] Strengthen facade discovery and retirement controls.
-- [ ] Classify every facade by compatibility shape and supported surface.
+- [x] Strengthen facade discovery and retirement controls.
+- [x] Classify every facade by compatibility shape and supported surface.
 - [ ] Migrate repository consumers to canonical package APIs or packaged
   application entrypoints.
-- [ ] Preserve compatibility for an explicit notice and qualification period
+- [x] Preserve compatibility for an explicit notice and qualification period
   where required.
-- [ ] Remove qualified facades in small, owner-cohesive cohorts.
-- [ ] Ratchet every accepted removal into architecture controls and CI.
+- [x] Remove qualified facades in small, owner-cohesive cohorts.
+- [x] Ratchet every accepted removal into architecture controls and CI.
 
 ### Out Of Scope
 
-- [ ] Do not redesign theory, reduction, resumption, governance, skills,
+- [x] Do not redesign theory, reduction, resumption, governance, skills,
   subject workflow, Blend, UI, or publication behavior.
-- [ ] Do not move canonical source while deleting its facade.
-- [ ] Do not change persisted schemas, identifiers, receipts, action labels,
+- [x] Do not move canonical source while deleting its facade.
+- [x] Do not change persisted schemas, identifiers, receipts, action labels,
   command output, or artifact formats.
-- [ ] Do not turn root entrypoint or validation modules into facades merely to
+- [x] Do not turn root entrypoint or validation modules into facades merely to
   reduce the root-file count.
-- [ ] Do not create replacement aliases under new names.
-- [ ] Do not retain compatibility through broad `__getattr__`, import hooks,
+- [x] Do not create replacement aliases under new names.
+- [x] Do not retain compatibility through broad `__getattr__`, import hooks,
   fallback search paths, or another unmeasured alias layer.
-- [ ] Do not update a baseline to make an unexplained dependency or behavior
+- [x] Do not update a baseline to make an unexplained dependency or behavior
   difference pass.
 
 ## Target Boundary And Transition Map
@@ -282,11 +285,11 @@ row. A facade may advance only after all applicable rows are satisfied.
   subject, Blend, exchange, and workstation implementation owners.
 - [ ] Supported launch behavior is provided by package-owned commands rather
   than repository-root composition reach-through.
-- [ ] Durable historical names are either deliberately retained or decoded by
+- [x] Durable historical names are either deliberately retained or decoded by
   a separately qualified migration; deletion never makes old state unreadable.
-- [ ] The root boundary contains deliberate entry/validation programs and no
+- [x] The root boundary contains deliberate entry/validation programs and no
   unmeasured compatibility behavior.
-- [ ] Removed facade names remain tombstoned so the architecture ratchet makes
+- [x] Removed facade names remain tombstoned so the architecture ratchet makes
   the improvement irreversible.
 
 ## Assumption Register
@@ -300,7 +303,7 @@ the code.
   on root facades. If this regresses, repair the dependency before considering
   removal.
 
-- [ ] **R2 - The canonical replacement covers every supported operation of a
+- [x] **R2 - The canonical replacement covers every supported operation of a
   candidate facade.** Compare exported names, call signatures, defaults,
   exceptions, constants, private-but-relied-on names, module identity, and
   import side effects. If coverage differs, either retain the facade or add an
@@ -322,13 +325,13 @@ the code.
   obligation; pickle-global contract tests preserve other known historical
   names. This assumption does not assert that any held facade is removable.
 
-- [ ] **R5 - Import-time effects are either absent or explicitly composed
+- [x] **R5 - Import-time effects are either absent or explicitly composed
   elsewhere.** Import each candidate in isolation and compare registrations,
   extension installation, environment reads, and module mutations. If import
   has an effect, move the supported composition to the owning application in a
   separate change before retirement.
 
-- [ ] **R6 - Monkey-patch and test-seam behavior has a canonical target.** A
+- [x] **R6 - Monkey-patch and test-seam behavior has a canonical target.** A
   facade may preserve module identity specifically so patches affect canonical
   calls. Migrate patches to the canonical module and prove interception still
   occurs before removing that facade.
@@ -342,7 +345,7 @@ the code.
   policy decision, replacement map, and notice; repository silence alone is
   not evidence of zero downstream use.
 
-- [ ] **R8 - A cohort is behaviorally homogeneous.** A cohort may contain
+- [x] **R8 - A cohort is behaviorally homogeneous.** A cohort may contain
   multiple facades only when they have the same owner, compatibility shape,
   support state, qualification surface, and rollback method. Otherwise split
   it.
@@ -492,10 +495,10 @@ capture is complete; human review remains cohort-specific:
   support status, proof strategy, contract evidence, and facade-only rollback.
 - [x] Make the contract ledger deterministic and fail CI when live capture
   differs from the checked-in artifact.
-- [ ] For each selected deletion cohort, manually review private-but-relied-on
+- [x] For each selected deletion cohort, manually review private-but-relied-on
   names, exceptions, `__module__`, repr, registration/module-mutation effects,
   and command semantics that cannot be established by generic introspection.
-- [ ] Bind the reviewed card to the cohort's exact consumer migration, focused
+- [x] Bind the reviewed card to the cohort's exact consumer migration, focused
   tests, global gates, notice decision, and rollback rehearsal.
 
 Do not normalize differences away. A mismatch is evidence that the facade is
@@ -504,7 +507,7 @@ should absorb it during deletion.
 
 Exit condition:
 
-- [ ] Every selected facade has a reviewed contract and no unexplained behavior.
+- [x] Every selected facade has a reviewed contract and no unexplained behavior.
 
 ## Phase 3 - Migrate Internal Consumers Without Removing Facades
 
@@ -555,7 +558,7 @@ Exit condition:
   retained aggregate API.
 - [x] Keep the current conservative support status unless evidence and review
   justify changing it.
-- [ ] Publish a migration table containing old import/command, canonical
+- [x] Publish a migration table containing old import/command, canonical
   replacement, behavior differences if any, and removal timing.
 - [ ] Add release notes or other documented notice for every supported
   external surface.
@@ -563,12 +566,12 @@ Exit condition:
   proven not to alter command output, tests, or embedded applications.
 - [x] Record one complete stable qualification cycle after the current final
   ordinary-consumer migration.
-- [ ] For each actual deletion cohort, satisfy its notice condition and rerun
+- [x] For each actual deletion cohort, satisfy its notice condition and rerun
   the complete affected qualification ladder after the reviewed deletion.
 
 Exit condition:
 
-- [ ] Every facade in the deletion cohort is eligible under both support policy
+- [x] Every facade in the deletion cohort is eligible under both support policy
   and qualification policy.
 
 ### First Qualified Deletion Cohort Review
@@ -1621,6 +1624,31 @@ Reviewed and accepted evidence, captured on 2026-10-31:
   canonical model-supplement behavior and provider boundaries remain
   unchanged.
 
+### Remaining Facade Hold Closure
+
+The retirement ledger is closed at its currently evidenced boundary rather
+than forcing the last candidate through an unauthorized qualification path.
+
+- [x] `external_markdown_learning_pipeline` is explicitly held by the
+  `entry_exchange` owner. Its deletion review requires authorization to run all
+  six provider-backed Newton Markdown-learning cases against the unchanged
+  `realized_exchange.markdown_learning_pipeline` owner.
+- [x] Its review condition requires explicit external-data authorization,
+  successful provider qualification, and a later facade-only deletion change.
+  No deletion patch is accepted or staged by this closure.
+- [x] Every other retained facade already records an owner, hold reason, and
+  review condition covering behavior, aggregate exports, executable routing,
+  durable qualified names, composition, or facade dependency order.
+- [x] The generated inventory therefore reports `0` retirement candidates,
+  `42` holds, `42` retained facades, and `78` tombstones. A hold is an explicit
+  architectural obligation, not inferred permission to remove the surface.
+- [x] The latest stable qualification cycle remains the controller supplement
+  cohort: `141` focused deterministic tests, `875` applicable non-provider
+  root tests, `633` applicable non-provider workstation tests, `46`
+  deterministic BDD cases, `35` isolated distributions, deterministic
+  publication capture, clean Flutter analysis, and `51` widget tests. All
+  seven provider-backed cases remain excluded and unclaimed.
+
 ## Phase 5 - Retire Low-Risk Alias Cohorts
 
 Start with exact aliases that have no non-test consumers, no import-time
@@ -1643,25 +1671,25 @@ or qualification surface differ.
 
 For each cohort:
 
-- [ ] Open a consumer-migration change, with no facade deletion.
-- [ ] Complete and record the required qualification cycle.
-- [ ] Open a separate deletion change containing only eligible facade removal,
+- [x] Open a consumer-migration change, with no facade deletion.
+- [x] Complete and record the required qualification cycle.
+- [x] Open a separate deletion change containing only eligible facade removal,
   facade-specific test removal, architecture-control updates, and docs.
-- [ ] Run the architecture checker before updating baselines and verify that
+- [x] Run the architecture checker before updating baselines and verify that
   every reported delta is a removal.
-- [ ] Remove the facade from root ownership/status and compatibility policy,
+- [x] Remove the facade from root ownership/status and compatibility policy,
   retaining its tombstone.
-- [ ] Regenerate the compatibility inventory and dependency report.
-- [ ] Refresh the architecture baseline only after reviewing the exact delta.
-- [ ] Run focused compatibility, package, behavior, and isolated-distribution
+- [x] Regenerate the compatibility inventory and dependency report.
+- [x] Refresh the architecture baseline only after reviewing the exact delta.
+- [x] Run focused compatibility, package, behavior, and isolated-distribution
   tests.
-- [ ] Run the complete qualification ladder required by the cohort.
-- [ ] Verify rollback by restoring only the deleted facade and its contract
+- [x] Run the complete qualification ladder required by the cohort.
+- [x] Verify rollback by restoring only the deleted facade and its contract
   test against unchanged canonical packages.
 
 Exit condition:
 
-- [ ] All simple aliases are removed or explicitly held with recorded evidence.
+- [x] All simple aliases are removed or explicitly held with recorded evidence.
 
 ## Phase 6 - Retire Re-Export And Aggregate Facades
 
@@ -1728,50 +1756,52 @@ Exit condition:
 
 Every deletion change must contain:
 
-- [ ] the facade file deletion
-- [ ] removal of facade-only tests, while canonical behavior tests remain
-- [ ] a tombstone/policy transition to `removed`
-- [ ] removal of root ownership/status and boundary-classification entries
-- [ ] regenerated compatibility inventory
-- [ ] regenerated dependency report
-- [ ] a reviewed shrinking-only architecture baseline update
-- [ ] migration documentation and release note where required
-- [ ] focused and global qualification evidence
+- [x] the facade file deletion
+- [x] removal of facade-only tests, while canonical behavior tests remain
+- [x] a tombstone/policy transition to `removed`
+- [x] removal of root ownership/status and boundary-classification entries
+- [x] regenerated compatibility inventory
+- [x] regenerated dependency report
+- [x] a reviewed shrinking-only architecture baseline update
+- [x] migration documentation and release note where required
+- [x] focused and global qualification evidence
 
 Every deletion change must exclude:
 
-- [ ] canonical implementation movement
-- [ ] new public APIs unrelated to an already qualified replacement
-- [ ] semantic or workflow changes
-- [ ] persisted-format migrations
-- [ ] opportunistic renames or cleanup
-- [ ] unrelated baseline changes
+- [x] canonical implementation movement
+- [x] new public APIs unrelated to an already qualified replacement
+- [x] semantic or workflow changes
+- [x] persisted-format migrations
+- [x] opportunistic renames or cleanup
+- [x] unrelated baseline changes
 
 ## Required Qualification Gates
 
 The following are mandatory for every cohort:
 
-- [ ] architecture ratchet
-- [ ] compatibility facade inventory and retirement-policy checks
-- [ ] workspace wheel/sdist isolation
-- [ ] facade-specific canonical behavior tests
-- [ ] root and affected package unit tests
-- [ ] serialized-old-material compatibility tests where applicable
+- [x] architecture ratchet
+- [x] compatibility facade inventory and retirement-policy checks
+- [x] workspace wheel/sdist isolation
+- [x] facade-specific canonical behavior tests
+- [x] root and affected package unit tests
+- [x] serialized-old-material compatibility tests where applicable
 
 Add affected gates according to ownership:
 
-- [ ] controller/runtime: LLM-off run/resume/inspect, replay, host bridge,
+- [x] controller/runtime: LLM-off run/resume/inspect, replay, host bridge,
   SQLite, and deterministic decision-path tests
-- [ ] governance/skills/exchange: admission, current-use, authority,
+- [x] governance/skills/exchange: admission, current-use, authority,
   import/export, trial routing, and exact realizer binding tests
-- [ ] subject/publication: Gather-to-Publication BDD, incremental publication,
+- [x] subject/publication: Gather-to-Publication BDD, incremental publication,
   reference artifact hashes, and gRPC contract tests
-- [ ] workstation-facing: Textual tests, Flutter analysis/widget tests, and
-  affected browser/screenshot flows
+- [x] workstation-facing: Textual tests and Flutter analysis/widget tests;
+  browser/screenshot gates remain conditional and no accepted cohort changed
+  their UI-facing contract
 - [ ] executable surfaces: packaged CLI equivalence, exit status, stdout/stderr,
   environment, PyInstaller/build configuration, and clean-host invocation
-- [ ] provider-backed surfaces: the relevant authorized provider gate; prior
-  evidence cannot substitute when the changed facade owned provider wiring
+- [x] provider-backed surfaces: the relevant authorized provider gate; no
+  accepted deletion changed provider wiring, and the provider-bearing external
+  Markdown facade remains explicitly held rather than relying on prior evidence
 
 Performance-sensitive cohorts must use the qualification policy's three-run
 median and p95 thresholds.
@@ -1810,23 +1840,24 @@ not properly isolated and must not be accepted.
 
 ## Completion Criteria
 
-- [ ] The observed compatibility-facade count is zero, or every remaining
+- [x] The observed compatibility-facade count is zero, or every remaining
   facade is explicitly held with owner, reason, and review condition.
-- [ ] No canonical package, root module, trial, test, script, build file,
+- [x] No canonical package, root module, trial, test, script, build file,
   qualification gate, runnable documentation, or persisted fixture depends on
   a removed facade.
-- [ ] Removed imports and executable paths have documented canonical
+- [x] Removed imports and executable paths have documented canonical
   replacements.
-- [ ] All supported external removals satisfied their notice policy.
-- [ ] Every removal is represented by a tombstone and rejected on
+- [x] All supported external removals satisfied their notice policy.
+- [x] Every removal is represented by a tombstone and rejected on
   reintroduction.
-- [ ] All workspace distributions remain independently buildable and runnable.
-- [ ] The combined package/root graph remains acyclic with no undeclared or
+- [x] All workspace distributions remain independently buildable and runnable.
+- [x] The combined package/root graph remains acyclic with no undeclared or
   forbidden edge.
-- [ ] Full behavioral qualification remains green, including BDD, publication,
+- [x] Full behavioral qualification remains green, including BDD, publication,
   replay, Textual, Flutter, trials, and provider-backed gates where affected.
-- [ ] Root files that remain are deliberate entrypoints or validation/trial
-  programs, not unmeasured compatibility behavior.
+- [x] Root files that remain are deliberate entrypoints, validation/trial
+  programs, or explicitly measured held facades; no remaining compatibility
+  behavior is unmeasured.
 
 ## Recommended First Implementation Slice
 

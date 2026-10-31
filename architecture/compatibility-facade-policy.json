@@ -70,6 +70,11 @@
       "hold_reason": "The supported main facade imports this binding; retire main and qualify packaged command parity before reviewing this alias.",
       "retirement_state": "held"
     },
+    "external_markdown_learning_pipeline": {
+      "hold_reason": "Deletion qualification requires the six provider-backed Newton Markdown-learning cases because this historical identity fronts external Markdown ingestion and extension composition; external-data execution is not authorized in the current change.",
+      "retirement_state": "held",
+      "review_condition": "Advance only after explicit external-data authorization, successful qualification of all six Newton Markdown-learning provider cases against the unchanged canonical exchange owner, and a separate facade-only deletion review."
+    },
     "fence_extraction_strategy": {
       "executable_obligation": "repository_only",
       "hold_reason": "The historical module retains a direct __main__ executable path whose packaged invocation, exit status, and output parity have not yet been qualified.",

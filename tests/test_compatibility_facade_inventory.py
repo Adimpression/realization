@@ -64,8 +64,8 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
             qualification["minimum_stable_cycles"],
         )
         self.assertFalse(qualification["retirement_hold"])
-        self.assertEqual(1, len(self.inventory["retirement_candidates"]))
-        self.assertEqual(41, len(self.inventory["retirement_holds"]))
+        self.assertEqual(0, len(self.inventory["retirement_candidates"]))
+        self.assertEqual(42, len(self.inventory["retirement_holds"]))
 
     def test_facade_shapes_match_reviewed_compatibility_cohorts(self) -> None:
         self.assertEqual(
@@ -125,6 +125,14 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
             "retained",
             by_module["python_skill_host"]["durable_qualified_name_status"],
         )
+        self.assertEqual(
+            "held",
+            by_module["external_markdown_learning_pipeline"]["retirement_state"],
+        )
+        self.assertIn(
+            "explicit external-data authorization",
+            by_module["external_markdown_learning_pipeline"]["review_condition"],
+        )
 
     def test_default_policy_applies_without_a_facade_override(self) -> None:
         policy = json.loads(
@@ -171,7 +179,7 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
             row["module"] for row in self.inventory["facades"]
             if row["retirement_assessment"]["hold_reasons"]
         }
-        self.assertEqual(41, len(held_modules))
+        self.assertEqual(42, len(held_modules))
         self.assertTrue(
             all(
                 row["owner"]
@@ -190,7 +198,7 @@ class CompatibilityFacadeInventoryTest(unittest.TestCase):
             for row in self.inventory["facades"]
             if row["module"] in self.inventory["retirement_candidates"]
         }
-        self.assertEqual(1, len(candidates))
+        self.assertEqual(0, len(candidates))
         self.assertTrue(
             all(
                 row["retirement_state"] == "qualified"

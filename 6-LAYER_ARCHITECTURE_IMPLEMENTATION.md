@@ -5752,12 +5752,18 @@ Exit condition:
 
 Further retirement work:
 
-- The first qualified cohort is retired. Each further candidate must still be
-  selected from the machine-readable ledger, receive any required external
-  deprecation notice, be removed in a separate change, pass the complete
-  qualification ladder, and reduce the checked-in architecture baseline. The
-  two unchecked program-level items above remain open until every approved
-  cohort has completed that process.
+- Every currently authorized qualified cohort is retired. The machine-readable
+  ledger now reports zero candidates, `42` explicitly held facades, and `78`
+  tombstones. Each held surface must satisfy its recorded review condition,
+  receive any required external notice, be removed in a separate change, pass
+  the complete affected qualification ladder, and reduce the checked-in
+  architecture baseline before it can advance.
+- `external_markdown_learning_pipeline` remains held until explicit
+  external-data authorization permits all six Newton Markdown-learning
+  provider cases to qualify the unchanged canonical exchange owner. The other
+  holds retain behavior, aggregate-export, executable, durable-qualified-name,
+  composition, or dependency-order obligations. They are not deletion
+  candidates in the completed retirement program state.
 
 ### Required Gates For Every Slice
 
