@@ -26,7 +26,6 @@ import governance_inventory
 import host_mediation
 import itemize
 import itemize_models
-import itemize_validation
 import learning_context
 import learning_context_paths
 import markdown_ir
@@ -118,7 +117,6 @@ from realized_skill_application import ir as packaged_skill_application_ir
 from realized_skill_application import normalization as packaged_skill_application_normalization
 from realized_exchange import learning_context as packaged_learning_context
 from realized_exchange import markdown_learning_pipeline as packaged_markdown_learning_pipeline
-from workstation.subject.core import itemize_validation as packaged_itemize_validation
 from workstation.subject.core import decision_review as packaged_subject_decision_review
 from workstation.subject.core import decision_review_constructs as packaged_subject_decision_review_constructs
 from workstation.subject.core import itemization as packaged_subject_itemization
@@ -321,12 +319,6 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
                     pickle.loads(f"creview_composition\n{name}\n.".encode("ascii")),
                     getattr(packaged_review_composition, name),
                 )
-
-    def test_subject_itemization_validation_facade_keeps_packaged_identity(self) -> None:
-        self.assertIs(
-            itemize_validation.validate_itemization_session,
-            packaged_itemize_validation.validate_itemization_session,
-        )
 
     def test_formal_theory_facade_keeps_packaged_identities(self) -> None:
         for name in pure_theory_types.__all__:

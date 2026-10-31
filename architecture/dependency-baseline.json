@@ -571,9 +571,9 @@
     "cyclic_internal_edge_count": 0,
     "cyclic_node_count": 0,
     "cyclic_scc_count": 0,
-    "edge_count": 224,
+    "edge_count": 223,
     "largest_cyclic_scc_node_count": 0,
-    "node_count": 88
+    "node_count": 87
   },
   "compatibility_edges": [
     {
@@ -871,12 +871,6 @@
       "direction": "root_to_component",
       "source": "itemize_models",
       "target": "core_semantics"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "itemize_validation",
-      "target": "subject_core"
     },
     {
       "category": "orchestration",
@@ -1258,13 +1252,6 @@
       ]
     },
     {
-      "module": "itemize_validation",
-      "owner": "subject_domain",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
       "module": "learning_context",
       "owner": "entry_exchange",
       "statuses": [
@@ -1634,10 +1621,6 @@
     {
       "source": "itemize_models",
       "target": "core_semantics"
-    },
-    {
-      "source": "itemize_validation",
-      "target": "subject_core"
     },
     {
       "source": "learning_context",

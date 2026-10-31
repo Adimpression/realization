@@ -360,7 +360,6 @@ legacy aliases.
   canonical subject implementation and retains only the former implicit
   controller bootstrap for direct root callers.
 - `workstation/subject/core/itemize_validation.py`: Canonical itemization-session validation invariants consumed by the subject workflow.
-- `itemize_validation.py`: Identity-preserving compatibility facade for the canonical subject-core itemization validation surface.
 - `workstation/subject/service/learning_capture.py`: Prompt-scoped subject application service that turns successful workstation chat “save learnings” markdown writes into chat `LearningSource`, `LearningDelta`, and merged `LearningContext` records without making raw markdown tools semantic by default.
 - `workstation/foundation/host/learning_capture.py`: Compatibility alias for the canonical subject-service learning-capture module.
 - `main.py`: Historical executable/import facade that preserves `import main` module identity while delegating to `controller_runtime.py` and lazily registering `controller_entrypoints.py`.

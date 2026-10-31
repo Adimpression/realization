@@ -279,6 +279,11 @@
       "removed_at": "2026-10-30",
       "replacement": "realized_core_semantics.identifiers"
     },
+    "itemize_validation": {
+      "removal_change_reference": "subject-reexport-cohort-1",
+      "removed_at": "2026-10-31",
+      "replacement": "workstation.subject.core.itemize_validation"
+    },
     "learning_context_markdown": {
       "removal_change_reference": "subject-core-alias-cohort-1",
       "removed_at": "2026-10-30",

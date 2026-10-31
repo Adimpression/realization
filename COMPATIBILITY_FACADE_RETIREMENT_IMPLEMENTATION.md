@@ -1520,6 +1520,56 @@ Reviewed and accepted evidence, captured on 2026-10-31:
   documentation; both canonical engine modules and their behavior remain
   unchanged.
 
+### Itemization Validation Re-Export Deletion Cohort Review
+
+The eighteenth deletion cohort removes the historical root projection for the
+canonical subject itemization-session validator.
+
+| Historical import | Canonical replacement |
+| --- | --- |
+| `itemize_validation.validate_itemization_session` | `workstation.subject.core.itemize_validation.validate_itemization_session` |
+
+Reviewed and accepted evidence, captured on 2026-10-31:
+
+- [x] Subject workflow and direct validator tests already consumed the
+  canonical subject-core module through multiple stable qualification cycles.
+  The only remaining facade import was its designated identity contract; no
+  production, package, trial, script, build, runnable-documentation, or
+  persisted-fixture consumer remained.
+- [x] The exported validator had one unambiguous canonical owner and preserved
+  object identity. The facade had no wildcard or non-contract consumer,
+  blocking reference, executable surface, distinct import effect, durable
+  pickle global, or ambiguous owner. Canonical validation, itemization,
+  subject-workflow, publication, and gRPC behavior tests remain active.
+- [x] The sequential architecture delta only shrank the graph: owned roots
+  `52 -> 51`, root-boundary classifications `75 -> 74`, combined graph nodes
+  `88 -> 87`, combined edges `224 -> 223`, and grandfathered observations
+  `94 -> 93`, with `35` components, `141` package edges, no addition, and no
+  cycle.
+- [x] The retained inventory contains `43` facades, `49` static consumers,
+  `2` qualified candidates, `41` holds, and `77` total tombstones, with no
+  canonical-package, public README, or public-example consumer.
+- [x] The retained contract ledger contains `43` cards, `28` exact aliases,
+  `9` symbol re-exports, `35` facades with `133` durable pickle globals, and
+  `71` facade contract tests.
+- [x] Qualification passed `353` focused architecture, validation,
+  itemization, review, publication, subject-workflow, and gRPC tests; all `875`
+  applicable non-provider root tests; and all `633` applicable non-provider
+  workstation tests under normal application composition, with one expected
+  skip.
+- [x] All `46` deterministic workstation BDD cases passed with the live
+  publication provider case absent from selection. The six Newton provider
+  cases and that live publication case remain excluded, unclaimed, and gated
+  on explicit external-data authorization.
+- [x] All `35` wheels and source distributions built and imported in source
+  isolation using the locked project interpreter; publication capture
+  reproduced eight actions and two artifacts; Flutter analysis found no
+  issues and all `51` widget tests passed.
+- [x] Rollback remains local to the historical projection, its facade-only
+  identity assertion, active root-ledger entry, tombstone, and module
+  documentation; canonical subject-core validation and workflow behavior
+  remain unchanged.
+
 ## Phase 5 - Retire Low-Risk Alias Cohorts
 
 Start with exact aliases that have no non-test consumers, no import-time

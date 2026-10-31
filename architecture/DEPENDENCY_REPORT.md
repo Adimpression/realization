@@ -76,7 +76,6 @@ Every repository-root Python module has one explicit responsibility. Status is o
 | `host_mediation` | `runtime_execution` | `compatibility_facade` |
 | `itemize` | `subject_domain` | `compatibility_facade` |
 | `itemize_models` | `subject_domain` | `compatibility_facade` |
-| `itemize_validation` | `subject_domain` | `compatibility_facade` |
 | `learning_context` | `entry_exchange` | `compatibility_facade` |
 | `learning_context_paths` | `subject_domain` | `compatibility_facade` |
 | `main` | `entry_exchange` | `compatibility_facade`, `entrypoint` |
@@ -310,8 +309,8 @@ These edges exist only to preserve historical import paths. They are excluded fr
 
 | Metric | Count |
 | --- | ---: |
-| Nodes | 88 |
-| Edges | 224 |
+| Nodes | 87 |
+| Edges | 223 |
 | Cyclic SCCs | 0 |
 | Nodes in cyclic SCCs | 0 |
 | Edges internal to cyclic SCCs | 0 |
@@ -372,7 +371,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `root_to_component` | `itemize` | `core_semantics` | `orchestration` |
 | `root_to_component` | `itemize` | `subject_core` | `orchestration` |
 | `root_to_component` | `itemize_models` | `core_semantics` | `dto_constants` |
-| `root_to_component` | `itemize_validation` | `subject_core` | `orchestration` |
 | `root_to_component` | `learning_context` | `exchange` | `orchestration` |
 | `root_to_component` | `learning_context_paths` | `subject_core` | `orchestration` |
 | `root_to_component` | `markdown_ir` | `core_semantics` | `orchestration` |
@@ -454,7 +452,6 @@ No workspace package imports a root application module.
 - `itemize` -> `core_semantics` (`itemize.py`)
 - `itemize` -> `subject_core` (`itemize.py`)
 - `itemize_models` -> `core_semantics` (`itemize_models.py`)
-- `itemize_validation` -> `subject_core` (`itemize_validation.py`)
 - `learning_context` -> `exchange` (`learning_context.py`)
 - `learning_context_paths` -> `subject_core` (`learning_context_paths.py`)
 - `markdown_ir` -> `core_semantics` (`markdown_ir.py`)

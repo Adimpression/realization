@@ -5701,6 +5701,29 @@ Completed deletion cut - fallback semantics symbol re-export cohort
   exclusion ran six Newton cases, after which corrected verified-ID reruns
   excluded all seven external-data cases and established the recorded totals.
 
+Completed deletion cut - itemization validation symbol re-export cohort
+(2026-10-31):
+
+- [x] Remove the repository-internal `itemize_validation` projection after
+  subject workflow and direct validator tests had consumed the canonical
+  `workstation.subject.core.itemize_validation` owner through stable
+  qualification cycles.
+- [x] Preserve canonical itemization validation, subject workflow,
+  publication, and gRPC assertions; remove only the root projection and its
+  facade-only identity evidence, tombstone the path, and redirect current
+  implementation guidance to the canonical source.
+- [x] Accept only the sequential shrinking delta: owned roots `52 -> 51`,
+  root-boundary classifications `75 -> 74`, combined graph nodes `88 -> 87`,
+  combined edges `224 -> 223`, grandfathered observations `94 -> 93`, retained
+  facades `44 -> 43`, and symbol re-exports `10 -> 9`, with no new dependency
+  or cycle.
+- [x] Qualify the non-model cut with `353` focused tests, `875` applicable
+  non-provider root tests, `633` applicable non-provider workstation tests,
+  `46` deterministic BDD cases, all distribution builds and isolated imports,
+  deterministic publication capture, Flutter analysis, and `51` widget tests.
+  All seven provider-backed cases remain excluded and unclaimed pending
+  explicit external-data authorization.
+
 Exit condition:
 
 - [x] The root-boundary ledger contains no canonical package-to-root
