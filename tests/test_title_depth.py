@@ -3,36 +3,27 @@ from __future__ import annotations
 
 import unittest
 
-from main import (
-    Artifact,
+from realized_core_engine.artifact_semantics import artifact_structured_learning_from_content
+from realized_core_engine.controller_runtime import BSSCController
+from realized_core_engine.non_achievedness_normalization import normalize_not_elaboration_payload
+from realized_core_engine.state import SystemState
+from realized_core_semantics.applied_model import Artifact, ArtifactType, BoundaryShapeTerm, NodeStatus, ProposalObject, SemanticNode, SupportView
+from realized_core_semantics.applied_primitives import (
     ArtifactAdmission,
     ArtifactRepresentation,
     ArtifactReuse,
-    ArtifactType,
-    BSSCController,
-    BoundaryShapeTerm,
     ClosureRule,
     DecompositionMode,
     LearningRelation,
-    NodeStatus,
     NodeOrigin,
     PriorityLevel,
-    ProposalGovernanceStatus,
-    ProposalObject,
-    ProposalType,
-    SemanticNode,
-    SupplementMode,
-    SystemState,
     SupportScore,
-    SupportView,
     ThreeLevel,
-    artifact_structured_learning_from_content,
-    classify_title_depth_relation,
-    derive_semantic_title_depth_view,
-    normalize_not_elaboration_payload,
 )
-from prompt_directives import semantic_prompt_directive_profile
-from semantic_text import semantic_requested_output_phrases
+from realized_core_semantics.proposals import ProposalGovernanceStatus, ProposalType, SupplementMode
+from realized_core_semantics.title_semantics import classify_title_depth_relation, derive_semantic_title_depth_view
+from realized_core_engine.prompt_directives import semantic_prompt_directive_profile
+from realized_core_semantics.semantic_text import semantic_requested_output_phrases
 
 
 def make_title_depth_artifact(*, artifact_id: str, title: str, question: str, answer: str) -> Artifact:

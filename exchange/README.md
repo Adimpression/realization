@@ -25,11 +25,6 @@ current use, grant authority, select an ability, bind a host realizer, or
 execute an operation. Callers pass translated values to the established
 governance, controller, and runtime owners for those decisions.
 
-The historical root modules `side`, `side_runtime_dependencies`,
-`skill_schema_io`, `skill_export_projection`, `skill_compatibility_import`,
-`skill_compatibility_export`, `skill_compiler`, `learning_context`, and
-`learning_context_skill_projection`, `skill_registry`, and `run_bundle_io`
-remain exact module-identity aliases during the qualification cycle. The
-historical `external_markdown_learning_pipeline` path is likewise an exact
-alias for the package-owned Markdown adapter. New production code imports
-canonical package APIs.
+The historical `learning_context` and `external_markdown_learning_pipeline`
+paths remain exact compatibility aliases during their separate qualification
+cycles. New production code imports canonical package APIs.

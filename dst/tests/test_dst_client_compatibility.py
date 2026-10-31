@@ -14,7 +14,7 @@ from dst import (
     run_live_dst_construct_discovery_for_itemized_item,
 )
 from dst.projection import project_normalized_case_to_decision_frame
-from itemize import ItemizedSubjectItem
+from realized_core_semantics.itemization import ItemizedSubjectItem
 
 
 class DstClientCompatibilityTests(unittest.TestCase):

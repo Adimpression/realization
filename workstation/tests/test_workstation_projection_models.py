@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import unittest
 
-from blend_workflow import (
+from realized_blend_application.workflows import (
     BlendWorkflowBinding,
     BlendWorkflowPlan,
     BlendWorkflowRun,

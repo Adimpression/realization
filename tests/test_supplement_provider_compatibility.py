@@ -5,7 +5,7 @@ from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
 
-from supplement import ask_llm
+from realized_core_engine.supplement import ask_llm
 
 
 class _FakeCompletions:
@@ -86,7 +86,7 @@ class SupplementProviderCompatibilityTests(unittest.TestCase):
                 clear=False,
             ),
             patch(
-                "supplement.build_openai_compatible_llm_client",
+                "realized_core_engine.supplement.build_openai_compatible_llm_client",
                 return_value=client,
             ),
         ):
@@ -117,10 +117,10 @@ class SupplementProviderCompatibilityTests(unittest.TestCase):
                 clear=False,
             ),
             patch(
-                "supplement.build_openai_compatible_llm_client",
+                "realized_core_engine.supplement.build_openai_compatible_llm_client",
                 return_value=client,
             ),
-            patch("supplement.time.sleep") as sleep_mock,
+            patch("realized_core_engine.supplement.time.sleep") as sleep_mock,
         ):
             with self.assertRaisesRegex(RuntimeError, "timed out"):
                 ask_llm(
@@ -149,7 +149,7 @@ class SupplementProviderCompatibilityTests(unittest.TestCase):
                 clear=False,
             ),
             patch(
-                "supplement.build_openai_compatible_llm_client",
+                "realized_core_engine.supplement.build_openai_compatible_llm_client",
                 return_value=client,
             ),
         ):

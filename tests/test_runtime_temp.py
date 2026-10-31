@@ -7,8 +7,8 @@ import unittest
 from pathlib import Path
 from unittest import mock
 
-import runtime_temp
-from virtual_mounts import default_virtual_mount_table
+import realized_core_runtime.temporary as runtime_temp
+from realized_core_runtime.virtual_mounts import default_virtual_mount_table
 
 
 class RuntimeTempTests(unittest.TestCase):

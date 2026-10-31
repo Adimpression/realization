@@ -7,10 +7,10 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from applied_theory_types import RuntimeDeterminismPolicy
-from constitutional_trace import composition_chain_signature, controller_decision_flow_signature
-from main import BSSCController
-from system_state import SystemState
+from realized_core_semantics.applied_model import RuntimeDeterminismPolicy
+from realized_core_engine.constitutional_trace import composition_chain_signature, controller_decision_flow_signature
+from realized_core_engine.controller_runtime import BSSCController
+from realized_core_engine.state import SystemState
 
 
 class ControllerDeterminismReplayPackTests(unittest.TestCase):

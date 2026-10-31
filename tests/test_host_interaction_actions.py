@@ -5,13 +5,13 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from host_interaction_actions import (
+from realized_host_interaction.actions import (
     host_interaction_fs_read,
     host_interaction_net_http,
     host_interaction_process_run,
     host_interaction_repo_tree,
 )
-from host_interaction_models import HostInteractionAttachment
+from realized_host_interaction.models import HostInteractionAttachment
 
 
 class HostInteractionActionsTests(unittest.TestCase):

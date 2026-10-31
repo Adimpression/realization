@@ -5,8 +5,8 @@ from dataclasses import dataclass
 import hashlib
 from pathlib import Path
 
-from id_generation import slugify
-from learning_context import (
+from realized_core_semantics.identifiers import slugify
+from realized_exchange.learning_context import (
     LearningContext,
     LearningDelta,
     LearningDeltaOperation,
@@ -22,8 +22,8 @@ from learning_context import (
     persist_learning_source,
     stable_learning_unit_id,
 )
-from markdown_ir import MarkdownDocumentIR, MarkdownSectionIR, parse_markdown_document_ir
-from semantic_text import collapse_ws
+from realized_core_semantics.markdown import MarkdownDocumentIR, MarkdownSectionIR, parse_markdown_document_ir
+from realized_core_semantics.semantic_text import collapse_ws
 
 
 @dataclass(frozen=True)

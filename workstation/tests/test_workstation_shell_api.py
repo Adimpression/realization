@@ -13,7 +13,7 @@ from types import SimpleNamespace
 
 import grpc
 
-from learning_context import new_learning_context, persist_learning_context
+from realized_exchange.learning_context import new_learning_context, persist_learning_context
 import workstation.ui.textual.chat_ui as workstation_chat_ui_module
 from workstation.ui.textual.chat_ui import _TextualWorkstationChatApp
 from workstation.foundation.host.client_sessions import WorkstationClientSessionRegistry

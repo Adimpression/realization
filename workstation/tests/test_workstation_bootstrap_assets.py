@@ -10,7 +10,7 @@ from urllib.request import urlopen
 
 import grpc
 
-from learning_context import new_learning_context, persist_learning_context
+from realized_exchange.learning_context import new_learning_context, persist_learning_context
 from workstation.foundation.host.client_sessions import WorkstationClientSessionRegistry
 from workstation.grpc.definitions import (
     subject_workflow_pb2,

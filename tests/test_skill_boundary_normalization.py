@@ -3,13 +3,13 @@ from __future__ import annotations
 
 import unittest
 
-from applied_theory_types import Artifact, BoundaryShapeTerm
+from realized_core_semantics.applied_model import Artifact, BoundaryShapeTerm
 from realized_skill_semantics.leaves import SkillLeaf, SkillLeafCarrierKind
 from realized_skill_semantics.normalization import (
     normalize_skill_region_body,
     reconstruct_skill_region_body,
 )
-from skill_boundary_normalization import synthesized_skill_normalization_for_artifact
+from realized_skill_application.normalization import synthesized_skill_normalization_for_artifact
 
 
 def _artifact(*, name: str, content: dict[str, object], kind: str = "ability") -> Artifact:

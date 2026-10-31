@@ -5,17 +5,16 @@ import unittest
 from collections.abc import Mapping
 from typing import Any
 
-from main import (
-    Artifact,
+from realized_core_engine.controller_runtime import BSSCController
+from realized_core_engine.state import SystemState
+from realized_core_semantics.applied_model import Artifact, ArtifactType
+from realized_core_semantics.applied_primitives import (
     ArtifactAdmission,
     ArtifactRepresentation,
     ArtifactReuse,
-    ArtifactType,
-    BSSCController,
     LearningRelation,
-    SystemState,
 )
-from skill_schema_io import artifact_from_skill_document
+from realized_exchange.skill_schema import artifact_from_skill_document
 
 
 def _authority_bound(authority: str) -> dict[str, Any]:

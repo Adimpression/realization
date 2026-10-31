@@ -19,6 +19,12 @@ here.
   repository-root compatibility facade, its canonical targets, and every
   static repository consumer. It also records public README/example references
   and the qualification hold that applies before retirement.
+- `compatibility-facade-contracts.json` is the executable retirement-card
+  ledger. It freezes module identity, exports, callable signatures, constants,
+  command replacements, and every protocol-zero pickle global exercised by the
+  compatibility contract suite.
+- `compatibility-facade-policy.json` contains human retirement decisions and
+  tombstones separately from generated observations and contracts.
 - `DEPENDENCY_REPORT.md` is the deterministic human-readable rendering of that
   snapshot. Tests require it to match the measured graph.
 - `qualification-gates.toml` declares the behavioral, packaging, UI, and
@@ -66,6 +72,7 @@ Run the read-only check with:
 ```sh
 python3 scripts/check_architecture_boundaries.py
 python3 scripts/check_compatibility_facades.py
+python3 scripts/capture_compatibility_facade_contracts.py
 python3 scripts/verify_workspace_distributions.py
 ```
 
@@ -75,6 +82,7 @@ artifacts explicitly:
 ```sh
 python3 scripts/check_architecture_boundaries.py --update-baseline --write-report
 python3 scripts/check_compatibility_facades.py --update
+python3 scripts/capture_compatibility_facade_contracts.py --update
 ```
 
 A normal check never rewrites either baseline. All generated files must be

@@ -5,7 +5,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from applied_theory_types import (
+from realized_core_semantics.applied_model import (
     Artifact,
     NodeStatus,
     PauseBoundary,

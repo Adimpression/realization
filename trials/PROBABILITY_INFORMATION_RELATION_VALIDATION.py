@@ -15,7 +15,7 @@ ROOT = TRIALS_ROOT.parent if (TRIALS_ROOT.parent / "main.py").exists() else TRIA
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from store import SQLiteVectorArtifactStore
+from realized_core_engine.store import SQLiteVectorArtifactStore
 from realized_validation.sqlite_runtime import (
     archive_validation_sqlite,
     validation_sqlite_paths,

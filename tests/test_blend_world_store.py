@@ -5,7 +5,7 @@ from pathlib import Path
 
 from realized_blend.ports import BlendWorldRepository
 from realized_blend.worlds import BlendWorld, BlendWorldMount
-from blend_world_store import (
+from realized_blend_application.world_store import (
     JsonBlendWorldRepository,
     blend_world_mount_source,
     ensure_blend_world_store,

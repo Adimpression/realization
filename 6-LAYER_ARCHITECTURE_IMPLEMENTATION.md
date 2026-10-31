@@ -5282,6 +5282,11 @@ Exit condition:
 
 ### Phase 11 - Retire Compatibility Paths Deliberately
 
+The detailed, assumption-led execution plan for the deferred retirement work
+is [COMPATIBILITY_FACADE_RETIREMENT_IMPLEMENTATION.md](COMPATIBILITY_FACADE_RETIREMENT_IMPLEMENTATION.md).
+It treats consumer migration, support/deprecation policy, qualification, and
+physical deletion as separate transitions.
+
 - [x] Produce a machine-readable inventory of every remaining compatibility
   facade and its consumers.
 - [x] Confirm that canonical production code never imports a compatibility
@@ -5337,19 +5342,428 @@ Qualification evidence (2026-10-29):
   `reference.json`, `report.md`, and `report.typ`; no behavioral artifact delta
   was accepted to complete the architecture migration.
 
+Completed deletion cut - first semantic exact-alias cohort (2026-10-30):
+
+- [x] Remove the seven repository-internal exact aliases
+  `applied_theory_primitives`, `boundary`, `id_generation`,
+  `normalization_primitives`, `prolog`, `semantic_text`, and
+  `title_semantics` without moving or changing their canonical
+  `realized_core_semantics` implementations.
+- [x] Remove only facade-identity assertions and root ownership/classification
+  entries, retain canonical behavior comparisons, and tombstone every removed
+  import with its explicit replacement.
+- [x] Accept only the shrinking architecture delta: owned roots `128 -> 121`,
+  combined graph nodes `164 -> 157`, combined edges `300 -> 293`, retained
+  facades `120 -> 113`, and exact aliases `95 -> 88`, with no new dependency
+  or cycle.
+- [x] Qualify the deletion with 153 focused architecture/compatibility tests,
+  899 root tests, 633 workstation tests, 38 targeted BDD cases, 35 isolated
+  wheel/sdist builds, deterministic publication capture, Flutter analysis, and
+  51 widget tests.
+
+Completed deletion cut - runtime exact-alias cohort (2026-10-30):
+
+- [x] Remove ten repository-internal aliases for canonical runtime capability,
+  host ABI, broker, realizer, transport, temporary-path, virtual-mount, and
+  Wasm modules while retaining the separately supported `python_skill_host`
+  import and the executable `fence_extraction_strategy` path.
+- [x] Accept only the sequential shrinking delta: owned roots `121 -> 111`,
+  combined graph nodes `157 -> 147`, combined edges `293 -> 283`, retained
+  facades `113 -> 103`, and exact aliases `88 -> 78`, with no new dependency
+  or cycle.
+- [x] Qualify runtime and host behavior with 153 focused tests, 899 root tests,
+  a clean 633-test workstation cycle, 38 targeted BDD cases, 35 isolated
+  wheel/sdist builds, deterministic publication capture, Flutter analysis, and
+  51 widget tests. One unrelated Textual timing assertion failed once, passed
+  four immediate isolated reruns, and passed in the complete clean rerun.
+
+Completed deletion cut - governance exact-alias cohort (2026-10-30):
+
+- [x] Remove the repository-internal `governed_skill_access` and
+  `runtime_governance_context` aliases without moving or changing their
+  canonical `realized_core_engine` implementations.
+- [x] Accept only the sequential shrinking delta: owned roots `111 -> 109`,
+  combined graph nodes `147 -> 145`, combined edges `283 -> 281`, retained
+  facades `103 -> 101`, and exact aliases `78 -> 76`, with no new dependency
+  or cycle.
+- [x] Qualify current-use and governance resolution with 153 focused
+  architecture/compatibility tests, 103 canonical governance tests, 80
+  composed selection/function/mediation tests, 899 root tests, 633 workstation
+  tests, 38 targeted BDD cases, all distribution builds, deterministic
+  publication capture, Flutter analysis, and 51 widget tests.
+
+Completed deletion cut - Blend application exact-alias cohort (2026-10-30):
+
+- [x] Remove the repository-internal `blend_workflow`,
+  `blend_workflow_store`, `blend_world`, and `blend_world_store` aliases
+  without moving or changing their canonical `realized_blend_application`
+  implementations.
+- [x] Retain canonical workflow/world behavior comparisons while removing only
+  obsolete root-module identity assertions, ownership/classification entries,
+  and compatibility-ledger cards; tombstone all four removed paths.
+- [x] Accept only the sequential shrinking delta: owned roots `109 -> 105`,
+  combined graph nodes `145 -> 141`, combined edges `281 -> 277`, retained
+  facades `101 -> 97`, and exact aliases `76 -> 72`, with no new dependency or
+  cycle.
+- [x] Qualify the cut with 153 focused architecture/compatibility tests, 40
+  Blend tests, 899 root tests, 633 workstation tests, 38 targeted BDD cases,
+  all distribution builds and isolated imports, deterministic publication
+  capture, Flutter analysis, and 51 widget tests.
+
+Completed deletion cut - subject-core exact-alias cohort (2026-10-30):
+
+- [x] Remove nine repository-internal root aliases for canonical subject-core
+  decision policy/projection, Gather sources, learning-context rendering, and
+  publication substrate/projection/rendering/validation without changing the
+  package-owned implementations.
+- [x] Keep the service-owned `url_learning_capture` alias in a separate cohort
+  because its browser/extraction behavior and distribution boundary require a
+  different qualification surface.
+- [x] Accept only the sequential shrinking delta: owned roots `105 -> 96`,
+  combined graph nodes `141 -> 132`, combined edges `277 -> 268`, retained
+  facades `97 -> 88`, and exact aliases `72 -> 63`, with no new dependency or
+  cycle.
+- [x] Qualify the cut with 145 focused architecture/compatibility tests, 65
+  subject-domain/distribution tests, 891 root tests, 633 workstation tests, 38
+  targeted BDD cases, all distribution builds and isolated imports,
+  deterministic publication capture, Flutter analysis, and 51 widget tests.
+
+Completed deletion cut - subject-service exact-alias cohort (2026-10-30):
+
+- [x] Remove the repository-internal `url_learning_capture` alias without
+  moving or changing the canonical
+  `workstation.subject.service.url_learning_capture` implementation.
+- [x] Preserve canonical browser acquisition, urllib fallback, extraction,
+  source-bundle persistence, patch targets, and service packaging; remove only
+  the obsolete root identity assertion and ledger entries, then tombstone the
+  retired path.
+- [x] Accept only the sequential shrinking delta: owned roots `96 -> 95`,
+  combined graph nodes `132 -> 131`, combined edges `268 -> 267`, retained
+  facades `88 -> 87`, and exact aliases `63 -> 62`, with no new dependency or
+  cycle.
+- [x] Qualify the cut with 144 focused architecture/compatibility tests, seven
+  URL-capture/service-distribution tests, 890 root tests, 633 workstation tests,
+  38 targeted BDD cases, all distribution builds and isolated imports,
+  deterministic publication capture, Flutter analysis, and 51 widget tests.
+
+Completed deletion cut - validation exact-alias cohort (2026-10-30):
+
+- [x] Remove the repository-internal `validation_ladder` and
+  `validation_sqlite` aliases without moving or changing the canonical
+  `realized_validation.ladder` and `realized_validation.sqlite_runtime`
+  implementations.
+- [x] Preserve validation command ordering, nested-report capture, CLI
+  integration, SQLite runtime allocation, and durable archival; remove only the
+  root aliases and ledger entries, tombstone the paths, and correct package
+  documentation.
+- [x] Accept only the sequential shrinking delta: owned roots `95 -> 93`,
+  combined graph nodes `131 -> 129`, combined edges `267 -> 265`, retained
+  facades `87 -> 85`, and exact aliases `62 -> 60`, with no new dependency or
+  cycle.
+- [x] Qualify the cut with 144 focused architecture/compatibility tests, ten
+  validation tests, 890 root tests, 633 workstation tests, 38 targeted BDD
+  cases, all distribution builds and isolated imports, deterministic
+  publication capture, Flutter analysis, and 51 widget tests.
+
+Completed deletion cut - exchange exact-alias cohort (2026-10-30):
+
+- [x] Remove ten repository-internal exact aliases for artifact exchange,
+  portable-skill schema/compilation/translation, registry and run-bundle
+  projection, and learning-context skill materialization without moving or
+  changing their canonical `realized_exchange` implementations.
+- [x] Preserve the held `learning_context` facade and the separately reviewed
+  Markdown/controller aliases; remove only the ten identity shells and their
+  ledger entries, tombstone every retired path, and correct exchange and module
+  documentation.
+- [x] Accept only the sequential shrinking delta: owned roots `93 -> 83`,
+  root-boundary classifications `116 -> 106`, combined graph nodes `129 ->
+  119`, combined edges `265 -> 255`, grandfathered observations `135 -> 125`,
+  retained facades `85 -> 75`, and exact aliases `60 -> 50`, with no new
+  dependency or cycle.
+- [x] Qualify the cut with 142 focused architecture/compatibility tests, 65
+  canonical exchange behavior tests, five isolated exchange package tests,
+  888 root tests, 633 workstation tests, 38 targeted BDD cases, all
+  distribution builds and isolated imports, deterministic publication capture,
+  Flutter analysis, and 51 widget tests.
+
+Completed deletion cut - controller binding exact-alias cohort (2026-10-30):
+
+- [x] Remove the repository-internal `controller_runtime_binding` alias without
+  moving or changing the canonical engine-owned controller factory registration
+  seam.
+- [x] Preserve engine registration and nested controller construction; remove
+  only the identity shell and its ledger/test entries, tombstone the path, and
+  correct module documentation.
+- [x] Accept only the sequential shrinking delta: owned roots `83 -> 82`,
+  root-boundary classifications `106 -> 105`, combined graph nodes `119 ->
+  118`, combined edges `255 -> 254`, grandfathered observations `125 -> 124`,
+  retained facades `75 -> 74`, and exact aliases `50 -> 49`, with no new
+  dependency or cycle.
+- [x] Qualify the non-model cut with 146 focused architecture/runtime-hygiene
+  tests, 882 applicable root tests, 632 applicable workstation tests, 38
+  deterministic BDD cases, all distribution builds and isolated imports,
+  deterministic publication capture, Flutter analysis, and 51 widget tests.
+  Seven unrelated provider-backed cases remain explicitly outside this
+  cohort's evidence pending external-data authorization.
+
+Completed deletion cut - persistence exact-alias cohort (2026-10-30):
+
+- [x] Remove the repository-internal `store` alias without moving or changing
+  the canonical core-engine artifact-store and SQLite implementation.
+- [x] Preserve canonical class identity, SQLite schema, persisted values,
+  selection semantics, and the already-migrated trial import; remove only the
+  identity shell and its ledger/test entries, tombstone the path, and correct
+  module documentation.
+- [x] Accept only the sequential shrinking delta: owned roots `82 -> 81`,
+  root-boundary classifications `105 -> 104`, combined graph nodes `118 ->
+  117`, combined edges `254 -> 253`, grandfathered observations `124 -> 123`,
+  retained facades `74 -> 73`, and exact aliases `49 -> 48`, with no new
+  dependency or cycle.
+- [x] Qualify the non-model cut with 314 focused architecture/persistence
+  tests, 882 applicable root tests, 632 applicable workstation tests, 38
+  deterministic BDD cases, all distribution builds and isolated imports,
+  deterministic publication capture, Flutter analysis, and 51 widget tests.
+  Seven unrelated provider-backed cases remain explicitly outside this
+  cohort's evidence pending external-data authorization.
+
+Completed deletion cut - controller selection exact-alias cohort (2026-10-30):
+
+- [x] Remove six repository-internal aliases for request posture,
+  direct-knowledge reuse, fallback elaboration, and retrieval ranking without
+  moving or changing their canonical core-engine implementations.
+- [x] Preserve canonical behavior and point the retained
+  `fallback_not_semantics` symbol-identity checks directly at canonical
+  modules; remove only identity shells and their ledger/test entries,
+  tombstone every path, and correct module documentation.
+- [x] Accept only the sequential shrinking delta: owned roots `81 -> 75`,
+  root-boundary classifications `104 -> 98`, combined graph nodes `117 ->
+  111`, combined edges `253 -> 247`, grandfathered observations `123 -> 117`,
+  retained facades `73 -> 67`, and exact aliases `48 -> 42`, with no new
+  dependency or cycle.
+- [x] Qualify the non-model cut with 362 focused architecture/controller tests,
+  881 applicable root tests, a clean 632-test workstation rerun after one
+  isolated Textual timing failure passed four exact normal-composition reruns,
+  38 deterministic BDD cases, all distribution builds and isolated imports,
+  deterministic publication capture, Flutter analysis, and 51 widget tests.
+  Seven unrelated provider-backed cases remain explicitly outside this
+  cohort's evidence pending external-data authorization.
+
+Completed deletion cut - controller normalization/learning exact-alias cohort
+(2026-10-30):
+
+- [x] Remove five repository-internal aliases for deterministic learning
+  vocabulary, Markdown encounter shaping, non-achievedness normalization, its
+  dependency surface, and structured-learning YAML without moving or changing
+  their canonical engine implementations.
+- [x] Keep the provider/composition-bearing external Markdown facade separate;
+  preserve the LLM-layer hygiene assertion by pointing it at canonical engine
+  source; remove only identity shells and ledger/test entries, tombstone every
+  path, and correct module documentation.
+- [x] Accept only the sequential shrinking delta: owned roots `75 -> 70`,
+  root-boundary classifications `98 -> 93`, combined graph nodes `111 -> 106`,
+  combined edges `247 -> 242`, grandfathered observations `117 -> 112`,
+  retained facades `67 -> 62`, and exact aliases `42 -> 37`, with no new
+  dependency or cycle.
+- [x] Qualify the non-model cut with 234 focused architecture/learning tests,
+  880 applicable root tests, 632 applicable workstation tests, 38 deterministic
+  BDD cases, all distribution builds and isolated imports, deterministic
+  publication capture, Flutter analysis, and 51 widget tests. Seven unrelated
+  provider-backed cases remain explicitly outside this cohort's evidence
+  pending external-data authorization.
+
+Completed deletion cut - controller reduction/closure exact-alias cohort
+(2026-10-30):
+
+- [x] Remove six repository-internal aliases for artifact answer resolution,
+  constitutional trace projection, closure and commitment, governed prior-
+  learning reuse, reduction coordination, and run-outcome harvesting without
+  moving or changing their canonical engine implementations.
+- [x] Preserve canonical constitutional-trace ownership, runtime-layer,
+  distribution, replay, determinism, artifact-selection, and resumption
+  assertions; remove only root identity shells and their facade-only evidence,
+  tombstone every path, and correct module documentation.
+- [x] Accept only the sequential shrinking delta: owned roots `70 -> 64`,
+  root-boundary classifications `93 -> 87`, combined graph nodes `106 -> 100`,
+  combined edges `242 -> 236`, grandfathered observations `112 -> 106`,
+  retained facades `62 -> 56`, and exact aliases `37 -> 31`, with no new
+  dependency or cycle.
+- [x] Qualify the non-model cut with 298 focused architecture/reduction tests,
+  879 applicable root tests, 632 applicable workstation tests, 46 deterministic
+  BDD cases, all distribution builds and isolated imports, deterministic
+  publication capture, Flutter analysis, and 51 widget tests. Seven unrelated
+  provider-backed cases remain explicitly outside this cohort's evidence
+  pending external-data authorization.
+
+Completed deletion cut - controller integration exact-alias cohort
+(2026-10-30):
+
+- [x] Remove the three repository-internal `artifact`,
+  `controller_governance_bridge`, and `system_state` aliases without moving or
+  changing their canonical engine implementations.
+- [x] Preserve canonical artifact-helper, governance-selection, state, replay,
+  determinism, layer-hygiene, and host-boundary assertions; remove only root
+  identity shells and their facade-only evidence, tombstone every path, and
+  correct module documentation.
+- [x] Accept only the sequential shrinking delta: owned roots `64 -> 61`,
+  root-boundary classifications `87 -> 84`, combined graph nodes `100 -> 97`,
+  combined edges `236 -> 233`, grandfathered observations `106 -> 103`,
+  retained facades `56 -> 53`, and exact aliases `31 -> 28`, with no new
+  dependency or cycle.
+- [x] Qualify the non-model cut with 325 focused architecture/controller tests,
+  877 applicable root tests, 632 applicable workstation tests, 46 deterministic
+  BDD cases, all distribution builds and isolated imports, deterministic
+  publication capture, Flutter analysis, and 51 widget tests. Seven unrelated
+  provider-backed cases remain explicitly outside this cohort's evidence
+  pending external-data authorization.
+
+Completed deletion cut - host-interaction symbol re-export cohort
+(2026-10-31):
+
+- [x] Remove seven repository-internal symbol projections for canonical host
+  action dispatch, actions, context, delegation, models, receipts, and
+  resolution without moving or changing the `realized-host-interaction`
+  implementation.
+- [x] Verify every exported symbol's canonical object identity, the absence of
+  wildcard and non-contract consumers, and the absence of facade-owned durable
+  pickle globals before deleting only the projections and their single
+  facade-only identity loop.
+- [x] Accept only the sequential shrinking delta: owned roots `61 -> 54`,
+  root-boundary classifications `84 -> 77`, combined graph nodes `97 -> 90`,
+  combined edges `233 -> 226`, grandfathered observations `103 -> 96`,
+  retained facades `53 -> 46`, and symbol re-exports `19 -> 12`, with no new
+  dependency or cycle.
+- [x] Qualify the non-model cut with 247 focused architecture/host-interaction
+  tests, 876 applicable root tests, 632 applicable workstation tests, 46
+  deterministic BDD cases, all distribution builds and isolated imports,
+  deterministic publication capture, Flutter analysis, and 51 widget tests.
+  Seven unrelated provider-backed cases remain explicitly outside this
+  cohort's evidence pending external-data authorization.
+
+Completed migration cut - artifact contract re-export consumer
+(2026-10-31):
+
+- [x] Migrate the canonical artifact protocol behavior assertion from the
+  historical `artifact_contracts` projection to
+  `realized_core_semantics.artifacts` without deleting or changing the facade.
+- [x] Reduce the retained facade to its single designated symbol-identity
+  contract consumer, with no production import, dependency-edge, or behavior
+  change.
+- [x] Qualify the migration with 241 focused semantic/artifact/compatibility
+  tests, 876 applicable root tests, 632 applicable workstation tests, 46
+  deterministic BDD cases, all distribution builds and isolated imports,
+  deterministic publication capture, Flutter analysis, and 51 widget tests.
+  Seven unrelated provider-backed cases remain explicitly outside this
+  migration's evidence pending external-data authorization.
+
+Completed deletion cut - artifact contract symbol re-export cohort
+(2026-10-31):
+
+- [x] Remove the repository-internal `artifact_contracts` projection only
+  after its canonical behavior consumer completed the separately committed
+  migration cycle to `realized_core_semantics.artifacts`.
+- [x] Preserve canonical protocol conformance, artifact-boundary, replay,
+  determinism, and selection assertions; remove only the root projection and
+  its remaining facade-only identity evidence, tombstone the path, and correct
+  module documentation.
+- [x] Accept only the sequential shrinking delta: owned roots `54 -> 53`,
+  root-boundary classifications `77 -> 76`, combined graph nodes `90 -> 89`,
+  combined edges `226 -> 225`, grandfathered observations `96 -> 95`, retained
+  facades `46 -> 45`, and symbol re-exports `12 -> 11`, with no new dependency
+  or cycle.
+- [x] Qualify the non-model cut with `272` focused architecture/semantic tests,
+  `877` applicable root tests, `632` applicable workstation tests, `46`
+  deterministic BDD cases, all distribution builds and isolated imports,
+  deterministic publication capture, Flutter analysis, and `51` widget tests.
+  Seven unrelated provider-backed cases remain explicitly outside this
+  cohort's evidence pending external-data authorization.
+
+Completed deletion cut - fallback semantics symbol re-export cohort
+(2026-10-31):
+
+- [x] Remove the repository-internal `fallback_not_semantics` aggregate
+  projection after the earlier controller-selection cohort migrated its
+  identity contract directly to canonical fallback-generation and ranking
+  modules and completed a stable qualification cycle.
+- [x] Preserve canonical fallback, ranking, schema, answer-selection,
+  title-depth, replay, and function-boundary assertions; remove only the root
+  projection and its facade-only identity evidence, tombstone the path, and
+  correct module documentation.
+- [x] Accept only the sequential shrinking delta: owned roots `53 -> 52`,
+  root-boundary classifications `76 -> 75`, combined graph nodes `89 -> 88`,
+  combined edges `225 -> 224`, grandfathered observations `95 -> 94`, retained
+  facades `45 -> 44`, and symbol re-exports `11 -> 10`, with no new dependency
+  or cycle.
+- [x] Qualify the non-model cut with `333` focused tests, `876` applicable
+  non-provider root tests, `633` applicable non-provider workstation tests,
+  `46` deterministic BDD cases, all distribution builds and isolated imports,
+  deterministic publication capture, Flutter analysis, and `51` widget tests.
+  Provider-backed results are not accepted as evidence; a misconfigured first
+  exclusion ran six Newton cases, after which corrected verified-ID reruns
+  excluded all seven external-data cases and established the recorded totals.
+
+Completed deletion cut - itemization validation symbol re-export cohort
+(2026-10-31):
+
+- [x] Remove the repository-internal `itemize_validation` projection after
+  subject workflow and direct validator tests had consumed the canonical
+  `workstation.subject.core.itemize_validation` owner through stable
+  qualification cycles.
+- [x] Preserve canonical itemization validation, subject workflow,
+  publication, and gRPC assertions; remove only the root projection and its
+  facade-only identity evidence, tombstone the path, and redirect current
+  implementation guidance to the canonical source.
+- [x] Accept only the sequential shrinking delta: owned roots `52 -> 51`,
+  root-boundary classifications `75 -> 74`, combined graph nodes `88 -> 87`,
+  combined edges `224 -> 223`, grandfathered observations `94 -> 93`, retained
+  facades `44 -> 43`, and symbol re-exports `10 -> 9`, with no new dependency
+  or cycle.
+- [x] Qualify the non-model cut with `353` focused tests, `875` applicable
+  non-provider root tests, `633` applicable non-provider workstation tests,
+  `46` deterministic BDD cases, all distribution builds and isolated imports,
+  deterministic publication capture, Flutter analysis, and `51` widget tests.
+  All seven provider-backed cases remain excluded and unclaimed pending
+  explicit external-data authorization.
+
+Completed deletion cut - controller supplement exact-alias cohort
+(2026-10-31):
+
+- [x] Remove the repository-internal `supplement` alias after all ordinary
+  consumers had used the canonical `realized_core_engine.supplement` owner
+  through stable qualification cycles.
+- [x] Preserve canonical supplement, provider-transport, prompt, retry,
+  response-shaping, replay, and controller behavior; remove only the exact
+  root alias and its facade-only identity evidence, then tombstone the path.
+- [x] Accept only the sequential shrinking delta: owned roots `51 -> 50`,
+  root-boundary classifications `74 -> 73`, combined graph nodes `87 -> 86`,
+  combined edges `223 -> 222`, grandfathered observations `93 -> 92`, retained
+  facades `43 -> 42`, and exact aliases `28 -> 27`, with no new dependency or
+  cycle.
+- [x] Qualify the import-only cut with `141` focused deterministic tests, `875`
+  applicable non-provider root tests, `633` applicable non-provider
+  workstation tests, `46` deterministic BDD cases, all distribution builds
+  and isolated imports, deterministic publication capture, Flutter analysis,
+  and `51` widget tests. All seven provider-backed cases remain excluded and
+  unclaimed pending explicit external-data authorization.
+
 Exit condition:
 
 - [x] The root-boundary ledger contains no canonical package-to-root
   implementation edges and only approved entry or compatibility edges remain.
 
-Deferred retirement work:
+Further retirement work:
 
-- Facade deletion is intentionally not part of this implementation change.
-  Each candidate must be selected from the machine-readable ledger, receive any
-  required external deprecation notice, be removed in a separate change, pass
-  the complete qualification ladder, and reduce the checked-in architecture
-  baseline. The two unchecked items above therefore remain the entry criteria
-  for those future deletion changes rather than unperformed canonical migration.
+- Every currently authorized qualified cohort is retired. The machine-readable
+  ledger now reports zero candidates, `42` explicitly held facades, and `78`
+  tombstones. Each held surface must satisfy its recorded review condition,
+  receive any required external notice, be removed in a separate change, pass
+  the complete affected qualification ladder, and reduce the checked-in
+  architecture baseline before it can advance.
+- `external_markdown_learning_pipeline` remains held until explicit
+  external-data authorization permits all six Newton Markdown-learning
+  provider cases to qualify the unchanged canonical exchange owner. The other
+  holds retain behavior, aggregate-export, executable, durable-qualified-name,
+  composition, or dependency-order obligations. They are not deletion
+  candidates in the completed retirement program state.
 
 ### Required Gates For Every Slice
 

@@ -7,7 +7,7 @@ from pathlib import Path
 
 from dst import load_dst_normalized_case
 from dst.projection import project_normalized_case_to_decision_frame
-from decision_review import (
+from workstation.subject.core.decision_review import (
     DecisionFrame,
     DecisionReviewItem,
     decision_review_item_from_review_item,
@@ -16,19 +16,19 @@ from decision_review import (
     persist_decision_review,
     stable_decision_frame_id,
 )
-from decision_review_projection import (
+from workstation.subject.core.decision_review_projection import (
     analyze_decision_frame,
     decision_review_model,
     list_decision_analysis_receipts,
     persist_decision_analysis_receipt,
 )
-from decision_review_policy import (
+from workstation.subject.core.decision_review_policy import (
     default_decision_policy_profile,
     load_decision_policy_profile,
     next_decision_policy_profile_kind,
     persist_decision_policy_profile,
 )
-from learning_context import (
+from realized_exchange.learning_context import (
     LearningContext,
     LearningUnit,
     new_learning_delta,
@@ -38,8 +38,8 @@ from learning_context import (
     persist_learning_source,
     stable_learning_unit_id,
 )
-from itemize import materialize_itemization_session
-from review_composition import review_composition_from_itemization
+from workstation.subject.core.itemization import materialize_itemization_session
+from workstation.subject.core.review_composition import review_composition_from_itemization
 
 
 class DecisionReviewTests(unittest.TestCase):
@@ -143,7 +143,7 @@ class DecisionReviewTests(unittest.TestCase):
         session, itemized_items = materialize_itemization_session(self.root, subject_id)
 
         # reload through the review path so the test uses real seeded review items
-        from learning_context import load_learning_context
+        from realized_exchange.learning_context import load_learning_context
 
         loaded_context = load_learning_context(self.root, subject_id)
         _composition, review_items = review_composition_from_itemization(
@@ -770,7 +770,7 @@ class DecisionReviewTests(unittest.TestCase):
         subject_id = self._persist_demo_context()
         session, itemized_items = materialize_itemization_session(self.root, subject_id)
 
-        from learning_context import load_learning_context
+        from realized_exchange.learning_context import load_learning_context
 
         loaded_context = load_learning_context(self.root, subject_id)
         _composition, review_items = review_composition_from_itemization(

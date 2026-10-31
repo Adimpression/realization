@@ -13,11 +13,11 @@ from pathlib import Path
 from unittest.mock import patch
 
 from args import parse_args
-from execution_frameworks import _shell_cross_boundary
-from host_interaction_receipts import host_interaction_capability_call_receipt
-from learning_context import load_learning_context
-from skill_schema_io import artifact_from_skill_document
-from store import SQLiteVectorArtifactStore
+from realized_core_runtime.execution import _shell_cross_boundary
+from realized_host_interaction.receipts import host_interaction_capability_call_receipt
+from realized_exchange.learning_context import load_learning_context
+from realized_exchange.skill_schema import artifact_from_skill_document
+from realized_core_engine.store import SQLiteVectorArtifactStore
 from workstation.app.cli.cli import (
     _prompt_for_workstation_escalation,
     handle_workstation_chat_command,
@@ -2599,8 +2599,8 @@ class WorkstationTests(unittest.TestCase):
         try:
             os.environ.pop("STATE_VECTOR_MODE", None)
             with (
-                patch("store.importlib.import_module", side_effect=guarded_import),
-                patch("store.EmbeddingGemmaEncoder", side_effect=AssertionError("embedding encoder should stay unused for workstation skill-store import")),
+                patch("realized_core_engine.store.importlib.import_module", side_effect=guarded_import),
+                patch("realized_core_engine.store.EmbeddingGemmaEncoder", side_effect=AssertionError("embedding encoder should stay unused for workstation skill-store import")),
             ):
                 payload = import_workstation_skill_file(
                     skill_store_path=self.skills_sqlite,
@@ -8195,7 +8195,10 @@ class WorkstationTests(unittest.TestCase):
                 self.parsed_output = {"status": "error", "broker": "fs.move_mount", "error": "boom"}
                 self.result = {"status": "error", "broker": "fs.move_mount", "error": "boom"}
 
-        with patch("main.BSSCController.execute_function_artifact", return_value=_PatchedNestedResult()):
+        with patch(
+            "realized_core_engine.controller_runtime.BSSCController.execute_function_artifact",
+            return_value=_PatchedNestedResult(),
+        ):
             result = execute_workstation_capability(
                 session,
                 "ws.skill.invoke",

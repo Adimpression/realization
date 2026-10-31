@@ -50,110 +50,44 @@ Every repository-root Python module has one explicit responsibility. Status is o
 | --- | --- | --- |
 | `SEMANTIC_RELATION_VALIDATION` | `validation_trial` | `validation` |
 | `TRIAL_DOMAIN_VALIDATION` | `validation_trial` | `validation` |
-| `applied_theory_primitives` | `semantic_model` | `compatibility_facade` |
 | `applied_theory_types` | `semantic_model` | `compatibility_facade` |
 | `approval_governance` | `governance` | `compatibility_facade` |
 | `args` | `entry_exchange` | `entrypoint` |
-| `artifact` | `controller` | `compatibility_facade` |
-| `artifact_answer_resolution` | `controller` | `compatibility_facade` |
-| `artifact_contracts` | `semantic_model` | `compatibility_facade` |
 | `blend_context` | `blend` | `compatibility_facade` |
 | `blend_operator` | `blend` | `compatibility_facade` |
 | `blend_operator_store` | `blend` | `compatibility_facade` |
 | `blend_session` | `blend` | `compatibility_facade` |
-| `blend_workflow` | `blend` | `compatibility_facade` |
 | `blend_workflow_execution` | `blend` | `compatibility_facade` |
 | `blend_workflow_models` | `blend` | `compatibility_facade` |
-| `blend_workflow_store` | `blend` | `compatibility_facade` |
-| `blend_world` | `blend` | `compatibility_facade` |
 | `blend_world_models` | `blend` | `compatibility_facade` |
-| `blend_world_store` | `blend` | `compatibility_facade` |
-| `boundary` | `semantic_model` | `compatibility_facade` |
-| `capability_runtime` | `runtime_execution` | `compatibility_facade` |
-| `constitutional_trace` | `controller` | `compatibility_facade` |
 | `controller_entrypoint_binding` | `entry_exchange` | `compatibility_facade` |
 | `controller_entrypoints` | `entry_exchange` | `entrypoint` |
-| `controller_governance_bridge` | `controller` | `compatibility_facade` |
 | `controller_runtime` | `controller` | `compatibility_facade` |
-| `controller_runtime_binding` | `entry_exchange` | `compatibility_facade` |
 | `data_governance` | `governance` | `compatibility_facade` |
 | `decision_review` | `subject_domain` | `compatibility_facade` |
 | `decision_review_constructs` | `subject_domain` | `compatibility_facade` |
 | `decision_review_models` | `subject_domain` | `compatibility_facade` |
-| `decision_review_policy` | `subject_domain` | `compatibility_facade` |
-| `decision_review_projection` | `subject_domain` | `compatibility_facade` |
-| `direct_knowledge_reuse` | `controller` | `compatibility_facade` |
 | `execution_framework_primitives` | `runtime_execution` | `compatibility_facade` |
 | `execution_frameworks` | `runtime_execution` | `compatibility_facade` |
 | `external_markdown_learning_pipeline` | `entry_exchange` | `compatibility_facade` |
-| `fallback_not_generation` | `controller` | `compatibility_facade` |
-| `fallback_not_semantics` | `controller` | `compatibility_facade` |
 | `fence_extraction_strategy` | `runtime_execution` | `compatibility_facade` |
-| `gather_sources` | `subject_domain` | `compatibility_facade` |
 | `governance_inventory` | `controller` | `compatibility_facade` |
-| `governed_closure_and_commitment` | `controller` | `compatibility_facade` |
-| `governed_prior_learning_reuse` | `controller` | `compatibility_facade` |
-| `governed_semantic_reduction_runtime` | `controller` | `compatibility_facade` |
-| `governed_skill_access` | `governance` | `compatibility_facade` |
 | `governed_skill_installation` | `governance` | `entrypoint` |
-| `host_abi` | `runtime_execution` | `compatibility_facade` |
-| `host_brokers` | `runtime_execution` | `compatibility_facade` |
-| `host_interaction_action_dispatch` | `runtime_execution` | `compatibility_facade` |
-| `host_interaction_actions` | `runtime_execution` | `compatibility_facade` |
-| `host_interaction_context` | `runtime_execution` | `compatibility_facade` |
-| `host_interaction_delegation` | `runtime_execution` | `compatibility_facade` |
-| `host_interaction_models` | `runtime_execution` | `compatibility_facade` |
-| `host_interaction_receipts` | `runtime_execution` | `compatibility_facade` |
-| `host_interaction_resolution` | `runtime_execution` | `compatibility_facade` |
 | `host_mediation` | `runtime_execution` | `compatibility_facade` |
-| `host_realizers` | `runtime_execution` | `compatibility_facade` |
-| `id_generation` | `semantic_model` | `compatibility_facade` |
 | `itemize` | `subject_domain` | `compatibility_facade` |
 | `itemize_models` | `subject_domain` | `compatibility_facade` |
-| `itemize_validation` | `subject_domain` | `compatibility_facade` |
-| `learn` | `controller` | `compatibility_facade` |
 | `learning_context` | `entry_exchange` | `compatibility_facade` |
-| `learning_context_markdown` | `subject_domain` | `compatibility_facade` |
 | `learning_context_paths` | `subject_domain` | `compatibility_facade` |
-| `learning_context_projection` | `subject_domain` | `compatibility_facade` |
-| `learning_context_skill_projection` | `entry_exchange` | `compatibility_facade` |
-| `macos_host_brokers` | `runtime_execution` | `compatibility_facade` |
 | `main` | `entry_exchange` | `compatibility_facade`, `entrypoint` |
 | `markdown_ir` | `subject_domain` | `compatibility_facade` |
-| `markdown_learning_artifact_semantics` | `controller` | `compatibility_facade` |
-| `non_achievedness_normalization` | `controller` | `compatibility_facade` |
-| `normalization_primitives` | `semantic_model` | `compatibility_facade` |
-| `normalization_runtime_dependencies` | `controller` | `compatibility_facade` |
 | `normalize` | `compatibility` | `compatibility_facade` |
-| `not_elaboration_ranking` | `controller` | `compatibility_facade` |
-| `prolog` | `semantic_model` | `compatibility_facade` |
-| `prompt_directives` | `controller` | `compatibility_facade` |
-| `publication` | `subject_domain` | `compatibility_facade` |
-| `publication_projection` | `subject_domain` | `compatibility_facade` |
-| `publication_render` | `subject_domain` | `compatibility_facade` |
-| `publication_validation` | `subject_domain` | `compatibility_facade` |
 | `pure_theory_types` | `semantic_model` | `compatibility_facade` |
-| `python_skill_brokerization` | `runtime_execution` | `compatibility_facade` |
 | `python_skill_host` | `runtime_execution` | `compatibility_facade` |
-| `python_skill_host_transport` | `runtime_execution` | `compatibility_facade` |
 | `replay_verifier` | `governance` | `entrypoint` |
-| `retrieval_ranking` | `controller` | `compatibility_facade` |
 | `review_composition` | `subject_domain` | `compatibility_facade` |
-| `run_bundle_io` | `entry_exchange` | `compatibility_facade` |
-| `run_outcome_harvest_and_reporting` | `controller` | `compatibility_facade` |
 | `runtime_controller_api` | `entry_exchange` | `compatibility_facade` |
-| `runtime_governance_context` | `governance` | `compatibility_facade` |
-| `runtime_temp` | `runtime_execution` | `compatibility_facade` |
-| `semantic_prompt_posture` | `controller` | `compatibility_facade` |
-| `semantic_text` | `semantic_model` | `compatibility_facade` |
-| `side` | `entry_exchange` | `compatibility_facade` |
-| `side_runtime_dependencies` | `entry_exchange` | `compatibility_facade` |
 | `skill_boundary_normalization` | `portable_skills` | `compatibility_facade` |
-| `skill_compatibility_export` | `entry_exchange` | `compatibility_facade` |
-| `skill_compatibility_import` | `entry_exchange` | `compatibility_facade` |
-| `skill_compiler` | `entry_exchange` | `compatibility_facade` |
 | `skill_composition` | `portable_skills` | `compatibility_facade` |
-| `skill_export_projection` | `entry_exchange` | `compatibility_facade` |
 | `skill_governance` | `governance` | `compatibility_facade` |
 | `skill_governance_primitives` | `governance` | `compatibility_facade` |
 | `skill_invocation_contract` | `portable_skills` | `compatibility_facade` |
@@ -161,21 +95,9 @@ Every repository-root Python module has one explicit responsibility. Status is o
 | `skill_leaf_types` | `portable_skills` | `compatibility_facade` |
 | `skill_lifecycle` | `governance` | `compatibility_facade` |
 | `skill_path_notation` | `portable_skills` | `compatibility_facade` |
-| `skill_registry` | `entry_exchange` | `compatibility_facade` |
 | `skill_safety_governance` | `governance` | `compatibility_facade` |
-| `skill_schema_io` | `entry_exchange` | `compatibility_facade` |
-| `store` | `persistence_adapter` | `compatibility_facade` |
-| `structured_learning_yaml` | `controller` | `compatibility_facade` |
-| `supplement` | `controller` | `compatibility_facade` |
-| `system_state` | `controller` | `compatibility_facade` |
 | `tablet_safety_validation` | `validation_trial` | `validation` |
 | `title_depth_learning_validation` | `validation_trial` | `validation` |
-| `title_semantics` | `semantic_model` | `compatibility_facade` |
-| `url_learning_capture` | `subject_domain` | `compatibility_facade` |
-| `validation_ladder` | `validation_trial` | `compatibility_facade`, `validation` |
-| `validation_sqlite` | `validation_trial` | `compatibility_facade`, `validation` |
-| `virtual_mounts` | `runtime_execution` | `compatibility_facade` |
-| `wasm_skill_runtime` | `runtime_execution` | `compatibility_facade` |
 
 ## Root Package Family Ownership
 
@@ -386,8 +308,8 @@ These edges exist only to preserve historical import paths. They are excluded fr
 
 | Metric | Count |
 | --- | ---: |
-| Nodes | 164 |
-| Edges | 300 |
+| Nodes | 86 |
+| Edges | 222 |
 | Cyclic SCCs | 0 |
 | Nodes in cyclic SCCs | 0 |
 | Edges internal to cyclic SCCs | 0 |
@@ -406,31 +328,20 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | --- | --- | --- | --- |
 | `root_to_component` | `SEMANTIC_RELATION_VALIDATION` | `core_engine` | `orchestration` |
 | `root_to_component` | `TRIAL_DOMAIN_VALIDATION` | `validation` | `orchestration` |
-| `root_to_component` | `applied_theory_primitives` | `core_semantics` | `dto_constants` |
 | `root_to_component` | `applied_theory_types` | `core_semantics` | `dto_constants` |
 | `root_to_component` | `approval_governance` | `core_governance` | `compatibility` |
 | `root_to_component` | `approval_governance` | `core_semantics` | `compatibility` |
 | `root_to_component` | `args` | `app_cli` | `orchestration` |
 | `root_to_component` | `args` | `core_engine` | `orchestration` |
-| `root_to_component` | `artifact` | `core_engine` | `orchestration` |
-| `root_to_component` | `artifact_answer_resolution` | `core_engine` | `orchestration` |
-| `root_to_component` | `artifact_contracts` | `core_semantics` | `compatibility` |
 | `root_to_component` | `blend_context` | `blend` | `compatibility` |
 | `root_to_component` | `blend_context` | `runtime_core` | `compatibility` |
 | `root_to_component` | `blend_operator` | `blend` | `compatibility` |
 | `root_to_component` | `blend_operator_store` | `blend_application` | `compatibility` |
 | `root_to_component` | `blend_session` | `blend` | `compatibility` |
 | `root_to_component` | `blend_session` | `runtime_core` | `compatibility` |
-| `root_to_component` | `blend_workflow` | `blend_application` | `compatibility` |
 | `root_to_component` | `blend_workflow_execution` | `blend_application` | `compatibility` |
 | `root_to_component` | `blend_workflow_models` | `blend` | `compatibility` |
-| `root_to_component` | `blend_workflow_store` | `blend_application` | `compatibility` |
-| `root_to_component` | `blend_world` | `blend_application` | `compatibility` |
 | `root_to_component` | `blend_world_models` | `blend` | `compatibility` |
-| `root_to_component` | `blend_world_store` | `blend_application` | `compatibility` |
-| `root_to_component` | `boundary` | `core_semantics` | `orchestration` |
-| `root_to_component` | `capability_runtime` | `governed_core` | `compatibility` |
-| `root_to_component` | `constitutional_trace` | `core_engine` | `orchestration` |
 | `root_to_component` | `controller_entrypoint_binding` | `core_engine` | `compatibility` |
 | `root_to_component` | `controller_entrypoints` | `app_cli` | `orchestration` |
 | `root_to_component` | `controller_entrypoints` | `core_engine` | `orchestration` |
@@ -439,98 +350,43 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `root_to_component` | `controller_entrypoints` | `governed_core` | `orchestration` |
 | `root_to_component` | `controller_entrypoints` | `host_interaction` | `orchestration` |
 | `root_to_component` | `controller_entrypoints` | `validation` | `orchestration` |
-| `root_to_component` | `controller_governance_bridge` | `core_engine` | `compatibility` |
 | `root_to_component` | `controller_runtime` | `core_engine` | `compatibility` |
 | `root_to_component` | `controller_runtime` | `exchange` | `compatibility` |
-| `root_to_component` | `controller_runtime_binding` | `core_engine` | `compatibility` |
 | `root_to_component` | `data_governance` | `core_governance` | `compatibility` |
 | `root_to_component` | `decision_review` | `subject_core` | `orchestration` |
 | `root_to_component` | `decision_review_constructs` | `subject_core` | `orchestration` |
 | `root_to_component` | `decision_review_models` | `core_semantics` | `dto_constants` |
-| `root_to_component` | `decision_review_policy` | `subject_core` | `compatibility` |
-| `root_to_component` | `decision_review_projection` | `subject_core` | `compatibility` |
-| `root_to_component` | `direct_knowledge_reuse` | `core_engine` | `orchestration` |
 | `root_to_component` | `execution_framework_primitives` | `governed_core` | `orchestration` |
 | `root_to_component` | `execution_frameworks` | `governed_core` | `orchestration` |
 | `root_to_component` | `external_markdown_learning_pipeline` | `exchange` | `compatibility` |
-| `root_to_component` | `fallback_not_generation` | `core_engine` | `orchestration` |
-| `root_to_component` | `fallback_not_semantics` | `core_engine` | `orchestration` |
 | `root_to_component` | `fence_extraction_strategy` | `governed_core` | `orchestration` |
-| `root_to_component` | `gather_sources` | `subject_core` | `orchestration` |
 | `root_to_component` | `governance_inventory` | `core_engine` | `orchestration` |
-| `root_to_component` | `governed_closure_and_commitment` | `core_engine` | `orchestration` |
-| `root_to_component` | `governed_prior_learning_reuse` | `core_engine` | `orchestration` |
-| `root_to_component` | `governed_semantic_reduction_runtime` | `core_engine` | `orchestration` |
-| `root_to_component` | `governed_skill_access` | `core_engine` | `compatibility` |
 | `root_to_component` | `governed_skill_installation` | `core_engine` | `orchestration` |
 | `root_to_component` | `governed_skill_installation` | `core_governance` | `orchestration` |
 | `root_to_component` | `governed_skill_installation` | `exchange` | `orchestration` |
 | `root_to_component` | `governed_skill_installation` | `skill_application` | `orchestration` |
 | `root_to_component` | `governed_skill_installation` | `skill_semantics` | `orchestration` |
-| `root_to_component` | `host_abi` | `governed_core` | `orchestration` |
-| `root_to_component` | `host_brokers` | `governed_core` | `orchestration` |
-| `root_to_component` | `host_interaction_action_dispatch` | `host_interaction` | `compatibility` |
-| `root_to_component` | `host_interaction_actions` | `host_interaction` | `compatibility` |
-| `root_to_component` | `host_interaction_context` | `host_interaction` | `compatibility` |
-| `root_to_component` | `host_interaction_delegation` | `host_interaction` | `compatibility` |
-| `root_to_component` | `host_interaction_models` | `host_interaction` | `compatibility` |
-| `root_to_component` | `host_interaction_receipts` | `host_interaction` | `compatibility` |
-| `root_to_component` | `host_interaction_resolution` | `host_interaction` | `compatibility` |
 | `root_to_component` | `host_mediation` | `core_engine` | `compatibility` |
-| `root_to_component` | `host_realizers` | `governed_core` | `orchestration` |
-| `root_to_component` | `id_generation` | `core_semantics` | `compatibility` |
 | `root_to_component` | `itemize` | `core_semantics` | `orchestration` |
 | `root_to_component` | `itemize` | `subject_core` | `orchestration` |
 | `root_to_component` | `itemize_models` | `core_semantics` | `dto_constants` |
-| `root_to_component` | `itemize_validation` | `subject_core` | `orchestration` |
-| `root_to_component` | `learn` | `core_engine` | `orchestration` |
 | `root_to_component` | `learning_context` | `exchange` | `orchestration` |
-| `root_to_component` | `learning_context_markdown` | `subject_core` | `compatibility` |
 | `root_to_component` | `learning_context_paths` | `subject_core` | `orchestration` |
-| `root_to_component` | `learning_context_projection` | `subject_core` | `orchestration` |
-| `root_to_component` | `learning_context_skill_projection` | `exchange` | `orchestration` |
-| `root_to_component` | `macos_host_brokers` | `governed_core` | `orchestration` |
 | `root_to_component` | `markdown_ir` | `core_semantics` | `orchestration` |
-| `root_to_component` | `markdown_learning_artifact_semantics` | `core_engine` | `compatibility` |
-| `root_to_component` | `non_achievedness_normalization` | `core_engine` | `orchestration` |
-| `root_to_component` | `normalization_primitives` | `core_semantics` | `orchestration` |
-| `root_to_component` | `normalization_runtime_dependencies` | `core_engine` | `orchestration` |
 | `root_to_component` | `normalize` | `core_engine` | `orchestration` |
 | `root_to_component` | `normalize` | `core_semantics` | `orchestration` |
-| `root_to_component` | `not_elaboration_ranking` | `core_engine` | `orchestration` |
-| `root_to_component` | `prolog` | `core_semantics` | `compatibility` |
-| `root_to_component` | `prompt_directives` | `core_engine` | `orchestration` |
-| `root_to_component` | `publication` | `subject_core` | `compatibility` |
-| `root_to_component` | `publication_projection` | `subject_core` | `compatibility` |
-| `root_to_component` | `publication_render` | `subject_core` | `compatibility` |
-| `root_to_component` | `publication_validation` | `subject_core` | `compatibility` |
 | `root_to_component` | `pure_theory_types` | `core_semantics` | `compatibility` |
-| `root_to_component` | `python_skill_brokerization` | `governed_core` | `orchestration` |
 | `root_to_component` | `python_skill_host` | `governed_core` | `orchestration` |
-| `root_to_component` | `python_skill_host_transport` | `governed_core` | `orchestration` |
 | `root_to_component` | `replay_verifier` | `core_engine` | `orchestration` |
 | `root_to_component` | `replay_verifier` | `core_governance` | `orchestration` |
 | `root_to_component` | `replay_verifier` | `core_semantics` | `orchestration` |
 | `root_to_component` | `replay_verifier` | `exchange` | `orchestration` |
 | `root_to_component` | `replay_verifier` | `governed_core` | `orchestration` |
 | `root_to_component` | `replay_verifier` | `skill_semantics` | `orchestration` |
-| `root_to_component` | `retrieval_ranking` | `core_engine` | `orchestration` |
 | `root_to_component` | `review_composition` | `subject_core` | `compatibility` |
-| `root_to_component` | `run_bundle_io` | `exchange` | `orchestration` |
-| `root_to_component` | `run_outcome_harvest_and_reporting` | `core_engine` | `orchestration` |
 | `root_to_component` | `runtime_controller_api` | `app_cli` | `compatibility` |
-| `root_to_component` | `runtime_governance_context` | `core_engine` | `compatibility` |
-| `root_to_component` | `runtime_temp` | `governed_core` | `orchestration` |
-| `root_to_component` | `semantic_prompt_posture` | `core_engine` | `orchestration` |
-| `root_to_component` | `semantic_text` | `core_semantics` | `compatibility` |
-| `root_to_component` | `side` | `exchange` | `orchestration` |
-| `root_to_component` | `side_runtime_dependencies` | `exchange` | `orchestration` |
 | `root_to_component` | `skill_boundary_normalization` | `skill_application` | `compatibility` |
-| `root_to_component` | `skill_compatibility_export` | `exchange` | `orchestration` |
-| `root_to_component` | `skill_compatibility_import` | `exchange` | `orchestration` |
-| `root_to_component` | `skill_compiler` | `exchange` | `orchestration` |
 | `root_to_component` | `skill_composition` | `skill_application` | `compatibility` |
-| `root_to_component` | `skill_export_projection` | `exchange` | `orchestration` |
 | `root_to_component` | `skill_governance` | `core_engine` | `compatibility` |
 | `root_to_component` | `skill_governance_primitives` | `core_governance` | `compatibility` |
 | `root_to_component` | `skill_invocation_contract` | `skill_semantics` | `compatibility` |
@@ -539,22 +395,10 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `root_to_component` | `skill_leaf_types` | `skill_semantics` | `compatibility` |
 | `root_to_component` | `skill_lifecycle` | `core_governance` | `compatibility` |
 | `root_to_component` | `skill_path_notation` | `skill_semantics` | `compatibility` |
-| `root_to_component` | `skill_registry` | `exchange` | `orchestration` |
 | `root_to_component` | `skill_safety_governance` | `core_governance` | `compatibility` |
 | `root_to_component` | `skill_safety_governance` | `core_semantics` | `compatibility` |
-| `root_to_component` | `skill_schema_io` | `exchange` | `orchestration` |
-| `root_to_component` | `store` | `core_engine` | `persistence` |
-| `root_to_component` | `structured_learning_yaml` | `core_engine` | `orchestration` |
-| `root_to_component` | `supplement` | `core_engine` | `orchestration` |
-| `root_to_component` | `system_state` | `core_engine` | `orchestration` |
 | `root_to_component` | `tablet_safety_validation` | `validation` | `orchestration` |
 | `root_to_component` | `title_depth_learning_validation` | `validation` | `orchestration` |
-| `root_to_component` | `title_semantics` | `core_semantics` | `compatibility` |
-| `root_to_component` | `url_learning_capture` | `subject_service` | `orchestration` |
-| `root_to_component` | `validation_ladder` | `validation` | `compatibility` |
-| `root_to_component` | `validation_sqlite` | `validation` | `compatibility` |
-| `root_to_component` | `virtual_mounts` | `governed_core` | `orchestration` |
-| `root_to_component` | `wasm_skill_runtime` | `governed_core` | `orchestration` |
 
 ## Root-Module Dependencies
 
@@ -564,31 +408,20 @@ No workspace package imports a root application module.
 
 - `SEMANTIC_RELATION_VALIDATION` -> `core_engine` (`SEMANTIC_RELATION_VALIDATION.py`)
 - `TRIAL_DOMAIN_VALIDATION` -> `validation` (`TRIAL_DOMAIN_VALIDATION.py`)
-- `applied_theory_primitives` -> `core_semantics` (`applied_theory_primitives.py`)
 - `applied_theory_types` -> `core_semantics` (`applied_theory_types.py`)
 - `approval_governance` -> `core_governance` (`approval_governance.py`)
 - `approval_governance` -> `core_semantics` (`approval_governance.py`)
 - `args` -> `app_cli` (`args.py`)
 - `args` -> `core_engine` (`args.py`)
-- `artifact` -> `core_engine` (`artifact.py`)
-- `artifact_answer_resolution` -> `core_engine` (`artifact_answer_resolution.py`)
-- `artifact_contracts` -> `core_semantics` (`artifact_contracts.py`)
 - `blend_context` -> `blend` (`blend_context.py`)
 - `blend_context` -> `runtime_core` (`blend_context.py`)
 - `blend_operator` -> `blend` (`blend_operator.py`)
 - `blend_operator_store` -> `blend_application` (`blend_operator_store.py`)
 - `blend_session` -> `blend` (`blend_session.py`)
 - `blend_session` -> `runtime_core` (`blend_session.py`)
-- `blend_workflow` -> `blend_application` (`blend_workflow.py`)
 - `blend_workflow_execution` -> `blend_application` (`blend_workflow_execution.py`)
 - `blend_workflow_models` -> `blend` (`blend_workflow_models.py`)
-- `blend_workflow_store` -> `blend_application` (`blend_workflow_store.py`)
-- `blend_world` -> `blend_application` (`blend_world.py`)
 - `blend_world_models` -> `blend` (`blend_world_models.py`)
-- `blend_world_store` -> `blend_application` (`blend_world_store.py`)
-- `boundary` -> `core_semantics` (`boundary.py`)
-- `capability_runtime` -> `governed_core` (`capability_runtime.py`)
-- `constitutional_trace` -> `core_engine` (`constitutional_trace.py`)
 - `controller_entrypoint_binding` -> `core_engine` (`controller_entrypoint_binding.py`)
 - `controller_entrypoints` -> `app_cli` (`controller_entrypoints.py`)
 - `controller_entrypoints` -> `core_engine` (`controller_entrypoints.py`)
@@ -597,98 +430,43 @@ No workspace package imports a root application module.
 - `controller_entrypoints` -> `governed_core` (`controller_entrypoints.py`)
 - `controller_entrypoints` -> `host_interaction` (`controller_entrypoints.py`)
 - `controller_entrypoints` -> `validation` (`controller_entrypoints.py`)
-- `controller_governance_bridge` -> `core_engine` (`controller_governance_bridge.py`)
 - `controller_runtime` -> `core_engine` (`controller_runtime.py`)
 - `controller_runtime` -> `exchange` (`controller_runtime.py`)
-- `controller_runtime_binding` -> `core_engine` (`controller_runtime_binding.py`)
 - `data_governance` -> `core_governance` (`data_governance.py`)
 - `decision_review` -> `subject_core` (`decision_review.py`)
 - `decision_review_constructs` -> `subject_core` (`decision_review_constructs.py`)
 - `decision_review_models` -> `core_semantics` (`decision_review_models.py`)
-- `decision_review_policy` -> `subject_core` (`decision_review_policy.py`)
-- `decision_review_projection` -> `subject_core` (`decision_review_projection.py`)
-- `direct_knowledge_reuse` -> `core_engine` (`direct_knowledge_reuse.py`)
 - `execution_framework_primitives` -> `governed_core` (`execution_framework_primitives.py`)
 - `execution_frameworks` -> `governed_core` (`execution_frameworks.py`)
 - `external_markdown_learning_pipeline` -> `exchange` (`external_markdown_learning_pipeline.py`)
-- `fallback_not_generation` -> `core_engine` (`fallback_not_generation.py`)
-- `fallback_not_semantics` -> `core_engine` (`fallback_not_semantics.py`)
 - `fence_extraction_strategy` -> `governed_core` (`fence_extraction_strategy.py`)
-- `gather_sources` -> `subject_core` (`gather_sources.py`)
 - `governance_inventory` -> `core_engine` (`governance_inventory.py`)
-- `governed_closure_and_commitment` -> `core_engine` (`governed_closure_and_commitment.py`)
-- `governed_prior_learning_reuse` -> `core_engine` (`governed_prior_learning_reuse.py`)
-- `governed_semantic_reduction_runtime` -> `core_engine` (`governed_semantic_reduction_runtime.py`)
-- `governed_skill_access` -> `core_engine` (`governed_skill_access.py`)
 - `governed_skill_installation` -> `core_engine` (`governed_skill_installation.py`)
 - `governed_skill_installation` -> `core_governance` (`governed_skill_installation.py`)
 - `governed_skill_installation` -> `exchange` (`governed_skill_installation.py`)
 - `governed_skill_installation` -> `skill_application` (`governed_skill_installation.py`)
 - `governed_skill_installation` -> `skill_semantics` (`governed_skill_installation.py`)
-- `host_abi` -> `governed_core` (`host_abi.py`)
-- `host_brokers` -> `governed_core` (`host_brokers.py`)
-- `host_interaction_action_dispatch` -> `host_interaction` (`host_interaction_action_dispatch.py`)
-- `host_interaction_actions` -> `host_interaction` (`host_interaction_actions.py`)
-- `host_interaction_context` -> `host_interaction` (`host_interaction_context.py`)
-- `host_interaction_delegation` -> `host_interaction` (`host_interaction_delegation.py`)
-- `host_interaction_models` -> `host_interaction` (`host_interaction_models.py`)
-- `host_interaction_receipts` -> `host_interaction` (`host_interaction_receipts.py`)
-- `host_interaction_resolution` -> `host_interaction` (`host_interaction_resolution.py`)
 - `host_mediation` -> `core_engine` (`host_mediation.py`)
-- `host_realizers` -> `governed_core` (`host_realizers.py`)
-- `id_generation` -> `core_semantics` (`id_generation.py`)
 - `itemize` -> `core_semantics` (`itemize.py`)
 - `itemize` -> `subject_core` (`itemize.py`)
 - `itemize_models` -> `core_semantics` (`itemize_models.py`)
-- `itemize_validation` -> `subject_core` (`itemize_validation.py`)
-- `learn` -> `core_engine` (`learn.py`)
 - `learning_context` -> `exchange` (`learning_context.py`)
-- `learning_context_markdown` -> `subject_core` (`learning_context_markdown.py`)
 - `learning_context_paths` -> `subject_core` (`learning_context_paths.py`)
-- `learning_context_projection` -> `subject_core` (`learning_context_projection.py`)
-- `learning_context_skill_projection` -> `exchange` (`learning_context_skill_projection.py`)
-- `macos_host_brokers` -> `governed_core` (`macos_host_brokers.py`)
 - `markdown_ir` -> `core_semantics` (`markdown_ir.py`)
-- `markdown_learning_artifact_semantics` -> `core_engine` (`markdown_learning_artifact_semantics.py`)
-- `non_achievedness_normalization` -> `core_engine` (`non_achievedness_normalization.py`)
-- `normalization_primitives` -> `core_semantics` (`normalization_primitives.py`)
-- `normalization_runtime_dependencies` -> `core_engine` (`normalization_runtime_dependencies.py`)
 - `normalize` -> `core_engine` (`normalize.py`)
 - `normalize` -> `core_semantics` (`normalize.py`)
-- `not_elaboration_ranking` -> `core_engine` (`not_elaboration_ranking.py`)
-- `prolog` -> `core_semantics` (`prolog.py`)
-- `prompt_directives` -> `core_engine` (`prompt_directives.py`)
-- `publication` -> `subject_core` (`publication.py`)
-- `publication_projection` -> `subject_core` (`publication_projection.py`)
-- `publication_render` -> `subject_core` (`publication_render.py`)
-- `publication_validation` -> `subject_core` (`publication_validation.py`)
 - `pure_theory_types` -> `core_semantics` (`pure_theory_types.py`)
-- `python_skill_brokerization` -> `governed_core` (`python_skill_brokerization.py`)
 - `python_skill_host` -> `governed_core` (`python_skill_host.py`)
-- `python_skill_host_transport` -> `governed_core` (`python_skill_host_transport.py`)
 - `replay_verifier` -> `core_engine` (`replay_verifier.py`)
 - `replay_verifier` -> `core_governance` (`replay_verifier.py`)
 - `replay_verifier` -> `core_semantics` (`replay_verifier.py`)
 - `replay_verifier` -> `exchange` (`replay_verifier.py`)
 - `replay_verifier` -> `governed_core` (`replay_verifier.py`)
 - `replay_verifier` -> `skill_semantics` (`replay_verifier.py`)
-- `retrieval_ranking` -> `core_engine` (`retrieval_ranking.py`)
 - `review_composition` -> `subject_core` (`review_composition.py`)
-- `run_bundle_io` -> `exchange` (`run_bundle_io.py`)
-- `run_outcome_harvest_and_reporting` -> `core_engine` (`run_outcome_harvest_and_reporting.py`)
 - `runtime_controller_api` -> `app_cli` (`runtime_controller_api.py`)
-- `runtime_governance_context` -> `core_engine` (`runtime_governance_context.py`)
-- `runtime_temp` -> `governed_core` (`runtime_temp.py`)
-- `semantic_prompt_posture` -> `core_engine` (`semantic_prompt_posture.py`)
-- `semantic_text` -> `core_semantics` (`semantic_text.py`)
-- `side` -> `exchange` (`side.py`)
-- `side_runtime_dependencies` -> `exchange` (`side_runtime_dependencies.py`)
 - `skill_boundary_normalization` -> `skill_application` (`skill_boundary_normalization.py`)
-- `skill_compatibility_export` -> `exchange` (`skill_compatibility_export.py`)
-- `skill_compatibility_import` -> `exchange` (`skill_compatibility_import.py`)
-- `skill_compiler` -> `exchange` (`skill_compiler.py`)
 - `skill_composition` -> `skill_application` (`skill_composition.py`)
-- `skill_export_projection` -> `exchange` (`skill_export_projection.py`)
 - `skill_governance` -> `core_engine` (`skill_governance.py`)
 - `skill_governance_primitives` -> `core_governance` (`skill_governance_primitives.py`)
 - `skill_invocation_contract` -> `skill_semantics` (`skill_invocation_contract.py`)
@@ -697,22 +475,10 @@ No workspace package imports a root application module.
 - `skill_leaf_types` -> `skill_semantics` (`skill_leaf_types.py`)
 - `skill_lifecycle` -> `core_governance` (`skill_lifecycle.py`)
 - `skill_path_notation` -> `skill_semantics` (`skill_path_notation.py`)
-- `skill_registry` -> `exchange` (`skill_registry.py`)
 - `skill_safety_governance` -> `core_governance` (`skill_safety_governance.py`)
 - `skill_safety_governance` -> `core_semantics` (`skill_safety_governance.py`)
-- `skill_schema_io` -> `exchange` (`skill_schema_io.py`)
-- `store` -> `core_engine` (`store.py`)
-- `structured_learning_yaml` -> `core_engine` (`structured_learning_yaml.py`)
-- `supplement` -> `core_engine` (`supplement.py`)
-- `system_state` -> `core_engine` (`system_state.py`)
 - `tablet_safety_validation` -> `validation` (`tablet_safety_validation.py`)
 - `title_depth_learning_validation` -> `validation` (`title_depth_learning_validation.py`)
-- `title_semantics` -> `core_semantics` (`title_semantics.py`)
-- `url_learning_capture` -> `subject_service` (`url_learning_capture.py`)
-- `validation_ladder` -> `validation` (`validation_ladder.py`)
-- `validation_sqlite` -> `validation` (`validation_sqlite.py`)
-- `virtual_mounts` -> `governed_core` (`virtual_mounts.py`)
-- `wasm_skill_runtime` -> `governed_core` (`wasm_skill_runtime.py`)
 
 ## Root-to-Root Dependencies
 

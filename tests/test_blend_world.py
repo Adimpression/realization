@@ -3,7 +3,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from blend_world import BlendWorld, ensure_blend_workstation_world
+from realized_blend_application.worlds import BlendWorld, ensure_blend_workstation_world
 
 
 class BlendWorldTests(unittest.TestCase):

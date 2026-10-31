@@ -9,10 +9,10 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from decision_review import DecisionFrame, DecisionReviewItem
-from decision_review_policy import default_decision_policy_profile
-from decision_review_projection import DecisionAnalysisReceipt
-from learning_context import (
+from workstation.subject.core.decision_review import DecisionFrame, DecisionReviewItem
+from workstation.subject.core.decision_review_policy import default_decision_policy_profile
+from workstation.subject.core.decision_review_projection import DecisionAnalysisReceipt
+from realized_exchange.learning_context import (
     LearningContext,
     LearningUnit,
     list_subject_imports,
@@ -22,7 +22,7 @@ from learning_context import (
     persist_learning_source,
     persist_subject_import,
 )
-from publication import (
+from workstation.subject.core.publication import (
     Publication,
     PublicationBlock,
     PublicationClaim,
@@ -43,14 +43,14 @@ from publication import (
     publication_reviews_for_target,
     publication_xrefs_for_node,
 )
-from publication_projection import (
+from workstation.subject.core.publication_projection import (
     materialize_report_publication_from_learning_context,
     publication_composition_from_learning_context,
     publication_from_learning_context,
 )
-from publication_render import render_publication_markdown, render_publication_typst
-from publication_validation import validate_publication
-from review_composition import ReviewItem, ReviewTransformReceipt, stable_review_transform_receipt_id
+from workstation.subject.core.publication_render import render_publication_markdown, render_publication_typst
+from workstation.subject.core.publication_validation import validate_publication
+from workstation.subject.core.review_composition import ReviewItem, ReviewTransformReceipt, stable_review_transform_receipt_id
 
 
 class PublicationTests(unittest.TestCase):

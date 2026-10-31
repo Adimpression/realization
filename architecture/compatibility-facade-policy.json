@@ -1,0 +1,508 @@
+{
+  "defaults": {
+    "durable_qualified_name_status": "clear",
+    "earliest_removal_condition": "one_stable_qualification_cycle_after_final_consumer_migration",
+    "executable_obligation": "none",
+    "hold_reason": "No active policy hold; the repository-internal facade is qualified only for an isolated deletion change with tombstone and rollback evidence.",
+    "import_obligation": "repository_only",
+    "last_consumer_scan_evidence": "architecture/compatibility-facades.json",
+    "last_qualification_evidence": "architecture/qualification-baseline.json",
+    "notice_reference": "",
+    "retirement_state": "qualified",
+    "review_condition": "Delete only in an owner-cohesive cohort after the contract ledger, consumer inventory, stable qualification evidence, tombstone, and facade-only rollback have been reviewed.",
+    "support_status": "repository_internal"
+  },
+  "designated_contract_tests": [
+    "tests/test_architecture_compatibility_facades.py",
+    "tests/test_compatibility_facade_contracts.py"
+  ],
+  "durable_pickle_facades": [
+    "applied_theory_types",
+    "approval_governance",
+    "blend_context",
+    "blend_operator",
+    "blend_operator_store",
+    "blend_session",
+    "blend_workflow_execution",
+    "blend_workflow_models",
+    "blend_world_models",
+    "data_governance",
+    "decision_review",
+    "decision_review_constructs",
+    "decision_review_models",
+    "execution_framework_primitives",
+    "execution_frameworks",
+    "governance_inventory",
+    "host_mediation",
+    "itemize",
+    "itemize_models",
+    "learning_context",
+    "learning_context_paths",
+    "main",
+    "markdown_ir",
+    "pure_theory_types",
+    "review_composition",
+    "skill_boundary_normalization",
+    "skill_composition",
+    "skill_governance",
+    "skill_governance_primitives",
+    "skill_invocation_contract",
+    "skill_ir",
+    "skill_leaf_types",
+    "skill_lifecycle",
+    "skill_path_notation",
+    "skill_safety_governance"
+  ],
+  "facades": {
+    "blend_context": {
+      "hold_reason": "Behavior-bearing workstation projection adapter and historical pickle globals require explicit replacement and migration proof.",
+      "retirement_state": "held"
+    },
+    "blend_session": {
+      "hold_reason": "Behavior-bearing workstation projection adapter and historical pickle globals require explicit replacement and migration proof.",
+      "retirement_state": "held"
+    },
+    "controller_runtime": {
+      "hold_reason": "Import-time entry/exchange and Markdown extension composition must be replaced and qualified explicitly.",
+      "retirement_state": "held"
+    },
+    "controller_entrypoint_binding": {
+      "hold_reason": "The supported main facade imports this binding; retire main and qualify packaged command parity before reviewing this alias.",
+      "retirement_state": "held"
+    },
+    "external_markdown_learning_pipeline": {
+      "hold_reason": "Deletion qualification requires the six provider-backed Newton Markdown-learning cases because this historical identity fronts external Markdown ingestion and extension composition; external-data execution is not authorized in the current change.",
+      "retirement_state": "held",
+      "review_condition": "Advance only after explicit external-data authorization, successful qualification of all six Newton Markdown-learning provider cases against the unchanged canonical exchange owner, and a separate facade-only deletion review."
+    },
+    "fence_extraction_strategy": {
+      "executable_obligation": "repository_only",
+      "hold_reason": "The historical module retains a direct __main__ executable path whose packaged invocation, exit status, and output parity have not yet been qualified.",
+      "retirement_state": "held",
+      "review_condition": "Advance only after the repository executable path has an explicit packaged replacement and command-equivalence qualification."
+    },
+    "itemize": {
+      "hold_reason": "Historical implicit controller bootstrap and pickle globals require explicit replacement and migration proof.",
+      "retirement_state": "held"
+    },
+    "main": {
+      "executable_obligation": "supported",
+      "hold_reason": "Executable-path and import-identity obligations remain; packaged command parity and all path consumers must migrate first.",
+      "import_obligation": "repository_only",
+      "replacement_commands": [
+        "realized-core",
+        "realized-workstation"
+      ],
+      "support_status": "supported_executable_path"
+    },
+    "normalize": {
+      "hold_reason": "Aggregate re-export must be split across its canonical semantic and controller owners at each consumer.",
+      "retirement_state": "held"
+    },
+    "python_skill_host": {
+      "durable_qualified_name_status": "retained",
+      "hold_reason": "Persisted executable skill source and shipped runtime distributions import python_skill_host; migrate durable abilities and distribution compatibility before retirement.",
+      "import_obligation": "supported",
+      "retirement_state": "held",
+      "review_condition": "Advance only after trials/python/skill.yaml, representative persisted abilities, generated skill source, and the runtime wheel use a qualified canonical host API.",
+      "support_status": "supported_historical_import"
+    },
+    "runtime_controller_api": {
+      "hold_reason": "The itemize behavior adapter imports this alias; replace and qualify itemize's implicit bootstrap before reviewing this alias.",
+      "retirement_state": "held"
+    }
+  },
+  "schema_version": 2,
+  "tombstones": {
+    "applied_theory_primitives": {
+      "removal_change_reference": "semantic-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_semantics.applied_primitives"
+    },
+    "artifact": {
+      "removal_change_reference": "controller-integration-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.artifact_semantics"
+    },
+    "artifact_contracts": {
+      "removal_change_reference": "semantic-reexport-cohort-1",
+      "removed_at": "2026-10-31",
+      "replacement": "realized_core_semantics.artifacts"
+    },
+    "artifact_answer_resolution": {
+      "removal_change_reference": "controller-reduction-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.artifact_answer_resolution"
+    },
+    "boundary": {
+      "removal_change_reference": "semantic-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_semantics.boundary"
+    },
+    "blend_workflow": {
+      "removal_change_reference": "blend-application-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_blend_application.workflows"
+    },
+    "blend_workflow_store": {
+      "removal_change_reference": "blend-application-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_blend_application.workflow_store"
+    },
+    "blend_world": {
+      "removal_change_reference": "blend-application-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_blend_application.worlds"
+    },
+    "blend_world_store": {
+      "removal_change_reference": "blend-application-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_blend_application.world_store"
+    },
+    "capability_runtime": {
+      "removal_change_reference": "runtime-leaf-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_runtime.capabilities"
+    },
+    "controller_runtime_binding": {
+      "removal_change_reference": "controller-binding-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.controller_runtime_binding"
+    },
+    "constitutional_trace": {
+      "removal_change_reference": "controller-reduction-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.constitutional_trace"
+    },
+    "controller_governance_bridge": {
+      "removal_change_reference": "controller-integration-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.controller_governance_bridge"
+    },
+    "decision_review_policy": {
+      "removal_change_reference": "subject-core-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "workstation.subject.core.decision_review_policy"
+    },
+    "decision_review_projection": {
+      "removal_change_reference": "subject-core-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "workstation.subject.core.decision_review_projection"
+    },
+    "direct_knowledge_reuse": {
+      "removal_change_reference": "controller-selection-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.direct_knowledge_reuse"
+    },
+    "fallback_not_generation": {
+      "removal_change_reference": "controller-selection-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.fallback_not_generation"
+    },
+    "fallback_not_semantics": {
+      "removal_change_reference": "controller-reexport-cohort-1",
+      "removed_at": "2026-10-31",
+      "replacement": "realized_core_engine.fallback_not_generation and realized_core_engine.not_elaboration_ranking"
+    },
+    "gather_sources": {
+      "removal_change_reference": "subject-core-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "workstation.subject.core.gather_sources"
+    },
+    "governed_closure_and_commitment": {
+      "removal_change_reference": "controller-reduction-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.governed_closure_and_commitment"
+    },
+    "governed_prior_learning_reuse": {
+      "removal_change_reference": "controller-reduction-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.governed_prior_learning_reuse"
+    },
+    "governed_semantic_reduction_runtime": {
+      "removal_change_reference": "controller-reduction-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.reduction_runtime"
+    },
+    "host_abi": {
+      "removal_change_reference": "runtime-leaf-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_runtime.host_abi"
+    },
+    "host_brokers": {
+      "removal_change_reference": "runtime-leaf-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_runtime.host_brokers"
+    },
+    "host_realizers": {
+      "removal_change_reference": "runtime-leaf-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_runtime.host_realizers"
+    },
+    "host_interaction_action_dispatch": {
+      "removal_change_reference": "host-interaction-reexport-cohort-1",
+      "removed_at": "2026-10-31",
+      "replacement": "realized_host_interaction.action_dispatch"
+    },
+    "host_interaction_actions": {
+      "removal_change_reference": "host-interaction-reexport-cohort-1",
+      "removed_at": "2026-10-31",
+      "replacement": "realized_host_interaction.actions"
+    },
+    "host_interaction_context": {
+      "removal_change_reference": "host-interaction-reexport-cohort-1",
+      "removed_at": "2026-10-31",
+      "replacement": "realized_host_interaction.context"
+    },
+    "host_interaction_delegation": {
+      "removal_change_reference": "host-interaction-reexport-cohort-1",
+      "removed_at": "2026-10-31",
+      "replacement": "realized_host_interaction.delegation"
+    },
+    "host_interaction_models": {
+      "removal_change_reference": "host-interaction-reexport-cohort-1",
+      "removed_at": "2026-10-31",
+      "replacement": "realized_host_interaction.models"
+    },
+    "host_interaction_receipts": {
+      "removal_change_reference": "host-interaction-reexport-cohort-1",
+      "removed_at": "2026-10-31",
+      "replacement": "realized_host_interaction.receipts"
+    },
+    "host_interaction_resolution": {
+      "removal_change_reference": "host-interaction-reexport-cohort-1",
+      "removed_at": "2026-10-31",
+      "replacement": "realized_host_interaction.resolution"
+    },
+    "governed_skill_access": {
+      "removal_change_reference": "governance-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.governed_skill_access"
+    },
+    "id_generation": {
+      "removal_change_reference": "semantic-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_semantics.identifiers"
+    },
+    "itemize_validation": {
+      "removal_change_reference": "subject-reexport-cohort-1",
+      "removed_at": "2026-10-31",
+      "replacement": "workstation.subject.core.itemize_validation"
+    },
+    "learning_context_markdown": {
+      "removal_change_reference": "subject-core-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "workstation.subject.core.learning_context_markdown"
+    },
+    "learning_context_projection": {
+      "removal_change_reference": "subject-core-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "workstation.subject.core.learning_context_projection"
+    },
+    "learning_context_skill_projection": {
+      "removal_change_reference": "exchange-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_exchange.learning_context_skills"
+    },
+    "learn": {
+      "removal_change_reference": "controller-normalization-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.learning"
+    },
+    "macos_host_brokers": {
+      "removal_change_reference": "runtime-leaf-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_runtime.macos_brokers"
+    },
+    "markdown_learning_artifact_semantics": {
+      "removal_change_reference": "controller-normalization-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.markdown_learning_artifact_semantics"
+    },
+    "non_achievedness_normalization": {
+      "removal_change_reference": "controller-normalization-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.non_achievedness_normalization"
+    },
+    "normalization_primitives": {
+      "removal_change_reference": "semantic-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_semantics.normalization"
+    },
+    "normalization_runtime_dependencies": {
+      "removal_change_reference": "controller-normalization-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.normalization_runtime_dependencies"
+    },
+    "not_elaboration_ranking": {
+      "removal_change_reference": "controller-selection-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.not_elaboration_ranking"
+    },
+    "prompt_directives": {
+      "removal_change_reference": "controller-selection-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.prompt_directives"
+    },
+    "prolog": {
+      "removal_change_reference": "semantic-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_semantics.prolog"
+    },
+    "publication": {
+      "removal_change_reference": "subject-core-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "workstation.subject.core.publication"
+    },
+    "publication_projection": {
+      "removal_change_reference": "subject-core-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "workstation.subject.core.publication_projection"
+    },
+    "publication_render": {
+      "removal_change_reference": "subject-core-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "workstation.subject.core.publication_render"
+    },
+    "publication_validation": {
+      "removal_change_reference": "subject-core-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "workstation.subject.core.publication_validation"
+    },
+    "python_skill_brokerization": {
+      "removal_change_reference": "runtime-leaf-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_runtime.python_brokerization"
+    },
+    "python_skill_host_transport": {
+      "removal_change_reference": "runtime-leaf-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_runtime.python_transport"
+    },
+    "runtime_temp": {
+      "removal_change_reference": "runtime-leaf-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_runtime.temporary"
+    },
+    "runtime_governance_context": {
+      "removal_change_reference": "governance-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.runtime_governance_context"
+    },
+    "retrieval_ranking": {
+      "removal_change_reference": "controller-selection-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.retrieval_ranking"
+    },
+    "run_outcome_harvest_and_reporting": {
+      "removal_change_reference": "controller-reduction-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.run_outcome_harvest_and_reporting"
+    },
+    "run_bundle_io": {
+      "removal_change_reference": "exchange-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_exchange.run_bundle"
+    },
+    "semantic_text": {
+      "removal_change_reference": "semantic-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_semantics.semantic_text"
+    },
+    "semantic_prompt_posture": {
+      "removal_change_reference": "controller-selection-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.semantic_prompt_posture"
+    },
+    "side": {
+      "removal_change_reference": "exchange-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_exchange.artifact_yaml"
+    },
+    "side_runtime_dependencies": {
+      "removal_change_reference": "exchange-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_exchange.dependencies"
+    },
+    "skill_compatibility_export": {
+      "removal_change_reference": "exchange-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_exchange.compatibility_export"
+    },
+    "skill_compatibility_import": {
+      "removal_change_reference": "exchange-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_exchange.compatibility_import"
+    },
+    "skill_compiler": {
+      "removal_change_reference": "exchange-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_exchange.compiler"
+    },
+    "skill_export_projection": {
+      "removal_change_reference": "exchange-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_exchange.skill_export"
+    },
+    "skill_registry": {
+      "removal_change_reference": "exchange-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_exchange.registry"
+    },
+    "skill_schema_io": {
+      "removal_change_reference": "exchange-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_exchange.skill_schema"
+    },
+    "store": {
+      "removal_change_reference": "persistence-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.store"
+    },
+    "supplement": {
+      "removal_change_reference": "controller-supplement-alias-cohort-1",
+      "removed_at": "2026-10-31",
+      "replacement": "realized_core_engine.supplement"
+    },
+    "structured_learning_yaml": {
+      "removal_change_reference": "controller-normalization-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.structured_learning"
+    },
+    "system_state": {
+      "removal_change_reference": "controller-integration-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_engine.state"
+    },
+    "title_semantics": {
+      "removal_change_reference": "semantic-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_semantics.title_semantics"
+    },
+    "url_learning_capture": {
+      "removal_change_reference": "subject-service-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "workstation.subject.service.url_learning_capture"
+    },
+    "validation_ladder": {
+      "removal_change_reference": "validation-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_validation.ladder"
+    },
+    "validation_sqlite": {
+      "removal_change_reference": "validation-alias-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_validation.sqlite_runtime"
+    },
+    "virtual_mounts": {
+      "removal_change_reference": "runtime-leaf-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_runtime.virtual_mounts"
+    },
+    "wasm_skill_runtime": {
+      "removal_change_reference": "runtime-leaf-cohort-1",
+      "removed_at": "2026-10-30",
+      "replacement": "realized_core_runtime.wasm"
+    }
+  }
+}

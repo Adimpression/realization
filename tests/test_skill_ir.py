@@ -3,15 +3,15 @@ from __future__ import annotations
 
 import unittest
 
-from applied_theory_types import Artifact
-from skill_export_projection import skill_export_document
-from skill_ir import (
+from realized_core_semantics.applied_model import Artifact
+from realized_exchange.skill_export import skill_export_document
+from realized_skill_application.ir import (
     canonical_skill_ir_dict_from_artifact,
     canonical_skill_ir_from_artifact,
     normalized_skill_aliases,
     normalized_skill_family_metadata,
 )
-from skill_schema_io import artifact_from_skill_document
+from realized_exchange.skill_schema import artifact_from_skill_document
 
 
 class SkillIrTests(unittest.TestCase):

@@ -7,7 +7,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import Mock, patch
 
-from applied_theory_types import (
+from realized_core_semantics.applied_model import (
     Artifact,
     ArtifactAdmission,
     ArtifactRepresentation,
@@ -15,7 +15,7 @@ from applied_theory_types import (
     ArtifactType,
     LearningRelation,
 )
-from learning_context import (
+from realized_exchange.learning_context import (
     LearningContext,
     LearningUnit,
     load_learning_context,
@@ -25,7 +25,7 @@ from learning_context import (
     persist_subject_import,
     stable_learning_unit_id,
 )
-from runtime_controller_api import bootstrap_runtime_controller
+from workstation.app.cli.runtime_controller import bootstrap_runtime_controller
 
 
 class RuntimeControllerApiTests(unittest.TestCase):

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import unittest
 
-from python_skill_host_transport import (
+from realized_core_runtime.python_transport import (
     PYTHON_SKILL_HOST_ENDPOINT_ENV,
     PYTHON_SKILL_HOST_TOKEN_ENV,
     python_skill_host_bridge,

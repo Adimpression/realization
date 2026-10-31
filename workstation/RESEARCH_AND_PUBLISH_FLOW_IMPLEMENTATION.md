@@ -58,7 +58,7 @@ Implemented in [workstation/subject_workflow.py](workstation/subject_workflow.py
 Implemented across:
 
 - [itemize.py](itemize.py)
-- [itemize_validation.py](itemize_validation.py)
+- [itemize_validation.py](subject_core/src/workstation/subject/core/itemize_validation.py)
 - [workstation/subject_workflow.py](workstation/subject_workflow.py)
 
 This includes:

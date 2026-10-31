@@ -7,9 +7,7 @@ import tempfile
 import unittest
 from pathlib import Path
 from types import SimpleNamespace
-from unittest.mock import patch
-
-from itemize import (
+from workstation.subject.core.itemization import (
     ItemizationSession,
     ItemizedSubjectItem,
     itemization_paths,
@@ -21,7 +19,7 @@ from itemize import (
     stable_itemization_session_id,
     stable_itemized_item_id,
 )
-from learning_context import (
+from realized_exchange.learning_context import (
     LearningContext,
     LearningUnit,
     canonical_learning_subject_id,
@@ -307,11 +305,11 @@ $$ C = G cg $$
         persist_learning_context(self.root, context)
         captured: dict[str, object] = {}
 
-        class FakeController:
-            def request_proposal(self, **kwargs):
+        class FakeProposalPort:
+            def request_itemization_proposal(self, **kwargs):
                 captured.update(kwargs)
                 return SimpleNamespace(
-                    id="proposal-direct-itemize",
+                    proposal_id="proposal-direct-itemize",
                     source="fake-runtime",
                     payload={
                         "candidates": [
@@ -335,15 +333,12 @@ $$ C = G cg $$
                     },
                 )
 
-        with patch(
-            "itemize.bootstrap_runtime_controller",
-            return_value=(SimpleNamespace(), FakeController()),
-        ):
-            session, items = materialize_itemization_session(
-                self.root,
-                subject_id,
-                allow_direct_llm_decomposition=True,
-            )
+        session, items = materialize_itemization_session(
+            self.root,
+            subject_id,
+            allow_direct_llm_decomposition=True,
+            proposal_port=FakeProposalPort(),
+        )
 
         labels = {item.canonical_label for item in items}
         self.assertIn("Introduce contactless bank-card payment", labels)
@@ -397,15 +392,17 @@ $$ C = G cg $$
         )
         persist_learning_context(self.root, context)
 
-        with patch(
-            "itemize.bootstrap_runtime_controller",
-            side_effect=AssertionError("direct llm decomposition should be disabled"),
-        ):
-            _session, items = materialize_itemization_session(
-                self.root,
-                subject_id,
-                allow_direct_llm_decomposition=False,
-            )
+        class RejectingProposalPort:
+            def request_itemization_proposal(self, **kwargs):
+                del kwargs
+                raise AssertionError("direct llm decomposition should be disabled")
+
+        _session, items = materialize_itemization_session(
+            self.root,
+            subject_id,
+            allow_direct_llm_decomposition=False,
+            proposal_port=RejectingProposalPort(),
+        )
 
         self.assertNotIn(
             "Introduce contactless bank-card payment",
@@ -452,23 +449,21 @@ $$ C = G cg $$
         )
         persist_learning_context(self.root, context)
 
-        class FakeController:
-            def request_proposal(self, **kwargs):
+        class FakeProposalPort:
+            def request_itemization_proposal(self, **kwargs):
+                del kwargs
                 return SimpleNamespace(
-                    id="proposal-direct-itemize-empty",
+                    proposal_id="proposal-direct-itemize-empty",
                     source="fake-runtime",
                     payload={"candidates": []},
                 )
 
-        with patch(
-            "itemize.bootstrap_runtime_controller",
-            return_value=(SimpleNamespace(), FakeController()),
-        ):
-            session, items = materialize_itemization_session(
-                self.root,
-                subject_id,
-                allow_direct_llm_decomposition=True,
-            )
+        session, items = materialize_itemization_session(
+            self.root,
+            subject_id,
+            allow_direct_llm_decomposition=True,
+            proposal_port=FakeProposalPort(),
+        )
 
         labels = {item.canonical_label.casefold() for item in items}
         self.assertTrue(
@@ -534,23 +529,21 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
         )
         persist_learning_context(self.root, context)
 
-        class FakeController:
-            def request_proposal(self, **kwargs):
+        class FakeProposalPort:
+            def request_itemization_proposal(self, **kwargs):
+                del kwargs
                 return SimpleNamespace(
-                    id="proposal-direct-itemize-empty",
+                    proposal_id="proposal-direct-itemize-empty",
                     source="fake-runtime",
                     payload={"candidates": []},
                 )
 
-        with patch(
-            "itemize.bootstrap_runtime_controller",
-            return_value=(SimpleNamespace(), FakeController()),
-        ):
-            _session, items = materialize_itemization_session(
-                self.root,
-                subject_id,
-                allow_direct_llm_decomposition=True,
-            )
+        _session, items = materialize_itemization_session(
+            self.root,
+            subject_id,
+            allow_direct_llm_decomposition=True,
+            proposal_port=FakeProposalPort(),
+        )
 
         weak_prose_labels = {
             "city transit authority",
@@ -620,10 +613,11 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
         )
         persist_learning_context(self.root, context)
 
-        class FakeController:
-            def request_proposal(self, **kwargs):
+        class FakeProposalPort:
+            def request_itemization_proposal(self, **kwargs):
+                del kwargs
                 return SimpleNamespace(
-                    id="proposal-direct-itemize-v2",
+                    proposal_id="proposal-direct-itemize-v2",
                     source="fake-runtime",
                     payload={
                         "candidates": [
@@ -645,15 +639,12 @@ Passengers need the payment system to be easy, fast, trustworthy, and fair.
                     },
                 )
 
-        with patch(
-            "itemize.bootstrap_runtime_controller",
-            return_value=(SimpleNamespace(), FakeController()),
-        ):
-            session, items = materialize_itemization_session(
-                self.root,
-                subject_id,
-                allow_direct_llm_decomposition=True,
-            )
+        session, items = materialize_itemization_session(
+            self.root,
+            subject_id,
+            allow_direct_llm_decomposition=True,
+            proposal_port=FakeProposalPort(),
+        )
 
         labels_by_role: dict[str, set[str]] = {}
         for item in items:

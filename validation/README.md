@@ -12,6 +12,4 @@ validators, trial semantics, curricula, and corpora remain standalone entry
 programs outside this package. The package locates a source checkout by default;
 `REALIZED_VALIDATION_REPOSITORY_ROOT` can select one explicitly.
 
-Historical imports through `validation_ladder` and `validation_sqlite` remain
-exact compatibility aliases during the qualification period. New validation
-code should import `realized_validation`.
+Validation code imports the package-owned `realized_validation` API.

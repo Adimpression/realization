@@ -8,20 +8,17 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from main import (
-    Artifact,
+from realized_core_engine.controller_runtime import BSSCController, build_artifact_store
+from realized_core_engine.state import SystemState
+from realized_core_semantics.applied_model import Artifact, ArtifactType, BoundaryShapeTerm
+from realized_core_semantics.applied_primitives import (
     ArtifactAdmission,
     ArtifactRepresentation,
     ArtifactReuse,
-    ArtifactType,
-    BSSCController,
-    BoundaryShapeTerm,
-    infer_artifact_boundary_shape,
     LearningRelation,
-    SystemState,
-    build_artifact_store,
-    normalize_boundary_shape,
 )
+from realized_core_semantics.boundary import infer_artifact_boundary_shape
+from realized_core_semantics.normalization import normalize_boundary_shape
 
 
 class ArtifactBoundaryShapeTests(unittest.TestCase):

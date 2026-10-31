@@ -5,21 +5,18 @@ import os
 import unittest
 from unittest.mock import patch
 
-import main
-from main import (
-    Artifact,
+from realized_core_engine.controller_runtime import BSSCController
+from realized_core_engine.non_achievedness_normalization import normalize_not_elaboration_payload
+from realized_core_engine.state import SystemState
+from realized_core_semantics import title_semantics
+from realized_core_semantics.applied_model import Artifact, ArtifactType, BoundaryShapeTerm, LLMSupplementResult
+from realized_core_semantics.applied_primitives import (
     ArtifactAdmission,
     ArtifactRepresentation,
     ArtifactReuse,
-    ArtifactType,
-    BSSCController,
-    BoundaryShapeTerm,
-    LLMSupplementResult,
     LearningRelation,
-    SystemState,
-    derive_semantic_title_depth_view,
-    normalize_not_elaboration_payload,
 )
+from realized_core_semantics.title_semantics import derive_semantic_title_depth_view
 
 
 def make_prolog_artifact(*, artifact_id: str, title: str, answer: str = "") -> Artifact:
@@ -176,10 +173,10 @@ class PrologTitleRepresentationTests(unittest.TestCase):
         """
         with patch.dict(
             os.environ,
-            {main.TITLE_REPRESENTATION_MODE_ENV: main.TITLE_REPRESENTATION_MODE_PROLOG},
+            {title_semantics.TITLE_REPRESENTATION_MODE_ENV: title_semantics.TITLE_REPRESENTATION_MODE_PROLOG},
             clear=False,
         ):
-            instructions = main.title_depth_theory_prompt_block()
+            instructions = title_semantics.title_depth_theory_prompt_block()
 
         self.assertIn("broad:ground:resolved_head", instructions)
         self.assertIn("Head :- Body", instructions)
@@ -205,7 +202,7 @@ class PrologTitleRepresentationTests(unittest.TestCase):
         """
         with patch.dict(
             os.environ,
-            {main.TITLE_REPRESENTATION_MODE_ENV: main.TITLE_REPRESENTATION_MODE_PROLOG},
+            {title_semantics.TITLE_REPRESENTATION_MODE_ENV: title_semantics.TITLE_REPRESENTATION_MODE_PROLOG},
             clear=False,
         ):
             view = derive_semantic_title_depth_view(
@@ -248,7 +245,7 @@ class PrologTitleRepresentationTests(unittest.TestCase):
         """
         with patch.dict(
             os.environ,
-            {main.TITLE_REPRESENTATION_MODE_ENV: main.TITLE_REPRESENTATION_MODE_PROLOG},
+            {title_semantics.TITLE_REPRESENTATION_MODE_ENV: title_semantics.TITLE_REPRESENTATION_MODE_PROLOG},
             clear=False,
         ):
             normalized = normalize_not_elaboration_payload(
@@ -297,7 +294,7 @@ class PrologTitleRepresentationTests(unittest.TestCase):
 
         with patch.dict(
             os.environ,
-            {main.TITLE_REPRESENTATION_MODE_ENV: main.TITLE_REPRESENTATION_MODE_PROLOG},
+            {title_semantics.TITLE_REPRESENTATION_MODE_ENV: title_semantics.TITLE_REPRESENTATION_MODE_PROLOG},
             clear=False,
         ):
             score = controller.semantic_title_match_score(
@@ -339,7 +336,7 @@ class PrologTitleRepresentationTests(unittest.TestCase):
 
         with patch.dict(
             os.environ,
-            {main.TITLE_REPRESENTATION_MODE_ENV: main.TITLE_REPRESENTATION_MODE_PROLOG},
+            {title_semantics.TITLE_REPRESENTATION_MODE_ENV: title_semantics.TITLE_REPRESENTATION_MODE_PROLOG},
             clear=False,
         ):
             reused = controller.reusable_semantic_title_match(
@@ -378,7 +375,7 @@ class PrologTitleRepresentationTests(unittest.TestCase):
 
         with patch.dict(
             os.environ,
-            {main.TITLE_REPRESENTATION_MODE_ENV: main.TITLE_REPRESENTATION_MODE_PROLOG},
+            {title_semantics.TITLE_REPRESENTATION_MODE_ENV: title_semantics.TITLE_REPRESENTATION_MODE_PROLOG},
             clear=False,
         ):
             answer = controller.artifact_answer_text(
@@ -416,7 +413,7 @@ class PrologTitleRepresentationTests(unittest.TestCase):
 
         with patch.dict(
             os.environ,
-            {main.TITLE_REPRESENTATION_MODE_ENV: main.TITLE_REPRESENTATION_MODE_PROLOG},
+            {title_semantics.TITLE_REPRESENTATION_MODE_ENV: title_semantics.TITLE_REPRESENTATION_MODE_PROLOG},
             clear=False,
         ):
             current = normalize_not_elaboration_payload(
@@ -458,8 +455,8 @@ class PrologTitleRepresentationTests(unittest.TestCase):
         with patch.dict(
             os.environ,
             {
-                main.TITLE_REPRESENTATION_MODE_ENV: main.TITLE_REPRESENTATION_MODE_PROLOG,
-                main.PROLOG_QUERY_PRIMING_MODE_ENV: main.PROLOG_QUERY_PRIMING_MODE_OFF,
+                title_semantics.TITLE_REPRESENTATION_MODE_ENV: title_semantics.TITLE_REPRESENTATION_MODE_PROLOG,
+                title_semantics.PROLOG_QUERY_PRIMING_MODE_ENV: title_semantics.PROLOG_QUERY_PRIMING_MODE_OFF,
             },
             clear=False,
         ):
@@ -495,8 +492,8 @@ class PrologTitleRepresentationTests(unittest.TestCase):
         with patch.dict(
             os.environ,
             {
-                main.TITLE_REPRESENTATION_MODE_ENV: main.TITLE_REPRESENTATION_MODE_PROLOG,
-                main.PROLOG_QUERY_PRIMING_MODE_ENV: main.PROLOG_QUERY_PRIMING_MODE_OFF,
+                title_semantics.TITLE_REPRESENTATION_MODE_ENV: title_semantics.TITLE_REPRESENTATION_MODE_PROLOG,
+                title_semantics.PROLOG_QUERY_PRIMING_MODE_ENV: title_semantics.PROLOG_QUERY_PRIMING_MODE_OFF,
             },
             clear=False,
         ):
@@ -535,8 +532,8 @@ class PrologTitleRepresentationTests(unittest.TestCase):
         with patch.dict(
             os.environ,
             {
-                main.TITLE_REPRESENTATION_MODE_ENV: main.TITLE_REPRESENTATION_MODE_PROLOG,
-                main.PROLOG_QUERY_PRIMING_MODE_ENV: main.PROLOG_QUERY_PRIMING_MODE_OFF,
+                title_semantics.TITLE_REPRESENTATION_MODE_ENV: title_semantics.TITLE_REPRESENTATION_MODE_PROLOG,
+                title_semantics.PROLOG_QUERY_PRIMING_MODE_ENV: title_semantics.PROLOG_QUERY_PRIMING_MODE_OFF,
             },
             clear=False,
         ):
@@ -573,8 +570,8 @@ class PrologTitleRepresentationTests(unittest.TestCase):
         with patch.dict(
             os.environ,
             {
-                main.TITLE_REPRESENTATION_MODE_ENV: main.TITLE_REPRESENTATION_MODE_PROLOG,
-                main.PROLOG_QUERY_PRIMING_MODE_ENV: main.PROLOG_QUERY_PRIMING_MODE_OFF,
+                title_semantics.TITLE_REPRESENTATION_MODE_ENV: title_semantics.TITLE_REPRESENTATION_MODE_PROLOG,
+                title_semantics.PROLOG_QUERY_PRIMING_MODE_ENV: title_semantics.PROLOG_QUERY_PRIMING_MODE_OFF,
             },
             clear=False,
         ):
@@ -608,8 +605,8 @@ class PrologTitleRepresentationTests(unittest.TestCase):
         with patch.dict(
             os.environ,
             {
-                main.TITLE_REPRESENTATION_MODE_ENV: main.TITLE_REPRESENTATION_MODE_PROLOG,
-                main.PROLOG_QUERY_PRIMING_MODE_ENV: main.PROLOG_QUERY_PRIMING_MODE_OFF,
+                title_semantics.TITLE_REPRESENTATION_MODE_ENV: title_semantics.TITLE_REPRESENTATION_MODE_PROLOG,
+                title_semantics.PROLOG_QUERY_PRIMING_MODE_ENV: title_semantics.PROLOG_QUERY_PRIMING_MODE_OFF,
             },
             clear=False,
         ):
@@ -655,8 +652,8 @@ class PrologTitleRepresentationTests(unittest.TestCase):
         with patch.dict(
             os.environ,
             {
-                main.TITLE_REPRESENTATION_MODE_ENV: main.TITLE_REPRESENTATION_MODE_PROLOG,
-                main.PROLOG_QUERY_PRIMING_MODE_ENV: main.PROLOG_QUERY_PRIMING_MODE_FORCE,
+                title_semantics.TITLE_REPRESENTATION_MODE_ENV: title_semantics.TITLE_REPRESENTATION_MODE_PROLOG,
+                title_semantics.PROLOG_QUERY_PRIMING_MODE_ENV: title_semantics.PROLOG_QUERY_PRIMING_MODE_FORCE,
             },
             clear=False,
         ):

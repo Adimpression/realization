@@ -3,12 +3,12 @@ from __future__ import annotations
 
 import unittest
 
-from skill_compatibility_export import (
+from realized_exchange.compatibility_export import (
     instruction_skill_bundle_from_artifact,
     mcp_tool_definition_from_skill_artifact,
     openai_tool_definition_from_skill_artifact,
 )
-from skill_schema_io import artifact_from_skill_document
+from realized_exchange.skill_schema import artifact_from_skill_document
 
 
 class SkillCompatibilityExportTests(unittest.TestCase):

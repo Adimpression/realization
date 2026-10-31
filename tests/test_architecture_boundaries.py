@@ -11,7 +11,7 @@ import unittest
 from email.parser import Parser
 from pathlib import Path
 
-import gather_sources
+import workstation.subject.core.gather_sources as gather_sources
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -348,45 +348,13 @@ class RepositoryArchitectureBoundaryTest(unittest.TestCase):
             {path.stem for path in REPO_ROOT.glob("*.py") if path.is_file()},
             set(root_ownership),
         )
-        self.assertEqual(
-            ("controller", ("compatibility_facade",)),
-            root_ownership["supplement"],
-        )
         for module in (
             "blend_operator_store",
-            "blend_workflow",
             "blend_workflow_execution",
-            "blend_workflow_store",
-            "blend_world",
-            "blend_world_store",
         ):
             with self.subTest(module=module):
                 self.assertEqual(
                     ("blend", ("compatibility_facade",)),
-                    root_ownership[module],
-                )
-        for module in (
-            "decision_review_policy",
-            "decision_review_projection",
-            "publication",
-            "publication_projection",
-            "publication_render",
-            "publication_validation",
-            "url_learning_capture",
-        ):
-            with self.subTest(module=module):
-                self.assertEqual(
-                    ("subject_domain", ("compatibility_facade",)),
-                    root_ownership[module],
-                )
-        self.assertEqual(
-            ("semantic_model", ("compatibility_facade",)),
-            root_ownership["id_generation"],
-        )
-        for module in ("prolog", "semantic_text", "title_semantics"):
-            with self.subTest(module=module):
-                self.assertEqual(
-                    ("semantic_model", ("compatibility_facade",)),
                     root_ownership[module],
                 )
         for module in (
@@ -399,10 +367,6 @@ class RepositoryArchitectureBoundaryTest(unittest.TestCase):
                     ("portable_skills", ("compatibility_facade",)),
                     root_ownership[module],
                 )
-        self.assertEqual(
-            ("persistence_adapter", ("compatibility_facade",)),
-            root_ownership["store"],
-        )
         self.assertEqual(
             ("entry_exchange", ("compatibility_facade", "entrypoint")),
             root_ownership["main"],

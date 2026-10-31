@@ -3,10 +3,8 @@ from __future__ import annotations
 
 import unittest
 
-from main import (
-    fallback_not_elaboration_for_text,
-    normalize_not_elaboration_payload,
-)
+from realized_core_engine.fallback_not_generation import fallback_not_elaboration_for_text
+from realized_core_engine.non_achievedness_normalization import normalize_not_elaboration_payload
 
 
 class NotElaborationSchemaTests(unittest.TestCase):

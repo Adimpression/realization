@@ -3,23 +3,18 @@ from __future__ import annotations
 
 import unittest
 
-from main import (
-    BSSCController,
+from realized_core_engine.controller_runtime import BSSCController
+from realized_core_engine.state import SystemState
+from realized_core_semantics.applied_model import NodeStatus, ProposalObject, SemanticNode, SupportView
+from realized_core_semantics.applied_primitives import (
     ClosureRule,
     DecompositionMode,
     NodeOrigin,
-    NodeStatus,
     PriorityLevel,
-    ProposalGovernanceStatus,
-    ProposalObject,
-    ProposalType,
-    SemanticNode,
-    SupplementMode,
     SupportScore,
-    SupportView,
-    SystemState,
     ThreeLevel,
 )
+from realized_core_semantics.proposals import ProposalGovernanceStatus, ProposalType, SupplementMode
 
 
 class DecompositionPromptContextTests(unittest.TestCase):

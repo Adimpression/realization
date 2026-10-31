@@ -3,11 +3,11 @@ from __future__ import annotations
 import unittest
 from unittest.mock import patch
 
-import governed_semantic_reduction_runtime as legacy_runtime
-from applied_theory_types import NodeStatus
-from controller_runtime import BSSCController
+from realized_core_engine.controller_runtime import BSSCController
+import realized_core_engine.reduction_runtime as legacy_runtime
+from realized_core_semantics.applied_model import NodeStatus
 from realized_core_runtime import RealizationResumePort, RealizationRunPort
-from system_state import SystemState
+from realized_core_engine.state import SystemState
 
 
 class CoreRuntimePackageAdapterTests(unittest.TestCase):

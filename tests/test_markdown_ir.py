@@ -4,7 +4,7 @@ from __future__ import annotations
 import unittest
 from pathlib import Path
 
-from markdown_ir import (
+from realized_core_semantics.markdown import (
     bounded_markdown_encounter_prompt_view,
     bounded_markdown_learning_prompt_view,
     markdown_declared_contract_from_encounter,

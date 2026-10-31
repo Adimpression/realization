@@ -9,7 +9,7 @@ from unittest import mock
 
 from realized_core_semantics.proposals import ProposalType, SupplementMode
 from controller_entrypoints import ensure_application_controller_runtime
-from learning_context import new_learning_context, persist_learning_context
+from realized_exchange.learning_context import new_learning_context, persist_learning_context
 from workstation.foundation.host.subject_workflow import create_subject_workflow_client
 from workstation.app.cli.composition import (
     ApplicationControllerRuntimeProvider as _ApplicationControllerRuntimeProvider,

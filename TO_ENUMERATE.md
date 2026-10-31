@@ -205,12 +205,12 @@ For each file below:
   - `ordinal_focus_markers()` maps `first`, `1st`, `second`, `2nd`, and similar ordinal variants.
   - This should return an ordinal enum rather than raw strings.
 
-### `fallback_not_semantics.py`
+### `core_engine/src/realized_core_engine/fallback_not_generation.py`
 
-- `fallback_not_semantics.py:102-173`
+- `core_engine/src/realized_core_engine/fallback_not_generation.py:102-173`
   - The fallback non-achievedness builder looks for givens, uncertainty, guidance questions, confirmation, absence, and condition wording using English phrases like `i have`, `there is`, `what should`, `should i`, and `if`.
   - This parser is legitimate, but it should consume typed prompt-signal enums instead of re-matching phrase surfaces independently.
-- `fallback_not_semantics.py:201-300`
+- `core_engine/src/realized_core_engine/fallback_not_generation.py:201-300`
   - Success criteria and misalignment construction depend on prompt wording and directive-kind strings.
   - The directive-kind and signal surfaces should be formal enums.
 

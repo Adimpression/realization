@@ -8,12 +8,12 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from applied_theory_types import ProposalType, RuntimeDeterminismPolicy, SupplementMode
-from main import BSSCController
+from realized_core_engine.controller_runtime import BSSCController
+from realized_core_semantics.applied_model import ProposalType, RuntimeDeterminismPolicy, SupplementMode
 from replay_verifier import replay_run_bundle_document
-from run_bundle_io import export_run_bundle_text, load_run_bundle_document
-from store import build_artifact_store
-from system_state import SystemState, save_state
+from realized_exchange.run_bundle import export_run_bundle_text, load_run_bundle_document
+from realized_core_engine.store import build_artifact_store
+from realized_core_engine.state import SystemState, save_state
 
 
 class CoreRuntimeDeterminismReplayTests(unittest.TestCase):
@@ -61,7 +61,7 @@ class CoreRuntimeDeterminismReplayTests(unittest.TestCase):
                 # Any valid JSON object is acceptable for this unit test seam.
                 return json.dumps({"rationale": "ok"}), {"system_fingerprint": "test-fp"}
 
-            with patch("supplement.ask_llm", new=fake_ask_llm):
+            with patch("realized_core_engine.supplement.ask_llm", new=fake_ask_llm):
                 proposal = controller.request_proposal(
                     proposal_type=ProposalType.NOT_ELABORATION,
                     node=node,
@@ -89,7 +89,7 @@ class CoreRuntimeDeterminismReplayTests(unittest.TestCase):
             replay_controller = BSSCController(replay_state, llm_policy="off")
             replay_node = replay_state.root()
 
-            with patch("supplement.ask_llm", side_effect=AssertionError("provider call occurred during replay")):
+            with patch("realized_core_engine.supplement.ask_llm", side_effect=AssertionError("provider call occurred during replay")):
                 replay_proposal = replay_controller.request_proposal(
                     proposal_type=ProposalType.NOT_ELABORATION,
                     node=replay_node,

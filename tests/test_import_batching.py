@@ -10,10 +10,10 @@ from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
 
-import main
 import controller_entrypoints
-import side
-from applied_theory_types import RunOutcome
+import realized_exchange.artifact_yaml as side
+from realized_core_engine import controller_runtime
+from realized_core_semantics.applied_model import RunOutcome
 
 
 FIXTURE_DIR = Path(__file__).resolve().parent / "fixtures" / "boundary_shape_artifacts"
@@ -60,7 +60,7 @@ class _RuntimeProxy:
         return self._store
 
     def __getattr__(self, name: str):
-        return getattr(main, name)
+        return getattr(controller_runtime, name)
 
 
 class ImportBatchingTests(unittest.TestCase):

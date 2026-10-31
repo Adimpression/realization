@@ -12,8 +12,8 @@ import grpc
 
 from controller_entrypoints import ensure_application_controller_runtime
 from dst import DST_SOURCE_ROOT
-from gather_sources import new_source_collection, persist_source_collection
-from learning_context import new_learning_context, persist_learning_context
+from workstation.subject.core.gather_sources import new_source_collection, persist_source_collection
+from realized_exchange.learning_context import new_learning_context, persist_learning_context
 from workstation.grpc.definitions import subject_workflow_pb2, subject_workflow_pb2_grpc
 from workstation.runtime.core.session import launch_workstation_session
 from workstation.runtime.core.subject_host_actions import RuntimeSubjectWorkflowHostActions

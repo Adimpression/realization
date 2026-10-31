@@ -9,18 +9,17 @@ import importlib
 from unittest import mock
 from pathlib import Path
 
-from main import (
-    Artifact,
+from realized_core_engine.controller_runtime import build_artifact_store
+from realized_core_semantics.applied_model import Artifact, ArtifactType
+from realized_core_semantics.applied_primitives import (
     ArtifactAdmission,
     ArtifactRepresentation,
     ArtifactReuse,
-    ArtifactType,
     LearningRelation,
-    build_artifact_store,
-    normalize_boundary_shape,
 )
-from store import EmbeddingGemmaEncoder
-from store import SQLiteVectorArtifactStore
+from realized_core_semantics.normalization import normalize_boundary_shape
+from realized_core_engine.store import EmbeddingGemmaEncoder
+from realized_core_engine.store import SQLiteVectorArtifactStore
 
 
 class ArtifactSearchHybridTests(unittest.TestCase):
@@ -204,8 +203,8 @@ class ArtifactSearchHybridTests(unittest.TestCase):
 
         try:
             with (
-                mock.patch("store.importlib.import_module", side_effect=guarded_import),
-                mock.patch("store.EmbeddingGemmaEncoder", side_effect=AssertionError("encoder should stay lazy when vectors are off")),
+                mock.patch("realized_core_engine.store.importlib.import_module", side_effect=guarded_import),
+                mock.patch("realized_core_engine.store.EmbeddingGemmaEncoder", side_effect=AssertionError("encoder should stay lazy when vectors are off")),
             ):
                 store = build_artifact_store()
                 artifact = self.make_artifact(
@@ -600,8 +599,8 @@ class EmbeddingGemmaEncoderTests(unittest.TestCase):
             None: This function mutates state or performs side effects without returning a value.
         """
         with (
-            mock.patch("store.importlib.util.find_spec", return_value=object()) as find_spec,
-            mock.patch("store.importlib.import_module", side_effect=AssertionError("unexpected eager import")),
+            mock.patch("realized_core_engine.store.importlib.util.find_spec", return_value=object()) as find_spec,
+            mock.patch("realized_core_engine.store.importlib.import_module", side_effect=AssertionError("unexpected eager import")),
         ):
             encoder = EmbeddingGemmaEncoder()
             self.assertTrue(encoder.available())

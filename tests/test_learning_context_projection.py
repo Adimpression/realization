@@ -3,12 +3,12 @@ from __future__ import annotations
 
 import unittest
 
-from learning_context import LearningContext, LearningUnit
-from learning_context_projection import (
+from realized_exchange.learning_context import LearningContext, LearningUnit
+from workstation.subject.core.learning_context_projection import (
     render_learning_context_subject_markdown,
     render_learning_context_subject_typ,
 )
-from publication_render import validate_rendered_typst
+from workstation.subject.core.publication_render import validate_rendered_typst
 
 
 class LearningContextProjectionTests(unittest.TestCase):

@@ -9,11 +9,11 @@ from realized_blend.workflows import (
     BlendWorkflowRun,
     BlendWorkflowStep,
 )
-from blend_workflow import (
+from realized_blend_application.workflows import (
     blend_workflow_plan_from_skill_compose_arguments,
     blend_workflow_run_from_skill_compose_result,
 )
-from blend_workflow_store import (
+from realized_blend_application.workflow_store import (
     JsonBlendWorkflowRepository,
     ensure_blend_workflow_store,
     list_blend_workflow_runs_for_plan,

@@ -38,8 +38,7 @@ Top-line rule used in Python files:
   document construction, external URL acquisition adapter, and subject
   in-process/gRPC client adapters. Exchange materialization is supplied through
   a caller-composed callback; this package does not import YAML or compiler
-  adapters. The historical root `url_learning_capture` path is an exact module
-  alias to this package-owned adapter.
+  adapters.
 - `workstation/shell_core/` owns shell application services, chat orchestration,
   and shell in-process/gRPC client adapters. Its additive governed-conversation
   mode composes the public `realized-core-conversation` application surface and
@@ -92,9 +91,11 @@ legacy aliases.
   deterministic semantic views, identifier, timestamp, and JSON value
   projection helpers. It contains no governance decisions,
   persistence, controller orchestration, model calls, host execution, or
-  workstation code. `pure_theory_types.py`, `artifact_contracts.py`,
-  `prolog.py`, `semantic_text.py`, `title_semantics.py`, `itemize_models.py`,
-  `decision_review_models.py`, and `markdown_ir.py` are historical facades.
+  workstation code. `pure_theory_types.py`, `prolog.py`, `semantic_text.py`,
+  `title_semantics.py`, `itemize_models.py`, `decision_review_models.py`, and
+  `markdown_ir.py` are retained historical facades. The former artifact-
+  contract root projection has been retired in favor of the canonical
+  artifacts module.
 - `blend/`: Independently buildable `realized-blend` UV project. It owns the
   dependency-light Blend domain values and pure rules for context, actors,
   operator descriptors, opaque invocation handles, catalog providers,
@@ -120,8 +121,9 @@ legacy aliases.
   domain. It depends only on Blend plus core runtime/semantic and skill
   application/semantic contracts. It does not own Blend values, workstation
   sessions, request-to-ability selection, governance decisions, host-realizer
-  provision, model invocation, or exchange parsing. The six historical root
-  Blend adapter paths preserve exact module identity as compatibility aliases.
+  provision, model invocation, or exchange parsing. The two remaining
+  historical root Blend application adapter paths retain exact module identity
+  under the compatibility policy.
 - `core_governance/`: Independently buildable `realized-core-governance` UV
   project. Its first package-native cut owns governed-skill vocabulary,
   deterministic normalization, lifecycle states, conservative lifecycle
@@ -187,11 +189,7 @@ legacy aliases.
   `SkillExchangeProvider` composed at the CLI entrypoint. It translates
   representations but does not decide admission,
   current use, authority, semantic commitment, request-to-ability selection,
-  host realization, or execution. `side.py`, `side_runtime_dependencies.py`,
-  `skill_schema_io.py`, `skill_export_projection.py`,
-  `skill_compatibility_import.py`, `skill_compatibility_export.py`,
-  `skill_registry.py`, and `run_bundle_io.py` are exact module-identity
-  compatibility aliases.
+  host realization, or execution.
 - `core_app/`: Independently buildable `realized-core` UV project. Its wheel
   contains the narrow CLI/composition surface and compatibility imports; it
   owns no engine, conversational application, or provider implementation.
@@ -232,8 +230,7 @@ legacy aliases.
   validation orchestration, structured validation reports, disposable or
   RAM-backed SQLite allocation, and durable SQLite report archival. It does
   not own domain trial semantics, curricula, corpora, or production runtime
-  behavior. `validation_ladder.py` and `validation_sqlite.py` are exact
-  module-identity compatibility aliases.
+  behavior.
 - `host_interaction/`: Independently buildable `realized-host-interaction` UV
   project. It owns the backend-neutral attachment models, bounded resolution
   and actions, delegated-rights narrowing, receipt shaping, and immutable
@@ -241,14 +238,9 @@ legacy aliases.
   It has no third-party or workstation dependency and does not select or admit
   abilities, grant authority, or supply concrete host realizers. Concrete
   providers are attached at application/session composition boundaries; there
-  is no mutable global provider registry. The historical root
-  `host_interaction_*.py` paths are explicit compatibility facades over this
-  package.
-- `applied_theory_primitives.py`: Applied-theory enums, pure-theory aliases,
-  derived value sets, and compatibility re-exports of the canonical timestamp
-  and JSON projection helpers in `realized_core_semantics.values`.
-- `artifact_contracts.py`: Compatibility facade for the canonical read-only
-  artifact protocols in `realized_core_semantics.artifacts`.
+  is no mutable global provider registry. Historical root
+  `host_interaction_*.py` projections have been retired in favor of this
+  package's explicit modules.
 - `applied_theory_types.py`: Applied dataclasses and compatibility re-exports
   for the canonical proposal vocabulary, plus root-owned artifacts, abilities,
   controller payloads, and the historical `json_safe` import path.
@@ -258,8 +250,6 @@ legacy aliases.
   workstation command registration with core/exchange/validation syntax while
   reusing engine-owned runtime-configuration adapters; it is not an engine
   compatibility alias.
-- `artifact_answer_resolution.py`: Artifact answer extraction and direct formula/explanation resolution helpers.
-- `artifact.py`: Artifact serialization and YAML-facing helper utilities.
 - `blend_context.py`: Compatibility surface for canonical
   `realized_blend.context` values and the historical workstation projection
   entrypoint, which delegates to the runtime adapter.
@@ -270,38 +260,17 @@ legacy aliases.
 - `blend_session.py`: Compatibility surface for the canonical Blend session
   value and the historical workstation projection entrypoint, which delegates
   to the runtime adapter.
-- `blend_world.py`: Identity-preserving compatibility alias for world
-  materialization owned by `realized_blend_application.worlds`.
 - `blend_world_models.py`: Exact module-identity compatibility alias for
   canonical `realized_blend.worlds` values.
-- `blend_world_store.py`: Identity-preserving compatibility alias for the JSON
-  world repository adapter owned by `realized_blend_application.world_store`.
-- `blend_workflow.py`: Identity-preserving compatibility alias for workflow
-  translation owned by `realized_blend_application.workflows`.
 - `blend_workflow_models.py`: Exact module-identity compatibility alias for
   canonical `realized_blend.workflows` values.
 - `blend_workflow_execution.py`: Identity-preserving compatibility alias for
   execution adapters owned by `realized_blend_application.execution`.
-- `blend_workflow_store.py`: Identity-preserving compatibility alias for the
-  JSON workflow repository owned by
-  `realized_blend_application.workflow_store`.
-- `boundary.py`: Boundary-shape typing and boundary reasoning helpers.
-- `capability_runtime.py`: Runtime capability-grant issuance and
-  capability-to-broker/executor mapping. Governance evaluates a supplied
-  required authority against supplied grants; runtime still maps concrete
-  effects, creates invocation grants, and binds realizers.
-- `constitutional_trace.py`: Exact module-identity compatibility alias for
-  engine-owned constitutional state snapshots, composition/decision/transcript
-  signatures, and replay comparison. The canonical engine implementation
-  preserves exact aliases for the dependency-light effect-answer and
-  effect-signature requirements owned by `realized_core_governance.trace`.
 - `controller_entrypoint_binding.py`: Dependency-light registration seam between the historical executable facade and outer CLI composition.
 - `controller_entrypoints.py`: Historical aggregate command adapter. It
   preserves the root command surface while delegating package-native
   workstation parsing, composition, and dispatch to `workstation.app.cli`.
-- `controller_governance_bridge.py`: Controller-facing governance bridge methods rebound onto `BSSCController`.
 - `controller_runtime.py`: Canonical `BSSCController` implementation and historical public runtime surface.
-- `controller_runtime_binding.py`: Dependency-inversion seam used by nested host brokers to construct the application-registered controller without importing its implementation.
 - `data_governance.py`: Compatibility facade for data-class and access rules
   owned by `realized_core_governance.data`.
 - `decision_review_models.py`: Module-identity compatibility alias for
@@ -320,7 +289,6 @@ legacy aliases.
   subject review-composition values, deterministic item/tree transformations,
   transform receipts, and corpus persistence owned by
   `workstation.subject.core.review_composition`.
-- `direct_knowledge_reuse.py`: Direct knowledge reuse matching and lookup helpers.
 - `example.py`: Small Wasmtime/example surface used as a runtime proof-of-life.
 - `execution_framework_primitives.py`: Host-advertised supported-framework environment/default normalization plus exact compatibility aliases for portable descriptors now owned by `realized_skill_semantics.execution`.
 - `execution_frameworks.py`: Python, Bash, Ansible, and Wasm learning and
@@ -332,16 +300,10 @@ legacy aliases.
 - `external_markdown_learning_pipeline.py`: Exact module-identity compatibility
   alias for the external Markdown ingestion adapter owned by
   `realized_exchange.markdown_learning_pipeline`.
-- `fallback_not_generation.py`: Canonical fallback non-achievedness elaboration generation.
-- `fallback_not_semantics.py`: Compatibility facade retaining historical fallback generation and ranking identities.
 - `fence_extraction_strategy.py`: Fenced-code extraction and executor-aware fence learning helpers.
 - `governance_inventory.py`: Controller inventory-cache adapter plus the
   historical exact alias to package-owned read-only inventory loading and
   classification in `realized_core_governance.inventory`.
-- `governed_closure_and_commitment.py`: Closure, pause, incompletion, and commitment logic.
-- `governed_prior_learning_reuse.py`: Governed prior-learning reuse and candidate recovery.
-- `governed_semantic_reduction_runtime.py`: Compatibility adapter from `BSSCController` into `realized-core-runtime`, plus the existing domain-specific recursive `reduce_not` semantics.
-- `governed_skill_access.py`: Current-use governed access checks for skills and artifacts.
 - `governed_skill_installation.py`: Deliberate historical command adapter for
   governed `import-skill` installation. It coordinates canonical exchange,
   governance, persistence, and normalization APIs at the entry boundary.
@@ -354,16 +316,7 @@ legacy aliases.
 - `host_interaction_*.py`: Historical compatibility facades preserving the
   pre-package host-interaction import paths and object identities. New code
   imports `realized_host_interaction`.
-- `host_abi.py`: Stable host ABI, broker stability rules, and Wasm ABI definitions.
-- `host_brokers.py`: Concrete host adapters for fs, store, net, tool, and nested
-  skill invocation. Its historical broker table is immutable; application
-  composition projects those adapters into an injected exact-identity provider.
-- `host_realizers.py`: Application composition adapter that advertises concrete
-  executor and broker bindings, inspects runtime prerequisites, and builds one
-  immutable provider per composition request.
 - `core_semantics/src/realized_core_semantics/identifiers.py`: Canonical dependency-free slug and identifier construction helpers for semantic and runtime values.
-- `id_generation.py`: Module-identity compatibility alias for canonical semantic identifier helpers.
-- `learn.py`: Learning-token, discriminator, and selection-signal helpers.
 - `workstation/subject/core/learning_context.py`: Canonical LearningContext
   aggregate for learning units, deltas and operations, sources, subject
   imports, reasoning scope, deterministic delta application, and authoritative
@@ -396,7 +349,6 @@ legacy aliases.
 - `learning_context_paths.py`: Exact module-identity compatibility alias for
   the package-owned subject path vocabulary.
 - `workstation/subject/core/gather_sources.py`: Canonical Gather source, revision, collection, path, and JSON persistence model for the subject lifecycle.
-- `gather_sources.py`: Module-identity compatibility alias for canonical subject-core Gather source persistence.
 - `itemize_models.py`: Module-identity compatibility alias for dependency-light
   itemization values and normalization owned by
   `realized_core_semantics.itemization`.
@@ -408,66 +360,28 @@ legacy aliases.
   canonical subject implementation and retains only the former implicit
   controller bootstrap for direct root callers.
 - `workstation/subject/core/itemize_validation.py`: Canonical itemization-session validation invariants consumed by the subject workflow.
-- `itemize_validation.py`: Identity-preserving compatibility facade for the canonical subject-core itemization validation surface.
-- `learning_context_projection.py`: Exact module-identity compatibility alias for the subject-core document renderer.
-- `learning_context_skill_projection.py`: Exact module-identity compatibility alias for exchange-owned learning-context skill compilation and YAML materialization. Projection establishes subject scope and provenance; it does not perform governed skill installation or admission.
 - `workstation/subject/service/learning_capture.py`: Prompt-scoped subject application service that turns successful workstation chat “save learnings” markdown writes into chat `LearningSource`, `LearningDelta`, and merged `LearningContext` records without making raw markdown tools semantic by default.
 - `workstation/foundation/host/learning_capture.py`: Compatibility alias for the canonical subject-service learning-capture module.
-- `macos_host_brokers.py`: macOS-specific broker implementations for device actions.
 - `main.py`: Historical executable/import facade that preserves `import main` module identity while delegating to `controller_runtime.py` and lazily registering `controller_entrypoints.py`.
 - `markdown_ir.py`: Module-identity compatibility alias for dependency-free
   Markdown IR values, parsing, bounded semantic views, symbolic mappings, and
   normalization owned by `realized_core_semantics.markdown`.
-- `markdown_learning_artifact_semantics.py`: Exact module-identity compatibility
-  alias for deterministic Markdown encounter-to-artifact shaping owned by
-  `realized_core_engine.markdown_learning_artifact_semantics`.
-- `non_achievedness_normalization.py`: Structured non-achievedness normalization orchestration over explicit runtime dependencies.
-- `normalization_primitives.py`: Canonical dependency-light normalization helpers for schema, representations, boundary values, and runtime enums.
-- `normalization_runtime_dependencies.py`: Explicit dependency surface used by structured non-achievedness normalization.
 - `normalize.py`: Compatibility facade preserving historical normalization imports and object identities.
-- `not_elaboration_ranking.py`: Canonical non-achievedness elaboration ranking.
-- `prolog.py`: Prolog/title representation helpers and query support.
-- `prompt_directives.py`: Prompt directive classification and intent-shaping helpers.
 - `workstation/subject/core/publication.py`: Canonical publication substrate for claim-centered governed report publication, including typed publication/section/claim/source/build/render-artifact records, deterministic snapshot hashing, and explicit on-disk publication persistence under the subject corpus home.
-- `publication.py`: Module-identity compatibility alias for the canonical subject-core publication substrate.
 - `workstation/subject/core/publication_projection.py`: Canonical deterministic `LearningContext`-to-`Publication` report projection, including admitted-unit claim extraction, section assignment, source loading, validation/build/render orchestration, and separate publication-tree materialization.
-- `publication_projection.py`: Module-identity compatibility alias for canonical subject-core publication projection.
 - `workstation/subject/core/publication_render.py`: Canonical deterministic Typst and markdown renderers plus reproducible publication build and render-artifact projection.
-- `publication_render.py`: Module-identity compatibility alias for canonical subject-core publication rendering.
 - `workstation/subject/core/publication_validation.py`: Canonical publication validation rules over unique section ids, claim/source references, and source-backed descriptive claims.
-- `publication_validation.py`: Module-identity compatibility alias for canonical subject-core publication validation.
 - `pure_theory_types.py`: Compatibility facade for the canonical formal theory
   terms in `realized_core_semantics.theory`.
-- `python_skill_brokerization.py`: Python skill inspection and brokerization
-  heuristics, including conservative source-ordered extraction of literal
-  `broker_request(...)` identities. It never guesses dynamic broker names.
 - `python_skill_host.py`: Child Python runtime host API for governed broker
   calls. Under injected execution it uses the invocation-scoped parent bridge;
   its static dispatch path remains a compatibility fallback only.
-- `python_skill_host_transport.py`: Authenticated invocation-scoped loopback
-  bridge that carries child Python broker requests to the parent-injected
-  provider while rechecking the authoritative declaration, admission, ABI, and
-  grants before dispatch.
 - `replay_verifier.py`: Deliberate historical replay command adapter. It
   coordinates package-owned run-bundle exchange, replay execution, and
   governance receipt verification without becoming their implementation owner.
-- `retrieval_ranking.py`: Retrieval scoring and ranking for artifact reuse and prompt matching.
-- `run_bundle_io.py`: Exact module-identity compatibility alias for governed
-  run-bundle construction, YAML loading/rendering, and governance snapshot
-  packaging owned by `realized_exchange.run_bundle`.
-- `run_outcome_harvest_and_reporting.py`: Run finalization, discovery harvest, and report emission.
 - `runtime_controller_api.py`: Exact module-identity compatibility alias for
   `workstation.app.cli.runtime_controller`.
-- `runtime_governance_context.py`: Runtime-facing governance resolution facade.
-- `semantic_prompt_posture.py`: Prompt-posture classification and direct-answer preference helpers.
 - `SEMANTIC_RELATION_VALIDATION.py`: Standalone semantic relation validation script.
-- `semantic_text.py`: Semantic text normalization, literal decoding, and title/text helpers.
-- `side.py`: Exact module-identity compatibility alias for artifact-bundle YAML exchange owned by `realized_exchange.artifact_yaml`.
-- `side_runtime_dependencies.py`: Exact module-identity compatibility alias for artifact-exchange dependencies owned by `realized_exchange.dependencies`.
-- `skill_export_projection.py`: Exact module-identity compatibility alias for canonical portable-skill bundle export owned by `realized_exchange.skill_export`.
-- `skill_compiler.py`: Exact module-identity compatibility alias for the portable-skill compiler owned by `realized_exchange.compiler`.
-- `skill_compatibility_export.py`: Exact module-identity compatibility alias for foreign-format export adapters owned by `realized_exchange.compatibility_export`.
-- `skill_compatibility_import.py`: Exact module-identity compatibility alias for foreign-format import adapters owned by `realized_exchange.compatibility_import`.
 - `skill_boundary_normalization.py`: Identity-preserving compatibility alias for artifact-to-skill normalization owned by `realized_skill_application.normalization`.
 - `skill_composition.py`: Identity-preserving compatibility alias for composition analysis and execution owned by `realized_skill_application.composition`.
 - `skill_governance.py`: Historical governed-skill adapter and admission
@@ -486,30 +400,11 @@ legacy aliases.
 - `skill_lifecycle.py`: Compatibility facade for package-owned lifecycle
   normalization, projection, and lifecycle-only invocation-state rules.
 - `skill_path_notation.py`: Compatibility facade for canonical portable skill paths in `realized_skill_semantics.paths`.
-- `skill_registry.py`: Exact module-identity compatibility alias for portable
-  skill-registry projection and `export-skill-registry` support owned by
-  `realized_exchange.registry`.
 - `skill_safety_governance.py`: Compatibility facade for revocation and
   incident rules owned by `realized_core_governance.safety`.
-- `skill_schema_io.py`: Exact module-identity compatibility alias for portable-skill schema hydration and import-file resolution owned by `realized_exchange.skill_schema`.
-- `store.py`: SQLite artifact store, indexing, persistence, and batch import support.
-- `structured_learning_yaml.py`: Structured-learning YAML rendering helpers.
-- `supplement.py`: Controller-owned LLM supplement adapter, proposal-type
-  labeling, prompt policy, JSON repair, and supplement receipts. Provider SDK
-  construction, request fallback mechanics, retries, and typed response
-  parsing are delegated through the public `realized-core-llm` ABI.
-- `system_state.py`: System state model, persistence, effect traces, and capability grant storage.
 - `tablet_safety_validation.py`: Standalone tablet-safety validation script.
 - `title_depth_learning_validation.py`: Standalone title-depth learning validation script.
-- `title_semantics.py`: Title semantics, title-depth, and Prolog-title helpers.
 - `TRIAL_DOMAIN_VALIDATION.py`: Multi-domain trial runner for fresh-db curriculum validation.
-- `validation_ladder.py`: Compatibility alias for
-  `realized_validation.ladder`, the package-owned layered acceptance runner.
-- `validation_sqlite.py`: Compatibility alias for
-  `realized_validation.sqlite_runtime`, the package-owned validation SQLite
-  allocation and archival support.
-- `virtual_mounts.py`: Virtual mount definitions, safe path resolution, and mount policies.
-- `wasm_skill_runtime.py`: Embedded Wasmtime runtime for governed Wasm skill execution.
 - `workstation/__init__.py`: Inert namespace initializer for independently packaged workstation components.
 - `workstation/builtin_skills.py`: Builtin workstation worker-skill catalog, including repo-search and Wasm demo workers.
 - `workstation/capabilities.py`: Workstation capability schemas plus attachment-scoped capability execution, installed-skill invocation, workstation-backed shared Blend operator provider assembly for dynamic skill/capability operators, shared Blend operator/workflow store and execution adapters for `ws.skill.compose`, `ws.workflow.*`, and `ws.operator.*`, workstation publication of Blend workflow/step lifecycle events, and workstation-to-skill delegation shaping.

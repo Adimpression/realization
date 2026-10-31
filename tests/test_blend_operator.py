@@ -1,7 +1,7 @@
 import unittest
 
-from blend_context import BlendContext
-from blend_operator import (
+from realized_blend.context import BlendContext
+from realized_blend.operators import (
     BlendOperator,
     blend_operator_applicability,
     new_blend_operator_invocation,

@@ -12,10 +12,13 @@ from pathlib import Path
 
 import yaml
 
-from main import Artifact, ArtifactAdmission, ArtifactRepresentation, ArtifactReuse, ArtifactType, LearningRelation, build_artifact_store, load_artifact_yaml_documents
-from host_abi import host_abi_version, wasm_skill_abi_version
+from realized_core_engine.controller_runtime import build_artifact_store
+from realized_core_semantics.applied_model import Artifact, ArtifactType
+from realized_core_semantics.applied_primitives import ArtifactAdmission, ArtifactRepresentation, ArtifactReuse, LearningRelation
+from realized_exchange.artifact_yaml import load_artifact_yaml_documents
+from realized_core_runtime.host_abi import host_abi_version, wasm_skill_abi_version
 from governed_skill_installation import handle_import_skill_command
-from skill_export_projection import (
+from realized_exchange.skill_export import (
     batch_skill_export_filename,
     export_skill_bundle_text,
     skill_export_document,
@@ -24,12 +27,12 @@ from skill_export_projection import (
 from realized_skill_application.projection import (
     skill_kind_from_artifact as packaged_skill_kind_from_artifact,
 )
-from skill_governance import (
+from realized_core_engine.skill_governance import (
     artifact_admitted_for_use,
     evaluate_skill_admission,
 )
-from skill_schema_io import artifact_from_skill_document, resolve_import_skill_files, stable_skill_artifact_id
-from skill_registry import skill_registry_document
+from realized_exchange.skill_schema import artifact_from_skill_document, resolve_import_skill_files, stable_skill_artifact_id
+from realized_exchange.registry import skill_registry_document
 
 
 class SkillIOTests(unittest.TestCase):

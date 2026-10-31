@@ -8,8 +8,8 @@ from pathlib import Path
 from unittest.mock import patch
 
 from realized_validation import sqlite_runtime as packaged_validation_sqlite
-import validation_sqlite
-from validation_sqlite import archive_validation_sqlite, validation_sqlite_paths, validation_sqlite_use_ramdisk
+import realized_validation.sqlite_runtime as validation_sqlite
+from realized_validation.sqlite_runtime import archive_validation_sqlite, validation_sqlite_paths, validation_sqlite_use_ramdisk
 
 
 class ValidationSQLiteTests(unittest.TestCase):

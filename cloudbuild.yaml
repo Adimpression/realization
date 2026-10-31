@@ -23,6 +23,7 @@ steps:
       - >-
         python -m pip install --disable-pip-version-check --no-cache-dir uv==0.10.10 &&
         uv sync --frozen &&
+        uv run --frozen python scripts/capture_compatibility_facade_contracts.py &&
         uv build coordinated_transformation --out-dir /workspace/coordinated-transformation-dist &&
         uv build dst --out-dir /workspace/dst-dist &&
         uv build exchange --out-dir /workspace/exchange-dist &&
@@ -47,6 +48,7 @@ steps:
         -s dst/tests -p 'test_*.py' &&
         uv run --frozen python -m unittest
         tests.test_architecture_boundaries
+        tests.test_compatibility_facade_contracts
         tests.test_compatibility_facade_inventory
         core_runtime.tests.test_attempts
         core_runtime.tests.test_distribution
