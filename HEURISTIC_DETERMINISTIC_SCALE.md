@@ -102,7 +102,7 @@ The important review question is not only "is this heuristic?" but also "does th
 ### Medium
 
 15. `not_elaboration_alignment_rank()`
-    Location: [fallback_not_semantics.py:454](fallback_not_semantics.py#L454)
+    Location: [not_elaboration_ranking.py:18](core_engine/src/realized_core_engine/not_elaboration_ranking.py#L18)
     Determinism Impact: `Medium`
     Why: computes a deterministic tuple, but its inputs come from fallback structured-learning views, lookup keys, posture labels, and repair/misalignment fields that still originate partly from heuristic text interpretation.
     Review note: structurally ordered, but not purely structural.

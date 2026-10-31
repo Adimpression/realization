@@ -22,7 +22,6 @@ import decision_review_models
 import execution_framework_primitives
 import execution_frameworks
 import fence_extraction_strategy
-import fallback_not_semantics
 import governance_inventory
 import host_mediation
 import itemize
@@ -93,9 +92,7 @@ from realized_core_governance import vocabulary as packaged_governance_vocabular
 from realized_core_engine import constitutional_trace as packaged_constitutional_trace
 from realized_core_engine import configuration as packaged_engine_configuration
 from realized_core_engine import artifact_semantics as packaged_artifact_semantics
-from realized_core_engine import fallback_not_generation as packaged_fallback_not_generation
 from realized_core_engine import governance_inventory as packaged_engine_governance_inventory
-from realized_core_engine import not_elaboration_ranking as packaged_not_elaboration_ranking
 from realized_core_engine import host_mediation as packaged_host_mediation
 from realized_core_engine import controller_entrypoint_binding as packaged_controller_entrypoint_binding
 from realized_core_engine import controller_runtime as packaged_controller_runtime
@@ -495,16 +492,6 @@ class ArchitectureCompatibilityFacadeTest(unittest.TestCase):
                     getattr(normalize, name),
                     getattr(packaged_normalization_primitives, name),
                 )
-
-    def test_fallback_facade_keeps_canonical_identities(self) -> None:
-        self.assertIs(
-            fallback_not_semantics.fallback_not_elaboration_for_text,
-            packaged_fallback_not_generation.fallback_not_elaboration_for_text,
-        )
-        self.assertIs(
-            fallback_not_semantics.not_elaboration_alignment_rank,
-            packaged_not_elaboration_ranking.not_elaboration_alignment_rank,
-        )
 
     def test_applied_theory_public_types_keep_their_legacy_identity(self) -> None:
         for name in (

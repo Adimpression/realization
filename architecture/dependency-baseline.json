@@ -571,9 +571,9 @@
     "cyclic_internal_edge_count": 0,
     "cyclic_node_count": 0,
     "cyclic_scc_count": 0,
-    "edge_count": 225,
+    "edge_count": 224,
     "largest_cyclic_scc_node_count": 0,
-    "node_count": 89
+    "node_count": 88
   },
   "compatibility_edges": [
     {
@@ -805,12 +805,6 @@
       "direction": "root_to_component",
       "source": "external_markdown_learning_pipeline",
       "target": "exchange"
-    },
-    {
-      "category": "orchestration",
-      "direction": "root_to_component",
-      "source": "fallback_not_semantics",
-      "target": "core_engine"
     },
     {
       "category": "orchestration",
@@ -1222,13 +1216,6 @@
       ]
     },
     {
-      "module": "fallback_not_semantics",
-      "owner": "controller",
-      "statuses": [
-        "compatibility_facade"
-      ]
-    },
-    {
       "module": "fence_extraction_strategy",
       "owner": "runtime_execution",
       "statuses": [
@@ -1603,10 +1590,6 @@
     {
       "source": "external_markdown_learning_pipeline",
       "target": "exchange"
-    },
-    {
-      "source": "fallback_not_semantics",
-      "target": "core_engine"
     },
     {
       "source": "fence_extraction_strategy",

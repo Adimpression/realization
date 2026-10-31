@@ -127,7 +127,6 @@ runtime_execution = [
 ]
 controller = [
   "controller_runtime",
-  "fallback_not_semantics",
   "governance_inventory",
   "supplement",
 ]
@@ -207,7 +206,6 @@ compatibility_facade_modules = [
   "execution_framework_primitives",
   "execution_frameworks",
   "external_markdown_learning_pipeline",
-  "fallback_not_semantics",
   "fence_extraction_strategy",
   "governance_inventory",
   "host_mediation",

@@ -1466,6 +1466,60 @@ Reviewed and accepted evidence, captured on 2026-10-31:
   documentation; the canonical semantic package and artifact behavior remain
   unchanged.
 
+### Fallback Semantics Re-Export Deletion Cohort Review
+
+The seventeenth deletion cohort removes the historical aggregate projection
+for canonical fallback generation and non-achievedness ranking.
+
+| Historical import | Canonical replacement |
+| --- | --- |
+| `fallback_not_semantics.fallback_not_elaboration_for_text` | `realized_core_engine.fallback_not_generation.fallback_not_elaboration_for_text` |
+| `fallback_not_semantics.not_elaboration_alignment_rank` | `realized_core_engine.not_elaboration_ranking.not_elaboration_alignment_rank` |
+
+Reviewed and accepted evidence, captured on 2026-10-31:
+
+- [x] The earlier controller-selection cohort migrated the retained identity
+  contract directly to both canonical modules and completed a stable
+  qualification cycle. The only remaining facade import was that designated
+  identity contract; no production, package, trial, script, build,
+  runnable-documentation, or persisted-fixture consumer remained.
+- [x] Both exports had one deliberate canonical target and preserved object
+  identity. The facade had no wildcard or non-contract consumer, blocking
+  reference, executable surface, distinct import effect, durable pickle
+  global, or ambiguous owner. Canonical fallback, ranking, selection, schema,
+  title-depth, replay, and function-boundary behavior tests remain active.
+- [x] The sequential architecture delta only shrank the graph: owned roots
+  `53 -> 52`, root-boundary classifications `76 -> 75`, combined graph nodes
+  `89 -> 88`, combined edges `225 -> 224`, and grandfathered observations
+  `95 -> 94`, with `35` components, `141` package edges, no addition, and no
+  cycle.
+- [x] The retained inventory contains `44` facades, `50` static consumers,
+  `3` qualified candidates, `41` holds, and `76` total tombstones, with no
+  canonical-package, public README, or public-example consumer.
+- [x] The retained contract ledger contains `44` cards, `28` exact aliases,
+  `10` symbol re-exports, `35` facades with `133` durable pickle globals, and
+  `72` facade contract tests.
+- [x] Qualification passed `333` focused architecture, fallback, ranking,
+  schema, answer-selection, title-depth, replay, and function-boundary tests;
+  all `876` applicable non-provider root tests; and all `633` applicable
+  non-provider workstation tests under normal application composition, with
+  one expected skip.
+- [x] A first full-suite command used package-qualified exclusion prefixes
+  that did not match `unittest discover` IDs and therefore ran the six Newton
+  provider cases while the live publication case skipped. Those results are
+  excluded from accepted evidence. The recorded reruns used verified exact
+  IDs, excluded all seven provider-backed cases, and passed `876` root and
+  `46` deterministic BDD tests; provider-backed behavior remains unclaimed and
+  separately gated on explicit external-data authorization.
+- [x] All `35` wheels and source distributions built and imported in source
+  isolation using the locked project interpreter; publication capture
+  reproduced eight actions and two artifacts; Flutter analysis found no
+  issues and all `51` widget tests passed.
+- [x] Rollback remains local to the historical projection, its facade-only
+  identity assertion, active root-ledger entry, tombstone, and module
+  documentation; both canonical engine modules and their behavior remain
+  unchanged.
+
 ## Phase 5 - Retire Low-Risk Alias Cohorts
 
 Start with exact aliases that have no non-test consumers, no import-time

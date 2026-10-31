@@ -70,7 +70,6 @@ Every repository-root Python module has one explicit responsibility. Status is o
 | `execution_framework_primitives` | `runtime_execution` | `compatibility_facade` |
 | `execution_frameworks` | `runtime_execution` | `compatibility_facade` |
 | `external_markdown_learning_pipeline` | `entry_exchange` | `compatibility_facade` |
-| `fallback_not_semantics` | `controller` | `compatibility_facade` |
 | `fence_extraction_strategy` | `runtime_execution` | `compatibility_facade` |
 | `governance_inventory` | `controller` | `compatibility_facade` |
 | `governed_skill_installation` | `governance` | `entrypoint` |
@@ -311,8 +310,8 @@ These edges exist only to preserve historical import paths. They are excluded fr
 
 | Metric | Count |
 | --- | ---: |
-| Nodes | 89 |
-| Edges | 225 |
+| Nodes | 88 |
+| Edges | 224 |
 | Cyclic SCCs | 0 |
 | Nodes in cyclic SCCs | 0 |
 | Edges internal to cyclic SCCs | 0 |
@@ -362,7 +361,6 @@ Classifications are explicit policy metadata from `architecture/boundaries.toml`
 | `root_to_component` | `execution_framework_primitives` | `governed_core` | `orchestration` |
 | `root_to_component` | `execution_frameworks` | `governed_core` | `orchestration` |
 | `root_to_component` | `external_markdown_learning_pipeline` | `exchange` | `compatibility` |
-| `root_to_component` | `fallback_not_semantics` | `core_engine` | `orchestration` |
 | `root_to_component` | `fence_extraction_strategy` | `governed_core` | `orchestration` |
 | `root_to_component` | `governance_inventory` | `core_engine` | `orchestration` |
 | `root_to_component` | `governed_skill_installation` | `core_engine` | `orchestration` |
@@ -445,7 +443,6 @@ No workspace package imports a root application module.
 - `execution_framework_primitives` -> `governed_core` (`execution_framework_primitives.py`)
 - `execution_frameworks` -> `governed_core` (`execution_frameworks.py`)
 - `external_markdown_learning_pipeline` -> `exchange` (`external_markdown_learning_pipeline.py`)
-- `fallback_not_semantics` -> `core_engine` (`fallback_not_semantics.py`)
 - `fence_extraction_strategy` -> `governed_core` (`fence_extraction_strategy.py`)
 - `governance_inventory` -> `core_engine` (`governance_inventory.py`)
 - `governed_skill_installation` -> `core_engine` (`governed_skill_installation.py`)

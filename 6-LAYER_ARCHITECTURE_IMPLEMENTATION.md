@@ -5677,6 +5677,30 @@ Completed deletion cut - artifact contract symbol re-export cohort
   Seven unrelated provider-backed cases remain explicitly outside this
   cohort's evidence pending external-data authorization.
 
+Completed deletion cut - fallback semantics symbol re-export cohort
+(2026-10-31):
+
+- [x] Remove the repository-internal `fallback_not_semantics` aggregate
+  projection after the earlier controller-selection cohort migrated its
+  identity contract directly to canonical fallback-generation and ranking
+  modules and completed a stable qualification cycle.
+- [x] Preserve canonical fallback, ranking, schema, answer-selection,
+  title-depth, replay, and function-boundary assertions; remove only the root
+  projection and its facade-only identity evidence, tombstone the path, and
+  correct module documentation.
+- [x] Accept only the sequential shrinking delta: owned roots `53 -> 52`,
+  root-boundary classifications `76 -> 75`, combined graph nodes `89 -> 88`,
+  combined edges `225 -> 224`, grandfathered observations `95 -> 94`, retained
+  facades `45 -> 44`, and symbol re-exports `11 -> 10`, with no new dependency
+  or cycle.
+- [x] Qualify the non-model cut with `333` focused tests, `876` applicable
+  non-provider root tests, `633` applicable non-provider workstation tests,
+  `46` deterministic BDD cases, all distribution builds and isolated imports,
+  deterministic publication capture, Flutter analysis, and `51` widget tests.
+  Provider-backed results are not accepted as evidence; a misconfigured first
+  exclusion ran six Newton cases, after which corrected verified-ID reruns
+  excluded all seven external-data cases and established the recorded totals.
+
 Exit condition:
 
 - [x] The root-boundary ledger contains no canonical package-to-root

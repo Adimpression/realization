@@ -194,6 +194,11 @@
       "removed_at": "2026-10-30",
       "replacement": "realized_core_engine.fallback_not_generation"
     },
+    "fallback_not_semantics": {
+      "removal_change_reference": "controller-reexport-cohort-1",
+      "removed_at": "2026-10-31",
+      "replacement": "realized_core_engine.fallback_not_generation and realized_core_engine.not_elaboration_ranking"
+    },
     "gather_sources": {
       "removal_change_reference": "subject-core-alias-cohort-1",
       "removed_at": "2026-10-30",

@@ -2331,48 +2331,6 @@
       "support_status": "repository_internal"
     },
     {
-      "canonical_module_identity": "",
-      "canonical_targets": [
-        {
-          "component": "core_engine",
-          "module": "realized_core_engine.fallback_not_generation"
-        },
-        {
-          "component": "core_engine",
-          "module": "realized_core_engine.not_elaboration_ranking"
-        }
-      ],
-      "command_replacements": [],
-      "contract_evidence": "tests.test_architecture_compatibility_facades",
-      "durable_pickle_globals": [],
-      "exact_module_identity_observed": null,
-      "executable_surface": false,
-      "export_surface": {
-        "constant_types": {},
-        "explicit_all": [
-          "fallback_not_elaboration_for_text",
-          "not_elaboration_alignment_rank"
-        ],
-        "public_names": [
-          "annotations",
-          "fallback_not_elaboration_for_text",
-          "not_elaboration_alignment_rank"
-        ],
-        "signatures": {
-          "fallback_not_elaboration_for_text": "(semantic_unit: 'str', *, boundary_shape: 'Iterable[BoundaryShapeTerm | str] | None' = None, title_identity: 'str | None' = None) -> 'dict[str, Any]'",
-          "not_elaboration_alignment_rank": "(artifact: 'Any', semantic_unit: 'str', *, current_boundary_shape: 'Iterable[BoundaryShapeTerm | str] | None' = None) -> 'tuple[int, int, int, int, int, int, int]'"
-        }
-      },
-      "import_effect_class": "symbol_projection",
-      "module": "fallback_not_semantics",
-      "owner": "controller",
-      "path": "fallback_not_semantics.py",
-      "proof_strategy": "exported_symbol_object_identity",
-      "rollback_operation": "restore fallback_not_semantics.py and its compatibility contract assertions without reverting the canonical owner",
-      "shape": "symbol_reexport",
-      "support_status": "repository_internal"
-    },
-    {
       "canonical_module_identity": "realized_core_runtime.fence_extraction",
       "canonical_targets": [
         {
@@ -5841,17 +5799,17 @@
     "errors": 0,
     "failures": 0,
     "module": "tests.test_architecture_compatibility_facades",
-    "tests_run": 73
+    "tests_run": 72
   },
   "schema_version": 1,
   "summary": {
-    "card_count": 45,
+    "card_count": 44,
     "exact_module_identity_count": 30,
     "facades_with_durable_pickle_globals": 35,
     "pickle_global_count": 133,
     "proof_strategy_counts": {
       "exact_module_object_identity": 28,
-      "exported_symbol_object_identity": 11,
+      "exported_symbol_object_identity": 10,
       "manual_behavior_equivalence": 5,
       "manual_multi_owner_export_mapping": 1
     }

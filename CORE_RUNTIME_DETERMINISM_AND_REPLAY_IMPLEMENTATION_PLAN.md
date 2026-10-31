@@ -367,7 +367,8 @@ Concrete audit checklist (apply systematically across core runtime seams):
 Concrete files to inspect/patch (in order):
 
 - [governed_semantic_reduction_runtime.py](governed_semantic_reduction_runtime.py)
-- [fallback_not_semantics.py](fallback_not_semantics.py)
+- [fallback_not_generation.py](core_engine/src/realized_core_engine/fallback_not_generation.py)
+- [not_elaboration_ranking.py](core_engine/src/realized_core_engine/not_elaboration_ranking.py)
 - [retrieval_ranking.py](retrieval_ranking.py)
 - [title_semantics.py](title_semantics.py)
 

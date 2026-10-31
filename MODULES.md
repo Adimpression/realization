@@ -300,7 +300,6 @@ legacy aliases.
 - `external_markdown_learning_pipeline.py`: Exact module-identity compatibility
   alias for the external Markdown ingestion adapter owned by
   `realized_exchange.markdown_learning_pipeline`.
-- `fallback_not_semantics.py`: Compatibility facade retaining historical fallback generation and ranking identities.
 - `fence_extraction_strategy.py`: Fenced-code extraction and executor-aware fence learning helpers.
 - `governance_inventory.py`: Controller inventory-cache adapter plus the
   historical exact alias to package-owned read-only inventory loading and
